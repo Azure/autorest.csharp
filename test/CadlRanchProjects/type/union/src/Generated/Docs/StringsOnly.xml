@@ -73,34 +73,34 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("prop").ToString());
 ]]></code></example>
     </member>
-    <member name="SendAsync(GetResponseProp4,CancellationToken)">
+    <member name="SendAsync(GetResponseProp5,CancellationToken)">
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
 StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-Response response = await client.SendAsync(GetResponseProp4.A);
+Response response = await client.SendAsync(GetResponseProp5.A);
 ]]></code>
 This sample shows how to call SendAsync with all parameters.
 <code><![CDATA[
 StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-Response response = await client.SendAsync(GetResponseProp4.A);
+Response response = await client.SendAsync(GetResponseProp5.A);
 ]]></code></example>
     </member>
-    <member name="Send(GetResponseProp4,CancellationToken)">
+    <member name="Send(GetResponseProp5,CancellationToken)">
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
 StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-Response response = client.Send(GetResponseProp4.A);
+Response response = client.Send(GetResponseProp5.A);
 ]]></code>
 This sample shows how to call Send with all parameters.
 <code><![CDATA[
 StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-Response response = client.Send(GetResponseProp4.A);
+Response response = client.Send(GetResponseProp5.A);
 ]]></code></example>
     </member>
     <member name="SendAsync(RequestContent,RequestContext)">
