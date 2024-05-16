@@ -44,7 +44,7 @@ namespace Scm._Type.Union.Models
 
         /// <summary> Initializes a new instance of <see cref="SendRequest6"/>. </summary>
         /// <param name="prop"></param>
-        public SendRequest6(GetResponseProp3 prop)
+        public SendRequest6(GetResponseProp2 prop)
         {
             Prop = prop;
         }
@@ -52,7 +52,7 @@ namespace Scm._Type.Union.Models
         /// <summary> Initializes a new instance of <see cref="SendRequest6"/>. </summary>
         /// <param name="prop"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SendRequest6(GetResponseProp3 prop, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal SendRequest6(GetResponseProp2 prop, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Prop = prop;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -64,6 +64,6 @@ namespace Scm._Type.Union.Models
         }
 
         /// <summary> Gets the prop. </summary>
-        public GetResponseProp3 Prop { get; }
+        public GetResponseProp2 Prop { get; }
     }
 }
