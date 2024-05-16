@@ -20,6 +20,7 @@ namespace AutoRest.CSharp.Common.Input
         private readonly Dictionary<ServiceRequest, Func<InputOperation>> _operationsCache;
         private readonly Dictionary<RequestParameter, Func<InputParameter>> _parametersCache;
         private readonly Dictionary<Schema, InputEnumType> _enumsCache;
+        private readonly Dictionary<string, InputEnumType> _enumsNamingCache;
         private readonly Dictionary<ObjectSchema, InputModelType> _modelsCache;
         private readonly Dictionary<ObjectSchema, List<InputModelProperty>> _modelPropertiesCache;
         private readonly Dictionary<ObjectSchema, List<InputModelType>> _derivedModelsCache;
@@ -29,6 +30,7 @@ namespace AutoRest.CSharp.Common.Input
             _codeModel = codeModel;
             _schemaUsageProvider = schemaUsageProvider;
             _enumsCache = new Dictionary<Schema, InputEnumType>();
+            _enumsNamingCache = new Dictionary<string, InputEnumType>();
             _operationsCache = new Dictionary<ServiceRequest, Func<InputOperation>>();
             _parametersCache = new Dictionary<RequestParameter, Func<InputParameter>>();
             _modelsCache = new Dictionary<ObjectSchema, InputModelType>();
@@ -48,7 +50,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputNamespace CreateNamespace(Dictionary<ServiceRequest, InputOperation>? serviceRequestToInputOperation, Dictionary<InputOperation, Operation>? inputOperationToOperation)
         {
-            var enums = CreateEnums().Values.ToList();
+            CreateEnums();
             var models = CreateModels();
             var clients = CreateClients(_codeModel.OperationGroups, serviceRequestToInputOperation, inputOperationToOperation);
 
@@ -56,7 +58,7 @@ namespace AutoRest.CSharp.Common.Input
                 Description: _codeModel.Language.Default.Description,
                 Clients: clients,
                 Models: models,
-                Enums: enums,
+                Enums: _enumsCache.Values.ToArray(),
                 ApiVersions: GetApiVersions(),
                 Auth: GetAuth(_codeModel.Security.Schemes.OfType<SecurityScheme>()));
         }
@@ -276,21 +278,21 @@ namespace AutoRest.CSharp.Common.Input
             return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName, null, nextLinkServiceRequest == serviceRequest);
         }
 
-        private IReadOnlyDictionary<Schema, InputEnumType> CreateEnums()
+        private void CreateEnums()
         {
-            var enums = new Dictionary<Schema, InputEnumType>();
-
             foreach (var choiceSchema in _codeModel.Schemas.Choices)
             {
-                enums[choiceSchema] = CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true);
+                var enumType = CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true);
+                _enumsCache[choiceSchema] = enumType;
+                _enumsNamingCache[choiceSchema.Language.Default.Name] = enumType;
             }
 
             foreach (var sealedChoiceSchema in _codeModel.Schemas.SealedChoices)
             {
-                enums[sealedChoiceSchema] = CreateEnumType(sealedChoiceSchema, sealedChoiceSchema.ChoiceType, sealedChoiceSchema.Choices, false);
+                var enumType = CreateEnumType(sealedChoiceSchema, sealedChoiceSchema.ChoiceType, sealedChoiceSchema.Choices, false);
+                _enumsCache[sealedChoiceSchema] = enumType;
+                _enumsNamingCache[sealedChoiceSchema.Language.Default.Name] = enumType;
             }
-
-            return enums;
         }
 
         private IReadOnlyList<InputModelType> CreateModels()
@@ -604,13 +606,23 @@ namespace AutoRest.CSharp.Common.Input
 
             ConstantSchema constantSchema => CreateConstant(constantSchema, format, modelsCache, isNullable).Type,
             ChoiceSchema choiceSchema => _enumsCache[choiceSchema],
-            SealedChoiceSchema choiceSchema => _enumsCache[choiceSchema],
+            SealedChoiceSchema choiceSchema => GetInputTypeForChoiceSchema(choiceSchema),
             ArraySchema array => new InputListType(array.Name, GetOrCreateType(array.ElementType, modelsCache, array.NullableItems ?? false), array.Extensions?.IsEmbeddingsVector == true, isNullable),
             DictionarySchema dictionary => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, GetOrCreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false), isNullable),
             ObjectSchema objectSchema => CreateTypeForObjectSchema(objectSchema),
 
             _ => throw new InvalidCastException($"Unknown schema type {schema.GetType()}")
         };
+
+        // For ExampleValue.Schema, the schema is ChoiceSchema or SealedChoiceSchema, but the ChoiceSchema is not the same instance as the one in CodeModel.ChoiceSchemas or CodeModel.SealedChoiceSchemas
+        private InputType GetInputTypeForChoiceSchema(SealedChoiceSchema schema)
+        {
+            if (_enumsCache.TryGetValue(schema, out var result))
+            {
+                return result;
+            }
+            return _enumsNamingCache[schema.Language.Default.Name];
+        }
 
         private InputType CreateTypeForObjectSchema(ObjectSchema objectSchema)
         {
@@ -690,7 +702,6 @@ namespace AutoRest.CSharp.Common.Input
         private InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible)
         {
             var usage = _schemaUsageProvider.GetUsage(schema);
-
             var inputEnumType = new InputEnumType(
                 Name: schema.Name,
                 Namespace: schema.Extensions?.Namespace,
@@ -706,8 +717,6 @@ namespace AutoRest.CSharp.Common.Input
             {
                 Serialization = GetSerialization(schema, usage)
             };
-
-            _enumsCache[schema] = inputEnumType;
             return inputEnumType;
         }
 
