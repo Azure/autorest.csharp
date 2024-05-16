@@ -167,7 +167,15 @@ namespace AutoRest.CSharp.Output.Models.Types
                 //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager is known
                 //If in the future we add more types which have unique cases we might need to update this code, but it will be obvious
                 //given that the generation will fail with the new types
-                InputType inputType = declarationType.IsDictionary ? new InputDictionaryType(string.Empty, InputPrimitiveType.Boolean, InputPrimitiveType.Boolean, false) : InputPrimitiveType.Boolean;
+                InputType inputType = InputPrimitiveType.Boolean;
+                if (declarationType.IsDictionary)
+                {
+                    inputType = new InputDictionaryType(string.Empty, InputPrimitiveType.Boolean, InputPrimitiveType.Boolean, false);
+                }
+                else if (declarationType.IsList)
+                {
+                    inputType = new InputListType(string.Empty, InputPrimitiveType.Boolean, false, false);
+                }
                 InputModelProperty prop = new InputModelProperty(property.Name, GetSerializedName(property.Name, SystemType), GetPropertySummary(setter != null, property.Name), inputType, null, IsRequired(property, SystemType), property.IsReadOnly(), false, null);
                 yield return new ObjectTypeProperty(memberDeclarationOptions, prop.Description, prop.IsReadOnly, prop, new CSharpType(property.PropertyType) { SerializeAs = GetSerializeAs(property.PropertyType) });
 

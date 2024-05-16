@@ -27,10 +27,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 UpdateRequestParameter(bodyParameter, "patch", $"{resourceName}Patch", operation, updatedTypes);
             }
-            else
-            {
-                throw new InvalidOperationException($"unhandled HttpMethod {method} for resource {resourceName}");
-            }
         }
 
         internal static void UpdateUsingReplacement(InputParameter bodyParameter, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary, InputOperation operation, List<InputType> updatedTypes)
@@ -73,7 +69,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             string oriSchemaName = parameter.Type.Name;
             if (oriSchemaName != schemaName)
             {
-                updatedTypes.Add(parameter.Type);
+                // we only need to update the schema name if it is a model or enum type
+                if (parameter.Type is InputModelType || parameter.Type is InputEnumType)
+                {
+                    updatedTypes.Add(parameter.Type);
+                }
                 parameter.Type.Name = schemaName;
                 fullSerializedName = parameter.Type.GetFullSerializedName();
                 MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
