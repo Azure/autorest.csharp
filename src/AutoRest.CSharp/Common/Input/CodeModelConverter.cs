@@ -605,7 +605,7 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.AnyObject } => ToXMsFormatType(schema.Name, format, isNullable) ?? InputIntrinsicType.Unknown,
 
             ConstantSchema constantSchema => CreateConstant(constantSchema, format, modelsCache, isNullable).Type,
-            ChoiceSchema choiceSchema => _enumsCache[choiceSchema],
+            ChoiceSchema choiceSchema => GetInputTypeForChoiceSchema(choiceSchema),
             SealedChoiceSchema choiceSchema => GetInputTypeForChoiceSchema(choiceSchema),
             ArraySchema array => new InputListType(array.Name, GetOrCreateType(array.ElementType, modelsCache, array.NullableItems ?? false), array.Extensions?.IsEmbeddingsVector == true, isNullable),
             DictionarySchema dictionary => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, GetOrCreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false), isNullable),
@@ -616,6 +616,15 @@ namespace AutoRest.CSharp.Common.Input
 
         // For ExampleValue.Schema, the schema is ChoiceSchema or SealedChoiceSchema, but the ChoiceSchema is not the same instance as the one in CodeModel.ChoiceSchemas or CodeModel.SealedChoiceSchemas
         private InputType GetInputTypeForChoiceSchema(SealedChoiceSchema schema)
+        {
+            if (_enumsCache.TryGetValue(schema, out var result))
+            {
+                return result;
+            }
+            return _enumsNamingCache[schema.Language.Default.Name];
+        }
+
+        private InputType GetInputTypeForChoiceSchema(ChoiceSchema schema)
         {
             if (_enumsCache.TryGetValue(schema, out var result))
             {
