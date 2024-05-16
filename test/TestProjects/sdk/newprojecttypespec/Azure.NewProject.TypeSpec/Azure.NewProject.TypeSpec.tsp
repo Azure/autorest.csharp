@@ -196,14 +196,6 @@ union DaysOfWeekExtensibleEnum {
     Sunday: "Sunday",
 }
 
-model ModelWithFormat {
-    @doc("url format")
-    sourceUrl: url;
-
-    @doc("uuid format")
-    guid: uuid;
-}
-
 @doc("Hello world service")
 @route("/hello")
 namespace Hello.Demo {
@@ -284,12 +276,6 @@ op friendlyModel(...NotFriend): NotFriend;
 op addTimeHeader(
     @header("Repeatability-First-Sent") repeatabilityFirstSent?: utcDateTime 
 ): void;
-
-@route("/stringFormat")
-@doc("paramete has string format.")
-@post
-@convenientAPI(true)
-op stringFormat(@path subscriptionId: uuid, @body body: ModelWithFormat): void;
 
 // TODO: https://github.com/Azure/typespec-azure/issues/509
 namespace EnumTest {
