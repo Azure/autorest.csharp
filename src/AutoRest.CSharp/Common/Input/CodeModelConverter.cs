@@ -407,7 +407,8 @@ namespace AutoRest.CSharp.Common.Input
             IsReadOnly: property.IsReadOnly,
             IsDiscriminator: property.IsDiscriminator ?? false,
             IsNullable: property.IsNullable,
-            FlattenedNames: property.FlattenedNames.ToList());
+            FlattenedNames: property.FlattenedNames.ToList(),
+            GroupParameterNames: property is GroupProperty groupProperty ? groupProperty.OriginalParameter.Select(x => x.Language.Default.Name).ToArray() : null);
 
         private static InputOperationParameterKind GetOperationParameterKind(RequestParameter input) => input switch
         {

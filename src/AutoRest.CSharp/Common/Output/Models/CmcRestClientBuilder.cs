@@ -363,17 +363,17 @@ namespace AutoRest.CSharp.Output.Models
             {
                 return new StringResponseBody();
             }
-            else if (response.BodyType != null)
+            else if (response.BodyMediaType == BodyMediaType.Binary)
+            {
+                return new StreamResponseBody();
+            }
+            else if (response.BodyType is not null)
             {;
                 CSharpType responseType = _context.TypeFactory.CreateType(response.BodyType).OutputType;
 
                 ObjectSerialization serialization = SerializationBuilder.Build(response.BodyMediaType, response.BodyType, responseType, null);
 
                 return new ObjectResponseBody(responseType, serialization);
-            }
-            else if (response.BodyMediaType == BodyMediaType.Binary)
-            {
-                return new StreamResponseBody();
             }
 
             return null;
