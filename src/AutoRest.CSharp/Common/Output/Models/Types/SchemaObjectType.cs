@@ -517,7 +517,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             // We represent property being optional by making it nullable
             // Except in the case of collection where there is a special handling
             bool optionalViaNullability = !property.IsRequired &&
-                                          property.Type.IsNullable &&
+                                          !property.Type.IsNullable &&
                                           !propertyType.IsCollection;
 
             if (optionalViaNullability)
@@ -588,11 +588,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 property.IsReadOnly)
             {
                 valueType = valueType.OutputType;
-            }
-
-            if (!valueType.IsNullable && property.Type.IsNullable)
-            {
-                valueType = valueType.WithNullable(true);
             }
 
             return valueType;
