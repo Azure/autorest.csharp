@@ -18,14 +18,14 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Optional_BooleanLiteral_getAll() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetBooleanLiteralClient().GetAllAsync();
-            Assert.AreEqual(true, BooleanLiteralProperty.FromResponse(response.GetRawResponse()).Property);
+            Assert.AreEqual(true, response.Value.Property);
         });
 
         [Test]
         public Task Type_Property_Optional_BooleanLiteral_getDefault() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetBooleanLiteralClient().GetDefaultAsync();
-            Assert.AreEqual(null, BooleanLiteralProperty.FromResponse(response.GetRawResponse()).Property);
+            Assert.AreEqual(null, response.Value.Property);
         });
 
         [Test]
@@ -50,14 +50,14 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Optional_String_getAll() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetStringClient().GetAllAsync();
-            Assert.AreEqual("hello", StringProperty.FromResponse(response.GetRawResponse()).Property);
+            Assert.AreEqual("hello", response.Value.Property);
         });
 
         [Test]
         public Task Type_Property_Optional_String_getDefault() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetStringClient().GetDefaultAsync();
-            Assert.AreEqual(null, StringProperty.FromResponse(response.GetRawResponse()).Property);
+            Assert.AreEqual(null, response.Value.Property);
         });
 
         [Test]
@@ -82,14 +82,14 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Optional_Bytes_getAll() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetBytesClient().GetAllAsync();
-            BinaryDataAssert.AreEqual(BinaryData.FromString("hello, world!"), BytesProperty.FromResponse(response.GetRawResponse()).Property);
+            BinaryDataAssert.AreEqual(BinaryData.FromString("hello, world!"), response.Value.Property);
         });
 
         [Test]
         public Task Type_Property_Optional_Bytes_getDefault() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetBytesClient().GetDefaultAsync();
-            Assert.AreEqual(null, BytesProperty.FromResponse(response.GetRawResponse()).Property);
+            Assert.AreEqual(null, response.Value.Property);
         });
 
         [Test]
@@ -114,14 +114,14 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Optional_Datetime_getAll() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetDatetimeClient().GetAllAsync();
-            Assert.AreEqual(DateTimeOffset.Parse("2022-08-26T18:38:00Z"), DatetimeProperty.FromResponse(response.GetRawResponse()).Property);
+            Assert.AreEqual(DateTimeOffset.Parse("2022-08-26T18:38:00Z"), response.Value.Property);
         });
 
         [Test]
         public Task Type_Property_Optional_Datetime_getDefault() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetDatetimeClient().GetDefaultAsync();
-            Assert.AreEqual(null, DatetimeProperty.FromResponse(response.GetRawResponse()).Property);
+            Assert.AreEqual(null, response.Value.Property);
         });
 
         [Test]
@@ -146,14 +146,14 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Optional_Duration_getAll() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetDurationClient().GetAllAsync();
-            Assert.AreEqual(XmlConvert.ToTimeSpan("P123DT22H14M12.011S"), DurationProperty.FromResponse(response.GetRawResponse()).Property);
+            Assert.AreEqual(XmlConvert.ToTimeSpan("P123DT22H14M12.011S"), response.Value.Property);
         });
 
         [Test]
         public Task Type_Property_Optional_Duration_getDefault() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetDurationClient().GetDefaultAsync();
-            Assert.AreEqual(null, DurationProperty.FromResponse(response.GetRawResponse()).Property);
+            Assert.AreEqual(null, response.Value.Property);
         });
 
         [Test]
@@ -178,15 +178,15 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Optional_CollectionsByte_getAll() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetCollectionsByteClient().GetAllAsync();
-            BinaryDataAssert.AreEqual(BinaryData.FromString("hello, world!"), CollectionsByteProperty.FromResponse(response.GetRawResponse()).Property[0]);
-            BinaryDataAssert.AreEqual(BinaryData.FromString("hello, world!"), CollectionsByteProperty.FromResponse(response.GetRawResponse()).Property[1]);
+            BinaryDataAssert.AreEqual(BinaryData.FromString("hello, world!"), response.Value.Property[0]);
+            BinaryDataAssert.AreEqual(BinaryData.FromString("hello, world!"), response.Value.Property[1]);
         });
 
         [Test]
         public Task Type_Property_Optional_CollectionsByte_getDefault() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetCollectionsByteClient().GetDefaultAsync();
-            Assert.AreEqual(0, CollectionsByteProperty.FromResponse(response.GetRawResponse()).Property.Count);
+            Assert.AreEqual(0, response.Value.Property.Count);
         });
 
         [Test]
@@ -212,16 +212,17 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Optional_CollectionsModel_getAll() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetCollectionsModelClient().GetAllAsync();
-            var result = CollectionsModelProperty.FromResponse(response.GetRawResponse());
+            var result = response.Value;
             Assert.AreEqual("hello", result.Property[0].Property);
             Assert.AreEqual("world", result.Property[1].Property);
+            Assert.AreEqual(2, result.Property.Count);
         });
 
         [Test]
         public Task Type_Property_Optional_CollectionsModel_getDefault() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetCollectionsModelClient().GetDefaultAsync();
-            Assert.AreEqual(0, CollectionsModelProperty.FromResponse(response.GetRawResponse()).Property.Count);
+            Assert.AreEqual(0, response.Value.Property.Count);
         });
 
         [Test]
@@ -252,7 +253,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Optional_RequiredAndOptional_getAll() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetRequiredAndOptionalClient().GetAllAsync();
-            var result = RequiredAndOptionalProperty.FromResponse(response.GetRawResponse());
+            var result = response.Value;
             Assert.AreEqual("hello", result.OptionalProperty);
             Assert.AreEqual(42, result.RequiredProperty);
         });
@@ -261,7 +262,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Optional_RequiredAndOptional_getRequiredOnly() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetRequiredAndOptionalClient().GetRequiredOnlyAsync();
-            var result = RequiredAndOptionalProperty.FromResponse(response.GetRawResponse());
+            var result = response.Value;
             Assert.AreEqual(null, result.OptionalProperty);
             Assert.AreEqual(42, result.RequiredProperty);
         });
@@ -289,14 +290,14 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Optional_FloatLiteral_getAll() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetFloatLiteralClient().GetAllAsync();
-            Assert.AreEqual(FloatLiteralPropertyProperty._125, FloatLiteralProperty.FromResponse(response.GetRawResponse()).Property);
+            Assert.AreEqual(FloatLiteralPropertyProperty._125, response.Value.Property);
         });
 
         [Test]
         public Task Type_Property_Optional_FloatLiteral_getDefault() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetFloatLiteralClient().GetDefaultAsync();
-            Assert.AreEqual(null, FloatLiteralProperty.FromResponse(response.GetRawResponse()).Property);
+            Assert.AreEqual(null, response.Value.Property);
         });
 
         [Test]
@@ -321,14 +322,14 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Optional_IntLiteral_getAll() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetIntLiteralClient().GetAllAsync();
-            Assert.AreEqual(IntLiteralPropertyProperty._1, IntLiteralProperty.FromResponse(response.GetRawResponse()).Property);
+            Assert.AreEqual(IntLiteralPropertyProperty._1, response.Value.Property);
         });
 
         [Test]
         public Task Type_Property_Optional_IntLiteral_getDefault() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetIntLiteralClient().GetDefaultAsync();
-            Assert.AreEqual(null, IntLiteralProperty.FromResponse(response.GetRawResponse()).Property);
+            Assert.AreEqual(null, response.Value.Property);
         });
 
         [Test]
@@ -353,14 +354,14 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Optional_StringLiteral_getAll() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetStringLiteralClient().GetAllAsync();
-            Assert.AreEqual(StringLiteralPropertyProperty.Hello, StringLiteralProperty.FromResponse(response.GetRawResponse()).Property);
+            Assert.AreEqual(StringLiteralPropertyProperty.Hello, response.Value.Property);
         });
 
         [Test]
         public Task Type_Property_Optional_StringLiteral_getDefault() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetStringLiteralClient().GetDefaultAsync();
-            Assert.AreEqual(null, StringLiteralProperty.FromResponse(response.GetRawResponse()).Property);
+            Assert.AreEqual(null, response.Value.Property);
         });
 
         [Test]
@@ -385,14 +386,14 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Optional_UnionFloatLiteral_getAll() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetUnionFloatLiteralClient().GetAllAsync();
-            BinaryDataAssert.AreEqual(BinaryData.FromObjectAsJson(2.375), UnionFloatLiteralProperty.FromResponse(response.GetRawResponse()).Property);
+            BinaryDataAssert.AreEqual(BinaryData.FromObjectAsJson(2.375), response.Value.Property);
         });
 
         [Test]
         public Task Type_Property_Optional_UnionFloatLiteral_getDefault() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetUnionFloatLiteralClient().GetDefaultAsync();
-            Assert.AreEqual(null, UnionFloatLiteralProperty.FromResponse(response.GetRawResponse()).Property);
+            Assert.AreEqual(null, response.Value.Property);
         });
 
         [Test]
@@ -417,14 +418,14 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Optional_UnionIntLiteral_getAll() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetUnionIntLiteralClient().GetAllAsync();
-            BinaryDataAssert.AreEqual(BinaryData.FromObjectAsJson(2), UnionIntLiteralProperty.FromResponse(response.GetRawResponse()).Property);
+            BinaryDataAssert.AreEqual(BinaryData.FromObjectAsJson(2), response.Value.Property);
         });
 
         [Test]
         public Task Type_Property_Optional_UnionIntLiteral_getDefault() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetUnionIntLiteralClient().GetDefaultAsync();
-            Assert.AreEqual(null, UnionIntLiteralProperty.FromResponse(response.GetRawResponse()).Property);
+            Assert.AreEqual(null, response.Value.Property);
         });
 
         [Test]
@@ -449,14 +450,14 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Optional_UnionStringLiteral_getAll() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetUnionStringLiteralClient().GetAllAsync();
-            Assert.AreEqual(UnionStringLiteralPropertyProperty.World, UnionStringLiteralProperty.FromResponse(response.GetRawResponse()).Property);
+            Assert.AreEqual(UnionStringLiteralPropertyProperty.World, response.Value.Property);
         });
 
         [Test]
         public Task Type_Property_Optional_UnionStringLiteral_getDefault() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetUnionStringLiteralClient().GetDefaultAsync();
-            Assert.AreEqual(null, UnionStringLiteralProperty.FromResponse(response.GetRawResponse()).Property);
+            Assert.AreEqual(null, response.Value.Property);
         });
 
         [Test]

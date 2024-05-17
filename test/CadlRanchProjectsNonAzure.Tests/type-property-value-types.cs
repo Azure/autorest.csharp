@@ -245,6 +245,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             var result = response.Value;
             Assert.AreEqual("hello", result.Property[0].Property);
             Assert.AreEqual("world", result.Property[1].Property);
+            Assert.AreEqual(2, result.Property.Count);
         });
 
         [Test]
@@ -261,6 +262,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             var result = response.Value;
             Assert.AreEqual("hello", result.Property["k1"]);
             Assert.AreEqual("world", result.Property["k2"]);
+            Assert.AreEqual(2, result.Property.Count);
         });
 
         [Test]
@@ -321,6 +323,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             Assert.IsNotNull(result);
             Assert.AreEqual("hello", result["k1"]);
             Assert.AreEqual(42, result["k2"]);
+            Assert.AreEqual(2, result.Count);
         });
 
         [Test]
@@ -344,6 +347,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             Assert.IsNotNull(result);
             Assert.AreEqual("hello", result[0]);
             Assert.AreEqual("world", result[1]);
+            Assert.AreEqual(2, result.Length);
         });
 
         [Test]
