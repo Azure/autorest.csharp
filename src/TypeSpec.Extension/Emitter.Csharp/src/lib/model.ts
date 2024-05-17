@@ -5,8 +5,7 @@ import { getLroMetadata } from "@azure-tools/typespec-azure-core";
 import {
     SdkContext,
     getAllModels,
-    getClientType,
-    getSdkModelPropertyType
+    getClientType
 } from "@azure-tools/typespec-client-generator-core";
 import {
     Model,
@@ -15,7 +14,6 @@ import {
     Type,
     UsageFlags,
     getEffectiveModelType,
-    ignoreDiagnostics,
     isArrayModelType,
     isRecordModelType,
     resolveUsages
@@ -28,12 +26,7 @@ import {
     isStatusCode
 } from "@typespec/http";
 import { NetEmitterOptions } from "../options.js";
-import {
-    fromSdkEnumType,
-    fromSdkModelPropertyType,
-    fromSdkModelType,
-    fromSdkType
-} from "./converter.js";
+import { fromSdkEnumType, fromSdkModelType, fromSdkType } from "./converter.js";
 import {
     InputEnumType,
     InputModelType,
@@ -108,22 +101,6 @@ export function getInputType(
     literalTypeContext?: LiteralTypeContext
 ): InputType {
     Logger.getInstance().debug(`getInputType for kind: ${type.kind}`);
-
-    // TODO -- we might could remove this workaround when we adopt getAllOperations
-    //         or when we decide not to honor the `@format` decorators on parameters
-    // this is specifically dealing with the case of an operation parameter
-    if (type.kind === "ModelProperty") {
-        const propertyType = ignoreDiagnostics(
-            getSdkModelPropertyType(context, type, operation)
-        );
-        return fromSdkModelPropertyType(
-            propertyType,
-            context,
-            models,
-            enums,
-            literalTypeContext
-        );
-    }
 
     const sdkType = getClientType(context, type, operation);
     return fromSdkType(sdkType, context, models, enums, literalTypeContext);

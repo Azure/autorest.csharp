@@ -244,16 +244,6 @@ union DaysOfWeekExtensibleEnum {
     Sunday: "Sunday",
 }
 
-model ModelWithFormat {
-    @doc("url format")
-    @format("uri")
-    sourceUrl: string;
-
-    @doc("uuid format")
-    @format("uuid")
-    guid: string;
-}
-
 @doc("Hello world service")
 @route("/hello")
 namespace Hello.Demo {
@@ -311,7 +301,7 @@ namespace Hello.Demo2 {
 @doc("top level method")
 @get
 @convenientAPI(true)
-op topAction(@path @format("date") action: string): Thing;
+op topAction(@path action: utcDateTime): Thing;
 
 @route("/top2")
 @doc("top level method2")
@@ -340,12 +330,6 @@ op friendlyModel(...NotFriend): NotFriend;
 op addTimeHeader(
     @header("Repeatability-First-Sent") repeatabilityFirstSent?: utcDateTime 
 ): void;
-
-@route("/stringFormat")
-@doc("paramete has string format.")
-@post
-@convenientAPI(true)
-op stringFormat(@path @format("uuid") subscriptionId: string, @body body: ModelWithFormat): void;
 
 
 @route("/projectedName")

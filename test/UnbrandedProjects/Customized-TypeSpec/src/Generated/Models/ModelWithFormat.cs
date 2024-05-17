@@ -59,8 +59,8 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> url format. </summary>
-        public Uri SourceUrl { get; }
+        public Uri SourceUrl { get; set; }
         /// <summary> uuid format. </summary>
-        public Guid Guid { get; }
+        public Guid Guid { get; set; }
     }
 }
