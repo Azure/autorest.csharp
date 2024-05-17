@@ -75,7 +75,7 @@ export function fromSdkType(
     if (sdkType.kind === "array")
         return fromSdkArrayType(sdkType, context, models, enums);
     if (sdkType.kind === "constant")
-        return fromSdkConstantType(sdkType, enums, literalTypeContext);
+        return fromSdkConstantType(sdkType, context, models, enums, literalTypeContext);
     if (sdkType.kind === "union")
         return fromUnionType(sdkType, context, models, enums);
     if (sdkType.kind === "utcDateTime") return fromSdkDatetimeType(sdkType);
@@ -707,6 +707,8 @@ function fromUnionType(
 
 function fromSdkConstantType(
     constantType: SdkConstantType,
+    context: SdkContext,
+    models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>,
     literalTypeContext?: LiteralTypeContext
 ): InputLiteralType {
@@ -736,10 +738,8 @@ function fromSdkConstantType(
         // otherwise we need to wrap this into an extensible enum
         // we use the model name followed by the property name as the enum name to ensure it is unique
         const enumName = `${literalTypeContext.ModelName}_${literalTypeContext.PropertyName}`;
-        const enumValueType =
-            constantType.valueType.kind === "string"
-                ? InputPrimitiveTypeKind.String
-                : InputPrimitiveTypeKind.Float32;
+        const valueType = fromSdkType(constantType.valueType, context, models, enums, literalTypeContext) as InputPrimitiveType;
+        const enumValueType = valueType.Name;
         const enumValueName =
             constantType.value === null
                 ? "Null"
