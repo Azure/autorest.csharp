@@ -831,12 +831,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return model.IsNullable != resolvedModel.IsNullable ? resolvedModel.WithNullable(model.IsNullable) : resolvedModel;
         }
 
-        public override CSharpType? FindTypeByName(string originalName)
+        public override CSharpType? FindTypeByName(string name)
         {
-            _schemaNameToModels.Value.TryGetValue(originalName, out TypeProvider? provider);
+            _schemaNameToModels.Value.TryGetValue(name, out TypeProvider? provider);
 
             // Try to search declaration name too if no key matches. i.e. Resource Data Type will be appended a 'Data' in the name and won't be found through key
-            provider ??= _schemaToModels.FirstOrDefault(s => s.Value is MgmtObjectType mot && mot.Declaration.Name == originalName).Value;
+            // Since we have multiple instances for the same type due to nullability, we need to find the match based on name or spec name
+            provider ??= _schemaToModels.FirstOrDefault(s => s.Key.Name == name || s.Key.SpecName == name).Value;
 
             return provider?.Type;
         }
