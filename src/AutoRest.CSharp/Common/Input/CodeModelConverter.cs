@@ -408,7 +408,6 @@ namespace AutoRest.CSharp.Common.Input
             IsRequired: property.IsRequired,
             IsReadOnly: property.IsReadOnly,
             IsDiscriminator: property.IsDiscriminator ?? false,
-            IsNullable: property.IsNullable,
             FlattenedNames: property.FlattenedNames.ToList(),
             GroupParameterNames: property is GroupProperty groupProperty ? groupProperty.OriginalParameter.Select(x => x.Language.Default.Name).ToArray() : null);
 

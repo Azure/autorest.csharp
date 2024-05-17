@@ -325,7 +325,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultParameterValue = Constant.Default(inputType);
                     }
 
-                    var validate = property.InputModelProperty?.IsNullable != true && !inputType.IsValueType && property.InputModelProperty?.IsReadOnly != true ? ValidationType.AssertNotNull : ValidationType.None;
+                    var validate = property.InputModelProperty?.Type.IsNullable != true && !inputType.IsValueType && property.InputModelProperty?.IsReadOnly != true ? ValidationType.AssertNotNull : ValidationType.None;
                     var defaultCtorParameter = new Parameter(
                         property.Declaration.Name.ToVariableName(),
                         property.ParameterDescription,
@@ -517,7 +517,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             // We represent property being optional by making it nullable
             // Except in the case of collection where there is a special handling
             bool optionalViaNullability = !property.IsRequired &&
-                                          true != property.IsNullable &&
+                                          property.Type.IsNullable &&
                                           !propertyType.IsCollection;
 
             if (optionalViaNullability)
@@ -590,7 +590,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 valueType = valueType.OutputType;
             }
 
-            if (!valueType.IsNullable && true == property.IsNullable)
+            if (!valueType.IsNullable && property.Type.IsNullable)
             {
                 valueType = valueType.WithNullable(true);
             }
