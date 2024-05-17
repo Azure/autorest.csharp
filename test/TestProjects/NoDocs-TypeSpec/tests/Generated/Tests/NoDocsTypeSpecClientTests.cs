@@ -30,7 +30,7 @@ namespace NoDocsTypeSpec.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
-            Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
+            Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace NoDocsTypeSpec.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
-            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace NoDocsTypeSpec.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
-            Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
+            Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
         }
 
         [Test]
@@ -63,7 +63,7 @@ namespace NoDocsTypeSpec.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
-            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
         }
 
         [Test]
@@ -309,62 +309,6 @@ namespace NoDocsTypeSpec.Tests
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
             Response response = await client.AddTimeHeaderAsync();
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoDocsTypeSpec_StringFormat_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
-
-            using RequestContent content = RequestContent.Create(new
-            {
-                sourceUrl = "http://localhost:3000",
-                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-            });
-            Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoDocsTypeSpec_StringFormat_ShortVersion_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
-
-            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-            Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoDocsTypeSpec_StringFormat_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
-
-            using RequestContent content = RequestContent.Create(new
-            {
-                sourceUrl = "http://localhost:3000",
-                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-            });
-            Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoDocsTypeSpec_StringFormat_AllParameters_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
-
-            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-            Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
         }
 
         [Test]
