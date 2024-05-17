@@ -23,6 +23,11 @@ namespace CustomizedTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
+            if (Optional.IsDefined(Format))
+            {
+                writer.WritePropertyName("format"u8);
+                writer.WriteObjectValue(Format, options);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -62,6 +67,7 @@ namespace CustomizedTypeSpec.Models
                 return null;
             }
             string name = default;
+            ModelWithFormat format = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -71,13 +77,22 @@ namespace CustomizedTypeSpec.Models
                     name = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("format"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    format = ModelWithFormat.DeserializeModelWithFormat(property.Value, options);
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new SuperFriend(name, serializedAdditionalRawData);
+            return new SuperFriend(name, format, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<SuperFriend>.Write(ModelReaderWriterOptions options)

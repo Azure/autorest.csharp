@@ -810,90 +810,6 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> parameter has string format. </summary>
-        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
-        /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<ClientResult> StringFormatAsync(Guid subscriptionId, ModelWithFormat body)
-        {
-            Argument.AssertNotNull(body, nameof(body));
-
-            using BinaryContent content = body.ToBinaryContent();
-            ClientResult result = await StringFormatAsync(subscriptionId, content, null).ConfigureAwait(false);
-            return result;
-        }
-
-        /// <summary> parameter has string format. </summary>
-        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
-        /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual ClientResult StringFormat(Guid subscriptionId, ModelWithFormat body)
-        {
-            Argument.AssertNotNull(body, nameof(body));
-
-            using BinaryContent content = body.ToBinaryContent();
-            ClientResult result = StringFormat(subscriptionId, content, null);
-            return result;
-        }
-
-        /// <summary>
-        /// [Protocol Method] parameter has string format.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="StringFormatAsync(Guid,ModelWithFormat)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> StringFormatAsync(Guid subscriptionId, BinaryContent content, RequestOptions options = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using PipelineMessage message = CreateStringFormatRequest(subscriptionId, content, options);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-        }
-
-        /// <summary>
-        /// [Protocol Method] parameter has string format.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="StringFormat(Guid,ModelWithFormat)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult StringFormat(Guid subscriptionId, BinaryContent content, RequestOptions options = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using PipelineMessage message = CreateStringFormatRequest(subscriptionId, content, options);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
-        }
-
         /// <summary> Model can have its projected name. </summary>
         /// <param name="projectedModel"> this is a model with a projected name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
@@ -1451,24 +1367,6 @@ namespace CustomizedTypeSpec.Models
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Repeatability-First-Sent", DateTimeOffset.Now.ToString("R"));
-            message.Apply(options);
-            return message;
-        }
-
-        internal PipelineMessage CreateStringFormatRequest(Guid subscriptionId, BinaryContent content, RequestOptions options)
-        {
-            var message = _pipeline.CreateMessage();
-            message.ResponseClassifier = PipelineMessageClassifier204;
-            var request = message.Request;
-            request.Method = "POST";
-            var uri = new ClientUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/stringFormat/", false);
-            uri.AppendPath(subscriptionId.ToString(), true);
-            request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("Content-Type", "application/json");
-            request.Content = content;
             message.Apply(options);
             return message;
         }
