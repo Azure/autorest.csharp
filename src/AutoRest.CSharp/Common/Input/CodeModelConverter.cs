@@ -500,7 +500,7 @@ namespace AutoRest.CSharp.Common.Input
                 ? constantSchema.ValueType
                 : requestParameter.Schema;
 
-            return GetOrCreateType(schema, requestParameter.Extensions?.Format, requestParameter.IsNullable || !requestParameter.IsRequired);
+            return GetOrCreateType(schema, requestParameter.Extensions?.Format, requestParameter.IsNullable);
         }
 
         private InputType GetOrCreateType(Property property)
