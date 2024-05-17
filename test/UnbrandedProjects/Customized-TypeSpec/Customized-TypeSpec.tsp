@@ -137,6 +137,8 @@ model ModelWithRequiredNullableProperties {
 model NotFriend {
     @doc("name of the NotFriend")
     name: string;
+
+    format?: ModelWithFormat;
 }
 
 @doc("this is a model with a projected name")
@@ -168,6 +170,14 @@ union DaysOfWeekExtensibleEnum {
     Friday: "Friday",
     Saturday: "Saturday",
     Sunday: "Sunday",
+}
+
+model ModelWithFormat {
+    @doc("url format")
+    sourceUrl: url;
+
+    @doc("uuid format")
+    guid: uuid;
 }
 
 @route("/hello")

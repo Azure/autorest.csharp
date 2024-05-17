@@ -7,8 +7,8 @@ using System.Collections.Generic;
 
 namespace CustomizedTypeSpec.Models
 {
-    /// <summary> this is not a friendly model but with a friendly name. </summary>
-    public partial class SuperFriend
+    /// <summary> The ModelWithFormat. </summary>
+    public partial class ModelWithFormat
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -42,35 +42,25 @@ namespace CustomizedTypeSpec.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="SuperFriend"/>. </summary>
-        /// <param name="name"> name of the NotFriend. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public SuperFriend(string name)
-        {
-            Argument.AssertNotNull(name, nameof(name));
-
-            Name = name;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="SuperFriend"/>. </summary>
-        /// <param name="name"> name of the NotFriend. </param>
-        /// <param name="format"></param>
+        /// <summary> Initializes a new instance of <see cref="ModelWithFormat"/>. </summary>
+        /// <param name="sourceUrl"> url format. </param>
+        /// <param name="guid"> uuid format. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SuperFriend(string name, ModelWithFormat format, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ModelWithFormat(Uri sourceUrl, Guid guid, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Name = name;
-            Format = format;
+            SourceUrl = sourceUrl;
+            Guid = guid;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="SuperFriend"/> for deserialization. </summary>
-        internal SuperFriend()
+        /// <summary> Initializes a new instance of <see cref="ModelWithFormat"/> for deserialization. </summary>
+        internal ModelWithFormat()
         {
         }
 
-        /// <summary> name of the NotFriend. </summary>
-        public string Name { get; set; }
-        /// <summary> Gets or sets the format. </summary>
-        public ModelWithFormat Format { get; set; }
+        /// <summary> url format. </summary>
+        public Uri SourceUrl { get; set; }
+        /// <summary> uuid format. </summary>
+        public Guid Guid { get; set; }
     }
 }
