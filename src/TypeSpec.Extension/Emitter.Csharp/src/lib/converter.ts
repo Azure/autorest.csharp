@@ -28,7 +28,7 @@ import {
     IntrinsicType,
     Model
 } from "@typespec/compiler";
-import { logger } from "./logger.js";
+import { Logger } from "./logger.js";
 import { getFullNamespaceString } from "./utils.js";
 import { InputEnumTypeValue } from "../type/input-enum-type-value.js";
 import { InputIntrinsicTypeKind } from "../type/input-intrinsic-type-kind.js";
@@ -338,7 +338,7 @@ function fromSdkDurationType(
                 }
                 return InputPrimitiveTypeKind.DurationSeconds;
             default:
-                logger.warn(
+                Logger.getInstance().warn(
                     `invalid encode '${encode}' and wireType '${wireType.kind}' for duration.`
                 );
                 return InputPrimitiveTypeKind.DurationISO8601;
@@ -373,7 +373,9 @@ function fromBytesType(bytesType: SdkBuiltInType): InputPrimitiveType {
             case "base64url":
                 return InputPrimitiveTypeKind.BytesBase64Url;
             default:
-                logger.warn(`invalid encode ${encode} for bytes.`);
+                Logger.getInstance().warn(
+                    `invalid encode ${encode} for bytes.`
+                );
                 return InputPrimitiveTypeKind.Bytes;
         }
     }
@@ -430,7 +432,9 @@ function mapTcgcTypeToCSharpInputTypeKind(
                 case "base64url":
                     return InputPrimitiveTypeKind.BytesBase64Url;
                 default:
-                    logger.warn(`invalid encode '${type.encode}' for bytes.`);
+                    Logger.getInstance().warn(
+                        `invalid encode '${type.encode}' for bytes.`
+                    );
                     return InputPrimitiveTypeKind.Bytes;
             }
         case "float":
@@ -501,7 +505,7 @@ function fromScalarType(scalarType: SdkType): InputPrimitiveType {
                     case "base64url":
                         return InputPrimitiveTypeKind.BytesBase64Url;
                     default:
-                        logger.warn(
+                        Logger.getInstance().warn(
                             `invalid encode ${encode?.encoding} for bytes.`
                         );
                         return InputPrimitiveTypeKind.Bytes;
@@ -555,7 +559,7 @@ function fromScalarType(scalarType: SdkType): InputPrimitiveType {
                     case "unixTimestamp":
                         return InputPrimitiveTypeKind.DateTimeUnix;
                     default:
-                        logger.warn(
+                        Logger.getInstance().warn(
                             `invalid encode ${encode?.encoding} for date time.`
                         );
                         return InputPrimitiveTypeKind.DateTime;
@@ -579,7 +583,7 @@ function fromScalarType(scalarType: SdkType): InputPrimitiveType {
                             return InputPrimitiveTypeKind.DurationSeconds;
                         }
                     default:
-                        logger.warn(
+                        Logger.getInstance().warn(
                             `invalid encode ${encode?.encoding} for duration.`
                         );
                         return InputPrimitiveTypeKind.DurationISO8601;

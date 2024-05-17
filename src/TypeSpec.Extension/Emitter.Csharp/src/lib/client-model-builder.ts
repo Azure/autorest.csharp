@@ -28,7 +28,6 @@ import {
     getServers
 } from "@typespec/http";
 import { getVersions } from "@typespec/versioning";
-import { $lib } from "../emitter.js";
 import { NetEmitterOptions, resolveOptions } from "../options.js";
 import { ClientKind } from "../type/client-kind.js";
 import { CodeModel } from "../type/code-model.js";
@@ -45,7 +44,8 @@ import {
 import { InputPrimitiveTypeKind } from "../type/input-primitive-type-kind.js";
 import { RequestLocation } from "../type/request-location.js";
 import { Usage } from "../type/usage.js";
-import { logger } from "./logger.js";
+import { reportDiagnostic } from "./lib.js";
+import { Logger } from "./logger.js";
 import { getUsages, navigateModels } from "./model.js";
 import { loadOperation } from "./operation.js";
 import { processServiceAuthentication } from "./service-authentication.js";
@@ -137,13 +137,13 @@ export function createModelForService(
     const [services] = getAllHttpServices(program);
     const routes = services[0].operations;
     if (routes.length === 0) {
-        $lib.reportDiagnostic(program, {
-            code: "No-Route",
+        reportDiagnostic(program, {
+            code: "no-route",
             format: { service: services[0].namespace.name },
             target: NoTarget
         });
     }
-    logger.info("routes:" + routes.length);
+    Logger.getInstance().info("routes:" + routes.length);
 
     const clients: InputClient[] = [];
     const dpgClients = listClients(sdkContext);
@@ -250,8 +250,8 @@ export function createModelForService(
             clientName === "Models" &&
             resolveOptions(sdkContext.emitContext)["model-namespace"] !== false
         ) {
-            $lib.reportDiagnostic(program, {
-                code: "Invalid-Name",
+            reportDiagnostic(program, {
+                code: "invalid-name",
                 format: { name: clientName },
                 target: client.type
             });

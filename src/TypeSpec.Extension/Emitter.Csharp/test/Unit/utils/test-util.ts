@@ -17,6 +17,8 @@ import {
 import { createTestHost, TestHost } from "@typespec/compiler/testing";
 import { HttpTestLibrary } from "@typespec/http/testing";
 import { RestTestLibrary } from "@typespec/rest/testing";
+import { LoggerLevel } from "../../../src/lib/log-level.js";
+import { Logger } from "../../../src/lib/logger.js";
 import { VersioningTestLibrary } from "@typespec/versioning/testing";
 import { getInputType } from "../../../src/lib/model.js";
 import { NetEmitterOptions } from "../../../src/options.js";
@@ -133,6 +135,7 @@ export function navigateModels(
 export function createNetSdkContext(
     program: EmitContext<NetEmitterOptions>
 ): SdkContext<NetEmitterOptions> {
+    Logger.initialize(program.program, LoggerLevel.INFO);
     const sdkContext = createSdkContext(program, "@azure-tools/typespec-azure");
     // initialize TCGC
     getAllModels(sdkContext);

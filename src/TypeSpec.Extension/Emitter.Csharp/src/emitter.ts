@@ -3,55 +3,26 @@
 
 import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 import {
-    Program,
-    resolvePath,
     EmitContext,
-    createTypeSpecLibrary,
-    paramMessage,
-    logDiagnostics
+    Program,
+    logDiagnostics,
+    resolvePath
 } from "@typespec/compiler";
 
-import { stringifyRefs, PreserveType } from "json-serialize-refs";
-import fs, { existsSync } from "fs";
-import path from "node:path";
-import { Configuration } from "./type/configuration.js";
 import { execSync } from "child_process";
+import fs, { existsSync } from "fs";
+import { PreserveType, stringifyRefs } from "json-serialize-refs";
+import path from "node:path";
+import { configurationFileName, tspOutputFileName } from "./constants.js";
+import { createModel } from "./lib/client-model-builder.js";
+import { LoggerLevel } from "./lib/log-level.js";
+import { Logger } from "./lib/logger.js";
 import {
     NetEmitterOptions,
-    NetEmitterOptionsSchema,
     resolveOptions,
     resolveOutputFolder
 } from "./options.js";
-import { createModel } from "./lib/client-model-builder.js";
-import { logger, LoggerLevel } from "./lib/logger.js";
-import { tspOutputFileName, configurationFileName } from "./constants.js";
-
-export const $lib = createTypeSpecLibrary({
-    name: "@azure-tools/typespec-csharp",
-    diagnostics: {
-        "No-APIVersion": {
-            severity: "error",
-            messages: {
-                default: paramMessage`No APIVersion Provider for service ${"service"}`
-            }
-        },
-        "No-Route": {
-            severity: "error",
-            messages: {
-                default: paramMessage`No Route for service for service ${"service"}`
-            }
-        },
-        "Invalid-Name": {
-            severity: "warning",
-            messages: {
-                default: paramMessage`Invalid interface or operation group name ${"name"} when configuration "model-namespace" is on`
-            }
-        }
-    },
-    emitter: {
-        options: NetEmitterOptionsSchema
-    }
-});
+import { Configuration } from "./type/configuration.js";
 
 export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     const program: Program = context.program;
@@ -59,9 +30,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     const outputFolder = resolveOutputFolder(context);
 
     /* set the loglevel. */
-    for (const transport of logger.transports) {
-        transport.level = options.logLevel ?? LoggerLevel.INFO;
-    }
+    Logger.initialize(program, options.logLevel ?? LoggerLevel.INFO);
 
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
@@ -195,7 +164,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                     outputFolder,
                     `${configurations["library-name"]}.csproj`
                 );
-                logger.info(`Checking if ${csProjFile} exists`);
+                Logger.getInstance().info(`Checking if ${csProjFile} exists`);
                 const newProjectOption =
                     options["new-project"] || !existsSync(csProjFile)
                         ? "--new-project"
@@ -210,14 +179,15 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 )} --project-path ${outputFolder} ${newProjectOption} ${existingProjectOption} --clear-output-folder ${
                     options["clear-output-folder"]
                 }${debugFlag}`;
-                logger.info(command);
+                Logger.getInstance().info(command);
 
                 try {
                     execSync(command, { stdio: "inherit" });
                 } catch (error: any) {
-                    if (error.message) logger.info(error.message);
-                    if (error.stderr) logger.error(error.stderr);
-                    if (error.stdout) logger.verbose(error.stdout);
+                    if (error.message) Logger.getInstance().info(error.message);
+                    if (error.stderr) Logger.getInstance().error(error.stderr);
+                    if (error.stdout)
+                        Logger.getInstance().verbose(error.stdout);
                     throw error;
                 }
             }
@@ -234,9 +204,9 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 function deleteFile(filePath: string) {
     fs.unlink(filePath, (err) => {
         if (err) {
-            logger.error(`stderr: ${err}`);
+            //logger.error(`stderr: ${err}`);
         } else {
-            logger.info(`File ${filePath} is deleted.`);
+            Logger.getInstance().info(`File ${filePath} is deleted.`);
         }
     });
 }
