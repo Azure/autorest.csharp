@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private IEnumerable<InputType> UpdateBodyParameters()
         {
             var updatedTypes = new List<InputType>();
-            Dictionary<InputType, int> usageCounts = new Dictionary<InputType, int>(ReferenceEqualityComparer.Instance);
+            Dictionary<string, int> usageCounts = new Dictionary<string, int>();
 
             // run one pass to get the schema usage count
             foreach (var client in _input.Clients)
@@ -136,7 +136,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (parameter.Location != RequestLocation.Body)
                             continue;
 
-                        IncrementCount(usageCounts, parameter.Type);
+                        IncrementCount(usageCounts, parameter.Type.Name);
                     }
                     foreach (var response in operation.Responses)
                     {
@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (responseSchema is null)
                             continue;
 
-                        IncrementCount(usageCounts, responseSchema);
+                        IncrementCount(usageCounts, responseSchema.Name);
                     }
                 }
             }
@@ -161,7 +161,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     if (bodyParam is null)
                         continue;
 
-                    if (!usageCounts.TryGetValue(bodyParam.Type, out var count))
+                    if (!usageCounts.TryGetValue(bodyParam.Type.Name, out var count))
                         continue;
 
                     // get the request path and operation set
@@ -224,15 +224,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return updatedTypes;
         }
 
-        private static void IncrementCount(Dictionary<InputType, int> usageCounts, InputType schema)
+        private static void IncrementCount(Dictionary<string, int> usageCounts, string schemaName)
         {
-            if (usageCounts.ContainsKey(schema))
+            if (usageCounts.ContainsKey(schemaName))
             {
-                usageCounts[schema]++;
+                usageCounts[schemaName]++;
             }
             else
             {
-                usageCounts.Add(schema, 1);
+                usageCounts.Add(schemaName, 1);
             }
         }
 
@@ -800,15 +800,35 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return rawRequestPathToResourceData;
         }
 
-        public override CSharpType ResolveEnum(InputEnumType enumType) => AllEnumMap.Value[enumType].Type;
+        public override CSharpType ResolveEnum(InputEnumType enumType)
+        {
+            CSharpType resolvedEnum;
+            if (AllEnumMap.Value.TryGetValue(enumType, out var value))
+            {
+                resolvedEnum = value.Type;
+            }
+            else
+            {
+                // There could be different instances because of nullability
+                resolvedEnum = FindTypeByName(enumType.Name) ?? throw new InvalidOperationException($"Cannot find enum {enumType.Name}");
+            }
+            return  enumType.IsNullable != resolvedEnum.IsNullable ? resolvedEnum.WithNullable(enumType.IsNullable) : resolvedEnum;
+        }
 
         public override CSharpType ResolveModel(InputModelType model)
         {
+            CSharpType resolvedModel;
             if (_schemaToModels.TryGetValue(model, out var value))
             {
-                return value.Type;
+                resolvedModel = value.Type;
             }
-            throw new InvalidOperationException($"Cannot find model {model.Name}");
+            else
+            {
+                // There could be different instances because of nullability
+                resolvedModel = FindTypeByName(model.Name) ?? throw new InvalidOperationException($"Cannot find model {model.Name}");
+            }
+
+            return model.IsNullable != resolvedModel.IsNullable ? resolvedModel.WithNullable(model.IsNullable) : resolvedModel;
         }
 
         public override CSharpType? FindTypeByName(string originalName)

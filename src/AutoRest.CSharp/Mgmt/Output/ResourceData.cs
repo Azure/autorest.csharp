@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ResourceData : MgmtObjectType
     {
-        public ResourceData(InputModelType inputModel)
+        private ResourceData(InputModelType inputModel)
             : this(inputModel, null)
         {
         }
