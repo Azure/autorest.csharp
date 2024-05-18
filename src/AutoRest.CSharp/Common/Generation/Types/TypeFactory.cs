@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Generation.Types
         /// </summary>
         /// <param name="inputType">The input type to convert.</param>
         /// <returns>The <see cref="CSharpType"/> of the input type.</returns>
-        public CSharpType CreateType(InputType inputType, string? format = null) => inputType switch
+        public CSharpType CreateType(InputType inputType) => inputType switch
         {
             InputLiteralType literalType => CSharpType.FromLiteral(CreateType(literalType.LiteralValueType), literalType.Value),
             InputUnionType unionType => CSharpType.FromUnion(unionType.UnionItemTypes.Select(x => CreateType(x)).ToArray(), unionType.IsNullable),
@@ -79,14 +79,14 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.ResourceIdentifier => new CSharpType(typeof(ResourceIdentifier), inputType.IsNullable),
                 InputTypeKind.ResourceType => new CSharpType(typeof(ResourceType), inputType.IsNullable),
                 InputTypeKind.Stream => new CSharpType(typeof(Stream), inputType.IsNullable),
-                InputTypeKind.String => ToXMsFormatType(format) ?? new CSharpType(typeof(string), inputType.IsNullable),
+                InputTypeKind.String => new CSharpType(typeof(string), inputType.IsNullable),
                 InputTypeKind.Uri => new CSharpType(typeof(Uri), inputType.IsNullable),
                 InputTypeKind.Char => new CSharpType(typeof(char), inputType.IsNullable),
                 _ => new CSharpType(typeof(object), inputType.IsNullable),
             },
             InputGenericType genericType => new CSharpType(genericType.Type, CreateType(genericType.ArgumentType)).WithNullable(inputType.IsNullable),
-            _ when ToXMsFormatType(format) is Type type => new CSharpType(type, inputType.IsNullable),
             // TODO: consolidate the behavior when we handle type nullability in DPG
+            // TODO: When IsNullable is added to InputIntrinsicType, we can remove nullability handling for MPG from here
             InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => Configuration.AzureArm ? new CSharpType(UnknownType, inputType.IsNullable) : UnknownType,
             _ => throw new Exception("Unknown type")
         };
