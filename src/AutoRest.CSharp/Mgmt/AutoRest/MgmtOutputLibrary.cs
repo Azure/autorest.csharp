@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private readonly InputNamespace _input;
         private Dictionary<InputType, TypeProvider> _schemaToModels = new(ReferenceEqualityComparer.Instance);
-        private Lazy<IReadOnlyDictionary<string, TypeProvider>> _schemaNameToModels;
+        private Lazy<Dictionary<string, TypeProvider>> _schemaNameToModels;
 
         /// <summary>
         /// This is a collection that contains all the models from property bag, we use HashSet here to avoid potential duplicates
@@ -109,7 +109,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ResourceSchemaMap = new Lazy<IReadOnlyDictionary<InputType, TypeProvider>>(EnsureResourceSchemaMap);
             SchemaMap = new Lazy<IReadOnlyDictionary<InputType, TypeProvider>>(EnsureSchemaMap);
             ChildOperations = new Lazy<IReadOnlyDictionary<RequestPath, HashSet<InputOperation>>>(EnsureResourceChildOperations);
-            _schemaNameToModels = new Lazy<IReadOnlyDictionary<string, TypeProvider>>(EnsureSchemaNameToModels);
+            _schemaNameToModels = new Lazy<Dictionary<string, TypeProvider>>(EnsureSchemaNameToModels);
 
             // initialize the property bag collection
             // TODO -- considering provide a customized comparer
@@ -301,6 +301,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 var originalModel = _schemaToModels[schema];
                 _schemaToModels[schema] = replacedType;
+                _schemaNameToModels.Value[schema.Name] = replacedType;
                 MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                     new TransformItem(TransformTypeName.ReplaceTypeWhenInitializingModel, schema.GetFullSerializedName()),
                     schema.GetFullSerializedName(),
