@@ -164,21 +164,33 @@ namespace AutoRest.CSharp.Output.Models.Types
                     getter != null && getter.IsPublic ? "public" : "internal",
                     property.Name,
                     declarationType);
-                //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager is known
-                //If in the future we add more types which have unique cases we might need to update this code, but it will be obvious
-                //given that the generation will fail with the new types
-                InputType inputType = InputPrimitiveType.Boolean;
-                if (declarationType.IsDictionary)
+                InputModelProperty inputModelProperty;
+                if (backingProperty?.InputModelProperty is not null)
                 {
-                    inputType = new InputDictionaryType(string.Empty, InputPrimitiveType.Boolean, InputPrimitiveType.Boolean, false);
+                    inputModelProperty = backingProperty.InputModelProperty;
                 }
-                else if (declarationType.IsList)
+                else
                 {
-                    inputType = new InputListType(string.Empty, InputPrimitiveType.Boolean, false, false);
-                }
-                InputModelProperty prop = new InputModelProperty(property.Name, GetSerializedName(property.Name, SystemType), GetPropertySummary(setter != null, property.Name), inputType, null, IsRequired(property, SystemType), property.IsReadOnly(), false, null);
-                yield return new ObjectTypeProperty(memberDeclarationOptions, prop.Description, prop.IsReadOnly, prop, new CSharpType(property.PropertyType) { SerializeAs = GetSerializeAs(property.PropertyType) });
+                    //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager is known
+                    //If in the future we add more types which have unique cases we might need to update this code, but it will be obvious
+                    //given that the generation will fail with the new types
+                    InputType inputType = InputPrimitiveType.Boolean;
+                    if (declarationType.IsDictionary)
+                    {
+                        inputType = new InputDictionaryType(string.Empty, InputPrimitiveType.Boolean, InputPrimitiveType.Boolean, false);
+                    }
+                    else if (declarationType.IsList)
+                    {
+                        inputType = new InputListType(string.Empty, InputPrimitiveType.Boolean, false, false);
+                    }
+                    inputModelProperty = new InputModelProperty(property.Name, GetSerializedName(property.Name, SystemType), GetPropertySummary(setter != null, property.Name), inputType, null, IsRequired(property, SystemType), property.IsReadOnly(), false, null);
 
+                }
+
+                yield return new ObjectTypeProperty(memberDeclarationOptions, inputModelProperty.Description, inputModelProperty.IsReadOnly, inputModelProperty, new CSharpType(property.PropertyType)
+                {
+                    SerializeAs = GetSerializeAs(property.PropertyType)
+                });
             }
 
             static bool IsRequired(PropertyInfo property, Type systemType)
