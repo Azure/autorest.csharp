@@ -54,10 +54,12 @@ namespace CustomizedTypeSpec.Models
 
         /// <summary> Initializes a new instance of <see cref="SuperFriend"/>. </summary>
         /// <param name="name"> name of the NotFriend. </param>
+        /// <param name="format"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SuperFriend(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal SuperFriend(string name, ModelWithFormat format, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
+            Format = format;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -68,5 +70,7 @@ namespace CustomizedTypeSpec.Models
 
         /// <summary> name of the NotFriend. </summary>
         public string Name { get; set; }
+        /// <summary> Gets or sets the format. </summary>
+        public ModelWithFormat Format { get; set; }
     }
 }
