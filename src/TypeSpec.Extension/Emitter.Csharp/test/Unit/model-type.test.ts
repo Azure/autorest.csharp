@@ -1,12 +1,12 @@
 import { TestHost } from "@typespec/compiler/testing";
-import assert from "assert";
-import isEqual from "lodash.isequal";
+import assert, { deepStrictEqual, strictEqual } from "assert";
+import { beforeEach, describe, it } from "vitest";
 import { createModel } from "../../src/lib/client-model-builder.js";
 import { InputIntrinsicTypeKind } from "../../src/type/input-intrinsic-type-kind.js";
 import { InputModelProperty } from "../../src/type/input-model-property.js";
 import { InputPrimitiveTypeKind } from "../../src/type/input-primitive-type-kind.js";
-import { InputDictionaryType } from "../../src/type/input-type.js";
 import { InputTypeKind } from "../../src/type/input-type-kind.js";
+import { InputDictionaryType } from "../../src/type/input-type.js";
 import {
     createEmitterContext,
     createEmitterTestHost,
@@ -60,35 +60,27 @@ op test(@body input: Pet): Pet;
         const catModel = models.find((m) => m.Name === "Cat");
         const dogModel = models.find((m) => m.Name === "Dog");
         // assert the discriminator property name
-        assert(
-            isEqual("kind", petModel?.DiscriminatorPropertyName),
-            `Discriminator property name is not correct, got ${petModel?.DiscriminatorPropertyName}`
-        );
+        deepStrictEqual("kind", petModel?.DiscriminatorPropertyName);
         // assert we have a property corresponding to the discriminator property above on the base model
         const discriminatorProperty = petModel?.Properties.find(
             (p) => p.Name === petModel?.DiscriminatorPropertyName
         );
-        assert(
-            isEqual(
-                {
-                    Name: "kind",
-                    SerializedName: "kind",
-                    Type: {
-                        Kind: InputTypeKind.Primitive,
-                        Name: InputPrimitiveTypeKind.String,
-                        IsNullable: false
-                    },
-                    IsRequired: true,
-                    IsReadOnly: false,
-                    IsDiscriminator: true,
-                    Description: "Discriminator",
-                    FlattenedNames: undefined
-                } as InputModelProperty,
-                discriminatorProperty
-            ),
-            `Discriminator property is not correct, got ${JSON.stringify(
-                discriminatorProperty
-            )}`
+        deepStrictEqual(
+            {
+                Name: "kind",
+                SerializedName: "kind",
+                Type: {
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.String,
+                    IsNullable: false
+                },
+                IsRequired: true,
+                IsReadOnly: false,
+                IsDiscriminator: true,
+                Description: "Discriminator",
+                FlattenedNames: undefined
+            } as InputModelProperty,
+            discriminatorProperty
         );
         // assert we will NOT have a DiscriminatorPropertyName on the derived models
         assert(
@@ -160,54 +152,46 @@ op test(@body input: Pet): Pet;
         const pet = models.find((m) => m.Name === "Pet");
         assert(pet !== undefined);
         // assert the discriminator property name
-        assert(
-            isEqual("kind", pet?.DiscriminatorPropertyName),
-            `Discriminator property name is not correct, got ${pet?.DiscriminatorPropertyName}`
-        );
+        strictEqual("kind", pet?.DiscriminatorPropertyName);
         // assert we have a property corresponding to the discriminator property above on the base model
         const discriminatorProperty = pet?.Properties.find(
             (p) => p.Name === pet?.DiscriminatorPropertyName
         );
-        assert(
-            isEqual(
-                {
-                    Name: "kind",
-                    SerializedName: "kind",
-                    Description: "The kind of the pet",
-                    Type: {
-                        Kind: InputTypeKind.Enum,
-                        Name: "PetKind",
-                        Namespace: "Azure.Csharp.Testing",
-                        Description: "The pet kind",
-                        Accessibility: undefined,
-                        Deprecated: undefined,
-                        EnumValueType: "String",
-                        AllowedValues: [
-                            {
-                                Name: "Cat",
-                                Value: "Cat",
-                                Description: undefined
-                            },
-                            {
-                                Name: "Dog",
-                                Value: "Dog",
-                                Description: undefined
-                            }
-                        ],
-                        IsExtensible: false,
-                        IsNullable: false,
-                        Usage: "RoundTrip"
-                    },
-                    IsRequired: true,
-                    IsReadOnly: false,
-                    IsDiscriminator: true,
-                    FlattenedNames: undefined
-                } as InputModelProperty,
-                discriminatorProperty
-            ),
-            `Discriminator property is not correct, got ${JSON.stringify(
-                discriminatorProperty
-            )}`
+        deepStrictEqual(
+            {
+                Name: "kind",
+                SerializedName: "kind",
+                Description: "The kind of the pet",
+                Type: {
+                    Kind: InputTypeKind.Enum,
+                    Name: "PetKind",
+                    Namespace: "Azure.Csharp.Testing",
+                    Description: "The pet kind",
+                    Accessibility: undefined,
+                    Deprecated: undefined,
+                    EnumValueType: "String",
+                    AllowedValues: [
+                        {
+                            Name: "Cat",
+                            Value: "Cat",
+                            Description: undefined
+                        },
+                        {
+                            Name: "Dog",
+                            Value: "Dog",
+                            Description: undefined
+                        }
+                    ],
+                    IsExtensible: false,
+                    IsNullable: false,
+                    Usage: "RoundTrip"
+                },
+                IsRequired: true,
+                IsReadOnly: false,
+                IsDiscriminator: true,
+                FlattenedNames: undefined
+            } as InputModelProperty,
+            discriminatorProperty
         );
 
         // verify derived model Cat
@@ -293,54 +277,46 @@ op test(@body input: Pet): Pet;
         const pet = models.find((m) => m.Name === "Pet");
         assert(pet !== undefined);
         // assert the discriminator property name
-        assert(
-            isEqual("kind", pet?.DiscriminatorPropertyName),
-            `Discriminator property name is not correct, got ${pet?.DiscriminatorPropertyName}`
-        );
+        strictEqual("kind", pet?.DiscriminatorPropertyName);
         // assert we have a property corresponding to the discriminator property above on the base model
         const discriminatorProperty = pet?.Properties.find(
             (p) => p.Name === pet?.DiscriminatorPropertyName
         );
-        assert(
-            isEqual(
-                {
-                    Name: "kind",
-                    SerializedName: "kind",
-                    Description: "The kind of the pet",
-                    Type: {
-                        Kind: InputTypeKind.Enum,
-                        Name: "PetKind",
-                        Namespace: "Azure.Csharp.Testing",
-                        Accessibility: undefined,
-                        Deprecated: undefined,
-                        Description: "The pet kind",
-                        EnumValueType: "String",
-                        AllowedValues: [
-                            {
-                                Name: "Cat",
-                                Value: "cat",
-                                Description: undefined
-                            },
-                            {
-                                Name: "Dog",
-                                Value: "dog",
-                                Description: undefined
-                            }
-                        ],
-                        IsExtensible: false,
-                        IsNullable: false,
-                        Usage: "RoundTrip"
-                    },
-                    IsRequired: true,
-                    IsReadOnly: false,
-                    IsDiscriminator: true,
-                    FlattenedNames: undefined
-                } as InputModelProperty,
-                discriminatorProperty
-            ),
-            `Discriminator property is not correct, got ${JSON.stringify(
-                discriminatorProperty
-            )}`
+        deepStrictEqual(
+            {
+                Name: "kind",
+                SerializedName: "kind",
+                Description: "The kind of the pet",
+                Type: {
+                    Kind: InputTypeKind.Enum,
+                    Name: "PetKind",
+                    Namespace: "Azure.Csharp.Testing",
+                    Accessibility: undefined,
+                    Deprecated: undefined,
+                    Description: "The pet kind",
+                    EnumValueType: "String",
+                    AllowedValues: [
+                        {
+                            Name: "Cat",
+                            Value: "cat",
+                            Description: undefined
+                        },
+                        {
+                            Name: "Dog",
+                            Value: "dog",
+                            Description: undefined
+                        }
+                    ],
+                    IsExtensible: false,
+                    IsNullable: false,
+                    Usage: "RoundTrip"
+                },
+                IsRequired: true,
+                IsReadOnly: false,
+                IsDiscriminator: true,
+                FlattenedNames: undefined
+            } as InputModelProperty,
+            discriminatorProperty
         );
 
         // verify derived model Cat
@@ -469,117 +445,92 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
         assert(extendsFooModel !== undefined);
         assert(extendsFooArrayModel !== undefined);
         // assert the inherited dictionary type is expected
-        assert(
-            isEqual(
-                {
-                    Kind: InputTypeKind.Dictionary,
-                    Name: InputTypeKind.Dictionary,
-                    IsNullable: false,
-                    KeyType: {
-                        Kind: InputTypeKind.Primitive,
-                        Name: InputPrimitiveTypeKind.String,
-                        IsNullable: false
-                    },
-                    ValueType: {
-                        Kind: InputTypeKind.Intrinsic,
-                        Name: InputIntrinsicTypeKind.Unknown,
-                        IsNullable: false
-                    }
-                } as InputDictionaryType,
-                extendsUnknownModel.InheritedDictionaryType
-            ),
-            `Inherited dictionary type is not correct, got ${JSON.stringify(
-                extendsUnknownModel.InheritedDictionaryType
-            )}`
+        deepStrictEqual(
+            {
+                Kind: InputTypeKind.Dictionary,
+                Name: InputTypeKind.Dictionary,
+                IsNullable: false,
+                KeyType: {
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.String,
+                    IsNullable: false
+                },
+                ValueType: {
+                    Kind: InputTypeKind.Intrinsic,
+                    Name: InputIntrinsicTypeKind.Unknown,
+                    IsNullable: false
+                }
+            } as InputDictionaryType,
+            extendsUnknownModel.InheritedDictionaryType
         );
-        assert(
-            isEqual(
-                {
-                    Kind: InputTypeKind.Dictionary,
-                    Name: InputTypeKind.Dictionary,
-                    IsNullable: false,
-                    KeyType: {
-                        Kind: InputTypeKind.Primitive,
-                        Name: InputPrimitiveTypeKind.String,
-                        IsNullable: false
-                    },
-                    ValueType: {
-                        Kind: InputTypeKind.Primitive,
-                        Name: InputPrimitiveTypeKind.String,
-                        IsNullable: false
-                    }
-                } as InputDictionaryType,
-                extendsStringModel.InheritedDictionaryType
-            ),
-            `Inherited dictionary type is not correct, got ${JSON.stringify(
-                extendsStringModel.InheritedDictionaryType
-            )}`
+        deepStrictEqual(
+            {
+                Kind: InputTypeKind.Dictionary,
+                Name: InputTypeKind.Dictionary,
+                IsNullable: false,
+                KeyType: {
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.String,
+                    IsNullable: false
+                },
+                ValueType: {
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.String,
+                    IsNullable: false
+                }
+            } as InputDictionaryType,
+            extendsStringModel.InheritedDictionaryType
         );
-        assert(
-            isEqual(
-                {
-                    Kind: InputTypeKind.Dictionary,
-                    Name: InputTypeKind.Dictionary,
-                    IsNullable: false,
-                    KeyType: {
-                        Kind: InputTypeKind.Primitive,
-                        Name: InputPrimitiveTypeKind.String,
-                        IsNullable: false
-                    },
-                    ValueType: {
-                        Kind: InputTypeKind.Primitive,
-                        Name: InputPrimitiveTypeKind.Int32,
-                        IsNullable: false
-                    }
-                } as InputDictionaryType,
-                extendsInt32Model.InheritedDictionaryType
-            ),
-            `Inherited dictionary type is not correct, got ${JSON.stringify(
-                extendsInt32Model.InheritedDictionaryType
-            )}`
+        deepStrictEqual(
+            {
+                Kind: InputTypeKind.Dictionary,
+                Name: InputTypeKind.Dictionary,
+                IsNullable: false,
+                KeyType: {
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.String,
+                    IsNullable: false
+                },
+                ValueType: {
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.Int32,
+                    IsNullable: false
+                }
+            } as InputDictionaryType,
+            extendsInt32Model.InheritedDictionaryType
         );
-        assert(
-            isEqual(
-                {
-                    Kind: InputTypeKind.Dictionary,
-                    Name: InputTypeKind.Dictionary,
-                    IsNullable: false,
-                    KeyType: {
-                        Kind: InputTypeKind.Primitive,
-                        Name: InputPrimitiveTypeKind.String,
-                        IsNullable: false
-                    },
-                    ValueType: fooModel
-                } as InputDictionaryType,
-                extendsFooModel.InheritedDictionaryType
-            ),
-            `Inherited dictionary type is not correct, got ${JSON.stringify(
-                extendsFooModel.InheritedDictionaryType
-            )}`
+        deepStrictEqual(
+            {
+                Kind: InputTypeKind.Dictionary,
+                Name: InputTypeKind.Dictionary,
+                IsNullable: false,
+                KeyType: {
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.String,
+                    IsNullable: false
+                },
+                ValueType: fooModel
+            } as InputDictionaryType,
+            extendsFooModel.InheritedDictionaryType
         );
-        assert(
-            isEqual(
-                {
-                    Kind: InputTypeKind.Dictionary,
-                    Name: InputTypeKind.Dictionary,
-                    IsNullable: false,
-                    KeyType: {
-                        Kind: InputTypeKind.Primitive,
-                        Name: InputPrimitiveTypeKind.String,
-                        IsNullable: false
-                    },
-                    ValueType: {
-                        Kind: InputTypeKind.Array,
-                        Name: InputTypeKind.Array,
-                        ElementType: fooModel,
-                        IsNullable: false
-                    }
-                } as InputDictionaryType,
-                extendsFooArrayModel.InheritedDictionaryType
-            ),
-            `Inherited dictionary type is not correct, got ${JSON.stringify(
-                extendsFooArrayModel.InheritedDictionaryType
-            )}`
+        deepStrictEqual(
+            {
+                Kind: InputTypeKind.Dictionary,
+                Name: InputTypeKind.Dictionary,
+                IsNullable: false,
+                KeyType: {
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.String,
+                    IsNullable: false
+                },
+                ValueType: {
+                    Kind: InputTypeKind.Array,
+                    Name: InputTypeKind.Array,
+                    ElementType: fooModel,
+                    IsNullable: false
+                }
+            } as InputDictionaryType,
+            extendsFooArrayModel.InheritedDictionaryType
         );
     });
 });
@@ -664,117 +615,92 @@ op op5(@body body: IsFooArray): IsFooArray;
         assert(isFooModel !== undefined);
         assert(isFooArrayModel !== undefined);
         // assert the inherited dictionary type is expected
-        assert(
-            isEqual(
-                {
-                    Kind: InputTypeKind.Dictionary,
-                    Name: InputTypeKind.Dictionary,
-                    IsNullable: false,
-                    KeyType: {
-                        Kind: InputTypeKind.Primitive,
-                        Name: InputPrimitiveTypeKind.String,
-                        IsNullable: false
-                    },
-                    ValueType: {
-                        Kind: InputTypeKind.Intrinsic,
-                        Name: InputIntrinsicTypeKind.Unknown,
-                        IsNullable: false
-                    }
-                } as InputDictionaryType,
-                isUnknownModel.InheritedDictionaryType
-            ),
-            `Inherited dictionary type is not correct, got ${JSON.stringify(
-                isUnknownModel.InheritedDictionaryType
-            )}`
+        deepStrictEqual(
+            {
+                Kind: InputTypeKind.Dictionary,
+                Name: InputTypeKind.Dictionary,
+                IsNullable: false,
+                KeyType: {
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.String,
+                    IsNullable: false
+                },
+                ValueType: {
+                    Kind: InputTypeKind.Intrinsic,
+                    Name: InputIntrinsicTypeKind.Unknown,
+                    IsNullable: false
+                }
+            } as InputDictionaryType,
+            isUnknownModel.InheritedDictionaryType
         );
-        assert(
-            isEqual(
-                {
-                    Kind: InputTypeKind.Dictionary,
-                    Name: InputTypeKind.Dictionary,
-                    IsNullable: false,
-                    KeyType: {
-                        Kind: InputTypeKind.Primitive,
-                        Name: InputPrimitiveTypeKind.String,
-                        IsNullable: false
-                    },
-                    ValueType: {
-                        Kind: InputTypeKind.Primitive,
-                        Name: InputPrimitiveTypeKind.String,
-                        IsNullable: false
-                    }
-                } as InputDictionaryType,
-                isStringModel.InheritedDictionaryType
-            ),
-            `Inherited dictionary type is not correct, got ${JSON.stringify(
-                isStringModel.InheritedDictionaryType
-            )}`
+        deepStrictEqual(
+            {
+                Kind: InputTypeKind.Dictionary,
+                Name: InputTypeKind.Dictionary,
+                IsNullable: false,
+                KeyType: {
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.String,
+                    IsNullable: false
+                },
+                ValueType: {
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.String,
+                    IsNullable: false
+                }
+            } as InputDictionaryType,
+            isStringModel.InheritedDictionaryType
         );
-        assert(
-            isEqual(
-                {
-                    Kind: InputTypeKind.Dictionary,
-                    Name: InputTypeKind.Dictionary,
-                    IsNullable: false,
-                    KeyType: {
-                        Kind: InputTypeKind.Primitive,
-                        Name: InputPrimitiveTypeKind.String,
-                        IsNullable: false
-                    },
-                    ValueType: {
-                        Kind: InputTypeKind.Primitive,
-                        Name: InputPrimitiveTypeKind.Int32,
-                        IsNullable: false
-                    }
-                } as InputDictionaryType,
-                isInt32Model.InheritedDictionaryType
-            ),
-            `Inherited dictionary type is not correct, got ${JSON.stringify(
-                isInt32Model.InheritedDictionaryType
-            )}`
+        deepStrictEqual(
+            {
+                Kind: InputTypeKind.Dictionary,
+                Name: InputTypeKind.Dictionary,
+                IsNullable: false,
+                KeyType: {
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.String,
+                    IsNullable: false
+                },
+                ValueType: {
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.Int32,
+                    IsNullable: false
+                }
+            } as InputDictionaryType,
+            isInt32Model.InheritedDictionaryType
         );
-        assert(
-            isEqual(
-                {
-                    Kind: InputTypeKind.Dictionary,
-                    Name: InputTypeKind.Dictionary,
-                    IsNullable: false,
-                    KeyType: {
-                        Kind: InputTypeKind.Primitive,
-                        Name: InputPrimitiveTypeKind.String,
-                        IsNullable: false
-                    },
-                    ValueType: fooModel
-                } as InputDictionaryType,
-                isFooModel.InheritedDictionaryType
-            ),
-            `Inherited dictionary type is not correct, got ${JSON.stringify(
-                isFooModel.InheritedDictionaryType
-            )}`
+        deepStrictEqual(
+            {
+                Kind: InputTypeKind.Dictionary,
+                Name: InputTypeKind.Dictionary,
+                IsNullable: false,
+                KeyType: {
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.String,
+                    IsNullable: false
+                },
+                ValueType: fooModel
+            } as InputDictionaryType,
+            isFooModel.InheritedDictionaryType
         );
-        assert(
-            isEqual(
-                {
-                    Kind: InputTypeKind.Dictionary,
-                    Name: InputTypeKind.Dictionary,
-                    IsNullable: false,
-                    KeyType: {
-                        Kind: InputTypeKind.Primitive,
-                        Name: InputPrimitiveTypeKind.String,
-                        IsNullable: false
-                    },
-                    ValueType: {
-                        Kind: InputTypeKind.Array,
-                        Name: InputTypeKind.Array,
-                        ElementType: fooModel,
-                        IsNullable: false
-                    }
-                } as InputDictionaryType,
-                isFooArrayModel.InheritedDictionaryType
-            ),
-            `Inherited dictionary type is not correct, got ${JSON.stringify(
-                isFooArrayModel.InheritedDictionaryType
-            )}`
+        deepStrictEqual(
+            {
+                Kind: InputTypeKind.Dictionary,
+                Name: InputTypeKind.Dictionary,
+                IsNullable: false,
+                KeyType: {
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.String,
+                    IsNullable: false
+                },
+                ValueType: {
+                    Kind: InputTypeKind.Array,
+                    Name: InputTypeKind.Array,
+                    ElementType: fooModel,
+                    IsNullable: false
+                }
+            } as InputDictionaryType,
+            isFooArrayModel.InheritedDictionaryType
         );
     });
 });
