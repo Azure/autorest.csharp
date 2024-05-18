@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Generation.Types
             },
             InputGenericType genericType => new CSharpType(genericType.Type, CreateType(genericType.ArgumentType)).WithNullable(inputType.IsNullable),
             _ when ToXMsFormatType(format) is Type type => new CSharpType(type, inputType.IsNullable),
-            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => UnknownType,
+            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => new CSharpType(UnknownType, inputType.IsNullable),
             _ => throw new Exception("Unknown type")
         };
 
