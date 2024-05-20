@@ -11,7 +11,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ReferenceTypeWriter : ModelWriter
     {
-        // TODO: handle this with custom code
         protected override void AddClassAttributes(CodeWriter writer, ObjectType objectType)
         {
             if (objectType is not SchemaObjectType schema)
@@ -39,6 +38,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     writer.UseNamespace("Azure.Core");
                 }
+
+                // The hard-coded string input is needed for ReferenceTypeAttribute to work, and this only applies to ResourceData and TrackedResourceData now.
                 writer.Line($"[{ReferenceClassFinder.ReferenceTypeAttribute}(new string[]{{\"SystemData\"}})]");
             }
         }

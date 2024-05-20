@@ -38,12 +38,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             foreach (var operation in InputClient.Operations)
             {
-                // TODO: handle this later
-                // See also LowLevelRestClient::EnsureNormalMethods if changing
-                //if (serviceRequest.Protocol.Http is not HttpRequest httpRequest)
-                //{
-                //    continue;
-                //}
                 requestMethods.Add(operation, _clientBuilder.BuildMethod(operation, operation.Parameters, null, "public", ShouldReturnNullOn404(operation)));
 
             }

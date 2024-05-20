@@ -65,7 +65,6 @@ namespace AutoRest.CSharp.Mgmt.Models
                 : parameter;
         }
 
-
         protected override Parameter[] BuildMethodParameters(IReadOnlyDictionary<InputParameter, Parameter> allParameters)
         {
             List<Parameter> requiredParameters = new();

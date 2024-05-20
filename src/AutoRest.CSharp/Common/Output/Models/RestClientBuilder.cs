@@ -41,14 +41,14 @@ namespace AutoRest.CSharp.Output.Models
         public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory)
         {
             _typeFactory = typeFactory;
-            _parameters = clientParameters.DistinctBy(p => p.Name).ToDictionary(p => p.Name, p => BuildConstructorParameter(p));
+            _parameters = clientParameters.DistinctBy(p => p.Name).ToDictionary(p => p.Name, BuildConstructorParameter);
         }
 
         public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory, OutputLibrary library)
         {
             _typeFactory = typeFactory;
             _library = library;
-            _parameters = clientParameters.ToDictionary(p => p.Name, p => BuildConstructorParameter(p));
+            _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
         }
 
         /// <summary>

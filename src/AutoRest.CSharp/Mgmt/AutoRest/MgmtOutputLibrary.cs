@@ -325,7 +325,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             var actualBase = model.IsBasePolyType ? model : model.AllBaseModels.FirstOrDefault(parent => parent is InputModelType inputModel && inputModel.DiscriminatorPropertyName is not null) as InputModelType;
             if (actualBase is null)
-                throw new InvalidOperationException($"Found a child poly {model.Name} that we weren't able to determine its base poly from {string.Join(',', model.GetImmediateBaseModels().Select(p => p.Name) ?? Array.Empty<string>())}");
+                throw new InvalidOperationException($"Found a child poly {model.Name} that we weren't able to determine its base poly from {string.Join(',', model.ImmediateBaseModels.Select(p => p.Name) ?? Array.Empty<string>())}");
 
             // We don't need to create default type if its an input only model
             // TODO -- remove this condition completely when remove the UseModelReaderWriter flag

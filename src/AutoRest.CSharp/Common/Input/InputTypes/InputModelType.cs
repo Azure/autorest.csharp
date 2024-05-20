@@ -28,6 +28,9 @@ namespace AutoRest.CSharp.Common.Input
 
         public IReadOnlyList<InputModelType> AllBaseModels { get; init; } = Array.Empty<InputModelType>();
 
+        // TODO: remove the workaround for immediate base models
+        public IEnumerable<InputModelType> ImmediateBaseModels => AllBaseModels.Where(x => x.Name != "AzureResourceBase");
+
         public InputModelType? BaseModel { get; private set; } = BaseModel;
         /** In some case, its base model will have a propety whose type is the model, in tspCodeModel.json, the property type is a reference,
          * during descerializing, we need to create the model and add it to the referernce map before load base model, otherwise, the deserialization crash.
@@ -51,9 +54,6 @@ namespace AutoRest.CSharp.Common.Input
                 model = model.BaseModel;
             }
         }
-
-        // TODO: remove the workaround for immediate base models
-        public IEnumerable<InputModelType> GetImmediateBaseModels() => AllBaseModels.Where(x => x.Name != "AzureResourceBase");
 
         internal InputModelType ReplaceProperty(InputModelProperty property, InputType inputType)
         {

@@ -615,11 +615,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return baseType;
             }
 
-            var objectSchemas = InputModel.GetImmediateBaseModels().ToArray();
-
             InputModelType? selectedSchema = null;
 
-            foreach (var objectSchema in objectSchemas)
+            foreach (var objectSchema in InputModel.ImmediateBaseModels)
             {
                 // Take first schema or the one with discriminator
                 selectedSchema ??= objectSchema;

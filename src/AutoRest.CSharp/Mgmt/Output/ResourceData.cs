@@ -13,11 +13,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ResourceData : MgmtObjectType
     {
-        private ResourceData(InputModelType inputModel)
-            : this(inputModel, null)
-        {
-        }
-
         public ResourceData(InputModelType inputModel, SerializableObjectType? defaultDerivedType = null)
             : base(inputModel, defaultDerivedType)
         {

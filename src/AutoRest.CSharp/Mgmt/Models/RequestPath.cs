@@ -506,8 +506,6 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
         }
 
         var groupModel = (SchemaObjectType)typeFactory.CreateType(groupedByParameter.Type).Implementation;
-        // TODO: handle it later
-        //var property = groupModel.GetPropertyForGroupedParameter(requestParameter.Name);
         var property = groupModel.GetPropertyBySerializedName(requestParameter.NameInRequest ?? requestParameter.Name);
 
         return new Reference($"{groupedByParameter.CSharpName()}.{property.Declaration.Name}", property.Declaration.Type);

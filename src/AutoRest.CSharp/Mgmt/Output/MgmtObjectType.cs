@@ -191,7 +191,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var descendantTypes = schemaObjectType.Discriminator.Implementations.Select(implementation => implementation.Type).ToHashSet();
 
             // We need this redundant check as the internal backing schema will not be a part of the discriminator implementations of its base type.
-            var immediateParents = InputModel.GetImmediateBaseModels().ToArray();
+            var immediateParents = InputModel.ImmediateBaseModels.ToArray();
             if (InputModel.DiscriminatorValue == "Unknown" &&
                 immediateParents.Length == 1 &&
                 immediateParents.Single().Equals(schemaObjectType.InputModel))

@@ -316,7 +316,7 @@ internal static class SchemaNameAndFormatUpdater
     {
         if (Configuration.MgmtConfiguration.AcronymMapping.Count == 0)
             return;
-        TransformSchema(schema);
+        TransformInputType(schema);
     }
 
     private static void UpdateAcronyms(IEnumerable<Schema> allSchemas)
@@ -357,22 +357,22 @@ internal static class SchemaNameAndFormatUpdater
         }
     }
 
-    private static void TransformSchema(InputType schema)
+    private static void TransformInputType(InputType inputType)
     {
-        switch (schema)
+        switch (inputType)
         {
             case InputEnumType inputEnum:
-                TransformChoiceSchema(inputEnum, inputEnum.AllowedValues);
+                TransformInputEnumType(inputEnum, inputEnum.AllowedValues);
                 break;
-            case InputModelType inputModel: // GroupSchema inherits ObjectSchema, therefore we do not need to handle that
+            case InputModelType inputModel:
                 TransformInputModel(inputModel);
                 break;
             default:
-                throw new InvalidOperationException($"Unknown schema type {schema.GetType()}");
+                throw new InvalidOperationException($"Unknown input type {inputType.GetType()}");
         }
     }
 
-    private static void TransformChoiceSchema(InputEnumType inputEnum, IReadOnlyList<InputEnumTypeValue> choiceValues)
+    private static void TransformInputEnumType(InputEnumType inputEnum, IReadOnlyList<InputEnumTypeValue> choiceValues)
     {
         TransformInputType(inputEnum, inputEnum.GetFullSerializedName());
         TransformChoices(inputEnum, choiceValues);
