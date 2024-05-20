@@ -31,9 +31,9 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Model_Inheritance_Recursive_put() => Test(async (host) =>
         {
             var data = new Extension(0);
-            var extensions = data.Extension as ChangeTrackingList<Extension>;
+            var extensions = data.Extension;
             Extension item1 = new Extension(1);
-            (item1.Extension as ChangeTrackingList<Extension>).Add(new Extension(2));
+            item1.Extension.Add(new Extension(2));
             Extension item2 = new Extension(1);
             extensions.Add(item1);
             extensions.Add(item2);
