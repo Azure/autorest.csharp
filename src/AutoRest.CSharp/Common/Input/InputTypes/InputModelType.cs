@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Common.Input
         /// <summary>
         /// Types provided as immediate parents in spec that aren't base model
         /// </summary>
-        public IEnumerable<InputModelType> CompositionModels => GetImmediateBaseModels().Where(x => x != BaseModel);
+        public IEnumerable<InputModelType> CompositionModels => AllBaseModels.Where(x => x != BaseModel && x.Name != "AzureResourceBase");
 
         public IReadOnlyList<InputModelType> AllBaseModels { get; init; } = Array.Empty<InputModelType>();
 
@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         // TODO: remove the workaround for immediate base models
-        public IReadOnlyList<InputModelType> GetImmediateBaseModels() => AllBaseModels.Where(x => x.Name != "AzureResourceBase")?.ToArray() ?? Array.Empty<InputModelType>();
+        public IEnumerable<InputModelType> GetImmediateBaseModels() => AllBaseModels.Where(x => x.Name != "AzureResourceBase");
 
         internal InputModelType ReplaceProperty(InputModelProperty property, InputType inputType)
         {
