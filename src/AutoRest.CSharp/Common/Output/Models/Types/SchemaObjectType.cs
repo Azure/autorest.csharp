@@ -400,7 +400,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var discriminatorPropertyName = InputModel.DiscriminatorPropertyName;
             if (discriminatorPropertyName is null)
             {
-                discriminatorPropertyName = InputModel.GetAllBaseModels().FirstOrDefault(m => m.DiscriminatorPropertyName != null)?.DiscriminatorPropertyName;
+                discriminatorPropertyName = InputModel.AllBaseModels.FirstOrDefault(m => m.DiscriminatorPropertyName != null)?.DiscriminatorPropertyName;
             }
             if (discriminatorPropertyName is null)
             {
@@ -598,7 +598,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             yield return InputModel;
 
-            foreach (var model in InputModel.GetAllBaseModels())
+            foreach (var model in InputModel.AllBaseModels)
             {
                 yield return model;
             }

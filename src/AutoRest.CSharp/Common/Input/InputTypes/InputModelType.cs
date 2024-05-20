@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, InputDictionaryType? InheritedDictionaryType, bool IsNullable, IReadOnlyList<InputModelType>? Parents = null, bool IsBasePolyType = false)
+    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, InputDictionaryType? InheritedDictionaryType, bool IsNullable, bool IsBasePolyType = false)
         : InputType(Name, IsNullable)
     {
         /// <summary>
@@ -24,7 +24,9 @@ namespace AutoRest.CSharp.Common.Input
         /// <summary>
         /// Types provided as immediate parents in spec that aren't base model
         /// </summary>
-        public IReadOnlyList<InputModelType> CompositionModels { get; init; } = Array.Empty<InputModelType>();
+        public IEnumerable<InputModelType> CompositionModels => GetImmediateBaseModels().Where(x => x != BaseModel);
+
+        public IReadOnlyList<InputModelType> AllBaseModels { get; init; } = Array.Empty<InputModelType>();
 
         public InputModelType? BaseModel { get; private set; } = BaseModel;
         /** In some case, its base model will have a propety whose type is the model, in tspCodeModel.json, the property type is a reference,
@@ -50,11 +52,8 @@ namespace AutoRest.CSharp.Common.Input
             }
         }
 
-        // TODO: Parents is needed for multiple parents in MPG, DPG doesn't implement Parents, need further consolidation
-        public IReadOnlyList<InputModelType> GetAllBaseModels() => Parents ?? Array.Empty<InputModelType>();
-
         // TODO: remove the workaround for immediate base models
-        public IReadOnlyList<InputModelType> GetImmediateBaseModels() => Parents?.Where(x => x.Name != "AzureResourceBase")?.ToArray() ?? Array.Empty<InputModelType>();
+        public IReadOnlyList<InputModelType> GetImmediateBaseModels() => AllBaseModels.Where(x => x.Name != "AzureResourceBase")?.ToArray() ?? Array.Empty<InputModelType>();
 
         internal InputModelType ReplaceProperty(InputModelProperty property, InputType inputType)
         {

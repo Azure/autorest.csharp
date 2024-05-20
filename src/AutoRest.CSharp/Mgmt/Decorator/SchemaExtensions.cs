@@ -19,7 +19,7 @@ internal static class SchemaExtensions
     /// <returns></returns>
     internal static IEnumerable<InputModelProperty> GetAllProperties(this InputModelType inputModel)
     {
-        return inputModel.GetAllBaseModels().SelectMany(parentInputModelType => parentInputModelType.Properties).Concat(inputModel.Properties);
+        return inputModel.AllBaseModels.SelectMany(parentInputModelType => parentInputModelType.Properties).Concat(inputModel.Properties);
     }
 
     /// <summary>

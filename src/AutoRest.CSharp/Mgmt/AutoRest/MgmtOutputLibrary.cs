@@ -323,7 +323,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 return null;
             }
 
-            var actualBase = model.IsBasePolyType ? model : model.Parents?.FirstOrDefault(parent => parent is InputModelType inputModel && inputModel.DiscriminatorPropertyName is not null) as InputModelType;
+            var actualBase = model.IsBasePolyType ? model : model.AllBaseModels.FirstOrDefault(parent => parent is InputModelType inputModel && inputModel.DiscriminatorPropertyName is not null) as InputModelType;
             if (actualBase is null)
                 throw new InvalidOperationException($"Found a child poly {model.Name} that we weren't able to determine its base poly from {string.Join(',', model.GetImmediateBaseModels().Select(p => p.Name) ?? Array.Empty<string>())}");
 
@@ -356,10 +356,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     "Unknown", //TODO: do we need to support extensible enum / int values?
                     null,
                     null,
-                    false,
-                    new List<InputModelType> { actualBase })
+                    false)
                 {
-                    IsUnknownDiscriminatorModel = true
+                    AllBaseModels = new List<InputModelType> { actualBase },
+                    IsUnknownDiscriminatorModel = true,
                 };
 
                 defaultDerivedType = new MgmtObjectType(unknownDerivedType);
