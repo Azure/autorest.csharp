@@ -95,13 +95,21 @@ namespace AutoRest.CSharp.Common.Input
                 case InputTypeKind.String:
                     foreach (var value in allowedValues)
                     {
-                        concreteValues.Add(new InputEnumTypeStringValue(value.Name, (string)value.Value, value.Description));
+                        if (value.Value is not string s)
+                        {
+                            throw new JsonException($"Enum value types are not consistent");
+                        }
+                        concreteValues.Add(new InputEnumTypeStringValue(value.Name, s, value.Description));
                     }
                     break;
                 case InputTypeKind.Int32:
                     foreach (var value in allowedValues)
                     {
-                        concreteValues.Add(new InputEnumTypeIntegerValue(value.Name, (int)value.Value, value.Description));
+                        if (value.Value is not int i)
+                        {
+                            throw new JsonException($"Enum value types are not consistent");
+                        }
+                        concreteValues.Add(new InputEnumTypeIntegerValue(value.Name, i, value.Description));
                     }
                     break;
                 case InputTypeKind.Float32:
@@ -116,7 +124,7 @@ namespace AutoRest.CSharp.Common.Input
                                 concreteValues.Add(new InputEnumTypeFloatValue(value.Name, f, value.Description));
                                 break;
                             default:
-                                throw new JsonException($"Enum value type of ${value.Name} cannot cast to float.");
+                                throw new JsonException($"Enum value types are not consistent");
                         }
                     }
                     break;
