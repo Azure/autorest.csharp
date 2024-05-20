@@ -13,26 +13,26 @@ namespace NoDocsTypeSpec.Models
 {
     public readonly partial struct FloatExtensibleEnum : IEquatable<FloatExtensibleEnum>
     {
-        private readonly int _value;
+        private readonly float _value;
 
-        public FloatExtensibleEnum(int value)
+        public FloatExtensibleEnum(float value)
         {
             _value = value;
         }
 
-        private const int OneValue = 1;
-        private const int TwoValue = 2;
-        private const int FourValue = 4;
+        private const float OneValue = 1F;
+        private const float TwoValue = 2F;
+        private const float FourValue = 4F;
 
         public static FloatExtensibleEnum One { get; } = new FloatExtensibleEnum(OneValue);
         public static FloatExtensibleEnum Two { get; } = new FloatExtensibleEnum(TwoValue);
         public static FloatExtensibleEnum Four { get; } = new FloatExtensibleEnum(FourValue);
 
-        internal int ToSerialInt32() => _value;
+        internal float ToSerialSingle() => _value;
 
         public static bool operator ==(FloatExtensibleEnum left, FloatExtensibleEnum right) => left.Equals(right);
         public static bool operator !=(FloatExtensibleEnum left, FloatExtensibleEnum right) => !left.Equals(right);
-        public static implicit operator FloatExtensibleEnum(int value) => new FloatExtensibleEnum(value);
+        public static implicit operator FloatExtensibleEnum(float value) => new FloatExtensibleEnum(value);
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object obj) => obj is FloatExtensibleEnum other && Equals(other);
