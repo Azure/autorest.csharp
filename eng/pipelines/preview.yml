@@ -12,6 +12,9 @@ parameters:
   type: boolean
   default: true
 
+variables:
+  - template: /eng/pipelines/variables/image.yml@self
+
 resources:
   repositories:
     - repository: sdk-repository
@@ -69,6 +72,10 @@ extends:
       displayName: 'Update Packages.Data.props'
       workingDirectory: $(sdkRepositoryPath)
     TestMatrix:
+      pool:
+        name: $(LINUXPOOL)
+        image: $(LINUXVMIMAGE)
+        os: linux
       ${{ if eq(parameters.RunUnitTests, true) }}:
         Unit:
           TestArguments: -UnitTests
