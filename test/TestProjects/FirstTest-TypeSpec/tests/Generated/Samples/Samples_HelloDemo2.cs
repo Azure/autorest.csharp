@@ -269,10 +269,10 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1
             },
-                floatExtensibleEnum = 1,
+                floatExtensibleEnum = 1F,
                 floatExtensibleEnumCollection = new object[]
             {
-1
+1F
             },
                 floatFixedEnum = 1.1F,
                 floatFixedEnumCollection = new object[]
@@ -393,10 +393,10 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1
             },
-                floatExtensibleEnum = 1,
+                floatExtensibleEnum = 1F,
                 floatExtensibleEnumCollection = new object[]
             {
-1
+1F
             },
                 floatFixedEnum = 1.1F,
                 floatFixedEnumCollection = new object[]
@@ -767,10 +767,10 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1
             },
-                floatExtensibleEnum = 1,
+                floatExtensibleEnum = 1F,
                 floatExtensibleEnumCollection = new object[]
             {
-1
+1F
             },
                 floatFixedEnum = 1.1F,
                 floatFixedEnumCollection = new object[]
@@ -891,10 +891,10 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1
             },
-                floatExtensibleEnum = 1,
+                floatExtensibleEnum = 1F,
                 floatExtensibleEnumCollection = new object[]
             {
-1
+1F
             },
                 floatFixedEnum = 1.1F,
                 floatFixedEnumCollection = new object[]

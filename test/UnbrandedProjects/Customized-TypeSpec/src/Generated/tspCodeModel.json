@@ -29,7 +29,7 @@
    "$id": "4",
    "Kind": "Enum",
    "Name": "Thing_requiredLiteralInt",
-   "EnumValueType": "Float32",
+   "EnumValueType": "Int32",
    "AllowedValues": [
     {
      "$id": "5",
@@ -86,7 +86,7 @@
    "$id": "10",
    "Kind": "Enum",
    "Name": "Thing_optionalLiteralInt",
-   "EnumValueType": "Float32",
+   "EnumValueType": "Int32",
    "AllowedValues": [
     {
      "$id": "11",
