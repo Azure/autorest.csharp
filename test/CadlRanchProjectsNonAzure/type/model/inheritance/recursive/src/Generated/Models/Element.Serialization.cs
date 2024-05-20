@@ -69,7 +69,7 @@ namespace Scm._Type.Model.Inheritance.Recursive.Models
             {
                 return null;
             }
-            IReadOnlyList<Extension> extension = default;
+            IList<Extension> extension = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
