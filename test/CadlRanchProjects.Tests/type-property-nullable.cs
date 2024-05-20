@@ -172,9 +172,8 @@ namespace CadlRanchProjects.Tests
             var response = await new NullableClient(host, null).GetCollectionsByteClient().GetNullAsync();
             Assert.AreEqual("foo", response.Value.RequiredProperty);
             // we will never construct a null collection therefore this property is actually undefined here.
-            Optional.IsCollectionDefined(response.Value.NullableProperty);
+            Assert.IsFalse(Optional.IsCollectionDefined(response.Value.NullableProperty));
             Assert.IsNotNull(response.Value.NullableProperty);
-            Assert.True(response.Value.NullableProperty.Count == 0);
         });
 
         [Test]
@@ -213,9 +212,8 @@ namespace CadlRanchProjects.Tests
             var response = await new NullableClient(host, null).GetCollectionsModelClient().GetNullAsync();
             Assert.AreEqual("foo", response.Value.RequiredProperty);
             // we will never construct a null collection therefore this property is actually undefined here.
-            Optional.IsCollectionDefined(response.Value.NullableProperty);
+            Assert.IsFalse(Optional.IsCollectionDefined(response.Value.NullableProperty));
             Assert.IsNotNull(response.Value.NullableProperty);
-            Assert.True(response.Value.NullableProperty.Count == 0);
         });
 
         [Test]
