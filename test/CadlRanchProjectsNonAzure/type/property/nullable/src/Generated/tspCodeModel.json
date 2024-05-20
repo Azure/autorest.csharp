@@ -114,7 +114,7 @@
      "Type": {
       "$id": "16",
       "Kind": "Primitive",
-      "Name": "DateTime",
+      "Name": "DateTimeRFC3339",
       "IsNullable": true
      },
      "IsRequired": true,

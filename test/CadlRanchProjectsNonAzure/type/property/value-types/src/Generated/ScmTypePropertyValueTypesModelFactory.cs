@@ -42,7 +42,7 @@ namespace Scm._Type.Property.ValueTypes.Models
         /// <summary> Initializes a new instance of <see cref="Models.UnionEnumValueProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         /// <returns> A new <see cref="Models.UnionEnumValueProperty"/> instance for mocking. </returns>
-        public static UnionEnumValueProperty UnionEnumValueProperty(UnionEnumValuePropertyProperty property = default)
+        public static UnionEnumValueProperty UnionEnumValueProperty(ExtendedEnum property = default)
         {
             return new UnionEnumValueProperty(property, serializedAdditionalRawData: null);
         }
