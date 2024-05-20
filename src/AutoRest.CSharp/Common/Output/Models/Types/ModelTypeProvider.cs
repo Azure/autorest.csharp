@@ -449,7 +449,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     // For structs all properties become required
                     Constant? defaultParameterValue = null;
-                    if (property.InputModelProperty?.DefaultValue is object defaultValueObject)
+                    if (property.InputModelProperty?.DefaultValue is { } defaultValueObject)
                     {
                         defaultParameterValue = BuilderHelpers.ParseConstant(defaultValueObject, propertyType);
                         defaultInitializationValue = defaultParameterValue;
@@ -702,7 +702,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _inputModelSerialization.Xml is { } xml ? SerializationBuilder.BuildXmlObjectSerialization(xml.Name ?? _inputModel.Name, this, _typeFactory) : null;
         }
 
-    protected override bool EnsureIncludeSerializer()
+        protected override bool EnsureIncludeSerializer()
         {
             // TODO -- this should always return true when use model reader writer is enabled.
             return Configuration.UseModelReaderWriter || _inputModelUsage.HasFlag(InputModelTypeUsage.Input);

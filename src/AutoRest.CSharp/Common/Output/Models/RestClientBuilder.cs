@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -474,9 +473,9 @@ namespace AutoRest.CSharp.Output.Models
             };
         }
 
-        public Parameter BuildConstructorParameter(InputParameter operationParameter, TypeFactory typeFactory)
+        public virtual Parameter BuildConstructorParameter(InputParameter operationParameter)
         {
-            var parameter = BuildParameter(operationParameter, typeFactory);
+            var parameter = BuildParameter(operationParameter);
             if (!operationParameter.IsEndpoint)
             {
                 return parameter;
@@ -494,7 +493,7 @@ namespace AutoRest.CSharp.Output.Models
         public static bool IsIgnoredHeaderParameter(InputParameter operationParameter)
             => operationParameter.Location == RequestLocation.Header && IgnoredRequestHeader.Contains(operationParameter.NameInRequest);
 
-        private Parameter BuildParameter(in InputParameter operationParameter, TypeFactory typeFactory, Type? typeOverride = null)
+        private Parameter BuildParameter(in InputParameter operationParameter, Type? typeOverride = null)
         {
             CSharpType type = typeOverride != null ? new CSharpType(typeOverride, operationParameter.Type.IsNullable) :
                 // for apiVersion, we still convert enum type to enum value type
