@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Generation.Types
             InputListType listType => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
             // TODO: consolidate the behavior when we handle type nullability in DPG
-            InputEnumType enumType => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
+            InputEnumType enumType => Configuration.AzureArm ? _library.ResolveEnum(enumType) : _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
             // TODO -- this is a temporary solution until we refactored the type replacement to use input types instead of code model schemas
             InputModelType { Namespace: "Azure.Core.Foundations", Name: "Error" } => SystemObjectType.Create(AzureResponseErrorType, AzureResponseErrorType.Namespace!, null).Type,
             // TODO: consolidate the behavior when we handle type nullability in DPG
@@ -86,7 +86,6 @@ namespace AutoRest.CSharp.Generation.Types
             },
             InputGenericType genericType => new CSharpType(genericType.Type, CreateType(genericType.ArgumentType)).WithNullable(inputType.IsNullable),
             // TODO: consolidate the behavior when we handle type nullability in DPG
-            // TODO: When IsNullable is added to InputIntrinsicType, we can remove nullability handling for MPG from here
             InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => Configuration.AzureArm ? new CSharpType(UnknownType, inputType.IsNullable) : UnknownType,
             _ => throw new Exception("Unknown type")
         };
