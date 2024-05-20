@@ -159,6 +159,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
             InputTypeKind.Uri => InputExampleValue.Value(primitiveType, "http://localhost:3000"),
             InputTypeKind.DurationSeconds => InputExampleValue.Value(primitiveType, 10),
             InputTypeKind.DurationSecondsFloat => InputExampleValue.Value(primitiveType, 10f),
+            InputTypeKind.DurationSecondsDouble => InputExampleValue.Value(primitiveType, 3.141592),
             _ => InputExampleValue.Object(primitiveType, new Dictionary<string, InputExampleValue>())
         };
 
@@ -204,7 +205,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
                     {
                         exampleValue = InputExampleValue.Value(property.Type, model.DiscriminatorValue!);
                     }
-                    else if (property.ConstantValue is {Value: {} constantValue} )
+                    else if (property.ConstantValue is { Value: { } constantValue })
                     {
                         exampleValue = InputExampleValue.Value(property.Type, constantValue);
                     }

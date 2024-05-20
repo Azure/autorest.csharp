@@ -54,6 +54,7 @@ namespace MgmtDiscriminator
         /// <summary> Initializes a new instance of <see cref="DeliveryRuleData"/>. </summary>
         public DeliveryRuleData()
         {
+            AdditionalProperties = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of <see cref="DeliveryRuleData"/>. </summary>
@@ -72,8 +73,9 @@ namespace MgmtDiscriminator
         /// <param name="sku"> The top level sku property. </param>
         /// <param name="unflattened"> The unflattened property. </param>
         /// <param name="properties"> The properties. </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeliveryRuleData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, bool? boolProperty, AzureLocation? location, AzureLocation? locationWithCustomSerialization, DateTimeOffset? dateTimeProperty, TimeSpan? duration, int? number, Uri uri, Shell shellProperty, Sku1 sku, Unflattened unflattened, DeliveryRuleProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
+        internal DeliveryRuleData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, bool? boolProperty, AzureLocation? location, AzureLocation? locationWithCustomSerialization, DateTimeOffset? dateTimeProperty, TimeSpan? duration, int? number, Uri uri, Shell shellProperty, Sku1 sku, Unflattened unflattened, DeliveryRuleProperties properties, IDictionary<string, string> additionalProperties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             BoolProperty = boolProperty;
             Location = location;
@@ -86,6 +88,7 @@ namespace MgmtDiscriminator
             Sku = sku;
             Unflattened = unflattened;
             Properties = properties;
+            AdditionalProperties = additionalProperties;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -134,5 +137,8 @@ namespace MgmtDiscriminator
         /// <summary> The properties. </summary>
         [WirePath("properties")]
         public DeliveryRuleProperties Properties { get; set; }
+        /// <summary> Additional Properties. </summary>
+        [WirePath("AdditionalProperties")]
+        public IDictionary<string, string> AdditionalProperties { get; }
     }
 }

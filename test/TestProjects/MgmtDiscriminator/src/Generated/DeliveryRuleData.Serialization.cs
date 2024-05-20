@@ -105,6 +105,11 @@ namespace MgmtDiscriminator
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
             }
+            foreach (var item in AdditionalProperties)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -158,7 +163,9 @@ namespace MgmtDiscriminator
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
+            IDictionary<string, string> additionalProperties = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
@@ -285,11 +292,17 @@ namespace MgmtDiscriminator
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
+                if (property.Value.ValueKind == JsonValueKind.String || property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
+            additionalProperties = additionalPropertiesDictionary;
             serializedAdditionalRawData = rawDataDictionary;
             return new DeliveryRuleData(
                 id,
@@ -307,6 +320,7 @@ namespace MgmtDiscriminator
                 sku,
                 unflattened,
                 properties,
+                additionalProperties,
                 serializedAdditionalRawData);
         }
 

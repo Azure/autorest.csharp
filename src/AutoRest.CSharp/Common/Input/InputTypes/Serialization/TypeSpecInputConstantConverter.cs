@@ -72,8 +72,8 @@ namespace AutoRest.CSharp.Common.Input
                             value = reader.GetString() ?? throw new JsonException();
                             break;
                         case InputTypeKind.Uri:
-                            var stringvalue = reader.GetString() ?? throw new JsonException();
-                            value = new Uri(stringvalue);
+                            var stringValue = reader.GetString() ?? throw new JsonException();
+                            value = new Uri(stringValue);
                             break;
                         case InputTypeKind.Int32:
                             value = reader.GetInt32();

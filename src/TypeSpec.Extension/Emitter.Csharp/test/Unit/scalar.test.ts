@@ -1,17 +1,15 @@
 import { TestHost } from "@typespec/compiler/testing";
-import assert, { deepStrictEqual } from "assert";
-import { createModel } from "../../src/lib/clientModelBuilder.js";
+import { deepStrictEqual } from "assert";
+import { beforeEach, describe, it } from "vitest";
+import { createModel } from "../../src/lib/client-model-builder.js";
+import { InputPrimitiveTypeKind } from "../../src/type/input-primitive-type-kind.js";
+import { InputTypeKind } from "../../src/type/input-type-kind.js";
 import {
-    typeSpecCompile,
     createEmitterContext,
     createEmitterTestHost,
-    createNetSdkContext
-} from "./utils/TestUtil.js";
-import { InputEnumType, InputListType } from "../../src/type/inputType.js";
-import isEqual from "lodash.isequal";
-import { InputTypeKind } from "../../src/type/inputTypeKind.js";
-import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
-import { Console } from "console";
+    createNetSdkContext,
+    typeSpecCompile
+} from "./utils/test-util.js";
 
 describe("Test GetInputType for scalar", () => {
     let runner: TestHost;
@@ -40,15 +38,13 @@ describe("Test GetInputType for scalar", () => {
             root.Clients[0].Operations[0].Parameters[0].Type.Name,
             InputPrimitiveTypeKind.AzureLocation
         );
-        assert(
-            isEqual(
-                {
-                    Kind: InputTypeKind.Primitive,
-                    Name: InputPrimitiveTypeKind.AzureLocation,
-                    IsNullable: false
-                },
-                root.Clients[0].Operations[0].Parameters[0].Type
-            )
+        deepStrictEqual(
+            {
+                Kind: InputTypeKind.Primitive,
+                Name: InputPrimitiveTypeKind.AzureLocation,
+                IsNullable: false
+            },
+            root.Clients[0].Operations[0].Parameters[0].Type
         );
     });
 });

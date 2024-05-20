@@ -26,13 +26,13 @@ import {
     HttpOperationResponse
 } from "@typespec/http";
 import { NetEmitterOptions } from "../options.js";
-import { BodyMediaType, typeToBodyMediaType } from "../type/bodyMediaType.js";
-import { collectionFormatToDelimMap } from "../type/collectionFormat.js";
-import { HttpResponseHeader } from "../type/httpResponseHeader.js";
-import { InputConstant } from "../type/inputConstant.js";
-import { InputOperation } from "../type/inputOperation.js";
-import { InputOperationParameterKind } from "../type/inputOperationParameterKind.js";
-import { InputParameter } from "../type/inputParameter.js";
+import { BodyMediaType, typeToBodyMediaType } from "../type/body-media-type.js";
+import { collectionFormatToDelimMap } from "../type/collection-format.js";
+import { HttpResponseHeader } from "../type/http-response-header.js";
+import { InputConstant } from "../type/input-constant.js";
+import { InputOperation } from "../type/input-operation.js";
+import { InputOperationParameterKind } from "../type/input-operation-parameter-kind.js";
+import { InputParameter } from "../type/input-parameter.js";
 import {
     InputEnumType,
     InputListType,
@@ -42,21 +42,21 @@ import {
     isInputLiteralType,
     isInputModelType,
     isInputUnionType
-} from "../type/inputType.js";
-import { convertLroFinalStateVia } from "../type/operationFinalStateVia.js";
-import { OperationLongRunning } from "../type/operationLongRunning.js";
-import { OperationPaging } from "../type/operationPaging.js";
-import { OperationResponse } from "../type/operationResponse.js";
+} from "../type/input-type.js";
+import { convertLroFinalStateVia } from "../type/operation-final-state-via.js";
+import { OperationLongRunning } from "../type/operation-long-running.js";
+import { OperationPaging } from "../type/operation-paging.js";
+import { OperationResponse } from "../type/operation-response.js";
 import {
     RequestLocation,
     requestLocationMap
-} from "../type/requestLocation.js";
+} from "../type/request-location.js";
 import {
     parseHttpRequestMethod,
     RequestMethod
-} from "../type/requestMethod.js";
+} from "../type/request-method.js";
 import { getExternalDocs, getOperationId, hasDecorator } from "./decorators.js";
-import { logger } from "./logger.js";
+import { Logger } from "./logger.js";
 import {
     getDefaultValue,
     getEffectiveSchemaType,
@@ -68,7 +68,7 @@ import {
     getTypeName
 } from "./utils.js";
 import { Usage } from "../type/usage.js";
-import { InputTypeKind } from "../type/inputTypeKind.js";
+import { InputTypeKind } from "../type/input-type-kind.js";
 
 export function loadOperation(
     sdkContext: SdkContext<NetEmitterOptions>,
@@ -86,7 +86,7 @@ export function loadOperation(
         parameters: typespecParameters
     } = operation;
     const program = sdkContext.program;
-    logger.info(`load operation: ${op.name}, path:${fullPath} `);
+    Logger.getInstance().info(`load operation: ${op.name}, path:${fullPath} `);
     const resourceOperation = getResourceOperation(program, op);
     const desc = getDoc(program, op);
     const summary = getSummary(program, op);
@@ -112,7 +112,7 @@ export function loadOperation(
             typespecParameters.body.type
         );
         if (effectiveBodyType.kind === "Model") {
-            let bodyParameter = loadBodyParameter(
+            const bodyParameter = loadBodyParameter(
                 sdkContext,
                 effectiveBodyType
             );
@@ -127,7 +127,7 @@ export function loadOperation(
             ) {
                 // give body type a name
                 bodyParameter.Type.Name = `${capitalize(op.name)}Request`;
-                var bodyModelType = bodyParameter.Type as InputModelType;
+                const bodyModelType = bodyParameter.Type as InputModelType;
                 bodyModelType.Usage = Usage.Input;
                 // update models cache
                 models.delete("");
@@ -403,7 +403,7 @@ export function loadOperation(
             return undefined;
         }
 
-        var bodyType = undefined;
+        let bodyType = undefined;
         if (
             op.verb !== "delete" &&
             metadata.finalResult !== undefined &&

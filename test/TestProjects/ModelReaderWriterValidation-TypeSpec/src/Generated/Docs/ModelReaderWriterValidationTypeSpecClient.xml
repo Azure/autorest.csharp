@@ -735,5 +735,347 @@ Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("properties
 Console.WriteLine(result.GetProperty("providerAuthorizationConsentState").ToString());
 ]]></code></example>
     </member>
+    <member name="Op6Async(ModelWithStringAdditionalProperties,CancellationToken)">
+      <example>
+This sample shows how to call Op6Async.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+ModelWithStringAdditionalProperties body = new ModelWithStringAdditionalProperties("<name>");
+Response<ModelWithStringAdditionalProperties> response = await client.Op6Async(body);
+]]></code>
+This sample shows how to call Op6Async with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+ModelWithStringAdditionalProperties body = new ModelWithStringAdditionalProperties("<name>")
+{
+    Age = 1234,
+};
+Response<ModelWithStringAdditionalProperties> response = await client.Op6Async(body);
+]]></code></example>
+    </member>
+    <member name="Op6(ModelWithStringAdditionalProperties,CancellationToken)">
+      <example>
+This sample shows how to call Op6.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+ModelWithStringAdditionalProperties body = new ModelWithStringAdditionalProperties("<name>");
+Response<ModelWithStringAdditionalProperties> response = client.Op6(body);
+]]></code>
+This sample shows how to call Op6 with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+ModelWithStringAdditionalProperties body = new ModelWithStringAdditionalProperties("<name>")
+{
+    Age = 1234,
+};
+Response<ModelWithStringAdditionalProperties> response = client.Op6(body);
+]]></code></example>
+    </member>
+    <member name="Op6Async(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Op6Async and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = await client.Op6Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call Op6Async with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    age = 1234,
+});
+Response response = await client.Op6Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code></example>
+    </member>
+    <member name="Op6(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Op6 and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = client.Op6(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call Op6 with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    age = 1234,
+});
+Response response = client.Op6(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code></example>
+    </member>
+    <member name="Op7Async(ModelWithArrayAdditionalProperties,CancellationToken)">
+      <example>
+This sample shows how to call Op7Async.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+ModelWithArrayAdditionalProperties body = new ModelWithArrayAdditionalProperties("<name>");
+Response<ModelWithArrayAdditionalProperties> response = await client.Op7Async(body);
+]]></code>
+This sample shows how to call Op7Async with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+ModelWithArrayAdditionalProperties body = new ModelWithArrayAdditionalProperties("<name>")
+{
+    Age = 1234,
+};
+Response<ModelWithArrayAdditionalProperties> response = await client.Op7Async(body);
+]]></code></example>
+    </member>
+    <member name="Op7(ModelWithArrayAdditionalProperties,CancellationToken)">
+      <example>
+This sample shows how to call Op7.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+ModelWithArrayAdditionalProperties body = new ModelWithArrayAdditionalProperties("<name>");
+Response<ModelWithArrayAdditionalProperties> response = client.Op7(body);
+]]></code>
+This sample shows how to call Op7 with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+ModelWithArrayAdditionalProperties body = new ModelWithArrayAdditionalProperties("<name>")
+{
+    Age = 1234,
+};
+Response<ModelWithArrayAdditionalProperties> response = client.Op7(body);
+]]></code></example>
+    </member>
+    <member name="Op7Async(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Op7Async and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = await client.Op7Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call Op7Async with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    age = 1234,
+});
+Response response = await client.Op7Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code></example>
+    </member>
+    <member name="Op7(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Op7 and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = client.Op7(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call Op7 with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    age = 1234,
+});
+Response response = client.Op7(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code></example>
+    </member>
+    <member name="Op8Async(ModelWithUnknownAdditionalProperties,CancellationToken)">
+      <example>
+This sample shows how to call Op8Async.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+ModelWithUnknownAdditionalProperties body = new ModelWithUnknownAdditionalProperties("<name>");
+Response<ModelWithUnknownAdditionalProperties> response = await client.Op8Async(body);
+]]></code>
+This sample shows how to call Op8Async with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+ModelWithUnknownAdditionalProperties body = new ModelWithUnknownAdditionalProperties("<name>")
+{
+    Age = 1234,
+};
+Response<ModelWithUnknownAdditionalProperties> response = await client.Op8Async(body);
+]]></code></example>
+    </member>
+    <member name="Op8(ModelWithUnknownAdditionalProperties,CancellationToken)">
+      <example>
+This sample shows how to call Op8.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+ModelWithUnknownAdditionalProperties body = new ModelWithUnknownAdditionalProperties("<name>");
+Response<ModelWithUnknownAdditionalProperties> response = client.Op8(body);
+]]></code>
+This sample shows how to call Op8 with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+ModelWithUnknownAdditionalProperties body = new ModelWithUnknownAdditionalProperties("<name>")
+{
+    Age = 1234,
+};
+Response<ModelWithUnknownAdditionalProperties> response = client.Op8(body);
+]]></code></example>
+    </member>
+    <member name="Op8Async(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Op8Async and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = await client.Op8Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call Op8Async with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    age = 1234,
+});
+Response response = await client.Op8Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code></example>
+    </member>
+    <member name="Op8(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Op8 and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = client.Op8(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call Op8 with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    age = 1234,
+});
+Response response = client.Op8(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code></example>
+    </member>
   </members>
 </doc>

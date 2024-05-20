@@ -137,6 +137,8 @@ model ModelWithRequiredNullableProperties {
 model NotFriend {
     @doc("name of the NotFriend")
     name: string;
+
+    format?: ModelWithFormat;
 }
 
 @doc("this is a model with a projected name")
@@ -153,6 +155,10 @@ model RoundTripModel {
 
     @doc("Required int, illustrating a value type property.")
     requiredInt: int32;
+
+    @doc("Required readonly int")
+    @visibility("read")
+    requiredReadonlyInt: int32;
 }
 
 union DaysOfWeekExtensibleEnum {
@@ -226,7 +232,7 @@ op helloLiteral(@header p1: "test", @path p2: 123, @query p3: true): Thing;
 @doc("top level method")
 @get
 @convenientAPI(true)
-op topAction(@path @format("date") action: string): Thing;
+op topAction(@path action: utcDateTime): Thing;
 
 @route("/top2")
 @doc("top level method2")
@@ -256,12 +262,6 @@ op addTimeHeader(
     @header("Repeatability-First-Sent") repeatabilityFirstSent?: utcDateTime 
 ): void;
 
-@route("/stringFormat")
-@doc("parameter has string format.")
-@post
-@convenientAPI(true)
-op stringFormat(@path @format("uuid") subscriptionId: string, @body body: ModelWithFormat): void;
-
 
 @route("/projectedName")
 @doc("Model can have its projected name")
@@ -273,7 +273,7 @@ op projectedNameModel(...ModelWithProjectedName): ModelWithProjectedName;
 @doc("return anonymous model")
 @post
 @convenientAPI(true)
-op returnsAnonymousModel(): {};
+op returnsAnonymousModel(): {@body body:{}};
 
 @get
 @route("/unknown-value")

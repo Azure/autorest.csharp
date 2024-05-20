@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -31,7 +32,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public int Count => _fields.Count;
         public FieldDeclaration? AdditionalProperties { get; }
 
-        public ModelTypeProviderFields(IReadOnlyList<InputModelProperty> properties, string modelName, InputModelTypeUsage inputModelUsage, TypeFactory typeFactory, ModelTypeMapping? modelTypeMapping, ObjectType? baseModel, InputDictionaryType? additionalPropertiesType, bool isStruct, bool isPropertyBag)
+        public ModelTypeProviderFields(IReadOnlyList<InputModelProperty> properties, string modelName, InputModelTypeUsage inputModelUsage, TypeFactory typeFactory, ModelTypeMapping? modelTypeMapping, InputDictionaryType? additionalPropertiesType, bool isStruct, bool isPropertyBag)
         {
             var fields = new List<FieldDeclaration>();
             var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
@@ -97,7 +98,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // the same name.
                 var existingMember = modelTypeMapping?.GetMemberByOriginalName("$AdditionalProperties");
 
-                var type = typeFactory.CreateType(additionalPropertiesType);
+                var type = CreateAdditionalPropertiesPropertyType(typeFactory, additionalPropertiesType);
                 if (!inputModelUsage.HasFlag(InputModelTypeUsage.Input))
                 {
                     type = type.OutputType;
@@ -109,7 +110,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 var accessModifiers = existingMember is null ? Public : GetAccessModifiers(existingMember);
 
-                var additionalPropertiesField = new FieldDeclaration($"Additional Properties", accessModifiers | ReadOnly, type, type, declaration, null, false, Serialization.SerializationFormat.Default, true);
+                var additionalPropertiesField = new FieldDeclaration($"Additional Properties", accessModifiers | ReadOnly, type, type, declaration, null, false, SerializationFormat.Default, true);
                 var additionalPropertiesParameter = new Parameter(name.ToVariableName(), $"Additional Properties", type, null, ValidationType.None, null);
 
                 // we intentionally do not add this field into the field list to avoid cyclic references
@@ -152,6 +153,14 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             PublicConstructorParameters = publicParameters;
             SerializationParameters = serializationParameters;
+        }
+
+        // TODO -- when we consolidate the schemas into input types, we should remove this method and move it into BuilderHelpers
+        private static CSharpType CreateAdditionalPropertiesPropertyType(TypeFactory typeFactory, InputDictionaryType additionalPropertiesInputType)
+        {
+            var originalType = typeFactory.CreateType(additionalPropertiesInputType);
+
+            return BuilderHelpers.CreateAdditionalPropertiesPropertyType(originalType, typeFactory.UnknownType);
         }
 
         private static ValidationType GetParameterValidation(FieldDeclaration field, InputModelProperty inputModelProperty)

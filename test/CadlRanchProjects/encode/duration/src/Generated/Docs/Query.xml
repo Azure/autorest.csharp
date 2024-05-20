@@ -153,6 +153,44 @@ Response response = client.FloatSeconds(TimeSpan.FromSeconds(10F));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
+    <member name="Float64SecondsAsync(TimeSpan,RequestContext)">
+      <example>
+This sample shows how to call Float64SecondsAsync.
+<code><![CDATA[
+Query client = new DurationClient().GetQueryClient();
+
+Response response = await client.Float64SecondsAsync(TimeSpan.FromSeconds(3.141592));
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Float64SecondsAsync with all parameters.
+<code><![CDATA[
+Query client = new DurationClient().GetQueryClient();
+
+Response response = await client.Float64SecondsAsync(TimeSpan.FromSeconds(3.141592));
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Float64Seconds(TimeSpan,RequestContext)">
+      <example>
+This sample shows how to call Float64Seconds.
+<code><![CDATA[
+Query client = new DurationClient().GetQueryClient();
+
+Response response = client.Float64Seconds(TimeSpan.FromSeconds(3.141592));
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Float64Seconds with all parameters.
+<code><![CDATA[
+Query client = new DurationClient().GetQueryClient();
+
+Response response = client.Float64Seconds(TimeSpan.FromSeconds(3.141592));
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
     <member name="Int32SecondsArrayAsync(IEnumerable{TimeSpan},RequestContext)">
       <example>
 This sample shows how to call Int32SecondsArrayAsync.

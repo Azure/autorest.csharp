@@ -26,17 +26,14 @@ import {
     DurationKnownEncoding,
     EncodeData,
     IntrinsicType,
-    Model,
-    Program,
-    Type,
-    getFormat
+    Model
 } from "@typespec/compiler";
-import { logger } from "./logger.js";
+import { Logger } from "./logger.js";
 import { getFullNamespaceString } from "./utils.js";
-import { InputEnumTypeValue } from "../type/inputEnumTypeValue.js";
-import { InputIntrinsicTypeKind } from "../type/inputIntrinsicTypeKind.js";
-import { InputModelProperty } from "../type/inputModelProperty.js";
-import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
+import { InputEnumTypeValue } from "../type/input-enum-type-value.js";
+import { InputIntrinsicTypeKind } from "../type/input-intrinsic-type-kind.js";
+import { InputModelProperty } from "../type/input-model-property.js";
+import { InputPrimitiveTypeKind } from "../type/input-primitive-type-kind.js";
 import {
     InputDictionaryType,
     InputEnumType,
@@ -47,9 +44,9 @@ import {
     InputPrimitiveType,
     InputType,
     InputUnionType
-} from "../type/inputType.js";
-import { InputTypeKind } from "../type/inputTypeKind.js";
-import { LiteralTypeContext } from "../type/literalTypeContext.js";
+} from "../type/input-type.js";
+import { InputTypeKind } from "../type/input-type-kind.js";
+import { LiteralTypeContext } from "../type/literal-type-context.js";
 import { Usage } from "../type/usage.js";
 
 export function fromSdkType(
@@ -78,15 +75,13 @@ export function fromSdkType(
         return fromSdkConstantType(sdkType, enums, literalTypeContext);
     if (sdkType.kind === "union")
         return fromUnionType(sdkType, context, models, enums);
-    if (sdkType.kind === "utcDateTime") return fromSdkDatetimeType(sdkType);
-    if (sdkType.kind === "duration")
-        return fromSdkDurationType(sdkType as SdkDurationType);
-    if (sdkType.kind === "bytes")
-        return fromBytesType(sdkType as SdkBuiltInType);
-    if (sdkType.kind === "string")
-        return fromStringType(context.program, sdkType);
-    // TODO: offsetDateTime
+    if (sdkType.kind === "utcDateTime" || sdkType.kind == "offsetDateTime")
+        return fromSdkDatetimeType(sdkType);
+    if (sdkType.kind === "duration") return fromSdkDurationType(sdkType);
+    if (sdkType.kind === "bytes") return fromBytesType(sdkType);
+    if (sdkType.kind === "string") return fromStringType(sdkType);
     if (sdkType.kind === "tuple") return fromTupleType(sdkType);
+    // TODO -- refine the other types from TCGC
     if (sdkType.__raw?.kind === "Scalar") return fromScalarType(sdkType);
     // this happens for discriminator type, normally all other primitive types should be handled in scalar above
     // TODO: can we improve the type in TCGC around discriminator
@@ -94,32 +89,6 @@ export function fromSdkType(
     if (isSdkBuiltInKind(sdkType.kind))
         return fromSdkBuiltInType(sdkType as SdkBuiltInType);
     return {} as InputType;
-}
-
-// TODO -- this is workaround because TCGC ignore format, we need to remove this after a discussion on format.
-// this function is only for the case when we get a type from a parameter, because in typespec, the parameters share the same type as the properties
-export function fromSdkModelPropertyType(
-    propertyType: SdkModelPropertyType,
-    context: SdkContext,
-    models: Map<string, InputModelType>,
-    enums: Map<string, InputEnumType>,
-    literalTypeContext?: LiteralTypeContext
-): InputType {
-    // when the type is string, we need to add the format
-    if (propertyType.type.kind === "string") {
-        return fromStringType(
-            context.program,
-            propertyType.type,
-            propertyType.__raw
-        );
-    }
-    return fromSdkType(
-        propertyType.type,
-        context,
-        models,
-        enums,
-        literalTypeContext
-    );
 }
 
 export function fromSdkModelType(
@@ -247,7 +216,7 @@ export function fromSdkModelType(
             return [modelProperty];
         }
 
-        var flattenedProperties: InputModelProperty[] = [];
+        let flattenedProperties: InputModelProperty[] = [];
         const modelPropertyType = propertyType as SdkBodyModelPropertyType;
         const childPropertiesToFlatten = (
             modelPropertyType.type as SdkModelType
@@ -301,7 +270,7 @@ export function fromSdkEnumType(
     enums: Map<string, InputEnumType>,
     addToCollection: boolean = true
 ): InputEnumType {
-    let enumName = enumType.name;
+    const enumName = enumType.name;
     let inputEnumType = enums.get(enumName);
     if (inputEnumType === undefined) {
         const newInputEnumType: InputEnumType = {
@@ -369,7 +338,7 @@ function fromSdkDurationType(
                 }
                 return InputPrimitiveTypeKind.DurationSeconds;
             default:
-                logger.warn(
+                Logger.getInstance().warn(
                     `invalid encode '${encode}' and wireType '${wireType.kind}' for duration.`
                 );
                 return InputPrimitiveTypeKind.DurationISO8601;
@@ -404,7 +373,9 @@ function fromBytesType(bytesType: SdkBuiltInType): InputPrimitiveType {
             case "base64url":
                 return InputPrimitiveTypeKind.BytesBase64Url;
             default:
-                logger.warn(`invalid encode ${encode} for bytes.`);
+                Logger.getInstance().warn(
+                    `invalid encode ${encode} for bytes.`
+                );
                 return InputPrimitiveTypeKind.Bytes;
         }
     }
@@ -416,39 +387,10 @@ function fromBytesType(bytesType: SdkBuiltInType): InputPrimitiveType {
     };
 }
 
-function fromStringType(
-    program: Program,
-    stringType: SdkType,
-    // we need the extra raw here because the format decorator is added to the property/parameter, but the raw in stringType is the type itself, and it does not have the format decorator we want.
-    // only when we get the type from a parameter, we need to pass the the parameter as raw here to get the format
-    // TODO -- we should remove this entirely later because TCGC ignores format in these cases, we add it now because we have old test projects, and we did not discuss the impact yet
-    raw?: Type
-): InputPrimitiveType {
-    function fromStringFormat(rawStringType?: Type): InputPrimitiveTypeKind {
-        if (!rawStringType) return InputPrimitiveTypeKind.String;
-
-        const format = getFormat(program, rawStringType);
-        switch (format) {
-            case "date":
-                // TODO: remove
-                return InputPrimitiveTypeKind.DateTime;
-            case "uri":
-            case "url":
-                return InputPrimitiveTypeKind.Uri;
-            case "uuid":
-                return InputPrimitiveTypeKind.Guid;
-            default:
-                if (format) {
-                    logger.warn(`Invalid string format '${format}'`);
-                }
-                return InputPrimitiveTypeKind.String;
-        }
-    }
-
-    raw = raw ?? stringType.__raw;
+function fromStringType(stringType: SdkType): InputPrimitiveType {
     return {
         Kind: InputTypeKind.Primitive,
-        Name: fromStringFormat(raw),
+        Name: InputPrimitiveTypeKind.String,
         IsNullable: stringType.nullable
     };
 }
@@ -490,7 +432,9 @@ function mapTcgcTypeToCSharpInputTypeKind(
                 case "base64url":
                     return InputPrimitiveTypeKind.BytesBase64Url;
                 default:
-                    logger.warn(`invalid encode '${type.encode}' for bytes.`);
+                    Logger.getInstance().warn(
+                        `invalid encode '${type.encode}' for bytes.`
+                    );
                     return InputPrimitiveTypeKind.Bytes;
             }
         case "float":
@@ -543,7 +487,6 @@ function fromScalarType(scalarType: SdkType): InputPrimitiveType {
         Kind: InputTypeKind.Primitive,
         Name: getCSharpInputTypeKindByPrimitiveModelName(
             scalarType.kind,
-            scalarType.kind,
             undefined // To-DO: encode not compatible
         ),
         IsNullable: scalarType.nullable
@@ -551,7 +494,6 @@ function fromScalarType(scalarType: SdkType): InputPrimitiveType {
 
     function getCSharpInputTypeKindByPrimitiveModelName(
         name: string,
-        format?: string,
         encode?: EncodeData
     ): InputPrimitiveTypeKind {
         switch (name) {
@@ -563,7 +505,7 @@ function fromScalarType(scalarType: SdkType): InputPrimitiveType {
                     case "base64url":
                         return InputPrimitiveTypeKind.BytesBase64Url;
                     default:
-                        logger.warn(
+                        Logger.getInstance().warn(
                             `invalid encode ${encode?.encoding} for bytes.`
                         );
                         return InputPrimitiveTypeKind.Bytes;
@@ -596,20 +538,7 @@ function fromScalarType(scalarType: SdkType): InputPrimitiveType {
             case "eTag":
                 return InputPrimitiveTypeKind.String;
             case "string":
-                switch (format?.toLowerCase()) {
-                    case "date":
-                        return InputPrimitiveTypeKind.DateTime;
-                    case "uri":
-                    case "url":
-                        return InputPrimitiveTypeKind.Uri;
-                    case "uuid":
-                        return InputPrimitiveTypeKind.Guid;
-                    default:
-                        if (format) {
-                            logger.warn(`invalid format ${format}`);
-                        }
-                        return InputPrimitiveTypeKind.String;
-                }
+                return InputPrimitiveTypeKind.String;
             case "boolean":
                 return InputPrimitiveTypeKind.Boolean;
             case "date":
@@ -630,7 +559,7 @@ function fromScalarType(scalarType: SdkType): InputPrimitiveType {
                     case "unixTimestamp":
                         return InputPrimitiveTypeKind.DateTimeUnix;
                     default:
-                        logger.warn(
+                        Logger.getInstance().warn(
                             `invalid encode ${encode?.encoding} for date time.`
                         );
                         return InputPrimitiveTypeKind.DateTime;
@@ -648,11 +577,13 @@ function fromScalarType(scalarType: SdkType): InputPrimitiveType {
                             encode.type?.name === "float32"
                         ) {
                             return InputPrimitiveTypeKind.DurationSecondsFloat;
+                        } else if (encode.type?.name === "float64") {
+                            return InputPrimitiveTypeKind.DurationSecondsDouble;
                         } else {
                             return InputPrimitiveTypeKind.DurationSeconds;
                         }
                     default:
-                        logger.warn(
+                        Logger.getInstance().warn(
                             `invalid encode ${encode?.encoding} for duration.`
                         );
                         return InputPrimitiveTypeKind.DurationISO8601;
@@ -666,7 +597,6 @@ function fromScalarType(scalarType: SdkType): InputPrimitiveType {
 }
 
 function fromIntrinsicType(scalarType: SdkType): InputIntrinsicType {
-    const name = (scalarType.__raw! as IntrinsicType).name;
     return {
         Kind: InputTypeKind.Intrinsic,
         Name: getCSharpInputTypeKindByIntrinsic(
@@ -682,7 +612,7 @@ function fromUnionType(
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputUnionType | InputType {
-    let itemTypes: InputType[] = [];
+    const itemTypes: InputType[] = [];
     for (const value of union.values) {
         const inputType = fromSdkType(value, context, models, enums);
         itemTypes.push(inputType);

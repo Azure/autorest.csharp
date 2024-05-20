@@ -3,6 +3,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Azure.Core;
@@ -31,7 +32,7 @@ namespace CustomizationsInTsp.Models
         public int RequiredInt { get; set; }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void WriteRequiredIntValue(Utf8JsonWriter writer)
+        private void WriteRequiredIntValue(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStringValue(RequiredInt.ToString());
         }
@@ -43,7 +44,7 @@ namespace CustomizationsInTsp.Models
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void WriteRequiredIntOnBaseValue(Utf8JsonWriter writer)
+        private void WriteRequiredIntOnBaseValue(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStringValue(RequiredIntOnBase.ToString());
         }

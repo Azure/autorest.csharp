@@ -116,5 +116,349 @@ namespace Parameters.Spread.Samples
             BodyParameter bodyParameter = new BodyParameter("<name>");
             Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Model_SpreadCompositeRequestOnlyWithBody_ShortVersion()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+            });
+            Response response = client.SpreadCompositeRequestOnlyWithBody(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Model_SpreadCompositeRequestOnlyWithBody_ShortVersion_Async()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+            });
+            Response response = await client.SpreadCompositeRequestOnlyWithBodyAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Model_SpreadCompositeRequestOnlyWithBody_ShortVersion_Convenience()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            BodyParameter body = new BodyParameter("<name>");
+            Response response = client.SpreadCompositeRequestOnlyWithBody(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Model_SpreadCompositeRequestOnlyWithBody_ShortVersion_Convenience_Async()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            BodyParameter body = new BodyParameter("<name>");
+            Response response = await client.SpreadCompositeRequestOnlyWithBodyAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Model_SpreadCompositeRequestOnlyWithBody_AllParameters()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+            });
+            Response response = client.SpreadCompositeRequestOnlyWithBody(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Model_SpreadCompositeRequestOnlyWithBody_AllParameters_Async()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+            });
+            Response response = await client.SpreadCompositeRequestOnlyWithBodyAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Model_SpreadCompositeRequestOnlyWithBody_AllParameters_Convenience()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            BodyParameter body = new BodyParameter("<name>");
+            Response response = client.SpreadCompositeRequestOnlyWithBody(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Model_SpreadCompositeRequestOnlyWithBody_AllParameters_Convenience_Async()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            BodyParameter body = new BodyParameter("<name>");
+            Response response = await client.SpreadCompositeRequestOnlyWithBodyAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Model_SpreadCompositeRequestWithoutBody_ShortVersion()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            Response response = client.SpreadCompositeRequestWithoutBody("<name>", "<testHeader>");
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Model_SpreadCompositeRequestWithoutBody_ShortVersion_Async()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            Response response = await client.SpreadCompositeRequestWithoutBodyAsync("<name>", "<testHeader>");
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Model_SpreadCompositeRequestWithoutBody_AllParameters()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            Response response = client.SpreadCompositeRequestWithoutBody("<name>", "<testHeader>");
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Model_SpreadCompositeRequestWithoutBody_AllParameters_Async()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            Response response = await client.SpreadCompositeRequestWithoutBodyAsync("<name>", "<testHeader>");
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Model_SpreadCompositeRequest_ShortVersion()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+            });
+            Response response = client.SpreadCompositeRequest("<name>", "<testHeader>", content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Model_SpreadCompositeRequest_ShortVersion_Async()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+            });
+            Response response = await client.SpreadCompositeRequestAsync("<name>", "<testHeader>", content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Model_SpreadCompositeRequest_ShortVersion_Convenience()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            BodyParameter body = new BodyParameter("<name>");
+            Response response = client.SpreadCompositeRequest("<name>", "<testHeader>", body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Model_SpreadCompositeRequest_ShortVersion_Convenience_Async()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            BodyParameter body = new BodyParameter("<name>");
+            Response response = await client.SpreadCompositeRequestAsync("<name>", "<testHeader>", body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Model_SpreadCompositeRequest_AllParameters()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+            });
+            Response response = client.SpreadCompositeRequest("<name>", "<testHeader>", content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Model_SpreadCompositeRequest_AllParameters_Async()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+            });
+            Response response = await client.SpreadCompositeRequestAsync("<name>", "<testHeader>", content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Model_SpreadCompositeRequest_AllParameters_Convenience()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            BodyParameter body = new BodyParameter("<name>");
+            Response response = client.SpreadCompositeRequest("<name>", "<testHeader>", body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Model_SpreadCompositeRequest_AllParameters_Convenience_Async()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            BodyParameter body = new BodyParameter("<name>");
+            Response response = await client.SpreadCompositeRequestAsync("<name>", "<testHeader>", body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Model_SpreadCompositeRequestMix_ShortVersion()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                prop = "<prop>",
+            });
+            Response response = client.SpreadCompositeRequestMix("<name>", "<testHeader>", content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Model_SpreadCompositeRequestMix_ShortVersion_Async()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                prop = "<prop>",
+            });
+            Response response = await client.SpreadCompositeRequestMixAsync("<name>", "<testHeader>", content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Model_SpreadCompositeRequestMix_ShortVersion_Convenience()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            CompositeRequestMix compositeRequestMix = new CompositeRequestMix("<prop>");
+            Response response = client.SpreadCompositeRequestMix("<name>", "<testHeader>", compositeRequestMix);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Model_SpreadCompositeRequestMix_ShortVersion_Convenience_Async()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            CompositeRequestMix compositeRequestMix = new CompositeRequestMix("<prop>");
+            Response response = await client.SpreadCompositeRequestMixAsync("<name>", "<testHeader>", compositeRequestMix);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Model_SpreadCompositeRequestMix_AllParameters()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                prop = "<prop>",
+            });
+            Response response = client.SpreadCompositeRequestMix("<name>", "<testHeader>", content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Model_SpreadCompositeRequestMix_AllParameters_Async()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                prop = "<prop>",
+            });
+            Response response = await client.SpreadCompositeRequestMixAsync("<name>", "<testHeader>", content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Model_SpreadCompositeRequestMix_AllParameters_Convenience()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            CompositeRequestMix compositeRequestMix = new CompositeRequestMix("<prop>");
+            Response response = client.SpreadCompositeRequestMix("<name>", "<testHeader>", compositeRequestMix);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Model_SpreadCompositeRequestMix_AllParameters_Convenience_Async()
+        {
+            Model client = new SpreadClient().GetModelClient();
+
+            CompositeRequestMix compositeRequestMix = new CompositeRequestMix("<prop>");
+            Response response = await client.SpreadCompositeRequestMixAsync("<name>", "<testHeader>", compositeRequestMix);
+        }
     }
 }

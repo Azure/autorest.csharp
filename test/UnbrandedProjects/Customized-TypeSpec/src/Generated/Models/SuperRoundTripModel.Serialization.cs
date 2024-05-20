@@ -24,7 +24,12 @@ namespace CustomizedTypeSpec.Models
             writer.WritePropertyName("requiredSuperString"u8);
             writer.WriteStringValue(RequiredString);
             writer.WritePropertyName("requiredInt"u8);
-            writer.WriteNumberValue(RequiredSuperInt);
+            SerializationMethodHook(writer, options);
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("requiredReadonlyInt"u8);
+                writer.WriteNumberValue(RequiredReadonlyInt);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -65,6 +70,7 @@ namespace CustomizedTypeSpec.Models
             }
             string requiredSuperString = default;
             int requiredInt = default;
+            int requiredReadonlyInt = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -79,13 +85,18 @@ namespace CustomizedTypeSpec.Models
                     requiredInt = property.Value.GetInt32();
                     continue;
                 }
+                if (property.NameEquals("requiredReadonlyInt"u8))
+                {
+                    requiredReadonlyInt = property.Value.GetInt32();
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new SuperRoundTripModel(requiredSuperString, requiredInt, serializedAdditionalRawData);
+            return new SuperRoundTripModel(requiredSuperString, requiredInt, requiredReadonlyInt, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<SuperRoundTripModel>.Write(ModelReaderWriterOptions options)

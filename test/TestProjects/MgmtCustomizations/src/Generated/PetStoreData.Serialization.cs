@@ -36,7 +36,7 @@ namespace MgmtCustomizations
             if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
-                WriteId(writer);
+                WriteId(writer, options);
             }
             if (options.Format != "W")
             {

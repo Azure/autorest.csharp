@@ -19,7 +19,7 @@ namespace Inheritance.Models
             if (Optional.IsDefined(SomeProperty))
             {
                 writer.WritePropertyName("SomeProperty"u8);
-                writer.WriteStringValue(SomeProperty);
+                SerializationMethodHook(writer);
             }
             if (Optional.IsDefined(SomeOtherProperty))
             {
