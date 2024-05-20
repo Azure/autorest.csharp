@@ -28,7 +28,7 @@ namespace CustomizationsInTsp.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("requiredInt"u8);
-            WriteRequiredIntValue(writer);
+            WriteRequiredIntValue(writer, options);
             writer.WritePropertyName("additionalSerializableProperty"u8);
             writer.WriteNumberValue(AdditionalSerializableProperty);
             if (Optional.IsDefined(AdditionalNullableSerializableProperty))
@@ -44,7 +44,7 @@ namespace CustomizationsInTsp.Models
                 }
             }
             writer.WritePropertyName("requiredIntOnBase"u8);
-            WriteRequiredIntOnBaseValue(writer);
+            WriteRequiredIntOnBaseValue(writer, options);
             if (Optional.IsDefined(OptionalInt))
             {
                 writer.WritePropertyName("optionalInt"u8);

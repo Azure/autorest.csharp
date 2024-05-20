@@ -1,13 +1,14 @@
 import { TestHost } from "@typespec/compiler/testing";
-import assert, { deepStrictEqual } from "assert";
+import { getAllHttpServices } from "@typespec/http";
+import assert from "assert";
+import { beforeEach, describe, it } from "vitest";
+import { getUsages } from "../../src/lib/model.js";
 import {
     createEmitterContext,
     createEmitterTestHost,
     createNetSdkContext,
     typeSpecCompile
-} from "./utils/TestUtil.js";
-import { getAllHttpServices } from "@typespec/http";
-import { getUsages } from "../../src/lib/model.js";
+} from "./utils/test-util.js";
 
 describe("Test getUsages", () => {
     let runner: TestHost;
@@ -254,6 +255,10 @@ describe("Test getUsages", () => {
     it("Test the usage of body parameter and return type of azure core resource operation.", async () => {
         const program = await typeSpecCompile(
             `
+            alias ResourceOperations = global.Azure.Core.ResourceOperations<NoConditionalRequests &
+                NoRepeatableRequests &
+                NoClientRequestId>;
+
             @doc("This is a model.")
             @resource("items")
             model Foo {
@@ -267,7 +272,7 @@ describe("Test getUsages", () => {
 
             interface FooClient{
                 @doc("create Foo")
-                createFoo is ResourceCreateOrUpdate<Foo>;
+                createFoo is ResourceOperations.ResourceCreateOrUpdate<Foo>;
             }
       `,
             runner,

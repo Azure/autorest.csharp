@@ -47,7 +47,7 @@ namespace _Type.Union.Models
 
         /// <summary> Initializes a new instance of <see cref="GetResponse9"/>. </summary>
         /// <param name="prop"></param>
-        internal GetResponse9(GetResponse9Prop prop)
+        internal GetResponse9(GetResponseProp5 prop)
         {
             Prop = prop;
         }
@@ -55,7 +55,7 @@ namespace _Type.Union.Models
         /// <summary> Initializes a new instance of <see cref="GetResponse9"/>. </summary>
         /// <param name="prop"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal GetResponse9(GetResponse9Prop prop, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal GetResponse9(GetResponseProp5 prop, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Prop = prop;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -67,6 +67,6 @@ namespace _Type.Union.Models
         }
 
         /// <summary> Gets the prop. </summary>
-        public GetResponse9Prop Prop { get; }
+        public GetResponseProp5 Prop { get; }
     }
 }

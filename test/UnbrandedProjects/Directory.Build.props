@@ -3,6 +3,7 @@
     <!--Needed for inclusion in the autorest.csharp.sln-->
     <IsTestGenerationSrcProject Condition="!$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationSrcProject>
     <IsTestGenerationTestProject Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationTestProject>
+    <IsNoDocProject Condition="$(MSBuildProjectName.Contains('NoDocs'))">true</IsNoDocProject>
     <IsUnbranded>true</IsUnbranded>
   </PropertyGroup>
 
@@ -29,5 +30,7 @@
     <PackageOutputPath>$(ArtifactsPackagesDir)</PackageOutputPath>
 
     <CodeAnalysisRuleSet>$(RepoEngPath)\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
+    
+    <NoWarn Condition="'$(IsNoDocProject)' == 'true'">$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
 </Project>

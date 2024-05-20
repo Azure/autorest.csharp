@@ -62,7 +62,7 @@ namespace additionalProperties.Models
         {
             additionalProperties ??= new Dictionary<string, string>();
 
-            return new PetAPString(id, name, status, additionalProperties);
+            return new PetAPString(id, name, status, additionalProperties, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PetAPInProperties"/>. </summary>

@@ -216,16 +216,6 @@ union DaysOfWeekExtensibleEnum {
     Sunday: "Sunday",
 }
 
-model ModelWithFormat {
-    @doc("url format")
-    @format("Uri")
-    sourceUrl: string;
-
-    @doc("uuid format")
-    @format("uuid")
-    guid: string;
-}
-
 @route("/hello")
 @doc("Return hi")
 @get
@@ -278,7 +268,7 @@ op helloLiteral(@header p1: "test", @path p2: 123, @query p3: true): Thing;
 @doc("top level method")
 @get
 @convenientAPI(true)
-op topAction(@path @format("date") action: string): Thing;
+op topAction(@path action: utcDateTime): Thing;
 
 @route("/top2")
 @doc("top level method2")
@@ -308,13 +298,6 @@ op addTimeHeader(
     @header("Repeatability-First-Sent") repeatabilityFirstSent?: utcDateTime 
 ): void;
 
-@route("/stringFormat")
-@doc("parameter has string format.")
-@post
-@convenientAPI(true)
-op stringFormat(@path @format("uuid") subscriptionId: string, @body body: ModelWithFormat): void;
-
-
 @route("/projectedName")
 @doc("Model can have its projected name")
 @post
@@ -325,7 +308,7 @@ op projectedNameModel(...ModelWithProjectedName): ModelWithProjectedName;
 @doc("return anonymous model")
 @post
 @convenientAPI(true)
-op returnsAnonymousModel(): {};
+op returnsAnonymousModel(): {@body body:{}};
 
 // TODO: https://github.com/Azure/typespec-azure/issues/509
 @put

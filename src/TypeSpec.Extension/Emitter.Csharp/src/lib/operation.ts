@@ -17,8 +17,7 @@ import {
     Model,
     ModelProperty,
     Namespace,
-    Operation,
-    Program
+    Operation
 } from "@typespec/compiler";
 import { getResourceOperation } from "@typespec/rest";
 import {
@@ -27,40 +26,40 @@ import {
     HttpOperationResponse
 } from "@typespec/http";
 import { NetEmitterOptions } from "../options.js";
-import { BodyMediaType, typeToBodyMediaType } from "../type/bodyMediaType.js";
-import { collectionFormatToDelimMap } from "../type/collectionFormat.js";
-import { HttpResponseHeader } from "../type/httpResponseHeader.js";
-import { InputConstant } from "../type/inputConstant.js";
-import { InputOperation } from "../type/inputOperation.js";
-import { InputOperationParameterKind } from "../type/inputOperationParameterKind.js";
-import { InputParameter } from "../type/inputParameter.js";
+import { BodyMediaType, typeToBodyMediaType } from "../type/body-media-type.js";
+import { collectionFormatToDelimMap } from "../type/collection-format.js";
+import { HttpResponseHeader } from "../type/http-response-header.js";
+import { InputConstant } from "../type/input-constant.js";
+import { InputOperation } from "../type/input-operation.js";
+import { InputOperationParameterKind } from "../type/input-operation-parameter-kind.js";
+import { InputParameter } from "../type/input-parameter.js";
 import {
     InputEnumType,
     InputListType,
     InputModelType,
     InputType,
+    isInputEnumType,
     isInputLiteralType,
     isInputModelType,
     isInputUnionType
-} from "../type/inputType.js";
-import { convertLroFinalStateVia } from "../type/operationFinalStateVia.js";
-import { OperationLongRunning } from "../type/operationLongRunning.js";
-import { OperationPaging } from "../type/operationPaging.js";
-import { OperationResponse } from "../type/operationResponse.js";
+} from "../type/input-type.js";
+import { convertLroFinalStateVia } from "../type/operation-final-state-via.js";
+import { OperationLongRunning } from "../type/operation-long-running.js";
+import { OperationPaging } from "../type/operation-paging.js";
+import { OperationResponse } from "../type/operation-response.js";
 import {
     RequestLocation,
     requestLocationMap
-} from "../type/requestLocation.js";
+} from "../type/request-location.js";
 import {
     parseHttpRequestMethod,
     RequestMethod
-} from "../type/requestMethod.js";
+} from "../type/request-method.js";
 import { getExternalDocs, getOperationId, hasDecorator } from "./decorators.js";
-import { logger } from "./logger.js";
+import { Logger } from "./logger.js";
 import {
     getDefaultValue,
     getEffectiveSchemaType,
-    getFormattedType,
     getInputType
 } from "./model.js";
 import {
@@ -69,7 +68,7 @@ import {
     getTypeName
 } from "./utils.js";
 import { Usage } from "../type/usage.js";
-import { InputTypeKind } from "../type/inputTypeKind.js";
+import { InputTypeKind } from "../type/input-type-kind.js";
 
 export function loadOperation(
     sdkContext: SdkContext<NetEmitterOptions>,
@@ -87,7 +86,7 @@ export function loadOperation(
         parameters: typespecParameters
     } = operation;
     const program = sdkContext.program;
-    logger.info(`load operation: ${op.name}, path:${fullPath} `);
+    Logger.getInstance().info(`load operation: ${op.name}, path:${fullPath} `);
     const resourceOperation = getResourceOperation(program, op);
     const desc = getDoc(program, op);
     const summary = getSummary(program, op);
@@ -113,7 +112,7 @@ export function loadOperation(
             typespecParameters.body.type
         );
         if (effectiveBodyType.kind === "Model") {
-            let bodyParameter = loadBodyParameter(
+            const bodyParameter = loadBodyParameter(
                 sdkContext,
                 effectiveBodyType
             );
@@ -128,7 +127,7 @@ export function loadOperation(
             ) {
                 // give body type a name
                 bodyParameter.Type.Name = `${capitalize(op.name)}Request`;
-                var bodyModelType = bodyParameter.Type as InputModelType;
+                const bodyModelType = bodyParameter.Type as InputModelType;
                 bodyModelType.Usage = Usage.Input;
                 // update models cache
                 models.delete("");
@@ -179,6 +178,14 @@ export function loadOperation(
                 contentTypeParameter.Type.UnionItemTypes.map((item) =>
                     isInputLiteralType(item) ? item.Value : undefined
                 );
+            if (mediaTypeValues.some((item) => item === undefined)) {
+                throw "Media type of content type should be string.";
+            }
+            mediaTypes.push(...mediaTypeValues);
+        } else if (isInputEnumType(contentTypeParameter.Type)) {
+            const mediaTypeValues = contentTypeParameter.Type.AllowedValues.map(
+                (value) => value.Value
+            );
             if (mediaTypeValues.some((item) => item === undefined)) {
                 throw "Media type of content type should be string.";
             }
@@ -252,17 +259,18 @@ export function loadOperation(
         const typespecType = param.type;
         const inputType: InputType = getInputType(
             context,
-            getFormattedType(program, param),
+            param,
             models,
-            enums
+            enums,
+            operation.operation
         );
-        let defaultValue = undefined;
+        let defaultValue: InputConstant | undefined = undefined;
         const value = getDefaultValue(typespecType);
         if (value) {
             defaultValue = {
                 Type: inputType,
                 Value: value
-            } as InputConstant;
+            };
         }
         const requestLocation = requestLocationMap[location];
         const isApiVer: boolean = isApiVersion(sdkContext, parameter);
@@ -307,9 +315,10 @@ export function loadOperation(
     ): InputParameter {
         const inputType: InputType = getInputType(
             context,
-            getFormattedType(program, body),
+            body,
             models,
-            enums
+            enums,
+            operation.operation
         );
         const requestLocation = RequestLocation.Body;
         const kind: InputOperationParameterKind =
@@ -348,9 +357,10 @@ export function loadOperation(
             const typespecType = getEffectiveSchemaType(context, body.type);
             const inputType: InputType = getInputType(
                 context,
-                getFormattedType(program, typespecType),
+                typespecType,
                 models,
-                enums
+                enums,
+                operation.operation
             );
             type = inputType;
         }
@@ -365,9 +375,10 @@ export function loadOperation(
                     Description: getDoc(program, headers[key]) ?? "",
                     Type: getInputType(
                         context,
-                        getFormattedType(program, headers[key].type),
+                        headers[key].type,
                         models,
-                        enums
+                        enums,
+                        operation.operation
                     )
                 } as HttpResponseHeader);
             }
@@ -392,17 +403,19 @@ export function loadOperation(
             return undefined;
         }
 
-        var bodyType = undefined;
+        let bodyType = undefined;
         if (
             op.verb !== "delete" &&
             metadata.finalResult !== undefined &&
             metadata.finalResult !== "void"
         ) {
-            const formattedType = getFormattedType(
-                program,
-                metadata.finalEnvelopeResult as Model
+            bodyType = getInputType(
+                context,
+                metadata.finalEnvelopeResult as Model,
+                models,
+                enums,
+                op.operation
             );
-            bodyType = getInputType(context, formattedType, models, enums);
         }
 
         return {

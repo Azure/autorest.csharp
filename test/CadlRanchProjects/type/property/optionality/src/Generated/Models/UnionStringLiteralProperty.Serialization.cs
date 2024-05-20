@@ -30,7 +30,7 @@ namespace _Type.Property.Optionality.Models
             if (Optional.IsDefined(Property))
             {
                 writer.WritePropertyName("property"u8);
-                writer.WriteStringValue(Property.Value.ToString());
+                writer.WriteStringValue(Property.Value.ToSerialString());
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -81,7 +81,7 @@ namespace _Type.Property.Optionality.Models
                     {
                         continue;
                     }
-                    property = new UnionStringLiteralPropertyProperty(property0.Value.GetString());
+                    property = property0.Value.GetString().ToUnionStringLiteralPropertyProperty();
                     continue;
                 }
                 if (options.Format != "W")

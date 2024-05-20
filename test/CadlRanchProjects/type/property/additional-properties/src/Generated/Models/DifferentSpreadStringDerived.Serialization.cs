@@ -29,10 +29,27 @@ namespace _Type.Property.AdditionalProperties.Models
             writer.WriteStartObject();
             writer.WritePropertyName("derivedProp"u8);
             writer.WriteStringValue(DerivedProp);
+            writer.WritePropertyName("id"u8);
+            writer.WriteNumberValue(Id);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
                 writer.WriteStringValue(item.Value);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
             }
             writer.WriteEndObject();
         }
@@ -58,8 +75,11 @@ namespace _Type.Property.AdditionalProperties.Models
                 return null;
             }
             string derivedProp = default;
+            float id = default;
             IDictionary<string, string> additionalProperties = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("derivedProp"u8))
@@ -67,10 +87,24 @@ namespace _Type.Property.AdditionalProperties.Models
                     derivedProp = property.Value.GetString();
                     continue;
                 }
-                additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
+                if (property.NameEquals("id"u8))
+                {
+                    id = property.Value.GetSingle();
+                    continue;
+                }
+                if (property.Value.ValueKind == JsonValueKind.String || property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
+                    continue;
+                }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new DifferentSpreadStringDerived(derivedProp, additionalProperties);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new DifferentSpreadStringDerived(id, additionalProperties, serializedAdditionalRawData, derivedProp);
         }
 
         BinaryData IPersistableModel<DifferentSpreadStringDerived>.Write(ModelReaderWriterOptions options)
@@ -106,14 +140,14 @@ namespace _Type.Property.AdditionalProperties.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static DifferentSpreadStringDerived FromResponse(Response response)
+        internal static new DifferentSpreadStringDerived FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeDifferentSpreadStringDerived(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
-        internal virtual RequestContent ToRequestContent()
+        internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);

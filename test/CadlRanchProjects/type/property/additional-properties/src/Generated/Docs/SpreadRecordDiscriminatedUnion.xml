@@ -7,13 +7,13 @@ This sample shows how to call GetSpreadRecordDiscriminatedUnionAsync.
 <code><![CDATA[
 SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordDiscriminatedUnionClient();
 
-Response<IReadOnlyDictionary<string, BinaryData>> response = await client.GetSpreadRecordDiscriminatedUnionAsync();
+Response<SpreadRecordForDiscriminatedUnion> response = await client.GetSpreadRecordDiscriminatedUnionAsync();
 ]]></code>
 This sample shows how to call GetSpreadRecordDiscriminatedUnionAsync with all parameters.
 <code><![CDATA[
 SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordDiscriminatedUnionClient();
 
-Response<IReadOnlyDictionary<string, BinaryData>> response = await client.GetSpreadRecordDiscriminatedUnionAsync();
+Response<SpreadRecordForDiscriminatedUnion> response = await client.GetSpreadRecordDiscriminatedUnionAsync();
 ]]></code></example>
     </member>
     <member name="GetSpreadRecordDiscriminatedUnion(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetSpreadRecordDiscriminatedUnion.
 <code><![CDATA[
 SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordDiscriminatedUnionClient();
 
-Response<IReadOnlyDictionary<string, BinaryData>> response = client.GetSpreadRecordDiscriminatedUnion();
+Response<SpreadRecordForDiscriminatedUnion> response = client.GetSpreadRecordDiscriminatedUnion();
 ]]></code>
 This sample shows how to call GetSpreadRecordDiscriminatedUnion with all parameters.
 <code><![CDATA[
 SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordDiscriminatedUnionClient();
 
-Response<IReadOnlyDictionary<string, BinaryData>> response = client.GetSpreadRecordDiscriminatedUnion();
+Response<SpreadRecordForDiscriminatedUnion> response = client.GetSpreadRecordDiscriminatedUnion();
 ]]></code></example>
     </member>
     <member name="GetSpreadRecordDiscriminatedUnionAsync(RequestContext)">
@@ -40,7 +40,7 @@ SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpre
 Response response = await client.GetSpreadRecordDiscriminatedUnionAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call GetSpreadRecordDiscriminatedUnionAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -49,7 +49,7 @@ SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpre
 Response response = await client.GetSpreadRecordDiscriminatedUnionAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="GetSpreadRecordDiscriminatedUnion(RequestContext)">
@@ -61,7 +61,7 @@ SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpre
 Response response = client.GetSpreadRecordDiscriminatedUnion(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call GetSpreadRecordDiscriminatedUnion with all parameters and parse the result.
 <code><![CDATA[
@@ -70,65 +70,41 @@ SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpre
 Response response = client.GetSpreadRecordDiscriminatedUnion(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
-    <member name="PutAsync(IDictionary{string,BinaryData},CancellationToken)">
+    <member name="PutAsync(SpreadRecordForDiscriminatedUnion,CancellationToken)">
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
 SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordDiscriminatedUnionClient();
 
-Response response = await client.PutAsync(new Dictionary<string, BinaryData>
-{
-    ["key"] = BinaryData.FromObjectAsJson(new
-    {
-        kind = "kind0",
-        fooProp = "<fooProp>",
-    })
-});
+SpreadRecordForDiscriminatedUnion body = new SpreadRecordForDiscriminatedUnion("<name>");
+Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordDiscriminatedUnionClient();
 
-Response response = await client.PutAsync(new Dictionary<string, BinaryData>
-{
-    ["key"] = BinaryData.FromObjectAsJson(new
-    {
-        kind = "kind0",
-        fooProp = "<fooProp>",
-    })
-});
+SpreadRecordForDiscriminatedUnion body = new SpreadRecordForDiscriminatedUnion("<name>");
+Response response = await client.PutAsync(body);
 ]]></code></example>
     </member>
-    <member name="Put(IDictionary{string,BinaryData},CancellationToken)">
+    <member name="Put(SpreadRecordForDiscriminatedUnion,CancellationToken)">
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
 SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordDiscriminatedUnionClient();
 
-Response response = client.Put(new Dictionary<string, BinaryData>
-{
-    ["key"] = BinaryData.FromObjectAsJson(new
-    {
-        kind = "kind0",
-        fooProp = "<fooProp>",
-    })
-});
+SpreadRecordForDiscriminatedUnion body = new SpreadRecordForDiscriminatedUnion("<name>");
+Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpreadRecordDiscriminatedUnionClient();
 
-Response response = client.Put(new Dictionary<string, BinaryData>
-{
-    ["key"] = BinaryData.FromObjectAsJson(new
-    {
-        kind = "kind0",
-        fooProp = "<fooProp>",
-    })
-});
+SpreadRecordForDiscriminatedUnion body = new SpreadRecordForDiscriminatedUnion("<name>");
+Response response = client.Put(body);
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -139,11 +115,7 @@ SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpre
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = new
-    {
-        kind = "kind0",
-        fooProp = "<fooProp>",
-    },
+    name = "<name>",
 });
 Response response = await client.PutAsync(content);
 
@@ -155,11 +127,7 @@ SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpre
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = new
-    {
-        kind = "kind0",
-        fooProp = "<fooProp>",
-    },
+    name = "<name>",
 });
 Response response = await client.PutAsync(content);
 
@@ -174,11 +142,7 @@ SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpre
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = new
-    {
-        kind = "kind0",
-        fooProp = "<fooProp>",
-    },
+    name = "<name>",
 });
 Response response = client.Put(content);
 
@@ -190,11 +154,7 @@ SpreadRecordDiscriminatedUnion client = new AdditionalPropertiesClient().GetSpre
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = new
-    {
-        kind = "kind0",
-        fooProp = "<fooProp>",
-    },
+    name = "<name>",
 });
 Response response = client.Put(content);
 

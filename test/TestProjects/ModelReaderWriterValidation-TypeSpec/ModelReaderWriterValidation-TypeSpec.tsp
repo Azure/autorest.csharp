@@ -371,3 +371,57 @@ union ResourceTypeAliasPathAttributes {
 @route("/api/ResourceProvider")
 @convenientAPI(true)
 op op5(): ResourceProviderData;
+
+model ModelWithStringAdditionalProperties {
+    @doc("The id property.")
+    @visibility("read")
+    id: string;
+
+    @doc("The name property.")
+    name: string;
+
+    @doc("The age property.")
+    age?: int32;
+
+    ...Record<string>;
+}
+
+@route("/api/AdditionalProperties/string")
+@convenientAPI(true)
+op op6(@body body: ModelWithStringAdditionalProperties): ModelWithStringAdditionalProperties;
+
+model ModelWithArrayAdditionalProperties {
+    @doc("The id property.")
+    @visibility("read")
+    id: string;
+
+    @doc("The name property.")
+    name: string;
+
+    @doc("The age property.")
+    age?: int32;
+
+    ...Record<ResourceTypeAliasPathMetadata[]>;
+}
+
+@route("/api/AdditionalProperties/array")
+@convenientAPI(true)
+op op7(@body body: ModelWithArrayAdditionalProperties): ModelWithArrayAdditionalProperties;
+
+model ModelWithUnknownAdditionalProperties {
+    @doc("The id property.")
+    @visibility("read")
+    id: string;
+
+    @doc("The name property.")
+    name: string;
+
+    @doc("The age property.")
+    age?: int32;
+
+    ...Record<unknown>;
+}
+
+@route("/api/AdditionalProperties/unknown")
+@convenientAPI(true)
+op op8(@body body: ModelWithUnknownAdditionalProperties): ModelWithUnknownAdditionalProperties;

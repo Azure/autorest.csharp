@@ -29,10 +29,27 @@ namespace _Type.Property.AdditionalProperties.Models
             writer.WriteStartObject();
             writer.WritePropertyName("derivedProp"u8);
             writer.WriteNumberValue(DerivedProp);
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
                 writer.WriteNumberValue(item.Value);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
             }
             writer.WriteEndObject();
         }
@@ -58,8 +75,11 @@ namespace _Type.Property.AdditionalProperties.Models
                 return null;
             }
             float derivedProp = default;
+            string name = default;
             IDictionary<string, float> additionalProperties = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, float> additionalPropertiesDictionary = new Dictionary<string, float>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("derivedProp"u8))
@@ -67,10 +87,24 @@ namespace _Type.Property.AdditionalProperties.Models
                     derivedProp = property.Value.GetSingle();
                     continue;
                 }
-                additionalPropertiesDictionary.Add(property.Name, property.Value.GetSingle());
+                if (property.NameEquals("name"u8))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.Value.TryGetSingle(out float value))
+                {
+                    additionalPropertiesDictionary.Add(property.Name, value);
+                    continue;
+                }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new DifferentSpreadFloatDerived(derivedProp, additionalProperties);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new DifferentSpreadFloatDerived(name, additionalProperties, serializedAdditionalRawData, derivedProp);
         }
 
         BinaryData IPersistableModel<DifferentSpreadFloatDerived>.Write(ModelReaderWriterOptions options)
@@ -106,14 +140,14 @@ namespace _Type.Property.AdditionalProperties.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static DifferentSpreadFloatDerived FromResponse(Response response)
+        internal static new DifferentSpreadFloatDerived FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeDifferentSpreadFloatDerived(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
-        internal virtual RequestContent ToRequestContent()
+        internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);

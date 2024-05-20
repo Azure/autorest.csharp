@@ -138,7 +138,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
-            UnionIntLiteralProperty body = new UnionIntLiteralProperty(BinaryData.FromObjectAsJson(42));
+            UnionIntLiteralProperty body = new UnionIntLiteralProperty(UnionIntLiteralPropertyProperty._42);
             Response response = client.Put(body);
         }
 
@@ -148,7 +148,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
-            UnionIntLiteralProperty body = new UnionIntLiteralProperty(BinaryData.FromObjectAsJson(42));
+            UnionIntLiteralProperty body = new UnionIntLiteralProperty(UnionIntLiteralPropertyProperty._42);
             Response response = await client.PutAsync(body);
         }
 
@@ -188,7 +188,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
-            UnionIntLiteralProperty body = new UnionIntLiteralProperty(BinaryData.FromObjectAsJson(42));
+            UnionIntLiteralProperty body = new UnionIntLiteralProperty(UnionIntLiteralPropertyProperty._42);
             Response response = client.Put(body);
         }
 
@@ -198,7 +198,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
-            UnionIntLiteralProperty body = new UnionIntLiteralProperty(BinaryData.FromObjectAsJson(42));
+            UnionIntLiteralProperty body = new UnionIntLiteralProperty(UnionIntLiteralPropertyProperty._42);
             Response response = await client.PutAsync(body);
         }
     }

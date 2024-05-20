@@ -5,22 +5,20 @@ import {
     ModelProperty,
     Namespace,
     Operation,
-    Scalar,
-    getProjectedName
+    Scalar
 } from "@typespec/compiler";
-import { projectedNameJsonKey } from "../constants.js";
 import {
     SdkContext,
     getLibraryName,
     getSdkModel
 } from "@azure-tools/typespec-client-generator-core";
-import { InputParameter } from "../type/inputParameter.js";
-import { InputPrimitiveType, InputType } from "../type/inputType.js";
-import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
-import { RequestLocation } from "../type/requestLocation.js";
-import { InputOperationParameterKind } from "../type/inputOperationParameterKind.js";
-import { InputConstant } from "../type/inputConstant.js";
-import { InputTypeKind } from "../type/inputTypeKind.js";
+import { InputParameter } from "../type/input-parameter.js";
+import { InputPrimitiveType, InputType } from "../type/input-type.js";
+import { InputPrimitiveTypeKind } from "../type/input-primitive-type-kind.js";
+import { RequestLocation } from "../type/request-location.js";
+import { InputOperationParameterKind } from "../type/input-operation-parameter-kind.js";
+import { InputConstant } from "../type/input-constant.js";
+import { InputTypeKind } from "../type/input-type-kind.js";
 
 export function capitalize(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -45,10 +43,10 @@ export function getTypeName(
     context: SdkContext,
     type: Model | Enum | EnumMember | ModelProperty | Scalar | Operation
 ): string {
-    var name = getLibraryName(context, type);
+    const name = getLibraryName(context, type);
     if (type.kind !== "Model") return name;
     if (type.name === name) {
-        var templateName = getNameForTemplate(type);
+        const templateName = getNameForTemplate(type);
         if (templateName === "") {
             const sdkModel = getSdkModel(context, type as Model);
             return sdkModel.name;

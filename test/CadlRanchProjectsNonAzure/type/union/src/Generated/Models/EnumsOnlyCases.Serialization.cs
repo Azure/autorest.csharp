@@ -22,23 +22,9 @@ namespace Scm._Type.Union.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("lr"u8);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(Lr);
-#else
-            using (JsonDocument document = JsonDocument.Parse(Lr))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
-#endif
+            writer.WriteStringValue(Lr.ToSerialString());
             writer.WritePropertyName("ud"u8);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(Ud);
-#else
-            using (JsonDocument document = JsonDocument.Parse(Ud))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
-#endif
+            writer.WriteStringValue(Ud.ToSerialString());
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -77,20 +63,20 @@ namespace Scm._Type.Union.Models
             {
                 return null;
             }
-            BinaryData lr = default;
-            BinaryData ud = default;
+            EnumsOnlyCasesLr lr = default;
+            EnumsOnlyCasesUd ud = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("lr"u8))
                 {
-                    lr = BinaryData.FromString(property.Value.GetRawText());
+                    lr = property.Value.GetString().ToEnumsOnlyCasesLr();
                     continue;
                 }
                 if (property.NameEquals("ud"u8))
                 {
-                    ud = BinaryData.FromString(property.Value.GetRawText());
+                    ud = property.Value.GetString().ToEnumsOnlyCasesUd();
                     continue;
                 }
                 if (options.Format != "W")

@@ -22,7 +22,7 @@ namespace Scm._Type.Union.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("prop"u8);
-            writer.WriteStringValue(Prop.ToString());
+            writer.WriteStringValue(Prop.ToSerialString());
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -61,14 +61,14 @@ namespace Scm._Type.Union.Models
             {
                 return null;
             }
-            SendRequest9Prop prop = default;
+            GetResponseProp5 prop = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("prop"u8))
                 {
-                    prop = new SendRequest9Prop(property.Value.GetString());
+                    prop = property.Value.GetString().ToGetResponseProp5();
                     continue;
                 }
                 if (options.Format != "W")

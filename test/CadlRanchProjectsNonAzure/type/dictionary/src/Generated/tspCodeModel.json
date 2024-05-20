@@ -1178,7 +1178,7 @@
         "ValueType": {
          "$id": "132",
          "Kind": "Primitive",
-         "Name": "DateTime",
+         "Name": "DateTimeRFC3339",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1224,7 +1224,7 @@
         "ValueType": {
          "$id": "137",
          "Kind": "Primitive",
-         "Name": "DateTime",
+         "Name": "DateTimeRFC3339",
          "IsNullable": false
         },
         "IsNullable": false

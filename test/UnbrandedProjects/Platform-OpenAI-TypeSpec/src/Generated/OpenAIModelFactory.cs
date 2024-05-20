@@ -1130,7 +1130,7 @@ namespace OpenAI.Models
         /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
         /// <param name="user"></param>
         /// <returns> A new <see cref="Models.CreateImageEditRequest"/> instance for mocking. </returns>
-        public static CreateImageEditRequest CreateImageEditRequest(string prompt = null, Stream image = null, Stream mask = null, long? n = null, CreateImageEditRequestSize? size = null, CreateImageEditRequestResponseFormat? responseFormat = null, string user = null)
+        public static CreateImageEditRequest CreateImageEditRequest(string prompt = null, Stream image = null, Stream mask = null, long? n = null, CreateImageRequestSize? size = null, CreateImageRequestResponseFormat? responseFormat = null, string user = null)
         {
             return new CreateImageEditRequest(
                 prompt,
@@ -1153,7 +1153,7 @@ namespace OpenAI.Models
         /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
         /// <param name="user"></param>
         /// <returns> A new <see cref="Models.CreateImageVariationRequest"/> instance for mocking. </returns>
-        public static CreateImageVariationRequest CreateImageVariationRequest(Stream image = null, long? n = null, CreateImageVariationRequestSize? size = null, CreateImageVariationRequestResponseFormat? responseFormat = null, string user = null)
+        public static CreateImageVariationRequest CreateImageVariationRequest(Stream image = null, long? n = null, CreateImageRequestSize? size = null, CreateImageRequestResponseFormat? responseFormat = null, string user = null)
         {
             return new CreateImageVariationRequest(
                 image,

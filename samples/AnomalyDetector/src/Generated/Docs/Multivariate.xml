@@ -151,7 +151,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient(apiVersion: "v1.1");
 
-ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 Response<AnomalyDetectionModel> response = await client.TrainMultivariateModelAsync(modelInfo);
 ]]></code>
 This sample shows how to call TrainMultivariateModelAsync with all parameters.
@@ -160,7 +160,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient(apiVersion: "v1.1");
 
-ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"))
+ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"))
 {
     DataSchema = DataSchema.OneTable,
     DisplayName = "<displayName>",
@@ -186,8 +186,8 @@ ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-0
             Variable = "<variable>",
             FilledNARatio = 123.45F,
             EffectiveCount = 1234,
-            FirstTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-            LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+            FirstTimestamp = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
+            LastTimestamp = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
         }},
     },
 };
@@ -202,7 +202,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient(apiVersion: "v1.1");
 
-ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 Response<AnomalyDetectionModel> response = client.TrainMultivariateModel(modelInfo);
 ]]></code>
 This sample shows how to call TrainMultivariateModel with all parameters.
@@ -211,7 +211,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient(apiVersion: "v1.1");
 
-ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"))
+ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"))
 {
     DataSchema = DataSchema.OneTable,
     DisplayName = "<displayName>",
@@ -237,8 +237,8 @@ ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-0
             Variable = "<variable>",
             FilledNARatio = 123.45F,
             EffectiveCount = 1234,
-            FirstTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-            LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+            FirstTimestamp = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
+            LastTimestamp = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
         }},
     },
 };
@@ -256,8 +256,8 @@ Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultiva
 using RequestContent content = RequestContent.Create(new
 {
     dataSource = "<dataSource>",
-    startTime = "2022-05-10T14:57:31.2311892-04:00",
-    endTime = "2022-05-10T14:57:31.2311892-04:00",
+    startTime = "2022-05-10T18:57:31.2311892Z",
+    endTime = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = await client.TrainMultivariateModelAsync(content);
 
@@ -276,8 +276,8 @@ using RequestContent content = RequestContent.Create(new
 {
     dataSource = "<dataSource>",
     dataSchema = "OneTable",
-    startTime = "2022-05-10T14:57:31.2311892-04:00",
-    endTime = "2022-05-10T14:57:31.2311892-04:00",
+    startTime = "2022-05-10T18:57:31.2311892Z",
+    endTime = "2022-05-10T18:57:31.2311892Z",
     displayName = "<displayName>",
     slidingWindow = 1234,
     alignPolicy = new
@@ -315,8 +315,8 @@ using RequestContent content = RequestContent.Create(new
                 variable = "<variable>",
                 filledNARatio = 123.45F,
                 effectiveCount = 1234,
-                firstTimestamp = "2022-05-10T14:57:31.2311892-04:00",
-                lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
+                firstTimestamp = "2022-05-10T18:57:31.2311892Z",
+                lastTimestamp = "2022-05-10T18:57:31.2311892Z",
             }
         },
     },
@@ -361,8 +361,8 @@ Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultiva
 using RequestContent content = RequestContent.Create(new
 {
     dataSource = "<dataSource>",
-    startTime = "2022-05-10T14:57:31.2311892-04:00",
-    endTime = "2022-05-10T14:57:31.2311892-04:00",
+    startTime = "2022-05-10T18:57:31.2311892Z",
+    endTime = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = client.TrainMultivariateModel(content);
 
@@ -381,8 +381,8 @@ using RequestContent content = RequestContent.Create(new
 {
     dataSource = "<dataSource>",
     dataSchema = "OneTable",
-    startTime = "2022-05-10T14:57:31.2311892-04:00",
-    endTime = "2022-05-10T14:57:31.2311892-04:00",
+    startTime = "2022-05-10T18:57:31.2311892Z",
+    endTime = "2022-05-10T18:57:31.2311892Z",
     displayName = "<displayName>",
     slidingWindow = 1234,
     alignPolicy = new
@@ -420,8 +420,8 @@ using RequestContent content = RequestContent.Create(new
                 variable = "<variable>",
                 filledNARatio = 123.45F,
                 effectiveCount = 1234,
-                firstTimestamp = "2022-05-10T14:57:31.2311892-04:00",
-                lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
+                firstTimestamp = "2022-05-10T18:57:31.2311892Z",
+                lastTimestamp = "2022-05-10T18:57:31.2311892Z",
             }
         },
     },
@@ -647,7 +647,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient(apiVersion: "v1.1");
 
-MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 Response<MultivariateDetectionResult> response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", options);
 ]]></code>
 This sample shows how to call DetectMultivariateBatchAnomalyAsync with all parameters.
@@ -656,7 +656,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient(apiVersion: "v1.1");
 
-MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 Response<MultivariateDetectionResult> response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", options);
 ]]></code></example>
     </member>
@@ -668,7 +668,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient(apiVersion: "v1.1");
 
-MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 Response<MultivariateDetectionResult> response = client.DetectMultivariateBatchAnomaly("<modelId>", options);
 ]]></code>
 This sample shows how to call DetectMultivariateBatchAnomaly with all parameters.
@@ -677,7 +677,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient(apiVersion: "v1.1");
 
-MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 Response<MultivariateDetectionResult> response = client.DetectMultivariateBatchAnomaly("<modelId>", options);
 ]]></code></example>
     </member>
@@ -693,8 +693,8 @@ using RequestContent content = RequestContent.Create(new
 {
     dataSource = "http://localhost:3000",
     topContributorCount = 1234,
-    startTime = "2022-05-10T14:57:31.2311892-04:00",
-    endTime = "2022-05-10T14:57:31.2311892-04:00",
+    startTime = "2022-05-10T18:57:31.2311892Z",
+    endTime = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", content);
 
@@ -717,8 +717,8 @@ using RequestContent content = RequestContent.Create(new
 {
     dataSource = "http://localhost:3000",
     topContributorCount = 1234,
-    startTime = "2022-05-10T14:57:31.2311892-04:00",
-    endTime = "2022-05-10T14:57:31.2311892-04:00",
+    startTime = "2022-05-10T18:57:31.2311892Z",
+    endTime = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", content);
 
@@ -759,8 +759,8 @@ using RequestContent content = RequestContent.Create(new
 {
     dataSource = "http://localhost:3000",
     topContributorCount = 1234,
-    startTime = "2022-05-10T14:57:31.2311892-04:00",
-    endTime = "2022-05-10T14:57:31.2311892-04:00",
+    startTime = "2022-05-10T18:57:31.2311892Z",
+    endTime = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = client.DetectMultivariateBatchAnomaly("<modelId>", content);
 
@@ -783,8 +783,8 @@ using RequestContent content = RequestContent.Create(new
 {
     dataSource = "http://localhost:3000",
     topContributorCount = 1234,
-    startTime = "2022-05-10T14:57:31.2311892-04:00",
-    endTime = "2022-05-10T14:57:31.2311892-04:00",
+    startTime = "2022-05-10T18:57:31.2311892Z",
+    endTime = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = client.DetectMultivariateBatchAnomaly("<modelId>", content);
 

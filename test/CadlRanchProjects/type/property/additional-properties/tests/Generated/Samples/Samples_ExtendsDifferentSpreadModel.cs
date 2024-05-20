@@ -28,6 +28,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("derivedProp").GetProperty("state").ToString());
+            Console.WriteLine(result.GetProperty("knownProp").ToString());
         }
 
         [Test]
@@ -40,6 +41,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("derivedProp").GetProperty("state").ToString());
+            Console.WriteLine(result.GetProperty("knownProp").ToString());
         }
 
         [Test]
@@ -70,6 +72,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("derivedProp").GetProperty("state").ToString());
+            Console.WriteLine(result.GetProperty("knownProp").ToString());
         }
 
         [Test]
@@ -82,6 +85,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("derivedProp").GetProperty("state").ToString());
+            Console.WriteLine(result.GetProperty("knownProp").ToString());
         }
 
         [Test]
@@ -114,6 +118,7 @@ namespace _Type.Property.AdditionalProperties.Samples
                 {
                     state = "<state>",
                 },
+                knownProp = "<knownProp>",
             });
             Response response = client.Put(content);
 
@@ -132,6 +137,7 @@ namespace _Type.Property.AdditionalProperties.Samples
                 {
                     state = "<state>",
                 },
+                knownProp = "<knownProp>",
             });
             Response response = await client.PutAsync(content);
 
@@ -144,7 +150,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
 
-            DifferentSpreadModelDerived body = new DifferentSpreadModelDerived(new ModelForRecord("<state>"));
+            DifferentSpreadModelDerived body = new DifferentSpreadModelDerived("<knownProp>", new ModelForRecord("<state>"));
             Response response = client.Put(body);
         }
 
@@ -154,7 +160,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
 
-            DifferentSpreadModelDerived body = new DifferentSpreadModelDerived(new ModelForRecord("<state>"));
+            DifferentSpreadModelDerived body = new DifferentSpreadModelDerived("<knownProp>", new ModelForRecord("<state>"));
             Response response = await client.PutAsync(body);
         }
 
@@ -170,6 +176,7 @@ namespace _Type.Property.AdditionalProperties.Samples
                 {
                     state = "<state>",
                 },
+                knownProp = "<knownProp>",
             });
             Response response = client.Put(content);
 
@@ -188,6 +195,7 @@ namespace _Type.Property.AdditionalProperties.Samples
                 {
                     state = "<state>",
                 },
+                knownProp = "<knownProp>",
             });
             Response response = await client.PutAsync(content);
 
@@ -200,7 +208,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
 
-            DifferentSpreadModelDerived body = new DifferentSpreadModelDerived(new ModelForRecord("<state>"));
+            DifferentSpreadModelDerived body = new DifferentSpreadModelDerived("<knownProp>", new ModelForRecord("<state>"));
             Response response = client.Put(body);
         }
 
@@ -210,7 +218,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             ExtendsDifferentSpreadModel client = new AdditionalPropertiesClient().GetExtendsDifferentSpreadModelClient();
 
-            DifferentSpreadModelDerived body = new DifferentSpreadModelDerived(new ModelForRecord("<state>"));
+            DifferentSpreadModelDerived body = new DifferentSpreadModelDerived("<knownProp>", new ModelForRecord("<state>"));
             Response response = await client.PutAsync(body);
         }
     }

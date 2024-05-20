@@ -99,11 +99,8 @@ namespace Scm._Type.Union
 
         /// <summary> Send. </summary>
         /// <param name="prop"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
-        public virtual async Task<ClientResult> SendAsync(BinaryData prop)
+        public virtual async Task<ClientResult> SendAsync(GetResponseProp3 prop)
         {
-            Argument.AssertNotNull(prop, nameof(prop));
-
             SendRequest6 sendRequest6 = new SendRequest6(prop, null);
             ClientResult result = await SendAsync(sendRequest6.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
@@ -111,11 +108,8 @@ namespace Scm._Type.Union
 
         /// <summary> Send. </summary>
         /// <param name="prop"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
-        public virtual ClientResult Send(BinaryData prop)
+        public virtual ClientResult Send(GetResponseProp3 prop)
         {
-            Argument.AssertNotNull(prop, nameof(prop));
-
             SendRequest6 sendRequest6 = new SendRequest6(prop, null);
             ClientResult result = Send(sendRequest6.ToBinaryContent(), null);
             return result;
@@ -131,7 +125,7 @@ namespace Scm._Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SendAsync(BinaryData)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SendAsync(GetResponseProp3)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -159,7 +153,7 @@ namespace Scm._Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Send(BinaryData)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Send(GetResponseProp3)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

@@ -40,9 +40,36 @@ namespace _Type.Property.AdditionalProperties.Models
                 writer.WriteStartArray();
                 foreach (var item0 in item.Value)
                 {
-                    writer.WriteObjectValue(item0, options);
+                    if (item0 == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item0);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item0))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
                 }
                 writer.WriteEndArray();
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
             }
             writer.WriteEndObject();
         }
@@ -68,8 +95,10 @@ namespace _Type.Property.AdditionalProperties.Models
                 return null;
             }
             IList<ModelForRecord> knownProp = default;
-            IDictionary<string, IList<ModelForRecord>> additionalProperties = default;
-            Dictionary<string, IList<ModelForRecord>> additionalPropertiesDictionary = new Dictionary<string, IList<ModelForRecord>>();
+            IDictionary<string, IList<BinaryData>> additionalProperties = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, IList<BinaryData>> additionalPropertiesDictionary = new Dictionary<string, IList<BinaryData>>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("knownProp"u8))
@@ -82,15 +111,31 @@ namespace _Type.Property.AdditionalProperties.Models
                     knownProp = array;
                     continue;
                 }
-                List<ModelForRecord> array0 = new List<ModelForRecord>();
-                foreach (var item in property.Value.EnumerateArray())
+                if (property.Value.ValueKind == JsonValueKind.Array)
                 {
-                    array0.Add(ModelForRecord.DeserializeModelForRecord(item, options));
+                    List<BinaryData> array = new List<BinaryData>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(BinaryData.FromString(item.GetRawText()));
+                        }
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, array);
+                    continue;
                 }
-                additionalPropertiesDictionary.Add(property.Name, array0);
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new ExtendsModelArrayAdditionalProperties(knownProp, additionalProperties);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new ExtendsModelArrayAdditionalProperties(knownProp, additionalProperties, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ExtendsModelArrayAdditionalProperties>.Write(ModelReaderWriterOptions options)

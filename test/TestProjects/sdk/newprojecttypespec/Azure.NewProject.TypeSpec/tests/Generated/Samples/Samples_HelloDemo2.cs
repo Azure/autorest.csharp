@@ -217,10 +217,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
 1
             },
-                floatExtensibleEnum = 1,
+                floatExtensibleEnum = 1F,
                 floatExtensibleEnumCollection = new object[]
             {
-1
+1F
             },
                 floatFixedEnum = 1.1F,
                 floatFixedEnumCollection = new object[]
@@ -318,10 +318,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
 1
             },
-                floatExtensibleEnum = 1,
+                floatExtensibleEnum = 1F,
                 floatExtensibleEnumCollection = new object[]
             {
-1
+1F
             },
                 floatFixedEnum = 1.1F,
                 floatFixedEnumCollection = new object[]
@@ -623,10 +623,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
 1
             },
-                floatExtensibleEnum = 1,
+                floatExtensibleEnum = 1F,
                 floatExtensibleEnumCollection = new object[]
             {
-1
+1F
             },
                 floatFixedEnum = 1.1F,
                 floatFixedEnumCollection = new object[]
@@ -724,10 +724,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
 1
             },
-                floatExtensibleEnum = 1,
+                floatExtensibleEnum = 1F,
                 floatExtensibleEnumCollection = new object[]
             {
-1
+1F
             },
                 floatFixedEnum = 1.1F,
                 floatFixedEnumCollection = new object[]

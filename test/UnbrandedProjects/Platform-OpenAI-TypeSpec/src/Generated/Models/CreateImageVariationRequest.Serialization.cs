@@ -45,13 +45,27 @@ namespace OpenAI.Models
             }
             if (Optional.IsDefined(Size))
             {
-                writer.WritePropertyName("size"u8);
-                writer.WriteStringValue(Size.Value.ToString());
+                if (Size != null)
+                {
+                    writer.WritePropertyName("size"u8);
+                    writer.WriteStringValue(Size.Value.ToSerialString());
+                }
+                else
+                {
+                    writer.WriteNull("size");
+                }
             }
             if (Optional.IsDefined(ResponseFormat))
             {
-                writer.WritePropertyName("response_format"u8);
-                writer.WriteStringValue(ResponseFormat.Value.ToString());
+                if (ResponseFormat != null)
+                {
+                    writer.WritePropertyName("response_format"u8);
+                    writer.WriteStringValue(ResponseFormat.Value.ToSerialString());
+                }
+                else
+                {
+                    writer.WriteNull("response_format");
+                }
             }
             if (Optional.IsDefined(User))
             {
@@ -98,8 +112,8 @@ namespace OpenAI.Models
             }
             Stream image = default;
             long? n = default;
-            CreateImageVariationRequestSize? size = default;
-            CreateImageVariationRequestResponseFormat? responseFormat = default;
+            CreateImageRequestSize? size = default;
+            CreateImageRequestResponseFormat? responseFormat = default;
             string user = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
@@ -124,18 +138,20 @@ namespace OpenAI.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        size = null;
                         continue;
                     }
-                    size = new CreateImageVariationRequestSize(property.Value.GetString());
+                    size = property.Value.GetString().ToCreateImageRequestSize();
                     continue;
                 }
                 if (property.NameEquals("response_format"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        responseFormat = null;
                         continue;
                     }
-                    responseFormat = new CreateImageVariationRequestResponseFormat(property.Value.GetString());
+                    responseFormat = property.Value.GetString().ToCreateImageRequestResponseFormat();
                     continue;
                 }
                 if (property.NameEquals("user"u8))
@@ -186,11 +202,17 @@ namespace OpenAI.Models
             }
             if (Optional.IsDefined(Size))
             {
-                content.Add(Size.Value.ToString(), "size");
+                if (Size != null)
+                {
+                    content.Add(Size.Value.ToSerialString(), "size");
+                }
             }
             if (Optional.IsDefined(ResponseFormat))
             {
-                content.Add(ResponseFormat.Value.ToString(), "response_format");
+                if (ResponseFormat != null)
+                {
+                    content.Add(ResponseFormat.Value.ToSerialString(), "response_format");
+                }
             }
             if (Optional.IsDefined(User))
             {

@@ -56,6 +56,10 @@ extends:
                   npm run prettier
                 displayName: "Emitter format check"
                 workingDirectory: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
+              - script: |
+                  npm run lint
+                displayName: "Emitter linter check"
+                workingDirectory: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
               - script: 'dotnet pack src/AutoRest.CSharp/AutoRest.CSharp.csproj -o $(Build.ArtifactStagingDirectory)/packages -warnaserror -c Release'
                 name: Package
                 displayName: 'Package'

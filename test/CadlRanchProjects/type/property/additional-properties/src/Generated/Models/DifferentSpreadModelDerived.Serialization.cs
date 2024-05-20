@@ -29,10 +29,19 @@ namespace _Type.Property.AdditionalProperties.Models
             writer.WriteStartObject();
             writer.WritePropertyName("derivedProp"u8);
             writer.WriteObjectValue(DerivedProp, options);
+            writer.WritePropertyName("knownProp"u8);
+            writer.WriteStringValue(KnownProp);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value, options);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
+#endif
             }
             writer.WriteEndObject();
         }
@@ -58,8 +67,9 @@ namespace _Type.Property.AdditionalProperties.Models
                 return null;
             }
             ModelForRecord derivedProp = default;
-            IDictionary<string, ModelForRecord> additionalProperties = default;
-            Dictionary<string, ModelForRecord> additionalPropertiesDictionary = new Dictionary<string, ModelForRecord>();
+            string knownProp = default;
+            IDictionary<string, BinaryData> additionalProperties = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("derivedProp"u8))
@@ -67,10 +77,15 @@ namespace _Type.Property.AdditionalProperties.Models
                     derivedProp = ModelForRecord.DeserializeModelForRecord(property.Value, options);
                     continue;
                 }
-                additionalPropertiesDictionary.Add(property.Name, ModelForRecord.DeserializeModelForRecord(property.Value, options));
+                if (property.NameEquals("knownProp"u8))
+                {
+                    knownProp = property.Value.GetString();
+                    continue;
+                }
+                additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new DifferentSpreadModelDerived(derivedProp, additionalProperties);
+            return new DifferentSpreadModelDerived(knownProp, additionalProperties, derivedProp);
         }
 
         BinaryData IPersistableModel<DifferentSpreadModelDerived>.Write(ModelReaderWriterOptions options)
@@ -106,14 +121,14 @@ namespace _Type.Property.AdditionalProperties.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static DifferentSpreadModelDerived FromResponse(Response response)
+        internal static new DifferentSpreadModelDerived FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeDifferentSpreadModelDerived(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
-        internal virtual RequestContent ToRequestContent()
+        internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
