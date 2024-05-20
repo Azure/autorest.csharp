@@ -174,6 +174,8 @@ namespace CadlRanchProjectsNonAzure.Tests
             Assert.AreEqual("foo", response.Value.RequiredProperty);
             // we will never construct a null collection therefore this property is actually undefined here.
             Optional.IsCollectionDefined(response.Value.NullableProperty);
+            Assert.IsNotNull(response.Value.NullableProperty);
+            Assert.True(response.Value.NullableProperty.Count() == 0);
         });
 
         [Test]
@@ -213,6 +215,8 @@ namespace CadlRanchProjectsNonAzure.Tests
             Assert.AreEqual("foo", response.Value.RequiredProperty);
             // we will never construct a null collection therefore this property is actually undefined here.
             Optional.IsCollectionDefined(response.Value.NullableProperty);
+            Assert.IsNotNull(response.Value.NullableProperty);
+            Assert.True(response.Value.NullableProperty.Count() == 0);
         });
 
         [Test]

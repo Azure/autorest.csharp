@@ -386,7 +386,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Optional_UnionFloatLiteral_getAll() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetUnionFloatLiteralClient().GetAllAsync();
-            BinaryDataAssert.AreEqual(BinaryData.FromObjectAsJson(2.375), response.Value.Property);
+            Assert.AreEqual(UnionFloatLiteralPropertyProperty._2375, response.Value.Property);
         });
 
         [Test]
@@ -401,7 +401,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         {
             UnionFloatLiteralProperty data = new()
             {
-                Property = BinaryData.FromString("2.375")
+                Property = UnionFloatLiteralPropertyProperty._2375
             };
             var response = await new OptionalClient(host, null).GetUnionFloatLiteralClient().PutAllAsync(data);
             Assert.AreEqual(204, response.GetRawResponse().Status);
@@ -418,7 +418,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Optional_UnionIntLiteral_getAll() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetUnionIntLiteralClient().GetAllAsync();
-            BinaryDataAssert.AreEqual(BinaryData.FromObjectAsJson(2), response.Value.Property);
+            Assert.AreEqual(UnionIntLiteralPropertyProperty._2, response.Value.Property);
         });
 
         [Test]
@@ -433,7 +433,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         {
             UnionIntLiteralProperty data = new()
             {
-                Property = BinaryData.FromString("2")
+                Property = UnionIntLiteralPropertyProperty._2
             };
             var response = await new OptionalClient(host, null).GetUnionIntLiteralClient().PutAllAsync(data);
             Assert.AreEqual(204, response.GetRawResponse().Status);
