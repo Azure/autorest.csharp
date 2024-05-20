@@ -164,7 +164,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             Assert.AreEqual("foo", response.Value.RequiredProperty);
             BinaryDataAssert.AreEqual(BinaryData.FromString("hello, world!"), response.Value.NullableProperty.First());
             BinaryDataAssert.AreEqual(BinaryData.FromString("hello, world!"), response.Value.NullableProperty.Last());
-            Assert.AreEqual(2, response.Value.NullableProperty.Count());
+            Assert.AreEqual(2, response.Value.NullableProperty.Count);
         });
 
         [Test]
@@ -175,7 +175,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             // we will never construct a null collection therefore this property is actually undefined here.
             Optional.IsCollectionDefined(response.Value.NullableProperty);
             Assert.IsNotNull(response.Value.NullableProperty);
-            Assert.True(response.Value.NullableProperty.Count() == 0);
+            Assert.True(response.Value.NullableProperty.Count == 0);
         });
 
         [Test]
@@ -205,7 +205,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             Assert.AreEqual("foo", response.Value.RequiredProperty);
             Assert.AreEqual("hello", response.Value.NullableProperty.First().Property);
             Assert.AreEqual("world", response.Value.NullableProperty.Last().Property);
-            Assert.AreEqual(2, response.Value.NullableProperty.Count());
+            Assert.AreEqual(2, response.Value.NullableProperty.Count);
         });
 
         [Test]
@@ -216,7 +216,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             // we will never construct a null collection therefore this property is actually undefined here.
             Optional.IsCollectionDefined(response.Value.NullableProperty);
             Assert.IsNotNull(response.Value.NullableProperty);
-            Assert.True(response.Value.NullableProperty.Count() == 0);
+            Assert.True(response.Value.NullableProperty.Count == 0);
         });
 
         [Test]
