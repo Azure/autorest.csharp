@@ -70,7 +70,7 @@ namespace UnbrandedTypeSpec.Models
             if (Optional.IsDefined(FloatExtensibleEnum))
             {
                 writer.WritePropertyName("floatExtensibleEnum"u8);
-                writer.WriteNumberValue(FloatExtensibleEnum.Value.ToSerialInt32());
+                writer.WriteNumberValue(FloatExtensibleEnum.Value.ToSerialSingle());
             }
             if (Optional.IsCollectionDefined(FloatExtensibleEnumCollection))
             {
@@ -78,7 +78,7 @@ namespace UnbrandedTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in FloatExtensibleEnumCollection)
                 {
-                    writer.WriteNumberValue(item.ToSerialInt32());
+                    writer.WriteNumberValue(item.ToSerialSingle());
                 }
                 writer.WriteEndArray();
             }
@@ -377,7 +377,7 @@ namespace UnbrandedTypeSpec.Models
                     {
                         continue;
                     }
-                    floatExtensibleEnum = new FloatExtensibleEnum(property.Value.GetInt32());
+                    floatExtensibleEnum = new FloatExtensibleEnum(property.Value.GetSingle());
                     continue;
                 }
                 if (property.NameEquals("floatExtensibleEnumCollection"u8))
@@ -389,7 +389,7 @@ namespace UnbrandedTypeSpec.Models
                     List<FloatExtensibleEnum> array = new List<FloatExtensibleEnum>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(new FloatExtensibleEnum(item.GetInt32()));
+                        array.Add(new FloatExtensibleEnum(item.GetSingle()));
                     }
                     floatExtensibleEnumCollection = array;
                     continue;

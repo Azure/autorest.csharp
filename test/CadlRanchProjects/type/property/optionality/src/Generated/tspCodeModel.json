@@ -27,7 +27,7 @@
    "$id": "4",
    "Kind": "Enum",
    "Name": "IntLiteralProperty_property",
-   "EnumValueType": "Float32",
+   "EnumValueType": "Int32",
    "AllowedValues": [
     {
      "$id": "5",
