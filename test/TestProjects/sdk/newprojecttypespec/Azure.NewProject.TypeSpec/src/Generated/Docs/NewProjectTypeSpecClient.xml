@@ -9,7 +9,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 ]]></code>
 This sample shows how to call TopActionAsync with all parameters.
 <code><![CDATA[
@@ -17,7 +17,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 ]]></code></example>
     </member>
     <member name="TopAction(DateTimeOffset,CancellationToken)">
@@ -28,7 +28,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 ]]></code>
 This sample shows how to call TopAction with all parameters.
 <code><![CDATA[
@@ -36,7 +36,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 ]]></code></example>
     </member>
     <member name="TopActionAsync(DateTimeOffset,RequestContext)">
@@ -47,7 +47,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
+Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -64,7 +64,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
+Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -88,7 +88,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
+Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -105,7 +105,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
+Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -667,114 +667,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
 Response response = client.AddTimeHeader();
-
-Console.WriteLine(response.Status);
-]]></code></example>
-    </member>
-    <member name="StringFormatAsync(Guid,ModelWithFormat,CancellationToken)">
-      <example>
-This sample shows how to call StringFormatAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
-
-ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-]]></code>
-This sample shows how to call StringFormatAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
-
-ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-]]></code></example>
-    </member>
-    <member name="StringFormat(Guid,ModelWithFormat,CancellationToken)">
-      <example>
-This sample shows how to call StringFormat.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
-
-ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-]]></code>
-This sample shows how to call StringFormat with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
-
-ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-]]></code></example>
-    </member>
-    <member name="StringFormatAsync(Guid,RequestContent,RequestContext)">
-      <example>
-This sample shows how to call StringFormatAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
-
-using RequestContent content = RequestContent.Create(new
-{
-    sourceUrl = "http://localhost:3000",
-    guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-});
-Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-
-Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call StringFormatAsync with all parameters and request content.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
-
-using RequestContent content = RequestContent.Create(new
-{
-    sourceUrl = "http://localhost:3000",
-    guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-});
-Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-
-Console.WriteLine(response.Status);
-]]></code></example>
-    </member>
-    <member name="StringFormat(Guid,RequestContent,RequestContext)">
-      <example>
-This sample shows how to call StringFormat.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
-
-using RequestContent content = RequestContent.Create(new
-{
-    sourceUrl = "http://localhost:3000",
-    guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-});
-Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-
-Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call StringFormat with all parameters and request content.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
-
-using RequestContent content = RequestContent.Create(new
-{
-    sourceUrl = "http://localhost:3000",
-    guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-});
-Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
 
 Console.WriteLine(response.Status);
 ]]></code></example>

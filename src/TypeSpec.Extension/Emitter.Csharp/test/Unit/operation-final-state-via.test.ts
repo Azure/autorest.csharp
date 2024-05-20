@@ -1,12 +1,12 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 import { FinalStateValue } from "@azure-tools/typespec-azure-core";
+import assert from "assert";
+import { describe, it } from "vitest";
 import {
     OperationFinalStateVia,
     convertLroFinalStateVia
 } from "../../src/type/operation-final-state-via.js";
-import assert from "assert";
-import { describe } from "mocha";
 
 describe("convertLroFinalStateVia()", () => {
     describe("normal inputs", () => {
