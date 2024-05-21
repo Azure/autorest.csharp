@@ -772,6 +772,18 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\property\\additional-properties\\src\\Generated -n"
     },
+    "typespec-nonAzure-type/property/nullable": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\property\\nullable\\src\\Generated -n"
+    },
+    "typespec-nonAzure-type/property/optionality": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\property\\optionality\\src\\Generated -n"
+    },
+    "typespec-nonAzure-type/property/value-types": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\property\\value-types\\src\\Generated -n"
+    },
     "typespec-nonAzure-type/scalar": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\scalar\\src\\Generated -n"

@@ -1,0 +1,5344 @@
+{
+ "$id": "1",
+ "Name": "Type.Property.Optional",
+ "Description": "Illustrates models with optional properties.",
+ "ApiVersions": [],
+ "Enums": [
+  {
+   "$id": "2",
+   "Kind": "Enum",
+   "Name": "StringLiteralProperty_property",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "3",
+     "Name": "hello",
+     "Value": "hello",
+     "Description": "hello"
+    }
+   ],
+   "Namespace": "Type.Property.Optional",
+   "Description": "The StringLiteralProperty_property",
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "RoundTrip"
+  },
+  {
+   "$id": "4",
+   "Kind": "Enum",
+   "Name": "IntLiteralProperty_property",
+   "EnumValueType": "Int32",
+   "AllowedValues": [
+    {
+     "$id": "5",
+     "Name": "1",
+     "Value": 1,
+     "Description": "1"
+    }
+   ],
+   "Namespace": "Type.Property.Optional",
+   "Description": "The IntLiteralProperty_property",
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "RoundTrip"
+  },
+  {
+   "$id": "6",
+   "Kind": "Enum",
+   "Name": "FloatLiteralProperty_property",
+   "EnumValueType": "Float32",
+   "AllowedValues": [
+    {
+     "$id": "7",
+     "Name": "1.25",
+     "Value": 1.25,
+     "Description": "1.25"
+    }
+   ],
+   "Namespace": "Type.Property.Optional",
+   "Description": "The FloatLiteralProperty_property",
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "RoundTrip"
+  },
+  {
+   "$id": "8",
+   "Kind": "Enum",
+   "Name": "UnionStringLiteralPropertyProperty",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "9",
+     "Name": "hello",
+     "Value": "hello"
+    },
+    {
+     "$id": "10",
+     "Name": "world",
+     "Value": "world"
+    }
+   ],
+   "Namespace": "",
+   "IsExtensible": false,
+   "IsNullable": false,
+   "Usage": "RoundTrip"
+  },
+  {
+   "$id": "11",
+   "Kind": "Enum",
+   "Name": "UnionIntLiteralPropertyProperty",
+   "EnumValueType": "Int32",
+   "AllowedValues": [
+    {
+     "$id": "12",
+     "Name": "1",
+     "Value": 1
+    },
+    {
+     "$id": "13",
+     "Name": "2",
+     "Value": 2
+    }
+   ],
+   "Namespace": "",
+   "IsExtensible": false,
+   "IsNullable": false,
+   "Usage": "RoundTrip"
+  },
+  {
+   "$id": "14",
+   "Kind": "Enum",
+   "Name": "UnionFloatLiteralPropertyProperty",
+   "EnumValueType": "Float32",
+   "AllowedValues": [
+    {
+     "$id": "15",
+     "Name": "1.25",
+     "Value": 1.25
+    },
+    {
+     "$id": "16",
+     "Name": "2.375",
+     "Value": 2.375
+    }
+   ],
+   "Namespace": "",
+   "IsExtensible": false,
+   "IsNullable": false,
+   "Usage": "RoundTrip"
+  }
+ ],
+ "Models": [
+  {
+   "$id": "17",
+   "Kind": "Model",
+   "Name": "StringProperty",
+   "Namespace": "Type.Property.Optional",
+   "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "18",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$id": "19",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "20",
+   "Kind": "Model",
+   "Name": "BytesProperty",
+   "Namespace": "Type.Property.Optional",
+   "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "21",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$id": "22",
+      "Kind": "Primitive",
+      "Name": "Bytes",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "23",
+   "Kind": "Model",
+   "Name": "DatetimeProperty",
+   "Namespace": "Type.Property.Optional",
+   "Description": "Model with a datetime property",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "24",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$id": "25",
+      "Kind": "Primitive",
+      "Name": "DateTimeRFC3339",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "26",
+   "Kind": "Model",
+   "Name": "DurationProperty",
+   "Namespace": "Type.Property.Optional",
+   "Description": "Model with a duration property",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "27",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$id": "28",
+      "Kind": "Primitive",
+      "Name": "DurationISO8601",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "29",
+   "Kind": "Model",
+   "Name": "CollectionsByteProperty",
+   "Namespace": "Type.Property.Optional",
+   "Description": "Model with collection bytes properties",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "30",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$id": "31",
+      "Kind": "Array",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "32",
+       "Kind": "Primitive",
+       "Name": "Bytes",
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "33",
+   "Kind": "Model",
+   "Name": "CollectionsModelProperty",
+   "Namespace": "Type.Property.Optional",
+   "Description": "Model with collection models properties",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "34",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$id": "35",
+      "Kind": "Array",
+      "Name": "Array",
+      "ElementType": {
+       "$ref": "17"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "36",
+   "Kind": "Model",
+   "Name": "StringLiteralProperty",
+   "Namespace": "Type.Property.Optional",
+   "Description": "Model with string literal property",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "37",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$id": "38",
+      "Kind": "Literal",
+      "Name": "Literal",
+      "LiteralValueType": {
+       "$ref": "2"
+      },
+      "Value": "hello",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "39",
+   "Kind": "Model",
+   "Name": "IntLiteralProperty",
+   "Namespace": "Type.Property.Optional",
+   "Description": "Model with int literal property",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "40",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$id": "41",
+      "Kind": "Literal",
+      "Name": "Literal",
+      "LiteralValueType": {
+       "$ref": "4"
+      },
+      "Value": 1,
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "42",
+   "Kind": "Model",
+   "Name": "FloatLiteralProperty",
+   "Namespace": "Type.Property.Optional",
+   "Description": "Model with float literal property",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "43",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$id": "44",
+      "Kind": "Literal",
+      "Name": "Literal",
+      "LiteralValueType": {
+       "$ref": "6"
+      },
+      "Value": 1.25,
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "45",
+   "Kind": "Model",
+   "Name": "BooleanLiteralProperty",
+   "Namespace": "Type.Property.Optional",
+   "Description": "Model with boolean literal property",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "46",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$id": "47",
+      "Kind": "Literal",
+      "Name": "Literal",
+      "LiteralValueType": {
+       "$id": "48",
+       "Kind": "Primitive",
+       "Name": "Boolean",
+       "IsNullable": false
+      },
+      "Value": true,
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "49",
+   "Kind": "Model",
+   "Name": "UnionStringLiteralProperty",
+   "Namespace": "Type.Property.Optional",
+   "Description": "Model with union of string literal property",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "50",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$ref": "8"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "51",
+   "Kind": "Model",
+   "Name": "UnionIntLiteralProperty",
+   "Namespace": "Type.Property.Optional",
+   "Description": "Model with union of int literal property",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "52",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$ref": "11"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "53",
+   "Kind": "Model",
+   "Name": "UnionFloatLiteralProperty",
+   "Namespace": "Type.Property.Optional",
+   "Description": "Model with union of float literal property",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "54",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$ref": "14"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "55",
+   "Kind": "Model",
+   "Name": "RequiredAndOptionalProperty",
+   "Namespace": "Type.Property.Optional",
+   "Description": "Model with required and optional properties",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "56",
+     "Name": "optionalProperty",
+     "SerializedName": "optionalProperty",
+     "Description": "optional string property",
+     "Type": {
+      "$id": "57",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "58",
+     "Name": "requiredProperty",
+     "SerializedName": "requiredProperty",
+     "Description": "required int property",
+     "Type": {
+      "$id": "59",
+      "Kind": "Primitive",
+      "Name": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "60",
+   "Name": "OptionalClient",
+   "Description": "",
+   "Operations": [],
+   "Protocol": {
+    "$id": "61"
+   },
+   "Creatable": true
+  },
+  {
+   "$id": "62",
+   "Name": "String",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "63",
+     "Name": "getAll",
+     "ResourceName": "String",
+     "Description": "Get models that will return all properties in the model",
+     "Parameters": [
+      {
+       "$id": "64",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "TestServer endpoint",
+       "Type": {
+        "$id": "65",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "66",
+        "Type": {
+         "$id": "67",
+         "Kind": "Primitive",
+         "Name": "String",
+         "IsNullable": false
+        },
+        "Value": "http://localhost:3000"
+       }
+      },
+      {
+       "$id": "68",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "69",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "70",
+        "Type": {
+         "$ref": "69"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "71",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "17"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/string/all",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "72",
+     "Name": "getDefault",
+     "ResourceName": "String",
+     "Description": "Get models that will return the default object",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "73",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "74",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "75",
+        "Type": {
+         "$ref": "74"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "76",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "17"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/string/default",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "77",
+     "Name": "putAll",
+     "ResourceName": "String",
+     "Description": "Put a body with all properties present.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "78",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "17"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "79",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "80",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "81",
+        "Type": {
+         "$ref": "80"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "82",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "83",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "84",
+        "Type": {
+         "$ref": "83"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "85",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/string/all",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "86",
+     "Name": "putDefault",
+     "ResourceName": "String",
+     "Description": "Put a body with default properties.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "87",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "17"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "88",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "89",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "90",
+        "Type": {
+         "$ref": "89"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "91",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "92",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "93",
+        "Type": {
+         "$ref": "92"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "94",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/string/default",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "95"
+   },
+   "Creatable": false,
+   "Parent": "OptionalClient"
+  },
+  {
+   "$id": "96",
+   "Name": "Bytes",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "97",
+     "Name": "getAll",
+     "ResourceName": "Bytes",
+     "Description": "Get models that will return all properties in the model",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "98",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "99",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "100",
+        "Type": {
+         "$ref": "99"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "101",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "20"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/bytes/all",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "102",
+     "Name": "getDefault",
+     "ResourceName": "Bytes",
+     "Description": "Get models that will return the default object",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "103",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "104",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "105",
+        "Type": {
+         "$ref": "104"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "106",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "20"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/bytes/default",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "107",
+     "Name": "putAll",
+     "ResourceName": "Bytes",
+     "Description": "Put a body with all properties present.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "108",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "20"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "109",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "110",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "111",
+        "Type": {
+         "$ref": "110"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "112",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "113",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "114",
+        "Type": {
+         "$ref": "113"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "115",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/bytes/all",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "116",
+     "Name": "putDefault",
+     "ResourceName": "Bytes",
+     "Description": "Put a body with default properties.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "117",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "20"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "118",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "119",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "120",
+        "Type": {
+         "$ref": "119"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "121",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "122",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "123",
+        "Type": {
+         "$ref": "122"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "124",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/bytes/default",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "125"
+   },
+   "Creatable": false,
+   "Parent": "OptionalClient"
+  },
+  {
+   "$id": "126",
+   "Name": "Datetime",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "127",
+     "Name": "getAll",
+     "ResourceName": "Datetime",
+     "Description": "Get models that will return all properties in the model",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "128",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "129",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "130",
+        "Type": {
+         "$ref": "129"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "131",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "23"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/datetime/all",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "132",
+     "Name": "getDefault",
+     "ResourceName": "Datetime",
+     "Description": "Get models that will return the default object",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "133",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "134",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "135",
+        "Type": {
+         "$ref": "134"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "136",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "23"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/datetime/default",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "137",
+     "Name": "putAll",
+     "ResourceName": "Datetime",
+     "Description": "Put a body with all properties present.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "138",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "23"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "139",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "140",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "141",
+        "Type": {
+         "$ref": "140"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "142",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "143",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "144",
+        "Type": {
+         "$ref": "143"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "145",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/datetime/all",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "146",
+     "Name": "putDefault",
+     "ResourceName": "Datetime",
+     "Description": "Put a body with default properties.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "147",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "23"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "148",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "149",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "150",
+        "Type": {
+         "$ref": "149"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "151",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "152",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "153",
+        "Type": {
+         "$ref": "152"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "154",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/datetime/default",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "155"
+   },
+   "Creatable": false,
+   "Parent": "OptionalClient"
+  },
+  {
+   "$id": "156",
+   "Name": "Duration",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "157",
+     "Name": "getAll",
+     "ResourceName": "Duration",
+     "Description": "Get models that will return all properties in the model",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "158",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "159",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "160",
+        "Type": {
+         "$ref": "159"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "161",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "26"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/duration/all",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "162",
+     "Name": "getDefault",
+     "ResourceName": "Duration",
+     "Description": "Get models that will return the default object",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "163",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "164",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "165",
+        "Type": {
+         "$ref": "164"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "166",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "26"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/duration/default",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "167",
+     "Name": "putAll",
+     "ResourceName": "Duration",
+     "Description": "Put a body with all properties present.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "168",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "26"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "169",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "170",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "171",
+        "Type": {
+         "$ref": "170"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "172",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "173",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "174",
+        "Type": {
+         "$ref": "173"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "175",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/duration/all",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "176",
+     "Name": "putDefault",
+     "ResourceName": "Duration",
+     "Description": "Put a body with default properties.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "177",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "26"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "178",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "179",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "180",
+        "Type": {
+         "$ref": "179"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "181",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "182",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "183",
+        "Type": {
+         "$ref": "182"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "184",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/duration/default",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "185"
+   },
+   "Creatable": false,
+   "Parent": "OptionalClient"
+  },
+  {
+   "$id": "186",
+   "Name": "CollectionsByte",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "187",
+     "Name": "getAll",
+     "ResourceName": "CollectionsByte",
+     "Description": "Get models that will return all properties in the model",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "188",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "189",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "190",
+        "Type": {
+         "$ref": "189"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "191",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "29"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/collections/bytes/all",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "192",
+     "Name": "getDefault",
+     "ResourceName": "CollectionsByte",
+     "Description": "Get models that will return the default object",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "193",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "194",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "195",
+        "Type": {
+         "$ref": "194"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "196",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "29"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/collections/bytes/default",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "197",
+     "Name": "putAll",
+     "ResourceName": "CollectionsByte",
+     "Description": "Put a body with all properties present.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "198",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "29"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "199",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "200",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "201",
+        "Type": {
+         "$ref": "200"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "202",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "203",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "204",
+        "Type": {
+         "$ref": "203"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "205",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/collections/bytes/all",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "206",
+     "Name": "putDefault",
+     "ResourceName": "CollectionsByte",
+     "Description": "Put a body with default properties.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "207",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "29"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "208",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "209",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "210",
+        "Type": {
+         "$ref": "209"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "211",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "212",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "213",
+        "Type": {
+         "$ref": "212"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "214",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/collections/bytes/default",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "215"
+   },
+   "Creatable": false,
+   "Parent": "OptionalClient"
+  },
+  {
+   "$id": "216",
+   "Name": "CollectionsModel",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "217",
+     "Name": "getAll",
+     "ResourceName": "CollectionsModel",
+     "Description": "Get models that will return all properties in the model",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "218",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "219",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "220",
+        "Type": {
+         "$ref": "219"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "221",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "33"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/collections/model/all",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "222",
+     "Name": "getDefault",
+     "ResourceName": "CollectionsModel",
+     "Description": "Get models that will return the default object",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "223",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "224",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "225",
+        "Type": {
+         "$ref": "224"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "226",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "33"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/collections/model/default",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "227",
+     "Name": "putAll",
+     "ResourceName": "CollectionsModel",
+     "Description": "Put a body with all properties present.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "228",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "33"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "229",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "230",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "231",
+        "Type": {
+         "$ref": "230"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "232",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "233",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "234",
+        "Type": {
+         "$ref": "233"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "235",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/collections/model/all",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "236",
+     "Name": "putDefault",
+     "ResourceName": "CollectionsModel",
+     "Description": "Put a body with default properties.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "237",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "33"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "238",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "239",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "240",
+        "Type": {
+         "$ref": "239"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "241",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "242",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "243",
+        "Type": {
+         "$ref": "242"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "244",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/collections/model/default",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "245"
+   },
+   "Creatable": false,
+   "Parent": "OptionalClient"
+  },
+  {
+   "$id": "246",
+   "Name": "StringLiteral",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "247",
+     "Name": "getAll",
+     "ResourceName": "StringLiteral",
+     "Description": "Get models that will return all properties in the model",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "248",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "249",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "250",
+        "Type": {
+         "$ref": "249"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "251",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "36"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/string/literal/all",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "252",
+     "Name": "getDefault",
+     "ResourceName": "StringLiteral",
+     "Description": "Get models that will return the default object",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "253",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "254",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "255",
+        "Type": {
+         "$ref": "254"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "256",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "36"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/string/literal/default",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "257",
+     "Name": "putAll",
+     "ResourceName": "StringLiteral",
+     "Description": "Put a body with all properties present.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "258",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "36"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "259",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "260",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "261",
+        "Type": {
+         "$ref": "260"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "262",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "263",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "264",
+        "Type": {
+         "$ref": "263"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "265",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/string/literal/all",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "266",
+     "Name": "putDefault",
+     "ResourceName": "StringLiteral",
+     "Description": "Put a body with default properties.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "267",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "36"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "268",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "269",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "270",
+        "Type": {
+         "$ref": "269"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "271",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "272",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "273",
+        "Type": {
+         "$ref": "272"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "274",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/string/literal/default",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "275"
+   },
+   "Creatable": false,
+   "Parent": "OptionalClient"
+  },
+  {
+   "$id": "276",
+   "Name": "IntLiteral",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "277",
+     "Name": "getAll",
+     "ResourceName": "IntLiteral",
+     "Description": "Get models that will return all properties in the model",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "278",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "279",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "280",
+        "Type": {
+         "$ref": "279"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "281",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "39"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/int/literal/all",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "282",
+     "Name": "getDefault",
+     "ResourceName": "IntLiteral",
+     "Description": "Get models that will return the default object",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "283",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "284",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "285",
+        "Type": {
+         "$ref": "284"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "286",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "39"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/int/literal/default",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "287",
+     "Name": "putAll",
+     "ResourceName": "IntLiteral",
+     "Description": "Put a body with all properties present.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "288",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "39"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "289",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "290",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "291",
+        "Type": {
+         "$ref": "290"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "292",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "293",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "294",
+        "Type": {
+         "$ref": "293"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "295",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/int/literal/all",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "296",
+     "Name": "putDefault",
+     "ResourceName": "IntLiteral",
+     "Description": "Put a body with default properties.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "297",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "39"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "298",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "299",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "300",
+        "Type": {
+         "$ref": "299"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "301",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "302",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "303",
+        "Type": {
+         "$ref": "302"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "304",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/int/literal/default",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "305"
+   },
+   "Creatable": false,
+   "Parent": "OptionalClient"
+  },
+  {
+   "$id": "306",
+   "Name": "FloatLiteral",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "307",
+     "Name": "getAll",
+     "ResourceName": "FloatLiteral",
+     "Description": "Get models that will return all properties in the model",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "308",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "309",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "310",
+        "Type": {
+         "$ref": "309"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "311",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "42"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/float/literal/all",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "312",
+     "Name": "getDefault",
+     "ResourceName": "FloatLiteral",
+     "Description": "Get models that will return the default object",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "313",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "314",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "315",
+        "Type": {
+         "$ref": "314"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "316",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "42"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/float/literal/default",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "317",
+     "Name": "putAll",
+     "ResourceName": "FloatLiteral",
+     "Description": "Put a body with all properties present.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "318",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "42"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "319",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "320",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "321",
+        "Type": {
+         "$ref": "320"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "322",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "323",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "324",
+        "Type": {
+         "$ref": "323"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "325",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/float/literal/all",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "326",
+     "Name": "putDefault",
+     "ResourceName": "FloatLiteral",
+     "Description": "Put a body with default properties.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "327",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "42"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "328",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "329",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "330",
+        "Type": {
+         "$ref": "329"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "331",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "332",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "333",
+        "Type": {
+         "$ref": "332"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "334",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/float/literal/default",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "335"
+   },
+   "Creatable": false,
+   "Parent": "OptionalClient"
+  },
+  {
+   "$id": "336",
+   "Name": "BooleanLiteral",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "337",
+     "Name": "getAll",
+     "ResourceName": "BooleanLiteral",
+     "Description": "Get models that will return all properties in the model",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "338",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "339",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "340",
+        "Type": {
+         "$ref": "339"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "341",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "45"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/boolean/literal/all",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "342",
+     "Name": "getDefault",
+     "ResourceName": "BooleanLiteral",
+     "Description": "Get models that will return the default object",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "343",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "344",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "345",
+        "Type": {
+         "$ref": "344"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "346",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "45"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/boolean/literal/default",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "347",
+     "Name": "putAll",
+     "ResourceName": "BooleanLiteral",
+     "Description": "Put a body with all properties present.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "348",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "45"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "349",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "350",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "351",
+        "Type": {
+         "$ref": "350"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "352",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "353",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "354",
+        "Type": {
+         "$ref": "353"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "355",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/boolean/literal/all",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "356",
+     "Name": "putDefault",
+     "ResourceName": "BooleanLiteral",
+     "Description": "Put a body with default properties.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "357",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "45"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "358",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "359",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "360",
+        "Type": {
+         "$ref": "359"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "361",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "362",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "363",
+        "Type": {
+         "$ref": "362"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "364",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/boolean/literal/default",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "365"
+   },
+   "Creatable": false,
+   "Parent": "OptionalClient"
+  },
+  {
+   "$id": "366",
+   "Name": "UnionStringLiteral",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "367",
+     "Name": "getAll",
+     "ResourceName": "UnionStringLiteral",
+     "Description": "Get models that will return all properties in the model",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "368",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "369",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "370",
+        "Type": {
+         "$ref": "369"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "371",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "49"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/union/string/literal/all",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "372",
+     "Name": "getDefault",
+     "ResourceName": "UnionStringLiteral",
+     "Description": "Get models that will return the default object",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "373",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "374",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "375",
+        "Type": {
+         "$ref": "374"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "376",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "49"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/union/string/literal/default",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "377",
+     "Name": "putAll",
+     "ResourceName": "UnionStringLiteral",
+     "Description": "Put a body with all properties present.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "378",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "49"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "379",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "380",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "381",
+        "Type": {
+         "$ref": "380"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "382",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "383",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "384",
+        "Type": {
+         "$ref": "383"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "385",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/union/string/literal/all",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "386",
+     "Name": "putDefault",
+     "ResourceName": "UnionStringLiteral",
+     "Description": "Put a body with default properties.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "387",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "49"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "388",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "389",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "390",
+        "Type": {
+         "$ref": "389"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "391",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "392",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "393",
+        "Type": {
+         "$ref": "392"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "394",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/union/string/literal/default",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "395"
+   },
+   "Creatable": false,
+   "Parent": "OptionalClient"
+  },
+  {
+   "$id": "396",
+   "Name": "UnionIntLiteral",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "397",
+     "Name": "getAll",
+     "ResourceName": "UnionIntLiteral",
+     "Description": "Get models that will return all properties in the model",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "398",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "399",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "400",
+        "Type": {
+         "$ref": "399"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "401",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "51"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/union/int/literal/all",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "402",
+     "Name": "getDefault",
+     "ResourceName": "UnionIntLiteral",
+     "Description": "Get models that will return the default object",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "403",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "404",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "405",
+        "Type": {
+         "$ref": "404"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "406",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "51"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/union/int/literal/default",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "407",
+     "Name": "putAll",
+     "ResourceName": "UnionIntLiteral",
+     "Description": "Put a body with all properties present.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "408",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "51"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "409",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "410",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "411",
+        "Type": {
+         "$ref": "410"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "412",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "413",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "414",
+        "Type": {
+         "$ref": "413"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "415",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/union/int/literal/all",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "416",
+     "Name": "putDefault",
+     "ResourceName": "UnionIntLiteral",
+     "Description": "Put a body with default properties.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "417",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "51"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "418",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "419",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "420",
+        "Type": {
+         "$ref": "419"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "421",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "422",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "423",
+        "Type": {
+         "$ref": "422"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "424",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/union/int/literal/default",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "425"
+   },
+   "Creatable": false,
+   "Parent": "OptionalClient"
+  },
+  {
+   "$id": "426",
+   "Name": "UnionFloatLiteral",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "427",
+     "Name": "getAll",
+     "ResourceName": "UnionFloatLiteral",
+     "Description": "Get models that will return all properties in the model",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "428",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "429",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "430",
+        "Type": {
+         "$ref": "429"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "431",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "53"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/union/float/literal/all",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "432",
+     "Name": "getDefault",
+     "ResourceName": "UnionFloatLiteral",
+     "Description": "Get models that will return the default object",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "433",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "434",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "435",
+        "Type": {
+         "$ref": "434"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "436",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "53"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/union/float/literal/default",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "437",
+     "Name": "putAll",
+     "ResourceName": "UnionFloatLiteral",
+     "Description": "Put a body with all properties present.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "438",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "53"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "439",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "440",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "441",
+        "Type": {
+         "$ref": "440"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "442",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "443",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "444",
+        "Type": {
+         "$ref": "443"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "445",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/union/float/literal/all",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "446",
+     "Name": "putDefault",
+     "ResourceName": "UnionFloatLiteral",
+     "Description": "Put a body with default properties.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "447",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "53"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "448",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "449",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "450",
+        "Type": {
+         "$ref": "449"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "451",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "452",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "453",
+        "Type": {
+         "$ref": "452"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "454",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/union/float/literal/default",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "455"
+   },
+   "Creatable": false,
+   "Parent": "OptionalClient"
+  },
+  {
+   "$id": "456",
+   "Name": "RequiredAndOptional",
+   "Description": "Test optional and required properties",
+   "Operations": [
+    {
+     "$id": "457",
+     "Name": "getAll",
+     "ResourceName": "RequiredAndOptional",
+     "Description": "Get models that will return all properties in the model",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "458",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "459",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "460",
+        "Type": {
+         "$ref": "459"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "461",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "55"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/requiredAndOptional/all",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "462",
+     "Name": "getRequiredOnly",
+     "ResourceName": "RequiredAndOptional",
+     "Description": "Get models that will return only the required properties",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "463",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "464",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "465",
+        "Type": {
+         "$ref": "464"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "466",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "55"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/requiredAndOptional/requiredOnly",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "467",
+     "Name": "putAll",
+     "ResourceName": "RequiredAndOptional",
+     "Description": "Put a body with all properties present.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "468",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "55"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "469",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "470",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "471",
+        "Type": {
+         "$ref": "470"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "472",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "473",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "474",
+        "Type": {
+         "$ref": "473"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "475",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/requiredAndOptional/all",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "476",
+     "Name": "putRequiredOnly",
+     "ResourceName": "RequiredAndOptional",
+     "Description": "Put a body with only required properties.",
+     "Parameters": [
+      {
+       "$ref": "64"
+      },
+      {
+       "$id": "477",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "55"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "478",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "479",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "480",
+        "Type": {
+         "$ref": "479"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "481",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "482",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "483",
+        "Type": {
+         "$ref": "482"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "484",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/optional/requiredAndOptional/requiredOnly",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "485"
+   },
+   "Creatable": false,
+   "Parent": "OptionalClient"
+  }
+ ]
+}
