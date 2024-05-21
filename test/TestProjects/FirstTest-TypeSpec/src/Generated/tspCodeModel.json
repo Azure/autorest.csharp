@@ -23,7 +23,7 @@
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "4",
@@ -42,7 +42,7 @@
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "6",
@@ -61,7 +61,7 @@
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "8",
@@ -80,7 +80,7 @@
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "10",
@@ -99,7 +99,7 @@
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "12",
@@ -118,7 +118,7 @@
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "14",
@@ -146,7 +146,7 @@
    "Description": "enum with projected name",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": 2
   },
   {
    "$id": "18",
@@ -174,7 +174,7 @@
    "Description": "enum with projected name used in a model",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": 2
   },
   {
    "$id": "22",
@@ -202,7 +202,7 @@
    "Description": "Simple enum",
    "IsExtensible": false,
    "IsNullable": true,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "26",
@@ -230,7 +230,7 @@
    "Description": "Extensible enum",
    "IsExtensible": true,
    "IsNullable": true,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "30",
@@ -258,7 +258,7 @@
    "Description": "Int based extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "34",
@@ -286,7 +286,7 @@
    "Description": "Float based extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "38",
@@ -314,7 +314,7 @@
    "Description": "float fixed enum",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "42",
@@ -342,7 +342,7 @@
    "Description": "int fixed enum",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "46",
@@ -389,7 +389,7 @@
    "Namespace": "FirstTestTypeSpec",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": 0
   },
   {
    "$id": "54",
@@ -406,7 +406,7 @@
    "Namespace": "FirstTestTypeSpec",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": 8
   }
  ],
  "Models": [
@@ -417,7 +417,7 @@
    "Namespace": "FirstTestTypeSpec",
    "Description": "A model with a few properties of literal types",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "57",
@@ -686,7 +686,7 @@
    "Namespace": "FirstTestTypeSpec",
    "Description": "this is not a friendly model but with a friendly name",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "92",
@@ -710,7 +710,7 @@
    "Name": "ModelWithFormat",
    "Namespace": "FirstTestTypeSpec",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "95",
@@ -749,7 +749,7 @@
    "Namespace": "FirstTestTypeSpec",
    "Description": "this is a model with a projected name",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "100",
@@ -773,7 +773,7 @@
    "Name": "ReturnsAnonymousModelResponse",
    "Namespace": "FirstTestTypeSpec",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": []
   },
   {
@@ -783,7 +783,7 @@
    "Namespace": "FirstTestTypeSpec",
    "Description": "extension",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "BaseModel": {
     "$id": "104",
     "Kind": "Model",
@@ -791,7 +791,7 @@
     "Namespace": "FirstTestTypeSpec",
     "Description": "element",
     "IsNullable": false,
-    "Usage": "Input",
+    "Usage": 2,
     "Properties": [
      {
       "$id": "105",
@@ -839,7 +839,7 @@
    "Namespace": "FirstTestTypeSpec",
    "Description": "FHIR extendible element",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "110",
@@ -857,7 +857,7 @@
        "Namespace": "FirstTestTypeSpec",
        "Description": "extension",
        "IsNullable": false,
-       "Usage": "Input",
+       "Usage": 2,
        "BaseModel": {
         "$id": "113",
         "Kind": "Model",
@@ -865,7 +865,7 @@
         "Namespace": "FirstTestTypeSpec",
         "Description": "element",
         "IsNullable": false,
-        "Usage": "Input",
+        "Usage": 2,
         "Properties": [
          {
           "$id": "114",
@@ -923,7 +923,7 @@
    "Namespace": "FirstTestTypeSpec",
    "Description": "ChildModel",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "BaseModel": {
     "$id": "119",
     "Kind": "Model",
@@ -931,7 +931,7 @@
     "Namespace": "FirstTestTypeSpec",
     "Description": "parenetModel",
     "IsNullable": false,
-    "Usage": "Input",
+    "Usage": 2,
     "Properties": [
      {
       "$id": "120",
@@ -979,7 +979,7 @@
    "Namespace": "FirstTestTypeSpec",
    "Description": "containself",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "125",
@@ -1000,7 +1000,7 @@
    "Name": "ModelWithProjectedEnum",
    "Namespace": "FirstTestTypeSpec",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "127",
@@ -1021,7 +1021,7 @@
    "Name": "AzureLocationModel",
    "Namespace": "FirstTestTypeSpec",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "129",
@@ -1046,7 +1046,7 @@
    "Namespace": "FirstTestTypeSpec",
    "Description": "this is a roundtrip model",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "132",
@@ -1394,7 +1394,7 @@
       "Namespace": "FirstTestTypeSpec",
       "Description": "A model with a few required nullable properties",
       "IsNullable": false,
-      "Usage": "RoundTrip",
+      "Usage": 6,
       "Properties": [
        {
         "$id": "177",
@@ -1470,7 +1470,7 @@
          "Namespace": "FirstTestTypeSpec",
          "Description": "This is a model only used in union types, please do not use it anywhere else.",
          "IsNullable": false,
-         "Usage": "RoundTrip",
+         "Usage": 6,
          "Properties": [
           {
            "$id": "187",

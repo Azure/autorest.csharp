@@ -9,8 +9,9 @@ namespace AutoRest.CSharp.Common.Input;
 internal enum InputModelTypeUsage
 {
     None = 0,
-    Input = 1,
-    Output = 2,
-    RoundTrip = Input | Output,
-    Multipart = 4,
+    Input = 2,
+    Output = 4,
+    ApiVersionEnum = 8,
+    JsonMergePatch = 16,
+    MultipartFormData = 32
 }

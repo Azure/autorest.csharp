@@ -303,7 +303,7 @@ namespace AutoRest.CSharp.Common.Input
                 Accessibility: schema.Extensions?.Accessibility ?? (usage.HasFlag(SchemaTypeUsage.Model) ? "public" : "internal"),
                 Deprecated: schema.Deprecated?.Reason,
                 Description: schema.CreateDescription(),
-                Usage: (schema.Extensions != null && schema.Extensions.Formats.Contains<string>("multipart/form-data") ? InputModelTypeUsage.Multipart : InputModelTypeUsage.None)
+                Usage: (schema.Extensions != null && schema.Extensions.Formats.Contains<string>("multipart/form-data") ? InputModelTypeUsage.MultipartFormData : InputModelTypeUsage.None)
                         | GetUsage(usage),
                 Properties: properties,
                 BaseModel: baseModelSchema is not null ? GetOrCreateModel(baseModelSchema) : null,
@@ -329,7 +329,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 SchemaTypeUsage.Input => InputModelTypeUsage.Input,
                 SchemaTypeUsage.Output => InputModelTypeUsage.Output,
-                SchemaTypeUsage.RoundTrip => InputModelTypeUsage.RoundTrip,
+                SchemaTypeUsage.RoundTrip => InputModelTypeUsage.Input | InputModelTypeUsage.Output,
                 _ => InputModelTypeUsage.None
             };
 
