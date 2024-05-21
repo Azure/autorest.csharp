@@ -21,10 +21,10 @@ namespace Scm._Type.Property.AdditionalProperties.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
@@ -60,26 +60,26 @@ namespace Scm._Type.Property.AdditionalProperties.Models
             {
                 return null;
             }
-            string name = default;
             string kind = "Unknown";
+            string name = default;
             IDictionary<string, BinaryData> additionalProperties = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"u8))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("kind"u8))
                 {
                     kind = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("name"u8))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
                 additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new UnknownIsUnknownAdditionalPropertiesDiscriminated(name, kind, additionalProperties);
+            return new UnknownIsUnknownAdditionalPropertiesDiscriminated(kind, name, additionalProperties);
         }
 
         BinaryData IPersistableModel<IsUnknownAdditionalPropertiesDiscriminated>.Write(ModelReaderWriterOptions options)

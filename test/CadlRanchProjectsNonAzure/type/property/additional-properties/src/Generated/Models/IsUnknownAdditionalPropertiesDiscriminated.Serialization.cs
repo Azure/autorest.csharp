@@ -21,10 +21,10 @@ namespace Scm._Type.Property.AdditionalProperties.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);

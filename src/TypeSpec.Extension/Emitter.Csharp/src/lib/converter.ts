@@ -171,6 +171,16 @@ export function fromSdkModelType(
                 )
             )
             .flat();
+
+        var discriminatorPropertyIndex = inputModelType.Properties.findIndex(
+            (p) => p.IsDiscriminator === true
+        );
+        if (discriminatorPropertyIndex >= 1) {
+            const discriminatorProperty =
+                inputModelType.Properties[discriminatorPropertyIndex];
+            inputModelType.Properties.splice(discriminatorPropertyIndex, 1);
+            inputModelType.Properties.unshift(discriminatorProperty);
+        }
     }
 
     return inputModelType;
