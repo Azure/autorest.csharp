@@ -104,7 +104,7 @@ namespace FirstTestTypeSpec.Models
         }
 
         /// <summary> name of the Thing. </summary>
-        public string Name { get; set; }
+        public string Name { get; }
         /// <summary>
         /// required Union
         /// <para>
@@ -149,7 +149,7 @@ namespace FirstTestTypeSpec.Models
         /// </list>
         /// </para>
         /// </summary>
-        public BinaryData RequiredUnion { get; set; }
+        public BinaryData RequiredUnion { get; }
         /// <summary> required literal string. </summary>
         public ThingRequiredLiteralString RequiredLiteralString { get; } = ThingRequiredLiteralString.Accept;
 
@@ -171,7 +171,7 @@ namespace FirstTestTypeSpec.Models
         /// <summary> optional literal bool. </summary>
         public bool? OptionalLiteralBool { get; set; }
         /// <summary> description with xml &lt;|endoftext|&gt;. </summary>
-        public string RequiredBadDescription { get; set; }
+        public string RequiredBadDescription { get; }
         /// <summary> optional nullable collection. </summary>
         public IList<int> OptionalNullableList { get; set; }
         /// <summary> required nullable collection. </summary>

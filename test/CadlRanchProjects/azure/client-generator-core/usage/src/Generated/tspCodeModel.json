@@ -12,7 +12,7 @@
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
    "Description": "Usage override to roundtrip.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "3",
@@ -37,7 +37,7 @@
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
    "Description": "Usage override to roundtrip.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "6",
@@ -63,7 +63,7 @@
    "Accessibility": "public",
    "Description": "Not used anywhere, but access is override to public so still need to be generated and exported with serialization.",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "9",

@@ -19,7 +19,7 @@
    "Namespace": "Client.Naming.UnionEnum",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": 2
   },
   {
    "$id": "4",
@@ -41,7 +41,7 @@
    "Namespace": "Client.Naming.UnionEnum",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": 2
   }
  ],
  "Models": [
@@ -51,7 +51,7 @@
    "Name": "ClientNameModel",
    "Namespace": "Client.Naming.Property",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "8",
@@ -75,7 +75,7 @@
    "Name": "LanguageClientNameModel",
    "Namespace": "Client.Naming.Property",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "11",
@@ -99,7 +99,7 @@
    "Name": "ClientNameAndJsonEncodedNameModel",
    "Namespace": "Client.Naming.Property",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "14",
@@ -123,7 +123,7 @@
    "Name": "ClientModel",
    "Namespace": "Client.Naming.Model",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "17",
@@ -147,7 +147,7 @@
    "Name": "CSModel",
    "Namespace": "Client.Naming.Model",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "20",

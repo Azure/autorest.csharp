@@ -21,7 +21,7 @@
    "Description": "extensible enum type for discriminator",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "4",
@@ -40,7 +40,7 @@
    "Description": "fixed enum type for discriminator",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   }
  ],
  "Models": [
@@ -52,7 +52,7 @@
    "Description": "Test extensible enum type for discriminator",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "7",
@@ -90,7 +90,7 @@
    "Description": "Test fixed enum type for discriminator",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "11",
@@ -128,7 +128,7 @@
    "Description": "Golden dog model",
    "IsNullable": false,
    "DiscriminatorValue": "golden",
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "BaseModel": {
     "$ref": "6"
    },
@@ -142,7 +142,7 @@
    "Description": "Cobra model",
    "IsNullable": false,
    "DiscriminatorValue": "cobra",
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "BaseModel": {
     "$ref": "10"
    },

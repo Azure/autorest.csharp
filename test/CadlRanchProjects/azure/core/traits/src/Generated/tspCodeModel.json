@@ -29,7 +29,7 @@
    "Description": "Repeatability Result header options",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "5",
@@ -48,7 +48,7 @@
    "Description": "Service versions",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": 8
   }
  ],
  "Models": [
@@ -59,7 +59,7 @@
    "Namespace": "_Specs_.Azure.Core.Traits",
    "Description": "Sample Model",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "8",
@@ -98,7 +98,7 @@
    "Namespace": "_Specs_.Azure.Core.Traits",
    "Description": "User action param",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "13",
@@ -123,7 +123,7 @@
    "Namespace": "_Specs_.Azure.Core.Traits",
    "Description": "User action response",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "16",

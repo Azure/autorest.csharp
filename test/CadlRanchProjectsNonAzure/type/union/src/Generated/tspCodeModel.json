@@ -29,7 +29,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "6",
@@ -51,7 +51,7 @@
    "Namespace": "",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "9",
@@ -73,7 +73,7 @@
    "Namespace": "Type.Union",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "12",
@@ -100,7 +100,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "16",
@@ -127,7 +127,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "20",
@@ -159,7 +159,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "25",
@@ -181,7 +181,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   }
  ],
  "Models": [
@@ -191,7 +191,7 @@
    "Name": "GetResponse9",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "29",
@@ -212,7 +212,7 @@
    "Name": "SendRequest9",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "31",
@@ -233,7 +233,7 @@
    "Name": "GetResponse8",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "33",
@@ -254,7 +254,7 @@
    "Name": "SendRequest8",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "35",
@@ -275,7 +275,7 @@
    "Name": "GetResponse7",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "37",
@@ -296,7 +296,7 @@
    "Name": "SendRequest7",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "39",
@@ -317,7 +317,7 @@
    "Name": "GetResponse6",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "41",
@@ -338,7 +338,7 @@
    "Name": "SendRequest6",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "43",
@@ -359,7 +359,7 @@
    "Name": "GetResponse5",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "45",
@@ -380,7 +380,7 @@
    "Name": "SendRequest5",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "47",
@@ -401,7 +401,7 @@
    "Name": "GetResponse4",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "49",
@@ -419,7 +419,7 @@
         "Name": "Cat",
         "Namespace": "Type.Union",
         "IsNullable": false,
-        "Usage": "RoundTrip",
+        "Usage": 6,
         "Properties": [
          {
           "$id": "52",
@@ -443,7 +443,7 @@
         "Name": "Dog",
         "Namespace": "Type.Union",
         "IsNullable": false,
-        "Usage": "RoundTrip",
+        "Usage": 6,
         "Properties": [
          {
           "$id": "55",
@@ -481,7 +481,7 @@
    "Name": "SendRequest4",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "58",
@@ -513,7 +513,7 @@
    "Name": "GetResponse3",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "61",
@@ -526,7 +526,7 @@
       "Name": "EnumsOnlyCases",
       "Namespace": "Type.Union",
       "IsNullable": false,
-      "Usage": "RoundTrip",
+      "Usage": 6,
       "Properties": [
        {
         "$id": "63",
@@ -566,7 +566,7 @@
    "Name": "SendRequest3",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "66",
@@ -587,7 +587,7 @@
    "Name": "GetResponse2",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "68",
@@ -600,7 +600,7 @@
       "Name": "StringAndArrayCases",
       "Namespace": "Type.Union",
       "IsNullable": false,
-      "Usage": "RoundTrip",
+      "Usage": 6,
       "Properties": [
        {
         "$id": "70",
@@ -686,7 +686,7 @@
    "Name": "SendRequest2",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "81",
@@ -707,7 +707,7 @@
    "Name": "GetResponse1",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "83",
@@ -720,7 +720,7 @@
       "Name": "MixedLiteralsCases",
       "Namespace": "Type.Union",
       "IsNullable": false,
-      "Usage": "RoundTrip",
+      "Usage": 6,
       "Properties": [
        {
         "$id": "85",
@@ -1010,7 +1010,7 @@
    "Name": "SendRequest1",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "126",
@@ -1031,7 +1031,7 @@
    "Name": "GetResponse",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "128",
@@ -1044,7 +1044,7 @@
       "Name": "MixedTypesCases",
       "Namespace": "Type.Union",
       "IsNullable": false,
-      "Usage": "RoundTrip",
+      "Usage": 6,
       "Properties": [
        {
         "$id": "130",
@@ -1288,7 +1288,7 @@
    "Name": "SendRequest",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "162",

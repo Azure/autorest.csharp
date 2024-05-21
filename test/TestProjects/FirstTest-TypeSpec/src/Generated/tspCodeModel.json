@@ -23,7 +23,7 @@
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": 0
   },
   {
    "$id": "4",
@@ -42,7 +42,7 @@
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": 0
   },
   {
    "$id": "6",
@@ -61,7 +61,7 @@
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": 0
   },
   {
    "$id": "8",
@@ -80,7 +80,7 @@
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": 0
   },
   {
    "$id": "10",
@@ -99,7 +99,7 @@
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": 0
   },
   {
    "$id": "12",
@@ -118,7 +118,7 @@
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": 0
   },
   {
    "$id": "14",
@@ -202,7 +202,7 @@
    "Description": "Simple enum",
    "IsExtensible": false,
    "IsNullable": true,
-   "Usage": 6
+   "Usage": 2
   },
   {
    "$id": "26",
@@ -230,7 +230,7 @@
    "Description": "Extensible enum",
    "IsExtensible": true,
    "IsNullable": true,
-   "Usage": 6
+   "Usage": 2
   },
   {
    "$id": "30",
@@ -258,7 +258,7 @@
    "Description": "Int based extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": 2
   },
   {
    "$id": "34",
@@ -286,7 +286,7 @@
    "Description": "Float based extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": 2
   },
   {
    "$id": "38",
@@ -314,7 +314,7 @@
    "Description": "float fixed enum",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": 2
   },
   {
    "$id": "42",
@@ -342,7 +342,7 @@
    "Description": "int fixed enum",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": 2
   },
   {
    "$id": "46",
@@ -417,7 +417,7 @@
    "Namespace": "FirstTestTypeSpec",
    "Description": "A model with a few properties of literal types",
    "IsNullable": false,
-   "Usage": 6,
+   "Usage": 2,
    "Properties": [
     {
      "$id": "57",
@@ -686,7 +686,7 @@
    "Namespace": "FirstTestTypeSpec",
    "Description": "this is not a friendly model but with a friendly name",
    "IsNullable": false,
-   "Usage": 6,
+   "Usage": 2,
    "Properties": [
     {
      "$id": "92",
@@ -749,7 +749,7 @@
    "Namespace": "FirstTestTypeSpec",
    "Description": "this is a model with a projected name",
    "IsNullable": false,
-   "Usage": 6,
+   "Usage": 2,
    "Properties": [
     {
      "$id": "100",
@@ -791,7 +791,7 @@
     "Namespace": "FirstTestTypeSpec",
     "Description": "element",
     "IsNullable": false,
-    "Usage": 2,
+    "Usage": 0,
     "Properties": [
      {
       "$id": "105",
@@ -865,7 +865,7 @@
         "Namespace": "FirstTestTypeSpec",
         "Description": "element",
         "IsNullable": false,
-        "Usage": 2,
+        "Usage": 0,
         "Properties": [
          {
           "$id": "114",
@@ -1046,7 +1046,7 @@
    "Namespace": "FirstTestTypeSpec",
    "Description": "this is a roundtrip model",
    "IsNullable": false,
-   "Usage": 6,
+   "Usage": 2,
    "Properties": [
     {
      "$id": "132",
@@ -1394,7 +1394,7 @@
       "Namespace": "FirstTestTypeSpec",
       "Description": "A model with a few required nullable properties",
       "IsNullable": false,
-      "Usage": 6,
+      "Usage": 2,
       "Properties": [
        {
         "$id": "177",
@@ -1470,7 +1470,7 @@
          "Namespace": "FirstTestTypeSpec",
          "Description": "This is a model only used in union types, please do not use it anywhere else.",
          "IsNullable": false,
-         "Usage": 6,
+         "Usage": 2,
          "Properties": [
           {
            "$id": "187",

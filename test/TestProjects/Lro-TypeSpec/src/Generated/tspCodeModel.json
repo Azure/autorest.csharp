@@ -40,7 +40,7 @@
    "Description": "The status of the processing job.",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "8",
@@ -65,7 +65,7 @@
    "Description": "Repeatability Result header options",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   }
  ],
  "Models": [
@@ -76,7 +76,7 @@
    "Namespace": "lro",
    "Description": "The response for the Radiology Insights request.",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "12",
@@ -157,7 +157,7 @@
       "Namespace": "Azure.Core.Foundations",
       "Description": "The error object.",
       "IsNullable": false,
-      "Usage": "Output",
+      "Usage": 4,
       "Properties": [
        {
         "$id": "23",
@@ -230,7 +230,7 @@
          "Namespace": "Azure.Core.Foundations",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "IsNullable": false,
-         "Usage": "Output",
+         "Usage": 4,
          "Properties": [
           {
            "$id": "33",
@@ -279,7 +279,7 @@
       "Namespace": "lro",
       "Description": "The inference results for the Radiology Insights request.",
       "IsNullable": false,
-      "Usage": "Output",
+      "Usage": 4,
       "Properties": [
        {
         "$id": "38",
@@ -318,7 +318,7 @@
    "Namespace": "lro",
    "Description": "The body of the Radiology Insights request.",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "41",
@@ -363,7 +363,7 @@
    "Namespace": "lro",
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "47",

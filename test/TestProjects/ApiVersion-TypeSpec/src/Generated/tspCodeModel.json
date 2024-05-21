@@ -27,7 +27,7 @@
    "Namespace": "ApiVersionInTsp",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": 0
   },
   {
    "$id": "5",
@@ -49,7 +49,7 @@
    "Namespace": "ApiVersionInTsp",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": 8
   }
  ],
  "Models": [
@@ -60,7 +60,7 @@
    "Namespace": "ApiVersionInTsp",
    "Description": "Detection results for the given resultId.",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "9",

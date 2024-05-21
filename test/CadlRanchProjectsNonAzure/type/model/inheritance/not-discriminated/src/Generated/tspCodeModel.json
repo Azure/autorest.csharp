@@ -12,7 +12,7 @@
    "Namespace": "Type.Model.Inheritance.NotDiscriminated",
    "Description": "The third level model in the normal multiple levels inheritance.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "BaseModel": {
     "$id": "3",
     "Kind": "Model",
@@ -20,7 +20,7 @@
     "Namespace": "Type.Model.Inheritance.NotDiscriminated",
     "Description": "The second level model in the normal multiple levels inheritance.",
     "IsNullable": false,
-    "Usage": "RoundTrip",
+    "Usage": 6,
     "BaseModel": {
      "$id": "4",
      "Kind": "Model",
@@ -28,7 +28,7 @@
      "Namespace": "Type.Model.Inheritance.NotDiscriminated",
      "Description": "This is base model for not-discriminated normal multiple levels inheritance.",
      "IsNullable": false,
-     "Usage": "RoundTrip",
+     "Usage": 6,
      "Properties": [
       {
        "$id": "5",

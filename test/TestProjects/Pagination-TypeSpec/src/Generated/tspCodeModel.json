@@ -46,7 +46,7 @@
    "Description": "The interval",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": 2
   },
   {
    "$id": "8",
@@ -63,7 +63,7 @@
    "Namespace": "Pagination",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": 8
   }
  ],
  "Models": [
@@ -74,7 +74,7 @@
    "Namespace": "Pagination",
    "Description": "Type for input model body",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "11",
@@ -113,7 +113,7 @@
    "Namespace": "Pagination",
    "Description": "Paginated ledger entries",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "16",
@@ -130,7 +130,7 @@
        "Name": "LedgerEntry",
        "Namespace": "Pagination",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 4,
        "Properties": [
         {
          "$id": "19",
@@ -207,7 +207,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of DimensionValueListItem items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "28",
@@ -224,7 +224,7 @@
        "Name": "DimensionValueListItem",
        "Namespace": "Pagination",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 4,
        "Properties": [
         {
          "$id": "31",
@@ -279,7 +279,7 @@
    "Namespace": "Azure.Core",
    "Description": "Paged collection of LedgerEntry items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "37",
@@ -321,7 +321,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of TextBlocklist items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "42",
@@ -339,7 +339,7 @@
        "Namespace": "Pagination",
        "Description": "Text Blocklist.",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 4,
        "Properties": [
         {
          "$id": "45",
@@ -402,7 +402,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of TextBlockItem items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "52",
@@ -420,7 +420,7 @@
        "Namespace": "Pagination",
        "Description": "Item in TextBlocklist.",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 4,
        "Properties": [
         {
          "$id": "55",
@@ -497,7 +497,7 @@
    "Namespace": "Pagination",
    "Description": "The result of listing the Pools in an Account.",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "64",
@@ -515,7 +515,7 @@
        "Namespace": "Pagination",
        "Description": "A Pool in the Azure Batch service.",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 4,
        "Properties": [
         {
          "$id": "67",
@@ -592,7 +592,7 @@
    "Namespace": "Pagination",
    "Description": "An error response received from the Azure Batch service.",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "76",

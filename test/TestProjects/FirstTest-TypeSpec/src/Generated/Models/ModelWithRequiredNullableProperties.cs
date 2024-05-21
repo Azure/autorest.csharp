@@ -75,10 +75,10 @@ namespace FirstTestTypeSpec.Models
         }
 
         /// <summary> required nullable primitive type. </summary>
-        public int? RequiredNullablePrimitive { get; set; }
+        public int? RequiredNullablePrimitive { get; }
         /// <summary> required nullable extensible enum type. </summary>
-        public StringExtensibleEnum? RequiredExtensibleEnum { get; set; }
+        public StringExtensibleEnum? RequiredExtensibleEnum { get; }
         /// <summary> required nullable fixed enum type. </summary>
-        public StringFixedEnum? RequiredFixedEnum { get; set; }
+        public StringFixedEnum? RequiredFixedEnum { get; }
     }
 }

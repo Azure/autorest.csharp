@@ -72,7 +72,7 @@ namespace FirstTestTypeSpec.Models
         }
 
         /// <summary> name of the ModelForUnion. </summary>
-        public string Name { get; set; }
+        public string Name { get; }
         /// <summary> age of the ModelForUnion. </summary>
         public int? Age { get; set; }
     }

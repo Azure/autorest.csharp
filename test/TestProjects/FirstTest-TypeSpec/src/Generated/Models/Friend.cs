@@ -70,6 +70,6 @@ namespace FirstTestTypeSpec.Models
         }
 
         /// <summary> name of the NotFriend. </summary>
-        public string Name { get; set; }
+        public string Name { get; }
     }
 }

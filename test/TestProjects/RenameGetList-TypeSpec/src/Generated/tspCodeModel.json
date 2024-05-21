@@ -34,7 +34,7 @@
    "Description": "Represents the project kind.",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": 0
   },
   {
    "$id": "6",
@@ -51,7 +51,7 @@
    "Namespace": "RenameGetList",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": 8
   }
  ],
  "Models": [
@@ -61,7 +61,7 @@
    "Name": "Project",
    "Namespace": "RenameGetList",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": 0,
    "Properties": [
     {
      "$id": "9",
@@ -114,7 +114,7 @@
       "Namespace": "RenameGetList",
       "Description": "Represents the settings used to define the project behavior.",
       "IsNullable": false,
-      "Usage": "None",
+      "Usage": 0,
       "InheritedDictionaryType": {
        "$id": "16",
        "Kind": "Dictionary",
@@ -248,7 +248,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Project items",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": 0,
    "Properties": [
     {
      "$id": "34",
@@ -289,7 +289,7 @@
    "Name": "Deployment",
    "Namespace": "RenameGetList",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": 0,
    "Properties": [
     {
      "$id": "39",
@@ -314,7 +314,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Deployment items",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": 0,
    "Properties": [
     {
      "$id": "42",

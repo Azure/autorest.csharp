@@ -56,7 +56,7 @@
    "Description": "Days of the week",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   }
  ],
  "Models": [],

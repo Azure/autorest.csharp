@@ -75,7 +75,7 @@ namespace FirstTestTypeSpec.Models
             {
                 return null;
             }
-            IList<Extension> extension = default;
+            IReadOnlyList<Extension> extension = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

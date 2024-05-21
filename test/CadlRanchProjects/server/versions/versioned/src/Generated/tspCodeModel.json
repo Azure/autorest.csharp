@@ -30,7 +30,7 @@
    "Description": "The version of the API.",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": 8
   }
  ],
  "Models": [],

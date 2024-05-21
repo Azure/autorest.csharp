@@ -48,7 +48,7 @@
    "Description": "Enum describing allowed operation states.",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "8",
@@ -75,7 +75,7 @@
    "Namespace": "TypeSpec.Versioning.Latest",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": 8
   }
  ],
  "Models": [
@@ -86,7 +86,7 @@
    "Namespace": "Azure.Core",
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "13",
@@ -125,7 +125,7 @@
       "Namespace": "Azure.Core.Foundations",
       "Description": "The error object.",
       "IsNullable": false,
-      "Usage": "Output",
+      "Usage": 4,
       "Properties": [
        {
         "$id": "18",
@@ -198,7 +198,7 @@
          "Namespace": "Azure.Core.Foundations",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "IsNullable": false,
-         "Usage": "Output",
+         "Usage": 4,
          "Properties": [
           {
            "$id": "28",
@@ -246,7 +246,7 @@
       "Name": "ExportedResource",
       "Namespace": "TypeSpec.Versioning.Latest",
       "IsNullable": false,
-      "Usage": "Output",
+      "Usage": 4,
       "Properties": [
        {
         "$id": "33",
@@ -313,7 +313,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Resource items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "40",
@@ -330,7 +330,7 @@
        "Name": "Resource",
        "Namespace": "TypeSpec.Versioning.Latest",
        "IsNullable": false,
-       "Usage": "RoundTrip",
+       "Usage": 6,
        "Properties": [
         {
          "$id": "43",

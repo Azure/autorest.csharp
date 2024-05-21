@@ -21,7 +21,7 @@
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "4",
@@ -40,7 +40,7 @@
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "6",
@@ -59,7 +59,7 @@
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "8",
@@ -78,7 +78,7 @@
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "10",
@@ -97,7 +97,7 @@
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "12",
@@ -116,7 +116,7 @@
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "14",
@@ -144,7 +144,7 @@
    "Description": "Simple enum",
    "IsExtensible": false,
    "IsNullable": true,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "18",
@@ -172,7 +172,7 @@
    "Description": "Extensible enum",
    "IsExtensible": true,
    "IsNullable": true,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "22",
@@ -200,7 +200,7 @@
    "Description": "Int based extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "26",
@@ -228,7 +228,7 @@
    "Description": "Float based extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "30",
@@ -256,7 +256,7 @@
    "Description": "float fixed enum",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "34",
@@ -284,7 +284,7 @@
    "Description": "int fixed enum",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "38",
@@ -331,7 +331,7 @@
    "Namespace": "UnbrandedTypeSpec",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": 0
   }
  ],
  "Models": [
@@ -342,7 +342,7 @@
    "Namespace": "UnbrandedTypeSpec",
    "Description": "A model with a few properties of literal types",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "47",
@@ -611,7 +611,7 @@
    "Namespace": "UnbrandedTypeSpec",
    "Description": "this is a roundtrip model",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "82",
@@ -959,7 +959,7 @@
       "Namespace": "UnbrandedTypeSpec",
       "Description": "A model with a few required nullable properties",
       "IsNullable": false,
-      "Usage": "RoundTrip",
+      "Usage": 6,
       "Properties": [
        {
         "$id": "127",
@@ -1014,7 +1014,7 @@
    "Namespace": "UnbrandedTypeSpec",
    "Description": "this is not a friendly model but with a friendly name",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "132",
@@ -1039,7 +1039,7 @@
    "Namespace": "UnbrandedTypeSpec",
    "Description": "this is a model with a projected name",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "135",
@@ -1063,7 +1063,7 @@
    "Name": "ReturnsAnonymousModelResponse",
    "Namespace": "UnbrandedTypeSpec",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": []
   }
  ],

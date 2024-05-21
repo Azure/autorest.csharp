@@ -19,7 +19,7 @@
    "Namespace": "",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": 2
   },
   {
    "$id": "4",
@@ -56,7 +56,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": 2
   },
   {
    "$id": "10",
@@ -73,7 +73,7 @@
    "Namespace": "",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": 2
   },
   {
    "$id": "12",
@@ -110,7 +110,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": 2
   },
   {
    "$id": "18",
@@ -177,7 +177,7 @@
    "Namespace": "",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": 2
   },
   {
    "$id": "30",
@@ -209,7 +209,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": 2
   },
   {
    "$id": "35",
@@ -241,7 +241,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "40",
@@ -273,7 +273,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "45",
@@ -300,7 +300,7 @@
    "Namespace": "",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": 2
   },
   {
    "$id": "49",
@@ -319,7 +319,7 @@
    "Description": "The FineTuningJob_object",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "51",
@@ -361,7 +361,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "58",
@@ -388,7 +388,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "62",
@@ -445,7 +445,7 @@
    "Namespace": "",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": 2
   },
   {
    "$id": "72",
@@ -472,7 +472,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "76",
@@ -494,7 +494,7 @@
    "Namespace": "",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": 2
   },
   {
    "$id": "79",
@@ -513,7 +513,7 @@
    "Description": "The CreateEditResponse_object",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "81",
@@ -535,7 +535,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "84",
@@ -552,7 +552,7 @@
    "Namespace": "",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": 2
   },
   {
    "$id": "86",
@@ -571,7 +571,7 @@
    "Description": "The CreateEmbeddingResponse_object",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "88",
@@ -590,7 +590,7 @@
    "Description": "The Embedding_object",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "90",
@@ -609,7 +609,7 @@
    "Description": "The OpenAIFile_object",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "92",
@@ -651,7 +651,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "99",
@@ -683,7 +683,7 @@
    "Namespace": "",
    "IsExtensible": true,
    "IsNullable": true,
-   "Usage": "Input"
+   "Usage": 2
   },
   {
    "$id": "104",
@@ -702,7 +702,7 @@
    "Description": "The FineTune_object",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "106",
@@ -739,7 +739,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "112",
@@ -758,7 +758,7 @@
    "Description": "The Model_object",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "114",
@@ -785,7 +785,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": true,
-   "Usage": "Input"
+   "Usage": 2
   },
   {
    "$id": "118",
@@ -807,7 +807,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": true,
-   "Usage": "Input"
+   "Usage": 2
   },
   {
    "$id": "121",
@@ -829,7 +829,7 @@
    "Namespace": "",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": 2
   }
  ],
  "Models": [
@@ -839,7 +839,7 @@
    "Name": "CreateTranscriptionRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input,Multipart",
+   "Usage": 34,
    "Properties": [
     {
      "$id": "125",
@@ -927,7 +927,7 @@
    "Name": "CreateTranscriptionResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "136",
@@ -951,7 +951,7 @@
    "Name": "CreateTranslationRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input,Multipart",
+   "Usage": 34,
    "Properties": [
     {
      "$id": "139",
@@ -1025,7 +1025,7 @@
    "Name": "CreateTranslationResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "148",
@@ -1049,7 +1049,7 @@
    "Name": "CreateChatCompletionRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "151",
@@ -1077,7 +1077,7 @@
        "Name": "ChatCompletionRequestMessage",
        "Namespace": "OpenAI",
        "IsNullable": false,
-       "Usage": "Input",
+       "Usage": 2,
        "Properties": [
         {
          "$id": "155",
@@ -1129,7 +1129,7 @@
           "Name": "ChatCompletionRequestMessageFunctionCall",
           "Namespace": "OpenAI",
           "IsNullable": false,
-          "Usage": "Input",
+          "Usage": 2,
           "Properties": [
            {
             "$id": "162",
@@ -1186,7 +1186,7 @@
        "Name": "ChatCompletionFunctions",
        "Namespace": "OpenAI",
        "IsNullable": false,
-       "Usage": "Input",
+       "Usage": 2,
        "Properties": [
         {
          "$id": "169",
@@ -1227,7 +1227,7 @@
           "Name": "ChatCompletionFunctionParameters",
           "Namespace": "OpenAI",
           "IsNullable": false,
-          "Usage": "Input",
+          "Usage": 2,
           "InheritedDictionaryType": {
            "$id": "175",
            "Kind": "Dictionary",
@@ -1300,7 +1300,7 @@
         "Name": "ChatCompletionFunctionCallOption",
         "Namespace": "OpenAI",
         "IsNullable": false,
-        "Usage": "Input",
+        "Usage": 2,
         "Properties": [
          {
           "$id": "185",
@@ -1520,7 +1520,7 @@
    "Namespace": "OpenAI",
    "Description": "Represents a chat completion response returned by model, based on the provided input.",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "213",
@@ -1593,7 +1593,7 @@
        "Name": "CreateChatCompletionResponseChoice",
        "Namespace": "OpenAI",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 4,
        "Properties": [
         {
          "$id": "224",
@@ -1620,7 +1620,7 @@
           "Name": "ChatCompletionResponseMessage",
           "Namespace": "OpenAI",
           "IsNullable": false,
-          "Usage": "Output",
+          "Usage": 4,
           "Properties": [
            {
             "$id": "228",
@@ -1658,7 +1658,7 @@
              "Name": "ChatCompletionResponseMessageFunctionCall",
              "Namespace": "OpenAI",
              "IsNullable": false,
-             "Usage": "Output",
+             "Usage": 4,
              "Properties": [
               {
                "$id": "233",
@@ -1728,7 +1728,7 @@
       "Namespace": "OpenAI",
       "Description": "Usage statistics for the completion request.",
       "IsNullable": false,
-      "Usage": "Output",
+      "Usage": 4,
       "Properties": [
        {
         "$id": "240",
@@ -1797,7 +1797,7 @@
    "Name": "CreateFineTuningJobRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "247",
@@ -1849,7 +1849,7 @@
       "Name": "CreateFineTuningJobRequestHyperparameters",
       "Namespace": "OpenAI",
       "IsNullable": false,
-      "Usage": "Input",
+      "Usage": 2,
       "Properties": [
        {
         "$id": "254",
@@ -1916,7 +1916,7 @@
    "Name": "FineTuningJob",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "262",
@@ -2042,7 +2042,7 @@
       "Name": "FineTuningJobHyperparameters",
       "Namespace": "OpenAI",
       "IsNullable": false,
-      "Usage": "Output",
+      "Usage": 4,
       "Properties": [
        {
         "$id": "279",
@@ -2157,7 +2157,7 @@
       "Name": "FineTuningJobError",
       "Namespace": "",
       "IsNullable": true,
-      "Usage": "Output",
+      "Usage": 4,
       "Properties": [
        {
         "$id": "295",
@@ -2220,7 +2220,7 @@
    "Name": "ListPaginatedFineTuningJobsResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "302",
@@ -2275,7 +2275,7 @@
    "Name": "ListFineTuningJobEventsResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "309",
@@ -2306,7 +2306,7 @@
        "Name": "FineTuningJobEvent",
        "Namespace": "OpenAI",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 4,
        "Properties": [
         {
          "$id": "314",
@@ -2393,7 +2393,7 @@
    "Name": "CreateCompletionRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "324",
@@ -2707,7 +2707,7 @@
    "Namespace": "OpenAI",
    "Description": "Represents a completion response from the API. Note: both the streamed and non-streamed response\nobjects share the same shape (unlike the chat endpoint).",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "369",
@@ -2780,7 +2780,7 @@
        "Name": "CreateCompletionResponseChoice",
        "Namespace": "OpenAI",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 4,
        "Properties": [
         {
          "$id": "380",
@@ -2821,7 +2821,7 @@
           "Name": "CreateCompletionResponseChoiceLogprobs",
           "Namespace": "",
           "IsNullable": true,
-          "Usage": "Output",
+          "Usage": 4,
           "Properties": [
            {
             "$id": "386",
@@ -2963,7 +2963,7 @@
    "Name": "CreateEditRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "403",
@@ -3055,7 +3055,7 @@
    "Namespace": "OpenAI",
    "Deprecated": "deprecated",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "415",
@@ -3104,7 +3104,7 @@
        "Name": "CreateEditResponseChoice",
        "Namespace": "OpenAI",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 4,
        "Properties": [
         {
          "$id": "422",
@@ -3174,7 +3174,7 @@
    "Name": "CreateEmbeddingRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "429",
@@ -3273,7 +3273,7 @@
    "Name": "CreateEmbeddingResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "443",
@@ -3323,7 +3323,7 @@
        "Namespace": "OpenAI",
        "Description": "Represents an embedding vector returned by embedding endpoint.",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 4,
        "Properties": [
         {
          "$id": "450",
@@ -3395,7 +3395,7 @@
       "Name": "CreateEmbeddingResponseUsage",
       "Namespace": "OpenAI",
       "IsNullable": false,
-      "Usage": "Output",
+      "Usage": 4,
       "Properties": [
        {
         "$id": "459",
@@ -3444,7 +3444,7 @@
    "Name": "ListFilesResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "464",
@@ -3476,7 +3476,7 @@
        "Namespace": "OpenAI",
        "Description": "The `File` object represents a document that has been uploaded to OpenAI.",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 4,
        "Properties": [
         {
          "$id": "469",
@@ -3609,7 +3609,7 @@
    "Name": "CreateFileRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input,Multipart",
+   "Usage": 34,
    "Properties": [
     {
      "$id": "485",
@@ -3647,7 +3647,7 @@
    "Name": "DeleteFileResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "490",
@@ -3699,7 +3699,7 @@
    "Name": "CreateFineTuneRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "497",
@@ -3882,7 +3882,7 @@
    "Deprecated": "deprecated",
    "Description": "The `FineTune` object represents a legacy fine-tune job that has been created through the API.",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "522",
@@ -4008,7 +4008,7 @@
       "Name": "FineTuneHyperparams",
       "Namespace": "OpenAI",
       "IsNullable": false,
-      "Usage": "Output",
+      "Usage": 4,
       "Properties": [
        {
         "$id": "539",
@@ -4179,7 +4179,7 @@
        "Name": "FineTuneEvent",
        "Namespace": "OpenAI",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 4,
        "Properties": [
         {
          "$id": "562",
@@ -4258,7 +4258,7 @@
    "Name": "ListFineTunesResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "571",
@@ -4299,7 +4299,7 @@
    "Name": "ListFineTuneEventsResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "576",
@@ -4340,7 +4340,7 @@
    "Name": "ListModelsResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "581",
@@ -4372,7 +4372,7 @@
        "Namespace": "OpenAI",
        "Description": "Describes an OpenAI model offering that can be used with the API.",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 4,
        "Properties": [
         {
          "$id": "586",
@@ -4452,7 +4452,7 @@
    "Name": "DeleteModelResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "595",
@@ -4504,7 +4504,7 @@
    "Name": "CreateImageRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "602",
@@ -4578,7 +4578,7 @@
    "Name": "ImagesResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "611",
@@ -4610,7 +4610,7 @@
        "Namespace": "OpenAI",
        "Description": "Represents the url or the content of an image generated by the OpenAI API.",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 4,
        "Properties": [
         {
          "$id": "616",
@@ -4658,7 +4658,7 @@
    "Name": "CreateImageEditRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input,Multipart",
+   "Usage": 34,
    "Properties": [
     {
      "$id": "621",
@@ -4760,7 +4760,7 @@
    "Name": "CreateImageVariationRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input,Multipart",
+   "Usage": 34,
    "Properties": [
     {
      "$id": "634",
@@ -4834,7 +4834,7 @@
    "Name": "CreateModerationRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "643",
@@ -4889,7 +4889,7 @@
    "Name": "CreateModerationResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "650",
@@ -4934,7 +4934,7 @@
        "Name": "CreateModerationResponseResult",
        "Namespace": "OpenAI",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 4,
        "Properties": [
         {
          "$id": "657",
@@ -4961,7 +4961,7 @@
           "Name": "CreateModerationResponseResultCategories",
           "Namespace": "OpenAI",
           "IsNullable": false,
-          "Usage": "Output",
+          "Usage": 4,
           "Properties": [
            {
             "$id": "661",
@@ -5133,7 +5133,7 @@
           "Name": "CreateModerationResponseResultCategoryScores",
           "Namespace": "OpenAI",
           "IsNullable": false,
-          "Usage": "Output",
+          "Usage": 4,
           "Properties": [
            {
             "$id": "685",
@@ -5318,7 +5318,7 @@
    "Name": "ErrorResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "708",
@@ -5331,7 +5331,7 @@
       "Name": "Error",
       "Namespace": "OpenAI",
       "IsNullable": false,
-      "Usage": "Output",
+      "Usage": 4,
       "Properties": [
        {
         "$id": "710",

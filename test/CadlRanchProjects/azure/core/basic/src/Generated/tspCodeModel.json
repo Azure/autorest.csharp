@@ -29,7 +29,7 @@
    "Description": "An extensible enum input parameter.",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": 2
   },
   {
    "$id": "5",
@@ -48,7 +48,7 @@
    "Description": "The version of the API.",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": 8
   }
  ],
  "Models": [
@@ -59,7 +59,7 @@
    "Namespace": "_Specs_.Azure.Core.Basic",
    "Description": "Details about a user.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 22,
    "Properties": [
     {
      "$id": "8",
@@ -105,7 +105,7 @@
        "Namespace": "_Specs_.Azure.Core.Basic",
        "Description": "UserOrder for testing list with expand.",
        "IsNullable": false,
-       "Usage": "RoundTrip",
+       "Usage": 22,
        "Properties": [
         {
          "$id": "15",
@@ -182,7 +182,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of User items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "24",
@@ -224,7 +224,7 @@
    "Namespace": "_Specs_.Azure.Core.Basic",
    "Description": "The body of the input.",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "29",
@@ -248,7 +248,7 @@
    "Name": "UserListResults",
    "Namespace": "_Specs_.Azure.Core.Basic",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "32",
@@ -290,7 +290,7 @@
    "Namespace": "Azure.Core",
    "Description": "Paged collection of FirstItem items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "37",
@@ -308,7 +308,7 @@
        "Namespace": "_Specs_.Azure.Core.Basic",
        "Description": "First item.",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 4,
        "Properties": [
         {
          "$id": "40",
@@ -357,7 +357,7 @@
    "Namespace": "Azure.Core",
    "Description": "Paged collection of SecondItem items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "45",
@@ -375,7 +375,7 @@
        "Namespace": "_Specs_.Azure.Core.Basic",
        "Description": "Second item.",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 4,
        "Properties": [
         {
          "$id": "48",

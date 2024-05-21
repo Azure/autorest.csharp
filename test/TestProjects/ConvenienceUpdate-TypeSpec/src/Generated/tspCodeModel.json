@@ -12,7 +12,7 @@
    "Namespace": "ConvenienceInCadl",
    "Description": "A model.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "3",

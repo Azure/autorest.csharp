@@ -21,7 +21,7 @@
    "Description": "The StringLiteralProperty_property",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "4",
@@ -40,7 +40,7 @@
    "Description": "The IntLiteralProperty_property",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "6",
@@ -59,7 +59,7 @@
    "Description": "The FloatLiteralProperty_property",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "8",
@@ -81,7 +81,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "11",
@@ -103,7 +103,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "14",
@@ -125,7 +125,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   }
  ],
  "Models": [
@@ -136,7 +136,7 @@
    "Namespace": "Type.Property.Optional",
    "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "18",
@@ -161,7 +161,7 @@
    "Namespace": "Type.Property.Optional",
    "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "21",
@@ -186,7 +186,7 @@
    "Namespace": "Type.Property.Optional",
    "Description": "Model with a datetime property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "24",
@@ -211,7 +211,7 @@
    "Namespace": "Type.Property.Optional",
    "Description": "Model with a duration property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "27",
@@ -236,7 +236,7 @@
    "Namespace": "Type.Property.Optional",
    "Description": "Model with collection bytes properties",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "30",
@@ -267,7 +267,7 @@
    "Namespace": "Type.Property.Optional",
    "Description": "Model with collection models properties",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "34",
@@ -295,7 +295,7 @@
    "Namespace": "Type.Property.Optional",
    "Description": "Model with string literal property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "37",
@@ -324,7 +324,7 @@
    "Namespace": "Type.Property.Optional",
    "Description": "Model with int literal property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "40",
@@ -353,7 +353,7 @@
    "Namespace": "Type.Property.Optional",
    "Description": "Model with float literal property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "43",
@@ -382,7 +382,7 @@
    "Namespace": "Type.Property.Optional",
    "Description": "Model with boolean literal property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "46",
@@ -414,7 +414,7 @@
    "Namespace": "Type.Property.Optional",
    "Description": "Model with union of string literal property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "50",
@@ -436,7 +436,7 @@
    "Namespace": "Type.Property.Optional",
    "Description": "Model with union of int literal property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "52",
@@ -458,7 +458,7 @@
    "Namespace": "Type.Property.Optional",
    "Description": "Model with union of float literal property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "54",
@@ -480,7 +480,7 @@
    "Namespace": "Type.Property.Optional",
    "Description": "Model with required and optional properties",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "56",

@@ -11,7 +11,7 @@
    "Name": "DefaultDurationProperty",
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "3",
@@ -35,7 +35,7 @@
    "Name": "ISO8601DurationProperty",
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "6",
@@ -59,7 +59,7 @@
    "Name": "Int32SecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "9",
@@ -83,7 +83,7 @@
    "Name": "FloatSecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "12",
@@ -107,7 +107,7 @@
    "Name": "Float64SecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "15",
@@ -131,7 +131,7 @@
    "Name": "FloatSecondsDurationArrayProperty",
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "18",

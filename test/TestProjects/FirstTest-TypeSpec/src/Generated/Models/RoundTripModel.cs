@@ -143,15 +143,15 @@ namespace FirstTestTypeSpec.Models
         }
 
         /// <summary> Required string, illustrating a reference type property. </summary>
-        public string RequiredString { get; set; }
+        public string RequiredString { get; }
         /// <summary> Required int, illustrating a value type property. </summary>
-        public int RequiredInt { get; set; }
+        public int RequiredInt { get; }
         /// <summary> Required collection of enums. </summary>
         public IList<StringFixedEnum?> RequiredCollection { get; }
         /// <summary> Required dictionary of enums. </summary>
         public IDictionary<string, StringExtensibleEnum?> RequiredDictionary { get; }
         /// <summary> Required model. </summary>
-        public Thing RequiredModel { get; set; }
+        public Thing RequiredModel { get; }
         /// <summary> this is an int based extensible enum. </summary>
         public IntExtensibleEnum? IntExtensibleEnum { get; set; }
         /// <summary> this is a collection of int based extensible enum. </summary>
@@ -200,7 +200,7 @@ namespace FirstTestTypeSpec.Models
         /// </list>
         /// </para>
         /// </summary>
-        public BinaryData RequiredUnknown { get; set; }
+        public BinaryData RequiredUnknown { get; }
         /// <summary>
         /// optional unknown
         /// <para>
@@ -357,7 +357,7 @@ namespace FirstTestTypeSpec.Models
         /// </summary>
         public IReadOnlyDictionary<string, BinaryData> ReadOnlyOptionalRecordUnknown { get; }
         /// <summary> this is a model with required nullable properties. </summary>
-        public ModelWithRequiredNullableProperties ModelWithRequiredNullable { get; set; }
+        public ModelWithRequiredNullableProperties ModelWithRequiredNullable { get; }
         /// <summary>
         /// this is a list of union types
         /// <para>

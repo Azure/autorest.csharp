@@ -12,7 +12,7 @@
    "Namespace": "Azure.Core",
    "Description": "Paged collection of User items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "3",
@@ -30,7 +30,7 @@
        "Namespace": "Payload.Pageable",
        "Description": "User model",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 4,
        "Properties": [
         {
          "$id": "6",

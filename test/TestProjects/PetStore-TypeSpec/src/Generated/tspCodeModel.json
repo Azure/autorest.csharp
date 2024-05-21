@@ -25,7 +25,7 @@
    "Description": "Extensible enum Values for pet kind",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": 2
   }
  ],
  "Models": [
@@ -35,7 +35,7 @@
    "Name": "Pet",
    "Namespace": "PetStore",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "6",
@@ -89,7 +89,7 @@
    "Description": "Fish is the base model",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "13",
@@ -129,7 +129,7 @@
    "Namespace": "PetStore",
    "Description": "Error",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "18",
@@ -169,7 +169,7 @@
    "Description": "Shark is a fish",
    "IsNullable": false,
    "DiscriminatorValue": "shark",
-   "Usage": "Output",
+   "Usage": 4,
    "BaseModel": {
     "$ref": "12"
    },
@@ -198,7 +198,7 @@
    "Description": "Tuna is a fish",
    "IsNullable": false,
    "DiscriminatorValue": "tuna",
-   "Usage": "Output",
+   "Usage": 4,
    "BaseModel": {
     "$ref": "12"
    },

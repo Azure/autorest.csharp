@@ -12,7 +12,7 @@
    "Namespace": "Type.Property.Nullable",
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 22,
    "Properties": [
     {
      "$id": "3",
@@ -51,7 +51,7 @@
    "Namespace": "Type.Property.Nullable",
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 22,
    "Properties": [
     {
      "$id": "8",
@@ -90,7 +90,7 @@
    "Namespace": "Type.Property.Nullable",
    "Description": "Model with a datetime property",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 22,
    "Properties": [
     {
      "$id": "13",
@@ -129,7 +129,7 @@
    "Namespace": "Type.Property.Nullable",
    "Description": "Model with a duration property",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 22,
    "Properties": [
     {
      "$id": "18",
@@ -168,7 +168,7 @@
    "Namespace": "Type.Property.Nullable",
    "Description": "Model with collection bytes properties",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 22,
    "Properties": [
     {
      "$id": "23",
@@ -213,7 +213,7 @@
    "Namespace": "Type.Property.Nullable",
    "Description": "Model with collection models properties",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 22,
    "Properties": [
     {
      "$id": "29",
@@ -245,7 +245,7 @@
        "Namespace": "Type.Property.Nullable",
        "Description": "Inner model used in collections model property",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 22,
        "Properties": [
         {
          "$id": "34",

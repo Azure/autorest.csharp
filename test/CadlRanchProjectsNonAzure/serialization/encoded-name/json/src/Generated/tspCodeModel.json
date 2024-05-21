@@ -11,7 +11,7 @@
    "Name": "JsonEncodedNameModel",
    "Namespace": "Serialization.EncodedName.Json.Property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "3",

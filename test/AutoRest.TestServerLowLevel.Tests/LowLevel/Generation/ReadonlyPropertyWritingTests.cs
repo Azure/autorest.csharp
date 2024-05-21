@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void RoundTripModel(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/readonly-properties/main.cadl
-            var model = new InputModelType("RoundTripModel", "Cadl.TestServer.ReadonlyProperties.Models", "public", null, "Readonly model", InputModelTypeUsage.RoundTrip,
+            var model = new InputModelType("RoundTripModel", "Cadl.TestServer.ReadonlyProperties.Models", "public", null, "Readonly model", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
                     ReadOnlyProperties, null, Array.Empty<InputModelType>(), null, null, null, false);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ReadonlyProperties.Models", null, new List<string>(),

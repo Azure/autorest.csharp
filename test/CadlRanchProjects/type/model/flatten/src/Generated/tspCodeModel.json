@@ -12,7 +12,7 @@
    "Namespace": "Type.Model.Flatten",
    "Description": "This is the model with one level of flattening.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "3",
@@ -73,7 +73,7 @@
    "Namespace": "Type.Model.Flatten",
    "Description": "This is the model with two levels of flattening.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "10",
@@ -154,7 +154,7 @@
    "Namespace": "Type.Model.Flatten",
    "Description": "This is the child model to be flattened.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "19",
@@ -193,7 +193,7 @@
    "Namespace": "Type.Model.Flatten",
    "Description": "This is the child model to be flattened. And it has flattened property as well.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "24",
