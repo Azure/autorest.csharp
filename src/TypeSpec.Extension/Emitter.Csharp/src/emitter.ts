@@ -161,7 +161,9 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
             if (options.skipSDKGeneration !== true) {
                 const csProjFile = resolvePath(
-                    outputFolder.endsWith("src") ? outputFolder : resolvePath(outputFolder, "src"),
+                    outputFolder.endsWith("src")
+                        ? outputFolder
+                        : resolvePath(outputFolder, "src"),
                     `${configurations["library-name"]}.csproj`
                 );
                 Logger.getInstance().info(`Checking if ${csProjFile} exists`);
