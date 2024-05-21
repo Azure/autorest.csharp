@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+import { UsageFlags } from "@azure-tools/typespec-client-generator-core";
 import { InputEnumTypeValue } from "./input-enum-type-value.js";
 import { InputIntrinsicTypeKind } from "./input-intrinsic-type-kind.js";
 import { InputModelProperty } from "./input-model-property.js";
@@ -45,7 +46,7 @@ export interface InputModelType extends InputType {
     Accessibility?: string;
     Deprecated?: string;
     Description?: string;
-    Usage: string;
+    Usage: UsageFlags;
     Properties: InputModelProperty[];
     BaseModel?: InputModelType;
     DiscriminatorPropertyName?: string;
@@ -68,7 +69,7 @@ export interface InputEnumType extends InputType {
     Deprecated?: string;
     Description?: string;
     IsExtensible: boolean;
-    Usage: string;
+    Usage: UsageFlags;
 }
 
 export function isInputEnumType(type: InputType): type is InputEnumType {

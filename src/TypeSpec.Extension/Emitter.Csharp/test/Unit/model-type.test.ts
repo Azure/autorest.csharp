@@ -13,6 +13,7 @@ import {
     createNetSdkContext,
     typeSpecCompile
 } from "./utils/test-util.js";
+import { UsageFlags } from "@azure-tools/typespec-client-generator-core";
 
 describe("Discriminator property", () => {
     let runner: TestHost;
@@ -184,7 +185,7 @@ op test(@body input: Pet): Pet;
                     ],
                     IsExtensible: false,
                     IsNullable: false,
-                    Usage: "RoundTrip"
+                    Usage: UsageFlags.Input | UsageFlags.Output
                 },
                 IsRequired: true,
                 IsReadOnly: false,
@@ -309,7 +310,7 @@ op test(@body input: Pet): Pet;
                     ],
                     IsExtensible: false,
                     IsNullable: false,
-                    Usage: "RoundTrip"
+                    Usage: UsageFlags.Input | UsageFlags.Output
                 },
                 IsRequired: true,
                 IsReadOnly: false,

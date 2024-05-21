@@ -47,7 +47,6 @@ import {
 } from "../type/input-type.js";
 import { InputTypeKind } from "../type/input-type-kind.js";
 import { LiteralTypeContext } from "../type/literal-type-context.js";
-import { Usage } from "../type/usage.js";
 
 export function fromSdkType(
     sdkType: SdkType,
@@ -121,7 +120,7 @@ export function fromSdkModelType(
                 ? undefined
                 : getDiscriminatorPropertyNameFromCurrentModel(modelType),
             DiscriminatorValue: modelType.discriminatorValue,
-            Usage: fromUsageFlags(modelType.usage)
+            Usage: modelType.usage
         } as InputModelType;
 
         models.set(modelTypeName, inputModelType);
@@ -293,7 +292,7 @@ export function fromSdkEnumType(
             Description: enumType.description,
             IsExtensible: enumType.isFixed ? false : true,
             IsNullable: enumType.nullable,
-            Usage: fromUsageFlags(enumType.usage)
+            Usage: enumType.usage
         };
         if (addToCollection) enums.set(enumName, newInputEnumType);
         inputEnumType = newInputEnumType;
@@ -697,7 +696,7 @@ function fromSdkConstantType(
             Description: `The ${enumName}`, // TODO -- what should we put here?
             IsExtensible: true,
             IsNullable: false,
-            Usage: "None" // will be updated later
+            Usage: UsageFlags.None // will be updated later
         };
         enums.set(enumName, enumType);
         return enumType;
@@ -765,14 +764,6 @@ function fromSdkArrayType(
         ElementType: fromSdkType(arrayType.valueType, context, models, enums),
         IsNullable: arrayType.nullable
     };
-}
-
-function fromUsageFlags(usage: UsageFlags): Usage {
-    if (usage === UsageFlags.Input) return Usage.Input;
-    else if (usage === UsageFlags.Output) return Usage.Output;
-    else if (usage === (UsageFlags.Input | UsageFlags.Output))
-        return Usage.RoundTrip;
-    else return Usage.None;
 }
 
 function getCSharpInputTypeKindByIntrinsic(

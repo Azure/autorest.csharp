@@ -9,7 +9,8 @@ import {
     listOperationsInOperationGroup,
     SdkOperationGroup,
     SdkContext,
-    getLibraryName
+    getLibraryName,
+    UsageFlags
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -43,7 +44,6 @@ import {
 } from "../type/input-type.js";
 import { InputPrimitiveTypeKind } from "../type/input-primitive-type-kind.js";
 import { RequestLocation } from "../type/request-location.js";
-import { Usage } from "../type/usage.js";
 import { reportDiagnostic } from "./lib.js";
 import { Logger } from "./logger.js";
 import { getUsages, navigateModels } from "./model.js";
@@ -175,17 +175,11 @@ export function createModelForService(
                 op.RequestMediaTypes?.forEach((item) => {
                     if (
                         item === "multipart/form-data" &&
-                        !inputModelType.Usage.includes(Usage.Multipart)
+                        (inputModelType.Usage &
+                            UsageFlags.MultipartFormData) ===
+                            0
                     ) {
-                        if (inputModelType.Usage.trim().length === 0) {
-                            inputModelType.Usage = inputModelType.Usage.concat(
-                                Usage.Multipart
-                            );
-                        } else {
-                            inputModelType.Usage = inputModelType.Usage.trim()
-                                .concat(",")
-                                .concat(Usage.Multipart);
-                        }
+                        inputModelType.Usage |= UsageFlags.MultipartFormData;
                     }
                 });
             }
@@ -309,15 +303,15 @@ function setUsage(
     models: Map<string, InputModelType | InputEnumType>
 ) {
     for (const [name, m] of models) {
-        if (m.Usage !== undefined && m.Usage !== Usage.None) continue;
+        if (m.Usage !== undefined && m.Usage !== UsageFlags.None) continue;
         if (usages.inputs.includes(name)) {
-            m.Usage = Usage.Input;
+            m.Usage = UsageFlags.Input;
         } else if (usages.outputs.includes(name)) {
-            m.Usage = Usage.Output;
+            m.Usage = UsageFlags.Output;
         } else if (usages.roundTrips.includes(name)) {
-            m.Usage = Usage.RoundTrip;
+            m.Usage = UsageFlags.Input | UsageFlags.Output;
         } else {
-            m.Usage = Usage.None;
+            m.Usage = UsageFlags.None;
         }
     }
 }
