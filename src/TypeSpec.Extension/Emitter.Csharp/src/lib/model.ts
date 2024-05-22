@@ -34,7 +34,6 @@ import {
     isInputEnumType,
     isInputLiteralType
 } from "../type/input-type.js";
-import { LiteralTypeContext } from "../type/literal-type-context.js";
 import { Logger } from "./logger.js";
 import { capitalize, getTypeName } from "./utils.js";
 
@@ -97,13 +96,12 @@ export function getInputType(
     type: Type,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>,
-    operation?: Operation,
-    literalTypeContext?: LiteralTypeContext
+    operation?: Operation
 ): InputType {
     Logger.getInstance().debug(`getInputType for kind: ${type.kind}`);
 
     const sdkType = getClientType(context, type, operation);
-    return fromSdkType(sdkType, context, models, enums, literalTypeContext);
+    return fromSdkType(sdkType, context, models, enums);
 }
 
 export function getUsages(

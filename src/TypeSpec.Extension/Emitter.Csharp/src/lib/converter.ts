@@ -46,15 +46,13 @@ import {
     InputUnionType
 } from "../type/input-type.js";
 import { InputTypeKind } from "../type/input-type-kind.js";
-import { LiteralTypeContext } from "../type/literal-type-context.js";
 import { Usage } from "../type/usage.js";
 
 export function fromSdkType(
     sdkType: SdkType,
     context: SdkContext,
     models: Map<string, InputModelType>,
-    enums: Map<string, InputEnumType>,
-    literalTypeContext?: LiteralTypeContext
+    enums: Map<string, InputEnumType>
 ): InputType {
     if (sdkType.kind === "model")
         return fromSdkModelType(sdkType, context, models, enums);
@@ -64,8 +62,7 @@ export function fromSdkType(
         return fromSdkEnumValueTypeToConstantType(
             sdkType,
             context,
-            enums,
-            literalTypeContext
+            enums
         );
     if (sdkType.kind === "dict")
         return fromSdkDictionaryType(sdkType, context, models, enums);
@@ -76,8 +73,7 @@ export function fromSdkType(
             sdkType,
             context,
             models,
-            enums,
-            literalTypeContext
+            enums
         );
     if (sdkType.kind === "union")
         return fromUnionType(sdkType, context, models, enums);
@@ -163,10 +159,6 @@ export function fromSdkModelType(
             .map((p) =>
                 fromSdkModelProperty(
                     p,
-                    {
-                        ModelName: inputModelType?.Name,
-                        Namespace: inputModelType?.Namespace
-                    } as LiteralTypeContext,
                     []
                 )
             )
@@ -177,7 +169,6 @@ export function fromSdkModelType(
 
     function fromSdkModelProperty(
         propertyType: SdkModelPropertyType,
-        literalTypeContext: LiteralTypeContext,
         flattenedNamePrefixes: string[]
     ): InputModelProperty[] {
         if (propertyType.kind !== "property" || !propertyType.flatten) {
@@ -185,7 +176,6 @@ export function fromSdkModelType(
                 propertyType.kind === "property"
                     ? (propertyType as SdkBodyModelPropertyType).serializedName
                     : "";
-            literalTypeContext.PropertyName = serializedName;
 
             const isRequired =
                 propertyType.kind === "path" || propertyType.kind === "body"
@@ -205,8 +195,7 @@ export function fromSdkModelType(
                     propertyType.type,
                     context,
                     models,
-                    enums,
-                    literalTypeContext
+                    enums
                 ),
                 IsRequired: isRequired,
                 IsReadOnly:
@@ -234,7 +223,6 @@ export function fromSdkModelType(
             flattenedProperties = flattenedProperties.concat(
                 fromSdkModelProperty(
                     childPropertiesToFlatten[index],
-                    literalTypeContext,
                     newFlattenedNamePrefixes
                 )
             );
@@ -638,22 +626,19 @@ function fromSdkConstantType(
     constantType: SdkConstantType,
     context: SdkContext,
     models: Map<string, InputModelType>,
-    enums: Map<string, InputEnumType>,
-    literalTypeContext?: LiteralTypeContext
+    enums: Map<string, InputEnumType>
 ): InputLiteralType {
     return {
         Kind: InputTypeKind.Literal,
         Name: InputTypeKind.Literal,
         LiteralValueType:
-            constantType.valueType.kind === "boolean" ||
-            literalTypeContext === undefined
+            constantType.valueType.kind === "boolean"
                 ? fromSdkBuiltInType(constantType.valueType)
                 : // TODO: this might change in the near future
                   // we might keep constant as-is, instead of creating an enum for it.
                   convertConstantToEnum(
                       constantType,
-                      enums,
-                      literalTypeContext
+                      enums
                   ),
         Value: constantType.value,
         IsNullable: false
@@ -661,18 +646,16 @@ function fromSdkConstantType(
 
     function convertConstantToEnum(
         constantType: SdkConstantType,
-        enums: Map<string, InputEnumType>,
-        literalTypeContext: LiteralTypeContext
+        enums: Map<string, InputEnumType>
     ) {
         // otherwise we need to wrap this into an extensible enum
         // we use the model name followed by the property name as the enum name to ensure it is unique
-        const enumName = `${literalTypeContext.ModelName}_${literalTypeContext.PropertyName}`;
+        const enumName = constantType.name;
         const valueType = fromSdkType(
             constantType.valueType,
             context,
             models,
-            enums,
-            literalTypeContext
+            enums
         ) as InputPrimitiveType;
         const enumValueType = valueType.Name;
         const enumValueName =
@@ -691,7 +674,10 @@ function fromSdkConstantType(
             Name: enumName,
             EnumValueType: enumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
             AllowedValues: allowValues,
-            Namespace: literalTypeContext.Namespace,
+            Namespace: getFullNamespaceString(
+                // Enum and Union have optional namespace property
+                (constantType.__raw! as any).namespace
+            ),
             Accessibility: undefined,
             Deprecated: undefined,
             Description: `The ${enumName}`, // TODO -- what should we put here?
@@ -707,15 +693,13 @@ function fromSdkConstantType(
 function fromSdkEnumValueTypeToConstantType(
     enumValueType: SdkEnumValueType,
     context: SdkContext,
-    enums: Map<string, InputEnumType>,
-    literalTypeContext?: LiteralTypeContext
+    enums: Map<string, InputEnumType>
 ): InputLiteralType {
     return {
         Kind: InputTypeKind.Literal,
         Name: InputTypeKind.Literal,
         LiteralValueType:
-            enumValueType.valueType.kind === "boolean" ||
-            literalTypeContext === undefined
+            enumValueType.valueType.kind === "boolean"
                 ? fromSdkBuiltInType(enumValueType.valueType as SdkBuiltInType) // TODO: TCGC fix
                 : fromSdkEnumType(enumValueType.enumType, context, enums),
         Value: enumValueType.value,
