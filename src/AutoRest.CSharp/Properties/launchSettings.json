@@ -760,6 +760,18 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\model\\empty\\src\\Generated -n"
     },
+    "typespec-nonAzure-type/model/inheritance/enum-discriminator": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\model\\inheritance\\enum-discriminator\\src\\Generated -n"
+    },
+    "typespec-nonAzure-type/model/inheritance/not-discriminated": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\model\\inheritance\\not-discriminated\\src\\Generated -n"
+    },
+    "typespec-nonAzure-type/model/inheritance/recursive": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\model\\inheritance\\recursive\\src\\Generated -n"
+    },
     "typespec-nonAzure-type/model/inheritance/single-discriminator": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\model\\inheritance\\single-discriminator\\src\\Generated -n"
