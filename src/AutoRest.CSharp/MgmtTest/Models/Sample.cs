@@ -21,6 +21,6 @@ namespace AutoRest.CSharp.MgmtTest.Models
             return value;
         }
 
-        public string OriginalFilepath => _example.OriginalFile!;
+        public string ExampleFilepath => _example.ExampleFilePath!;
     }
 }
