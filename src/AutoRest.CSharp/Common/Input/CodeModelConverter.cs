@@ -294,6 +294,7 @@ namespace AutoRest.CSharp.Common.Input
             var properties = new List<InputModelProperty>();
             var derived = new List<InputModelType>();
             var baseModelSchema = GetBaseModelSchema(schema);
+            var baseModel = baseModelSchema is not null ? GetOrCreateModel(baseModelSchema) : null;
             var compositeSchemas = schema.Parents?.Immediate?.OfType<ObjectSchema>().Where(s => s != baseModelSchema);
             var dictionarySchema = Configuration.AzureArm ? null : schema.Parents?.Immediate?.OfType<DictionarySchema>().FirstOrDefault();
 
@@ -306,14 +307,14 @@ namespace AutoRest.CSharp.Common.Input
                 Usage: (schema.Extensions != null && schema.Extensions.Formats.Contains<string>("multipart/form-data") ? InputModelTypeUsage.Multipart : InputModelTypeUsage.None)
                         | GetUsage(usage),
                 Properties: properties,
-                BaseModel: baseModelSchema is not null ? GetOrCreateModel(baseModelSchema) : null,
+                BaseModel: baseModel,
                 DerivedModels: derived,
                 DiscriminatorValue: schema.DiscriminatorValue,
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
                 InheritedDictionaryType: dictionarySchema is not null ? (InputDictionaryType)GetOrCreateType(dictionarySchema, _modelsCache, false) : null,
                 IsNullable: false)
             {
-                CompositionModels = compositeSchemas is not null ? compositeSchemas.Select(GetOrCreateModel).ToList() : Array.Empty<InputModelType>(),
+                CompositionProperties = CreateCompositionProperties(schema, baseModelSchema, baseModel),
                 Serialization = GetSerialization(schema, usage)
             };
 
@@ -322,6 +323,18 @@ namespace AutoRest.CSharp.Common.Input
             _derivedModelsCache[schema] = derived;
 
             return model;
+        }
+
+        private IReadOnlyList<InputModelProperty> CreateCompositionProperties(ObjectSchema objectSchema, ObjectSchema? baseModelSchema, InputModelType? baseModel)
+        {
+            var compositionProperties = new List<InputModelProperty>();
+            var compositeSchemas = objectSchema.Parents?.Immediate?.OfType<ObjectSchema>().Where(s => s != baseModelSchema);
+            List<InputModelType> compositionModels = compositeSchemas is not null ? compositeSchemas.Select(GetOrCreateModel).ToList() : new List<InputModelType>();
+            if (baseModel is not null)
+            {
+                compositionModels.AddRange(baseModel.GetSelfAndBaseModels());
+            }
+            return compositionModels.SelectMany(m => m.GetSelfAndBaseModels()).SelectMany(m => m.Properties).ToArray();
         }
 
         private static InputModelTypeUsage GetUsage(SchemaTypeUsage usage)

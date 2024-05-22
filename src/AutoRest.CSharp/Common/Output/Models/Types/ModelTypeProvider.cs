@@ -190,30 +190,17 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             var properties = inputModel.Properties.ToList();
-            var compositionModels = inputModel.CompositionModels;
+            var compositionProperties = inputModel.CompositionProperties.ToList();
 
             if (existingBaseType is not null && existingBaseType.Name != baseModel.Name && !SymbolEqualityComparer.Default.Equals(sourceInputModel?.FindForType(ns, baseModel.Name.ToCleanName()), existingBaseType))
             {
-                // First try to find composite type by name
-                // If failed, try find existing type with CodeGenModel that has expected name
-                var baseTypeReplacement = inputModel.CompositionModels.FirstOrDefault(m => m.Name == existingBaseType.Name);
-                if (baseTypeReplacement is null && sourceInputModel is not null)
-                {
-                    baseTypeReplacement = inputModel.CompositionModels.FirstOrDefault(m => SymbolEqualityComparer.Default.Equals(sourceInputModel.FindForType(ns, m.Name.ToCleanName()), existingBaseType));
-                }
+                var existingBaseTypeProperties = existingBaseType.GetMembers().OfType<IPropertySymbol>();
 
-                if (baseTypeReplacement is null)
-                {
-                    throw new InvalidOperationException($"Base type `{existingBaseType.Name}` is not one of the `{inputModel.Name}` composite types.");
-                }
-
-                compositionModels = inputModel.CompositionModels
-                    .Except(baseTypeReplacement.GetSelfAndBaseModels())
-                    .Concat(baseModel.GetSelfAndBaseModels())
-                    .ToList();
+                // Filter out properties that are already defined in the existing type
+                compositionProperties = compositionProperties.Where(m => !existingBaseTypeProperties.Any(x => x.Name.Equals(m.Name))).ToList();
             }
 
-            foreach (var property in compositionModels.SelectMany(m => m.GetSelfAndBaseModels()).SelectMany(m => m.Properties))
+            foreach (var property in compositionProperties)
             {
                 if (properties.All(p => p.Name != property.Name))
                 {

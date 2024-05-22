@@ -21,9 +21,9 @@ namespace AutoRest.CSharp.Common.Input
         public bool IsPropertyBag { get; init; } = false;
 
         /// <summary>
-        /// Types provided as immediate parents in spec that aren't base model
+        /// Provides composition properties
         /// </summary>
-        public IReadOnlyList<InputModelType> CompositionModels { get; init; } = Array.Empty<InputModelType>();
+        public IReadOnlyList<InputModelProperty> CompositionProperties { get; init; } = Array.Empty<InputModelProperty>();
 
         public InputModelType? BaseModel { get; private set; } = BaseModel;
         /** In some case, its base model will have a propety whose type is the model, in tspCodeModel.json, the property type is a reference,
