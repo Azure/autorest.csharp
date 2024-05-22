@@ -81,6 +81,7 @@ internal record InputOperation(
     }
 
     public string CleanName => Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
+    internal string OperationId => $"{ResourceName}_{Name}";
     private readonly Dictionary<string, InputOperationExample> _examples = new();
     public IReadOnlyDictionary<string, InputOperationExample> Examples => _examples.Any() ? _examples : EnsureExamples(_examples);
 

@@ -139,7 +139,7 @@ namespace AutoRest.CSharp.Common.Input
             var parameters = CreateOperationParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList());
             return new InputOperation(
                 Name: operation.Language.Default.Name,
-                ResourceName: null,
+                ResourceName: operation.OperationId?.Split('_')[0],
                 Summary: operation.Language.Default.Summary,
                 Deprecated: operation.Deprecated?.Reason,
                 Description: operation.Language.Default.Description,
