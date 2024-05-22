@@ -23,7 +23,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetAccountProperties_ShortVersion()
+        public async Task Accounts_GetAccountProperties_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -34,7 +34,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetAccountProperties_AllParameters()
+        public async Task Accounts_GetAccountProperties_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -45,7 +45,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UpdateAccountProperties_ShortVersion()
+        public async Task Accounts_UpdateAccountProperties_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -57,7 +57,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UpdateAccountProperties_AllParameters()
+        public async Task Accounts_UpdateAccountProperties_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -72,7 +72,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetAccessKeys_ShortVersion()
+        public async Task Accounts_GetAccessKeys_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -83,7 +83,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetAccessKeys_AllParameters()
+        public async Task Accounts_GetAccessKeys_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -94,7 +94,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RegenerateAccessKey_ShortVersion()
+        public async Task Accounts_RegenerateAccessKey_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -106,7 +106,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RegenerateAccessKey_AllParameters()
+        public async Task Accounts_RegenerateAccessKey_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -121,7 +121,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetResourceSetRules_ShortVersion()
+        public async Task Accounts_GetResourceSetRules_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -134,7 +134,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetResourceSetRules_AllParameters()
+        public async Task Accounts_GetResourceSetRules_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();

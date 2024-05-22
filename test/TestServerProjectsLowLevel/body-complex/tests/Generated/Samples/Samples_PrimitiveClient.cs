@@ -20,7 +20,7 @@ namespace body_complex_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetInt_ShortVersion()
+        public void Example_primitive_GetInt_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -33,7 +33,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetInt_ShortVersion_Async()
+        public async Task Example_primitive_GetInt_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -46,7 +46,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetInt_AllParameters()
+        public void Example_primitive_GetInt_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -60,7 +60,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetInt_AllParameters_Async()
+        public async Task Example_primitive_GetInt_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -74,7 +74,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutInt_ShortVersion()
+        public void Example_primitive_PutInt_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -87,7 +87,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutInt_ShortVersion_Async()
+        public async Task Example_primitive_PutInt_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -100,7 +100,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutInt_AllParameters()
+        public void Example_primitive_PutInt_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -117,7 +117,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutInt_AllParameters_Async()
+        public async Task Example_primitive_PutInt_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -134,7 +134,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetLong_ShortVersion()
+        public void Example_primitive_GetLong_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -147,7 +147,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetLong_ShortVersion_Async()
+        public async Task Example_primitive_GetLong_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -160,7 +160,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetLong_AllParameters()
+        public void Example_primitive_GetLong_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -174,7 +174,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetLong_AllParameters_Async()
+        public async Task Example_primitive_GetLong_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -188,7 +188,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutLong_ShortVersion()
+        public void Example_primitive_PutLong_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -201,7 +201,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutLong_ShortVersion_Async()
+        public async Task Example_primitive_PutLong_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -214,7 +214,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutLong_AllParameters()
+        public void Example_primitive_PutLong_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -231,7 +231,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutLong_AllParameters_Async()
+        public async Task Example_primitive_PutLong_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -248,7 +248,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFloat_ShortVersion()
+        public void Example_primitive_GetFloat_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -261,7 +261,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFloat_ShortVersion_Async()
+        public async Task Example_primitive_GetFloat_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -274,7 +274,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFloat_AllParameters()
+        public void Example_primitive_GetFloat_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -288,7 +288,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFloat_AllParameters_Async()
+        public async Task Example_primitive_GetFloat_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -302,7 +302,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutFloat_ShortVersion()
+        public void Example_primitive_PutFloat_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -315,7 +315,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutFloat_ShortVersion_Async()
+        public async Task Example_primitive_PutFloat_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -328,7 +328,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutFloat_AllParameters()
+        public void Example_primitive_PutFloat_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -345,7 +345,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutFloat_AllParameters_Async()
+        public async Task Example_primitive_PutFloat_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -362,7 +362,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDouble_ShortVersion()
+        public void Example_primitive_GetDouble_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -375,7 +375,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDouble_ShortVersion_Async()
+        public async Task Example_primitive_GetDouble_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -388,7 +388,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDouble_AllParameters()
+        public void Example_primitive_GetDouble_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -402,7 +402,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDouble_AllParameters_Async()
+        public async Task Example_primitive_GetDouble_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -416,7 +416,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDouble_ShortVersion()
+        public void Example_primitive_PutDouble_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -429,7 +429,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDouble_ShortVersion_Async()
+        public async Task Example_primitive_PutDouble_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -442,7 +442,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDouble_AllParameters()
+        public void Example_primitive_PutDouble_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -459,7 +459,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDouble_AllParameters_Async()
+        public async Task Example_primitive_PutDouble_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -476,7 +476,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBool_ShortVersion()
+        public void Example_primitive_GetBool_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -489,7 +489,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBool_ShortVersion_Async()
+        public async Task Example_primitive_GetBool_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -502,7 +502,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBool_AllParameters()
+        public void Example_primitive_GetBool_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -516,7 +516,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBool_AllParameters_Async()
+        public async Task Example_primitive_GetBool_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -530,7 +530,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutBool_ShortVersion()
+        public void Example_primitive_PutBool_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -543,7 +543,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutBool_ShortVersion_Async()
+        public async Task Example_primitive_PutBool_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -556,7 +556,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutBool_AllParameters()
+        public void Example_primitive_PutBool_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -573,7 +573,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutBool_AllParameters_Async()
+        public async Task Example_primitive_PutBool_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -590,7 +590,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetString_ShortVersion()
+        public void Example_primitive_GetString_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -603,7 +603,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetString_ShortVersion_Async()
+        public async Task Example_primitive_GetString_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -616,7 +616,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetString_AllParameters()
+        public void Example_primitive_GetString_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -631,7 +631,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetString_AllParameters_Async()
+        public async Task Example_primitive_GetString_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -646,7 +646,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutString_ShortVersion()
+        public void Example_primitive_PutString_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -659,7 +659,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutString_ShortVersion_Async()
+        public async Task Example_primitive_PutString_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -672,7 +672,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutString_AllParameters()
+        public void Example_primitive_PutString_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -690,7 +690,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutString_AllParameters_Async()
+        public async Task Example_primitive_PutString_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -708,7 +708,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDate_ShortVersion()
+        public void Example_primitive_GetDate_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -721,7 +721,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDate_ShortVersion_Async()
+        public async Task Example_primitive_GetDate_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -734,7 +734,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDate_AllParameters()
+        public void Example_primitive_GetDate_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -748,7 +748,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDate_AllParameters_Async()
+        public async Task Example_primitive_GetDate_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -762,7 +762,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDate_ShortVersion()
+        public void Example_primitive_PutDate_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -775,7 +775,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDate_ShortVersion_Async()
+        public async Task Example_primitive_PutDate_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -788,7 +788,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDate_AllParameters()
+        public void Example_primitive_PutDate_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -805,7 +805,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDate_AllParameters_Async()
+        public async Task Example_primitive_PutDate_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -822,7 +822,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDateTime_ShortVersion()
+        public void Example_primitive_GetDateTime_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -835,7 +835,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDateTime_ShortVersion_Async()
+        public async Task Example_primitive_GetDateTime_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -848,7 +848,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDateTime_AllParameters()
+        public void Example_primitive_GetDateTime_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -862,7 +862,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDateTime_AllParameters_Async()
+        public async Task Example_primitive_GetDateTime_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -876,7 +876,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDateTime_ShortVersion()
+        public void Example_primitive_PutDateTime_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -889,7 +889,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDateTime_ShortVersion_Async()
+        public async Task Example_primitive_PutDateTime_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -902,7 +902,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDateTime_AllParameters()
+        public void Example_primitive_PutDateTime_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -919,7 +919,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDateTime_AllParameters_Async()
+        public async Task Example_primitive_PutDateTime_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -936,7 +936,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDateTimeRfc1123_ShortVersion()
+        public void Example_primitive_GetDateTimeRfc1123_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -949,7 +949,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDateTimeRfc1123_ShortVersion_Async()
+        public async Task Example_primitive_GetDateTimeRfc1123_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -962,7 +962,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDateTimeRfc1123_AllParameters()
+        public void Example_primitive_GetDateTimeRfc1123_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -976,7 +976,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDateTimeRfc1123_AllParameters_Async()
+        public async Task Example_primitive_GetDateTimeRfc1123_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -990,7 +990,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDateTimeRfc1123_ShortVersion()
+        public void Example_primitive_PutDateTimeRfc1123_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1003,7 +1003,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDateTimeRfc1123_ShortVersion_Async()
+        public async Task Example_primitive_PutDateTimeRfc1123_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1016,7 +1016,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDateTimeRfc1123_AllParameters()
+        public void Example_primitive_PutDateTimeRfc1123_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1033,7 +1033,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDateTimeRfc1123_AllParameters_Async()
+        public async Task Example_primitive_PutDateTimeRfc1123_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1050,7 +1050,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDuration_ShortVersion()
+        public void Example_primitive_GetDuration_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1063,7 +1063,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDuration_ShortVersion_Async()
+        public async Task Example_primitive_GetDuration_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1076,7 +1076,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDuration_AllParameters()
+        public void Example_primitive_GetDuration_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1089,7 +1089,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDuration_AllParameters_Async()
+        public async Task Example_primitive_GetDuration_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1102,7 +1102,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDuration_ShortVersion()
+        public void Example_primitive_PutDuration_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1115,7 +1115,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDuration_ShortVersion_Async()
+        public async Task Example_primitive_PutDuration_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1128,7 +1128,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDuration_AllParameters()
+        public void Example_primitive_PutDuration_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1144,7 +1144,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDuration_AllParameters_Async()
+        public async Task Example_primitive_PutDuration_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1160,7 +1160,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetByte_ShortVersion()
+        public void Example_primitive_GetByte_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1173,7 +1173,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetByte_ShortVersion_Async()
+        public async Task Example_primitive_GetByte_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1186,7 +1186,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetByte_AllParameters()
+        public void Example_primitive_GetByte_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1199,7 +1199,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetByte_AllParameters_Async()
+        public async Task Example_primitive_GetByte_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1212,7 +1212,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutByte_ShortVersion()
+        public void Example_primitive_PutByte_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1225,7 +1225,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutByte_ShortVersion_Async()
+        public async Task Example_primitive_PutByte_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1238,7 +1238,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutByte_AllParameters()
+        public void Example_primitive_PutByte_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1254,7 +1254,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutByte_AllParameters_Async()
+        public async Task Example_primitive_PutByte_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);

@@ -21,7 +21,7 @@ namespace ParameterSequence_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetItem_ShortVersion()
+        public async Task getItem_GetItem_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -32,7 +32,7 @@ namespace ParameterSequence_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetItem_AllParameters()
+        public async Task getItem_GetItem_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -43,7 +43,7 @@ namespace ParameterSequence_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SelectItem_ShortVersion()
+        public async Task selectItem_SelectItem_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -54,7 +54,7 @@ namespace ParameterSequence_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SelectItem_AllParameters()
+        public async Task selectItem_SelectItem_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");

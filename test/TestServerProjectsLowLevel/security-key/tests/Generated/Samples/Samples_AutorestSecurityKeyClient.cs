@@ -17,7 +17,7 @@ namespace security_key_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head_ShortVersion()
+        public void Example_head_Head_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);
@@ -29,7 +29,7 @@ namespace security_key_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head_ShortVersion_Async()
+        public async Task Example_head_Head_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);
@@ -41,7 +41,7 @@ namespace security_key_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head_AllParameters()
+        public void Example_head_Head_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);
@@ -53,7 +53,7 @@ namespace security_key_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head_AllParameters_Async()
+        public async Task Example_head_Head_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);

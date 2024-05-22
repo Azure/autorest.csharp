@@ -18,7 +18,7 @@ namespace httpInfrastructure_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head400_ShortVersion()
+        public void Example_httpClientFailure_Head400_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -30,7 +30,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head400_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Head400_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -42,7 +42,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head400_AllParameters()
+        public void Example_httpClientFailure_Head400_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -54,7 +54,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head400_AllParameters_Async()
+        public async Task Example_httpClientFailure_Head400_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -66,7 +66,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get400_ShortVersion()
+        public void Example_httpClientFailure_Get400_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -78,7 +78,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get400_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Get400_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -90,7 +90,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get400_AllParameters()
+        public void Example_httpClientFailure_Get400_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -102,7 +102,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get400_AllParameters_Async()
+        public async Task Example_httpClientFailure_Get400_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -114,7 +114,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Options400_ShortVersion()
+        public void Example_httpClientFailure_Options400_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -126,7 +126,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Options400_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Options400_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -138,7 +138,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Options400_AllParameters()
+        public void Example_httpClientFailure_Options400_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -150,7 +150,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Options400_AllParameters_Async()
+        public async Task Example_httpClientFailure_Options400_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -162,7 +162,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put400_ShortVersion()
+        public void Example_httpClientFailure_Put400_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -175,7 +175,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put400_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Put400_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -188,7 +188,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put400_AllParameters()
+        public void Example_httpClientFailure_Put400_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -201,7 +201,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put400_AllParameters_Async()
+        public async Task Example_httpClientFailure_Put400_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -214,7 +214,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch400_ShortVersion()
+        public void Example_httpClientFailure_Patch400_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -227,7 +227,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch400_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Patch400_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -240,7 +240,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch400_AllParameters()
+        public void Example_httpClientFailure_Patch400_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -253,7 +253,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch400_AllParameters_Async()
+        public async Task Example_httpClientFailure_Patch400_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -266,7 +266,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post400_ShortVersion()
+        public void Example_httpClientFailure_Post400_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -279,7 +279,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post400_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Post400_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -292,7 +292,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post400_AllParameters()
+        public void Example_httpClientFailure_Post400_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -305,7 +305,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post400_AllParameters_Async()
+        public async Task Example_httpClientFailure_Post400_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -318,7 +318,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete400_ShortVersion()
+        public void Example_httpClientFailure_Delete400_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -331,7 +331,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete400_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Delete400_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -344,7 +344,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete400_AllParameters()
+        public void Example_httpClientFailure_Delete400_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -357,7 +357,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete400_AllParameters_Async()
+        public async Task Example_httpClientFailure_Delete400_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -370,7 +370,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head401_ShortVersion()
+        public void Example_httpClientFailure_Head401_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -382,7 +382,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head401_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Head401_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -394,7 +394,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head401_AllParameters()
+        public void Example_httpClientFailure_Head401_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -406,7 +406,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head401_AllParameters_Async()
+        public async Task Example_httpClientFailure_Head401_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -418,7 +418,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get402_ShortVersion()
+        public void Example_httpClientFailure_Get402_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -430,7 +430,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get402_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Get402_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -442,7 +442,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get402_AllParameters()
+        public void Example_httpClientFailure_Get402_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -454,7 +454,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get402_AllParameters_Async()
+        public async Task Example_httpClientFailure_Get402_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -466,7 +466,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Options403_ShortVersion()
+        public void Example_httpClientFailure_Options403_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -478,7 +478,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Options403_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Options403_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -490,7 +490,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Options403_AllParameters()
+        public void Example_httpClientFailure_Options403_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -502,7 +502,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Options403_AllParameters_Async()
+        public async Task Example_httpClientFailure_Options403_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -514,7 +514,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get403_ShortVersion()
+        public void Example_httpClientFailure_Get403_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -526,7 +526,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get403_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Get403_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -538,7 +538,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get403_AllParameters()
+        public void Example_httpClientFailure_Get403_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -550,7 +550,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get403_AllParameters_Async()
+        public async Task Example_httpClientFailure_Get403_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -562,7 +562,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put404_ShortVersion()
+        public void Example_httpClientFailure_Put404_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -575,7 +575,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put404_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Put404_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -588,7 +588,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put404_AllParameters()
+        public void Example_httpClientFailure_Put404_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -601,7 +601,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put404_AllParameters_Async()
+        public async Task Example_httpClientFailure_Put404_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -614,7 +614,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch405_ShortVersion()
+        public void Example_httpClientFailure_Patch405_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -627,7 +627,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch405_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Patch405_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -640,7 +640,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch405_AllParameters()
+        public void Example_httpClientFailure_Patch405_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -653,7 +653,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch405_AllParameters_Async()
+        public async Task Example_httpClientFailure_Patch405_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -666,7 +666,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post406_ShortVersion()
+        public void Example_httpClientFailure_Post406_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -679,7 +679,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post406_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Post406_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -692,7 +692,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post406_AllParameters()
+        public void Example_httpClientFailure_Post406_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -705,7 +705,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post406_AllParameters_Async()
+        public async Task Example_httpClientFailure_Post406_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -718,7 +718,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete407_ShortVersion()
+        public void Example_httpClientFailure_Delete407_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -731,7 +731,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete407_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Delete407_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -744,7 +744,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete407_AllParameters()
+        public void Example_httpClientFailure_Delete407_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -757,7 +757,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete407_AllParameters_Async()
+        public async Task Example_httpClientFailure_Delete407_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -770,7 +770,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put409_ShortVersion()
+        public void Example_httpClientFailure_Put409_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -783,7 +783,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put409_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Put409_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -796,7 +796,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put409_AllParameters()
+        public void Example_httpClientFailure_Put409_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -809,7 +809,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put409_AllParameters_Async()
+        public async Task Example_httpClientFailure_Put409_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -822,7 +822,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head410_ShortVersion()
+        public void Example_httpClientFailure_Head410_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -834,7 +834,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head410_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Head410_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -846,7 +846,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head410_AllParameters()
+        public void Example_httpClientFailure_Head410_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -858,7 +858,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head410_AllParameters_Async()
+        public async Task Example_httpClientFailure_Head410_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -870,7 +870,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get411_ShortVersion()
+        public void Example_httpClientFailure_Get411_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -882,7 +882,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get411_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Get411_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -894,7 +894,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get411_AllParameters()
+        public void Example_httpClientFailure_Get411_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -906,7 +906,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get411_AllParameters_Async()
+        public async Task Example_httpClientFailure_Get411_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -918,7 +918,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Options412_ShortVersion()
+        public void Example_httpClientFailure_Options412_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -930,7 +930,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Options412_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Options412_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -942,7 +942,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Options412_AllParameters()
+        public void Example_httpClientFailure_Options412_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -954,7 +954,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Options412_AllParameters_Async()
+        public async Task Example_httpClientFailure_Options412_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -966,7 +966,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get412_ShortVersion()
+        public void Example_httpClientFailure_Get412_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -978,7 +978,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get412_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Get412_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -990,7 +990,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get412_AllParameters()
+        public void Example_httpClientFailure_Get412_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1002,7 +1002,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get412_AllParameters_Async()
+        public async Task Example_httpClientFailure_Get412_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1014,7 +1014,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put413_ShortVersion()
+        public void Example_httpClientFailure_Put413_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1027,7 +1027,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put413_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Put413_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1040,7 +1040,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put413_AllParameters()
+        public void Example_httpClientFailure_Put413_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1053,7 +1053,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put413_AllParameters_Async()
+        public async Task Example_httpClientFailure_Put413_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1066,7 +1066,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch414_ShortVersion()
+        public void Example_httpClientFailure_Patch414_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1079,7 +1079,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch414_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Patch414_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1092,7 +1092,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch414_AllParameters()
+        public void Example_httpClientFailure_Patch414_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1105,7 +1105,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch414_AllParameters_Async()
+        public async Task Example_httpClientFailure_Patch414_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1118,7 +1118,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post415_ShortVersion()
+        public void Example_httpClientFailure_Post415_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1131,7 +1131,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post415_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Post415_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1144,7 +1144,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post415_AllParameters()
+        public void Example_httpClientFailure_Post415_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1157,7 +1157,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post415_AllParameters_Async()
+        public async Task Example_httpClientFailure_Post415_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1170,7 +1170,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get416_ShortVersion()
+        public void Example_httpClientFailure_Get416_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1182,7 +1182,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get416_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Get416_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1194,7 +1194,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get416_AllParameters()
+        public void Example_httpClientFailure_Get416_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1206,7 +1206,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get416_AllParameters_Async()
+        public async Task Example_httpClientFailure_Get416_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1218,7 +1218,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete417_ShortVersion()
+        public void Example_httpClientFailure_Delete417_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1231,7 +1231,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete417_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Delete417_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1244,7 +1244,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete417_AllParameters()
+        public void Example_httpClientFailure_Delete417_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1257,7 +1257,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete417_AllParameters_Async()
+        public async Task Example_httpClientFailure_Delete417_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1270,7 +1270,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head429_ShortVersion()
+        public void Example_httpClientFailure_Head429_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1282,7 +1282,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head429_ShortVersion_Async()
+        public async Task Example_httpClientFailure_Head429_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1294,7 +1294,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head429_AllParameters()
+        public void Example_httpClientFailure_Head429_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
@@ -1306,7 +1306,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head429_AllParameters_Async()
+        public async Task Example_httpClientFailure_Head429_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);

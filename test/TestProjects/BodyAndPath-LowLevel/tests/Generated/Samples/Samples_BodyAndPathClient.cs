@@ -21,7 +21,7 @@ namespace BodyAndPath_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Create_ShortVersion()
+        public void Example_create_Create_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
@@ -34,7 +34,7 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Create_ShortVersion_Async()
+        public async Task Example_create_Create_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
@@ -47,7 +47,7 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Create_AllParameters()
+        public void Example_create_Create_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
@@ -60,7 +60,7 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Create_AllParameters_Async()
+        public async Task Example_create_Create_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
@@ -73,7 +73,7 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateStream_ShortVersion()
+        public void Example_createStream_CreateStream_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
@@ -86,7 +86,7 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateStream_ShortVersion_Async()
+        public async Task Example_createStream_CreateStream_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
@@ -99,7 +99,7 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateStream_AllParameters()
+        public void Example_createStream_CreateStream_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
@@ -112,7 +112,7 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateStream_AllParameters_Async()
+        public async Task Example_createStream_CreateStream_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
@@ -125,7 +125,7 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateEnum_ShortVersion()
+        public void Example_createEnum_CreateEnum_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
@@ -138,7 +138,7 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateEnum_ShortVersion_Async()
+        public async Task Example_createEnum_CreateEnum_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
@@ -151,7 +151,7 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateEnum_AllParameters()
+        public void Example_createEnum_CreateEnum_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
@@ -164,7 +164,7 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateEnum_AllParameters_Async()
+        public async Task Example_createEnum_CreateEnum_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
@@ -177,12 +177,12 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBodyAndPaths_ShortVersion()
+        public void Example_list_GetLists_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
-            Response response = client.GetBodyAndPaths(null);
+            Response response = client.GetLists(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -190,12 +190,12 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBodyAndPaths_ShortVersion_Async()
+        public async Task Example_list_GetLists_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
-            Response response = await client.GetBodyAndPathsAsync(null);
+            Response response = await client.GetListsAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -203,12 +203,12 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBodyAndPaths_AllParameters()
+        public void Example_list_GetLists_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
-            Response response = client.GetBodyAndPaths(null);
+            Response response = client.GetLists(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -216,12 +216,12 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBodyAndPaths_AllParameters_Async()
+        public async Task Example_list_GetLists_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
-            Response response = await client.GetBodyAndPathsAsync(null);
+            Response response = await client.GetListsAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -229,33 +229,7 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetItems_ShortVersion()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            BodyAndPathClient client = new BodyAndPathClient(credential);
-
-            Response response = client.GetItems(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetItems_ShortVersion_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            BodyAndPathClient client = new BodyAndPathClient(credential);
-
-            Response response = await client.GetItemsAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetItems_AllParameters()
+        public void Example_listItems_GetItems_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
@@ -268,7 +242,7 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetItems_AllParameters_Async()
+        public async Task Example_listItems_GetItems_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
@@ -281,7 +255,33 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Update_ShortVersion()
+        public void Example_listItems_GetItems_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            BodyAndPathClient client = new BodyAndPathClient(credential);
+
+            Response response = client.GetItems(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_listItems_GetItems_AllParameters_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            BodyAndPathClient client = new BodyAndPathClient(credential);
+
+            Response response = await client.GetItemsAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_update_Update_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
@@ -294,7 +294,7 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Update_ShortVersion_Async()
+        public async Task Example_update_Update_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
@@ -307,7 +307,7 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Update_AllParameters()
+        public void Example_update_Update_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
@@ -323,7 +323,7 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Update_AllParameters_Async()
+        public async Task Example_update_Update_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);

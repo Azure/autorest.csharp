@@ -22,7 +22,7 @@ namespace Parameters_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoRequestBodyResponseBody_ShortVersion()
+        public async Task NoRequestBodyResponseBody_NoRequestBodyResponseBody_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -33,7 +33,7 @@ namespace Parameters_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoRequestBodyResponseBody_AllParameters()
+        public async Task NoRequestBodyResponseBody_NoRequestBodyResponseBody_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -44,7 +44,7 @@ namespace Parameters_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RequestBodyResponseBody_ShortVersion()
+        public async Task RequestBodyResponseBody_RequestBodyResponseBody_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -56,7 +56,7 @@ namespace Parameters_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RequestBodyResponseBody_AllParameters()
+        public async Task RequestBodyResponseBody_RequestBodyResponseBody_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -72,7 +72,7 @@ namespace Parameters_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DeleteNoRequestBodyResponseBody_ShortVersion()
+        public async Task DeleteNoRequestBodyResponseBody_DeleteNoRequestBodyResponseBody_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -83,7 +83,7 @@ namespace Parameters_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DeleteNoRequestBodyResponseBody_AllParameters()
+        public async Task DeleteNoRequestBodyResponseBody_DeleteNoRequestBodyResponseBody_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -94,7 +94,7 @@ namespace Parameters_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoRequestBodyNoResponseBody_ShortVersion()
+        public async Task NoRequestBodyNoResponseBody_NoRequestBodyNoResponseBody_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -105,7 +105,7 @@ namespace Parameters_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoRequestBodyNoResponseBody_AllParameters()
+        public async Task NoRequestBodyNoResponseBody_NoRequestBodyNoResponseBody_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -116,7 +116,7 @@ namespace Parameters_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RequestBodyNoResponseBody_ShortVersion()
+        public async Task RequestBodyNoResponseBody_RequestBodyNoResponseBody_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -128,7 +128,7 @@ namespace Parameters_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RequestBodyNoResponseBody_AllParameters()
+        public async Task RequestBodyNoResponseBody_RequestBodyNoResponseBody_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -140,7 +140,7 @@ namespace Parameters_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task OptionalPathParameters_ShortVersion()
+        public async Task optionalPathParameters_OptionalPathParameters_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -151,7 +151,7 @@ namespace Parameters_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task OptionalPathParameters_AllParameters()
+        public async Task optionalPathParameters_OptionalPathParameters_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -162,7 +162,7 @@ namespace Parameters_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task OptionalPathParametersWithMixedSequence_ShortVersion()
+        public async Task optionalPathParametersWithMixedSequence_OptionalPathParametersWithMixedSequence_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -173,7 +173,7 @@ namespace Parameters_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task OptionalPathParametersWithMixedSequence_AllParameters()
+        public async Task optionalPathParametersWithMixedSequence_OptionalPathParametersWithMixedSequence_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -184,7 +184,7 @@ namespace Parameters_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task OptionalPathBodyParametersWithMixedSequence_ShortVersion()
+        public async Task optionalPathBodyParametersWithMixedSequence_OptionalPathBodyParametersWithMixedSequence_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -196,7 +196,7 @@ namespace Parameters_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task OptionalPathBodyParametersWithMixedSequence_AllParameters()
+        public async Task optionalPathBodyParametersWithMixedSequence_OptionalPathBodyParametersWithMixedSequence_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -212,7 +212,7 @@ namespace Parameters_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RepeatableAction_ShortVersion()
+        public async Task repeatableAction_RepeatableAction_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -224,7 +224,7 @@ namespace Parameters_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RepeatableAction_AllParameters()
+        public async Task repeatableAction_RepeatableAction_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");

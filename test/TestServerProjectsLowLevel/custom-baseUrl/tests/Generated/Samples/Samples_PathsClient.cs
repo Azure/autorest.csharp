@@ -17,7 +17,7 @@ namespace custom_baseUrl_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmpty_ShortVersion()
+        public void Example_paths_GetEmpty_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient("host", credential);
@@ -29,7 +29,7 @@ namespace custom_baseUrl_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEmpty_ShortVersion_Async()
+        public async Task Example_paths_GetEmpty_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient("host", credential);
@@ -41,7 +41,7 @@ namespace custom_baseUrl_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmpty_AllParameters()
+        public void Example_paths_GetEmpty_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient("host", credential);
@@ -53,7 +53,7 @@ namespace custom_baseUrl_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEmpty_AllParameters_Async()
+        public async Task Example_paths_GetEmpty_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient("host", credential);

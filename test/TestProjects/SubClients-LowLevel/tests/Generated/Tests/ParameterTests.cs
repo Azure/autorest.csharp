@@ -21,7 +21,7 @@ namespace SubClients_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetSubParameter_ShortVersion()
+        public async Task Parameter_GetSubParameter_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -32,7 +32,7 @@ namespace SubClients_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetSubParameter_AllParameters()
+        public async Task Parameter_GetSubParameter_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");

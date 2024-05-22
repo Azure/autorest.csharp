@@ -21,7 +21,7 @@ namespace ResourceClients_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetItem_ShortVersion()
+        public async Task Item_GetItem_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -32,7 +32,7 @@ namespace ResourceClients_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetItem_AllParameters()
+        public async Task Item_GetItem_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");

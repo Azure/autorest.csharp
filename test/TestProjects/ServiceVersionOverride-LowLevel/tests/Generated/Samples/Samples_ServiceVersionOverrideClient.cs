@@ -17,7 +17,7 @@ namespace ServiceVersionOverride_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_ShortVersion()
+        public void Example_Operation_Operation_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceVersionOverrideClient client = new ServiceVersionOverrideClient(endpoint);
@@ -29,7 +29,7 @@ namespace ServiceVersionOverride_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_ShortVersion_Async()
+        public async Task Example_Operation_Operation_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceVersionOverrideClient client = new ServiceVersionOverrideClient(endpoint);
@@ -41,7 +41,7 @@ namespace ServiceVersionOverride_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_AllParameters()
+        public void Example_Operation_Operation_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceVersionOverrideClient client = new ServiceVersionOverrideClient(endpoint);
@@ -53,7 +53,7 @@ namespace ServiceVersionOverride_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_AllParameters_Async()
+        public async Task Example_Operation_Operation_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceVersionOverrideClient client = new ServiceVersionOverrideClient(endpoint);

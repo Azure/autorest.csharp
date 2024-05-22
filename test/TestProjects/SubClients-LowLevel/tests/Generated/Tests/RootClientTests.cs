@@ -21,7 +21,7 @@ namespace SubClients_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetCachedParameter_ShortVersion()
+        public async Task Root_GetCachedParameter_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -32,7 +32,7 @@ namespace SubClients_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetCachedParameter_AllParameters()
+        public async Task Root_GetCachedParameter_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");

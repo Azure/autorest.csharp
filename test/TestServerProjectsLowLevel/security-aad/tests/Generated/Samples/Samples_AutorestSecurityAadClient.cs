@@ -18,7 +18,7 @@ namespace security_aad_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head_ShortVersion()
+        public void Example_head_Head_ShortVersion()
         {
             TokenCredential credential = new DefaultAzureCredential();
             AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
@@ -30,7 +30,7 @@ namespace security_aad_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head_ShortVersion_Async()
+        public async Task Example_head_Head_ShortVersion_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
             AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
@@ -42,7 +42,7 @@ namespace security_aad_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head_AllParameters()
+        public void Example_head_Head_AllParameters()
         {
             TokenCredential credential = new DefaultAzureCredential();
             AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
@@ -54,7 +54,7 @@ namespace security_aad_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head_AllParameters_Async()
+        public async Task Example_head_Head_AllParameters_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
             AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);

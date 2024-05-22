@@ -19,7 +19,7 @@ namespace body_complex_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetValid_ShortVersion()
+        public void Example_polymorphism_GetValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -33,7 +33,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_ShortVersion_Async()
+        public async Task Example_polymorphism_GetValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -47,7 +47,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetValid_AllParameters()
+        public void Example_polymorphism_GetValid_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -65,7 +65,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_AllParameters_Async()
+        public async Task Example_polymorphism_GetValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -83,7 +83,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutValid_ShortVersion()
+        public void Example_polymorphism_PutValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -100,7 +100,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValid_ShortVersion_Async()
+        public async Task Example_polymorphism_PutValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -117,7 +117,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutValid_AllParameters()
+        public void Example_polymorphism_PutValid_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -141,7 +141,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValid_AllParameters_Async()
+        public async Task Example_polymorphism_PutValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -165,7 +165,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDotSyntax_ShortVersion()
+        public void Example_polymorphism_GetDotSyntax_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -178,7 +178,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDotSyntax_ShortVersion_Async()
+        public async Task Example_polymorphism_GetDotSyntax_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -191,7 +191,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDotSyntax_AllParameters()
+        public void Example_polymorphism_GetDotSyntax_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -205,7 +205,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDotSyntax_AllParameters_Async()
+        public async Task Example_polymorphism_GetDotSyntax_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -219,7 +219,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetComposedWithDiscriminator_ShortVersion()
+        public void Example_polymorphism_GetComposedWithDiscriminator_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -232,7 +232,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetComposedWithDiscriminator_ShortVersion_Async()
+        public async Task Example_polymorphism_GetComposedWithDiscriminator_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -245,7 +245,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetComposedWithDiscriminator_AllParameters()
+        public void Example_polymorphism_GetComposedWithDiscriminator_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -269,7 +269,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetComposedWithDiscriminator_AllParameters_Async()
+        public async Task Example_polymorphism_GetComposedWithDiscriminator_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -293,7 +293,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetComposedWithoutDiscriminator_ShortVersion()
+        public void Example_polymorphism_GetComposedWithoutDiscriminator_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -306,7 +306,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetComposedWithoutDiscriminator_ShortVersion_Async()
+        public async Task Example_polymorphism_GetComposedWithoutDiscriminator_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -319,7 +319,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetComposedWithoutDiscriminator_AllParameters()
+        public void Example_polymorphism_GetComposedWithoutDiscriminator_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -343,7 +343,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetComposedWithoutDiscriminator_AllParameters_Async()
+        public async Task Example_polymorphism_GetComposedWithoutDiscriminator_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -367,7 +367,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetComplicated_ShortVersion()
+        public void Example_polymorphism_GetComplicated_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -381,7 +381,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetComplicated_ShortVersion_Async()
+        public async Task Example_polymorphism_GetComplicated_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -395,7 +395,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetComplicated_AllParameters()
+        public void Example_polymorphism_GetComplicated_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -415,7 +415,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetComplicated_AllParameters_Async()
+        public async Task Example_polymorphism_GetComplicated_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -435,7 +435,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutComplicated_ShortVersion()
+        public void Example_polymorphism_PutComplicated_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -452,7 +452,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutComplicated_ShortVersion_Async()
+        public async Task Example_polymorphism_PutComplicated_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -469,7 +469,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutComplicated_AllParameters()
+        public void Example_polymorphism_PutComplicated_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -505,7 +505,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutComplicated_AllParameters_Async()
+        public async Task Example_polymorphism_PutComplicated_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -541,7 +541,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutMissingDiscriminator_ShortVersion()
+        public void Example_polymorphism_PutMissingDiscriminator_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -560,7 +560,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutMissingDiscriminator_ShortVersion_Async()
+        public async Task Example_polymorphism_PutMissingDiscriminator_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -579,7 +579,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutMissingDiscriminator_AllParameters()
+        public void Example_polymorphism_PutMissingDiscriminator_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -623,7 +623,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutMissingDiscriminator_AllParameters_Async()
+        public async Task Example_polymorphism_PutMissingDiscriminator_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -667,7 +667,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutValidMissingRequired_ShortVersion()
+        public void Example_polymorphism_PutValidMissingRequired_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -684,7 +684,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValidMissingRequired_ShortVersion_Async()
+        public async Task Example_polymorphism_PutValidMissingRequired_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -701,7 +701,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutValidMissingRequired_AllParameters()
+        public void Example_polymorphism_PutValidMissingRequired_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
@@ -725,7 +725,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValidMissingRequired_AllParameters_Async()
+        public async Task Example_polymorphism_PutValidMissingRequired_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);

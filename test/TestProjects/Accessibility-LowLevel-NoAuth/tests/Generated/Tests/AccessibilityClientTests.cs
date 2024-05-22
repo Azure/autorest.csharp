@@ -22,7 +22,7 @@ namespace Accessibility_LowLevel_NoAuth.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Operation_ShortVersion()
+        public async Task Operation_Operation_ShortVersion()
         {
             Uri endpoint = null;
             AccessibilityClient client = CreateAccessibilityClient(endpoint);
@@ -33,7 +33,7 @@ namespace Accessibility_LowLevel_NoAuth.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Operation_AllParameters()
+        public async Task Operation_Operation_AllParameters()
         {
             Uri endpoint = null;
             AccessibilityClient client = CreateAccessibilityClient(endpoint);

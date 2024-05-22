@@ -17,7 +17,7 @@ namespace head_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head200_ShortVersion()
+        public void Example_httpSuccess_Head200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -29,7 +29,7 @@ namespace head_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head200_ShortVersion_Async()
+        public async Task Example_httpSuccess_Head200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -41,7 +41,7 @@ namespace head_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head200_AllParameters()
+        public void Example_httpSuccess_Head200_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -53,7 +53,7 @@ namespace head_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head200_AllParameters_Async()
+        public async Task Example_httpSuccess_Head200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -65,7 +65,7 @@ namespace head_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head204_ShortVersion()
+        public void Example_httpSuccess_Head204_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -77,7 +77,7 @@ namespace head_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head204_ShortVersion_Async()
+        public async Task Example_httpSuccess_Head204_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -89,7 +89,7 @@ namespace head_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head204_AllParameters()
+        public void Example_httpSuccess_Head204_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -101,7 +101,7 @@ namespace head_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head204_AllParameters_Async()
+        public async Task Example_httpSuccess_Head204_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -113,7 +113,7 @@ namespace head_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head404_ShortVersion()
+        public void Example_httpSuccess_Head404_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -125,7 +125,7 @@ namespace head_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head404_ShortVersion_Async()
+        public async Task Example_httpSuccess_Head404_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -137,7 +137,7 @@ namespace head_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head404_AllParameters()
+        public void Example_httpSuccess_Head404_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -149,7 +149,7 @@ namespace head_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head404_AllParameters_Async()
+        public async Task Example_httpSuccess_Head404_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);

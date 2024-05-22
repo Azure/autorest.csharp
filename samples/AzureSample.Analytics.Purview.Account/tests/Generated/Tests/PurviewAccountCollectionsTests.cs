@@ -23,7 +23,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetCollection_ShortVersion()
+        public async Task Collections_GetCollection_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -34,7 +34,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetCollection_AllParameters()
+        public async Task Collections_GetCollection_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -45,7 +45,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CreateOrUpdateCollection_ShortVersion()
+        public async Task Collections_CreateOrUpdateCollection_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -57,7 +57,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CreateOrUpdateCollection_AllParameters()
+        public async Task Collections_CreateOrUpdateCollection_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -77,7 +77,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DeleteCollection_ShortVersion()
+        public async Task Collections_DeleteCollection_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -88,7 +88,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DeleteCollection_AllParameters()
+        public async Task Collections_DeleteCollection_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -99,7 +99,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetCollectionPath_ShortVersion()
+        public async Task Collections_GetCollectionPath_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -110,7 +110,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetCollectionPath_AllParameters()
+        public async Task Collections_GetCollectionPath_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -121,7 +121,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetCollections_ShortVersion()
+        public async Task Collections_GetCollections_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -134,7 +134,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetCollections_AllParameters()
+        public async Task Collections_GetCollections_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -147,7 +147,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetChildCollectionNames_ShortVersion()
+        public async Task Collections_GetChildCollectionNames_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -160,7 +160,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetChildCollectionNames_AllParameters()
+        public async Task Collections_GetChildCollectionNames_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();

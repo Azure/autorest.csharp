@@ -22,7 +22,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CollapseGetWithHead_ShortVersion()
+        public async Task MatchConditionCollapse_CollapseGetWithHead_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -33,7 +33,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CollapseGetWithHead_AllParameters()
+        public async Task MatchConditionCollapse_CollapseGetWithHead_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -44,7 +44,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CollapsePut_ShortVersion()
+        public async Task MatchConditionCollapse_CollapsePut_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -56,7 +56,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CollapsePut_AllParameters()
+        public async Task MatchConditionCollapse_CollapsePut_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -68,7 +68,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CollapseGet_ShortVersion()
+        public async Task MatchConditionCollapse_CollapseGet_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -79,7 +79,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CollapseGet_AllParameters()
+        public async Task MatchConditionCollapse_CollapseGet_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");

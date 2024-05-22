@@ -21,7 +21,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Operation_ShortVersion()
+        public async Task Operation_Operation_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -32,7 +32,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Operation_AllParameters()
+        public async Task Operation_Operation_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -43,7 +43,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetAll_ShortVersion()
+        public async Task Client4_GetAll_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -56,7 +56,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetAll_AllParameters()
+        public async Task Client4_GetAll_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");

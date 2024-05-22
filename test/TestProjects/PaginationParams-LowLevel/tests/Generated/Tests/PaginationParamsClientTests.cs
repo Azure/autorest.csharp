@@ -22,7 +22,7 @@ namespace PaginationParams_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetPaginationParams_ShortVersion()
+        public async Task PaginationParams_GetPaginationParams_ShortVersion()
         {
             Uri endpoint = null;
             TokenCredential credential = new DefaultAzureCredential();
@@ -35,7 +35,7 @@ namespace PaginationParams_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetPaginationParams_AllParameters()
+        public async Task PaginationParams_GetPaginationParams_AllParameters()
         {
             Uri endpoint = null;
             TokenCredential credential = new DefaultAzureCredential();
@@ -48,7 +48,7 @@ namespace PaginationParams_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Get2s_ShortVersion()
+        public async Task PaginationParams_Get2s_ShortVersion()
         {
             Uri endpoint = null;
             TokenCredential credential = new DefaultAzureCredential();
@@ -61,7 +61,7 @@ namespace PaginationParams_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Get2s_AllParameters()
+        public async Task PaginationParams_Get2s_AllParameters()
         {
             Uri endpoint = null;
             TokenCredential credential = new DefaultAzureCredential();
@@ -74,7 +74,7 @@ namespace PaginationParams_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Get3s_ShortVersion()
+        public async Task PaginationParams_Get3s_ShortVersion()
         {
             Uri endpoint = null;
             TokenCredential credential = new DefaultAzureCredential();
@@ -87,7 +87,7 @@ namespace PaginationParams_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Get3s_AllParameters()
+        public async Task PaginationParams_Get3s_AllParameters()
         {
             Uri endpoint = null;
             TokenCredential credential = new DefaultAzureCredential();
@@ -100,7 +100,7 @@ namespace PaginationParams_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Get4s_ShortVersion()
+        public async Task PaginationParams_Get4s_ShortVersion()
         {
             Uri endpoint = null;
             TokenCredential credential = new DefaultAzureCredential();
@@ -113,7 +113,7 @@ namespace PaginationParams_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Get4s_AllParameters()
+        public async Task PaginationParams_Get4s_AllParameters()
         {
             Uri endpoint = null;
             TokenCredential credential = new DefaultAzureCredential();

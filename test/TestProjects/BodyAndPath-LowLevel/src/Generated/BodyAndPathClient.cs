@@ -301,14 +301,14 @@ namespace BodyAndPath_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetBodyAndPathsAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetBodyAndPathsAsync(RequestContext context)
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetListsAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetListsAsync(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetLists");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetBodyAndPathsRequest(context);
+                using HttpMessage message = CreateGetListsRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -331,14 +331,14 @@ namespace BodyAndPath_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetBodyAndPaths(RequestContext)']/*" />
-        public virtual Response GetBodyAndPaths(RequestContext context)
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetLists(RequestContext)']/*" />
+        public virtual Response GetLists(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetLists");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetBodyAndPathsRequest(context);
+                using HttpMessage message = CreateGetListsRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -550,7 +550,7 @@ namespace BodyAndPath_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetBodyAndPathsRequest(RequestContext context)
+        internal HttpMessage CreateGetListsRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;

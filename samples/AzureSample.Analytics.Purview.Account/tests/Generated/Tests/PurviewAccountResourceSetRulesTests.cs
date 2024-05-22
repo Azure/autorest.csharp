@@ -23,7 +23,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetResourceSetRule_ShortVersion()
+        public async Task ResourceSetRules_GetResourceSetRule_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -34,7 +34,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetResourceSetRule_AllParameters()
+        public async Task ResourceSetRules_GetResourceSetRule_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -45,7 +45,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CreateOrUpdateResourceSetRule_ShortVersion()
+        public async Task ResourceSetRules_CreateOrUpdateResourceSetRule_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -57,7 +57,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CreateOrUpdateResourceSetRule_AllParameters()
+        public async Task ResourceSetRules_CreateOrUpdateResourceSetRule_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -179,7 +179,7 @@ storeType = "<storeType>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DeleteResourceSetRule_ShortVersion()
+        public async Task ResourceSetRules_DeleteResourceSetRule_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -190,7 +190,7 @@ storeType = "<storeType>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DeleteResourceSetRule_AllParameters()
+        public async Task ResourceSetRules_DeleteResourceSetRule_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();

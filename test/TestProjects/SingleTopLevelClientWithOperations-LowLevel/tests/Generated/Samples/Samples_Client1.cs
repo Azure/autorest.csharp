@@ -18,7 +18,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_ShortVersion()
+        public void Example_Client1_Operation_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Client1 client = new TopLevelClientWithOperationClient(credential).GetClient1Client();
@@ -31,7 +31,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_ShortVersion_Async()
+        public async Task Example_Client1_Operation_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Client1 client = new TopLevelClientWithOperationClient(credential).GetClient1Client();
@@ -44,7 +44,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_AllParameters()
+        public void Example_Client1_Operation_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Client1 client = new TopLevelClientWithOperationClient(credential).GetClient1Client();
@@ -57,7 +57,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_AllParameters_Async()
+        public async Task Example_Client1_Operation_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Client1 client = new TopLevelClientWithOperationClient(credential).GetClient1Client();

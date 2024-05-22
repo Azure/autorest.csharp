@@ -21,7 +21,7 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Head200_ShortVersion()
+        public async Task httpSuccess_Head200_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -32,7 +32,7 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Head200_AllParameters()
+        public async Task httpSuccess_Head200_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -43,7 +43,7 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Head204_ShortVersion()
+        public async Task httpSuccess_Head204_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -54,7 +54,7 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Head204_AllParameters()
+        public async Task httpSuccess_Head204_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -65,7 +65,7 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Head404_ShortVersion()
+        public async Task httpSuccess_Head404_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -76,7 +76,7 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Head404_AllParameters()
+        public async Task httpSuccess_Head404_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");

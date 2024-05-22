@@ -18,7 +18,7 @@ namespace Accessibility_LowLevel_TokenAuth.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_ShortVersion()
+        public void Example_Operation_Operation_ShortVersion()
         {
             TokenCredential credential = new DefaultAzureCredential();
             AccessibilityClient client = new AccessibilityClient(credential);
@@ -31,7 +31,7 @@ namespace Accessibility_LowLevel_TokenAuth.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_ShortVersion_Async()
+        public async Task Example_Operation_Operation_ShortVersion_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
             AccessibilityClient client = new AccessibilityClient(credential);
@@ -44,7 +44,7 @@ namespace Accessibility_LowLevel_TokenAuth.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_AllParameters()
+        public void Example_Operation_Operation_AllParameters()
         {
             TokenCredential credential = new DefaultAzureCredential();
             AccessibilityClient client = new AccessibilityClient(credential);
@@ -57,7 +57,7 @@ namespace Accessibility_LowLevel_TokenAuth.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_AllParameters_Async()
+        public async Task Example_Operation_Operation_AllParameters_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
             AccessibilityClient client = new AccessibilityClient(credential);

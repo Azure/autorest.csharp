@@ -18,7 +18,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_IfMatchPut_ShortVersion()
+        public void Example_NonCollapse_IfMatchPut_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NonCollapseClient client = new NonCollapseClient(credential);
@@ -31,7 +31,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_IfMatchPut_ShortVersion_Async()
+        public async Task Example_NonCollapse_IfMatchPut_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NonCollapseClient client = new NonCollapseClient(credential);
@@ -44,7 +44,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_IfMatchPut_AllParameters()
+        public void Example_NonCollapse_IfMatchPut_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NonCollapseClient client = new NonCollapseClient(credential);
@@ -57,7 +57,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_IfMatchPut_AllParameters_Async()
+        public async Task Example_NonCollapse_IfMatchPut_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NonCollapseClient client = new NonCollapseClient(credential);
@@ -70,7 +70,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_IfNoneMatchPut_ShortVersion()
+        public void Example_NonCollapse_IfNoneMatchPut_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NonCollapseClient client = new NonCollapseClient(credential);
@@ -83,7 +83,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_IfNoneMatchPut_ShortVersion_Async()
+        public async Task Example_NonCollapse_IfNoneMatchPut_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NonCollapseClient client = new NonCollapseClient(credential);
@@ -96,7 +96,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_IfNoneMatchPut_AllParameters()
+        public void Example_NonCollapse_IfNoneMatchPut_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NonCollapseClient client = new NonCollapseClient(credential);
@@ -109,7 +109,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_IfNoneMatchPut_AllParameters_Async()
+        public async Task Example_NonCollapse_IfNoneMatchPut_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NonCollapseClient client = new NonCollapseClient(credential);

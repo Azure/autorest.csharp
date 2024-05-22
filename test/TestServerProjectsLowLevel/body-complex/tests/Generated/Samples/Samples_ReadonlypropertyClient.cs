@@ -19,7 +19,7 @@ namespace body_complex_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetValid_ShortVersion()
+        public void Example_readonlyproperty_GetValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
@@ -32,7 +32,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_ShortVersion_Async()
+        public async Task Example_readonlyproperty_GetValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
@@ -45,7 +45,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetValid_AllParameters()
+        public void Example_readonlyproperty_GetValid_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
@@ -59,7 +59,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_AllParameters_Async()
+        public async Task Example_readonlyproperty_GetValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
@@ -73,7 +73,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutValid_ShortVersion()
+        public void Example_readonlyproperty_PutValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
@@ -86,7 +86,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValid_ShortVersion_Async()
+        public async Task Example_readonlyproperty_PutValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
@@ -99,7 +99,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutValid_AllParameters()
+        public void Example_readonlyproperty_PutValid_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
@@ -115,7 +115,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValid_AllParameters_Async()
+        public async Task Example_readonlyproperty_PutValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);

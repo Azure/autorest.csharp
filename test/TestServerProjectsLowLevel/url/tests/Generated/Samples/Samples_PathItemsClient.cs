@@ -17,7 +17,7 @@ namespace url_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAllWithValues_ShortVersion()
+        public void Example_pathItems_GetAllWithValues_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
@@ -29,7 +29,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAllWithValues_ShortVersion_Async()
+        public async Task Example_pathItems_GetAllWithValues_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
@@ -41,7 +41,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAllWithValues_AllParameters()
+        public void Example_pathItems_GetAllWithValues_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
@@ -53,7 +53,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAllWithValues_AllParameters_Async()
+        public async Task Example_pathItems_GetAllWithValues_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
@@ -65,7 +65,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetGlobalQueryNull_ShortVersion()
+        public void Example_pathItems_GetGlobalQueryNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
@@ -77,7 +77,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetGlobalQueryNull_ShortVersion_Async()
+        public async Task Example_pathItems_GetGlobalQueryNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
@@ -89,7 +89,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetGlobalQueryNull_AllParameters()
+        public void Example_pathItems_GetGlobalQueryNull_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
@@ -101,7 +101,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetGlobalQueryNull_AllParameters_Async()
+        public async Task Example_pathItems_GetGlobalQueryNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
@@ -113,7 +113,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetGlobalAndLocalQueryNull_ShortVersion()
+        public void Example_pathItems_GetGlobalAndLocalQueryNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
@@ -125,7 +125,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetGlobalAndLocalQueryNull_ShortVersion_Async()
+        public async Task Example_pathItems_GetGlobalAndLocalQueryNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
@@ -137,7 +137,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetGlobalAndLocalQueryNull_AllParameters()
+        public void Example_pathItems_GetGlobalAndLocalQueryNull_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
@@ -149,7 +149,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetGlobalAndLocalQueryNull_AllParameters_Async()
+        public async Task Example_pathItems_GetGlobalAndLocalQueryNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
@@ -161,7 +161,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetLocalPathItemQueryNull_ShortVersion()
+        public void Example_pathItems_GetLocalPathItemQueryNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
@@ -173,7 +173,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetLocalPathItemQueryNull_ShortVersion_Async()
+        public async Task Example_pathItems_GetLocalPathItemQueryNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
@@ -185,7 +185,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetLocalPathItemQueryNull_AllParameters()
+        public void Example_pathItems_GetLocalPathItemQueryNull_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
@@ -197,7 +197,7 @@ namespace url_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetLocalPathItemQueryNull_AllParameters_Async()
+        public async Task Example_pathItems_GetLocalPathItemQueryNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);

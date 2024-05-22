@@ -19,7 +19,7 @@ namespace Parameters_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NoRequestBodyResponseBody_ShortVersion()
+        public void Example_NoRequestBodyResponseBody_NoRequestBodyResponseBody_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -32,7 +32,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NoRequestBodyResponseBody_ShortVersion_Async()
+        public async Task Example_NoRequestBodyResponseBody_NoRequestBodyResponseBody_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -45,7 +45,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NoRequestBodyResponseBody_AllParameters()
+        public void Example_NoRequestBodyResponseBody_NoRequestBodyResponseBody_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -58,7 +58,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NoRequestBodyResponseBody_AllParameters_Async()
+        public async Task Example_NoRequestBodyResponseBody_NoRequestBodyResponseBody_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -71,7 +71,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RequestBodyResponseBody_ShortVersion()
+        public void Example_RequestBodyResponseBody_RequestBodyResponseBody_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -85,7 +85,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RequestBodyResponseBody_ShortVersion_Async()
+        public async Task Example_RequestBodyResponseBody_RequestBodyResponseBody_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -99,7 +99,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RequestBodyResponseBody_AllParameters()
+        public void Example_RequestBodyResponseBody_RequestBodyResponseBody_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -118,7 +118,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RequestBodyResponseBody_AllParameters_Async()
+        public async Task Example_RequestBodyResponseBody_RequestBodyResponseBody_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -137,7 +137,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteNoRequestBodyResponseBody_ShortVersion()
+        public void Example_DeleteNoRequestBodyResponseBody_DeleteNoRequestBodyResponseBody_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -150,7 +150,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteNoRequestBodyResponseBody_ShortVersion_Async()
+        public async Task Example_DeleteNoRequestBodyResponseBody_DeleteNoRequestBodyResponseBody_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -163,7 +163,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteNoRequestBodyResponseBody_AllParameters()
+        public void Example_DeleteNoRequestBodyResponseBody_DeleteNoRequestBodyResponseBody_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -176,7 +176,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteNoRequestBodyResponseBody_AllParameters_Async()
+        public async Task Example_DeleteNoRequestBodyResponseBody_DeleteNoRequestBodyResponseBody_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -189,7 +189,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NoRequestBodyNoResponseBody_ShortVersion()
+        public void Example_NoRequestBodyNoResponseBody_NoRequestBodyNoResponseBody_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -201,7 +201,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NoRequestBodyNoResponseBody_ShortVersion_Async()
+        public async Task Example_NoRequestBodyNoResponseBody_NoRequestBodyNoResponseBody_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -213,7 +213,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NoRequestBodyNoResponseBody_AllParameters()
+        public void Example_NoRequestBodyNoResponseBody_NoRequestBodyNoResponseBody_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -225,7 +225,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NoRequestBodyNoResponseBody_AllParameters_Async()
+        public async Task Example_NoRequestBodyNoResponseBody_NoRequestBodyNoResponseBody_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -237,7 +237,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RequestBodyNoResponseBody_ShortVersion()
+        public void Example_RequestBodyNoResponseBody_RequestBodyNoResponseBody_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -250,7 +250,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RequestBodyNoResponseBody_ShortVersion_Async()
+        public async Task Example_RequestBodyNoResponseBody_RequestBodyNoResponseBody_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -263,7 +263,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RequestBodyNoResponseBody_AllParameters()
+        public void Example_RequestBodyNoResponseBody_RequestBodyNoResponseBody_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -276,7 +276,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RequestBodyNoResponseBody_AllParameters_Async()
+        public async Task Example_RequestBodyNoResponseBody_RequestBodyNoResponseBody_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -289,7 +289,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OptionalPathParameters_ShortVersion()
+        public void Example_optionalPathParameters_OptionalPathParameters_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -301,7 +301,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OptionalPathParameters_ShortVersion_Async()
+        public async Task Example_optionalPathParameters_OptionalPathParameters_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -313,7 +313,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OptionalPathParameters_AllParameters()
+        public void Example_optionalPathParameters_OptionalPathParameters_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -325,7 +325,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OptionalPathParameters_AllParameters_Async()
+        public async Task Example_optionalPathParameters_OptionalPathParameters_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -337,7 +337,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OptionalPathParametersWithMixedSequence_ShortVersion()
+        public void Example_optionalPathParametersWithMixedSequence_OptionalPathParametersWithMixedSequence_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -349,7 +349,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OptionalPathParametersWithMixedSequence_ShortVersion_Async()
+        public async Task Example_optionalPathParametersWithMixedSequence_OptionalPathParametersWithMixedSequence_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -361,7 +361,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OptionalPathParametersWithMixedSequence_AllParameters()
+        public void Example_optionalPathParametersWithMixedSequence_OptionalPathParametersWithMixedSequence_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -373,7 +373,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OptionalPathParametersWithMixedSequence_AllParameters_Async()
+        public async Task Example_optionalPathParametersWithMixedSequence_OptionalPathParametersWithMixedSequence_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -385,7 +385,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OptionalPathBodyParametersWithMixedSequence_ShortVersion()
+        public void Example_optionalPathBodyParametersWithMixedSequence_OptionalPathBodyParametersWithMixedSequence_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -398,7 +398,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OptionalPathBodyParametersWithMixedSequence_ShortVersion_Async()
+        public async Task Example_optionalPathBodyParametersWithMixedSequence_OptionalPathBodyParametersWithMixedSequence_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -411,7 +411,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OptionalPathBodyParametersWithMixedSequence_AllParameters()
+        public void Example_optionalPathBodyParametersWithMixedSequence_OptionalPathBodyParametersWithMixedSequence_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -428,7 +428,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OptionalPathBodyParametersWithMixedSequence_AllParameters_Async()
+        public async Task Example_optionalPathBodyParametersWithMixedSequence_OptionalPathBodyParametersWithMixedSequence_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -445,7 +445,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RepeatableAction_ShortVersion()
+        public void Example_repeatableAction_RepeatableAction_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -458,7 +458,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RepeatableAction_ShortVersion_Async()
+        public async Task Example_repeatableAction_RepeatableAction_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -471,7 +471,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RepeatableAction_AllParameters()
+        public void Example_repeatableAction_RepeatableAction_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
@@ -488,7 +488,7 @@ namespace Parameters_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RepeatableAction_AllParameters_Async()
+        public async Task Example_repeatableAction_RepeatableAction_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);

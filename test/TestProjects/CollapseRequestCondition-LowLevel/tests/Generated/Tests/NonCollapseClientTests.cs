@@ -22,7 +22,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task IfMatchPut_ShortVersion()
+        public async Task NonCollapse_IfMatchPut_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -34,7 +34,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task IfMatchPut_AllParameters()
+        public async Task NonCollapse_IfMatchPut_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -46,7 +46,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task IfNoneMatchPut_ShortVersion()
+        public async Task NonCollapse_IfNoneMatchPut_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -58,7 +58,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task IfNoneMatchPut_AllParameters()
+        public async Task NonCollapse_IfNoneMatchPut_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");

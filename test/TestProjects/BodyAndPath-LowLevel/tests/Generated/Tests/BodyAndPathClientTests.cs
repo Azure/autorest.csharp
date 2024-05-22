@@ -24,7 +24,7 @@ namespace BodyAndPath_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Create_ShortVersion()
+        public async Task create_Create_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -36,7 +36,7 @@ namespace BodyAndPath_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Create_AllParameters()
+        public async Task create_Create_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -48,7 +48,7 @@ namespace BodyAndPath_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CreateStream_ShortVersion()
+        public async Task createStream_CreateStream_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -60,7 +60,7 @@ namespace BodyAndPath_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CreateStream_AllParameters()
+        public async Task createStream_CreateStream_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -72,7 +72,7 @@ namespace BodyAndPath_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CreateEnum_ShortVersion()
+        public async Task createEnum_CreateEnum_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -84,7 +84,7 @@ namespace BodyAndPath_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CreateEnum_AllParameters()
+        public async Task createEnum_CreateEnum_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -96,40 +96,29 @@ namespace BodyAndPath_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetBodyAndPaths_ShortVersion()
+        public async Task list_GetLists_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
-            Response response = await client.GetBodyAndPathsAsync(null);
+            Response response = await client.GetListsAsync(null);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetBodyAndPaths_AllParameters()
+        public async Task list_GetLists_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
-            Response response = await client.GetBodyAndPathsAsync(null);
+            Response response = await client.GetListsAsync(null);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetItems_ShortVersion()
-        {
-            Uri endpoint = null;
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
-
-            Response response = await client.GetItemsAsync(null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetItems_AllParameters()
+        public async Task listItems_GetItems_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -140,7 +129,18 @@ namespace BodyAndPath_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Update_ShortVersion()
+        public async Task listItems_GetItems_AllParameters()
+        {
+            Uri endpoint = null;
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
+
+            Response response = await client.GetItemsAsync(null);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task update_Update_ShortVersion()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -152,7 +152,7 @@ namespace BodyAndPath_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Update_AllParameters()
+        public async Task update_Update_AllParameters()
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");

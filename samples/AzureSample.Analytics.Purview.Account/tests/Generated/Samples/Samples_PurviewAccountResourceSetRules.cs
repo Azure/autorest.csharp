@@ -20,7 +20,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetResourceSetRule_ShortVersion()
+        public void Example_ResourceSetRules_GetResourceSetRule_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -34,7 +34,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetResourceSetRule_ShortVersion_Async()
+        public async Task Example_ResourceSetRules_GetResourceSetRule_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -48,7 +48,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetResourceSetRule_AllParameters()
+        public void Example_ResourceSetRules_GetResourceSetRule_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -146,7 +146,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetResourceSetRule_AllParameters_Async()
+        public async Task Example_ResourceSetRules_GetResourceSetRule_AllParameters_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -244,7 +244,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrUpdateResourceSetRule_ShortVersion()
+        public void Example_ResourceSetRules_CreateOrUpdateResourceSetRule_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -259,7 +259,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrUpdateResourceSetRule_ShortVersion_Async()
+        public async Task Example_ResourceSetRules_CreateOrUpdateResourceSetRule_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -274,7 +274,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrUpdateResourceSetRule_AllParameters()
+        public void Example_ResourceSetRules_CreateOrUpdateResourceSetRule_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -483,7 +483,7 @@ storeType = "<storeType>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrUpdateResourceSetRule_AllParameters_Async()
+        public async Task Example_ResourceSetRules_CreateOrUpdateResourceSetRule_AllParameters_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -692,7 +692,7 @@ storeType = "<storeType>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteResourceSetRule_ShortVersion()
+        public void Example_ResourceSetRules_DeleteResourceSetRule_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -705,7 +705,7 @@ storeType = "<storeType>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteResourceSetRule_ShortVersion_Async()
+        public async Task Example_ResourceSetRules_DeleteResourceSetRule_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -718,7 +718,7 @@ storeType = "<storeType>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteResourceSetRule_AllParameters()
+        public void Example_ResourceSetRules_DeleteResourceSetRule_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -731,7 +731,7 @@ storeType = "<storeType>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteResourceSetRule_AllParameters_Async()
+        public async Task Example_ResourceSetRules_DeleteResourceSetRule_AllParameters_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();

@@ -19,7 +19,7 @@ namespace lro_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put201CreatingSucceeded200_ShortVersion()
+        public void Example_LRORetrys_Put201CreatingSucceeded200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -34,7 +34,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put201CreatingSucceeded200_ShortVersion_Async()
+        public async Task Example_LRORetrys_Put201CreatingSucceeded200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -49,7 +49,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put201CreatingSucceeded200_AllParameters()
+        public void Example_LRORetrys_Put201CreatingSucceeded200_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -81,7 +81,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put201CreatingSucceeded200_AllParameters_Async()
+        public async Task Example_LRORetrys_Put201CreatingSucceeded200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -113,7 +113,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAsyncRelativeRetrySucceeded_ShortVersion()
+        public void Example_LRORetrys_PutAsyncRelativeRetrySucceeded_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -128,7 +128,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAsyncRelativeRetrySucceeded_ShortVersion_Async()
+        public async Task Example_LRORetrys_PutAsyncRelativeRetrySucceeded_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -143,7 +143,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAsyncRelativeRetrySucceeded_AllParameters()
+        public void Example_LRORetrys_PutAsyncRelativeRetrySucceeded_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -175,7 +175,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAsyncRelativeRetrySucceeded_AllParameters_Async()
+        public async Task Example_LRORetrys_PutAsyncRelativeRetrySucceeded_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -207,7 +207,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteProvisioning202Accepted200Succeeded_ShortVersion()
+        public void Example_LRORetrys_DeleteProvisioning202Accepted200Succeeded_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -221,7 +221,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteProvisioning202Accepted200Succeeded_ShortVersion_Async()
+        public async Task Example_LRORetrys_DeleteProvisioning202Accepted200Succeeded_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -235,7 +235,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteProvisioning202Accepted200Succeeded_AllParameters()
+        public void Example_LRORetrys_DeleteProvisioning202Accepted200Succeeded_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -255,7 +255,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteProvisioning202Accepted200Succeeded_AllParameters_Async()
+        public async Task Example_LRORetrys_DeleteProvisioning202Accepted200Succeeded_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -275,7 +275,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete202Retry200_ShortVersion()
+        public void Example_LRORetrys_Delete202Retry200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -285,7 +285,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete202Retry200_ShortVersion_Async()
+        public async Task Example_LRORetrys_Delete202Retry200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -295,7 +295,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete202Retry200_AllParameters()
+        public void Example_LRORetrys_Delete202Retry200_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -305,7 +305,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete202Retry200_AllParameters_Async()
+        public async Task Example_LRORetrys_Delete202Retry200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -315,7 +315,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteAsyncRelativeRetrySucceeded_ShortVersion()
+        public void Example_LRORetrys_DeleteAsyncRelativeRetrySucceeded_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -325,7 +325,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteAsyncRelativeRetrySucceeded_ShortVersion_Async()
+        public async Task Example_LRORetrys_DeleteAsyncRelativeRetrySucceeded_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -335,7 +335,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteAsyncRelativeRetrySucceeded_AllParameters()
+        public void Example_LRORetrys_DeleteAsyncRelativeRetrySucceeded_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -345,7 +345,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteAsyncRelativeRetrySucceeded_AllParameters_Async()
+        public async Task Example_LRORetrys_DeleteAsyncRelativeRetrySucceeded_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -355,7 +355,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post202Retry200_ShortVersion()
+        public void Example_LRORetrys_Post202Retry200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -366,7 +366,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post202Retry200_ShortVersion_Async()
+        public async Task Example_LRORetrys_Post202Retry200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -377,7 +377,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post202Retry200_AllParameters()
+        public void Example_LRORetrys_Post202Retry200_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -399,7 +399,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post202Retry200_AllParameters_Async()
+        public async Task Example_LRORetrys_Post202Retry200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -421,7 +421,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostAsyncRelativeRetrySucceeded_ShortVersion()
+        public void Example_LRORetrys_PostAsyncRelativeRetrySucceeded_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -432,7 +432,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostAsyncRelativeRetrySucceeded_ShortVersion_Async()
+        public async Task Example_LRORetrys_PostAsyncRelativeRetrySucceeded_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -443,7 +443,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostAsyncRelativeRetrySucceeded_AllParameters()
+        public void Example_LRORetrys_PostAsyncRelativeRetrySucceeded_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
@@ -465,7 +465,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostAsyncRelativeRetrySucceeded_AllParameters_Async()
+        public async Task Example_LRORetrys_PostAsyncRelativeRetrySucceeded_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);

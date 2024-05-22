@@ -19,7 +19,7 @@ namespace paging_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNoItemNamePages_ShortVersion()
+        public void Example_Paging_GetNoItemNamePages_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -33,7 +33,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNoItemNamePages_ShortVersion_Async()
+        public async Task Example_Paging_GetNoItemNamePages_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -47,7 +47,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNoItemNamePages_AllParameters()
+        public void Example_Paging_GetNoItemNamePages_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -62,7 +62,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNoItemNamePages_AllParameters_Async()
+        public async Task Example_Paging_GetNoItemNamePages_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -77,7 +77,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmptyNextLinkNamePages_ShortVersion()
+        public void Example_Paging_GetEmptyNextLinkNamePages_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -91,7 +91,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEmptyNextLinkNamePages_ShortVersion_Async()
+        public async Task Example_Paging_GetEmptyNextLinkNamePages_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -105,7 +105,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmptyNextLinkNamePages_AllParameters()
+        public void Example_Paging_GetEmptyNextLinkNamePages_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -120,7 +120,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEmptyNextLinkNamePages_AllParameters_Async()
+        public async Task Example_Paging_GetEmptyNextLinkNamePages_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -135,7 +135,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNullNextLinkNamePages_ShortVersion()
+        public void Example_Paging_GetNullNextLinkNamePages_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -149,7 +149,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNullNextLinkNamePages_ShortVersion_Async()
+        public async Task Example_Paging_GetNullNextLinkNamePages_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -163,7 +163,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNullNextLinkNamePages_AllParameters()
+        public void Example_Paging_GetNullNextLinkNamePages_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -178,7 +178,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNullNextLinkNamePages_AllParameters_Async()
+        public async Task Example_Paging_GetNullNextLinkNamePages_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -193,7 +193,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetSinglePages_ShortVersion()
+        public void Example_Paging_GetSinglePages_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -207,7 +207,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetSinglePages_ShortVersion_Async()
+        public async Task Example_Paging_GetSinglePages_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -221,7 +221,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetSinglePages_AllParameters()
+        public void Example_Paging_GetSinglePages_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -236,7 +236,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetSinglePages_AllParameters_Async()
+        public async Task Example_Paging_GetSinglePages_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -251,7 +251,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetSinglePagesWithBodyParams_ShortVersion()
+        public void Example_Paging_GetSinglePagesWithBodyParams_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -266,7 +266,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetSinglePagesWithBodyParams_ShortVersion_Async()
+        public async Task Example_Paging_GetSinglePagesWithBodyParams_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -281,7 +281,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetSinglePagesWithBodyParams_AllParameters()
+        public void Example_Paging_GetSinglePagesWithBodyParams_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -300,7 +300,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetSinglePagesWithBodyParams_AllParameters_Async()
+        public async Task Example_Paging_GetSinglePagesWithBodyParams_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -319,7 +319,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FirstResponseEmpty_ShortVersion()
+        public void Example_Paging_FirstResponseEmpty_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -333,7 +333,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FirstResponseEmpty_ShortVersion_Async()
+        public async Task Example_Paging_FirstResponseEmpty_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -347,7 +347,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FirstResponseEmpty_AllParameters()
+        public void Example_Paging_FirstResponseEmpty_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -362,7 +362,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FirstResponseEmpty_AllParameters_Async()
+        public async Task Example_Paging_FirstResponseEmpty_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -377,7 +377,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultiplePages_ShortVersion()
+        public void Example_Paging_GetMultiplePages_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -391,7 +391,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultiplePages_ShortVersion_Async()
+        public async Task Example_Paging_GetMultiplePages_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -405,7 +405,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultiplePages_AllParameters()
+        public void Example_Paging_GetMultiplePages_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -420,7 +420,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultiplePages_AllParameters_Async()
+        public async Task Example_Paging_GetMultiplePages_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -435,7 +435,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithQueryParams_ShortVersion()
+        public void Example_Paging_GetWithQueryParams_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -449,7 +449,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithQueryParams_ShortVersion_Async()
+        public async Task Example_Paging_GetWithQueryParams_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -463,7 +463,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithQueryParams_AllParameters()
+        public void Example_Paging_GetWithQueryParams_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -478,7 +478,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithQueryParams_AllParameters_Async()
+        public async Task Example_Paging_GetWithQueryParams_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -493,7 +493,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DuplicateParams_ShortVersion()
+        public void Example_Paging_DuplicateParams_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -507,7 +507,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DuplicateParams_ShortVersion_Async()
+        public async Task Example_Paging_DuplicateParams_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -521,7 +521,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DuplicateParams_AllParameters()
+        public void Example_Paging_DuplicateParams_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -536,7 +536,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DuplicateParams_AllParameters_Async()
+        public async Task Example_Paging_DuplicateParams_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -551,7 +551,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PageWithMaxPageSize_ShortVersion()
+        public void Example_Paging_PageWithMaxPageSize_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -565,7 +565,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PageWithMaxPageSize_ShortVersion_Async()
+        public async Task Example_Paging_PageWithMaxPageSize_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -579,7 +579,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PageWithMaxPageSize_AllParameters()
+        public void Example_Paging_PageWithMaxPageSize_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -594,7 +594,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PageWithMaxPageSize_AllParameters_Async()
+        public async Task Example_Paging_PageWithMaxPageSize_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -609,7 +609,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NextOperationWithQueryParams_ShortVersion()
+        public void Example_Paging_NextOperationWithQueryParams_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -623,7 +623,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NextOperationWithQueryParams_ShortVersion_Async()
+        public async Task Example_Paging_NextOperationWithQueryParams_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -637,7 +637,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NextOperationWithQueryParams_AllParameters()
+        public void Example_Paging_NextOperationWithQueryParams_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -652,7 +652,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NextOperationWithQueryParams_AllParameters_Async()
+        public async Task Example_Paging_NextOperationWithQueryParams_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -667,7 +667,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetOdataMultiplePages_ShortVersion()
+        public void Example_Paging_GetOdataMultiplePages_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -681,7 +681,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetOdataMultiplePages_ShortVersion_Async()
+        public async Task Example_Paging_GetOdataMultiplePages_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -695,7 +695,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetOdataMultiplePages_AllParameters()
+        public void Example_Paging_GetOdataMultiplePages_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -710,7 +710,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetOdataMultiplePages_AllParameters_Async()
+        public async Task Example_Paging_GetOdataMultiplePages_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -725,7 +725,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultiplePagesWithOffset_ShortVersion()
+        public void Example_Paging_GetMultiplePagesWithOffset_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -739,7 +739,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultiplePagesWithOffset_ShortVersion_Async()
+        public async Task Example_Paging_GetMultiplePagesWithOffset_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -753,7 +753,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultiplePagesWithOffset_AllParameters()
+        public void Example_Paging_GetMultiplePagesWithOffset_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -768,7 +768,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultiplePagesWithOffset_AllParameters_Async()
+        public async Task Example_Paging_GetMultiplePagesWithOffset_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -783,7 +783,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultiplePagesRetryFirst_ShortVersion()
+        public void Example_Paging_GetMultiplePagesRetryFirst_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -797,7 +797,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultiplePagesRetryFirst_ShortVersion_Async()
+        public async Task Example_Paging_GetMultiplePagesRetryFirst_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -811,7 +811,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultiplePagesRetryFirst_AllParameters()
+        public void Example_Paging_GetMultiplePagesRetryFirst_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -826,7 +826,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultiplePagesRetryFirst_AllParameters_Async()
+        public async Task Example_Paging_GetMultiplePagesRetryFirst_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -841,7 +841,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultiplePagesRetrySecond_ShortVersion()
+        public void Example_Paging_GetMultiplePagesRetrySecond_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -855,7 +855,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultiplePagesRetrySecond_ShortVersion_Async()
+        public async Task Example_Paging_GetMultiplePagesRetrySecond_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -869,7 +869,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultiplePagesRetrySecond_AllParameters()
+        public void Example_Paging_GetMultiplePagesRetrySecond_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -884,7 +884,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultiplePagesRetrySecond_AllParameters_Async()
+        public async Task Example_Paging_GetMultiplePagesRetrySecond_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -899,7 +899,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetSinglePagesFailure_ShortVersion()
+        public void Example_Paging_GetSinglePagesFailure_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -913,7 +913,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetSinglePagesFailure_ShortVersion_Async()
+        public async Task Example_Paging_GetSinglePagesFailure_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -927,7 +927,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetSinglePagesFailure_AllParameters()
+        public void Example_Paging_GetSinglePagesFailure_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -942,7 +942,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetSinglePagesFailure_AllParameters_Async()
+        public async Task Example_Paging_GetSinglePagesFailure_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -957,7 +957,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultiplePagesFailure_ShortVersion()
+        public void Example_Paging_GetMultiplePagesFailure_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -971,7 +971,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultiplePagesFailure_ShortVersion_Async()
+        public async Task Example_Paging_GetMultiplePagesFailure_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -985,7 +985,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultiplePagesFailure_AllParameters()
+        public void Example_Paging_GetMultiplePagesFailure_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1000,7 +1000,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultiplePagesFailure_AllParameters_Async()
+        public async Task Example_Paging_GetMultiplePagesFailure_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1015,7 +1015,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultiplePagesFailureUri_ShortVersion()
+        public void Example_Paging_GetMultiplePagesFailureUri_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1029,7 +1029,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultiplePagesFailureUri_ShortVersion_Async()
+        public async Task Example_Paging_GetMultiplePagesFailureUri_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1043,7 +1043,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultiplePagesFailureUri_AllParameters()
+        public void Example_Paging_GetMultiplePagesFailureUri_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1058,7 +1058,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultiplePagesFailureUri_AllParameters_Async()
+        public async Task Example_Paging_GetMultiplePagesFailureUri_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1073,7 +1073,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultiplePagesFragmentNextLink_ShortVersion()
+        public void Example_Paging_GetMultiplePagesFragmentNextLink_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1087,7 +1087,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultiplePagesFragmentNextLink_ShortVersion_Async()
+        public async Task Example_Paging_GetMultiplePagesFragmentNextLink_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1101,7 +1101,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultiplePagesFragmentNextLink_AllParameters()
+        public void Example_Paging_GetMultiplePagesFragmentNextLink_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1116,7 +1116,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultiplePagesFragmentNextLink_AllParameters_Async()
+        public async Task Example_Paging_GetMultiplePagesFragmentNextLink_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1131,7 +1131,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultiplePagesFragmentWithGroupingNextLink_ShortVersion()
+        public void Example_Paging_GetMultiplePagesFragmentWithGroupingNextLink_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1145,7 +1145,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultiplePagesFragmentWithGroupingNextLink_ShortVersion_Async()
+        public async Task Example_Paging_GetMultiplePagesFragmentWithGroupingNextLink_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1159,7 +1159,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultiplePagesFragmentWithGroupingNextLink_AllParameters()
+        public void Example_Paging_GetMultiplePagesFragmentWithGroupingNextLink_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1174,7 +1174,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultiplePagesFragmentWithGroupingNextLink_AllParameters_Async()
+        public async Task Example_Paging_GetMultiplePagesFragmentWithGroupingNextLink_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1189,7 +1189,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_AppendApiVersion_ShortVersion()
+        public void Example_Paging_AppendApiVersion_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1203,7 +1203,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_AppendApiVersion_ShortVersion_Async()
+        public async Task Example_Paging_AppendApiVersion_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1217,7 +1217,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_AppendApiVersion_AllParameters()
+        public void Example_Paging_AppendApiVersion_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1232,7 +1232,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_AppendApiVersion_AllParameters_Async()
+        public async Task Example_Paging_AppendApiVersion_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1247,7 +1247,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ReplaceApiVersion_ShortVersion()
+        public void Example_Paging_ReplaceApiVersion_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1261,7 +1261,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ReplaceApiVersion_ShortVersion_Async()
+        public async Task Example_Paging_ReplaceApiVersion_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1275,7 +1275,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ReplaceApiVersion_AllParameters()
+        public void Example_Paging_ReplaceApiVersion_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1290,7 +1290,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ReplaceApiVersion_AllParameters_Async()
+        public async Task Example_Paging_ReplaceApiVersion_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1305,7 +1305,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NextFragment_ShortVersion()
+        public void Example_Paging_NextFragment_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1319,7 +1319,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NextFragment_ShortVersion_Async()
+        public async Task Example_Paging_NextFragment_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1333,7 +1333,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NextFragment_AllParameters()
+        public void Example_Paging_NextFragment_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1348,7 +1348,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NextFragment_AllParameters_Async()
+        public async Task Example_Paging_NextFragment_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1363,7 +1363,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NextFragmentWithGrouping_ShortVersion()
+        public void Example_Paging_NextFragmentWithGrouping_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1377,7 +1377,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NextFragmentWithGrouping_ShortVersion_Async()
+        public async Task Example_Paging_NextFragmentWithGrouping_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1391,7 +1391,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NextFragmentWithGrouping_AllParameters()
+        public void Example_Paging_NextFragmentWithGrouping_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1406,7 +1406,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NextFragmentWithGrouping_AllParameters_Async()
+        public async Task Example_Paging_NextFragmentWithGrouping_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1421,7 +1421,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPagingModelWithItemNameWithXMSClientName_ShortVersion()
+        public void Example_Paging_GetPagingModelWithItemNameWithXMSClientName_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1435,7 +1435,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPagingModelWithItemNameWithXMSClientName_ShortVersion_Async()
+        public async Task Example_Paging_GetPagingModelWithItemNameWithXMSClientName_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1449,7 +1449,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPagingModelWithItemNameWithXMSClientName_AllParameters()
+        public void Example_Paging_GetPagingModelWithItemNameWithXMSClientName_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1464,7 +1464,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPagingModelWithItemNameWithXMSClientName_AllParameters_Async()
+        public async Task Example_Paging_GetPagingModelWithItemNameWithXMSClientName_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1479,7 +1479,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultiplePagesLRO_ShortVersion()
+        public void Example_Paging_GetMultiplePagesLRO_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1495,7 +1495,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultiplePagesLRO_ShortVersion_Async()
+        public async Task Example_Paging_GetMultiplePagesLRO_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1511,7 +1511,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultiplePagesLRO_AllParameters()
+        public void Example_Paging_GetMultiplePagesLRO_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
@@ -1528,7 +1528,7 @@ namespace paging_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultiplePagesLRO_AllParameters_Async()
+        public async Task Example_Paging_GetMultiplePagesLRO_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);

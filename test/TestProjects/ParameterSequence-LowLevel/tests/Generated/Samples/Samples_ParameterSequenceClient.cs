@@ -18,7 +18,7 @@ namespace ParameterSequence_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetItem_ShortVersion()
+        public void Example_getItem_GetItem_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);
@@ -31,7 +31,7 @@ namespace ParameterSequence_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetItem_ShortVersion_Async()
+        public async Task Example_getItem_GetItem_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);
@@ -44,7 +44,7 @@ namespace ParameterSequence_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetItem_AllParameters()
+        public void Example_getItem_GetItem_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);
@@ -57,7 +57,7 @@ namespace ParameterSequence_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetItem_AllParameters_Async()
+        public async Task Example_getItem_GetItem_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);
@@ -70,7 +70,7 @@ namespace ParameterSequence_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SelectItem_ShortVersion()
+        public void Example_selectItem_SelectItem_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);
@@ -83,7 +83,7 @@ namespace ParameterSequence_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SelectItem_ShortVersion_Async()
+        public async Task Example_selectItem_SelectItem_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);
@@ -96,7 +96,7 @@ namespace ParameterSequence_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SelectItem_AllParameters()
+        public void Example_selectItem_SelectItem_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);
@@ -109,7 +109,7 @@ namespace ParameterSequence_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SelectItem_AllParameters_Async()
+        public async Task Example_selectItem_SelectItem_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);

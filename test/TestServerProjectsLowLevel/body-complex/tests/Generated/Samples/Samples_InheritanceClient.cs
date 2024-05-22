@@ -19,7 +19,7 @@ namespace body_complex_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetValid_ShortVersion()
+        public void Example_inheritance_GetValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             InheritanceClient client = new InheritanceClient(credential);
@@ -32,7 +32,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_ShortVersion_Async()
+        public async Task Example_inheritance_GetValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             InheritanceClient client = new InheritanceClient(credential);
@@ -45,7 +45,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetValid_AllParameters()
+        public void Example_inheritance_GetValid_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             InheritanceClient client = new InheritanceClient(credential);
@@ -64,7 +64,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_AllParameters_Async()
+        public async Task Example_inheritance_GetValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             InheritanceClient client = new InheritanceClient(credential);
@@ -83,7 +83,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutValid_ShortVersion()
+        public void Example_inheritance_PutValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             InheritanceClient client = new InheritanceClient(credential);
@@ -96,7 +96,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValid_ShortVersion_Async()
+        public async Task Example_inheritance_PutValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             InheritanceClient client = new InheritanceClient(credential);
@@ -109,7 +109,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutValid_AllParameters()
+        public void Example_inheritance_PutValid_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             InheritanceClient client = new InheritanceClient(credential);
@@ -137,7 +137,7 @@ name = "<name>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValid_AllParameters_Async()
+        public async Task Example_inheritance_PutValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             InheritanceClient client = new InheritanceClient(credential);

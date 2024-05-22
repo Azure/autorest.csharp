@@ -19,7 +19,7 @@ namespace httpInfrastructure_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head200_ShortVersion()
+        public void Example_httpSuccess_Head200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -31,7 +31,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head200_ShortVersion_Async()
+        public async Task Example_httpSuccess_Head200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -43,7 +43,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head200_AllParameters()
+        public void Example_httpSuccess_Head200_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -55,7 +55,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head200_AllParameters_Async()
+        public async Task Example_httpSuccess_Head200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -67,7 +67,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200_ShortVersion()
+        public void Example_httpSuccess_Get200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -80,7 +80,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200_ShortVersion_Async()
+        public async Task Example_httpSuccess_Get200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -93,7 +93,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200_AllParameters()
+        public void Example_httpSuccess_Get200_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -106,7 +106,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200_AllParameters_Async()
+        public async Task Example_httpSuccess_Get200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -119,7 +119,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Options200_ShortVersion()
+        public void Example_httpSuccess_Options200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -132,7 +132,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Options200_ShortVersion_Async()
+        public async Task Example_httpSuccess_Options200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -145,7 +145,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Options200_AllParameters()
+        public void Example_httpSuccess_Options200_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -158,7 +158,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Options200_AllParameters_Async()
+        public async Task Example_httpSuccess_Options200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -171,7 +171,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put200_ShortVersion()
+        public void Example_httpSuccess_Put200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -184,7 +184,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put200_ShortVersion_Async()
+        public async Task Example_httpSuccess_Put200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -197,7 +197,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put200_AllParameters()
+        public void Example_httpSuccess_Put200_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -210,7 +210,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put200_AllParameters_Async()
+        public async Task Example_httpSuccess_Put200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -223,7 +223,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch200_ShortVersion()
+        public void Example_httpSuccess_Patch200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -236,7 +236,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch200_ShortVersion_Async()
+        public async Task Example_httpSuccess_Patch200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -249,7 +249,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch200_AllParameters()
+        public void Example_httpSuccess_Patch200_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -262,7 +262,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch200_AllParameters_Async()
+        public async Task Example_httpSuccess_Patch200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -275,7 +275,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post200_ShortVersion()
+        public void Example_httpSuccess_Post200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -288,7 +288,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post200_ShortVersion_Async()
+        public async Task Example_httpSuccess_Post200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -301,7 +301,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post200_AllParameters()
+        public void Example_httpSuccess_Post200_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -314,7 +314,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post200_AllParameters_Async()
+        public async Task Example_httpSuccess_Post200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -327,7 +327,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete200_ShortVersion()
+        public void Example_httpSuccess_Delete200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -340,7 +340,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete200_ShortVersion_Async()
+        public async Task Example_httpSuccess_Delete200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -353,7 +353,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete200_AllParameters()
+        public void Example_httpSuccess_Delete200_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -366,7 +366,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete200_AllParameters_Async()
+        public async Task Example_httpSuccess_Delete200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -379,7 +379,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put201_ShortVersion()
+        public void Example_httpSuccess_Put201_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -392,7 +392,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put201_ShortVersion_Async()
+        public async Task Example_httpSuccess_Put201_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -405,7 +405,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put201_AllParameters()
+        public void Example_httpSuccess_Put201_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -418,7 +418,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put201_AllParameters_Async()
+        public async Task Example_httpSuccess_Put201_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -431,7 +431,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post201_ShortVersion()
+        public void Example_httpSuccess_Post201_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -444,7 +444,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post201_ShortVersion_Async()
+        public async Task Example_httpSuccess_Post201_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -457,7 +457,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post201_AllParameters()
+        public void Example_httpSuccess_Post201_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -470,7 +470,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post201_AllParameters_Async()
+        public async Task Example_httpSuccess_Post201_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -483,7 +483,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put202_ShortVersion()
+        public void Example_httpSuccess_Put202_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -496,7 +496,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put202_ShortVersion_Async()
+        public async Task Example_httpSuccess_Put202_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -509,7 +509,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put202_AllParameters()
+        public void Example_httpSuccess_Put202_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -522,7 +522,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put202_AllParameters_Async()
+        public async Task Example_httpSuccess_Put202_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -535,7 +535,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch202_ShortVersion()
+        public void Example_httpSuccess_Patch202_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -548,7 +548,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch202_ShortVersion_Async()
+        public async Task Example_httpSuccess_Patch202_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -561,7 +561,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch202_AllParameters()
+        public void Example_httpSuccess_Patch202_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -574,7 +574,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch202_AllParameters_Async()
+        public async Task Example_httpSuccess_Patch202_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -587,7 +587,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post202_ShortVersion()
+        public void Example_httpSuccess_Post202_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -600,7 +600,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post202_ShortVersion_Async()
+        public async Task Example_httpSuccess_Post202_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -613,7 +613,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post202_AllParameters()
+        public void Example_httpSuccess_Post202_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -626,7 +626,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post202_AllParameters_Async()
+        public async Task Example_httpSuccess_Post202_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -639,7 +639,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete202_ShortVersion()
+        public void Example_httpSuccess_Delete202_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -652,7 +652,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete202_ShortVersion_Async()
+        public async Task Example_httpSuccess_Delete202_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -665,7 +665,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete202_AllParameters()
+        public void Example_httpSuccess_Delete202_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -678,7 +678,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete202_AllParameters_Async()
+        public async Task Example_httpSuccess_Delete202_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -691,7 +691,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head204_ShortVersion()
+        public void Example_httpSuccess_Head204_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -703,7 +703,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head204_ShortVersion_Async()
+        public async Task Example_httpSuccess_Head204_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -715,7 +715,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head204_AllParameters()
+        public void Example_httpSuccess_Head204_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -727,7 +727,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head204_AllParameters_Async()
+        public async Task Example_httpSuccess_Head204_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -739,7 +739,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put204_ShortVersion()
+        public void Example_httpSuccess_Put204_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -752,7 +752,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put204_ShortVersion_Async()
+        public async Task Example_httpSuccess_Put204_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -765,7 +765,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put204_AllParameters()
+        public void Example_httpSuccess_Put204_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -778,7 +778,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put204_AllParameters_Async()
+        public async Task Example_httpSuccess_Put204_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -791,7 +791,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch204_ShortVersion()
+        public void Example_httpSuccess_Patch204_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -804,7 +804,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch204_ShortVersion_Async()
+        public async Task Example_httpSuccess_Patch204_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -817,7 +817,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch204_AllParameters()
+        public void Example_httpSuccess_Patch204_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -830,7 +830,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch204_AllParameters_Async()
+        public async Task Example_httpSuccess_Patch204_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -843,7 +843,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post204_ShortVersion()
+        public void Example_HttpSuccess_Post204_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -856,7 +856,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post204_ShortVersion_Async()
+        public async Task Example_HttpSuccess_Post204_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -869,7 +869,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post204_AllParameters()
+        public void Example_HttpSuccess_Post204_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -882,7 +882,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post204_AllParameters_Async()
+        public async Task Example_HttpSuccess_Post204_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -895,7 +895,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete204_ShortVersion()
+        public void Example_httpSuccess_Delete204_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -908,7 +908,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete204_ShortVersion_Async()
+        public async Task Example_httpSuccess_Delete204_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -921,7 +921,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete204_AllParameters()
+        public void Example_httpSuccess_Delete204_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -934,7 +934,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete204_AllParameters_Async()
+        public async Task Example_httpSuccess_Delete204_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -947,7 +947,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head404_ShortVersion()
+        public void Example_httpSuccess_Head404_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -959,7 +959,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head404_ShortVersion_Async()
+        public async Task Example_httpSuccess_Head404_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -971,7 +971,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head404_AllParameters()
+        public void Example_httpSuccess_Head404_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -983,7 +983,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head404_AllParameters_Async()
+        public async Task Example_httpSuccess_Head404_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);

@@ -21,7 +21,7 @@ namespace ServiceVersionOverride_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Operation_ShortVersion()
+        public async Task Operation_Operation_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceVersionOverrideClient client = CreateServiceVersionOverrideClient(endpoint);
@@ -31,7 +31,7 @@ namespace ServiceVersionOverride_LowLevel.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Operation_AllParameters()
+        public async Task Operation_Operation_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceVersionOverrideClient client = CreateServiceVersionOverrideClient(endpoint);

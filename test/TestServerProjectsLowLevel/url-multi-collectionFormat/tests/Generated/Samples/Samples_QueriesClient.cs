@@ -17,7 +17,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ArrayStringMultiNull_ShortVersion()
+        public void Example_queries_ArrayStringMultiNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
@@ -29,7 +29,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ArrayStringMultiNull_ShortVersion_Async()
+        public async Task Example_queries_ArrayStringMultiNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
@@ -41,7 +41,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ArrayStringMultiNull_AllParameters()
+        public void Example_queries_ArrayStringMultiNull_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
@@ -53,7 +53,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ArrayStringMultiNull_AllParameters_Async()
+        public async Task Example_queries_ArrayStringMultiNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
@@ -65,7 +65,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ArrayStringMultiEmpty_ShortVersion()
+        public void Example_queries_ArrayStringMultiEmpty_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
@@ -77,7 +77,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ArrayStringMultiEmpty_ShortVersion_Async()
+        public async Task Example_queries_ArrayStringMultiEmpty_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
@@ -89,7 +89,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ArrayStringMultiEmpty_AllParameters()
+        public void Example_queries_ArrayStringMultiEmpty_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
@@ -101,7 +101,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ArrayStringMultiEmpty_AllParameters_Async()
+        public async Task Example_queries_ArrayStringMultiEmpty_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
@@ -113,7 +113,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ArrayStringMultiValid_ShortVersion()
+        public void Example_queries_ArrayStringMultiValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
@@ -125,7 +125,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ArrayStringMultiValid_ShortVersion_Async()
+        public async Task Example_queries_ArrayStringMultiValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
@@ -137,7 +137,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ArrayStringMultiValid_AllParameters()
+        public void Example_queries_ArrayStringMultiValid_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
@@ -149,7 +149,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ArrayStringMultiValid_AllParameters_Async()
+        public async Task Example_queries_ArrayStringMultiValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
