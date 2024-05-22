@@ -160,30 +160,6 @@ export function createModelForService(
 
     for (const client of clients) {
         for (const op of client.Operations) {
-            /* TODO: remove this when adopt tcgc.
-             *set Multipart usage for models.
-             */
-            const bodyParameter = op.Parameters.find(
-                (value) => value.Location === RequestLocation.Body
-            );
-            if (
-                bodyParameter &&
-                bodyParameter.Type &&
-                (bodyParameter.Type as InputModelType)
-            ) {
-                const inputModelType = bodyParameter.Type as InputModelType;
-                op.RequestMediaTypes?.forEach((item) => {
-                    if (
-                        item === "multipart/form-data" &&
-                        (inputModelType.Usage &
-                            UsageFlags.MultipartFormData) ===
-                            0
-                    ) {
-                        inputModelType.Usage |= UsageFlags.MultipartFormData;
-                    }
-                });
-            }
-
             const apiVersionIndex = op.Parameters.findIndex(
                 (value: InputParameter) => value.IsApiVersion
             );
