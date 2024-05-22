@@ -455,39 +455,44 @@
    "Protocol": {
     "$id": "58"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "59",
+     "Name": "lroEndpoint",
+     "NameInRequest": "lroEndpoint",
+     "Type": {
+      "$id": "60",
+      "Kind": "Primitive",
+      "Name": "Uri",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
+    }
+   ]
   },
   {
-   "$id": "59",
+   "$id": "61",
    "Name": "LegacyLro",
    "Description": "",
    "Operations": [
     {
-     "$id": "60",
+     "$id": "62",
      "Name": "getJob",
      "ResourceName": "LegacyLro",
      "Summary": "Get Radiology Insights job details",
      "Description": "Gets the status and details of the Radiology Insights job.",
      "Parameters": [
       {
-       "$id": "61",
-       "Name": "lroEndpoint",
-       "NameInRequest": "lroEndpoint",
-       "Type": {
-        "$id": "62",
-        "Kind": "Primitive",
-        "Name": "Uri",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
+       "$ref": "59"
       },
       {
        "$id": "63",
@@ -605,7 +610,7 @@
      "Description": "Creates a Radiology Insights job with the given request body.",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "59"
       },
       {
        "$id": "74",
@@ -825,7 +830,12 @@
     "$id": "95"
    },
    "Creatable": false,
-   "Parent": "lroClient"
+   "Parent": "lroClient",
+   "Parameters": [
+    {
+     "$ref": "59"
+    }
+   ]
   }
  ],
  "Auth": {

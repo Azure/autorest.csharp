@@ -279,7 +279,8 @@ export function createModelForService(
             Operations: [],
             Protocol: {},
             Creatable: client.kind === ClientKind.SdkClient,
-            Parent: parent === undefined ? undefined : getClientName(parent)
+            Parent: parent === undefined ? undefined : getClientName(parent),
+            Parameters: urlParameters
         } as InputClient;
         for (const op of operations) {
             const httpOperation = ignoreDiagnostics(

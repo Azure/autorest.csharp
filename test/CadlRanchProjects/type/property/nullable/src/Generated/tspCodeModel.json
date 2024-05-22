@@ -283,49 +283,54 @@
    "Protocol": {
     "$id": "37"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "38",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "39",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "40",
+      "Type": {
+       "$id": "41",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "38",
+   "$id": "42",
    "Name": "String",
    "Description": "",
    "Operations": [
     {
-     "$id": "39",
+     "$id": "43",
      "Name": "getNonNull",
      "ResourceName": "String",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$id": "40",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "41",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "42",
-        "Type": {
-         "$id": "43",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "38"
       },
       {
        "$id": "44",
@@ -387,7 +392,7 @@
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "49",
@@ -449,7 +454,7 @@
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "54",
@@ -560,7 +565,7 @@
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "64",
@@ -669,7 +674,12 @@
     "$id": "73"
    },
    "Creatable": false,
-   "Parent": "NullableClient"
+   "Parent": "NullableClient",
+   "Parameters": [
+    {
+     "$ref": "38"
+    }
+   ]
   },
   {
    "$id": "74",
@@ -683,7 +693,7 @@
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "76",
@@ -745,7 +755,7 @@
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "81",
@@ -807,7 +817,7 @@
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "86",
@@ -918,7 +928,7 @@
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "96",
@@ -1027,7 +1037,12 @@
     "$id": "105"
    },
    "Creatable": false,
-   "Parent": "NullableClient"
+   "Parent": "NullableClient",
+   "Parameters": [
+    {
+     "$ref": "38"
+    }
+   ]
   },
   {
    "$id": "106",
@@ -1041,7 +1056,7 @@
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "108",
@@ -1103,7 +1118,7 @@
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "113",
@@ -1165,7 +1180,7 @@
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "118",
@@ -1276,7 +1291,7 @@
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "128",
@@ -1385,7 +1400,12 @@
     "$id": "137"
    },
    "Creatable": false,
-   "Parent": "NullableClient"
+   "Parent": "NullableClient",
+   "Parameters": [
+    {
+     "$ref": "38"
+    }
+   ]
   },
   {
    "$id": "138",
@@ -1399,7 +1419,7 @@
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "140",
@@ -1461,7 +1481,7 @@
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "145",
@@ -1523,7 +1543,7 @@
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "150",
@@ -1634,7 +1654,7 @@
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "160",
@@ -1743,7 +1763,12 @@
     "$id": "169"
    },
    "Creatable": false,
-   "Parent": "NullableClient"
+   "Parent": "NullableClient",
+   "Parameters": [
+    {
+     "$ref": "38"
+    }
+   ]
   },
   {
    "$id": "170",
@@ -1757,7 +1782,7 @@
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "172",
@@ -1819,7 +1844,7 @@
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "177",
@@ -1881,7 +1906,7 @@
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "182",
@@ -1992,7 +2017,7 @@
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "192",
@@ -2101,7 +2126,12 @@
     "$id": "201"
    },
    "Creatable": false,
-   "Parent": "NullableClient"
+   "Parent": "NullableClient",
+   "Parameters": [
+    {
+     "$ref": "38"
+    }
+   ]
   },
   {
    "$id": "202",
@@ -2115,7 +2145,7 @@
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "204",
@@ -2177,7 +2207,7 @@
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "209",
@@ -2239,7 +2269,7 @@
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "214",
@@ -2350,7 +2380,7 @@
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "40"
+       "$ref": "38"
       },
       {
        "$id": "224",
@@ -2459,7 +2489,12 @@
     "$id": "233"
    },
    "Creatable": false,
-   "Parent": "NullableClient"
+   "Parent": "NullableClient",
+   "Parameters": [
+    {
+     "$ref": "38"
+    }
+   ]
   }
  ]
 }

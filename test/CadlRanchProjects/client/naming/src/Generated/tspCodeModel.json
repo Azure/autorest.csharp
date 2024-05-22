@@ -783,7 +783,12 @@
    "Protocol": {
     "$id": "80"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "24"
+    }
+   ]
   },
   {
    "$id": "81",
@@ -999,7 +1004,12 @@
     "$id": "100"
    },
    "Creatable": false,
-   "Parent": "NamingClient"
+   "Parent": "NamingClient",
+   "Parameters": [
+    {
+     "$ref": "24"
+    }
+   ]
   },
   {
    "$id": "101",
@@ -1215,7 +1225,12 @@
     "$id": "120"
    },
    "Creatable": false,
-   "Parent": "NamingClient"
+   "Parent": "NamingClient",
+   "Parameters": [
+    {
+     "$ref": "24"
+    }
+   ]
   }
  ]
 }

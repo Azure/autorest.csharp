@@ -142,7 +142,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     }
                     // if it is optional, we just do not put it in the map indicates that in the invocation we could omit it
                 }
-                else
+                else if (!result.ContainsKey(parameter.Name))
                 {
                     // add it into the mapping
                     result.Add(parameter.Name, new InputExampleParameterValue(parameter, exampleValue));

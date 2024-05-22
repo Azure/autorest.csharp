@@ -70,6 +70,13 @@ namespace AutoRest.CSharp.Output.Models
                 .Distinct()
                 .ToList();
 
+        public static IEnumerable<InputParameter> GetParametersFromClient(InputClient client)
+        {
+            return (client.Parameters ?? new List<InputParameter>())
+                .Concat(client.Operations.SelectMany(op => op.Parameters).Where(p => p.Kind == InputOperationParameterKind.Client))
+                .Distinct();
+        }
+
         private static string GetRequestParameterName(RequestParameter requestParameter)
         {
             var language = requestParameter.Language.Default;

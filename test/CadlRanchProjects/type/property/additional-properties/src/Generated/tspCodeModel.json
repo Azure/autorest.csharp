@@ -1735,49 +1735,54 @@
    "Protocol": {
     "$id": "218"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "219",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "220",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "221",
+      "Type": {
+       "$id": "222",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "219",
+   "$id": "223",
    "Name": "ExtendsUnknown",
    "Description": "",
    "Operations": [
     {
-     "$id": "220",
+     "$id": "224",
      "Name": "get",
      "ResourceName": "ExtendsUnknown",
      "Description": "Get call",
      "Parameters": [
       {
-       "$id": "221",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "222",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "223",
-        "Type": {
-         "$id": "224",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "219"
       },
       {
        "$id": "225",
@@ -1839,7 +1844,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "230",
@@ -1941,7 +1946,12 @@
     "$id": "238"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "239",
@@ -1955,7 +1965,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "241",
@@ -2017,7 +2027,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "246",
@@ -2119,7 +2129,12 @@
     "$id": "254"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "255",
@@ -2133,7 +2148,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "257",
@@ -2195,7 +2210,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "262",
@@ -2297,7 +2312,12 @@
     "$id": "270"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "271",
@@ -2311,7 +2331,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "273",
@@ -2373,7 +2393,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "278",
@@ -2475,7 +2495,12 @@
     "$id": "286"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "287",
@@ -2489,7 +2514,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "289",
@@ -2551,7 +2576,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "294",
@@ -2653,7 +2678,12 @@
     "$id": "302"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "303",
@@ -2667,7 +2697,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "305",
@@ -2729,7 +2759,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "310",
@@ -2831,7 +2861,12 @@
     "$id": "318"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "319",
@@ -2845,7 +2880,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "321",
@@ -2907,7 +2942,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "326",
@@ -3009,7 +3044,12 @@
     "$id": "334"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "335",
@@ -3023,7 +3063,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "337",
@@ -3085,7 +3125,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "342",
@@ -3187,7 +3227,12 @@
     "$id": "350"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "351",
@@ -3201,7 +3246,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "353",
@@ -3263,7 +3308,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "358",
@@ -3365,7 +3410,12 @@
     "$id": "366"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "367",
@@ -3379,7 +3429,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "369",
@@ -3441,7 +3491,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "374",
@@ -3543,7 +3593,12 @@
     "$id": "382"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "383",
@@ -3557,7 +3612,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "385",
@@ -3619,7 +3674,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "390",
@@ -3721,7 +3776,12 @@
     "$id": "398"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "399",
@@ -3735,7 +3795,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "401",
@@ -3797,7 +3857,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "406",
@@ -3899,7 +3959,12 @@
     "$id": "414"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "415",
@@ -3913,7 +3978,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "417",
@@ -3975,7 +4040,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "422",
@@ -4077,7 +4142,12 @@
     "$id": "430"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "431",
@@ -4091,7 +4161,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "433",
@@ -4153,7 +4223,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "438",
@@ -4255,7 +4325,12 @@
     "$id": "446"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "447",
@@ -4269,7 +4344,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "449",
@@ -4331,7 +4406,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "454",
@@ -4433,7 +4508,12 @@
     "$id": "462"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "463",
@@ -4447,7 +4527,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "465",
@@ -4509,7 +4589,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "470",
@@ -4611,7 +4691,12 @@
     "$id": "478"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "479",
@@ -4625,7 +4710,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "481",
@@ -4687,7 +4772,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "486",
@@ -4789,7 +4874,12 @@
     "$id": "494"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "495",
@@ -4803,7 +4893,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "497",
@@ -4865,7 +4955,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "502",
@@ -4967,7 +5057,12 @@
     "$id": "510"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "511",
@@ -4981,7 +5076,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "513",
@@ -5043,7 +5138,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "518",
@@ -5145,7 +5240,12 @@
     "$id": "526"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "527",
@@ -5159,7 +5259,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "529",
@@ -5221,7 +5321,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "534",
@@ -5323,7 +5423,12 @@
     "$id": "542"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "543",
@@ -5337,7 +5442,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "545",
@@ -5399,7 +5504,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "550",
@@ -5501,7 +5606,12 @@
     "$id": "558"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "559",
@@ -5515,7 +5625,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "561",
@@ -5577,7 +5687,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "566",
@@ -5679,7 +5789,12 @@
     "$id": "574"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "575",
@@ -5693,7 +5808,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "577",
@@ -5755,7 +5870,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "582",
@@ -5857,7 +5972,12 @@
     "$id": "590"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "591",
@@ -5871,7 +5991,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "593",
@@ -5933,7 +6053,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "598",
@@ -6035,7 +6155,12 @@
     "$id": "606"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "607",
@@ -6049,7 +6174,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "609",
@@ -6111,7 +6236,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "614",
@@ -6213,7 +6338,12 @@
     "$id": "622"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "623",
@@ -6227,7 +6357,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "625",
@@ -6289,7 +6419,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "630",
@@ -6391,7 +6521,12 @@
     "$id": "638"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "639",
@@ -6405,7 +6540,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "641",
@@ -6467,7 +6602,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "646",
@@ -6569,7 +6704,12 @@
     "$id": "654"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "655",
@@ -6583,7 +6723,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "657",
@@ -6645,7 +6785,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "662",
@@ -6747,7 +6887,12 @@
     "$id": "670"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "671",
@@ -6761,7 +6906,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "673",
@@ -6823,7 +6968,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "678",
@@ -6925,7 +7070,12 @@
     "$id": "686"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "687",
@@ -6939,7 +7089,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "689",
@@ -7001,7 +7151,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "694",
@@ -7103,7 +7253,12 @@
     "$id": "702"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "703",
@@ -7117,7 +7272,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "705",
@@ -7179,7 +7334,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "710",
@@ -7281,7 +7436,12 @@
     "$id": "718"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   },
   {
    "$id": "719",
@@ -7295,7 +7455,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "721",
@@ -7357,7 +7517,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "221"
+       "$ref": "219"
       },
       {
        "$id": "726",
@@ -7459,7 +7619,12 @@
     "$id": "734"
    },
    "Creatable": false,
-   "Parent": "AdditionalPropertiesClient"
+   "Parent": "AdditionalPropertiesClient",
+   "Parameters": [
+    {
+     "$ref": "219"
+    }
+   ]
   }
  ]
 }

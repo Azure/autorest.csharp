@@ -1116,38 +1116,43 @@
    "Protocol": {
     "$id": "143"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "144",
+     "Name": "Endpoint",
+     "NameInRequest": "Endpoint",
+     "Type": {
+      "$id": "145",
+      "Kind": "Primitive",
+      "Name": "Uri",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
+    }
+   ]
   },
   {
-   "$id": "144",
+   "$id": "146",
    "Name": "Projects",
    "Description": "",
    "Operations": [
     {
-     "$id": "145",
+     "$id": "147",
      "Name": "createOrUpdate",
      "ResourceName": "Project",
      "Description": "Creates a new project or updates an existing one.",
      "Parameters": [
       {
-       "$id": "146",
-       "Name": "Endpoint",
-       "NameInRequest": "Endpoint",
-       "Type": {
-        "$id": "147",
-        "Kind": "Primitive",
-        "Name": "Uri",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
+       "$ref": "144"
       },
       {
        "$id": "148",
@@ -1363,7 +1368,7 @@
      "Description": "Gets the details of a project.",
      "Parameters": [
       {
-       "$ref": "146"
+       "$ref": "144"
       },
       {
        "$id": "170",
@@ -1469,7 +1474,7 @@
      "Description": "Deletes a project.",
      "Parameters": [
       {
-       "$ref": "146"
+       "$ref": "144"
       },
       {
        "$id": "179",
@@ -1599,7 +1604,7 @@
      "Description": "Lists the existing projects.",
      "Parameters": [
       {
-       "$ref": "146"
+       "$ref": "144"
       },
       {
        "$id": "192",
@@ -1690,7 +1695,7 @@
      "Description": "Triggers a job to export a project's data.",
      "Parameters": [
       {
-       "$ref": "146"
+       "$ref": "144"
       },
       {
        "$id": "200",
@@ -1834,7 +1839,7 @@
      "Description": "Triggers a job to export a project's data.",
      "Parameters": [
       {
-       "$ref": "146"
+       "$ref": "144"
       },
       {
        "$id": "215",
@@ -1958,7 +1963,7 @@
      "Description": "Triggers a training job for a project.",
      "Parameters": [
       {
-       "$ref": "146"
+       "$ref": "144"
       },
       {
        "$id": "228",
@@ -2127,7 +2132,12 @@
     "$id": "244"
    },
    "Creatable": false,
-   "Parent": "AuthoringTypeSpecClient"
+   "Parent": "AuthoringTypeSpecClient",
+   "Parameters": [
+    {
+     "$ref": "144"
+    }
+   ]
   },
   {
    "$id": "245",
@@ -2141,7 +2151,7 @@
      "Description": "Gets the details of a deployment.",
      "Parameters": [
       {
-       "$ref": "146"
+       "$ref": "144"
       },
       {
        "$id": "247",
@@ -2267,7 +2277,7 @@
      "Description": "Creates a new deployment or replaces an existing one.",
      "Parameters": [
       {
-       "$ref": "146"
+       "$ref": "144"
       },
       {
        "$id": "258",
@@ -2496,7 +2506,7 @@
      "Description": "Deletes a project deployment.",
      "Parameters": [
       {
-       "$ref": "146"
+       "$ref": "144"
       },
       {
        "$id": "280",
@@ -2646,7 +2656,7 @@
      "Description": "Lists the existing deployments.",
      "Parameters": [
       {
-       "$ref": "146"
+       "$ref": "144"
       },
       {
        "$id": "295",
@@ -2757,7 +2767,7 @@
      "Description": "Swaps two existing deployments with each other.",
      "Parameters": [
       {
-       "$ref": "146"
+       "$ref": "144"
       },
       {
        "$id": "305",
@@ -2927,7 +2937,12 @@
     "$id": "321"
    },
    "Creatable": false,
-   "Parent": "AuthoringTypeSpecClient"
+   "Parent": "AuthoringTypeSpecClient",
+   "Parameters": [
+    {
+     "$ref": "144"
+    }
+   ]
   },
   {
    "$id": "322",
@@ -2941,7 +2956,7 @@
      "Description": "Gets the status of an existing deployment job.",
      "Parameters": [
       {
-       "$ref": "146"
+       "$ref": "144"
       },
       {
        "$id": "324",
@@ -3087,7 +3102,7 @@
      "Description": "Gets the status of an existing swap deployment job.",
      "Parameters": [
       {
-       "$ref": "146"
+       "$ref": "144"
       },
       {
        "$id": "337",
@@ -3231,7 +3246,12 @@
     "$id": "349"
    },
    "Creatable": false,
-   "Parent": "AuthoringTypeSpecClient"
+   "Parent": "AuthoringTypeSpecClient",
+   "Parameters": [
+    {
+     "$ref": "144"
+    }
+   ]
   },
   {
    "$id": "350",
@@ -3244,7 +3264,7 @@
      "ResourceName": "Global",
      "Parameters": [
       {
-       "$ref": "146"
+       "$ref": "144"
       },
       {
        "$id": "352",
@@ -3394,7 +3414,7 @@
      "ResourceName": "Global",
      "Parameters": [
       {
-       "$ref": "146"
+       "$ref": "144"
       },
       {
        "$id": "366",
@@ -3543,7 +3563,12 @@
     "$id": "379"
    },
    "Creatable": false,
-   "Parent": "AuthoringTypeSpecClient"
+   "Parent": "AuthoringTypeSpecClient",
+   "Parameters": [
+    {
+     "$ref": "144"
+    }
+   ]
   }
  ]
 }
