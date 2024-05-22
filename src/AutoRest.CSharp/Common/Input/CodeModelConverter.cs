@@ -629,10 +629,9 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputType CreateTypeForObjectSchema(ObjectSchema objectSchema)
         {
-            const string DFE_OBJECT_SCHEMA_PREFIX = "DataFactoryElement-";
-            if (objectSchema.Language.Default.Name.StartsWith(DFE_OBJECT_SCHEMA_PREFIX))
+            if (objectSchema.Language.Default.Name.StartsWith("DataFactoryElement-"))
             {
-                return new InputGenericType(typeof(DataFactoryElement<>), InputPrimitiveType.String, false);
+                return CreateDataFactoryElementIntputType(false, InputPrimitiveType.String);
             }
             return _modelsCache[objectSchema];
         }
@@ -659,24 +658,29 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputType? ToDataFactoryElementType(string name, string? format, bool isNullable, Schema? elementType = null)
         {
+
             var type = typeof(DataFactoryElement<>);
             return format switch
             {
-                XMsFormat.DataFactoryElementOfObject => new InputGenericType(type, InputPrimitiveType.BinaryData, isNullable),
-                XMsFormat.DataFactoryElementOfString => new InputGenericType(type, InputPrimitiveType.String, isNullable),
-                XMsFormat.DataFactoryElementOfInt => new InputGenericType(type, InputPrimitiveType.Int32, isNullable),
-                XMsFormat.DataFactoryElementOfDouble => new InputGenericType(type, InputPrimitiveType.Float64, isNullable),
-                XMsFormat.DataFactoryElementOfBool => new InputGenericType(type, InputPrimitiveType.Boolean, isNullable),
-                XMsFormat.DataFactoryElementOfListOfT => new InputGenericType(type, new InputListType(name, GetOrCreateType(elementType!, false), false, false), isNullable),
-                XMsFormat.DataFactoryElementOfListOfString => new InputGenericType(type, new InputListType(name, InputPrimitiveType.String, false, false), isNullable),
-                XMsFormat.DataFactoryElementOfKeyValuePairs => new InputGenericType(type, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.String, false), isNullable),
-                XMsFormat.DataFactoryElementOfDateTime => new InputGenericType(type, InputPrimitiveType.DateTime, isNullable),
-                XMsFormat.DataFactoryElementOfDuration => new InputGenericType(type, InputPrimitiveType.Time, isNullable),
-                XMsFormat.DataFactoryElementOfUri => new InputGenericType(type, InputPrimitiveType.Uri, isNullable),
-                XMsFormat.DataFactoryElementOfKeyObjectValuePairs => new InputGenericType(type, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.BinaryData, false), isNullable),
+                XMsFormat.DataFactoryElementOfObject => CreateDataFactoryElementIntputType(isNullable, InputPrimitiveType.BinaryData),
+                XMsFormat.DataFactoryElementOfString => CreateDataFactoryElementIntputType(isNullable, InputPrimitiveType.String),
+                XMsFormat.DataFactoryElementOfInt => CreateDataFactoryElementIntputType(isNullable, InputPrimitiveType.Int32),
+                XMsFormat.DataFactoryElementOfDouble => CreateDataFactoryElementIntputType(isNullable, InputPrimitiveType.Float64),
+                XMsFormat.DataFactoryElementOfBool => CreateDataFactoryElementIntputType(isNullable, InputPrimitiveType.Boolean),
+                XMsFormat.DataFactoryElementOfListOfT => CreateDataFactoryElementIntputType(isNullable, new InputListType(name, GetOrCreateType(elementType!, false), false, false)),
+                XMsFormat.DataFactoryElementOfListOfString => CreateDataFactoryElementIntputType(isNullable, new InputListType(name, InputPrimitiveType.String, false, false)),
+                XMsFormat.DataFactoryElementOfKeyValuePairs => CreateDataFactoryElementIntputType(isNullable, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.String, false)),
+                XMsFormat.DataFactoryElementOfDateTime => CreateDataFactoryElementIntputType(isNullable, InputPrimitiveType.DateTime),
+                XMsFormat.DataFactoryElementOfDuration => CreateDataFactoryElementIntputType(isNullable, InputPrimitiveType.Time),
+                XMsFormat.DataFactoryElementOfUri => CreateDataFactoryElementIntputType(isNullable, InputPrimitiveType.Uri),
+                XMsFormat.DataFactoryElementOfKeyObjectValuePairs => CreateDataFactoryElementIntputType(isNullable, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.BinaryData, false)),
                 _ => null
-            };
+            }; ;
+            ;
         }
+
+        private static InputModelType CreateDataFactoryElementIntputType(bool isNullable, InputType argumentType)
+            => new InputModelType("DataFactoryElement", "Azure.Core.Resources", null, null, null, InputModelTypeUsage.None, Array.Empty<InputModelProperty>(), null, Array.Empty<InputModelType>(), null, null, null, false, isNullable, new List<InputType> { argumentType });
 
         private InputConstant CreateConstant(ConstantSchema constantSchema, string? format, bool isNullable)
         {

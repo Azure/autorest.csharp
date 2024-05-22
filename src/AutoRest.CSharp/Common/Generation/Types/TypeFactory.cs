@@ -44,12 +44,12 @@ namespace AutoRest.CSharp.Generation.Types
             InputListType { IsEmbeddingsVector: true } listType => new CSharpType(typeof(ReadOnlyMemory<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputListType listType => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
-            // TODO: consolidate the behavior when we handle type nullability in DPG
-            InputEnumType enumType => Configuration.AzureArm ? _library.ResolveEnum(enumType) : _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
+            InputEnumType enumType => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
             // TODO -- this is a temporary solution until we refactored the type replacement to use input types instead of code model schemas
             InputModelType { Namespace: "Azure.Core.Foundations", Name: "Error" } => SystemObjectType.Create(AzureResponseErrorType, AzureResponseErrorType.Namespace!, null).Type,
-            // TODO: consolidate the behavior when we handle type nullability in DPG
-            InputModelType model => Configuration.AzureArm ? _library.ResolveModel(model) : _library.ResolveModel(model).WithNullable(inputType.IsNullable),
+            // Handle DataFactoryElement, we are sure that the argument type is not null and contains only 1 element
+            InputModelType { Namespace: "Azure.Core.Resources", Name: "DataFactoryElement" } inputModel => new CSharpType(typeof(DataFactoryElement<>), inputType.IsNullable, CreateType(inputModel.ArgumentTypes![0])),
+            InputModelType model => _library.ResolveModel(model).WithNullable(inputType.IsNullable),
             InputPrimitiveType primitiveType => primitiveType.Kind switch
             {
                 InputTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation), inputType.IsNullable),
@@ -84,8 +84,6 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.Char => new CSharpType(typeof(char), inputType.IsNullable),
                 _ => new CSharpType(typeof(object), inputType.IsNullable),
             },
-            InputGenericType genericType => new CSharpType(genericType.Type, CreateType(genericType.ArgumentType)).WithNullable(inputType.IsNullable),
-            // TODO: consolidate the behavior when we handle type nullability in DPG
             InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => Configuration.AzureArm ? new CSharpType(UnknownType, inputType.IsNullable) : UnknownType,
             _ => throw new Exception("Unknown type")
         };

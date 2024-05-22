@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
             const string DFE_OBJECT_SCHEMA_PREFIX = "DataFactoryElement";
 
-            if (exampleValue.Type is InputGenericType inputModel && inputModel.Name.StartsWith(DFE_OBJECT_SCHEMA_PREFIX))
+            if (exampleValue.Type is InputModelType inputModel && inputModel.Name.Equals(DFE_OBJECT_SCHEMA_PREFIX))
             {
                 const string DFE_OBJECT_PROPERTY_TYPE = "type";
                 const string DFE_OBJECT_PROPERTY_VALUE = "value";
