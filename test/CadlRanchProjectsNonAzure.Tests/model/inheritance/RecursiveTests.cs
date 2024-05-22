@@ -4,14 +4,14 @@
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
-using _Type.Model.Inheritance.Recursive;
-using _Type.Model.Inheritance.Recursive.Models;
+using Scm._Type.Model.Inheritance.Recursive;
+using Scm._Type.Model.Inheritance.Recursive.Models;
 using Azure.Core;
 using System.Linq;
 
-namespace CadlRanchProjects.Tests
+namespace CadlRanchProjectsNonAzure.Tests
 {
-    public class RecursiveTests : CadlRanchTestBase
+    public class RecursiveTests : CadlRanchNonAzureTestBase
     {
         [Test]
         public Task Type_Model_Inheritance_Recursive_get() => Test(async (host) =>
@@ -38,7 +38,7 @@ namespace CadlRanchProjects.Tests
             extensions.Add(item1);
             extensions.Add(item2);
             var response = await new RecursiveClient(host, null).PutAsync(data);
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
         });
     }
 }
