@@ -285,8 +285,6 @@ namespace AutoRest.CSharp.Output.Models
                 var infoForEndpoint = topLevelClients.FirstOrDefault(c => c.ClientParameters.Any(p => p.IsEndpoint));
                 var endpointParameter = infoForEndpoint?.ClientParameters.FirstOrDefault(p => p.IsEndpoint);
                 var clientParameters = topLevelClients.SelectMany(c => c.ClientParameters.Where(p => !p.IsRequired || p.IsApiVersion || p.IsEndpoint)).Distinct().ToArray();
-
-                //var clientParameters = endpointParameter != null ? new[] { endpointParameter } : Array.Empty<InputParameter>();
                 var clientExamples = infoForEndpoint?.Examples ?? new Dictionary<string, InputClientExample>();
 
                 topLevelClientInfo = new ClientInfo(clientName, clientNamespace, clientParameters, clientExamples);
