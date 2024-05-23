@@ -296,7 +296,6 @@ namespace AutoRest.CSharp.Common.Input
             var derived = new List<InputModelType>();
             var baseModelSchema = GetBaseModelSchema(schema);
             var baseModel = baseModelSchema is not null ? GetOrCreateModel(baseModelSchema) : null;
-            var compositeSchemas = schema.Parents?.Immediate?.OfType<ObjectSchema>().Where(s => s != baseModelSchema);
             var dictionarySchema = Configuration.AzureArm ? null : schema.Parents?.Immediate?.OfType<DictionarySchema>().FirstOrDefault();
 
             model = new InputModelType(
@@ -327,7 +326,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private IReadOnlyList<Property> CreateCompositionProperties(ObjectSchema objectSchema, ObjectSchema? baseModelSchema)
         {
-            var compositeSchemas = objectSchema.Parents?.Immediate?.OfType<ObjectSchema>().Where(s => s != baseModelSchema);
+            var compositeSchemas = objectSchema.Parents?.All?.OfType<ObjectSchema>().Where(s => s != baseModelSchema);
             return compositeSchemas is null ? Array.Empty<Property>() : compositeSchemas.SelectMany(m => m.Properties).ToList();
         }
 
