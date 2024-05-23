@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "NoDocsTypeSpec",
- "Description": "This is a sample typespec project.",
  "ApiVersions": [
   "2022-05-15-preview"
  ],
