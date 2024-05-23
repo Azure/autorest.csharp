@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Authentication.Union",
- "Description": "Illustrates clients generated with ApiKey and OAuth2 authentication.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [],
