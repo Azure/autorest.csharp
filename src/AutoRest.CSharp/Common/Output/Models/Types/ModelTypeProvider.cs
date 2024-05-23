@@ -187,33 +187,25 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return inputModel.Properties;
             }
 
-            var properties = inputModel.Properties.ToList();
-            IEnumerable<string> compositionProperties = inputModel.CompositionProperties.ToList();
-
             if (existingBaseType is not null && existingBaseType.Name != baseModel.Name && !SymbolEqualityComparer.Default.Equals(sourceInputModel?.FindForType(ns, baseModel.Name.ToCleanName()), existingBaseType))
             {
+                IEnumerable<InputModelProperty> properties = inputModel.Properties.ToList();
+
                 // All all properties in the hierarchy of current base type to composition properties
                 var currentBaseModelProperties = baseModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
-                compositionProperties = compositionProperties.Concat(currentBaseModelProperties);
+                properties = properties.Concat(currentBaseModelProperties);
 
                 // Remove all properties in the hierarchy of existing base type from composition properties
                 var existingBaseTypeModel = _typeFactory.GetLibraryTypeByName(existingBaseType.Name)?.Implementation as ModelTypeProvider;
                 if (existingBaseTypeModel is not null)
                 {
                     var existingBaseTypeProperties = existingBaseTypeModel._inputModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
-                    compositionProperties = compositionProperties.Except(existingBaseTypeProperties);
+                    properties = properties.Except(existingBaseTypeProperties);
                 }
+                return properties.ToList();
             }
 
-            foreach (var propertyName in compositionProperties)
-            {
-                if (properties.All(p => p.Name != propertyName))
-                {
-                    properties.Add(propertyName);
-                }
-            }
-
-            return properties;
+            return inputModel.Properties;
         }
 
         private MethodSignatureModifiers GetFromResponseModifiers()
