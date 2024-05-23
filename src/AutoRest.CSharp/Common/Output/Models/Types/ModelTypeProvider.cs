@@ -193,7 +193,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 IEnumerable<InputModelProperty> properties = _inputModel.Properties.ToList();
 
-                // All all properties in the hierarchy of current base type
+                // Add all properties in the hierarchy of current base type
                 var currentBaseModelProperties = baseModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
                 properties = properties.Concat(currentBaseModelProperties);
 
