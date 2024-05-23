@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null && _inputModel.DiscriminatorValue is null;
 
-        public ModelTypeProviderFields Fields => _fields ??= EnsureFields();
+        public ModelTypeProviderFields Fields => _fields ??= new ModelTypeProviderFields(UpdateInputModelProperties(), Declaration.Name, _inputModelUsage, _typeFactory, ModelTypeMapping, _inputModel.InheritedDictionaryType, IsStruct, _inputModel.IsPropertyBag);
         private ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
         private ConstructorSignature SerializationConstructorSignature => _serializationConstructor ??= EnsureSerializationConstructorSignature();
 
@@ -180,17 +180,18 @@ namespace AutoRest.CSharp.Output.Models.Types
             return serialization;
         }
 
-        private IReadOnlyList<InputModelProperty> UpdateInputModelProperties(InputModelType inputModel, INamedTypeSymbol? existingBaseType, string ns, SourceInputModel? sourceInputModel)
+        private IReadOnlyList<InputModelProperty> UpdateInputModelProperties()
         {
-            if (inputModel.BaseModel is not { } baseModel)
+            if (_inputModel.BaseModel is not { } baseModel)
             {
-                return inputModel.Properties;
+                return _inputModel.Properties;
             }
 
+            var existingBaseType = GetSourceBaseType();
             // If base type in custom code is different from the current base type, we need to replace the base type and handle the properties accordingly
-            if (existingBaseType is not null && existingBaseType.Name != baseModel.Name && !SymbolEqualityComparer.Default.Equals(sourceInputModel?.FindForType(ns, baseModel.Name.ToCleanName()), existingBaseType))
+            if (existingBaseType is not null && existingBaseType.Name != baseModel.Name && !SymbolEqualityComparer.Default.Equals(_sourceInputModel?.FindForType(Declaration.Namespace, baseModel.Name.ToCleanName()), existingBaseType))
             {
-                IEnumerable<InputModelProperty> properties = inputModel.Properties.ToList();
+                IEnumerable<InputModelProperty> properties = _inputModel.Properties.ToList();
 
                 // All all properties in the hierarchy of current base type
                 var currentBaseModelProperties = baseModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
@@ -206,7 +207,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return properties.ToList();
             }
 
-            return inputModel.Properties;
+            return _inputModel.Properties;
         }
 
         private MethodSignatureModifiers GetFromResponseModifiers()
@@ -248,12 +249,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override FormattableString CreateDescription()
         {
             return string.IsNullOrEmpty(_inputModel.Description) ? $"The {_inputModel.Name}." : FormattableStringHelpers.FromString(BuilderHelpers.EscapeXmlDocDescription(_inputModel.Description));
-        }
-
-        private ModelTypeProviderFields EnsureFields()
-        {
-            var properties = UpdateInputModelProperties(_inputModel, GetSourceBaseType(), Declaration.Namespace, _sourceInputModel);
-            return new ModelTypeProviderFields(properties, Declaration.Name, _inputModelUsage, _typeFactory, ModelTypeMapping, _inputModel.InheritedDictionaryType, IsStruct, _inputModel.IsPropertyBag);
         }
 
         private ConstructorSignature EnsurePublicConstructorSignature()
