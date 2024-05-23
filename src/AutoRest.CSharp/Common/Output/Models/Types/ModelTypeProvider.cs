@@ -187,15 +187,16 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return inputModel.Properties;
             }
 
+            // If base type in custom code is different from the current base type, we need to replace the base type and handle the properties accordingly
             if (existingBaseType is not null && existingBaseType.Name != baseModel.Name && !SymbolEqualityComparer.Default.Equals(sourceInputModel?.FindForType(ns, baseModel.Name.ToCleanName()), existingBaseType))
             {
                 IEnumerable<InputModelProperty> properties = inputModel.Properties.ToList();
 
-                // All all properties in the hierarchy of current base type to composition properties
+                // All all properties in the hierarchy of current base type
                 var currentBaseModelProperties = baseModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
                 properties = properties.Concat(currentBaseModelProperties);
 
-                // Remove all properties in the hierarchy of existing base type from composition properties
+                // Remove all properties in the hierarchy of existing base type
                 var existingBaseTypeModel = _typeFactory.GetLibraryTypeByName(existingBaseType.Name)?.Implementation as ModelTypeProvider;
                 if (existingBaseTypeModel is not null)
                 {
