@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "SpreadTypeSpec",
- "Description": "This is a spread model or alias service.",
  "ApiVersions": [
   "2022-01-01-preview"
  ],
