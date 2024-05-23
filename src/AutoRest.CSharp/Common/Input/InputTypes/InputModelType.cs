@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Common.Input
         /// <summary>
         /// Provides composition properties
         /// </summary>
-        public IReadOnlyList<InputModelProperty> CompositionProperties { get; init; } = Array.Empty<InputModelProperty>();
+        public IReadOnlyList<string> CompositionProperties { get; init; } = Array.Empty<string>();
 
         public InputModelType? BaseModel { get; private set; } = BaseModel;
         /** In some case, its base model will have a propety whose type is the model, in tspCodeModel.json, the property type is a reference,

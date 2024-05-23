@@ -37,7 +37,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private readonly InputModelTypeUsage _inputModelUsage;
         private readonly InputTypeSerialization _inputModelSerialization;
-        private readonly IReadOnlyList<InputModelProperty> _inputModelProperties;
         private readonly InputModelType _inputModel;
         private readonly TypeFactory _typeFactory;
         private readonly IReadOnlyList<InputModelType> _derivedModels;
@@ -125,7 +124,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             _inputModelUsage = UpdateInputModelUsage(inputModel, ModelTypeMapping);
             _inputModelSerialization = UpdateInputSerialization(inputModel, ModelTypeMapping);
-            _inputModelProperties = UpdateInputModelProperties(inputModel, GetSourceBaseType(), Declaration.Namespace, sourceInputModel);
 
             IsPropertyBag = inputModel.IsPropertyBag;
             IsUnknownDerivedType = inputModel.IsUnknownDiscriminatorModel;
@@ -182,7 +180,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return serialization;
         }
 
-        private static IReadOnlyList<InputModelProperty> UpdateInputModelProperties(InputModelType inputModel, INamedTypeSymbol? existingBaseType, string ns, SourceInputModel? sourceInputModel)
+        private IReadOnlyList<InputModelProperty> UpdateInputModelProperties(InputModelType inputModel, INamedTypeSymbol? existingBaseType, string ns, SourceInputModel? sourceInputModel)
         {
             if (inputModel.BaseModel is not { } baseModel)
             {
@@ -190,21 +188,28 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             var properties = inputModel.Properties.ToList();
-            var compositionProperties = inputModel.CompositionProperties.ToList();
+            IEnumerable<string> compositionProperties = inputModel.CompositionProperties.ToList();
 
             if (existingBaseType is not null && existingBaseType.Name != baseModel.Name && !SymbolEqualityComparer.Default.Equals(sourceInputModel?.FindForType(ns, baseModel.Name.ToCleanName()), existingBaseType))
             {
-                var existingBaseTypeProperties = existingBaseType.GetMembers().OfType<IPropertySymbol>();
+                // All all properties in the hierarchy of current base type to composition properties
+                var currentBaseModelProperties = baseModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
+                compositionProperties = compositionProperties.Concat(currentBaseModelProperties);
 
-                // Filter out properties that are already defined in the existing type
-                compositionProperties = compositionProperties.Where(m => !existingBaseTypeProperties.Any(x => x.Name.Equals(m.Name))).ToList();
+                // Remove all properties in the hierarchy of existing base type from composition properties
+                var existingBaseTypeModel = _typeFactory.GetLibraryTypeByName(existingBaseType.Name)?.Implementation as ModelTypeProvider;
+                if (existingBaseTypeModel is not null)
+                {
+                    var existingBaseTypeProperties = existingBaseTypeModel._inputModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
+                    compositionProperties = compositionProperties.Except(existingBaseTypeProperties);
+                }
             }
 
-            foreach (var property in compositionProperties)
+            foreach (var propertyName in compositionProperties)
             {
-                if (properties.All(p => p.Name != property.Name))
+                if (properties.All(p => p.Name != propertyName))
                 {
-                    properties.Add(property);
+                    properties.Add(propertyName);
                 }
             }
 
@@ -254,7 +259,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ModelTypeProviderFields EnsureFields()
         {
-            return new ModelTypeProviderFields(_inputModelProperties, Declaration.Name, _inputModelUsage, _typeFactory, ModelTypeMapping, _inputModel.InheritedDictionaryType, IsStruct, _inputModel.IsPropertyBag);
+            var properties = UpdateInputModelProperties(_inputModel, GetSourceBaseType(), Declaration.Namespace, _sourceInputModel);
+            return new ModelTypeProviderFields(properties, Declaration.Name, _inputModelUsage, _typeFactory, ModelTypeMapping, _inputModel.InheritedDictionaryType, IsStruct, _inputModel.IsPropertyBag);
         }
 
         private ConstructorSignature EnsurePublicConstructorSignature()

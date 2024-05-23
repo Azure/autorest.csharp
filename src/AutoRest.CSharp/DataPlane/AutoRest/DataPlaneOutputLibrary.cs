@@ -101,7 +101,19 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override TypeProvider FindTypeProviderForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeProviderForSchema)} shouldn't be called for HLC!");
 
-        public override CSharpType? FindTypeByName(string originalName) => Models.Where(m => m.Declaration.Name == originalName).Select(m => m.Type).FirstOrDefault();
+        public override CSharpType? FindTypeByName(string originalName) => TestMethod(originalName);
+
+        private CSharpType? TestMethod(string originalName)
+        {
+            try
+            {
+                return Models.Where(m => m.Declaration.Name == originalName).Select(m => m.Type).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public LongRunningOperation FindLongRunningOperation(InputOperation operation)
         {
