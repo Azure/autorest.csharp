@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         public InputOperation Operation { get; }
 
-        public string OperationId => Operation.OperationId!;
+        public string OperationId => Operation.OperationId;
 
         /// <summary>
         /// The name of this operation

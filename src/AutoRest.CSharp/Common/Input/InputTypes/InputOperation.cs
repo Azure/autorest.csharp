@@ -32,8 +32,7 @@ internal record InputOperation
     OperationPaging? paging,
     bool generateProtocolMethod,
     bool generateConvenienceMethod,
-    bool keepClientDefaultValue,
-    string? operationId = null)
+    bool keepClientDefaultValue)
     {
         Name = name;
         SpecName = name;
@@ -56,7 +55,6 @@ internal record InputOperation
         GenerateProtocolMethod = generateProtocolMethod;
         GenerateConvenienceMethod = generateConvenienceMethod;
         KeepClientDefaultValue = keepClientDefaultValue;
-        OperationId = operationId;
     }
 
     public InputOperation() : this(
@@ -106,8 +104,7 @@ internal record InputOperation
             operation.Paging,
             operation.GenerateProtocolMethod,
             operation.GenerateConvenienceMethod,
-            operation.KeepClientDefaultValue,
-            operation.OperationId)
+            operation.KeepClientDefaultValue)
         {
             SpecName = operation.SpecName
         };
@@ -146,9 +143,9 @@ internal record InputOperation
     public bool GenerateProtocolMethod { get; }
     public bool GenerateConvenienceMethod { get; }
     public bool KeepClientDefaultValue { get; }
-    public string? OperationId { get; }
     public string? OperationName { get; }
     public string? OperationVersion { get; }
     public string? OperationType { get; }
     public string SpecName { get; init; }
+    internal string OperationId => ResourceName is null ? Name : $"{ResourceName}_{Name}";
 }
