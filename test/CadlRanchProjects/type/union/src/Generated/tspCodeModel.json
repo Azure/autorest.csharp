@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Type.Union",
- "Description": "Describe scenarios for various combinations of unions.",
  "ApiVersions": [],
  "Enums": [
   {

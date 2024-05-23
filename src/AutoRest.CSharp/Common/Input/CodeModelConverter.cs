@@ -52,7 +52,6 @@ namespace AutoRest.CSharp.Common.Input
             var clients = CreateClients(_codeModel.OperationGroups, serviceRequestToInputOperation, inputOperationToOperation);
 
             return new(Name: _codeModel.Language.Default.Name,
-                Description: _codeModel.Language.Default.Description,
                 Clients: clients,
                 Models: models,
                 Enums: enums,

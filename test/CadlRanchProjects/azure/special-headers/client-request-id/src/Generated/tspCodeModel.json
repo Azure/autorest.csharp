@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Azure.SpecialHeaders.XmsClientRequestId",
- "Description": "Azure client request id header configurations.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [],
