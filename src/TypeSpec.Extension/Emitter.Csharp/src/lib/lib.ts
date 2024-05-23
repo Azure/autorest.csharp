@@ -5,7 +5,7 @@ import { createTypeSpecLibrary, paramMessage } from "@typespec/compiler";
 import { NetEmitterOptionsSchema } from "../options.js";
 
 const $lib = createTypeSpecLibrary({
-    name: "@typespec/http-client-csharp",
+    name: "@azure-tools/typespec-csharp",
     diagnostics: {
         "no-apiVersion": {
             severity: "error",
