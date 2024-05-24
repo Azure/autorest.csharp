@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public static IEnumerable<InputParameter> GetParametersFromClient(InputClient client)
         {
-            return (client.Parameters ?? new List<InputParameter>())
+            return client.Parameters
                 .Concat(client.Operations.SelectMany(op => op.Parameters).Where(p => p.Kind == InputOperationParameterKind.Client))
                 .Distinct();
         }
