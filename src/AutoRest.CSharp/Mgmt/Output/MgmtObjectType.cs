@@ -8,7 +8,6 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
@@ -32,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private string? _defaultNamespace;
         protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(MgmtContext.Context, InputModel, IsResourceType);
 
-        internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
+        internal ObjectTypeProperty[] MyProperties => _myProperties ??= UpdateInputModelProperties().Select(CreateProperty).ToArray();
 
         private static string GetDefaultName(InputModelType inputModel, bool isResourceType)
         {
@@ -104,22 +103,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             // only bother flattening if the single property is public
             return properties.Length == 1 && properties[0].Declaration.Accessibility == "public";
-        }
-
-        private IEnumerable<ObjectTypeProperty> BuildMyProperties()
-        {
-            foreach (var property in UpdateInputModelProperties())
-            {
-                yield return CreateProperty(property);
-            }
-
-            foreach (var inputModel in GetCombinedSchemas())
-            {
-                foreach (InputModelProperty property in inputModel.Properties!)
-                {
-                    yield return CreateProperty(property);
-                }
-            }
         }
 
         protected virtual ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
@@ -214,9 +197,26 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override CSharpType? CreateInheritedType()
         {
-            if (GetExistingBaseType() is { } existingBaseType)
+            // find from the customized code to see if we already have this type defined with a base class
+            if (ExistingType != null && ExistingType.BaseType != null)
             {
-                return existingBaseType;
+                // if this type is defined with a base class, we have to use the same base class here
+                // otherwise the compiler will throw an error
+                if (MgmtContext.Context.TypeFactory.TryCreateType(ExistingType.BaseType, ShouldIncludeArmCoreType, out var existingBaseType))
+                {
+                    // if we could find a type and it is not a framework type meaning that it is a TypeProvider, return that
+                    if (!existingBaseType.IsFrameworkType)
+                        return existingBaseType;
+                    // if it is a framework type, first we check if it is System.Object. Since it is base type for everything, we would not want it to override anything in our code
+                    if (!existingBaseType.Equals(typeof(object)))
+                    {
+                        // we cannot directly return the FrameworkType here, we need to wrap it inside the SystemObjectType
+                        // in order to let the constructor builder have the ability to get base constructor
+                        return CSharpType.FromSystemType(MgmtContext.Context, existingBaseType.FrameworkType);
+                    }
+                }
+                // if we did not find that type, this means the customization code is referencing something unrecognized
+                // or the customization code is not specifying a base type
             }
 
             CSharpType? inheritedType = base.CreateInheritedType();

@@ -475,20 +475,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return prop;
             }
 
-            foreach (var inputModel in GetCombinedSchemas())
-            {
-                foreach (InputModelProperty property in inputModel.Properties!)
-                {
-                    if (existingProperties.Contains(property.Name))
-                    {
-                        continue;
-                    }
-                    var prop = CreateProperty(property);
-                    propertiesFromSpec.Add(prop.Declaration.Name);
-                    yield return prop;
-                }
-            }
-
             if (AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)
             {
                 propertiesFromSpec.Add(additionalPropertiesProperty.Declaration.Name);
@@ -516,9 +502,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected IReadOnlyList<InputModelProperty> UpdateInputModelProperties()
         {
+            var allProperties = InputModel.Properties.Concat(GetCombinedSchemas().SelectMany(x => x.Properties)).ToArray();
             if (InputModel.BaseModel is not { } baseModel)
             {
-                return InputModel.Properties;
+                return allProperties;
             }
 
             var existingBaseType = GetSourceBaseType();
@@ -538,10 +525,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                     var existingBaseTypeProperties = existingBaseTypeModel.InputModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
                     properties = properties.Except(existingBaseTypeProperties);
                 }
-                return properties.Concat(InputModel.GetAllBaseModels().SelectMany(x => x.Properties)).ToList();
+                return properties.ToList();
             }
 
-            return InputModel.Properties;
+            return allProperties;
         }
 
         protected ObjectTypeProperty CreateProperty(InputModelProperty property)
