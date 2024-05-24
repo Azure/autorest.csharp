@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Common.Input
@@ -20,8 +19,6 @@ namespace AutoRest.CSharp.Common.Input
         /// Indicates if this model is a property bag
         /// </summary>
         public bool IsPropertyBag { get; init; } = false;
-
-        public IReadOnlyList<InputModelType> AllBaseModels { get; init; } = Array.Empty<InputModelType>();
 
         public InputModelType? BaseModel { get; private set; } = BaseModel;
         /** In some case, its base model will have a propety whose type is the model, in tspCodeModel.json, the property type is a reference,

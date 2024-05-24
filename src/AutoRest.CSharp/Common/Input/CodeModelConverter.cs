@@ -361,7 +361,6 @@ namespace AutoRest.CSharp.Common.Input
                 InheritedDictionaryType: dictionarySchema is not null ? (InputDictionaryType)GetOrCreateType(dictionarySchema, false) : null,
                 IsNullable: false)
             {
-                AllBaseModels = schema.Parents?.All is null ? Array.Empty<InputModelType>() : schema.Parents.All.OfType<ObjectSchema>().Select(GetOrCreateModel).ToArray(),
                 Serialization = GetSerialization(schema, usage),
                 SpecName = schema.Language.Default.SerializedName
             };

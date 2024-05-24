@@ -361,7 +361,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     null,
                     false)
                 {
-                    AllBaseModels = new List<InputModelType> { actualBase },
                     IsUnknownDiscriminatorModel = true,
                 };
 

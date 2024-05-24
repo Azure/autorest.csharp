@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return false;
 
             // we cannot use the EnumerateHierarchy method because we are calling this when we are building that
-            var properties = objType.GetCombinedSchemas().SelectMany(obj => obj.Properties);
+            var properties = objType.InputModel.GetSelfAndBaseModels().SelectMany(obj => obj.Properties);
             return properties.Count() == 1;
         }
 
@@ -108,9 +108,14 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private IEnumerable<ObjectTypeProperty> BuildMyProperties()
         {
-            foreach (var objectSchema in GetCombinedSchemas())
+            foreach (var property in UpdateInputModelProperties())
             {
-                foreach (var property in objectSchema.Properties)
+                yield return CreateProperty(property);
+            }
+
+            foreach (var inputModel in GetCombinedSchemas())
+            {
+                foreach (InputModelProperty property in inputModel.Properties!)
                 {
                     yield return CreateProperty(property);
                 }
@@ -294,7 +299,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         internal string GetFullSerializedName(InputModelProperty property)
         {
-            var parentSchema = this.GetCombinedSchemas().FirstOrDefault(s => s.Properties.Contains(property));
+            var parentSchema = InputModel.GetSelfAndBaseModels().FirstOrDefault(s => s.Properties.Contains(property));
             if (parentSchema == null)
             {
                 throw new InvalidOperationException($"Can't find parent object schema for property schema: '{this.Declaration.Name}.{property.CSharpName()}'");
