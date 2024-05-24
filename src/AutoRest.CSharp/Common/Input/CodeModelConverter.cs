@@ -156,7 +156,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 SpecName = operation.Language.Default.SerializedName ?? operation.Language.Default.Name
             };
-            inputOperation.CodeModelExamples = CreateOperationExamples(inputOperation);
+            inputOperation.CodeModelExamples = CreateOperationExamples(inputOperation, operation);
             return inputOperation;
         }
 
@@ -169,10 +169,10 @@ namespace AutoRest.CSharp.Common.Input
             return operationId.Split('_')[0];
         }
 
-        private IReadOnlyList<InputOperationExample> CreateOperationExamples(InputOperation operation)
+        private IReadOnlyList<InputOperationExample> CreateOperationExamples(InputOperation inputOperation, Operation operation)
         {
             var result = new List<InputOperationExample>();
-            var exampleOperation = _codeModel.TestModel?.MockTest.ExampleGroups?.FirstOrDefault(g => string.Equals(g.OperationId, operation.OperationId, StringComparison.OrdinalIgnoreCase));
+            var exampleOperation = _codeModel.TestModel?.MockTest.ExampleGroups?.FirstOrDefault(g => g.Operation == operation);
             if (exampleOperation is null)
             {
                 return result;
@@ -182,7 +182,7 @@ namespace AutoRest.CSharp.Common.Input
                 var parameters = example.AllParameters
                     .Select(p => new InputParameterExample(CreateOperationParameter(p.Parameter), CreateExampleValue(p.ExampleValue)))
                     .ToList();
-                result.Add(new InputOperationExample(operation, parameters, example.Name, example.OriginalFile));
+                result.Add(new InputOperationExample(inputOperation, parameters, example.Name, example.OriginalFile));
             }
             return result;
         }
