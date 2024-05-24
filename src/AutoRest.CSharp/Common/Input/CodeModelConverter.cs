@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Common.Input
         private readonly Dictionary<Schema, InputEnumType> _enumsCache;
         private readonly Dictionary<string, InputEnumType> _enumsNamingCache;
         private readonly Dictionary<ObjectSchema, InputModelType> _modelsCache;
-        private readonly Dictionary<ObjectSchema, List<InputModelProperty>> _modelPropertiesCache;
+        private readonly Dictionary<ObjectSchema, (List<InputModelProperty> Properties, IReadOnlyList<ObjectSchema> CompositSchemas)> _modelPropertiesCache;
         private readonly Dictionary<ObjectSchema, List<InputModelType>> _derivedModelsCache;
 
         public CodeModelConverter(CodeModel codeModel, SchemaUsageProvider schemaUsageProvider)
@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Common.Input
             _operationsCache = new Dictionary<ServiceRequest, Func<InputOperation>>();
             _parametersCache = new Dictionary<RequestParameter, Func<InputParameter>>();
             _modelsCache = new Dictionary<ObjectSchema, InputModelType>();
-            _modelPropertiesCache = new Dictionary<ObjectSchema, List<InputModelProperty>>();
+            _modelPropertiesCache = new Dictionary<ObjectSchema, (List<InputModelProperty> Properties, IReadOnlyList<ObjectSchema> CompositSchemas)>();
             _derivedModelsCache = new Dictionary<ObjectSchema, List<InputModelType>>();
         }
 
@@ -55,7 +55,6 @@ namespace AutoRest.CSharp.Common.Input
             var clients = CreateClients(_codeModel.OperationGroups, serviceRequestToInputOperation, inputOperationToOperation);
 
             return new(Name: _codeModel.Language.Default.Name,
-                Description: _codeModel.Language.Default.Description,
                 Clients: clients,
                 Models: models,
                 Enums: _enumsCache.Values.ToArray(),
@@ -304,9 +303,10 @@ namespace AutoRest.CSharp.Common.Input
                 GetOrCreateModel(schema);
             }
 
-            foreach (var (schema, properties) in _modelPropertiesCache)
+            foreach (var (schema, (properties, compositionSchemas)) in _modelPropertiesCache)
             {
                 properties.AddRange(schema.Properties.Select(CreateProperty));
+                properties.AddRange(compositionSchemas.SelectMany(EnumerateBase).SelectMany(x => x.Properties).Select(CreateProperty));
             }
 
             foreach (var schema in schemas)
@@ -321,6 +321,15 @@ namespace AutoRest.CSharp.Common.Input
             return schemas.Select(s => _modelsCache[s]).ToList();
         }
 
+        private static IEnumerable<ObjectSchema> EnumerateBase(ObjectSchema? schema)
+        {
+            while (schema != null)
+            {
+                yield return schema;
+                schema = GetBaseModelSchema(schema);
+            }
+        }
+
         private InputModelType GetOrCreateModel(ObjectSchema schema)
         {
             if (_modelsCache.TryGetValue(schema, out var model))
@@ -332,7 +341,8 @@ namespace AutoRest.CSharp.Common.Input
             var properties = new List<InputModelProperty>();
             var derived = new List<InputModelType>();
             var baseModelSchema = GetBaseModelSchema(schema);
-            var compositeSchemas = schema.Parents?.Immediate?.OfType<ObjectSchema>().Where(s => s != baseModelSchema);
+            var baseModel = baseModelSchema is not null ? GetOrCreateModel(baseModelSchema) : null;
+            IReadOnlyList<ObjectSchema> compositeSchemas = schema.Parents?.Immediate?.OfType<ObjectSchema>().Where(s => s != baseModelSchema).ToArray() ?? Array.Empty<ObjectSchema>();
             var dictionarySchema = schema.Parents?.Immediate?.OfType<DictionarySchema>().FirstOrDefault();
 
             model = new InputModelType(
@@ -344,7 +354,7 @@ namespace AutoRest.CSharp.Common.Input
                 Usage: (schema.Extensions != null && schema.Extensions.Formats.Contains("multipart/form-data") ? InputModelTypeUsage.Multipart : InputModelTypeUsage.None)
                         | GetUsage(usage),
                 Properties: properties,
-                BaseModel: baseModelSchema is not null ? GetOrCreateModel(baseModelSchema) : null,
+                BaseModel: baseModel,
                 DerivedModels: derived,
                 DiscriminatorValue: schema.DiscriminatorValue,
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
@@ -358,10 +368,16 @@ namespace AutoRest.CSharp.Common.Input
             };
 
             _modelsCache[schema] = model;
-            _modelPropertiesCache[schema] = properties;
+            _modelPropertiesCache[schema] = (properties, compositeSchemas);
             _derivedModelsCache[schema] = derived;
 
             return model;
+        }
+
+        private IReadOnlyList<Property> CreateCompositionProperties(ObjectSchema objectSchema, ObjectSchema? baseModelSchema)
+        {
+            var compositeSchemas = objectSchema.Parents?.Immediate?.OfType<ObjectSchema>().Where(s => s != baseModelSchema);
+            return compositeSchemas is null ? Array.Empty<Property>() : compositeSchemas.SelectMany(m => m.Properties).ToList();
         }
 
         private bool IsBasePolyType(ObjectSchema schema)

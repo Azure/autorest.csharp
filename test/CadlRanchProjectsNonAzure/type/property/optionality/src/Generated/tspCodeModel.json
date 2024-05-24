@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Type.Property.Optional",
- "Description": "Illustrates models with optional properties.",
  "ApiVersions": [],
  "Enums": [
   {

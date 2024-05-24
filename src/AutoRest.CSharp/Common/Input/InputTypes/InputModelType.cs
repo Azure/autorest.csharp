@@ -21,11 +21,6 @@ namespace AutoRest.CSharp.Common.Input
         /// </summary>
         public bool IsPropertyBag { get; init; } = false;
 
-        /// <summary>
-        /// Types provided as immediate parents in spec that aren't base model
-        /// </summary>
-        public IEnumerable<InputModelType> CompositionModels => AllBaseModels.Where(x => x != BaseModel && x.Name != "AzureResourceBase");
-
         public IReadOnlyList<InputModelType> AllBaseModels { get; init; } = Array.Empty<InputModelType>();
 
         // TODO: remove the workaround for immediate base models

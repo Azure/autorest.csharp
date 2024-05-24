@@ -13,9 +13,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -606,11 +604,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override CSharpType? CreateInheritedType()
         {
-            var sourceBaseType = ExistingType?.BaseType;
-            if (sourceBaseType != null &&
-                sourceBaseType.SpecialType != SpecialType.System_ValueType &&
-                sourceBaseType.SpecialType != SpecialType.System_Object &&
-                _typeFactory.TryCreateType(sourceBaseType, out CSharpType? baseType))
+            if (GetSourceBaseType() is { } sourceBaseType && _typeFactory.TryCreateType(sourceBaseType, out CSharpType? baseType))
             {
                 return baseType;
             }
@@ -637,6 +631,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             return null;
         }
+
+        private INamedTypeSymbol? GetSourceBaseType()
+            => ExistingType?.BaseType is { } sourceBaseType && sourceBaseType.SpecialType != SpecialType.System_ValueType && sourceBaseType.SpecialType != SpecialType.System_Object
+                ? sourceBaseType
+                : null;
 
         private CSharpType? CreateInheritedDictionaryType()
         {
