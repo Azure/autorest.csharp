@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="TestAsync(string,CancellationToken)">
+      <example>
+This sample shows how to call TestAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, Versions.V1);
+
+Response<string> response = await client.TestAsync("<body>");
+]]></code>
+This sample shows how to call TestAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, Versions.V1);
+
+Response<string> response = await client.TestAsync("<body>");
+]]></code></example>
+    </member>
+    <member name="Test(string,CancellationToken)">
+      <example>
+This sample shows how to call Test.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, Versions.V1);
+
+Response<string> response = client.Test("<body>");
+]]></code>
+This sample shows how to call Test with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, Versions.V1);
+
+Response<string> response = client.Test("<body>");
+]]></code></example>
+    </member>
+    <member name="TestAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call TestAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, Versions.V1);
+
+using RequestContent content = RequestContent.Create("<body>");
+Response response = await client.TestAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call TestAsync with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, Versions.V1);
+
+using RequestContent content = RequestContent.Create("<body>");
+Response response = await client.TestAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code></example>
+    </member>
+    <member name="Test(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Test and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, Versions.V1);
+
+using RequestContent content = RequestContent.Create("<body>");
+Response response = client.Test(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call Test with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, Versions.V1);
+
+using RequestContent content = RequestContent.Create("<body>");
+Response response = client.Test(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code></example>
+    </member>
+  </members>
+</doc>
