@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Type.Property.ValueTypes",
- "Description": "Illustrates various property types for models",
  "ApiVersions": [],
  "Enums": [
   {

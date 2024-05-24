@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Type.Model.Flatten",
- "Description": "Illustrates the model flatten cases.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [

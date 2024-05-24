@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Type.Dictionary",
- "Description": "Illustrates various of dictionaries.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [

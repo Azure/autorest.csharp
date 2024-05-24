@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Payload.ContentNegotiation",
- "Description": "Test describing optionality of the request body.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [

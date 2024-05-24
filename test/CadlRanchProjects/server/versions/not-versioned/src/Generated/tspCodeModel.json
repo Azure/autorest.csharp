@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Server.Versions.NotVersioned",
- "Description": "Illustrates not-versioned server.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [],

@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Server.Versions.Versioned",
- "Description": "Illustrates versioned server.",
  "ApiVersions": [
   "2021-01-01-preview",
   "2022-12-01-preview"

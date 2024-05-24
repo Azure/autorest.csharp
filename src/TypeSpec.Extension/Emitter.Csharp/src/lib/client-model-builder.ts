@@ -104,8 +104,6 @@ export function createModelForService(
               }
             : undefined;
 
-    const description = getDoc(program, serviceNamespaceType);
-
     const servers = getServers(program, serviceNamespaceType);
     const namespace = getNamespaceFullName(serviceNamespaceType) || "client";
     const authentication = getAuthentication(program, serviceNamespaceType);
@@ -210,7 +208,6 @@ export function createModelForService(
 
     const clientModel = {
         Name: namespace,
-        Description: description,
         ApiVersions: Array.from(apiVersions.values()),
         Enums: Array.from(enumMap.values()),
         Models: Array.from(modelMap.values()),

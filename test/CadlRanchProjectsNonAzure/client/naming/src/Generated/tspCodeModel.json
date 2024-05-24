@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Client.Naming",
- "Description": "Describe changing names of types in a client with `@clientName`",
  "ApiVersions": [],
  "Enums": [
   {
