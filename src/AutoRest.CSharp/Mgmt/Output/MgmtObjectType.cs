@@ -191,7 +191,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var descendantTypes = schemaObjectType.Discriminator.Implementations.Select(implementation => implementation.Type).ToHashSet();
 
             // We need this redundant check as the internal backing schema will not be a part of the discriminator implementations of its base type.
-            var immediateParents = InputModel.ImmediateBaseModels.ToArray();
+            var immediateParents = InputModel.GetAllBaseModels().ToArray();
             if (InputModel.DiscriminatorValue == "Unknown" &&
                 immediateParents.Length == 1 &&
                 immediateParents.Single().Equals(schemaObjectType.InputModel))
@@ -209,27 +209,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override CSharpType? CreateInheritedType()
         {
-            // find from the customized code to see if we already have this type defined with a base class
-            if (ExistingType != null && ExistingType.BaseType != null)
+            if (GetExistingBaseType() is { } existingBaseType)
             {
-                // if this type is defined with a base class, we have to use the same base class here
-                // otherwise the compiler will throw an error
-                if (MgmtContext.Context.TypeFactory.TryCreateType(ExistingType.BaseType, ShouldIncludeArmCoreType, out var existingBaseType))
-                {
-                    // if we could find a type and it is not a framework type meaning that it is a TypeProvider, return that
-                    if (!existingBaseType.IsFrameworkType)
-                        return existingBaseType;
-                    // if it is a framework type, first we check if it is System.Object. Since it is base type for everything, we would not want it to override anything in our code
-                    if (!existingBaseType.Equals(typeof(object)))
-                    {
-                        // we cannot directly return the FrameworkType here, we need to wrap it inside the SystemObjectType
-                        // in order to let the constructor builder have the ability to get base constructor
-                        return CSharpType.FromSystemType(MgmtContext.Context, existingBaseType.FrameworkType);
-                    }
-                }
-                // if we did not find that type, this means the customization code is referencing something unrecognized
-                // or the customization code is not specifying a base type
+                return existingBaseType;
             }
+
             CSharpType? inheritedType = base.CreateInheritedType();
             if (inheritedType != null)
             {

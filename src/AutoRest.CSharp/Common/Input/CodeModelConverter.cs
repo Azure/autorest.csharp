@@ -359,8 +359,7 @@ namespace AutoRest.CSharp.Common.Input
                 DiscriminatorValue: schema.DiscriminatorValue,
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
                 InheritedDictionaryType: dictionarySchema is not null ? (InputDictionaryType)GetOrCreateType(dictionarySchema, false) : null,
-                IsNullable: false,
-                IsBasePolyType: IsBasePolyType(schema))
+                IsNullable: false)
             {
                 AllBaseModels = schema.Parents?.All is null ? Array.Empty<InputModelType>() : schema.Parents.All.OfType<ObjectSchema>().Select(GetOrCreateModel).ToArray(),
                 Serialization = GetSerialization(schema, usage),
@@ -696,7 +695,7 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         private static InputModelType CreateDataFactoryElementIntputType(bool isNullable, InputType argumentType)
-            => new InputModelType("DataFactoryElement", "Azure.Core.Resources", null, null, null, InputModelTypeUsage.None, Array.Empty<InputModelProperty>(), null, Array.Empty<InputModelType>(), null, null, null, false, isNullable, new List<InputType> { argumentType });
+            => new InputModelType("DataFactoryElement", "Azure.Core.Resources", null, null, null, InputModelTypeUsage.None, Array.Empty<InputModelProperty>(), null, Array.Empty<InputModelType>(), null, null, null, isNullable, new List<InputType> { argumentType });
 
         private InputConstant CreateConstant(ConstantSchema constantSchema, string? format, bool isNullable)
         {

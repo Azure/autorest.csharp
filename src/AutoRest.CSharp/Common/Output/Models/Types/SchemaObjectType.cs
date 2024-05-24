@@ -604,38 +604,29 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override CSharpType? CreateInheritedType()
         {
-            if (GetSourceBaseType() is { } sourceBaseType && _typeFactory.TryCreateType(sourceBaseType, out CSharpType? baseType))
+            if (GetExistingBaseType() is { } existingBaseType)
+            {
+                return existingBaseType;
+            }
+
+            return InputModel.BaseModel is { } baseModel
+                ? _typeFactory.CreateType(baseModel)
+                : null;
+        }
+
+        protected CSharpType? GetExistingBaseType()
+        {
+            var existingBaseType = ExistingType?.BaseType is { } sourceBaseType && sourceBaseType.SpecialType != SpecialType.System_ValueType && sourceBaseType.SpecialType != SpecialType.System_Object
+                ? sourceBaseType
+                : null;
+
+            if (existingBaseType is { } type && _typeFactory.TryCreateType(type, out CSharpType? baseType))
             {
                 return baseType;
             }
 
-            InputModelType? selectedSchema = null;
-
-            foreach (var objectSchema in InputModel.ImmediateBaseModels)
-            {
-                // Take first schema or the one with discriminator
-                selectedSchema ??= objectSchema;
-
-                if (objectSchema.DiscriminatorPropertyName != null)
-                {
-                    selectedSchema = objectSchema;
-                    break;
-                }
-            }
-
-            if (selectedSchema != null)
-            {
-                CSharpType type = _typeFactory.CreateType(selectedSchema);
-                Debug.Assert(!type.IsFrameworkType);
-                return type;
-            }
             return null;
         }
-
-        private INamedTypeSymbol? GetSourceBaseType()
-            => ExistingType?.BaseType is { } sourceBaseType && sourceBaseType.SpecialType != SpecialType.System_ValueType && sourceBaseType.SpecialType != SpecialType.System_Object
-                ? sourceBaseType
-                : null;
 
         private CSharpType? CreateInheritedDictionaryType()
         {

@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, InputDictionaryType? InheritedDictionaryType, bool IsNullable, bool IsBasePolyType = false, IReadOnlyList<InputType>? ArgumentTypes = null)
+    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, InputDictionaryType? InheritedDictionaryType, bool IsNullable, IReadOnlyList<InputType>? ArgumentTypes = null)
         : InputType(Name, IsNullable)
     {
         /// <summary>
@@ -22,9 +22,6 @@ namespace AutoRest.CSharp.Common.Input
         public bool IsPropertyBag { get; init; } = false;
 
         public IReadOnlyList<InputModelType> AllBaseModels { get; init; } = Array.Empty<InputModelType>();
-
-        // TODO: remove the workaround for immediate base models
-        public IEnumerable<InputModelType> ImmediateBaseModels => AllBaseModels.Where(x => x.Name != "AzureResourceBase");
 
         public InputModelType? BaseModel { get; private set; } = BaseModel;
         /** In some case, its base model will have a propety whose type is the model, in tspCodeModel.json, the property type is a reference,
@@ -40,6 +37,8 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
+
+        public IEnumerable<InputModelType> GetAllBaseModels() => EnumerateBase(BaseModel);
 
         private static IEnumerable<InputModelType> EnumerateBase(InputModelType? model)
         {
