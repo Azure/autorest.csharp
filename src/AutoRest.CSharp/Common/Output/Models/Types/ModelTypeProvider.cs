@@ -37,7 +37,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private readonly InputModelTypeUsage _inputModelUsage;
         private readonly InputTypeSerialization _inputModelSerialization;
-        private readonly IReadOnlyList<InputModelProperty> _inputModelProperties;
         private readonly InputModelType _inputModel;
         private readonly TypeFactory _typeFactory;
         private readonly IReadOnlyList<InputModelType> _derivedModels;
@@ -49,7 +48,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null && _inputModel.DiscriminatorValue is null;
 
-        public ModelTypeProviderFields Fields => _fields ??= EnsureFields();
+        public ModelTypeProviderFields Fields => _fields ??= new ModelTypeProviderFields(UpdateInputModelProperties(), Declaration.Name, _inputModelUsage, _typeFactory, ModelTypeMapping, _inputModel.InheritedDictionaryType, IsStruct, _inputModel.IsPropertyBag);
         private ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
         private ConstructorSignature SerializationConstructorSignature => _serializationConstructor ??= EnsureSerializationConstructorSignature();
 
@@ -125,7 +124,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             _inputModelUsage = UpdateInputModelUsage(inputModel, ModelTypeMapping);
             _inputModelSerialization = UpdateInputSerialization(inputModel, ModelTypeMapping);
-            _inputModelProperties = UpdateInputModelProperties(inputModel, GetSourceBaseType(), Declaration.Namespace, sourceInputModel);
 
             IsPropertyBag = inputModel.IsPropertyBag;
             IsUnknownDerivedType = inputModel.IsUnknownDiscriminatorModel;
@@ -182,46 +180,34 @@ namespace AutoRest.CSharp.Output.Models.Types
             return serialization;
         }
 
-        private static IReadOnlyList<InputModelProperty> UpdateInputModelProperties(InputModelType inputModel, INamedTypeSymbol? existingBaseType, string ns, SourceInputModel? sourceInputModel)
+        private IReadOnlyList<InputModelProperty> UpdateInputModelProperties()
         {
-            if (inputModel.BaseModel is not { } baseModel)
+            if (_inputModel.BaseModel is not { } baseModel)
             {
-                return inputModel.Properties;
+                return _inputModel.Properties;
             }
 
-            var properties = inputModel.Properties.ToList();
-            var compositionModels = inputModel.CompositionModels;
-
-            if (existingBaseType is not null && existingBaseType.Name != baseModel.Name && !SymbolEqualityComparer.Default.Equals(sourceInputModel?.FindForType(ns, baseModel.Name.ToCleanName()), existingBaseType))
+            var existingBaseType = GetSourceBaseType();
+            // If base type in custom code is different from the current base type, we need to replace the base type and handle the properties accordingly
+            if (existingBaseType is not null && existingBaseType.Name != baseModel.Name && !SymbolEqualityComparer.Default.Equals(_sourceInputModel?.FindForType(Declaration.Namespace, baseModel.Name.ToCleanName()), existingBaseType))
             {
-                // First try to find composite type by name
-                // If failed, try find existing type with CodeGenModel that has expected name
-                var baseTypeReplacement = inputModel.CompositionModels.FirstOrDefault(m => m.Name == existingBaseType.Name);
-                if (baseTypeReplacement is null && sourceInputModel is not null)
-                {
-                    baseTypeReplacement = inputModel.CompositionModels.FirstOrDefault(m => SymbolEqualityComparer.Default.Equals(sourceInputModel.FindForType(ns, m.Name.ToCleanName()), existingBaseType));
-                }
+                IEnumerable<InputModelProperty> properties = _inputModel.Properties.ToList();
 
-                if (baseTypeReplacement is null)
-                {
-                    throw new InvalidOperationException($"Base type `{existingBaseType.Name}` is not one of the `{inputModel.Name}` composite types.");
-                }
+                // Add all properties in the hierarchy of current base type
+                var currentBaseModelProperties = baseModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
+                properties = properties.Concat(currentBaseModelProperties);
 
-                compositionModels = inputModel.CompositionModels
-                    .Except(baseTypeReplacement.GetSelfAndBaseModels())
-                    .Concat(baseModel.GetSelfAndBaseModels())
-                    .ToList();
+                // Remove all properties in the hierarchy of existing base type
+                var existingBaseTypeModel = _typeFactory.GetLibraryTypeByName(existingBaseType.Name)?.Implementation as ModelTypeProvider;
+                if (existingBaseTypeModel is not null)
+                {
+                    var existingBaseTypeProperties = existingBaseTypeModel._inputModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
+                    properties = properties.Except(existingBaseTypeProperties);
+                }
+                return properties.ToList();
             }
 
-            foreach (var property in compositionModels.SelectMany(m => m.GetSelfAndBaseModels()).SelectMany(m => m.Properties))
-            {
-                if (properties.All(p => p.Name != property.Name))
-                {
-                    properties.Add(property);
-                }
-            }
-
-            return properties;
+            return _inputModel.Properties;
         }
 
         private MethodSignatureModifiers GetFromResponseModifiers()
@@ -263,11 +249,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override FormattableString CreateDescription()
         {
             return string.IsNullOrEmpty(_inputModel.Description) ? $"The {_inputModel.Name}." : FormattableStringHelpers.FromString(BuilderHelpers.EscapeXmlDocDescription(_inputModel.Description));
-        }
-
-        private ModelTypeProviderFields EnsureFields()
-        {
-            return new ModelTypeProviderFields(_inputModelProperties, Declaration.Name, _inputModelUsage, _typeFactory, ModelTypeMapping, _inputModel.InheritedDictionaryType, IsStruct, _inputModel.IsPropertyBag);
         }
 
         private ConstructorSignature EnsurePublicConstructorSignature()
