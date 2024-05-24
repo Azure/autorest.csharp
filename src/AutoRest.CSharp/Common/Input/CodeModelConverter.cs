@@ -172,7 +172,7 @@ namespace AutoRest.CSharp.Common.Input
         private IReadOnlyList<InputOperationExample> CreateOperationExamples(InputOperation operation)
         {
             var result = new List<InputOperationExample>();
-            var exampleOperation = _codeModel.TestModel?.MockTest.ExampleGroups?.FirstOrDefault(g => g.OperationId == operation.OperationId);
+            var exampleOperation = _codeModel.TestModel?.MockTest.ExampleGroups?.FirstOrDefault(g => string.Equals(g.OperationId, operation.OperationId, StringComparison.OrdinalIgnoreCase));
             if (exampleOperation is null)
             {
                 return result;
