@@ -502,10 +502,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected IReadOnlyList<InputModelProperty> UpdateInputModelProperties()
         {
-            var allProperties = InputModel.Properties.Concat(GetCombinedSchemas().SelectMany(x => x.Properties)).ToArray();
             if (InputModel.BaseModel is not { } baseModel)
             {
-                return allProperties;
+                return InputModel.Properties.ToArray();
             }
 
             var existingBaseType = GetSourceBaseType();
@@ -528,7 +527,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return properties.ToList();
             }
 
-            return allProperties;
+            return InputModel.Properties.ToArray();
         }
 
         protected ObjectTypeProperty CreateProperty(InputModelProperty property)
