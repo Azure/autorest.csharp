@@ -13,9 +13,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -400,7 +398,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var discriminatorPropertyName = InputModel.DiscriminatorPropertyName;
             if (discriminatorPropertyName is null)
             {
-                discriminatorPropertyName = InputModel.AllBaseModels.FirstOrDefault(m => m.DiscriminatorPropertyName != null)?.DiscriminatorPropertyName;
+                discriminatorPropertyName = GetCombinedSchemas().FirstOrDefault(m => m.DiscriminatorPropertyName != null)?.DiscriminatorPropertyName;
             }
             if (discriminatorPropertyName is null)
             {
@@ -466,18 +464,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             var propertiesFromSpec = GetParentPropertyDeclarationNames();
             var existingProperties = GetParentPropertySerializedNames();
 
-            foreach (var inputModel in GetCombinedSchemas())
+            foreach (var property in UpdateInputModelProperties())
             {
-                foreach (InputModelProperty property in inputModel.Properties!)
+                if (existingProperties.Contains(property.Name))
                 {
-                    if (existingProperties.Contains(property.Name))
-                    {
-                        continue;
-                    }
-                    var prop = CreateProperty(property);
-                    propertiesFromSpec.Add(prop.Declaration.Name);
-                    yield return prop;
+                    continue;
                 }
+                var prop = CreateProperty(property);
+                propertiesFromSpec.Add(prop.Declaration.Name);
+                yield return prop;
             }
 
             if (AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)
@@ -503,6 +498,36 @@ namespace AutoRest.CSharp.Output.Models.Types
                         null);
                 }
             }
+        }
+
+        protected IReadOnlyList<InputModelProperty> UpdateInputModelProperties()
+        {
+            if (InputModel.BaseModel is not { } baseModel)
+            {
+                return InputModel.Properties;
+            }
+
+            var existingBaseType = GetSourceBaseType();
+            // If base type in custom code is different from the current base type, we need to replace the base type and handle the properties accordingly
+            if (existingBaseType is not null && existingBaseType.Name != baseModel.Name && !SymbolEqualityComparer.Default.Equals(_sourceInputModel?.FindForType(Declaration.Namespace, baseModel.Name.ToCleanName()), existingBaseType))
+            {
+                IEnumerable<InputModelProperty> properties = InputModel.Properties.ToList();
+
+                // Remove all properties in the hierarchy of current base type
+                var currentBaseModelProperties = baseModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
+                properties = properties.Except(currentBaseModelProperties);
+
+                // Add all properties in the hierarchy of existing base type
+                var existingBaseTypeModel = _typeFactory.GetLibraryTypeByName(existingBaseType.Name)?.Implementation as SchemaObjectType;
+                if (existingBaseTypeModel is not null)
+                {
+                    var existingBaseTypeProperties = existingBaseTypeModel.InputModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
+                    properties = properties.Concat(existingBaseTypeProperties);
+                }
+                return properties.ToList();
+            }
+
+            return InputModel.Properties;
         }
 
         protected ObjectTypeProperty CreateProperty(InputModelProperty property)
@@ -593,49 +618,53 @@ namespace AutoRest.CSharp.Output.Models.Types
             return valueType;
         }
 
-        // Enumerates all schemas that were merged into this one, excludes the inherited schema
         protected internal IEnumerable<InputModelType> GetCombinedSchemas()
         {
-            yield return InputModel;
-
-            foreach (var model in InputModel.AllBaseModels)
+            if (InputModel.IsUnknownDiscriminatorModel)
             {
-                yield return model;
+                if (InputModel.BaseModel is not null)
+                {
+                    yield return InputModel.BaseModel;
+                }
+            }
+            else
+            {
+                foreach (var inputModel in InputModel.GetAllBaseModels())
+                {
+                    yield return inputModel;
+                }
             }
         }
 
         protected override CSharpType? CreateInheritedType()
         {
-            var sourceBaseType = ExistingType?.BaseType;
-            if (sourceBaseType != null &&
-                sourceBaseType.SpecialType != SpecialType.System_ValueType &&
-                sourceBaseType.SpecialType != SpecialType.System_Object &&
-                _typeFactory.TryCreateType(sourceBaseType, out CSharpType? baseType))
+            if (GetExistingBaseType() is { } existingBaseType)
+            {
+                return existingBaseType;
+            }
+
+            return InputModel.BaseModel is { } baseModel
+                ? _typeFactory.CreateType(baseModel)
+                : null;
+        }
+
+        protected CSharpType? GetExistingBaseType()
+        {
+            INamedTypeSymbol? existingBaseType = GetSourceBaseType();
+
+            if (existingBaseType is { } type && _typeFactory.TryCreateType(type, out CSharpType? baseType))
             {
                 return baseType;
             }
 
-            InputModelType? selectedSchema = null;
-
-            foreach (var objectSchema in InputModel.ImmediateBaseModels)
-            {
-                // Take first schema or the one with discriminator
-                selectedSchema ??= objectSchema;
-
-                if (objectSchema.DiscriminatorPropertyName != null)
-                {
-                    selectedSchema = objectSchema;
-                    break;
-                }
-            }
-
-            if (selectedSchema != null)
-            {
-                CSharpType type = _typeFactory.CreateType(selectedSchema);
-                Debug.Assert(!type.IsFrameworkType);
-                return type;
-            }
             return null;
+        }
+
+        private INamedTypeSymbol? GetSourceBaseType()
+        {
+            return ExistingType?.BaseType is { } sourceBaseType && sourceBaseType.SpecialType != SpecialType.System_ValueType && sourceBaseType.SpecialType != SpecialType.System_Object
+                ? sourceBaseType
+                : null;
         }
 
         private CSharpType? CreateInheritedDictionaryType()

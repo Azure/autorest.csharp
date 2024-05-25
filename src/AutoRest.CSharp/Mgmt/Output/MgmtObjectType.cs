@@ -8,7 +8,6 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
@@ -32,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private string? _defaultNamespace;
         protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(MgmtContext.Context, InputModel, IsResourceType);
 
-        internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
+        internal ObjectTypeProperty[] MyProperties => _myProperties ??= InputModel.Properties.Select(CreateProperty).ToArray();
 
         private static string GetDefaultName(InputModelType inputModel, bool isResourceType)
         {
@@ -94,7 +93,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return false;
 
             // we cannot use the EnumerateHierarchy method because we are calling this when we are building that
-            var properties = objType.GetCombinedSchemas().SelectMany(obj => obj.Properties);
+            var properties = objType.InputModel.GetSelfAndBaseModels().SelectMany(obj => obj.Properties).Select(x => x.Name).Distinct();
             return properties.Count() == 1;
         }
 
@@ -104,17 +103,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             // only bother flattening if the single property is public
             return properties.Length == 1 && properties[0].Declaration.Accessibility == "public";
-        }
-
-        private IEnumerable<ObjectTypeProperty> BuildMyProperties()
-        {
-            foreach (var objectSchema in GetCombinedSchemas())
-            {
-                foreach (var property in objectSchema.Properties)
-                {
-                    yield return CreateProperty(property);
-                }
-            }
         }
 
         protected virtual ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
@@ -191,7 +179,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var descendantTypes = schemaObjectType.Discriminator.Implementations.Select(implementation => implementation.Type).ToHashSet();
 
             // We need this redundant check as the internal backing schema will not be a part of the discriminator implementations of its base type.
-            var immediateParents = InputModel.ImmediateBaseModels.ToArray();
+            var immediateParents = InputModel.GetAllBaseModels().ToArray();
             if (InputModel.DiscriminatorValue == "Unknown" &&
                 immediateParents.Length == 1 &&
                 immediateParents.Single().Equals(schemaObjectType.InputModel))
@@ -230,6 +218,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 // if we did not find that type, this means the customization code is referencing something unrecognized
                 // or the customization code is not specifying a base type
             }
+
             CSharpType? inheritedType = base.CreateInheritedType();
             if (inheritedType != null)
             {
@@ -310,7 +299,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         internal string GetFullSerializedName(InputModelProperty property)
         {
-            var parentSchema = this.GetCombinedSchemas().FirstOrDefault(s => s.Properties.Contains(property));
+            var parentSchema = InputModel.GetSelfAndBaseModels().FirstOrDefault(s => s.Properties.Contains(property));
             if (parentSchema == null)
             {
                 throw new InvalidOperationException($"Can't find parent object schema for property schema: '{this.Declaration.Name}.{property.CSharpName()}'");
