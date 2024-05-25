@@ -513,16 +513,16 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 IEnumerable<InputModelProperty> properties = InputModel.Properties.ToList();
 
-                // Add all properties in the hierarchy of current base type
+                // Remove all properties in the hierarchy of current base type
                 var currentBaseModelProperties = baseModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
-                properties = properties.Concat(currentBaseModelProperties);
+                properties = properties.Except(currentBaseModelProperties);
 
-                // Remove all properties in the hierarchy of existing base type
+                // Add all properties in the hierarchy of existing base type
                 var existingBaseTypeModel = _typeFactory.GetLibraryTypeByName(existingBaseType.Name)?.Implementation as SchemaObjectType;
                 if (existingBaseTypeModel is not null)
                 {
                     var existingBaseTypeProperties = existingBaseTypeModel.InputModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
-                    properties = properties.Except(existingBaseTypeProperties);
+                    properties = properties.Concat(existingBaseTypeProperties);
                 }
                 return properties.ToList();
             }

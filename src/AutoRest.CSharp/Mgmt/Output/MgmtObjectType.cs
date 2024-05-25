@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return false;
 
             // we cannot use the EnumerateHierarchy method because we are calling this when we are building that
-            var properties = objType.InputModel.GetSelfAndBaseModels().SelectMany(obj => obj.Properties);
+            var properties = objType.InputModel.GetSelfAndBaseModels().SelectMany(obj => obj.Properties).Select(x => x.Name).Distinct();
             return properties.Count() == 1;
         }
 
