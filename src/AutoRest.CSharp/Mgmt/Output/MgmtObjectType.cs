@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private string? _defaultNamespace;
         protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(MgmtContext.Context, InputModel, IsResourceType);
 
-        internal ObjectTypeProperty[] MyProperties => _myProperties ??= UpdateInputModelProperties().Select(CreateProperty).ToArray();
+        internal ObjectTypeProperty[] MyProperties => _myProperties ??= InputModel.Properties.Select(CreateProperty).ToArray();
 
         private static string GetDefaultName(InputModelType inputModel, bool isResourceType)
         {
