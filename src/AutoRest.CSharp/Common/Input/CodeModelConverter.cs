@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Common.Input
         private readonly Dictionary<Schema, InputEnumType> _enumsCache;
         private readonly Dictionary<string, InputEnumType> _enumsNamingCache;
         private readonly Dictionary<ObjectSchema, InputModelType> _modelsCache;
-        private readonly Dictionary<ObjectSchema, (List<InputModelProperty> Properties, IReadOnlyList<ObjectSchema> ImmediateBaseModelSchemas)> _modelPropertiesCache;
+        private readonly Dictionary<ObjectSchema, (List<InputModelProperty> Properties, IReadOnlyList<ObjectSchema> CompositSchemas, IReadOnlyList<ObjectSchema> ImmediateBaseSchemas)> _modelPropertiesCache;
         private readonly Dictionary<ObjectSchema, List<InputModelType>> _derivedModelsCache;
 
         public CodeModelConverter(CodeModel codeModel, SchemaUsageProvider schemaUsageProvider)
@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Common.Input
             _operationsCache = new Dictionary<ServiceRequest, Func<InputOperation>>();
             _parametersCache = new Dictionary<RequestParameter, Func<InputParameter>>();
             _modelsCache = new Dictionary<ObjectSchema, InputModelType>();
-            _modelPropertiesCache = new Dictionary<ObjectSchema, (List<InputModelProperty> Properties, IReadOnlyList<ObjectSchema> ImmediateBaseModelSchemas)>();
+            _modelPropertiesCache = new Dictionary<ObjectSchema, (List<InputModelProperty> Properties, IReadOnlyList<ObjectSchema> CompositSchemas, IReadOnlyList<ObjectSchema> ImmediateBaseSchemas)>();
             _derivedModelsCache = new Dictionary<ObjectSchema, List<InputModelType>>();
         }
 
@@ -303,10 +303,17 @@ namespace AutoRest.CSharp.Common.Input
                 GetOrCreateModel(schema);
             }
 
-            foreach (var (schema, (properties, immediateBaseModelSchemas)) in _modelPropertiesCache)
+            foreach (var (schema, (properties, compositionSchemas, immediateBaseSchemas)) in _modelPropertiesCache)
             {
                 properties.AddRange(schema.Properties.Select(CreateProperty));
-                properties.AddRange(immediateBaseModelSchemas.SelectMany(EnumerateBase).SelectMany(x => x.Properties).Select(CreateProperty));
+                if (Configuration.AzureArm)
+                {
+                    properties.AddRange(immediateBaseSchemas.SelectMany(EnumerateBase).SelectMany(x => x.Properties).Select(CreateProperty));
+                }
+                else
+                {
+                    properties.AddRange(compositionSchemas.SelectMany(EnumerateBase).SelectMany(x => x.Properties).Select(CreateProperty));
+                }
             }
 
             foreach (var schema in schemas)
@@ -342,7 +349,7 @@ namespace AutoRest.CSharp.Common.Input
             var derived = new List<InputModelType>();
             var baseModelSchema = GetBaseModelSchema(schema);
             var baseModel = baseModelSchema is not null ? GetOrCreateModel(baseModelSchema) : null;
-            IReadOnlyList<ObjectSchema> immediateBaseModelSchemas = schema.Parents?.Immediate?.OfType<ObjectSchema>().ToArray() ?? Array.Empty<ObjectSchema>();
+            IReadOnlyList<ObjectSchema> compositeSchemas = schema.Parents?.Immediate?.OfType<ObjectSchema>().Where(s => s != baseModelSchema).ToArray() ?? Array.Empty<ObjectSchema>();
             var dictionarySchema = schema.Parents?.Immediate?.OfType<DictionarySchema>().FirstOrDefault();
 
             model = new InputModelType(
@@ -366,7 +373,7 @@ namespace AutoRest.CSharp.Common.Input
             };
 
             _modelsCache[schema] = model;
-            _modelPropertiesCache[schema] = (properties, immediateBaseModelSchemas);
+            _modelPropertiesCache[schema] = (properties, compositeSchemas, schema.Parents?.Immediate?.OfType<ObjectSchema>().ToArray() ?? Array.Empty<ObjectSchema>());
             _derivedModelsCache[schema] = derived;
 
             return model;
