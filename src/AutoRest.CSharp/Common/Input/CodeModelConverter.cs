@@ -385,17 +385,6 @@ namespace AutoRest.CSharp.Common.Input
             return compositeSchemas is null ? Array.Empty<Property>() : compositeSchemas.SelectMany(m => m.Properties).ToList();
         }
 
-        private bool IsBasePolyType(ObjectSchema schema)
-        {
-            return schema.Discriminator?.All is not null ||
-                (schema.Discriminator is not null && !HasParentsWithDiscriminator(schema)); //this is the case where I am a solo placeholder but might have derived types later
-        }
-
-        private bool HasParentsWithDiscriminator(ObjectSchema schema)
-        {
-            return schema.Parents?.All.Count > 0 && schema.Parents.All.Any(parent => parent is ObjectSchema objectSchema && objectSchema.Discriminator is not null);
-        }
-
         private static InputModelTypeUsage GetUsage(SchemaTypeUsage usage)
         {
             var result = InputModelTypeUsage.None;
