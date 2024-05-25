@@ -504,7 +504,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (InputModel.BaseModel is not { } baseModel)
             {
-                return InputModel.Properties.ToArray();
+                return InputModel.Properties;
             }
 
             var existingBaseType = GetSourceBaseType();
@@ -527,7 +527,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return properties.ToList();
             }
 
-            return InputModel.Properties.ToArray();
+            return InputModel.Properties;
         }
 
         protected ObjectTypeProperty CreateProperty(InputModelProperty property)
