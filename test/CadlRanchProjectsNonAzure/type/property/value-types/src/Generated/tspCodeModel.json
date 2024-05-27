@@ -972,49 +972,54 @@
    "Protocol": {
     "$id": "113"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "114",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "115",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "116",
+      "Type": {
+       "$id": "117",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "114",
+   "$id": "118",
    "Name": "Boolean",
    "Description": "",
    "Operations": [
     {
-     "$id": "115",
+     "$id": "119",
      "Name": "get",
      "ResourceName": "Boolean",
      "Description": "Get call",
      "Parameters": [
       {
-       "$id": "116",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "117",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "118",
-        "Type": {
-         "$id": "119",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "114"
       },
       {
        "$id": "120",
@@ -1076,7 +1081,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "125",
@@ -1178,7 +1183,12 @@
     "$id": "133"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "134",
@@ -1192,7 +1202,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "136",
@@ -1254,7 +1264,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "141",
@@ -1356,7 +1366,12 @@
     "$id": "149"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "150",
@@ -1370,7 +1385,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "152",
@@ -1432,7 +1447,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "157",
@@ -1534,7 +1549,12 @@
     "$id": "165"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "166",
@@ -1548,7 +1568,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "168",
@@ -1610,7 +1630,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "173",
@@ -1712,7 +1732,12 @@
     "$id": "181"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "182",
@@ -1726,7 +1751,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "184",
@@ -1788,7 +1813,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "189",
@@ -1890,7 +1915,12 @@
     "$id": "197"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "198",
@@ -1904,7 +1934,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "200",
@@ -1966,7 +1996,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "205",
@@ -2068,7 +2098,12 @@
     "$id": "213"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "214",
@@ -2082,7 +2117,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "216",
@@ -2144,7 +2179,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "221",
@@ -2246,7 +2281,12 @@
     "$id": "229"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "230",
@@ -2260,7 +2300,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "232",
@@ -2322,7 +2362,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "237",
@@ -2424,7 +2464,12 @@
     "$id": "245"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "246",
@@ -2438,7 +2483,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "248",
@@ -2500,7 +2545,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "253",
@@ -2602,7 +2647,12 @@
     "$id": "261"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "262",
@@ -2616,7 +2666,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "264",
@@ -2678,7 +2728,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "269",
@@ -2780,7 +2830,12 @@
     "$id": "277"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "278",
@@ -2794,7 +2849,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "280",
@@ -2856,7 +2911,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "285",
@@ -2958,7 +3013,12 @@
     "$id": "293"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "294",
@@ -2972,7 +3032,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "296",
@@ -3034,7 +3094,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "301",
@@ -3136,7 +3196,12 @@
     "$id": "309"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "310",
@@ -3150,7 +3215,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "312",
@@ -3212,7 +3277,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "317",
@@ -3314,7 +3379,12 @@
     "$id": "325"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "326",
@@ -3328,7 +3398,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "328",
@@ -3390,7 +3460,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "333",
@@ -3492,7 +3562,12 @@
     "$id": "341"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "342",
@@ -3506,7 +3581,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "344",
@@ -3568,7 +3643,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "349",
@@ -3670,7 +3745,12 @@
     "$id": "357"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "358",
@@ -3684,7 +3764,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "360",
@@ -3746,7 +3826,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "365",
@@ -3848,7 +3928,12 @@
     "$id": "373"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "374",
@@ -3862,7 +3947,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "376",
@@ -3924,7 +4009,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "381",
@@ -4026,7 +4111,12 @@
     "$id": "389"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "390",
@@ -4040,7 +4130,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "392",
@@ -4102,7 +4192,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "397",
@@ -4204,7 +4294,12 @@
     "$id": "405"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "406",
@@ -4218,7 +4313,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "408",
@@ -4280,7 +4375,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "413",
@@ -4382,7 +4477,12 @@
     "$id": "421"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "422",
@@ -4396,7 +4496,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "424",
@@ -4458,7 +4558,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "429",
@@ -4560,7 +4660,12 @@
     "$id": "437"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "438",
@@ -4574,7 +4679,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "440",
@@ -4636,7 +4741,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "445",
@@ -4738,7 +4843,12 @@
     "$id": "453"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "454",
@@ -4752,7 +4862,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "456",
@@ -4814,7 +4924,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "461",
@@ -4916,7 +5026,12 @@
     "$id": "469"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "470",
@@ -4930,7 +5045,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "472",
@@ -4992,7 +5107,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "477",
@@ -5094,7 +5209,12 @@
     "$id": "485"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "486",
@@ -5108,7 +5228,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "488",
@@ -5170,7 +5290,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "493",
@@ -5272,7 +5392,12 @@
     "$id": "501"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "502",
@@ -5286,7 +5411,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "504",
@@ -5348,7 +5473,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "509",
@@ -5450,7 +5575,12 @@
     "$id": "517"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "518",
@@ -5464,7 +5594,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "520",
@@ -5526,7 +5656,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "525",
@@ -5628,7 +5758,12 @@
     "$id": "533"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "534",
@@ -5642,7 +5777,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "536",
@@ -5704,7 +5839,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "541",
@@ -5806,7 +5941,12 @@
     "$id": "549"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "550",
@@ -5820,7 +5960,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "552",
@@ -5882,7 +6022,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "557",
@@ -5984,7 +6124,12 @@
     "$id": "565"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   },
   {
    "$id": "566",
@@ -5998,7 +6143,7 @@
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "568",
@@ -6060,7 +6205,7 @@
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "116"
+       "$ref": "114"
       },
       {
        "$id": "573",
@@ -6162,7 +6307,12 @@
     "$id": "581"
    },
    "Creatable": false,
-   "Parent": "ValueTypesClient"
+   "Parent": "ValueTypesClient",
+   "Parameters": [
+    {
+     "$ref": "114"
+    }
+   ]
   }
  ]
 }

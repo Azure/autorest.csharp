@@ -1509,7 +1509,12 @@
    "Protocol": {
     "$id": "171"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "124"
+    }
+   ]
   },
   {
    "$id": "172",
@@ -1520,7 +1525,12 @@
     "$id": "173"
    },
    "Creatable": false,
-   "Parent": "NewProjectTypeSpecClient"
+   "Parent": "NewProjectTypeSpecClient",
+   "Parameters": [
+    {
+     "$ref": "124"
+    }
+   ]
   },
   {
    "$id": "174",
@@ -1654,7 +1664,12 @@
     "$id": "186"
    },
    "Creatable": false,
-   "Parent": "Hello"
+   "Parent": "Hello",
+   "Parameters": [
+    {
+     "$ref": "124"
+    }
+   ]
   },
   {
    "$id": "187",
@@ -2244,7 +2259,12 @@
     "$id": "241"
    },
    "Creatable": false,
-   "Parent": "Hello"
+   "Parent": "Hello",
+   "Parameters": [
+    {
+     "$ref": "124"
+    }
+   ]
   },
   {
    "$id": "242",
@@ -2359,7 +2379,12 @@
     "$id": "252"
    },
    "Creatable": false,
-   "Parent": "NewProjectTypeSpecClient"
+   "Parent": "NewProjectTypeSpecClient",
+   "Parameters": [
+    {
+     "$ref": "124"
+    }
+   ]
   },
   {
    "$id": "253",
@@ -2536,7 +2561,12 @@
     "$id": "268"
    },
    "Creatable": false,
-   "Parent": "NewProjectTypeSpecClient"
+   "Parent": "NewProjectTypeSpecClient",
+   "Parameters": [
+    {
+     "$ref": "124"
+    }
+   ]
   }
  ],
  "Auth": {

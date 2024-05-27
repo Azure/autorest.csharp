@@ -13,48 +13,53 @@
    "Protocol": {
     "$id": "3"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "4",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "5",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "6",
+      "Type": {
+       "$id": "7",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "4",
+   "$id": "8",
    "Name": "Query",
    "Description": "",
    "Operations": [
     {
-     "$id": "5",
+     "$id": "9",
      "Name": "multi",
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$id": "6",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "7",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "8",
-        "Type": {
-         "$id": "9",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "4"
       },
       {
        "$id": "10",
@@ -136,7 +141,7 @@
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "18",
@@ -219,7 +224,7 @@
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "26",
@@ -302,7 +307,7 @@
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "34",
@@ -385,7 +390,7 @@
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "42",
@@ -467,7 +472,12 @@
     "$id": "49"
    },
    "Creatable": false,
-   "Parent": "CollectionFormatClient"
+   "Parent": "CollectionFormatClient",
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   },
   {
    "$id": "50",
@@ -480,7 +490,7 @@
      "ResourceName": "Header",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "52",
@@ -562,7 +572,12 @@
     "$id": "59"
    },
    "Creatable": false,
-   "Parent": "CollectionFormatClient"
+   "Parent": "CollectionFormatClient",
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   }
  ]
 }

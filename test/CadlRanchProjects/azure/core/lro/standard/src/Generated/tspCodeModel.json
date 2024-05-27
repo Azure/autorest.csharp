@@ -973,7 +973,12 @@
    "Protocol": {
     "$id": "106"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "53"
+    }
+   ]
   }
  ]
 }

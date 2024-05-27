@@ -62,48 +62,53 @@
    "Protocol": {
     "$id": "9"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "10",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "11",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "12",
+      "Type": {
+       "$id": "13",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "10",
+   "$id": "14",
    "Name": "Int32Value",
    "Description": "Dictionary of int32 values",
    "Operations": [
     {
-     "$id": "11",
+     "$id": "15",
      "Name": "get",
      "ResourceName": "Int32Value",
      "Parameters": [
       {
-       "$id": "12",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "13",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "14",
-        "Type": {
-         "$id": "15",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "10"
       },
       {
        "$id": "16",
@@ -179,7 +184,7 @@
      "ResourceName": "Int32Value",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "24",
@@ -295,7 +300,12 @@
     "$id": "35"
    },
    "Creatable": false,
-   "Parent": "DictionaryClient"
+   "Parent": "DictionaryClient",
+   "Parameters": [
+    {
+     "$ref": "10"
+    }
+   ]
   },
   {
    "$id": "36",
@@ -308,7 +318,7 @@
      "ResourceName": "Int64Value",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "38",
@@ -384,7 +394,7 @@
      "ResourceName": "Int64Value",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "46",
@@ -500,7 +510,12 @@
     "$id": "57"
    },
    "Creatable": false,
-   "Parent": "DictionaryClient"
+   "Parent": "DictionaryClient",
+   "Parameters": [
+    {
+     "$ref": "10"
+    }
+   ]
   },
   {
    "$id": "58",
@@ -513,7 +528,7 @@
      "ResourceName": "BooleanValue",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "60",
@@ -589,7 +604,7 @@
      "ResourceName": "BooleanValue",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "68",
@@ -705,7 +720,12 @@
     "$id": "79"
    },
    "Creatable": false,
-   "Parent": "DictionaryClient"
+   "Parent": "DictionaryClient",
+   "Parameters": [
+    {
+     "$ref": "10"
+    }
+   ]
   },
   {
    "$id": "80",
@@ -718,7 +738,7 @@
      "ResourceName": "StringValue",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "82",
@@ -794,7 +814,7 @@
      "ResourceName": "StringValue",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "90",
@@ -910,7 +930,12 @@
     "$id": "101"
    },
    "Creatable": false,
-   "Parent": "DictionaryClient"
+   "Parent": "DictionaryClient",
+   "Parameters": [
+    {
+     "$ref": "10"
+    }
+   ]
   },
   {
    "$id": "102",
@@ -923,7 +948,7 @@
      "ResourceName": "Float32Value",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "104",
@@ -999,7 +1024,7 @@
      "ResourceName": "Float32Value",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "112",
@@ -1115,7 +1140,12 @@
     "$id": "123"
    },
    "Creatable": false,
-   "Parent": "DictionaryClient"
+   "Parent": "DictionaryClient",
+   "Parameters": [
+    {
+     "$ref": "10"
+    }
+   ]
   },
   {
    "$id": "124",
@@ -1128,7 +1158,7 @@
      "ResourceName": "DatetimeValue",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "126",
@@ -1204,7 +1234,7 @@
      "ResourceName": "DatetimeValue",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "134",
@@ -1320,7 +1350,12 @@
     "$id": "145"
    },
    "Creatable": false,
-   "Parent": "DictionaryClient"
+   "Parent": "DictionaryClient",
+   "Parameters": [
+    {
+     "$ref": "10"
+    }
+   ]
   },
   {
    "$id": "146",
@@ -1333,7 +1368,7 @@
      "ResourceName": "DurationValue",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "148",
@@ -1409,7 +1444,7 @@
      "ResourceName": "DurationValue",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "156",
@@ -1525,7 +1560,12 @@
     "$id": "167"
    },
    "Creatable": false,
-   "Parent": "DictionaryClient"
+   "Parent": "DictionaryClient",
+   "Parameters": [
+    {
+     "$ref": "10"
+    }
+   ]
   },
   {
    "$id": "168",
@@ -1538,7 +1578,7 @@
      "ResourceName": "UnknownValue",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "170",
@@ -1614,7 +1654,7 @@
      "ResourceName": "UnknownValue",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "178",
@@ -1730,7 +1770,12 @@
     "$id": "189"
    },
    "Creatable": false,
-   "Parent": "DictionaryClient"
+   "Parent": "DictionaryClient",
+   "Parameters": [
+    {
+     "$ref": "10"
+    }
+   ]
   },
   {
    "$id": "190",
@@ -1743,7 +1788,7 @@
      "ResourceName": "ModelValue",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "192",
@@ -1816,7 +1861,7 @@
      "ResourceName": "ModelValue",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "199",
@@ -1929,7 +1974,12 @@
     "$id": "209"
    },
    "Creatable": false,
-   "Parent": "DictionaryClient"
+   "Parent": "DictionaryClient",
+   "Parameters": [
+    {
+     "$ref": "10"
+    }
+   ]
   },
   {
    "$id": "210",
@@ -1942,7 +1992,7 @@
      "ResourceName": "RecursiveModelValue",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "212",
@@ -2015,7 +2065,7 @@
      "ResourceName": "RecursiveModelValue",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "219",
@@ -2128,7 +2178,12 @@
     "$id": "229"
    },
    "Creatable": false,
-   "Parent": "DictionaryClient"
+   "Parent": "DictionaryClient",
+   "Parameters": [
+    {
+     "$ref": "10"
+    }
+   ]
   },
   {
    "$id": "230",
@@ -2141,7 +2196,7 @@
      "ResourceName": "NullableFloatValue",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "232",
@@ -2217,7 +2272,7 @@
      "ResourceName": "NullableFloatValue",
      "Parameters": [
       {
-       "$ref": "12"
+       "$ref": "10"
       },
       {
        "$id": "240",
@@ -2333,7 +2388,12 @@
     "$id": "251"
    },
    "Creatable": false,
-   "Parent": "DictionaryClient"
+   "Parent": "DictionaryClient",
+   "Parameters": [
+    {
+     "$ref": "10"
+    }
+   ]
   }
  ]
 }
