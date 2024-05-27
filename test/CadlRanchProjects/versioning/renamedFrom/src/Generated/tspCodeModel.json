@@ -288,7 +288,15 @@
    "Protocol": {
     "$id": "30"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "17"
+    },
+    {
+     "$ref": "19"
+    }
+   ]
   },
   {
    "$id": "31",
@@ -411,7 +419,15 @@
     "$id": "41"
    },
    "Creatable": false,
-   "Parent": "RenamedFromClient"
+   "Parent": "RenamedFromClient",
+   "Parameters": [
+    {
+     "$ref": "17"
+    },
+    {
+     "$ref": "19"
+    }
+   ]
   }
  ]
 }

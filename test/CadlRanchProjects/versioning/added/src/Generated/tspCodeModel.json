@@ -484,7 +484,15 @@
    "Protocol": {
     "$id": "50"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "28"
+    },
+    {
+     "$ref": "30"
+    }
+   ]
   },
   {
    "$id": "51",
@@ -607,7 +615,15 @@
     "$id": "61"
    },
    "Creatable": false,
-   "Parent": "AddedClient"
+   "Parent": "AddedClient",
+   "Parameters": [
+    {
+     "$ref": "28"
+    },
+    {
+     "$ref": "30"
+    }
+   ]
   }
  ]
 }
