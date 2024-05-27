@@ -50,7 +50,13 @@
         "client/naming",
         "client/structure/multi-client",
         "client/structure/renamed-operation",
-        "client/structure/two-operation-group"
+        "client/structure/two-operation-group",
+        "versioning/added",
+        "versioning/madeOptional",
+        "versioning/removed",
+        "versioning/renamedFrom",
+        "versioning/returnTypeChangedFrom",
+        "versioning/typeChangedFrom"
     ],
     "CadlRanchProjectsNonAzure":[
         "authentication/api-key",
