@@ -129,15 +129,17 @@ namespace AutoRest.CSharp.Common.Input
         private InputOperation CreateOperation(ServiceRequest serviceRequest, Operation operation, HttpRequest httpRequest)
         {
             var parameters = CreateOperationParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList());
+            var operationId = operation.OperationId;
             var inputOperation = new InputOperation(
                 name: operation.Language.Default.Name,
-                resourceName: null,
+                // Keep the behavior for non-mgmt scenarios
+                resourceName: Configuration.AzureArm ? GetResoureName(operationId) : null,
                 summary: operation.Language.Default.Summary,
                 deprecated: operation.Deprecated?.Reason,
                 description: operation.Language.Default.Description,
                 accessibility: operation.Accessibility,
                 parameters: parameters,
-                responses: operation.Responses.Select(CreateOperationResponse).ToList(),
+                responses: operation.Responses.Select<ServiceResponse, OperationResponse>(CreateOperationResponse).ToList(),
                 httpMethod: httpRequest.Method.ToCoreRequestMethod(),
                 requestBodyMediaType: GetBodyFormat((httpRequest as HttpWithBodyRequest)?.KnownMediaType),
                 uri: httpRequest.Uri,
@@ -149,19 +151,27 @@ namespace AutoRest.CSharp.Common.Input
                 paging: CreateOperationPaging(serviceRequest, operation),
                 generateProtocolMethod: true,
                 generateConvenienceMethod: false,
-                keepClientDefaultValue: Configuration.MethodsToKeepClientDefaultValue.Contains(operation.OperationId),
-                operationId: operation.OperationId)
+                keepClientDefaultValue: operationId is null ? false : Configuration.MethodsToKeepClientDefaultValue.Contains(operationId))
             {
                 SpecName = operation.Language.Default.SerializedName ?? operation.Language.Default.Name
             };
-            inputOperation.CodeModelExamples = CreateOperationExamples(inputOperation);
+            inputOperation.CodeModelExamples = CreateOperationExamples(inputOperation, operation);
             return inputOperation;
         }
 
-        private IReadOnlyList<InputOperationExample> CreateOperationExamples(InputOperation operation)
+        private static string? GetResoureName(string? operationId)
+        {
+            if (operationId is null || operationId.IndexOf("_") == -1)
+            {
+                return null;
+            }
+            return operationId.Split('_')[0];
+        }
+
+        private IReadOnlyList<InputOperationExample> CreateOperationExamples(InputOperation inputOperation, Operation operation)
         {
             var result = new List<InputOperationExample>();
-            var exampleOperation = _codeModel.TestModel?.MockTest.ExampleGroups?.FirstOrDefault(g => g.OperationId == operation.OperationId);
+            var exampleOperation = _codeModel.TestModel?.MockTest.ExampleGroups?.FirstOrDefault(g => g.Operation == operation);
             if (exampleOperation is null)
             {
                 return result;
@@ -171,7 +181,7 @@ namespace AutoRest.CSharp.Common.Input
                 var parameters = example.AllParameters
                     .Select(p => new InputParameterExample(CreateOperationParameter(p.Parameter), CreateExampleValue(p.ExampleValue)))
                     .ToList();
-                result.Add(new InputOperationExample(operation, parameters, example.Name, example.OriginalFile));
+                result.Add(new InputOperationExample(inputOperation, parameters, example.Name, example.OriginalFile));
             }
             return result;
         }
