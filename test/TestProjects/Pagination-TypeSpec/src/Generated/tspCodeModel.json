@@ -785,7 +785,12 @@
    "Protocol": {
     "$id": "95"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "80"
+    }
+   ]
   },
   {
    "$id": "96",
@@ -1012,7 +1017,12 @@
     "$id": "116"
    },
    "Creatable": false,
-   "Parent": "PaginationClient"
+   "Parent": "PaginationClient",
+   "Parameters": [
+    {
+     "$ref": "80"
+    }
+   ]
   },
   {
    "$id": "117",
@@ -1115,7 +1125,12 @@
     "$id": "126"
    },
    "Creatable": false,
-   "Parent": "PaginationClient"
+   "Parent": "PaginationClient",
+   "Parameters": [
+    {
+     "$ref": "80"
+    }
+   ]
   },
   {
    "$id": "127",
@@ -1395,7 +1410,12 @@
     "$id": "152"
    },
    "Creatable": false,
-   "Parent": "PaginationClient"
+   "Parent": "PaginationClient",
+   "Parameters": [
+    {
+     "$ref": "80"
+    }
+   ]
   },
   {
    "$id": "153",
@@ -1575,7 +1595,12 @@
     "$id": "170"
    },
    "Creatable": false,
-   "Parent": "PaginationClient"
+   "Parent": "PaginationClient",
+   "Parameters": [
+    {
+     "$ref": "80"
+    }
+   ]
   }
  ],
  "Auth": {
