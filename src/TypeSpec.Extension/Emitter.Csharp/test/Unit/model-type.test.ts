@@ -704,3 +704,36 @@ op op5(@body body: IsFooArray): IsFooArray;
         );
     });
 });
+
+describe("Empty models should be returned by tsp", () => {
+    let runner: TestHost;
+
+    beforeEach(async () => {
+        runner = await createEmitterTestHost();
+    });
+
+    it("Empty Model should be returned", async () => {
+        const program = await typeSpecCompile(
+            `
+@doc("Empty model")
+@usage(Usage.input)
+@access(Access.public)
+model Empty {
+}
+
+@route("/op1")
+op op1(): void;
+`,
+            runner,
+            { IsTCGCNeeded: true }
+        );
+        runner.compileAndDiagnose;
+        const context = createEmitterContext(program);
+        const sdkContext = createNetSdkContext(context);
+        const root = createModel(sdkContext);
+        const models = root.Models;
+        const isEmptyModel = models.find((m) => m.Name === "Empty");
+        assert(isEmptyModel !== undefined);
+        // assert the inherited dictionary type is expected
+    });
+});

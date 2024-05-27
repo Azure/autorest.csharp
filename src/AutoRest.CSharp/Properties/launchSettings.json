@@ -940,6 +940,30 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\union\\src\\Generated -n"
     },
+    "typespec-versioning/added": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\versioning\\added\\src\\Generated -n"
+    },
+    "typespec-versioning/madeOptional": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\versioning\\madeOptional\\src\\Generated -n"
+    },
+    "typespec-versioning/removed": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\versioning\\removed\\src\\Generated -n"
+    },
+    "typespec-versioning/renamedFrom": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\versioning\\renamedFrom\\src\\Generated -n"
+    },
+    "typespec-versioning/returnTypeChangedFrom": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\versioning\\returnTypeChangedFrom\\src\\Generated -n"
+    },
+    "typespec-versioning/typeChangedFrom": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\versioning\\typeChangedFrom\\src\\Generated -n"
+    },
     "Unbranded-TypeSpec": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\UnbrandedProjects\\Unbranded-TypeSpec\\src\\Generated -n"
