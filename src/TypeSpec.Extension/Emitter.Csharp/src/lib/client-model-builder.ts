@@ -85,12 +85,30 @@ export function createModelForService(
 
     const apiVersions: Set<string> | undefined = new Set<string>();
     let defaultApiVersion: string | undefined = undefined;
-    const versions = getVersions(program, service.type)[1]?.getVersions();
+    let versions = getVersions(program, service.type)[1]
+        ?.getVersions()
+        .map((v) => v.value);
+    if (sdkContext.emitContext.options["api-version"] !== undefined) {
+        const targetApiVersion = sdkContext.emitContext.options["api-version"];
+        // azure swagger version doesn't follow SemVer spec so that we cannot use existing library to compare versions.
+        // We need to filter out the versions that are greater than the target version.
+        // Basically 3 cases regarding version v.s. targetApiVersion:
+        // - 2022-02-01-preview = 2022-02-01-preview: just compare equals
+        // - 2022-02-01-preview < 2022-03-01-preview: this can be compared by dictionary order.
+        //   - 2022-02-01 > 2022-02-01-preview: this need to check if the targetApiVersion contains the version.
+        // - 2022-02-01-preview < 2022-02-01: this need to check if the version contains the targetApiVersion.
+        versions = versions?.filter(
+            (v) =>
+                v === targetApiVersion ||
+                (v < targetApiVersion && !targetApiVersion.startsWith(v)) ||
+                v.startsWith(targetApiVersion)
+        );
+    }
     if (versions && versions.length > 0) {
         for (const ver of versions) {
-            apiVersions.add(ver.value);
+            apiVersions.add(ver);
         }
-        defaultApiVersion = versions[versions.length - 1].value;
+        defaultApiVersion = versions[versions.length - 1];
     }
     const defaultApiVersionConstant: InputConstant | undefined =
         defaultApiVersion
