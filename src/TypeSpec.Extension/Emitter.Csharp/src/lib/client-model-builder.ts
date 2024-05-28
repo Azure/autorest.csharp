@@ -88,8 +88,8 @@ export function createModelForService(
     let versions = getVersions(program, service.type)[1]
         ?.getVersions()
         .map((v) => v.value);
-    if (sdkContext.emitContext.options["api-version"] !== undefined) {
-        const targetApiVersion = sdkContext.emitContext.options["api-version"];
+    const targetApiVersion = sdkContext.emitContext.options["api-version"];
+    if (targetApiVersion !== undefined && targetApiVersion !== "all") {
         // azure swagger version doesn't follow SemVer spec so that we cannot use existing library to compare versions.
         // We need to filter out the versions that are greater than the target version.
         // Basically 3 cases regarding version v.s. targetApiVersion:
