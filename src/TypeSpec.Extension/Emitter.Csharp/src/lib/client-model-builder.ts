@@ -88,11 +88,9 @@ export function createModelForService(
     let versions = getVersions(program, service.type)[1]
         ?.getVersions()
         .map((v) => v.value);
-    if (versions === undefined) {
-        throw Error("Can not get versions for service.");
-    }
     const targetApiVersion = sdkContext.emitContext.options["api-version"];
     if (
+        versions !== undefined &&
         targetApiVersion !== undefined &&
         targetApiVersion !== "all" &&
         targetApiVersion !== "latest"
