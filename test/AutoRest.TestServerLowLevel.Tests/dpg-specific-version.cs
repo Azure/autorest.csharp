@@ -10,6 +10,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Resource = TypeSpec.Versioning.Specific.Models.Resource;
 using System.Threading;
+using System.Reflection;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -41,7 +42,14 @@ namespace AutoRest.TestServer.Tests
                 m.Name == "GetResources" && m.ReturnType.Name.StartsWith("Pageable") && m.ReturnType.GenericTypeArguments.Length == 1 &&
                 m.ReturnType.GenericTypeArguments[0] == typeof(Resource)).FirstOrDefault();
             var getResourcesOperationParameters = getResourcesOperation.GetParameters().Select(p => (p.Name, p.ParameterType)).ToArray();
-            Assert.AreEqual(new (string, Type)[] { ("select", typeof(IEnumerable<string>)), ("expand", typeof(string)), ("cancellationToken", typeof(CancellationToken)) },getResourcesOperationParameters);
+            Assert.AreEqual(new (string, Type)[] { ("select", typeof(IEnumerable<string>)), ("expand", typeof(string)), ("cancellationToken", typeof(CancellationToken)) }, getResourcesOperationParameters);
+
+            // 2 versions are defined
+            var enumType = typeof(SpecificClientOptions.ServiceVersion);
+            Assert.AreEqual(new string[] { "V2022_06_01_Preview", "V2022_09_01" }, enumType.GetEnumNames());
+            var optionsType = typeof(SpecificClientOptions);
+            var field = optionsType.GetField("LatestVersion", BindingFlags.NonPublic | BindingFlags.Static);
+            Assert.AreEqual(SpecificClientOptions.ServiceVersion.V2022_09_01, field.GetValue(null));
         }
     }
 }

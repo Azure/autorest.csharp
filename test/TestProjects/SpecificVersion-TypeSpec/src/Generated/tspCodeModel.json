@@ -3,8 +3,7 @@
  "Name": "TypeSpec.Versioning.Specific",
  "ApiVersions": [
   "2022-06-01-preview",
-  "2022-09-01",
-  "2022-12-01-preview"
+  "2022-09-01"
  ],
  "Enums": [
   {
@@ -435,7 +434,7 @@
          "Name": "String",
          "IsNullable": false
         },
-        "Value": "2022-12-01-preview"
+        "Value": "2022-09-01"
        },
        "IsRequired": true,
        "IsApiVersion": true,
