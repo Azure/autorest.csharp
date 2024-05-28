@@ -69,48 +69,53 @@
    "Protocol": {
     "$id": "11"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "12",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "13",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "14",
+      "Type": {
+       "$id": "15",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "12",
+   "$id": "16",
    "Name": "String",
    "Description": "",
    "Operations": [
     {
-     "$id": "13",
+     "$id": "17",
      "Name": "getKnownValue",
      "ResourceName": "String",
      "Parameters": [
       {
-       "$id": "14",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "15",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "16",
-        "Type": {
-         "$id": "17",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "12"
       },
       {
        "$id": "18",
@@ -171,7 +176,7 @@
      "ResourceName": "String",
      "Parameters": [
       {
-       "$ref": "14"
+       "$ref": "12"
       },
       {
        "$id": "23",
@@ -232,7 +237,7 @@
      "ResourceName": "String",
      "Parameters": [
       {
-       "$ref": "14"
+       "$ref": "12"
       },
       {
        "$id": "28",
@@ -334,7 +339,7 @@
      "ResourceName": "String",
      "Parameters": [
       {
-       "$ref": "14"
+       "$ref": "12"
       },
       {
        "$id": "37",
@@ -435,7 +440,12 @@
     "$id": "45"
    },
    "Creatable": false,
-   "Parent": "ExtensibleClient"
+   "Parent": "ExtensibleClient",
+   "Parameters": [
+    {
+     "$ref": "12"
+    }
+   ]
   }
  ]
 }

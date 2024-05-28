@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="V2InInterfaceAsync(ModelV2,CancellationToken)">
+      <example>
+This sample shows how to call V2InInterfaceAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
+
+ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
+Response<ModelV2> response = await client.V2InInterfaceAsync(body);
+]]></code>
+This sample shows how to call V2InInterfaceAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
+
+ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
+Response<ModelV2> response = await client.V2InInterfaceAsync(body);
+]]></code></example>
+    </member>
+    <member name="V2InInterface(ModelV2,CancellationToken)">
+      <example>
+This sample shows how to call V2InInterface.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
+
+ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
+Response<ModelV2> response = client.V2InInterface(body);
+]]></code>
+This sample shows how to call V2InInterface with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
+
+ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
+Response<ModelV2> response = client.V2InInterface(body);
+]]></code></example>
+    </member>
+    <member name="V2InInterfaceAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call V2InInterfaceAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "<prop>",
+    enumProp = "enumMember",
+    unionProp = "<unionProp>",
+});
+Response response = await client.V2InInterfaceAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+Console.WriteLine(result.GetProperty("unionProp").ToString());
+]]></code>
+This sample shows how to call V2InInterfaceAsync with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "<prop>",
+    enumProp = "enumMember",
+    unionProp = "<unionProp>",
+});
+Response response = await client.V2InInterfaceAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+Console.WriteLine(result.GetProperty("unionProp").ToString());
+]]></code></example>
+    </member>
+    <member name="V2InInterface(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call V2InInterface and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "<prop>",
+    enumProp = "enumMember",
+    unionProp = "<unionProp>",
+});
+Response response = client.V2InInterface(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+Console.WriteLine(result.GetProperty("unionProp").ToString());
+]]></code>
+This sample shows how to call V2InInterface with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "<prop>",
+    enumProp = "enumMember",
+    unionProp = "<unionProp>",
+});
+Response response = client.V2InInterface(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+Console.WriteLine(result.GetProperty("unionProp").ToString());
+]]></code></example>
+    </member>
+  </members>
+</doc>

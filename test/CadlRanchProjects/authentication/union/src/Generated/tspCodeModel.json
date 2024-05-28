@@ -155,7 +155,12 @@
    "Protocol": {
     "$id": "17"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   }
  ],
  "Auth": {

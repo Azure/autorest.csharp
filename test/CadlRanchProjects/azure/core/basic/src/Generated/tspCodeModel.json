@@ -1748,7 +1748,12 @@
    "Protocol": {
     "$id": "171"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "54"
+    }
+   ]
   },
   {
    "$id": "172",
@@ -1942,7 +1947,12 @@
     "$id": "189"
    },
    "Creatable": false,
-   "Parent": "BasicClient"
+   "Parent": "BasicClient",
+   "Parameters": [
+    {
+     "$ref": "54"
+    }
+   ]
   }
  ]
 }

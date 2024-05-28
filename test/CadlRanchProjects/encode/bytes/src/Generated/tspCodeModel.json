@@ -117,48 +117,53 @@
    "Protocol": {
     "$id": "16"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "17",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "18",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "19",
+      "Type": {
+       "$id": "20",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "17",
+   "$id": "21",
    "Name": "Query",
    "Description": "",
    "Operations": [
     {
-     "$id": "18",
+     "$id": "22",
      "Name": "default",
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$id": "19",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "20",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "21",
-        "Type": {
-         "$id": "22",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "17"
       },
       {
        "$id": "23",
@@ -233,7 +238,7 @@
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "30",
@@ -308,7 +313,7 @@
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "37",
@@ -383,7 +388,7 @@
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "44",
@@ -464,7 +469,12 @@
     "$id": "51"
    },
    "Creatable": false,
-   "Parent": "BytesClient"
+   "Parent": "BytesClient",
+   "Parameters": [
+    {
+     "$ref": "17"
+    }
+   ]
   },
   {
    "$id": "52",
@@ -477,7 +487,7 @@
      "ResourceName": "Property",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "54",
@@ -585,7 +595,7 @@
      "ResourceName": "Property",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "63",
@@ -693,7 +703,7 @@
      "ResourceName": "Property",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "72",
@@ -801,7 +811,7 @@
      "ResourceName": "Property",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "81",
@@ -908,7 +918,12 @@
     "$id": "89"
    },
    "Creatable": false,
-   "Parent": "BytesClient"
+   "Parent": "BytesClient",
+   "Parameters": [
+    {
+     "$ref": "17"
+    }
+   ]
   },
   {
    "$id": "90",
@@ -921,7 +936,7 @@
      "ResourceName": "Header",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "92",
@@ -996,7 +1011,7 @@
      "ResourceName": "Header",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "99",
@@ -1071,7 +1086,7 @@
      "ResourceName": "Header",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "106",
@@ -1146,7 +1161,7 @@
      "ResourceName": "Header",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "113",
@@ -1227,7 +1242,12 @@
     "$id": "120"
    },
    "Creatable": false,
-   "Parent": "BytesClient"
+   "Parent": "BytesClient",
+   "Parameters": [
+    {
+     "$ref": "17"
+    }
+   ]
   },
   {
    "$id": "121",
@@ -1240,7 +1260,7 @@
      "ResourceName": "RequestBody",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "123",
@@ -1345,7 +1365,7 @@
      "ResourceName": "RequestBody",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "133",
@@ -1457,7 +1477,7 @@
      "ResourceName": "RequestBody",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "144",
@@ -1569,7 +1589,7 @@
      "ResourceName": "RequestBody",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "155",
@@ -1674,7 +1694,7 @@
      "ResourceName": "RequestBody",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "165",
@@ -1778,7 +1798,12 @@
     "$id": "174"
    },
    "Creatable": false,
-   "Parent": "BytesClient"
+   "Parent": "BytesClient",
+   "Parameters": [
+    {
+     "$ref": "17"
+    }
+   ]
   },
   {
    "$id": "175",
@@ -1791,7 +1816,7 @@
      "ResourceName": "ResponseBody",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "177",
@@ -1855,7 +1880,7 @@
      "ResourceName": "ResponseBody",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "183",
@@ -1919,7 +1944,7 @@
      "ResourceName": "ResponseBody",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "189",
@@ -1983,7 +2008,7 @@
      "ResourceName": "ResponseBody",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "195",
@@ -2047,7 +2072,7 @@
      "ResourceName": "ResponseBody",
      "Parameters": [
       {
-       "$ref": "19"
+       "$ref": "17"
       },
       {
        "$id": "201",
@@ -2110,7 +2135,12 @@
     "$id": "206"
    },
    "Creatable": false,
-   "Parent": "BytesClient"
+   "Parent": "BytesClient",
+   "Parameters": [
+    {
+     "$ref": "17"
+    }
+   ]
   }
  ]
 }

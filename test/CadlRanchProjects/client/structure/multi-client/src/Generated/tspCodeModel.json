@@ -255,7 +255,15 @@
    "Protocol": {
     "$id": "26"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "9"
+    },
+    {
+     "$ref": "11"
+    }
+   ]
   },
   {
    "$id": "27",
@@ -440,7 +448,15 @@
    "Protocol": {
     "$id": "43"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "9"
+    },
+    {
+     "$ref": "11"
+    }
+   ]
   }
  ]
 }

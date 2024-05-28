@@ -3770,7 +3770,12 @@
    "Protocol": {
     "$id": "391"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "194"
+    }
+   ]
   },
   {
    "$id": "392",
@@ -3781,7 +3786,12 @@
     "$id": "393"
    },
    "Creatable": false,
-   "Parent": "FirstTestTypeSpecClient"
+   "Parent": "FirstTestTypeSpecClient",
+   "Parameters": [
+    {
+     "$ref": "194"
+    }
+   ]
   },
   {
    "$id": "394",
@@ -3915,7 +3925,12 @@
     "$id": "406"
    },
    "Creatable": false,
-   "Parent": "Hello"
+   "Parent": "Hello",
+   "Parameters": [
+    {
+     "$ref": "194"
+    }
+   ]
   },
   {
    "$id": "407",
@@ -4567,7 +4582,12 @@
     "$id": "466"
    },
    "Creatable": false,
-   "Parent": "Hello"
+   "Parent": "Hello",
+   "Parameters": [
+    {
+     "$ref": "194"
+    }
+   ]
   },
   {
    "$id": "467",
@@ -4682,7 +4702,12 @@
     "$id": "477"
    },
    "Creatable": false,
-   "Parent": "FirstTestTypeSpecClient"
+   "Parent": "FirstTestTypeSpecClient",
+   "Parameters": [
+    {
+     "$ref": "194"
+    }
+   ]
   },
   {
    "$id": "478",
@@ -4859,7 +4884,12 @@
     "$id": "493"
    },
    "Creatable": false,
-   "Parent": "FirstTestTypeSpecClient"
+   "Parent": "FirstTestTypeSpecClient",
+   "Parameters": [
+    {
+     "$ref": "194"
+    }
+   ]
   },
   {
    "$id": "494",
@@ -4953,7 +4983,12 @@
     "$id": "502"
    },
    "Creatable": false,
-   "Parent": "FirstTestTypeSpecClient"
+   "Parent": "FirstTestTypeSpecClient",
+   "Parameters": [
+    {
+     "$ref": "194"
+    }
+   ]
   },
   {
    "$id": "503",
@@ -5067,7 +5102,12 @@
     "$id": "513"
    },
    "Creatable": false,
-   "Parent": "FirstTestTypeSpecClient"
+   "Parent": "FirstTestTypeSpecClient",
+   "Parameters": [
+    {
+     "$ref": "194"
+    }
+   ]
   }
  ],
  "Auth": {
