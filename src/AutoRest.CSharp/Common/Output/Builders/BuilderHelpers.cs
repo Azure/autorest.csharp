@@ -176,6 +176,8 @@ namespace AutoRest.CSharp.Output.Builders
                 escapeLength = slice.Length;
             return isMatch;
         }
+
+        // TODO: Clean up these helper methods in https://github.com/Azure/autorest.csharp/issues/4767
         public static string CSharpName(this InputParameter parameter) => parameter.Name.ToVariableName();
 
         public static string CSharpName(this RequestParameter parameter) => parameter.Language.Default.Name.ToVariableName();
