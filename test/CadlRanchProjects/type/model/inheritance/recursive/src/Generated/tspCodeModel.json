@@ -262,7 +262,12 @@
    "Protocol": {
     "$id": "27"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "10"
+    }
+   ]
   }
  ]
 }

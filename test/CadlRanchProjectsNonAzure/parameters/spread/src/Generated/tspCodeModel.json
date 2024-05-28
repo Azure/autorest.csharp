@@ -206,48 +206,53 @@
    "Protocol": {
     "$id": "28"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "29",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "30",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "31",
+      "Type": {
+       "$id": "32",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "29",
+   "$id": "33",
    "Name": "Model",
    "Description": "",
    "Operations": [
     {
-     "$id": "30",
+     "$id": "34",
      "Name": "spreadAsRequestBody",
      "ResourceName": "Model",
      "Parameters": [
       {
-       "$id": "31",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "32",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "33",
-        "Type": {
-         "$id": "34",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "29"
       },
       {
        "$id": "35",
@@ -350,7 +355,7 @@
      "ResourceName": "Model",
      "Parameters": [
       {
-       "$ref": "31"
+       "$ref": "29"
       },
       {
        "$id": "44",
@@ -452,7 +457,7 @@
      "ResourceName": "Model",
      "Parameters": [
       {
-       "$ref": "31"
+       "$ref": "29"
       },
       {
        "$id": "53",
@@ -547,7 +552,7 @@
      "ResourceName": "Model",
      "Parameters": [
       {
-       "$ref": "31"
+       "$ref": "29"
       },
       {
        "$id": "62",
@@ -689,7 +694,7 @@
      "ResourceName": "Model",
      "Parameters": [
       {
-       "$ref": "31"
+       "$ref": "29"
       },
       {
        "$id": "75",
@@ -831,7 +836,12 @@
     "$id": "87"
    },
    "Creatable": false,
-   "Parent": "SpreadClient"
+   "Parent": "SpreadClient",
+   "Parameters": [
+    {
+     "$ref": "29"
+    }
+   ]
   },
   {
    "$id": "88",
@@ -844,7 +854,7 @@
      "ResourceName": "Alias",
      "Parameters": [
       {
-       "$ref": "31"
+       "$ref": "29"
       },
       {
        "$id": "90",
@@ -946,7 +956,7 @@
      "ResourceName": "Alias",
      "Parameters": [
       {
-       "$ref": "31"
+       "$ref": "29"
       },
       {
        "$id": "99",
@@ -1088,7 +1098,7 @@
      "ResourceName": "Alias",
      "Parameters": [
       {
-       "$ref": "31"
+       "$ref": "29"
       },
       {
        "$id": "112",
@@ -1229,7 +1239,12 @@
     "$id": "124"
    },
    "Creatable": false,
-   "Parent": "SpreadClient"
+   "Parent": "SpreadClient",
+   "Parameters": [
+    {
+     "$ref": "29"
+    }
+   ]
   }
  ]
 }

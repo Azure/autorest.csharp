@@ -140,48 +140,53 @@
    "Protocol": {
     "$id": "19"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "20",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "21",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "22",
+      "Type": {
+       "$id": "23",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "20",
+   "$id": "24",
    "Name": "Query",
    "Description": "",
    "Operations": [
     {
-     "$id": "21",
+     "$id": "25",
      "Name": "default",
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$id": "22",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "23",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "24",
-        "Type": {
-         "$id": "25",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "20"
       },
       {
        "$id": "26",
@@ -256,7 +261,7 @@
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "20"
       },
       {
        "$id": "33",
@@ -331,7 +336,7 @@
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "20"
       },
       {
        "$id": "40",
@@ -406,7 +411,7 @@
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "20"
       },
       {
        "$id": "47",
@@ -481,7 +486,7 @@
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "20"
       },
       {
        "$id": "54",
@@ -562,7 +567,12 @@
     "$id": "61"
    },
    "Creatable": false,
-   "Parent": "DatetimeClient"
+   "Parent": "DatetimeClient",
+   "Parameters": [
+    {
+     "$ref": "20"
+    }
+   ]
   },
   {
    "$id": "62",
@@ -575,7 +585,7 @@
      "ResourceName": "Property",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "20"
       },
       {
        "$id": "64",
@@ -683,7 +693,7 @@
      "ResourceName": "Property",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "20"
       },
       {
        "$id": "73",
@@ -791,7 +801,7 @@
      "ResourceName": "Property",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "20"
       },
       {
        "$id": "82",
@@ -899,7 +909,7 @@
      "ResourceName": "Property",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "20"
       },
       {
        "$id": "91",
@@ -1007,7 +1017,7 @@
      "ResourceName": "Property",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "20"
       },
       {
        "$id": "100",
@@ -1114,7 +1124,12 @@
     "$id": "108"
    },
    "Creatable": false,
-   "Parent": "DatetimeClient"
+   "Parent": "DatetimeClient",
+   "Parameters": [
+    {
+     "$ref": "20"
+    }
+   ]
   },
   {
    "$id": "109",
@@ -1127,7 +1142,7 @@
      "ResourceName": "Header",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "20"
       },
       {
        "$id": "111",
@@ -1202,7 +1217,7 @@
      "ResourceName": "Header",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "20"
       },
       {
        "$id": "118",
@@ -1277,7 +1292,7 @@
      "ResourceName": "Header",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "20"
       },
       {
        "$id": "125",
@@ -1352,7 +1367,7 @@
      "ResourceName": "Header",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "20"
       },
       {
        "$id": "132",
@@ -1427,7 +1442,7 @@
      "ResourceName": "Header",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "20"
       },
       {
        "$id": "139",
@@ -1508,7 +1523,12 @@
     "$id": "146"
    },
    "Creatable": false,
-   "Parent": "DatetimeClient"
+   "Parent": "DatetimeClient",
+   "Parameters": [
+    {
+     "$ref": "20"
+    }
+   ]
   },
   {
    "$id": "147",
@@ -1521,7 +1541,7 @@
      "ResourceName": "ResponseHeader",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "20"
       },
       {
        "$id": "149",
@@ -1589,7 +1609,7 @@
      "ResourceName": "ResponseHeader",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "20"
       },
       {
        "$id": "156",
@@ -1657,7 +1677,7 @@
      "ResourceName": "ResponseHeader",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "20"
       },
       {
        "$id": "163",
@@ -1725,7 +1745,7 @@
      "ResourceName": "ResponseHeader",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "20"
       },
       {
        "$id": "170",
@@ -1792,7 +1812,12 @@
     "$id": "176"
    },
    "Creatable": false,
-   "Parent": "DatetimeClient"
+   "Parent": "DatetimeClient",
+   "Parameters": [
+    {
+     "$ref": "20"
+    }
+   ]
   }
  ]
 }
