@@ -45,24 +45,6 @@ const spreadAliasWithRequiredAndOptionalCollections = {
     optionalStringList: ["c", "d"]
 };
 
-Scenarios.Spread_SpreadModel = passOnSuccess(
-    mockapi.post("/spreadModel", (req) => {
-        req.expect.bodyEquals(spreadModelRequest);
-        return {
-            status: 204
-          };
-    }),
-);
-
-Scenarios.Spread_SpreadAlias = passOnSuccess(
-    mockapi.post("/spreadAlias", (req) => {
-        req.expect.bodyEquals(spreadAliasRequest);
-        return {
-            status: 204
-          };
-    }),
-);
-
 Scenarios.Spread_SpreadMultiTargetAlias = passOnSuccess(
     mockapi.post("/spreadMultiTargetAlias/1", (req) => {
         req.expect.bodyEquals(spreadMultiTargetAliasRequest);
