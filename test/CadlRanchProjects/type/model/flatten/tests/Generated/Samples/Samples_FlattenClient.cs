@@ -27,15 +27,18 @@ namespace _Type.Model.Flatten.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                description = "<description>",
-                age = 1234,
+                properties = new
+                {
+                    description = "<description>",
+                    age = 1234,
+                },
             });
             Response response = client.PutFlattenModel(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("age").ToString());
         }
 
         [Test]
@@ -47,15 +50,18 @@ namespace _Type.Model.Flatten.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                description = "<description>",
-                age = 1234,
+                properties = new
+                {
+                    description = "<description>",
+                    age = 1234,
+                },
             });
             Response response = await client.PutFlattenModelAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("age").ToString());
         }
 
         [Test]
@@ -64,7 +70,7 @@ namespace _Type.Model.Flatten.Samples
         {
             FlattenClient client = new FlattenClient();
 
-            FlattenModel input = new FlattenModel("<name>", "<description>", 1234);
+            FlattenModel input = new FlattenModel("<name>", new ChildModel("<description>", 1234));
             Response<FlattenModel> response = client.PutFlattenModel(input);
         }
 
@@ -74,7 +80,7 @@ namespace _Type.Model.Flatten.Samples
         {
             FlattenClient client = new FlattenClient();
 
-            FlattenModel input = new FlattenModel("<name>", "<description>", 1234);
+            FlattenModel input = new FlattenModel("<name>", new ChildModel("<description>", 1234));
             Response<FlattenModel> response = await client.PutFlattenModelAsync(input);
         }
 
@@ -87,15 +93,18 @@ namespace _Type.Model.Flatten.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                description = "<description>",
-                age = 1234,
+                properties = new
+                {
+                    description = "<description>",
+                    age = 1234,
+                },
             });
             Response response = client.PutFlattenModel(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("age").ToString());
         }
 
         [Test]
@@ -107,15 +116,18 @@ namespace _Type.Model.Flatten.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                description = "<description>",
-                age = 1234,
+                properties = new
+                {
+                    description = "<description>",
+                    age = 1234,
+                },
             });
             Response response = await client.PutFlattenModelAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("age").ToString());
         }
 
         [Test]
@@ -124,7 +136,7 @@ namespace _Type.Model.Flatten.Samples
         {
             FlattenClient client = new FlattenClient();
 
-            FlattenModel input = new FlattenModel("<name>", "<description>", 1234);
+            FlattenModel input = new FlattenModel("<name>", new ChildModel("<description>", 1234));
             Response<FlattenModel> response = client.PutFlattenModel(input);
         }
 
@@ -134,7 +146,7 @@ namespace _Type.Model.Flatten.Samples
         {
             FlattenClient client = new FlattenClient();
 
-            FlattenModel input = new FlattenModel("<name>", "<description>", 1234);
+            FlattenModel input = new FlattenModel("<name>", new ChildModel("<description>", 1234));
             Response<FlattenModel> response = await client.PutFlattenModelAsync(input);
         }
 
@@ -147,17 +159,23 @@ namespace _Type.Model.Flatten.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                summary = "<summary>",
-                description = "<description>",
-                age = 1234,
+                properties = new
+                {
+                    summary = "<summary>",
+                    properties = new
+                    {
+                        description = "<description>",
+                        age = 1234,
+                    },
+                },
             });
             Response response = client.PutNestedFlattenModel(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("summary").ToString());
-            Console.WriteLine(result.GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("summary").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("properties").GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("properties").GetProperty("age").ToString());
         }
 
         [Test]
@@ -169,17 +187,23 @@ namespace _Type.Model.Flatten.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                summary = "<summary>",
-                description = "<description>",
-                age = 1234,
+                properties = new
+                {
+                    summary = "<summary>",
+                    properties = new
+                    {
+                        description = "<description>",
+                        age = 1234,
+                    },
+                },
             });
             Response response = await client.PutNestedFlattenModelAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("summary").ToString());
-            Console.WriteLine(result.GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("summary").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("properties").GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("properties").GetProperty("age").ToString());
         }
 
         [Test]
@@ -188,7 +212,7 @@ namespace _Type.Model.Flatten.Samples
         {
             FlattenClient client = new FlattenClient();
 
-            NestedFlattenModel input = new NestedFlattenModel("<name>", "<summary>", "<description>", 1234);
+            NestedFlattenModel input = new NestedFlattenModel("<name>", new ChildFlattenModel("<summary>", new ChildModel("<description>", 1234)));
             Response<NestedFlattenModel> response = client.PutNestedFlattenModel(input);
         }
 
@@ -198,7 +222,7 @@ namespace _Type.Model.Flatten.Samples
         {
             FlattenClient client = new FlattenClient();
 
-            NestedFlattenModel input = new NestedFlattenModel("<name>", "<summary>", "<description>", 1234);
+            NestedFlattenModel input = new NestedFlattenModel("<name>", new ChildFlattenModel("<summary>", new ChildModel("<description>", 1234)));
             Response<NestedFlattenModel> response = await client.PutNestedFlattenModelAsync(input);
         }
 
@@ -211,17 +235,23 @@ namespace _Type.Model.Flatten.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                summary = "<summary>",
-                description = "<description>",
-                age = 1234,
+                properties = new
+                {
+                    summary = "<summary>",
+                    properties = new
+                    {
+                        description = "<description>",
+                        age = 1234,
+                    },
+                },
             });
             Response response = client.PutNestedFlattenModel(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("summary").ToString());
-            Console.WriteLine(result.GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("summary").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("properties").GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("properties").GetProperty("age").ToString());
         }
 
         [Test]
@@ -233,17 +263,23 @@ namespace _Type.Model.Flatten.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                summary = "<summary>",
-                description = "<description>",
-                age = 1234,
+                properties = new
+                {
+                    summary = "<summary>",
+                    properties = new
+                    {
+                        description = "<description>",
+                        age = 1234,
+                    },
+                },
             });
             Response response = await client.PutNestedFlattenModelAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("summary").ToString());
-            Console.WriteLine(result.GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("summary").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("properties").GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("properties").GetProperty("age").ToString());
         }
 
         [Test]
@@ -252,7 +288,7 @@ namespace _Type.Model.Flatten.Samples
         {
             FlattenClient client = new FlattenClient();
 
-            NestedFlattenModel input = new NestedFlattenModel("<name>", "<summary>", "<description>", 1234);
+            NestedFlattenModel input = new NestedFlattenModel("<name>", new ChildFlattenModel("<summary>", new ChildModel("<description>", 1234)));
             Response<NestedFlattenModel> response = client.PutNestedFlattenModel(input);
         }
 
@@ -262,7 +298,7 @@ namespace _Type.Model.Flatten.Samples
         {
             FlattenClient client = new FlattenClient();
 
-            NestedFlattenModel input = new NestedFlattenModel("<name>", "<summary>", "<description>", 1234);
+            NestedFlattenModel input = new NestedFlattenModel("<name>", new ChildFlattenModel("<summary>", new ChildModel("<description>", 1234)));
             Response<NestedFlattenModel> response = await client.PutNestedFlattenModelAsync(input);
         }
     }

@@ -1,6 +1,7 @@
 {
  "$id": "1",
  "Name": "Payload.MediaType",
+ "Description": "Test the payload with different media types and different types of the payload itself.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [],

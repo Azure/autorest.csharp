@@ -30,17 +30,7 @@ namespace _Type.Model.Flatten.Models
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            writer.WritePropertyName("summary"u8);
-            writer.WriteStringValue(Summary);
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            writer.WritePropertyName("description"u8);
-            writer.WriteStringValue(Description);
-            writer.WritePropertyName("age"u8);
-            writer.WriteNumberValue(Age);
-            writer.WriteEndObject();
-            writer.WriteEndObject();
+            writer.WriteObjectValue(Properties, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -80,9 +70,7 @@ namespace _Type.Model.Flatten.Models
                 return null;
             }
             string name = default;
-            string summary = default;
-            string description = default;
-            int age = default;
+            ChildFlattenModel properties = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -94,41 +82,7 @@ namespace _Type.Model.Flatten.Models
                 }
                 if (property.NameEquals("properties"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        if (property0.NameEquals("summary"u8))
-                        {
-                            summary = property0.Value.GetString();
-                            continue;
-                        }
-                        if (property0.NameEquals("properties"u8))
-                        {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                property0.ThrowNonNullablePropertyIsNull();
-                                continue;
-                            }
-                            foreach (var property1 in property0.Value.EnumerateObject())
-                            {
-                                if (property1.NameEquals("description"u8))
-                                {
-                                    description = property1.Value.GetString();
-                                    continue;
-                                }
-                                if (property1.NameEquals("age"u8))
-                                {
-                                    age = property1.Value.GetInt32();
-                                    continue;
-                                }
-                            }
-                            continue;
-                        }
-                    }
+                    properties = ChildFlattenModel.DeserializeChildFlattenModel(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -137,7 +91,7 @@ namespace _Type.Model.Flatten.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new NestedFlattenModel(name, summary, description, age, serializedAdditionalRawData);
+            return new NestedFlattenModel(name, properties, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<NestedFlattenModel>.Write(ModelReaderWriterOptions options)

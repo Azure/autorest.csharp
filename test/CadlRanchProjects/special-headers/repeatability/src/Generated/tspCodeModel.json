@@ -1,6 +1,7 @@
 {
  "$id": "1",
  "Name": "SpecialHeaders.Repeatability",
+ "Description": "Illustrates OASIS repeatability headers",
  "ApiVersions": [],
  "Enums": [
   {

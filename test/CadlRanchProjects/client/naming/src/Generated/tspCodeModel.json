@@ -1,6 +1,7 @@
 {
  "$id": "1",
  "Name": "Client.Naming",
+ "Description": "Describe changing names of types in a client with `@clientName`",
  "ApiVersions": [],
  "Enums": [
   {
@@ -78,7 +79,7 @@
    "Properties": [
     {
      "$id": "11",
-     "Name": "CSName",
+     "Name": "defaultName",
      "SerializedName": "defaultName",
      "Description": "Pass in true",
      "Type": {
@@ -143,7 +144,7 @@
   {
    "$id": "19",
    "Kind": "Model",
-   "Name": "CSModel",
+   "Name": "ModelWithLanguageClientName",
    "Namespace": "Client.Naming.Model",
    "IsNullable": false,
    "Usage": "Input",
@@ -901,7 +902,7 @@
       },
       {
        "$id": "92",
-       "Name": "CSModel",
+       "Name": "ModelWithLanguageClientName",
        "NameInRequest": "ModelWithLanguageClientName",
        "Type": {
         "$ref": "19"

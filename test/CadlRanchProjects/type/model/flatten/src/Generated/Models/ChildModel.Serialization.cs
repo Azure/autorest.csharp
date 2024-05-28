@@ -12,23 +12,25 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace Client.Naming.Models
+namespace _Type.Model.Flatten.Models
 {
-    public partial class CSModel : IUtf8JsonSerializable, IJsonModel<CSModel>
+    public partial class ChildModel : IUtf8JsonSerializable, IJsonModel<ChildModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CSModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ChildModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
-        void IJsonModel<CSModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<ChildModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CSModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ChildModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(CSModel)} does not support writing '{format}' format.");
+                throw new FormatException($"The model {nameof(ChildModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("defaultName"u8);
-            writer.WriteBooleanValue(DefaultName);
+            writer.WritePropertyName("description"u8);
+            writer.WriteStringValue(Description);
+            writer.WritePropertyName("age"u8);
+            writer.WriteNumberValue(Age);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -47,19 +49,19 @@ namespace Client.Naming.Models
             writer.WriteEndObject();
         }
 
-        CSModel IJsonModel<CSModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ChildModel IJsonModel<ChildModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CSModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ChildModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(CSModel)} does not support reading '{format}' format.");
+                throw new FormatException($"The model {nameof(ChildModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeCSModel(document.RootElement, options);
+            return DeserializeChildModel(document.RootElement, options);
         }
 
-        internal static CSModel DeserializeCSModel(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static ChildModel DeserializeChildModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -67,14 +69,20 @@ namespace Client.Naming.Models
             {
                 return null;
             }
-            bool defaultName = default;
+            string description = default;
+            int age = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("defaultName"u8))
+                if (property.NameEquals("description"u8))
                 {
-                    defaultName = property.Value.GetBoolean();
+                    description = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("age"u8))
+                {
+                    age = property.Value.GetInt32();
                     continue;
                 }
                 if (options.Format != "W")
@@ -83,46 +91,46 @@ namespace Client.Naming.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new CSModel(defaultName, serializedAdditionalRawData);
+            return new ChildModel(description, age, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<CSModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ChildModel>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CSModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ChildModel>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(CSModel)} does not support writing '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ChildModel)} does not support writing '{options.Format}' format.");
             }
         }
 
-        CSModel IPersistableModel<CSModel>.Create(BinaryData data, ModelReaderWriterOptions options)
+        ChildModel IPersistableModel<ChildModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CSModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ChildModel>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeCSModel(document.RootElement, options);
+                        return DeserializeChildModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(CSModel)} does not support reading '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ChildModel)} does not support reading '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<CSModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ChildModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static CSModel FromResponse(Response response)
+        internal static ChildModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCSModel(document.RootElement);
+            return DeserializeChildModel(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>

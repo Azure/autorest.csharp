@@ -2,10 +2,10 @@
   "output-folder": ".",
   "namespace": "_Type.Property.AdditionalProperties",
   "library-name": "_Type.Property.AdditionalProperties",
+  "flavor": "azure",
+  "use-model-reader-writer": true,
   "shared-source-folders": [
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net7.0/Generator.Shared",
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net7.0/Azure.Core.Shared"
-  ],
-  "flavor": "azure",
-  "use-model-reader-writer": true
+  ]
 }

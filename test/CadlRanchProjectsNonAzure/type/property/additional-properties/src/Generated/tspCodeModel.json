@@ -1,6 +1,7 @@
 {
  "$id": "1",
  "Name": "Type.Property.AdditionalProperties",
+ "Description": "Tests for additional properties of models",
  "ApiVersions": [],
  "Enums": [
   {

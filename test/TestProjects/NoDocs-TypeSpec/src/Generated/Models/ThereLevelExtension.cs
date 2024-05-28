@@ -10,22 +10,31 @@ using System.Collections.Generic;
 
 namespace NoDocsTypeSpec.Models
 {
+    /// <summary> extension. </summary>
     public partial class ThereLevelExtension : ThereLevelElement
     {
+        /// <summary> Initializes a new instance of <see cref="ThereLevelExtension"/>. </summary>
+        /// <param name="level"></param>
         public ThereLevelExtension(sbyte level)
         {
             Level = level;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ThereLevelExtension"/>. </summary>
+        /// <param name="extension"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        /// <param name="level"></param>
         internal ThereLevelExtension(IList<ThereLevelExtension> extension, IDictionary<string, BinaryData> serializedAdditionalRawData, sbyte level) : base(extension, serializedAdditionalRawData)
         {
             Level = level;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ThereLevelExtension"/> for deserialization. </summary>
         internal ThereLevelExtension()
         {
         }
 
+        /// <summary> Gets the level. </summary>
         public sbyte Level { get; }
     }
 }

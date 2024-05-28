@@ -1,6 +1,7 @@
 {
  "$id": "1",
  "Name": "FirstTestTypeSpec",
+ "Description": "This is a sample typespec project.",
  "ApiVersions": [
   "2022-05-15-preview"
  ],

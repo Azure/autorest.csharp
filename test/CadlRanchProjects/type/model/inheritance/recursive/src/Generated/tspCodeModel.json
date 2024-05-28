@@ -1,6 +1,7 @@
 {
  "$id": "1",
  "Name": "Type.Model.Inheritance.Recursive",
+ "Description": "Illustrates inheritance recursion",
  "ApiVersions": [],
  "Enums": [],
  "Models": [

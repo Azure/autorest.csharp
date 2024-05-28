@@ -1,6 +1,7 @@
 {
  "$id": "1",
  "Name": "Encode.Duration",
+ "Description": "Test for encode decorator on duration.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [

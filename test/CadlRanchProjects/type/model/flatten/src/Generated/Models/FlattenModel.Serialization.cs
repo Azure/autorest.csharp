@@ -30,12 +30,7 @@ namespace _Type.Model.Flatten.Models
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            writer.WritePropertyName("description"u8);
-            writer.WriteStringValue(Description);
-            writer.WritePropertyName("age"u8);
-            writer.WriteNumberValue(Age);
-            writer.WriteEndObject();
+            writer.WriteObjectValue(Properties, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -75,8 +70,7 @@ namespace _Type.Model.Flatten.Models
                 return null;
             }
             string name = default;
-            string description = default;
-            int age = default;
+            ChildModel properties = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -88,24 +82,7 @@ namespace _Type.Model.Flatten.Models
                 }
                 if (property.NameEquals("properties"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        if (property0.NameEquals("description"u8))
-                        {
-                            description = property0.Value.GetString();
-                            continue;
-                        }
-                        if (property0.NameEquals("age"u8))
-                        {
-                            age = property0.Value.GetInt32();
-                            continue;
-                        }
-                    }
+                    properties = ChildModel.DeserializeChildModel(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -114,7 +91,7 @@ namespace _Type.Model.Flatten.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new FlattenModel(name, description, age, serializedAdditionalRawData);
+            return new FlattenModel(name, properties, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<FlattenModel>.Write(ModelReaderWriterOptions options)

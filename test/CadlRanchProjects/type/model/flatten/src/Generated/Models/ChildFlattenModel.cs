@@ -8,10 +8,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace Client.Naming.Models
+namespace _Type.Model.Flatten.Models
 {
-    /// <summary> The CSModel. </summary>
-    public partial class CSModel
+    /// <summary> This is the child model to be flattened. And it has flattened property as well. </summary>
+    public partial class ChildFlattenModel
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -45,28 +45,38 @@ namespace Client.Naming.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="CSModel"/>. </summary>
-        /// <param name="defaultName"> Pass in true. </param>
-        public CSModel(bool defaultName)
+        /// <summary> Initializes a new instance of <see cref="ChildFlattenModel"/>. </summary>
+        /// <param name="summary"></param>
+        /// <param name="properties"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="summary"/> or <paramref name="properties"/> is null. </exception>
+        public ChildFlattenModel(string summary, ChildModel properties)
         {
-            DefaultName = defaultName;
+            Argument.AssertNotNull(summary, nameof(summary));
+            Argument.AssertNotNull(properties, nameof(properties));
+
+            Summary = summary;
+            Properties = properties;
         }
 
-        /// <summary> Initializes a new instance of <see cref="CSModel"/>. </summary>
-        /// <param name="defaultName"> Pass in true. </param>
+        /// <summary> Initializes a new instance of <see cref="ChildFlattenModel"/>. </summary>
+        /// <param name="summary"></param>
+        /// <param name="properties"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CSModel(bool defaultName, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ChildFlattenModel(string summary, ChildModel properties, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            DefaultName = defaultName;
+            Summary = summary;
+            Properties = properties;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="CSModel"/> for deserialization. </summary>
-        internal CSModel()
+        /// <summary> Initializes a new instance of <see cref="ChildFlattenModel"/> for deserialization. </summary>
+        internal ChildFlattenModel()
         {
         }
 
-        /// <summary> Pass in true. </summary>
-        public bool DefaultName { get; }
+        /// <summary> Gets or sets the summary. </summary>
+        public string Summary { get; set; }
+        /// <summary> Gets or sets the properties. </summary>
+        public ChildModel Properties { get; set; }
     }
 }

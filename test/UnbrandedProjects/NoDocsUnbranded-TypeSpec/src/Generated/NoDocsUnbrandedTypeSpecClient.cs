@@ -11,6 +11,7 @@ using NoDocsUnbrandedTypeSpec.Models;
 namespace NoDocsUnbrandedTypeSpec
 {
     // Data plane generated client.
+    /// <summary> This is a sample typespec project. </summary>
     public partial class NoDocsUnbrandedTypeSpecClient
     {
         private const string AuthorizationHeader = "my-api-key";
@@ -18,16 +19,27 @@ namespace NoDocsUnbrandedTypeSpec
         private readonly ClientPipeline _pipeline;
         private readonly Uri _endpoint;
 
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual ClientPipeline Pipeline => _pipeline;
 
+        /// <summary> Initializes a new instance of NoDocsUnbrandedTypeSpecClient for mocking. </summary>
         protected NoDocsUnbrandedTypeSpecClient()
         {
         }
 
+        /// <summary> Initializes a new instance of NoDocsUnbrandedTypeSpecClient. </summary>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="credential"> A credential used to authenticate to the service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public NoDocsUnbrandedTypeSpecClient(Uri endpoint, ApiKeyCredential credential) : this(endpoint, credential, new NoDocsUnbrandedTypeSpecClientOptions())
         {
         }
 
+        /// <summary> Initializes a new instance of NoDocsUnbrandedTypeSpecClient. </summary>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="credential"> A credential used to authenticate to the service. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public NoDocsUnbrandedTypeSpecClient(Uri endpoint, ApiKeyCredential credential, NoDocsUnbrandedTypeSpecClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
@@ -39,6 +51,11 @@ namespace NoDocsUnbrandedTypeSpec
             _endpoint = endpoint;
         }
 
+        /// <summary> Return hi. </summary>
+        /// <param name="headParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         public virtual async Task<ClientResult<Thing>> SayHiAsync(string headParameter, string queryParameter, string optionalQuery = null)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
@@ -48,6 +65,11 @@ namespace NoDocsUnbrandedTypeSpec
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
+        /// <summary> Return hi. </summary>
+        /// <param name="headParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         public virtual ClientResult<Thing> SayHi(string headParameter, string queryParameter, string optionalQuery = null)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
@@ -57,6 +79,28 @@ namespace NoDocsUnbrandedTypeSpec
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
+        /// <summary>
+        /// [Protocol Method] Return hi
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SayHiAsync(string,string,string)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="headParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<ClientResult> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestOptions options)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
@@ -66,6 +110,28 @@ namespace NoDocsUnbrandedTypeSpec
             return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
+        /// <summary>
+        /// [Protocol Method] Return hi
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SayHi(string,string,string)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="headParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
         public virtual ClientResult SayHi(string headParameter, string queryParameter, string optionalQuery, RequestOptions options)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));

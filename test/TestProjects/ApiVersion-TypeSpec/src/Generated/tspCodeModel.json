@@ -1,6 +1,7 @@
 {
  "$id": "1",
  "Name": "ApiVersionInTsp",
+ "Description": "CADL project to test api versions.",
  "ApiVersions": [
   "v1.1",
   "v1.2"

@@ -47,34 +47,25 @@ namespace _Type.Model.Flatten.Models
 
         /// <summary> Initializes a new instance of <see cref="NestedFlattenModel"/>. </summary>
         /// <param name="name"></param>
-        /// <param name="summary"></param>
-        /// <param name="description"></param>
-        /// <param name="age"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="summary"/> or <paramref name="description"/> is null. </exception>
-        public NestedFlattenModel(string name, string summary, string description, int age)
+        /// <param name="properties"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="properties"/> is null. </exception>
+        public NestedFlattenModel(string name, ChildFlattenModel properties)
         {
             Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(summary, nameof(summary));
-            Argument.AssertNotNull(description, nameof(description));
+            Argument.AssertNotNull(properties, nameof(properties));
 
             Name = name;
-            Summary = summary;
-            Description = description;
-            Age = age;
+            Properties = properties;
         }
 
         /// <summary> Initializes a new instance of <see cref="NestedFlattenModel"/>. </summary>
         /// <param name="name"></param>
-        /// <param name="summary"></param>
-        /// <param name="description"></param>
-        /// <param name="age"></param>
+        /// <param name="properties"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal NestedFlattenModel(string name, string summary, string description, int age, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal NestedFlattenModel(string name, ChildFlattenModel properties, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
-            Summary = summary;
-            Description = description;
-            Age = age;
+            Properties = properties;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -85,11 +76,7 @@ namespace _Type.Model.Flatten.Models
 
         /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
-        /// <summary> Gets or sets the summary. </summary>
-        public string Summary { get; set; }
-        /// <summary> Gets or sets the description. </summary>
-        public string Description { get; set; }
-        /// <summary> Gets or sets the age. </summary>
-        public int Age { get; set; }
+        /// <summary> Gets or sets the properties. </summary>
+        public ChildFlattenModel Properties { get; set; }
     }
 }

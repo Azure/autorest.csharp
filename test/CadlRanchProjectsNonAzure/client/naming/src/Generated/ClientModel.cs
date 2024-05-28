@@ -115,25 +115,25 @@ namespace Scm.Client.Naming
         }
 
         /// <summary> Language. </summary>
-        /// <param name="csModel"> The <see cref="CSModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="csModel"/> is null. </exception>
-        public virtual async Task<ClientResult> LanguageAsync(CSModel csModel)
+        /// <param name="modelWithLanguageClientName"> The <see cref="ModelWithLanguageClientName"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="modelWithLanguageClientName"/> is null. </exception>
+        public virtual async Task<ClientResult> LanguageAsync(ModelWithLanguageClientName modelWithLanguageClientName)
         {
-            Argument.AssertNotNull(csModel, nameof(csModel));
+            Argument.AssertNotNull(modelWithLanguageClientName, nameof(modelWithLanguageClientName));
 
-            using BinaryContent content = csModel.ToBinaryContent();
+            using BinaryContent content = modelWithLanguageClientName.ToBinaryContent();
             ClientResult result = await LanguageAsync(content, null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Language. </summary>
-        /// <param name="csModel"> The <see cref="CSModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="csModel"/> is null. </exception>
-        public virtual ClientResult Language(CSModel csModel)
+        /// <param name="modelWithLanguageClientName"> The <see cref="ModelWithLanguageClientName"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="modelWithLanguageClientName"/> is null. </exception>
+        public virtual ClientResult Language(ModelWithLanguageClientName modelWithLanguageClientName)
         {
-            Argument.AssertNotNull(csModel, nameof(csModel));
+            Argument.AssertNotNull(modelWithLanguageClientName, nameof(modelWithLanguageClientName));
 
-            using BinaryContent content = csModel.ToBinaryContent();
+            using BinaryContent content = modelWithLanguageClientName.ToBinaryContent();
             ClientResult result = Language(content, null);
             return result;
         }
@@ -148,7 +148,7 @@ namespace Scm.Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="LanguageAsync(CSModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="LanguageAsync(ModelWithLanguageClientName)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -176,7 +176,7 @@ namespace Scm.Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Language(CSModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Language(ModelWithLanguageClientName)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

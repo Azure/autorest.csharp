@@ -14,6 +14,7 @@ using Azure.Core.Pipeline;
 namespace NoDocsTypeSpec
 {
     // Data plane generated sub-client.
+    /// <summary> Hello world service. </summary>
     public partial class HelloDemo
     {
         private const string AuthorizationHeader = "x-ms-api-key";
@@ -23,14 +24,23 @@ namespace NoDocsTypeSpec
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
 
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
 
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
+        /// <summary> Initializes a new instance of HelloDemo for mocking. </summary>
         protected HelloDemo()
         {
         }
 
+        /// <summary> Initializes a new instance of HelloDemo. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="keyCredential"> The key credential to copy. </param>
+        /// <param name="tokenCredential"> The token credential to copy. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal HelloDemo(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, TokenCredential tokenCredential, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -40,6 +50,24 @@ namespace NoDocsTypeSpec
             _endpoint = endpoint;
         }
 
+        /// <summary>
+        /// [Protocol Method] Return hi
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="headParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/HelloDemo.xml" path="doc/members/member[@name='SayHiAsync(string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
@@ -59,6 +87,24 @@ namespace NoDocsTypeSpec
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] Return hi
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="headParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/HelloDemo.xml" path="doc/members/member[@name='SayHi(string,string,string,RequestContext)']/*" />
         public virtual Response SayHi(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));

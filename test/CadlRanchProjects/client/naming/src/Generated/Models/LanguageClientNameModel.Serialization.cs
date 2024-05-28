@@ -28,7 +28,7 @@ namespace Client.Naming.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("defaultName"u8);
-            writer.WriteBooleanValue(CSName);
+            writer.WriteBooleanValue(DefaultName);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

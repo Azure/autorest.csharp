@@ -1,6 +1,7 @@
 {
  "$id": "1",
  "Name": "Type.Model.Inheritance.SingleDiscriminator",
+ "Description": "Illustrates inheritance with single discriminator.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [

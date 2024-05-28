@@ -6,6 +6,7 @@ using System.ClientModel.Primitives;
 
 namespace NoDocsUnbrandedTypeSpec
 {
+    /// <summary> Client options for NoDocsUnbrandedTypeSpecClient. </summary>
     public partial class NoDocsUnbrandedTypeSpecClientOptions : ClientPipelineOptions
     {
     }

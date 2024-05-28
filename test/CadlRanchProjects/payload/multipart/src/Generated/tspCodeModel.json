@@ -1,6 +1,7 @@
 {
  "$id": "1",
  "Name": "Payload.MultiPart",
+ "Description": "Test for multipart",
  "ApiVersions": [],
  "Enums": [],
  "Models": [

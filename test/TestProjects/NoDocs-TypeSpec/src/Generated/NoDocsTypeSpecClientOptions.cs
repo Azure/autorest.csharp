@@ -10,17 +10,21 @@ using Azure.Core;
 
 namespace NoDocsTypeSpec
 {
+    /// <summary> Client options for NoDocsTypeSpecClient. </summary>
     public partial class NoDocsTypeSpecClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2022_05_15_Preview;
 
+        /// <summary> The version of the service to use. </summary>
         public enum ServiceVersion
         {
+            /// <summary> Service version "2022-05-15-preview". </summary>
             V2022_05_15_Preview = 1,
         }
 
         internal string Version { get; }
 
+        /// <summary> Initializes new instance of NoDocsTypeSpecClientOptions. </summary>
         public NoDocsTypeSpecClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch

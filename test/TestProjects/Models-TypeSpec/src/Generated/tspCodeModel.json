@@ -1,6 +1,7 @@
 {
  "$id": "1",
  "Name": "ModelsTypeSpec",
+ "Description": "CADL project to test various types of models.",
  "ApiVersions": [
   "0.1.0"
  ],

@@ -1,6 +1,7 @@
 {
  "$id": "1",
  "Name": "Parameters.Spread",
+ "Description": "Test for the spread operator.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [

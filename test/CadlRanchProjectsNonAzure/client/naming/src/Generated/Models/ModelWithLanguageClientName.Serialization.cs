@@ -10,14 +10,14 @@ using System.Text.Json;
 
 namespace Scm.Client.Naming.Models
 {
-    public partial class CSModel : IJsonModel<CSModel>
+    public partial class ModelWithLanguageClientName : IJsonModel<ModelWithLanguageClientName>
     {
-        void IJsonModel<CSModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<ModelWithLanguageClientName>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CSModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ModelWithLanguageClientName>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(CSModel)} does not support writing '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithLanguageClientName)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -41,19 +41,19 @@ namespace Scm.Client.Naming.Models
             writer.WriteEndObject();
         }
 
-        CSModel IJsonModel<CSModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ModelWithLanguageClientName IJsonModel<ModelWithLanguageClientName>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CSModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ModelWithLanguageClientName>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(CSModel)} does not support reading '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithLanguageClientName)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeCSModel(document.RootElement, options);
+            return DeserializeModelWithLanguageClientName(document.RootElement, options);
         }
 
-        internal static CSModel DeserializeCSModel(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static ModelWithLanguageClientName DeserializeModelWithLanguageClientName(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -77,46 +77,46 @@ namespace Scm.Client.Naming.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new CSModel(defaultName, serializedAdditionalRawData);
+            return new ModelWithLanguageClientName(defaultName, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<CSModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ModelWithLanguageClientName>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CSModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ModelWithLanguageClientName>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(CSModel)} does not support writing '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithLanguageClientName)} does not support writing '{options.Format}' format.");
             }
         }
 
-        CSModel IPersistableModel<CSModel>.Create(BinaryData data, ModelReaderWriterOptions options)
+        ModelWithLanguageClientName IPersistableModel<ModelWithLanguageClientName>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CSModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ModelWithLanguageClientName>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeCSModel(document.RootElement, options);
+                        return DeserializeModelWithLanguageClientName(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(CSModel)} does not support reading '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithLanguageClientName)} does not support reading '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<CSModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ModelWithLanguageClientName>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
-        internal static CSModel FromResponse(PipelineResponse response)
+        internal static ModelWithLanguageClientName FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCSModel(document.RootElement);
+            return DeserializeModelWithLanguageClientName(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>

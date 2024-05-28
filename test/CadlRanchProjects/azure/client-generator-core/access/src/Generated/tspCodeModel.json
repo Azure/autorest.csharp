@@ -1,6 +1,7 @@
 {
  "$id": "1",
  "Name": "_Specs_.Azure.ClientGenerator.Core.Access",
+ "Description": "Test for internal decorator.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [

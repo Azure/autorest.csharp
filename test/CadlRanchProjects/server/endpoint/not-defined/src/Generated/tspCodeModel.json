@@ -1,6 +1,7 @@
 {
  "$id": "1",
  "Name": "Server.Endpoint.NotDefined",
+ "Description": "Illustrates server doesn't define endpoint. Client should automatically add an endpoint to let user pass in.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [],

@@ -1,6 +1,7 @@
 {
  "$id": "1",
  "Name": "CustomizationsInTsp",
+ "Description": "CADL project to test various types of models.",
  "ApiVersions": [],
  "Enums": [
   {
