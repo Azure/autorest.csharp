@@ -427,8 +427,7 @@ namespace AutoRest.CSharp.Common.Input
             IsRequired: property.IsRequired,
             IsReadOnly: property.IsReadOnly,
             IsDiscriminator: property.IsDiscriminator ?? false,
-            FlattenedNames: property.FlattenedNames.ToList(),
-            GroupParameterNames: property is GroupProperty groupProperty ? groupProperty.OriginalParameter.Select(x => x.Language.Default.Name).ToArray() : null);
+            FlattenedNames: property.FlattenedNames.ToList());
 
         private static InputOperationParameterKind GetOperationParameterKind(RequestParameter input) => input switch
         {
