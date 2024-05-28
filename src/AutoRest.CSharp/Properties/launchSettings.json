@@ -676,6 +676,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\client\\naming\\src\\Generated -n"
     },
+    "typespec-client/structure/default": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\client\\structure\\default\\src\\Generated -n"
+    },
     "typespec-client/structure/multi-client": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\client\\structure\\multi-client\\src\\Generated -n"
@@ -935,6 +939,30 @@
     "typespec-type/union": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\union\\src\\Generated -n"
+    },
+    "typespec-versioning/added": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\versioning\\added\\src\\Generated -n"
+    },
+    "typespec-versioning/madeOptional": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\versioning\\madeOptional\\src\\Generated -n"
+    },
+    "typespec-versioning/removed": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\versioning\\removed\\src\\Generated -n"
+    },
+    "typespec-versioning/renamedFrom": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\versioning\\renamedFrom\\src\\Generated -n"
+    },
+    "typespec-versioning/returnTypeChangedFrom": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\versioning\\returnTypeChangedFrom\\src\\Generated -n"
+    },
+    "typespec-versioning/typeChangedFrom": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\versioning\\typeChangedFrom\\src\\Generated -n"
     },
     "Unbranded-TypeSpec": {
       "commandName": "Project",

@@ -3608,7 +3608,12 @@
    "Protocol": {
     "$id": "375"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "189"
+    }
+   ]
   },
   {
    "$id": "376",
@@ -3619,7 +3624,12 @@
     "$id": "377"
    },
    "Creatable": false,
-   "Parent": "NoDocsTypeSpecClient"
+   "Parent": "NoDocsTypeSpecClient",
+   "Parameters": [
+    {
+     "$ref": "189"
+    }
+   ]
   },
   {
    "$id": "378",
@@ -3753,7 +3763,12 @@
     "$id": "390"
    },
    "Creatable": false,
-   "Parent": "Hello"
+   "Parent": "Hello",
+   "Parameters": [
+    {
+     "$ref": "189"
+    }
+   ]
   },
   {
    "$id": "391",
@@ -4405,7 +4420,12 @@
     "$id": "450"
    },
    "Creatable": false,
-   "Parent": "Hello"
+   "Parent": "Hello",
+   "Parameters": [
+    {
+     "$ref": "189"
+    }
+   ]
   },
   {
    "$id": "451",
@@ -4520,7 +4540,12 @@
     "$id": "461"
    },
    "Creatable": false,
-   "Parent": "NoDocsTypeSpecClient"
+   "Parent": "NoDocsTypeSpecClient",
+   "Parameters": [
+    {
+     "$ref": "189"
+    }
+   ]
   },
   {
    "$id": "462",
@@ -4697,7 +4722,12 @@
     "$id": "477"
    },
    "Creatable": false,
-   "Parent": "NoDocsTypeSpecClient"
+   "Parent": "NoDocsTypeSpecClient",
+   "Parameters": [
+    {
+     "$ref": "189"
+    }
+   ]
   },
   {
    "$id": "478",
@@ -4791,7 +4821,12 @@
     "$id": "486"
    },
    "Creatable": false,
-   "Parent": "NoDocsTypeSpecClient"
+   "Parent": "NoDocsTypeSpecClient",
+   "Parameters": [
+    {
+     "$ref": "189"
+    }
+   ]
   },
   {
    "$id": "487",
@@ -4905,7 +4940,12 @@
     "$id": "497"
    },
    "Creatable": false,
-   "Parent": "NoDocsTypeSpecClient"
+   "Parent": "NoDocsTypeSpecClient",
+   "Parameters": [
+    {
+     "$ref": "189"
+    }
+   ]
   }
  ],
  "Auth": {

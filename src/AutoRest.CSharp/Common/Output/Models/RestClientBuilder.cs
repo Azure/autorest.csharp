@@ -63,12 +63,12 @@ namespace AutoRest.CSharp.Output.Models
             return OrderParametersByRequired(_parameters.Values);
         }
 
-        public static IEnumerable<InputParameter> GetParametersFromOperations(IEnumerable<InputOperation> operations) =>
-            operations
-                .SelectMany(op => op.Parameters)
-                .Where(p => p.Kind == InputOperationParameterKind.Client)
-                .Distinct()
-                .ToList();
+        public static IEnumerable<InputParameter> GetParametersFromClient(InputClient client)
+        {
+            return client.Parameters
+                .Concat(client.Operations.SelectMany(op => op.Parameters).Where(p => p.Kind == InputOperationParameterKind.Client))
+                .Distinct();
+        }
 
         private static string GetRequestParameterName(RequestParameter requestParameter)
         {

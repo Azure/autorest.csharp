@@ -1312,48 +1312,53 @@
    "Protocol": {
     "$id": "164"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "165",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "166",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "167",
+      "Type": {
+       "$id": "168",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "165",
+   "$id": "169",
    "Name": "StringsOnly",
    "Description": "Describe union of string \"a\" | \"b\" | \"c\"",
    "Operations": [
     {
-     "$id": "166",
+     "$id": "170",
      "Name": "get",
      "ResourceName": "StringsOnly",
      "Parameters": [
       {
-       "$id": "167",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "168",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "169",
-        "Type": {
-         "$id": "170",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "165"
       },
       {
        "$id": "171",
@@ -1414,7 +1419,7 @@
      "ResourceName": "StringsOnly",
      "Parameters": [
       {
-       "$ref": "167"
+       "$ref": "165"
       },
       {
        "$id": "176",
@@ -1515,7 +1520,12 @@
     "$id": "184"
    },
    "Creatable": false,
-   "Parent": "UnionClient"
+   "Parent": "UnionClient",
+   "Parameters": [
+    {
+     "$ref": "165"
+    }
+   ]
   },
   {
    "$id": "185",
@@ -1528,7 +1538,7 @@
      "ResourceName": "StringExtensible",
      "Parameters": [
       {
-       "$ref": "167"
+       "$ref": "165"
       },
       {
        "$id": "187",
@@ -1589,7 +1599,7 @@
      "ResourceName": "StringExtensible",
      "Parameters": [
       {
-       "$ref": "167"
+       "$ref": "165"
       },
       {
        "$id": "192",
@@ -1690,7 +1700,12 @@
     "$id": "200"
    },
    "Creatable": false,
-   "Parent": "UnionClient"
+   "Parent": "UnionClient",
+   "Parameters": [
+    {
+     "$ref": "165"
+    }
+   ]
   },
   {
    "$id": "201",
@@ -1703,7 +1718,7 @@
      "ResourceName": "StringExtensibleNamed",
      "Parameters": [
       {
-       "$ref": "167"
+       "$ref": "165"
       },
       {
        "$id": "203",
@@ -1764,7 +1779,7 @@
      "ResourceName": "StringExtensibleNamed",
      "Parameters": [
       {
-       "$ref": "167"
+       "$ref": "165"
       },
       {
        "$id": "208",
@@ -1865,7 +1880,12 @@
     "$id": "216"
    },
    "Creatable": false,
-   "Parent": "UnionClient"
+   "Parent": "UnionClient",
+   "Parameters": [
+    {
+     "$ref": "165"
+    }
+   ]
   },
   {
    "$id": "217",
@@ -1878,7 +1898,7 @@
      "ResourceName": "IntsOnly",
      "Parameters": [
       {
-       "$ref": "167"
+       "$ref": "165"
       },
       {
        "$id": "219",
@@ -1939,7 +1959,7 @@
      "ResourceName": "IntsOnly",
      "Parameters": [
       {
-       "$ref": "167"
+       "$ref": "165"
       },
       {
        "$id": "224",
@@ -2040,7 +2060,12 @@
     "$id": "232"
    },
    "Creatable": false,
-   "Parent": "UnionClient"
+   "Parent": "UnionClient",
+   "Parameters": [
+    {
+     "$ref": "165"
+    }
+   ]
   },
   {
    "$id": "233",
@@ -2053,7 +2078,7 @@
      "ResourceName": "FloatsOnly",
      "Parameters": [
       {
-       "$ref": "167"
+       "$ref": "165"
       },
       {
        "$id": "235",
@@ -2114,7 +2139,7 @@
      "ResourceName": "FloatsOnly",
      "Parameters": [
       {
-       "$ref": "167"
+       "$ref": "165"
       },
       {
        "$id": "240",
@@ -2215,7 +2240,12 @@
     "$id": "248"
    },
    "Creatable": false,
-   "Parent": "UnionClient"
+   "Parent": "UnionClient",
+   "Parameters": [
+    {
+     "$ref": "165"
+    }
+   ]
   },
   {
    "$id": "249",
@@ -2228,7 +2258,7 @@
      "ResourceName": "ModelsOnly",
      "Parameters": [
       {
-       "$ref": "167"
+       "$ref": "165"
       },
       {
        "$id": "251",
@@ -2289,7 +2319,7 @@
      "ResourceName": "ModelsOnly",
      "Parameters": [
       {
-       "$ref": "167"
+       "$ref": "165"
       },
       {
        "$id": "256",
@@ -2390,7 +2420,12 @@
     "$id": "264"
    },
    "Creatable": false,
-   "Parent": "UnionClient"
+   "Parent": "UnionClient",
+   "Parameters": [
+    {
+     "$ref": "165"
+    }
+   ]
   },
   {
    "$id": "265",
@@ -2403,7 +2438,7 @@
      "ResourceName": "EnumsOnly",
      "Parameters": [
       {
-       "$ref": "167"
+       "$ref": "165"
       },
       {
        "$id": "267",
@@ -2464,7 +2499,7 @@
      "ResourceName": "EnumsOnly",
      "Parameters": [
       {
-       "$ref": "167"
+       "$ref": "165"
       },
       {
        "$id": "272",
@@ -2565,7 +2600,12 @@
     "$id": "280"
    },
    "Creatable": false,
-   "Parent": "UnionClient"
+   "Parent": "UnionClient",
+   "Parameters": [
+    {
+     "$ref": "165"
+    }
+   ]
   },
   {
    "$id": "281",
@@ -2578,7 +2618,7 @@
      "ResourceName": "StringAndArray",
      "Parameters": [
       {
-       "$ref": "167"
+       "$ref": "165"
       },
       {
        "$id": "283",
@@ -2639,7 +2679,7 @@
      "ResourceName": "StringAndArray",
      "Parameters": [
       {
-       "$ref": "167"
+       "$ref": "165"
       },
       {
        "$id": "288",
@@ -2740,7 +2780,12 @@
     "$id": "296"
    },
    "Creatable": false,
-   "Parent": "UnionClient"
+   "Parent": "UnionClient",
+   "Parameters": [
+    {
+     "$ref": "165"
+    }
+   ]
   },
   {
    "$id": "297",
@@ -2753,7 +2798,7 @@
      "ResourceName": "MixedLiterals",
      "Parameters": [
       {
-       "$ref": "167"
+       "$ref": "165"
       },
       {
        "$id": "299",
@@ -2814,7 +2859,7 @@
      "ResourceName": "MixedLiterals",
      "Parameters": [
       {
-       "$ref": "167"
+       "$ref": "165"
       },
       {
        "$id": "304",
@@ -2915,7 +2960,12 @@
     "$id": "312"
    },
    "Creatable": false,
-   "Parent": "UnionClient"
+   "Parent": "UnionClient",
+   "Parameters": [
+    {
+     "$ref": "165"
+    }
+   ]
   },
   {
    "$id": "313",
@@ -2928,7 +2978,7 @@
      "ResourceName": "MixedTypes",
      "Parameters": [
       {
-       "$ref": "167"
+       "$ref": "165"
       },
       {
        "$id": "315",
@@ -2989,7 +3039,7 @@
      "ResourceName": "MixedTypes",
      "Parameters": [
       {
-       "$ref": "167"
+       "$ref": "165"
       },
       {
        "$id": "320",
@@ -3090,7 +3140,12 @@
     "$id": "328"
    },
    "Creatable": false,
-   "Parent": "UnionClient"
+   "Parent": "UnionClient",
+   "Parameters": [
+    {
+     "$ref": "165"
+    }
+   ]
   }
  ]
 }

@@ -38,48 +38,53 @@
    "Protocol": {
     "$id": "6"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "7",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "8",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "9",
+      "Type": {
+       "$id": "10",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "7",
+   "$id": "11",
    "Name": "SameBody",
    "Description": "",
    "Operations": [
     {
-     "$id": "8",
+     "$id": "12",
      "Name": "getAvatarAsPng",
      "ResourceName": "SameBody",
      "Parameters": [
       {
-       "$id": "9",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "10",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "11",
-        "Type": {
-         "$id": "12",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "7"
       },
       {
        "$id": "13",
@@ -143,7 +148,7 @@
      "ResourceName": "SameBody",
      "Parameters": [
       {
-       "$ref": "9"
+       "$ref": "7"
       },
       {
        "$id": "19",
@@ -206,7 +211,12 @@
     "$id": "24"
    },
    "Creatable": false,
-   "Parent": "ContentNegotiationClient"
+   "Parent": "ContentNegotiationClient",
+   "Parameters": [
+    {
+     "$ref": "7"
+    }
+   ]
   },
   {
    "$id": "25",
@@ -219,7 +229,7 @@
      "ResourceName": "DifferentBody",
      "Parameters": [
       {
-       "$ref": "9"
+       "$ref": "7"
       },
       {
        "$id": "27",
@@ -283,7 +293,7 @@
      "ResourceName": "DifferentBody",
      "Parameters": [
       {
-       "$ref": "9"
+       "$ref": "7"
       },
       {
        "$id": "33",
@@ -343,7 +353,12 @@
     "$id": "37"
    },
    "Creatable": false,
-   "Parent": "ContentNegotiationClient"
+   "Parent": "ContentNegotiationClient",
+   "Parameters": [
+    {
+     "$ref": "7"
+    }
+   ]
   }
  ]
 }

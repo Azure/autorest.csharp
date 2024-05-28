@@ -254,7 +254,15 @@
    "Protocol": {
     "$id": "26"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "9"
+    },
+    {
+     "$ref": "11"
+    }
+   ]
   },
   {
    "$id": "27",
@@ -440,7 +448,15 @@
     "$id": "43"
    },
    "Creatable": false,
-   "Parent": "RenamedOperationClient"
+   "Parent": "RenamedOperationClient",
+   "Parameters": [
+    {
+     "$ref": "9"
+    },
+    {
+     "$ref": "11"
+    }
+   ]
   }
  ]
 }
