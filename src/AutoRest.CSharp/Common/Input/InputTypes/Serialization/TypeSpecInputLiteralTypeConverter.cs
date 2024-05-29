@@ -2,11 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -34,9 +31,8 @@ namespace AutoRest.CSharp.Common.Input
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputLiteralType.Name), ref name)
                     || reader.TryReadBoolean(nameof(InputLiteralType.IsNullable), ref isNullable)
-                    || reader.TryReadWithConverter(nameof(InputLiteralType.LiteralValueType), options, ref type);
+                    || reader.TryReadWithConverter(nameof(InputLiteralType.ValueType), options, ref type);
 
                 if (isKnownProperty)
                 {
@@ -53,13 +49,11 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            name = name ?? throw new JsonException($"{nameof(InputLiteralType)} must have a name.");
-
             type = type ?? throw new JsonException("InputConstant must have type");
 
             value = value ?? throw new JsonException("InputConstant must have value");
 
-            var literalType = new InputLiteralType(name, type, value, isNullable);
+            var literalType = new InputLiteralType(type, value, isNullable);
 
             if (id != null)
             {
@@ -89,16 +83,16 @@ namespace AutoRest.CSharp.Common.Input
             var kind = type switch
             {
                 InputPrimitiveType primitiveType => primitiveType.Kind,
-                InputEnumType enumType => enumType.EnumValueType.Kind,
+                InputEnumType enumType => enumType.ValueType.Kind,
                 _ => throw new JsonException($"Not supported literal type {type.GetType()}.")
             };
             object value = kind switch
             {
-                InputTypeKind.String => reader.GetString() ?? throw new JsonException(),
-                InputTypeKind.Int32 => reader.GetInt32(),
-                InputTypeKind.Float32 => reader.GetSingle(),
-                InputTypeKind.Float64 => reader.GetDouble(),
-                InputTypeKind.Boolean => reader.GetBoolean(),
+                InputPrimitiveTypeKind.String => reader.GetString() ?? throw new JsonException(),
+                InputPrimitiveTypeKind.Int32 => reader.GetInt32(),
+                InputPrimitiveTypeKind.Float32 => reader.GetSingle(),
+                InputPrimitiveTypeKind.Float64 => reader.GetDouble(),
+                InputPrimitiveTypeKind.Boolean => reader.GetBoolean(),
                 _ => throw new JsonException($"Not supported literal type {kind}.")
             };
             reader.Read();

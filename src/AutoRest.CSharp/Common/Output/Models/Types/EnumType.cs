@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             : base(defaultNamespace, sourceInputModel)
         {
             IsEnum = true;
-            _allowedValues = input.AllowedValues;
+            _allowedValues = input.Values;
             _typeFactory = typeFactory;
             _deprecated = input.Deprecated;
 
@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             IsExtensible = isExtensible;
-            ValueType = typeFactory.CreateType(input.EnumValueType);
+            ValueType = typeFactory.CreateType(input.ValueType);
             IsStringValueType = ValueType.Equals(typeof(string));
             IsIntValueType = ValueType.Equals(typeof(int)) || ValueType.Equals(typeof(long));
             IsFloatValueType = ValueType.Equals(typeof(float)) || ValueType.Equals(typeof(double));

@@ -125,6 +125,12 @@ model Thing {
 
     @doc("required nullable collection")
     requiredNullableList: int32[] | null;
+
+    @doc("required float property")
+    requiredFloatProperty: float;
+
+    @doc("optional float property")
+    optionalFloatProperty?: float;
 }
 
 @doc("A model with a few required nullable properties")
