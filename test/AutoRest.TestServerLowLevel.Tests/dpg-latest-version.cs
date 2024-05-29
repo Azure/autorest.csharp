@@ -10,6 +10,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Resource = TypeSpec.Versioning.Latest.Models.Resource;
 using System.Threading;
+using System.Reflection;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -42,6 +43,13 @@ namespace AutoRest.TestServer.Tests
                 m.ReturnType.GenericTypeArguments[0] == typeof(Resource)).FirstOrDefault();
             var createLongRunningOperationParameters = createLongRunningOperation.GetParameters().Select(p => (p.Name, p.ParameterType)).ToArray();
             Assert.AreEqual(new (string, Type)[] { ("waitUntil", typeof(WaitUntil)), ("name", typeof(string)), ("resource", typeof(Resource)), ("cancellationToken", typeof(CancellationToken)) }, createLongRunningOperationParameters);
+
+            // All 3 versions are defined
+            var enumType = typeof(LatestClientOptions.ServiceVersion);
+            Assert.AreEqual(new string[] { "V2022_06_01_Preview", "V2022_09_01", "V2022_12_01_Preview" }, enumType.GetEnumNames());
+            var optionsType = typeof(LatestClientOptions);
+            var field = optionsType.GetField("LatestVersion", BindingFlags.NonPublic | BindingFlags.Static);
+            Assert.AreEqual(LatestClientOptions.ServiceVersion.V2022_12_01_Preview, field.GetValue(null));
         }
     }
 }

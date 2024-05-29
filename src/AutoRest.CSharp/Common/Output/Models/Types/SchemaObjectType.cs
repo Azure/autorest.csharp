@@ -703,7 +703,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ObjectTypeProperty GetPropertyForGroupedParameter(string groupedParameterName, bool includeParents = false)
         {
             if (!TryGetPropertyForSchemaProperty(
-                    p => p.InputModelProperty?.GroupParameterNames != null && p.InputModelProperty.GroupParameterNames.Any(name => name == groupedParameterName),
+                    p => p.InputModelProperty?.Name == groupedParameterName,
                     out ObjectTypeProperty? objectProperty, includeParents))
             {
                 throw new InvalidOperationException($"Unable to find object property for grouped parameter {groupedParameterName} in schema {DefaultName}");
