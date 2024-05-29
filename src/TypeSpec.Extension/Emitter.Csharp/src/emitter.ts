@@ -47,6 +47,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     const emitFunction = entrypoint.esmExports.$onEmit;
     try {
         context.options.skipSDKGeneration = true;
+        context.options.emitterName = "@azure-tools/typespec-csharp";
         await emitFunction(context);
     } catch (error: unknown) {
         throw new Error("emitter error");

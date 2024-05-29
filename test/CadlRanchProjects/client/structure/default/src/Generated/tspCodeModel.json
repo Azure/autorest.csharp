@@ -1,6 +1,7 @@
 {
  "$id": "1",
  "Name": "Client.Structure.Service",
+ "Description": "Test that we can use @client and @operationGroup decorators to customize client side code structure, such as:\n1. have everything as default.\n2. to rename client or operation group\n3. one client can have more than one operations groups\n4. split one interface into two clients\n5. have two clients with operations come from different interfaces\n6. have two clients with a hierarchy relation.",
  "ApiVersions": [],
  "Enums": [
   {
@@ -196,15 +197,7 @@
    "Protocol": {
     "$id": "21"
    },
-   "Creatable": true,
-   "Parameters": [
-    {
-     "$ref": "9"
-    },
-    {
-     "$ref": "11"
-    }
-   ]
+   "Creatable": true
   },
   {
    "$id": "22",
@@ -215,15 +208,7 @@
     "$id": "23"
    },
    "Creatable": false,
-   "Parent": "ServiceClient",
-   "Parameters": [
-    {
-     "$ref": "9"
-    },
-    {
-     "$ref": "11"
-    }
-   ]
+   "Parent": "ServiceClient"
   },
   {
    "$id": "24",
@@ -293,15 +278,7 @@
     "$id": "30"
    },
    "Creatable": false,
-   "Parent": "Baz",
-   "Parameters": [
-    {
-     "$ref": "9"
-    },
-    {
-     "$ref": "11"
-    }
-   ]
+   "Parent": "Baz"
   },
   {
    "$id": "31",
@@ -371,15 +348,7 @@
     "$id": "37"
    },
    "Creatable": false,
-   "Parent": "ServiceClient",
-   "Parameters": [
-    {
-     "$ref": "9"
-    },
-    {
-     "$ref": "11"
-    }
-   ]
+   "Parent": "ServiceClient"
   },
   {
    "$id": "38",
@@ -449,15 +418,7 @@
     "$id": "44"
    },
    "Creatable": false,
-   "Parent": "Qux",
-   "Parameters": [
-    {
-     "$ref": "9"
-    },
-    {
-     "$ref": "11"
-    }
-   ]
+   "Parent": "Qux"
   },
   {
    "$id": "45",
@@ -585,15 +546,7 @@
     "$id": "56"
    },
    "Creatable": false,
-   "Parent": "ServiceClient",
-   "Parameters": [
-    {
-     "$ref": "9"
-    },
-    {
-     "$ref": "11"
-    }
-   ]
+   "Parent": "ServiceClient"
   },
   {
    "$id": "57",
@@ -721,15 +674,7 @@
     "$id": "68"
    },
    "Creatable": false,
-   "Parent": "ServiceClient",
-   "Parameters": [
-    {
-     "$ref": "9"
-    },
-    {
-     "$ref": "11"
-    }
-   ]
+   "Parent": "ServiceClient"
   }
  ]
 }

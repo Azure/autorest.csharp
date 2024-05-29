@@ -91,54 +91,49 @@
    "Protocol": {
     "$id": "12"
    },
-   "Creatable": true,
-   "Parameters": [
-    {
-     "$id": "13",
-     "Name": "host",
-     "NameInRequest": "host",
-     "Description": "TestServer endpoint",
-     "Type": {
-      "$id": "14",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "Location": "Uri",
-     "IsApiVersion": false,
-     "IsResourceParameter": false,
-     "IsContentType": false,
-     "IsRequired": true,
-     "IsEndpoint": true,
-     "SkipUrlEncoding": false,
-     "Explode": false,
-     "Kind": "Client",
-     "DefaultValue": {
-      "$id": "15",
-      "Type": {
-       "$id": "16",
-       "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
-      },
-      "Value": "http://localhost:3000"
-     }
-    }
-   ]
+   "Creatable": true
   },
   {
-   "$id": "17",
+   "$id": "13",
    "Name": "ModelInOperation",
    "Description": "",
    "Operations": [
     {
-     "$id": "18",
+     "$id": "14",
      "Name": "inputToInputOutput",
      "ResourceName": "ModelInOperation",
      "Description": "Expected body parameter: \n```json\n{\n  \"name\": <any string>\n}\n```",
      "Parameters": [
       {
-       "$ref": "13"
+       "$id": "15",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "TestServer endpoint",
+       "Type": {
+        "$id": "16",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "17",
+        "Type": {
+         "$id": "18",
+         "Kind": "Primitive",
+         "Name": "String",
+         "IsNullable": false
+        },
+        "Value": "http://localhost:3000"
+       }
       },
       {
        "$id": "19",
@@ -241,7 +236,7 @@
      "Description": "Expected response body: \n```json\n{\n  \"name\": <any string>\n}\n```",
      "Parameters": [
       {
-       "$ref": "13"
+       "$ref": "15"
       },
       {
        "$id": "28",
@@ -301,12 +296,7 @@
     "$id": "32"
    },
    "Creatable": false,
-   "Parent": "UsageClient",
-   "Parameters": [
-    {
-     "$ref": "13"
-    }
-   ]
+   "Parent": "UsageClient"
   }
  ]
 }

@@ -1228,12 +1228,7 @@
    "Protocol": {
     "$id": "126"
    },
-   "Creatable": true,
-   "Parameters": [
-    {
-     "$ref": "46"
-    }
-   ]
+   "Creatable": true
   }
  ]
 }

@@ -153,30 +153,30 @@ namespace Client.Naming
         }
 
         /// <summary> Language. </summary>
-        /// <param name="modelWithLanguageClientName"> The <see cref="ModelWithLanguageClientName"/> to use. </param>
+        /// <param name="csModel"> The <see cref="CSModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="modelWithLanguageClientName"/> is null. </exception>
-        /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='LanguageAsync(ModelWithLanguageClientName,CancellationToken)']/*" />
-        public virtual async Task<Response> LanguageAsync(ModelWithLanguageClientName modelWithLanguageClientName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="csModel"/> is null. </exception>
+        /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='LanguageAsync(CSModel,CancellationToken)']/*" />
+        public virtual async Task<Response> LanguageAsync(CSModel csModel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(modelWithLanguageClientName, nameof(modelWithLanguageClientName));
+            Argument.AssertNotNull(csModel, nameof(csModel));
 
-            using RequestContent content = modelWithLanguageClientName.ToRequestContent();
+            using RequestContent content = csModel.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await LanguageAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Language. </summary>
-        /// <param name="modelWithLanguageClientName"> The <see cref="ModelWithLanguageClientName"/> to use. </param>
+        /// <param name="csModel"> The <see cref="CSModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="modelWithLanguageClientName"/> is null. </exception>
-        /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='Language(ModelWithLanguageClientName,CancellationToken)']/*" />
-        public virtual Response Language(ModelWithLanguageClientName modelWithLanguageClientName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="csModel"/> is null. </exception>
+        /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='Language(CSModel,CancellationToken)']/*" />
+        public virtual Response Language(CSModel csModel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(modelWithLanguageClientName, nameof(modelWithLanguageClientName));
+            Argument.AssertNotNull(csModel, nameof(csModel));
 
-            using RequestContent content = modelWithLanguageClientName.ToRequestContent();
+            using RequestContent content = csModel.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Language(content, context);
             return response;
@@ -192,7 +192,7 @@ namespace Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="LanguageAsync(ModelWithLanguageClientName,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="LanguageAsync(CSModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -231,7 +231,7 @@ namespace Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Language(ModelWithLanguageClientName,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Language(CSModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

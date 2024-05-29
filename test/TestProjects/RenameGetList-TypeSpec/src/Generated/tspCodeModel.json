@@ -359,43 +359,38 @@
    "Protocol": {
     "$id": "47"
    },
-   "Creatable": true,
-   "Parameters": [
-    {
-     "$id": "48",
-     "Name": "Endpoint",
-     "NameInRequest": "Endpoint",
-     "Type": {
-      "$id": "49",
-      "Kind": "Primitive",
-      "Name": "Uri",
-      "IsNullable": false
-     },
-     "Location": "Uri",
-     "IsApiVersion": false,
-     "IsResourceParameter": false,
-     "IsContentType": false,
-     "IsRequired": true,
-     "IsEndpoint": true,
-     "SkipUrlEncoding": false,
-     "Explode": false,
-     "Kind": "Client"
-    }
-   ]
+   "Creatable": true
   },
   {
-   "$id": "50",
+   "$id": "48",
    "Name": "Projects",
    "Description": "",
    "Operations": [
     {
-     "$id": "51",
+     "$id": "49",
      "Name": "get",
      "ResourceName": "Project",
      "Description": "Gets the details of a project.",
      "Parameters": [
       {
-       "$ref": "48"
+       "$id": "50",
+       "Name": "Endpoint",
+       "NameInRequest": "Endpoint",
+       "Type": {
+        "$id": "51",
+        "Kind": "Primitive",
+        "Name": "Uri",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
       },
       {
        "$id": "52",
@@ -508,7 +503,7 @@
      "Description": "Lists the existing projects.",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "50"
       },
       {
        "$id": "63",
@@ -597,12 +592,7 @@
     "$id": "70"
    },
    "Creatable": false,
-   "Parent": "RenameGetListClient",
-   "Parameters": [
-    {
-     "$ref": "48"
-    }
-   ]
+   "Parent": "RenameGetListClient"
   },
   {
    "$id": "71",
@@ -616,7 +606,7 @@
      "Description": "Gets the details of a deployment.",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "50"
       },
       {
        "$id": "73",
@@ -742,7 +732,7 @@
      "Description": "Lists the existing deployments.",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "50"
       },
       {
        "$id": "84",
@@ -851,12 +841,7 @@
     "$id": "93"
    },
    "Creatable": false,
-   "Parent": "RenameGetListClient",
-   "Parameters": [
-    {
-     "$ref": "48"
-    }
-   ]
+   "Parent": "RenameGetListClient"
   }
  ]
 }

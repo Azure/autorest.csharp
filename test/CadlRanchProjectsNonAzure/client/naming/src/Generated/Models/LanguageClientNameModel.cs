@@ -43,18 +43,18 @@ namespace Scm.Client.Naming.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="LanguageClientNameModel"/>. </summary>
-        /// <param name="defaultName"> Pass in true. </param>
-        public LanguageClientNameModel(bool defaultName)
+        /// <param name="csName"> Pass in true. </param>
+        public LanguageClientNameModel(bool csName)
         {
-            DefaultName = defaultName;
+            CSName = csName;
         }
 
         /// <summary> Initializes a new instance of <see cref="LanguageClientNameModel"/>. </summary>
-        /// <param name="defaultName"> Pass in true. </param>
+        /// <param name="csName"> Pass in true. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal LanguageClientNameModel(bool defaultName, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal LanguageClientNameModel(bool csName, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            DefaultName = defaultName;
+            CSName = csName;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -64,6 +64,6 @@ namespace Scm.Client.Naming.Models
         }
 
         /// <summary> Pass in true. </summary>
-        public bool DefaultName { get; }
+        public bool CSName { get; }
     }
 }

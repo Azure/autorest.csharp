@@ -229,44 +229,39 @@
    "Protocol": {
     "$id": "29"
    },
-   "Creatable": true,
-   "Parameters": [
-    {
-     "$id": "30",
-     "Name": "petStoreUrl",
-     "NameInRequest": "petStoreUrl",
-     "Type": {
-      "$id": "31",
-      "Kind": "Primitive",
-      "Name": "Uri",
-      "IsNullable": false
-     },
-     "Location": "Uri",
-     "IsApiVersion": false,
-     "IsResourceParameter": false,
-     "IsContentType": false,
-     "IsRequired": true,
-     "IsEndpoint": true,
-     "SkipUrlEncoding": false,
-     "Explode": false,
-     "Kind": "Client"
-    }
-   ]
+   "Creatable": true
   },
   {
-   "$id": "32",
+   "$id": "30",
    "Name": "Pets",
    "Description": "Manage your pets. You can delete or get the Pet from pet store.",
    "Operations": [
     {
-     "$id": "33",
+     "$id": "31",
      "Name": "delete",
      "ResourceName": "Pets",
      "Summary": "delete.",
      "Description": "Delete a pet.",
      "Parameters": [
       {
-       "$ref": "30"
+       "$id": "32",
+       "Name": "petStoreUrl",
+       "NameInRequest": "petStoreUrl",
+       "Type": {
+        "$id": "33",
+        "Kind": "Primitive",
+        "Name": "Uri",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
       },
       {
        "$id": "34",
@@ -343,7 +338,7 @@
      "Description": "Returns a pet. Supports eTags.",
      "Parameters": [
       {
-       "$ref": "30"
+       "$ref": "32"
       },
       {
        "$id": "41",
@@ -440,7 +435,7 @@
      "ResourceName": "Pets",
      "Parameters": [
       {
-       "$ref": "30"
+       "$ref": "32"
       },
       {
        "$id": "49",
@@ -548,7 +543,7 @@
      "ResourceName": "Pets",
      "Parameters": [
       {
-       "$ref": "30"
+       "$ref": "32"
       },
       {
        "$id": "58",
@@ -626,7 +621,7 @@
      "ResourceName": "Pets",
      "Parameters": [
       {
-       "$ref": "30"
+       "$ref": "32"
       },
       {
        "$id": "64",
@@ -707,7 +702,7 @@
      "ResourceName": "Pets",
      "Parameters": [
       {
-       "$ref": "30"
+       "$ref": "32"
       },
       {
        "$id": "71",
@@ -789,7 +784,7 @@
      "Description": "Test that an LRO polling operation defined in a namespace wtihout @service decorator will not be generated. This should be removed after cadl-ranch test case update.",
      "Parameters": [
       {
-       "$ref": "30"
+       "$ref": "32"
       },
       {
        "$id": "78",
@@ -833,12 +828,7 @@
     "$id": "81"
    },
    "Creatable": false,
-   "Parent": "PetStoreClient",
-   "Parameters": [
-    {
-     "$ref": "30"
-    }
-   ]
+   "Parent": "PetStoreClient"
   }
  ]
 }

@@ -79,7 +79,7 @@
    "Properties": [
     {
      "$id": "11",
-     "Name": "defaultName",
+     "Name": "CSName",
      "SerializedName": "defaultName",
      "Description": "Pass in true",
      "Type": {
@@ -144,7 +144,7 @@
   {
    "$id": "19",
    "Kind": "Model",
-   "Name": "ModelWithLanguageClientName",
+   "Name": "CSModel",
    "Namespace": "Client.Naming.Model",
    "IsNullable": false,
    "Usage": "Input",
@@ -783,12 +783,7 @@
    "Protocol": {
     "$id": "80"
    },
-   "Creatable": true,
-   "Parameters": [
-    {
-     "$ref": "24"
-    }
-   ]
+   "Creatable": true
   },
   {
    "$id": "81",
@@ -907,7 +902,7 @@
       },
       {
        "$id": "92",
-       "Name": "ModelWithLanguageClientName",
+       "Name": "CSModel",
        "NameInRequest": "ModelWithLanguageClientName",
        "Type": {
         "$ref": "19"
@@ -1004,12 +999,7 @@
     "$id": "100"
    },
    "Creatable": false,
-   "Parent": "NamingClient",
-   "Parameters": [
-    {
-     "$ref": "24"
-    }
-   ]
+   "Parent": "NamingClient"
   },
   {
    "$id": "101",
@@ -1225,12 +1215,7 @@
     "$id": "120"
    },
    "Creatable": false,
-   "Parent": "NamingClient",
-   "Parameters": [
-    {
-     "$ref": "24"
-    }
-   ]
+   "Parent": "NamingClient"
   }
  ]
 }

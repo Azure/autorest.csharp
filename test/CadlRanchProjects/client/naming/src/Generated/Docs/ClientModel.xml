@@ -89,38 +89,38 @@ Response response = client.Client(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="LanguageAsync(ModelWithLanguageClientName,CancellationToken)">
+    <member name="LanguageAsync(CSModel,CancellationToken)">
       <example>
 This sample shows how to call LanguageAsync.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
-ModelWithLanguageClientName modelWithLanguageClientName = new ModelWithLanguageClientName(true);
-Response response = await client.LanguageAsync(modelWithLanguageClientName);
+CSModel csModel = new CSModel(true);
+Response response = await client.LanguageAsync(csModel);
 ]]></code>
 This sample shows how to call LanguageAsync with all parameters.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
-ModelWithLanguageClientName modelWithLanguageClientName = new ModelWithLanguageClientName(true);
-Response response = await client.LanguageAsync(modelWithLanguageClientName);
+CSModel csModel = new CSModel(true);
+Response response = await client.LanguageAsync(csModel);
 ]]></code></example>
     </member>
-    <member name="Language(ModelWithLanguageClientName,CancellationToken)">
+    <member name="Language(CSModel,CancellationToken)">
       <example>
 This sample shows how to call Language.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
-ModelWithLanguageClientName modelWithLanguageClientName = new ModelWithLanguageClientName(true);
-Response response = client.Language(modelWithLanguageClientName);
+CSModel csModel = new CSModel(true);
+Response response = client.Language(csModel);
 ]]></code>
 This sample shows how to call Language with all parameters.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
-ModelWithLanguageClientName modelWithLanguageClientName = new ModelWithLanguageClientName(true);
-Response response = client.Language(modelWithLanguageClientName);
+CSModel csModel = new CSModel(true);
+Response response = client.Language(csModel);
 ]]></code></example>
     </member>
     <member name="LanguageAsync(RequestContent,RequestContext)">

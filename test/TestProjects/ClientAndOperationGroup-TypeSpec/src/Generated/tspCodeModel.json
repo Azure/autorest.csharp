@@ -159,12 +159,7 @@
    "Protocol": {
     "$id": "17"
    },
-   "Creatable": true,
-   "Parameters": [
-    {
-     "$ref": "4"
-    }
-   ]
+   "Creatable": true
   },
   {
    "$id": "18",
@@ -304,12 +299,7 @@
     "$id": "31"
    },
    "Creatable": false,
-   "Parent": "ClientAndOperationGroupClient",
-   "Parameters": [
-    {
-     "$ref": "4"
-    }
-   ]
+   "Parent": "ClientAndOperationGroupClient"
   },
   {
    "$id": "32",
@@ -449,12 +439,7 @@
     "$id": "45"
    },
    "Creatable": false,
-   "Parent": "ClientAndOperationGroupClient",
-   "Parameters": [
-    {
-     "$ref": "4"
-    }
-   ]
+   "Parent": "ClientAndOperationGroupClient"
   }
  ]
 }

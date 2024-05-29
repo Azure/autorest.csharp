@@ -306,54 +306,49 @@
    "Protocol": {
     "$id": "35"
    },
-   "Creatable": true,
-   "Parameters": [
-    {
-     "$id": "36",
-     "Name": "host",
-     "NameInRequest": "host",
-     "Description": "TestServer endpoint",
-     "Type": {
-      "$id": "37",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "Location": "Uri",
-     "IsApiVersion": false,
-     "IsResourceParameter": false,
-     "IsContentType": false,
-     "IsRequired": true,
-     "IsEndpoint": true,
-     "SkipUrlEncoding": false,
-     "Explode": false,
-     "Kind": "Client",
-     "DefaultValue": {
-      "$id": "38",
-      "Type": {
-       "$id": "39",
-       "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
-      },
-      "Value": "http://localhost:3000"
-     }
-    }
-   ]
+   "Creatable": true
   },
   {
-   "$id": "40",
+   "$id": "36",
    "Name": "PublicOperation",
    "Description": "",
    "Operations": [
     {
-     "$id": "41",
+     "$id": "37",
      "Name": "noDecoratorInPublic",
      "ResourceName": "PublicOperation",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "36"
+       "$id": "38",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "TestServer endpoint",
+       "Type": {
+        "$id": "39",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "40",
+        "Type": {
+         "$id": "41",
+         "Kind": "Primitive",
+         "Name": "String",
+         "IsNullable": false
+        },
+        "Value": "http://localhost:3000"
+       }
       },
       {
        "$id": "42",
@@ -435,7 +430,7 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "36"
+       "$ref": "38"
       },
       {
        "$id": "49",
@@ -515,12 +510,7 @@
     "$id": "55"
    },
    "Creatable": false,
-   "Parent": "AccessClient",
-   "Parameters": [
-    {
-     "$ref": "36"
-    }
-   ]
+   "Parent": "AccessClient"
   },
   {
    "$id": "56",
@@ -534,7 +524,7 @@
      "Accessibility": "internal",
      "Parameters": [
       {
-       "$ref": "36"
+       "$ref": "38"
       },
       {
        "$id": "58",
@@ -616,7 +606,7 @@
      "Accessibility": "internal",
      "Parameters": [
       {
-       "$ref": "36"
+       "$ref": "38"
       },
       {
        "$id": "65",
@@ -698,7 +688,7 @@
      "Accessibility": "internal",
      "Parameters": [
       {
-       "$ref": "36"
+       "$ref": "38"
       },
       {
        "$id": "72",
@@ -778,12 +768,7 @@
     "$id": "78"
    },
    "Creatable": false,
-   "Parent": "AccessClient",
-   "Parameters": [
-    {
-     "$ref": "36"
-    }
-   ]
+   "Parent": "AccessClient"
   },
   {
    "$id": "79",
@@ -797,7 +782,7 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "36"
+       "$ref": "38"
       },
       {
        "$id": "81",
@@ -879,7 +864,7 @@
      "Accessibility": "internal",
      "Parameters": [
       {
-       "$ref": "36"
+       "$ref": "38"
       },
       {
        "$id": "88",
@@ -959,12 +944,7 @@
     "$id": "94"
    },
    "Creatable": false,
-   "Parent": "AccessClient",
-   "Parameters": [
-    {
-     "$ref": "36"
-    }
-   ]
+   "Parent": "AccessClient"
   },
   {
    "$id": "95",
@@ -979,7 +959,7 @@
      "Accessibility": "internal",
      "Parameters": [
       {
-       "$ref": "36"
+       "$ref": "38"
       },
       {
        "$id": "97",
@@ -1062,7 +1042,7 @@
      "Accessibility": "internal",
      "Parameters": [
       {
-       "$ref": "36"
+       "$ref": "38"
       },
       {
        "$id": "104",
@@ -1142,12 +1122,7 @@
     "$id": "110"
    },
    "Creatable": false,
-   "Parent": "AccessClient",
-   "Parameters": [
-    {
-     "$ref": "36"
-    }
-   ]
+   "Parent": "AccessClient"
   }
  ]
 }
