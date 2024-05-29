@@ -502,9 +502,9 @@
      "Description": "required Union",
      "Type": {
       "$id": "76",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "ThingRequiredUnion",
+      "ItemTypes": [
        {
         "$id": "77",
         "Kind": "string",
@@ -1500,9 +1500,9 @@
       "Name": "Array",
       "ElementType": {
        "$id": "203",
-       "Kind": "Union",
-       "Name": "Union",
-       "UnionItemTypes": [
+       "Kind": "union",
+       "Name": "RoundTripModelUnionList",
+       "ItemTypes": [
         {
          "$id": "204",
          "Kind": "string",
