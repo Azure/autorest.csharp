@@ -10,6 +10,7 @@ internal record InputParameter(
     InputType Type,
     RequestLocation Location,
     InputConstant? DefaultValue,
+    // TODO: This should be removed, tracking it in https://github.com/Azure/autorest.csharp/issues/4779
     InputParameter? GroupedBy,
     InputModelProperty? FlattenedBodyProperty,
     InputOperationParameterKind Kind,

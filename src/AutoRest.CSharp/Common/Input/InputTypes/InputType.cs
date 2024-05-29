@@ -37,5 +37,6 @@ internal abstract record InputType
 
     public bool IsNullable { get; init; }
     public string Name { get; internal set; }
-    public string? SpecName { get; init; }
+    //TODO: Remove this until the SDK nullable is enabled, traking in https://github.com/Azure/autorest.csharp/issues/4780
+    internal string? SpecName { get; init; }
 }

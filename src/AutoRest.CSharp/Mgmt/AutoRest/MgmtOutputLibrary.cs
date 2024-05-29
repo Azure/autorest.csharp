@@ -838,7 +838,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _schemaNameToModels.Value.TryGetValue(name, out TypeProvider? provider);
 
             // Since we have multiple instances for the same type due to nullability, we need to find the match based on name or spec name
-            provider ??= _schemaToModels.FirstOrDefault(s => s.Key.Name == name || s.Key.SpecName == name).Value;
+            provider ??= _schemaToModels.FirstOrDefault(s => s.Key.SpecName == name).Value;
 
             return provider?.Type;
         }
