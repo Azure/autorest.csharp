@@ -1,38 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="ClientAsync(ClientModel,CancellationToken)">
+    <member name="ClientAsync(bool,CancellationToken)">
       <example>
 This sample shows how to call ClientAsync.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
-Models.ClientModel clientModel = new Models.ClientModel(true);
-Response response = await client.ClientAsync(clientModel);
+Response response = await client.ClientAsync(true);
 ]]></code>
 This sample shows how to call ClientAsync with all parameters.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
-Models.ClientModel clientModel = new Models.ClientModel(true);
-Response response = await client.ClientAsync(clientModel);
+Response response = await client.ClientAsync(true);
 ]]></code></example>
     </member>
-    <member name="Client(ClientModel,CancellationToken)">
+    <member name="Client(bool,CancellationToken)">
       <example>
 This sample shows how to call Client.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
-Models.ClientModel clientModel = new Models.ClientModel(true);
-Response response = client.Client(clientModel);
+Response response = client.Client(true);
 ]]></code>
 This sample shows how to call Client with all parameters.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
-Models.ClientModel clientModel = new Models.ClientModel(true);
-Response response = client.Client(clientModel);
+Response response = client.Client(true);
 ]]></code></example>
     </member>
     <member name="ClientAsync(RequestContent,RequestContext)">
@@ -89,38 +85,34 @@ Response response = client.Client(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="LanguageAsync(CSModel,CancellationToken)">
+    <member name="LanguageAsync(bool,CancellationToken)">
       <example>
 This sample shows how to call LanguageAsync.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
-CSModel csModel = new CSModel(true);
-Response response = await client.LanguageAsync(csModel);
+Response response = await client.LanguageAsync(true);
 ]]></code>
 This sample shows how to call LanguageAsync with all parameters.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
-CSModel csModel = new CSModel(true);
-Response response = await client.LanguageAsync(csModel);
+Response response = await client.LanguageAsync(true);
 ]]></code></example>
     </member>
-    <member name="Language(CSModel,CancellationToken)">
+    <member name="Language(bool,CancellationToken)">
       <example>
 This sample shows how to call Language.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
-CSModel csModel = new CSModel(true);
-Response response = client.Language(csModel);
+Response response = client.Language(true);
 ]]></code>
 This sample shows how to call Language with all parameters.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
-CSModel csModel = new CSModel(true);
-Response response = client.Language(csModel);
+Response response = client.Language(true);
 ]]></code></example>
     </member>
     <member name="LanguageAsync(RequestContent,RequestContext)">

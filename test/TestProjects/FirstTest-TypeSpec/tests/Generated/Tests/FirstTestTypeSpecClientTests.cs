@@ -179,8 +179,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
-            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false);
         }
 
         [Test]
@@ -224,15 +223,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList = { 1234 },
-            };
-            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false, optionalLiteralString: ThingOptionalLiteralString.Reject, optionalLiteralInt: ThingOptionalLiteralInt._456, optionalLiteralFloat: ThingOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 });
         }
 
         [Test]
@@ -258,8 +249,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Friend friend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(friend);
+            Response<Friend> response = await client.FriendlyModelAsync("<name>");
         }
 
         [Test]
@@ -285,8 +275,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Friend friend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(friend);
+            Response<Friend> response = await client.FriendlyModelAsync("<name>");
         }
 
         [Test]
@@ -390,8 +379,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            ProjectedModel projectedModel = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(projectedModel);
+            Response<ProjectedModel> response = await client.ProjectedNameModelAsync("<name>");
         }
 
         [Test]
@@ -417,8 +405,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            ProjectedModel projectedModel = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(projectedModel);
+            Response<ProjectedModel> response = await client.ProjectedNameModelAsync("<name>");
         }
 
         [Test]

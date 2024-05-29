@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace Client.Naming.Models
 {
     /// <summary> The CSModel. </summary>
-    public partial class CSModel
+    internal partial class CSModel
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.

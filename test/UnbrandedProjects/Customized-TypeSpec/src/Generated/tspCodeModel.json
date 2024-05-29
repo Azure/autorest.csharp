@@ -1632,7 +1632,7 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Method"
+       "Kind": "Spread"
       },
       {
        "$id": "166",
@@ -1742,7 +1742,7 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Method"
+       "Kind": "Spread"
       },
       {
        "$id": "175",
@@ -1927,7 +1927,7 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Method"
+       "Kind": "Spread"
       },
       {
        "$id": "191",

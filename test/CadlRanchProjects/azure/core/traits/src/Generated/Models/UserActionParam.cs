@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace _Specs_.Azure.Core.Traits.Models
 {
     /// <summary> User action param. </summary>
-    public partial class UserActionParam
+    internal partial class UserActionParam
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.

@@ -12,7 +12,7 @@ using System.Linq;
 namespace lrotsp.Models
 {
     /// <summary> The body of the Radiology Insights request. </summary>
-    public partial class RadiologyInsightsData
+    internal partial class RadiologyInsightsData
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.

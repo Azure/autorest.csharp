@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
-using Client.Naming.Models;
 using NUnit.Framework;
 
 namespace Client.Naming.Samples
@@ -53,8 +52,7 @@ namespace Client.Naming.Samples
         {
             ClientModel client = new NamingClient().GetClientModelClient();
 
-            Models.ClientModel clientModel = new Models.ClientModel(true);
-            Response response = client.Client(clientModel);
+            Response response = client.Client(true);
         }
 
         [Test]
@@ -63,8 +61,7 @@ namespace Client.Naming.Samples
         {
             ClientModel client = new NamingClient().GetClientModelClient();
 
-            Models.ClientModel clientModel = new Models.ClientModel(true);
-            Response response = await client.ClientAsync(clientModel);
+            Response response = await client.ClientAsync(true);
         }
 
         [Test]
@@ -103,8 +100,7 @@ namespace Client.Naming.Samples
         {
             ClientModel client = new NamingClient().GetClientModelClient();
 
-            Models.ClientModel clientModel = new Models.ClientModel(true);
-            Response response = client.Client(clientModel);
+            Response response = client.Client(true);
         }
 
         [Test]
@@ -113,8 +109,7 @@ namespace Client.Naming.Samples
         {
             ClientModel client = new NamingClient().GetClientModelClient();
 
-            Models.ClientModel clientModel = new Models.ClientModel(true);
-            Response response = await client.ClientAsync(clientModel);
+            Response response = await client.ClientAsync(true);
         }
 
         [Test]
@@ -153,8 +148,7 @@ namespace Client.Naming.Samples
         {
             ClientModel client = new NamingClient().GetClientModelClient();
 
-            CSModel csModel = new CSModel(true);
-            Response response = client.Language(csModel);
+            Response response = client.Language(true);
         }
 
         [Test]
@@ -163,8 +157,7 @@ namespace Client.Naming.Samples
         {
             ClientModel client = new NamingClient().GetClientModelClient();
 
-            CSModel csModel = new CSModel(true);
-            Response response = await client.LanguageAsync(csModel);
+            Response response = await client.LanguageAsync(true);
         }
 
         [Test]
@@ -203,8 +196,7 @@ namespace Client.Naming.Samples
         {
             ClientModel client = new NamingClient().GetClientModelClient();
 
-            CSModel csModel = new CSModel(true);
-            Response response = client.Language(csModel);
+            Response response = client.Language(true);
         }
 
         [Test]
@@ -213,8 +205,7 @@ namespace Client.Naming.Samples
         {
             ClientModel client = new NamingClient().GetClientModelClient();
 
-            CSModel csModel = new CSModel(true);
-            Response response = await client.LanguageAsync(csModel);
+            Response response = await client.LanguageAsync(true);
         }
     }
 }

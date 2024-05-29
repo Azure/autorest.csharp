@@ -142,8 +142,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             TraitsClient client = new TraitsClient();
 
-            UserActionParam userActionParam = new UserActionParam("<userActionValue>");
-            Response<UserActionResponse> response = client.RepeatableAction(1234, userActionParam);
+            Response<UserActionResponse> response = client.RepeatableAction(1234, "<userActionValue>");
         }
 
         [Test]
@@ -152,8 +151,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             TraitsClient client = new TraitsClient();
 
-            UserActionParam userActionParam = new UserActionParam("<userActionValue>");
-            Response<UserActionResponse> response = await client.RepeatableActionAsync(1234, userActionParam);
+            Response<UserActionResponse> response = await client.RepeatableActionAsync(1234, "<userActionValue>");
         }
 
         [Test]
@@ -194,8 +192,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             TraitsClient client = new TraitsClient();
 
-            UserActionParam userActionParam = new UserActionParam("<userActionValue>");
-            Response<UserActionResponse> response = client.RepeatableAction(1234, userActionParam);
+            Response<UserActionResponse> response = client.RepeatableAction(1234, "<userActionValue>");
         }
 
         [Test]
@@ -204,8 +201,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             TraitsClient client = new TraitsClient();
 
-            UserActionParam userActionParam = new UserActionParam("<userActionValue>");
-            Response<UserActionResponse> response = await client.RepeatableActionAsync(1234, userActionParam);
+            Response<UserActionResponse> response = await client.RepeatableActionAsync(1234, "<userActionValue>");
         }
     }
 }

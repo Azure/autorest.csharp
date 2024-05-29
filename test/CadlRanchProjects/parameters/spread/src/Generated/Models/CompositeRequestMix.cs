@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace Parameters.Spread.Models
 {
     /// <summary> This is a model with non-body http request decorator. </summary>
-    public partial class CompositeRequestMix
+    internal partial class CompositeRequestMix
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.

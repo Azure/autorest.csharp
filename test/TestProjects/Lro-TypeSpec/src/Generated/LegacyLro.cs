@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -126,38 +128,40 @@ namespace lrotsp
         /// <summary> Create Radiology Insights job. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="apiVersion"> The API version to use for this operation. </param>
-        /// <param name="radiologyInsightsData"> The body of the Radiology Insights request. </param>
+        /// <param name="patients"> The list of patients, including their clinical information and data. </param>
+        /// <param name="configuration"> Configuration affecting the Radiology Insights model's inference. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="radiologyInsightsData"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="patients"/> is null. </exception>
         /// <remarks> Creates a Radiology Insights job with the given request body. </remarks>
-        /// <include file="Docs/LegacyLro.xml" path="doc/members/member[@name='CreateJobAsync(WaitUntil,string,RadiologyInsightsData,CancellationToken)']/*" />
-        public virtual async Task<Operation<RadiologyInsightsInferenceResult>> CreateJobAsync(WaitUntil waitUntil, string apiVersion, RadiologyInsightsData radiologyInsightsData, CancellationToken cancellationToken = default)
+        /// <include file="Docs/LegacyLro.xml" path="doc/members/member[@name='CreateJobAsync(WaitUntil,string,IEnumerable{string},string,CancellationToken)']/*" />
+        public virtual async Task<Operation<RadiologyInsightsInferenceResult>> CreateJobAsync(WaitUntil waitUntil, string apiVersion, IEnumerable<string> patients, string configuration = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-            Argument.AssertNotNull(radiologyInsightsData, nameof(radiologyInsightsData));
+            Argument.AssertNotNull(patients, nameof(patients));
 
-            using RequestContent content = radiologyInsightsData.ToRequestContent();
+            RadiologyInsightsData radiologyInsightsData = new RadiologyInsightsData(patients.ToList(), configuration, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Operation<BinaryData> response = await CreateJobAsync(waitUntil, apiVersion, content, context).ConfigureAwait(false);
+            Operation<BinaryData> response = await CreateJobAsync(waitUntil, apiVersion, radiologyInsightsData.ToRequestContent(), context).ConfigureAwait(false);
             return ProtocolOperationHelpers.Convert(response, FetchRadiologyInsightsInferenceResultFromRadiologyInsightsResult, ClientDiagnostics, "LegacyLro.CreateJob");
         }
 
         /// <summary> Create Radiology Insights job. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="apiVersion"> The API version to use for this operation. </param>
-        /// <param name="radiologyInsightsData"> The body of the Radiology Insights request. </param>
+        /// <param name="patients"> The list of patients, including their clinical information and data. </param>
+        /// <param name="configuration"> Configuration affecting the Radiology Insights model's inference. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="radiologyInsightsData"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="patients"/> is null. </exception>
         /// <remarks> Creates a Radiology Insights job with the given request body. </remarks>
-        /// <include file="Docs/LegacyLro.xml" path="doc/members/member[@name='CreateJob(WaitUntil,string,RadiologyInsightsData,CancellationToken)']/*" />
-        public virtual Operation<RadiologyInsightsInferenceResult> CreateJob(WaitUntil waitUntil, string apiVersion, RadiologyInsightsData radiologyInsightsData, CancellationToken cancellationToken = default)
+        /// <include file="Docs/LegacyLro.xml" path="doc/members/member[@name='CreateJob(WaitUntil,string,IEnumerable{string},string,CancellationToken)']/*" />
+        public virtual Operation<RadiologyInsightsInferenceResult> CreateJob(WaitUntil waitUntil, string apiVersion, IEnumerable<string> patients, string configuration = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-            Argument.AssertNotNull(radiologyInsightsData, nameof(radiologyInsightsData));
+            Argument.AssertNotNull(patients, nameof(patients));
 
-            using RequestContent content = radiologyInsightsData.ToRequestContent();
+            RadiologyInsightsData radiologyInsightsData = new RadiologyInsightsData(patients.ToList(), configuration, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Operation<BinaryData> response = CreateJob(waitUntil, apiVersion, content, context);
+            Operation<BinaryData> response = CreateJob(waitUntil, apiVersion, radiologyInsightsData.ToRequestContent(), context);
             return ProtocolOperationHelpers.Convert(response, FetchRadiologyInsightsInferenceResultFromRadiologyInsightsResult, ClientDiagnostics, "LegacyLro.CreateJob");
         }
 
@@ -171,7 +175,7 @@ namespace lrotsp
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateJobAsync(WaitUntil,string,RadiologyInsightsData,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateJobAsync(WaitUntil,string,IEnumerable{string},string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -213,7 +217,7 @@ namespace lrotsp
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateJob(WaitUntil,string,RadiologyInsightsData,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateJob(WaitUntil,string,IEnumerable{string},string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

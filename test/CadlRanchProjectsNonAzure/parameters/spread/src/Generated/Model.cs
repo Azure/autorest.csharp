@@ -5,6 +5,7 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Scm.Parameters.Spread.Models;
 
@@ -35,26 +36,26 @@ namespace Scm.Parameters.Spread
         }
 
         /// <summary> Spread as request body. </summary>
-        /// <param name="bodyParameter"> This is a simple model. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
-        public virtual async Task<ClientResult> SpreadAsRequestBodyAsync(BodyParameter bodyParameter)
+        /// <param name="name"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual async Task<ClientResult> SpreadAsRequestBodyAsync(string name)
         {
-            Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using BinaryContent content = bodyParameter.ToBinaryContent();
-            ClientResult result = await SpreadAsRequestBodyAsync(content, null).ConfigureAwait(false);
+            BodyParameter bodyParameter = new BodyParameter(name, null);
+            ClientResult result = await SpreadAsRequestBodyAsync(bodyParameter.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Spread as request body. </summary>
-        /// <param name="bodyParameter"> This is a simple model. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
-        public virtual ClientResult SpreadAsRequestBody(BodyParameter bodyParameter)
+        /// <param name="name"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual ClientResult SpreadAsRequestBody(string name)
         {
-            Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using BinaryContent content = bodyParameter.ToBinaryContent();
-            ClientResult result = SpreadAsRequestBody(content, null);
+            BodyParameter bodyParameter = new BodyParameter(name, null);
+            ClientResult result = SpreadAsRequestBody(bodyParameter.ToBinaryContent(), null);
             return result;
         }
 
@@ -68,7 +69,7 @@ namespace Scm.Parameters.Spread
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAsRequestBodyAsync(BodyParameter)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAsRequestBodyAsync(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -96,7 +97,7 @@ namespace Scm.Parameters.Spread
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAsRequestBody(BodyParameter)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAsRequestBody(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -351,34 +352,34 @@ namespace Scm.Parameters.Spread
         /// <summary> Spread composite request mix. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="testHeader"> The <see cref="string"/> to use. </param>
-        /// <param name="compositeRequestMix"> This is a model with non-body http request decorator. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="compositeRequestMix"/> is null. </exception>
+        /// <param name="prop"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="prop"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<ClientResult> SpreadCompositeRequestMixAsync(string name, string testHeader, CompositeRequestMix compositeRequestMix)
+        public virtual async Task<ClientResult> SpreadCompositeRequestMixAsync(string name, string testHeader, string prop)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(testHeader, nameof(testHeader));
-            Argument.AssertNotNull(compositeRequestMix, nameof(compositeRequestMix));
+            Argument.AssertNotNull(prop, nameof(prop));
 
-            using BinaryContent content = compositeRequestMix.ToBinaryContent();
-            ClientResult result = await SpreadCompositeRequestMixAsync(name, testHeader, content, null).ConfigureAwait(false);
+            CompositeRequestMix compositeRequestMix = new CompositeRequestMix(prop, null);
+            ClientResult result = await SpreadCompositeRequestMixAsync(name, testHeader, compositeRequestMix.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Spread composite request mix. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="testHeader"> The <see cref="string"/> to use. </param>
-        /// <param name="compositeRequestMix"> This is a model with non-body http request decorator. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="compositeRequestMix"/> is null. </exception>
+        /// <param name="prop"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="prop"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual ClientResult SpreadCompositeRequestMix(string name, string testHeader, CompositeRequestMix compositeRequestMix)
+        public virtual ClientResult SpreadCompositeRequestMix(string name, string testHeader, string prop)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(testHeader, nameof(testHeader));
-            Argument.AssertNotNull(compositeRequestMix, nameof(compositeRequestMix));
+            Argument.AssertNotNull(prop, nameof(prop));
 
-            using BinaryContent content = compositeRequestMix.ToBinaryContent();
-            ClientResult result = SpreadCompositeRequestMix(name, testHeader, content, null);
+            CompositeRequestMix compositeRequestMix = new CompositeRequestMix(prop, null);
+            ClientResult result = SpreadCompositeRequestMix(name, testHeader, compositeRequestMix.ToBinaryContent(), null);
             return result;
         }
 
@@ -392,7 +393,7 @@ namespace Scm.Parameters.Spread
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadCompositeRequestMixAsync(string,string,CompositeRequestMix)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadCompositeRequestMixAsync(string,string,string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -425,7 +426,7 @@ namespace Scm.Parameters.Spread
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadCompositeRequestMix(string,string,CompositeRequestMix)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadCompositeRequestMix(string,string,string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

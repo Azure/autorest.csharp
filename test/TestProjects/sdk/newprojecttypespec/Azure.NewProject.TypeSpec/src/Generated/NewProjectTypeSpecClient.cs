@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core;
@@ -309,32 +310,80 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary> body parameter without body decorator. </summary>
-        /// <param name="thing"> A model with a few properties of literal types. </param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="requiredUnion"> required Union. </param>
+        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
+        /// <param name="requiredLiteralString"> required literal string. </param>
+        /// <param name="requiredLiteralInt"> required literal int. </param>
+        /// <param name="requiredLiteralFloat"> required literal float. </param>
+        /// <param name="requiredLiteralBool"> required literal bool. </param>
+        /// <param name="optionalLiteralString"> optional literal string. </param>
+        /// <param name="optionalLiteralInt"> optional literal int. </param>
+        /// <param name="optionalLiteralFloat"> optional literal float. </param>
+        /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(Thing,CancellationToken)']/*" />
-        public virtual async Task<Response<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(string,BinaryData,string,ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,CancellationToken)']/*" />
+        public virtual async Task<Response<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(thing, nameof(thing));
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
+            Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
-            using RequestContent content = thing.ToRequestContent();
+            Thing thing = new Thing(
+                name,
+                requiredUnion,
+                requiredLiteralString,
+                requiredLiteralInt,
+                requiredLiteralFloat,
+                requiredLiteralBool,
+                optionalLiteralString,
+                optionalLiteralInt,
+                optionalLiteralFloat,
+                optionalLiteralBool,
+                requiredBadDescription,
+                null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await AnonymousBodyAsync(content, context).ConfigureAwait(false);
+            Response response = await AnonymousBodyAsync(thing.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
         /// <summary> body parameter without body decorator. </summary>
-        /// <param name="thing"> A model with a few properties of literal types. </param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="requiredUnion"> required Union. </param>
+        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
+        /// <param name="requiredLiteralString"> required literal string. </param>
+        /// <param name="requiredLiteralInt"> required literal int. </param>
+        /// <param name="requiredLiteralFloat"> required literal float. </param>
+        /// <param name="requiredLiteralBool"> required literal bool. </param>
+        /// <param name="optionalLiteralString"> optional literal string. </param>
+        /// <param name="optionalLiteralInt"> optional literal int. </param>
+        /// <param name="optionalLiteralFloat"> optional literal float. </param>
+        /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(Thing,CancellationToken)']/*" />
-        public virtual Response<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(string,BinaryData,string,ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,CancellationToken)']/*" />
+        public virtual Response<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(thing, nameof(thing));
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
+            Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
-            using RequestContent content = thing.ToRequestContent();
+            Thing thing = new Thing(
+                name,
+                requiredUnion,
+                requiredLiteralString,
+                requiredLiteralInt,
+                requiredLiteralFloat,
+                requiredLiteralBool,
+                optionalLiteralString,
+                optionalLiteralInt,
+                optionalLiteralFloat,
+                optionalLiteralBool,
+                requiredBadDescription,
+                null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = AnonymousBody(content, context);
+            Response response = AnonymousBody(thing.ToRequestContent(), context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
@@ -348,7 +397,7 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousBodyAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousBodyAsync(string,BinaryData,string,ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -387,7 +436,7 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousBody(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousBody(string,BinaryData,string,ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -417,32 +466,32 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
+        /// <param name="name"> name of the NotFriend. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(Friend,CancellationToken)']/*" />
-        public virtual async Task<Response<Friend>> FriendlyModelAsync(Friend friend, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(string,CancellationToken)']/*" />
+        public virtual async Task<Response<Friend>> FriendlyModelAsync(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(friend, nameof(friend));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using RequestContent content = friend.ToRequestContent();
+            Friend friend = new Friend(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await FriendlyModelAsync(content, context).ConfigureAwait(false);
+            Response response = await FriendlyModelAsync(friend.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
+        /// <param name="name"> name of the NotFriend. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(Friend,CancellationToken)']/*" />
-        public virtual Response<Friend> FriendlyModel(Friend friend, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(string,CancellationToken)']/*" />
+        public virtual Response<Friend> FriendlyModel(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(friend, nameof(friend));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using RequestContent content = friend.ToRequestContent();
+            Friend friend = new Friend(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = FriendlyModel(content, context);
+            Response response = FriendlyModel(friend.ToRequestContent(), context);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
 
@@ -456,7 +505,7 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="FriendlyModelAsync(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="FriendlyModelAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -495,7 +544,7 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="FriendlyModel(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="FriendlyModel(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

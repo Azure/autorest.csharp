@@ -107,16 +107,20 @@ export function loadOperation(
             loadBodyParameter(sdkContext, typespecParameters.body?.parameter)
         );
     } else if (typespecParameters.body?.type) {
-        const effectiveBodyType = getEffectiveSchemaType(
-            sdkContext,
-            typespecParameters.body.type
-        );
-        if (effectiveBodyType.kind === "Model") {
+        const rawBodyType = typespecParameters.body.type;
+        if (rawBodyType.kind === "Model") {
+            const effectiveBodyType = getEffectiveSchemaType(
+                sdkContext,
+                typespecParameters.body.type
+            ) as Model;
             const bodyParameter = loadBodyParameter(
                 sdkContext,
                 effectiveBodyType
             );
-            if (effectiveBodyType.name === "") {
+            if (
+                effectiveBodyType.name === "" ||
+                rawBodyType.sourceModels.some((m) => m.usage === "spread")
+            ) {
                 bodyParameter.Kind = InputOperationParameterKind.Spread;
             }
             // TODO: remove this after https://github.com/Azure/typespec-azure/issues/69 is resolved

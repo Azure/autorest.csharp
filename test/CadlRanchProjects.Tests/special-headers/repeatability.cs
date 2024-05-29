@@ -28,7 +28,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task RepeatableAction() => Test(async (host) =>
         {
-            var response = await new TraitsClient(host, null).RepeatableActionAsync(1, new UserActionParam("test"));
+            var response = await new TraitsClient(host, null).RepeatableActionAsync(1, "test");
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.IsTrue(response.GetRawResponse().Headers.TryGetValue("repeatability-result", out var headerValue));
             Assert.AreEqual("accepted", headerValue);

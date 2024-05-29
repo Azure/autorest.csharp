@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace OpenAI.Models
 {
     /// <summary> The CreateCompletionRequest. </summary>
-    public partial class CreateCompletionRequest
+    internal partial class CreateCompletionRequest
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.

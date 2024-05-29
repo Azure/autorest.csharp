@@ -10,7 +10,7 @@ using System.Text.Json;
 
 namespace Scm.Client.Naming.Models
 {
-    public partial class CSModel : IJsonModel<CSModel>
+    internal partial class CSModel : IJsonModel<CSModel>
     {
         void IJsonModel<CSModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {

@@ -54,8 +54,7 @@ namespace Serialization.EncodedName.Json.Samples
         {
             Property client = new JsonClient().GetPropertyClient();
 
-            JsonEncodedNameModel jsonEncodedNameModel = new JsonEncodedNameModel(true);
-            Response response = client.Send(jsonEncodedNameModel);
+            Response response = client.Send(true);
         }
 
         [Test]
@@ -64,8 +63,7 @@ namespace Serialization.EncodedName.Json.Samples
         {
             Property client = new JsonClient().GetPropertyClient();
 
-            JsonEncodedNameModel jsonEncodedNameModel = new JsonEncodedNameModel(true);
-            Response response = await client.SendAsync(jsonEncodedNameModel);
+            Response response = await client.SendAsync(true);
         }
 
         [Test]
@@ -104,8 +102,7 @@ namespace Serialization.EncodedName.Json.Samples
         {
             Property client = new JsonClient().GetPropertyClient();
 
-            JsonEncodedNameModel jsonEncodedNameModel = new JsonEncodedNameModel(true);
-            Response response = client.Send(jsonEncodedNameModel);
+            Response response = client.Send(true);
         }
 
         [Test]
@@ -114,8 +111,7 @@ namespace Serialization.EncodedName.Json.Samples
         {
             Property client = new JsonClient().GetPropertyClient();
 
-            JsonEncodedNameModel jsonEncodedNameModel = new JsonEncodedNameModel(true);
-            Response response = await client.SendAsync(jsonEncodedNameModel);
+            Response response = await client.SendAsync(true);
         }
 
         [Test]

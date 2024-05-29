@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace Client.Naming.Models
 {
     /// <summary> The LanguageClientNameModel. </summary>
-    public partial class LanguageClientNameModel
+    internal partial class LanguageClientNameModel
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.

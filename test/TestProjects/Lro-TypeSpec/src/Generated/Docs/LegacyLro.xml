@@ -71,7 +71,7 @@ Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetPrope
 Console.WriteLine(result.GetProperty("result").GetProperty("id").ToString());
 ]]></code></example>
     </member>
-    <member name="CreateJobAsync(WaitUntil,string,RadiologyInsightsData,CancellationToken)">
+    <member name="CreateJobAsync(WaitUntil,string,IEnumerable{string},string,CancellationToken)">
       <example>
 This sample shows how to call CreateJobAsync.
 <code><![CDATA[
@@ -79,8 +79,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
-RadiologyInsightsData radiologyInsightsData = new RadiologyInsightsData(new string[] { "<patients>" });
-Operation<RadiologyInsightsInferenceResult> operation = await client.CreateJobAsync(WaitUntil.Completed, "<apiVersion>", radiologyInsightsData);
+Operation<RadiologyInsightsInferenceResult> operation = await client.CreateJobAsync(WaitUntil.Completed, "<apiVersion>", new string[] { "<patients>" });
 RadiologyInsightsInferenceResult responseData = operation.Value;
 ]]></code>
 This sample shows how to call CreateJobAsync with all parameters.
@@ -89,15 +88,11 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
-RadiologyInsightsData radiologyInsightsData = new RadiologyInsightsData(new string[] { "<patients>" })
-{
-    Configuration = "<configuration>",
-};
-Operation<RadiologyInsightsInferenceResult> operation = await client.CreateJobAsync(WaitUntil.Completed, "<apiVersion>", radiologyInsightsData);
+Operation<RadiologyInsightsInferenceResult> operation = await client.CreateJobAsync(WaitUntil.Completed, "<apiVersion>", new string[] { "<patients>" }, configuration: "<configuration>");
 RadiologyInsightsInferenceResult responseData = operation.Value;
 ]]></code></example>
     </member>
-    <member name="CreateJob(WaitUntil,string,RadiologyInsightsData,CancellationToken)">
+    <member name="CreateJob(WaitUntil,string,IEnumerable{string},string,CancellationToken)">
       <example>
 This sample shows how to call CreateJob.
 <code><![CDATA[
@@ -105,8 +100,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
-RadiologyInsightsData radiologyInsightsData = new RadiologyInsightsData(new string[] { "<patients>" });
-Operation<RadiologyInsightsInferenceResult> operation = client.CreateJob(WaitUntil.Completed, "<apiVersion>", radiologyInsightsData);
+Operation<RadiologyInsightsInferenceResult> operation = client.CreateJob(WaitUntil.Completed, "<apiVersion>", new string[] { "<patients>" });
 RadiologyInsightsInferenceResult responseData = operation.Value;
 ]]></code>
 This sample shows how to call CreateJob with all parameters.
@@ -115,11 +109,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
-RadiologyInsightsData radiologyInsightsData = new RadiologyInsightsData(new string[] { "<patients>" })
-{
-    Configuration = "<configuration>",
-};
-Operation<RadiologyInsightsInferenceResult> operation = client.CreateJob(WaitUntil.Completed, "<apiVersion>", radiologyInsightsData);
+Operation<RadiologyInsightsInferenceResult> operation = client.CreateJob(WaitUntil.Completed, "<apiVersion>", new string[] { "<patients>" }, configuration: "<configuration>");
 RadiologyInsightsInferenceResult responseData = operation.Value;
 ]]></code></example>
     </member>

@@ -1,38 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="SendAsync(JsonEncodedNameModel,CancellationToken)">
+    <member name="SendAsync(bool,CancellationToken)">
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
 Property client = new JsonClient().GetPropertyClient();
 
-JsonEncodedNameModel jsonEncodedNameModel = new JsonEncodedNameModel(true);
-Response response = await client.SendAsync(jsonEncodedNameModel);
+Response response = await client.SendAsync(true);
 ]]></code>
 This sample shows how to call SendAsync with all parameters.
 <code><![CDATA[
 Property client = new JsonClient().GetPropertyClient();
 
-JsonEncodedNameModel jsonEncodedNameModel = new JsonEncodedNameModel(true);
-Response response = await client.SendAsync(jsonEncodedNameModel);
+Response response = await client.SendAsync(true);
 ]]></code></example>
     </member>
-    <member name="Send(JsonEncodedNameModel,CancellationToken)">
+    <member name="Send(bool,CancellationToken)">
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
 Property client = new JsonClient().GetPropertyClient();
 
-JsonEncodedNameModel jsonEncodedNameModel = new JsonEncodedNameModel(true);
-Response response = client.Send(jsonEncodedNameModel);
+Response response = client.Send(true);
 ]]></code>
 This sample shows how to call Send with all parameters.
 <code><![CDATA[
 Property client = new JsonClient().GetPropertyClient();
 
-JsonEncodedNameModel jsonEncodedNameModel = new JsonEncodedNameModel(true);
-Response response = client.Send(jsonEncodedNameModel);
+Response response = client.Send(true);
 ]]></code></example>
     </member>
     <member name="SendAsync(RequestContent,RequestContext)">

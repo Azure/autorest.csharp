@@ -5,6 +5,7 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Scm.Serialization.EncodedName.Json.Models;
 
@@ -35,26 +36,20 @@ namespace Scm.Serialization.EncodedName.Json
         }
 
         /// <summary> Send. </summary>
-        /// <param name="jsonEncodedNameModel"> The <see cref="JsonEncodedNameModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="jsonEncodedNameModel"/> is null. </exception>
-        public virtual async Task<ClientResult> SendAsync(JsonEncodedNameModel jsonEncodedNameModel)
+        /// <param name="defaultName"> Pass in true. </param>
+        public virtual async Task<ClientResult> SendAsync(bool defaultName)
         {
-            Argument.AssertNotNull(jsonEncodedNameModel, nameof(jsonEncodedNameModel));
-
-            using BinaryContent content = jsonEncodedNameModel.ToBinaryContent();
-            ClientResult result = await SendAsync(content, null).ConfigureAwait(false);
+            JsonEncodedNameModel jsonEncodedNameModel = new JsonEncodedNameModel(defaultName, null);
+            ClientResult result = await SendAsync(jsonEncodedNameModel.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Send. </summary>
-        /// <param name="jsonEncodedNameModel"> The <see cref="JsonEncodedNameModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="jsonEncodedNameModel"/> is null. </exception>
-        public virtual ClientResult Send(JsonEncodedNameModel jsonEncodedNameModel)
+        /// <param name="defaultName"> Pass in true. </param>
+        public virtual ClientResult Send(bool defaultName)
         {
-            Argument.AssertNotNull(jsonEncodedNameModel, nameof(jsonEncodedNameModel));
-
-            using BinaryContent content = jsonEncodedNameModel.ToBinaryContent();
-            ClientResult result = Send(content, null);
+            JsonEncodedNameModel jsonEncodedNameModel = new JsonEncodedNameModel(defaultName, null);
+            ClientResult result = Send(jsonEncodedNameModel.ToBinaryContent(), null);
             return result;
         }
 
@@ -68,7 +63,7 @@ namespace Scm.Serialization.EncodedName.Json
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SendAsync(JsonEncodedNameModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SendAsync(bool)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -96,7 +91,7 @@ namespace Scm.Serialization.EncodedName.Json
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Send(JsonEncodedNameModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Send(bool)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

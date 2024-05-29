@@ -146,8 +146,7 @@ namespace lrotsp.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
-            RadiologyInsightsData radiologyInsightsData = new RadiologyInsightsData(new string[] { "<patients>" });
-            Operation<RadiologyInsightsInferenceResult> operation = client.CreateJob(WaitUntil.Completed, "<apiVersion>", radiologyInsightsData);
+            Operation<RadiologyInsightsInferenceResult> operation = client.CreateJob(WaitUntil.Completed, "<apiVersion>", new string[] { "<patients>" });
             RadiologyInsightsInferenceResult responseData = operation.Value;
         }
 
@@ -159,8 +158,7 @@ namespace lrotsp.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
-            RadiologyInsightsData radiologyInsightsData = new RadiologyInsightsData(new string[] { "<patients>" });
-            Operation<RadiologyInsightsInferenceResult> operation = await client.CreateJobAsync(WaitUntil.Completed, "<apiVersion>", radiologyInsightsData);
+            Operation<RadiologyInsightsInferenceResult> operation = await client.CreateJobAsync(WaitUntil.Completed, "<apiVersion>", new string[] { "<patients>" });
             RadiologyInsightsInferenceResult responseData = operation.Value;
         }
 
@@ -218,11 +216,7 @@ namespace lrotsp.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
-            RadiologyInsightsData radiologyInsightsData = new RadiologyInsightsData(new string[] { "<patients>" })
-            {
-                Configuration = "<configuration>",
-            };
-            Operation<RadiologyInsightsInferenceResult> operation = client.CreateJob(WaitUntil.Completed, "<apiVersion>", radiologyInsightsData);
+            Operation<RadiologyInsightsInferenceResult> operation = client.CreateJob(WaitUntil.Completed, "<apiVersion>", new string[] { "<patients>" }, configuration: "<configuration>");
             RadiologyInsightsInferenceResult responseData = operation.Value;
         }
 
@@ -234,11 +228,7 @@ namespace lrotsp.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
-            RadiologyInsightsData radiologyInsightsData = new RadiologyInsightsData(new string[] { "<patients>" })
-            {
-                Configuration = "<configuration>",
-            };
-            Operation<RadiologyInsightsInferenceResult> operation = await client.CreateJobAsync(WaitUntil.Completed, "<apiVersion>", radiologyInsightsData);
+            Operation<RadiologyInsightsInferenceResult> operation = await client.CreateJobAsync(WaitUntil.Completed, "<apiVersion>", new string[] { "<patients>" }, configuration: "<configuration>");
             RadiologyInsightsInferenceResult responseData = operation.Value;
         }
     }

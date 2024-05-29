@@ -11,7 +11,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         [Test]
         public Task Serialization_EncodedName_Json_Property_send() => Test(async (host) =>
         {
-            var response = await new JsonClient(host, null).GetPropertyClient().SendAsync(new JsonEncodedNameModel(true));
+            var response = await new JsonClient(host, null).GetPropertyClient().SendAsync(true);
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 

@@ -5,6 +5,7 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Scm.Client.Naming.Models;
 
@@ -35,26 +36,20 @@ namespace Scm.Client.Naming
         }
 
         /// <summary> Client. </summary>
-        /// <param name="clientModel"> The <see cref="Models.ClientModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientModel"/> is null. </exception>
-        public virtual async Task<ClientResult> ClientAsync(Models.ClientModel clientModel)
+        /// <param name="defaultName"> Pass in true. </param>
+        public virtual async Task<ClientResult> ClientAsync(bool defaultName)
         {
-            Argument.AssertNotNull(clientModel, nameof(clientModel));
-
-            using BinaryContent content = clientModel.ToBinaryContent();
-            ClientResult result = await ClientAsync(content, null).ConfigureAwait(false);
+            Models.ClientModel clientModel = new Models.ClientModel(defaultName, null);
+            ClientResult result = await ClientAsync(clientModel.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Client. </summary>
-        /// <param name="clientModel"> The <see cref="Models.ClientModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientModel"/> is null. </exception>
-        public virtual ClientResult Client(Models.ClientModel clientModel)
+        /// <param name="defaultName"> Pass in true. </param>
+        public virtual ClientResult Client(bool defaultName)
         {
-            Argument.AssertNotNull(clientModel, nameof(clientModel));
-
-            using BinaryContent content = clientModel.ToBinaryContent();
-            ClientResult result = Client(content, null);
+            Models.ClientModel clientModel = new Models.ClientModel(defaultName, null);
+            ClientResult result = Client(clientModel.ToBinaryContent(), null);
             return result;
         }
 
@@ -68,7 +63,7 @@ namespace Scm.Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ClientAsync(Models.ClientModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ClientAsync(bool)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -96,7 +91,7 @@ namespace Scm.Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Client(Models.ClientModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Client(bool)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -115,26 +110,20 @@ namespace Scm.Client.Naming
         }
 
         /// <summary> Language. </summary>
-        /// <param name="csModel"> The <see cref="CSModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="csModel"/> is null. </exception>
-        public virtual async Task<ClientResult> LanguageAsync(CSModel csModel)
+        /// <param name="defaultName"> Pass in true. </param>
+        public virtual async Task<ClientResult> LanguageAsync(bool defaultName)
         {
-            Argument.AssertNotNull(csModel, nameof(csModel));
-
-            using BinaryContent content = csModel.ToBinaryContent();
-            ClientResult result = await LanguageAsync(content, null).ConfigureAwait(false);
+            CSModel csModel = new CSModel(defaultName, null);
+            ClientResult result = await LanguageAsync(csModel.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Language. </summary>
-        /// <param name="csModel"> The <see cref="CSModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="csModel"/> is null. </exception>
-        public virtual ClientResult Language(CSModel csModel)
+        /// <param name="defaultName"> Pass in true. </param>
+        public virtual ClientResult Language(bool defaultName)
         {
-            Argument.AssertNotNull(csModel, nameof(csModel));
-
-            using BinaryContent content = csModel.ToBinaryContent();
-            ClientResult result = Language(content, null);
+            CSModel csModel = new CSModel(defaultName, null);
+            ClientResult result = Language(csModel.ToBinaryContent(), null);
             return result;
         }
 
@@ -148,7 +137,7 @@ namespace Scm.Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="LanguageAsync(CSModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="LanguageAsync(bool)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -176,7 +165,7 @@ namespace Scm.Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Language(CSModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Language(bool)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
