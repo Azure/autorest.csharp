@@ -138,6 +138,28 @@ using System.Runtime.CompilerServices;
 
         private string GetReadme()
         {
+            const string multipleApiVersionContent = @"
+
+### Service API versions
+
+The client library is designed to communicate with multiple service API versions. By default, the client library targets the latest service API version.
+
+#### Select a service API version
+
+You have the flexibility to explicitly select a supported service API version when instantiating a client. This ensures that the client can communicate with services using the specified API version.
+
+For example,
+
+```C# Snippet:Create<YourService>ClientForSpecialAPIVersion
+Uri endpoint = new Uri(""<your endpoint>"");
+DefaultAzureCredential credential = new DefaultAzureCredential();
+<YourService>ClientOptions options = new <YourService>ClientOptions(<YourService>ClientOptions.ServiceVersion.<API Version>)
+var client = new <YourService>Client(endpoint, credential, options);
+```
+
+While selecting an API version, it's important to verify that there are no breaking changes compared to the latest API version. If there are significant differences, API calls may fail due to incompatibility.
+
+Always ensure that the chosen API version is fully supported and operational for your specific use case and that it aligns with the service's versioning policy.";
             const string readmeContent = @"# {0} client library for .NET
 
 {0} is a managed service that helps developers get secret simply and securely.
@@ -174,28 +196,7 @@ Include a section after the install command that details any requirements that m
 
 If your library requires authentication for use, such as for Azure services, include instructions and example code needed for initializing and authenticating.
 
-For example, include details on obtaining an account key and endpoint URI, setting environment variables for each, and initializing the client object.
-
-### Service API versions
-
-The client library is designed to communicate with multiple service API versions. By default, the client library targets the latest service API version.
-
-#### Select a service API version
-
-You have the flexibility to explicitly select a supported service API version when instantiating a client. This ensures that the client can communicate with services using the specified API version.
-
-For example,
-
-```C# Snippet:Create<YourService>ClientForSpecialAPIVersion
-Uri endpoint = new Uri(""<your endpoint>"");
-DefaultAzureCredential credential = new DefaultAzureCredential();
-<YourService>ClientOptions options = new <YourService>ClientOptions(<YourService>ClientOptions.ServiceVersion.<API Version>)
-var client = new <YourService>Client(endpoint, credential, options);
-```
-
-While selecting an API version, it's important to verify that there are no breaking changes compared to the latest API version. If there are significant differences, API calls may fail due to incompatibility.
-
-Always ensure that the chosen API version is fully supported and operational for your specific use case and that it aligns with the service's versioning policy.
+For example, include details on obtaining an account key and endpoint URI, setting environment variables for each, and initializing the client object.{2}
 
 ## Key concepts
 
@@ -246,7 +247,7 @@ This is a template, but your SDK readme should include details on how to contrib
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net/sdk/{1}/{0}/README.png)
 ";
-            return string.Format(readmeContent, Configuration.Namespace, _serviceDirectoryName);
+            return string.Format(readmeContent, Configuration.Namespace, _serviceDirectoryName, (Configuration.AzureArm || Configuration.Generation1ConvenienceClient) ? "" : multipleApiVersionContent);
         }
 
         private string GetCiYml()
