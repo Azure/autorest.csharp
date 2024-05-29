@@ -6,20 +6,18 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
     internal class MgmtRestClientBuilder : CmcRestClientBuilder
     {
-        private static HashSet<string> AllowedRequestParameterOrigins = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "modelerfour:synthesized/host", "modelerfour:synthesized/api-version" };
-        private class ParameterCompareer : IEqualityComparer<RequestParameter>
+        private class ParameterCompareer : IEqualityComparer<InputParameter>
         {
-            public bool Equals([AllowNull] RequestParameter x, [AllowNull] RequestParameter y)
+            public bool Equals([AllowNull] InputParameter x, [AllowNull] InputParameter y)
             {
                 if (x is null)
                     return y is null;
@@ -27,31 +25,31 @@ namespace AutoRest.CSharp.Mgmt.Models
                 if (y is null)
                     return false;
 
-                return x.Language.Default.Name == y.Language.Default.Name && x.Implementation == y.Implementation;
+                return x.Name == y.Name && x.Kind == y.Kind;
             }
 
-            public int GetHashCode([DisallowNull] RequestParameter obj)
+            public int GetHashCode([DisallowNull] InputParameter obj)
             {
-                return obj.Language.Default.Name.GetHashCode() ^ obj.Implementation.GetHashCode();
+                return obj.Name.GetHashCode() ^ obj.Kind.GetHashCode();
             }
         }
 
-        public MgmtRestClientBuilder(OperationGroup operationGroup)
-            : base(GetMgmtParametersFromOperations(operationGroup.Operations), MgmtContext.Context)
+        public MgmtRestClientBuilder(InputClient inputClient)
+            : base(GetMgmtParametersFromOperations(inputClient.Operations), MgmtContext.Context)
         {
         }
 
-        private static IReadOnlyList<RequestParameter> GetMgmtParametersFromOperations(ICollection<Operation> operations)
+        private static IReadOnlyList<InputParameter> GetMgmtParametersFromOperations(IReadOnlyList<InputOperation> operations)
         {
-            var parameters = new HashSet<RequestParameter>(new ParameterCompareer());
+            var parameters = new HashSet<InputParameter>(new ParameterCompareer());
             foreach (var operation in operations)
             {
-                var clientParameters = operation.Parameters.Where(p => p.Implementation == ImplementationLocation.Client);
+                var clientParameters = operation.Parameters.Where(p => p.Kind == InputOperationParameterKind.Client);
                 foreach (var parameter in clientParameters)
                 {
-                    if (!AllowedRequestParameterOrigins.Contains(parameter.Origin ?? string.Empty))
+                    if (!parameter.IsEndpoint && !parameter.IsApiVersion)
                     {
-                        throw new InvalidOperationException($"'{parameter.Language.Default.Name}' with origin '{parameter.Origin}' should be method parameter for operation '{operation.OperationId}'");
+                        throw new InvalidOperationException($"'{parameter.Name}' should be method parameter for operation '{operation.OperationId}'");
                     }
                     parameters.Add(parameter);
                 }
@@ -59,7 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             return parameters.ToList();
         }
 
-        public override Parameter BuildConstructorParameter(RequestParameter requestParameter)
+        public override Parameter BuildConstructorParameter(InputParameter requestParameter)
         {
             var parameter = base.BuildConstructorParameter(requestParameter);
             return parameter.IsApiVersionParameter
@@ -67,7 +65,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 : parameter;
         }
 
-        protected override Parameter[] BuildMethodParameters(IReadOnlyDictionary<RequestParameter, Parameter> allParameters)
+        protected override Parameter[] BuildMethodParameters(IReadOnlyDictionary<InputParameter, Parameter> allParameters)
         {
             List<Parameter> requiredParameters = new();
             List<Parameter> optionalParameters = new();

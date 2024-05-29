@@ -1,8 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using AutoRest.CSharp.Input;
-
 namespace AutoRest.CSharp.Common.Input;
 
 internal record InputParameter(
@@ -12,6 +10,7 @@ internal record InputParameter(
     InputType Type,
     RequestLocation Location,
     InputConstant? DefaultValue,
+    // TODO: This should be removed, tracking it in https://github.com/Azure/autorest.csharp/issues/4779
     InputParameter? GroupedBy,
     InputModelProperty? FlattenedBodyProperty,
     InputOperationParameterKind Kind,
@@ -45,4 +44,7 @@ internal record InputParameter(
         ArraySerializationDelimiter: null,
         HeaderCollectionPrefix: null)
     { }
+
+    public string Name { get; internal set; } = Name;
+    public bool IsRequired { get; internal set; } = IsRequired;
 }
