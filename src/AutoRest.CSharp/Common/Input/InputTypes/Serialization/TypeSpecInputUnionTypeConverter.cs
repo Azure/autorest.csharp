@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Common.Input
                     continue;
                 }
 
-                if (reader.GetString() == nameof(InputUnionType.UnionItemTypes))
+                if (reader.GetString() == nameof(InputUnionType.ItemTypes))
                 {
                     reader.Read();
                     CreateUnionItemTypes(ref reader, unionItemTypes, options);

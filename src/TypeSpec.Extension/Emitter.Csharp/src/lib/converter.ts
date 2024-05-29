@@ -333,21 +333,19 @@ function fromUnionType(
     context: SdkContext,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
-): InputUnionType | InputType {
+): InputUnionType {
     const itemTypes: InputType[] = [];
     for (const value of union.values) {
-        const inputType = fromSdkType(value, context, models, enums);
-        itemTypes.push(inputType);
+        const valueType = fromSdkType(value, context, models, enums);
+        itemTypes.push(valueType);
     }
 
-    return itemTypes.length > 1
-        ? {
-              Kind: InputTypeKind.Union,
-              Name: InputTypeKind.Union,
-              UnionItemTypes: itemTypes,
-              IsNullable: false
-          }
-        : itemTypes[0];
+    return {
+        Kind: "union",
+        Name: union.name,
+        ItemTypes: itemTypes,
+        IsNullable: false
+    };
 }
 
 function fromSdkConstantType(
