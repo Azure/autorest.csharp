@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "_Specs_.Azure.ClientGenerator.Core.Usage",
- "Description": "Test for internal decorator.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [
@@ -91,49 +90,54 @@
    "Protocol": {
     "$id": "12"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "13",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "14",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "15",
+      "Type": {
+       "$id": "16",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "13",
+   "$id": "17",
    "Name": "ModelInOperation",
    "Description": "",
    "Operations": [
     {
-     "$id": "14",
+     "$id": "18",
      "Name": "inputToInputOutput",
      "ResourceName": "ModelInOperation",
      "Description": "Expected body parameter: \n```json\n{\n  \"name\": <any string>\n}\n```",
      "Parameters": [
       {
-       "$id": "15",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "16",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "17",
-        "Type": {
-         "$id": "18",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "13"
       },
       {
        "$id": "19",
@@ -236,7 +240,7 @@
      "Description": "Expected response body: \n```json\n{\n  \"name\": <any string>\n}\n```",
      "Parameters": [
       {
-       "$ref": "15"
+       "$ref": "13"
       },
       {
        "$id": "28",
@@ -296,7 +300,12 @@
     "$id": "32"
    },
    "Creatable": false,
-   "Parent": "UsageClient"
+   "Parent": "UsageClient",
+   "Parameters": [
+    {
+     "$ref": "13"
+    }
+   ]
   }
  ]
 }

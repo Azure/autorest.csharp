@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "SpecialHeaders.Repeatability",
- "Description": "Illustrates OASIS repeatability headers",
  "ApiVersions": [],
  "Enums": [
   {
@@ -172,7 +171,12 @@
    "Protocol": {
     "$id": "20"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "7"
+    }
+   ]
   }
  ]
 }

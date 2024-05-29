@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "PetStore",
- "Description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
  "ApiVersions": [],
  "Enums": [
   {
@@ -229,39 +228,44 @@
    "Protocol": {
     "$id": "29"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "30",
+     "Name": "petStoreUrl",
+     "NameInRequest": "petStoreUrl",
+     "Type": {
+      "$id": "31",
+      "Kind": "Primitive",
+      "Name": "Uri",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
+    }
+   ]
   },
   {
-   "$id": "30",
+   "$id": "32",
    "Name": "Pets",
    "Description": "Manage your pets. You can delete or get the Pet from pet store.",
    "Operations": [
     {
-     "$id": "31",
+     "$id": "33",
      "Name": "delete",
      "ResourceName": "Pets",
      "Summary": "delete.",
      "Description": "Delete a pet.",
      "Parameters": [
       {
-       "$id": "32",
-       "Name": "petStoreUrl",
-       "NameInRequest": "petStoreUrl",
-       "Type": {
-        "$id": "33",
-        "Kind": "Primitive",
-        "Name": "Uri",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
+       "$ref": "30"
       },
       {
        "$id": "34",
@@ -338,7 +342,7 @@
      "Description": "Returns a pet. Supports eTags.",
      "Parameters": [
       {
-       "$ref": "32"
+       "$ref": "30"
       },
       {
        "$id": "41",
@@ -435,7 +439,7 @@
      "ResourceName": "Pets",
      "Parameters": [
       {
-       "$ref": "32"
+       "$ref": "30"
       },
       {
        "$id": "49",
@@ -543,7 +547,7 @@
      "ResourceName": "Pets",
      "Parameters": [
       {
-       "$ref": "32"
+       "$ref": "30"
       },
       {
        "$id": "58",
@@ -621,7 +625,7 @@
      "ResourceName": "Pets",
      "Parameters": [
       {
-       "$ref": "32"
+       "$ref": "30"
       },
       {
        "$id": "64",
@@ -702,7 +706,7 @@
      "ResourceName": "Pets",
      "Parameters": [
       {
-       "$ref": "32"
+       "$ref": "30"
       },
       {
        "$id": "71",
@@ -784,7 +788,7 @@
      "Description": "Test that an LRO polling operation defined in a namespace wtihout @service decorator will not be generated. This should be removed after cadl-ranch test case update.",
      "Parameters": [
       {
-       "$ref": "32"
+       "$ref": "30"
       },
       {
        "$id": "78",
@@ -828,7 +832,12 @@
     "$id": "81"
    },
    "Creatable": false,
-   "Parent": "PetStoreClient"
+   "Parent": "PetStoreClient",
+   "Parameters": [
+    {
+     "$ref": "30"
+    }
+   ]
   }
  ]
 }

@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Authentication.OAuth2",
- "Description": "Illustrates clients generated with OAuth2 authentication.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [
@@ -195,7 +194,12 @@
    "Protocol": {
     "$id": "21"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "7"
+    }
+   ]
   }
  ],
  "Auth": {

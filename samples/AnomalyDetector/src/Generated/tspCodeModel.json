@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "AnomalyDetector",
- "Description": "The Anomaly Detector API detects anomalies automatically in time series data.\nIt supports two kinds of mode, one is for stateless using, another is for\nstateful using. In stateless mode, there are three functionalities. Entire\nDetect is for detecting the whole series with model trained by the time series,\nLast Detect is detecting last point with model trained by points before.\nChangePoint Detect is for detecting trend changes in time series. In stateful\nmode, user can store time series, the stored time series will be used for\ndetection anomalies. Under this mode, user can still use the above three\nfunctionalities by only giving a time range without preparing time series in\nclient side. Besides the above three functionalities, stateful model also\nprovide group based detection and labeling service. By leveraging labeling\nservice user can provide labels for each detection result, these labels will be\nused for retuning or regenerating detection models. Inconsistency detection is\na kind of group based detection, this detection will find inconsistency ones in\na set of time series. By using anomaly detector service, business customers can\ndiscover incidents and establish a logic flow for root cause analysis.",
  "ApiVersions": [
   "v1.1"
  ],
@@ -2145,68 +2144,76 @@
    "Protocol": {
     "$id": "284"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "285",
+     "Name": "Endpoint",
+     "NameInRequest": "Endpoint",
+     "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
+     "Type": {
+      "$id": "286",
+      "Kind": "Primitive",
+      "Name": "Uri",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
+    },
+    {
+     "$id": "287",
+     "Name": "ApiVersion",
+     "NameInRequest": "ApiVersion",
+     "Description": "Api Version",
+     "Type": {
+      "$ref": "2"
+     },
+     "Location": "Uri",
+     "IsApiVersion": true,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": false,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "288",
+      "Type": {
+       "$id": "289",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "Value": "v1.1"
+     }
+    }
+   ]
   },
   {
-   "$id": "285",
+   "$id": "290",
    "Name": "Univariate",
    "Description": "",
    "Operations": [
     {
-     "$id": "286",
+     "$id": "291",
      "Name": "DetectUnivariateEntireSeries",
      "ResourceName": "Univariate",
      "Summary": "Detect anomalies for the entire series in batch.",
      "Description": "This operation generates a model with an entire series, each point is detected\nwith the same model. With this method, points before and after a certain point\nare used to determine whether it is an anomaly. The entire detection can give\nuser an overall status of the time series.",
      "Parameters": [
       {
-       "$id": "287",
-       "Name": "Endpoint",
-       "NameInRequest": "Endpoint",
-       "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
-       "Type": {
-        "$id": "288",
-        "Kind": "Primitive",
-        "Name": "Uri",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
+       "$ref": "285"
       },
       {
-       "$id": "289",
-       "Name": "ApiVersion",
-       "NameInRequest": "ApiVersion",
-       "Description": "Api Version",
-       "Type": {
-        "$ref": "2"
-       },
-       "Location": "Uri",
-       "IsApiVersion": true,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "290",
-        "Type": {
-         "$id": "291",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "v1.1"
-       }
+       "$ref": "287"
       },
       {
        "$id": "292",
@@ -2317,10 +2324,10 @@
      "Description": "This operation generates a model using the points that you sent into the API,\nand based on all data to determine whether the last point is anomalous.",
      "Parameters": [
       {
-       "$ref": "287"
+       "$ref": "285"
       },
       {
-       "$ref": "289"
+       "$ref": "287"
       },
       {
        "$id": "301",
@@ -2431,10 +2438,10 @@
      "Description": "Evaluate change point score of every series point",
      "Parameters": [
       {
-       "$ref": "287"
+       "$ref": "285"
       },
       {
-       "$ref": "289"
+       "$ref": "287"
       },
       {
        "$id": "310",
@@ -2542,7 +2549,15 @@
     "$id": "318"
    },
    "Creatable": false,
-   "Parent": "AnomalyDetectorClient"
+   "Parent": "AnomalyDetectorClient",
+   "Parameters": [
+    {
+     "$ref": "285"
+    },
+    {
+     "$ref": "287"
+    }
+   ]
   },
   {
    "$id": "319",
@@ -2557,10 +2572,10 @@
      "Description": "For asynchronous inference, get multivariate anomaly detection result based on\nresultId returned by the BatchDetectAnomaly api.",
      "Parameters": [
       {
-       "$ref": "287"
+       "$ref": "285"
       },
       {
-       "$ref": "289"
+       "$ref": "287"
       },
       {
        "$id": "321",
@@ -2644,10 +2659,10 @@
      "Description": "Create and train a multivariate anomaly detection model. The request must\ninclude a source parameter to indicate an externally accessible Azure blob\nstorage URI.There are two types of data input: An URI pointed to an Azure blob\nstorage folder which contains multiple CSV files, and each CSV file contains\ntwo columns, timestamp and variable. Another type of input is an URI pointed to\na CSV file in Azure blob storage, which contains all the variables and a\ntimestamp column.",
      "Parameters": [
       {
-       "$ref": "287"
+       "$ref": "285"
       },
       {
-       "$ref": "289"
+       "$ref": "287"
       },
       {
        "$id": "328",
@@ -2771,10 +2786,10 @@
      "Description": "List models of a resource.",
      "Parameters": [
       {
-       "$ref": "287"
+       "$ref": "285"
       },
       {
-       "$ref": "289"
+       "$ref": "287"
       },
       {
        "$id": "339",
@@ -2884,10 +2899,10 @@
      "Description": "Delete an existing multivariate model according to the modelId",
      "Parameters": [
       {
-       "$ref": "287"
+       "$ref": "285"
       },
       {
-       "$ref": "289"
+       "$ref": "287"
       },
       {
        "$id": "349",
@@ -2965,10 +2980,10 @@
      "Description": "Get detailed information of multivariate model, including the training status\nand variables used in the model.",
      "Parameters": [
       {
-       "$ref": "287"
+       "$ref": "285"
       },
       {
-       "$ref": "289"
+       "$ref": "287"
       },
       {
        "$id": "356",
@@ -3052,10 +3067,10 @@
      "Description": "Submit multivariate anomaly detection task with the modelId of trained model\nand inference data, the input schema should be the same with the training\nrequest. The request will complete asynchronously and return a resultId to\nquery the detection result.The request should be a source link to indicate an\nexternally accessible Azure storage Uri, either pointed to an Azure blob\nstorage folder, or pointed to a CSV file in Azure blob storage.",
      "Parameters": [
       {
-       "$ref": "287"
+       "$ref": "285"
       },
       {
-       "$ref": "289"
+       "$ref": "287"
       },
       {
        "$id": "363",
@@ -3212,10 +3227,10 @@
      "Description": "Submit multivariate anomaly detection task with the modelId of trained model\nand inference data, and the inference data should be put into request body in a\nJSON format. The request will complete synchronously and return the detection\nimmediately in the response body.",
      "Parameters": [
       {
-       "$ref": "287"
+       "$ref": "285"
       },
       {
-       "$ref": "289"
+       "$ref": "287"
       },
       {
        "$id": "378",
@@ -3344,7 +3359,15 @@
     "$id": "388"
    },
    "Creatable": false,
-   "Parent": "AnomalyDetectorClient"
+   "Parent": "AnomalyDetectorClient",
+   "Parameters": [
+    {
+     "$ref": "285"
+    },
+    {
+     "$ref": "287"
+    }
+   ]
   }
  ],
  "Auth": {

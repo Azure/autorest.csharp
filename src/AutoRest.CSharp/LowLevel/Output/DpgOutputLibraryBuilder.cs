@@ -245,7 +245,7 @@ namespace AutoRest.CSharp.Output.Models
             var clientNamespace = Configuration.Namespace;
             var clientDescription = ns.Description;
             var operations = ns.Operations;
-            var clientParameters = RestClientBuilder.GetParametersFromOperations(operations).ToList();
+            var clientParameters = RestClientBuilder.GetParametersFromClient(ns).ToList();
             var resourceParameters = clientParameters.Where(cp => cp.IsResourceParameter).ToHashSet();
             var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(ns.Name) || resourceParameters.Any() || !string.IsNullOrEmpty(ns.Parent);
             var clientName = isSubClient ? clientNamePrefix : clientNamePrefix + ClientBuilder.GetClientSuffix();
@@ -284,7 +284,7 @@ namespace AutoRest.CSharp.Output.Models
                 var clientNamespace = Configuration.Namespace;
                 var infoForEndpoint = topLevelClients.FirstOrDefault(c => c.ClientParameters.Any(p => p.IsEndpoint));
                 var endpointParameter = infoForEndpoint?.ClientParameters.FirstOrDefault(p => p.IsEndpoint);
-                var clientParameters = endpointParameter != null ? new[] { endpointParameter } : Array.Empty<InputParameter>();
+                var clientParameters = topLevelClients.SelectMany(c => c.ClientParameters.Where(p => !p.IsRequired || p.IsApiVersion || p.IsEndpoint)).Distinct().ToArray();
                 var clientExamples = infoForEndpoint?.Examples ?? new Dictionary<string, InputClientExample>();
 
                 topLevelClientInfo = new ClientInfo(clientName, clientNamespace, clientParameters, clientExamples);

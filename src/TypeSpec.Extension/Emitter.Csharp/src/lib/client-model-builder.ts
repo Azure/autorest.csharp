@@ -85,12 +85,26 @@ export function createModelForService(
 
     const apiVersions: Set<string> | undefined = new Set<string>();
     let defaultApiVersion: string | undefined = undefined;
-    const versions = getVersions(program, service.type)[1]?.getVersions();
+    let versions = getVersions(program, service.type)[1]
+        ?.getVersions()
+        .map((v) => v.value);
+    const targetApiVersion = sdkContext.emitContext.options["api-version"];
+    if (
+        versions !== undefined &&
+        targetApiVersion !== undefined &&
+        targetApiVersion !== "all" &&
+        targetApiVersion !== "latest"
+    ) {
+        const targetApiVersionIndex = versions.findIndex(
+            (v) => v === targetApiVersion
+        );
+        versions = versions.slice(0, targetApiVersionIndex + 1);
+    }
     if (versions && versions.length > 0) {
         for (const ver of versions) {
-            apiVersions.add(ver.value);
+            apiVersions.add(ver);
         }
-        defaultApiVersion = versions[versions.length - 1].value;
+        defaultApiVersion = versions[versions.length - 1];
     }
     const defaultApiVersionConstant: InputConstant | undefined =
         defaultApiVersion
@@ -103,8 +117,6 @@ export function createModelForService(
                   Value: defaultApiVersion
               }
             : undefined;
-
-    const description = getDoc(program, serviceNamespaceType);
 
     const servers = getServers(program, serviceNamespaceType);
     const namespace = getNamespaceFullName(serviceNamespaceType) || "client";
@@ -210,7 +222,6 @@ export function createModelForService(
 
     const clientModel = {
         Name: namespace,
-        Description: description,
         ApiVersions: Array.from(apiVersions.values()),
         Enums: Array.from(enumMap.values()),
         Models: Array.from(modelMap.values()),
@@ -279,7 +290,8 @@ export function createModelForService(
             Operations: [],
             Protocol: {},
             Creatable: client.kind === ClientKind.SdkClient,
-            Parent: parent === undefined ? undefined : getClientName(parent)
+            Parent: parent === undefined ? undefined : getClientName(parent),
+            Parameters: urlParameters
         } as InputClient;
         for (const op of operations) {
             const httpOperation = ignoreDiagnostics(

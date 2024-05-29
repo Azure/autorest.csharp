@@ -13,49 +13,54 @@
    "Protocol": {
     "$id": "3"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "4",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "5",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "6",
+      "Type": {
+       "$id": "7",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "4",
+   "$id": "8",
    "Name": "String",
    "Description": "",
    "Operations": [
     {
-     "$id": "5",
+     "$id": "9",
      "Name": "get",
      "ResourceName": "String",
      "Description": "get string value",
      "Parameters": [
       {
-       "$id": "6",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "7",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "8",
-        "Type": {
-         "$id": "9",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "4"
       },
       {
        "$id": "10",
@@ -120,7 +125,7 @@
      "Description": "put string value",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "16",
@@ -225,7 +230,12 @@
     "$id": "25"
    },
    "Creatable": false,
-   "Parent": "ScalarClient"
+   "Parent": "ScalarClient",
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   },
   {
    "$id": "26",
@@ -239,7 +249,7 @@
      "Description": "get boolean value",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "28",
@@ -304,7 +314,7 @@
      "Description": "put boolean value",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "34",
@@ -409,7 +419,12 @@
     "$id": "43"
    },
    "Creatable": false,
-   "Parent": "ScalarClient"
+   "Parent": "ScalarClient",
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   },
   {
    "$id": "44",
@@ -423,7 +438,7 @@
      "Description": "get unknown value",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "46",
@@ -488,7 +503,7 @@
      "Description": "put unknown value",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "52",
@@ -593,7 +608,12 @@
     "$id": "61"
    },
    "Creatable": false,
-   "Parent": "ScalarClient"
+   "Parent": "ScalarClient",
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   },
   {
    "$id": "62",
@@ -606,7 +626,7 @@
      "ResourceName": "DecimalType",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "64",
@@ -670,7 +690,7 @@
      "ResourceName": "DecimalType",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "70",
@@ -775,7 +795,7 @@
      "ResourceName": "DecimalType",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "80",
@@ -849,7 +869,12 @@
     "$id": "86"
    },
    "Creatable": false,
-   "Parent": "ScalarClient"
+   "Parent": "ScalarClient",
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   },
   {
    "$id": "87",
@@ -862,7 +887,7 @@
      "ResourceName": "Decimal128Type",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "89",
@@ -926,7 +951,7 @@
      "ResourceName": "Decimal128Type",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "95",
@@ -1031,7 +1056,7 @@
      "ResourceName": "Decimal128Type",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "105",
@@ -1105,7 +1130,12 @@
     "$id": "111"
    },
    "Creatable": false,
-   "Parent": "ScalarClient"
+   "Parent": "ScalarClient",
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   },
   {
    "$id": "112",
@@ -1118,7 +1148,7 @@
      "ResourceName": "DecimalVerify",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "114",
@@ -1188,7 +1218,7 @@
      "ResourceName": "DecimalVerify",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "121",
@@ -1292,7 +1322,12 @@
     "$id": "130"
    },
    "Creatable": false,
-   "Parent": "ScalarClient"
+   "Parent": "ScalarClient",
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   },
   {
    "$id": "131",
@@ -1305,7 +1340,7 @@
      "ResourceName": "Decimal128Verify",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "133",
@@ -1375,7 +1410,7 @@
      "ResourceName": "Decimal128Verify",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "140",
@@ -1479,7 +1514,12 @@
     "$id": "149"
    },
    "Creatable": false,
-   "Parent": "ScalarClient"
+   "Parent": "ScalarClient",
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   }
  ]
 }

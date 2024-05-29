@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Payload.MultiPart",
- "Description": "Test for multipart",
  "ApiVersions": [],
  "Enums": [],
  "Models": [
@@ -345,49 +344,54 @@
    "Protocol": {
     "$id": "45"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "46",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "47",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "48",
+      "Type": {
+       "$id": "49",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "46",
+   "$id": "50",
    "Name": "FormData",
    "Description": "",
    "Operations": [
     {
-     "$id": "47",
+     "$id": "51",
      "Name": "basic",
      "ResourceName": "FormData",
      "Description": "Test content-type: multipart/form-data",
      "Parameters": [
       {
-       "$id": "48",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "49",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "50",
-        "Type": {
-         "$id": "51",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "46"
       },
       {
        "$id": "52",
@@ -497,7 +501,7 @@
      "Description": "Test content-type: multipart/form-data for mixed scenarios",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "46"
       },
       {
        "$id": "62",
@@ -607,7 +611,7 @@
      "Description": "Test content-type: multipart/form-data for scenario contains json part and binary part ",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "46"
       },
       {
        "$id": "72",
@@ -717,7 +721,7 @@
      "Description": "Test content-type: multipart/form-data for scenario contains multi binary parts",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "46"
       },
       {
        "$id": "82",
@@ -827,7 +831,7 @@
      "Description": "Test content-type: multipart/form-data for scenario contains multi json parts",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "46"
       },
       {
        "$id": "92",
@@ -937,7 +941,7 @@
      "Description": "Test content-type: multipart/form-data for scenario contains multi binary parts",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "46"
       },
       {
        "$id": "102",
@@ -1047,7 +1051,7 @@
      "Description": "Test content-type: multipart/form-data",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "46"
       },
       {
        "$id": "112",
@@ -1157,7 +1161,7 @@
      "Description": "Test content-type: multipart/form-data",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "46"
       },
       {
        "$id": "122",
@@ -1265,7 +1269,12 @@
     "$id": "131"
    },
    "Creatable": false,
-   "Parent": "MultiPartClient"
+   "Parent": "MultiPartClient",
+   "Parameters": [
+    {
+     "$ref": "46"
+    }
+   ]
   }
  ]
 }

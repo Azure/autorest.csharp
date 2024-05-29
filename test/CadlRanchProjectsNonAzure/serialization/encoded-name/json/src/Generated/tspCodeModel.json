@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Serialization.EncodedName.Json",
- "Description": "Projection",
  "ApiVersions": [],
  "Enums": [],
  "Models": [
@@ -39,48 +38,53 @@
    "Protocol": {
     "$id": "6"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "7",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "8",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "9",
+      "Type": {
+       "$id": "10",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "7",
+   "$id": "11",
    "Name": "Property",
    "Description": "",
    "Operations": [
     {
-     "$id": "8",
+     "$id": "12",
      "Name": "send",
      "ResourceName": "Property",
      "Parameters": [
       {
-       "$id": "9",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "10",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "11",
-        "Type": {
-         "$id": "12",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "7"
       },
       {
        "$id": "13",
@@ -182,7 +186,7 @@
      "ResourceName": "Property",
      "Parameters": [
       {
-       "$ref": "9"
+       "$ref": "7"
       },
       {
        "$id": "22",
@@ -242,7 +246,12 @@
     "$id": "26"
    },
    "Creatable": false,
-   "Parent": "JsonClient"
+   "Parent": "JsonClient",
+   "Parameters": [
+    {
+     "$ref": "7"
+    }
+   ]
   }
  ]
 }

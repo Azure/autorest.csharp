@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Type.Model.Flatten",
- "Description": "Illustrates the model flatten cases.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [
@@ -502,7 +501,12 @@
    "Protocol": {
     "$id": "53"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "32"
+    }
+   ]
   }
  ]
 }

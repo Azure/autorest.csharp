@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Client.Structure.Service",
- "Description": "Test that we can use @client and @operationGroup decorators to customize client side code structure, such as:\n1. have everything as default.\n2. to rename client or operation group\n3. one client can have more than one operations groups\n4. split one interface into two clients\n5. have two clients with operations come from different interfaces\n6. have two clients with a hierarchy relation.",
  "ApiVersions": [],
  "Enums": [
   {
@@ -47,56 +46,64 @@
    "Protocol": {
     "$id": "8"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "9",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Need to be set as 'http://localhost:3000' in client.",
+     "Type": {
+      "$id": "10",
+      "Kind": "Primitive",
+      "Name": "Uri",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
+    },
+    {
+     "$id": "11",
+     "Name": "client",
+     "NameInRequest": "client",
+     "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
+     "Type": {
+      "$ref": "2"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": false,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
+    }
+   ]
   },
   {
-   "$id": "9",
+   "$id": "12",
    "Name": "Group1",
    "Description": "",
    "Operations": [
     {
-     "$id": "10",
+     "$id": "13",
      "Name": "one",
      "ResourceName": "Group1",
      "Parameters": [
       {
-       "$id": "11",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Need to be set as 'http://localhost:3000' in client.",
-       "Type": {
-        "$id": "12",
-        "Kind": "Primitive",
-        "Name": "Uri",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
+       "$ref": "9"
       },
       {
-       "$id": "13",
-       "Name": "client",
-       "NameInRequest": "client",
-       "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
-       "Type": {
-        "$ref": "2"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
+       "$ref": "11"
       },
       {
        "$id": "14",
@@ -151,10 +158,10 @@
      "ResourceName": "Group1",
      "Parameters": [
       {
-       "$ref": "11"
+       "$ref": "9"
       },
       {
-       "$ref": "13"
+       "$ref": "11"
       },
       {
        "$id": "19",
@@ -209,10 +216,10 @@
      "ResourceName": "Group1",
      "Parameters": [
       {
-       "$ref": "11"
+       "$ref": "9"
       },
       {
-       "$ref": "13"
+       "$ref": "11"
       },
       {
        "$id": "24",
@@ -266,7 +273,15 @@
     "$id": "28"
    },
    "Creatable": false,
-   "Parent": "TwoOperationGroupClient"
+   "Parent": "TwoOperationGroupClient",
+   "Parameters": [
+    {
+     "$ref": "9"
+    },
+    {
+     "$ref": "11"
+    }
+   ]
   },
   {
    "$id": "29",
@@ -279,10 +294,10 @@
      "ResourceName": "Group2",
      "Parameters": [
       {
-       "$ref": "11"
+       "$ref": "9"
       },
       {
-       "$ref": "13"
+       "$ref": "11"
       },
       {
        "$id": "31",
@@ -337,10 +352,10 @@
      "ResourceName": "Group2",
      "Parameters": [
       {
-       "$ref": "11"
+       "$ref": "9"
       },
       {
-       "$ref": "13"
+       "$ref": "11"
       },
       {
        "$id": "36",
@@ -395,10 +410,10 @@
      "ResourceName": "Group2",
      "Parameters": [
       {
-       "$ref": "11"
+       "$ref": "9"
       },
       {
-       "$ref": "13"
+       "$ref": "11"
       },
       {
        "$id": "41",
@@ -452,7 +467,15 @@
     "$id": "45"
    },
    "Creatable": false,
-   "Parent": "TwoOperationGroupClient"
+   "Parent": "TwoOperationGroupClient",
+   "Parameters": [
+    {
+     "$ref": "9"
+    },
+    {
+     "$ref": "11"
+    }
+   ]
   }
  ]
 }

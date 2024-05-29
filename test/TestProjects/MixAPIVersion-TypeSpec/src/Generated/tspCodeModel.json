@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "MixApiVersion",
- "Description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
  "ApiVersions": [
   "2022-11-30-preview"
  ],
@@ -182,39 +181,44 @@
    "Protocol": {
     "$id": "24"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "25",
+     "Name": "petStoreUrl",
+     "NameInRequest": "petStoreUrl",
+     "Type": {
+      "$id": "26",
+      "Kind": "Primitive",
+      "Name": "Uri",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
+    }
+   ]
   },
   {
-   "$id": "25",
+   "$id": "27",
    "Name": "Pets",
    "Description": "Manage your pets. You can delete or get the Pet from pet store.",
    "Operations": [
     {
-     "$id": "26",
+     "$id": "28",
      "Name": "delete",
      "ResourceName": "Pet",
      "Summary": "delete.",
      "Description": "Delete a pet.",
      "Parameters": [
       {
-       "$id": "27",
-       "Name": "petStoreUrl",
-       "NameInRequest": "petStoreUrl",
-       "Type": {
-        "$id": "28",
-        "Kind": "Primitive",
-        "Name": "Uri",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
+       "$ref": "25"
       },
       {
        "$id": "29",
@@ -322,7 +326,7 @@
      "Description": "Returns a pet. Supports eTags.",
      "Parameters": [
       {
-       "$ref": "27"
+       "$ref": "25"
       },
       {
        "$id": "40",
@@ -419,7 +423,7 @@
      "ResourceName": "Pets",
      "Parameters": [
       {
-       "$ref": "27"
+       "$ref": "25"
       },
       {
        "$id": "48",
@@ -560,7 +564,12 @@
     "$id": "60"
    },
    "Creatable": false,
-   "Parent": "MixApiVersionClient"
+   "Parent": "MixApiVersionClient",
+   "Parameters": [
+    {
+     "$ref": "25"
+    }
+   ]
   },
   {
    "$id": "61",
@@ -575,7 +584,7 @@
      "Description": "A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.",
      "Parameters": [
       {
-       "$ref": "27"
+       "$ref": "25"
       },
       {
        "$id": "63",
@@ -664,7 +673,12 @@
     "$id": "70"
    },
    "Creatable": false,
-   "Parent": "MixApiVersionClient"
+   "Parent": "MixApiVersionClient",
+   "Parameters": [
+    {
+     "$ref": "25"
+    }
+   ]
   }
  ]
 }

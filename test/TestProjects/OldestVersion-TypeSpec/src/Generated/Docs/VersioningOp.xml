@@ -6,7 +6,7 @@
 This sample shows how to call CreateAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 Models.Resource resource = new Models.Resource("<type>");
 Response<Models.Resource> response = await client.CreateAsync("<name>", resource);
@@ -14,7 +14,7 @@ Response<Models.Resource> response = await client.CreateAsync("<name>", resource
 This sample shows how to call CreateAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 Models.Resource resource = new Models.Resource("<type>");
 Response<Models.Resource> response = await client.CreateAsync("<name>", resource);
@@ -25,7 +25,7 @@ Response<Models.Resource> response = await client.CreateAsync("<name>", resource
 This sample shows how to call Create.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 Models.Resource resource = new Models.Resource("<type>");
 Response<Models.Resource> response = client.Create("<name>", resource);
@@ -33,7 +33,7 @@ Response<Models.Resource> response = client.Create("<name>", resource);
 This sample shows how to call Create with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 Models.Resource resource = new Models.Resource("<type>");
 Response<Models.Resource> response = client.Create("<name>", resource);
@@ -44,7 +44,7 @@ Response<Models.Resource> response = client.Create("<name>", resource);
 This sample shows how to call CreateAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -60,7 +60,7 @@ Console.WriteLine(result.GetProperty("type").ToString());
 This sample shows how to call CreateAsync with all parameters and request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -79,7 +79,7 @@ Console.WriteLine(result.GetProperty("type").ToString());
 This sample shows how to call Create and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -95,7 +95,7 @@ Console.WriteLine(result.GetProperty("type").ToString());
 This sample shows how to call Create with all parameters and request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -114,7 +114,7 @@ Console.WriteLine(result.GetProperty("type").ToString());
 This sample shows how to call GetResourcesAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 await foreach (Models.Resource item in client.GetResourcesAsync())
 {
@@ -123,7 +123,7 @@ await foreach (Models.Resource item in client.GetResourcesAsync())
 This sample shows how to call GetResourcesAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 await foreach (Models.Resource item in client.GetResourcesAsync(select: new string[] { "<select>" }, expand: "<expand>"))
 {
@@ -135,7 +135,7 @@ await foreach (Models.Resource item in client.GetResourcesAsync(select: new stri
 This sample shows how to call GetResources.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 foreach (Models.Resource item in client.GetResources())
 {
@@ -144,7 +144,7 @@ foreach (Models.Resource item in client.GetResources())
 This sample shows how to call GetResources with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 foreach (Models.Resource item in client.GetResources(select: new string[] { "<select>" }, expand: "<expand>"))
 {
@@ -156,7 +156,7 @@ foreach (Models.Resource item in client.GetResources(select: new string[] { "<se
 This sample shows how to call GetResourcesAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 await foreach (BinaryData item in client.GetResourcesAsync(null, null, null))
 {
@@ -169,7 +169,7 @@ await foreach (BinaryData item in client.GetResourcesAsync(null, null, null))
 This sample shows how to call GetResourcesAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 await foreach (BinaryData item in client.GetResourcesAsync(new string[] { "<select>" }, "<expand>", null))
 {
@@ -185,7 +185,7 @@ await foreach (BinaryData item in client.GetResourcesAsync(new string[] { "<sele
 This sample shows how to call GetResources and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 foreach (BinaryData item in client.GetResources(null, null, null))
 {
@@ -198,7 +198,7 @@ foreach (BinaryData item in client.GetResources(null, null, null))
 This sample shows how to call GetResources with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 foreach (BinaryData item in client.GetResources(new string[] { "<select>" }, "<expand>", null))
 {
@@ -214,7 +214,7 @@ foreach (BinaryData item in client.GetResources(new string[] { "<select>" }, "<e
 This sample shows how to call ExportAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 Operation<ExportedResource> operation = await client.ExportAsync(WaitUntil.Completed, "<name>");
 ExportedResource responseData = operation.Value;
@@ -222,7 +222,7 @@ ExportedResource responseData = operation.Value;
 This sample shows how to call ExportAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 Operation<ExportedResource> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", projectFileVersion: "<projectFileVersion>", removedQueryParam: "<removedQueryParam>");
 ExportedResource responseData = operation.Value;
@@ -233,7 +233,7 @@ ExportedResource responseData = operation.Value;
 This sample shows how to call Export.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 Operation<ExportedResource> operation = client.Export(WaitUntil.Completed, "<name>");
 ExportedResource responseData = operation.Value;
@@ -241,7 +241,7 @@ ExportedResource responseData = operation.Value;
 This sample shows how to call Export with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 Operation<ExportedResource> operation = client.Export(WaitUntil.Completed, "<name>", projectFileVersion: "<projectFileVersion>", removedQueryParam: "<removedQueryParam>");
 ExportedResource responseData = operation.Value;
@@ -252,7 +252,7 @@ ExportedResource responseData = operation.Value;
 This sample shows how to call ExportAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", null, null, null);
 BinaryData responseData = operation.Value;
@@ -265,7 +265,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call ExportAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<projectFileVersion>", "<removedQueryParam>", null);
 BinaryData responseData = operation.Value;
@@ -281,7 +281,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call Export and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", null, null, null);
 BinaryData responseData = operation.Value;
@@ -294,7 +294,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call Export with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
+VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
 Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", "<projectFileVersion>", "<removedQueryParam>", null);
 BinaryData responseData = operation.Value;

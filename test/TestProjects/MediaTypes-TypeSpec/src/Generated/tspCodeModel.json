@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "MultipleMediaTypes",
- "Description": "Play with produces/consumes and media-types in general.",
  "ApiVersions": [],
  "Enums": [
   {
@@ -409,7 +408,12 @@
    "Protocol": {
     "$id": "41"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "14"
+    }
+   ]
   }
  ]
 }

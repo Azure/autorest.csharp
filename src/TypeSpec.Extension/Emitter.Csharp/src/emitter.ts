@@ -13,7 +13,11 @@ import { execSync } from "child_process";
 import fs, { existsSync } from "fs";
 import { PreserveType, stringifyRefs } from "json-serialize-refs";
 import path from "node:path";
-import { configurationFileName, tspOutputFileName } from "./constants.js";
+import {
+    configurationFileName,
+    tspOutputFileName,
+    packageName
+} from "./constants.js";
 import { createModel } from "./lib/client-model-builder.js";
 import { LoggerLevel } from "./lib/log-level.js";
 import { Logger } from "./lib/logger.js";
@@ -34,10 +38,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
-        const sdkContext = createSdkContext(
-            context,
-            "@azure-tools/typespec-csharp"
-        );
+        const sdkContext = createSdkContext(context, packageName);
         const root = createModel(sdkContext);
         if (
             context.program.diagnostics.length > 0 &&

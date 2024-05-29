@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Type.Model.Usage",
- "Description": "Illustrates usage of Record in different places(Operation parameters, return type or both).",
  "ApiVersions": [],
  "Enums": [],
  "Models": [
@@ -390,7 +389,12 @@
    "Protocol": {
     "$id": "39"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "13"
+    }
+   ]
   }
  ]
 }

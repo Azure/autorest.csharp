@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Azure.SpecialHeaders.XmsClientRequestId",
- "Description": "Azure client request id header configurations.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [],
@@ -119,7 +118,12 @@
    "Protocol": {
     "$id": "14"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   }
  ]
 }

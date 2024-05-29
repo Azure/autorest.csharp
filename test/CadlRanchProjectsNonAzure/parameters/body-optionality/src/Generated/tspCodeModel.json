@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Parameters.BodyOptionality",
- "Description": "Test describing optionality of the request body.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [
@@ -272,7 +271,12 @@
    "Protocol": {
     "$id": "28"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "7"
+    }
+   ]
   },
   {
    "$id": "29",
@@ -488,7 +492,12 @@
     "$id": "48"
    },
    "Creatable": false,
-   "Parent": "BodyOptionalityClient"
+   "Parent": "BodyOptionalityClient",
+   "Parameters": [
+    {
+     "$ref": "7"
+    }
+   ]
   }
  ]
 }

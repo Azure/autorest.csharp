@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "SpecialWords",
- "Description": "Scenarios to verify that reserved words can be used in service and generators will handle it appropriately.\n\nCurrent list of special words\n```txt\nand\nas\nassert\nasync\nawait\nbreak\nclass\nconstructor\ncontinue\ndef\ndel\nelif\nelse\nexcept\nexec\nfinally\nfor\nfrom\nglobal\nif\nimport\nin\nis\nlambda\nnot\nor\npass\nraise\nreturn\ntry\nwhile\nwith\nyield\n```",
  "ApiVersions": [],
  "Enums": [],
  "Models": [
@@ -831,48 +830,53 @@
    "Protocol": {
     "$id": "105"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "106",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "107",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "108",
+      "Type": {
+       "$id": "109",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "106",
+   "$id": "110",
    "Name": "Models",
    "Description": "Verify model names",
    "Operations": [
     {
-     "$id": "107",
+     "$id": "111",
      "Name": "withAnd",
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$id": "108",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "109",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "110",
-        "Type": {
-         "$id": "111",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "106"
       },
       {
        "$id": "112",
@@ -974,7 +978,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "121",
@@ -1076,7 +1080,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "130",
@@ -1178,7 +1182,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "139",
@@ -1280,7 +1284,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "148",
@@ -1382,7 +1386,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "157",
@@ -1484,7 +1488,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "166",
@@ -1586,7 +1590,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "175",
@@ -1688,7 +1692,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "184",
@@ -1790,7 +1794,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "193",
@@ -1892,7 +1896,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "202",
@@ -1994,7 +1998,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "211",
@@ -2096,7 +2100,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "220",
@@ -2198,7 +2202,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "229",
@@ -2300,7 +2304,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "238",
@@ -2402,7 +2406,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "247",
@@ -2504,7 +2508,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "256",
@@ -2606,7 +2610,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "265",
@@ -2708,7 +2712,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "274",
@@ -2810,7 +2814,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "283",
@@ -2912,7 +2916,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "292",
@@ -3014,7 +3018,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "301",
@@ -3116,7 +3120,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "310",
@@ -3218,7 +3222,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "319",
@@ -3320,7 +3324,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "328",
@@ -3422,7 +3426,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "337",
@@ -3524,7 +3528,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "346",
@@ -3626,7 +3630,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "355",
@@ -3728,7 +3732,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "364",
@@ -3830,7 +3834,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "373",
@@ -3932,7 +3936,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "382",
@@ -4034,7 +4038,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "391",
@@ -4136,7 +4140,7 @@
      "ResourceName": "Models",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "400",
@@ -4237,7 +4241,12 @@
     "$id": "408"
    },
    "Creatable": false,
-   "Parent": "SpecialWordsClient"
+   "Parent": "SpecialWordsClient",
+   "Parameters": [
+    {
+     "$ref": "106"
+    }
+   ]
   },
   {
    "$id": "409",
@@ -4250,7 +4259,7 @@
      "ResourceName": "ModelProperties",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "411",
@@ -4351,7 +4360,12 @@
     "$id": "419"
    },
    "Creatable": false,
-   "Parent": "SpecialWordsClient"
+   "Parent": "SpecialWordsClient",
+   "Parameters": [
+    {
+     "$ref": "106"
+    }
+   ]
   },
   {
    "$id": "420",
@@ -4364,7 +4378,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "422",
@@ -4419,7 +4433,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "427",
@@ -4474,7 +4488,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "432",
@@ -4529,7 +4543,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "437",
@@ -4584,7 +4598,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "442",
@@ -4639,7 +4653,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "447",
@@ -4694,7 +4708,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "452",
@@ -4749,7 +4763,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "457",
@@ -4804,7 +4818,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "462",
@@ -4859,7 +4873,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "467",
@@ -4914,7 +4928,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "472",
@@ -4969,7 +4983,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "477",
@@ -5024,7 +5038,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "482",
@@ -5079,7 +5093,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "487",
@@ -5134,7 +5148,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "492",
@@ -5189,7 +5203,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "497",
@@ -5244,7 +5258,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "502",
@@ -5299,7 +5313,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "507",
@@ -5354,7 +5368,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "512",
@@ -5409,7 +5423,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "517",
@@ -5464,7 +5478,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "522",
@@ -5519,7 +5533,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "527",
@@ -5574,7 +5588,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "532",
@@ -5629,7 +5643,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "537",
@@ -5684,7 +5698,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "542",
@@ -5739,7 +5753,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "547",
@@ -5794,7 +5808,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "552",
@@ -5849,7 +5863,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "557",
@@ -5904,7 +5918,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "562",
@@ -5959,7 +5973,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "567",
@@ -6014,7 +6028,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "572",
@@ -6069,7 +6083,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "577",
@@ -6124,7 +6138,7 @@
      "ResourceName": "Operations",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "582",
@@ -6178,7 +6192,12 @@
     "$id": "586"
    },
    "Creatable": false,
-   "Parent": "SpecialWordsClient"
+   "Parent": "SpecialWordsClient",
+   "Parameters": [
+    {
+     "$ref": "106"
+    }
+   ]
   },
   {
    "$id": "587",
@@ -6191,7 +6210,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "589",
@@ -6266,7 +6285,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "596",
@@ -6341,7 +6360,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "603",
@@ -6416,7 +6435,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "610",
@@ -6491,7 +6510,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "617",
@@ -6566,7 +6585,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "624",
@@ -6641,7 +6660,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "631",
@@ -6716,7 +6735,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "638",
@@ -6791,7 +6810,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "645",
@@ -6866,7 +6885,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "652",
@@ -6941,7 +6960,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "659",
@@ -7016,7 +7035,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "666",
@@ -7091,7 +7110,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "673",
@@ -7166,7 +7185,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "680",
@@ -7241,7 +7260,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "687",
@@ -7316,7 +7335,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "694",
@@ -7391,7 +7410,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "701",
@@ -7466,7 +7485,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "708",
@@ -7541,7 +7560,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "715",
@@ -7616,7 +7635,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "722",
@@ -7691,7 +7710,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "729",
@@ -7766,7 +7785,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "736",
@@ -7841,7 +7860,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "743",
@@ -7916,7 +7935,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "750",
@@ -7991,7 +8010,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "757",
@@ -8066,7 +8085,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "764",
@@ -8141,7 +8160,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "771",
@@ -8216,7 +8235,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "778",
@@ -8291,7 +8310,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "785",
@@ -8366,7 +8385,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "792",
@@ -8441,7 +8460,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "799",
@@ -8516,7 +8535,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "806",
@@ -8591,7 +8610,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "813",
@@ -8666,7 +8685,7 @@
      "ResourceName": "Parameters",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "106"
       },
       {
        "$id": "820",
@@ -8740,7 +8759,12 @@
     "$id": "826"
    },
    "Creatable": false,
-   "Parent": "SpecialWordsClient"
+   "Parent": "SpecialWordsClient",
+   "Parameters": [
+    {
+     "$ref": "106"
+    }
+   ]
   }
  ]
 }

@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Authentication.Union",
- "Description": "Illustrates clients generated with ApiKey and OAuth2 authentication.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [],
@@ -155,7 +154,12 @@
    "Protocol": {
     "$id": "17"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   }
  ],
  "Auth": {

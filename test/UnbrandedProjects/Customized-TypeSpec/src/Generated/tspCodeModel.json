@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "CustomizedTypeSpec",
- "Description": "This is a sample typespec project.",
  "ApiVersions": [
   "2022-05-15-preview"
  ],
@@ -2385,7 +2384,12 @@
    "Protocol": {
     "$id": "230"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "73"
+    }
+   ]
   }
  ],
  "Auth": {

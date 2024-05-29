@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "NoTestTypeSpec",
- "Description": "This is a sample typespec project.",
  "ApiVersions": [],
  "Enums": [
   {
@@ -539,7 +538,12 @@
    "Protocol": {
     "$id": "63"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "51"
+    }
+   ]
   }
  ],
  "Auth": {

@@ -37,7 +37,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         public async Task Generate()
         {
             var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", _projectName, "src", "Generated");
+            var gitRootPath = GetGitRootPath(basePath);
+            basePath = Path.Combine(gitRootPath, "test", "TestProjects", _projectName, "src", "Generated");
 
             StandaloneGeneratorRunner.LoadConfiguration(null, basePath, null, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
             var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(File.ReadAllText(Path.Combine(basePath, "CodeModel.yaml"))));
@@ -46,6 +47,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var model = await codeModelTask;
             CodeModelTransformer.TransformForMgmt(model);
             MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(model, sourceInputModel, new SchemaUsageProvider(model)));
+        }
+
+        private string GetGitRootPath(string path)
+        {
+            var current = path;
+            while (!Directory.Exists(Path.Combine(current, ".git")))
+            {
+                current = Path.Combine(current, "..");
+            }
+            return current;
         }
 
         [Test]

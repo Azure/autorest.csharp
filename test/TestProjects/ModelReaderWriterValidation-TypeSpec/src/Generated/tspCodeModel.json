@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "ModelReaderWriterValidationTypeSpec",
- "Description": "This is a typespec project to validation the model reader writer functionalities.",
  "ApiVersions": [],
  "Enums": [
   {
@@ -2449,7 +2448,12 @@
    "Protocol": {
     "$id": "280"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "211"
+    }
+   ]
   }
  ]
 }

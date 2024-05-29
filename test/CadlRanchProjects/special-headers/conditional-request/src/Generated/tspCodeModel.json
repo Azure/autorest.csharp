@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "SpecialHeaders.ConditionalRequest",
- "Description": "Illustrates conditional request headers",
  "ApiVersions": [],
  "Enums": [],
  "Models": [],
@@ -197,7 +196,12 @@
    "Protocol": {
     "$id": "21"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   }
  ]
 }
