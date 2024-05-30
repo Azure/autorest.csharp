@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Utilities;
@@ -19,13 +18,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly ModelTypeMapping? _typeMapping;
         private readonly TypeFactory _typeFactory;
         private IList<EnumTypeValue>? _values;
-        public EnumType(InputEnumType enumType, Schema schema, BuildContext context)
-            : this(enumType, GetDefaultModelNamespace(schema.Extensions?.Namespace, context.DefaultNamespace), GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
+        public EnumType(InputEnumType enumType, BuildContext context)
+            : this(enumType, GetDefaultModelNamespace(enumType.Namespace, context.DefaultNamespace), enumType.Accessibility ?? "public", context.TypeFactory, context.SourceInputModel)
         {
         }
 
-        public EnumType(InputEnumType input, string defaultNamespace, string defaultAccessibility, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
-            : base(defaultNamespace, sourceInputModel)
+        public EnumType(InputEnumType input, string defaultNameSpace, string defaultAccessibility, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+            : base(defaultNameSpace, sourceInputModel)
         {
             IsEnum = true;
             _allowedValues = input.Values;
@@ -51,6 +50,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 _typeMapping = sourceInputModel?.CreateForModel(ExistingType);
             }
 
+            Description = string.IsNullOrWhiteSpace(input.Description) ? $"The {input.Name}." : input.Description;
             IsExtensible = isExtensible;
             ValueType = typeFactory.CreateType(input.ValueType);
             IsStringValueType = ValueType.Equals(typeof(string));
@@ -58,8 +58,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsFloatValueType = ValueType.Equals(typeof(float)) || ValueType.Equals(typeof(double));
             IsNumericValueType = IsIntValueType || IsFloatValueType;
             SerializationMethodName = IsStringValueType && IsExtensible ? "ToString" : $"ToSerial{ValueType.Name.FirstCharToUpperCase()}";
-
-            Description = input.Description;
         }
 
         public CSharpType ValueType { get; }
@@ -100,13 +98,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 ? value.GetValueString()
                 : value.Description;
             return BuilderHelpers.EscapeXmlDocDescription(description);
-        }
-
-        public static string GetAccessibility(Schema schema, BuildContext context)
-        {
-            var usage = context.SchemaUsageProvider.GetUsage(schema);
-            var hasUsage = usage.HasFlag(SchemaTypeUsage.Model);
-            return schema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
         }
     }
 }

@@ -32,7 +32,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             // schema usage transformer must run first
             SchemaUsageTransformer.Transform(codeModel);
-            DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
             OmitOperationGroups.RemoveOperationGroups(codeModel);
             SubscriptionIdUpdater.Update(codeModel);
             ConstantSchemaTransformer.Transform(codeModel);

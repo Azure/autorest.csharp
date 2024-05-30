@@ -19,10 +19,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
     internal abstract class SerializableObjectType : ObjectType
     {
         private readonly Lazy<ModelTypeMapping?> _modelTypeMapping;
-        protected SerializableObjectType(BuildContext context) : base(context)
-        {
-            _modelTypeMapping = new Lazy<ModelTypeMapping?>(() => _sourceInputModel?.CreateForModel(ExistingType));
-        }
+
         protected SerializableObjectType(string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             _modelTypeMapping = new Lazy<ModelTypeMapping?>(() => _sourceInputModel?.CreateForModel(ExistingType));

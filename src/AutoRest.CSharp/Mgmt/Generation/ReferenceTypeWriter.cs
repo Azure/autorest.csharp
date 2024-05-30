@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (objectType is not SchemaObjectType schema)
                 return;
 
-            if (MgmtReferenceType.IsPropertyReferenceType(schema.ObjectSchema))
+            if (MgmtReferenceType.IsPropertyReferenceType(schema.InputModel))
             {
                 if (Configuration.IsBranded)
                 {
@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 writer.Line($"[{ReferenceClassFinder.PropertyReferenceTypeAttribute}]");
             }
-            else if (MgmtReferenceType.IsTypeReferenceType(schema.ObjectSchema))
+            else if (MgmtReferenceType.IsTypeReferenceType(schema.InputModel))
             {
                 if (Configuration.IsBranded)
                 {
@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 writer.Line($"[{ReferenceClassFinder.TypeReferenceTypeAttribute}]");
             }
-            else if (MgmtReferenceType.IsReferenceType(schema.ObjectSchema))
+            else if (MgmtReferenceType.IsReferenceType(schema.InputModel))
             {
                 if (Configuration.IsBranded)
                 {
