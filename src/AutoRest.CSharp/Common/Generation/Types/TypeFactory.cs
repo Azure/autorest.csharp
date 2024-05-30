@@ -83,6 +83,7 @@ namespace AutoRest.CSharp.Generation.Types
                 InputPrimitiveTypeKind.Any => UnknownType,
 #pragma warning disable CS0618 // Type or member is obsolete
                 InputPrimitiveTypeKind.RequestMethod => new CSharpType(typeof(RequestMethod), inputType.IsNullable),
+                InputPrimitiveTypeKind.Object => new CSharpType(typeof(object), inputType.IsNullable),
 #pragma warning restore CS0618 // Type or member is obsolete
                 _ => new CSharpType(typeof(object), inputType.IsNullable),
             },

@@ -611,8 +611,8 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.String } when format == XMsFormat.ResourceType => new InputPrimitiveType(InputPrimitiveTypeKind.ResourceType, isNullable),
 #pragma warning disable CS0618 // Type or member is obsolete
             { Type: AllSchemaTypes.String } when format == XMsFormat.RequestMethod => new InputPrimitiveType(InputPrimitiveTypeKind.RequestMethod, isNullable),
+            { Type: AllSchemaTypes.String } when format == XMsFormat.Object => new InputPrimitiveType(InputPrimitiveTypeKind.Object, isNullable),
 #pragma warning restore CS0618 // Type or member is obsolete
-            { Type: AllSchemaTypes.String } when format == XMsFormat.Object => new InputPrimitiveType(InputPrimitiveTypeKind.Any, isNullable),
             { Type: AllSchemaTypes.String } => ToDataFactoryElementType(schema.Name, format, isNullable) ?? new InputPrimitiveType(InputPrimitiveTypeKind.String, isNullable),
             { Type: AllSchemaTypes.Char } => new InputPrimitiveType(InputPrimitiveTypeKind.Char, isNullable),
             { Type: AllSchemaTypes.Any } => new InputPrimitiveType(InputPrimitiveTypeKind.Any, isNullable),

@@ -43,5 +43,7 @@ internal enum InputPrimitiveTypeKind
     Char,
     Any, // aka unknown
     [Obsolete("We should only use this kind in the context of CodeModelConverter")]
+    Object, // generate `object` type
+    [Obsolete("We should only use this kind in the context of CodeModelConverter")]
     RequestMethod // <- Azure.Core.RequestMethod
 }
