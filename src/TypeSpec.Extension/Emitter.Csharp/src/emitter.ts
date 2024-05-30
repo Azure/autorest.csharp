@@ -11,7 +11,6 @@ import {
 
 import { execSync } from "child_process";
 import fs, { existsSync } from "fs";
-import { PreserveType, stringifyRefs } from "json-serialize-refs";
 import path from "node:path";
 import {
     configurationFileName,
@@ -27,6 +26,7 @@ import {
     resolveOutputFolder
 } from "./options.js";
 import { Configuration } from "./type/configuration.js";
+import { stringifyRefs } from "./lib/json-serialize-refs.js";
 
 export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     const program: Program = context.program;
@@ -87,9 +87,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
             await program.host.writeFile(
                 resolvePath(generatedFolder, tspOutputFileName),
-                prettierOutput(
-                    stringifyRefs(root, null, 1, PreserveType.Objects)
-                )
+                prettierOutput(stringifyRefs(root, undefined, 1))
             );
 
             //emit configuration.json

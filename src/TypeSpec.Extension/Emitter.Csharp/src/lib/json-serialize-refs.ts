@@ -1,66 +1,64 @@
-export function createNewRefs(obj: any) : any{
+function createRefs(obj: any): any {
     const map = new Map<object, string>();
 
-    
+    return doCreateRefs(obj, map);
 }
 
-export function createRefs(obj: any) : any {
-  const map = new Map<object, string>();
-
-  function sweep(val: any): any {
-    if (typeof val === "object" && val !== null) {
-      const id = String(map.size + 1);
-
-      if (Object.prototype.toString.apply(val) === "[object Array]") { // ARRAY
-              const marr = [];
-              for (let i = 0; i < val.length; ++i) {
-                const V = val[i];
-                const backRef = map.get(V);
-                if (backRef) {
-                  marr[i] = {
-                    $ref: backRef,
-                  };
-                } else {
-                  marr[i] = sweep(V);
-                }
-              }
-              return marr;
-      } else { // OBJECT
-
-        if (val instanceof Date) {
-          return val;
-        } else {
-          map.set(val, id);
-
-          const mobj: any = { $id: id };
-
-          for (const name in val) {
-            if (Object.prototype.hasOwnProperty.call(val, name)) {
-              const V = val[name];
-              const backRef = map.get(V);
-              if (backRef) {
-                mobj[name] = {
-                  $ref: backRef,
-                };
-              } else {
-                mobj[name] = sweep(V);
-              }
-            }
-          }
-
-          return mobj;
-        }
-      }
+function doCreateRefs(obj: any, refMap: Map<object, string>): any {
+    if (typeof obj !== "object" || obj === null) {
+        // this is primitive type
+        return obj;
     }
-    return val; // PRIMITIVE
-  }
 
-  const res = sweep(obj);
+    // set the id of the current object
+    const id = refMap.size.toString();
+    if (Array.isArray(obj)) {
+        // this is an array
+        const results: any[] = [];
+        for (const v of obj) {
+            const ref = refMap.get(v);
+            if (ref) {
+                results.push({
+                    $ref: ref
+                });
+            } else {
+                results.push(doCreateRefs(v, refMap));
+            }
+        }
 
-  return res;
+        return results;
+    } else {
+        // this is an object
+        refMap.set(obj, id);
+
+        const result: any = { $id: id };
+        for (const property in obj) {
+            const v = obj[property];
+            const ref = refMap.get(v);
+            if (ref) {
+                result[property] = {
+                    $ref: ref
+                };
+            } else {
+                result[property] = doCreateRefs(v, refMap);
+            }
+        }
+
+        return result;
+    }
 }
 
-/** convert given obj to json resolving references as specified by preserveType ( NewtonJson NET compatible ) */
-export function stringifyRefs(obj: any, replacer?: (this: any, key: string, value: any) => any, space?: string | number) {
-  return JSON.stringify(createRefs(obj), replacer, space);
+/**
+ * Convert the json into string with refs
+ * @param obj
+ * @param replacer
+ * @param space
+ * @returns
+ */
+export function stringifyRefs(
+    obj: any,
+    replacer?: (this: any, key: string, value: any) => any,
+    space?: string | number
+) {
+    return JSON.stringify(createRefs(obj), replacer, space);
 }
