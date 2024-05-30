@@ -3,9 +3,9 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Output;
 /// </summary>
 internal class PartialResource : Resource
 {
-    protected internal PartialResource(OperationSet operationSet, IEnumerable<Operation> operations, string defaultName, string originalResourceName, ResourceTypeSegment resourceType) : base(operationSet, operations, defaultName, resourceType, ResourceData.Empty, ResourcePosition)
+    protected internal PartialResource(OperationSet operationSet, IEnumerable<InputOperation> operations, string defaultName, string originalResourceName, ResourceTypeSegment resourceType) : base(operationSet, operations, defaultName, resourceType, ResourceData.Empty, ResourcePosition)
     {
         OriginalResourceName = originalResourceName;
     }

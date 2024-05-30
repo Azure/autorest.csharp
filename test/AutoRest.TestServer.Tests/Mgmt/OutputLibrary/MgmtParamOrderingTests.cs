@@ -3,8 +3,6 @@
 
 using System;
 using System.Linq;
-using System.Threading.Tasks;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
@@ -39,10 +37,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [TestCase("AvailabilitySets", "Delete", new[] { "subscriptionId", "resourceGroupName", "availabilitySetName" })]
         public void ValidateOperationParameterList(string operationGroupName, string methodName, string[] parameterList)
         {
-            var method = MgmtContext.CodeModel.OperationGroups.Single(p => p.Key.Equals(operationGroupName))
+            var method = MgmtContext.InputNamespace.Clients.Single(p => p.Key.Equals(operationGroupName))
                 .Operations.Single(o => o.CSharpName().Equals(methodName));
 
-            Assert.IsTrue(parameterList.SequenceEqual(method.Parameters.Where(p => p.In == HttpParameterIn.Path).Select(p => p.CSharpName())));
+            Assert.IsTrue(parameterList.SequenceEqual(method.Parameters.Where(p => p.Location == CSharp.Common.Input.RequestLocation.Path).Select(p => p.CSharpName())));
         }
 
         [TestCase(typeof(VirtualMachineScaleSetCollection), "CreateOrUpdate", true, new[] { "vmScaleSetName", "data", "quick" }, new[] { true, true, false })]

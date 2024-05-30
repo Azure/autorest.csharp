@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -20,16 +21,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         internal const string ReferenceAttributeName = "ReferenceTypeAttribute";
         internal const string OptionalPropertiesName = "OptionalProperties";
 
-        private static ConcurrentDictionary<Schema, CSharpType?> _valueCache = new ConcurrentDictionary<Schema, CSharpType?>();
-
-        public static bool TryGetCachedExactMatch(Schema schema, out CSharpType? result)
-        {
-            return _valueCache.TryGetValue(schema, out result);
-        }
+        private static ConcurrentDictionary<InputType, CSharpType?> _valueCache = new ConcurrentDictionary<InputType, CSharpType?>();
 
         public static CSharpType? GetExactMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties)
         {
-            if (_valueCache.TryGetValue(originalType.ObjectSchema, out var result))
+            if (_valueCache.TryGetValue(originalType.InputModel, out var result))
                 return result;
 
             foreach (var parentType in ReferenceClassFinder.ReferenceTypes)
@@ -38,11 +34,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (PropertyMatchDetection.IsEqual(parentType, originalType, parentProperties, properties.ToList()))
                 {
                     result = GetCSharpType(parentType);
-                    _valueCache.TryAdd(originalType.ObjectSchema, result);
+                    _valueCache.TryAdd(originalType.InputModel, result);
                     return result;
                 }
             }
-            _valueCache.TryAdd(originalType.ObjectSchema, null);
+            _valueCache.TryAdd(originalType.InputModel, null);
             return null;
         }
 

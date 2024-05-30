@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, InputDictionaryType? InheritedDictionaryType, bool IsNullable)
+    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, InputDictionaryType? InheritedDictionaryType, bool IsNullable, IReadOnlyList<InputType>? ArgumentTypes = null)
         : InputType(Name, IsNullable)
     {
         /// <summary>
@@ -35,17 +35,6 @@ namespace AutoRest.CSharp.Common.Input
         public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
 
         public IEnumerable<InputModelType> GetAllBaseModels() => EnumerateBase(BaseModel);
-
-        public IReadOnlyList<InputModelType> GetAllDerivedModels()
-        {
-            var list = new List<InputModelType>(DerivedModels);
-            for (var i = 0; i < list.Count; i++)
-            {
-                list.AddRange(list[i].DerivedModels);
-            }
-
-            return list;
-        }
 
         private static IEnumerable<InputModelType> EnumerateBase(InputModelType? model)
         {
