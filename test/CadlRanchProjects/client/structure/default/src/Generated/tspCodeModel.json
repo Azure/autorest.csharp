@@ -197,7 +197,15 @@
    "Protocol": {
     "$id": "21"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "9"
+    },
+    {
+     "$ref": "11"
+    }
+   ]
   },
   {
    "$id": "22",
@@ -208,7 +216,15 @@
     "$id": "23"
    },
    "Creatable": false,
-   "Parent": "ServiceClient"
+   "Parent": "ServiceClient",
+   "Parameters": [
+    {
+     "$ref": "9"
+    },
+    {
+     "$ref": "11"
+    }
+   ]
   },
   {
    "$id": "24",
@@ -278,7 +294,15 @@
     "$id": "30"
    },
    "Creatable": false,
-   "Parent": "Baz"
+   "Parent": "Baz",
+   "Parameters": [
+    {
+     "$ref": "9"
+    },
+    {
+     "$ref": "11"
+    }
+   ]
   },
   {
    "$id": "31",
@@ -348,7 +372,15 @@
     "$id": "37"
    },
    "Creatable": false,
-   "Parent": "ServiceClient"
+   "Parent": "ServiceClient",
+   "Parameters": [
+    {
+     "$ref": "9"
+    },
+    {
+     "$ref": "11"
+    }
+   ]
   },
   {
    "$id": "38",
@@ -418,7 +450,15 @@
     "$id": "44"
    },
    "Creatable": false,
-   "Parent": "Qux"
+   "Parent": "Qux",
+   "Parameters": [
+    {
+     "$ref": "9"
+    },
+    {
+     "$ref": "11"
+    }
+   ]
   },
   {
    "$id": "45",
@@ -546,7 +586,15 @@
     "$id": "56"
    },
    "Creatable": false,
-   "Parent": "ServiceClient"
+   "Parent": "ServiceClient",
+   "Parameters": [
+    {
+     "$ref": "9"
+    },
+    {
+     "$ref": "11"
+    }
+   ]
   },
   {
    "$id": "57",
@@ -674,7 +722,15 @@
     "$id": "68"
    },
    "Creatable": false,
-   "Parent": "ServiceClient"
+   "Parent": "ServiceClient",
+   "Parameters": [
+    {
+     "$ref": "9"
+    },
+    {
+     "$ref": "11"
+    }
+   ]
   }
  ]
 }

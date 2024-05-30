@@ -60,49 +60,54 @@
    "Protocol": {
     "$id": "8"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "9",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "10",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "11",
+      "Type": {
+       "$id": "12",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "9",
+   "$id": "13",
    "Name": "AzureLocationScalar",
    "Description": "",
    "Operations": [
     {
-     "$id": "10",
+     "$id": "14",
      "Name": "get",
      "ResourceName": "AzureLocationScalar",
      "Description": "get azureLocation value",
      "Parameters": [
       {
-       "$id": "11",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "12",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "13",
-        "Type": {
-         "$id": "14",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "9"
       },
       {
        "$id": "15",
@@ -167,7 +172,7 @@
      "Description": "put azureLocation value",
      "Parameters": [
       {
-       "$ref": "11"
+       "$ref": "9"
       },
       {
        "$id": "21",
@@ -274,7 +279,7 @@
      "Description": "post a model which has azureLocation property",
      "Parameters": [
       {
-       "$ref": "11"
+       "$ref": "9"
       },
       {
        "$id": "31",
@@ -384,7 +389,7 @@
      "Description": "azureLocation value header",
      "Parameters": [
       {
-       "$ref": "11"
+       "$ref": "9"
       },
       {
        "$id": "40",
@@ -461,7 +466,7 @@
      "Description": "azureLocation value query",
      "Parameters": [
       {
-       "$ref": "11"
+       "$ref": "9"
       },
       {
        "$id": "47",
@@ -536,7 +541,12 @@
     "$id": "53"
    },
    "Creatable": false,
-   "Parent": "ScalarClient"
+   "Parent": "ScalarClient",
+   "Parameters": [
+    {
+     "$ref": "9"
+    }
+   ]
   }
  ]
 }

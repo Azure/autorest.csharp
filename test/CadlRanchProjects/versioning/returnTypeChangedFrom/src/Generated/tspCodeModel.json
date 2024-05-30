@@ -1,6 +1,7 @@
 {
  "$id": "1",
  "Name": "Versioning.ReturnTypeChangedFrom",
+ "Description": "Test for the `@returnTypeChangedFrom` decorator.",
  "ApiVersions": [
   "v1",
   "v2"

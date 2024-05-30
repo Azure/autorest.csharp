@@ -5409,60 +5409,70 @@
    "Protocol": {
     "$id": "719"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "720",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "OpenAI Endpoint",
+     "Type": {
+      "$id": "721",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "722",
+      "Type": {
+       "$id": "723",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "Value": "https://api.openai.com/v1"
+     }
+    }
+   ]
   },
   {
-   "$id": "720",
+   "$id": "724",
    "Name": "Audio",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "721"
+    "$id": "725"
    },
    "Creatable": false,
-   "Parent": "OpenAIClient"
+   "Parent": "OpenAIClient",
+   "Parameters": [
+    {
+     "$ref": "720"
+    }
+   ]
   },
   {
-   "$id": "722",
+   "$id": "726",
    "Name": "AudioTranscriptions",
    "Description": "",
    "Operations": [
     {
-     "$id": "723",
+     "$id": "727",
      "Name": "create",
      "ResourceName": "Transcriptions",
      "Summary": "Transcribes audio into the input language.",
      "Parameters": [
       {
-       "$id": "724",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "OpenAI Endpoint",
-       "Type": {
-        "$id": "725",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "726",
-        "Type": {
-         "$id": "727",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "https://api.openai.com/v1"
-       }
+       "$ref": "720"
       },
       {
        "$id": "728",
@@ -5576,7 +5586,12 @@
     "$id": "737"
    },
    "Creatable": false,
-   "Parent": "Audio"
+   "Parent": "Audio",
+   "Parameters": [
+    {
+     "$ref": "720"
+    }
+   ]
   },
   {
    "$id": "738",
@@ -5590,7 +5605,7 @@
      "Summary": "Transcribes audio into the input language.",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "740",
@@ -5704,7 +5719,12 @@
     "$id": "749"
    },
    "Creatable": false,
-   "Parent": "Audio"
+   "Parent": "Audio",
+   "Parameters": [
+    {
+     "$ref": "720"
+    }
+   ]
   },
   {
    "$id": "750",
@@ -5715,7 +5735,12 @@
     "$id": "751"
    },
    "Creatable": false,
-   "Parent": "OpenAIClient"
+   "Parent": "OpenAIClient",
+   "Parameters": [
+    {
+     "$ref": "720"
+    }
+   ]
   },
   {
    "$id": "752",
@@ -5728,7 +5753,7 @@
      "ResourceName": "Completions",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "754",
@@ -5835,7 +5860,12 @@
     "$id": "762"
    },
    "Creatable": false,
-   "Parent": "Chat"
+   "Parent": "Chat",
+   "Parameters": [
+    {
+     "$ref": "720"
+    }
+   ]
   },
   {
    "$id": "763",
@@ -5846,7 +5876,12 @@
     "$id": "764"
    },
    "Creatable": false,
-   "Parent": "OpenAIClient"
+   "Parent": "OpenAIClient",
+   "Parameters": [
+    {
+     "$ref": "720"
+    }
+   ]
   },
   {
    "$id": "765",
@@ -5860,7 +5895,7 @@
      "Description": "Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the\nfine-tuned models once complete.\n\n[Learn more about fine-tuning](/docs/guides/fine-tuning)",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "767",
@@ -5968,7 +6003,7 @@
      "ResourceName": "Jobs",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "776",
@@ -6072,7 +6107,7 @@
      "Summary": "Get info about a fine-tuning job.\n\n[Learn more about fine-tuning](/docs/guides/fine-tuning)",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "785",
@@ -6154,7 +6189,7 @@
      "Summary": "Get status updates for a fine-tuning job.",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "792",
@@ -6279,7 +6314,7 @@
      "Summary": "Immediately cancel a fine-tune job.",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "803",
@@ -6360,7 +6395,12 @@
     "$id": "809"
    },
    "Creatable": false,
-   "Parent": "FineTuning"
+   "Parent": "FineTuning",
+   "Parameters": [
+    {
+     "$ref": "720"
+    }
+   ]
   },
   {
    "$id": "810",
@@ -6373,7 +6413,7 @@
      "ResourceName": "Completions",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "812",
@@ -6480,7 +6520,12 @@
     "$id": "820"
    },
    "Creatable": false,
-   "Parent": "OpenAIClient"
+   "Parent": "OpenAIClient",
+   "Parameters": [
+    {
+     "$ref": "720"
+    }
+   ]
   },
   {
    "$id": "821",
@@ -6494,7 +6539,7 @@
      "Deprecated": "deprecated",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "823",
@@ -6601,7 +6646,12 @@
     "$id": "831"
    },
    "Creatable": false,
-   "Parent": "OpenAIClient"
+   "Parent": "OpenAIClient",
+   "Parameters": [
+    {
+     "$ref": "720"
+    }
+   ]
   },
   {
    "$id": "832",
@@ -6615,7 +6665,7 @@
      "Summary": "Creates an embedding vector representing the input text.",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "834",
@@ -6722,7 +6772,12 @@
     "$id": "842"
    },
    "Creatable": false,
-   "Parent": "OpenAIClient"
+   "Parent": "OpenAIClient",
+   "Parameters": [
+    {
+     "$ref": "720"
+    }
+   ]
   },
   {
    "$id": "843",
@@ -6736,7 +6791,7 @@
      "Summary": "Returns a list of files that belong to the user's organization.",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "845",
@@ -6798,7 +6853,7 @@
      "Summary": "Returns a list of files that belong to the user's organization.",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "850",
@@ -6914,7 +6969,7 @@
      "Summary": "Returns information about a specific file.",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "860",
@@ -6997,7 +7052,7 @@
      "Summary": "Delete a file",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "867",
@@ -7080,7 +7135,7 @@
      "Summary": "Returns the contents of the specified file.",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "874",
@@ -7164,7 +7219,12 @@
     "$id": "881"
    },
    "Creatable": false,
-   "Parent": "OpenAIClient"
+   "Parent": "OpenAIClient",
+   "Parameters": [
+    {
+     "$ref": "720"
+    }
+   ]
   },
   {
    "$id": "882",
@@ -7179,7 +7239,7 @@
      "Deprecated": "deprecated",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "884",
@@ -7289,7 +7349,7 @@
      "Deprecated": "deprecated",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "893",
@@ -7352,7 +7412,7 @@
      "Deprecated": "deprecated",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "898",
@@ -7436,7 +7496,7 @@
      "Deprecated": "deprecated",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "905",
@@ -7541,7 +7601,7 @@
      "Deprecated": "deprecated",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "914",
@@ -7622,7 +7682,12 @@
     "$id": "920"
    },
    "Creatable": false,
-   "Parent": "OpenAIClient"
+   "Parent": "OpenAIClient",
+   "Parameters": [
+    {
+     "$ref": "720"
+    }
+   ]
   },
   {
    "$id": "921",
@@ -7636,7 +7701,7 @@
      "Summary": "Lists the currently available models, and provides basic information about each one such as the\nowner and availability.",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "923",
@@ -7698,7 +7763,7 @@
      "Summary": "Retrieves a model instance, providing basic information about the model such as the owner and\npermissioning.",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "928",
@@ -7781,7 +7846,7 @@
      "Summary": "Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "935",
@@ -7862,7 +7927,12 @@
     "$id": "941"
    },
    "Creatable": false,
-   "Parent": "OpenAIClient"
+   "Parent": "OpenAIClient",
+   "Parameters": [
+    {
+     "$ref": "720"
+    }
+   ]
   },
   {
    "$id": "942",
@@ -7876,7 +7946,7 @@
      "Summary": "Creates an image given a prompt",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "944",
@@ -7985,7 +8055,7 @@
      "Summary": "Creates an edited or extended image given an original image and a prompt.",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "953",
@@ -8101,7 +8171,7 @@
      "Summary": "Creates an edited or extended image given an original image and a prompt.",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "963",
@@ -8215,7 +8285,12 @@
     "$id": "972"
    },
    "Creatable": false,
-   "Parent": "OpenAIClient"
+   "Parent": "OpenAIClient",
+   "Parameters": [
+    {
+     "$ref": "720"
+    }
+   ]
   },
   {
    "$id": "973",
@@ -8229,7 +8304,7 @@
      "Summary": "Classifies if text violates OpenAI's Content Policy",
      "Parameters": [
       {
-       "$ref": "724"
+       "$ref": "720"
       },
       {
        "$id": "975",
@@ -8336,7 +8411,12 @@
     "$id": "983"
    },
    "Creatable": false,
-   "Parent": "OpenAIClient"
+   "Parent": "OpenAIClient",
+   "Parameters": [
+    {
+     "$ref": "720"
+    }
+   ]
   }
  ],
  "Auth": {
