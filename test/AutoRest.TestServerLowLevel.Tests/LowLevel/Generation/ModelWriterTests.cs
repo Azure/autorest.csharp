@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                     new InputModelProperty("requiredBodyDateTime", "requiredBodyDateTime", "Illustrate a zonedDateTime body parameter, serialized as (https://datatracker.ietf.org/doc/html/rfc3339)", InputDateTimeType.Rfc3339, null, true, false, false),
                     new InputModelProperty("requiredDuration", "requiredDuration", "", InputDurationType.Iso8601, null, true, false, false),
                     new InputModelProperty("requiredBoolean", "requiredBoolean", "", InputPrimitiveType.Boolean, null, true, false, false),
-                    new InputModelProperty("requiredBytes", "requiredBytes", "", InputBytesType.Base64, null, true, false, false)
+                    new InputModelProperty("requiredBytes", "requiredBytes", "", InputPrimitiveType.Base64, null, true, false, false)
                 },
                 null, Array.Empty<InputModelType>(), null, null, null, false);
 
