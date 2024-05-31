@@ -234,19 +234,6 @@ export function fromSdkModelType(
     }
 }
 
-function hasDiscriminator(model?: SdkModelType): boolean {
-    if (model == null) return false;
-
-    if (
-        model.properties.some(
-            (p) => (p as SdkBodyModelPropertyType).discriminator
-        )
-    )
-        return true;
-
-    return hasDiscriminator(model.baseModel);
-}
-
 export function fromSdkEnumType(
     enumType: SdkEnumType,
     context: SdkContext,

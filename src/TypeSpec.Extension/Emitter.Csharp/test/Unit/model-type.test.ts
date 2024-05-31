@@ -4,7 +4,6 @@ import { beforeEach, describe, it } from "vitest";
 import { createModel } from "../../src/lib/client-model-builder.js";
 import { InputModelProperty } from "../../src/type/input-model-property.js";
 import { InputTypeKind } from "../../src/type/input-type-kind.js";
-import { InputDictionaryType } from "../../src/type/input-type.js";
 import {
     createEmitterContext,
     createEmitterTestHost,
