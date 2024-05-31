@@ -4,12 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -17,24 +17,21 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         private static readonly string Content = "Content";
 
-        internal static void Update(HttpMethod method, string methodName, RequestParameter bodyParameter, string resourceName, Operation operation)
+        internal static void Update(RequestMethod method, InputParameter bodyParameter, string resourceName, InputOperation operation, List<InputType> updatedTypes)
         {
-            switch (method)
+            if (method == RequestMethod.Put)
             {
-                case HttpMethod.Put:
-                    UpdateRequestParameter(bodyParameter, "content", $"{resourceName}CreateOrUpdateContent", operation);
-                    break;
-                case HttpMethod.Patch:
-                    UpdateRequestParameter(bodyParameter, "patch", $"{resourceName}Patch", operation);
-                    break;
-                default:
-                    throw new InvalidOperationException($"unhandled HttpMethod {method} for resource {resourceName}");
+                UpdateRequestParameter(bodyParameter, "content", $"{resourceName}CreateOrUpdateContent", operation, updatedTypes);
+            }
+            else if (method == RequestMethod.Patch)
+            {
+                UpdateRequestParameter(bodyParameter, "patch", $"{resourceName}Patch", operation, updatedTypes);
             }
         }
 
-        internal static void UpdateUsingReplacement(RequestParameter bodyParameter, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary, Operation operation)
+        internal static void UpdateUsingReplacement(InputParameter bodyParameter, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary, InputOperation operation, List<InputType> updatedTypes)
         {
-            var schemaName = bodyParameter.Schema.Language.Default.Name;
+            var schemaName = bodyParameter.Type.Name;
             if (schemaName.EndsWith("Parameters", StringComparison.Ordinal))
                 schemaName = schemaName.ReplaceLast("Parameters", Content);
             if (schemaName.EndsWith("Request", StringComparison.Ordinal))
@@ -45,56 +42,59 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 schemaName = schemaName.ReplaceLast("Info", Content);
             if (schemaName.EndsWith("Input", StringComparison.Ordinal))
                 schemaName = schemaName.ReplaceLast("Input", Content);
-            var paramName = NormalizeParamNames.GetNewName(bodyParameter.Language.Default.Name, schemaName, resourceDataDictionary);
+            var paramName = NormalizeParamNames.GetNewName(bodyParameter.Name, schemaName, resourceDataDictionary);
             // TODO -- we need to add a check here to see if this rename introduces parameter name collisions
-            UpdateRequestParameter(bodyParameter, paramName, schemaName, operation);
+            UpdateRequestParameter(bodyParameter, paramName, schemaName, operation, updatedTypes);
         }
 
-        internal static void UpdateParameterNameOnly(RequestParameter bodyParam, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary, Operation operation)
+        internal static void UpdateParameterNameOnly(InputParameter bodyParam, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary, InputOperation operation)
         {
-            string oriName = bodyParam.Language.Default.Name;
-            bodyParam.Language.Default.SerializedName ??= bodyParam.Language.Default.Name;
-            bodyParam.Language.Default.Name = NormalizeParamNames.GetNewName(bodyParam.Language.Default.Name, bodyParam.Schema.Name, resourceDataDictionary);
+            string oriName = bodyParam.Name;
+            bodyParam.Name = NormalizeParamNames.GetNewName(bodyParam.Name, bodyParam.Type.Name, resourceDataDictionary);
             string fullSerializedName = operation.GetFullSerializedName(bodyParam);
             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                 new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
-                fullSerializedName, "UpdateParameterNameOnly", oriName, bodyParam.Language.Default.Name);
+                fullSerializedName, "UpdateParameterNameOnly", oriName, bodyParam.Name);
         }
 
-        private static void UpdateRequestParameter(RequestParameter parameter, string parameterName, string schemaName, Operation operation)
+        private static void UpdateRequestParameter(InputParameter parameter, string parameterName, string schemaName, InputOperation operation, List<InputType> updatedTypes)
         {
-            string oriParameterName = parameter.Language.Default.Name;
-            parameter.Language.Default.SerializedName ??= parameter.Language.Default.Name;
-            parameter.Language.Default.Name = parameterName;
+            string oriParameterName = parameter.Name;
+            parameter.Name = parameterName;
             string fullSerializedName = operation.GetFullSerializedName(parameter);
             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                 new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
-                fullSerializedName, "UpdateParameterName", oriParameterName, parameter.Language.Default.Name);
+                fullSerializedName, "UpdateParameterName", oriParameterName, parameter.Name);
 
-            string oriSchemaName = parameter.Schema.Language.Default.Name;
-            parameter.Schema.Language.Default.SerializedName ??= parameter.Schema.Language.Default.Name;
-            parameter.Schema.Language.Default.Name = schemaName;
-            fullSerializedName = parameter.Schema.GetFullSerializedName();
-            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
-                fullSerializedName, "UpdateParameterSchemaName", oriSchemaName, parameter.Schema.Language.Default.Name);
+            string oriSchemaName = parameter.Type.Name;
+            if (oriSchemaName != schemaName)
+            {
+                // we only need to update the schema name if it is a model or enum type
+                if (parameter.Type is InputModelType || parameter.Type is InputEnumType)
+                {
+                    updatedTypes.Add(parameter.Type);
+                }
+                parameter.Type.Name = schemaName;
+                fullSerializedName = parameter.Type.GetFullSerializedName();
+                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                    new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
+                    fullSerializedName, "UpdateParameterSchemaName", oriSchemaName, parameter.Type.Name);
+            }
 
-            if (parameter.Schema is ChoiceSchema ||
-                parameter.Schema is SealedChoiceSchema ||
-                parameter.Schema is ObjectSchema)
-                SchemaNameAndFormatUpdater.UpdateAcronym(parameter.Schema);
+            if (parameter.Type is InputEnumType || parameter.Type is InputModelType)
+                SchemaNameAndFormatUpdater.UpdateAcronym(parameter.Type);
         }
 
-        internal static void MakeRequired(RequestParameter bodyParameter, HttpMethod method)
+        internal static void MakeRequired(InputParameter bodyParameter, RequestMethod method)
         {
             if (ShouldMarkRequired(method))
             {
-                bodyParameter.Required = true;
+                bodyParameter.IsRequired = true;
             }
         }
 
-        internal static bool ShouldMarkRequired(HttpMethod method) => MethodsRequiredBodyParameter.Contains(method);
+        private static bool ShouldMarkRequired(RequestMethod method) => MethodsRequiredBodyParameter.Contains(method);
 
-        private static readonly HttpMethod[] MethodsRequiredBodyParameter = new[] { HttpMethod.Put, HttpMethod.Patch };
+        private static readonly RequestMethod[] MethodsRequiredBodyParameter = new[] { RequestMethod.Put, RequestMethod.Patch };
     }
 }

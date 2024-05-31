@@ -431,7 +431,7 @@ namespace MgmtMockAndSample
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>MHSMPrivateLinkResources_ListByMHSMResource</description>
+        /// <description>MHSMPrivateLinkResources_ListByMhsmResource</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -456,7 +456,7 @@ namespace MgmtMockAndSample
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>MHSMPrivateLinkResources_ListByMHSMResource</description>
+        /// <description>MHSMPrivateLinkResources_ListByMhsmResource</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>

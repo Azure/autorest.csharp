@@ -3,8 +3,15 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal abstract record InputType(string Name, bool IsNullable)
+internal abstract record InputType
 {
+    protected InputType(string name, bool isNullable)
+    {
+        Name = name;
+        SpecName = name;
+        IsNullable = isNullable;
+    }
+
     public InputTypeSerialization Serialization { get; init; } = InputTypeSerialization.Default;
 
     internal InputType GetCollectionEquivalent(InputType inputType)
@@ -27,4 +34,9 @@ internal abstract record InputType(string Name, bool IsNullable)
                 return inputType;
         }
     }
+
+    public bool IsNullable { get; init; }
+    public string Name { get; internal set; }
+    //TODO: Remove this until the SDK nullable is enabled, traking in https://github.com/Azure/autorest.csharp/issues/4780
+    internal string? SpecName { get; init; }
 }
