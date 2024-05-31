@@ -1,3 +1,8 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+// NOTE: code copied and changed from https://github.com/devel0/json-serialize-refs/blob/22e6ef737d57f9fe6c809181022b43be34bf65ef/src/lib/stringify-refs.ts because it has not been maintained for quite a long time for security concerns
+
 function createRefs(obj: any): any {
     const map = new Map<object, string>();
 
