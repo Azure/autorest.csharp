@@ -670,7 +670,7 @@ namespace AutoRest.CSharp.Common.Input
                 XMsFormat.DataFactoryElementOfListOfT => CreateDataFactoryElementIntputType(isNullable, new InputListType(name, GetOrCreateType(elementType!, false), false, false)),
                 XMsFormat.DataFactoryElementOfListOfString => CreateDataFactoryElementIntputType(isNullable, new InputListType(name, InputPrimitiveType.String, false, false)),
                 XMsFormat.DataFactoryElementOfKeyValuePairs => CreateDataFactoryElementIntputType(isNullable, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.String, false)),
-                XMsFormat.DataFactoryElementOfDateTime => CreateDataFactoryElementIntputType(isNullable, InputDateTimeType.Rfc3339),
+                XMsFormat.DataFactoryElementOfDateTime => CreateDataFactoryElementIntputType(isNullable, new InputDateTimeType(DateTimeKnownEncoding.Rfc3339, InputPrimitiveType.String, false)),
                 XMsFormat.DataFactoryElementOfDuration => CreateDataFactoryElementIntputType(isNullable, InputPrimitiveType.PlainTime),
                 XMsFormat.DataFactoryElementOfUri => CreateDataFactoryElementIntputType(isNullable, InputPrimitiveType.Uri),
                 XMsFormat.DataFactoryElementOfKeyObjectValuePairs => CreateDataFactoryElementIntputType(isNullable, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.Any, false)),

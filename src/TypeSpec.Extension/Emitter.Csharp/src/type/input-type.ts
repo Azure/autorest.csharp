@@ -64,7 +64,7 @@ export interface InputDurationType extends InputTypeBase {
 }
 
 export interface InputUnionType extends InputTypeBase {
-    Kind: InputTypeKind.Union;
+    Kind: InputTypeKind.Union; // TODO -- will change to TCGC value in future refactor
     Name: InputTypeKind.Union; // union type does not really have a name right now, we just use its kind
     UnionItemTypes: InputType[];
 }
@@ -74,7 +74,7 @@ export function isInputUnionType(type: InputType): type is InputUnionType {
 }
 
 export interface InputModelType extends InputTypeBase {
-    Kind: InputTypeKind.Model;
+    Kind: InputTypeKind.Model; // TODO -- will change to TCGC value in future refactor
     Name: string;
     Namespace?: string;
     Accessibility?: string;
@@ -110,7 +110,7 @@ export function isInputEnumType(type: InputType): type is InputEnumType {
 }
 
 export interface InputListType extends InputTypeBase {
-    Kind: InputTypeKind.Array;
+    Kind: InputTypeKind.Array; // TODO -- will change to TCGC value in future refactor
     Name: InputTypeKind.Array; // array type does not really have a name right now, we just use its kind
     ElementType: InputType;
 }
@@ -120,7 +120,7 @@ export function isInputListType(type: InputType): type is InputListType {
 }
 
 export interface InputDictionaryType extends InputTypeBase {
-    Kind: InputTypeKind.Dictionary;
+    Kind: InputTypeKind.Dictionary; // TODO -- will change to TCGC value in future refactor
     Name: InputTypeKind.Dictionary; // dictionary type does not really have a name right now, we just use its kind
     KeyType: InputType;
     ValueType: InputType;
