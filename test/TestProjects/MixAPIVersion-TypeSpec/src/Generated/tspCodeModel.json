@@ -30,12 +30,12 @@
  "Models": [
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Pet",
    "Namespace": "MixApiVersion",
+   "Usage": "None",
    "Description": "Pet",
    "IsNullable": false,
-   "Usage": "None",
    "Properties": [
     {
      "$id": "6",
@@ -80,12 +80,12 @@
   },
   {
    "$id": "12",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedToy",
    "Namespace": "Azure.Core.Foundations",
+   "Usage": "None",
    "Description": "Paged collection of Toy items",
    "IsNullable": false,
-   "Usage": "None",
    "Properties": [
     {
      "$id": "13",
@@ -98,11 +98,11 @@
       "Name": "Array",
       "ElementType": {
        "$id": "15",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "Toy",
        "Namespace": "MixApiVersion",
-       "IsNullable": false,
        "Usage": "None",
+       "IsNullable": false,
        "Properties": [
         {
          "$id": "16",

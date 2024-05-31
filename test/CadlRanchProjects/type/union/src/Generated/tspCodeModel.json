@@ -214,11 +214,11 @@
  "Models": [
   {
    "$id": "35",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse9",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Output",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "36",
@@ -235,11 +235,11 @@
   },
   {
    "$id": "37",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest9",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "38",
@@ -256,11 +256,11 @@
   },
   {
    "$id": "39",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse8",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Output",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "40",
@@ -277,11 +277,11 @@
   },
   {
    "$id": "41",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest8",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "42",
@@ -298,11 +298,11 @@
   },
   {
    "$id": "43",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse7",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Output",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "44",
@@ -319,11 +319,11 @@
   },
   {
    "$id": "45",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest7",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "46",
@@ -340,11 +340,11 @@
   },
   {
    "$id": "47",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse6",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Output",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "48",
@@ -361,11 +361,11 @@
   },
   {
    "$id": "49",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest6",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "50",
@@ -382,11 +382,11 @@
   },
   {
    "$id": "51",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse5",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Output",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "52",
@@ -403,11 +403,11 @@
   },
   {
    "$id": "53",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest5",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "54",
@@ -424,11 +424,11 @@
   },
   {
    "$id": "55",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse4",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Output",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "56",
@@ -437,16 +437,16 @@
      "Description": "",
      "Type": {
       "$id": "57",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "GetResponseProp",
+      "ItemTypes": [
        {
         "$id": "58",
-        "Kind": "Model",
+        "Kind": "model",
         "Name": "Cat",
         "Namespace": "Type.Union",
-        "IsNullable": false,
         "Usage": "RoundTrip",
+        "IsNullable": false,
         "Properties": [
          {
           "$id": "59",
@@ -465,11 +465,11 @@
        },
        {
         "$id": "61",
-        "Kind": "Model",
+        "Kind": "model",
         "Name": "Dog",
         "Namespace": "Type.Union",
-        "IsNullable": false,
         "Usage": "RoundTrip",
+        "IsNullable": false,
         "Properties": [
          {
           "$id": "62",
@@ -502,11 +502,11 @@
   },
   {
    "$id": "64",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest4",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "65",
@@ -515,9 +515,9 @@
      "Description": "",
      "Type": {
       "$id": "66",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "GetResponseProp",
+      "ItemTypes": [
        {
         "$ref": "58"
        },
@@ -534,11 +534,11 @@
   },
   {
    "$id": "67",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse3",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Output",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "68",
@@ -547,11 +547,11 @@
      "Description": "",
      "Type": {
       "$id": "69",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "EnumsOnlyCases",
       "Namespace": "Type.Union",
-      "IsNullable": false,
       "Usage": "RoundTrip",
+      "IsNullable": false,
       "Properties": [
        {
         "$id": "70",
@@ -587,11 +587,11 @@
   },
   {
    "$id": "72",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest3",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "73",
@@ -608,11 +608,11 @@
   },
   {
    "$id": "74",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse2",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Output",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "75",
@@ -621,11 +621,11 @@
      "Description": "",
      "Type": {
       "$id": "76",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "StringAndArrayCases",
       "Namespace": "Type.Union",
-      "IsNullable": false,
       "Usage": "RoundTrip",
+      "IsNullable": false,
       "Properties": [
        {
         "$id": "77",
@@ -634,9 +634,9 @@
         "Description": "This should be receive/send the string variant",
         "Type": {
          "$id": "78",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "StringAndArrayCasesString",
+         "ItemTypes": [
           {
            "$id": "79",
            "Kind": "string",
@@ -666,9 +666,9 @@
         "Description": "This should be receive/send the array variant",
         "Type": {
          "$id": "83",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "StringAndArrayCasesArray",
+         "ItemTypes": [
           {
            "$id": "84",
            "Kind": "string",
@@ -703,11 +703,11 @@
   },
   {
    "$id": "87",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest2",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "88",
@@ -724,11 +724,11 @@
   },
   {
    "$id": "89",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse1",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Output",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "90",
@@ -737,11 +737,11 @@
      "Description": "",
      "Type": {
       "$id": "91",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "MixedLiteralsCases",
       "Namespace": "Type.Union",
-      "IsNullable": false,
       "Usage": "RoundTrip",
+      "IsNullable": false,
       "Properties": [
        {
         "$id": "92",
@@ -750,9 +750,9 @@
         "Description": "This should be receive/send the \"a\" variant",
         "Type": {
          "$id": "93",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedLiteralsCasesStringLiteral",
+         "ItemTypes": [
           {
            "$id": "94",
            "Kind": "constant",
@@ -810,9 +810,9 @@
         "Description": "This should be receive/send the 2 variant",
         "Type": {
          "$id": "103",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedLiteralsCasesStringLiteral",
+         "ItemTypes": [
           {
            "$id": "104",
            "Kind": "constant",
@@ -870,9 +870,9 @@
         "Description": "This should be receive/send the 3.3 variant",
         "Type": {
          "$id": "113",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedLiteralsCasesStringLiteral",
+         "ItemTypes": [
           {
            "$id": "114",
            "Kind": "constant",
@@ -930,9 +930,9 @@
         "Description": "This should be receive/send the true variant",
         "Type": {
          "$id": "123",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedLiteralsCasesStringLiteral",
+         "ItemTypes": [
           {
            "$id": "124",
            "Kind": "constant",
@@ -995,11 +995,11 @@
   },
   {
    "$id": "132",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest1",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "133",
@@ -1016,11 +1016,11 @@
   },
   {
    "$id": "134",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Output",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "135",
@@ -1029,11 +1029,11 @@
      "Description": "",
      "Type": {
       "$id": "136",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "MixedTypesCases",
       "Namespace": "Type.Union",
-      "IsNullable": false,
       "Usage": "RoundTrip",
+      "IsNullable": false,
       "Properties": [
        {
         "$id": "137",
@@ -1042,9 +1042,9 @@
         "Description": "This should be receive/send the Cat variant",
         "Type": {
          "$id": "138",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedTypesCasesModel",
+         "ItemTypes": [
           {
            "$ref": "58"
           },
@@ -1082,9 +1082,9 @@
         "Description": "This should be receive/send the \"a\" variant",
         "Type": {
          "$id": "144",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedTypesCasesModel",
+         "ItemTypes": [
           {
            "$ref": "58"
           },
@@ -1122,9 +1122,9 @@
         "Description": "This should be receive/send the int variant",
         "Type": {
          "$id": "150",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedTypesCasesModel",
+         "ItemTypes": [
           {
            "$ref": "58"
           },
@@ -1162,9 +1162,9 @@
         "Description": "This should be receive/send the boolean variant",
         "Type": {
          "$id": "156",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedTypesCasesModel",
+         "ItemTypes": [
           {
            "$ref": "58"
           },
@@ -1206,9 +1206,9 @@
          "Name": "Array",
          "ElementType": {
           "$id": "163",
-          "Kind": "Union",
-          "Name": "Union",
-          "UnionItemTypes": [
+          "Kind": "union",
+          "Name": "MixedTypesCasesModel",
+          "ItemTypes": [
            {
             "$ref": "58"
            },
@@ -1253,11 +1253,11 @@
   },
   {
    "$id": "168",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest",
    "Namespace": "Type.Union",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "169",

@@ -60,11 +60,11 @@
  "Models": [
   {
    "$id": "9",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "NewModel",
    "Namespace": "Versioning.RenamedFrom",
-   "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "10",
@@ -97,9 +97,9 @@
      "Description": "",
      "Type": {
       "$id": "14",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "NewUnion",
+      "ItemTypes": [
        {
         "$id": "15",
         "Kind": "string",

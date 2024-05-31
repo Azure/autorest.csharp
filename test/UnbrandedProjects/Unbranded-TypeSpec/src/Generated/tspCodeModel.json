@@ -388,12 +388,12 @@
  "Models": [
   {
    "$id": "59",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Thing",
    "Namespace": "UnbrandedTypeSpec",
+   "Usage": "RoundTrip",
    "Description": "A model with a few properties of literal types",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "60",
@@ -415,9 +415,9 @@
      "Description": "required Union",
      "Type": {
       "$id": "63",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "ThingRequiredUnion",
+      "ItemTypes": [
        {
         "$id": "64",
         "Kind": "string",
@@ -640,12 +640,12 @@
   },
   {
    "$id": "94",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RoundTripModel",
    "Namespace": "UnbrandedTypeSpec",
+   "Usage": "RoundTrip",
    "Description": "this is a roundtrip model",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "95",
@@ -975,12 +975,12 @@
      "Description": "this is a model with required nullable properties",
      "Type": {
       "$id": "139",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelWithRequiredNullableProperties",
       "Namespace": "UnbrandedTypeSpec",
+      "Usage": "RoundTrip",
       "Description": "A model with a few required nullable properties",
       "IsNullable": false,
-      "Usage": "RoundTrip",
       "Properties": [
        {
         "$id": "140",
@@ -1029,12 +1029,12 @@
   },
   {
    "$id": "144",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Friend",
    "Namespace": "UnbrandedTypeSpec",
+   "Usage": "RoundTrip",
    "Description": "this is not a friendly model but with a friendly name",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "145",
@@ -1053,12 +1053,12 @@
   },
   {
    "$id": "147",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ProjectedModel",
    "Namespace": "UnbrandedTypeSpec",
+   "Usage": "RoundTrip",
    "Description": "this is a model with a projected name",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "148",
@@ -1077,11 +1077,11 @@
   },
   {
    "$id": "150",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
    "Namespace": "UnbrandedTypeSpec",
-   "IsNullable": false,
    "Usage": "Output",
+   "IsNullable": false,
    "Properties": []
   }
  ],

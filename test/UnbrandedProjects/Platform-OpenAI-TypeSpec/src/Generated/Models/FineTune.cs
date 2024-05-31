@@ -9,7 +9,6 @@ using System.Linq;
 namespace OpenAI.Models
 {
     /// <summary> The `FineTune` object represents a legacy fine-tune job that has been created through the API. </summary>
-    [Obsolete("deprecated")]
     public partial class FineTune
     {
         /// <summary>

@@ -61,12 +61,12 @@
  "Models": [
   {
    "$id": "9",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "User",
    "Namespace": "_Specs_.Azure.Core.Basic",
+   "Usage": "RoundTrip",
    "Description": "Details about a user.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "10",
@@ -105,12 +105,12 @@
       "Name": "Array",
       "ElementType": {
        "$id": "16",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "UserOrder",
        "Namespace": "_Specs_.Azure.Core.Basic",
+       "Usage": "RoundTrip",
        "Description": "UserOrder for testing list with expand.",
        "IsNullable": false,
-       "Usage": "RoundTrip",
        "Properties": [
         {
          "$id": "17",
@@ -179,12 +179,12 @@
   },
   {
    "$id": "25",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedUser",
    "Namespace": "Azure.Core.Foundations",
+   "Usage": "Output",
    "Description": "Paged collection of User items",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "26",
@@ -220,12 +220,12 @@
   },
   {
    "$id": "30",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ListItemInputBody",
    "Namespace": "_Specs_.Azure.Core.Basic",
+   "Usage": "Input",
    "Description": "The body of the input.",
    "IsNullable": false,
-   "Usage": "Input",
    "Properties": [
     {
      "$id": "31",
@@ -244,11 +244,11 @@
   },
   {
    "$id": "33",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UserListResults",
    "Namespace": "_Specs_.Azure.Core.Basic",
-   "IsNullable": false,
    "Usage": "Output",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "34",
@@ -284,12 +284,12 @@
   },
   {
    "$id": "38",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedFirstItem",
    "Namespace": "Azure.Core",
+   "Usage": "Output",
    "Description": "Paged collection of FirstItem items",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "39",
@@ -302,12 +302,12 @@
       "Name": "Array",
       "ElementType": {
        "$id": "41",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "FirstItem",
        "Namespace": "_Specs_.Azure.Core.Basic",
+       "Usage": "Output",
        "Description": "First item.",
        "IsNullable": false,
-       "Usage": "Output",
        "Properties": [
         {
          "$id": "42",
@@ -349,12 +349,12 @@
   },
   {
    "$id": "46",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedSecondItem",
    "Namespace": "Azure.Core",
+   "Usage": "Output",
    "Description": "Paged collection of SecondItem items",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "47",
@@ -367,12 +367,12 @@
       "Name": "Array",
       "ElementType": {
        "$id": "49",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "SecondItem",
        "Namespace": "_Specs_.Azure.Core.Basic",
+       "Usage": "Output",
        "Description": "Second item.",
        "IsNullable": false,
-       "Usage": "Output",
        "Properties": [
         {
          "$id": "50",

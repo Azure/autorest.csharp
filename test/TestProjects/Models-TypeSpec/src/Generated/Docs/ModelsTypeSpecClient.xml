@@ -8,10 +8,7 @@ This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBaseAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
-{
-    Kind = "A",
-};
+BaseModelWithDiscriminatorDefinedOnBase body = new BaseModelWithDiscriminatorDefinedOnBase(null);
 Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(body);
 ]]></code>
 This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBaseAsync with all parameters.
@@ -19,11 +16,9 @@ This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBaseAsync wi
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
+BaseModelWithDiscriminatorDefinedOnBase body = new BaseModelWithDiscriminatorDefinedOnBase(null)
 {
-    OptionalInt = 1234,
     OptionalString = "<optionalString>",
-    Kind = "A",
 };
 Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(body);
 ]]></code></example>
@@ -35,10 +30,7 @@ This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBase.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
-{
-    Kind = "A",
-};
+BaseModelWithDiscriminatorDefinedOnBase body = new BaseModelWithDiscriminatorDefinedOnBase(null);
 Response<BaseModelWithDiscriminatorDefinedOnBase> response = client.PutBaseModelWithDiscriminatorDefinedOnBase(body);
 ]]></code>
 This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBase with all parameters.
@@ -46,11 +38,9 @@ This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBase with al
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
+BaseModelWithDiscriminatorDefinedOnBase body = new BaseModelWithDiscriminatorDefinedOnBase(null)
 {
-    OptionalInt = 1234,
     OptionalString = "<optionalString>",
-    Kind = "A",
 };
 Response<BaseModelWithDiscriminatorDefinedOnBase> response = client.PutBaseModelWithDiscriminatorDefinedOnBase(body);
 ]]></code></example>
@@ -62,11 +52,7 @@ This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBaseAsync an
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-using RequestContent content = RequestContent.Create(new
-{
-    requiredString = "<requiredString>",
-    kind = "A",
-});
+using RequestContent content = RequestContent.Create(new { });
 Response response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -80,9 +66,6 @@ ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
-    requiredString = "<requiredString>",
-    optionalInt = 1234,
-    kind = "A",
     optionalString = "<optionalString>",
 });
 Response response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(content);
@@ -100,11 +83,7 @@ This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBase and par
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-using RequestContent content = RequestContent.Create(new
-{
-    requiredString = "<requiredString>",
-    kind = "A",
-});
+using RequestContent content = RequestContent.Create(new { });
 Response response = client.PutBaseModelWithDiscriminatorDefinedOnBase(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -118,9 +97,6 @@ ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
-    requiredString = "<requiredString>",
-    optionalInt = 1234,
-    kind = "A",
     optionalString = "<optionalString>",
 });
 Response response = client.PutBaseModelWithDiscriminatorDefinedOnBase(content);
@@ -1854,8 +1830,8 @@ using RequestContent content = RequestContent.Create(new
     requiredNullableString = "<requiredNullableString>",
     requiredModel = new
     {
-        requiredString = "<requiredString>",
         discriminatorProperty = "A",
+        requiredString = "<requiredString>",
         requiredPropertyOnBase = 1234,
     },
     requiredFixedStringEnum = "1",
@@ -1928,8 +1904,8 @@ using RequestContent content = RequestContent.Create(new
     nonRequiredNullableString = "<nonRequiredNullableString>",
     requiredModel = new
     {
-        requiredString = "<requiredString>",
         discriminatorProperty = "A",
+        requiredString = "<requiredString>",
         optionalPropertyOnBase = "<optionalPropertyOnBase>",
         requiredPropertyOnBase = 1234,
     },
@@ -2020,8 +1996,8 @@ using RequestContent content = RequestContent.Create(new
     requiredNullableString = "<requiredNullableString>",
     requiredModel = new
     {
-        requiredString = "<requiredString>",
         discriminatorProperty = "A",
+        requiredString = "<requiredString>",
         requiredPropertyOnBase = 1234,
     },
     requiredFixedStringEnum = "1",
@@ -2094,8 +2070,8 @@ using RequestContent content = RequestContent.Create(new
     nonRequiredNullableString = "<nonRequiredNullableString>",
     requiredModel = new
     {
-        requiredString = "<requiredString>",
         discriminatorProperty = "A",
+        requiredString = "<requiredString>",
         optionalPropertyOnBase = "<optionalPropertyOnBase>",
         requiredPropertyOnBase = 1234,
     },

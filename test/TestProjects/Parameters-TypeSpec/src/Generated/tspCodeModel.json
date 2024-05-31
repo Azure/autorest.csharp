@@ -30,11 +30,11 @@
  "Models": [
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Result",
    "Namespace": "ParametersCadl.ParameterOrders",
-   "IsNullable": false,
    "Usage": "Output",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "6",

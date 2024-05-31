@@ -6,11 +6,11 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "DefaultDurationProperty",
    "Namespace": "Encode.Duration.Property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "3",
@@ -35,11 +35,11 @@
   },
   {
    "$id": "6",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ISO8601DurationProperty",
    "Namespace": "Encode.Duration.Property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "7",
@@ -64,11 +64,11 @@
   },
   {
    "$id": "10",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Int32SecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "11",
@@ -93,11 +93,11 @@
   },
   {
    "$id": "14",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "FloatSecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "15",
@@ -122,11 +122,11 @@
   },
   {
    "$id": "18",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Float64SecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "19",
@@ -151,11 +151,11 @@
   },
   {
    "$id": "22",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "FloatSecondsDurationArrayProperty",
    "Namespace": "Encode.Duration.Property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "23",

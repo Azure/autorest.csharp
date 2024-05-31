@@ -6,11 +6,11 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "InvalidAuth",
    "Namespace": "Authentication.OAuth2",
-   "IsNullable": false,
    "Usage": "Output",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "3",

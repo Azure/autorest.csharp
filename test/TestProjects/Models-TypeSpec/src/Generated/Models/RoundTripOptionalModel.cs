@@ -11,7 +11,6 @@ using System.Collections.Generic;
 namespace ModelsTypeSpec.Models
 {
     /// <summary> RoundTrip model with optional properties. </summary>
-    [Obsolete("deprecated for test")]
     public partial class RoundTripOptionalModel
     {
         /// <summary>

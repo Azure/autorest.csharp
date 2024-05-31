@@ -168,12 +168,12 @@
  "Models": [
   {
    "$id": "23",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Thing",
    "Namespace": "CustomizedTypeSpec",
+   "Usage": "RoundTrip",
    "Description": "A model with a few properties of literal types",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "24",
@@ -195,9 +195,9 @@
      "Description": "required Union",
      "Type": {
       "$id": "27",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "ThingRequiredUnion",
+      "ItemTypes": [
        {
         "$id": "28",
         "Kind": "string",
@@ -420,12 +420,12 @@
   },
   {
    "$id": "58",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RoundTripModel",
    "Namespace": "CustomizedTypeSpec",
+   "Usage": "RoundTrip",
    "Description": "this is a roundtrip model",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "59",
@@ -470,12 +470,12 @@
   },
   {
    "$id": "65",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Friend",
    "Namespace": "CustomizedTypeSpec",
+   "Usage": "RoundTrip",
    "Description": "this is not a friendly model but with a friendly name",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "66",
@@ -497,11 +497,11 @@
      "Description": "",
      "Type": {
       "$id": "69",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelWithFormat",
       "Namespace": "CustomizedTypeSpec",
-      "IsNullable": false,
       "Usage": "RoundTrip",
+      "IsNullable": false,
       "Properties": [
        {
         "$id": "70",
@@ -542,12 +542,12 @@
   },
   {
    "$id": "74",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ProjectedModel",
    "Namespace": "CustomizedTypeSpec",
+   "Usage": "RoundTrip",
    "Description": "this is a model with a projected name",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "75",
@@ -566,11 +566,11 @@
   },
   {
    "$id": "77",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
    "Namespace": "CustomizedTypeSpec",
-   "IsNullable": false,
    "Usage": "Output",
+   "IsNullable": false,
    "Properties": []
   }
  ],

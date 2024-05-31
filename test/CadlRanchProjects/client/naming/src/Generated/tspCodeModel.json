@@ -54,11 +54,11 @@
  "Models": [
   {
    "$id": "9",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ClientNameModel",
    "Namespace": "Client.Naming.Property",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "10",
@@ -77,11 +77,11 @@
   },
   {
    "$id": "12",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "LanguageClientNameModel",
    "Namespace": "Client.Naming.Property",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "13",
@@ -100,11 +100,11 @@
   },
   {
    "$id": "15",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ClientNameAndJsonEncodedNameModel",
    "Namespace": "Client.Naming.Property",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "16",
@@ -123,11 +123,11 @@
   },
   {
    "$id": "18",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ClientModel",
    "Namespace": "Client.Naming.Model",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "19",
@@ -146,11 +146,11 @@
   },
   {
    "$id": "21",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "CSModel",
    "Namespace": "Client.Naming.Model",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "22",

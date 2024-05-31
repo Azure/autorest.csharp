@@ -7,13 +7,13 @@
 
 using System;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
-    [PersistableModelProxy(typeof(UnknownBaseModelWithDiscriminatorDefinedOnBase))]
     public partial class BaseModelWithDiscriminatorDefinedOnBase : IUtf8JsonSerializable, IJsonModel<BaseModelWithDiscriminatorDefinedOnBase>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseModelWithDiscriminatorDefinedOnBase>)this).Write(writer, ModelSerializationExtensions.WireOptions);
@@ -72,14 +72,29 @@ namespace ModelsTypeSpec.Models
             {
                 return null;
             }
-            if (element.TryGetProperty("kind", out JsonElement discriminator))
+            string optionalString = default;
+            string kind = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
+            foreach (var property in element.EnumerateObject())
             {
-                switch (discriminator.GetString())
+                if (property.NameEquals("optionalString"u8))
                 {
-                    case "A": return DerivedWithDiscriminatorDefinedOnBase.DeserializeDerivedWithDiscriminatorDefinedOnBase(element, options);
+                    optionalString = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("kind"u8))
+                {
+                    kind = property.Value.GetString();
+                    continue;
+                }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            return UnknownBaseModelWithDiscriminatorDefinedOnBase.DeserializeUnknownBaseModelWithDiscriminatorDefinedOnBase(element, options);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new BaseModelWithDiscriminatorDefinedOnBase(kind, serializedAdditionalRawData, optionalString);
         }
 
         BinaryData IPersistableModel<BaseModelWithDiscriminatorDefinedOnBase>.Write(ModelReaderWriterOptions options)

@@ -6,12 +6,12 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "FlattenModel",
    "Namespace": "Type.Model.Flatten",
+   "Usage": "RoundTrip",
    "Description": "This is the model with one level of flattening.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "3",
@@ -64,12 +64,12 @@
   },
   {
    "$id": "9",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "NestedFlattenModel",
    "Namespace": "Type.Model.Flatten",
+   "Usage": "RoundTrip",
    "Description": "This is the model with two levels of flattening.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "10",
@@ -141,12 +141,12 @@
   },
   {
    "$id": "18",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ChildModel",
    "Namespace": "Type.Model.Flatten",
+   "Usage": "RoundTrip",
    "Description": "This is the child model to be flattened.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "19",
@@ -178,12 +178,12 @@
   },
   {
    "$id": "23",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ChildFlattenModel",
    "Namespace": "Type.Model.Flatten",
+   "Usage": "RoundTrip",
    "Description": "This is the child model to be flattened. And it has flattened property as well.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "24",

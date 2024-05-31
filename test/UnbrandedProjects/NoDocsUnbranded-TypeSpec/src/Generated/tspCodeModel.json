@@ -145,12 +145,12 @@
  "Models": [
   {
    "$id": "20",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Thing",
    "Namespace": "NoDocsUnbrandedTypeSpec",
+   "Usage": "Output",
    "Description": "A model with a few properties of literal types",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "21",
@@ -172,9 +172,9 @@
      "Description": "required Union",
      "Type": {
       "$id": "24",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "ThingRequiredUnion",
+      "ItemTypes": [
        {
         "$id": "25",
         "Kind": "string",

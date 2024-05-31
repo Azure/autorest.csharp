@@ -6,11 +6,11 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "JsonEncodedNameModel",
    "Namespace": "Serialization.EncodedName.Json.Property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "3",

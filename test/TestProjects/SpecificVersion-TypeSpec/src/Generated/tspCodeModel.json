@@ -83,12 +83,12 @@
  "Models": [
   {
    "$id": "13",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ResourceOperationStatusResourceExportedResourceError",
    "Namespace": "Azure.Core",
+   "Usage": "Output",
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "14",
@@ -121,12 +121,12 @@
      "Description": "Error object that describes the error when status is \"Failed\".",
      "Type": {
       "$id": "18",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "Error",
       "Namespace": "Azure.Core.Foundations",
+      "Usage": "Output",
       "Description": "The error object.",
       "IsNullable": false,
-      "Usage": "Output",
       "Properties": [
        {
         "$id": "19",
@@ -191,12 +191,12 @@
         "Description": "An object containing more specific information than the current object about the error.",
         "Type": {
          "$id": "28",
-         "Kind": "Model",
+         "Kind": "model",
          "Name": "InnerError",
          "Namespace": "Azure.Core.Foundations",
+         "Usage": "Output",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "IsNullable": false,
-         "Usage": "Output",
          "Properties": [
           {
            "$id": "29",
@@ -239,11 +239,11 @@
      "Description": "The result of the operation.",
      "Type": {
       "$id": "33",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ExportedResource",
       "Namespace": "TypeSpec.Versioning.Specific",
-      "IsNullable": false,
       "Usage": "Output",
+      "IsNullable": false,
       "Properties": [
        {
         "$id": "34",
@@ -289,12 +289,12 @@
   },
   {
    "$id": "38",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedResource",
    "Namespace": "Azure.Core.Foundations",
+   "Usage": "Output",
    "Description": "Paged collection of Resource items",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "39",
@@ -307,11 +307,11 @@
       "Name": "Array",
       "ElementType": {
        "$id": "41",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "Resource",
        "Namespace": "TypeSpec.Versioning.Specific",
-       "IsNullable": false,
        "Usage": "RoundTrip",
+       "IsNullable": false,
        "Properties": [
         {
          "$id": "42",

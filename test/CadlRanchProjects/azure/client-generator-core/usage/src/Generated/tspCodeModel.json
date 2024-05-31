@@ -6,12 +6,12 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "InputModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
+   "Usage": "RoundTrip",
    "Description": "Usage override to roundtrip.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "3",
@@ -30,12 +30,12 @@
   },
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "OutputModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
+   "Usage": "RoundTrip",
    "Description": "Usage override to roundtrip.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "6",
@@ -54,13 +54,13 @@
   },
   {
    "$id": "8",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "OrphanModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage",
-   "Accessibility": "public",
+   "Access": "public",
+   "Usage": "Input",
    "Description": "Not used anywhere, but access is override to public so still need to be generated and exported with serialization.",
    "IsNullable": false,
-   "Usage": "Input",
    "Properties": [
     {
      "$id": "9",

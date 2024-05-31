@@ -6,20 +6,20 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Extension",
    "Namespace": "Type.Model.Inheritance.Recursive",
+   "Usage": "RoundTrip",
    "Description": "extension",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "BaseModel": {
     "$id": "3",
-    "Kind": "Model",
+    "Kind": "model",
     "Name": "Element",
     "Namespace": "Type.Model.Inheritance.Recursive",
+    "Usage": "RoundTrip",
     "Description": "element",
     "IsNullable": false,
-    "Usage": "RoundTrip",
     "Properties": [
      {
       "$id": "4",

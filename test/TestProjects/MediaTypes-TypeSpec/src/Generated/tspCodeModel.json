@@ -64,11 +64,11 @@
  "Models": [
   {
    "$id": "11",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Body",
    "Namespace": "MultipleMediaTypes",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "12",

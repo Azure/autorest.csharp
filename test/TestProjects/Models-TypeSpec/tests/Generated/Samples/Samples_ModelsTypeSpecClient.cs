@@ -26,11 +26,7 @@ namespace ModelsTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                requiredString = "<requiredString>",
-                kind = "A",
-            });
+            using RequestContent content = RequestContent.Create(new { });
             Response response = client.PutBaseModelWithDiscriminatorDefinedOnBase(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -45,11 +41,7 @@ namespace ModelsTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                requiredString = "<requiredString>",
-                kind = "A",
-            });
+            using RequestContent content = RequestContent.Create(new { });
             Response response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -64,10 +56,7 @@ namespace ModelsTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
-            {
-                Kind = "A",
-            };
+            BaseModelWithDiscriminatorDefinedOnBase body = new BaseModelWithDiscriminatorDefinedOnBase(null);
             Response<BaseModelWithDiscriminatorDefinedOnBase> response = client.PutBaseModelWithDiscriminatorDefinedOnBase(body);
         }
 
@@ -78,10 +67,7 @@ namespace ModelsTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
-            {
-                Kind = "A",
-            };
+            BaseModelWithDiscriminatorDefinedOnBase body = new BaseModelWithDiscriminatorDefinedOnBase(null);
             Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(body);
         }
 
@@ -94,9 +80,6 @@ namespace ModelsTypeSpec.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredString = "<requiredString>",
-                optionalInt = 1234,
-                kind = "A",
                 optionalString = "<optionalString>",
             });
             Response response = client.PutBaseModelWithDiscriminatorDefinedOnBase(content);
@@ -116,9 +99,6 @@ namespace ModelsTypeSpec.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredString = "<requiredString>",
-                optionalInt = 1234,
-                kind = "A",
                 optionalString = "<optionalString>",
             });
             Response response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(content);
@@ -136,11 +116,9 @@ namespace ModelsTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
+            BaseModelWithDiscriminatorDefinedOnBase body = new BaseModelWithDiscriminatorDefinedOnBase(null)
             {
-                OptionalInt = 1234,
                 OptionalString = "<optionalString>",
-                Kind = "A",
             };
             Response<BaseModelWithDiscriminatorDefinedOnBase> response = client.PutBaseModelWithDiscriminatorDefinedOnBase(body);
         }
@@ -152,11 +130,9 @@ namespace ModelsTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
+            BaseModelWithDiscriminatorDefinedOnBase body = new BaseModelWithDiscriminatorDefinedOnBase(null)
             {
-                OptionalInt = 1234,
                 OptionalString = "<optionalString>",
-                Kind = "A",
             };
             Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(body);
         }
@@ -1720,8 +1696,8 @@ default
                 requiredNullableString = "<requiredNullableString>",
                 requiredModel = new
                 {
-                    requiredString = "<requiredString>",
                     discriminatorProperty = "A",
+                    requiredString = "<requiredString>",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
@@ -1793,8 +1769,8 @@ null
                 requiredNullableString = "<requiredNullableString>",
                 requiredModel = new
                 {
-                    requiredString = "<requiredString>",
                     discriminatorProperty = "A",
+                    requiredString = "<requiredString>",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
@@ -1964,8 +1940,8 @@ default
                 nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new
                 {
-                    requiredString = "<requiredString>",
                     discriminatorProperty = "A",
+                    requiredString = "<requiredString>",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
                 },
@@ -2060,8 +2036,8 @@ null
                 nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new
                 {
-                    requiredString = "<requiredString>",
                     discriminatorProperty = "A",
+                    requiredString = "<requiredString>",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
                 },

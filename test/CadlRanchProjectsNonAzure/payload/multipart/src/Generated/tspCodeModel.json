@@ -6,11 +6,11 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "MultiPartRequest",
    "Namespace": "Payload.MultiPart",
-   "IsNullable": false,
    "Usage": "Input,Multipart",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "3",
@@ -43,11 +43,11 @@
   },
   {
    "$id": "7",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ComplexPartsRequest",
    "Namespace": "Payload.MultiPart",
-   "IsNullable": false,
    "Usage": "Input,Multipart",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "8",
@@ -69,11 +69,11 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "Address",
       "Namespace": "Payload.MultiPart",
-      "IsNullable": false,
       "Usage": "Input",
+      "IsNullable": false,
       "Properties": [
        {
         "$id": "12",
@@ -151,11 +151,11 @@
   },
   {
    "$id": "21",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "JsonPartRequest",
    "Namespace": "Payload.MultiPart",
-   "IsNullable": false,
    "Usage": "Input,Multipart",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "22",
@@ -186,11 +186,11 @@
   },
   {
    "$id": "25",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "BinaryArrayPartsRequest",
    "Namespace": "Payload.MultiPart",
-   "IsNullable": false,
    "Usage": "Input,Multipart",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "26",
@@ -229,11 +229,11 @@
   },
   {
    "$id": "31",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "JsonArrayPartsRequest",
    "Namespace": "Payload.MultiPart",
-   "IsNullable": false,
    "Usage": "Input,Multipart",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "32",
@@ -270,11 +270,11 @@
   },
   {
    "$id": "36",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "MultiBinaryPartsRequest",
    "Namespace": "Payload.MultiPart",
-   "IsNullable": false,
    "Usage": "Input,Multipart",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "37",
@@ -308,11 +308,11 @@
   },
   {
    "$id": "41",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "AnonymousModelRequest",
    "Namespace": "",
-   "IsNullable": false,
    "Usage": "Input,Multipart",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "42",

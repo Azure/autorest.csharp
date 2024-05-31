@@ -77,12 +77,12 @@
  "Models": [
   {
    "$id": "12",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ListLedgerEntryInputBody",
    "Namespace": "Pagination",
+   "Usage": "Input",
    "Description": "Type for input model body",
    "IsNullable": false,
-   "Usage": "Input",
    "Properties": [
     {
      "$id": "13",
@@ -114,12 +114,12 @@
   },
   {
    "$id": "17",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedLedgerEntries",
    "Namespace": "Pagination",
+   "Usage": "Output",
    "Description": "Paginated ledger entries",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "18",
@@ -132,11 +132,11 @@
       "Name": "Array",
       "ElementType": {
        "$id": "20",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "LedgerEntry",
        "Namespace": "Pagination",
-       "IsNullable": false,
        "Usage": "Output",
+       "IsNullable": false,
        "Properties": [
         {
          "$id": "21",
@@ -204,12 +204,12 @@
   },
   {
    "$id": "29",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedDimensionValueListItem",
    "Namespace": "Azure.Core.Foundations",
+   "Usage": "Output",
    "Description": "Paged collection of DimensionValueListItem items",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "30",
@@ -222,11 +222,11 @@
       "Name": "Array",
       "ElementType": {
        "$id": "32",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "DimensionValueListItem",
        "Namespace": "Pagination",
-       "IsNullable": false,
        "Usage": "Output",
+       "IsNullable": false,
        "Properties": [
         {
          "$id": "33",
@@ -274,12 +274,12 @@
   },
   {
    "$id": "38",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedLedgerEntry",
    "Namespace": "Azure.Core",
+   "Usage": "Output",
    "Description": "Paged collection of LedgerEntry items",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "39",
@@ -315,12 +315,12 @@
   },
   {
    "$id": "43",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedTextBlocklist",
    "Namespace": "Azure.Core.Foundations",
+   "Usage": "Output",
    "Description": "Paged collection of TextBlocklist items",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "44",
@@ -333,12 +333,12 @@
       "Name": "Array",
       "ElementType": {
        "$id": "46",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "TextBlocklist",
        "Namespace": "Pagination",
+       "Usage": "Output",
        "Description": "Text Blocklist.",
        "IsNullable": false,
-       "Usage": "Output",
        "Properties": [
         {
          "$id": "47",
@@ -393,12 +393,12 @@
   },
   {
    "$id": "53",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedTextBlockItem",
    "Namespace": "Azure.Core.Foundations",
+   "Usage": "Output",
    "Description": "Paged collection of TextBlockItem items",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "54",
@@ -411,12 +411,12 @@
       "Name": "Array",
       "ElementType": {
        "$id": "56",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "TextBlockItem",
        "Namespace": "Pagination",
+       "Usage": "Output",
        "Description": "Item in TextBlocklist.",
        "IsNullable": false,
-       "Usage": "Output",
        "Properties": [
         {
          "$id": "57",
@@ -484,12 +484,12 @@
   },
   {
    "$id": "65",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "BatchPoolListResult",
    "Namespace": "Pagination",
+   "Usage": "Output",
    "Description": "The result of listing the Pools in an Account.",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "66",
@@ -502,12 +502,12 @@
       "Name": "Array",
       "ElementType": {
        "$id": "68",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "BatchPool",
        "Namespace": "Pagination",
+       "Usage": "Output",
        "Description": "A Pool in the Azure Batch service.",
        "IsNullable": false,
-       "Usage": "Output",
        "Properties": [
         {
          "$id": "69",
@@ -575,12 +575,12 @@
   },
   {
    "$id": "77",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "BatchError",
    "Namespace": "Pagination",
+   "Usage": "Output",
    "Description": "An error response received from the Azure Batch service.",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "78",

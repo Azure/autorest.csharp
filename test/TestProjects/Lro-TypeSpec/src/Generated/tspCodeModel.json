@@ -78,12 +78,12 @@
  "Models": [
   {
    "$id": "13",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RadiologyInsightsResult",
    "Namespace": "lro",
+   "Usage": "Output",
    "Description": "The response for the Radiology Insights request.",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "14",
@@ -174,12 +174,12 @@
      "Description": "Error object that describes the error when status is \"Failed\".",
      "Type": {
       "$id": "27",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "Error",
       "Namespace": "Azure.Core.Foundations",
+      "Usage": "Output",
       "Description": "The error object.",
       "IsNullable": false,
-      "Usage": "Output",
       "Properties": [
        {
         "$id": "28",
@@ -244,12 +244,12 @@
         "Description": "An object containing more specific information than the current object about the error.",
         "Type": {
          "$id": "37",
-         "Kind": "Model",
+         "Kind": "model",
          "Name": "InnerError",
          "Namespace": "Azure.Core.Foundations",
+         "Usage": "Output",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "IsNullable": false,
-         "Usage": "Output",
          "Properties": [
           {
            "$id": "38",
@@ -292,12 +292,12 @@
      "Description": "The result of the operation.",
      "Type": {
       "$id": "42",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "RadiologyInsightsInferenceResult",
       "Namespace": "lro",
+      "Usage": "Output",
       "Description": "The inference results for the Radiology Insights request.",
       "IsNullable": false,
-      "Usage": "Output",
       "Properties": [
        {
         "$id": "43",
@@ -330,12 +330,12 @@
   },
   {
    "$id": "45",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RadiologyInsightsData",
    "Namespace": "lro",
+   "Usage": "Input",
    "Description": "The body of the Radiology Insights request.",
    "IsNullable": false,
-   "Usage": "Input",
    "Properties": [
     {
      "$id": "46",
@@ -373,12 +373,12 @@
   },
   {
    "$id": "51",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "HealthInsightsOperationStatusError",
    "Namespace": "lro",
+   "Usage": "Output",
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "52",

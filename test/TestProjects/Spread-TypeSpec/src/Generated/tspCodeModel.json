@@ -30,11 +30,11 @@
  "Models": [
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Thing",
    "Namespace": "SpreadTypeSpec",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "6",
@@ -66,11 +66,11 @@
   },
   {
    "$id": "10",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadAliasRequest",
    "Namespace": "SpreadTypeSpec",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "11",
@@ -102,11 +102,11 @@
   },
   {
    "$id": "15",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadMultiTargetAliasRequest",
    "Namespace": "",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "16",
@@ -138,11 +138,11 @@
   },
   {
    "$id": "20",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadAliasWithSpreadAliasRequest",
    "Namespace": "",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "21",
@@ -174,11 +174,11 @@
   },
   {
    "$id": "25",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadAliasWithOptionalPropsRequest",
    "Namespace": "",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "26",
@@ -261,11 +261,11 @@
   },
   {
    "$id": "38",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadAliasWithCollectionsRequest",
    "Namespace": "SpreadTypeSpec",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "39",

@@ -475,12 +475,12 @@
  "Models": [
   {
    "$id": "72",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Thing",
    "Namespace": "NoDocsTypeSpec",
+   "Usage": "RoundTrip",
    "Description": "A model with a few properties of literal types",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "73",
@@ -502,9 +502,9 @@
      "Description": "required Union",
      "Type": {
       "$id": "76",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "ThingRequiredUnion",
+      "ItemTypes": [
        {
         "$id": "77",
         "Kind": "string",
@@ -727,12 +727,12 @@
   },
   {
    "$id": "107",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Friend",
    "Namespace": "NoDocsTypeSpec",
+   "Usage": "RoundTrip",
    "Description": "this is not a friendly model but with a friendly name",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "108",
@@ -751,12 +751,12 @@
   },
   {
    "$id": "110",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ProjectedModel",
    "Namespace": "NoDocsTypeSpec",
+   "Usage": "RoundTrip",
    "Description": "this is a model with a projected name",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "111",
@@ -775,29 +775,29 @@
   },
   {
    "$id": "113",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
    "Namespace": "NoDocsTypeSpec",
-   "IsNullable": false,
    "Usage": "Output",
+   "IsNullable": false,
    "Properties": []
   },
   {
    "$id": "114",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Extension",
    "Namespace": "NoDocsTypeSpec",
+   "Usage": "Input",
    "Description": "extension",
    "IsNullable": false,
-   "Usage": "Input",
    "BaseModel": {
     "$id": "115",
-    "Kind": "Model",
+    "Kind": "model",
     "Name": "Element",
     "Namespace": "NoDocsTypeSpec",
+    "Usage": "Input",
     "Description": "element",
     "IsNullable": false,
-    "Usage": "Input",
     "Properties": [
      {
       "$id": "116",
@@ -839,12 +839,12 @@
   },
   {
    "$id": "120",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Extendible",
    "Namespace": "NoDocsTypeSpec",
+   "Usage": "Input",
    "Description": "FHIR extendible element",
    "IsNullable": false,
-   "Usage": "Input",
    "Properties": [
     {
      "$id": "121",
@@ -857,20 +857,20 @@
       "Name": "Array",
       "ElementType": {
        "$id": "123",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "ThereLevelExtension",
        "Namespace": "NoDocsTypeSpec",
+       "Usage": "Input",
        "Description": "extension",
        "IsNullable": false,
-       "Usage": "Input",
        "BaseModel": {
         "$id": "124",
-        "Kind": "Model",
+        "Kind": "model",
         "Name": "ThereLevelElement",
         "Namespace": "NoDocsTypeSpec",
+        "Usage": "Input",
         "Description": "element",
         "IsNullable": false,
-        "Usage": "Input",
         "Properties": [
          {
           "$id": "125",
@@ -922,20 +922,20 @@
   },
   {
    "$id": "129",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ChildModel",
    "Namespace": "NoDocsTypeSpec",
+   "Usage": "Input",
    "Description": "ChildModel",
    "IsNullable": false,
-   "Usage": "Input",
    "BaseModel": {
     "$id": "130",
-    "Kind": "Model",
+    "Kind": "model",
     "Name": "BaseModel",
     "Namespace": "NoDocsTypeSpec",
+    "Usage": "Input",
     "Description": "parenetModel",
     "IsNullable": false,
-    "Usage": "Input",
     "Properties": [
      {
       "$id": "131",
@@ -977,12 +977,12 @@
   },
   {
    "$id": "135",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ContainSelf",
    "Namespace": "NoDocsTypeSpec",
+   "Usage": "Input",
    "Description": "containself",
    "IsNullable": false,
-   "Usage": "Input",
    "Properties": [
     {
      "$id": "136",
@@ -999,11 +999,11 @@
   },
   {
    "$id": "137",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelWithProjectedEnum",
    "Namespace": "NoDocsTypeSpec",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "138",
@@ -1020,11 +1020,11 @@
   },
   {
    "$id": "139",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "AzureLocationModel",
    "Namespace": "NoDocsTypeSpec",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "140",
@@ -1044,12 +1044,12 @@
   },
   {
    "$id": "142",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RoundTripModel",
    "Namespace": "NoDocsTypeSpec",
+   "Usage": "RoundTrip",
    "Description": "this is a roundtrip model",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "143",
@@ -1379,12 +1379,12 @@
      "Description": "this is a model with required nullable properties",
      "Type": {
       "$id": "187",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelWithRequiredNullableProperties",
       "Namespace": "NoDocsTypeSpec",
+      "Usage": "RoundTrip",
       "Description": "A model with a few required nullable properties",
       "IsNullable": false,
-      "Usage": "RoundTrip",
       "Properties": [
        {
         "$id": "188",
@@ -1437,9 +1437,9 @@
       "Name": "Array",
       "ElementType": {
        "$id": "194",
-       "Kind": "Union",
-       "Name": "Union",
-       "UnionItemTypes": [
+       "Kind": "union",
+       "Name": "RoundTripModelUnionList",
+       "ItemTypes": [
         {
          "$id": "195",
          "Kind": "string",
@@ -1452,12 +1452,12 @@
         },
         {
          "$id": "197",
-         "Kind": "Model",
+         "Kind": "model",
          "Name": "ModelForUnion",
          "Namespace": "NoDocsTypeSpec",
+         "Usage": "RoundTrip",
          "Description": "This is a model only used in union types, please do not use it anywhere else.",
          "IsNullable": false,
-         "Usage": "RoundTrip",
          "Properties": [
           {
            "$id": "198",

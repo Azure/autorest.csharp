@@ -6,12 +6,12 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Model",
    "Namespace": "ConvenienceInCadl",
+   "Usage": "RoundTrip",
    "Description": "A model.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "3",

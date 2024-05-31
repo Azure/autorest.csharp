@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
-    internal partial class DerivedWithDiscriminatorDefinedOnBase : IUtf8JsonSerializable, IJsonModel<DerivedWithDiscriminatorDefinedOnBase>
+    internal partial class UnknownDerivedWithDiscriminatorDefinedOnBase : IUtf8JsonSerializable, IJsonModel<DerivedWithDiscriminatorDefinedOnBase>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DerivedWithDiscriminatorDefinedOnBase>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
@@ -71,7 +71,7 @@ namespace ModelsTypeSpec.Models
             return DeserializeDerivedWithDiscriminatorDefinedOnBase(document.RootElement, options);
         }
 
-        internal static DerivedWithDiscriminatorDefinedOnBase DeserializeDerivedWithDiscriminatorDefinedOnBase(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static UnknownDerivedWithDiscriminatorDefinedOnBase DeserializeUnknownDerivedWithDiscriminatorDefinedOnBase(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -117,7 +117,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new DerivedWithDiscriminatorDefinedOnBase(kind, serializedAdditionalRawData, optionalString, requiredString, optionalInt);
+            return new UnknownDerivedWithDiscriminatorDefinedOnBase(kind, serializedAdditionalRawData, optionalString, requiredString, optionalInt);
         }
 
         BinaryData IPersistableModel<DerivedWithDiscriminatorDefinedOnBase>.Write(ModelReaderWriterOptions options)
@@ -153,17 +153,17 @@ namespace ModelsTypeSpec.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static new DerivedWithDiscriminatorDefinedOnBase FromResponse(Response response)
+        internal static new UnknownDerivedWithDiscriminatorDefinedOnBase FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDerivedWithDiscriminatorDefinedOnBase(document.RootElement);
+            return DeserializeUnknownDerivedWithDiscriminatorDefinedOnBase(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue<DerivedWithDiscriminatorDefinedOnBase>(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

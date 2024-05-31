@@ -6,12 +6,12 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedUser",
    "Namespace": "Azure.Core",
+   "Usage": "Output",
    "Description": "Paged collection of User items",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "3",
@@ -24,12 +24,12 @@
       "Name": "Array",
       "ElementType": {
        "$id": "5",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "User",
        "Namespace": "Payload.Pageable",
+       "Usage": "Output",
        "Description": "User model",
        "IsNullable": false,
-       "Usage": "Output",
        "Properties": [
         {
          "$id": "6",

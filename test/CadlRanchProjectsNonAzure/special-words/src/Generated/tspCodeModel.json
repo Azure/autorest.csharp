@@ -6,11 +6,11 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "and",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "3",
@@ -29,11 +29,11 @@
   },
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "as",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "6",
@@ -52,11 +52,11 @@
   },
   {
    "$id": "8",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "assert",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "9",
@@ -75,11 +75,11 @@
   },
   {
    "$id": "11",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "async",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "12",
@@ -98,11 +98,11 @@
   },
   {
    "$id": "14",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "await",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "15",
@@ -121,11 +121,11 @@
   },
   {
    "$id": "17",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "break",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "18",
@@ -144,11 +144,11 @@
   },
   {
    "$id": "20",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "class",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "21",
@@ -167,11 +167,11 @@
   },
   {
    "$id": "23",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "constructor",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "24",
@@ -190,11 +190,11 @@
   },
   {
    "$id": "26",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "continue",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "27",
@@ -213,11 +213,11 @@
   },
   {
    "$id": "29",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "def",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "30",
@@ -236,11 +236,11 @@
   },
   {
    "$id": "32",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "del",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "33",
@@ -259,11 +259,11 @@
   },
   {
    "$id": "35",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "elif",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "36",
@@ -282,11 +282,11 @@
   },
   {
    "$id": "38",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "else",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "39",
@@ -305,11 +305,11 @@
   },
   {
    "$id": "41",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "except",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "42",
@@ -328,11 +328,11 @@
   },
   {
    "$id": "44",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "exec",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "45",
@@ -351,11 +351,11 @@
   },
   {
    "$id": "47",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "finally",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "48",
@@ -374,11 +374,11 @@
   },
   {
    "$id": "50",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "for",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "51",
@@ -397,11 +397,11 @@
   },
   {
    "$id": "53",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "from",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "54",
@@ -420,11 +420,11 @@
   },
   {
    "$id": "56",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "global",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "57",
@@ -443,11 +443,11 @@
   },
   {
    "$id": "59",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "if",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "60",
@@ -466,11 +466,11 @@
   },
   {
    "$id": "62",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "import",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "63",
@@ -489,11 +489,11 @@
   },
   {
    "$id": "65",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "in",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "66",
@@ -512,11 +512,11 @@
   },
   {
    "$id": "68",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "is",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "69",
@@ -535,11 +535,11 @@
   },
   {
    "$id": "71",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "lambda",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "72",
@@ -558,11 +558,11 @@
   },
   {
    "$id": "74",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "not",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "75",
@@ -581,11 +581,11 @@
   },
   {
    "$id": "77",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "or",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "78",
@@ -604,11 +604,11 @@
   },
   {
    "$id": "80",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "pass",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "81",
@@ -627,11 +627,11 @@
   },
   {
    "$id": "83",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "raise",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "84",
@@ -650,11 +650,11 @@
   },
   {
    "$id": "86",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "return",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "87",
@@ -673,11 +673,11 @@
   },
   {
    "$id": "89",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "try",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "90",
@@ -696,11 +696,11 @@
   },
   {
    "$id": "92",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "while",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "93",
@@ -719,11 +719,11 @@
   },
   {
    "$id": "95",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "with",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "96",
@@ -742,11 +742,11 @@
   },
   {
    "$id": "98",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "yield",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "99",
@@ -765,11 +765,11 @@
   },
   {
    "$id": "101",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SameAsModel",
    "Namespace": "SpecialWords.ModelProperties",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "102",

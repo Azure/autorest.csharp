@@ -6,12 +6,12 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "InputRecord",
    "Namespace": "Type.Model.Usage",
+   "Usage": "Input",
    "Description": "Record used in operation parameters",
    "IsNullable": false,
-   "Usage": "Input",
    "Properties": [
     {
      "$id": "3",
@@ -30,12 +30,12 @@
   },
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "OutputRecord",
    "Namespace": "Type.Model.Usage",
+   "Usage": "Output",
    "Description": "Record used in operation return type",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "6",
@@ -54,12 +54,12 @@
   },
   {
    "$id": "8",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "InputOutputRecord",
    "Namespace": "Type.Model.Usage",
+   "Usage": "RoundTrip",
    "Description": "Record used both as operation parameter and return type",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "9",

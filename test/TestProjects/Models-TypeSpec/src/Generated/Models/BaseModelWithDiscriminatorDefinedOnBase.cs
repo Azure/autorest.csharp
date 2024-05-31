@@ -10,17 +10,13 @@ using System.Collections.Generic;
 
 namespace ModelsTypeSpec.Models
 {
-    /// <summary>
-    /// A base model in the discriminated set inheriting from a base with the predefined discriminator property
-    /// Please note <see cref="BaseModelWithDiscriminatorDefinedOnBase"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-    /// The available derived classes include <see cref="DerivedWithDiscriminatorDefinedOnBase"/>.
-    /// </summary>
-    public abstract partial class BaseModelWithDiscriminatorDefinedOnBase : BaseModelWithARequiredProperty
+    /// <summary> A base model in the discriminated set inheriting from a base with the predefined discriminator property. </summary>
+    public partial class BaseModelWithDiscriminatorDefinedOnBase : BaseModelWithARequiredProperty
     {
         /// <summary> Initializes a new instance of <see cref="BaseModelWithDiscriminatorDefinedOnBase"/>. </summary>
         /// <param name="kind"> Required kind. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
-        protected BaseModelWithDiscriminatorDefinedOnBase(string kind) : base(kind)
+        public BaseModelWithDiscriminatorDefinedOnBase(string kind) : base(kind)
         {
             Argument.AssertNotNull(kind, nameof(kind));
         }

@@ -86,11 +86,11 @@
  "Models": [
   {
    "$id": "13",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelV1",
    "Namespace": "Versioning.Added",
-   "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "14",
@@ -123,9 +123,9 @@
      "Description": "",
      "Type": {
       "$id": "18",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "UnionV1",
+      "ItemTypes": [
        {
         "$id": "19",
         "Kind": "string",
@@ -146,11 +146,11 @@
   },
   {
    "$id": "21",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelV2",
    "Namespace": "Versioning.Added",
-   "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "22",
@@ -183,9 +183,9 @@
      "Description": "",
      "Type": {
       "$id": "26",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "UnionV2",
+      "ItemTypes": [
        {
         "$id": "27",
         "Kind": "string",

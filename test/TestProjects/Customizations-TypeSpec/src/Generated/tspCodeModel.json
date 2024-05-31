@@ -159,12 +159,12 @@
  "Models": [
   {
    "$id": "25",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RootModel",
    "Namespace": "CustomizationsInTsp",
+   "Usage": "RoundTrip",
    "Description": "Root RoundTrip model to reference all other types to ensure generation",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "26",
@@ -184,12 +184,12 @@
      "Description": "ModelToMakeInternal",
      "Type": {
       "$id": "28",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelToMakeInternal",
       "Namespace": "CustomizationsInTsp",
+      "Usage": "RoundTrip",
       "Description": "Public model made internal",
       "IsNullable": false,
-      "Usage": "RoundTrip",
       "Properties": [
        {
         "$id": "29",
@@ -216,12 +216,12 @@
      "Description": "ModelToRename",
      "Type": {
       "$id": "32",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelToRename",
       "Namespace": "CustomizationsInTsp",
+      "Usage": "RoundTrip",
       "Description": "Renamed model (original name: ModelToRename)",
       "IsNullable": false,
-      "Usage": "RoundTrip",
       "Properties": [
        {
         "$id": "33",
@@ -261,12 +261,12 @@
      "Description": "ModelToChangeNamespace",
      "Type": {
       "$id": "38",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelToChangeNamespace",
       "Namespace": "CustomizationsInTsp",
+      "Usage": "RoundTrip",
       "Description": "Model moved into custom namespace",
       "IsNullable": false,
-      "Usage": "RoundTrip",
       "Properties": [
        {
         "$id": "39",
@@ -293,12 +293,12 @@
      "Description": "ModelWithCustomizedProperties",
      "Type": {
       "$id": "42",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelWithCustomizedProperties",
       "Namespace": "CustomizationsInTsp",
+      "Usage": "RoundTrip",
       "Description": "Model with customized properties",
       "IsNullable": false,
-      "Usage": "RoundTrip",
       "Properties": [
        {
         "$id": "43",
@@ -705,12 +705,12 @@
      "Description": "ModelToAddAdditionalSerializableProperty",
      "Type": {
       "$id": "104",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelToAddAdditionalSerializableProperty",
       "Namespace": "CustomizationsInTsp",
+      "Usage": "RoundTrip",
       "Description": "Model to add additional serializable property",
       "IsNullable": false,
-      "Usage": "RoundTrip",
       "BaseModel": {
        "$ref": "32"
       },
@@ -751,12 +751,12 @@
      "Description": "ModelStruct",
      "Type": {
       "$id": "109",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelStruct",
       "Namespace": "CustomizationsInTsp",
+      "Usage": "RoundTrip",
       "Description": "Model to make to a struct",
       "IsNullable": false,
-      "Usage": "RoundTrip",
       "Properties": [
        {
         "$id": "110",

@@ -388,12 +388,12 @@
  "Models": [
   {
    "$id": "59",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Thing",
    "Namespace": "NewProjectTypeSpec",
+   "Usage": "RoundTrip",
    "Description": "A model with a few properties of literal types",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "60",
@@ -415,9 +415,9 @@
      "Description": "required Union",
      "Type": {
       "$id": "63",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "ThingRequiredUnion",
+      "ItemTypes": [
        {
         "$id": "64",
         "Kind": "string",
@@ -602,12 +602,12 @@
   },
   {
    "$id": "88",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Friend",
    "Namespace": "NewProjectTypeSpec",
+   "Usage": "RoundTrip",
    "Description": "this is not a friendly model but with a friendly name",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "89",
@@ -626,12 +626,12 @@
   },
   {
    "$id": "91",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RoundTripModel",
    "Namespace": "NewProjectTypeSpec",
+   "Usage": "RoundTrip",
    "Description": "this is a roundtrip model",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "92",

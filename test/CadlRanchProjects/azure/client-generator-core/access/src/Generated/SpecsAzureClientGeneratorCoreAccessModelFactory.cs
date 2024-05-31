@@ -26,14 +26,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             return new PublicDecoratorModelInPublic(name, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.PublicDecoratorModelInInternal"/>. </summary>
-        /// <param name="name"></param>
-        /// <returns> A new <see cref="Models.PublicDecoratorModelInInternal"/> instance for mocking. </returns>
-        public static PublicDecoratorModelInInternal PublicDecoratorModelInInternal(string name = null)
-        {
-            return new PublicDecoratorModelInInternal(name, serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.SharedModel"/>. </summary>
         /// <param name="name"></param>
         /// <returns> A new <see cref="Models.SharedModel"/> instance for mocking. </returns>

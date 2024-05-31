@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
-    public partial class PublicDecoratorModelInInternal : IUtf8JsonSerializable, IJsonModel<PublicDecoratorModelInInternal>
+    internal partial class PublicDecoratorModelInInternal : IUtf8JsonSerializable, IJsonModel<PublicDecoratorModelInInternal>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PublicDecoratorModelInInternal>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 

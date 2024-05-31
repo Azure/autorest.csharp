@@ -39,11 +39,11 @@
  "Models": [
   {
    "$id": "6",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "TestModel",
    "Namespace": "Versioning.TypeChangedFrom",
-   "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "7",

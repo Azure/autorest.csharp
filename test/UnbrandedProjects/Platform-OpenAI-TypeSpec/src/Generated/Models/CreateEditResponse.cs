@@ -9,7 +9,6 @@ using System.Linq;
 namespace OpenAI.Models
 {
     /// <summary> The CreateEditResponse. </summary>
-    [Obsolete("deprecated")]
     public partial class CreateEditResponse
     {
         /// <summary>
