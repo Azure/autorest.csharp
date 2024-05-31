@@ -96,53 +96,60 @@ export function fromSdkModelType(
     const modelTypeName = modelType.name;
     let inputModelType = models.get(modelTypeName);
     if (!inputModelType) {
-        const baseModelHasDiscriminator = hasDiscriminator(modelType.baseModel);
         inputModelType = {
-            Kind: InputTypeKind.Model,
+            Kind: "model",
             Name: modelTypeName,
             Namespace: getFullNamespaceString(
                 (modelType.__raw as Model).namespace
-            ),
-            Accessibility: modelType.access,
-            Deprecated: modelType.deprecation,
+            ), // TODO -- use the value from TCGC when this is included in TCGC
+            Access: modelType.access,
+            Usage: fromUsageFlags(modelType.usage),
+            Deprecation: modelType.deprecation,
             Description: modelType.description,
             IsNullable: modelType.nullable,
-            DiscriminatorPropertyName: baseModelHasDiscriminator
-                ? undefined
-                : getDiscriminatorPropertyNameFromCurrentModel(modelType),
-            DiscriminatorValue: modelType.discriminatorValue,
-            Usage: fromUsageFlags(modelType.usage)
+            DiscriminatorValue: modelType.discriminatorValue
         } as InputModelType;
 
         models.set(modelTypeName, inputModelType);
+
+        inputModelType.DiscriminatorProperty = modelType.discriminatorProperty
+            ? fromSdkModelProperty(
+                  modelType.discriminatorProperty,
+                  {
+                      ModelName: modelTypeName,
+                      Namespace: inputModelType.Namespace
+                  } as LiteralTypeContext,
+                  []
+              )[0]
+            : undefined;
 
         inputModelType.BaseModel = modelType.baseModel
             ? fromSdkModelType(modelType.baseModel, context, models, enums)
             : undefined;
 
-        inputModelType.InheritedDictionaryType = modelType.additionalProperties
-            ? {
-                  Kind: InputTypeKind.Dictionary,
-                  Name: InputTypeKind.Dictionary,
-                  KeyType: {
-                      Kind: "string",
-                      IsNullable: false
-                  },
-                  ValueType: fromSdkType(
-                      modelType.additionalProperties,
-                      context,
-                      models,
-                      enums
-                  ),
-                  IsNullable: false
-              }
+        if (modelType.discriminatedSubtypes) {
+            const discriminatedSubtypes: Record<string, InputModelType> = {};
+            for (const key in modelType.discriminatedSubtypes) {
+                const subtype = modelType.discriminatedSubtypes[key];
+                discriminatedSubtypes[key] = fromSdkModelType(
+                    subtype,
+                    context,
+                    models,
+                    enums
+                );
+            }
+            inputModelType.DiscriminatedSubtypes = discriminatedSubtypes;
+        }
+
+        inputModelType.AdditionalProperties = modelType.additionalProperties
+            ? fromSdkType(
+                  modelType.additionalProperties,
+                  context,
+                  models,
+                  enums
+              )
             : undefined;
         inputModelType.Properties = modelType.properties
-            .filter(
-                (p) =>
-                    !(p as SdkBodyModelPropertyType).discriminator ||
-                    !baseModelHasDiscriminator
-            )
             .filter(
                 (p) =>
                     p.kind !== "header" &&
@@ -231,19 +238,6 @@ export function fromSdkModelType(
 
         return flattenedProperties;
     }
-}
-
-function getDiscriminatorPropertyNameFromCurrentModel(
-    model?: SdkModelType
-): string | undefined {
-    if (model == null) return undefined;
-
-    const discriminatorProperty = model.properties.find(
-        (p) => (p as SdkBodyModelPropertyType).discriminator
-    );
-    if (discriminatorProperty) return discriminatorProperty.name;
-
-    return undefined;
 }
 
 function hasDiscriminator(model?: SdkModelType): boolean {
