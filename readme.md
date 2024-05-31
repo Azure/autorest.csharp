@@ -1806,3 +1806,9 @@ skip-csproj-packagereference: true
 ## Management plane concepts and configurations
 
 See the documentation [here](./docs/mgmt/readme.md)
+
+# Third-Party Code
+
+This project uses code from the following third-party projects:
+
+- **json-serialize-refs**: [GitHub Repository](https://github.com/devel0/json-serialize-refs)  - Licensed under the MIT License.
