@@ -112,20 +112,40 @@ export function fromSdkModelType(
 
         models.set(modelTypeName, inputModelType);
 
-        inputModelType.DiscriminatorProperty = modelType.discriminatorProperty
-            ? fromSdkModelProperty(
-                  modelType.discriminatorProperty,
-                  {
-                      ModelName: modelTypeName,
-                      Namespace: inputModelType.Namespace
-                  } as LiteralTypeContext,
-                  []
-              )[0]
-            : undefined;
-
         inputModelType.BaseModel = modelType.baseModel
             ? fromSdkModelType(modelType.baseModel, context, models, enums)
             : undefined;
+
+        inputModelType.AdditionalProperties = modelType.additionalProperties
+            ? fromSdkType(
+                  modelType.additionalProperties,
+                  context,
+                  models,
+                  enums
+              )
+            : undefined;
+
+        const propertiesDict = new Map<
+            SdkModelPropertyType,
+            InputModelProperty[]
+        >();
+        for (const property of modelType.properties) {
+            const ourProperties = fromSdkModelProperty(
+                property,
+                {
+                    ModelName: modelTypeName,
+                    Namespace: inputModelType.Namespace
+                } as LiteralTypeContext,
+                []
+            );
+            propertiesDict.set(property, ourProperties);
+        }
+
+        inputModelType.DiscriminatorProperty = modelType.discriminatorProperty
+            ? propertiesDict.get(modelType.discriminatorProperty)![0]
+            : undefined;
+
+        inputModelType.Properties = Array.from(propertiesDict.values()).flat();
 
         if (modelType.discriminatedSubtypes) {
             const discriminatedSubtypes: Record<string, InputModelType> = {};
@@ -140,33 +160,6 @@ export function fromSdkModelType(
             }
             inputModelType.DiscriminatedSubtypes = discriminatedSubtypes;
         }
-
-        inputModelType.AdditionalProperties = modelType.additionalProperties
-            ? fromSdkType(
-                  modelType.additionalProperties,
-                  context,
-                  models,
-                  enums
-              )
-            : undefined;
-        inputModelType.Properties = modelType.properties
-            .filter(
-                (p) =>
-                    p.kind !== "header" &&
-                    p.kind !== "query" &&
-                    p.kind !== "path"
-            )
-            .map((p) =>
-                fromSdkModelProperty(
-                    p,
-                    {
-                        ModelName: inputModelType?.Name,
-                        Namespace: inputModelType?.Namespace
-                    } as LiteralTypeContext,
-                    []
-                )
-            )
-            .flat();
     }
 
     return inputModelType;
@@ -176,6 +169,7 @@ export function fromSdkModelType(
         literalTypeContext: LiteralTypeContext,
         flattenedNamePrefixes: string[]
     ): InputModelProperty[] {
+        // TODO -- we should consolidate the flatten somewhere else
         if (propertyType.kind !== "property" || !propertyType.flatten) {
             const serializedName =
                 propertyType.kind === "property"

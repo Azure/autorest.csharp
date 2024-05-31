@@ -621,7 +621,7 @@ namespace AutoRest.CSharp.Output.Builders
         }
         private MultipartAdditionalPropertiesSerialization? CreateMultipartAdditionalPropertiesSerialization(InputModelType objectSchema, ObjectType objectType)
         {
-            var inheritedDictionarySchema = objectSchema.InheritedDictionaryType;
+            var additionalPropertiesValueType = objectSchema.AdditionalProperties;
             bool shouldExcludeInWireSerialization = false;
             ObjectTypeProperty? additionalPropertiesProperty = null;
             foreach (var obj in objectType.EnumerateHierarchy())
@@ -643,9 +643,9 @@ namespace AutoRest.CSharp.Output.Builders
             var dictionaryValueType = additionalPropertiesProperty.Declaration.Type.Arguments[1];
             Debug.Assert(!dictionaryValueType.IsNullable, $"{typeof(JsonCodeWriterExtensions)} implicitly relies on {additionalPropertiesProperty.Declaration.Name} dictionary value being non-nullable");
             MultipartSerialization valueSerialization;
-            if (inheritedDictionarySchema is not null)
+            if (additionalPropertiesValueType is not null)
             {
-                valueSerialization = BuildMultipartSerialization(inheritedDictionarySchema.KeyType, dictionaryValueType, false, additionalPropertiesProperty.SerializationFormat, new TypedMemberExpression(null, additionalPropertiesProperty.Declaration.Name, additionalPropertiesProperty.Declaration.Type).NullableStructValue());
+                valueSerialization = BuildMultipartSerialization(InputPrimitiveType.String, dictionaryValueType, false, additionalPropertiesProperty.SerializationFormat, new TypedMemberExpression(null, additionalPropertiesProperty.Declaration.Name, additionalPropertiesProperty.Declaration.Type).NullableStructValue());
             }
             else
             {

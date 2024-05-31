@@ -30,15 +30,16 @@ namespace AutoRest.CSharp.Common.Input
         {
             var isFirstProperty = id == null && name == null;
             var properties = new List<InputModelProperty>();
+            var discriminatedSubtypes = new Dictionary<string, InputModelType>();
             bool isNullable = false;
             string? ns = null;
             string? accessibility = null;
             string? deprecated = null;
             string? description = null;
             string? usageString = null;
-            string? discriminatorPropertyName = null;
+            InputModelProperty? discriminatorProperty = null;
             string? discriminatorValue = null;
-            InputDictionaryType? inheritedDictionaryType = null;
+            InputType? additionalProperties = null;
             InputModelType? baseModel = null;
             InputModelType? model = null;
             while (reader.TokenType != JsonTokenType.EndObject)
@@ -51,9 +52,9 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputModelType.Deprecated), ref deprecated)
                     || reader.TryReadString(nameof(InputModelType.Description), ref description)
                     || reader.TryReadString(nameof(InputModelType.Usage), ref usageString)
-                    || reader.TryReadString(nameof(InputModelType.DiscriminatorPropertyName), ref discriminatorPropertyName)
+                    || reader.TryReadWithConverter(nameof(InputModelType.DiscriminatorProperty), options, ref discriminatorProperty)
                     || reader.TryReadString(nameof(InputModelType.DiscriminatorValue), ref discriminatorValue)
-                    || reader.TryReadWithConverter(nameof(InputModelType.InheritedDictionaryType), options, ref inheritedDictionaryType);
+                    || reader.TryReadWithConverter(nameof(InputModelType.AdditionalProperties), options, ref additionalProperties);
 
                 if (isKnownProperty)
                 {
@@ -65,7 +66,7 @@ namespace AutoRest.CSharp.Common.Input
                  */
                 if (reader.GetString() == nameof(InputModelType.BaseModel))
                 {
-                    model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, inheritedDictionaryType, isNullable, resolver);
+                    model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, isNullable, resolver);
                     reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel);
                     if (baseModel != null)
                     {
@@ -77,9 +78,15 @@ namespace AutoRest.CSharp.Common.Input
                 }
                 if (reader.GetString() == nameof(InputModelType.Properties))
                 {
-                    model = model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, inheritedDictionaryType, isNullable, resolver);
+                    model = model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, isNullable, resolver);
                     reader.Read();
                     CreateProperties(ref reader, properties, options, model.Usage.HasFlag(InputModelTypeUsage.Multipart));
+                }
+                else if (reader.GetString() == nameof(InputModelType.DiscriminatedSubtypes))
+                {
+                    model = model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, isNullable, resolver);
+                    reader.Read();
+                    CreateDiscriminatedSubtypes(ref reader, discriminatedSubtypes, options);
                     if (reader.TokenType != JsonTokenType.EndObject)
                     {
                         throw new JsonException($"{nameof(InputModelType)}.{nameof(InputModelType.Properties)} must be the last defined property for id '{id}', name '{name}'");
@@ -91,10 +98,10 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, inheritedDictionaryType, isNullable, resolver);
+            return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, isNullable, resolver);
         }
 
-        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, string? discriminatorPropertyValue, InputModelType? baseModel, IReadOnlyList<InputModelProperty> properties, InputDictionaryType? inheritedDictionaryType, bool isNullable, ReferenceResolver resolver)
+        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, InputModelProperty? discriminatorProperty, InputModelType? baseModel, IReadOnlyList<InputModelProperty> properties, IReadOnlyDictionary<string, InputModelType> discriminatedSubtypes, InputType? additionalProperties, bool isNullable, ReferenceResolver resolver)
         {
             name = name ?? throw new JsonException("Model must have name");
             InputModelTypeUsage usage = InputModelTypeUsage.None;
@@ -104,7 +111,7 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             var derivedModels = new List<InputModelType>();
-            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, derivedModels, discriminatorValue, discriminatorPropertyValue, inheritedDictionaryType, IsNullable: isNullable);
+            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, derivedModels, discriminatorValue, discriminatorProperty, discriminatedSubtypes, additionalProperties, IsNullable: isNullable);
 
             if (id is not null)
             {
@@ -160,6 +167,32 @@ namespace AutoRest.CSharp.Common.Input
                 }
                 properties.Add(property ?? throw new JsonException($"null {nameof(InputModelProperty)} is not allowed"));
             }
+            reader.Read();
+        }
+
+        private static void CreateDiscriminatedSubtypes(ref Utf8JsonReader reader, IDictionary<string, InputModelType> discriminatedSubtypes, JsonSerializerOptions options)
+        {
+            if (reader.TokenType != JsonTokenType.StartObject)
+            {
+                throw new JsonException();
+            }
+            reader.Read();
+
+            while (reader.TokenType != JsonTokenType.EndObject)
+            {
+                var discriminatorValue = reader.GetString() ?? throw new JsonException("Discriminator value cannot be null");
+                reader.Read();
+                if (reader.TokenType == JsonTokenType.StartObject)
+                {
+                    var subtype = reader.ReadWithConverter<InputModelType>(options) ?? throw new JsonException("Discriminated Subtype cannot be null");
+                    discriminatedSubtypes.Add(discriminatorValue, subtype);
+                }
+                else
+                {
+                    reader.Read();
+                }
+            }
+
             reader.Read();
         }
     }

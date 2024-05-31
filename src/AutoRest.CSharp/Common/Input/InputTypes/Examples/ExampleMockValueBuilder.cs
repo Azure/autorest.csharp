@@ -183,7 +183,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
             var result = InputExampleValue.Object(model, dict);
             visitedModels.Add(model);
             // if this model has a discriminator, we should return a derived type
-            if (model.DiscriminatorPropertyName != null)
+            if (model.DiscriminatorProperty != null)
             {
                 var derived = model.DerivedModels.FirstOrDefault();
                 if (derived is null)

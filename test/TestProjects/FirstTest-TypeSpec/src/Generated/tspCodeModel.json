@@ -475,12 +475,12 @@
  "Models": [
   {
    "$id": "72",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Thing",
    "Namespace": "FirstTestTypeSpec",
+   "Usage": "RoundTrip",
    "Description": "A model with a few properties of literal types",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "73",
@@ -753,12 +753,12 @@
   },
   {
    "$id": "111",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Friend",
    "Namespace": "FirstTestTypeSpec",
+   "Usage": "RoundTrip",
    "Description": "this is not a friendly model but with a friendly name",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "112",
@@ -777,11 +777,11 @@
   },
   {
    "$id": "114",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelWithFormat",
    "Namespace": "FirstTestTypeSpec",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "115",
@@ -814,12 +814,12 @@
   },
   {
    "$id": "119",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ProjectedModel",
    "Namespace": "FirstTestTypeSpec",
+   "Usage": "RoundTrip",
    "Description": "this is a model with a projected name",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "120",
@@ -838,29 +838,29 @@
   },
   {
    "$id": "122",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
    "Namespace": "FirstTestTypeSpec",
-   "IsNullable": false,
    "Usage": "Output",
+   "IsNullable": false,
    "Properties": []
   },
   {
    "$id": "123",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Extension",
    "Namespace": "FirstTestTypeSpec",
+   "Usage": "Input",
    "Description": "extension",
    "IsNullable": false,
-   "Usage": "Input",
    "BaseModel": {
     "$id": "124",
-    "Kind": "Model",
+    "Kind": "model",
     "Name": "Element",
     "Namespace": "FirstTestTypeSpec",
+    "Usage": "Input",
     "Description": "element",
     "IsNullable": false,
-    "Usage": "Input",
     "Properties": [
      {
       "$id": "125",
@@ -902,12 +902,12 @@
   },
   {
    "$id": "129",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Extendible",
    "Namespace": "FirstTestTypeSpec",
+   "Usage": "Input",
    "Description": "FHIR extendible element",
    "IsNullable": false,
-   "Usage": "Input",
    "Properties": [
     {
      "$id": "130",
@@ -920,20 +920,20 @@
       "Name": "Array",
       "ElementType": {
        "$id": "132",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "ThereLevelExtension",
        "Namespace": "FirstTestTypeSpec",
+       "Usage": "Input",
        "Description": "extension",
        "IsNullable": false,
-       "Usage": "Input",
        "BaseModel": {
         "$id": "133",
-        "Kind": "Model",
+        "Kind": "model",
         "Name": "ThereLevelElement",
         "Namespace": "FirstTestTypeSpec",
+        "Usage": "Input",
         "Description": "element",
         "IsNullable": false,
-        "Usage": "Input",
         "Properties": [
          {
           "$id": "134",
@@ -985,20 +985,20 @@
   },
   {
    "$id": "138",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ChildModel",
    "Namespace": "FirstTestTypeSpec",
+   "Usage": "Input",
    "Description": "ChildModel",
    "IsNullable": false,
-   "Usage": "Input",
    "BaseModel": {
     "$id": "139",
-    "Kind": "Model",
+    "Kind": "model",
     "Name": "BaseModel",
     "Namespace": "FirstTestTypeSpec",
+    "Usage": "Input",
     "Description": "parenetModel",
     "IsNullable": false,
-    "Usage": "Input",
     "Properties": [
      {
       "$id": "140",
@@ -1040,12 +1040,12 @@
   },
   {
    "$id": "144",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ContainSelf",
    "Namespace": "FirstTestTypeSpec",
+   "Usage": "Input",
    "Description": "containself",
    "IsNullable": false,
-   "Usage": "Input",
    "Properties": [
     {
      "$id": "145",
@@ -1062,11 +1062,11 @@
   },
   {
    "$id": "146",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelWithProjectedEnum",
    "Namespace": "FirstTestTypeSpec",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "147",
@@ -1083,11 +1083,11 @@
   },
   {
    "$id": "148",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "AzureLocationModel",
    "Namespace": "FirstTestTypeSpec",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "149",
@@ -1107,12 +1107,12 @@
   },
   {
    "$id": "151",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RoundTripModel",
    "Namespace": "FirstTestTypeSpec",
+   "Usage": "RoundTrip",
    "Description": "this is a roundtrip model",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "152",
@@ -1442,12 +1442,12 @@
      "Description": "this is a model with required nullable properties",
      "Type": {
       "$id": "196",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelWithRequiredNullableProperties",
       "Namespace": "FirstTestTypeSpec",
+      "Usage": "RoundTrip",
       "Description": "A model with a few required nullable properties",
       "IsNullable": false,
-      "Usage": "RoundTrip",
       "Properties": [
        {
         "$id": "197",
@@ -1515,12 +1515,12 @@
         },
         {
          "$id": "206",
-         "Kind": "Model",
+         "Kind": "model",
          "Name": "ModelForUnion",
          "Namespace": "FirstTestTypeSpec",
+         "Usage": "RoundTrip",
          "Description": "This is a model only used in union types, please do not use it anywhere else.",
          "IsNullable": false,
-         "Usage": "RoundTrip",
          "Properties": [
           {
            "$id": "207",

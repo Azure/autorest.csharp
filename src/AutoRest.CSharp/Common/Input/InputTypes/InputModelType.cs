@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, InputDictionaryType? InheritedDictionaryType, bool IsNullable, IReadOnlyList<InputType>? ArgumentTypes = null)
+    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, InputModelProperty? DiscriminatorProperty, IReadOnlyDictionary<string, InputModelType> DiscriminatedSubtypes, InputType? AdditionalProperties, bool IsNullable, IReadOnlyList<InputType>? ArgumentTypes = null)
         : InputType(Name, IsNullable)
     {
         /// <summary>
@@ -58,8 +58,9 @@ namespace AutoRest.CSharp.Common.Input
                 BaseModel,
                 DerivedModels,
                 DiscriminatorValue,
-                DiscriminatorPropertyName,
-                InheritedDictionaryType,
+                DiscriminatorProperty,
+                DiscriminatedSubtypes,
+                AdditionalProperties,
                 IsNullable);
         }
 

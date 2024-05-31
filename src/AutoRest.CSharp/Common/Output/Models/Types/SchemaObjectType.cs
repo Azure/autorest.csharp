@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             _defaultDerivedType = defaultDerivedType
                 //if I have children and parents then I am my own defaultDerivedType
-                ?? (inputModel.DerivedModels.Any() && inputModel.BaseModel is { DiscriminatorPropertyName: not null } ? this :(inputModel.IsUnknownDiscriminatorModel ? this : null));
+                ?? (inputModel.DerivedModels.Any() && inputModel.BaseModel is { DiscriminatorProperty: not null } ? this :(inputModel.IsUnknownDiscriminatorModel ? this : null));
             IsUnknownDerivedType = inputModel.IsUnknownDiscriminatorModel;
             // we skip the init ctor when there is an extension telling us to, or when this is an unknown derived type in a discriminated set
             SkipInitializerConstructor = IsUnknownDerivedType;
@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private SerializableObjectType? _defaultDerivedType;
 
-        protected override bool IsAbstract => MgmtReferenceType.IsReferenceType(InputModel) || (!Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && InputModel.DiscriminatorPropertyName != null && InputModel.DiscriminatorValue == null);
+        protected override bool IsAbstract => MgmtReferenceType.IsReferenceType(InputModel) || (!Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && InputModel.DiscriminatorProperty != null && InputModel.DiscriminatorValue == null);
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty
         {
@@ -147,7 +147,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (InputModel.DerivedModels.Count > 0)
                 return true;
 
-            if (InputModel.DiscriminatorPropertyName is not null)
+            if (InputModel.DiscriminatorProperty is not null)
                 return true;
 
             return false;
@@ -395,12 +395,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override ObjectTypeDiscriminator? BuildDiscriminator()
         {
-            var discriminatorPropertyName = InputModel.DiscriminatorPropertyName;
-            if (discriminatorPropertyName is null)
+            var discriminatorProperty = InputModel.DiscriminatorProperty;
+            if (discriminatorProperty is null)
             {
-                discriminatorPropertyName = GetCombinedSchemas().FirstOrDefault(m => m.DiscriminatorPropertyName != null)?.DiscriminatorPropertyName;
+                discriminatorProperty = GetCombinedSchemas().FirstOrDefault(m => m.DiscriminatorProperty != null)?.DiscriminatorProperty;
             }
-            if (discriminatorPropertyName is null)
+            if (discriminatorProperty is null)
             {
                 return null;
             }
@@ -431,7 +431,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ObjectTypeDiscriminator(
                 property,
-                discriminatorPropertyName,
+                discriminatorProperty.SerializedName,
                 implementations,
                 value,
                 _defaultDerivedType!
@@ -669,12 +669,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private CSharpType? CreateInheritedDictionaryType()
         {
-            if (InputModel.InheritedDictionaryType is not null)
+            if (InputModel.AdditionalProperties is not null)
             {
                 return new CSharpType(
                         _usage.HasFlag(InputModelTypeUsage.Input) ? typeof(IDictionary<,>) : typeof(IReadOnlyDictionary<,>),
                         typeof(string),
-                        _typeFactory.CreateType(InputModel.InheritedDictionaryType.ValueType));
+                        _typeFactory.CreateType(InputModel.AdditionalProperties));
             }
 
             return null;
