@@ -1,18 +1,18 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "ParametersCadl",
  "ApiVersions": [
   "2022-05-15-preview"
  ],
  "Enums": [
   {
-   "$id": "2",
+   "$id": "1",
    "Kind": "Enum",
    "Name": "Versions",
    "EnumValueType": "String",
    "AllowedValues": [
     {
-     "$id": "3",
+     "$id": "2",
      "Name": "2022-05-15-preview",
      "Value": "2022-05-15-preview"
     }
@@ -25,7 +25,7 @@
  ],
  "Models": [
   {
-   "$id": "4",
+   "$id": "3",
    "Kind": "Model",
    "Name": "Result",
    "Namespace": "ParametersCadl.ParameterOrders",
@@ -33,12 +33,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "5",
+     "$id": "4",
      "Name": "id",
      "SerializedName": "id",
      "Description": "",
      "Type": {
-      "$id": "6",
+      "$id": "5",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -51,31 +51,31 @@
  ],
  "Clients": [
   {
-   "$id": "7",
+   "$id": "6",
    "Name": "ParametersCadlClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "8"
+    "$id": "7"
    },
    "Creatable": true
   },
   {
-   "$id": "9",
+   "$id": "8",
    "Name": "ParameterOrders",
    "Description": "",
    "Operations": [
     {
-     "$id": "10",
+     "$id": "9",
      "Name": "Operation",
      "ResourceName": "ParameterOrders",
      "Parameters": [
       {
-       "$id": "11",
+       "$id": "10",
        "Name": "start",
        "NameInRequest": "start",
        "Type": {
-        "$id": "12",
+        "$id": "11",
         "Kind": "Primitive",
         "Name": "Int32",
         "IsNullable": false
@@ -91,11 +91,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "13",
+       "$id": "12",
        "Name": "end",
        "NameInRequest": "end",
        "Type": {
-        "$id": "14",
+        "$id": "13",
         "Kind": "Primitive",
         "Name": "Int32",
         "IsNullable": false
@@ -111,20 +111,20 @@
        "Kind": "Method"
       },
       {
-       "$id": "15",
+       "$id": "14",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Type": {
-        "$id": "16",
+        "$id": "15",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "17",
+        "$id": "16",
         "Type": {
-         "$id": "18",
+         "$id": "17",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -141,11 +141,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "19",
+       "$id": "18",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "20",
+        "$id": "19",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -160,9 +160,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "21",
+        "$id": "20",
         "Type": {
-         "$ref": "20"
+         "$ref": "19"
         },
         "Value": "application/json"
        }
@@ -170,12 +170,12 @@
      ],
      "Responses": [
       {
-       "$id": "22",
+       "$id": "21",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "4"
+        "$ref": "3"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -194,16 +194,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "23",
+     "$id": "22",
      "Name": "Operation2",
      "ResourceName": "ParameterOrders",
      "Parameters": [
       {
-       "$id": "24",
+       "$id": "23",
        "Name": "start",
        "NameInRequest": "start",
        "Type": {
-        "$id": "25",
+        "$id": "24",
         "Kind": "Primitive",
         "Name": "Int32",
         "IsNullable": false
@@ -219,11 +219,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "26",
+       "$id": "25",
        "Name": "end",
        "NameInRequest": "end",
        "Type": {
-        "$id": "27",
+        "$id": "26",
         "Kind": "Primitive",
         "Name": "Int32",
         "IsNullable": false
@@ -239,11 +239,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "28",
+       "$id": "27",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "29",
+        "$id": "28",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -258,9 +258,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "30",
+        "$id": "29",
         "Type": {
-         "$ref": "29"
+         "$ref": "28"
         },
         "Value": "application/json"
        }
@@ -268,12 +268,12 @@
      ],
      "Responses": [
       {
-       "$id": "31",
+       "$id": "30",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "4"
+        "$ref": "3"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -293,7 +293,7 @@
     }
    ],
    "Protocol": {
-    "$id": "32"
+    "$id": "31"
    },
    "Creatable": false,
    "Parent": "ParametersCadlClient"

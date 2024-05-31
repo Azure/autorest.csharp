@@ -1,11 +1,11 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "Encode.Duration",
  "ApiVersions": [],
  "Enums": [],
  "Models": [
   {
-   "$id": "2",
+   "$id": "1",
    "Kind": "Model",
    "Name": "DefaultDurationProperty",
    "Namespace": "Encode.Duration.Property",
@@ -13,12 +13,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "3",
+     "$id": "2",
      "Name": "value",
      "SerializedName": "value",
      "Description": "",
      "Type": {
-      "$id": "4",
+      "$id": "3",
       "Kind": "Primitive",
       "Name": "DurationISO8601",
       "IsNullable": false
@@ -29,7 +29,7 @@
    ]
   },
   {
-   "$id": "5",
+   "$id": "4",
    "Kind": "Model",
    "Name": "ISO8601DurationProperty",
    "Namespace": "Encode.Duration.Property",
@@ -37,12 +37,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "6",
+     "$id": "5",
      "Name": "value",
      "SerializedName": "value",
      "Description": "",
      "Type": {
-      "$id": "7",
+      "$id": "6",
       "Kind": "Primitive",
       "Name": "DurationISO8601",
       "IsNullable": false
@@ -53,7 +53,7 @@
    ]
   },
   {
-   "$id": "8",
+   "$id": "7",
    "Kind": "Model",
    "Name": "Int32SecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
@@ -61,12 +61,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "9",
+     "$id": "8",
      "Name": "value",
      "SerializedName": "value",
      "Description": "",
      "Type": {
-      "$id": "10",
+      "$id": "9",
       "Kind": "Primitive",
       "Name": "DurationSeconds",
       "IsNullable": false
@@ -77,7 +77,7 @@
    ]
   },
   {
-   "$id": "11",
+   "$id": "10",
    "Kind": "Model",
    "Name": "FloatSecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
@@ -85,12 +85,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "12",
+     "$id": "11",
      "Name": "value",
      "SerializedName": "value",
      "Description": "",
      "Type": {
-      "$id": "13",
+      "$id": "12",
       "Kind": "Primitive",
       "Name": "DurationSecondsFloat",
       "IsNullable": false
@@ -101,7 +101,7 @@
    ]
   },
   {
-   "$id": "14",
+   "$id": "13",
    "Kind": "Model",
    "Name": "Float64SecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
@@ -109,12 +109,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "15",
+     "$id": "14",
      "Name": "value",
      "SerializedName": "value",
      "Description": "",
      "Type": {
-      "$id": "16",
+      "$id": "15",
       "Kind": "Primitive",
       "Name": "DurationSecondsDouble",
       "IsNullable": false
@@ -125,7 +125,7 @@
    ]
   },
   {
-   "$id": "17",
+   "$id": "16",
    "Kind": "Model",
    "Name": "FloatSecondsDurationArrayProperty",
    "Namespace": "Encode.Duration.Property",
@@ -133,16 +133,16 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "18",
+     "$id": "17",
      "Name": "value",
      "SerializedName": "value",
      "Description": "",
      "Type": {
-      "$id": "19",
+      "$id": "18",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "20",
+       "$id": "19",
        "Kind": "Primitive",
        "Name": "DurationSecondsFloat",
        "IsNullable": false
@@ -157,22 +157,22 @@
  ],
  "Clients": [
   {
-   "$id": "21",
+   "$id": "20",
    "Name": "DurationClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "22"
+    "$id": "21"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$id": "23",
+     "$id": "22",
      "Name": "host",
      "NameInRequest": "host",
      "Description": "TestServer endpoint",
      "Type": {
-      "$id": "24",
+      "$id": "23",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -187,9 +187,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "25",
+      "$id": "24",
       "Type": {
-       "$id": "26",
+       "$id": "25",
        "Kind": "Primitive",
        "Name": "String",
        "IsNullable": false
@@ -200,24 +200,24 @@
    ]
   },
   {
-   "$id": "27",
+   "$id": "26",
    "Name": "Query",
    "Description": "",
    "Operations": [
     {
-     "$id": "28",
+     "$id": "27",
      "Name": "default",
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "22"
       },
       {
-       "$id": "29",
+       "$id": "28",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$id": "30",
+        "$id": "29",
         "Kind": "Primitive",
         "Name": "DurationISO8601",
         "IsNullable": false
@@ -233,11 +233,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "31",
+       "$id": "30",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "32",
+        "$id": "31",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -252,9 +252,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "33",
+        "$id": "32",
         "Type": {
-         "$ref": "32"
+         "$ref": "31"
         },
         "Value": "application/json"
        }
@@ -262,7 +262,7 @@
      ],
      "Responses": [
       {
-       "$id": "34",
+       "$id": "33",
        "StatusCodes": [
         204
        ],
@@ -280,19 +280,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "35",
+     "$id": "34",
      "Name": "iso8601",
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "22"
       },
       {
-       "$id": "36",
+       "$id": "35",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$id": "37",
+        "$id": "36",
         "Kind": "Primitive",
         "Name": "DurationISO8601",
         "IsNullable": false
@@ -308,11 +308,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "38",
+       "$id": "37",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "39",
+        "$id": "38",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -327,9 +327,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "40",
+        "$id": "39",
         "Type": {
-         "$ref": "39"
+         "$ref": "38"
         },
         "Value": "application/json"
        }
@@ -337,7 +337,7 @@
      ],
      "Responses": [
       {
-       "$id": "41",
+       "$id": "40",
        "StatusCodes": [
         204
        ],
@@ -355,19 +355,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "42",
+     "$id": "41",
      "Name": "int32Seconds",
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "22"
       },
       {
-       "$id": "43",
+       "$id": "42",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$id": "44",
+        "$id": "43",
         "Kind": "Primitive",
         "Name": "DurationSeconds",
         "IsNullable": false
@@ -383,11 +383,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "45",
+       "$id": "44",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "46",
+        "$id": "45",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -402,9 +402,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "47",
+        "$id": "46",
         "Type": {
-         "$ref": "46"
+         "$ref": "45"
         },
         "Value": "application/json"
        }
@@ -412,7 +412,7 @@
      ],
      "Responses": [
       {
-       "$id": "48",
+       "$id": "47",
        "StatusCodes": [
         204
        ],
@@ -430,19 +430,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "49",
+     "$id": "48",
      "Name": "floatSeconds",
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "22"
       },
       {
-       "$id": "50",
+       "$id": "49",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$id": "51",
+        "$id": "50",
         "Kind": "Primitive",
         "Name": "DurationSecondsFloat",
         "IsNullable": false
@@ -458,11 +458,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "52",
+       "$id": "51",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "53",
+        "$id": "52",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -477,9 +477,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "54",
+        "$id": "53",
         "Type": {
-         "$ref": "53"
+         "$ref": "52"
         },
         "Value": "application/json"
        }
@@ -487,7 +487,7 @@
      ],
      "Responses": [
       {
-       "$id": "55",
+       "$id": "54",
        "StatusCodes": [
         204
        ],
@@ -505,19 +505,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "56",
+     "$id": "55",
      "Name": "float64Seconds",
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "22"
       },
       {
-       "$id": "57",
+       "$id": "56",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$id": "58",
+        "$id": "57",
         "Kind": "Primitive",
         "Name": "DurationSecondsDouble",
         "IsNullable": false
@@ -533,11 +533,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "59",
+       "$id": "58",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "60",
+        "$id": "59",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -552,9 +552,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "61",
+        "$id": "60",
         "Type": {
-         "$ref": "60"
+         "$ref": "59"
         },
         "Value": "application/json"
        }
@@ -562,7 +562,7 @@
      ],
      "Responses": [
       {
-       "$id": "62",
+       "$id": "61",
        "StatusCodes": [
         204
        ],
@@ -580,23 +580,23 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "63",
+     "$id": "62",
      "Name": "int32SecondsArray",
      "ResourceName": "Query",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "22"
       },
       {
-       "$id": "64",
+       "$id": "63",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$id": "65",
+        "$id": "64",
         "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "66",
+         "$id": "65",
          "Kind": "Primitive",
          "Name": "DurationSeconds",
          "IsNullable": false
@@ -615,11 +615,11 @@
        "ArraySerializationDelimiter": ","
       },
       {
-       "$id": "67",
+       "$id": "66",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "68",
+        "$id": "67",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -634,9 +634,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "69",
+        "$id": "68",
         "Type": {
-         "$ref": "68"
+         "$ref": "67"
         },
         "Value": "application/json"
        }
@@ -644,7 +644,7 @@
      ],
      "Responses": [
       {
-       "$id": "70",
+       "$id": "69",
        "StatusCodes": [
         204
        ],
@@ -663,35 +663,35 @@
     }
    ],
    "Protocol": {
-    "$id": "71"
+    "$id": "70"
    },
    "Creatable": false,
    "Parent": "DurationClient",
    "Parameters": [
     {
-     "$ref": "23"
+     "$ref": "22"
     }
    ]
   },
   {
-   "$id": "72",
+   "$id": "71",
    "Name": "Property",
    "Description": "",
    "Operations": [
     {
-     "$id": "73",
+     "$id": "72",
      "Name": "default",
      "ResourceName": "Property",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "22"
       },
       {
-       "$id": "74",
+       "$id": "73",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "2"
+        "$ref": "1"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -704,11 +704,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "75",
+       "$id": "74",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "76",
+        "$id": "75",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -723,19 +723,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "77",
+        "$id": "76",
         "Type": {
-         "$ref": "76"
+         "$ref": "75"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "78",
+       "$id": "77",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "79",
+        "$id": "78",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -750,9 +750,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "80",
+        "$id": "79",
         "Type": {
-         "$ref": "79"
+         "$ref": "78"
         },
         "Value": "application/json"
        }
@@ -760,12 +760,12 @@
      ],
      "Responses": [
       {
-       "$id": "81",
+       "$id": "80",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "2"
+        "$ref": "1"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -787,19 +787,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "82",
+     "$id": "81",
      "Name": "iso8601",
      "ResourceName": "Property",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "22"
       },
       {
-       "$id": "83",
+       "$id": "82",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "5"
+        "$ref": "4"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -812,11 +812,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "84",
+       "$id": "83",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "85",
+        "$id": "84",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -831,19 +831,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "86",
+        "$id": "85",
         "Type": {
-         "$ref": "85"
+         "$ref": "84"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "87",
+       "$id": "86",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "88",
+        "$id": "87",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -858,9 +858,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "89",
+        "$id": "88",
         "Type": {
-         "$ref": "88"
+         "$ref": "87"
         },
         "Value": "application/json"
        }
@@ -868,12 +868,12 @@
      ],
      "Responses": [
       {
-       "$id": "90",
+       "$id": "89",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "4"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -895,19 +895,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "91",
+     "$id": "90",
      "Name": "int32Seconds",
      "ResourceName": "Property",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "22"
       },
       {
-       "$id": "92",
+       "$id": "91",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "8"
+        "$ref": "7"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -920,11 +920,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "93",
+       "$id": "92",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "94",
+        "$id": "93",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -939,19 +939,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "95",
+        "$id": "94",
         "Type": {
-         "$ref": "94"
+         "$ref": "93"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "96",
+       "$id": "95",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "97",
+        "$id": "96",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -966,9 +966,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "98",
+        "$id": "97",
         "Type": {
-         "$ref": "97"
+         "$ref": "96"
         },
         "Value": "application/json"
        }
@@ -976,12 +976,12 @@
      ],
      "Responses": [
       {
-       "$id": "99",
+       "$id": "98",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "8"
+        "$ref": "7"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1003,19 +1003,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "100",
+     "$id": "99",
      "Name": "floatSeconds",
      "ResourceName": "Property",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "22"
       },
       {
-       "$id": "101",
+       "$id": "100",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "11"
+        "$ref": "10"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1028,11 +1028,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "102",
+       "$id": "101",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "103",
+        "$id": "102",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1047,19 +1047,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "104",
+        "$id": "103",
         "Type": {
-         "$ref": "103"
+         "$ref": "102"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "105",
+       "$id": "104",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "106",
+        "$id": "105",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1074,9 +1074,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "107",
+        "$id": "106",
         "Type": {
-         "$ref": "106"
+         "$ref": "105"
         },
         "Value": "application/json"
        }
@@ -1084,12 +1084,12 @@
      ],
      "Responses": [
       {
-       "$id": "108",
+       "$id": "107",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "11"
+        "$ref": "10"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1111,19 +1111,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "109",
+     "$id": "108",
      "Name": "float64Seconds",
      "ResourceName": "Property",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "22"
       },
       {
-       "$id": "110",
+       "$id": "109",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "14"
+        "$ref": "13"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1136,11 +1136,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "111",
+       "$id": "110",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "112",
+        "$id": "111",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1155,19 +1155,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "113",
+        "$id": "112",
         "Type": {
-         "$ref": "112"
+         "$ref": "111"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "114",
+       "$id": "113",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "115",
+        "$id": "114",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1182,9 +1182,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "116",
+        "$id": "115",
         "Type": {
-         "$ref": "115"
+         "$ref": "114"
         },
         "Value": "application/json"
        }
@@ -1192,12 +1192,12 @@
      ],
      "Responses": [
       {
-       "$id": "117",
+       "$id": "116",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "14"
+        "$ref": "13"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1219,19 +1219,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "118",
+     "$id": "117",
      "Name": "floatSecondsArray",
      "ResourceName": "Property",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "22"
       },
       {
-       "$id": "119",
+       "$id": "118",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "17"
+        "$ref": "16"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1244,11 +1244,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "120",
+       "$id": "119",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "121",
+        "$id": "120",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1263,19 +1263,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "122",
+        "$id": "121",
         "Type": {
-         "$ref": "121"
+         "$ref": "120"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "123",
+       "$id": "122",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "124",
+        "$id": "123",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1290,9 +1290,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "125",
+        "$id": "124",
         "Type": {
-         "$ref": "124"
+         "$ref": "123"
         },
         "Value": "application/json"
        }
@@ -1300,12 +1300,12 @@
      ],
      "Responses": [
       {
-       "$id": "126",
+       "$id": "125",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "17"
+        "$ref": "16"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1328,35 +1328,35 @@
     }
    ],
    "Protocol": {
-    "$id": "127"
+    "$id": "126"
    },
    "Creatable": false,
    "Parent": "DurationClient",
    "Parameters": [
     {
-     "$ref": "23"
+     "$ref": "22"
     }
    ]
   },
   {
-   "$id": "128",
+   "$id": "127",
    "Name": "Header",
    "Description": "",
    "Operations": [
     {
-     "$id": "129",
+     "$id": "128",
      "Name": "default",
      "ResourceName": "Header",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "22"
       },
       {
-       "$id": "130",
+       "$id": "129",
        "Name": "duration",
        "NameInRequest": "duration",
        "Type": {
-        "$id": "131",
+        "$id": "130",
         "Kind": "Primitive",
         "Name": "DurationISO8601",
         "IsNullable": false
@@ -1372,11 +1372,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "132",
+       "$id": "131",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "133",
+        "$id": "132",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1391,9 +1391,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "134",
+        "$id": "133",
         "Type": {
-         "$ref": "133"
+         "$ref": "132"
         },
         "Value": "application/json"
        }
@@ -1401,7 +1401,7 @@
      ],
      "Responses": [
       {
-       "$id": "135",
+       "$id": "134",
        "StatusCodes": [
         204
        ],
@@ -1419,19 +1419,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "136",
+     "$id": "135",
      "Name": "iso8601",
      "ResourceName": "Header",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "22"
       },
       {
-       "$id": "137",
+       "$id": "136",
        "Name": "duration",
        "NameInRequest": "duration",
        "Type": {
-        "$id": "138",
+        "$id": "137",
         "Kind": "Primitive",
         "Name": "DurationISO8601",
         "IsNullable": false
@@ -1447,11 +1447,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "139",
+       "$id": "138",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "140",
+        "$id": "139",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1466,9 +1466,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "141",
+        "$id": "140",
         "Type": {
-         "$ref": "140"
+         "$ref": "139"
         },
         "Value": "application/json"
        }
@@ -1476,7 +1476,7 @@
      ],
      "Responses": [
       {
-       "$id": "142",
+       "$id": "141",
        "StatusCodes": [
         204
        ],
@@ -1494,23 +1494,23 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "143",
+     "$id": "142",
      "Name": "iso8601Array",
      "ResourceName": "Header",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "22"
       },
       {
-       "$id": "144",
+       "$id": "143",
        "Name": "duration",
        "NameInRequest": "duration",
        "Type": {
-        "$id": "145",
+        "$id": "144",
         "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "146",
+         "$id": "145",
          "Kind": "Primitive",
          "Name": "DurationISO8601",
          "IsNullable": false
@@ -1529,11 +1529,11 @@
        "ArraySerializationDelimiter": ","
       },
       {
-       "$id": "147",
+       "$id": "146",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "148",
+        "$id": "147",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1548,9 +1548,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "149",
+        "$id": "148",
         "Type": {
-         "$ref": "148"
+         "$ref": "147"
         },
         "Value": "application/json"
        }
@@ -1558,7 +1558,7 @@
      ],
      "Responses": [
       {
-       "$id": "150",
+       "$id": "149",
        "StatusCodes": [
         204
        ],
@@ -1576,19 +1576,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "151",
+     "$id": "150",
      "Name": "int32Seconds",
      "ResourceName": "Header",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "22"
       },
       {
-       "$id": "152",
+       "$id": "151",
        "Name": "duration",
        "NameInRequest": "duration",
        "Type": {
-        "$id": "153",
+        "$id": "152",
         "Kind": "Primitive",
         "Name": "DurationSeconds",
         "IsNullable": false
@@ -1604,11 +1604,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "154",
+       "$id": "153",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "155",
+        "$id": "154",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1623,9 +1623,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "156",
+        "$id": "155",
         "Type": {
-         "$ref": "155"
+         "$ref": "154"
         },
         "Value": "application/json"
        }
@@ -1633,7 +1633,7 @@
      ],
      "Responses": [
       {
-       "$id": "157",
+       "$id": "156",
        "StatusCodes": [
         204
        ],
@@ -1651,19 +1651,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "158",
+     "$id": "157",
      "Name": "floatSeconds",
      "ResourceName": "Header",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "22"
       },
       {
-       "$id": "159",
+       "$id": "158",
        "Name": "duration",
        "NameInRequest": "duration",
        "Type": {
-        "$id": "160",
+        "$id": "159",
         "Kind": "Primitive",
         "Name": "DurationSecondsFloat",
         "IsNullable": false
@@ -1679,11 +1679,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "161",
+       "$id": "160",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "162",
+        "$id": "161",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1698,9 +1698,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "163",
+        "$id": "162",
         "Type": {
-         "$ref": "162"
+         "$ref": "161"
         },
         "Value": "application/json"
        }
@@ -1708,7 +1708,7 @@
      ],
      "Responses": [
       {
-       "$id": "164",
+       "$id": "163",
        "StatusCodes": [
         204
        ],
@@ -1726,19 +1726,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "165",
+     "$id": "164",
      "Name": "float64Seconds",
      "ResourceName": "Header",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "22"
       },
       {
-       "$id": "166",
+       "$id": "165",
        "Name": "duration",
        "NameInRequest": "duration",
        "Type": {
-        "$id": "167",
+        "$id": "166",
         "Kind": "Primitive",
         "Name": "DurationSecondsDouble",
         "IsNullable": false
@@ -1754,11 +1754,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "168",
+       "$id": "167",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "169",
+        "$id": "168",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1773,9 +1773,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "170",
+        "$id": "169",
         "Type": {
-         "$ref": "169"
+         "$ref": "168"
         },
         "Value": "application/json"
        }
@@ -1783,7 +1783,7 @@
      ],
      "Responses": [
       {
-       "$id": "171",
+       "$id": "170",
        "StatusCodes": [
         204
        ],
@@ -1802,13 +1802,13 @@
     }
    ],
    "Protocol": {
-    "$id": "172"
+    "$id": "171"
    },
    "Creatable": false,
    "Parent": "DurationClient",
    "Parameters": [
     {
-     "$ref": "23"
+     "$ref": "22"
     }
    ]
   }

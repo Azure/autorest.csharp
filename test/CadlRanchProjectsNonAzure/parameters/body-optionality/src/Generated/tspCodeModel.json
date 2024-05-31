@@ -1,11 +1,11 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "Parameters.BodyOptionality",
  "ApiVersions": [],
  "Enums": [],
  "Models": [
   {
-   "$id": "2",
+   "$id": "1",
    "Kind": "Model",
    "Name": "BodyModel",
    "Namespace": "Parameters.BodyOptionality",
@@ -13,12 +13,12 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "3",
+     "$id": "2",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "4",
+      "$id": "3",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -31,22 +31,22 @@
  ],
  "Clients": [
   {
-   "$id": "5",
+   "$id": "4",
    "Name": "BodyOptionalityClient",
    "Description": "Test describing optionality of the request body.",
    "Operations": [
     {
-     "$id": "6",
+     "$id": "5",
      "Name": "requiredExplicit",
      "ResourceName": "BodyOptionality",
      "Parameters": [
       {
-       "$id": "7",
+       "$id": "6",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "8",
+        "$id": "7",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -61,9 +61,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "9",
+        "$id": "8",
         "Type": {
-         "$id": "10",
+         "$id": "9",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -72,11 +72,11 @@
        }
       },
       {
-       "$id": "11",
+       "$id": "10",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "2"
+        "$ref": "1"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -89,11 +89,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "12",
+       "$id": "11",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "13",
+        "$id": "12",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -108,19 +108,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "14",
+        "$id": "13",
         "Type": {
-         "$ref": "13"
+         "$ref": "12"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "15",
+       "$id": "14",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "16",
+        "$id": "15",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -135,9 +135,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "17",
+        "$id": "16",
         "Type": {
-         "$ref": "16"
+         "$ref": "15"
         },
         "Value": "application/json"
        }
@@ -145,7 +145,7 @@
      ],
      "Responses": [
       {
-       "$id": "18",
+       "$id": "17",
        "StatusCodes": [
         204
        ],
@@ -166,19 +166,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "19",
+     "$id": "18",
      "Name": "requiredImplicit",
      "ResourceName": "BodyOptionality",
      "Parameters": [
       {
-       "$ref": "7"
+       "$ref": "6"
       },
       {
-       "$id": "20",
+       "$id": "19",
        "Name": "BodyModel",
        "NameInRequest": "BodyModel",
        "Type": {
-        "$ref": "2"
+        "$ref": "1"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -191,11 +191,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "21",
+       "$id": "20",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "22",
+        "$id": "21",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -210,19 +210,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "23",
+        "$id": "22",
         "Type": {
-         "$ref": "22"
+         "$ref": "21"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "24",
+       "$id": "23",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "25",
+        "$id": "24",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -237,9 +237,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "26",
+        "$id": "25",
         "Type": {
-         "$ref": "25"
+         "$ref": "24"
         },
         "Value": "application/json"
        }
@@ -247,7 +247,7 @@
      ],
      "Responses": [
       {
-       "$id": "27",
+       "$id": "26",
        "StatusCodes": [
         204
        ],
@@ -269,34 +269,34 @@
     }
    ],
    "Protocol": {
-    "$id": "28"
+    "$id": "27"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "7"
+     "$ref": "6"
     }
    ]
   },
   {
-   "$id": "29",
+   "$id": "28",
    "Name": "OptionalExplicit",
    "Description": "",
    "Operations": [
     {
-     "$id": "30",
+     "$id": "29",
      "Name": "set",
      "ResourceName": "OptionalExplicit",
      "Parameters": [
       {
-       "$ref": "7"
+       "$ref": "6"
       },
       {
-       "$id": "31",
+       "$id": "30",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "2"
+        "$ref": "1"
        },
        "Location": "Body",
        "IsRequired": false,
@@ -309,11 +309,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "32",
+       "$id": "31",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "33",
+        "$id": "32",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -328,19 +328,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "34",
+        "$id": "33",
         "Type": {
-         "$ref": "33"
+         "$ref": "32"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "35",
+       "$id": "34",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "36",
+        "$id": "35",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -355,9 +355,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "37",
+        "$id": "36",
         "Type": {
-         "$ref": "36"
+         "$ref": "35"
         },
         "Value": "application/json"
        }
@@ -365,7 +365,7 @@
      ],
      "Responses": [
       {
-       "$id": "38",
+       "$id": "37",
        "StatusCodes": [
         204
        ],
@@ -386,19 +386,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "39",
+     "$id": "38",
      "Name": "omit",
      "ResourceName": "OptionalExplicit",
      "Parameters": [
       {
-       "$ref": "7"
+       "$ref": "6"
       },
       {
-       "$id": "40",
+       "$id": "39",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "2"
+        "$ref": "1"
        },
        "Location": "Body",
        "IsRequired": false,
@@ -411,11 +411,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "41",
+       "$id": "40",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "42",
+        "$id": "41",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -430,19 +430,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "43",
+        "$id": "42",
         "Type": {
-         "$ref": "42"
+         "$ref": "41"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "44",
+       "$id": "43",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "45",
+        "$id": "44",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -457,9 +457,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "46",
+        "$id": "45",
         "Type": {
-         "$ref": "45"
+         "$ref": "44"
         },
         "Value": "application/json"
        }
@@ -467,7 +467,7 @@
      ],
      "Responses": [
       {
-       "$id": "47",
+       "$id": "46",
        "StatusCodes": [
         204
        ],
@@ -489,13 +489,13 @@
     }
    ],
    "Protocol": {
-    "$id": "48"
+    "$id": "47"
    },
    "Creatable": false,
    "Parent": "BodyOptionalityClient",
    "Parameters": [
     {
-     "$ref": "7"
+     "$ref": "6"
     }
    ]
   }

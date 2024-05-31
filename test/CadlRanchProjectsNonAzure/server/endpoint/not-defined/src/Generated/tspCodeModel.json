@@ -1,26 +1,26 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "Server.Endpoint.NotDefined",
  "ApiVersions": [],
  "Enums": [],
  "Models": [],
  "Clients": [
   {
-   "$id": "2",
+   "$id": "1",
    "Name": "NotDefinedClient",
    "Description": "Illustrates server doesn't define endpoint. Client should automatically add an endpoint to let user pass in.",
    "Operations": [
     {
-     "$id": "3",
+     "$id": "2",
      "Name": "valid",
      "ResourceName": "NotDefined",
      "Parameters": [
       {
-       "$id": "4",
+       "$id": "3",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "5",
+        "$id": "4",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -35,9 +35,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "6",
+        "$id": "5",
         "Type": {
-         "$ref": "5"
+         "$ref": "4"
         },
         "Value": "application/json"
        }
@@ -45,7 +45,7 @@
      ],
      "Responses": [
       {
-       "$id": "7",
+       "$id": "6",
        "StatusCodes": [
         200
        ],
@@ -64,7 +64,7 @@
     }
    ],
    "Protocol": {
-    "$id": "8"
+    "$id": "7"
    },
    "Creatable": true
   }

@@ -1,16 +1,16 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "Type.Property.Optional",
  "ApiVersions": [],
  "Enums": [
   {
-   "$id": "2",
+   "$id": "1",
    "Kind": "Enum",
    "Name": "StringLiteralProperty_property",
    "EnumValueType": "String",
    "AllowedValues": [
     {
-     "$id": "3",
+     "$id": "2",
      "Name": "hello",
      "Value": "hello",
      "Description": "hello"
@@ -23,13 +23,13 @@
    "Usage": "RoundTrip"
   },
   {
-   "$id": "4",
+   "$id": "3",
    "Kind": "Enum",
    "Name": "IntLiteralProperty_property",
    "EnumValueType": "Int32",
    "AllowedValues": [
     {
-     "$id": "5",
+     "$id": "4",
      "Name": "1",
      "Value": 1,
      "Description": "1"
@@ -42,13 +42,13 @@
    "Usage": "RoundTrip"
   },
   {
-   "$id": "6",
+   "$id": "5",
    "Kind": "Enum",
    "Name": "FloatLiteralProperty_property",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
-     "$id": "7",
+     "$id": "6",
      "Name": "1.25",
      "Value": 1.25,
      "Description": "1.25"
@@ -61,18 +61,18 @@
    "Usage": "RoundTrip"
   },
   {
-   "$id": "8",
+   "$id": "7",
    "Kind": "Enum",
    "Name": "UnionStringLiteralPropertyProperty",
    "EnumValueType": "String",
    "AllowedValues": [
     {
-     "$id": "9",
+     "$id": "8",
      "Name": "hello",
      "Value": "hello"
     },
     {
-     "$id": "10",
+     "$id": "9",
      "Name": "world",
      "Value": "world"
     }
@@ -83,18 +83,18 @@
    "Usage": "RoundTrip"
   },
   {
-   "$id": "11",
+   "$id": "10",
    "Kind": "Enum",
    "Name": "UnionIntLiteralPropertyProperty",
    "EnumValueType": "Int32",
    "AllowedValues": [
     {
-     "$id": "12",
+     "$id": "11",
      "Name": "1",
      "Value": 1
     },
     {
-     "$id": "13",
+     "$id": "12",
      "Name": "2",
      "Value": 2
     }
@@ -105,18 +105,18 @@
    "Usage": "RoundTrip"
   },
   {
-   "$id": "14",
+   "$id": "13",
    "Kind": "Enum",
    "Name": "UnionFloatLiteralPropertyProperty",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
-     "$id": "15",
+     "$id": "14",
      "Name": "1.25",
      "Value": 1.25
     },
     {
-     "$id": "16",
+     "$id": "15",
      "Name": "2.375",
      "Value": 2.375
     }
@@ -129,7 +129,7 @@
  ],
  "Models": [
   {
-   "$id": "17",
+   "$id": "16",
    "Kind": "Model",
    "Name": "StringProperty",
    "Namespace": "Type.Property.Optional",
@@ -138,12 +138,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "18",
+     "$id": "17",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "19",
+      "$id": "18",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -154,7 +154,7 @@
    ]
   },
   {
-   "$id": "20",
+   "$id": "19",
    "Kind": "Model",
    "Name": "BytesProperty",
    "Namespace": "Type.Property.Optional",
@@ -163,12 +163,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "21",
+     "$id": "20",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "22",
+      "$id": "21",
       "Kind": "Primitive",
       "Name": "Bytes",
       "IsNullable": false
@@ -179,7 +179,7 @@
    ]
   },
   {
-   "$id": "23",
+   "$id": "22",
    "Kind": "Model",
    "Name": "DatetimeProperty",
    "Namespace": "Type.Property.Optional",
@@ -188,12 +188,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "24",
+     "$id": "23",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "25",
+      "$id": "24",
       "Kind": "Primitive",
       "Name": "DateTimeRFC3339",
       "IsNullable": false
@@ -204,7 +204,7 @@
    ]
   },
   {
-   "$id": "26",
+   "$id": "25",
    "Kind": "Model",
    "Name": "DurationProperty",
    "Namespace": "Type.Property.Optional",
@@ -213,12 +213,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "27",
+     "$id": "26",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "28",
+      "$id": "27",
       "Kind": "Primitive",
       "Name": "DurationISO8601",
       "IsNullable": false
@@ -229,7 +229,7 @@
    ]
   },
   {
-   "$id": "29",
+   "$id": "28",
    "Kind": "Model",
    "Name": "CollectionsByteProperty",
    "Namespace": "Type.Property.Optional",
@@ -238,16 +238,16 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "30",
+     "$id": "29",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "31",
+      "$id": "30",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "32",
+       "$id": "31",
        "Kind": "Primitive",
        "Name": "Bytes",
        "IsNullable": false
@@ -260,7 +260,7 @@
    ]
   },
   {
-   "$id": "33",
+   "$id": "32",
    "Kind": "Model",
    "Name": "CollectionsModelProperty",
    "Namespace": "Type.Property.Optional",
@@ -269,16 +269,16 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "34",
+     "$id": "33",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "35",
+      "$id": "34",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$ref": "17"
+       "$ref": "16"
       },
       "IsNullable": false
      },
@@ -288,7 +288,7 @@
    ]
   },
   {
-   "$id": "36",
+   "$id": "35",
    "Kind": "Model",
    "Name": "StringLiteralProperty",
    "Namespace": "Type.Property.Optional",
@@ -297,16 +297,16 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "37",
+     "$id": "36",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "38",
+      "$id": "37",
       "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
-       "$ref": "2"
+       "$ref": "1"
       },
       "Value": "hello",
       "IsNullable": false
@@ -317,7 +317,7 @@
    ]
   },
   {
-   "$id": "39",
+   "$id": "38",
    "Kind": "Model",
    "Name": "IntLiteralProperty",
    "Namespace": "Type.Property.Optional",
@@ -326,16 +326,16 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "40",
+     "$id": "39",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "41",
+      "$id": "40",
       "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
-       "$ref": "4"
+       "$ref": "3"
       },
       "Value": 1,
       "IsNullable": false
@@ -346,7 +346,7 @@
    ]
   },
   {
-   "$id": "42",
+   "$id": "41",
    "Kind": "Model",
    "Name": "FloatLiteralProperty",
    "Namespace": "Type.Property.Optional",
@@ -355,16 +355,16 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "43",
+     "$id": "42",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "44",
+      "$id": "43",
       "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
-       "$ref": "6"
+       "$ref": "5"
       },
       "Value": 1.25,
       "IsNullable": false
@@ -375,7 +375,7 @@
    ]
   },
   {
-   "$id": "45",
+   "$id": "44",
    "Kind": "Model",
    "Name": "BooleanLiteralProperty",
    "Namespace": "Type.Property.Optional",
@@ -384,16 +384,16 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "46",
+     "$id": "45",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$id": "47",
+      "$id": "46",
       "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
-       "$id": "48",
+       "$id": "47",
        "Kind": "Primitive",
        "Name": "Boolean",
        "IsNullable": false
@@ -407,7 +407,7 @@
    ]
   },
   {
-   "$id": "49",
+   "$id": "48",
    "Kind": "Model",
    "Name": "UnionStringLiteralProperty",
    "Namespace": "Type.Property.Optional",
@@ -416,12 +416,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "50",
+     "$id": "49",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$ref": "8"
+      "$ref": "7"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -429,7 +429,7 @@
    ]
   },
   {
-   "$id": "51",
+   "$id": "50",
    "Kind": "Model",
    "Name": "UnionIntLiteralProperty",
    "Namespace": "Type.Property.Optional",
@@ -438,12 +438,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "52",
+     "$id": "51",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$ref": "11"
+      "$ref": "10"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -451,7 +451,7 @@
    ]
   },
   {
-   "$id": "53",
+   "$id": "52",
    "Kind": "Model",
    "Name": "UnionFloatLiteralProperty",
    "Namespace": "Type.Property.Optional",
@@ -460,12 +460,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "54",
+     "$id": "53",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Property",
      "Type": {
-      "$ref": "14"
+      "$ref": "13"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -473,7 +473,7 @@
    ]
   },
   {
-   "$id": "55",
+   "$id": "54",
    "Kind": "Model",
    "Name": "RequiredAndOptionalProperty",
    "Namespace": "Type.Property.Optional",
@@ -482,12 +482,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "56",
+     "$id": "55",
      "Name": "optionalProperty",
      "SerializedName": "optionalProperty",
      "Description": "optional string property",
      "Type": {
-      "$id": "57",
+      "$id": "56",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -496,12 +496,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "58",
+     "$id": "57",
      "Name": "requiredProperty",
      "SerializedName": "requiredProperty",
      "Description": "required int property",
      "Type": {
-      "$id": "59",
+      "$id": "58",
       "Kind": "Primitive",
       "Name": "Int32",
       "IsNullable": false
@@ -514,22 +514,22 @@
  ],
  "Clients": [
   {
-   "$id": "60",
+   "$id": "59",
    "Name": "OptionalClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "61"
+    "$id": "60"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$id": "62",
+     "$id": "61",
      "Name": "host",
      "NameInRequest": "host",
      "Description": "TestServer endpoint",
      "Type": {
-      "$id": "63",
+      "$id": "62",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -544,9 +544,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "64",
+      "$id": "63",
       "Type": {
-       "$id": "65",
+       "$id": "64",
        "Kind": "Primitive",
        "Name": "String",
        "IsNullable": false
@@ -557,25 +557,25 @@
    ]
   },
   {
-   "$id": "66",
+   "$id": "65",
    "Name": "String",
    "Description": "",
    "Operations": [
     {
-     "$id": "67",
+     "$id": "66",
      "Name": "getAll",
      "ResourceName": "String",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "68",
+       "$id": "67",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "69",
+        "$id": "68",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -590,9 +590,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "70",
+        "$id": "69",
         "Type": {
-         "$ref": "69"
+         "$ref": "68"
         },
         "Value": "application/json"
        }
@@ -600,12 +600,12 @@
      ],
      "Responses": [
       {
-       "$id": "71",
+       "$id": "70",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "17"
+        "$ref": "16"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -624,20 +624,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "72",
+     "$id": "71",
      "Name": "getDefault",
      "ResourceName": "String",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "73",
+       "$id": "72",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "74",
+        "$id": "73",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -652,9 +652,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "75",
+        "$id": "74",
         "Type": {
-         "$ref": "74"
+         "$ref": "73"
         },
         "Value": "application/json"
        }
@@ -662,12 +662,12 @@
      ],
      "Responses": [
       {
-       "$id": "76",
+       "$id": "75",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "17"
+        "$ref": "16"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -686,20 +686,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "77",
+     "$id": "76",
      "Name": "putAll",
      "ResourceName": "String",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "78",
+       "$id": "77",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "17"
+        "$ref": "16"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -712,11 +712,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "79",
+       "$id": "78",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "80",
+        "$id": "79",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -731,19 +731,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "81",
+        "$id": "80",
         "Type": {
-         "$ref": "80"
+         "$ref": "79"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "82",
+       "$id": "81",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "83",
+        "$id": "82",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -758,9 +758,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "84",
+        "$id": "83",
         "Type": {
-         "$ref": "83"
+         "$ref": "82"
         },
         "Value": "application/json"
        }
@@ -768,7 +768,7 @@
      ],
      "Responses": [
       {
-       "$id": "85",
+       "$id": "84",
        "StatusCodes": [
         204
        ],
@@ -789,20 +789,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "86",
+     "$id": "85",
      "Name": "putDefault",
      "ResourceName": "String",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "87",
+       "$id": "86",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "17"
+        "$ref": "16"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -815,11 +815,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "88",
+       "$id": "87",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "89",
+        "$id": "88",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -834,19 +834,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "90",
+        "$id": "89",
         "Type": {
-         "$ref": "89"
+         "$ref": "88"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "91",
+       "$id": "90",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "92",
+        "$id": "91",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -861,9 +861,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "93",
+        "$id": "92",
         "Type": {
-         "$ref": "92"
+         "$ref": "91"
         },
         "Value": "application/json"
        }
@@ -871,7 +871,7 @@
      ],
      "Responses": [
       {
-       "$id": "94",
+       "$id": "93",
        "StatusCodes": [
         204
        ],
@@ -893,36 +893,36 @@
     }
    ],
    "Protocol": {
-    "$id": "95"
+    "$id": "94"
    },
    "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
-     "$ref": "62"
+     "$ref": "61"
     }
    ]
   },
   {
-   "$id": "96",
+   "$id": "95",
    "Name": "Bytes",
    "Description": "",
    "Operations": [
     {
-     "$id": "97",
+     "$id": "96",
      "Name": "getAll",
      "ResourceName": "Bytes",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "98",
+       "$id": "97",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "99",
+        "$id": "98",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -937,9 +937,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "100",
+        "$id": "99",
         "Type": {
-         "$ref": "99"
+         "$ref": "98"
         },
         "Value": "application/json"
        }
@@ -947,12 +947,12 @@
      ],
      "Responses": [
       {
-       "$id": "101",
+       "$id": "100",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "20"
+        "$ref": "19"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -971,20 +971,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "102",
+     "$id": "101",
      "Name": "getDefault",
      "ResourceName": "Bytes",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "103",
+       "$id": "102",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "104",
+        "$id": "103",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -999,9 +999,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "105",
+        "$id": "104",
         "Type": {
-         "$ref": "104"
+         "$ref": "103"
         },
         "Value": "application/json"
        }
@@ -1009,12 +1009,12 @@
      ],
      "Responses": [
       {
-       "$id": "106",
+       "$id": "105",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "20"
+        "$ref": "19"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1033,20 +1033,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "107",
+     "$id": "106",
      "Name": "putAll",
      "ResourceName": "Bytes",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "108",
+       "$id": "107",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "20"
+        "$ref": "19"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1059,11 +1059,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "109",
+       "$id": "108",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "110",
+        "$id": "109",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1078,19 +1078,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "111",
+        "$id": "110",
         "Type": {
-         "$ref": "110"
+         "$ref": "109"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "112",
+       "$id": "111",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "113",
+        "$id": "112",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1105,9 +1105,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "114",
+        "$id": "113",
         "Type": {
-         "$ref": "113"
+         "$ref": "112"
         },
         "Value": "application/json"
        }
@@ -1115,7 +1115,7 @@
      ],
      "Responses": [
       {
-       "$id": "115",
+       "$id": "114",
        "StatusCodes": [
         204
        ],
@@ -1136,20 +1136,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "116",
+     "$id": "115",
      "Name": "putDefault",
      "ResourceName": "Bytes",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "117",
+       "$id": "116",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "20"
+        "$ref": "19"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1162,11 +1162,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "118",
+       "$id": "117",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "119",
+        "$id": "118",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1181,19 +1181,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "120",
+        "$id": "119",
         "Type": {
-         "$ref": "119"
+         "$ref": "118"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "121",
+       "$id": "120",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "122",
+        "$id": "121",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1208,9 +1208,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "123",
+        "$id": "122",
         "Type": {
-         "$ref": "122"
+         "$ref": "121"
         },
         "Value": "application/json"
        }
@@ -1218,7 +1218,7 @@
      ],
      "Responses": [
       {
-       "$id": "124",
+       "$id": "123",
        "StatusCodes": [
         204
        ],
@@ -1240,36 +1240,36 @@
     }
    ],
    "Protocol": {
-    "$id": "125"
+    "$id": "124"
    },
    "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
-     "$ref": "62"
+     "$ref": "61"
     }
    ]
   },
   {
-   "$id": "126",
+   "$id": "125",
    "Name": "Datetime",
    "Description": "",
    "Operations": [
     {
-     "$id": "127",
+     "$id": "126",
      "Name": "getAll",
      "ResourceName": "Datetime",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "128",
+       "$id": "127",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "129",
+        "$id": "128",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1284,9 +1284,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "130",
+        "$id": "129",
         "Type": {
-         "$ref": "129"
+         "$ref": "128"
         },
         "Value": "application/json"
        }
@@ -1294,12 +1294,12 @@
      ],
      "Responses": [
       {
-       "$id": "131",
+       "$id": "130",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "23"
+        "$ref": "22"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1318,20 +1318,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "132",
+     "$id": "131",
      "Name": "getDefault",
      "ResourceName": "Datetime",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "133",
+       "$id": "132",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "134",
+        "$id": "133",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1346,9 +1346,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "135",
+        "$id": "134",
         "Type": {
-         "$ref": "134"
+         "$ref": "133"
         },
         "Value": "application/json"
        }
@@ -1356,12 +1356,12 @@
      ],
      "Responses": [
       {
-       "$id": "136",
+       "$id": "135",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "23"
+        "$ref": "22"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1380,20 +1380,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "137",
+     "$id": "136",
      "Name": "putAll",
      "ResourceName": "Datetime",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "138",
+       "$id": "137",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "23"
+        "$ref": "22"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1406,11 +1406,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "139",
+       "$id": "138",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "140",
+        "$id": "139",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1425,19 +1425,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "141",
+        "$id": "140",
         "Type": {
-         "$ref": "140"
+         "$ref": "139"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "142",
+       "$id": "141",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "143",
+        "$id": "142",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1452,9 +1452,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "144",
+        "$id": "143",
         "Type": {
-         "$ref": "143"
+         "$ref": "142"
         },
         "Value": "application/json"
        }
@@ -1462,7 +1462,7 @@
      ],
      "Responses": [
       {
-       "$id": "145",
+       "$id": "144",
        "StatusCodes": [
         204
        ],
@@ -1483,20 +1483,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "146",
+     "$id": "145",
      "Name": "putDefault",
      "ResourceName": "Datetime",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "147",
+       "$id": "146",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "23"
+        "$ref": "22"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1509,11 +1509,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "148",
+       "$id": "147",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "149",
+        "$id": "148",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1528,19 +1528,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "150",
+        "$id": "149",
         "Type": {
-         "$ref": "149"
+         "$ref": "148"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "151",
+       "$id": "150",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "152",
+        "$id": "151",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1555,9 +1555,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "153",
+        "$id": "152",
         "Type": {
-         "$ref": "152"
+         "$ref": "151"
         },
         "Value": "application/json"
        }
@@ -1565,7 +1565,7 @@
      ],
      "Responses": [
       {
-       "$id": "154",
+       "$id": "153",
        "StatusCodes": [
         204
        ],
@@ -1587,36 +1587,36 @@
     }
    ],
    "Protocol": {
-    "$id": "155"
+    "$id": "154"
    },
    "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
-     "$ref": "62"
+     "$ref": "61"
     }
    ]
   },
   {
-   "$id": "156",
+   "$id": "155",
    "Name": "Duration",
    "Description": "",
    "Operations": [
     {
-     "$id": "157",
+     "$id": "156",
      "Name": "getAll",
      "ResourceName": "Duration",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "158",
+       "$id": "157",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "159",
+        "$id": "158",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1631,9 +1631,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "160",
+        "$id": "159",
         "Type": {
-         "$ref": "159"
+         "$ref": "158"
         },
         "Value": "application/json"
        }
@@ -1641,12 +1641,12 @@
      ],
      "Responses": [
       {
-       "$id": "161",
+       "$id": "160",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "26"
+        "$ref": "25"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1665,20 +1665,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "162",
+     "$id": "161",
      "Name": "getDefault",
      "ResourceName": "Duration",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "163",
+       "$id": "162",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "164",
+        "$id": "163",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1693,9 +1693,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "165",
+        "$id": "164",
         "Type": {
-         "$ref": "164"
+         "$ref": "163"
         },
         "Value": "application/json"
        }
@@ -1703,12 +1703,12 @@
      ],
      "Responses": [
       {
-       "$id": "166",
+       "$id": "165",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "26"
+        "$ref": "25"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1727,20 +1727,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "167",
+     "$id": "166",
      "Name": "putAll",
      "ResourceName": "Duration",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "168",
+       "$id": "167",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "26"
+        "$ref": "25"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1753,11 +1753,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "169",
+       "$id": "168",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "170",
+        "$id": "169",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1772,19 +1772,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "171",
+        "$id": "170",
         "Type": {
-         "$ref": "170"
+         "$ref": "169"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "172",
+       "$id": "171",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "173",
+        "$id": "172",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1799,9 +1799,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "174",
+        "$id": "173",
         "Type": {
-         "$ref": "173"
+         "$ref": "172"
         },
         "Value": "application/json"
        }
@@ -1809,7 +1809,7 @@
      ],
      "Responses": [
       {
-       "$id": "175",
+       "$id": "174",
        "StatusCodes": [
         204
        ],
@@ -1830,20 +1830,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "176",
+     "$id": "175",
      "Name": "putDefault",
      "ResourceName": "Duration",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "177",
+       "$id": "176",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "26"
+        "$ref": "25"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1856,11 +1856,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "178",
+       "$id": "177",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "179",
+        "$id": "178",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1875,19 +1875,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "180",
+        "$id": "179",
         "Type": {
-         "$ref": "179"
+         "$ref": "178"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "181",
+       "$id": "180",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "182",
+        "$id": "181",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1902,9 +1902,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "183",
+        "$id": "182",
         "Type": {
-         "$ref": "182"
+         "$ref": "181"
         },
         "Value": "application/json"
        }
@@ -1912,7 +1912,7 @@
      ],
      "Responses": [
       {
-       "$id": "184",
+       "$id": "183",
        "StatusCodes": [
         204
        ],
@@ -1934,36 +1934,36 @@
     }
    ],
    "Protocol": {
-    "$id": "185"
+    "$id": "184"
    },
    "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
-     "$ref": "62"
+     "$ref": "61"
     }
    ]
   },
   {
-   "$id": "186",
+   "$id": "185",
    "Name": "CollectionsByte",
    "Description": "",
    "Operations": [
     {
-     "$id": "187",
+     "$id": "186",
      "Name": "getAll",
      "ResourceName": "CollectionsByte",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "188",
+       "$id": "187",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "189",
+        "$id": "188",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1978,9 +1978,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "190",
+        "$id": "189",
         "Type": {
-         "$ref": "189"
+         "$ref": "188"
         },
         "Value": "application/json"
        }
@@ -1988,12 +1988,12 @@
      ],
      "Responses": [
       {
-       "$id": "191",
+       "$id": "190",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "29"
+        "$ref": "28"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2012,20 +2012,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "192",
+     "$id": "191",
      "Name": "getDefault",
      "ResourceName": "CollectionsByte",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "193",
+       "$id": "192",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "194",
+        "$id": "193",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2040,9 +2040,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "195",
+        "$id": "194",
         "Type": {
-         "$ref": "194"
+         "$ref": "193"
         },
         "Value": "application/json"
        }
@@ -2050,12 +2050,12 @@
      ],
      "Responses": [
       {
-       "$id": "196",
+       "$id": "195",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "29"
+        "$ref": "28"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2074,20 +2074,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "197",
+     "$id": "196",
      "Name": "putAll",
      "ResourceName": "CollectionsByte",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "198",
+       "$id": "197",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "29"
+        "$ref": "28"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2100,11 +2100,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "199",
+       "$id": "198",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "200",
+        "$id": "199",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2119,19 +2119,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "201",
+        "$id": "200",
         "Type": {
-         "$ref": "200"
+         "$ref": "199"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "202",
+       "$id": "201",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "203",
+        "$id": "202",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2146,9 +2146,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "204",
+        "$id": "203",
         "Type": {
-         "$ref": "203"
+         "$ref": "202"
         },
         "Value": "application/json"
        }
@@ -2156,7 +2156,7 @@
      ],
      "Responses": [
       {
-       "$id": "205",
+       "$id": "204",
        "StatusCodes": [
         204
        ],
@@ -2177,20 +2177,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "206",
+     "$id": "205",
      "Name": "putDefault",
      "ResourceName": "CollectionsByte",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "207",
+       "$id": "206",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "29"
+        "$ref": "28"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2203,11 +2203,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "208",
+       "$id": "207",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "209",
+        "$id": "208",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2222,19 +2222,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "210",
+        "$id": "209",
         "Type": {
-         "$ref": "209"
+         "$ref": "208"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "211",
+       "$id": "210",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "212",
+        "$id": "211",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2249,9 +2249,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "213",
+        "$id": "212",
         "Type": {
-         "$ref": "212"
+         "$ref": "211"
         },
         "Value": "application/json"
        }
@@ -2259,7 +2259,7 @@
      ],
      "Responses": [
       {
-       "$id": "214",
+       "$id": "213",
        "StatusCodes": [
         204
        ],
@@ -2281,36 +2281,36 @@
     }
    ],
    "Protocol": {
-    "$id": "215"
+    "$id": "214"
    },
    "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
-     "$ref": "62"
+     "$ref": "61"
     }
    ]
   },
   {
-   "$id": "216",
+   "$id": "215",
    "Name": "CollectionsModel",
    "Description": "",
    "Operations": [
     {
-     "$id": "217",
+     "$id": "216",
      "Name": "getAll",
      "ResourceName": "CollectionsModel",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "218",
+       "$id": "217",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "219",
+        "$id": "218",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2325,9 +2325,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "220",
+        "$id": "219",
         "Type": {
-         "$ref": "219"
+         "$ref": "218"
         },
         "Value": "application/json"
        }
@@ -2335,12 +2335,12 @@
      ],
      "Responses": [
       {
-       "$id": "221",
+       "$id": "220",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "33"
+        "$ref": "32"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2359,20 +2359,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "222",
+     "$id": "221",
      "Name": "getDefault",
      "ResourceName": "CollectionsModel",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "223",
+       "$id": "222",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "224",
+        "$id": "223",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2387,9 +2387,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "225",
+        "$id": "224",
         "Type": {
-         "$ref": "224"
+         "$ref": "223"
         },
         "Value": "application/json"
        }
@@ -2397,12 +2397,12 @@
      ],
      "Responses": [
       {
-       "$id": "226",
+       "$id": "225",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "33"
+        "$ref": "32"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2421,20 +2421,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "227",
+     "$id": "226",
      "Name": "putAll",
      "ResourceName": "CollectionsModel",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "228",
+       "$id": "227",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "33"
+        "$ref": "32"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2447,11 +2447,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "229",
+       "$id": "228",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "230",
+        "$id": "229",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2466,19 +2466,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "231",
+        "$id": "230",
         "Type": {
-         "$ref": "230"
+         "$ref": "229"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "232",
+       "$id": "231",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "233",
+        "$id": "232",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2493,9 +2493,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "234",
+        "$id": "233",
         "Type": {
-         "$ref": "233"
+         "$ref": "232"
         },
         "Value": "application/json"
        }
@@ -2503,7 +2503,7 @@
      ],
      "Responses": [
       {
-       "$id": "235",
+       "$id": "234",
        "StatusCodes": [
         204
        ],
@@ -2524,20 +2524,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "236",
+     "$id": "235",
      "Name": "putDefault",
      "ResourceName": "CollectionsModel",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "237",
+       "$id": "236",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "33"
+        "$ref": "32"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2550,11 +2550,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "238",
+       "$id": "237",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "239",
+        "$id": "238",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2569,19 +2569,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "240",
+        "$id": "239",
         "Type": {
-         "$ref": "239"
+         "$ref": "238"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "241",
+       "$id": "240",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "242",
+        "$id": "241",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2596,9 +2596,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "243",
+        "$id": "242",
         "Type": {
-         "$ref": "242"
+         "$ref": "241"
         },
         "Value": "application/json"
        }
@@ -2606,7 +2606,7 @@
      ],
      "Responses": [
       {
-       "$id": "244",
+       "$id": "243",
        "StatusCodes": [
         204
        ],
@@ -2628,36 +2628,36 @@
     }
    ],
    "Protocol": {
-    "$id": "245"
+    "$id": "244"
    },
    "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
-     "$ref": "62"
+     "$ref": "61"
     }
    ]
   },
   {
-   "$id": "246",
+   "$id": "245",
    "Name": "StringLiteral",
    "Description": "",
    "Operations": [
     {
-     "$id": "247",
+     "$id": "246",
      "Name": "getAll",
      "ResourceName": "StringLiteral",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "248",
+       "$id": "247",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "249",
+        "$id": "248",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2672,9 +2672,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "250",
+        "$id": "249",
         "Type": {
-         "$ref": "249"
+         "$ref": "248"
         },
         "Value": "application/json"
        }
@@ -2682,12 +2682,12 @@
      ],
      "Responses": [
       {
-       "$id": "251",
+       "$id": "250",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "36"
+        "$ref": "35"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2706,20 +2706,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "252",
+     "$id": "251",
      "Name": "getDefault",
      "ResourceName": "StringLiteral",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "253",
+       "$id": "252",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "254",
+        "$id": "253",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2734,9 +2734,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "255",
+        "$id": "254",
         "Type": {
-         "$ref": "254"
+         "$ref": "253"
         },
         "Value": "application/json"
        }
@@ -2744,12 +2744,12 @@
      ],
      "Responses": [
       {
-       "$id": "256",
+       "$id": "255",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "36"
+        "$ref": "35"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2768,20 +2768,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "257",
+     "$id": "256",
      "Name": "putAll",
      "ResourceName": "StringLiteral",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "258",
+       "$id": "257",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "36"
+        "$ref": "35"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2794,11 +2794,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "259",
+       "$id": "258",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "260",
+        "$id": "259",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2813,19 +2813,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "261",
+        "$id": "260",
         "Type": {
-         "$ref": "260"
+         "$ref": "259"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "262",
+       "$id": "261",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "263",
+        "$id": "262",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2840,9 +2840,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "264",
+        "$id": "263",
         "Type": {
-         "$ref": "263"
+         "$ref": "262"
         },
         "Value": "application/json"
        }
@@ -2850,7 +2850,7 @@
      ],
      "Responses": [
       {
-       "$id": "265",
+       "$id": "264",
        "StatusCodes": [
         204
        ],
@@ -2871,20 +2871,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "266",
+     "$id": "265",
      "Name": "putDefault",
      "ResourceName": "StringLiteral",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "267",
+       "$id": "266",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "36"
+        "$ref": "35"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2897,11 +2897,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "268",
+       "$id": "267",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "269",
+        "$id": "268",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2916,19 +2916,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "270",
+        "$id": "269",
         "Type": {
-         "$ref": "269"
+         "$ref": "268"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "271",
+       "$id": "270",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "272",
+        "$id": "271",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2943,9 +2943,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "273",
+        "$id": "272",
         "Type": {
-         "$ref": "272"
+         "$ref": "271"
         },
         "Value": "application/json"
        }
@@ -2953,7 +2953,7 @@
      ],
      "Responses": [
       {
-       "$id": "274",
+       "$id": "273",
        "StatusCodes": [
         204
        ],
@@ -2975,36 +2975,36 @@
     }
    ],
    "Protocol": {
-    "$id": "275"
+    "$id": "274"
    },
    "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
-     "$ref": "62"
+     "$ref": "61"
     }
    ]
   },
   {
-   "$id": "276",
+   "$id": "275",
    "Name": "IntLiteral",
    "Description": "",
    "Operations": [
     {
-     "$id": "277",
+     "$id": "276",
      "Name": "getAll",
      "ResourceName": "IntLiteral",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "278",
+       "$id": "277",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "279",
+        "$id": "278",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3019,9 +3019,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "280",
+        "$id": "279",
         "Type": {
-         "$ref": "279"
+         "$ref": "278"
         },
         "Value": "application/json"
        }
@@ -3029,12 +3029,12 @@
      ],
      "Responses": [
       {
-       "$id": "281",
+       "$id": "280",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "39"
+        "$ref": "38"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3053,20 +3053,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "282",
+     "$id": "281",
      "Name": "getDefault",
      "ResourceName": "IntLiteral",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "283",
+       "$id": "282",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "284",
+        "$id": "283",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3081,9 +3081,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "285",
+        "$id": "284",
         "Type": {
-         "$ref": "284"
+         "$ref": "283"
         },
         "Value": "application/json"
        }
@@ -3091,12 +3091,12 @@
      ],
      "Responses": [
       {
-       "$id": "286",
+       "$id": "285",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "39"
+        "$ref": "38"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3115,20 +3115,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "287",
+     "$id": "286",
      "Name": "putAll",
      "ResourceName": "IntLiteral",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "288",
+       "$id": "287",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "39"
+        "$ref": "38"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3141,11 +3141,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "289",
+       "$id": "288",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "290",
+        "$id": "289",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3160,19 +3160,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "291",
+        "$id": "290",
         "Type": {
-         "$ref": "290"
+         "$ref": "289"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "292",
+       "$id": "291",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "293",
+        "$id": "292",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3187,9 +3187,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "294",
+        "$id": "293",
         "Type": {
-         "$ref": "293"
+         "$ref": "292"
         },
         "Value": "application/json"
        }
@@ -3197,7 +3197,7 @@
      ],
      "Responses": [
       {
-       "$id": "295",
+       "$id": "294",
        "StatusCodes": [
         204
        ],
@@ -3218,20 +3218,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "296",
+     "$id": "295",
      "Name": "putDefault",
      "ResourceName": "IntLiteral",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "297",
+       "$id": "296",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "39"
+        "$ref": "38"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3244,11 +3244,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "298",
+       "$id": "297",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "299",
+        "$id": "298",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3263,19 +3263,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "300",
+        "$id": "299",
         "Type": {
-         "$ref": "299"
+         "$ref": "298"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "301",
+       "$id": "300",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "302",
+        "$id": "301",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3290,9 +3290,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "303",
+        "$id": "302",
         "Type": {
-         "$ref": "302"
+         "$ref": "301"
         },
         "Value": "application/json"
        }
@@ -3300,7 +3300,7 @@
      ],
      "Responses": [
       {
-       "$id": "304",
+       "$id": "303",
        "StatusCodes": [
         204
        ],
@@ -3322,36 +3322,36 @@
     }
    ],
    "Protocol": {
-    "$id": "305"
+    "$id": "304"
    },
    "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
-     "$ref": "62"
+     "$ref": "61"
     }
    ]
   },
   {
-   "$id": "306",
+   "$id": "305",
    "Name": "FloatLiteral",
    "Description": "",
    "Operations": [
     {
-     "$id": "307",
+     "$id": "306",
      "Name": "getAll",
      "ResourceName": "FloatLiteral",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "308",
+       "$id": "307",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "309",
+        "$id": "308",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3366,9 +3366,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "310",
+        "$id": "309",
         "Type": {
-         "$ref": "309"
+         "$ref": "308"
         },
         "Value": "application/json"
        }
@@ -3376,12 +3376,12 @@
      ],
      "Responses": [
       {
-       "$id": "311",
+       "$id": "310",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "42"
+        "$ref": "41"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3400,20 +3400,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "312",
+     "$id": "311",
      "Name": "getDefault",
      "ResourceName": "FloatLiteral",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "313",
+       "$id": "312",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "314",
+        "$id": "313",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3428,9 +3428,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "315",
+        "$id": "314",
         "Type": {
-         "$ref": "314"
+         "$ref": "313"
         },
         "Value": "application/json"
        }
@@ -3438,12 +3438,12 @@
      ],
      "Responses": [
       {
-       "$id": "316",
+       "$id": "315",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "42"
+        "$ref": "41"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3462,20 +3462,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "317",
+     "$id": "316",
      "Name": "putAll",
      "ResourceName": "FloatLiteral",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "318",
+       "$id": "317",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "42"
+        "$ref": "41"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3488,11 +3488,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "319",
+       "$id": "318",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "320",
+        "$id": "319",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3507,19 +3507,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "321",
+        "$id": "320",
         "Type": {
-         "$ref": "320"
+         "$ref": "319"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "322",
+       "$id": "321",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "323",
+        "$id": "322",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3534,9 +3534,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "324",
+        "$id": "323",
         "Type": {
-         "$ref": "323"
+         "$ref": "322"
         },
         "Value": "application/json"
        }
@@ -3544,7 +3544,7 @@
      ],
      "Responses": [
       {
-       "$id": "325",
+       "$id": "324",
        "StatusCodes": [
         204
        ],
@@ -3565,20 +3565,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "326",
+     "$id": "325",
      "Name": "putDefault",
      "ResourceName": "FloatLiteral",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "327",
+       "$id": "326",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "42"
+        "$ref": "41"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3591,11 +3591,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "328",
+       "$id": "327",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "329",
+        "$id": "328",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3610,19 +3610,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "330",
+        "$id": "329",
         "Type": {
-         "$ref": "329"
+         "$ref": "328"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "331",
+       "$id": "330",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "332",
+        "$id": "331",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3637,9 +3637,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "333",
+        "$id": "332",
         "Type": {
-         "$ref": "332"
+         "$ref": "331"
         },
         "Value": "application/json"
        }
@@ -3647,7 +3647,7 @@
      ],
      "Responses": [
       {
-       "$id": "334",
+       "$id": "333",
        "StatusCodes": [
         204
        ],
@@ -3669,36 +3669,36 @@
     }
    ],
    "Protocol": {
-    "$id": "335"
+    "$id": "334"
    },
    "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
-     "$ref": "62"
+     "$ref": "61"
     }
    ]
   },
   {
-   "$id": "336",
+   "$id": "335",
    "Name": "BooleanLiteral",
    "Description": "",
    "Operations": [
     {
-     "$id": "337",
+     "$id": "336",
      "Name": "getAll",
      "ResourceName": "BooleanLiteral",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "338",
+       "$id": "337",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "339",
+        "$id": "338",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3713,9 +3713,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "340",
+        "$id": "339",
         "Type": {
-         "$ref": "339"
+         "$ref": "338"
         },
         "Value": "application/json"
        }
@@ -3723,12 +3723,12 @@
      ],
      "Responses": [
       {
-       "$id": "341",
+       "$id": "340",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "45"
+        "$ref": "44"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3747,20 +3747,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "342",
+     "$id": "341",
      "Name": "getDefault",
      "ResourceName": "BooleanLiteral",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "343",
+       "$id": "342",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "344",
+        "$id": "343",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3775,9 +3775,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "345",
+        "$id": "344",
         "Type": {
-         "$ref": "344"
+         "$ref": "343"
         },
         "Value": "application/json"
        }
@@ -3785,12 +3785,12 @@
      ],
      "Responses": [
       {
-       "$id": "346",
+       "$id": "345",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "45"
+        "$ref": "44"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3809,20 +3809,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "347",
+     "$id": "346",
      "Name": "putAll",
      "ResourceName": "BooleanLiteral",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "348",
+       "$id": "347",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "45"
+        "$ref": "44"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3835,11 +3835,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "349",
+       "$id": "348",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "350",
+        "$id": "349",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3854,19 +3854,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "351",
+        "$id": "350",
         "Type": {
-         "$ref": "350"
+         "$ref": "349"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "352",
+       "$id": "351",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "353",
+        "$id": "352",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3881,9 +3881,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "354",
+        "$id": "353",
         "Type": {
-         "$ref": "353"
+         "$ref": "352"
         },
         "Value": "application/json"
        }
@@ -3891,7 +3891,7 @@
      ],
      "Responses": [
       {
-       "$id": "355",
+       "$id": "354",
        "StatusCodes": [
         204
        ],
@@ -3912,20 +3912,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "356",
+     "$id": "355",
      "Name": "putDefault",
      "ResourceName": "BooleanLiteral",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "357",
+       "$id": "356",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "45"
+        "$ref": "44"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3938,11 +3938,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "358",
+       "$id": "357",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "359",
+        "$id": "358",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3957,19 +3957,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "360",
+        "$id": "359",
         "Type": {
-         "$ref": "359"
+         "$ref": "358"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "361",
+       "$id": "360",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "362",
+        "$id": "361",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3984,9 +3984,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "363",
+        "$id": "362",
         "Type": {
-         "$ref": "362"
+         "$ref": "361"
         },
         "Value": "application/json"
        }
@@ -3994,7 +3994,7 @@
      ],
      "Responses": [
       {
-       "$id": "364",
+       "$id": "363",
        "StatusCodes": [
         204
        ],
@@ -4016,36 +4016,36 @@
     }
    ],
    "Protocol": {
-    "$id": "365"
+    "$id": "364"
    },
    "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
-     "$ref": "62"
+     "$ref": "61"
     }
    ]
   },
   {
-   "$id": "366",
+   "$id": "365",
    "Name": "UnionStringLiteral",
    "Description": "",
    "Operations": [
     {
-     "$id": "367",
+     "$id": "366",
      "Name": "getAll",
      "ResourceName": "UnionStringLiteral",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "368",
+       "$id": "367",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "369",
+        "$id": "368",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4060,9 +4060,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "370",
+        "$id": "369",
         "Type": {
-         "$ref": "369"
+         "$ref": "368"
         },
         "Value": "application/json"
        }
@@ -4070,12 +4070,12 @@
      ],
      "Responses": [
       {
-       "$id": "371",
+       "$id": "370",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "49"
+        "$ref": "48"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4094,20 +4094,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "372",
+     "$id": "371",
      "Name": "getDefault",
      "ResourceName": "UnionStringLiteral",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "373",
+       "$id": "372",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "374",
+        "$id": "373",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4122,9 +4122,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "375",
+        "$id": "374",
         "Type": {
-         "$ref": "374"
+         "$ref": "373"
         },
         "Value": "application/json"
        }
@@ -4132,12 +4132,12 @@
      ],
      "Responses": [
       {
-       "$id": "376",
+       "$id": "375",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "49"
+        "$ref": "48"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4156,20 +4156,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "377",
+     "$id": "376",
      "Name": "putAll",
      "ResourceName": "UnionStringLiteral",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "378",
+       "$id": "377",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "49"
+        "$ref": "48"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4182,11 +4182,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "379",
+       "$id": "378",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "380",
+        "$id": "379",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4201,19 +4201,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "381",
+        "$id": "380",
         "Type": {
-         "$ref": "380"
+         "$ref": "379"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "382",
+       "$id": "381",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "383",
+        "$id": "382",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4228,9 +4228,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "384",
+        "$id": "383",
         "Type": {
-         "$ref": "383"
+         "$ref": "382"
         },
         "Value": "application/json"
        }
@@ -4238,7 +4238,7 @@
      ],
      "Responses": [
       {
-       "$id": "385",
+       "$id": "384",
        "StatusCodes": [
         204
        ],
@@ -4259,20 +4259,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "386",
+     "$id": "385",
      "Name": "putDefault",
      "ResourceName": "UnionStringLiteral",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "387",
+       "$id": "386",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "49"
+        "$ref": "48"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4285,11 +4285,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "388",
+       "$id": "387",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "389",
+        "$id": "388",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4304,19 +4304,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "390",
+        "$id": "389",
         "Type": {
-         "$ref": "389"
+         "$ref": "388"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "391",
+       "$id": "390",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "392",
+        "$id": "391",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4331,9 +4331,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "393",
+        "$id": "392",
         "Type": {
-         "$ref": "392"
+         "$ref": "391"
         },
         "Value": "application/json"
        }
@@ -4341,7 +4341,7 @@
      ],
      "Responses": [
       {
-       "$id": "394",
+       "$id": "393",
        "StatusCodes": [
         204
        ],
@@ -4363,36 +4363,36 @@
     }
    ],
    "Protocol": {
-    "$id": "395"
+    "$id": "394"
    },
    "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
-     "$ref": "62"
+     "$ref": "61"
     }
    ]
   },
   {
-   "$id": "396",
+   "$id": "395",
    "Name": "UnionIntLiteral",
    "Description": "",
    "Operations": [
     {
-     "$id": "397",
+     "$id": "396",
      "Name": "getAll",
      "ResourceName": "UnionIntLiteral",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "398",
+       "$id": "397",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "399",
+        "$id": "398",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4407,9 +4407,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "400",
+        "$id": "399",
         "Type": {
-         "$ref": "399"
+         "$ref": "398"
         },
         "Value": "application/json"
        }
@@ -4417,12 +4417,12 @@
      ],
      "Responses": [
       {
-       "$id": "401",
+       "$id": "400",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "51"
+        "$ref": "50"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4441,20 +4441,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "402",
+     "$id": "401",
      "Name": "getDefault",
      "ResourceName": "UnionIntLiteral",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "403",
+       "$id": "402",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "404",
+        "$id": "403",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4469,9 +4469,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "405",
+        "$id": "404",
         "Type": {
-         "$ref": "404"
+         "$ref": "403"
         },
         "Value": "application/json"
        }
@@ -4479,12 +4479,12 @@
      ],
      "Responses": [
       {
-       "$id": "406",
+       "$id": "405",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "51"
+        "$ref": "50"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4503,20 +4503,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "407",
+     "$id": "406",
      "Name": "putAll",
      "ResourceName": "UnionIntLiteral",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "408",
+       "$id": "407",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "51"
+        "$ref": "50"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4529,11 +4529,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "409",
+       "$id": "408",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "410",
+        "$id": "409",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4548,19 +4548,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "411",
+        "$id": "410",
         "Type": {
-         "$ref": "410"
+         "$ref": "409"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "412",
+       "$id": "411",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "413",
+        "$id": "412",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4575,9 +4575,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "414",
+        "$id": "413",
         "Type": {
-         "$ref": "413"
+         "$ref": "412"
         },
         "Value": "application/json"
        }
@@ -4585,7 +4585,7 @@
      ],
      "Responses": [
       {
-       "$id": "415",
+       "$id": "414",
        "StatusCodes": [
         204
        ],
@@ -4606,20 +4606,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "416",
+     "$id": "415",
      "Name": "putDefault",
      "ResourceName": "UnionIntLiteral",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "417",
+       "$id": "416",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "51"
+        "$ref": "50"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4632,11 +4632,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "418",
+       "$id": "417",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "419",
+        "$id": "418",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4651,19 +4651,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "420",
+        "$id": "419",
         "Type": {
-         "$ref": "419"
+         "$ref": "418"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "421",
+       "$id": "420",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "422",
+        "$id": "421",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4678,9 +4678,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "423",
+        "$id": "422",
         "Type": {
-         "$ref": "422"
+         "$ref": "421"
         },
         "Value": "application/json"
        }
@@ -4688,7 +4688,7 @@
      ],
      "Responses": [
       {
-       "$id": "424",
+       "$id": "423",
        "StatusCodes": [
         204
        ],
@@ -4710,36 +4710,36 @@
     }
    ],
    "Protocol": {
-    "$id": "425"
+    "$id": "424"
    },
    "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
-     "$ref": "62"
+     "$ref": "61"
     }
    ]
   },
   {
-   "$id": "426",
+   "$id": "425",
    "Name": "UnionFloatLiteral",
    "Description": "",
    "Operations": [
     {
-     "$id": "427",
+     "$id": "426",
      "Name": "getAll",
      "ResourceName": "UnionFloatLiteral",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "428",
+       "$id": "427",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "429",
+        "$id": "428",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4754,9 +4754,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "430",
+        "$id": "429",
         "Type": {
-         "$ref": "429"
+         "$ref": "428"
         },
         "Value": "application/json"
        }
@@ -4764,12 +4764,12 @@
      ],
      "Responses": [
       {
-       "$id": "431",
+       "$id": "430",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "53"
+        "$ref": "52"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4788,20 +4788,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "432",
+     "$id": "431",
      "Name": "getDefault",
      "ResourceName": "UnionFloatLiteral",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "433",
+       "$id": "432",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "434",
+        "$id": "433",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4816,9 +4816,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "435",
+        "$id": "434",
         "Type": {
-         "$ref": "434"
+         "$ref": "433"
         },
         "Value": "application/json"
        }
@@ -4826,12 +4826,12 @@
      ],
      "Responses": [
       {
-       "$id": "436",
+       "$id": "435",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "53"
+        "$ref": "52"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4850,20 +4850,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "437",
+     "$id": "436",
      "Name": "putAll",
      "ResourceName": "UnionFloatLiteral",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "438",
+       "$id": "437",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "53"
+        "$ref": "52"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4876,11 +4876,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "439",
+       "$id": "438",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "440",
+        "$id": "439",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4895,19 +4895,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "441",
+        "$id": "440",
         "Type": {
-         "$ref": "440"
+         "$ref": "439"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "442",
+       "$id": "441",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "443",
+        "$id": "442",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4922,9 +4922,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "444",
+        "$id": "443",
         "Type": {
-         "$ref": "443"
+         "$ref": "442"
         },
         "Value": "application/json"
        }
@@ -4932,7 +4932,7 @@
      ],
      "Responses": [
       {
-       "$id": "445",
+       "$id": "444",
        "StatusCodes": [
         204
        ],
@@ -4953,20 +4953,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "446",
+     "$id": "445",
      "Name": "putDefault",
      "ResourceName": "UnionFloatLiteral",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "447",
+       "$id": "446",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "53"
+        "$ref": "52"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4979,11 +4979,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "448",
+       "$id": "447",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "449",
+        "$id": "448",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4998,19 +4998,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "450",
+        "$id": "449",
         "Type": {
-         "$ref": "449"
+         "$ref": "448"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "451",
+       "$id": "450",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "452",
+        "$id": "451",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5025,9 +5025,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "453",
+        "$id": "452",
         "Type": {
-         "$ref": "452"
+         "$ref": "451"
         },
         "Value": "application/json"
        }
@@ -5035,7 +5035,7 @@
      ],
      "Responses": [
       {
-       "$id": "454",
+       "$id": "453",
        "StatusCodes": [
         204
        ],
@@ -5057,36 +5057,36 @@
     }
    ],
    "Protocol": {
-    "$id": "455"
+    "$id": "454"
    },
    "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
-     "$ref": "62"
+     "$ref": "61"
     }
    ]
   },
   {
-   "$id": "456",
+   "$id": "455",
    "Name": "RequiredAndOptional",
    "Description": "Test optional and required properties",
    "Operations": [
     {
-     "$id": "457",
+     "$id": "456",
      "Name": "getAll",
      "ResourceName": "RequiredAndOptional",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "458",
+       "$id": "457",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "459",
+        "$id": "458",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5101,9 +5101,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "460",
+        "$id": "459",
         "Type": {
-         "$ref": "459"
+         "$ref": "458"
         },
         "Value": "application/json"
        }
@@ -5111,12 +5111,12 @@
      ],
      "Responses": [
       {
-       "$id": "461",
+       "$id": "460",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "55"
+        "$ref": "54"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -5135,20 +5135,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "462",
+     "$id": "461",
      "Name": "getRequiredOnly",
      "ResourceName": "RequiredAndOptional",
      "Description": "Get models that will return only the required properties",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "463",
+       "$id": "462",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "464",
+        "$id": "463",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5163,9 +5163,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "465",
+        "$id": "464",
         "Type": {
-         "$ref": "464"
+         "$ref": "463"
         },
         "Value": "application/json"
        }
@@ -5173,12 +5173,12 @@
      ],
      "Responses": [
       {
-       "$id": "466",
+       "$id": "465",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "55"
+        "$ref": "54"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -5197,20 +5197,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "467",
+     "$id": "466",
      "Name": "putAll",
      "ResourceName": "RequiredAndOptional",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "468",
+       "$id": "467",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "55"
+        "$ref": "54"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -5223,11 +5223,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "469",
+       "$id": "468",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "470",
+        "$id": "469",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5242,19 +5242,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "471",
+        "$id": "470",
         "Type": {
-         "$ref": "470"
+         "$ref": "469"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "472",
+       "$id": "471",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "473",
+        "$id": "472",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5269,9 +5269,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "474",
+        "$id": "473",
         "Type": {
-         "$ref": "473"
+         "$ref": "472"
         },
         "Value": "application/json"
        }
@@ -5279,7 +5279,7 @@
      ],
      "Responses": [
       {
-       "$id": "475",
+       "$id": "474",
        "StatusCodes": [
         204
        ],
@@ -5300,20 +5300,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "476",
+     "$id": "475",
      "Name": "putRequiredOnly",
      "ResourceName": "RequiredAndOptional",
      "Description": "Put a body with only required properties.",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "61"
       },
       {
-       "$id": "477",
+       "$id": "476",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "55"
+        "$ref": "54"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -5326,11 +5326,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "478",
+       "$id": "477",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "479",
+        "$id": "478",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5345,19 +5345,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "480",
+        "$id": "479",
         "Type": {
-         "$ref": "479"
+         "$ref": "478"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "481",
+       "$id": "480",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "482",
+        "$id": "481",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5372,9 +5372,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "483",
+        "$id": "482",
         "Type": {
-         "$ref": "482"
+         "$ref": "481"
         },
         "Value": "application/json"
        }
@@ -5382,7 +5382,7 @@
      ],
      "Responses": [
       {
-       "$id": "484",
+       "$id": "483",
        "StatusCodes": [
         204
        ],
@@ -5404,13 +5404,13 @@
     }
    ],
    "Protocol": {
-    "$id": "485"
+    "$id": "484"
    },
    "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
-     "$ref": "62"
+     "$ref": "61"
     }
    ]
   }

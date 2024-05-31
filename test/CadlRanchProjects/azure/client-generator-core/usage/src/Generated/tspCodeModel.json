@@ -1,11 +1,11 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "_Specs_.Azure.ClientGenerator.Core.Usage",
  "ApiVersions": [],
  "Enums": [],
  "Models": [
   {
-   "$id": "2",
+   "$id": "1",
    "Kind": "Model",
    "Name": "InputModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
@@ -14,12 +14,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "3",
+     "$id": "2",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "4",
+      "$id": "3",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -30,7 +30,7 @@
    ]
   },
   {
-   "$id": "5",
+   "$id": "4",
    "Kind": "Model",
    "Name": "OutputModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
@@ -39,12 +39,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "6",
+     "$id": "5",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "7",
+      "$id": "6",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -55,7 +55,7 @@
    ]
   },
   {
-   "$id": "8",
+   "$id": "7",
    "Kind": "Model",
    "Name": "OrphanModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage",
@@ -65,12 +65,12 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "9",
+     "$id": "8",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "10",
+      "$id": "9",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -83,22 +83,22 @@
  ],
  "Clients": [
   {
-   "$id": "11",
+   "$id": "10",
    "Name": "UsageClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "12"
+    "$id": "11"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$id": "13",
+     "$id": "12",
      "Name": "host",
      "NameInRequest": "host",
      "Description": "TestServer endpoint",
      "Type": {
-      "$id": "14",
+      "$id": "13",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -113,9 +113,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "15",
+      "$id": "14",
       "Type": {
-       "$id": "16",
+       "$id": "15",
        "Kind": "Primitive",
        "Name": "String",
        "IsNullable": false
@@ -126,25 +126,25 @@
    ]
   },
   {
-   "$id": "17",
+   "$id": "16",
    "Name": "ModelInOperation",
    "Description": "",
    "Operations": [
     {
-     "$id": "18",
+     "$id": "17",
      "Name": "inputToInputOutput",
      "ResourceName": "ModelInOperation",
      "Description": "Expected body parameter: \n```json\n{\n  \"name\": <any string>\n}\n```",
      "Parameters": [
       {
-       "$ref": "13"
+       "$ref": "12"
       },
       {
-       "$id": "19",
+       "$id": "18",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "2"
+        "$ref": "1"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -157,11 +157,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "20",
+       "$id": "19",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "21",
+        "$id": "20",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -176,19 +176,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "22",
+        "$id": "21",
         "Type": {
-         "$ref": "21"
+         "$ref": "20"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "23",
+       "$id": "22",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "24",
+        "$id": "23",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -203,9 +203,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "25",
+        "$id": "24",
         "Type": {
-         "$ref": "24"
+         "$ref": "23"
         },
         "Value": "application/json"
        }
@@ -213,7 +213,7 @@
      ],
      "Responses": [
       {
-       "$id": "26",
+       "$id": "25",
        "StatusCodes": [
         204
        ],
@@ -234,20 +234,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "27",
+     "$id": "26",
      "Name": "outputToInputOutput",
      "ResourceName": "ModelInOperation",
      "Description": "Expected response body: \n```json\n{\n  \"name\": <any string>\n}\n```",
      "Parameters": [
       {
-       "$ref": "13"
+       "$ref": "12"
       },
       {
-       "$id": "28",
+       "$id": "27",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "29",
+        "$id": "28",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -262,9 +262,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "30",
+        "$id": "29",
         "Type": {
-         "$ref": "29"
+         "$ref": "28"
         },
         "Value": "application/json"
        }
@@ -272,12 +272,12 @@
      ],
      "Responses": [
       {
-       "$id": "31",
+       "$id": "30",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "4"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -297,13 +297,13 @@
     }
    ],
    "Protocol": {
-    "$id": "32"
+    "$id": "31"
    },
    "Creatable": false,
    "Parent": "UsageClient",
    "Parameters": [
     {
-     "$ref": "13"
+     "$ref": "12"
     }
    ]
   }

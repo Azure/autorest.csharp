@@ -1,28 +1,28 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "SpecialHeaders.ConditionalRequest",
  "ApiVersions": [],
  "Enums": [],
  "Models": [],
  "Clients": [
   {
-   "$id": "2",
+   "$id": "1",
    "Name": "ConditionalRequestClient",
    "Description": "Illustrates conditional request headers",
    "Operations": [
     {
-     "$id": "3",
+     "$id": "2",
      "Name": "postIfMatch",
      "ResourceName": "ConditionalRequest",
      "Description": "Check when only If-Match in header is defined.",
      "Parameters": [
       {
-       "$id": "4",
+       "$id": "3",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "5",
+        "$id": "4",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -37,9 +37,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "6",
+        "$id": "5",
         "Type": {
-         "$id": "7",
+         "$id": "6",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -48,12 +48,12 @@
        }
       },
       {
-       "$id": "8",
+       "$id": "7",
        "Name": "ifMatch",
        "NameInRequest": "If-Match",
        "Description": "The request should only proceed if an entity matches this string.",
        "Type": {
-        "$id": "9",
+        "$id": "8",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -69,11 +69,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "10",
+       "$id": "9",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "11",
+        "$id": "10",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -88,9 +88,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "12",
+        "$id": "11",
         "Type": {
-         "$ref": "11"
+         "$ref": "10"
         },
         "Value": "application/json"
        }
@@ -98,7 +98,7 @@
      ],
      "Responses": [
       {
-       "$id": "13",
+       "$id": "12",
        "StatusCodes": [
         204
        ],
@@ -116,21 +116,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "14",
+     "$id": "13",
      "Name": "postIfNoneMatch",
      "ResourceName": "ConditionalRequest",
      "Description": "Check when only If-None-Match in header is defined.",
      "Parameters": [
       {
-       "$ref": "4"
+       "$ref": "3"
       },
       {
-       "$id": "15",
+       "$id": "14",
        "Name": "ifNoneMatch",
        "NameInRequest": "If-None-Match",
        "Description": "The request should only proceed if no entity matches this string.",
        "Type": {
-        "$id": "16",
+        "$id": "15",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -146,11 +146,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "17",
+       "$id": "16",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "18",
+        "$id": "17",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -165,9 +165,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "19",
+        "$id": "18",
         "Type": {
-         "$ref": "18"
+         "$ref": "17"
         },
         "Value": "application/json"
        }
@@ -175,7 +175,7 @@
      ],
      "Responses": [
       {
-       "$id": "20",
+       "$id": "19",
        "StatusCodes": [
         204
        ],
@@ -194,12 +194,12 @@
     }
    ],
    "Protocol": {
-    "$id": "21"
+    "$id": "20"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "4"
+     "$ref": "3"
     }
    ]
   }

@@ -1,11 +1,11 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "Type.Model.Inheritance.SingleDiscriminator",
  "ApiVersions": [],
  "Enums": [],
  "Models": [
   {
-   "$id": "2",
+   "$id": "1",
    "Kind": "Model",
    "Name": "Bird",
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
@@ -15,12 +15,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "3",
+     "$id": "2",
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "Discriminator",
      "Type": {
-      "$id": "4",
+      "$id": "3",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -30,12 +30,12 @@
      "IsDiscriminator": true
     },
     {
-     "$id": "5",
+     "$id": "4",
      "Name": "wingspan",
      "SerializedName": "wingspan",
      "Description": "",
      "Type": {
-      "$id": "6",
+      "$id": "5",
       "Kind": "Primitive",
       "Name": "Int32",
       "IsNullable": false
@@ -46,7 +46,7 @@
    ]
   },
   {
-   "$id": "7",
+   "$id": "6",
    "Kind": "Model",
    "Name": "Dinosaur",
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
@@ -56,12 +56,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "8",
+     "$id": "7",
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "Discriminator",
      "Type": {
-      "$id": "9",
+      "$id": "8",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -71,12 +71,12 @@
      "IsDiscriminator": true
     },
     {
-     "$id": "10",
+     "$id": "9",
      "Name": "size",
      "SerializedName": "size",
      "Description": "",
      "Type": {
-      "$id": "11",
+      "$id": "10",
       "Kind": "Primitive",
       "Name": "Int32",
       "IsNullable": false
@@ -87,7 +87,7 @@
    ]
   },
   {
-   "$id": "12",
+   "$id": "11",
    "Kind": "Model",
    "Name": "SeaGull",
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
@@ -96,12 +96,12 @@
    "DiscriminatorValue": "seagull",
    "Usage": "RoundTrip",
    "BaseModel": {
-    "$ref": "2"
+    "$ref": "1"
    },
    "Properties": []
   },
   {
-   "$id": "13",
+   "$id": "12",
    "Kind": "Model",
    "Name": "Sparrow",
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
@@ -110,12 +110,12 @@
    "DiscriminatorValue": "sparrow",
    "Usage": "RoundTrip",
    "BaseModel": {
-    "$ref": "2"
+    "$ref": "1"
    },
    "Properties": []
   },
   {
-   "$id": "14",
+   "$id": "13",
    "Kind": "Model",
    "Name": "Goose",
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
@@ -124,12 +124,12 @@
    "DiscriminatorValue": "goose",
    "Usage": "RoundTrip",
    "BaseModel": {
-    "$ref": "2"
+    "$ref": "1"
    },
    "Properties": []
   },
   {
-   "$id": "15",
+   "$id": "14",
    "Kind": "Model",
    "Name": "Eagle",
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
@@ -138,20 +138,20 @@
    "DiscriminatorValue": "eagle",
    "Usage": "RoundTrip",
    "BaseModel": {
-    "$ref": "2"
+    "$ref": "1"
    },
    "Properties": [
     {
-     "$id": "16",
+     "$id": "15",
      "Name": "friends",
      "SerializedName": "friends",
      "Description": "",
      "Type": {
-      "$id": "17",
+      "$id": "16",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$ref": "2"
+       "$ref": "1"
       },
       "IsNullable": false
      },
@@ -159,22 +159,22 @@
      "IsReadOnly": false
     },
     {
-     "$id": "18",
+     "$id": "17",
      "Name": "hate",
      "SerializedName": "hate",
      "Description": "",
      "Type": {
-      "$id": "19",
+      "$id": "18",
       "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "20",
+       "$id": "19",
        "Kind": "Primitive",
        "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$ref": "2"
+       "$ref": "1"
       },
       "IsNullable": false
      },
@@ -182,12 +182,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "21",
+     "$id": "20",
      "Name": "partner",
      "SerializedName": "partner",
      "Description": "",
      "Type": {
-      "$ref": "2"
+      "$ref": "1"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -195,7 +195,7 @@
    ]
   },
   {
-   "$id": "22",
+   "$id": "21",
    "Kind": "Model",
    "Name": "TRex",
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
@@ -204,29 +204,29 @@
    "DiscriminatorValue": "t-rex",
    "Usage": "Output",
    "BaseModel": {
-    "$ref": "7"
+    "$ref": "6"
    },
    "Properties": []
   }
  ],
  "Clients": [
   {
-   "$id": "23",
+   "$id": "22",
    "Name": "SingleDiscriminatorClient",
    "Description": "Illustrates inheritance with single discriminator.",
    "Operations": [
     {
-     "$id": "24",
+     "$id": "23",
      "Name": "getModel",
      "ResourceName": "SingleDiscriminator",
      "Parameters": [
       {
-       "$id": "25",
+       "$id": "24",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "26",
+        "$id": "25",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -241,9 +241,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "27",
+        "$id": "26",
         "Type": {
-         "$id": "28",
+         "$id": "27",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -252,11 +252,11 @@
        }
       },
       {
-       "$id": "29",
+       "$id": "28",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "30",
+        "$id": "29",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -271,9 +271,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "31",
+        "$id": "30",
         "Type": {
-         "$ref": "30"
+         "$ref": "29"
         },
         "Value": "application/json"
        }
@@ -281,12 +281,12 @@
      ],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "31",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "2"
+        "$ref": "1"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -305,19 +305,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "33",
+     "$id": "32",
      "Name": "putModel",
      "ResourceName": "SingleDiscriminator",
      "Parameters": [
       {
-       "$ref": "25"
+       "$ref": "24"
       },
       {
-       "$id": "34",
+       "$id": "33",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "2"
+        "$ref": "1"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -330,11 +330,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "35",
+       "$id": "34",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "36",
+        "$id": "35",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -349,19 +349,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "37",
+        "$id": "36",
         "Type": {
-         "$ref": "36"
+         "$ref": "35"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "38",
+       "$id": "37",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "39",
+        "$id": "38",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -376,9 +376,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "40",
+        "$id": "39",
         "Type": {
-         "$ref": "39"
+         "$ref": "38"
         },
         "Value": "application/json"
        }
@@ -386,7 +386,7 @@
      ],
      "Responses": [
       {
-       "$id": "41",
+       "$id": "40",
        "StatusCodes": [
         204
        ],
@@ -407,19 +407,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "42",
+     "$id": "41",
      "Name": "getRecursiveModel",
      "ResourceName": "SingleDiscriminator",
      "Parameters": [
       {
-       "$ref": "25"
+       "$ref": "24"
       },
       {
-       "$id": "43",
+       "$id": "42",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "44",
+        "$id": "43",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -434,9 +434,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "45",
+        "$id": "44",
         "Type": {
-         "$ref": "44"
+         "$ref": "43"
         },
         "Value": "application/json"
        }
@@ -444,12 +444,12 @@
      ],
      "Responses": [
       {
-       "$id": "46",
+       "$id": "45",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "2"
+        "$ref": "1"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -468,19 +468,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "47",
+     "$id": "46",
      "Name": "putRecursiveModel",
      "ResourceName": "SingleDiscriminator",
      "Parameters": [
       {
-       "$ref": "25"
+       "$ref": "24"
       },
       {
-       "$id": "48",
+       "$id": "47",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "2"
+        "$ref": "1"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -493,11 +493,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "49",
+       "$id": "48",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "50",
+        "$id": "49",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -512,19 +512,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "51",
+        "$id": "50",
         "Type": {
-         "$ref": "50"
+         "$ref": "49"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "52",
+       "$id": "51",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "53",
+        "$id": "52",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -539,9 +539,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "54",
+        "$id": "53",
         "Type": {
-         "$ref": "53"
+         "$ref": "52"
         },
         "Value": "application/json"
        }
@@ -549,7 +549,7 @@
      ],
      "Responses": [
       {
-       "$id": "55",
+       "$id": "54",
        "StatusCodes": [
         204
        ],
@@ -570,19 +570,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "56",
+     "$id": "55",
      "Name": "getMissingDiscriminator",
      "ResourceName": "SingleDiscriminator",
      "Parameters": [
       {
-       "$ref": "25"
+       "$ref": "24"
       },
       {
-       "$id": "57",
+       "$id": "56",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "58",
+        "$id": "57",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -597,9 +597,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "59",
+        "$id": "58",
         "Type": {
-         "$ref": "58"
+         "$ref": "57"
         },
         "Value": "application/json"
        }
@@ -607,12 +607,12 @@
      ],
      "Responses": [
       {
-       "$id": "60",
+       "$id": "59",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "2"
+        "$ref": "1"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -631,19 +631,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "61",
+     "$id": "60",
      "Name": "getWrongDiscriminator",
      "ResourceName": "SingleDiscriminator",
      "Parameters": [
       {
-       "$ref": "25"
+       "$ref": "24"
       },
       {
-       "$id": "62",
+       "$id": "61",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "63",
+        "$id": "62",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -658,9 +658,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "64",
+        "$id": "63",
         "Type": {
-         "$ref": "63"
+         "$ref": "62"
         },
         "Value": "application/json"
        }
@@ -668,12 +668,12 @@
      ],
      "Responses": [
       {
-       "$id": "65",
+       "$id": "64",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "2"
+        "$ref": "1"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -692,19 +692,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "66",
+     "$id": "65",
      "Name": "getLegacyModel",
      "ResourceName": "SingleDiscriminator",
      "Parameters": [
       {
-       "$ref": "25"
+       "$ref": "24"
       },
       {
-       "$id": "67",
+       "$id": "66",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "68",
+        "$id": "67",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -719,9 +719,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "69",
+        "$id": "68",
         "Type": {
-         "$ref": "68"
+         "$ref": "67"
         },
         "Value": "application/json"
        }
@@ -729,12 +729,12 @@
      ],
      "Responses": [
       {
-       "$id": "70",
+       "$id": "69",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "7"
+        "$ref": "6"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -754,12 +754,12 @@
     }
    ],
    "Protocol": {
-    "$id": "71"
+    "$id": "70"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "25"
+     "$ref": "24"
     }
    ]
   }

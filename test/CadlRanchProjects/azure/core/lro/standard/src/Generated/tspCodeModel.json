@@ -1,42 +1,42 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "_Specs_.Azure.Core.Lro.Standard",
  "ApiVersions": [
   "2022-12-01-preview"
  ],
  "Enums": [
   {
-   "$id": "2",
+   "$id": "1",
    "Kind": "Enum",
    "Name": "OperationState",
    "EnumValueType": "String",
    "AllowedValues": [
     {
-     "$id": "3",
+     "$id": "2",
      "Name": "NotStarted",
      "Value": "NotStarted",
      "Description": "The operation has not started."
     },
     {
-     "$id": "4",
+     "$id": "3",
      "Name": "Running",
      "Value": "Running",
      "Description": "The operation is in progress."
     },
     {
-     "$id": "5",
+     "$id": "4",
      "Name": "Succeeded",
      "Value": "Succeeded",
      "Description": "The operation has completed successfully."
     },
     {
-     "$id": "6",
+     "$id": "5",
      "Name": "Failed",
      "Value": "Failed",
      "Description": "The operation has failed."
     },
     {
-     "$id": "7",
+     "$id": "6",
      "Name": "Canceled",
      "Value": "Canceled",
      "Description": "The operation has been canceled by the user."
@@ -49,13 +49,13 @@
    "Usage": "Output"
   },
   {
-   "$id": "8",
+   "$id": "7",
    "Kind": "Enum",
    "Name": "Versions",
    "EnumValueType": "String",
    "AllowedValues": [
     {
-     "$id": "9",
+     "$id": "8",
      "Name": "v2022_12_01_preview",
      "Value": "2022-12-01-preview",
      "Description": "The 2022-12-01-preview version."
@@ -70,7 +70,7 @@
  ],
  "Models": [
   {
-   "$id": "10",
+   "$id": "9",
    "Kind": "Model",
    "Name": "User",
    "Namespace": "_Specs_.Azure.Core.Lro.Standard",
@@ -79,12 +79,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "11",
+     "$id": "10",
      "Name": "name",
      "SerializedName": "name",
      "Description": "The name of user.",
      "Type": {
-      "$id": "12",
+      "$id": "11",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -93,12 +93,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "13",
+     "$id": "12",
      "Name": "role",
      "SerializedName": "role",
      "Description": "The role of user",
      "Type": {
-      "$id": "14",
+      "$id": "13",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -109,7 +109,7 @@
    ]
   },
   {
-   "$id": "15",
+   "$id": "14",
    "Kind": "Model",
    "Name": "OperationStatusError",
    "Namespace": "Azure.Core.Foundations",
@@ -118,12 +118,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "16",
+     "$id": "15",
      "Name": "id",
      "SerializedName": "id",
      "Description": "The unique ID of the operation.",
      "Type": {
-      "$id": "17",
+      "$id": "16",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -132,23 +132,23 @@
      "IsReadOnly": false
     },
     {
-     "$id": "18",
+     "$id": "17",
      "Name": "status",
      "SerializedName": "status",
      "Description": "The status of the operation",
      "Type": {
-      "$ref": "2"
+      "$ref": "1"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "19",
+     "$id": "18",
      "Name": "error",
      "SerializedName": "error",
      "Description": "Error object that describes the error when status is \"Failed\".",
      "Type": {
-      "$id": "20",
+      "$id": "19",
       "Kind": "Model",
       "Name": "Error",
       "Namespace": "Azure.Core.Foundations",
@@ -157,12 +157,12 @@
       "Usage": "Output",
       "Properties": [
        {
-        "$id": "21",
+        "$id": "20",
         "Name": "code",
         "SerializedName": "code",
         "Description": "One of a server-defined set of error codes.",
         "Type": {
-         "$id": "22",
+         "$id": "21",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -171,12 +171,12 @@
         "IsReadOnly": false
        },
        {
-        "$id": "23",
+        "$id": "22",
         "Name": "message",
         "SerializedName": "message",
         "Description": "A human-readable representation of the error.",
         "Type": {
-         "$id": "24",
+         "$id": "23",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -185,12 +185,12 @@
         "IsReadOnly": false
        },
        {
-        "$id": "25",
+        "$id": "24",
         "Name": "target",
         "SerializedName": "target",
         "Description": "The target of the error.",
         "Type": {
-         "$id": "26",
+         "$id": "25",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -199,16 +199,16 @@
         "IsReadOnly": false
        },
        {
-        "$id": "27",
+        "$id": "26",
         "Name": "details",
         "SerializedName": "details",
         "Description": "An array of details about specific errors that led to this reported error.",
         "Type": {
-         "$id": "28",
+         "$id": "27",
          "Kind": "Array",
          "Name": "Array",
          "ElementType": {
-          "$ref": "20"
+          "$ref": "19"
          },
          "IsNullable": false
         },
@@ -216,12 +216,12 @@
         "IsReadOnly": false
        },
        {
-        "$id": "29",
+        "$id": "28",
         "Name": "innererror",
         "SerializedName": "innererror",
         "Description": "An object containing more specific information than the current object about the error.",
         "Type": {
-         "$id": "30",
+         "$id": "29",
          "Kind": "Model",
          "Name": "InnerError",
          "Namespace": "Azure.Core.Foundations",
@@ -230,12 +230,12 @@
          "Usage": "Output",
          "Properties": [
           {
-           "$id": "31",
+           "$id": "30",
            "Name": "code",
            "SerializedName": "code",
            "Description": "One of a server-defined set of error codes.",
            "Type": {
-            "$id": "32",
+            "$id": "31",
             "Kind": "Primitive",
             "Name": "String",
             "IsNullable": false
@@ -244,12 +244,12 @@
            "IsReadOnly": false
           },
           {
-           "$id": "33",
+           "$id": "32",
            "Name": "innererror",
            "SerializedName": "innererror",
            "Description": "Inner error.",
            "Type": {
-            "$ref": "30"
+            "$ref": "29"
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -267,13 +267,13 @@
    ]
   },
   {
-   "$ref": "20"
+   "$ref": "19"
   },
   {
-   "$ref": "30"
+   "$ref": "29"
   },
   {
-   "$id": "34",
+   "$id": "33",
    "Kind": "Model",
    "Name": "ResourceOperationStatusUserExportedUserError",
    "Namespace": "Azure.Core",
@@ -282,12 +282,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "35",
+     "$id": "34",
      "Name": "id",
      "SerializedName": "id",
      "Description": "The unique ID of the operation.",
      "Type": {
-      "$id": "36",
+      "$id": "35",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -296,34 +296,34 @@
      "IsReadOnly": false
     },
     {
-     "$id": "37",
+     "$id": "36",
      "Name": "status",
      "SerializedName": "status",
      "Description": "The status of the operation",
      "Type": {
-      "$ref": "2"
+      "$ref": "1"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "38",
+     "$id": "37",
      "Name": "error",
      "SerializedName": "error",
      "Description": "Error object that describes the error when status is \"Failed\".",
      "Type": {
-      "$ref": "20"
+      "$ref": "19"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "39",
+     "$id": "38",
      "Name": "result",
      "SerializedName": "result",
      "Description": "The result of the operation.",
      "Type": {
-      "$id": "40",
+      "$id": "39",
       "Kind": "Model",
       "Name": "ExportedUser",
       "Namespace": "_Specs_.Azure.Core.Lro.Standard",
@@ -332,12 +332,12 @@
       "Usage": "Output",
       "Properties": [
        {
-        "$id": "41",
+        "$id": "40",
         "Name": "name",
         "SerializedName": "name",
         "Description": "The name of user.",
         "Type": {
-         "$id": "42",
+         "$id": "41",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -346,12 +346,12 @@
         "IsReadOnly": false
        },
        {
-        "$id": "43",
+        "$id": "42",
         "Name": "resourceUri",
         "SerializedName": "resourceUri",
         "Description": "The exported URI.",
         "Type": {
-         "$id": "44",
+         "$id": "43",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -367,10 +367,10 @@
    ]
   },
   {
-   "$ref": "40"
+   "$ref": "39"
   },
   {
-   "$id": "45",
+   "$id": "44",
    "Kind": "Model",
    "Name": "OperationStatusExportedUserError",
    "Namespace": "Azure.Core.Foundations",
@@ -379,12 +379,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "46",
+     "$id": "45",
      "Name": "id",
      "SerializedName": "id",
      "Description": "The unique ID of the operation.",
      "Type": {
-      "$id": "47",
+      "$id": "46",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -393,34 +393,34 @@
      "IsReadOnly": false
     },
     {
-     "$id": "48",
+     "$id": "47",
      "Name": "status",
      "SerializedName": "status",
      "Description": "The status of the operation",
      "Type": {
-      "$ref": "2"
+      "$ref": "1"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "49",
+     "$id": "48",
      "Name": "error",
      "SerializedName": "error",
      "Description": "Error object that describes the error when status is \"Failed\".",
      "Type": {
-      "$ref": "20"
+      "$ref": "19"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "50",
+     "$id": "49",
      "Name": "result",
      "SerializedName": "result",
      "Description": "The result of the operation.",
      "Type": {
-      "$ref": "40"
+      "$ref": "39"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -430,24 +430,24 @@
  ],
  "Clients": [
   {
-   "$id": "51",
+   "$id": "50",
    "Name": "StandardClient",
    "Description": "Illustrates bodies templated with Azure Core with long-running operation",
    "Operations": [
     {
-     "$id": "52",
+     "$id": "51",
      "Name": "createOrReplace",
      "ResourceName": "User",
      "Summary": "Adds a user or replaces a user's fields.",
      "Description": "Creates or replaces a User",
      "Parameters": [
       {
-       "$id": "53",
+       "$id": "52",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "54",
+        "$id": "53",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -462,9 +462,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "55",
+        "$id": "54",
         "Type": {
-         "$id": "56",
+         "$id": "55",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -473,21 +473,21 @@
        }
       },
       {
-       "$id": "57",
+       "$id": "56",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "58",
+        "$id": "57",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "59",
+        "$id": "58",
         "Type": {
-         "$id": "60",
+         "$id": "59",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -504,12 +504,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "61",
+       "$id": "60",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "The name of user.",
        "Type": {
-        "$id": "62",
+        "$id": "61",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -525,12 +525,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "63",
+       "$id": "62",
        "Name": "resource",
        "NameInRequest": "resource",
        "Description": "The resource instance.",
        "Type": {
-        "$ref": "10"
+        "$ref": "9"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -543,11 +543,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "64",
+       "$id": "63",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "65",
+        "$id": "64",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -562,19 +562,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "66",
+        "$id": "65",
         "Type": {
-         "$ref": "65"
+         "$ref": "64"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "67",
+       "$id": "66",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "68",
+        "$id": "67",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -589,9 +589,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "69",
+        "$id": "68",
         "Type": {
-         "$ref": "68"
+         "$ref": "67"
         },
         "Value": "application/json"
        }
@@ -599,22 +599,22 @@
      ],
      "Responses": [
       {
-       "$id": "70",
+       "$id": "69",
        "StatusCodes": [
         201
        ],
        "BodyType": {
-        "$ref": "10"
+        "$ref": "9"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "71",
+         "$id": "70",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "72",
+          "$id": "71",
           "Kind": "Primitive",
           "Name": "Uri",
           "IsNullable": false
@@ -627,22 +627,22 @@
        ]
       },
       {
-       "$id": "73",
+       "$id": "72",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "10"
+        "$ref": "9"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "74",
+         "$id": "73",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "75",
+          "$id": "74",
           "Kind": "Primitive",
           "Name": "Uri",
           "IsNullable": false
@@ -664,15 +664,15 @@
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "76",
+      "$id": "75",
       "FinalStateVia": 2,
       "FinalResponse": {
-       "$id": "77",
+       "$id": "76",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "10"
+        "$ref": "9"
        },
        "BodyMediaType": "Json"
       }
@@ -681,29 +681,29 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "78",
+     "$id": "77",
      "Name": "delete",
      "ResourceName": "User",
      "Summary": "Deletes a user.",
      "Description": "Deletes a User",
      "Parameters": [
       {
-       "$ref": "53"
+       "$ref": "52"
       },
       {
-       "$id": "79",
+       "$id": "78",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "80",
+        "$id": "79",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "59"
+        "$ref": "58"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -715,12 +715,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "81",
+       "$id": "80",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "The name of user.",
        "Type": {
-        "$id": "82",
+        "$id": "81",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -736,11 +736,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "83",
+       "$id": "82",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "84",
+        "$id": "83",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -755,9 +755,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "85",
+        "$id": "84",
         "Type": {
-         "$ref": "84"
+         "$ref": "83"
         },
         "Value": "application/json"
        }
@@ -765,22 +765,22 @@
      ],
      "Responses": [
       {
-       "$id": "86",
+       "$id": "85",
        "StatusCodes": [
         202
        ],
        "BodyType": {
-        "$ref": "15"
+        "$ref": "14"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "87",
+         "$id": "86",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "88",
+          "$id": "87",
           "Kind": "Primitive",
           "Name": "Uri",
           "IsNullable": false
@@ -799,10 +799,10 @@
      "Path": "/azure/core/lro/standard/users/{name}",
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "89",
+      "$id": "88",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "90",
+       "$id": "89",
        "StatusCodes": [
         204
        ],
@@ -813,29 +813,29 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "91",
+     "$id": "90",
      "Name": "export",
      "ResourceName": "Standard",
      "Summary": "Exports a user.",
      "Description": "Exports a User",
      "Parameters": [
       {
-       "$ref": "53"
+       "$ref": "52"
       },
       {
-       "$id": "92",
+       "$id": "91",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "93",
+        "$id": "92",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "59"
+        "$ref": "58"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -847,12 +847,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "94",
+       "$id": "93",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "The name of user.",
        "Type": {
-        "$id": "95",
+        "$id": "94",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -868,12 +868,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "96",
+       "$id": "95",
        "Name": "format",
        "NameInRequest": "format",
        "Description": "The format of the data.",
        "Type": {
-        "$id": "97",
+        "$id": "96",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -889,11 +889,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "98",
+       "$id": "97",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "99",
+        "$id": "98",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -908,9 +908,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "100",
+        "$id": "99",
         "Type": {
-         "$ref": "99"
+         "$ref": "98"
         },
         "Value": "application/json"
        }
@@ -918,22 +918,22 @@
      ],
      "Responses": [
       {
-       "$id": "101",
+       "$id": "100",
        "StatusCodes": [
         202
        ],
        "BodyType": {
-        "$ref": "34"
+        "$ref": "33"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "102",
+         "$id": "101",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "103",
+          "$id": "102",
           "Kind": "Primitive",
           "Name": "Uri",
           "IsNullable": false
@@ -952,15 +952,15 @@
      "Path": "/azure/core/lro/standard/users/{name}:export",
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "104",
+      "$id": "103",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "105",
+       "$id": "104",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "45"
+        "$ref": "44"
        },
        "BodyMediaType": "Json"
       },
@@ -971,12 +971,12 @@
     }
    ],
    "Protocol": {
-    "$id": "106"
+    "$id": "105"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "53"
+     "$ref": "52"
     }
    ]
   }

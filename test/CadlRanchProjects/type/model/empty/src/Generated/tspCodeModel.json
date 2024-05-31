@@ -1,11 +1,11 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "Type.Model.Empty",
  "ApiVersions": [],
  "Enums": [],
  "Models": [
   {
-   "$id": "2",
+   "$id": "1",
    "Kind": "Model",
    "Name": "EmptyInput",
    "Namespace": "Type.Model.Empty",
@@ -15,7 +15,7 @@
    "Properties": []
   },
   {
-   "$id": "3",
+   "$id": "2",
    "Kind": "Model",
    "Name": "EmptyOutput",
    "Namespace": "Type.Model.Empty",
@@ -25,7 +25,7 @@
    "Properties": []
   },
   {
-   "$id": "4",
+   "$id": "3",
    "Kind": "Model",
    "Name": "EmptyInputOutput",
    "Namespace": "Type.Model.Empty",
@@ -37,22 +37,22 @@
  ],
  "Clients": [
   {
-   "$id": "5",
+   "$id": "4",
    "Name": "EmptyClient",
    "Description": "Illustrates usage of empty model used in operation's parameters and responses.",
    "Operations": [
     {
-     "$id": "6",
+     "$id": "5",
      "Name": "putEmpty",
      "ResourceName": "Empty",
      "Parameters": [
       {
-       "$id": "7",
+       "$id": "6",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "8",
+        "$id": "7",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -67,9 +67,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "9",
+        "$id": "8",
         "Type": {
-         "$id": "10",
+         "$id": "9",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -78,11 +78,11 @@
        }
       },
       {
-       "$id": "11",
+       "$id": "10",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "2"
+        "$ref": "1"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -95,11 +95,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "12",
+       "$id": "11",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "13",
+        "$id": "12",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -114,19 +114,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "14",
+        "$id": "13",
         "Type": {
-         "$ref": "13"
+         "$ref": "12"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "15",
+       "$id": "14",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "16",
+        "$id": "15",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -141,9 +141,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "17",
+        "$id": "16",
         "Type": {
-         "$ref": "16"
+         "$ref": "15"
         },
         "Value": "application/json"
        }
@@ -151,7 +151,7 @@
      ],
      "Responses": [
       {
-       "$id": "18",
+       "$id": "17",
        "StatusCodes": [
         204
        ],
@@ -172,19 +172,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "19",
+     "$id": "18",
      "Name": "getEmpty",
      "ResourceName": "Empty",
      "Parameters": [
       {
-       "$ref": "7"
+       "$ref": "6"
       },
       {
-       "$id": "20",
+       "$id": "19",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "21",
+        "$id": "20",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -199,9 +199,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "22",
+        "$id": "21",
         "Type": {
-         "$ref": "21"
+         "$ref": "20"
         },
         "Value": "application/json"
        }
@@ -209,12 +209,12 @@
      ],
      "Responses": [
       {
-       "$id": "23",
+       "$id": "22",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "3"
+        "$ref": "2"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -233,19 +233,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "24",
+     "$id": "23",
      "Name": "postRoundTripEmpty",
      "ResourceName": "Empty",
      "Parameters": [
       {
-       "$ref": "7"
+       "$ref": "6"
       },
       {
-       "$id": "25",
+       "$id": "24",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "4"
+        "$ref": "3"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -258,11 +258,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "26",
+       "$id": "25",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "27",
+        "$id": "26",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -277,19 +277,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "28",
+        "$id": "27",
         "Type": {
-         "$ref": "27"
+         "$ref": "26"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "29",
+       "$id": "28",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "30",
+        "$id": "29",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -304,9 +304,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "31",
+        "$id": "30",
         "Type": {
-         "$ref": "30"
+         "$ref": "29"
         },
         "Value": "application/json"
        }
@@ -314,12 +314,12 @@
      ],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "31",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "4"
+        "$ref": "3"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -342,12 +342,12 @@
     }
    ],
    "Protocol": {
-    "$id": "33"
+    "$id": "32"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "7"
+     "$ref": "6"
     }
    ]
   }

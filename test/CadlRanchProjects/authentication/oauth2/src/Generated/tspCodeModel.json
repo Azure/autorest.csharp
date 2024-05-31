@@ -1,11 +1,11 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "Authentication.OAuth2",
  "ApiVersions": [],
  "Enums": [],
  "Models": [
   {
-   "$id": "2",
+   "$id": "1",
    "Kind": "Model",
    "Name": "InvalidAuth",
    "Namespace": "Authentication.OAuth2",
@@ -13,12 +13,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "3",
+     "$id": "2",
      "Name": "error",
      "SerializedName": "error",
      "Description": "",
      "Type": {
-      "$id": "4",
+      "$id": "3",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -31,23 +31,23 @@
  ],
  "Clients": [
   {
-   "$id": "5",
+   "$id": "4",
    "Name": "OAuth2Client",
    "Description": "Illustrates clients generated with OAuth2 authentication.",
    "Operations": [
     {
-     "$id": "6",
+     "$id": "5",
      "Name": "valid",
      "ResourceName": "OAuth2",
      "Description": "Check whether client is authenticated",
      "Parameters": [
       {
-       "$id": "7",
+       "$id": "6",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "8",
+        "$id": "7",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -62,9 +62,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "9",
+        "$id": "8",
         "Type": {
-         "$id": "10",
+         "$id": "9",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -73,11 +73,11 @@
        }
       },
       {
-       "$id": "11",
+       "$id": "10",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "12",
+        "$id": "11",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -92,9 +92,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "13",
+        "$id": "12",
         "Type": {
-         "$ref": "12"
+         "$ref": "11"
         },
         "Value": "application/json"
        }
@@ -102,7 +102,7 @@
      ],
      "Responses": [
       {
-       "$id": "14",
+       "$id": "13",
        "StatusCodes": [
         204
        ],
@@ -120,20 +120,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "15",
+     "$id": "14",
      "Name": "invalid",
      "ResourceName": "OAuth2",
      "Description": "Check whether client is authenticated. Will return an invalid bearer error.",
      "Parameters": [
       {
-       "$ref": "7"
+       "$ref": "6"
       },
       {
-       "$id": "16",
+       "$id": "15",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "17",
+        "$id": "16",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -148,9 +148,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "18",
+        "$id": "17",
         "Type": {
-         "$ref": "17"
+         "$ref": "16"
         },
         "Value": "application/json"
        }
@@ -158,7 +158,7 @@
      ],
      "Responses": [
       {
-       "$id": "19",
+       "$id": "18",
        "StatusCodes": [
         204
        ],
@@ -167,12 +167,12 @@
        "IsErrorResponse": false
       },
       {
-       "$id": "20",
+       "$id": "19",
        "StatusCodes": [
         403
        ],
        "BodyType": {
-        "$ref": "2"
+        "$ref": "1"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -192,20 +192,20 @@
     }
    ],
    "Protocol": {
-    "$id": "21"
+    "$id": "20"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "7"
+     "$ref": "6"
     }
    ]
   }
  ],
  "Auth": {
-  "$id": "22",
+  "$id": "21",
   "OAuth2": {
-   "$id": "23",
+   "$id": "22",
    "Scopes": [
     "https://security.microsoft.com/.default"
    ]

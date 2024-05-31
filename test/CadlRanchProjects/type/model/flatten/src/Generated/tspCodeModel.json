@@ -1,11 +1,11 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "Type.Model.Flatten",
  "ApiVersions": [],
  "Enums": [],
  "Models": [
   {
-   "$id": "2",
+   "$id": "1",
    "Kind": "Model",
    "Name": "FlattenModel",
    "Namespace": "Type.Model.Flatten",
@@ -14,12 +14,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "3",
+     "$id": "2",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "4",
+      "$id": "3",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -28,12 +28,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "5",
+     "$id": "4",
      "Name": "description",
      "SerializedName": "description",
      "Description": "",
      "Type": {
-      "$id": "6",
+      "$id": "5",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -46,12 +46,12 @@
      ]
     },
     {
-     "$id": "7",
+     "$id": "6",
      "Name": "age",
      "SerializedName": "age",
      "Description": "",
      "Type": {
-      "$id": "8",
+      "$id": "7",
       "Kind": "Primitive",
       "Name": "Int32",
       "IsNullable": false
@@ -66,7 +66,7 @@
    ]
   },
   {
-   "$id": "9",
+   "$id": "8",
    "Kind": "Model",
    "Name": "NestedFlattenModel",
    "Namespace": "Type.Model.Flatten",
@@ -75,12 +75,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "10",
+     "$id": "9",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "11",
+      "$id": "10",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -89,12 +89,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "12",
+     "$id": "11",
      "Name": "summary",
      "SerializedName": "summary",
      "Description": "",
      "Type": {
-      "$id": "13",
+      "$id": "12",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -107,12 +107,12 @@
      ]
     },
     {
-     "$id": "14",
+     "$id": "13",
      "Name": "description",
      "SerializedName": "description",
      "Description": "",
      "Type": {
-      "$id": "15",
+      "$id": "14",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -126,12 +126,12 @@
      ]
     },
     {
-     "$id": "16",
+     "$id": "15",
      "Name": "age",
      "SerializedName": "age",
      "Description": "",
      "Type": {
-      "$id": "17",
+      "$id": "16",
       "Kind": "Primitive",
       "Name": "Int32",
       "IsNullable": false
@@ -147,7 +147,7 @@
    ]
   },
   {
-   "$id": "18",
+   "$id": "17",
    "Kind": "Model",
    "Name": "ChildModel",
    "Namespace": "Type.Model.Flatten",
@@ -156,12 +156,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "19",
+     "$id": "18",
      "Name": "description",
      "SerializedName": "description",
      "Description": "",
      "Type": {
-      "$id": "20",
+      "$id": "19",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -170,12 +170,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "21",
+     "$id": "20",
      "Name": "age",
      "SerializedName": "age",
      "Description": "",
      "Type": {
-      "$id": "22",
+      "$id": "21",
       "Kind": "Primitive",
       "Name": "Int32",
       "IsNullable": false
@@ -186,7 +186,7 @@
    ]
   },
   {
-   "$id": "23",
+   "$id": "22",
    "Kind": "Model",
    "Name": "ChildFlattenModel",
    "Namespace": "Type.Model.Flatten",
@@ -195,12 +195,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "24",
+     "$id": "23",
      "Name": "summary",
      "SerializedName": "summary",
      "Description": "",
      "Type": {
-      "$id": "25",
+      "$id": "24",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -209,12 +209,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "26",
+     "$id": "25",
      "Name": "description",
      "SerializedName": "description",
      "Description": "",
      "Type": {
-      "$id": "27",
+      "$id": "26",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -227,12 +227,12 @@
      ]
     },
     {
-     "$id": "28",
+     "$id": "27",
      "Name": "age",
      "SerializedName": "age",
      "Description": "",
      "Type": {
-      "$id": "29",
+      "$id": "28",
       "Kind": "Primitive",
       "Name": "Int32",
       "IsNullable": false
@@ -249,22 +249,22 @@
  ],
  "Clients": [
   {
-   "$id": "30",
+   "$id": "29",
    "Name": "FlattenClient",
    "Description": "Illustrates the model flatten cases.",
    "Operations": [
     {
-     "$id": "31",
+     "$id": "30",
      "Name": "putFlattenModel",
      "ResourceName": "Flatten",
      "Parameters": [
       {
-       "$id": "32",
+       "$id": "31",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "33",
+        "$id": "32",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -279,9 +279,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "34",
+        "$id": "33",
         "Type": {
-         "$id": "35",
+         "$id": "34",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -290,11 +290,11 @@
        }
       },
       {
-       "$id": "36",
+       "$id": "35",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "2"
+        "$ref": "1"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -307,11 +307,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "37",
+       "$id": "36",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "38",
+        "$id": "37",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -326,19 +326,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "39",
+        "$id": "38",
         "Type": {
-         "$ref": "38"
+         "$ref": "37"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "40",
+       "$id": "39",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "41",
+        "$id": "40",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -353,9 +353,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "42",
+        "$id": "41",
         "Type": {
-         "$ref": "41"
+         "$ref": "40"
         },
         "Value": "application/json"
        }
@@ -363,12 +363,12 @@
      ],
      "Responses": [
       {
-       "$id": "43",
+       "$id": "42",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "2"
+        "$ref": "1"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -390,19 +390,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "44",
+     "$id": "43",
      "Name": "putNestedFlattenModel",
      "ResourceName": "Flatten",
      "Parameters": [
       {
-       "$ref": "32"
+       "$ref": "31"
       },
       {
-       "$id": "45",
+       "$id": "44",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "9"
+        "$ref": "8"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -415,11 +415,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "46",
+       "$id": "45",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "47",
+        "$id": "46",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -434,19 +434,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "48",
+        "$id": "47",
         "Type": {
-         "$ref": "47"
+         "$ref": "46"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "49",
+       "$id": "48",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "50",
+        "$id": "49",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -461,9 +461,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "51",
+        "$id": "50",
         "Type": {
-         "$ref": "50"
+         "$ref": "49"
         },
         "Value": "application/json"
        }
@@ -471,12 +471,12 @@
      ],
      "Responses": [
       {
-       "$id": "52",
+       "$id": "51",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "9"
+        "$ref": "8"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -499,12 +499,12 @@
     }
    ],
    "Protocol": {
-    "$id": "53"
+    "$id": "52"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "32"
+     "$ref": "31"
     }
    ]
   }

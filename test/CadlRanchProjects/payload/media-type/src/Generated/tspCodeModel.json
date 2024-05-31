@@ -1,27 +1,27 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "Payload.MediaType",
  "ApiVersions": [],
  "Enums": [],
  "Models": [],
  "Clients": [
   {
-   "$id": "2",
+   "$id": "1",
    "Name": "MediaTypeClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "3"
+    "$id": "2"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$id": "4",
+     "$id": "3",
      "Name": "host",
      "NameInRequest": "host",
      "Description": "TestServer endpoint",
      "Type": {
-      "$id": "5",
+      "$id": "4",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -36,9 +36,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "6",
+      "$id": "5",
       "Type": {
-       "$id": "7",
+       "$id": "6",
        "Kind": "Primitive",
        "Name": "String",
        "IsNullable": false
@@ -49,28 +49,28 @@
    ]
   },
   {
-   "$id": "8",
+   "$id": "7",
    "Name": "StringBody",
    "Description": "",
    "Operations": [
     {
-     "$id": "9",
+     "$id": "8",
      "Name": "sendAsText",
      "ResourceName": "StringBody",
      "Parameters": [
       {
-       "$ref": "4"
+       "$ref": "3"
       },
       {
-       "$id": "10",
+       "$id": "9",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "11",
+        "$id": "10",
         "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "12",
+         "$id": "11",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -80,9 +80,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "13",
+        "$id": "12",
         "Type": {
-         "$ref": "11"
+         "$ref": "10"
         },
         "Value": "text/plain"
        },
@@ -96,11 +96,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "14",
+       "$id": "13",
        "Name": "text",
        "NameInRequest": "text",
        "Type": {
-        "$id": "15",
+        "$id": "14",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -116,11 +116,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "16",
+       "$id": "15",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "17",
+        "$id": "16",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -135,9 +135,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "18",
+        "$id": "17",
         "Type": {
-         "$ref": "17"
+         "$ref": "16"
         },
         "Value": "application/json"
        }
@@ -145,7 +145,7 @@
      ],
      "Responses": [
       {
-       "$id": "19",
+       "$id": "18",
        "StatusCodes": [
         200
        ],
@@ -166,19 +166,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "20",
+     "$id": "19",
      "Name": "getAsText",
      "ResourceName": "StringBody",
      "Parameters": [
       {
-       "$ref": "4"
+       "$ref": "3"
       },
       {
-       "$id": "21",
+       "$id": "20",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "22",
+        "$id": "21",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -193,9 +193,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "23",
+        "$id": "22",
         "Type": {
-         "$ref": "22"
+         "$ref": "21"
         },
         "Value": "text/plain"
        }
@@ -203,12 +203,12 @@
      ],
      "Responses": [
       {
-       "$id": "24",
+       "$id": "23",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "25",
+        "$id": "24",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -230,23 +230,23 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "26",
+     "$id": "25",
      "Name": "sendAsJson",
      "ResourceName": "StringBody",
      "Parameters": [
       {
-       "$ref": "4"
+       "$ref": "3"
       },
       {
-       "$id": "27",
+       "$id": "26",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "28",
+        "$id": "27",
         "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "29",
+         "$id": "28",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -256,9 +256,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "30",
+        "$id": "29",
         "Type": {
-         "$ref": "28"
+         "$ref": "27"
         },
         "Value": "application/json"
        },
@@ -272,11 +272,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "31",
+       "$id": "30",
        "Name": "text",
        "NameInRequest": "text",
        "Type": {
-        "$id": "32",
+        "$id": "31",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -292,11 +292,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "33",
+       "$id": "32",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "34",
+        "$id": "33",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -311,9 +311,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "35",
+        "$id": "34",
         "Type": {
-         "$ref": "34"
+         "$ref": "33"
         },
         "Value": "application/json"
        }
@@ -321,7 +321,7 @@
      ],
      "Responses": [
       {
-       "$id": "36",
+       "$id": "35",
        "StatusCodes": [
         200
        ],
@@ -342,19 +342,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "37",
+     "$id": "36",
      "Name": "getAsJson",
      "ResourceName": "StringBody",
      "Parameters": [
       {
-       "$ref": "4"
+       "$ref": "3"
       },
       {
-       "$id": "38",
+       "$id": "37",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "39",
+        "$id": "38",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -369,9 +369,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "40",
+        "$id": "39",
         "Type": {
-         "$ref": "39"
+         "$ref": "38"
         },
         "Value": "application/json"
        }
@@ -379,12 +379,12 @@
      ],
      "Responses": [
       {
-       "$id": "41",
+       "$id": "40",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "42",
+        "$id": "41",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -407,13 +407,13 @@
     }
    ],
    "Protocol": {
-    "$id": "43"
+    "$id": "42"
    },
    "Creatable": false,
    "Parent": "MediaTypeClient",
    "Parameters": [
     {
-     "$ref": "4"
+     "$ref": "3"
     }
    ]
   }

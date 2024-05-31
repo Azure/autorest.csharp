@@ -1,31 +1,31 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "Client.Structure.Service",
  "ApiVersions": [],
  "Enums": [
   {
-   "$id": "2",
+   "$id": "1",
    "Kind": "Enum",
    "Name": "ClientType",
    "EnumValueType": "String",
    "AllowedValues": [
     {
-     "$id": "3",
+     "$id": "2",
      "Name": "Default",
      "Value": "default"
     },
     {
-     "$id": "4",
+     "$id": "3",
      "Name": "MultiClient",
      "Value": "multi-client"
     },
     {
-     "$id": "5",
+     "$id": "4",
      "Name": "RenamedOperation",
      "Value": "renamed-operation"
     },
     {
-     "$id": "6",
+     "$id": "5",
      "Name": "TwoOperationGroup",
      "Value": "two-operation-group"
     }
@@ -39,22 +39,22 @@
  "Models": [],
  "Clients": [
   {
-   "$id": "7",
+   "$id": "6",
    "Name": "RenamedOperationClient",
    "Description": "",
    "Operations": [
     {
-     "$id": "8",
+     "$id": "7",
      "Name": "renamedOne",
      "ResourceName": "RenamedOperation",
      "Parameters": [
       {
-       "$id": "9",
+       "$id": "8",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "10",
+        "$id": "9",
         "Kind": "Primitive",
         "Name": "Uri",
         "IsNullable": false
@@ -70,12 +70,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "11",
+       "$id": "10",
        "Name": "client",
        "NameInRequest": "client",
        "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
        "Type": {
-        "$ref": "2"
+        "$ref": "1"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -88,11 +88,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "12",
+       "$id": "11",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "13",
+        "$id": "12",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -107,9 +107,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "14",
+        "$id": "13",
         "Type": {
-         "$ref": "13"
+         "$ref": "12"
         },
         "Value": "application/json"
        }
@@ -117,7 +117,7 @@
      ],
      "Responses": [
       {
-       "$id": "15",
+       "$id": "14",
        "StatusCodes": [
         204
        ],
@@ -135,22 +135,22 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "16",
+     "$id": "15",
      "Name": "renamedThree",
      "ResourceName": "RenamedOperation",
      "Parameters": [
       {
-       "$ref": "9"
+       "$ref": "8"
       },
       {
-       "$ref": "11"
+       "$ref": "10"
       },
       {
-       "$id": "17",
+       "$id": "16",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "18",
+        "$id": "17",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -165,9 +165,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "19",
+        "$id": "18",
         "Type": {
-         "$ref": "18"
+         "$ref": "17"
         },
         "Value": "application/json"
        }
@@ -175,7 +175,7 @@
      ],
      "Responses": [
       {
-       "$id": "20",
+       "$id": "19",
        "StatusCodes": [
         204
        ],
@@ -193,22 +193,22 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "21",
+     "$id": "20",
      "Name": "renamedFive",
      "ResourceName": "RenamedOperation",
      "Parameters": [
       {
-       "$ref": "9"
+       "$ref": "8"
       },
       {
-       "$ref": "11"
+       "$ref": "10"
       },
       {
-       "$id": "22",
+       "$id": "21",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "23",
+        "$id": "22",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -223,9 +223,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "24",
+        "$id": "23",
         "Type": {
-         "$ref": "23"
+         "$ref": "22"
         },
         "Value": "application/json"
        }
@@ -233,7 +233,7 @@
      ],
      "Responses": [
       {
-       "$id": "25",
+       "$id": "24",
        "StatusCodes": [
         204
        ],
@@ -252,40 +252,40 @@
     }
    ],
    "Protocol": {
-    "$id": "26"
+    "$id": "25"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "9"
+     "$ref": "8"
     },
     {
-     "$ref": "11"
+     "$ref": "10"
     }
    ]
   },
   {
-   "$id": "27",
+   "$id": "26",
    "Name": "Group",
    "Description": "",
    "Operations": [
     {
-     "$id": "28",
+     "$id": "27",
      "Name": "renamedTwo",
      "ResourceName": "Group",
      "Parameters": [
       {
-       "$ref": "9"
+       "$ref": "8"
       },
       {
-       "$ref": "11"
+       "$ref": "10"
       },
       {
-       "$id": "29",
+       "$id": "28",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "30",
+        "$id": "29",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -300,9 +300,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "31",
+        "$id": "30",
         "Type": {
-         "$ref": "30"
+         "$ref": "29"
         },
         "Value": "application/json"
        }
@@ -310,7 +310,7 @@
      ],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "31",
        "StatusCodes": [
         204
        ],
@@ -328,22 +328,22 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "33",
+     "$id": "32",
      "Name": "renamedFour",
      "ResourceName": "Group",
      "Parameters": [
       {
-       "$ref": "9"
+       "$ref": "8"
       },
       {
-       "$ref": "11"
+       "$ref": "10"
       },
       {
-       "$id": "34",
+       "$id": "33",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "35",
+        "$id": "34",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -358,9 +358,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "36",
+        "$id": "35",
         "Type": {
-         "$ref": "35"
+         "$ref": "34"
         },
         "Value": "application/json"
        }
@@ -368,7 +368,7 @@
      ],
      "Responses": [
       {
-       "$id": "37",
+       "$id": "36",
        "StatusCodes": [
         204
        ],
@@ -386,22 +386,22 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "38",
+     "$id": "37",
      "Name": "renamedSix",
      "ResourceName": "Group",
      "Parameters": [
       {
-       "$ref": "9"
+       "$ref": "8"
       },
       {
-       "$ref": "11"
+       "$ref": "10"
       },
       {
-       "$id": "39",
+       "$id": "38",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "40",
+        "$id": "39",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -416,9 +416,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "41",
+        "$id": "40",
         "Type": {
-         "$ref": "40"
+         "$ref": "39"
         },
         "Value": "application/json"
        }
@@ -426,7 +426,7 @@
      ],
      "Responses": [
       {
-       "$id": "42",
+       "$id": "41",
        "StatusCodes": [
         204
        ],
@@ -445,16 +445,16 @@
     }
    ],
    "Protocol": {
-    "$id": "43"
+    "$id": "42"
    },
    "Creatable": false,
    "Parent": "RenamedOperationClient",
    "Parameters": [
     {
-     "$ref": "9"
+     "$ref": "8"
     },
     {
-     "$ref": "11"
+     "$ref": "10"
     }
    ]
   }
