@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -302,7 +303,8 @@ namespace AutoRest.CSharp.Output.Models
                         // This method has a flattened body
                         if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened)
                         {
-                            var objectType = (SchemaObjectType)_library.ResolveModel((InputModelType)bodyRequestParameter.Type).Implementation;
+                            (InputType bodyType, bool isNullable) = bodyRequestParameter.Type is InputNullableType nullableType ? (nullableType.ValueType, true) : (bodyRequestParameter.Type, false);
+                            var objectType = (SchemaObjectType)_library.ResolveModel((InputModelType)bodyType, isNullable).Implementation;
 
                             var initializationMap = new List<ObjectPropertyInitializer>();
                             foreach (var (parameter, _) in allParameters.Values)
@@ -468,7 +470,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private Parameter BuildParameter(in InputParameter requestParameter, Type? typeOverride = null, bool keepClientDefaultValue = false)
         {
-            var isNullable = requestParameter.Type.IsNullable || !requestParameter.IsRequired;
+            var isNullable = requestParameter.Type is InputNullableType || !requestParameter.IsRequired;
             CSharpType type = typeOverride != null
                 ? new CSharpType(typeOverride, isNullable)
                 : _context.TypeFactory.CreateType(requestParameter.Type);

@@ -358,8 +358,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     Array.Empty<InputModelType>(),
                     "Unknown", //TODO: do we need to support extensible enum / int values?
                     null,
-                    null,
-                    false)
+                    null)
                 {
                     IsUnknownDiscriminatorModel = true,
                 };
@@ -803,7 +802,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return rawRequestPathToResourceData;
         }
 
-        public override CSharpType ResolveEnum(InputEnumType enumType)
+        public override CSharpType ResolveEnum(InputEnumType enumType, bool isNullable)
         {
             CSharpType resolvedEnum;
             if (AllEnumMap.Value.TryGetValue(enumType, out var value))
@@ -815,10 +814,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 // There could be different instances because of nullability
                 resolvedEnum = FindTypeByModelName(enumType.Name) ?? throw new InvalidOperationException($"Cannot find enum {enumType.Name}");
             }
-            return resolvedEnum;
+            return resolvedEnum.WithNullable(isNullable);
         }
 
-        public override CSharpType ResolveModel(InputModelType model)
+        public override CSharpType ResolveModel(InputModelType model, bool isNullable)
         {
             CSharpType resolvedModel;
             if (_schemaToModels.TryGetValue(model, out var value))
@@ -830,7 +829,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 // There could be different instances because of nullability
                 resolvedModel = FindTypeByModelName(model.Name) ?? throw new InvalidOperationException($"Cannot find model {model.Name}");
             }
-            return resolvedModel;
+            return resolvedModel.WithNullable(isNullable);
         }
 
         private CSharpType? FindTypeByModelName(string name)

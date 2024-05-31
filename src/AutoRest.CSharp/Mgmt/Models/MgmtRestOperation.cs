@@ -7,6 +7,7 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -185,10 +186,10 @@ namespace AutoRest.CSharp.Mgmt.Models
             var finalSchema = Operation.LongRunning?.FinalResponse.BodyType;
             if (finalSchema is null)
                 return null;
-
+            (InputType finalType, bool isNullable) = finalSchema is InputNullableType nullableType ? (nullableType.ValueType, true) : (finalSchema, false);
             try
             {
-                return finalSchema is InputModelType inputModel ? MgmtContext.Library.ResolveModel(inputModel) : MgmtContext.TypeFactory.CreateType(finalSchema);
+                return finalType is InputModelType inputModel ? MgmtContext.Library.ResolveModel(inputModel, isNullable) : MgmtContext.TypeFactory.CreateType(finalSchema).WithNullable(isNullable);
             }
             catch (Exception ex)
             {

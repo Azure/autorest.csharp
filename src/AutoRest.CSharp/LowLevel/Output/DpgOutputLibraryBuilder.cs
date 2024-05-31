@@ -126,8 +126,7 @@ namespace AutoRest.CSharp.Output.Models
                     Array.Empty<InputModelType>(),
                     "Unknown", //TODO: do we need to support extensible enum / int values?
                     null,
-                    null,
-                    false)
+                    null)
                 {
                     IsUnknownDiscriminatorModel = true
                 };
@@ -174,7 +173,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     Uri = $"{{{KnownParameters.Endpoint.Name}}}",
                     Parameters = operation.Parameters
-                        .Append(new InputParameter(KnownParameters.Endpoint.Name, KnownParameters.Endpoint.Name, $"{KnownParameters.Endpoint.Description}", new InputPrimitiveType(InputTypeKind.Uri, false), RequestLocation.Uri, null, null, null, InputOperationParameterKind.Client, true, false, false, false, true, false, false, null, null))
+                        .Append(new InputParameter(KnownParameters.Endpoint.Name, KnownParameters.Endpoint.Name, $"{KnownParameters.Endpoint.Description}", new InputPrimitiveType(InputTypeKind.Uri), RequestLocation.Uri, null, null, null, InputOperationParameterKind.Client, true, false, false, false, true, false, false, null, null))
                         .ToList()
                 };
             }

@@ -9,5 +9,6 @@ export enum InputTypeKind {
     Enum = "Enum",
     Array = "Array",
     Dictionary = "Dictionary",
-    Intrinsic = "Intrinsic"
+    Intrinsic = "Intrinsic",
+    Nullable = "Nullable",
 }

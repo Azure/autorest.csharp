@@ -10,7 +10,7 @@ import { InputTypeKind } from "./input-type-kind.js";
 export interface InputType {
     Name: string;
     Kind: InputTypeKind;
-    IsNullable: boolean;
+    //IsNullable: boolean;
 }
 
 export interface InputPrimitiveType extends InputType {
@@ -71,6 +71,12 @@ export interface InputEnumType extends InputType {
     Usage: string;
 }
 
+export interface InputNullableType extends InputType {
+    Kind: InputTypeKind.Nullable;
+    Name: InputTypeKind.Nullable;
+    ValueType: InputType;
+}
+
 export function isInputEnumType(type: InputType): type is InputEnumType {
     return type.Kind === InputTypeKind.Enum;
 }
@@ -101,7 +107,6 @@ export function isInputDictionaryType(
 export interface InputIntrinsicType extends InputType {
     Kind: InputTypeKind.Intrinsic;
     Name: InputIntrinsicTypeKind;
-    IsNullable: false;
 }
 
 export function isInputIntrinsicType(

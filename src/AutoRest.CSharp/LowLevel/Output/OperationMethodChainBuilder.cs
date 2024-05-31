@@ -22,6 +22,7 @@ using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Configuration = AutoRest.CSharp.Common.Input.Configuration;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using AutoRest.CSharp.Common.Input.InputTypes;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -653,7 +654,7 @@ namespace AutoRest.CSharp.Output.Models
         private Parameter BuildParameter(in InputParameter operationParameter, CSharpType? typeOverride = null)
         {
             var type = typeOverride != null
-                ? typeOverride.WithNullable(operationParameter.Type.IsNullable)
+                ? typeOverride.WithNullable(operationParameter.Type is InputNullableType)
                 : _typeFactory.CreateType(operationParameter.Type);
 
             return Parameter.FromInputParameter(operationParameter, type, _typeFactory, Operation.KeepClientDefaultValue);
@@ -688,8 +689,13 @@ namespace AutoRest.CSharp.Output.Models
 
         private CSharpType? ChangeTypeForProtocolMethod(InputType type) => type switch
         {
-            InputEnumType enumType => _typeFactory.CreateType(enumType.EnumValueType).WithNullable(enumType.IsNullable),
-            InputModelType modelType => new CSharpType(typeof(object), modelType.IsNullable),
+            InputEnumType enumType => _typeFactory.CreateType(enumType.EnumValueType),
+            InputModelType modelType => new CSharpType(typeof(object)),
+            InputNullableType nullableType => ChangeTypeForProtocolMethod(nullableType.ValueType) switch
+            {
+                null => null,
+                { } protocolType => protocolType.WithNullable(true),
+            },
             _ => null
         };
 

@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             reader.Read();
-            value = TypeSpecInputTypeConverter.CreatePrimitiveType(reader.GetString(), false) ?? throw new JsonException();
+            value = TypeSpecInputTypeConverter.CreatePrimitiveType(reader.GetString()) ?? throw new JsonException();
             reader.Read();
             return true;
         }

@@ -87,15 +87,15 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<TypeProvider> Models { get; }
         public IReadOnlyDictionary<string, List<string>> ProtocolMethodsDictionary => _protocolMethodsDictionary.Value;
 
-        public override CSharpType ResolveEnum(InputEnumType enumType)
-            => _enums.TryGetValue(enumType with { IsNullable = false }, out var typeProvider)
-                ? typeProvider.Type.WithNullable(enumType.IsNullable)
+        public override CSharpType ResolveEnum(InputEnumType enumType, bool isNullable)
+            => _enums.TryGetValue(enumType, out var typeProvider)
+                ? typeProvider.Type.WithNullable(isNullable)
                 : throw new InvalidOperationException($"No {nameof(EnumType)} has been created for `{enumType.Name}` {nameof(InputEnumType)}.");
 
-        public override CSharpType ResolveModel(InputModelType model)
-            => _models.TryGetValue(model with { IsNullable = false }, out var modelTypeProvider)
-                ? modelTypeProvider.Type.WithNullable(model.IsNullable)
-                : new CSharpType(typeof(object), model.IsNullable);
+        public override CSharpType ResolveModel(InputModelType model, bool isNullable)
+            => _models.TryGetValue(model, out var modelTypeProvider)
+                ? modelTypeProvider.Type.WithNullable(isNullable)
+                : new CSharpType(typeof(object));
 
         public override CSharpType? FindTypeByName(string originalName) => Models.Where(m => m.Declaration.Name == originalName).Select(m => m.Type).FirstOrDefault();
 

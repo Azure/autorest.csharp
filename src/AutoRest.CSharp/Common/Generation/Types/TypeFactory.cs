@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
@@ -40,51 +41,52 @@ namespace AutoRest.CSharp.Generation.Types
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
             InputLiteralType literalType => CSharpType.FromLiteral(CreateType(literalType.LiteralValueType), literalType.Value),
-            InputUnionType unionType => CSharpType.FromUnion(unionType.UnionItemTypes.Select(CreateType).ToArray(), unionType.IsNullable),
-            InputListType { IsEmbeddingsVector: true } listType => new CSharpType(typeof(ReadOnlyMemory<>), listType.IsNullable, CreateType(listType.ElementType)),
-            InputListType listType => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
-            InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
-            InputEnumType enumType => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
+            InputUnionType unionType => CSharpType.FromUnion(unionType.UnionItemTypes.Select(CreateType).ToArray()),
+            InputListType { IsEmbeddingsVector: true } listType => new CSharpType(typeof(ReadOnlyMemory<>), false, CreateType(listType.ElementType)),
+            InputListType listType => new CSharpType(typeof(IList<>), false, CreateType(listType.ElementType)),
+            InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), typeof(string), CreateType(dictionaryType.ValueType)),
+            InputEnumType enumType => _library.ResolveEnum(enumType, false),
             // TODO -- this is a temporary solution until we refactored the type replacement to use input types instead of code model schemas
             InputModelType { Namespace: "Azure.Core.Foundations", Name: "Error" } => SystemObjectType.Create(AzureResponseErrorType, AzureResponseErrorType.Namespace!, null).Type,
             // Handle DataFactoryElement, we are sure that the argument type is not null and contains only 1 element
-            InputModelType { Namespace: "Azure.Core.Resources", Name: "DataFactoryElement" } inputModel => new CSharpType(typeof(DataFactoryElement<>), inputType.IsNullable, CreateType(inputModel.ArgumentTypes![0])),
-            InputModelType model => _library.ResolveModel(model).WithNullable(inputType.IsNullable),
+            InputModelType { Namespace: "Azure.Core.Resources", Name: "DataFactoryElement" } inputModel => new CSharpType(typeof(DataFactoryElement<>), CreateType(inputModel.ArgumentTypes![0])),
+            InputModelType model => _library.ResolveModel(model,false),
+            InputNullableType nullableType => CreateType(nullableType.ValueType).WithNullable(true),
             InputPrimitiveType primitiveType => primitiveType.Kind switch
             {
-                InputTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation), inputType.IsNullable),
-                InputTypeKind.BinaryData => new CSharpType(typeof(BinaryData), inputType.IsNullable),
-                InputTypeKind.Boolean => new CSharpType(typeof(bool), inputType.IsNullable),
-                InputTypeKind.BytesBase64Url => Configuration.ShouldTreatBase64AsBinaryData ? new CSharpType(typeof(BinaryData), inputType.IsNullable) : new CSharpType(typeof(byte[]), inputType.IsNullable),
-                InputTypeKind.Bytes => Configuration.ShouldTreatBase64AsBinaryData ? new CSharpType(typeof(BinaryData), inputType.IsNullable) : new CSharpType(typeof(byte[]), inputType.IsNullable),
-                InputTypeKind.ContentType => new CSharpType(typeof(ContentType), inputType.IsNullable),
+                InputTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation)),
+                InputTypeKind.BinaryData => new CSharpType(typeof(BinaryData)),
+                InputTypeKind.Boolean => new CSharpType(typeof(bool)),
+                InputTypeKind.BytesBase64Url => Configuration.ShouldTreatBase64AsBinaryData ? new CSharpType(typeof(BinaryData)) : new CSharpType(typeof(byte[])),
+                InputTypeKind.Bytes => Configuration.ShouldTreatBase64AsBinaryData ? new CSharpType(typeof(BinaryData)) : new CSharpType(typeof(byte[])),
+                InputTypeKind.ContentType => new CSharpType(typeof(ContentType)),
                 InputTypeKind.Date or InputTypeKind.DateTime or InputTypeKind.DateTimeISO8601 or InputTypeKind.DateTimeRFC1123 or InputTypeKind.DateTimeRFC3339 or InputTypeKind.DateTimeRFC7231 or InputTypeKind.DateTimeUnix
-                    => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
-                InputTypeKind.Decimal => new CSharpType(typeof(decimal), inputType.IsNullable),
-                InputTypeKind.Decimal128 => new CSharpType(typeof(decimal), inputType.IsNullable),
+                    => new CSharpType(typeof(DateTimeOffset)),
+                InputTypeKind.Decimal => new CSharpType(typeof(decimal)),
+                InputTypeKind.Decimal128 => new CSharpType(typeof(decimal)),
                 InputTypeKind.DurationISO8601 or InputTypeKind.DurationSeconds or InputTypeKind.DurationSecondsFloat or InputTypeKind.DurationSecondsDouble or InputTypeKind.DurationConstant or InputTypeKind.Time
-                    => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
-                InputTypeKind.ETag => new CSharpType(typeof(ETag), inputType.IsNullable),
-                InputTypeKind.Float32 => new CSharpType(typeof(float), inputType.IsNullable),
-                InputTypeKind.Float64 => new CSharpType(typeof(double), inputType.IsNullable),
-                InputTypeKind.Float128 => new CSharpType(typeof(decimal), inputType.IsNullable),
-                InputTypeKind.Guid => new CSharpType(typeof(Guid), inputType.IsNullable),
-                InputTypeKind.SByte => new CSharpType(typeof(sbyte), inputType.IsNullable),
-                InputTypeKind.Byte => new CSharpType(typeof(byte), inputType.IsNullable),
-                InputTypeKind.Int32 => new CSharpType(typeof(int), inputType.IsNullable),
-                InputTypeKind.Int64 => new CSharpType(typeof(long), inputType.IsNullable),
-                InputTypeKind.SafeInt => new CSharpType(typeof(long), inputType.IsNullable),
-                InputTypeKind.IPAddress => new CSharpType(typeof(IPAddress), inputType.IsNullable),
-                InputTypeKind.RequestMethod => new CSharpType(typeof(RequestMethod), inputType.IsNullable),
-                InputTypeKind.ResourceIdentifier => new CSharpType(typeof(ResourceIdentifier), inputType.IsNullable),
-                InputTypeKind.ResourceType => new CSharpType(typeof(ResourceType), inputType.IsNullable),
-                InputTypeKind.Stream => new CSharpType(typeof(Stream), inputType.IsNullable),
-                InputTypeKind.String => new CSharpType(typeof(string), inputType.IsNullable),
-                InputTypeKind.Uri => new CSharpType(typeof(Uri), inputType.IsNullable),
-                InputTypeKind.Char => new CSharpType(typeof(char), inputType.IsNullable),
-                _ => new CSharpType(typeof(object), inputType.IsNullable),
+                    => new CSharpType(typeof(TimeSpan)),
+                InputTypeKind.ETag => new CSharpType(typeof(ETag)),
+                InputTypeKind.Float32 => new CSharpType(typeof(float)),
+                InputTypeKind.Float64 => new CSharpType(typeof(double)),
+                InputTypeKind.Float128 => new CSharpType(typeof(decimal)),
+                InputTypeKind.Guid => new CSharpType(typeof(Guid)),
+                InputTypeKind.SByte => new CSharpType(typeof(sbyte)),
+                InputTypeKind.Byte => new CSharpType(typeof(byte)),
+                InputTypeKind.Int32 => new CSharpType(typeof(int)),
+                InputTypeKind.Int64 => new CSharpType(typeof(long)),
+                InputTypeKind.SafeInt => new CSharpType(typeof(long)),
+                InputTypeKind.IPAddress => new CSharpType(typeof(IPAddress)),
+                InputTypeKind.RequestMethod => new CSharpType(typeof(RequestMethod)),
+                InputTypeKind.ResourceIdentifier => new CSharpType(typeof(ResourceIdentifier)),
+                InputTypeKind.ResourceType => new CSharpType(typeof(ResourceType)),
+                InputTypeKind.Stream => new CSharpType(typeof(Stream)),
+                InputTypeKind.String => new CSharpType(typeof(string)),
+                InputTypeKind.Uri => new CSharpType(typeof(Uri)),
+                InputTypeKind.Char => new CSharpType(typeof(char)),
+                _ => new CSharpType(typeof(object)),
             },
-            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => Configuration.AzureArm ? new CSharpType(UnknownType, inputType.IsNullable) : UnknownType,
+            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => Configuration.AzureArm ? new CSharpType(UnknownType) : UnknownType,
             _ => throw new Exception("Unknown type")
         };
 
