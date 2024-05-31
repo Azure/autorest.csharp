@@ -7,6 +7,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -15,6 +16,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 #pragma warning restore SA1649 // File name should match first type name
     {
         private TypeFactory? _typeFactory;
+        private InputNamespace _inputNamespace;
 
         private T? _library;
         public T Library => _library ??= EnsureLibrary();
@@ -24,7 +26,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             T library;
             if (Configuration.AzureArm)
             {
-                library = (T)(object)new MgmtOutputLibrary();
+                library = (T)(object)new MgmtOutputLibrary(_inputNamespace);
             }
             else
             {
@@ -35,9 +37,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             return library;
         }
 
-        public BuildContext(CodeModel codeModel, SourceInputModel? sourceInputModel, SchemaUsageProvider schemaUsageProvider)
-            : base(codeModel, sourceInputModel, schemaUsageProvider)
+        public BuildContext(InputNamespace inputNamespace, SourceInputModel? sourceInputModel)
+            : base(inputNamespace, sourceInputModel)
         {
+            _inputNamespace = inputNamespace;
         }
 
         public override TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library, typeof(BinaryData));

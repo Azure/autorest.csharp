@@ -1043,7 +1043,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 case Resource { ResourceData: SerializableObjectType resourceDataType } resource:
                     return New.Instance(resource.Type, new MemberExpression(null, "Client"), SerializableObjectTypeExpression.Deserialize(resourceDataType, element));
 
-                case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema):
+                case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.InputModel):
                     return JsonSerializerExpression.Deserialize(element, implementation.Type);
 
                 case SerializableObjectType type:

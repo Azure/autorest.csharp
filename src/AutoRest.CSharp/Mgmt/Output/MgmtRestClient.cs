@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -24,34 +25,27 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public ClientFields Fields { get; }
 
-        public MgmtRestClient(OperationGroup operationGroup, MgmtRestClientBuilder clientBuilder)
-            : base(operationGroup, MgmtContext.Context, operationGroup.Language.Default.Name, GetOrderedParameters(clientBuilder))
+        public MgmtRestClient(InputClient inputClient, MgmtRestClientBuilder clientBuilder)
+            : base(inputClient, MgmtContext.Context, inputClient.Name, GetOrderedParameters(clientBuilder))
         {
             _clientBuilder = clientBuilder;
             Fields = ClientFields.CreateForRestClient(new[] { KnownParameters.Pipeline }.Union(clientBuilder.GetOrderedParametersByRequired()));
         }
 
-        protected override Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
+        protected override Dictionary<InputOperation, RestClientMethod> EnsureNormalMethods()
         {
-            var requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
+            var requestMethods = new Dictionary<InputOperation, RestClientMethod>(ReferenceEqualityComparer.Instance);
 
-            foreach (var operation in OperationGroup.Operations)
+            foreach (var operation in InputClient.Operations)
             {
-                foreach (var serviceRequest in operation.Requests)
-                {
-                    // See also LowLevelRestClient::EnsureNormalMethods if changing
-                    if (serviceRequest.Protocol.Http is not HttpRequest httpRequest)
-                    {
-                        continue;
-                    }
-                    requestMethods.Add(serviceRequest, _clientBuilder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null, "public", ShouldReturnNullOn404(operation)));
-                }
+                requestMethods.Add(operation, _clientBuilder.BuildMethod(operation, operation.Parameters, null, "public", ShouldReturnNullOn404(operation)));
+
             }
 
             return requestMethods;
         }
 
-        private static Func<string?, bool> ShouldReturnNullOn404(Operation operation)
+        private static Func<string?, bool> ShouldReturnNullOn404(InputOperation operation)
         {
             Func<string?, bool> f = delegate (string? responseBodyType)
             {
@@ -60,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 if (!operation.IsGetResourceOperation(responseBodyType, resourceData))
                     return false;
 
-                return operation.Responses.Any(r => r.ResponseSchema == resourceData.ObjectSchema);
+                return operation.Responses.Any(r => r.BodyType == resourceData.InputModel);
             };
             return f;
         }
@@ -70,7 +64,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IReadOnlyList<Resource> GetResources()
         {
             HashSet<Resource> candidates = new HashSet<Resource>();
-            foreach (var operation in OperationGroup.Operations)
+            foreach (var operation in InputClient.Operations)
             {
                 foreach (var resource in operation.GetResourceFromResourceType())
                 {

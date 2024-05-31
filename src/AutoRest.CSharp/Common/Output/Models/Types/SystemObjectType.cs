@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -163,45 +164,30 @@ namespace AutoRest.CSharp.Output.Models.Types
                     getter != null && getter.IsPublic ? "public" : "internal",
                     property.Name,
                     declarationType);
-                Property schemaProperty;
-                if (backingProperty?.SchemaProperty is not null)
+                InputModelProperty inputModelProperty;
+                if (backingProperty?.InputModelProperty is not null)
                 {
-                    schemaProperty = backingProperty.SchemaProperty;
+                    inputModelProperty = backingProperty.InputModelProperty;
                 }
                 else
                 {
-                    schemaProperty = new Property()
-                    {
-                        Nullable = declarationType.IsNullable,
-                        ReadOnly = property.IsReadOnly(),
-                        SerializedName = GetSerializedName(property.Name, SystemType),
-                        Summary = GetPropertySummary(setter != null, property.Name),
-                        Required = IsRequired(property, SystemType),
-                        Language = new Languages()
-                        {
-                            Default = new Language() { Name = property.Name },
-                        }
-                    };
                     //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager is known
                     //If in the future we add more types which have unique cases we might need to update this code, but it will be obvious
                     //given that the generation will fail with the new types
-                    if (declarationType.IsList)
-                    {
-                        schemaProperty.Schema = new ArraySchema()
-                        {
-                            Type = AllSchemaTypes.Array
-                        };
-                    }
+                    InputType inputType = InputPrimitiveType.Boolean;
                     if (declarationType.IsDictionary)
                     {
-                        schemaProperty.Schema = new DictionarySchema()
-                        {
-                            Type = AllSchemaTypes.Dictionary
-                        };
+                        inputType = new InputDictionaryType(string.Empty, InputPrimitiveType.Boolean, InputPrimitiveType.Boolean, false);
                     }
+                    else if (declarationType.IsList)
+                    {
+                        inputType = new InputListType(string.Empty, InputPrimitiveType.Boolean, false, false);
+                    }
+                    inputModelProperty = new InputModelProperty(property.Name, GetSerializedName(property.Name, SystemType), GetPropertySummary(setter != null, property.Name), inputType, null, IsRequired(property, SystemType), property.IsReadOnly(), false, null);
+
                 }
 
-                yield return new ObjectTypeProperty(memberDeclarationOptions, schemaProperty.Summary!, schemaProperty.IsReadOnly, schemaProperty, new CSharpType(property.PropertyType)
+                yield return new ObjectTypeProperty(memberDeclarationOptions, inputModelProperty.Description, inputModelProperty.IsReadOnly, inputModelProperty, new CSharpType(property.PropertyType)
                 {
                     SerializeAs = GetSerializeAs(property.PropertyType)
                 });

@@ -62,7 +62,7 @@ namespace TypeSpec.Versioning.Specific
         /// <summary> Initializes a new instance of VersioningOp. </summary>
         /// <param name="apiVersion"> The API version to use for this operation. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual VersioningOp GetVersioningOpClient(string apiVersion = "2022-12-01-preview")
+        public virtual VersioningOp GetVersioningOpClient(string apiVersion = "2022-09-01")
         {
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 

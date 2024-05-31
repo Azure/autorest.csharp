@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "TypeSpec.Versioning.Oldest",
  "ApiVersions": [
-  "2022-06-01-preview",
-  "2022-09-01",
-  "2022-12-01-preview"
+  "2022-06-01-preview"
  ],
  "Enums": [
   {
@@ -444,7 +442,7 @@
          "Name": "String",
          "IsNullable": false
         },
-        "Value": "2022-12-01-preview"
+        "Value": "2022-06-01-preview"
        },
        "IsRequired": true,
        "IsApiVersion": true,

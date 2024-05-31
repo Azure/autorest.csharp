@@ -37,7 +37,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         public async Task Generate()
         {
             var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", _projectName, "src", "Generated");
+            var gitRootPath = GetGitRootPath(basePath);
+            basePath = Path.Combine(gitRootPath, "test", "TestProjects", _projectName, "src", "Generated");
 
             StandaloneGeneratorRunner.LoadConfiguration(null, basePath, null, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
             var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(File.ReadAllText(Path.Combine(basePath, "CodeModel.yaml"))));
@@ -45,7 +46,21 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
             var model = await codeModelTask;
             CodeModelTransformer.TransformForMgmt(model);
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(model, sourceInputModel, new SchemaUsageProvider(model)));
+            var schemaUsageProvider = new SchemaUsageProvider(model);
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(new CodeModelConverter(model, schemaUsageProvider).CreateNamespace(), sourceInputModel));
+
+            // load all the models to prepare AllSchemaMap, otherwise it will throw in tests only getting ArmResources
+            var models = MgmtContext.Library.Models.ToArray();
+        }
+
+        private string GetGitRootPath(string path)
+        {
+            var current = path;
+            while (!Directory.Exists(Path.Combine(current, ".git")))
+            {
+                current = Path.Combine(current, "..");
+            }
+            return current;
         }
 
         [Test]
@@ -60,31 +75,31 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             {
                 if (ReferenceTypePropertyChooser.GetExactMatch(mgmtObject) == null)
                 {
-                    ValidateModelRequiredCtorParams(mgmtObject.ObjectSchema, mgmtObject.Type.Name);
+                    ValidateModelRequiredCtorParams(mgmtObject.InputModel, mgmtObject.Type.Name);
                 }
             }
             foreach (var resourceData in MgmtContext.Library.ResourceData)
             {
-                ValidateModelRequiredCtorParams(resourceData.ObjectSchema, resourceData.Type.Name);
+                ValidateModelRequiredCtorParams(resourceData.InputModel, resourceData.Type.Name);
             }
         }
 
-        private void ValidateModelRequiredCtorParams(ObjectSchema objectSchema, string typeName)
+        private void ValidateModelRequiredCtorParams(InputModelType inputModel, string typeName)
         {
-            var requiredParams = objectSchema.Properties.Where(p => p.Schema is not ConstantSchema && p.Required.HasValue && p.Required.Value);
+            var requiredParams = inputModel.Properties.Where(p => p.Type is not InputPrimitiveType && p.IsRequired);
 
             Type generatedModel = Assembly.GetExecutingAssembly().GetType(typeName);
             if (generatedModel == null)
                 return; //for some reason we are losing the cache during generation to know which models were removed
-            Assert.NotNull(generatedModel, $"Generated type not found for {objectSchema.Name}");
+            Assert.NotNull(generatedModel, $"Generated type not found for {inputModel.Name}");
             ConstructorInfo leastParamCtor = GetLeastParamCtor(generatedModel);
             ConstructorInfo baseLeastParamCtor = GetLeastParamCtor(generatedModel.BaseType);
             var fullRequiredParams = requiredParams.Select(p => p.SerializedName).Concat(baseLeastParamCtor?.GetParameters().Select(p => p.Name)).Distinct();
-            Assert.NotNull(leastParamCtor, $"Ctor not found for {objectSchema.Name}");
-            Assert.AreEqual(fullRequiredParams.Count(), leastParamCtor.GetParameters().Length, $"{objectSchema.Name} had a mismatch in required ctor params");
+            Assert.NotNull(leastParamCtor, $"Ctor not found for {inputModel.Name}");
+            Assert.AreEqual(fullRequiredParams.Count(), leastParamCtor.GetParameters().Length, $"{inputModel.Name} had a mismatch in required ctor params");
             foreach (var param in fullRequiredParams)
             {
-                Assert.NotNull(leastParamCtor.GetParameters().FirstOrDefault(p => string.Equals(p.Name, param, StringComparison.InvariantCultureIgnoreCase)), $"{param} was not found in {objectSchema.Name}'s ctor");
+                Assert.NotNull(leastParamCtor.GetParameters().FirstOrDefault(p => string.Equals(p.Name, param, StringComparison.InvariantCultureIgnoreCase)), $"{param} was not found in {inputModel.Name}'s ctor");
             }
         }
 

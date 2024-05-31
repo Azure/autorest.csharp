@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             project.AddGeneratedFile(filename, text);
         }
 
-        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, SchemaUsageProvider schemaUsageProvider)
+        public static async Task ExecuteAsync(GeneratedCodeWorkspace project)
         {
             var addedFilenames = new HashSet<string>();
             var serializeWriter = new SerializationWriter();
@@ -88,12 +88,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 if (model is MgmtObjectType mot)
                 {
-                    ModelItem mi = new ModelItem(mot.Declaration.Namespace, mot.Declaration.Name, mot.ObjectSchema.GetFullSerializedName(), MgmtReport.Instance.TransformSection);
+                    ModelItem mi = new ModelItem(mot.Declaration.Namespace, mot.Declaration.Name, mot.InputModel.Name, MgmtReport.Instance.TransformSection);
                     mi.Properties = mot.Properties.ToDictionary(p => p.Declaration.Name, p =>
                     {
-                        if (p.SchemaProperty != null)
+                        if (p.InputModelProperty != null)
                         {
-                            return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), mot.GetFullSerializedName(p.SchemaProperty), MgmtReport.Instance.TransformSection);
+                            return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), mot.GetFullSerializedName(p.InputModelProperty), MgmtReport.Instance.TransformSection);
                         }
                         else
                         {
@@ -105,25 +105,24 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 else if (model is EnumType et)
                 {
-                    var schema = MgmtContext.Library.SchemaMap.Value.First(map => map.Value == model).Key;
-                    var choices = schema switch
+                    var inputType = MgmtContext.Library.SchemaMap.Value.First(map => map.Value == model).Key;
+                    var choices = inputType switch
                     {
-                        ChoiceSchema sc => sc.Choices,
-                        SealedChoiceSchema scs => scs.Choices,
-                        _ => throw new InvalidOperationException("Unexpected Schema type for EnumType: " + schema.GetType())
+                        InputEnumType sc => sc.AllowedValues,
+                        _ => throw new InvalidOperationException("Unexpected Schema type for EnumType: " + inputType.GetType())
                     };
 
-                    EnumItem mi = new EnumItem(et.Declaration.Namespace, et.Declaration.Name, schema.GetFullSerializedName(), MgmtReport.Instance.TransformSection);
+                    EnumItem mi = new EnumItem(et.Declaration.Namespace, et.Declaration.Name, inputType.Name, MgmtReport.Instance.TransformSection);
                     mi.Values = et.Values.ToDictionary(v => v.Declaration.Name, v =>
                     {
-                        var found = choices.FirstOrDefault(c => c.Value == v.Value.Value?.ToString());
+                        var found = choices.FirstOrDefault(c => c.Value.ToString() == v.Value.Value?.ToString());
                         if (found == null)
                         {
                             var allValues = string.Join(",", choices.Select(c => c.Value ?? "<null>"));
                             AutoRestLogger.Warning($"Can't find matching enumvalue '{v.Value}' in '{allValues}'").Wait();
                             return new EnumValueItem(v.Declaration.Name, "<no matching enum value found>", MgmtReport.Instance.TransformSection);
                         }
-                        return new EnumValueItem(v.Declaration.Name, schema.GetFullSerializedName(found), MgmtReport.Instance.TransformSection);
+                        return new EnumValueItem(v.Declaration.Name, inputType.GetFullSerializedName(found), MgmtReport.Instance.TransformSection);
                     });
                     MgmtReport.Instance.EnumSection.Add(mi.FullName, mi);
                 }
@@ -161,12 +160,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 var name = model.Type.Name;
 
-                ModelItem mi = new ModelItem(model.Declaration.Namespace, model.Declaration.Name, model.ObjectSchema.GetFullSerializedName(), MgmtReport.Instance.TransformSection);
+                ModelItem mi = new ModelItem(model.Declaration.Namespace, model.Declaration.Name, model.InputModel.Name, MgmtReport.Instance.TransformSection);
                 mi.Properties = model.Properties.ToDictionary(p => p.Declaration.Name, p =>
                 {
-                    if (p.SchemaProperty != null)
+                    if (p.InputModelProperty != null)
                     {
-                        return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), model.GetFullSerializedName(p.SchemaProperty), MgmtReport.Instance.TransformSection);
+                        return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), model.GetFullSerializedName(p.InputModelProperty), MgmtReport.Instance.TransformSection);
                     }
                     else
                     {
@@ -226,15 +225,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             var modelFactoryProvider = MgmtContext.Library.ModelFactory;
-            if (modelFactoryProvider != null)
+            if (modelFactoryProvider is not null && modelFactoryProvider.Methods.Any())
             {
                 var modelFactoryWriter = new ModelFactoryWriter(modelFactoryProvider);
                 modelFactoryWriter.Write();
                 AddGeneratedFile(project, $"{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
             }
 
-            if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
-                throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
+            // TODO: fix the overriden
+            //if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
+            //    throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
             var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
             await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));

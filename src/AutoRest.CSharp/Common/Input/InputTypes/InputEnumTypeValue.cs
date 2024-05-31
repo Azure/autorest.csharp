@@ -7,4 +7,6 @@ internal record InputEnumTypeValue(string Name, object Value, string? Descriptio
 {
     public virtual string GetJsonValueString() => GetValueString();
     public string GetValueString() => (Value.ToString() ?? string.Empty);
+
+    public string Name { get; internal set;} = Name;
 }
