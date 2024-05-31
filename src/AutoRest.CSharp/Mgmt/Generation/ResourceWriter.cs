@@ -6,14 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
+using Azure.Core;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using Resource = AutoRest.CSharp.Mgmt.Output.Resource;
 
@@ -157,7 +156,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var bodyParamType = parameters.First().Type;
             string bodyParamName = "current";
             //if we are using PATCH always minimize what we pass in the body to what we actually want to change
-            if (!bodyParamType.Equals(This.ResourceData.Type) || updateOperation.OperationMappings.Values.First().Operation.GetHttpMethod() == HttpMethod.Patch)
+            if (bodyParamType.Name != This.ResourceData.Type.Name || updateOperation.OperationMappings.Values.First().Operation.HttpMethod == RequestMethod.Patch)
             {
                 bodyParamName = "patch";
                 if (bodyParamType is { IsFrameworkType: false, Implementation: ObjectType objectType })
