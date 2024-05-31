@@ -130,6 +130,9 @@ export function fromSdkModelType(
             InputModelProperty[]
         >();
         for (const property of modelType.properties) {
+            if (property.kind !== "property") {
+                continue;
+            }
             const ourProperties = fromSdkModelProperty(
                 property,
                 {

@@ -6,12 +6,12 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "BodyParameter",
    "Namespace": "Parameters.Spread.Model",
+   "Usage": "Input",
    "Description": "This is a simple model.",
    "IsNullable": false,
-   "Usage": "Input",
    "Properties": [
     {
      "$id": "3",
@@ -30,12 +30,12 @@
   },
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "CompositeRequestMix",
    "Namespace": "Parameters.Spread.Model",
+   "Usage": "Input",
    "Description": "This is a model with non-body http request decorator.",
    "IsNullable": false,
-   "Usage": "Input",
    "Properties": [
     {
      "$id": "6",
@@ -54,11 +54,11 @@
   },
   {
    "$id": "8",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadAsRequestBodyRequest",
    "Namespace": "Parameters.Spread.Alias",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "9",
@@ -77,11 +77,11 @@
   },
   {
    "$id": "11",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadAsRequestParameterRequest",
    "Namespace": "",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "12",
@@ -100,11 +100,11 @@
   },
   {
    "$id": "14",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadWithMultipleParametersRequest",
    "Namespace": "",
-   "IsNullable": false,
    "Usage": "Input",
+   "IsNullable": false,
    "Properties": [
     {
      "$id": "15",
