@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly Lazy<INamedTypeSymbol?> _existingType;
 
-        protected string? _deprecated;
+        protected string? _deprecation;
 
         private TypeDeclarationOptions? _type;
         protected readonly SourceInputModel? _sourceInputModel;
@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public TypeProvider? DeclaringTypeProvider { get; protected init; }
 
-        public string? Deprecated => _deprecated;
+        public string? Deprecated => _deprecation;
         protected virtual TypeKind TypeKind { get; } = TypeKind.Class;
         protected virtual bool IsAbstract { get; } = false;
         protected INamedTypeSymbol? ExistingType => _existingType.Value;

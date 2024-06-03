@@ -12,18 +12,18 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
+namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
 {
-    public partial class PublicDecoratorModelInInternal : IUtf8JsonSerializable, IJsonModel<PublicDecoratorModelInInternal>
+    public partial class OrphanModel : IUtf8JsonSerializable, IJsonModel<OrphanModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PublicDecoratorModelInInternal>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OrphanModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
-        void IJsonModel<PublicDecoratorModelInInternal>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<OrphanModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<PublicDecoratorModelInInternal>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<OrphanModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(PublicDecoratorModelInInternal)} does not support writing '{format}' format.");
+                throw new FormatException($"The model {nameof(OrphanModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -47,19 +47,19 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             writer.WriteEndObject();
         }
 
-        PublicDecoratorModelInInternal IJsonModel<PublicDecoratorModelInInternal>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        OrphanModel IJsonModel<OrphanModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<PublicDecoratorModelInInternal>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<OrphanModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(PublicDecoratorModelInInternal)} does not support reading '{format}' format.");
+                throw new FormatException($"The model {nameof(OrphanModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializePublicDecoratorModelInInternal(document.RootElement, options);
+            return DeserializeOrphanModel(document.RootElement, options);
         }
 
-        internal static PublicDecoratorModelInInternal DeserializePublicDecoratorModelInInternal(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static OrphanModel DeserializeOrphanModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -83,46 +83,46 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new PublicDecoratorModelInInternal(name, serializedAdditionalRawData);
+            return new OrphanModel(name, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<PublicDecoratorModelInInternal>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<OrphanModel>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<PublicDecoratorModelInInternal>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<OrphanModel>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(PublicDecoratorModelInInternal)} does not support writing '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(OrphanModel)} does not support writing '{options.Format}' format.");
             }
         }
 
-        PublicDecoratorModelInInternal IPersistableModel<PublicDecoratorModelInInternal>.Create(BinaryData data, ModelReaderWriterOptions options)
+        OrphanModel IPersistableModel<OrphanModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<PublicDecoratorModelInInternal>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<OrphanModel>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializePublicDecoratorModelInInternal(document.RootElement, options);
+                        return DeserializeOrphanModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(PublicDecoratorModelInInternal)} does not support reading '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(OrphanModel)} does not support reading '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<PublicDecoratorModelInInternal>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<OrphanModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static PublicDecoratorModelInInternal FromResponse(Response response)
+        internal static OrphanModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializePublicDecoratorModelInInternal(document.RootElement);
+            return DeserializeOrphanModel(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>

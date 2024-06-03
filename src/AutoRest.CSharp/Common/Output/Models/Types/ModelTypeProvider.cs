@@ -111,12 +111,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             : base(defaultNamespace, sourceInputModel)
         {
             DefaultName = inputModel.Name.ToCleanName();
-            DefaultAccessibility = inputModel.Accessibility ?? "public";
-            IsAccessibilityOverridden = inputModel.Accessibility != null;
+            DefaultAccessibility = inputModel.Access ?? "public";
+            IsAccessibilityOverridden = inputModel.Access != null;
 
             _typeFactory = typeFactory;
             _inputModel = inputModel;
-            _deprecated = inputModel.Deprecated;
+            _deprecation = inputModel.Deprecation;
             _derivedModels = inputModel.DerivedModels;
             _defaultDerivedType = inputModel.DerivedModels.Any() && inputModel.BaseModel is { DiscriminatorProperty: not null }
                 ? this //if I have children and parents then I am my own defaultDerivedType

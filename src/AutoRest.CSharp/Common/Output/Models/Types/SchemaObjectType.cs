@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _serializationBuilder = new SerializationBuilder();
             _usage = inputModel.Usage;
 
-            DefaultAccessibility = inputModel.Accessibility ?? "public";
+            DefaultAccessibility = inputModel.Access ?? "public";
 
             // Update usage from code attribute
             if (ModelTypeMapping?.Usage != null)

@@ -8,10 +8,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
+namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
 {
-    /// <summary> Used in an internal operation but with public decorator, should be generated and exported. </summary>
-    public partial class PublicDecoratorModelInInternal
+    /// <summary> Not used anywhere, but access is override to public so still need to be generated and exported with serialization. </summary>
+    public partial class OrphanModel
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -45,27 +45,27 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="PublicDecoratorModelInInternal"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="OrphanModel"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal PublicDecoratorModelInInternal(string name)
+        public OrphanModel(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
         }
 
-        /// <summary> Initializes a new instance of <see cref="PublicDecoratorModelInInternal"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="OrphanModel"/>. </summary>
         /// <param name="name"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal PublicDecoratorModelInInternal(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal OrphanModel(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="PublicDecoratorModelInInternal"/> for deserialization. </summary>
-        internal PublicDecoratorModelInInternal()
+        /// <summary> Initializes a new instance of <see cref="OrphanModel"/> for deserialization. </summary>
+        internal OrphanModel()
         {
         }
 
