@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _typeFactory = typeFactory;
             DefaultName = inputModel.CSharpName();
-            DefaultNamespace = GetDefaultModelNamespace(inputModel.Namespace, defaultNamespace);
+            DefaultNamespace = GetDefaultModelNamespace(null, defaultNamespace);
             InputModel = inputModel;
             _serializationBuilder = new SerializationBuilder();
             _usage = inputModel.Usage;

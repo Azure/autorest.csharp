@@ -160,8 +160,11 @@ export function createModelForService(
     const clients: InputClient[] = [];
     const dpgClients = listClients(sdkContext);
     for (const client of dpgClients) {
-        clients.push(emitClient(client));
-        addChildClients(sdkContext.emitContext, client, clients);
+        var emittedClient = emitClient(client); 
+        if (emittedClient !== undefined) {
+            clients.push(emittedClient);
+        }
+        addChildClients(sdkContext.emitContext, client, clients, sdkContext.arm);
     }
 
     navigateModels(sdkContext, modelMap, enumMap);
@@ -233,16 +236,24 @@ export function createModelForService(
     function addChildClients(
         context: EmitContext<NetEmitterOptions>,
         client: SdkClient | SdkOperationGroup,
-        clients: InputClient[]
+        clients: InputClient[],
+        isAzureArm: boolean | undefined
     ) {
         const dpgOperationGroups = listOperationGroups(
             sdkContext,
             client as SdkClient
         );
         for (const dpgGroup of dpgOperationGroups) {
+            // For MPG, we skip the "Operations" operation group
+            if (isAzureArm === true && (dpgGroup.groupPath.endsWith("Operations") || dpgGroup.groupPath.endsWith("OperationStatus"))) {
+                continue;
+            }
             const subClient = emitClient(dpgGroup, client);
+            if (subClient === undefined) {
+                continue;
+            }
             clients.push(subClient);
-            addChildClients(context, dpgGroup, clients);
+            addChildClients(context, dpgGroup, clients, isAzureArm);
         }
     }
 
@@ -274,8 +285,11 @@ export function createModelForService(
     function emitClient(
         client: SdkClient | SdkOperationGroup,
         parent?: SdkClient | SdkOperationGroup
-    ): InputClient {
+    ): InputClient | undefined {
         const operations = listOperationsInOperationGroup(sdkContext, client);
+        if (operations.length === 0) {
+            return undefined;
+        }
         let clientDesc = "";
         if (operations.length > 0) {
             const container = ignoreDiagnostics(

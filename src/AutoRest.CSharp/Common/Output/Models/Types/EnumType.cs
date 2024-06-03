@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly TypeFactory _typeFactory;
         private IList<EnumTypeValue>? _values;
         public EnumType(InputEnumType enumType, BuildContext context)
-            : this(enumType, GetDefaultModelNamespace(enumType.Namespace, context.DefaultNamespace), enumType.Accessibility ?? "public", context.TypeFactory, context.SourceInputModel)
+            : this(enumType, GetDefaultModelNamespace(null, context.DefaultNamespace), enumType.Accessibility ?? "public", context.TypeFactory, context.SourceInputModel)
         {
         }
 
