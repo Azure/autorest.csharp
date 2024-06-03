@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     var inputType = MgmtContext.Library.SchemaMap.Value.First(map => map.Value == model).Key;
                     var choices = inputType switch
                     {
-                        InputEnumType sc => sc.AllowedValues,
+                        InputEnumType sc => sc.Values,
                         _ => throw new InvalidOperationException("Unexpected Schema type for EnumType: " + inputType.GetType())
                     };
 

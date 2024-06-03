@@ -35,6 +35,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
         }
 
         [Test]
@@ -55,6 +56,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
         }
 
         [Test]
@@ -100,6 +102,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
         }
 
         [Test]
@@ -125,6 +129,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
         }
 
         [Test]
