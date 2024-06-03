@@ -266,9 +266,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 var supportedTypesToShow = new List<string>();
                 var commonMsiSupportedTypeCount = typeof(ManagedServiceIdentityType).GetProperties().Length;
-                if (identityType is InputEnumType enumType && enumType.AllowedValues.Count < commonMsiSupportedTypeCount)
+                if (identityType is InputEnumType enumType && enumType.Values.Count < commonMsiSupportedTypeCount)
                 {
-                    supportedTypesToShow = enumType.AllowedValues.Select(c => c.GetValueString()).ToList();
+                    supportedTypesToShow = enumType.Values.Select(c => c.GetValueString()).ToList();
                 }
                 if (supportedTypesToShow.Count > 0)
                 {

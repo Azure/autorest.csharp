@@ -30,18 +30,7 @@ namespace NoDocsTypeSpec.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
-            Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoDocsTypeSpec_TopAction_ShortVersion_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
-
-            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+            Response response = await client.TopActionAsync(null);
         }
 
         [Test]
@@ -52,40 +41,7 @@ namespace NoDocsTypeSpec.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
-            Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoDocsTypeSpec_TopAction_AllParameters_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
-
-            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoDocsTypeSpec_TopAction2_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
-
-            Response response = await client.TopAction2Async(null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoDocsTypeSpec_TopAction2_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
-
-            Response response = await client.TopAction2Async(null);
+            Response response = await client.TopActionAsync(null);
         }
 
         [Test]

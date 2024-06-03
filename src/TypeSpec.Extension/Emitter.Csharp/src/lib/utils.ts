@@ -14,11 +14,9 @@ import {
 } from "@azure-tools/typespec-client-generator-core";
 import { InputParameter } from "../type/input-parameter.js";
 import { InputPrimitiveType, InputType } from "../type/input-type.js";
-import { InputPrimitiveTypeKind } from "../type/input-primitive-type-kind.js";
 import { RequestLocation } from "../type/request-location.js";
 import { InputOperationParameterKind } from "../type/input-operation-parameter-kind.js";
 import { InputConstant } from "../type/input-constant.js";
-import { InputTypeKind } from "../type/input-type-kind.js";
 
 export function capitalize(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -80,8 +78,7 @@ export function createContentTypeOrAcceptParameter(
     const isContentType: boolean =
         nameInRequest.toLowerCase() === "content-type";
     const inputType: InputType = {
-        Kind: InputTypeKind.Primitive,
-        Name: InputPrimitiveTypeKind.String,
+        Kind: "string",
         IsNullable: false
     } as InputPrimitiveType;
     return {

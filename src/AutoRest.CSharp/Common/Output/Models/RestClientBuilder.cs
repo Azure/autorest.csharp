@@ -303,7 +303,7 @@ namespace AutoRest.CSharp.Output.Models
                     var (bodyRequestParameter, bodyParameterValue) = bodyParameters[0];
                     if (bodyMediaType == BodyMediaType.Binary ||
                         // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/360
-                        bodyRequestParameter.Type is InputPrimitiveType { Kind: InputTypeKind.Stream })
+                        bodyRequestParameter.Type is InputPrimitiveType { Kind: InputPrimitiveTypeKind.Stream })
                     {
                         body = new BinaryRequestBody(bodyParameterValue);
                     }
@@ -400,7 +400,7 @@ namespace AutoRest.CSharp.Output.Models
                 return new StringResponseBody();
             }
 
-            if (bodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
+            if (bodyType is InputPrimitiveType { Kind: InputPrimitiveTypeKind.Stream })
             {
                 return new StreamResponseBody();
             }
@@ -497,7 +497,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             CSharpType type = typeOverride != null ? new CSharpType(typeOverride, operationParameter.Type.IsNullable) :
                 // for apiVersion, we still convert enum type to enum value type
-                operationParameter is { IsApiVersion: true, Type: InputEnumType enumType } ? _typeFactory.CreateType(enumType.EnumValueType) : _typeFactory.CreateType(operationParameter.Type);
+                operationParameter is { IsApiVersion: true, Type: InputEnumType enumType } ? _typeFactory.CreateType(enumType.ValueType) : _typeFactory.CreateType(operationParameter.Type);
             return Parameter.FromInputParameter(operationParameter, type, _typeFactory);
         }
 

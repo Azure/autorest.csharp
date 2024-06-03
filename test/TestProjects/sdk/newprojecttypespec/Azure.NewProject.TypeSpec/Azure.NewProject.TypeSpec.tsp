@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 
 @service({
     title: "hello world",
-    version: "0.1.0",
+    version: "1.0.0"
 })
 @doc("This is a sample typespec project.")
 @server(
@@ -18,6 +18,7 @@ import "@azure-tools/typespec-azure-core";
 @useAuth(
     OAuth2Auth<[AuthFlow]> | ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">
 )
+@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 namespace NewProjectTypeSpec;
 
 @doc("The auth flow model")
@@ -30,6 +31,7 @@ model AuthFlow {
 
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 @doc("float fixed enum")

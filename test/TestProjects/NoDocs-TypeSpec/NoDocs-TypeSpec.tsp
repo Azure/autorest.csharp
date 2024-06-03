@@ -300,14 +300,8 @@ namespace Hello.Demo2 {
 @route("/top")
 @doc("top level method")
 @get
-@convenientAPI(true)
-op topAction(@path action: utcDateTime): Thing;
-
-@route("/top2")
-@doc("top level method2")
-@get
 @convenientAPI(false)
-op topAction2(): Thing;
+op topAction(): Thing;
 
 @route("/patch")
 @doc("top level patch")
@@ -330,7 +324,6 @@ op friendlyModel(...NotFriend): NotFriend;
 op addTimeHeader(
     @header("Repeatability-First-Sent") repeatabilityFirstSent?: utcDateTime 
 ): void;
-
 
 @route("/projectedName")
 @doc("Model can have its projected name")
