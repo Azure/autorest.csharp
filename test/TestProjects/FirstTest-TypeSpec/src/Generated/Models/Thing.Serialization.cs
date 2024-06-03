@@ -99,6 +99,13 @@ namespace FirstTestTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableList");
             }
+            writer.WritePropertyName("requiredFloatProperty"u8);
+            writer.WriteNumberValue(RequiredFloatProperty);
+            if (Optional.IsDefined(OptionalFloatProperty))
+            {
+                writer.WritePropertyName("optionalFloatProperty"u8);
+                writer.WriteNumberValue(OptionalFloatProperty.Value);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -150,6 +157,8 @@ namespace FirstTestTypeSpec.Models
             string requiredBadDescription = default;
             IList<int> optionalNullableList = default;
             IList<int> requiredNullableList = default;
+            double requiredFloatProperty = default;
+            double? optionalFloatProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -255,6 +264,20 @@ namespace FirstTestTypeSpec.Models
                     requiredNullableList = array;
                     continue;
                 }
+                if (property.NameEquals("requiredFloatProperty"u8))
+                {
+                    requiredFloatProperty = property.Value.GetDouble();
+                    continue;
+                }
+                if (property.NameEquals("optionalFloatProperty"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalFloatProperty = property.Value.GetDouble();
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
@@ -275,6 +298,8 @@ namespace FirstTestTypeSpec.Models
                 requiredBadDescription,
                 optionalNullableList ?? new ChangeTrackingList<int>(),
                 requiredNullableList,
+                requiredFloatProperty,
+                optionalFloatProperty,
                 serializedAdditionalRawData);
         }
 

@@ -22,8 +22,7 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "5",
-        "Kind": "Primitive",
-        "Name": "Uri",
+        "Kind": "uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -42,8 +41,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "7",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -97,8 +95,7 @@
        "NameInRequest": "api-version",
        "Type": {
         "$id": "12",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -117,8 +114,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "14",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -172,8 +168,7 @@
        "NameInRequest": "apiVersion",
        "Type": {
         "$id": "19",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Path",
@@ -192,8 +187,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "21",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",

@@ -3,11 +3,8 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal enum InputIntrinsicTypeKind
+internal static class BytesKnownEncoding
 {
-    ErrorType,
-    Void,
-    Never,
-    Unknown,
-    Null,
+    public const string Base64 = "base64";
+    public const string Base64Url = "base64url";
 }
