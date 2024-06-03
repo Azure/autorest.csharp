@@ -105,7 +105,10 @@ namespace FirstTestTypeSpec.Tests
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new object(),
+                requiredNullableList = new object[]
+            {
+1234
+            },
             });
             Response response = await client.PatchActionAsync(content);
         }
@@ -131,8 +134,14 @@ namespace FirstTestTypeSpec.Tests
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new object(),
-                requiredNullableList = new object(),
+                optionalNullableList = new object[]
+            {
+1234
+            },
+                requiredNullableList = new object[]
+            {
+1234
+            },
             });
             Response response = await client.PatchActionAsync(content);
         }
@@ -154,7 +163,10 @@ namespace FirstTestTypeSpec.Tests
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new object(),
+                requiredNullableList = new object[]
+            {
+1234
+            },
             });
             Response response = await client.AnonymousBodyAsync(content);
         }
@@ -167,7 +179,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", Array.Empty<int>());
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
             Response<Thing> response = await client.AnonymousBodyAsync(thing);
         }
 
@@ -192,8 +204,14 @@ namespace FirstTestTypeSpec.Tests
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new object(),
-                requiredNullableList = new object(),
+                optionalNullableList = new object[]
+            {
+1234
+            },
+                requiredNullableList = new object[]
+            {
+1234
+            },
             });
             Response response = await client.AnonymousBodyAsync(content);
         }
@@ -206,13 +224,13 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", Array.Empty<int>())
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
             {
                 OptionalLiteralString = ThingOptionalLiteralString.Reject,
                 OptionalLiteralInt = ThingOptionalLiteralInt._456,
                 OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                 OptionalLiteralBool = true,
-                OptionalNullableList = { },
+                OptionalNullableList = { 1234 },
             };
             Response<Thing> response = await client.AnonymousBodyAsync(thing);
         }

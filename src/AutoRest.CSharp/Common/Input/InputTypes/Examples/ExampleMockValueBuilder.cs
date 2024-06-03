@@ -4,6 +4,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input.InputTypes;
 
 namespace AutoRest.CSharp.Common.Input.Examples
 {
@@ -106,6 +107,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
             InputLiteralType literalType => InputExampleValue.Value(literalType, literalType.Value),
             InputModelType modelType => BuildModelExampleValue(modelType, useAllParameters, visitedModels),
             InputUnionType unionType => BuildExampleValue(unionType.UnionItemTypes.First(), hint, useAllParameters, visitedModels),
+            InputNullableType nullableType => BuildExampleValue(nullableType.Type, hint, useAllParameters, visitedModels),
             _ => InputExampleValue.Object(type, new Dictionary<string, InputExampleValue>())
         };
 
