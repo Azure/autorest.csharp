@@ -10,6 +10,8 @@ namespace AutoRest.CSharp.Common.Input;
 internal record InputEnumType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string Description, InputModelTypeUsage Usage, InputPrimitiveType ValueType, IReadOnlyList<InputEnumTypeValue> Values, bool IsExtensible, bool IsNullable)
     : InputType(Name, IsNullable)
 {
+    public InputModelTypeUsage Usage { get; internal set; } = Usage;
+
     public static IEqualityComparer<InputEnumType> IgnoreNullabilityComparer { get; } = new IgnoreNullabilityComparerImplementation();
 
     private struct IgnoreNullabilityComparerImplementation : IEqualityComparer<InputEnumType>

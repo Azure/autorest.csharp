@@ -48,6 +48,17 @@ namespace AutoRest.CSharp.AutoRest.Communication
             {
                 var json = await File.ReadAllTextAsync(tspInputFile);
                 var rootNamespace = TypeSpecSerialization.Deserialize(json) ?? throw new InvalidOperationException($"Deserializing {tspInputFile} has failed.");
+
+                // Update usages
+                var inputTypeUsageProvider = new InputTypeUsageProvider(rootNamespace);
+                foreach (var model in rootNamespace.Models)
+                {
+                    model.Usage = inputTypeUsageProvider.GetUsage(model);
+                }
+                foreach (var model in rootNamespace.Enums)
+                {
+                    model.Usage = inputTypeUsageProvider.GetUsage(model);
+                }
                 workspace = await new CSharpGen().ExecuteAsync(rootNamespace);
                 if (options.IsNewProject)
                 {
