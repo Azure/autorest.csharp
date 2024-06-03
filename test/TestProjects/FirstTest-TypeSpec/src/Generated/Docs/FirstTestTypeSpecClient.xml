@@ -52,7 +52,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
 ]]></code>
 This sample shows how to call TopActionAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -73,8 +73,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
 ]]></code></example>
     </member>
     <member name="TopAction(DateTimeOffset,RequestContext)">
@@ -94,7 +94,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
 ]]></code>
 This sample shows how to call TopAction with all parameters and parse the result.
 <code><![CDATA[
@@ -115,8 +115,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
 ]]></code></example>
     </member>
     <member name="TopAction2Async(RequestContext)">
@@ -136,7 +136,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
 ]]></code>
 This sample shows how to call TopAction2Async with all parameters and parse the result.
 <code><![CDATA[
@@ -157,8 +157,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
 ]]></code></example>
     </member>
     <member name="TopAction2(RequestContext)">
@@ -178,7 +178,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
 ]]></code>
 This sample shows how to call TopAction2 with all parameters and parse the result.
 <code><![CDATA[
@@ -199,8 +199,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
 ]]></code></example>
     </member>
     <member name="PatchActionAsync(RequestContent,RequestContext)">
@@ -219,10 +219,7 @@ using RequestContent content = RequestContent.Create(new
     requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
-    requiredNullableList = new object[]
-    {
-        1234
-    },
+    requiredNullableList = new object(),
 });
 Response response = await client.PatchActionAsync(content);
 
@@ -234,7 +231,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
 ]]></code>
 This sample shows how to call PatchActionAsync with all request content and parse the result.
 <code><![CDATA[
@@ -254,14 +251,8 @@ using RequestContent content = RequestContent.Create(new
     optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
-    optionalNullableList = new object[]
-    {
-        1234
-    },
-    requiredNullableList = new object[]
-    {
-        1234
-    },
+    optionalNullableList = new object(),
+    requiredNullableList = new object(),
 });
 Response response = await client.PatchActionAsync(content);
 
@@ -277,8 +268,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
 ]]></code></example>
     </member>
     <member name="PatchAction(RequestContent,RequestContext)">
@@ -297,10 +288,7 @@ using RequestContent content = RequestContent.Create(new
     requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
-    requiredNullableList = new object[]
-    {
-        1234
-    },
+    requiredNullableList = new object(),
 });
 Response response = client.PatchAction(content);
 
@@ -312,7 +300,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
 ]]></code>
 This sample shows how to call PatchAction with all request content and parse the result.
 <code><![CDATA[
@@ -332,14 +320,8 @@ using RequestContent content = RequestContent.Create(new
     optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
-    optionalNullableList = new object[]
-    {
-        1234
-    },
-    requiredNullableList = new object[]
-    {
-        1234
-    },
+    optionalNullableList = new object(),
+    requiredNullableList = new object(),
 });
 Response response = client.PatchAction(content);
 
@@ -355,8 +337,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
 ]]></code></example>
     </member>
     <member name="AnonymousBodyAsync(Thing,CancellationToken)">
@@ -366,7 +348,7 @@ This sample shows how to call AnonymousBodyAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
+Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", Array.Empty<int>());
 Response<Thing> response = await client.AnonymousBodyAsync(thing);
 ]]></code>
 This sample shows how to call AnonymousBodyAsync with all parameters.
@@ -374,13 +356,13 @@ This sample shows how to call AnonymousBodyAsync with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", Array.Empty<int>())
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
-    OptionalNullableList = { 1234 },
+    OptionalNullableList = { },
 };
 Response<Thing> response = await client.AnonymousBodyAsync(thing);
 ]]></code></example>
@@ -392,7 +374,7 @@ This sample shows how to call AnonymousBody.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
+Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", Array.Empty<int>());
 Response<Thing> response = client.AnonymousBody(thing);
 ]]></code>
 This sample shows how to call AnonymousBody with all parameters.
@@ -400,13 +382,13 @@ This sample shows how to call AnonymousBody with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", Array.Empty<int>())
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
-    OptionalNullableList = { 1234 },
+    OptionalNullableList = { },
 };
 Response<Thing> response = client.AnonymousBody(thing);
 ]]></code></example>
@@ -427,10 +409,7 @@ using RequestContent content = RequestContent.Create(new
     requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
-    requiredNullableList = new object[]
-    {
-        1234
-    },
+    requiredNullableList = new object(),
 });
 Response response = await client.AnonymousBodyAsync(content);
 
@@ -442,7 +421,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
 ]]></code>
 This sample shows how to call AnonymousBodyAsync with all request content and parse the result.
 <code><![CDATA[
@@ -462,14 +441,8 @@ using RequestContent content = RequestContent.Create(new
     optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
-    optionalNullableList = new object[]
-    {
-        1234
-    },
-    requiredNullableList = new object[]
-    {
-        1234
-    },
+    optionalNullableList = new object(),
+    requiredNullableList = new object(),
 });
 Response response = await client.AnonymousBodyAsync(content);
 
@@ -485,8 +458,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
 ]]></code></example>
     </member>
     <member name="AnonymousBody(RequestContent,RequestContext)">
@@ -505,10 +478,7 @@ using RequestContent content = RequestContent.Create(new
     requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
-    requiredNullableList = new object[]
-    {
-        1234
-    },
+    requiredNullableList = new object(),
 });
 Response response = client.AnonymousBody(content);
 
@@ -520,7 +490,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
 ]]></code>
 This sample shows how to call AnonymousBody with all request content and parse the result.
 <code><![CDATA[
@@ -540,14 +510,8 @@ using RequestContent content = RequestContent.Create(new
     optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
-    optionalNullableList = new object[]
-    {
-        1234
-    },
-    requiredNullableList = new object[]
-    {
-        1234
-    },
+    optionalNullableList = new object(),
+    requiredNullableList = new object(),
 });
 Response response = client.AnonymousBody(content);
 
@@ -563,8 +527,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
 ]]></code></example>
     </member>
     <member name="FriendlyModelAsync(Friend,CancellationToken)">

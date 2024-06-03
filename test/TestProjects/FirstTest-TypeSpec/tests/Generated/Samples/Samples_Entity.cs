@@ -34,7 +34,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
         }
 
         [Test]
@@ -98,8 +98,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalNullableList").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
         }
 
         [Test]
@@ -123,8 +123,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalNullableList").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList").ToString());
         }
 
         [Test]

@@ -51,10 +51,7 @@ namespace FirstTestTypeSpec.Tests
                     requiredLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
-                    requiredNullableList = new object[]
-            {
-1234
-            },
+                    requiredNullableList = new object(),
                 },
                 requiredUnknown = new object(),
                 requiredRecordUnknown = new
@@ -63,9 +60,9 @@ namespace FirstTestTypeSpec.Tests
                 },
                 modelWithRequiredNullable = new
                 {
-                    requiredNullablePrimitive = 1234,
-                    requiredExtensibleEnum = "1",
-                    requiredFixedEnum = "1",
+                    requiredNullablePrimitive = new object(),
+                    requiredExtensibleEnum = new object(),
+                    requiredFixedEnum = new object(),
                 },
                 unionList = new object[]
             {
@@ -86,18 +83,18 @@ namespace FirstTestTypeSpec.Tests
             RoundTripModel action = new RoundTripModel(
                 "<requiredString>",
                 1234,
-                new StringFixedEnum?[] { StringFixedEnum.One },
-                new Dictionary<string, StringExtensibleEnum?>
+                new StringFixedEnum[] { StringFixedEnum.One },
+                new Dictionary<string, StringExtensibleEnum>
                 {
                     ["key"] = StringExtensibleEnum.One
                 },
-                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }),
+                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", Array.Empty<int>()),
                 BinaryData.FromObjectAsJson(new object()),
                 new Dictionary<string, BinaryData>
                 {
                     ["key"] = BinaryData.FromObjectAsJson(new object())
                 },
-                new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One),
+                new ModelWithRequiredNullableProperties(default, null, null),
                 new BinaryData[]
             {
 BinaryData.FromObjectAsJson("<unionList>")
@@ -138,14 +135,8 @@ BinaryData.FromObjectAsJson("<unionList>")
                     optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
-                    optionalNullableList = new object[]
-            {
-1234
-            },
-                    requiredNullableList = new object[]
-            {
-1234
-            },
+                    optionalNullableList = new object(),
+                    requiredNullableList = new object(),
                 },
                 intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new object[]
@@ -180,9 +171,9 @@ BinaryData.FromObjectAsJson("<unionList>")
                 },
                 modelWithRequiredNullable = new
                 {
-                    requiredNullablePrimitive = 1234,
-                    requiredExtensibleEnum = "1",
-                    requiredFixedEnum = "1",
+                    requiredNullablePrimitive = new object(),
+                    requiredExtensibleEnum = new object(),
+                    requiredFixedEnum = new object(),
                 },
                 unionList = new object[]
             {
@@ -203,25 +194,25 @@ BinaryData.FromObjectAsJson("<unionList>")
             RoundTripModel action = new RoundTripModel(
                 "<requiredString>",
                 1234,
-                new StringFixedEnum?[] { StringFixedEnum.One },
-                new Dictionary<string, StringExtensibleEnum?>
+                new StringFixedEnum[] { StringFixedEnum.One },
+                new Dictionary<string, StringExtensibleEnum>
                 {
                     ["key"] = StringExtensibleEnum.One
                 },
-                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", Array.Empty<int>())
                 {
                     OptionalLiteralString = ThingOptionalLiteralString.Reject,
                     OptionalLiteralInt = ThingOptionalLiteralInt._456,
                     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                     OptionalLiteralBool = true,
-                    OptionalNullableList = { 1234 },
+                    OptionalNullableList = { },
                 },
                 BinaryData.FromObjectAsJson(new object()),
                 new Dictionary<string, BinaryData>
                 {
                     ["key"] = BinaryData.FromObjectAsJson(new object())
                 },
-                new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One),
+                new ModelWithRequiredNullableProperties(default, null, null),
                 new BinaryData[]
             {
 BinaryData.FromObjectAsJson("<unionList>")
@@ -274,10 +265,7 @@ BinaryData.FromObjectAsJson("<unionList>")
                     requiredLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
-                    requiredNullableList = new object[]
-            {
-1234
-            },
+                    requiredNullableList = new object(),
                 },
                 requiredUnknown = new object(),
                 requiredRecordUnknown = new
@@ -286,9 +274,9 @@ BinaryData.FromObjectAsJson("<unionList>")
                 },
                 modelWithRequiredNullable = new
                 {
-                    requiredNullablePrimitive = 1234,
-                    requiredExtensibleEnum = "1",
-                    requiredFixedEnum = "1",
+                    requiredNullablePrimitive = new object(),
+                    requiredExtensibleEnum = new object(),
+                    requiredFixedEnum = new object(),
                 },
                 unionList = new object[]
             {
@@ -331,14 +319,8 @@ BinaryData.FromObjectAsJson("<unionList>")
                     optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
-                    optionalNullableList = new object[]
-            {
-1234
-            },
-                    requiredNullableList = new object[]
-            {
-1234
-            },
+                    optionalNullableList = new object(),
+                    requiredNullableList = new object(),
                 },
                 intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new object[]
@@ -373,9 +355,9 @@ BinaryData.FromObjectAsJson("<unionList>")
                 },
                 modelWithRequiredNullable = new
                 {
-                    requiredNullablePrimitive = 1234,
-                    requiredExtensibleEnum = "1",
-                    requiredFixedEnum = "1",
+                    requiredNullablePrimitive = new object(),
+                    requiredExtensibleEnum = new object(),
+                    requiredFixedEnum = new object(),
                 },
                 unionList = new object[]
             {
@@ -446,10 +428,7 @@ BinaryData.FromObjectAsJson("<unionList>")
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new object[]
-            {
-1234
-            },
+                requiredNullableList = new object(),
             });
             Response response = await client.CreateLiteralAsync(content);
         }
@@ -462,7 +441,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
-            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", Array.Empty<int>());
             Response<Thing> response = await client.CreateLiteralAsync(body);
         }
 
@@ -487,14 +466,8 @@ BinaryData.FromObjectAsJson("<unionList>")
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new object[]
-            {
-1234
-            },
-                requiredNullableList = new object[]
-            {
-1234
-            },
+                optionalNullableList = new object(),
+                requiredNullableList = new object(),
             });
             Response response = await client.CreateLiteralAsync(content);
         }
@@ -507,13 +480,13 @@ BinaryData.FromObjectAsJson("<unionList>")
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
-            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", Array.Empty<int>())
             {
                 OptionalLiteralString = ThingOptionalLiteralString.Reject,
                 OptionalLiteralInt = ThingOptionalLiteralInt._456,
                 OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                 OptionalLiteralBool = true,
-                OptionalNullableList = { 1234 },
+                OptionalNullableList = { },
             };
             Response<Thing> response = await client.CreateLiteralAsync(body);
         }
