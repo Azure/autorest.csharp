@@ -111,24 +111,6 @@ namespace AutoRest.CSharp.Common.Input
             return true;
         }
 
-        public static bool TryReadPrimitiveType(this ref Utf8JsonReader reader, string propertyName, ref InputPrimitiveType? value)
-        {
-            if (reader.TokenType != JsonTokenType.PropertyName)
-            {
-                throw new JsonException();
-            }
-
-            if (reader.GetString() != propertyName)
-            {
-                return false;
-            }
-
-            reader.Read();
-            value = TypeSpecInputTypeConverter.CreatePrimitiveType(reader.GetString(), false) ?? throw new JsonException();
-            reader.Read();
-            return true;
-        }
-
         public static bool TryReadWithConverter<T>(this ref Utf8JsonReader reader, string propertyName, JsonSerializerOptions options, ref T? value)
         {
             if (reader.TokenType != JsonTokenType.PropertyName)

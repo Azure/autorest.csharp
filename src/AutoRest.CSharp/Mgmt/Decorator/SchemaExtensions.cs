@@ -36,7 +36,7 @@ internal static class SchemaExtensions
         => property.CSharpName().Equals("Tags")
             && property.Type is InputDictionaryType dictType
             && dictType.ValueType is InputPrimitiveType inputPrimitive
-            && inputPrimitive.Kind == InputTypeKind.String;
+            && inputPrimitive.Kind == InputPrimitiveTypeKind.String;
 
     public static bool HasTags(this InputType schema)
     {
@@ -67,15 +67,15 @@ internal static class SchemaExtensions
             switch (property.SerializedName)
             {
                 case "id":
-                    if (property.Type is InputPrimitiveType inputPrimitiveType && (inputPrimitiveType.Kind == InputTypeKind.String || inputPrimitiveType.Kind == InputTypeKind.ResourceIdentifier))
+                    if (property.Type is InputPrimitiveType { Kind: InputPrimitiveTypeKind.String or InputPrimitiveTypeKind.ArmId } inputPrimitiveType)
                         idPropertyFound = true;
                     continue;
                 case "type":
-                    if (property.Type is InputPrimitiveType inputPrimitive && (inputPrimitive.Kind == InputTypeKind.ResourceType || inputPrimitive.Kind == InputTypeKind.String))
+                    if (property.Type is InputPrimitiveType { Kind: InputPrimitiveTypeKind.ResourceType or InputPrimitiveTypeKind.String } inputPrimitive)
                         typePropertyFound = true;
                     continue;
                 case "name":
-                    if (property.Type is InputPrimitiveType primitive && primitive.Kind == InputTypeKind.String)
+                    if (property.Type is InputPrimitiveType { Kind: InputPrimitiveTypeKind.String } primitive)
                         namePropertyFound = true;
                     continue;
             }
@@ -92,7 +92,7 @@ internal static class SchemaExtensions
 
     private static bool ContainsStringProperty(this InputModelType inputModelType, string propertyName)
     {
-        return inputModelType.GetAllProperties().Any(p => p.SerializedName.Equals(propertyName, StringComparison.Ordinal) && p.Type is InputPrimitiveType inputPrimitiveType && inputPrimitiveType.Kind == InputTypeKind.String);
+        return inputModelType.GetAllProperties().Any(p => p.SerializedName.Equals(propertyName, StringComparison.Ordinal) && p.Type is InputPrimitiveType { Kind: InputPrimitiveTypeKind.String });
     }
 
     // TODO: we may reuse the IsResourceModel instead of creating this method, but the result for flattened properties is different as although models with matched flattened properties are not treated as Resource but they still inherit from ResourceData. We should probably consider to align the behavior before we can refactor the methods.
@@ -137,7 +137,7 @@ internal static class SchemaExtensions
 
     internal static string GetFullSerializedName(this InputEnumType inputEnum, InputEnumTypeValue choice)
     {
-        if (!inputEnum.AllowedValues.Contains(choice))
+        if (!inputEnum.Values.Contains(choice))
             throw new InvalidOperationException($"enum value {choice.Value} doesn't belong to enum {inputEnum.Name}");
         return $"{inputEnum.Name}.{choice.Value}";
     }
