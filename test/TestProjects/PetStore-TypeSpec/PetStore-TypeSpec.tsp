@@ -99,32 +99,6 @@ model Tuna extends Fish {
 @summary("Manage your pets.")
 @route("/pets")
 namespace Pets {
-  @doc("Delete a pet.")
-  @summary("delete.")
-  @delete
-  @convenientAPI(true)
-  op delete(...PetId): Response<200> | Error;
-
-  // @fancyDoc("List pets.")
-  // op list(@query nextLink?: string): OkResponse<ResponsePage<Pet>> | Error;
-
-  @doc("Returns a pet. Supports eTags.")
-  @convenientAPI(true)
-  op read(...PetId): Pet | (NotModifiedResponse & Pet) | Error;
-
-  @convenientAPI(true)
-  @post op create(@body pet: Pet): Pet | Error;
-
-  @convenientAPI(true)
-  @get op getPetByKind(@path kind: PetKind): Pet | Error;
-
-  @convenientAPI(true)
-  @get op GetFirstPet(@query start?: int32): Pet | Error;
-
-  @convenientAPI(true)
-  @route("/getFish")
-  @get op getFish(@query kind?: string): Fish | Error;
-
   @doc("Test that an LRO polling operation defined in a namespace wtihout @service decorator will not be generated. This should be removed after cadl-ranch test case update.")
   @convenientAPI(true)
   @post
