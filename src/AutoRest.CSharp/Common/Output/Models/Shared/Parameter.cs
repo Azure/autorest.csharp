@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var inputType = type.InputType;
             return new Parameter(
                 name,
-                CreateDescription(operationParameter, inputType, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.GetValueString()), keepClientDefaultValue ? null : clientDefaultValue),
+                CreateDescription(operationParameter, inputType, (operationParameter.Type as InputEnumType)?.Values.Select(c => c.GetValueString()), keepClientDefaultValue ? null : clientDefaultValue),
                 inputType,
                 defaultValue,
                 validation,
@@ -168,7 +168,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             return requestParameter.Type switch
             {
-                InputEnumType choiceSchema when type.IsFrameworkType => AddAllowedValues(description, choiceSchema.AllowedValues),
+                InputEnumType choiceSchema when type.IsFrameworkType => AddAllowedValues(description, choiceSchema.Values),
                 _ => description
             };
 
