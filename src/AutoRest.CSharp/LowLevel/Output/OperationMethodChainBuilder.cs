@@ -691,7 +691,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             InputEnumType enumType => _typeFactory.CreateType(enumType.EnumValueType),
             InputModelType modelType => new CSharpType(typeof(object)),
-            InputNullableType nullableType => ChangeTypeForProtocolMethod(nullableType.ValueType) switch
+            InputNullableType nullableType => ChangeTypeForProtocolMethod(nullableType.Type) switch
             {
                 null => null,
                 { } protocolType => protocolType.WithNullable(true),

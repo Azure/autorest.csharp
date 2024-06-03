@@ -323,7 +323,7 @@ namespace AutoRest.CSharp.Output.Models
                         // This method has a flattened body
                         if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened && library != null)
                         {
-                            (InputType inputType, bool isNullable) = bodyRequestParameter.Type is InputNullableType nullableType ? (nullableType.ValueType, true) : (bodyRequestParameter.Type, false);
+                            (InputType inputType, bool isNullable) = bodyRequestParameter.Type is InputNullableType nullableType ? (nullableType.Type, true) : (bodyRequestParameter.Type, false);
                             var objectType = inputType switch
                             {
                                 InputModelType inputModelType => library.ResolveModel(inputModelType, isNullable).Implementation as SerializableObjectType,

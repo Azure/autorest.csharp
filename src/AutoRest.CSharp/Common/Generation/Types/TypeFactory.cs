@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Generation.Types
             // Handle DataFactoryElement, we are sure that the argument type is not null and contains only 1 element
             InputModelType { Namespace: "Azure.Core.Resources", Name: "DataFactoryElement" } inputModel => new CSharpType(typeof(DataFactoryElement<>), CreateType(inputModel.ArgumentTypes![0])),
             InputModelType model => _library.ResolveModel(model,false),
-            InputNullableType nullableType => CreateType(nullableType.ValueType).WithNullable(true),
+            InputNullableType nullableType => CreateType(nullableType.Type).WithNullable(true),
             InputPrimitiveType primitiveType => primitiveType.Kind switch
             {
                 InputTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation)),

@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Output.Builders
             InputLiteralType literalType => GetSerializationFormat(literalType.LiteralValueType),
             InputListType listType => GetSerializationFormat(listType.ElementType),
             InputDictionaryType dictionaryType => GetSerializationFormat(dictionaryType.ValueType),
-            InputNullableType nullableType => GetSerializationFormat(nullableType.ValueType),
+            InputNullableType nullableType => GetSerializationFormat(nullableType.Type),
             InputPrimitiveType primitiveType => primitiveType.Kind switch
             {
                 InputTypeKind.BytesBase64Url => SerializationFormat.Bytes_Base64Url,
@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Output.Builders
                     var valueElement = BuildXmlElementSerialization(dictionaryType.ValueType, type.ElementType, null, false);
                     return new XmlDictionarySerialization(type.InitializationType, valueElement, xmlName);
                 case InputNullableType nullableType:
-                    return BuildXmlElementSerialization(nullableType.ValueType, type, name, isRoot);
+                    return BuildXmlElementSerialization(nullableType.Type, type, name, isRoot);
                 default:
                     return new XmlElementValueSerialization(xmlName, new XmlValueSerialization(type, GetSerializationFormat(inputType)));
             }
@@ -133,7 +133,7 @@ namespace AutoRest.CSharp.Output.Builders
             {
                 InputListType listType => new JsonArraySerialization(valueType, BuildJsonSerialization(listType.ElementType, valueType.ElementType, true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
                 InputDictionaryType dictionaryType => new JsonDictionarySerialization(valueType, BuildJsonSerialization(dictionaryType.ValueType, valueType.ElementType, true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
-                InputNullableType nullableType => BuildJsonSerialization(nullableType.ValueType, valueType, isCollectionElement, serializationFormat),
+                InputNullableType nullableType => BuildJsonSerialization(nullableType.Type, valueType, isCollectionElement, serializationFormat),
                 _ =>
                 Configuration.AzureArm
                     ? new JsonValueSerialization(valueType, serializationFormat, valueType.IsNullable || (isCollectionElement && !valueType.IsValueType), IsManagedServiceIdentityV3(inputType, valueType) ? JsonSerializationOptions.UseManagedServiceIdentityV3 : JsonSerializationOptions.None)
@@ -669,7 +669,7 @@ namespace AutoRest.CSharp.Output.Builders
             {
                 InputListType listType => new MultipartArraySerialization(valueType, BuildMultipartSerialization(listType.ElementType, valueType.ElementType, true, serializationFormat, new VariableReference(valueType.ElementType, "item")), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
                 InputDictionaryType dictionaryType => new MultipartDictionarySerialization(valueType, BuildMultipartSerialization(dictionaryType.ValueType, valueType.ElementType, true, serializationFormat, memberValueExpression), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
-                InputNullableType nullableType => BuildMultipartSerialization(nullableType.ValueType, valueType, isCollectionElement, serializationFormat, memberValueExpression),
+                InputNullableType nullableType => BuildMultipartSerialization(nullableType.Type, valueType, isCollectionElement, serializationFormat, memberValueExpression),
                 _ => new MultipartValueSerialization(valueType, serializationFormat, valueType.IsNullable || isCollectionElement)// nullable CSharp type like int?, Etag?, and reference type in collection
             };
         }

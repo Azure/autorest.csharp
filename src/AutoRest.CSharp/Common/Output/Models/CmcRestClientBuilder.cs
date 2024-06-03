@@ -303,7 +303,7 @@ namespace AutoRest.CSharp.Output.Models
                         // This method has a flattened body
                         if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened)
                         {
-                            (InputType bodyType, bool isNullable) = bodyRequestParameter.Type is InputNullableType nullableType ? (nullableType.ValueType, true) : (bodyRequestParameter.Type, false);
+                            (InputType bodyType, bool isNullable) = bodyRequestParameter.Type is InputNullableType nullableType ? (nullableType.Type, true) : (bodyRequestParameter.Type, false);
                             var objectType = (SchemaObjectType)_library.ResolveModel((InputModelType)bodyType, isNullable).Implementation;
 
                             var initializationMap = new List<ObjectPropertyInitializer>();

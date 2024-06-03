@@ -3,7 +3,7 @@
 
 namespace AutoRest.CSharp.Common.Input.InputTypes
 {
-    internal record InputNullableType(InputType ValueType): InputType("nullable")
+    internal record InputNullableType(InputType Type): InputType("nullable")
     {
     }
 }

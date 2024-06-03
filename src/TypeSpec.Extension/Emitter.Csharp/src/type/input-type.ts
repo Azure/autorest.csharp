@@ -74,7 +74,7 @@ export interface InputEnumType extends InputType {
 export interface InputNullableType extends InputType {
     Kind: InputTypeKind.Nullable;
     Name: InputTypeKind.Nullable;
-    ValueType: InputType;
+    Type: InputType;
 }
 
 export function isInputEnumType(type: InputType): type is InputEnumType {

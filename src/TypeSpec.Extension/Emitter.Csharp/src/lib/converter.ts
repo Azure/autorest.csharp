@@ -59,12 +59,12 @@ export function fromSdkType(
     literalTypeContext?: LiteralTypeContext
 ): InputType {
     if (sdkType.kind === "nullable") {
-        let inputType = fromSdkType(sdkType.valueType, context, models, enums);
+        let inputType = fromSdkType(sdkType.type, context, models, enums);
         //inputType.IsNullable = true;
         return {
             Kind: InputTypeKind.Nullable,
             Name: InputTypeKind.Nullable,
-            ValueType: inputType
+            Type: inputType
         } as InputNullableType
     }
     if (sdkType.kind === "model")
