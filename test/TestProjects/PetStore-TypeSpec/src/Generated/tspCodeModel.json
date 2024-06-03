@@ -20,8 +20,7 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "Primitive",
-      "Name": "Int32",
+      "Kind": "int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -34,8 +33,7 @@
      "Description": "",
      "Type": {
       "$id": "6",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -61,8 +59,7 @@
      "NameInRequest": "petStoreUrl",
      "Type": {
       "$id": "10",
-      "Kind": "Primitive",
-      "Name": "Uri",
+      "Kind": "uri",
       "IsNullable": false
      },
      "Location": "Uri",
@@ -97,8 +94,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "14",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
