@@ -245,7 +245,7 @@ export function createModelForService(
             if (isAzureArm === true && (dpgGroup.groupPath.endsWith("Operations") || dpgGroup.groupPath.endsWith("OperationStatus"))) {
                 continue;
             }
-            const subClient = emitClient(dpgGroup, client);
+            const subClient = emitClient(dpgGroup, isAzureArm, client);
             if (subClient === undefined) {
                 continue;
             }
@@ -281,10 +281,11 @@ export function createModelForService(
 
     function emitClient(
         client: SdkClient | SdkOperationGroup,
+        isAzureArm: boolean | undefined,
         parent?: SdkClient | SdkOperationGroup
     ): InputClient | undefined {
         const operations = listOperationsInOperationGroup(sdkContext, client);
-        if (operations.length === 0) {
+        if (isAzureArm === true && operations.length === 0) {
             return undefined;
         }
         let clientDesc = "";
