@@ -18,6 +18,7 @@ import {
     SdkType,
     SdkUnionType,
     UsageFlags,
+    getAccessOverride,
     isReadOnly,
     isSdkBuiltInKind
 } from "@azure-tools/typespec-client-generator-core";
@@ -124,7 +125,7 @@ export function fromSdkModelType(
             Namespace: getFullNamespaceString(
                 (modelType.__raw as Model).namespace
             ),
-            Accessibility: modelType.access,
+            Accessibility: getAccessOverride(context, modelType.__raw as Model), /* when tcgc provide a way to identify if the access is override or not, we can get the accessibility from the modelType.access */
             Deprecated: modelType.deprecation,
             Description: modelType.description,
             DiscriminatorPropertyName: baseModelHasDiscriminator
@@ -296,7 +297,7 @@ export function fromSdkEnumType(
                 // Enum and Union have optional namespace property
                 (enumType.__raw! as any).namespace
             ),
-            Accessibility: enumType.access,
+            Accessibility: getAccessOverride(context, enumType.__raw as any), /* when tcgc provide a way to identify if the access is override or not, we can get the accessibility from the enumType.access,*/
             Deprecated: enumType.deprecation,
             Description: enumType.description,
             IsExtensible: enumType.isFixed ? false : true,

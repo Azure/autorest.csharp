@@ -136,7 +136,6 @@
     }
    ],
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Description": "enum with projected name",
    "IsExtensible": false,
    "Usage": "Input"
@@ -164,7 +163,6 @@
     }
    ],
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Description": "enum with projected name used in a model",
    "IsExtensible": false,
    "Usage": "Input"
@@ -192,7 +190,6 @@
     }
    ],
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Description": "Simple enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -220,7 +217,6 @@
     }
    ],
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Description": "Extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -248,7 +244,6 @@
     }
    ],
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Description": "Int based extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -276,7 +271,6 @@
     }
    ],
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Description": "Float based extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -304,7 +298,6 @@
     }
    ],
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Description": "float fixed enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -332,7 +325,6 @@
     }
    ],
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Description": "int fixed enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -380,7 +372,6 @@
     }
    ],
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "IsExtensible": true,
    "Usage": "None"
   },
@@ -397,7 +388,6 @@
     }
    ],
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -408,7 +398,6 @@
    "Kind": "Model",
    "Name": "Thing",
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Description": "A model with a few properties of literal types",
    "Usage": "RoundTrip",
    "Properties": [
@@ -666,7 +655,6 @@
    "Kind": "Model",
    "Name": "Friend",
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Description": "this is not a friendly model but with a friendly name",
    "Usage": "RoundTrip",
    "Properties": [
@@ -690,7 +678,6 @@
    "Kind": "Model",
    "Name": "ModelWithFormat",
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Usage": "Input",
    "Properties": [
     {
@@ -726,7 +713,6 @@
    "Kind": "Model",
    "Name": "ProjectedModel",
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Description": "this is a model with a projected name",
    "Usage": "RoundTrip",
    "Properties": [
@@ -750,7 +736,6 @@
    "Kind": "Model",
    "Name": "ReturnsAnonymousModelResponse",
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Usage": "Output",
    "Properties": []
   },
@@ -759,7 +744,6 @@
    "Kind": "Model",
    "Name": "Extension",
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Description": "extension",
    "Usage": "Input",
    "BaseModel": {
@@ -767,7 +751,6 @@
     "Kind": "Model",
     "Name": "Element",
     "Namespace": "FirstTestTypeSpec",
-    "Accessibility": "public",
     "Description": "element",
     "Usage": "Input",
     "Properties": [
@@ -813,7 +796,6 @@
    "Kind": "Model",
    "Name": "Extendible",
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Description": "FHIR extendible element",
    "Usage": "Input",
    "Properties": [
@@ -831,7 +813,6 @@
        "Kind": "Model",
        "Name": "ThereLevelExtension",
        "Namespace": "FirstTestTypeSpec",
-       "Accessibility": "public",
        "Description": "extension",
        "Usage": "Input",
        "BaseModel": {
@@ -839,7 +820,6 @@
         "Kind": "Model",
         "Name": "ThereLevelElement",
         "Namespace": "FirstTestTypeSpec",
-        "Accessibility": "public",
         "Description": "element",
         "Usage": "Input",
         "Properties": [
@@ -894,7 +874,6 @@
    "Kind": "Model",
    "Name": "ChildModel",
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Description": "ChildModel",
    "Usage": "Input",
    "BaseModel": {
@@ -902,7 +881,6 @@
     "Kind": "Model",
     "Name": "BaseModel",
     "Namespace": "FirstTestTypeSpec",
-    "Accessibility": "public",
     "Description": "parenetModel",
     "Usage": "Input",
     "Properties": [
@@ -948,7 +926,6 @@
    "Kind": "Model",
    "Name": "ContainSelf",
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Description": "containself",
    "Usage": "Input",
    "Properties": [
@@ -970,7 +947,6 @@
    "Kind": "Model",
    "Name": "ModelWithProjectedEnum",
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Usage": "Input",
    "Properties": [
     {
@@ -991,7 +967,6 @@
    "Kind": "Model",
    "Name": "AzureLocationModel",
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Usage": "Input",
    "Properties": [
     {
@@ -1014,7 +989,6 @@
    "Kind": "Model",
    "Name": "RoundTripModel",
    "Namespace": "FirstTestTypeSpec",
-   "Accessibility": "public",
    "Description": "this is a roundtrip model",
    "Usage": "RoundTrip",
    "Properties": [
@@ -1339,7 +1313,6 @@
       "Kind": "Model",
       "Name": "ModelWithRequiredNullableProperties",
       "Namespace": "FirstTestTypeSpec",
-      "Accessibility": "public",
       "Description": "A model with a few required nullable properties",
       "Usage": "RoundTrip",
       "Properties": [
@@ -1427,7 +1400,6 @@
          "Kind": "Model",
          "Name": "ModelForUnion",
          "Namespace": "FirstTestTypeSpec",
-         "Accessibility": "public",
          "Description": "This is a model only used in union types, please do not use it anywhere else.",
          "Usage": "RoundTrip",
          "Properties": [
