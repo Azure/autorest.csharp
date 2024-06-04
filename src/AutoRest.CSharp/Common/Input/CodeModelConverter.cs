@@ -341,7 +341,9 @@ namespace AutoRest.CSharp.Common.Input
                     {
                         if (child.DiscriminatorValue != null)
                         {
-                            _derivedModelsCache[schema].DiscriminatedSubtypes.Add(child.DiscriminatorValue, GetOrCreateModel(child));
+                            // TODO -- change it to the throw exception version when https://github.com/Azure/azure-rest-api-specs/issues/29320 and https://github.com/Azure/azure-rest-api-specs/issues/29321 are resolved
+                            //_derivedModelsCache[schema].DiscriminatedSubtypes.Add(child.DiscriminatorValue, GetOrCreateModel(child));
+                            _derivedModelsCache[schema].DiscriminatedSubtypes[child.DiscriminatorValue] = GetOrCreateModel(child);
                         }
                     }
                 }
