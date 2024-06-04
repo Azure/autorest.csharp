@@ -403,12 +403,12 @@
  "Models": [
   {
    "$id": "67",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnivariateDetectionOptions",
    "Namespace": "AnomalyDetector.Univariate",
+   "Usage": "Input",
    "Description": "The request of entire or last anomaly detection.",
    "IsNullable": false,
-   "Usage": "Input",
    "Properties": [
     {
      "$id": "68",
@@ -421,12 +421,12 @@
       "Name": "Array",
       "ElementType": {
        "$id": "70",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "TimeSeriesPoint",
        "Namespace": "AnomalyDetector.Univariate",
+       "Usage": "Input",
        "Description": "The definition of input timeseries points.",
        "IsNullable": false,
-       "Usage": "Input",
        "Properties": [
         {
          "$id": "71",
@@ -561,12 +561,12 @@
   },
   {
    "$id": "88",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnivariateEntireDetectionResult",
    "Namespace": "AnomalyDetector.Univariate",
+   "Usage": "Output",
    "Description": "The response of entire anomaly detection.",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "89",
@@ -718,12 +718,12 @@
   },
   {
    "$id": "112",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnivariateLastDetectionResult",
    "Namespace": "AnomalyDetector.Univariate",
+   "Usage": "Output",
    "Description": "The response of last anomaly detection.",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "113",
@@ -846,12 +846,12 @@
   },
   {
    "$id": "131",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnivariateChangePointDetectionOptions",
    "Namespace": "AnomalyDetector.Univariate",
+   "Usage": "Input",
    "Description": "The request of change point detection.",
    "IsNullable": false,
-   "Usage": "Input",
    "Properties": [
     {
      "$id": "132",
@@ -937,12 +937,12 @@
   },
   {
    "$id": "143",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnivariateChangePointDetectionResult",
    "Namespace": "AnomalyDetector.Univariate",
+   "Usage": "Output",
    "Description": "The response of change point detection.",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "144",
@@ -999,12 +999,12 @@
   },
   {
    "$id": "152",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "MultivariateDetectionResult",
    "Namespace": "AnomalyDetector.Multivariate",
+   "Usage": "Output",
    "Description": "Detection results for the given resultId.",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "153",
@@ -1027,12 +1027,12 @@
      "Description": "Multivariate anomaly detection status.",
      "Type": {
       "$id": "156",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "MultivariateBatchDetectionResultSummary",
       "Namespace": "AnomalyDetector.Multivariate",
+      "Usage": "Output",
       "Description": "Multivariate anomaly detection status.",
       "IsNullable": false,
-      "Usage": "Output",
       "Properties": [
        {
         "$id": "157",
@@ -1056,12 +1056,12 @@
          "Name": "Array",
          "ElementType": {
           "$id": "160",
-          "Kind": "Model",
+          "Kind": "model",
           "Name": "ErrorResponse",
           "Namespace": "AnomalyDetector.Multivariate",
+          "Usage": "RoundTrip",
           "Description": "ErrorResponse contains code and message that shows the error information.",
           "IsNullable": false,
-          "Usage": "RoundTrip",
           "Properties": [
            {
             "$id": "161",
@@ -1107,12 +1107,12 @@
          "Name": "Array",
          "ElementType": {
           "$id": "167",
-          "Kind": "Model",
+          "Kind": "model",
           "Name": "VariableState",
           "Namespace": "AnomalyDetector.Multivariate",
+          "Usage": "RoundTrip",
           "Description": "Variable Status.",
           "IsNullable": false,
-          "Usage": "RoundTrip",
           "Properties": [
            {
             "$id": "168",
@@ -1205,12 +1205,12 @@
         "Description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
         "Type": {
          "$id": "181",
-         "Kind": "Model",
+         "Kind": "model",
          "Name": "MultivariateBatchDetectionOptions",
          "Namespace": "AnomalyDetector.Multivariate",
+         "Usage": "RoundTrip",
          "Description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
          "IsNullable": false,
-         "Usage": "RoundTrip",
          "Properties": [
           {
            "$id": "182",
@@ -1297,12 +1297,12 @@
       "Name": "Array",
       "ElementType": {
        "$id": "194",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "AnomalyState",
        "Namespace": "AnomalyDetector.Multivariate",
+       "Usage": "Output",
        "Description": "Anomaly status and information.",
        "IsNullable": false,
-       "Usage": "Output",
        "Properties": [
         {
          "$id": "195",
@@ -1330,12 +1330,12 @@
          "Description": "The detailed value of this anomalous timestamp.",
          "Type": {
           "$id": "199",
-          "Kind": "Model",
+          "Kind": "model",
           "Name": "AnomalyValue",
           "Namespace": "AnomalyDetector.Multivariate",
+          "Usage": "Output",
           "Description": "Detailed information of the anomalous timestamp.",
           "IsNullable": false,
-          "Usage": "Output",
           "Properties": [
            {
             "$id": "200",
@@ -1387,12 +1387,12 @@
              "Name": "Array",
              "ElementType": {
               "$id": "208",
-              "Kind": "Model",
+              "Kind": "model",
               "Name": "AnomalyInterpretation",
               "Namespace": "AnomalyDetector.Multivariate",
+              "Usage": "Output",
               "Description": "Interpretation of the anomalous timestamp.",
               "IsNullable": false,
-              "Usage": "Output",
               "Properties": [
                {
                 "$id": "209",
@@ -1427,12 +1427,12 @@
                 "Description": "Correlation changes among the anomalous variables",
                 "Type": {
                  "$id": "214",
-                 "Kind": "Model",
+                 "Kind": "model",
                  "Name": "CorrelationChanges",
                  "Namespace": "AnomalyDetector.Multivariate",
+                 "Usage": "Output",
                  "Description": "Correlation changes among the anomalous variables",
                  "IsNullable": false,
-                 "Usage": "Output",
                  "Properties": [
                   {
                    "$id": "215",
@@ -1522,12 +1522,12 @@
   },
   {
    "$id": "220",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelInfo",
    "Namespace": "AnomalyDetector.Multivariate",
+   "Usage": "RoundTrip",
    "Description": "Training result of a model including its status, errors and diagnostics\ninformation.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "221",
@@ -1624,12 +1624,12 @@
      "Description": "An optional field, indicating the manner to align multiple variables.",
      "Type": {
       "$id": "235",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "AlignPolicy",
       "Namespace": "AnomalyDetector.Multivariate",
+      "Usage": "RoundTrip",
       "Description": "An optional field, indicating the manner to align multiple variables.",
       "IsNullable": false,
-      "Usage": "RoundTrip",
       "Properties": [
        {
         "$id": "236",
@@ -1706,12 +1706,12 @@
      "Description": "Diagnostics information to help inspect the states of model or variable.",
      "Type": {
       "$id": "244",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "DiagnosticsInfo",
       "Namespace": "AnomalyDetector.Multivariate",
+      "Usage": "RoundTrip",
       "Description": "Diagnostics information to help inspect the states of model or variable.",
       "IsNullable": false,
-      "Usage": "RoundTrip",
       "Properties": [
        {
         "$id": "245",
@@ -1720,12 +1720,12 @@
         "Description": "Model status.",
         "Type": {
          "$id": "246",
-         "Kind": "Model",
+         "Kind": "model",
          "Name": "ModelState",
          "Namespace": "AnomalyDetector.Multivariate",
+         "Usage": "RoundTrip",
          "Description": "Model status.",
          "IsNullable": false,
-         "Usage": "RoundTrip",
          "Properties": [
           {
            "$id": "247",
@@ -1843,12 +1843,12 @@
   },
   {
    "$id": "261",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "AnomalyDetectionModel",
    "Namespace": "AnomalyDetector.Multivariate",
+   "Usage": "Output",
    "Description": "Response of getting a model.",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "262",
@@ -1917,12 +1917,12 @@
   },
   {
    "$id": "271",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelList",
    "Namespace": "AnomalyDetector.Multivariate",
+   "Usage": "Output",
    "Description": "Response of listing models.",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "272",
@@ -1984,12 +1984,12 @@
   },
   {
    "$id": "280",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "MultivariateLastDetectionOptions",
    "Namespace": "AnomalyDetector.Multivariate",
+   "Usage": "Input",
    "Description": "Request of last detection.",
    "IsNullable": false,
-   "Usage": "Input",
    "Properties": [
     {
      "$id": "281",
@@ -2002,12 +2002,12 @@
       "Name": "Array",
       "ElementType": {
        "$id": "283",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "VariableValues",
        "Namespace": "AnomalyDetector.Multivariate",
+       "Usage": "Input",
        "Description": "Variable values.",
        "IsNullable": false,
-       "Usage": "Input",
        "Properties": [
         {
          "$id": "284",
@@ -2087,12 +2087,12 @@
   },
   {
    "$id": "294",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "MultivariateLastDetectionResult",
    "Namespace": "AnomalyDetector.Multivariate",
+   "Usage": "Output",
    "Description": "Results of last detection.",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "295",
@@ -2132,12 +2132,12 @@
   },
   {
    "$id": "299",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "AnomalyDetectorError",
    "Namespace": "AnomalyDetector.Univariate",
+   "Usage": "Output",
    "Description": "Error information returned by the API.",
    "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "300",
