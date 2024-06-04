@@ -157,7 +157,7 @@ export function createModelForService(
     const clients: InputClient[] = [];
     const dpgClients = listClients(sdkContext);
     for (const client of dpgClients) {
-        var emittedClient = emitClient(client, sdkContext.arm);
+        const emittedClient = emitClient(client, sdkContext.arm);
         if (emittedClient !== undefined) {
             clients.push(emittedClient);
         }
