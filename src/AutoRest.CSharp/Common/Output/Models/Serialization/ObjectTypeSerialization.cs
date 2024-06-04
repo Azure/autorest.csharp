@@ -13,7 +13,7 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models.Serialization
 {
-    internal record ObjectTypeSerialization
+    internal class ObjectTypeSerialization
     {
         public ObjectTypeSerialization(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep, MultipartObjectSerialization? multipart)
         {
