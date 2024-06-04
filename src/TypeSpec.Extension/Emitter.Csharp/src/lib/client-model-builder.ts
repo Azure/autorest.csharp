@@ -157,11 +157,16 @@ export function createModelForService(
     const clients: InputClient[] = [];
     const dpgClients = listClients(sdkContext);
     for (const client of dpgClients) {
-        var emittedClient = emitClient(client, sdkContext.arm); 
+        var emittedClient = emitClient(client, sdkContext.arm);
         if (emittedClient !== undefined) {
             clients.push(emittedClient);
         }
-        addChildClients(sdkContext.emitContext, client, clients, sdkContext.arm);
+        addChildClients(
+            sdkContext.emitContext,
+            client,
+            clients,
+            sdkContext.arm
+        );
     }
 
     navigateModels(sdkContext, modelMap, enumMap);
@@ -242,7 +247,11 @@ export function createModelForService(
         );
         for (const dpgGroup of dpgOperationGroups) {
             // For MPG, we skip the "Operations" operation group
-            if (isAzureArm === true && (dpgGroup.groupPath.endsWith("Operations") || dpgGroup.groupPath.endsWith("OperationStatus"))) {
+            if (
+                isAzureArm === true &&
+                (dpgGroup.groupPath.endsWith("Operations") ||
+                    dpgGroup.groupPath.endsWith("OperationStatus"))
+            ) {
                 continue;
             }
             const subClient = emitClient(dpgGroup, isAzureArm, client);
