@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Common.Input
         private readonly Dictionary<Schema, InputEnumType> _enumsCache;
         private readonly Dictionary<string, InputEnumType> _enumsNamingCache;
         private readonly Dictionary<ObjectSchema, InputModelType> _modelsCache;
-        private readonly Dictionary<ObjectSchema, (List<InputModelProperty> Properties, IReadOnlyList<ObjectSchema> CompositSchemas, IReadOnlyList<ObjectSchema> AllBaseSchemas)> _modelPropertiesCache;
+        private readonly Dictionary<ObjectSchema, (List<InputModelProperty> Properties, IReadOnlyList<ObjectSchema> CompositeSchemas, IReadOnlyList<ObjectSchema> AllBaseSchemas)> _modelPropertiesCache;
         private readonly Dictionary<ObjectSchema, (List<InputModelType> DerivedModels, Dictionary<string, InputModelType> DiscriminatedSubtypes)> _derivedModelsCache;
         private readonly Dictionary<Property, InputModelProperty> _propertiesCache;
 
@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Common.Input
             _operationsCache = new Dictionary<ServiceRequest, Func<InputOperation>>();
             _parametersCache = new Dictionary<RequestParameter, Func<InputParameter>>();
             _modelsCache = new Dictionary<ObjectSchema, InputModelType>();
-            _modelPropertiesCache = new Dictionary<ObjectSchema, (List<InputModelProperty> Properties, IReadOnlyList<ObjectSchema> CompositSchemas, IReadOnlyList<ObjectSchema> AllBaseSchemas)>();
+            _modelPropertiesCache = new Dictionary<ObjectSchema, (List<InputModelProperty> Properties, IReadOnlyList<ObjectSchema> CompositeSchemas, IReadOnlyList<ObjectSchema> AllBaseSchemas)>();
             _propertiesCache = new Dictionary<Property, InputModelProperty>();
             _derivedModelsCache = new Dictionary<ObjectSchema, (List<InputModelType>, Dictionary<string, InputModelType>)>();
         }
@@ -238,7 +238,7 @@ namespace AutoRest.CSharp.Common.Input
             SkipUrlEncoding: input.Extensions?.SkipEncoding ?? false,
             HeaderCollectionPrefix: input.Extensions?.HeaderCollectionPrefix,
             FlattenedBodyProperty: input is VirtualParameter vp and ({ Schema: not ConstantSchema } or { Required: not true })
-                ? CreateProperty(vp.TargetProperty)
+                ? GetOrCreateProperty(vp.TargetProperty)
                 : null
         );
 
@@ -317,14 +317,14 @@ namespace AutoRest.CSharp.Common.Input
 
             foreach (var (schema, (properties, compositionSchemas, allBaseSchemas)) in _modelPropertiesCache)
             {
-                properties.AddRange(schema.Properties.Select(CreateProperty));
+                properties.AddRange(schema.Properties.Select(GetOrCreateProperty));
                 if (Configuration.AzureArm)
                 {
-                    properties.AddRange(allBaseSchemas.SelectMany(x => x.Properties).Select(CreateProperty));
+                    properties.AddRange(allBaseSchemas.SelectMany(x => x.Properties).Select(GetOrCreateProperty));
                 }
                 else
                 {
-                    properties.AddRange(compositionSchemas.SelectMany(EnumerateBase).SelectMany(x => x.Properties).Select(CreateProperty));
+                    properties.AddRange(compositionSchemas.SelectMany(EnumerateBase).SelectMany(x => x.Properties).Select(GetOrCreateProperty));
                 }
             }
 
@@ -389,7 +389,7 @@ namespace AutoRest.CSharp.Common.Input
                 BaseModel: baseModel,
                 DerivedModels: derived,
                 DiscriminatorValue: schema.DiscriminatorValue,
-                DiscriminatorProperty: schema.Discriminator?.Property is { } discriminatorProperty ? CreateProperty(discriminatorProperty) : null,
+                DiscriminatorProperty: schema.Discriminator?.Property is { } discriminatorProperty ? GetOrCreateProperty(discriminatorProperty) : null,
                 DiscriminatedSubtypes: discriminatedSubtypes,
                 AdditionalProperties: dictionarySchema is not null ? GetOrCreateType(dictionarySchema.ElementType, false) : null,
                 IsNullable: false)
@@ -434,7 +434,7 @@ namespace AutoRest.CSharp.Common.Input
                 ? parents.OfType<ObjectSchema>().FirstOrDefault(s => s.Discriminator is not null) ?? parents.OfType<ObjectSchema>().FirstOrDefault()
                 : null;
 
-        private InputModelProperty CreateProperty(Property property)
+        private InputModelProperty GetOrCreateProperty(Property property)
         {
             if (_propertiesCache.TryGetValue(property, out var inputProperty))
             {
