@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -46,11 +45,6 @@ namespace AutoRest.CSharp.Common.Input
                         }
                     }
 
-                    //foreach (var operationResponse in operation.Exceptions)
-                    //{
-                    //    Apply(usages, operationResponse.ResponseSchema, SchemaTypeUsage.Error | SchemaTypeUsage.Output);
-                    //}
-
                     foreach (var parameter in operation.Parameters)
                     {
                         ApplyParameterSchema(usages, parameter);
@@ -63,14 +57,6 @@ namespace AutoRest.CSharp.Common.Input
 
         private void ApplyParameterSchema(Dictionary<InputType, InputModelTypeUsage> usages, InputParameter parameter)
         {
-            //if (parameter.Flattened == true)
-            //{
-            //    Apply(usages, parameter.Schema, SchemaTypeUsage.FlattenedParameters | SchemaTypeUsage.Input, recurse: false);
-            //}
-            //else
-            //{
-            //    Apply(usages, parameter.Schema, SchemaTypeUsage.Model | SchemaTypeUsage.Input);
-            //}
             Apply(usages, parameter.Type, InputModelTypeUsage.Input);
         }
 
@@ -98,7 +84,6 @@ namespace AutoRest.CSharp.Common.Input
 
             if (inputType is InputModelType inputModel)
             {
-                // TODO: this should only apply children
                 foreach (var parent in inputModel.GetAllBaseModels())
                 {
                     Apply(usages, parent, usage);
@@ -124,11 +109,6 @@ namespace AutoRest.CSharp.Common.Input
             {
                 Apply(usages, arraySchema.ElementType, usage);
             }
-            //else if (inputType is InputConstant constantSchmea)
-            //{
-            //    // the value type of a ConstantSchema might be an choice (transformed in class AutoRest.CSharp.Mgmt.Decorator.Transformer.ConstantSchemaTransformer
-            //    Apply(usages, constantSchmea.ValueType, usage);
-            //}
         }
 
         public InputModelTypeUsage GetUsage(InputType inputType)

@@ -20,7 +20,6 @@ using AutoRest.CSharp.Utilities;
 using OutputResourceData = AutoRest.CSharp.Mgmt.Output.ResourceData;
 using Azure.Core;
 using System.Runtime.CompilerServices;
-using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {

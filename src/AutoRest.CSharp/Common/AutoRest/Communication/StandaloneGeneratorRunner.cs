@@ -50,6 +50,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 var rootNamespace = TypeSpecSerialization.Deserialize(json) ?? throw new InvalidOperationException($"Deserializing {tspInputFile} has failed.");
 
                 // Update usage for Mgmt
+                // TODO: Consolidate InputTypeUsageProvider and SchemaUsageProvider
                 if (Configuration.AzureArm)
                 {
                     var inputTypeUsageProvider = new InputTypeUsageProvider(rootNamespace);
