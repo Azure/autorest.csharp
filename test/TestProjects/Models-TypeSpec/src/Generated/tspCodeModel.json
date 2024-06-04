@@ -338,8 +338,22 @@
    "Usage": "RoundTrip",
    "Description": "A base model in the discriminated set inheriting from a base with the predefined discriminator property",
    "IsNullable": false,
-   "BaseModel": {
+   "DiscriminatorProperty": {
     "$id": "49",
+    "Name": "kind",
+    "SerializedName": "kind",
+    "Description": "Discriminator",
+    "Type": {
+     "$id": "50",
+     "Kind": "string",
+     "IsNullable": false
+    },
+    "IsRequired": true,
+    "IsReadOnly": false,
+    "IsDiscriminator": true
+   },
+   "BaseModel": {
+    "$id": "51",
     "Kind": "model",
     "Name": "BaseModelWithARequiredProperty",
     "Namespace": "ModelsTypeSpec",
@@ -348,12 +362,12 @@
     "IsNullable": false,
     "Properties": [
      {
-      "$id": "50",
+      "$id": "52",
       "Name": "kind",
       "SerializedName": "kind",
       "Description": "Required kind",
       "Type": {
-       "$id": "51",
+       "$id": "53",
        "Kind": "string",
        "IsNullable": false
       },
@@ -362,23 +376,9 @@
      }
     ]
    },
-   "DiscriminatorProperty": {
-    "$id": "52",
-    "Name": "kind",
-    "SerializedName": "kind",
-    "Description": "Discriminator",
-    "Type": {
-     "$id": "53",
-     "Kind": "string",
-     "IsNullable": false
-    },
-    "IsRequired": true,
-    "IsReadOnly": false,
-    "IsDiscriminator": true
-   },
    "Properties": [
     {
-     "$ref": "52"
+     "$ref": "49"
     },
     {
      "$id": "54",
@@ -458,7 +458,7 @@
    }
   },
   {
-   "$ref": "49"
+   "$ref": "51"
   },
   {
    "$ref": "57"

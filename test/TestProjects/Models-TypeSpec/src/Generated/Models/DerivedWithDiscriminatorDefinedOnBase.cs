@@ -11,15 +11,13 @@ using System.Collections.Generic;
 namespace ModelsTypeSpec.Models
 {
     /// <summary> A derived class in the discriminated set inheriting from a base with the predefined discriminator property. </summary>
-    internal partial class DerivedWithDiscriminatorDefinedOnBase : BaseModelWithDiscriminatorDefinedOnBase
+    public partial class DerivedWithDiscriminatorDefinedOnBase : BaseModelWithDiscriminatorDefinedOnBase
     {
         /// <summary> Initializes a new instance of <see cref="DerivedWithDiscriminatorDefinedOnBase"/>. </summary>
-        /// <param name="kind"> Required kind. </param>
         /// <param name="requiredString"> Required string. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="kind"/> or <paramref name="requiredString"/> is null. </exception>
-        public DerivedWithDiscriminatorDefinedOnBase(string kind, string requiredString) : base(kind)
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> is null. </exception>
+        public DerivedWithDiscriminatorDefinedOnBase(string requiredString) : base("A")
         {
-            Argument.AssertNotNull(kind, nameof(kind));
             Argument.AssertNotNull(requiredString, nameof(requiredString));
 
             RequiredString = requiredString;

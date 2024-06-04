@@ -81,8 +81,9 @@ namespace AutoRest.CSharp.Common.Input
                     model = model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, isNullable, resolver);
                     reader.Read();
                     CreateProperties(ref reader, properties, options, model.Usage.HasFlag(InputModelTypeUsage.Multipart));
+                    continue;
                 }
-                else if (reader.GetString() == nameof(InputModelType.DiscriminatedSubtypes))
+                if (reader.GetString() == nameof(InputModelType.DiscriminatedSubtypes))
                 {
                     model = model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, isNullable, resolver);
                     reader.Read();
@@ -91,11 +92,10 @@ namespace AutoRest.CSharp.Common.Input
                     {
                         throw new JsonException($"{nameof(InputModelType)}.{nameof(InputModelType.Properties)} must be the last defined property for id '{id}', name '{name}'");
                     }
+                    continue;
                 }
-                else
-                {
-                    reader.SkipProperty();
-                }
+
+                reader.SkipProperty();
             }
 
             return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, isNullable, resolver);

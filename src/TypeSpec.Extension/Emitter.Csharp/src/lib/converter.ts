@@ -112,10 +112,6 @@ export function fromSdkModelType(
 
         models.set(modelTypeName, inputModelType);
 
-        inputModelType.BaseModel = modelType.baseModel
-            ? fromSdkModelType(modelType.baseModel, context, models, enums)
-            : undefined;
-
         inputModelType.AdditionalProperties = modelType.additionalProperties
             ? fromSdkType(
                   modelType.additionalProperties,
@@ -146,6 +142,10 @@ export function fromSdkModelType(
 
         inputModelType.DiscriminatorProperty = modelType.discriminatorProperty
             ? propertiesDict.get(modelType.discriminatorProperty)![0]
+            : undefined;
+
+        inputModelType.BaseModel = modelType.baseModel
+            ? fromSdkModelType(modelType.baseModel, context, models, enums)
             : undefined;
 
         inputModelType.Properties = Array.from(propertiesDict.values()).flat();

@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
-    internal partial class DerivedWithDiscriminatorDefinedOnBase : IUtf8JsonSerializable, IJsonModel<DerivedWithDiscriminatorDefinedOnBase>
+    public partial class DerivedWithDiscriminatorDefinedOnBase : IUtf8JsonSerializable, IJsonModel<DerivedWithDiscriminatorDefinedOnBase>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DerivedWithDiscriminatorDefinedOnBase>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 

@@ -7,14 +7,14 @@
 
 using System;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
-    [PersistableModelProxy(typeof(UnknownBaseModelWithDiscriminatorDefinedOnBase))]
-    public partial class BaseModelWithDiscriminatorDefinedOnBase : IUtf8JsonSerializable, IJsonModel<BaseModelWithDiscriminatorDefinedOnBase>
+    internal partial class UnknownBaseModelWithDiscriminatorDefinedOnBase : IUtf8JsonSerializable, IJsonModel<BaseModelWithDiscriminatorDefinedOnBase>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseModelWithDiscriminatorDefinedOnBase>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
@@ -64,7 +64,7 @@ namespace ModelsTypeSpec.Models
             return DeserializeBaseModelWithDiscriminatorDefinedOnBase(document.RootElement, options);
         }
 
-        internal static BaseModelWithDiscriminatorDefinedOnBase DeserializeBaseModelWithDiscriminatorDefinedOnBase(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static UnknownBaseModelWithDiscriminatorDefinedOnBase DeserializeUnknownBaseModelWithDiscriminatorDefinedOnBase(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -72,14 +72,29 @@ namespace ModelsTypeSpec.Models
             {
                 return null;
             }
-            if (element.TryGetProperty("kind", out JsonElement discriminator))
+            string optionalString = default;
+            string kind = "Unknown";
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
+            foreach (var property in element.EnumerateObject())
             {
-                switch (discriminator.GetString())
+                if (property.NameEquals("optionalString"u8))
                 {
-                    case "A": return DerivedWithDiscriminatorDefinedOnBase.DeserializeDerivedWithDiscriminatorDefinedOnBase(element, options);
+                    optionalString = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("kind"u8))
+                {
+                    kind = property.Value.GetString();
+                    continue;
+                }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            return UnknownBaseModelWithDiscriminatorDefinedOnBase.DeserializeUnknownBaseModelWithDiscriminatorDefinedOnBase(element, options);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new UnknownBaseModelWithDiscriminatorDefinedOnBase(kind, serializedAdditionalRawData, optionalString);
         }
 
         BinaryData IPersistableModel<BaseModelWithDiscriminatorDefinedOnBase>.Write(ModelReaderWriterOptions options)
@@ -115,17 +130,17 @@ namespace ModelsTypeSpec.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static new BaseModelWithDiscriminatorDefinedOnBase FromResponse(Response response)
+        internal static new UnknownBaseModelWithDiscriminatorDefinedOnBase FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBaseModelWithDiscriminatorDefinedOnBase(document.RootElement);
+            return DeserializeUnknownBaseModelWithDiscriminatorDefinedOnBase(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue<BaseModelWithDiscriminatorDefinedOnBase>(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }
