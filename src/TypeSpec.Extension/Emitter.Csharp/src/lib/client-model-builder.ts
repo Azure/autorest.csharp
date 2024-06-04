@@ -157,7 +157,7 @@ export function createModelForService(
     const clients: InputClient[] = [];
     const dpgClients = listClients(sdkContext);
     for (const client of dpgClients) {
-        var emittedClient = emitClient(client); 
+        var emittedClient = emitClient(client, sdkContext.arm); 
         if (emittedClient !== undefined) {
             clients.push(emittedClient);
         }
@@ -285,6 +285,7 @@ export function createModelForService(
         parent?: SdkClient | SdkOperationGroup
     ): InputClient | undefined {
         const operations = listOperationsInOperationGroup(sdkContext, client);
+        // For ARM, we skip the operation group without operations
         if (isAzureArm === true && operations.length === 0) {
             return undefined;
         }
