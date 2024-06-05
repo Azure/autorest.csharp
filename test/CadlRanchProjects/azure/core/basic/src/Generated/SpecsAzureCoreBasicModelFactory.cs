@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure;
 
 namespace _Specs_.Azure.Core.Basic.Models
 {
@@ -20,7 +21,7 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// <param name="orders"> The user's order list. </param>
         /// <param name="etag"> The entity tag for this resource. </param>
         /// <returns> A new <see cref="Models.User"/> instance for mocking. </returns>
-        public static User User(int id = default, string name = null, IEnumerable<UserOrder> orders = null, string etag = null)
+        public static User User(int id = default, string name = null, IEnumerable<UserOrder> orders = null, ETag etag = default)
         {
             orders ??= new List<UserOrder>();
 

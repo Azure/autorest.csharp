@@ -16,7 +16,6 @@ using NoDocsTypeSpec.Models;
 namespace NoDocsTypeSpec
 {
     // Data plane generated sub-client.
-    /// <summary> The ProtocolAndConvenient sub-client. </summary>
     public partial class ProtocolAndConvenient
     {
         private const string AuthorizationHeader = "x-ms-api-key";
@@ -26,23 +25,14 @@ namespace NoDocsTypeSpec
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
 
-        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of ProtocolAndConvenient for mocking. </summary>
         protected ProtocolAndConvenient()
         {
         }
 
-        /// <summary> Initializes a new instance of ProtocolAndConvenient. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="keyCredential"> The key credential to copy. </param>
-        /// <param name="tokenCredential"> The token credential to copy. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal ProtocolAndConvenient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, TokenCredential tokenCredential, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -52,10 +42,6 @@ namespace NoDocsTypeSpec
             _endpoint = endpoint;
         }
 
-        /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
-        /// <param name="body"> The <see cref="Thing"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<Response<Thing>> InternalProtocolAsync(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -66,10 +52,6 @@ namespace NoDocsTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
-        /// <param name="body"> The <see cref="Thing"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual Response<Thing> InternalProtocol(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -80,21 +62,6 @@ namespace NoDocsTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary>
-        /// [Protocol Method] When set protocol false and convenient true, then the protocol method should be internal
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
         internal virtual async Task<Response> InternalProtocolAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -113,21 +80,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] When set protocol false and convenient true, then the protocol method should be internal
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
         internal virtual Response InternalProtocol(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -146,8 +98,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> StillConvenientValueAsync(CancellationToken cancellationToken = default)
         {
             using var scope = ClientDiagnostics.CreateScope("ProtocolAndConvenient.StillConvenientValue");
@@ -165,8 +115,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response StillConvenientValue(CancellationToken cancellationToken = default)
         {
             using var scope = ClientDiagnostics.CreateScope("ProtocolAndConvenient.StillConvenientValue");
@@ -184,19 +132,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
         internal virtual async Task<Response> StillConvenientAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ProtocolAndConvenient.StillConvenient");
@@ -213,19 +148,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
         internal virtual Response StillConvenient(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ProtocolAndConvenient.StillConvenient");

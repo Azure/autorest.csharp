@@ -23,8 +23,7 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "5",
-        "Kind": "Primitive",
-        "Name": "Uri",
+        "Kind": "uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -43,8 +42,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "7",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",

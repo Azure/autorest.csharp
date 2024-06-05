@@ -142,15 +142,12 @@ namespace NoDocsTypeSpec.Models
 
         string IPersistableModel<Extension>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
         internal static new Extension FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeExtension(document.RootElement);
         }
 
-        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();

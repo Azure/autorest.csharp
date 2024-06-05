@@ -39,8 +39,7 @@
          "Description": "User name",
          "Type": {
           "$id": "7",
-          "Kind": "Primitive",
-          "Name": "String",
+          "Kind": "string",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -60,8 +59,7 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "9",
-      "Kind": "Primitive",
-      "Name": "Uri",
+      "Kind": "url",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -92,8 +90,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "13",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -109,8 +106,7 @@
         "$id": "14",
         "Type": {
          "$id": "15",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -123,8 +119,7 @@
        "Description": "The maximum number of result items per page.",
        "Type": {
         "$id": "17",
-        "Kind": "Primitive",
-        "Name": "Int32",
+        "Kind": "int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -143,8 +138,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "19",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",

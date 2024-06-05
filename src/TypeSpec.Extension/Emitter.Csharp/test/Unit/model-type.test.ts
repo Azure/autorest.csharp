@@ -2,9 +2,7 @@ import { TestHost } from "@typespec/compiler/testing";
 import assert, { deepStrictEqual, strictEqual } from "assert";
 import { beforeEach, describe, it } from "vitest";
 import { createModel } from "../../src/lib/client-model-builder.js";
-import { InputIntrinsicTypeKind } from "../../src/type/input-intrinsic-type-kind.js";
 import { InputModelProperty } from "../../src/type/input-model-property.js";
-import { InputPrimitiveTypeKind } from "../../src/type/input-primitive-type-kind.js";
 import { InputTypeKind } from "../../src/type/input-type-kind.js";
 import { InputDictionaryType } from "../../src/type/input-type.js";
 import {
@@ -70,9 +68,9 @@ op test(@body input: Pet): Pet;
                 Name: "kind",
                 SerializedName: "kind",
                 Type: {
-                    Kind: InputTypeKind.Primitive,
-                    Name: InputPrimitiveTypeKind.String,
-                    IsNullable: false
+                    Kind: "string",
+                    IsNullable: false,
+                    Encode: undefined
                 },
                 IsRequired: true,
                 IsReadOnly: false,
@@ -163,14 +161,18 @@ op test(@body input: Pet): Pet;
                 SerializedName: "kind",
                 Description: "The kind of the pet",
                 Type: {
-                    Kind: InputTypeKind.Enum,
+                    Kind: "enum",
                     Name: "PetKind",
                     Namespace: "Azure.Csharp.Testing",
                     Description: "The pet kind",
                     Accessibility: undefined,
                     Deprecated: undefined,
-                    EnumValueType: "String",
-                    AllowedValues: [
+                    ValueType: {
+                        Kind: "string",
+                        IsNullable: false,
+                        Encode: undefined
+                    },
+                    Values: [
                         {
                             Name: "Cat",
                             Value: "Cat",
@@ -288,14 +290,18 @@ op test(@body input: Pet): Pet;
                 SerializedName: "kind",
                 Description: "The kind of the pet",
                 Type: {
-                    Kind: InputTypeKind.Enum,
+                    Kind: "enum",
                     Name: "PetKind",
                     Namespace: "Azure.Csharp.Testing",
                     Accessibility: undefined,
                     Deprecated: undefined,
                     Description: "The pet kind",
-                    EnumValueType: "String",
-                    AllowedValues: [
+                    ValueType: {
+                        Kind: "string",
+                        IsNullable: false,
+                        Encode: undefined
+                    },
+                    Values: [
                         {
                             Name: "Cat",
                             Value: "cat",
@@ -451,14 +457,13 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
                 Name: InputTypeKind.Dictionary,
                 IsNullable: false,
                 KeyType: {
-                    Kind: InputTypeKind.Primitive,
-                    Name: InputPrimitiveTypeKind.String,
+                    Kind: "string",
                     IsNullable: false
                 },
                 ValueType: {
-                    Kind: InputTypeKind.Intrinsic,
-                    Name: InputIntrinsicTypeKind.Unknown,
-                    IsNullable: false
+                    Kind: "any",
+                    IsNullable: false,
+                    Encode: undefined
                 }
             } as InputDictionaryType,
             extendsUnknownModel.InheritedDictionaryType
@@ -469,14 +474,13 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
                 Name: InputTypeKind.Dictionary,
                 IsNullable: false,
                 KeyType: {
-                    Kind: InputTypeKind.Primitive,
-                    Name: InputPrimitiveTypeKind.String,
+                    Kind: "string",
                     IsNullable: false
                 },
                 ValueType: {
-                    Kind: InputTypeKind.Primitive,
-                    Name: InputPrimitiveTypeKind.String,
-                    IsNullable: false
+                    Kind: "string",
+                    IsNullable: false,
+                    Encode: undefined
                 }
             } as InputDictionaryType,
             extendsStringModel.InheritedDictionaryType
@@ -487,14 +491,13 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
                 Name: InputTypeKind.Dictionary,
                 IsNullable: false,
                 KeyType: {
-                    Kind: InputTypeKind.Primitive,
-                    Name: InputPrimitiveTypeKind.String,
+                    Kind: "string",
                     IsNullable: false
                 },
                 ValueType: {
-                    Kind: InputTypeKind.Primitive,
-                    Name: InputPrimitiveTypeKind.Int32,
-                    IsNullable: false
+                    Kind: "int32",
+                    IsNullable: false,
+                    Encode: undefined
                 }
             } as InputDictionaryType,
             extendsInt32Model.InheritedDictionaryType
@@ -505,8 +508,7 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
                 Name: InputTypeKind.Dictionary,
                 IsNullable: false,
                 KeyType: {
-                    Kind: InputTypeKind.Primitive,
-                    Name: InputPrimitiveTypeKind.String,
+                    Kind: "string",
                     IsNullable: false
                 },
                 ValueType: fooModel
@@ -519,8 +521,7 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
                 Name: InputTypeKind.Dictionary,
                 IsNullable: false,
                 KeyType: {
-                    Kind: InputTypeKind.Primitive,
-                    Name: InputPrimitiveTypeKind.String,
+                    Kind: "string",
                     IsNullable: false
                 },
                 ValueType: {
@@ -621,14 +622,13 @@ op op5(@body body: IsFooArray): IsFooArray;
                 Name: InputTypeKind.Dictionary,
                 IsNullable: false,
                 KeyType: {
-                    Kind: InputTypeKind.Primitive,
-                    Name: InputPrimitiveTypeKind.String,
+                    Kind: "string",
                     IsNullable: false
                 },
                 ValueType: {
-                    Kind: InputTypeKind.Intrinsic,
-                    Name: InputIntrinsicTypeKind.Unknown,
-                    IsNullable: false
+                    Kind: "any",
+                    IsNullable: false,
+                    Encode: undefined
                 }
             } as InputDictionaryType,
             isUnknownModel.InheritedDictionaryType
@@ -639,14 +639,13 @@ op op5(@body body: IsFooArray): IsFooArray;
                 Name: InputTypeKind.Dictionary,
                 IsNullable: false,
                 KeyType: {
-                    Kind: InputTypeKind.Primitive,
-                    Name: InputPrimitiveTypeKind.String,
+                    Kind: "string",
                     IsNullable: false
                 },
                 ValueType: {
-                    Kind: InputTypeKind.Primitive,
-                    Name: InputPrimitiveTypeKind.String,
-                    IsNullable: false
+                    Kind: "string",
+                    IsNullable: false,
+                    Encode: undefined
                 }
             } as InputDictionaryType,
             isStringModel.InheritedDictionaryType
@@ -657,14 +656,13 @@ op op5(@body body: IsFooArray): IsFooArray;
                 Name: InputTypeKind.Dictionary,
                 IsNullable: false,
                 KeyType: {
-                    Kind: InputTypeKind.Primitive,
-                    Name: InputPrimitiveTypeKind.String,
+                    Kind: "string",
                     IsNullable: false
                 },
                 ValueType: {
-                    Kind: InputTypeKind.Primitive,
-                    Name: InputPrimitiveTypeKind.Int32,
-                    IsNullable: false
+                    Kind: "int32",
+                    IsNullable: false,
+                    Encode: undefined
                 }
             } as InputDictionaryType,
             isInt32Model.InheritedDictionaryType
@@ -675,8 +673,7 @@ op op5(@body body: IsFooArray): IsFooArray;
                 Name: InputTypeKind.Dictionary,
                 IsNullable: false,
                 KeyType: {
-                    Kind: InputTypeKind.Primitive,
-                    Name: InputPrimitiveTypeKind.String,
+                    Kind: "string",
                     IsNullable: false
                 },
                 ValueType: fooModel
@@ -689,8 +686,7 @@ op op5(@body body: IsFooArray): IsFooArray;
                 Name: InputTypeKind.Dictionary,
                 IsNullable: false,
                 KeyType: {
-                    Kind: InputTypeKind.Primitive,
-                    Name: InputPrimitiveTypeKind.String,
+                    Kind: "string",
                     IsNullable: false
                 },
                 ValueType: {

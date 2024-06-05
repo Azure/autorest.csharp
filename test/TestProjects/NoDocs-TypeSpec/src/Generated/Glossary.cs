@@ -16,7 +16,6 @@ using NoDocsTypeSpec.Models;
 namespace NoDocsTypeSpec
 {
     // Data plane generated sub-client.
-    /// <summary> The Glossary sub-client. </summary>
     public partial class Glossary
     {
         private const string AuthorizationHeader = "x-ms-api-key";
@@ -26,23 +25,14 @@ namespace NoDocsTypeSpec
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
 
-        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of Glossary for mocking. </summary>
         protected Glossary()
         {
         }
 
-        /// <summary> Initializes a new instance of Glossary. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="keyCredential"> The key credential to copy. </param>
-        /// <param name="tokenCredential"> The token credential to copy. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal Glossary(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, TokenCredential tokenCredential, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -52,13 +42,6 @@ namespace NoDocsTypeSpec
             _endpoint = endpoint;
         }
 
-        /// <summary> doSomething for glossary. </summary>
-        /// <param name="id"> The <see cref="string"/> to use. </param>
-        /// <param name="h1"> The <see cref="string"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="h1"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/Glossary.xml" path="doc/members/member[@name='DoSomethingAsync(string,string,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> DoSomethingAsync(string id, string h1, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -69,13 +52,6 @@ namespace NoDocsTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> doSomething for glossary. </summary>
-        /// <param name="id"> The <see cref="string"/> to use. </param>
-        /// <param name="h1"> The <see cref="string"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="h1"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/Glossary.xml" path="doc/members/member[@name='DoSomething(string,string,CancellationToken)']/*" />
         public virtual Response<Thing> DoSomething(string id, string h1, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -86,29 +62,6 @@ namespace NoDocsTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary>
-        /// [Protocol Method] doSomething for glossary
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="DoSomethingAsync(string,string,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="id"> The <see cref="string"/> to use. </param>
-        /// <param name="h1"> The <see cref="string"/> to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="h1"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Glossary.xml" path="doc/members/member[@name='DoSomethingAsync(string,string,RequestContext)']/*" />
         public virtual async Task<Response> DoSomethingAsync(string id, string h1, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -128,29 +81,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] doSomething for glossary
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="DoSomething(string,string,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="id"> The <see cref="string"/> to use. </param>
-        /// <param name="h1"> The <see cref="string"/> to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="h1"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Glossary.xml" path="doc/members/member[@name='DoSomething(string,string,RequestContext)']/*" />
         public virtual Response DoSomething(string id, string h1, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));

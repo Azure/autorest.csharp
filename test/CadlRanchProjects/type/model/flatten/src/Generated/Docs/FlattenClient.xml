@@ -7,14 +7,14 @@ This sample shows how to call PutFlattenModelAsync.
 <code><![CDATA[
 FlattenClient client = new FlattenClient();
 
-FlattenModel input = new FlattenModel("<name>", new ChildModel("<description>", 1234));
+FlattenModel input = new FlattenModel("<name>", "<description>", 1234);
 Response<FlattenModel> response = await client.PutFlattenModelAsync(input);
 ]]></code>
 This sample shows how to call PutFlattenModelAsync with all parameters.
 <code><![CDATA[
 FlattenClient client = new FlattenClient();
 
-FlattenModel input = new FlattenModel("<name>", new ChildModel("<description>", 1234));
+FlattenModel input = new FlattenModel("<name>", "<description>", 1234);
 Response<FlattenModel> response = await client.PutFlattenModelAsync(input);
 ]]></code></example>
     </member>
@@ -24,14 +24,14 @@ This sample shows how to call PutFlattenModel.
 <code><![CDATA[
 FlattenClient client = new FlattenClient();
 
-FlattenModel input = new FlattenModel("<name>", new ChildModel("<description>", 1234));
+FlattenModel input = new FlattenModel("<name>", "<description>", 1234);
 Response<FlattenModel> response = client.PutFlattenModel(input);
 ]]></code>
 This sample shows how to call PutFlattenModel with all parameters.
 <code><![CDATA[
 FlattenClient client = new FlattenClient();
 
-FlattenModel input = new FlattenModel("<name>", new ChildModel("<description>", 1234));
+FlattenModel input = new FlattenModel("<name>", "<description>", 1234);
 Response<FlattenModel> response = client.PutFlattenModel(input);
 ]]></code></example>
     </member>
@@ -44,18 +44,15 @@ FlattenClient client = new FlattenClient();
 using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
-    properties = new
-    {
-        description = "<description>",
-        age = 1234,
-    },
+    description = "<description>",
+    age = 1234,
 });
 Response response = await client.PutFlattenModelAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("description").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 This sample shows how to call PutFlattenModelAsync with all request content and parse the result.
 <code><![CDATA[
@@ -64,18 +61,15 @@ FlattenClient client = new FlattenClient();
 using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
-    properties = new
-    {
-        description = "<description>",
-        age = 1234,
-    },
+    description = "<description>",
+    age = 1234,
 });
 Response response = await client.PutFlattenModelAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("description").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code></example>
     </member>
     <member name="PutFlattenModel(RequestContent,RequestContext)">
@@ -87,18 +81,15 @@ FlattenClient client = new FlattenClient();
 using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
-    properties = new
-    {
-        description = "<description>",
-        age = 1234,
-    },
+    description = "<description>",
+    age = 1234,
 });
 Response response = client.PutFlattenModel(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("description").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 This sample shows how to call PutFlattenModel with all request content and parse the result.
 <code><![CDATA[
@@ -107,18 +98,15 @@ FlattenClient client = new FlattenClient();
 using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
-    properties = new
-    {
-        description = "<description>",
-        age = 1234,
-    },
+    description = "<description>",
+    age = 1234,
 });
 Response response = client.PutFlattenModel(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("description").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code></example>
     </member>
     <member name="PutNestedFlattenModelAsync(NestedFlattenModel,CancellationToken)">
@@ -127,14 +115,14 @@ This sample shows how to call PutNestedFlattenModelAsync.
 <code><![CDATA[
 FlattenClient client = new FlattenClient();
 
-NestedFlattenModel input = new NestedFlattenModel("<name>", new ChildFlattenModel("<summary>", new ChildModel("<description>", 1234)));
+NestedFlattenModel input = new NestedFlattenModel("<name>", "<summary>", "<description>", 1234);
 Response<NestedFlattenModel> response = await client.PutNestedFlattenModelAsync(input);
 ]]></code>
 This sample shows how to call PutNestedFlattenModelAsync with all parameters.
 <code><![CDATA[
 FlattenClient client = new FlattenClient();
 
-NestedFlattenModel input = new NestedFlattenModel("<name>", new ChildFlattenModel("<summary>", new ChildModel("<description>", 1234)));
+NestedFlattenModel input = new NestedFlattenModel("<name>", "<summary>", "<description>", 1234);
 Response<NestedFlattenModel> response = await client.PutNestedFlattenModelAsync(input);
 ]]></code></example>
     </member>
@@ -144,14 +132,14 @@ This sample shows how to call PutNestedFlattenModel.
 <code><![CDATA[
 FlattenClient client = new FlattenClient();
 
-NestedFlattenModel input = new NestedFlattenModel("<name>", new ChildFlattenModel("<summary>", new ChildModel("<description>", 1234)));
+NestedFlattenModel input = new NestedFlattenModel("<name>", "<summary>", "<description>", 1234);
 Response<NestedFlattenModel> response = client.PutNestedFlattenModel(input);
 ]]></code>
 This sample shows how to call PutNestedFlattenModel with all parameters.
 <code><![CDATA[
 FlattenClient client = new FlattenClient();
 
-NestedFlattenModel input = new NestedFlattenModel("<name>", new ChildFlattenModel("<summary>", new ChildModel("<description>", 1234)));
+NestedFlattenModel input = new NestedFlattenModel("<name>", "<summary>", "<description>", 1234);
 Response<NestedFlattenModel> response = client.PutNestedFlattenModel(input);
 ]]></code></example>
     </member>
@@ -164,23 +152,17 @@ FlattenClient client = new FlattenClient();
 using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
-    properties = new
-    {
-        summary = "<summary>",
-        properties = new
-        {
-            description = "<description>",
-            age = 1234,
-        },
-    },
+    summary = "<summary>",
+    description = "<description>",
+    age = 1234,
 });
 Response response = await client.PutNestedFlattenModelAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("summary").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("properties").GetProperty("description").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("properties").GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("summary").ToString());
+Console.WriteLine(result.GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 This sample shows how to call PutNestedFlattenModelAsync with all request content and parse the result.
 <code><![CDATA[
@@ -189,23 +171,17 @@ FlattenClient client = new FlattenClient();
 using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
-    properties = new
-    {
-        summary = "<summary>",
-        properties = new
-        {
-            description = "<description>",
-            age = 1234,
-        },
-    },
+    summary = "<summary>",
+    description = "<description>",
+    age = 1234,
 });
 Response response = await client.PutNestedFlattenModelAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("summary").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("properties").GetProperty("description").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("properties").GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("summary").ToString());
+Console.WriteLine(result.GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code></example>
     </member>
     <member name="PutNestedFlattenModel(RequestContent,RequestContext)">
@@ -217,23 +193,17 @@ FlattenClient client = new FlattenClient();
 using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
-    properties = new
-    {
-        summary = "<summary>",
-        properties = new
-        {
-            description = "<description>",
-            age = 1234,
-        },
-    },
+    summary = "<summary>",
+    description = "<description>",
+    age = 1234,
 });
 Response response = client.PutNestedFlattenModel(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("summary").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("properties").GetProperty("description").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("properties").GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("summary").ToString());
+Console.WriteLine(result.GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 This sample shows how to call PutNestedFlattenModel with all request content and parse the result.
 <code><![CDATA[
@@ -242,23 +212,17 @@ FlattenClient client = new FlattenClient();
 using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
-    properties = new
-    {
-        summary = "<summary>",
-        properties = new
-        {
-            description = "<description>",
-            age = 1234,
-        },
-    },
+    summary = "<summary>",
+    description = "<description>",
+    age = 1234,
 });
 Response response = client.PutNestedFlattenModel(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("summary").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("properties").GetProperty("description").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("properties").GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("summary").ToString());
+Console.WriteLine(result.GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code></example>
     </member>
   </members>

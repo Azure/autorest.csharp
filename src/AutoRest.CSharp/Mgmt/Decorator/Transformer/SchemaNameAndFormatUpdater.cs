@@ -312,11 +312,11 @@ internal static class SchemaNameAndFormatUpdater
         Type = 0, Property = 1
     }
 
-    public static void UpdateAcronym(Schema schema)
+    public static void UpdateAcronym(InputType schema)
     {
         if (Configuration.MgmtConfiguration.AcronymMapping.Count == 0)
             return;
-        TransformSchema(schema);
+        TransformInputType(schema);
     }
 
     private static void UpdateAcronyms(IEnumerable<Schema> allSchemas)
@@ -354,6 +354,66 @@ internal static class SchemaNameAndFormatUpdater
             {
                 TransformLanguage(parameter.Language, operation.GetFullSerializedName(parameter));
             }
+        }
+    }
+
+    private static void TransformInputType(InputType inputType)
+    {
+        switch (inputType)
+        {
+            case InputEnumType inputEnum:
+                TransformInputEnumType(inputEnum, inputEnum.Values);
+                break;
+            case InputModelType inputModel:
+                TransformInputModel(inputModel);
+                break;
+            default:
+                throw new InvalidOperationException($"Unknown input type {inputType.GetType()}");
+        }
+    }
+
+    private static void TransformInputEnumType(InputEnumType inputEnum, IReadOnlyList<InputEnumTypeValue> choiceValues)
+    {
+        TransformInputType(inputEnum, inputEnum.GetFullSerializedName());
+        TransformChoices(inputEnum, choiceValues);
+    }
+
+    private static void TransformChoices(InputEnumType schema, IReadOnlyList<InputEnumTypeValue> choiceValues)
+    {
+        foreach (var choiceValue in choiceValues)
+        {
+            var originalName = choiceValue.Name;
+            var tempName = originalName;
+            var result = NameTransformer.Instance.EnsureNameCase(originalName, (applyStep) =>
+            {
+                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, schema.GetFullSerializedName(choiceValue),
+                    "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
+                tempName = applyStep.NewName.Name;
+            });
+            choiceValue.Name = result.Name;
+        }
+    }
+
+    private static void TransformInputType(InputType inputType, string targetFullSerializedName)
+    {
+        var originalName = inputType.Name;
+        var tempName = originalName;
+        var result = NameTransformer.Instance.EnsureNameCase(originalName, (applyStep) =>
+        {
+            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, targetFullSerializedName,
+                "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
+            tempName = applyStep.NewName.Name;
+        });
+        inputType.Name = result.Name;
+    }
+
+    private static void TransformInputModel(InputModelType inputModel)
+    {
+        // transform the name of this schema
+        TransformInputType(inputModel, inputModel.GetFullSerializedName());
+        foreach (var property in inputModel.Properties)
+        {
+            TransformInputType(property.Type, inputModel.GetFullSerializedName(property));
         }
     }
 

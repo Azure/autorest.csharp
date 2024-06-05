@@ -61,8 +61,8 @@ namespace AutoRest.CSharp.Common.Input
 
             if (propertyType is InputLiteralType lt)
             {
-                defaultValue = new InputConstant(lt.Value, lt.LiteralValueType);
-                propertyType = lt.LiteralValueType;
+                defaultValue = new InputConstant(lt.Value, lt.ValueType);
+                propertyType = lt.ValueType;
             }
 
             var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, defaultValue, isRequired, isReadOnly, isDiscriminator, flattenedNames);

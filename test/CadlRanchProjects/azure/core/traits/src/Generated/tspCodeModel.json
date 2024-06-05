@@ -8,18 +8,22 @@
  "Enums": [
   {
    "$id": "2",
-   "Kind": "Enum",
+   "Kind": "enum",
    "Name": "RepeatabilityResult",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "ValueType": {
+    "$id": "3",
+    "Kind": "string",
+    "IsNullable": false
+   },
+   "Values": [
     {
-     "$id": "3",
+     "$id": "4",
      "Name": "accepted",
      "Value": "accepted",
      "Description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
     },
     {
-     "$id": "4",
+     "$id": "5",
      "Name": "rejected",
      "Value": "rejected",
      "Description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
@@ -32,13 +36,17 @@
    "Usage": "Output"
   },
   {
-   "$id": "5",
-   "Kind": "Enum",
+   "$id": "6",
+   "Kind": "enum",
    "Name": "Versions",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "ValueType": {
+    "$id": "7",
+    "Kind": "string",
+    "IsNullable": false
+   },
+   "Values": [
     {
-     "$id": "6",
+     "$id": "8",
      "Name": "v2022_12_01_preview",
      "Value": "2022-12-01-preview",
      "Description": "2022-12-01-preview"
@@ -53,7 +61,7 @@
  ],
  "Models": [
   {
-   "$id": "7",
+   "$id": "9",
    "Kind": "Model",
    "Name": "User",
    "Namespace": "_Specs_.Azure.Core.Traits",
@@ -62,28 +70,26 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "8",
+     "$id": "10",
      "Name": "id",
      "SerializedName": "id",
      "Description": "The user's id.",
      "Type": {
-      "$id": "9",
-      "Kind": "Primitive",
-      "Name": "Int32",
+      "$id": "11",
+      "Kind": "int32",
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": true
     },
     {
-     "$id": "10",
+     "$id": "12",
      "Name": "name",
      "SerializedName": "name",
      "Description": "The user's name.",
      "Type": {
-      "$id": "11",
-      "Kind": "Primitive",
-      "Name": "String",
+      "$id": "13",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -92,7 +98,7 @@
    ]
   },
   {
-   "$id": "12",
+   "$id": "14",
    "Kind": "Model",
    "Name": "UserActionParam",
    "Namespace": "_Specs_.Azure.Core.Traits",
@@ -101,14 +107,13 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "13",
+     "$id": "15",
      "Name": "userActionValue",
      "SerializedName": "userActionValue",
      "Description": "User action value.",
      "Type": {
-      "$id": "14",
-      "Kind": "Primitive",
-      "Name": "String",
+      "$id": "16",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -117,7 +122,7 @@
    ]
   },
   {
-   "$id": "15",
+   "$id": "17",
    "Kind": "Model",
    "Name": "UserActionResponse",
    "Namespace": "_Specs_.Azure.Core.Traits",
@@ -126,14 +131,13 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "16",
+     "$id": "18",
      "Name": "userActionResult",
      "SerializedName": "userActionResult",
      "Description": "User action result.",
      "Type": {
-      "$id": "17",
-      "Kind": "Primitive",
-      "Name": "String",
+      "$id": "19",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -144,25 +148,24 @@
  ],
  "Clients": [
   {
-   "$id": "18",
+   "$id": "20",
    "Name": "TraitsClient",
    "Description": "Illustrates Azure Core operation customizations by traits",
    "Operations": [
     {
-     "$id": "19",
+     "$id": "21",
      "Name": "smokeTest",
      "ResourceName": "User",
      "Description": "Get a resource, sending and receiving headers.",
      "Parameters": [
       {
-       "$id": "20",
+       "$id": "22",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "21",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "23",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -175,34 +178,31 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "22",
+        "$id": "24",
         "Type": {
-         "$id": "23",
-         "Kind": "Primitive",
-         "Name": "String",
+         "$id": "25",
+         "Kind": "string",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
        }
       },
       {
-       "$id": "24",
+       "$id": "26",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "25",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "27",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "26",
+        "$id": "28",
         "Type": {
-         "$id": "27",
-         "Kind": "Primitive",
-         "Name": "String",
+         "$id": "29",
+         "Kind": "string",
          "IsNullable": false
         },
         "Value": "2022-12-01-preview"
@@ -217,14 +217,13 @@
        "Kind": "Client"
       },
       {
-       "$id": "28",
+       "$id": "30",
        "Name": "id",
        "NameInRequest": "id",
        "Description": "The user's id.",
        "Type": {
-        "$id": "29",
-        "Kind": "Primitive",
-        "Name": "Int32",
+        "$id": "31",
+        "Kind": "int32",
         "IsNullable": false
        },
        "Location": "Path",
@@ -238,14 +237,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "30",
+       "$id": "32",
        "Name": "foo",
        "NameInRequest": "foo",
        "Description": "header in request",
        "Type": {
-        "$id": "31",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "33",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -259,35 +257,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "32",
+       "$id": "34",
        "Name": "ifMatch",
        "NameInRequest": "If-Match",
        "Description": "The request should only proceed if an entity matches this string.",
        "Type": {
-        "$id": "33",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsRequired": false,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "34",
-       "Name": "ifNoneMatch",
-       "NameInRequest": "If-None-Match",
-       "Description": "The request should only proceed if no entity matches this string.",
-       "Type": {
         "$id": "35",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -302,13 +278,12 @@
       },
       {
        "$id": "36",
-       "Name": "ifUnmodifiedSince",
-       "NameInRequest": "If-Unmodified-Since",
-       "Description": "The request should only proceed if the entity was not modified after this time.",
+       "Name": "ifNoneMatch",
+       "NameInRequest": "If-None-Match",
+       "Description": "The request should only proceed if no entity matches this string.",
        "Type": {
         "$id": "37",
-        "Kind": "Primitive",
-        "Name": "DateTimeRFC7231",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -323,14 +298,45 @@
       },
       {
        "$id": "38",
+       "Name": "ifUnmodifiedSince",
+       "NameInRequest": "If-Unmodified-Since",
+       "Description": "The request should only proceed if the entity was not modified after this time.",
+       "Type": {
+        "$id": "39",
+        "Kind": "utcDateTime",
+        "IsNullable": false,
+        "Encode": "rfc7231",
+        "WireType": {
+         "$id": "40",
+         "Kind": "string",
+         "IsNullable": false
+        }
+       },
+       "Location": "Header",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "41",
        "Name": "ifModifiedSince",
        "NameInRequest": "If-Modified-Since",
        "Description": "The request should only proceed if the entity was modified after this time.",
        "Type": {
-        "$id": "39",
-        "Kind": "Primitive",
-        "Name": "DateTimeRFC7231",
-        "IsNullable": false
+        "$id": "42",
+        "Kind": "utcDateTime",
+        "IsNullable": false,
+        "Encode": "rfc7231",
+        "WireType": {
+         "$id": "43",
+         "Kind": "string",
+         "IsNullable": false
+        }
        },
        "Location": "Header",
        "IsRequired": false,
@@ -343,15 +349,15 @@
        "Kind": "Method"
       },
       {
-       "$id": "40",
+       "$id": "44",
        "Name": "clientRequestId",
        "NameInRequest": "x-ms-client-request-id",
        "Description": "An opaque, globally-unique, client-generated string identifier for the request.",
        "Type": {
-        "$id": "41",
-        "Kind": "Primitive",
-        "Name": "Guid",
-        "IsNullable": false
+        "$id": "45",
+        "Kind": "uuid",
+        "IsNullable": false,
+        "Encode": "string"
        },
        "Location": "Header",
        "IsRequired": false,
@@ -364,13 +370,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "42",
+       "$id": "46",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "43",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "47",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -383,9 +388,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "44",
+        "$id": "48",
         "Type": {
-         "$ref": "43"
+         "$ref": "47"
         },
         "Value": "application/json"
        }
@@ -393,49 +398,47 @@
      ],
      "Responses": [
       {
-       "$id": "45",
+       "$id": "49",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "7"
+        "$ref": "9"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "46",
+         "$id": "50",
          "Name": "bar",
          "NameInResponse": "bar",
          "Description": "",
          "Type": {
-          "$id": "47",
-          "Kind": "Primitive",
-          "Name": "String",
+          "$id": "51",
+          "Kind": "string",
           "IsNullable": false
          }
         },
         {
-         "$id": "48",
+         "$id": "52",
          "Name": "ETag",
          "NameInResponse": "etagHeader",
          "Description": "The entity tag for the response.",
          "Type": {
-          "$id": "49",
-          "Kind": "Primitive",
-          "Name": "String",
+          "$id": "53",
+          "Kind": "string",
           "IsNullable": false
          }
         },
         {
-         "$id": "50",
+         "$id": "54",
          "Name": "x-ms-client-request-id",
          "NameInResponse": "clientRequestId",
          "Description": "An opaque, globally-unique, client-generated string identifier for the request.",
          "Type": {
-          "$id": "51",
-          "Kind": "Primitive",
-          "Name": "Guid",
-          "IsNullable": false
+          "$id": "55",
+          "Kind": "uuid",
+          "IsNullable": false,
+          "Encode": "string"
          }
         }
        ],
@@ -454,28 +457,27 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "52",
+     "$id": "56",
      "Name": "repeatableAction",
      "ResourceName": "Traits",
      "Description": "Test for repeatable requests",
      "Parameters": [
       {
-       "$ref": "20"
+       "$ref": "22"
       },
       {
-       "$id": "53",
+       "$id": "57",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "54",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "58",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "26"
+        "$ref": "28"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -487,14 +489,13 @@
        "Kind": "Client"
       },
       {
-       "$id": "55",
+       "$id": "59",
        "Name": "id",
        "NameInRequest": "id",
        "Description": "The user's id.",
        "Type": {
-        "$id": "56",
-        "Kind": "Primitive",
-        "Name": "Int32",
+        "$id": "60",
+        "Kind": "int32",
         "IsNullable": false
        },
        "Location": "Path",
@@ -508,14 +509,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "57",
+       "$id": "61",
        "Name": "repeatabilityRequestId",
        "NameInRequest": "Repeatability-Request-ID",
        "Description": "An opaque, globally-unique, client-generated string identifier for the request.",
        "Type": {
-        "$id": "58",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "62",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -529,15 +529,20 @@
        "Kind": "Method"
       },
       {
-       "$id": "59",
+       "$id": "63",
        "Name": "repeatabilityFirstSent",
        "NameInRequest": "Repeatability-First-Sent",
        "Description": "Specifies the date and time at which the request was first created.",
        "Type": {
-        "$id": "60",
-        "Kind": "Primitive",
-        "Name": "DateTimeRFC7231",
-        "IsNullable": false
+        "$id": "64",
+        "Kind": "utcDateTime",
+        "IsNullable": false,
+        "Encode": "rfc7231",
+        "WireType": {
+         "$id": "65",
+         "Kind": "string",
+         "IsNullable": false
+        }
        },
        "Location": "Header",
        "IsRequired": false,
@@ -550,12 +555,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "61",
+       "$id": "66",
        "Name": "UserActionParam",
        "NameInRequest": "UserActionParam",
        "Description": "User action param",
        "Type": {
-        "$ref": "12"
+        "$ref": "14"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -568,13 +573,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "62",
+       "$id": "67",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "63",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "68",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -587,21 +591,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "64",
+        "$id": "69",
         "Type": {
-         "$ref": "63"
+         "$ref": "68"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "65",
+       "$id": "70",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "66",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "71",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -614,9 +617,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "67",
+        "$id": "72",
         "Type": {
-         "$ref": "66"
+         "$ref": "71"
         },
         "Value": "application/json"
        }
@@ -624,17 +627,17 @@
      ],
      "Responses": [
       {
-       "$id": "68",
+       "$id": "73",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "15"
+        "$ref": "17"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "69",
+         "$id": "74",
          "Name": "Repeatability-Result",
          "NameInResponse": "repeatabilityResult",
          "Description": "Indicates whether the repeatable request was accepted or rejected.",
@@ -662,12 +665,12 @@
     }
    ],
    "Protocol": {
-    "$id": "70"
+    "$id": "75"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "20"
+     "$ref": "22"
     }
    ]
   }

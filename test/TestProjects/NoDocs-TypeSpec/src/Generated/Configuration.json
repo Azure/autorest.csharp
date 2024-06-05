@@ -7,6 +7,7 @@
   "flavor": "azure",
   "generate-test-project": true,
   "use-model-reader-writer": true,
+  "disable-xml-docs": true,
   "shared-source-folders": [
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net7.0/Generator.Shared",
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net7.0/Azure.Core.Shared"

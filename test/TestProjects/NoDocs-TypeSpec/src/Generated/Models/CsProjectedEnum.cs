@@ -7,14 +7,10 @@
 
 namespace NoDocsTypeSpec.Models
 {
-    /// <summary> enum with projected name. </summary>
     public enum CsProjectedEnum
     {
-        /// <summary> 1.1. </summary>
         CsOne,
-        /// <summary> 2.2. </summary>
         Two,
-        /// <summary> 4.4. </summary>
         Four
     }
 }

@@ -47,25 +47,29 @@ namespace _Type.Model.Flatten.Models
 
         /// <summary> Initializes a new instance of <see cref="FlattenModel"/>. </summary>
         /// <param name="name"></param>
-        /// <param name="properties"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="properties"/> is null. </exception>
-        public FlattenModel(string name, ChildModel properties)
+        /// <param name="description"></param>
+        /// <param name="age"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="description"/> is null. </exception>
+        public FlattenModel(string name, string description, int age)
         {
             Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(properties, nameof(properties));
+            Argument.AssertNotNull(description, nameof(description));
 
             Name = name;
-            Properties = properties;
+            Description = description;
+            Age = age;
         }
 
         /// <summary> Initializes a new instance of <see cref="FlattenModel"/>. </summary>
         /// <param name="name"></param>
-        /// <param name="properties"></param>
+        /// <param name="description"></param>
+        /// <param name="age"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal FlattenModel(string name, ChildModel properties, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal FlattenModel(string name, string description, int age, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
-            Properties = properties;
+            Description = description;
+            Age = age;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -76,7 +80,9 @@ namespace _Type.Model.Flatten.Models
 
         /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
-        /// <summary> Gets or sets the properties. </summary>
-        public ChildModel Properties { get; set; }
+        /// <summary> Gets or sets the description. </summary>
+        public string Description { get; set; }
+        /// <summary> Gets or sets the age. </summary>
+        public int Age { get; set; }
     }
 }

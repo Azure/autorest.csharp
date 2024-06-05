@@ -17,7 +17,6 @@ using NoDocsTypeSpec.Models;
 namespace NoDocsTypeSpec
 {
     // Data plane generated client.
-    /// <summary> This is a sample typespec project. </summary>
     public partial class NoDocsTypeSpecClient
     {
         private const string AuthorizationHeader = "x-ms-api-key";
@@ -27,38 +26,22 @@ namespace NoDocsTypeSpec
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
 
-        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of NoDocsTypeSpecClient for mocking. </summary>
         protected NoDocsTypeSpecClient()
         {
         }
 
-        /// <summary> Initializes a new instance of NoDocsTypeSpecClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public NoDocsTypeSpecClient(Uri endpoint, AzureKeyCredential credential) : this(endpoint, credential, new NoDocsTypeSpecClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of NoDocsTypeSpecClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public NoDocsTypeSpecClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new NoDocsTypeSpecClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of NoDocsTypeSpecClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public NoDocsTypeSpecClient(Uri endpoint, AzureKeyCredential credential, NoDocsTypeSpecClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
@@ -71,11 +54,6 @@ namespace NoDocsTypeSpec
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of NoDocsTypeSpecClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public NoDocsTypeSpecClient(Uri endpoint, TokenCredential credential, NoDocsTypeSpecClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
@@ -88,55 +66,13 @@ namespace NoDocsTypeSpec
             _endpoint = endpoint;
         }
 
-        /// <summary> top level method. </summary>
-        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,CancellationToken)']/*" />
-        public virtual async Task<Response<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
-        {
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await TopActionAsync(action, context).ConfigureAwait(false);
-            return Response.FromValue(Thing.FromResponse(response), response);
-        }
-
-        /// <summary> top level method. </summary>
-        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,CancellationToken)']/*" />
-        public virtual Response<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
-        {
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = TopAction(action, context);
-            return Response.FromValue(Thing.FromResponse(response), response);
-        }
-
-        /// <summary>
-        /// [Protocol Method] top level method
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="TopActionAsync(DateTimeOffset,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,RequestContext)']/*" />
-        public virtual async Task<Response> TopActionAsync(DateTimeOffset action, RequestContext context)
+        public virtual async Task<Response> TopActionAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.TopAction");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateTopActionRequest(action, context);
+                using HttpMessage message = CreateTopActionRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -146,33 +82,13 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] top level method
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="TopAction(DateTimeOffset,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,RequestContext)']/*" />
-        public virtual Response TopAction(DateTimeOffset action, RequestContext context)
+        public virtual Response TopAction(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.TopAction");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateTopActionRequest(action, context);
+                using HttpMessage message = CreateTopActionRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -182,82 +98,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] top level method2
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='TopAction2Async(RequestContext)']/*" />
-        public virtual async Task<Response> TopAction2Async(RequestContext context)
-        {
-            using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.TopAction2");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateTopAction2Request(context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// [Protocol Method] top level method2
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='TopAction2(RequestContext)']/*" />
-        public virtual Response TopAction2(RequestContext context)
-        {
-            using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.TopAction2");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateTopAction2Request(context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// [Protocol Method] top level patch
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='PatchActionAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PatchActionAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -276,22 +116,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] top level patch
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='PatchAction(RequestContent,RequestContext)']/*" />
         public virtual Response PatchAction(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -310,11 +134,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary> body parameter without body decorator. </summary>
-        /// <param name="thing"> A model with a few properties of literal types. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(Thing,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(thing, nameof(thing));
@@ -325,11 +144,6 @@ namespace NoDocsTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> body parameter without body decorator. </summary>
-        /// <param name="thing"> A model with a few properties of literal types. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(Thing,CancellationToken)']/*" />
         public virtual Response<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(thing, nameof(thing));
@@ -340,27 +154,6 @@ namespace NoDocsTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary>
-        /// [Protocol Method] body parameter without body decorator
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="AnonymousBodyAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> AnonymousBodyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -379,27 +172,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] body parameter without body decorator
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="AnonymousBody(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(RequestContent,RequestContext)']/*" />
         public virtual Response AnonymousBody(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -418,11 +190,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary> Model can have its friendly name. </summary>
-        /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(Friend,CancellationToken)']/*" />
         public virtual async Task<Response<Friend>> FriendlyModelAsync(Friend friend, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(friend, nameof(friend));
@@ -433,11 +200,6 @@ namespace NoDocsTypeSpec
             return Response.FromValue(Friend.FromResponse(response), response);
         }
 
-        /// <summary> Model can have its friendly name. </summary>
-        /// <param name="friend"> this is not a friendly model but with a friendly name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(Friend,CancellationToken)']/*" />
         public virtual Response<Friend> FriendlyModel(Friend friend, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(friend, nameof(friend));
@@ -448,27 +210,6 @@ namespace NoDocsTypeSpec
             return Response.FromValue(Friend.FromResponse(response), response);
         }
 
-        /// <summary>
-        /// [Protocol Method] Model can have its friendly name
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="FriendlyModelAsync(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> FriendlyModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -487,27 +228,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] Model can have its friendly name
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="FriendlyModel(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(RequestContent,RequestContext)']/*" />
         public virtual Response FriendlyModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -526,20 +246,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] Add time header.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='AddTimeHeaderAsync(RequestContext)']/*" />
         public virtual async Task<Response> AddTimeHeaderAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.AddTimeHeader");
@@ -556,20 +262,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] Add time header.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='AddTimeHeader(RequestContext)']/*" />
         public virtual Response AddTimeHeader(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.AddTimeHeader");
@@ -586,11 +278,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary> Model can have its projected name. </summary>
-        /// <param name="projectedModel"> this is a model with a projected name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModelAsync(ProjectedModel,CancellationToken)']/*" />
         public virtual async Task<Response<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
@@ -601,11 +288,6 @@ namespace NoDocsTypeSpec
             return Response.FromValue(ProjectedModel.FromResponse(response), response);
         }
 
-        /// <summary> Model can have its projected name. </summary>
-        /// <param name="projectedModel"> this is a model with a projected name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModel(ProjectedModel,CancellationToken)']/*" />
         public virtual Response<ProjectedModel> ProjectedNameModel(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
@@ -616,27 +298,6 @@ namespace NoDocsTypeSpec
             return Response.FromValue(ProjectedModel.FromResponse(response), response);
         }
 
-        /// <summary>
-        /// [Protocol Method] Model can have its projected name
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="ProjectedNameModelAsync(ProjectedModel,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ProjectedNameModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -655,27 +316,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] Model can have its projected name
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="ProjectedNameModel(ProjectedModel,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModel(RequestContent,RequestContext)']/*" />
         public virtual Response ProjectedNameModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -694,9 +334,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary> return anonymous model. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<ReturnsAnonymousModelResponse>> ReturnsAnonymousModelAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -704,9 +341,6 @@ namespace NoDocsTypeSpec
             return Response.FromValue(ReturnsAnonymousModelResponse.FromResponse(response), response);
         }
 
-        /// <summary> return anonymous model. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModel(CancellationToken)']/*" />
         public virtual Response<ReturnsAnonymousModelResponse> ReturnsAnonymousModel(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -714,25 +348,6 @@ namespace NoDocsTypeSpec
             return Response.FromValue(ReturnsAnonymousModelResponse.FromResponse(response), response);
         }
 
-        /// <summary>
-        /// [Protocol Method] return anonymous model
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="ReturnsAnonymousModelAsync(CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModelAsync(RequestContext)']/*" />
         public virtual async Task<Response> ReturnsAnonymousModelAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.ReturnsAnonymousModel");
@@ -749,25 +364,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] return anonymous model
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="ReturnsAnonymousModel(CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModel(RequestContext)']/*" />
         public virtual Response ReturnsAnonymousModel(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.ReturnsAnonymousModel");
@@ -785,23 +381,6 @@ namespace NoDocsTypeSpec
         }
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
-        /// <summary>
-        /// [Protocol Method] head as boolean.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="id"> The <see cref="string"/> to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='HeadAsBooleanAsync(string,RequestContext)']/*" />
         public virtual async Task<Response<bool>> HeadAsBooleanAsync(string id, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -821,23 +400,6 @@ namespace NoDocsTypeSpec
         }
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
-        /// <summary>
-        /// [Protocol Method] head as boolean.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="id"> The <see cref="string"/> to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='HeadAsBoolean(string,RequestContext)']/*" />
         public virtual Response<bool> HeadAsBoolean(string id, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -856,12 +418,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary> The body parameter type is string. </summary>
-        /// <param name="body"> The <see cref="string"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='StringBodyAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response> StringBodyAsync(string body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));
@@ -872,12 +428,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary> The body parameter type is string. </summary>
-        /// <param name="body"> The <see cref="string"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='StringBody(string,CancellationToken)']/*" />
         public virtual Response StringBody(string body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));
@@ -888,27 +438,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary>
-        /// [Protocol Method] The body parameter type is string.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="StringBodyAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='StringBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> StringBodyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -927,27 +456,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] The body parameter type is string.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="StringBody(string,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='StringBody(RequestContent,RequestContext)']/*" />
         public virtual Response StringBody(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -966,10 +474,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary> The body parameter type is bool. </summary>
-        /// <param name="body"> The <see cref="bool"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='BoolBodyAsync(bool,CancellationToken)']/*" />
         public virtual async Task<Response> BoolBodyAsync(bool body, CancellationToken cancellationToken = default)
         {
             using RequestContent content = RequestContentHelper.FromObject(body);
@@ -978,10 +482,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary> The body parameter type is bool. </summary>
-        /// <param name="body"> The <see cref="bool"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='BoolBody(bool,CancellationToken)']/*" />
         public virtual Response BoolBody(bool body, CancellationToken cancellationToken = default)
         {
             using RequestContent content = RequestContentHelper.FromObject(body);
@@ -990,27 +490,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary>
-        /// [Protocol Method] The body parameter type is bool.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="BoolBodyAsync(bool,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='BoolBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> BoolBodyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1029,27 +508,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] The body parameter type is bool.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="BoolBody(bool,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='BoolBody(RequestContent,RequestContext)']/*" />
         public virtual Response BoolBody(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1068,10 +526,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary> The body parameter type is datetime. </summary>
-        /// <param name="body"> The <see cref="DateTimeOffset"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBodyAsync(DateTimeOffset,CancellationToken)']/*" />
         public virtual async Task<Response> DateTimeBodyAsync(DateTimeOffset body, CancellationToken cancellationToken = default)
         {
             using RequestContent content = RequestContentHelper.FromObject(body);
@@ -1080,10 +534,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary> The body parameter type is datetime. </summary>
-        /// <param name="body"> The <see cref="DateTimeOffset"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBody(DateTimeOffset,CancellationToken)']/*" />
         public virtual Response DateTimeBody(DateTimeOffset body, CancellationToken cancellationToken = default)
         {
             using RequestContent content = RequestContentHelper.FromObject(body);
@@ -1092,27 +542,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary>
-        /// [Protocol Method] The body parameter type is datetime.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="DateTimeBodyAsync(DateTimeOffset,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> DateTimeBodyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1131,27 +560,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] The body parameter type is datetime.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="DateTimeBody(DateTimeOffset,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBody(RequestContent,RequestContext)']/*" />
         public virtual Response DateTimeBody(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1170,9 +578,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary> The return type is datetime. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ReturnStringAsync(CancellationToken)']/*" />
         public virtual async Task<Response<string>> ReturnStringAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -1180,9 +585,6 @@ namespace NoDocsTypeSpec
             return Response.FromValue(response.Content.ToObjectFromJson<string>(), response);
         }
 
-        /// <summary> The return type is datetime. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ReturnString(CancellationToken)']/*" />
         public virtual Response<string> ReturnString(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -1190,25 +592,6 @@ namespace NoDocsTypeSpec
             return Response.FromValue(response.Content.ToObjectFromJson<string>(), response);
         }
 
-        /// <summary>
-        /// [Protocol Method] The return type is datetime.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="ReturnStringAsync(CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ReturnStringAsync(RequestContext)']/*" />
         public virtual async Task<Response> ReturnStringAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.ReturnString");
@@ -1225,25 +608,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] The return type is datetime.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="ReturnString(CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ReturnString(RequestContext)']/*" />
         public virtual Response ReturnString(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.ReturnString");
@@ -1260,9 +624,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary> Return unknown. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ReturnUnknownAsync(CancellationToken)']/*" />
         public virtual async Task<Response<BinaryData>> ReturnUnknownAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -1270,9 +631,6 @@ namespace NoDocsTypeSpec
             return Response.FromValue(response.Content, response);
         }
 
-        /// <summary> Return unknown. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ReturnUnknown(CancellationToken)']/*" />
         public virtual Response<BinaryData> ReturnUnknown(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -1280,25 +638,6 @@ namespace NoDocsTypeSpec
             return Response.FromValue(response.Content, response);
         }
 
-        /// <summary>
-        /// [Protocol Method] Return unknown.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="ReturnUnknownAsync(CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ReturnUnknownAsync(RequestContext)']/*" />
         public virtual async Task<Response> ReturnUnknownAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.ReturnUnknown");
@@ -1315,25 +654,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] Return unknown.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="ReturnUnknown(CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ReturnUnknown(RequestContext)']/*" />
         public virtual Response ReturnUnknown(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.ReturnUnknown");
@@ -1350,11 +670,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary> test parent reference child. </summary>
-        /// <param name="input"> The <see cref="Extension"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='RecursiveExtensionAsync(Extension,CancellationToken)']/*" />
         public virtual async Task<Response> RecursiveExtensionAsync(Extension input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1365,11 +680,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary> test parent reference child. </summary>
-        /// <param name="input"> The <see cref="Extension"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='RecursiveExtension(Extension,CancellationToken)']/*" />
         public virtual Response RecursiveExtension(Extension input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1380,27 +690,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary>
-        /// [Protocol Method] test parent reference child
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="RecursiveExtensionAsync(Extension,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='RecursiveExtensionAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RecursiveExtensionAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1419,27 +708,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] test parent reference child
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="RecursiveExtension(Extension,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='RecursiveExtension(RequestContent,RequestContext)']/*" />
         public virtual Response RecursiveExtension(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1458,11 +726,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary> test three level recursive extension. </summary>
-        /// <param name="input"> The <see cref="Extendible"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursiveAsync(Extendible,CancellationToken)']/*" />
         public virtual async Task<Response> ThreeLevelRecursiveAsync(Extendible input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1473,11 +736,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary> test three level recursive extension. </summary>
-        /// <param name="input"> The <see cref="Extendible"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursive(Extendible,CancellationToken)']/*" />
         public virtual Response ThreeLevelRecursive(Extendible input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1488,27 +746,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary>
-        /// [Protocol Method] test three level recursive extension
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="ThreeLevelRecursiveAsync(Extendible,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursiveAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ThreeLevelRecursiveAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1527,27 +764,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] test three level recursive extension
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="ThreeLevelRecursive(Extendible,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursive(RequestContent,RequestContext)']/*" />
         public virtual Response ThreeLevelRecursive(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1566,11 +782,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary> test child reference parent. </summary>
-        /// <param name="input"> The <see cref="ChildModel"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='RecursiveModelsAsync(ChildModel,CancellationToken)']/*" />
         public virtual async Task<Response> RecursiveModelsAsync(ChildModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1581,11 +792,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary> test child reference parent. </summary>
-        /// <param name="input"> The <see cref="ChildModel"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='RecursiveModels(ChildModel,CancellationToken)']/*" />
         public virtual Response RecursiveModels(ChildModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1596,27 +802,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary>
-        /// [Protocol Method] test child reference parent
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="RecursiveModelsAsync(ChildModel,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='RecursiveModelsAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RecursiveModelsAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1635,27 +820,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] test child reference parent
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="RecursiveModels(ChildModel,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='RecursiveModels(RequestContent,RequestContext)']/*" />
         public virtual Response RecursiveModels(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1674,11 +838,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary> test contain self models. </summary>
-        /// <param name="input"> The <see cref="ContainSelf"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ContainSelfModelsAsync(ContainSelf,CancellationToken)']/*" />
         public virtual async Task<Response> ContainSelfModelsAsync(ContainSelf input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1689,11 +848,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary> test contain self models. </summary>
-        /// <param name="input"> The <see cref="ContainSelf"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ContainSelfModels(ContainSelf,CancellationToken)']/*" />
         public virtual Response ContainSelfModels(ContainSelf input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1704,27 +858,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary>
-        /// [Protocol Method] test contain self models
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="ContainSelfModelsAsync(ContainSelf,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ContainSelfModelsAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ContainSelfModelsAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1743,27 +876,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] test contain self models
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="ContainSelfModels(ContainSelf,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='ContainSelfModels(RequestContent,RequestContext)']/*" />
         public virtual Response ContainSelfModels(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1782,10 +894,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary> test enum parameter. </summary>
-        /// <param name="p1"> The <see cref="CsProjectedEnum"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='EnumParameterAsync(CsProjectedEnum,CancellationToken)']/*" />
         public virtual async Task<Response> EnumParameterAsync(CsProjectedEnum p1, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -1793,10 +901,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary> test enum parameter. </summary>
-        /// <param name="p1"> The <see cref="CsProjectedEnum"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='EnumParameter(CsProjectedEnum,CancellationToken)']/*" />
         public virtual Response EnumParameter(CsProjectedEnum p1, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -1804,26 +908,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary>
-        /// [Protocol Method] test enum parameter.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="EnumParameterAsync(CsProjectedEnum,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="p1"> The <see cref="float"/> to use. Allowed values: "1.1" | "2.2" | "4.4". </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='EnumParameterAsync(float,RequestContext)']/*" />
         public virtual async Task<Response> EnumParameterAsync(float p1, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.EnumParameter");
@@ -1840,26 +924,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] test enum parameter.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="EnumParameter(CsProjectedEnum,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="p1"> The <see cref="float"/> to use. Allowed values: "1.1" | "2.2" | "4.4". </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='EnumParameter(float,RequestContext)']/*" />
         public virtual Response EnumParameter(float p1, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.EnumParameter");
@@ -1876,11 +940,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary> test enum parameter. </summary>
-        /// <param name="body"> The <see cref="ModelWithProjectedEnum"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='BodyIsModelWithProjectedEnumAsync(ModelWithProjectedEnum,CancellationToken)']/*" />
         public virtual async Task<Response> BodyIsModelWithProjectedEnumAsync(ModelWithProjectedEnum body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1891,11 +950,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary> test enum parameter. </summary>
-        /// <param name="body"> The <see cref="ModelWithProjectedEnum"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='BodyIsModelWithProjectedEnum(ModelWithProjectedEnum,CancellationToken)']/*" />
         public virtual Response BodyIsModelWithProjectedEnum(ModelWithProjectedEnum body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1906,27 +960,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary>
-        /// [Protocol Method] test enum parameter.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="BodyIsModelWithProjectedEnumAsync(ModelWithProjectedEnum,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='BodyIsModelWithProjectedEnumAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> BodyIsModelWithProjectedEnumAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1945,27 +978,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] test enum parameter.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="BodyIsModelWithProjectedEnum(ModelWithProjectedEnum,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='BodyIsModelWithProjectedEnum(RequestContent,RequestContext)']/*" />
         public virtual Response BodyIsModelWithProjectedEnum(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1984,10 +996,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary> test optional dictionary. </summary>
-        /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="int"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='OptionalDictionaryAsync(IDictionary{string,int},CancellationToken)']/*" />
         public virtual async Task<Response> OptionalDictionaryAsync(IDictionary<string, int> body = null, CancellationToken cancellationToken = default)
         {
             using RequestContent content = body != null ? RequestContentHelper.FromDictionary(body) : null;
@@ -1996,10 +1004,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary> test optional dictionary. </summary>
-        /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="int"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='OptionalDictionary(IDictionary{string,int},CancellationToken)']/*" />
         public virtual Response OptionalDictionary(IDictionary<string, int> body = null, CancellationToken cancellationToken = default)
         {
             using RequestContent content = body != null ? RequestContentHelper.FromDictionary(body) : null;
@@ -2008,26 +1012,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary>
-        /// [Protocol Method] test optional dictionary.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="OptionalDictionaryAsync(IDictionary{string,int},CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='OptionalDictionaryAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> OptionalDictionaryAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.OptionalDictionary");
@@ -2044,26 +1028,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] test optional dictionary.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="OptionalDictionary(IDictionary{string,int},CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='OptionalDictionary(RequestContent,RequestContext)']/*" />
         public virtual Response OptionalDictionary(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.OptionalDictionary");
@@ -2080,12 +1044,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary> test optional dictionary. </summary>
-        /// <param name="location"> The <see cref="AzureLocation"/> to use. </param>
-        /// <param name="regenLocation"> The <see cref="AzureLocation"/> to use. </param>
-        /// <param name="body"> The <see cref="AzureLocationModel"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOpAsync(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)']/*" />
         public virtual async Task<Response> AzureLocationOpAsync(AzureLocation location, AzureLocation regenLocation, AzureLocationModel body = null, CancellationToken cancellationToken = default)
         {
             using RequestContent content = body?.ToRequestContent();
@@ -2094,12 +1052,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary> test optional dictionary. </summary>
-        /// <param name="location"> The <see cref="AzureLocation"/> to use. </param>
-        /// <param name="regenLocation"> The <see cref="AzureLocation"/> to use. </param>
-        /// <param name="body"> The <see cref="AzureLocationModel"/> to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOp(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)']/*" />
         public virtual Response AzureLocationOp(AzureLocation location, AzureLocation regenLocation, AzureLocationModel body = null, CancellationToken cancellationToken = default)
         {
             using RequestContent content = body?.ToRequestContent();
@@ -2108,28 +1060,6 @@ namespace NoDocsTypeSpec
             return response;
         }
 
-        /// <summary>
-        /// [Protocol Method] test optional dictionary.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="AzureLocationOpAsync(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="location"> The <see cref="AzureLocation"/> to use. </param>
-        /// <param name="regenLocation"> The <see cref="AzureLocation"/> to use. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOpAsync(AzureLocation,AzureLocation,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> AzureLocationOpAsync(AzureLocation location, AzureLocation regenLocation, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.AzureLocationOp");
@@ -2146,28 +1076,6 @@ namespace NoDocsTypeSpec
             }
         }
 
-        /// <summary>
-        /// [Protocol Method] test optional dictionary.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="AzureLocationOp(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="location"> The <see cref="AzureLocation"/> to use. </param>
-        /// <param name="regenLocation"> The <see cref="AzureLocation"/> to use. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NoDocsTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOp(AzureLocation,AzureLocation,RequestContent,RequestContext)']/*" />
         public virtual Response AzureLocationOp(AzureLocation location, AzureLocation regenLocation, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.AzureLocationOp");
@@ -2190,58 +1098,39 @@ namespace NoDocsTypeSpec
         private Entity _cachedEntity;
         private Glossary _cachedGlossary;
 
-        /// <summary> Initializes a new instance of Hello. </summary>
         public virtual Hello GetHelloClient()
         {
             return Volatile.Read(ref _cachedHello) ?? Interlocked.CompareExchange(ref _cachedHello, new Hello(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedHello;
         }
 
-        /// <summary> Initializes a new instance of EnumTest. </summary>
         public virtual EnumTest GetEnumTestClient()
         {
             return Volatile.Read(ref _cachedEnumTest) ?? Interlocked.CompareExchange(ref _cachedEnumTest, new EnumTest(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedEnumTest;
         }
 
-        /// <summary> Initializes a new instance of ProtocolAndConvenient. </summary>
         public virtual ProtocolAndConvenient GetProtocolAndConvenientClient()
         {
             return Volatile.Read(ref _cachedProtocolAndConvenient) ?? Interlocked.CompareExchange(ref _cachedProtocolAndConvenient, new ProtocolAndConvenient(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedProtocolAndConvenient;
         }
 
-        /// <summary> Initializes a new instance of Entity. </summary>
         public virtual Entity GetEntityClient()
         {
             return Volatile.Read(ref _cachedEntity) ?? Interlocked.CompareExchange(ref _cachedEntity, new Entity(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedEntity;
         }
 
-        /// <summary> Initializes a new instance of Glossary. </summary>
         public virtual Glossary GetGlossaryClient()
         {
             return Volatile.Read(ref _cachedGlossary) ?? Interlocked.CompareExchange(ref _cachedGlossary, new Glossary(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedGlossary;
         }
 
-        internal HttpMessage CreateTopActionRequest(DateTimeOffset action, RequestContext context)
+        internal HttpMessage CreateTopActionRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/top/", false);
-            uri.AppendPath(action, "O", true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        internal HttpMessage CreateTopAction2Request(RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/top2", false);
+            uri.AppendPath("/top", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
