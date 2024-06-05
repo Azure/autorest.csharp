@@ -669,8 +669,6 @@ namespace AutoRest.CSharp.Common.Input
                 XMsFormat.DataFactoryElementOfKeyObjectValuePairs => CreateDataFactoryElementIntputType(isNullable, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.Any, false)),
                 _ => null
             };
-            ;
-            ;
         }
 
         private static InputModelType CreateDataFactoryElementIntputType(bool isNullable, InputType argumentType)
