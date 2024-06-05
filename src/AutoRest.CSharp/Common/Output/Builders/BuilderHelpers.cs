@@ -177,6 +177,9 @@ namespace AutoRest.CSharp.Output.Builders
             return isMatch;
         }
 
+        // TODO: Clean up these helper methods in https://github.com/Azure/autorest.csharp/issues/4767
+        public static string CSharpName(this InputParameter parameter) => parameter.Name.ToVariableName();
+
         public static string CSharpName(this RequestParameter parameter) => parameter.Language.Default.Name.ToVariableName();
 
         public static string CSharpName(this ChoiceValue choice) => choice.Language.Default.Name.ToCleanName();
@@ -184,8 +187,14 @@ namespace AutoRest.CSharp.Output.Builders
         public static string CSharpName(this Property property) =>
             (property.Language.Default.Name == null || property.Language.Default.Name == "null") ? "NullProperty" : property.Language.Default.Name.ToCleanName();
 
-        public static string CSharpName(this Operation operation) =>
-            operation.Language.Default.Name.ToCleanName();
+        public static string CSharpName(this InputModelProperty property) =>
+            (property.Name == null || property.Name == "null") ? "NullProperty" : property.Name.ToCleanName();
+
+        public static string CSharpName(this InputOperation operation) =>
+            operation.Name.ToCleanName();
+
+        public static string CSharpName(this InputType inputType) =>
+            inputType.Name.ToCleanName();
 
         public static string CSharpName(this Schema operation) =>
             operation.Language.Default.Name.ToCleanName();
@@ -289,11 +298,7 @@ namespace AutoRest.CSharp.Output.Builders
         }
 
         public static string CreateDescription(this Schema schema)
-        {
-            return string.IsNullOrWhiteSpace(schema.Language.Default.Description) ?
-                $"The {schema.Name}." :
-                EscapeXmlDocDescription(schema.Language.Default.Description);
-        }
+            => EscapeXmlDocDescription(schema.Language.Default.Description);
 
         public static string DisambiguateName(string typeName, string name, string suffix)
         {

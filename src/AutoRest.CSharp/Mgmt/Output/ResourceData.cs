@@ -3,8 +3,9 @@
 
 using System;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 
@@ -12,27 +13,22 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ResourceData : MgmtObjectType
     {
-        public ResourceData(ObjectSchema schema)
-            : this(schema, default, default)
+        public ResourceData(InputModelType inputModel, SerializableObjectType? defaultDerivedType = null)
+            : base(inputModel, defaultDerivedType)
         {
+            _clientPrefix = inputModel.Name;
         }
 
-        public ResourceData(ObjectSchema schema, string? name = default, string? nameSpace = default)
-            : base(schema, name, nameSpace)
-        {
-            _clientPrefix = schema.Name;
-        }
-
-        public static ResourceData Empty = new ResourceData(new ObjectSchema());
+        public static ResourceData Empty = new ResourceData(new InputModelType(string.Empty, null, null, null, null, InputModelTypeUsage.None, Array.Empty<InputModelProperty>(), null, Array.Empty<InputModelType>(), null, null, null, false));
 
         protected override bool IsResourceType => true;
 
         protected override FormattableString CreateDescription()
         {
             FormattableString baseDescription = $"{BuilderHelpers.EscapeXmlDocDescription($"A class representing the {_clientPrefix} data model.")}";
-            FormattableString extraDescription = string.IsNullOrWhiteSpace(ObjectSchema.Language.Default.Description) ?
+            FormattableString extraDescription = string.IsNullOrWhiteSpace(InputModel.Description) ?
                 (FormattableString)$"" :
-                $"{Environment.NewLine}{BuilderHelpers.EscapeXmlDocDescription(ObjectSchema.Language.Default.Description)}";
+                $"{Environment.NewLine}{BuilderHelpers.EscapeXmlDocDescription(InputModel.Description)}";
             return $"{baseDescription}{extraDescription}";
         }
 
@@ -42,7 +38,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public bool IsTaggable => _isTaggable ??= EnsureIsTaggable();
         private bool EnsureIsTaggable()
         {
-            return ObjectSchema.HasTags();
+            return InputModel.HasTags();
         }
 
         private CSharpType? typeOfId;

@@ -12,11 +12,9 @@ import {
     InputPrimitiveType,
     InputType
 } from "../type/input-type.js";
-import { InputPrimitiveTypeKind } from "../type/input-primitive-type-kind.js";
 import { RequestLocation } from "../type/request-location.js";
 import { getDefaultValue, getInputType } from "./model.js";
 import { SdkContext } from "@azure-tools/typespec-client-generator-core";
-import { InputTypeKind } from "../type/input-type-kind.js";
 import { NetEmitterOptions } from "../options.js";
 
 export interface TypeSpecServer {
@@ -44,8 +42,7 @@ export function resolveServers(
             const value = prop.default ? getDefaultValue(prop.default) : "";
             const inputType: InputType = isEndpoint
                 ? ({
-                      Kind: InputTypeKind.Primitive,
-                      Name: InputPrimitiveTypeKind.Uri,
+                      Kind: "uri",
                       IsNullable: false
                   } as InputPrimitiveType)
                 : getInputType(context, prop, models, enums);
@@ -84,8 +81,7 @@ export function resolveServers(
                 NameInRequest: "host",
                 Description: server.description,
                 Type: {
-                    Kind: InputTypeKind.Primitive,
-                    Name: InputPrimitiveTypeKind.String,
+                    Kind: "string",
                     IsNullable: false
                 } as InputPrimitiveType,
                 Location: RequestLocation.Uri,
@@ -99,8 +95,7 @@ export function resolveServers(
                 Kind: InputOperationParameterKind.Client,
                 DefaultValue: {
                     Type: {
-                        Kind: InputTypeKind.Primitive,
-                        Name: InputPrimitiveTypeKind.String,
+                        Kind: "string",
                         IsNullable: false
                     } as InputPrimitiveType,
                     Value: server.url

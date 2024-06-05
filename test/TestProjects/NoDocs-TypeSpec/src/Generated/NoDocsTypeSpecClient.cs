@@ -66,27 +66,13 @@ namespace NoDocsTypeSpec
             _endpoint = endpoint;
         }
 
-        public virtual async Task<Response<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
-        {
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await TopActionAsync(action, context).ConfigureAwait(false);
-            return Response.FromValue(Thing.FromResponse(response), response);
-        }
-
-        public virtual Response<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
-        {
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = TopAction(action, context);
-            return Response.FromValue(Thing.FromResponse(response), response);
-        }
-
-        public virtual async Task<Response> TopActionAsync(DateTimeOffset action, RequestContext context)
+        public virtual async Task<Response> TopActionAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.TopAction");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateTopActionRequest(action, context);
+                using HttpMessage message = CreateTopActionRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -96,45 +82,13 @@ namespace NoDocsTypeSpec
             }
         }
 
-        public virtual Response TopAction(DateTimeOffset action, RequestContext context)
+        public virtual Response TopAction(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.TopAction");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateTopActionRequest(action, context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        public virtual async Task<Response> TopAction2Async(RequestContext context)
-        {
-            using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.TopAction2");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateTopAction2Request(context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        public virtual Response TopAction2(RequestContext context)
-        {
-            using var scope = ClientDiagnostics.CreateScope("NoDocsTypeSpecClient.TopAction2");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateTopAction2Request(context);
+                using HttpMessage message = CreateTopActionRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -1169,28 +1123,14 @@ namespace NoDocsTypeSpec
             return Volatile.Read(ref _cachedGlossary) ?? Interlocked.CompareExchange(ref _cachedGlossary, new Glossary(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedGlossary;
         }
 
-        internal HttpMessage CreateTopActionRequest(DateTimeOffset action, RequestContext context)
+        internal HttpMessage CreateTopActionRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/top/", false);
-            uri.AppendPath(action, "O", true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        internal HttpMessage CreateTopAction2Request(RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/top2", false);
+            uri.AppendPath("/top", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

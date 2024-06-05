@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (!_isTspInput)
             {
-                return TypeFactory.CreateType(enumType.EnumValueType);
+                return TypeFactory.CreateType(enumType.ValueType);
             }
 
             if (_enums.TryGetValue(enumType, out var typeProvider))
@@ -152,9 +152,5 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return null;
         }
-
-        public override CSharpType FindTypeForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for DPG!");
-
-        public override TypeProvider FindTypeProviderForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for DPG!");
     }
 }
