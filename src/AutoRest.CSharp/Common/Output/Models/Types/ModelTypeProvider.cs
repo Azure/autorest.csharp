@@ -197,13 +197,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var currentBaseModelProperties = baseModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
                 properties.AddRange(currentBaseModelProperties);
 
-                //// Remove all properties in the hierarchy of existing base type
-                //var existingBaseTypeModel = _typeFactory.GetLibraryTypeByName(existingBaseType.Name)?.Implementation as ModelTypeProvider;
-                //if (existingBaseTypeModel is not null)
-                //{
-                //    var existingBaseTypeProperties = existingBaseTypeModel._inputModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
-                //    properties = properties.Except(existingBaseTypeProperties);
-                //}
                 return properties;
             }
 
