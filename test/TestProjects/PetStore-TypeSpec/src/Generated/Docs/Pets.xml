@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="RefreshAsync(RequestContext)">
+      <example>
+This sample shows how to call RefreshAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Pets client = new PetStoreClient(endpoint).GetPetsClient();
+
+Response response = await client.RefreshAsync();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call RefreshAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Pets client = new PetStoreClient(endpoint).GetPetsClient();
+
+Response response = await client.RefreshAsync();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Refresh(RequestContext)">
+      <example>
+This sample shows how to call Refresh.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Pets client = new PetStoreClient(endpoint).GetPetsClient();
+
+Response response = client.Refresh();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Refresh with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Pets client = new PetStoreClient(endpoint).GetPetsClient();
+
+Response response = client.Refresh();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>
