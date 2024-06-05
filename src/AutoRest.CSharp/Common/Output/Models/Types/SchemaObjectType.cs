@@ -511,20 +511,20 @@ namespace AutoRest.CSharp.Output.Models.Types
             // If base type in custom code is different from the current base type, we need to replace the base type and handle the properties accordingly
             if (existingBaseType is not null && existingBaseType.Name != baseModel.Name && !SymbolEqualityComparer.Default.Equals(_sourceInputModel?.FindForType(Declaration.Namespace, baseModel.Name.ToCleanName()), existingBaseType))
             {
-                IEnumerable<InputModelProperty> properties = InputModel.Properties.ToList();
+                var properties = InputModel.Properties.ToList();
 
-                // Remove all properties in the hierarchy of current base type
+                // Add all properties in the hierarchy of current base type
                 var currentBaseModelProperties = baseModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
-                properties = properties.Except(currentBaseModelProperties);
+                properties.AddRange(currentBaseModelProperties);
 
-                // Add all properties in the hierarchy of existing base type
-                var existingBaseTypeModel = _typeFactory.GetLibraryTypeByName(existingBaseType.Name)?.Implementation as SchemaObjectType;
-                if (existingBaseTypeModel is not null)
-                {
-                    var existingBaseTypeProperties = existingBaseTypeModel.InputModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
-                    properties = properties.Concat(existingBaseTypeProperties);
-                }
-                return properties.ToList();
+                //// Remove all properties in the hierarchy of existing base type
+                //var existingBaseTypeModel = _typeFactory.GetLibraryTypeByName(existingBaseType.Name)?.Implementation as ModelTypeProvider;
+                //if (existingBaseTypeModel is not null)
+                //{
+                //    var existingBaseTypeProperties = existingBaseTypeModel._inputModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
+                //    properties = properties.Except(existingBaseTypeProperties);
+                //}
+                return properties;
             }
 
             return InputModel.Properties;

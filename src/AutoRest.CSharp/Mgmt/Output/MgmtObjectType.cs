@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private IEnumerable<ObjectTypeProperty> BuildMyProperties()
         {
-            foreach (var model in InputModel.GetAllBaseModels())
+            foreach (var model in InputModel.GetSelfAndBaseModels())
             {
                 foreach (var property in model.Properties)
                 {
