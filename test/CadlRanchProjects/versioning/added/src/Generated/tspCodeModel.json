@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Versioning.Added",
- "Description": "Test for the `@added` decorator.",
  "ApiVersions": [
   "v1",
   "v2"

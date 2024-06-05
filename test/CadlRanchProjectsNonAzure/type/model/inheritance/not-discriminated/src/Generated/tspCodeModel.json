@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Type.Model.Inheritance.NotDiscriminated",
- "Description": "Illustrates not-discriminated inheritance model.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [

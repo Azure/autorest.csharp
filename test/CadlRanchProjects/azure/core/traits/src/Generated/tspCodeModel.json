@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "_Specs_.Azure.Core.Traits",
- "Description": "Illustrates Azure Core operation customizations by traits",
  "ApiVersions": [
   "2022-12-01-preview"
  ],

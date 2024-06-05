@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Serialization.EncodedName.Json",
- "Description": "Projection",
  "ApiVersions": [],
  "Enums": [],
  "Models": [
