@@ -142,7 +142,7 @@ using System.Runtime.CompilerServices;
 
 ### Service API versions
 
-The client library is designed to communicate with multiple service API versions. By default, the client library targets the latest service API version.
+The client library targets the latest service API version. A client accepts an optional service API version parameter to specify which API version service to communicate, by default, it is the latest API version.
 
 #### Select a service API version
 
