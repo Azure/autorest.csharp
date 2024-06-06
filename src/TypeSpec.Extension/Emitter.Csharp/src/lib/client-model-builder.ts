@@ -246,7 +246,7 @@ export function createModelForService(
             client as SdkClient
         );
         for (const dpgGroup of dpgOperationGroups) {
-            // For MPG, we skip the "Operations" operation group
+            // For MPG, we skip the "Operations" and "operationStatus" operation group
             if (
                 isAzureArm === true &&
                 (dpgGroup.groupPath.endsWith("Operations") ||
