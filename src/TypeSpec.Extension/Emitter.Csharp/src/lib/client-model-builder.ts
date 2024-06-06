@@ -9,7 +9,9 @@ import {
     listOperationsInOperationGroup,
     SdkOperationGroup,
     SdkContext,
-    getLibraryName
+    getLibraryName,
+    getAccess,
+    AccessFlags
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -157,16 +159,8 @@ export function createModelForService(
     const clients: InputClient[] = [];
     const dpgClients = listClients(sdkContext);
     for (const client of dpgClients) {
-        const emittedClient = emitClient(client, sdkContext.arm);
-        if (emittedClient !== undefined) {
-            clients.push(emittedClient);
-        }
-        addChildClients(
-            sdkContext.emitContext,
-            client,
-            clients,
-            sdkContext.arm
-        );
+        clients.push(emitClient(client));
+        addChildClients(sdkContext.emitContext, client, clients);
     }
 
     navigateModels(sdkContext, modelMap, enumMap);
@@ -238,28 +232,16 @@ export function createModelForService(
     function addChildClients(
         context: EmitContext<NetEmitterOptions>,
         client: SdkClient | SdkOperationGroup,
-        clients: InputClient[],
-        isAzureArm: boolean | undefined
+        clients: InputClient[]
     ) {
         const dpgOperationGroups = listOperationGroups(
             sdkContext,
             client as SdkClient
         );
         for (const dpgGroup of dpgOperationGroups) {
-            // For MPG, we skip the "Operations" and "operationStatus" operation group
-            if (
-                isAzureArm === true &&
-                (dpgGroup.groupPath.endsWith("Operations") ||
-                    dpgGroup.groupPath.endsWith("OperationStatus"))
-            ) {
-                continue;
-            }
-            const subClient = emitClient(dpgGroup, isAzureArm, client);
-            if (subClient === undefined) {
-                continue;
-            }
+            const subClient = emitClient(dpgGroup, client);
             clients.push(subClient);
-            addChildClients(context, dpgGroup, clients, isAzureArm);
+            addChildClients(context, dpgGroup, clients);
         }
     }
 
@@ -290,14 +272,9 @@ export function createModelForService(
 
     function emitClient(
         client: SdkClient | SdkOperationGroup,
-        isAzureArm: boolean | undefined,
         parent?: SdkClient | SdkOperationGroup
-    ): InputClient | undefined {
+    ): InputClient {
         const operations = listOperationsInOperationGroup(sdkContext, client);
-        // For ARM, we skip the operation group without operations
-        if (isAzureArm === true && operations.length === 0) {
-            return undefined;
-        }
         let clientDesc = "";
         if (operations.length > 0) {
             const container = ignoreDiagnostics(
@@ -328,6 +305,10 @@ export function createModelForService(
                 modelMap,
                 enumMap
             );
+
+            if (inputOperation.Accessibility === 'internal') {
+                continue;
+            }
 
             applyDefaultContentTypeAndAcceptParameter(inputOperation);
             inputClient.Operations.push(inputOperation);

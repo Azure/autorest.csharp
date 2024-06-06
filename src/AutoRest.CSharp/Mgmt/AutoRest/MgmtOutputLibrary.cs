@@ -75,6 +75,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Lazy<IReadOnlyDictionary<RequestPath, HashSet<InputOperation>>> ChildOperations { get; }
 
         private readonly InputNamespace _input;
+        private readonly IEnumerable<InputClient> _inputClients;
         private Dictionary<InputType, TypeProvider> _schemaToModels = new(ReferenceEqualityComparer.Instance);
         private Lazy<Dictionary<string, TypeProvider>> _schemaNameToModels;
 
@@ -91,6 +92,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public MgmtOutputLibrary(InputNamespace inputNamespace)
         {
             _input = inputNamespace;
+
+            // For TypeSpec input, we need to filter out the client that has no operations
+            _inputClients = _input.Clients.Where(c => c.Operations.Count > 0);
 
             // these dictionaries are initialized right now and they would not change later
             RawRequestPathToOperationSets = CategorizeOperationGroups();
@@ -126,7 +130,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             Dictionary<string, int> usageCounts = new Dictionary<string, int>();
 
             // run one pass to get the schema usage count
-            foreach (var client in _input.Clients)
+            foreach (var client in _inputClients)
             {
                 foreach (var operation in client.Operations)
                 {
@@ -149,7 +153,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             // run second pass to rename the ones based on the schema usage count
-            foreach (var client in _input.Clients)
+            foreach (var client in _inputClients)
             {
                 foreach (var operation in client.Operations)
                 {
@@ -197,7 +201,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             // run third pass to rename the corresponding parameters
-            foreach (var client in _input.Clients)
+            foreach (var client in _inputClients)
             {
                 foreach (var operation in client.Operations)
                 {
@@ -547,7 +551,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<string, HashSet<MgmtRestClient>> EnsureRestClients()
         {
             var rawRequestPathToRestClient = new Dictionary<string, HashSet<MgmtRestClient>>();
-            foreach (var inputClient in _input.Clients)
+            foreach (var inputClient in _inputClients)
             {
                 var restClient = new MgmtRestClient(inputClient, new MgmtRestClientBuilder(inputClient));
                 foreach (var requestPath in _operationGroupToRequestPaths[inputClient])
@@ -925,8 +929,19 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<string, OperationSet> CategorizeOperationGroups()
         {
             var rawRequestPathToOperationSets = new Dictionary<string, OperationSet>();
-            foreach (var inputClient in _input.Clients)
+            foreach (var inputClient in _inputClients)
             {
+                // If the client has no operations, we skip it
+                if (inputClient.Operations.Count == 0)
+                {
+                    continue;
+                }
+
+                // Skip "Operations" operation group in the Operations client
+                if (inputClient.Name == "Operations")
+                {
+                    continue;
+                }
                 var requestPathList = new HashSet<string>();
                 _operationGroupToRequestPaths.Add(inputClient, requestPathList);
                 foreach (var operation in inputClient.Operations)
@@ -960,7 +975,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<InputOperation, RequestPath> PopulateOperationsToRequestPaths()
         {
             var operationsToRequestPath = new Dictionary<InputOperation, RequestPath>(ReferenceEqualityComparer.Instance);
-            foreach (var operationGroup in _input.Clients)
+            foreach (var operationGroup in _inputClients)
             {
                 foreach (var operation in operationGroup.Operations)
                 {
