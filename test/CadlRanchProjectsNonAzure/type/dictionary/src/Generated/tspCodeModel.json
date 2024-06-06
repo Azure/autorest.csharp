@@ -10,7 +10,6 @@
    "Name": "InnerModel",
    "Namespace": "Type.Dictionary",
    "Description": "Dictionary inner model",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -21,8 +20,7 @@
      "Type": {
       "$id": "4",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -39,13 +37,11 @@
       "KeyType": {
        "$id": "7",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "Name": "String"
       },
       "ValueType": {
        "$ref": "2"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -106,6 +102,7 @@
      "$id": "15",
      "Name": "get",
      "ResourceName": "Int32Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -151,16 +148,13 @@
         "KeyType": {
          "$id": "21",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$id": "22",
          "Kind": "Primitive",
-         "Name": "Int32",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "Int32"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -182,6 +176,7 @@
      "$id": "23",
      "Name": "put",
      "ResourceName": "Int32Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -197,16 +192,13 @@
         "KeyType": {
          "$id": "26",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$id": "27",
          "Kind": "Primitive",
-         "Name": "Int32",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "Int32"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -316,6 +308,7 @@
      "$id": "37",
      "Name": "get",
      "ResourceName": "Int64Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -361,16 +354,13 @@
         "KeyType": {
          "$id": "43",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$id": "44",
          "Kind": "Primitive",
-         "Name": "Int64",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "Int64"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -392,6 +382,7 @@
      "$id": "45",
      "Name": "put",
      "ResourceName": "Int64Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -407,16 +398,13 @@
         "KeyType": {
          "$id": "48",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$id": "49",
          "Kind": "Primitive",
-         "Name": "Int64",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "Int64"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -526,6 +514,7 @@
      "$id": "59",
      "Name": "get",
      "ResourceName": "BooleanValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -571,16 +560,13 @@
         "KeyType": {
          "$id": "65",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$id": "66",
          "Kind": "Primitive",
-         "Name": "Boolean",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "Boolean"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -602,6 +588,7 @@
      "$id": "67",
      "Name": "put",
      "ResourceName": "BooleanValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -617,16 +604,13 @@
         "KeyType": {
          "$id": "70",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$id": "71",
          "Kind": "Primitive",
-         "Name": "Boolean",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "Boolean"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -736,6 +720,7 @@
      "$id": "81",
      "Name": "get",
      "ResourceName": "StringValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -781,16 +766,13 @@
         "KeyType": {
          "$id": "87",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$id": "88",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "String"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -812,6 +794,7 @@
      "$id": "89",
      "Name": "put",
      "ResourceName": "StringValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -827,16 +810,13 @@
         "KeyType": {
          "$id": "92",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$id": "93",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "String"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -946,6 +926,7 @@
      "$id": "103",
      "Name": "get",
      "ResourceName": "Float32Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -991,16 +972,13 @@
         "KeyType": {
          "$id": "109",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$id": "110",
          "Kind": "Primitive",
-         "Name": "Float32",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "Float32"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1022,6 +1000,7 @@
      "$id": "111",
      "Name": "put",
      "ResourceName": "Float32Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -1037,16 +1016,13 @@
         "KeyType": {
          "$id": "114",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$id": "115",
          "Kind": "Primitive",
-         "Name": "Float32",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "Float32"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1156,6 +1132,7 @@
      "$id": "125",
      "Name": "get",
      "ResourceName": "DatetimeValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -1201,16 +1178,14 @@
         "KeyType": {
          "$id": "131",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$id": "132",
          "Kind": "Primitive",
          "Name": "DateTimeRFC3339",
          "IsNullable": false
-        },
-        "IsNullable": false
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1232,6 +1207,7 @@
      "$id": "133",
      "Name": "put",
      "ResourceName": "DatetimeValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -1247,16 +1223,14 @@
         "KeyType": {
          "$id": "136",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$id": "137",
          "Kind": "Primitive",
          "Name": "DateTimeRFC3339",
          "IsNullable": false
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1366,6 +1340,7 @@
      "$id": "147",
      "Name": "get",
      "ResourceName": "DurationValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -1411,16 +1386,14 @@
         "KeyType": {
          "$id": "153",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$id": "154",
          "Kind": "Primitive",
          "Name": "DurationISO8601",
          "IsNullable": false
-        },
-        "IsNullable": false
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1442,6 +1415,7 @@
      "$id": "155",
      "Name": "put",
      "ResourceName": "DurationValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -1457,16 +1431,14 @@
         "KeyType": {
          "$id": "158",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$id": "159",
          "Kind": "Primitive",
          "Name": "DurationISO8601",
          "IsNullable": false
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1576,6 +1548,7 @@
      "$id": "169",
      "Name": "get",
      "ResourceName": "UnknownValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -1621,16 +1594,13 @@
         "KeyType": {
          "$id": "175",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$id": "176",
          "Kind": "Intrinsic",
-         "Name": "unknown",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "unknown"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1652,6 +1622,7 @@
      "$id": "177",
      "Name": "put",
      "ResourceName": "UnknownValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -1667,16 +1638,13 @@
         "KeyType": {
          "$id": "180",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$id": "181",
          "Kind": "Intrinsic",
-         "Name": "unknown",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "unknown"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1786,6 +1754,7 @@
      "$id": "191",
      "Name": "get",
      "ResourceName": "ModelValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -1831,13 +1800,11 @@
         "KeyType": {
          "$id": "197",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$ref": "2"
-        },
-        "IsNullable": false
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1859,6 +1826,7 @@
      "$id": "198",
      "Name": "put",
      "ResourceName": "ModelValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -1874,13 +1842,11 @@
         "KeyType": {
          "$id": "201",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$ref": "2"
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1990,6 +1956,7 @@
      "$id": "211",
      "Name": "get",
      "ResourceName": "RecursiveModelValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -2035,13 +2002,11 @@
         "KeyType": {
          "$id": "217",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$ref": "2"
-        },
-        "IsNullable": false
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2063,6 +2028,7 @@
      "$id": "218",
      "Name": "put",
      "ResourceName": "RecursiveModelValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -2078,13 +2044,11 @@
         "KeyType": {
          "$id": "221",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$ref": "2"
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2194,6 +2158,7 @@
      "$id": "231",
      "Name": "get",
      "ResourceName": "NullableFloatValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -2239,16 +2204,18 @@
         "KeyType": {
          "$id": "237",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "ValueType": {
          "$id": "238",
-         "Kind": "Primitive",
-         "Name": "Float32",
-         "IsNullable": true
-        },
-        "IsNullable": false
+         "Kind": "Nullable",
+         "Name": "Nullable",
+         "Type": {
+          "$id": "239",
+          "Kind": "Primitive",
+          "Name": "Float32"
+         }
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2267,34 +2234,37 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "239",
+     "$id": "240",
      "Name": "put",
      "ResourceName": "NullableFloatValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
       },
       {
-       "$id": "240",
+       "$id": "241",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "241",
+        "$id": "242",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "242",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "ValueType": {
          "$id": "243",
          "Kind": "Primitive",
-         "Name": "Float32",
-         "IsNullable": true
+         "Name": "String"
         },
-        "IsNullable": false
+        "ValueType": {
+         "$id": "244",
+         "Kind": "Nullable",
+         "Name": "Nullable",
+         "Type": {
+          "$id": "245",
+          "Kind": "Primitive",
+          "Name": "Float32"
+         }
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2307,11 +2277,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "244",
+       "$id": "246",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "245",
+        "$id": "247",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2326,19 +2296,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "246",
+        "$id": "248",
         "Type": {
-         "$ref": "245"
+         "$ref": "247"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "247",
+       "$id": "249",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "248",
+        "$id": "250",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2353,9 +2323,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "249",
+        "$id": "251",
         "Type": {
-         "$ref": "248"
+         "$ref": "250"
         },
         "Value": "application/json"
        }
@@ -2363,7 +2333,7 @@
      ],
      "Responses": [
       {
-       "$id": "250",
+       "$id": "252",
        "StatusCodes": [
         204
        ],
@@ -2385,7 +2355,7 @@
     }
    ],
    "Protocol": {
-    "$id": "251"
+    "$id": "253"
    },
    "Creatable": false,
    "Parent": "DictionaryClient",

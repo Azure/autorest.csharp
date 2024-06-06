@@ -21,7 +21,6 @@
    "Namespace": "Server.Path.Multiple",
    "Description": "Service versions",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -36,6 +35,7 @@
      "$id": "5",
      "Name": "noOperationParams",
      "ResourceName": "Multiple",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "6",
@@ -137,6 +137,7 @@
      "$id": "15",
      "Name": "withOperationPathParam",
      "ResourceName": "Multiple",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "6"
@@ -151,8 +152,7 @@
        "Type": {
         "$id": "17",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,

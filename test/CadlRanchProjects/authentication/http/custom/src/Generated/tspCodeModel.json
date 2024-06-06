@@ -9,7 +9,6 @@
    "Kind": "Model",
    "Name": "InvalidAuth",
    "Namespace": "Authentication.Http.Custom",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -20,8 +19,7 @@
      "Type": {
       "$id": "4",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -40,6 +38,7 @@
      "Name": "valid",
      "ResourceName": "Custom",
      "Description": "Check whether client is authenticated",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "7",
@@ -124,6 +123,7 @@
      "Name": "invalid",
      "ResourceName": "Custom",
      "Description": "Check whether client is authenticated.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"

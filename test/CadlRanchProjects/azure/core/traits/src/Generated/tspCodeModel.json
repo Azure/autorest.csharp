@@ -27,7 +27,6 @@
    "Namespace": "Azure.Core",
    "Description": "Repeatability Result header options",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Output"
   },
   {
@@ -46,7 +45,6 @@
    "Namespace": "_Specs_.Azure.Core.Traits",
    "Description": "Service versions",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -57,7 +55,6 @@
    "Name": "User",
    "Namespace": "_Specs_.Azure.Core.Traits",
    "Description": "Sample Model",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -68,8 +65,7 @@
      "Type": {
       "$id": "9",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -82,8 +78,7 @@
      "Type": {
       "$id": "11",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -96,7 +91,6 @@
    "Name": "UserActionParam",
    "Namespace": "_Specs_.Azure.Core.Traits",
    "Description": "User action param",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -107,8 +101,7 @@
      "Type": {
       "$id": "14",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -121,7 +114,6 @@
    "Name": "UserActionResponse",
    "Namespace": "_Specs_.Azure.Core.Traits",
    "Description": "User action response",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -132,8 +124,7 @@
      "Type": {
       "$id": "17",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -152,6 +143,7 @@
      "Name": "smokeTest",
      "ResourceName": "User",
      "Description": "Get a resource, sending and receiving headers.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "20",
@@ -192,8 +184,7 @@
        "Type": {
         "$id": "25",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -223,8 +214,7 @@
        "Type": {
         "$id": "29",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -244,8 +234,7 @@
        "Type": {
         "$id": "31",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -265,8 +254,7 @@
        "Type": {
         "$id": "33",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Header",
        "IsRequired": false,
@@ -286,8 +274,7 @@
        "Type": {
         "$id": "35",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Header",
        "IsRequired": false,
@@ -349,8 +336,7 @@
        "Type": {
         "$id": "41",
         "Kind": "Primitive",
-        "Name": "Guid",
-        "IsNullable": false
+        "Name": "Guid"
        },
        "Location": "Header",
        "IsRequired": false,
@@ -409,8 +395,7 @@
          "Type": {
           "$id": "47",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          }
         },
         {
@@ -421,8 +406,7 @@
          "Type": {
           "$id": "49",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          }
         },
         {
@@ -433,8 +417,7 @@
          "Type": {
           "$id": "51",
           "Kind": "Primitive",
-          "Name": "Guid",
-          "IsNullable": false
+          "Name": "Guid"
          }
         }
        ],
@@ -457,6 +440,7 @@
      "Name": "repeatableAction",
      "ResourceName": "Traits",
      "Description": "Test for repeatable requests",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"
@@ -469,8 +453,7 @@
        "Type": {
         "$id": "54",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -493,8 +476,7 @@
        "Type": {
         "$id": "56",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -514,8 +496,7 @@
        "Type": {
         "$id": "58",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Header",
        "IsRequired": false,

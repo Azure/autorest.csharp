@@ -19,7 +19,6 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The WidgetData0_kind",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -38,7 +37,6 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The WidgetData1_kind",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -57,7 +55,6 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The WidgetData2_kind",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   }
  ],
@@ -68,7 +65,6 @@
    "Name": "ExtendsUnknownAdditionalProperties",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from Record<unknown> type.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "9",
@@ -77,16 +73,13 @@
     "KeyType": {
      "$id": "10",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "11",
      "Kind": "Intrinsic",
-     "Name": "unknown",
-     "IsNullable": false
-    },
-    "IsNullable": false
+     "Name": "unknown"
+    }
    },
    "Properties": [
     {
@@ -97,8 +90,7 @@
      "Type": {
       "$id": "13",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -111,7 +103,6 @@
    "Name": "ExtendsUnknownAdditionalPropertiesDerived",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from a type that extends from Record<unknown>.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "8"
@@ -125,8 +116,7 @@
      "Type": {
       "$id": "16",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -139,8 +129,7 @@
      "Type": {
       "$id": "18",
       "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "Name": "Float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -153,7 +142,6 @@
    "Name": "ExtendsUnknownAdditionalPropertiesDiscriminated",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from Record<unknown> with a discriminator.",
-   "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
@@ -163,16 +151,13 @@
     "KeyType": {
      "$id": "21",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "22",
      "Kind": "Intrinsic",
-     "Name": "unknown",
-     "IsNullable": false
-    },
-    "IsNullable": false
+     "Name": "unknown"
+    }
    },
    "Properties": [
     {
@@ -183,8 +168,7 @@
      "Type": {
       "$id": "24",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -197,8 +181,7 @@
      "Type": {
       "$id": "26",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -212,7 +195,6 @@
    "Name": "IsUnknownAdditionalProperties",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model is from Record<unknown> type.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "28",
@@ -221,16 +203,13 @@
     "KeyType": {
      "$id": "29",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "30",
      "Kind": "Intrinsic",
-     "Name": "unknown",
-     "IsNullable": false
-    },
-    "IsNullable": false
+     "Name": "unknown"
+    }
    },
    "Properties": [
     {
@@ -241,8 +220,7 @@
      "Type": {
       "$id": "32",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -255,7 +233,6 @@
    "Name": "IsUnknownAdditionalPropertiesDerived",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from a type that is Record<unknown> type",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "27"
@@ -269,8 +246,7 @@
      "Type": {
       "$id": "35",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -283,8 +259,7 @@
      "Type": {
       "$id": "37",
       "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "Name": "Float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -297,7 +272,6 @@
    "Name": "IsUnknownAdditionalPropertiesDiscriminated",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model is Record<unknown> with a discriminator.",
-   "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
@@ -307,16 +281,13 @@
     "KeyType": {
      "$id": "40",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "41",
      "Kind": "Intrinsic",
-     "Name": "unknown",
-     "IsNullable": false
-    },
-    "IsNullable": false
+     "Name": "unknown"
+    }
    },
    "Properties": [
     {
@@ -327,8 +298,7 @@
      "Type": {
       "$id": "43",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -341,8 +311,7 @@
      "Type": {
       "$id": "45",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -356,7 +325,6 @@
    "Name": "ExtendsStringAdditionalProperties",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from Record<string> type.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "47",
@@ -365,16 +333,13 @@
     "KeyType": {
      "$id": "48",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "49",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
-    },
-    "IsNullable": false
+     "Name": "String"
+    }
    },
    "Properties": [
     {
@@ -385,8 +350,7 @@
      "Type": {
       "$id": "51",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -399,7 +363,6 @@
    "Name": "IsStringAdditionalProperties",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model is from Record<string> type.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "53",
@@ -408,16 +371,13 @@
     "KeyType": {
      "$id": "54",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "55",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
-    },
-    "IsNullable": false
+     "Name": "String"
+    }
    },
    "Properties": [
     {
@@ -428,8 +388,7 @@
      "Type": {
       "$id": "57",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -442,7 +401,6 @@
    "Name": "SpreadStringRecord",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<string> with the same known property type",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "59",
@@ -451,16 +409,13 @@
     "KeyType": {
      "$id": "60",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "61",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
-    },
-    "IsNullable": false
+     "Name": "String"
+    }
    },
    "Properties": [
     {
@@ -471,8 +426,7 @@
      "Type": {
       "$id": "63",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -485,7 +439,6 @@
    "Name": "ExtendsFloatAdditionalProperties",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from Record<float32> type.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "65",
@@ -494,16 +447,13 @@
     "KeyType": {
      "$id": "66",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "67",
      "Kind": "Primitive",
-     "Name": "Float32",
-     "IsNullable": false
-    },
-    "IsNullable": false
+     "Name": "Float32"
+    }
    },
    "Properties": [
     {
@@ -514,8 +464,7 @@
      "Type": {
       "$id": "69",
       "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "Name": "Float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -528,7 +477,6 @@
    "Name": "IsFloatAdditionalProperties",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model is from Record<float32> type.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "71",
@@ -537,16 +485,13 @@
     "KeyType": {
      "$id": "72",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "73",
      "Kind": "Primitive",
-     "Name": "Float32",
-     "IsNullable": false
-    },
-    "IsNullable": false
+     "Name": "Float32"
+    }
    },
    "Properties": [
     {
@@ -557,8 +502,7 @@
      "Type": {
       "$id": "75",
       "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "Name": "Float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -571,7 +515,6 @@
    "Name": "SpreadFloatRecord",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<float32> with the same known property type",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "77",
@@ -580,16 +523,13 @@
     "KeyType": {
      "$id": "78",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "79",
      "Kind": "Primitive",
-     "Name": "Float32",
-     "IsNullable": false
-    },
-    "IsNullable": false
+     "Name": "Float32"
+    }
    },
    "Properties": [
     {
@@ -600,8 +540,7 @@
      "Type": {
       "$id": "81",
       "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "Name": "Float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -614,7 +553,6 @@
    "Name": "ExtendsModelAdditionalProperties",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from Record<ModelForRecord> type.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "83",
@@ -623,8 +561,7 @@
     "KeyType": {
      "$id": "84",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "85",
@@ -632,7 +569,6 @@
      "Name": "ModelForRecord",
      "Namespace": "Type.Property.AdditionalProperties",
      "Description": "model for record",
-     "IsNullable": false,
      "Usage": "RoundTrip",
      "Properties": [
       {
@@ -643,15 +579,13 @@
        "Type": {
         "$id": "87",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "IsRequired": true,
        "IsReadOnly": false
       }
      ]
-    },
-    "IsNullable": false
+    }
    },
    "Properties": [
     {
@@ -676,7 +610,6 @@
    "Name": "IsModelAdditionalProperties",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model is from Record<ModelForRecord> type.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "90",
@@ -685,13 +618,11 @@
     "KeyType": {
      "$id": "91",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$ref": "85"
-    },
-    "IsNullable": false
+    }
    },
    "Properties": [
     {
@@ -713,7 +644,6 @@
    "Name": "SpreadModelRecord",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<ModelForRecord> with the same known property type",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "94",
@@ -722,13 +652,11 @@
     "KeyType": {
      "$id": "95",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$ref": "85"
-    },
-    "IsNullable": false
+    }
    },
    "Properties": [
     {
@@ -750,7 +678,6 @@
    "Name": "ExtendsModelArrayAdditionalProperties",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from Record<ModelForRecord[]> type.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "98",
@@ -759,8 +686,7 @@
     "KeyType": {
      "$id": "99",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "100",
@@ -768,10 +694,8 @@
      "Name": "Array",
      "ElementType": {
       "$ref": "85"
-     },
-     "IsNullable": false
-    },
-    "IsNullable": false
+     }
+    }
    },
    "Properties": [
     {
@@ -785,8 +709,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "85"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -799,7 +722,6 @@
    "Name": "IsModelArrayAdditionalProperties",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model is from Record<ModelForRecord[]> type.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "104",
@@ -808,8 +730,7 @@
     "KeyType": {
      "$id": "105",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "106",
@@ -817,10 +738,8 @@
      "Name": "Array",
      "ElementType": {
       "$ref": "85"
-     },
-     "IsNullable": false
-    },
-    "IsNullable": false
+     }
+    }
    },
    "Properties": [
     {
@@ -834,8 +753,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "85"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -847,7 +765,6 @@
    "Kind": "Model",
    "Name": "SpreadModelArrayRecord",
    "Namespace": "Type.Property.AdditionalProperties",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "110",
@@ -856,8 +773,7 @@
     "KeyType": {
      "$id": "111",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "112",
@@ -865,10 +781,8 @@
      "Name": "Array",
      "ElementType": {
       "$ref": "85"
-     },
-     "IsNullable": false
-    },
-    "IsNullable": false
+     }
+    }
    },
    "Properties": [
     {
@@ -882,8 +796,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "85"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -896,7 +809,6 @@
    "Name": "DifferentSpreadStringRecord",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<string> with the different known property type",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "116",
@@ -905,16 +817,13 @@
     "KeyType": {
      "$id": "117",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "118",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
-    },
-    "IsNullable": false
+     "Name": "String"
+    }
    },
    "Properties": [
     {
@@ -925,8 +834,7 @@
      "Type": {
       "$id": "120",
       "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "Name": "Float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -939,7 +847,6 @@
    "Name": "DifferentSpreadFloatRecord",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<float32> with the different known property type",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "122",
@@ -948,16 +855,13 @@
     "KeyType": {
      "$id": "123",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "124",
      "Kind": "Primitive",
-     "Name": "Float32",
-     "IsNullable": false
-    },
-    "IsNullable": false
+     "Name": "Float32"
+    }
    },
    "Properties": [
     {
@@ -968,8 +872,7 @@
      "Type": {
       "$id": "126",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -982,7 +885,6 @@
    "Name": "DifferentSpreadModelRecord",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<ModelForRecord> with the different known property type",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "128",
@@ -991,13 +893,11 @@
     "KeyType": {
      "$id": "129",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$ref": "85"
-    },
-    "IsNullable": false
+    }
    },
    "Properties": [
     {
@@ -1008,8 +908,7 @@
      "Type": {
       "$id": "131",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1022,7 +921,6 @@
    "Name": "DifferentSpreadModelArrayRecord",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<ModelForRecord[]> with the different known property type",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "133",
@@ -1031,8 +929,7 @@
     "KeyType": {
      "$id": "134",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "135",
@@ -1040,10 +937,8 @@
      "Name": "Array",
      "ElementType": {
       "$ref": "85"
-     },
-     "IsNullable": false
-    },
-    "IsNullable": false
+     }
+    }
    },
    "Properties": [
     {
@@ -1054,8 +949,7 @@
      "Type": {
       "$id": "137",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1068,7 +962,6 @@
    "Name": "DifferentSpreadStringDerived",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from a model that spread Record<string> with the different known property type",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "115"
@@ -1082,8 +975,7 @@
      "Type": {
       "$id": "140",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1096,7 +988,6 @@
    "Name": "DifferentSpreadFloatDerived",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from a model that spread Record<float32> with the different known property type",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "121"
@@ -1110,8 +1001,7 @@
      "Type": {
       "$id": "143",
       "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "Name": "Float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1124,7 +1014,6 @@
    "Name": "DifferentSpreadModelDerived",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from a model that spread Record<ModelForRecord> with the different known property type",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "127"
@@ -1149,7 +1038,6 @@
    "Name": "DifferentSpreadModelArrayDerived",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from a model that spread Record<ModelForRecord[]> with the different known property type",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "132"
@@ -1166,8 +1054,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "85"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1180,7 +1067,6 @@
    "Name": "MultipleSpreadRecord",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<string> and Record<float32>",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "150",
@@ -1189,8 +1075,7 @@
     "KeyType": {
      "$id": "151",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "152",
@@ -1200,19 +1085,15 @@
       {
        "$id": "153",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "Name": "String"
       },
       {
        "$id": "154",
        "Kind": "Primitive",
-       "Name": "Float32",
-       "IsNullable": false
+       "Name": "Float32"
       }
-     ],
-     "IsNullable": false
-    },
-    "IsNullable": false
+     ]
+    }
    },
    "Properties": [
     {
@@ -1223,8 +1104,7 @@
      "Type": {
       "$id": "156",
       "Kind": "Primitive",
-      "Name": "Boolean",
-      "IsNullable": false
+      "Name": "Boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1237,7 +1117,6 @@
    "Name": "SpreadRecordForUnion",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<string | float32>",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "158",
@@ -1246,8 +1125,7 @@
     "KeyType": {
      "$id": "159",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "160",
@@ -1257,19 +1135,15 @@
       {
        "$id": "161",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "Name": "String"
       },
       {
        "$id": "162",
        "Kind": "Primitive",
-       "Name": "Float32",
-       "IsNullable": false
+       "Name": "Float32"
       }
-     ],
-     "IsNullable": false
-    },
-    "IsNullable": false
+     ]
+    }
    },
    "Properties": [
     {
@@ -1280,8 +1154,7 @@
      "Type": {
       "$id": "164",
       "Kind": "Primitive",
-      "Name": "Boolean",
-      "IsNullable": false
+      "Name": "Boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1294,7 +1167,6 @@
    "Name": "SpreadRecordForDiscriminatedUnion",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<WidgetData>",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "166",
@@ -1303,8 +1175,7 @@
     "KeyType": {
      "$id": "167",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "168",
@@ -1316,7 +1187,6 @@
        "Kind": "Model",
        "Name": "WidgetData0",
        "Namespace": "Type.Property.AdditionalProperties",
-       "IsNullable": false,
        "Usage": "RoundTrip",
        "Properties": [
         {
@@ -1331,8 +1201,7 @@
           "LiteralValueType": {
            "$ref": "2"
           },
-          "Value": "kind0",
-          "IsNullable": false
+          "Value": "kind0"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -1345,8 +1214,7 @@
          "Type": {
           "$id": "173",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -1358,7 +1226,6 @@
        "Kind": "Model",
        "Name": "WidgetData1",
        "Namespace": "Type.Property.AdditionalProperties",
-       "IsNullable": false,
        "Usage": "RoundTrip",
        "Properties": [
         {
@@ -1373,8 +1240,7 @@
           "LiteralValueType": {
            "$ref": "4"
           },
-          "Value": "kind1",
-          "IsNullable": false
+          "Value": "kind1"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -1409,10 +1275,8 @@
         }
        ]
       }
-     ],
-     "IsNullable": false
-    },
-    "IsNullable": false
+     ]
+    }
    },
    "Properties": [
     {
@@ -1423,8 +1287,7 @@
      "Type": {
       "$id": "182",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1443,7 +1306,6 @@
    "Name": "SpreadRecordForNonDiscriminatedUnion",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<WidgetData0 | WidgetData1>",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "184",
@@ -1452,8 +1314,7 @@
     "KeyType": {
      "$id": "185",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "186",
@@ -1466,10 +1327,8 @@
       {
        "$ref": "174"
       }
-     ],
-     "IsNullable": false
-    },
-    "IsNullable": false
+     ]
+    }
    },
    "Properties": [
     {
@@ -1480,8 +1339,7 @@
      "Type": {
       "$id": "188",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1494,7 +1352,6 @@
    "Name": "SpreadRecordForNonDiscriminatedUnion2",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<WidgetData2 | WidgetData1>",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "190",
@@ -1503,8 +1360,7 @@
     "KeyType": {
      "$id": "191",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "192",
@@ -1516,7 +1372,6 @@
        "Kind": "Model",
        "Name": "WidgetData2",
        "Namespace": "Type.Property.AdditionalProperties",
-       "IsNullable": false,
        "Usage": "RoundTrip",
        "Properties": [
         {
@@ -1531,8 +1386,7 @@
           "LiteralValueType": {
            "$ref": "6"
           },
-          "Value": "kind1",
-          "IsNullable": false
+          "Value": "kind1"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -1545,8 +1399,7 @@
          "Type": {
           "$id": "197",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -1556,10 +1409,8 @@
       {
        "$ref": "174"
       }
-     ],
-     "IsNullable": false
-    },
-    "IsNullable": false
+     ]
+    }
    },
    "Properties": [
     {
@@ -1570,8 +1421,7 @@
      "Type": {
       "$id": "199",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1587,7 +1437,6 @@
    "Name": "SpreadRecordForNonDiscriminatedUnion3",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<WidgetData2[] | WidgetData1>",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "201",
@@ -1596,8 +1445,7 @@
     "KeyType": {
      "$id": "202",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "203",
@@ -1610,16 +1458,13 @@
        "Name": "Array",
        "ElementType": {
         "$ref": "193"
-       },
-       "IsNullable": false
+       }
       },
       {
        "$ref": "174"
       }
-     ],
-     "IsNullable": false
-    },
-    "IsNullable": false
+     ]
+    }
    },
    "Properties": [
     {
@@ -1630,8 +1475,7 @@
      "Type": {
       "$id": "206",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1644,7 +1488,6 @@
    "Name": "IsUnknownAdditionalPropertiesDiscriminatedDerived",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The derived discriminated type",
-   "IsNullable": false,
    "DiscriminatorValue": "derived",
    "Usage": "RoundTrip",
    "BaseModel": {
@@ -1659,8 +1502,7 @@
      "Type": {
       "$id": "209",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1673,8 +1515,7 @@
      "Type": {
       "$id": "211",
       "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "Name": "Float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1687,7 +1528,6 @@
    "Name": "ExtendsUnknownAdditionalPropertiesDiscriminatedDerived",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The derived discriminated type",
-   "IsNullable": false,
    "DiscriminatorValue": "derived",
    "Usage": "RoundTrip",
    "BaseModel": {
@@ -1702,8 +1542,7 @@
      "Type": {
       "$id": "214",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1716,8 +1555,7 @@
      "Type": {
       "$id": "216",
       "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "Name": "Float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1779,6 +1617,7 @@
      "Name": "get",
      "ResourceName": "ExtendsUnknown",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -1841,6 +1680,7 @@
      "Name": "put",
      "ResourceName": "ExtendsUnknown",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -1962,6 +1802,7 @@
      "Name": "get",
      "ResourceName": "ExtendsUnknownDerived",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -2024,6 +1865,7 @@
      "Name": "put",
      "ResourceName": "ExtendsUnknownDerived",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -2145,6 +1987,7 @@
      "Name": "get",
      "ResourceName": "ExtendsUnknownDiscriminated",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -2207,6 +2050,7 @@
      "Name": "put",
      "ResourceName": "ExtendsUnknownDiscriminated",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -2328,6 +2172,7 @@
      "Name": "get",
      "ResourceName": "IsUnknown",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -2390,6 +2235,7 @@
      "Name": "put",
      "ResourceName": "IsUnknown",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -2511,6 +2357,7 @@
      "Name": "get",
      "ResourceName": "IsUnknownDerived",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -2573,6 +2420,7 @@
      "Name": "put",
      "ResourceName": "IsUnknownDerived",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -2694,6 +2542,7 @@
      "Name": "get",
      "ResourceName": "IsUnknownDiscriminated",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -2756,6 +2605,7 @@
      "Name": "put",
      "ResourceName": "IsUnknownDiscriminated",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -2877,6 +2727,7 @@
      "Name": "get",
      "ResourceName": "ExtendsString",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -2939,6 +2790,7 @@
      "Name": "put",
      "ResourceName": "ExtendsString",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -3060,6 +2912,7 @@
      "Name": "get",
      "ResourceName": "IsString",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -3122,6 +2975,7 @@
      "Name": "put",
      "ResourceName": "IsString",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -3243,6 +3097,7 @@
      "Name": "get",
      "ResourceName": "SpreadString",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -3305,6 +3160,7 @@
      "Name": "put",
      "ResourceName": "SpreadString",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -3426,6 +3282,7 @@
      "Name": "get",
      "ResourceName": "ExtendsFloat",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -3488,6 +3345,7 @@
      "Name": "put",
      "ResourceName": "ExtendsFloat",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -3609,6 +3467,7 @@
      "Name": "get",
      "ResourceName": "IsFloat",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -3671,6 +3530,7 @@
      "Name": "put",
      "ResourceName": "IsFloat",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -3792,6 +3652,7 @@
      "Name": "get",
      "ResourceName": "SpreadFloat",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -3854,6 +3715,7 @@
      "Name": "put",
      "ResourceName": "SpreadFloat",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -3975,6 +3837,7 @@
      "Name": "get",
      "ResourceName": "ExtendsModel",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -4037,6 +3900,7 @@
      "Name": "put",
      "ResourceName": "ExtendsModel",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -4158,6 +4022,7 @@
      "Name": "get",
      "ResourceName": "IsModel",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -4220,6 +4085,7 @@
      "Name": "put",
      "ResourceName": "IsModel",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -4341,6 +4207,7 @@
      "Name": "get",
      "ResourceName": "SpreadModel",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -4403,6 +4270,7 @@
      "Name": "put",
      "ResourceName": "SpreadModel",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -4524,6 +4392,7 @@
      "Name": "get",
      "ResourceName": "ExtendsModelArray",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -4586,6 +4455,7 @@
      "Name": "put",
      "ResourceName": "ExtendsModelArray",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -4707,6 +4577,7 @@
      "Name": "get",
      "ResourceName": "IsModelArray",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -4769,6 +4640,7 @@
      "Name": "put",
      "ResourceName": "IsModelArray",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -4890,6 +4762,7 @@
      "Name": "get",
      "ResourceName": "SpreadModelArray",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -4952,6 +4825,7 @@
      "Name": "put",
      "ResourceName": "SpreadModelArray",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -5073,6 +4947,7 @@
      "Name": "get",
      "ResourceName": "SpreadDifferentString",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -5135,6 +5010,7 @@
      "Name": "put",
      "ResourceName": "SpreadDifferentString",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -5256,6 +5132,7 @@
      "Name": "get",
      "ResourceName": "SpreadDifferentFloat",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -5318,6 +5195,7 @@
      "Name": "put",
      "ResourceName": "SpreadDifferentFloat",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -5439,6 +5317,7 @@
      "Name": "get",
      "ResourceName": "SpreadDifferentModel",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -5501,6 +5380,7 @@
      "Name": "put",
      "ResourceName": "SpreadDifferentModel",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -5622,6 +5502,7 @@
      "Name": "get",
      "ResourceName": "SpreadDifferentModelArray",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -5684,6 +5565,7 @@
      "Name": "put",
      "ResourceName": "SpreadDifferentModelArray",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -5805,6 +5687,7 @@
      "Name": "get",
      "ResourceName": "ExtendsDifferentSpreadString",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -5867,6 +5750,7 @@
      "Name": "put",
      "ResourceName": "ExtendsDifferentSpreadString",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -5988,6 +5872,7 @@
      "Name": "get",
      "ResourceName": "ExtendsDifferentSpreadFloat",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -6050,6 +5935,7 @@
      "Name": "put",
      "ResourceName": "ExtendsDifferentSpreadFloat",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -6171,6 +6057,7 @@
      "Name": "get",
      "ResourceName": "ExtendsDifferentSpreadModel",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -6233,6 +6120,7 @@
      "Name": "put",
      "ResourceName": "ExtendsDifferentSpreadModel",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -6354,6 +6242,7 @@
      "Name": "get",
      "ResourceName": "ExtendsDifferentSpreadModelArray",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -6416,6 +6305,7 @@
      "Name": "put",
      "ResourceName": "ExtendsDifferentSpreadModelArray",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -6537,6 +6427,7 @@
      "Name": "get",
      "ResourceName": "MultipleSpread",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -6599,6 +6490,7 @@
      "Name": "put",
      "ResourceName": "MultipleSpread",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -6720,6 +6612,7 @@
      "Name": "get",
      "ResourceName": "SpreadRecordUnion",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -6782,6 +6675,7 @@
      "Name": "put",
      "ResourceName": "SpreadRecordUnion",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -6903,6 +6797,7 @@
      "Name": "get",
      "ResourceName": "SpreadRecordDiscriminatedUnion",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -6965,6 +6860,7 @@
      "Name": "put",
      "ResourceName": "SpreadRecordDiscriminatedUnion",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -7086,6 +6982,7 @@
      "Name": "get",
      "ResourceName": "SpreadRecordNonDiscriminatedUnion",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -7148,6 +7045,7 @@
      "Name": "put",
      "ResourceName": "SpreadRecordNonDiscriminatedUnion",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -7269,6 +7167,7 @@
      "Name": "get",
      "ResourceName": "SpreadRecordNonDiscriminatedUnion2",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -7331,6 +7230,7 @@
      "Name": "put",
      "ResourceName": "SpreadRecordNonDiscriminatedUnion2",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -7452,6 +7352,7 @@
      "Name": "get",
      "ResourceName": "SpreadRecordNonDiscriminatedUnion3",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"
@@ -7514,6 +7415,7 @@
      "Name": "put",
      "ResourceName": "SpreadRecordNonDiscriminatedUnion3",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "219"

@@ -32,7 +32,6 @@
    ],
    "Namespace": "Client.Structure.Service",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input"
   }
  ],
@@ -98,6 +97,7 @@
      "$id": "13",
      "Name": "one",
      "ResourceName": "Group1",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -156,6 +156,7 @@
      "$id": "18",
      "Name": "three",
      "ResourceName": "Group1",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -214,6 +215,7 @@
      "$id": "23",
      "Name": "four",
      "ResourceName": "Group1",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -292,6 +294,7 @@
      "$id": "30",
      "Name": "two",
      "ResourceName": "Group2",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -350,6 +353,7 @@
      "$id": "35",
      "Name": "five",
      "ResourceName": "Group2",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -408,6 +412,7 @@
      "$id": "40",
      "Name": "six",
      "ResourceName": "Group2",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"

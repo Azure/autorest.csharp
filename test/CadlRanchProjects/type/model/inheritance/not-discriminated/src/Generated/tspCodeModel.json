@@ -10,7 +10,6 @@
    "Name": "Siamese",
    "Namespace": "Type.Model.Inheritance.NotDiscriminated",
    "Description": "The third level model in the normal multiple levels inheritance.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "BaseModel": {
     "$id": "3",
@@ -18,7 +17,6 @@
     "Name": "Cat",
     "Namespace": "Type.Model.Inheritance.NotDiscriminated",
     "Description": "The second level model in the normal multiple levels inheritance.",
-    "IsNullable": false,
     "Usage": "RoundTrip",
     "BaseModel": {
      "$id": "4",
@@ -26,7 +24,6 @@
      "Name": "Pet",
      "Namespace": "Type.Model.Inheritance.NotDiscriminated",
      "Description": "This is base model for not-discriminated normal multiple levels inheritance.",
-     "IsNullable": false,
      "Usage": "RoundTrip",
      "Properties": [
       {
@@ -37,8 +34,7 @@
        "Type": {
         "$id": "6",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "IsRequired": true,
        "IsReadOnly": false
@@ -54,8 +50,7 @@
       "Type": {
        "$id": "8",
        "Kind": "Primitive",
-       "Name": "Int32",
-       "IsNullable": false
+       "Name": "Int32"
       },
       "IsRequired": true,
       "IsReadOnly": false
@@ -71,8 +66,7 @@
      "Type": {
       "$id": "10",
       "Kind": "Primitive",
-      "Name": "Boolean",
-      "IsNullable": false
+      "Name": "Boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -96,6 +90,7 @@
      "$id": "12",
      "Name": "postValid",
      "ResourceName": "NotDiscriminated",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "13",
@@ -226,6 +221,7 @@
      "$id": "25",
      "Name": "getValid",
      "ResourceName": "NotDiscriminated",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "13"
@@ -287,6 +283,7 @@
      "$id": "30",
      "Name": "putValid",
      "ResourceName": "NotDiscriminated",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "13"

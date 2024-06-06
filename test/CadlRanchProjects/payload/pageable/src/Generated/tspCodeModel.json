@@ -10,7 +10,6 @@
    "Name": "PagedUser",
    "Namespace": "Azure.Core",
    "Description": "Paged collection of User items",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -28,7 +27,6 @@
        "Name": "User",
        "Namespace": "Payload.Pageable",
        "Description": "User model",
-       "IsNullable": false,
        "Usage": "Output",
        "Properties": [
         {
@@ -39,15 +37,13 @@
          "Type": {
           "$id": "7",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -60,8 +56,7 @@
      "Type": {
       "$id": "9",
       "Kind": "Primitive",
-      "Name": "Uri",
-      "IsNullable": false
+      "Name": "Uri"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -83,6 +78,7 @@
      "Name": "list",
      "ResourceName": "Pageable",
      "Description": "List users",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "12",
@@ -123,8 +119,7 @@
        "Type": {
         "$id": "17",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Query",
        "IsRequired": false,

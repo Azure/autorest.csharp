@@ -28,7 +28,6 @@
    "Namespace": "Versioning.MadeOptional",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -38,7 +37,6 @@
    "Kind": "Model",
    "Name": "TestModel",
    "Namespace": "Versioning.MadeOptional",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -49,8 +47,7 @@
      "Type": {
       "$id": "7",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -63,8 +60,7 @@
      "Type": {
       "$id": "9",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -82,6 +78,7 @@
      "$id": "11",
      "Name": "test",
      "ResourceName": "MadeOptional",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "12",
@@ -129,8 +126,7 @@
        "Type": {
         "$id": "16",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "IsRequired": false,

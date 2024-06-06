@@ -10,7 +10,6 @@
    "Name": "InnerModel",
    "Namespace": "Type.Array",
    "Description": "Array inner model",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -21,8 +20,7 @@
      "Type": {
       "$id": "4",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -38,8 +36,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "2"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -100,6 +97,7 @@
      "$id": "14",
      "Name": "get",
      "ResourceName": "Int32Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -145,10 +143,8 @@
         "ElementType": {
          "$id": "20",
          "Kind": "Primitive",
-         "Name": "Int32",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "Int32"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -170,6 +166,7 @@
      "$id": "21",
      "Name": "put",
      "ResourceName": "Int32Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -185,10 +182,8 @@
         "ElementType": {
          "$id": "24",
          "Kind": "Primitive",
-         "Name": "Int32",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "Int32"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -298,6 +293,7 @@
      "$id": "34",
      "Name": "get",
      "ResourceName": "Int64Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -343,10 +339,8 @@
         "ElementType": {
          "$id": "40",
          "Kind": "Primitive",
-         "Name": "Int64",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "Int64"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -368,6 +362,7 @@
      "$id": "41",
      "Name": "put",
      "ResourceName": "Int64Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -383,10 +378,8 @@
         "ElementType": {
          "$id": "44",
          "Kind": "Primitive",
-         "Name": "Int64",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "Int64"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -496,6 +489,7 @@
      "$id": "54",
      "Name": "get",
      "ResourceName": "BooleanValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -541,10 +535,8 @@
         "ElementType": {
          "$id": "60",
          "Kind": "Primitive",
-         "Name": "Boolean",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "Boolean"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -566,6 +558,7 @@
      "$id": "61",
      "Name": "put",
      "ResourceName": "BooleanValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -581,10 +574,8 @@
         "ElementType": {
          "$id": "64",
          "Kind": "Primitive",
-         "Name": "Boolean",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "Boolean"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -694,6 +685,7 @@
      "$id": "74",
      "Name": "get",
      "ResourceName": "StringValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -739,10 +731,8 @@
         "ElementType": {
          "$id": "80",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "String"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -764,6 +754,7 @@
      "$id": "81",
      "Name": "put",
      "ResourceName": "StringValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -779,10 +770,8 @@
         "ElementType": {
          "$id": "84",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "String"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -892,6 +881,7 @@
      "$id": "94",
      "Name": "get",
      "ResourceName": "Float32Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -937,10 +927,8 @@
         "ElementType": {
          "$id": "100",
          "Kind": "Primitive",
-         "Name": "Float32",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "Float32"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -962,6 +950,7 @@
      "$id": "101",
      "Name": "put",
      "ResourceName": "Float32Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -977,10 +966,8 @@
         "ElementType": {
          "$id": "104",
          "Kind": "Primitive",
-         "Name": "Float32",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "Float32"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1090,6 +1077,7 @@
      "$id": "114",
      "Name": "get",
      "ResourceName": "DatetimeValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -1137,8 +1125,7 @@
          "Kind": "Primitive",
          "Name": "DateTimeRFC3339",
          "IsNullable": false
-        },
-        "IsNullable": false
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1160,6 +1147,7 @@
      "$id": "121",
      "Name": "put",
      "ResourceName": "DatetimeValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -1177,8 +1165,7 @@
          "Kind": "Primitive",
          "Name": "DateTimeRFC3339",
          "IsNullable": false
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1288,6 +1275,7 @@
      "$id": "134",
      "Name": "get",
      "ResourceName": "DurationValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -1335,8 +1323,7 @@
          "Kind": "Primitive",
          "Name": "DurationISO8601",
          "IsNullable": false
-        },
-        "IsNullable": false
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1358,6 +1345,7 @@
      "$id": "141",
      "Name": "put",
      "ResourceName": "DurationValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -1375,8 +1363,7 @@
          "Kind": "Primitive",
          "Name": "DurationISO8601",
          "IsNullable": false
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1486,6 +1473,7 @@
      "$id": "154",
      "Name": "get",
      "ResourceName": "UnknownValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -1531,10 +1519,8 @@
         "ElementType": {
          "$id": "160",
          "Kind": "Intrinsic",
-         "Name": "unknown",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "unknown"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1556,6 +1542,7 @@
      "$id": "161",
      "Name": "put",
      "ResourceName": "UnknownValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -1571,10 +1558,8 @@
         "ElementType": {
          "$id": "164",
          "Kind": "Intrinsic",
-         "Name": "unknown",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "unknown"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1684,6 +1669,7 @@
      "$id": "174",
      "Name": "get",
      "ResourceName": "ModelValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -1728,8 +1714,7 @@
         "Name": "Array",
         "ElementType": {
          "$ref": "2"
-        },
-        "IsNullable": false
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1751,6 +1736,7 @@
      "$id": "180",
      "Name": "put",
      "ResourceName": "ModelValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -1765,8 +1751,7 @@
         "Name": "Array",
         "ElementType": {
          "$ref": "2"
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1876,6 +1861,7 @@
      "$id": "192",
      "Name": "get",
      "ResourceName": "NullableFloatValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -1920,11 +1906,14 @@
         "Name": "Array",
         "ElementType": {
          "$id": "198",
-         "Kind": "Primitive",
-         "Name": "Float32",
-         "IsNullable": true
-        },
-        "IsNullable": false
+         "Kind": "Nullable",
+         "Name": "Nullable",
+         "Type": {
+          "$id": "199",
+          "Kind": "Primitive",
+          "Name": "Float32"
+         }
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1943,28 +1932,32 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "199",
+     "$id": "200",
      "Name": "put",
      "ResourceName": "NullableFloatValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
       },
       {
-       "$id": "200",
+       "$id": "201",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "201",
+        "$id": "202",
         "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "202",
-         "Kind": "Primitive",
-         "Name": "Float32",
-         "IsNullable": true
-        },
-        "IsNullable": false
+         "$id": "203",
+         "Kind": "Nullable",
+         "Name": "Nullable",
+         "Type": {
+          "$id": "204",
+          "Kind": "Primitive",
+          "Name": "Float32"
+         }
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1977,11 +1970,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "203",
+       "$id": "205",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "204",
+        "$id": "206",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1996,19 +1989,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "205",
+        "$id": "207",
         "Type": {
-         "$ref": "204"
+         "$ref": "206"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "206",
+       "$id": "208",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "207",
+        "$id": "209",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2023,9 +2016,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "208",
+        "$id": "210",
         "Type": {
-         "$ref": "207"
+         "$ref": "209"
         },
         "Value": "application/json"
        }
@@ -2033,7 +2026,7 @@
      ],
      "Responses": [
       {
-       "$id": "209",
+       "$id": "211",
        "StatusCodes": [
         204
        ],
@@ -2055,7 +2048,7 @@
     }
    ],
    "Protocol": {
-    "$id": "210"
+    "$id": "212"
    },
    "Creatable": false,
    "Parent": "ArrayClient",

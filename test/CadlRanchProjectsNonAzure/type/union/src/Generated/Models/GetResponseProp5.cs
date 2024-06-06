@@ -7,11 +7,11 @@ namespace Scm._Type.Union.Models
     /// <summary> The GetResponseProp5. </summary>
     public enum GetResponseProp5
     {
-        /// <summary> a. </summary>
-        A,
-        /// <summary> b. </summary>
-        B,
-        /// <summary> c. </summary>
-        C
+        /// <summary> 1. </summary>
+        _1 = 1,
+        /// <summary> 2. </summary>
+        _2 = 2,
+        /// <summary> 3. </summary>
+        _3 = 3
     }
 }

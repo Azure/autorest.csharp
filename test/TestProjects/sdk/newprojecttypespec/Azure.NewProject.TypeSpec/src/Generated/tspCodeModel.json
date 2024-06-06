@@ -19,7 +19,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -38,7 +37,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -57,7 +55,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -76,7 +73,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -95,7 +91,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -114,7 +109,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -142,7 +136,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "Simple enum",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -170,7 +163,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "Extensible enum",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -198,7 +190,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "Int based extensible enum",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -226,7 +217,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "Float based extensible enum",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -254,7 +244,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "float fixed enum",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -282,7 +271,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "int fixed enum",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -329,7 +317,6 @@
    ],
    "Namespace": "NewProjectTypeSpec",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -340,7 +327,6 @@
    "Name": "Thing",
    "Namespace": "NewProjectTypeSpec",
    "Description": "A model with a few properties of literal types",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -351,8 +337,7 @@
      "Type": {
       "$id": "48",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -370,8 +355,7 @@
        {
         "$id": "51",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        {
         "$id": "52",
@@ -380,19 +364,15 @@
         "ElementType": {
          "$id": "53",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "String"
+        }
        },
        {
         "$id": "54",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        }
-      ],
-      "IsNullable": false
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -409,8 +389,7 @@
       "LiteralValueType": {
        "$ref": "2"
       },
-      "Value": "accept",
-      "IsNullable": false
+      "Value": "accept"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -427,8 +406,7 @@
       "LiteralValueType": {
        "$ref": "4"
       },
-      "Value": 123,
-      "IsNullable": false
+      "Value": 123
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -445,8 +423,7 @@
       "LiteralValueType": {
        "$ref": "6"
       },
-      "Value": 1.23,
-      "IsNullable": false
+      "Value": 1.23
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -463,11 +440,9 @@
       "LiteralValueType": {
        "$id": "63",
        "Kind": "Primitive",
-       "Name": "Boolean",
-       "IsNullable": false
+       "Name": "Boolean"
       },
-      "Value": false,
-      "IsNullable": false
+      "Value": false
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -484,8 +459,7 @@
       "LiteralValueType": {
        "$ref": "8"
       },
-      "Value": "reject",
-      "IsNullable": false
+      "Value": "reject"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -502,8 +476,7 @@
       "LiteralValueType": {
        "$ref": "10"
       },
-      "Value": 456,
-      "IsNullable": false
+      "Value": 456
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -520,8 +493,7 @@
       "LiteralValueType": {
        "$ref": "12"
       },
-      "Value": 4.56,
-      "IsNullable": false
+      "Value": 4.56
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -538,11 +510,9 @@
       "LiteralValueType": {
        "$id": "72",
        "Kind": "Primitive",
-       "Name": "Boolean",
-       "IsNullable": false
+       "Name": "Boolean"
       },
-      "Value": true,
-      "IsNullable": false
+      "Value": true
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -555,8 +525,7 @@
      "Type": {
       "$id": "74",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -569,7 +538,6 @@
    "Name": "Friend",
    "Namespace": "NewProjectTypeSpec",
    "Description": "this is not a friendly model but with a friendly name",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -580,8 +548,7 @@
      "Type": {
       "$id": "77",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -594,7 +561,6 @@
    "Name": "RoundTripModel",
    "Namespace": "NewProjectTypeSpec",
    "Description": "this is a roundtrip model",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -605,8 +571,7 @@
      "Type": {
       "$id": "80",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -619,8 +584,7 @@
      "Type": {
       "$id": "82",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -636,8 +600,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "14"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -654,13 +617,11 @@
       "KeyType": {
        "$id": "87",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "Name": "String"
       },
       "ValueType": {
        "$ref": "18"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -698,8 +659,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "22"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -726,8 +686,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "26"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -754,8 +713,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "30"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -782,8 +740,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "34"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -807,8 +764,7 @@
      "Type": {
       "$id": "103",
       "Kind": "Intrinsic",
-      "Name": "unknown",
-      "IsNullable": false
+      "Name": "unknown"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -821,8 +777,7 @@
      "Type": {
       "$id": "105",
       "Kind": "Intrinsic",
-      "Name": "unknown",
-      "IsNullable": false
+      "Name": "unknown"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -839,16 +794,13 @@
       "KeyType": {
        "$id": "108",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "Name": "String"
       },
       "ValueType": {
        "$id": "109",
        "Kind": "Intrinsic",
-       "Name": "unknown",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "unknown"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -865,16 +817,13 @@
       "KeyType": {
        "$id": "112",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "Name": "String"
       },
       "ValueType": {
        "$id": "113",
        "Kind": "Intrinsic",
-       "Name": "unknown",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "unknown"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -891,16 +840,13 @@
       "KeyType": {
        "$id": "116",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "Name": "String"
       },
       "ValueType": {
        "$id": "117",
        "Kind": "Intrinsic",
-       "Name": "unknown",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "unknown"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -917,16 +863,13 @@
       "KeyType": {
        "$id": "120",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "Name": "String"
       },
       "ValueType": {
        "$id": "121",
        "Kind": "Intrinsic",
-       "Name": "unknown",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "unknown"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": true
@@ -945,6 +888,7 @@
      "Name": "topAction",
      "ResourceName": "NewProjectTypeSpec",
      "Description": "top level method",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "124",
@@ -1044,6 +988,7 @@
      "Name": "topAction2",
      "ResourceName": "NewProjectTypeSpec",
      "Description": "top level method2",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "124"
@@ -1106,6 +1051,7 @@
      "Name": "patchAction",
      "ResourceName": "NewProjectTypeSpec",
      "Description": "top level patch",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "124"
@@ -1215,6 +1161,7 @@
      "Name": "anonymousBody",
      "ResourceName": "NewProjectTypeSpec",
      "Description": "body parameter without body decorator",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "124"
@@ -1325,6 +1272,7 @@
      "Name": "friendlyModel",
      "ResourceName": "NewProjectTypeSpec",
      "Description": "Model can have its friendly name",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "124"
@@ -1434,6 +1382,7 @@
      "$id": "164",
      "Name": "addTimeHeader",
      "ResourceName": "NewProjectTypeSpec",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "124"
@@ -1542,6 +1491,7 @@
      "Name": "sayHi",
      "ResourceName": "Demo",
      "Description": "Return hi",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "124"
@@ -1553,8 +1503,7 @@
        "Type": {
         "$id": "177",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1573,8 +1522,7 @@
        "Type": {
         "$id": "179",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1593,8 +1541,7 @@
        "Type": {
         "$id": "181",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1681,6 +1628,7 @@
      "Name": "helloAgain",
      "ResourceName": "Demo2",
      "Description": "Return hi again",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "124"
@@ -1692,8 +1640,7 @@
        "Type": {
         "$id": "190",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1716,11 +1663,9 @@
         "LiteralValueType": {
          "$id": "193",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
-        "Value": "text/plain",
-        "IsNullable": false
+        "Value": "text/plain"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1746,8 +1691,7 @@
        "Type": {
         "$id": "196",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1837,6 +1781,7 @@
      "Name": "noContentType",
      "ResourceName": "Demo2",
      "Description": "Return hi again",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "124"
@@ -1848,8 +1793,7 @@
        "Type": {
         "$id": "204",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1868,8 +1812,7 @@
        "Type": {
         "$id": "206",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1986,6 +1929,7 @@
      "Name": "createLiteral",
      "ResourceName": "Demo2",
      "Description": "Create with literal value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "124"
@@ -2095,6 +2039,7 @@
      "Name": "helloLiteral",
      "ResourceName": "Demo2",
      "Description": "Send literal parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "124"
@@ -2110,11 +2055,9 @@
         "LiteralValueType": {
          "$id": "227",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
-        "Value": "test",
-        "IsNullable": false
+        "Value": "test"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -2144,11 +2087,9 @@
         "LiteralValueType": {
          "$id": "231",
          "Kind": "Primitive",
-         "Name": "Int32",
-         "IsNullable": false
+         "Name": "Int32"
         },
-        "Value": 123,
-        "IsNullable": false
+        "Value": 123
        },
        "Location": "Path",
        "DefaultValue": {
@@ -2178,11 +2119,9 @@
         "LiteralValueType": {
          "$id": "235",
          "Kind": "Primitive",
-         "Name": "Boolean",
-         "IsNullable": false
+         "Name": "Boolean"
         },
-        "Value": true,
-        "IsNullable": false
+        "Value": true
        },
        "Location": "Query",
        "DefaultValue": {
@@ -2276,6 +2215,7 @@
      "Name": "getUnknownValue",
      "ResourceName": "EnumTest",
      "Description": "create extensible enum",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "124"
@@ -2396,6 +2336,7 @@
      "Name": "internalProtocol",
      "ResourceName": "ProtocolAndConvenient",
      "Description": "When set protocol false and convenient true, then the protocol method should be internal",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "124"
@@ -2505,6 +2446,7 @@
      "Name": "stillConvenient",
      "ResourceName": "ProtocolAndConvenient",
      "Description": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "124"

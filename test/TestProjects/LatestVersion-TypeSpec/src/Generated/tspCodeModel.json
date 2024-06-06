@@ -47,7 +47,6 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Enum describing allowed operation states.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Output"
   },
   {
@@ -74,7 +73,6 @@
    ],
    "Namespace": "TypeSpec.Versioning.Latest",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -85,7 +83,6 @@
    "Name": "ResourceOperationStatusResourceExportedResourceError",
    "Namespace": "Azure.Core",
    "Description": "Provides status details for long running operations.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -96,8 +93,7 @@
      "Type": {
       "$id": "14",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -124,7 +120,6 @@
       "Name": "Error",
       "Namespace": "Azure.Core.Foundations",
       "Description": "The error object.",
-      "IsNullable": false,
       "Usage": "Output",
       "Properties": [
        {
@@ -135,8 +130,7 @@
         "Type": {
          "$id": "19",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -149,8 +143,7 @@
         "Type": {
          "$id": "21",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -163,8 +156,7 @@
         "Type": {
          "$id": "23",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -180,8 +172,7 @@
          "Name": "Array",
          "ElementType": {
           "$ref": "17"
-         },
-         "IsNullable": false
+         }
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -197,7 +188,6 @@
          "Name": "InnerError",
          "Namespace": "Azure.Core.Foundations",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-         "IsNullable": false,
          "Usage": "Output",
          "Properties": [
           {
@@ -208,8 +198,7 @@
            "Type": {
             "$id": "29",
             "Kind": "Primitive",
-            "Name": "String",
-            "IsNullable": false
+            "Name": "String"
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -245,7 +234,6 @@
       "Kind": "Model",
       "Name": "ExportedResource",
       "Namespace": "TypeSpec.Versioning.Latest",
-      "IsNullable": false,
       "Usage": "Output",
       "Properties": [
        {
@@ -256,8 +244,7 @@
         "Type": {
          "$id": "34",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -270,8 +257,7 @@
         "Type": {
          "$id": "36",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -284,8 +270,7 @@
         "Type": {
          "$id": "38",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -312,7 +297,6 @@
    "Name": "PagedResource",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Resource items",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -329,7 +313,6 @@
        "Kind": "Model",
        "Name": "Resource",
        "Namespace": "TypeSpec.Versioning.Latest",
-       "IsNullable": false,
        "Usage": "RoundTrip",
        "Properties": [
         {
@@ -340,8 +323,7 @@
          "Type": {
           "$id": "44",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": true,
          "IsReadOnly": true
@@ -354,8 +336,7 @@
          "Type": {
           "$id": "46",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": true,
          "IsReadOnly": true
@@ -368,15 +349,13 @@
          "Type": {
           "$id": "48",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -389,8 +368,7 @@
      "Type": {
       "$id": "50",
       "Kind": "Primitive",
-      "Name": "Uri",
-      "IsNullable": false
+      "Name": "Uri"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -433,6 +411,7 @@
      "Name": "export",
      "ResourceName": "VersioningOp",
      "Description": "Long-running resource action operation template.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "57",
@@ -442,8 +421,7 @@
        "Type": {
         "$id": "58",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -472,8 +450,7 @@
        "Type": {
         "$id": "62",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -492,8 +469,7 @@
        "Type": {
         "$id": "64",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -512,8 +488,7 @@
        "Type": {
         "$id": "66",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -532,8 +507,7 @@
        "Type": {
         "$id": "68",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -592,8 +566,7 @@
          "Type": {
           "$id": "74",
           "Kind": "Primitive",
-          "Name": "Uri",
-          "IsNullable": false
+          "Name": "Uri"
          }
         }
        ],
@@ -631,6 +604,7 @@
      "Name": "list",
      "ResourceName": "Resource",
      "Description": "Resource list operation template.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "78",
@@ -640,8 +614,7 @@
        "Type": {
         "$id": "79",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -668,10 +641,8 @@
         "ElementType": {
          "$id": "82",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "String"
+        }
        },
        "Location": "Query",
        "IsRequired": false,
@@ -691,8 +662,7 @@
        "Type": {
         "$id": "84",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -767,6 +737,7 @@
      "Name": "createLongRunning",
      "ResourceName": "Resource",
      "Description": "Long-running resource create or replace operation template.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "91",
@@ -776,8 +747,7 @@
        "Type": {
         "$id": "92",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -799,8 +769,7 @@
        "Type": {
         "$id": "94",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -904,8 +873,7 @@
          "Type": {
           "$id": "104",
           "Kind": "Primitive",
-          "Name": "Uri",
-          "IsNullable": false
+          "Name": "Uri"
          }
         }
        ],
@@ -932,8 +900,7 @@
          "Type": {
           "$id": "107",
           "Kind": "Primitive",
-          "Name": "Uri",
-          "IsNullable": false
+          "Name": "Uri"
          }
         }
        ],

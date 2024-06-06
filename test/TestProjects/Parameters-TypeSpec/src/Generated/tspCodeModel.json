@@ -19,7 +19,6 @@
    ],
    "Namespace": "ParametersCadl",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -29,7 +28,6 @@
    "Kind": "Model",
    "Name": "Result",
    "Namespace": "ParametersCadl.ParameterOrders",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -40,8 +38,7 @@
      "Type": {
       "$id": "6",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -69,6 +66,7 @@
      "$id": "10",
      "Name": "Operation",
      "ResourceName": "ParameterOrders",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "11",
@@ -77,8 +75,7 @@
        "Type": {
         "$id": "12",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -97,8 +94,7 @@
        "Type": {
         "$id": "14",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -117,8 +113,7 @@
        "Type": {
         "$id": "16",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -197,6 +192,7 @@
      "$id": "23",
      "Name": "Operation2",
      "ResourceName": "ParameterOrders",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "24",
@@ -205,8 +201,7 @@
        "Type": {
         "$id": "25",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -225,8 +220,7 @@
        "Type": {
         "$id": "27",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Query",
        "IsRequired": true,

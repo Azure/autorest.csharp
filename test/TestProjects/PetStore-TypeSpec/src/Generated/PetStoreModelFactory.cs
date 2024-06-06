@@ -11,7 +11,7 @@ namespace PetStore.Models
     public static partial class PetStoreModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.Fish"/>. </summary>
-        /// <param name="kind"> Discriminator. </param>
+        /// <param name="kind"> Discriminator property for Fish. </param>
         /// <param name="size"> The size of the fish. </param>
         /// <returns> A new <see cref="Models.Fish"/> instance for mocking. </returns>
         public static Fish Fish(string kind = null, int size = default)

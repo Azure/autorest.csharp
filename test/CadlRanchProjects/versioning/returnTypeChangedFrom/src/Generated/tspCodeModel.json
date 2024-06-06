@@ -28,7 +28,6 @@
    "Namespace": "Versioning.ReturnTypeChangedFrom",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -43,6 +42,7 @@
      "$id": "6",
      "Name": "test",
      "ResourceName": "ReturnTypeChangedFrom",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "7",
@@ -90,8 +90,7 @@
        "Type": {
         "$id": "11",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -167,8 +166,7 @@
        "BodyType": {
         "$id": "19",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "BodyMediaType": "Json",
        "Headers": [],

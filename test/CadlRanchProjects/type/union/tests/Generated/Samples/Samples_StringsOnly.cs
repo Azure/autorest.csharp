@@ -138,7 +138,7 @@ namespace _Type.Union.Samples
         {
             StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-            Response response = client.Send(GetResponseProp5.A);
+            Response response = client.Send(GetResponseProp7.A);
         }
 
         [Test]
@@ -147,7 +147,7 @@ namespace _Type.Union.Samples
         {
             StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-            Response response = await client.SendAsync(GetResponseProp5.A);
+            Response response = await client.SendAsync(GetResponseProp7.A);
         }
 
         [Test]
@@ -186,7 +186,7 @@ namespace _Type.Union.Samples
         {
             StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-            Response response = client.Send(GetResponseProp5.A);
+            Response response = client.Send(GetResponseProp7.A);
         }
 
         [Test]
@@ -195,7 +195,7 @@ namespace _Type.Union.Samples
         {
             StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-            Response response = await client.SendAsync(GetResponseProp5.A);
+            Response response = await client.SendAsync(GetResponseProp7.A);
         }
     }
 }

@@ -45,7 +45,6 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Enum describing allowed operation states.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Output"
   },
   {
@@ -64,7 +63,6 @@
    "Namespace": "_Specs_.Azure.Core.Lro.Standard",
    "Description": "The API version.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -75,7 +73,6 @@
    "Name": "User",
    "Namespace": "_Specs_.Azure.Core.Lro.Standard",
    "Description": "Details about a user.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -86,8 +83,7 @@
      "Type": {
       "$id": "12",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -100,8 +96,7 @@
      "Type": {
       "$id": "14",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -114,7 +109,6 @@
    "Name": "OperationStatusError",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Provides status details for long running operations.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -125,8 +119,7 @@
      "Type": {
       "$id": "17",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -153,7 +146,6 @@
       "Name": "Error",
       "Namespace": "Azure.Core.Foundations",
       "Description": "The error object.",
-      "IsNullable": false,
       "Usage": "Output",
       "Properties": [
        {
@@ -164,8 +156,7 @@
         "Type": {
          "$id": "22",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -178,8 +169,7 @@
         "Type": {
          "$id": "24",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -192,8 +182,7 @@
         "Type": {
          "$id": "26",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -209,8 +198,7 @@
          "Name": "Array",
          "ElementType": {
           "$ref": "20"
-         },
-         "IsNullable": false
+         }
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -226,7 +214,6 @@
          "Name": "InnerError",
          "Namespace": "Azure.Core.Foundations",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-         "IsNullable": false,
          "Usage": "Output",
          "Properties": [
           {
@@ -237,8 +224,7 @@
            "Type": {
             "$id": "32",
             "Kind": "Primitive",
-            "Name": "String",
-            "IsNullable": false
+            "Name": "String"
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -278,7 +264,6 @@
    "Name": "ResourceOperationStatusUserExportedUserError",
    "Namespace": "Azure.Core",
    "Description": "Provides status details for long running operations.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -289,8 +274,7 @@
      "Type": {
       "$id": "36",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -328,7 +312,6 @@
       "Name": "ExportedUser",
       "Namespace": "_Specs_.Azure.Core.Lro.Standard",
       "Description": "The exported user data.",
-      "IsNullable": false,
       "Usage": "Output",
       "Properties": [
        {
@@ -339,8 +322,7 @@
         "Type": {
          "$id": "42",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -353,8 +335,7 @@
         "Type": {
          "$id": "44",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -375,7 +356,6 @@
    "Name": "OperationStatusExportedUserError",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Provides status details for long running operations.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -386,8 +366,7 @@
      "Type": {
       "$id": "47",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -440,6 +419,7 @@
      "ResourceName": "User",
      "Summary": "Adds a user or replaces a user's fields.",
      "Description": "Creates or replaces a User",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "53",
@@ -480,8 +460,7 @@
        "Type": {
         "$id": "58",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -511,8 +490,7 @@
        "Type": {
         "$id": "62",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -616,8 +594,7 @@
          "Type": {
           "$id": "72",
           "Kind": "Primitive",
-          "Name": "Uri",
-          "IsNullable": false
+          "Name": "Uri"
          }
         }
        ],
@@ -644,8 +621,7 @@
          "Type": {
           "$id": "75",
           "Kind": "Primitive",
-          "Name": "Uri",
-          "IsNullable": false
+          "Name": "Uri"
          }
         }
        ],
@@ -686,6 +662,7 @@
      "ResourceName": "User",
      "Summary": "Deletes a user.",
      "Description": "Deletes a User",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "53"
@@ -698,8 +675,7 @@
        "Type": {
         "$id": "80",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -722,8 +698,7 @@
        "Type": {
         "$id": "82",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -782,8 +757,7 @@
          "Type": {
           "$id": "88",
           "Kind": "Primitive",
-          "Name": "Uri",
-          "IsNullable": false
+          "Name": "Uri"
          }
         }
        ],
@@ -818,6 +792,7 @@
      "ResourceName": "Standard",
      "Summary": "Exports a user.",
      "Description": "Exports a User",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "53"
@@ -830,8 +805,7 @@
        "Type": {
         "$id": "93",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -854,8 +828,7 @@
        "Type": {
         "$id": "95",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -875,8 +848,7 @@
        "Type": {
         "$id": "97",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -935,8 +907,7 @@
          "Type": {
           "$id": "103",
           "Kind": "Primitive",
-          "Name": "Uri",
-          "IsNullable": false
+          "Name": "Uri"
          }
         }
        ],

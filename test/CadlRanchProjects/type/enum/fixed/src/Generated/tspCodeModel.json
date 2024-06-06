@@ -55,7 +55,6 @@
    "Namespace": "Type.Enum.Fixed",
    "Description": "Days of the week",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   }
  ],
@@ -114,6 +113,7 @@
      "Name": "getKnownValue",
      "ResourceName": "String",
      "Description": "getKnownValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "12"
@@ -176,6 +176,7 @@
      "Name": "putKnownValue",
      "ResourceName": "String",
      "Description": "putKnownValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "12"
@@ -280,6 +281,7 @@
      "Name": "putUnknownValue",
      "ResourceName": "String",
      "Description": "putUnknownValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "12"

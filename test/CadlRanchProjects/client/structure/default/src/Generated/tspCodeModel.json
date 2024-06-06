@@ -32,7 +32,6 @@
    ],
    "Namespace": "Client.Structure.Service",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input"
   }
  ],
@@ -47,6 +46,7 @@
      "$id": "8",
      "Name": "one",
      "ResourceName": "Service",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "9",
@@ -138,6 +138,7 @@
      "$id": "16",
      "Name": "two",
      "ResourceName": "Service",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -234,6 +235,7 @@
      "$id": "25",
      "Name": "seven",
      "ResourceName": "Foo",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -312,6 +314,7 @@
      "$id": "32",
      "Name": "eight",
      "ResourceName": "Qux",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -390,6 +393,7 @@
      "$id": "39",
      "Name": "nine",
      "ResourceName": "Bar",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -468,6 +472,7 @@
      "$id": "46",
      "Name": "three",
      "ResourceName": "Foo",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -526,6 +531,7 @@
      "$id": "51",
      "Name": "four",
      "ResourceName": "Foo",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -604,6 +610,7 @@
      "$id": "58",
      "Name": "five",
      "ResourceName": "Bar",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -662,6 +669,7 @@
      "$id": "63",
      "Name": "six",
      "ResourceName": "Bar",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"

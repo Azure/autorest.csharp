@@ -58,6 +58,7 @@
      "Name": "get",
      "ResourceName": "String",
      "Description": "get string value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -99,8 +100,7 @@
        "BodyType": {
         "$id": "14",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -123,6 +123,7 @@
      "Name": "put",
      "ResourceName": "String",
      "Description": "put string value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -135,8 +136,7 @@
        "Type": {
         "$id": "17",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -247,6 +247,7 @@
      "Name": "get",
      "ResourceName": "Boolean",
      "Description": "get boolean value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -288,8 +289,7 @@
        "BodyType": {
         "$id": "32",
         "Kind": "Primitive",
-        "Name": "Boolean",
-        "IsNullable": false
+        "Name": "Boolean"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -312,6 +312,7 @@
      "Name": "put",
      "ResourceName": "Boolean",
      "Description": "put boolean value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -324,8 +325,7 @@
        "Type": {
         "$id": "35",
         "Kind": "Primitive",
-        "Name": "Boolean",
-        "IsNullable": false
+        "Name": "Boolean"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -436,6 +436,7 @@
      "Name": "get",
      "ResourceName": "Unknown",
      "Description": "get unknown value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -477,8 +478,7 @@
        "BodyType": {
         "$id": "50",
         "Kind": "Intrinsic",
-        "Name": "unknown",
-        "IsNullable": false
+        "Name": "unknown"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -501,6 +501,7 @@
      "Name": "put",
      "ResourceName": "Unknown",
      "Description": "put unknown value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -513,8 +514,7 @@
        "Type": {
         "$id": "53",
         "Kind": "Intrinsic",
-        "Name": "unknown",
-        "IsNullable": false
+        "Name": "unknown"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -624,6 +624,7 @@
      "$id": "63",
      "Name": "responseBody",
      "ResourceName": "DecimalType",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -665,8 +666,7 @@
        "BodyType": {
         "$id": "68",
         "Kind": "Primitive",
-        "Name": "Decimal",
-        "IsNullable": false
+        "Name": "Decimal"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -688,6 +688,7 @@
      "$id": "69",
      "Name": "requestBody",
      "ResourceName": "DecimalType",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -699,8 +700,7 @@
        "Type": {
         "$id": "71",
         "Kind": "Primitive",
-        "Name": "Decimal",
-        "IsNullable": false
+        "Name": "Decimal"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -793,6 +793,7 @@
      "$id": "79",
      "Name": "requestParameter",
      "ResourceName": "DecimalType",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -804,8 +805,7 @@
        "Type": {
         "$id": "81",
         "Kind": "Primitive",
-        "Name": "Decimal",
-        "IsNullable": false
+        "Name": "Decimal"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -885,6 +885,7 @@
      "$id": "88",
      "Name": "responseBody",
      "ResourceName": "Decimal128Type",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -926,8 +927,7 @@
        "BodyType": {
         "$id": "93",
         "Kind": "Primitive",
-        "Name": "Decimal128",
-        "IsNullable": false
+        "Name": "Decimal128"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -949,6 +949,7 @@
      "$id": "94",
      "Name": "requestBody",
      "ResourceName": "Decimal128Type",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -960,8 +961,7 @@
        "Type": {
         "$id": "96",
         "Kind": "Primitive",
-        "Name": "Decimal128",
-        "IsNullable": false
+        "Name": "Decimal128"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1054,6 +1054,7 @@
      "$id": "104",
      "Name": "requestParameter",
      "ResourceName": "Decimal128Type",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -1065,8 +1066,7 @@
        "Type": {
         "$id": "106",
         "Kind": "Primitive",
-        "Name": "Decimal128",
-        "IsNullable": false
+        "Name": "Decimal128"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1146,6 +1146,7 @@
      "$id": "113",
      "Name": "prepareVerify",
      "ResourceName": "DecimalVerify",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -1191,10 +1192,8 @@
         "ElementType": {
          "$id": "119",
          "Kind": "Primitive",
-         "Name": "Decimal",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "Decimal"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1216,6 +1215,7 @@
      "$id": "120",
      "Name": "verify",
      "ResourceName": "DecimalVerify",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -1227,8 +1227,7 @@
        "Type": {
         "$id": "122",
         "Kind": "Primitive",
-        "Name": "Decimal",
-        "IsNullable": false
+        "Name": "Decimal"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1338,6 +1337,7 @@
      "$id": "132",
      "Name": "prepareVerify",
      "ResourceName": "Decimal128Verify",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -1383,10 +1383,8 @@
         "ElementType": {
          "$id": "138",
          "Kind": "Primitive",
-         "Name": "Decimal",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "Decimal"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1408,6 +1406,7 @@
      "$id": "139",
      "Name": "verify",
      "ResourceName": "Decimal128Verify",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -1419,8 +1418,7 @@
        "Type": {
         "$id": "141",
         "Kind": "Primitive",
-        "Name": "Decimal",
-        "IsNullable": false
+        "Name": "Decimal"
        },
        "Location": "Body",
        "IsRequired": true,

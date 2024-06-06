@@ -9,7 +9,6 @@
    "Kind": "Model",
    "Name": "BodyModel",
    "Namespace": "Parameters.BodyOptionality",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -20,8 +19,7 @@
      "Type": {
       "$id": "4",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -39,6 +37,7 @@
      "$id": "6",
      "Name": "requiredExplicit",
      "ResourceName": "BodyOptionality",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "7",
@@ -169,6 +168,7 @@
      "$id": "19",
      "Name": "requiredImplicit",
      "ResourceName": "BodyOptionality",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"
@@ -287,6 +287,7 @@
      "$id": "30",
      "Name": "set",
      "ResourceName": "OptionalExplicit",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"
@@ -389,6 +390,7 @@
      "$id": "39",
      "Name": "omit",
      "ResourceName": "OptionalExplicit",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"

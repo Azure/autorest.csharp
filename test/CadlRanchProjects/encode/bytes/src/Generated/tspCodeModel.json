@@ -9,7 +9,6 @@
    "Kind": "Model",
    "Name": "DefaultBytesProperty",
    "Namespace": "Encode.Bytes",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -20,8 +19,7 @@
      "Type": {
       "$id": "4",
       "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Name": "Bytes"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -33,7 +31,6 @@
    "Kind": "Model",
    "Name": "Base64BytesProperty",
    "Namespace": "Encode.Bytes",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -44,8 +41,7 @@
      "Type": {
       "$id": "7",
       "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Name": "Bytes"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -57,7 +53,6 @@
    "Kind": "Model",
    "Name": "Base64urlBytesProperty",
    "Namespace": "Encode.Bytes",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -68,8 +63,7 @@
      "Type": {
       "$id": "10",
       "Kind": "Primitive",
-      "Name": "BytesBase64Url",
-      "IsNullable": false
+      "Name": "BytesBase64Url"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -81,7 +75,6 @@
    "Kind": "Model",
    "Name": "Base64urlArrayBytesProperty",
    "Namespace": "Encode.Bytes",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -96,10 +89,8 @@
       "ElementType": {
        "$id": "14",
        "Kind": "Primitive",
-       "Name": "BytesBase64Url",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "BytesBase64Url"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -160,6 +151,7 @@
      "$id": "22",
      "Name": "default",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -171,8 +163,7 @@
        "Type": {
         "$id": "24",
         "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Name": "Bytes"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -235,6 +226,7 @@
      "$id": "29",
      "Name": "base64",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -246,8 +238,7 @@
        "Type": {
         "$id": "31",
         "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Name": "Bytes"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -310,6 +301,7 @@
      "$id": "36",
      "Name": "base64url",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -321,8 +313,7 @@
        "Type": {
         "$id": "38",
         "Kind": "Primitive",
-        "Name": "BytesBase64Url",
-        "IsNullable": false
+        "Name": "BytesBase64Url"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -385,6 +376,7 @@
      "$id": "43",
      "Name": "base64urlArray",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -400,10 +392,8 @@
         "ElementType": {
          "$id": "46",
          "Kind": "Primitive",
-         "Name": "BytesBase64Url",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "BytesBase64Url"
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -484,6 +474,7 @@
      "$id": "53",
      "Name": "default",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -592,6 +583,7 @@
      "$id": "62",
      "Name": "base64",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -700,6 +692,7 @@
      "$id": "71",
      "Name": "base64url",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -808,6 +801,7 @@
      "$id": "80",
      "Name": "base64urlArray",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -933,6 +927,7 @@
      "$id": "91",
      "Name": "default",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -944,8 +939,7 @@
        "Type": {
         "$id": "93",
         "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Name": "Bytes"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1008,6 +1002,7 @@
      "$id": "98",
      "Name": "base64",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1019,8 +1014,7 @@
        "Type": {
         "$id": "100",
         "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Name": "Bytes"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1083,6 +1077,7 @@
      "$id": "105",
      "Name": "base64url",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1094,8 +1089,7 @@
        "Type": {
         "$id": "107",
         "Kind": "Primitive",
-        "Name": "BytesBase64Url",
-        "IsNullable": false
+        "Name": "BytesBase64Url"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1158,6 +1152,7 @@
      "$id": "112",
      "Name": "base64urlArray",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1173,10 +1168,8 @@
         "ElementType": {
          "$id": "115",
          "Kind": "Primitive",
-         "Name": "BytesBase64Url",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "BytesBase64Url"
+        }
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1257,6 +1250,7 @@
      "$id": "122",
      "Name": "default",
      "ResourceName": "RequestBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1268,8 +1262,7 @@
        "Type": {
         "$id": "124",
         "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Name": "Bytes"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1362,6 +1355,7 @@
      "$id": "132",
      "Name": "octetStream",
      "ResourceName": "RequestBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1377,11 +1371,9 @@
         "LiteralValueType": {
          "$id": "135",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
-        "Value": "application/octet-stream",
-        "IsNullable": false
+        "Value": "application/octet-stream"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1407,8 +1399,7 @@
        "Type": {
         "$id": "138",
         "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Name": "Bytes"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1474,6 +1465,7 @@
      "$id": "143",
      "Name": "customContentType",
      "ResourceName": "RequestBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1489,11 +1481,9 @@
         "LiteralValueType": {
          "$id": "146",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
-        "Value": "image/png",
-        "IsNullable": false
+        "Value": "image/png"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1519,8 +1509,7 @@
        "Type": {
         "$id": "149",
         "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Name": "Bytes"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1586,6 +1575,7 @@
      "$id": "154",
      "Name": "base64",
      "ResourceName": "RequestBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1597,8 +1587,7 @@
        "Type": {
         "$id": "156",
         "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Name": "Bytes"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1691,6 +1680,7 @@
      "$id": "164",
      "Name": "base64url",
      "ResourceName": "RequestBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1702,8 +1692,7 @@
        "Type": {
         "$id": "166",
         "Kind": "Primitive",
-        "Name": "BytesBase64Url",
-        "IsNullable": false
+        "Name": "BytesBase64Url"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1813,6 +1802,7 @@
      "$id": "176",
      "Name": "default",
      "ResourceName": "ResponseBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1854,8 +1844,7 @@
        "BodyType": {
         "$id": "181",
         "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Name": "Bytes"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1877,6 +1866,7 @@
      "$id": "182",
      "Name": "octetStream",
      "ResourceName": "ResponseBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1918,8 +1908,7 @@
        "BodyType": {
         "$id": "187",
         "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Name": "Bytes"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1941,6 +1930,7 @@
      "$id": "188",
      "Name": "customContentType",
      "ResourceName": "ResponseBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1982,8 +1972,7 @@
        "BodyType": {
         "$id": "193",
         "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Name": "Bytes"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2005,6 +1994,7 @@
      "$id": "194",
      "Name": "base64",
      "ResourceName": "ResponseBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -2046,8 +2036,7 @@
        "BodyType": {
         "$id": "199",
         "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Name": "Bytes"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2069,6 +2058,7 @@
      "$id": "200",
      "Name": "base64url",
      "ResourceName": "ResponseBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -2110,8 +2100,7 @@
        "BodyType": {
         "$id": "205",
         "Kind": "Primitive",
-        "Name": "BytesBase64Url",
-        "IsNullable": false
+        "Name": "BytesBase64Url"
        },
        "BodyMediaType": "Json",
        "Headers": [],

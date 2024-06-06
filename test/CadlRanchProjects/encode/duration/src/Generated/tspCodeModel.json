@@ -9,7 +9,6 @@
    "Kind": "Model",
    "Name": "DefaultDurationProperty",
    "Namespace": "Encode.Duration.Property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -33,7 +32,6 @@
    "Kind": "Model",
    "Name": "ISO8601DurationProperty",
    "Namespace": "Encode.Duration.Property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -57,7 +55,6 @@
    "Kind": "Model",
    "Name": "Int32SecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -81,7 +78,6 @@
    "Kind": "Model",
    "Name": "FloatSecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -105,7 +101,6 @@
    "Kind": "Model",
    "Name": "Float64SecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -129,7 +124,6 @@
    "Kind": "Model",
    "Name": "FloatSecondsDurationArrayProperty",
    "Namespace": "Encode.Duration.Property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -146,8 +140,7 @@
        "Kind": "Primitive",
        "Name": "DurationSecondsFloat",
        "IsNullable": false
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -208,6 +201,7 @@
      "$id": "28",
      "Name": "default",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "23"
@@ -283,6 +277,7 @@
      "$id": "35",
      "Name": "iso8601",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "23"
@@ -358,6 +353,7 @@
      "$id": "42",
      "Name": "int32Seconds",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "23"
@@ -433,6 +429,7 @@
      "$id": "49",
      "Name": "floatSeconds",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "23"
@@ -508,6 +505,7 @@
      "$id": "56",
      "Name": "float64Seconds",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "23"
@@ -583,6 +581,7 @@
      "$id": "63",
      "Name": "int32SecondsArray",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "23"
@@ -600,8 +599,7 @@
          "Kind": "Primitive",
          "Name": "DurationSeconds",
          "IsNullable": false
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -682,6 +680,7 @@
      "$id": "73",
      "Name": "default",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "23"
@@ -790,6 +789,7 @@
      "$id": "82",
      "Name": "iso8601",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "23"
@@ -898,6 +898,7 @@
      "$id": "91",
      "Name": "int32Seconds",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "23"
@@ -1006,6 +1007,7 @@
      "$id": "100",
      "Name": "floatSeconds",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "23"
@@ -1114,6 +1116,7 @@
      "$id": "109",
      "Name": "float64Seconds",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "23"
@@ -1222,6 +1225,7 @@
      "$id": "118",
      "Name": "floatSecondsArray",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "23"
@@ -1347,6 +1351,7 @@
      "$id": "129",
      "Name": "default",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "23"
@@ -1422,6 +1427,7 @@
      "$id": "136",
      "Name": "iso8601",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "23"
@@ -1497,6 +1503,7 @@
      "$id": "143",
      "Name": "iso8601Array",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "23"
@@ -1514,8 +1521,7 @@
          "Kind": "Primitive",
          "Name": "DurationISO8601",
          "IsNullable": false
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1579,6 +1585,7 @@
      "$id": "151",
      "Name": "int32Seconds",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "23"
@@ -1654,6 +1661,7 @@
      "$id": "158",
      "Name": "floatSeconds",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "23"
@@ -1729,6 +1737,7 @@
      "$id": "165",
      "Name": "float64Seconds",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "23"

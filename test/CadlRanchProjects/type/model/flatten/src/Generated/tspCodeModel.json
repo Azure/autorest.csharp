@@ -10,7 +10,6 @@
    "Name": "FlattenModel",
    "Namespace": "Type.Model.Flatten",
    "Description": "This is the model with one level of flattening.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -21,8 +20,7 @@
      "Type": {
       "$id": "4",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -35,8 +33,7 @@
      "Type": {
       "$id": "6",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -53,8 +50,7 @@
      "Type": {
       "$id": "8",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -71,7 +67,6 @@
    "Name": "NestedFlattenModel",
    "Namespace": "Type.Model.Flatten",
    "Description": "This is the model with two levels of flattening.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -82,8 +77,7 @@
      "Type": {
       "$id": "11",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -96,8 +90,7 @@
      "Type": {
       "$id": "13",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -114,8 +107,7 @@
      "Type": {
       "$id": "15",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -133,8 +125,7 @@
      "Type": {
       "$id": "17",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -152,7 +143,6 @@
    "Name": "ChildModel",
    "Namespace": "Type.Model.Flatten",
    "Description": "This is the child model to be flattened.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -163,8 +153,7 @@
      "Type": {
       "$id": "20",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -177,8 +166,7 @@
      "Type": {
       "$id": "22",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -191,7 +179,6 @@
    "Name": "ChildFlattenModel",
    "Namespace": "Type.Model.Flatten",
    "Description": "This is the child model to be flattened. And it has flattened property as well.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -202,8 +189,7 @@
      "Type": {
       "$id": "25",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -216,8 +202,7 @@
      "Type": {
       "$id": "27",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -234,8 +219,7 @@
      "Type": {
       "$id": "29",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -257,6 +241,7 @@
      "$id": "31",
      "Name": "putFlattenModel",
      "ResourceName": "Flatten",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "32",
@@ -393,6 +378,7 @@
      "$id": "44",
      "Name": "putNestedFlattenModel",
      "ResourceName": "Flatten",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "32"

@@ -6,7 +6,7 @@
   {
    "$id": "2",
    "Kind": "Enum",
-   "Name": "ImmediateSuccessResponse",
+   "Name": "ImmediateSuccessResponseRepeatabilityResult",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -22,8 +22,7 @@
    ],
    "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
-   "Usage": "None"
+   "Usage": "Output"
   }
  ],
  "Models": [],
@@ -38,6 +37,7 @@
      "Name": "immediateSuccess",
      "ResourceName": "Repeatability",
      "Description": "Check we recognize Repeatability-Request-ID and Repeatability-First-Sent.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "7",
@@ -77,8 +77,7 @@
        "Type": {
         "$id": "12",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Header",
        "IsRequired": true,

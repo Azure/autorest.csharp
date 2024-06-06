@@ -717,15 +717,22 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputConstant CreateConstant(ConstantSchema constantSchema, string? format, bool isNullable)
         {
+            var rawValue = constantSchema.Value.Value;
             var valueType = CreateType(constantSchema.ValueType, format, isNullable);
+            if (isNullable && rawValue == null)
+            {
+                return new InputConstant(null, valueType);
+            }
+            var targetValueType = valueType is InputNullableType nullableType ? nullableType.Type : valueType;
+
             // normalize the value, because the "value" coming from the code model is always a string
-            var kind = valueType switch
+            var kind = targetValueType switch
             {
                 InputPrimitiveType primitiveType => primitiveType.Kind,
                 InputEnumType enumType => enumType.EnumValueType.Kind,
                 _ => throw new InvalidCastException($"Unknown value type {valueType.GetType()} for literal types")
             };
-            var rawValue = constantSchema.Value.Value;
+
             object normalizedValue = kind switch
             {
                 InputTypeKind.Boolean => bool.Parse(rawValue.ToString()!),

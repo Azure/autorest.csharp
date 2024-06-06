@@ -28,7 +28,6 @@
    "Namespace": "Versioning.RenamedFrom",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   },
   {
@@ -45,7 +44,6 @@
    ],
    "Namespace": "Versioning.RenamedFrom",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   }
  ],
@@ -55,7 +53,6 @@
    "Kind": "Model",
    "Name": "NewModel",
    "Namespace": "Versioning.RenamedFrom",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -66,8 +63,7 @@
      "Type": {
       "$id": "9",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -96,17 +92,14 @@
        {
         "$id": "13",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        {
         "$id": "14",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        }
-      ],
-      "IsNullable": false
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -124,6 +117,7 @@
      "$id": "16",
      "Name": "newOp",
      "ResourceName": "RenamedFrom",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "17",
@@ -171,8 +165,7 @@
        "Type": {
         "$id": "21",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -307,6 +300,7 @@
      "$id": "32",
      "Name": "newOpInNewInterface",
      "ResourceName": "NewInterface",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"

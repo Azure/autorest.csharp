@@ -19,7 +19,6 @@
    "Namespace": "Type.Property.Optional",
    "Description": "The StringLiteralProperty_property",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -38,7 +37,6 @@
    "Namespace": "Type.Property.Optional",
    "Description": "The IntLiteralProperty_property",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -57,7 +55,6 @@
    "Namespace": "Type.Property.Optional",
    "Description": "The FloatLiteralProperty_property",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -79,7 +76,6 @@
    ],
    "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -101,7 +97,6 @@
    ],
    "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -123,7 +118,6 @@
    ],
    "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   }
  ],
@@ -134,7 +128,6 @@
    "Name": "StringProperty",
    "Namespace": "Type.Property.Optional",
    "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -145,8 +138,7 @@
      "Type": {
       "$id": "19",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -159,7 +151,6 @@
    "Name": "BytesProperty",
    "Namespace": "Type.Property.Optional",
    "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -170,8 +161,7 @@
      "Type": {
       "$id": "22",
       "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Name": "Bytes"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -184,7 +174,6 @@
    "Name": "DatetimeProperty",
    "Namespace": "Type.Property.Optional",
    "Description": "Model with a datetime property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -209,7 +198,6 @@
    "Name": "DurationProperty",
    "Namespace": "Type.Property.Optional",
    "Description": "Model with a duration property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -234,7 +222,6 @@
    "Name": "CollectionsByteProperty",
    "Namespace": "Type.Property.Optional",
    "Description": "Model with collection bytes properties",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -249,10 +236,8 @@
       "ElementType": {
        "$id": "32",
        "Kind": "Primitive",
-       "Name": "Bytes",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "Bytes"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -265,7 +250,6 @@
    "Name": "CollectionsModelProperty",
    "Namespace": "Type.Property.Optional",
    "Description": "Model with collection models properties",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -279,8 +263,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "17"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -293,7 +276,6 @@
    "Name": "StringLiteralProperty",
    "Namespace": "Type.Property.Optional",
    "Description": "Model with string literal property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -308,8 +290,7 @@
       "LiteralValueType": {
        "$ref": "2"
       },
-      "Value": "hello",
-      "IsNullable": false
+      "Value": "hello"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -322,7 +303,6 @@
    "Name": "IntLiteralProperty",
    "Namespace": "Type.Property.Optional",
    "Description": "Model with int literal property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -337,8 +317,7 @@
       "LiteralValueType": {
        "$ref": "4"
       },
-      "Value": 1,
-      "IsNullable": false
+      "Value": 1
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -351,7 +330,6 @@
    "Name": "FloatLiteralProperty",
    "Namespace": "Type.Property.Optional",
    "Description": "Model with float literal property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -366,8 +344,7 @@
       "LiteralValueType": {
        "$ref": "6"
       },
-      "Value": 1.25,
-      "IsNullable": false
+      "Value": 1.25
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -380,7 +357,6 @@
    "Name": "BooleanLiteralProperty",
    "Namespace": "Type.Property.Optional",
    "Description": "Model with boolean literal property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -395,11 +371,9 @@
       "LiteralValueType": {
        "$id": "48",
        "Kind": "Primitive",
-       "Name": "Boolean",
-       "IsNullable": false
+       "Name": "Boolean"
       },
-      "Value": true,
-      "IsNullable": false
+      "Value": true
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -412,7 +386,6 @@
    "Name": "UnionStringLiteralProperty",
    "Namespace": "Type.Property.Optional",
    "Description": "Model with union of string literal property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -434,7 +407,6 @@
    "Name": "UnionIntLiteralProperty",
    "Namespace": "Type.Property.Optional",
    "Description": "Model with union of int literal property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -456,7 +428,6 @@
    "Name": "UnionFloatLiteralProperty",
    "Namespace": "Type.Property.Optional",
    "Description": "Model with union of float literal property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -478,7 +449,6 @@
    "Name": "RequiredAndOptionalProperty",
    "Namespace": "Type.Property.Optional",
    "Description": "Model with required and optional properties",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -489,8 +459,7 @@
      "Type": {
       "$id": "57",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -503,8 +472,7 @@
      "Type": {
       "$id": "59",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -566,6 +534,7 @@
      "Name": "getAll",
      "ResourceName": "String",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -628,6 +597,7 @@
      "Name": "getDefault",
      "ResourceName": "String",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -690,6 +660,7 @@
      "Name": "putAll",
      "ResourceName": "String",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -793,6 +764,7 @@
      "Name": "putDefault",
      "ResourceName": "String",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -913,6 +885,7 @@
      "Name": "getAll",
      "ResourceName": "Bytes",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -975,6 +948,7 @@
      "Name": "getDefault",
      "ResourceName": "Bytes",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -1037,6 +1011,7 @@
      "Name": "putAll",
      "ResourceName": "Bytes",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -1140,6 +1115,7 @@
      "Name": "putDefault",
      "ResourceName": "Bytes",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -1260,6 +1236,7 @@
      "Name": "getAll",
      "ResourceName": "Datetime",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -1322,6 +1299,7 @@
      "Name": "getDefault",
      "ResourceName": "Datetime",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -1384,6 +1362,7 @@
      "Name": "putAll",
      "ResourceName": "Datetime",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -1487,6 +1466,7 @@
      "Name": "putDefault",
      "ResourceName": "Datetime",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -1607,6 +1587,7 @@
      "Name": "getAll",
      "ResourceName": "Duration",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -1669,6 +1650,7 @@
      "Name": "getDefault",
      "ResourceName": "Duration",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -1731,6 +1713,7 @@
      "Name": "putAll",
      "ResourceName": "Duration",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -1834,6 +1817,7 @@
      "Name": "putDefault",
      "ResourceName": "Duration",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -1954,6 +1938,7 @@
      "Name": "getAll",
      "ResourceName": "CollectionsByte",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -2016,6 +2001,7 @@
      "Name": "getDefault",
      "ResourceName": "CollectionsByte",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -2078,6 +2064,7 @@
      "Name": "putAll",
      "ResourceName": "CollectionsByte",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -2181,6 +2168,7 @@
      "Name": "putDefault",
      "ResourceName": "CollectionsByte",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -2301,6 +2289,7 @@
      "Name": "getAll",
      "ResourceName": "CollectionsModel",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -2363,6 +2352,7 @@
      "Name": "getDefault",
      "ResourceName": "CollectionsModel",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -2425,6 +2415,7 @@
      "Name": "putAll",
      "ResourceName": "CollectionsModel",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -2528,6 +2519,7 @@
      "Name": "putDefault",
      "ResourceName": "CollectionsModel",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -2648,6 +2640,7 @@
      "Name": "getAll",
      "ResourceName": "StringLiteral",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -2710,6 +2703,7 @@
      "Name": "getDefault",
      "ResourceName": "StringLiteral",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -2772,6 +2766,7 @@
      "Name": "putAll",
      "ResourceName": "StringLiteral",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -2875,6 +2870,7 @@
      "Name": "putDefault",
      "ResourceName": "StringLiteral",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -2995,6 +2991,7 @@
      "Name": "getAll",
      "ResourceName": "IntLiteral",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -3057,6 +3054,7 @@
      "Name": "getDefault",
      "ResourceName": "IntLiteral",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -3119,6 +3117,7 @@
      "Name": "putAll",
      "ResourceName": "IntLiteral",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -3222,6 +3221,7 @@
      "Name": "putDefault",
      "ResourceName": "IntLiteral",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -3342,6 +3342,7 @@
      "Name": "getAll",
      "ResourceName": "FloatLiteral",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -3404,6 +3405,7 @@
      "Name": "getDefault",
      "ResourceName": "FloatLiteral",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -3466,6 +3468,7 @@
      "Name": "putAll",
      "ResourceName": "FloatLiteral",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -3569,6 +3572,7 @@
      "Name": "putDefault",
      "ResourceName": "FloatLiteral",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -3689,6 +3693,7 @@
      "Name": "getAll",
      "ResourceName": "BooleanLiteral",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -3751,6 +3756,7 @@
      "Name": "getDefault",
      "ResourceName": "BooleanLiteral",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -3813,6 +3819,7 @@
      "Name": "putAll",
      "ResourceName": "BooleanLiteral",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -3916,6 +3923,7 @@
      "Name": "putDefault",
      "ResourceName": "BooleanLiteral",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -4036,6 +4044,7 @@
      "Name": "getAll",
      "ResourceName": "UnionStringLiteral",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -4098,6 +4107,7 @@
      "Name": "getDefault",
      "ResourceName": "UnionStringLiteral",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -4160,6 +4170,7 @@
      "Name": "putAll",
      "ResourceName": "UnionStringLiteral",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -4263,6 +4274,7 @@
      "Name": "putDefault",
      "ResourceName": "UnionStringLiteral",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -4383,6 +4395,7 @@
      "Name": "getAll",
      "ResourceName": "UnionIntLiteral",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -4445,6 +4458,7 @@
      "Name": "getDefault",
      "ResourceName": "UnionIntLiteral",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -4507,6 +4521,7 @@
      "Name": "putAll",
      "ResourceName": "UnionIntLiteral",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -4610,6 +4625,7 @@
      "Name": "putDefault",
      "ResourceName": "UnionIntLiteral",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -4730,6 +4746,7 @@
      "Name": "getAll",
      "ResourceName": "UnionFloatLiteral",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -4792,6 +4809,7 @@
      "Name": "getDefault",
      "ResourceName": "UnionFloatLiteral",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -4854,6 +4872,7 @@
      "Name": "putAll",
      "ResourceName": "UnionFloatLiteral",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -4957,6 +4976,7 @@
      "Name": "putDefault",
      "ResourceName": "UnionFloatLiteral",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -5077,6 +5097,7 @@
      "Name": "getAll",
      "ResourceName": "RequiredAndOptional",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -5139,6 +5160,7 @@
      "Name": "getRequiredOnly",
      "ResourceName": "RequiredAndOptional",
      "Description": "Get models that will return only the required properties",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -5201,6 +5223,7 @@
      "Name": "putAll",
      "ResourceName": "RequiredAndOptional",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"
@@ -5304,6 +5327,7 @@
      "Name": "putRequiredOnly",
      "ResourceName": "RequiredAndOptional",
      "Description": "Put a body with only required properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "62"

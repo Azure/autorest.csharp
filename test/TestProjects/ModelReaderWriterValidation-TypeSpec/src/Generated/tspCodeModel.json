@@ -25,7 +25,6 @@
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The type of alias pattern.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Output"
   },
   {
@@ -86,7 +85,6 @@
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The type of the token that the alias path is referring to.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -111,7 +109,6 @@
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The attributes of the token that the alias path is referring to.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -142,7 +139,6 @@
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The type of the alias.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Output"
   },
   {
@@ -179,7 +175,6 @@
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The provider authorization consent state.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Output"
   }
  ],
@@ -190,7 +185,6 @@
    "Name": "ModelAsStruct",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The model to change to struct.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -201,8 +195,7 @@
      "Type": {
       "$id": "28",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -214,7 +207,6 @@
    "Kind": "Model",
    "Name": "ModelWithPersistableOnly",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -225,8 +217,7 @@
      "Type": {
       "$id": "31",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -243,10 +234,8 @@
       "ElementType": {
        "$id": "34",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "String"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -259,8 +248,7 @@
      "Type": {
       "$id": "36",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -277,16 +265,13 @@
       "KeyType": {
        "$id": "39",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "Name": "String"
       },
       "ValueType": {
        "$id": "40",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "String"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -299,8 +284,7 @@
      "Type": {
       "$id": "42",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -313,7 +297,6 @@
    "Name": "BaseModel",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The BaseModel in the discriminated set",
-   "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "RoundTrip",
    "Properties": [
@@ -325,8 +308,7 @@
      "Type": {
       "$id": "45",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -340,8 +322,7 @@
      "Type": {
       "$id": "47",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -354,7 +335,6 @@
    "Name": "AvailabilitySetData",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The availability set data",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "BaseModel": {
     "$id": "49",
@@ -362,7 +342,6 @@
     "Name": "TrackedResourceData",
     "Namespace": "ModelReaderWriterValidationTypeSpec",
     "Description": "The tracked resource data",
-    "IsNullable": false,
     "Usage": "RoundTrip",
     "Properties": [
      {
@@ -373,8 +352,7 @@
       "Type": {
        "$id": "51",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "Name": "String"
       },
       "IsRequired": true,
       "IsReadOnly": true
@@ -387,8 +365,7 @@
       "Type": {
        "$id": "53",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "Name": "String"
       },
       "IsRequired": true,
       "IsReadOnly": true
@@ -401,8 +378,7 @@
       "Type": {
        "$id": "55",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "Name": "String"
       },
       "IsRequired": true,
       "IsReadOnly": true
@@ -415,8 +391,7 @@
       "Type": {
        "$id": "57",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "Name": "String"
       },
       "IsRequired": true,
       "IsReadOnly": false
@@ -433,16 +408,13 @@
        "KeyType": {
         "$id": "60",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "ValueType": {
         "$id": "61",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "IsNullable": false
+        "Name": "String"
+       }
       },
       "IsRequired": false,
       "IsReadOnly": false
@@ -460,7 +432,6 @@
       "Kind": "Model",
       "Name": "ComputeSku",
       "Namespace": "ModelReaderWriterValidationTypeSpec",
-      "IsNullable": false,
       "Usage": "RoundTrip",
       "Properties": [
        {
@@ -471,8 +442,7 @@
         "Type": {
          "$id": "65",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -485,8 +455,7 @@
         "Type": {
          "$id": "67",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -499,8 +468,7 @@
         "Type": {
          "$id": "69",
          "Kind": "Primitive",
-         "Name": "Int64",
-         "IsNullable": false
+         "Name": "Int64"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -521,7 +489,6 @@
       "Name": "AvailabilitySetProperties",
       "Namespace": "ModelReaderWriterValidationTypeSpec",
       "Description": "The availability set properties",
-      "IsNullable": false,
       "Usage": "RoundTrip",
       "Properties": [
        {
@@ -539,7 +506,6 @@
           "Name": "WritableSubResource",
           "Namespace": "ModelReaderWriterValidationTypeSpec",
           "Description": "The writable sub resource",
-          "IsNullable": false,
           "Usage": "RoundTrip",
           "Properties": [
            {
@@ -550,15 +516,13 @@
             "Type": {
              "$id": "76",
              "Kind": "Primitive",
-             "Name": "String",
-             "IsNullable": false
+             "Name": "String"
             },
             "IsRequired": false,
             "IsReadOnly": false
            }
           ]
-         },
-         "IsNullable": false
+         }
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -571,8 +535,7 @@
         "Type": {
          "$id": "78",
          "Kind": "Primitive",
-         "Name": "Int32",
-         "IsNullable": false
+         "Name": "Int32"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -585,8 +548,7 @@
         "Type": {
          "$id": "80",
          "Kind": "Primitive",
-         "Name": "Int32",
-         "IsNullable": false
+         "Name": "Int32"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -616,7 +578,6 @@
    "Name": "ResourceProviderData",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "A class representing the ResourceProvider data model.\nResource provider information.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -627,8 +588,7 @@
      "Type": {
       "$id": "83",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -641,8 +601,7 @@
      "Type": {
       "$id": "85",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -655,8 +614,7 @@
      "Type": {
       "$id": "87",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -669,8 +627,7 @@
      "Type": {
       "$id": "89",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -689,7 +646,6 @@
        "Kind": "Model",
        "Name": "ProviderResourceType",
        "Namespace": "ModelReaderWriterValidationTypeSpec",
-       "IsNullable": false,
        "Usage": "Output",
        "Properties": [
         {
@@ -700,8 +656,7 @@
          "Type": {
           "$id": "94",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -718,10 +673,8 @@
           "ElementType": {
            "$id": "97",
            "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
-          },
-          "IsNullable": false
+           "Name": "String"
+          }
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -741,7 +694,6 @@
            "Name": "ProviderExtendedLocation",
            "Namespace": "ModelReaderWriterValidationTypeSpec",
            "Description": "The provider extended location.",
-           "IsNullable": false,
            "Usage": "Output",
            "Properties": [
             {
@@ -752,8 +704,7 @@
              "Type": {
               "$id": "102",
               "Kind": "Primitive",
-              "Name": "String",
-              "IsNullable": false
+              "Name": "String"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -766,8 +717,7 @@
              "Type": {
               "$id": "104",
               "Kind": "Primitive",
-              "Name": "String",
-              "IsNullable": false
+              "Name": "String"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -784,17 +734,14 @@
               "ElementType": {
                "$id": "107",
                "Kind": "Primitive",
-               "Name": "String",
-               "IsNullable": false
-              },
-              "IsNullable": false
+               "Name": "String"
+              }
              },
              "IsRequired": false,
              "IsReadOnly": false
             }
            ]
-          },
-          "IsNullable": false
+          }
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -814,7 +761,6 @@
            "Name": "ResourceTypeAlias",
            "Namespace": "ModelReaderWriterValidationTypeSpec",
            "Description": "The alias type.",
-           "IsNullable": false,
            "Usage": "Output",
            "Properties": [
             {
@@ -825,8 +771,7 @@
              "Type": {
               "$id": "112",
               "Kind": "Primitive",
-              "Name": "String",
-              "IsNullable": false
+              "Name": "String"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -846,7 +791,6 @@
                "Name": "ResourceTypeAliasPath",
                "Namespace": "ModelReaderWriterValidationTypeSpec",
                "Description": "The type of the paths for alias.",
-               "IsNullable": false,
                "Usage": "Output",
                "Properties": [
                 {
@@ -857,8 +801,7 @@
                  "Type": {
                   "$id": "117",
                   "Kind": "Primitive",
-                  "Name": "String",
-                  "IsNullable": false
+                  "Name": "String"
                  },
                  "IsRequired": false,
                  "IsReadOnly": false
@@ -875,10 +818,8 @@
                   "ElementType": {
                    "$id": "120",
                    "Kind": "Primitive",
-                   "Name": "String",
-                   "IsNullable": false
-                  },
-                  "IsNullable": false
+                   "Name": "String"
+                  }
                  },
                  "IsRequired": false,
                  "IsReadOnly": false
@@ -894,7 +835,6 @@
                   "Name": "ResourceTypeAliasPattern",
                   "Namespace": "ModelReaderWriterValidationTypeSpec",
                   "Description": "The type of the pattern for an alias path.",
-                  "IsNullable": false,
                   "Usage": "Output",
                   "Properties": [
                    {
@@ -905,8 +845,7 @@
                     "Type": {
                      "$id": "124",
                      "Kind": "Primitive",
-                     "Name": "String",
-                     "IsNullable": false
+                     "Name": "String"
                     },
                     "IsRequired": false,
                     "IsReadOnly": false
@@ -919,8 +858,7 @@
                     "Type": {
                      "$id": "126",
                      "Kind": "Primitive",
-                     "Name": "String",
-                     "IsNullable": false
+                     "Name": "String"
                     },
                     "IsRequired": false,
                     "IsReadOnly": false
@@ -952,7 +890,6 @@
                   "Name": "ResourceTypeAliasPathMetadata",
                   "Namespace": "ModelReaderWriterValidationTypeSpec",
                   "Description": "The ResourceTypeAliasPathMetadata.",
-                  "IsNullable": false,
                   "Usage": "RoundTrip",
                   "Properties": [
                    {
@@ -983,8 +920,7 @@
                  "IsReadOnly": false
                 }
                ]
-              },
-              "IsNullable": false
+              }
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -1008,8 +944,7 @@
              "Type": {
               "$id": "134",
               "Kind": "Primitive",
-              "Name": "String",
-              "IsNullable": false
+              "Name": "String"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -1037,8 +972,7 @@
              "IsReadOnly": false
             }
            ]
-          },
-          "IsNullable": false
+          }
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1055,10 +989,8 @@
           "ElementType": {
            "$id": "139",
            "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
-          },
-          "IsNullable": false
+           "Name": "String"
+          }
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1071,8 +1003,7 @@
          "Type": {
           "$id": "141",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1092,7 +1023,6 @@
            "Name": "ZoneMapping",
            "Namespace": "ModelReaderWriterValidationTypeSpec",
            "Description": "The ZoneMapping.",
-           "IsNullable": false,
            "Usage": "Output",
            "Properties": [
             {
@@ -1103,8 +1033,7 @@
              "Type": {
               "$id": "146",
               "Kind": "Primitive",
-              "Name": "String",
-              "IsNullable": false
+              "Name": "String"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -1121,17 +1050,14 @@
               "ElementType": {
                "$id": "149",
                "Kind": "Primitive",
-               "Name": "String",
-               "IsNullable": false
-              },
-              "IsNullable": false
+               "Name": "String"
+              }
              },
              "IsRequired": false,
              "IsReadOnly": false
             }
            ]
-          },
-          "IsNullable": false
+          }
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1150,7 +1076,6 @@
            "Kind": "Model",
            "Name": "ApiProfile",
            "Namespace": "ModelReaderWriterValidationTypeSpec",
-           "IsNullable": false,
            "Usage": "Output",
            "Properties": [
             {
@@ -1161,8 +1086,7 @@
              "Type": {
               "$id": "154",
               "Kind": "Primitive",
-              "Name": "String",
-              "IsNullable": false
+              "Name": "String"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -1175,15 +1099,13 @@
              "Type": {
               "$id": "156",
               "Kind": "Primitive",
-              "Name": "String",
-              "IsNullable": false
+              "Name": "String"
              },
              "IsRequired": false,
              "IsReadOnly": false
             }
            ]
-          },
-          "IsNullable": false
+          }
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1196,8 +1118,7 @@
          "Type": {
           "$id": "158",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1214,23 +1135,19 @@
           "KeyType": {
            "$id": "161",
            "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
+           "Name": "String"
           },
           "ValueType": {
            "$id": "162",
            "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
-          },
-          "IsNullable": false
+           "Name": "String"
+          }
          },
          "IsRequired": false,
          "IsReadOnly": false
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1277,7 +1194,6 @@
    "Kind": "Model",
    "Name": "ModelWithStringAdditionalProperties",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "165",
@@ -1286,16 +1202,13 @@
     "KeyType": {
      "$id": "166",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "167",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
-    },
-    "IsNullable": false
+     "Name": "String"
+    }
    },
    "Properties": [
     {
@@ -1306,8 +1219,7 @@
      "Type": {
       "$id": "169",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1320,8 +1232,7 @@
      "Type": {
       "$id": "171",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1334,8 +1245,7 @@
      "Type": {
       "$id": "173",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1347,7 +1257,6 @@
    "Kind": "Model",
    "Name": "ModelWithArrayAdditionalProperties",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "175",
@@ -1356,8 +1265,7 @@
     "KeyType": {
      "$id": "176",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "177",
@@ -1365,10 +1273,8 @@
      "Name": "Array",
      "ElementType": {
       "$ref": "129"
-     },
-     "IsNullable": false
-    },
-    "IsNullable": false
+     }
+    }
    },
    "Properties": [
     {
@@ -1379,8 +1285,7 @@
      "Type": {
       "$id": "179",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1393,8 +1298,7 @@
      "Type": {
       "$id": "181",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1407,8 +1311,7 @@
      "Type": {
       "$id": "183",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1420,7 +1323,6 @@
    "Kind": "Model",
    "Name": "ModelWithUnknownAdditionalProperties",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "185",
@@ -1429,16 +1331,13 @@
     "KeyType": {
      "$id": "186",
      "Kind": "Primitive",
-     "Name": "String",
-     "IsNullable": false
+     "Name": "String"
     },
     "ValueType": {
      "$id": "187",
      "Kind": "Intrinsic",
-     "Name": "unknown",
-     "IsNullable": false
-    },
-    "IsNullable": false
+     "Name": "unknown"
+    }
    },
    "Properties": [
     {
@@ -1449,8 +1348,7 @@
      "Type": {
       "$id": "189",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1463,8 +1361,7 @@
      "Type": {
       "$id": "191",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1477,8 +1374,7 @@
      "Type": {
       "$id": "193",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1491,7 +1387,6 @@
    "Name": "ModelX",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The ModelX in the discriminated set",
-   "IsNullable": false,
    "DiscriminatorValue": "X",
    "Usage": "RoundTrip",
    "BaseModel": {
@@ -1510,10 +1405,8 @@
       "ElementType": {
        "$id": "197",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "String"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1526,8 +1419,7 @@
      "Type": {
       "$id": "199",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1544,16 +1436,13 @@
       "KeyType": {
        "$id": "202",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "Name": "String"
       },
       "ValueType": {
        "$id": "203",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "String"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1566,8 +1455,7 @@
      "Type": {
       "$id": "205",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1580,7 +1468,6 @@
    "Name": "ModelY",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The ModelY in the discriminated set",
-   "IsNullable": false,
    "DiscriminatorValue": "Y",
    "Usage": "RoundTrip",
    "BaseModel": {
@@ -1595,8 +1482,7 @@
      "Type": {
       "$id": "208",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1614,6 +1500,7 @@
      "$id": "210",
      "Name": "op1",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "211",
@@ -1739,6 +1626,7 @@
      "$id": "221",
      "Name": "op2",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "211"
@@ -1847,6 +1735,7 @@
      "$id": "230",
      "Name": "op3",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "211"
@@ -1955,6 +1844,7 @@
      "$id": "239",
      "Name": "op4",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "211"
@@ -2063,6 +1953,7 @@
      "$id": "248",
      "Name": "op5",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "211"
@@ -2124,6 +2015,7 @@
      "$id": "253",
      "Name": "op6",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "211"
@@ -2232,6 +2124,7 @@
      "$id": "262",
      "Name": "op7",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "211"
@@ -2340,6 +2233,7 @@
      "$id": "271",
      "Name": "op8",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "211"

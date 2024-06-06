@@ -19,7 +19,6 @@
    ],
    "Namespace": "SpreadTypeSpec",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -29,7 +28,6 @@
    "Kind": "Model",
    "Name": "Thing",
    "Namespace": "SpreadTypeSpec",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -40,8 +38,7 @@
      "Type": {
       "$id": "6",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -54,8 +51,7 @@
      "Type": {
       "$id": "8",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -67,7 +63,6 @@
    "Kind": "Model",
    "Name": "SpreadAliasRequest",
    "Namespace": "SpreadTypeSpec",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -78,8 +73,7 @@
      "Type": {
       "$id": "11",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -92,8 +86,7 @@
      "Type": {
       "$id": "13",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -105,7 +98,6 @@
    "Kind": "Model",
    "Name": "SpreadMultiTargetAliasRequest",
    "Namespace": "",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -116,8 +108,7 @@
      "Type": {
       "$id": "16",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -130,8 +121,7 @@
      "Type": {
       "$id": "18",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -143,7 +133,6 @@
    "Kind": "Model",
    "Name": "SpreadAliasWithSpreadAliasRequest",
    "Namespace": "",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -154,8 +143,7 @@
      "Type": {
       "$id": "21",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -168,8 +156,7 @@
      "Type": {
       "$id": "23",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -181,7 +168,6 @@
    "Kind": "Model",
    "Name": "SpreadAliasWithOptionalPropsRequest",
    "Namespace": "",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -192,8 +178,7 @@
      "Type": {
       "$id": "26",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -206,8 +191,7 @@
      "Type": {
       "$id": "28",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -220,8 +204,7 @@
      "Type": {
       "$id": "30",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -238,10 +221,8 @@
       "ElementType": {
        "$id": "33",
        "Kind": "Primitive",
-       "Name": "Int32",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "Int32"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -258,10 +239,8 @@
       "ElementType": {
        "$id": "36",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "String"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -273,7 +252,6 @@
    "Kind": "Model",
    "Name": "SpreadAliasWithCollectionsRequest",
    "Namespace": "SpreadTypeSpec",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -288,10 +266,8 @@
       "ElementType": {
        "$id": "40",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "String"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -308,10 +284,8 @@
       "ElementType": {
        "$id": "43",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "String"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -330,6 +304,7 @@
      "Name": "spreadModel",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread a model as body.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "46",
@@ -450,6 +425,7 @@
      "Name": "spreadAlias",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias as body.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -553,6 +529,7 @@
      "Name": "spreadMultiTargetAlias",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias which has multiple target property as body.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -564,8 +541,7 @@
        "Type": {
         "$id": "67",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -584,8 +560,7 @@
        "Type": {
         "$id": "69",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -696,6 +671,7 @@
      "Name": "spreadAliasWithModel",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias which contains a complex model property as body.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -707,8 +683,7 @@
        "Type": {
         "$id": "80",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -727,8 +702,7 @@
        "Type": {
         "$id": "82",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -839,6 +813,7 @@
      "Name": "spreadAliasWithSpreadAlias",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias with contains another alias property as body.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -850,8 +825,7 @@
        "Type": {
         "$id": "93",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -870,8 +844,7 @@
        "Type": {
         "$id": "95",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -982,6 +955,7 @@
      "Name": "spreadAliasWithOptionalProps",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias with contains optional properties as body.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -993,8 +967,7 @@
        "Type": {
         "$id": "106",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1013,8 +986,7 @@
        "Type": {
         "$id": "108",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1125,6 +1097,7 @@
      "Name": "spreadAliasWithCollections",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias with required and optional collections",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"

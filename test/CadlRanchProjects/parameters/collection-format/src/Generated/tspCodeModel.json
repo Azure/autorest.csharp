@@ -57,6 +57,7 @@
      "$id": "9",
      "Name": "multi",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -73,10 +74,8 @@
         "ElementType": {
          "$id": "12",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "String"
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -139,6 +138,7 @@
      "$id": "17",
      "Name": "ssv",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -155,10 +155,8 @@
         "ElementType": {
          "$id": "20",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "String"
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -222,6 +220,7 @@
      "$id": "25",
      "Name": "tsv",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -238,10 +237,8 @@
         "ElementType": {
          "$id": "28",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "String"
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -305,6 +302,7 @@
      "$id": "33",
      "Name": "pipes",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -321,10 +319,8 @@
         "ElementType": {
          "$id": "36",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "String"
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -388,6 +384,7 @@
      "$id": "41",
      "Name": "csv",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -404,10 +401,8 @@
         "ElementType": {
          "$id": "44",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "String"
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -488,6 +483,7 @@
      "$id": "51",
      "Name": "csv",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -504,10 +500,8 @@
         "ElementType": {
          "$id": "54",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "String"
+        }
        },
        "Location": "Header",
        "IsRequired": true,

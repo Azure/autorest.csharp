@@ -15,6 +15,7 @@
      "Name": "validKey",
      "ResourceName": "Union",
      "Description": "Check whether client is authenticated",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "4",
@@ -99,6 +100,7 @@
      "Name": "validToken",
      "ResourceName": "Union",
      "Description": "Check whether client is authenticated",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"

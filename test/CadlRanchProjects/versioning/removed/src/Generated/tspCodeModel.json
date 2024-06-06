@@ -28,7 +28,6 @@
    "Namespace": "Versioning.Removed",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   },
   {
@@ -45,7 +44,6 @@
    ],
    "Namespace": "Versioning.Removed",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   }
  ],
@@ -55,7 +53,6 @@
    "Kind": "Model",
    "Name": "ModelV2",
    "Namespace": "Versioning.Removed",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -66,8 +63,7 @@
      "Type": {
       "$id": "9",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -96,17 +92,14 @@
        {
         "$id": "13",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        {
         "$id": "14",
         "Kind": "Primitive",
-        "Name": "Float32",
-        "IsNullable": false
+        "Name": "Float32"
        }
-      ],
-      "IsNullable": false
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -124,6 +117,7 @@
      "$id": "16",
      "Name": "v2",
      "ResourceName": "Removed",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "17",

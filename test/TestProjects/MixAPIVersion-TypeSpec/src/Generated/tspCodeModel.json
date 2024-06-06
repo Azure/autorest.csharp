@@ -19,7 +19,6 @@
    ],
    "Namespace": "MixApiVersion",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -30,7 +29,6 @@
    "Name": "Pet",
    "Namespace": "MixApiVersion",
    "Description": "Pet",
-   "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
@@ -41,8 +39,7 @@
      "Type": {
       "$id": "6",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -55,8 +52,7 @@
      "Type": {
       "$id": "8",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -69,8 +65,7 @@
      "Type": {
       "$id": "10",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -83,7 +78,6 @@
    "Name": "PagedToy",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Toy items",
-   "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
@@ -100,7 +94,6 @@
        "Kind": "Model",
        "Name": "Toy",
        "Namespace": "MixApiVersion",
-       "IsNullable": false,
        "Usage": "None",
        "Properties": [
         {
@@ -111,8 +104,7 @@
          "Type": {
           "$id": "16",
           "Kind": "Primitive",
-          "Name": "Int64",
-          "IsNullable": false
+          "Name": "Int64"
          },
          "IsRequired": true,
          "IsReadOnly": true
@@ -125,8 +117,7 @@
          "Type": {
           "$id": "18",
           "Kind": "Primitive",
-          "Name": "Int64",
-          "IsNullable": false
+          "Name": "Int64"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -139,15 +130,13 @@
          "Type": {
           "$id": "20",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -160,8 +149,7 @@
      "Type": {
       "$id": "22",
       "Kind": "Primitive",
-      "Name": "Uri",
-      "IsNullable": false
+      "Name": "Uri"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -216,6 +204,7 @@
      "ResourceName": "Pet",
      "Summary": "delete.",
      "Description": "Delete a pet.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "25"
@@ -228,8 +217,7 @@
        "Type": {
         "$id": "30",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -259,8 +247,7 @@
        "Type": {
         "$id": "34",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -324,6 +311,7 @@
      "Name": "read",
      "ResourceName": "Pets",
      "Description": "Returns a pet. Supports eTags.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "25"
@@ -336,8 +324,7 @@
        "Type": {
         "$id": "41",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -421,6 +408,7 @@
      "$id": "47",
      "Name": "create",
      "ResourceName": "Pets",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "25"
@@ -436,11 +424,9 @@
         "LiteralValueType": {
          "$id": "50",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
-        "Value": "2022-07-09",
-        "IsNullable": false
+        "Value": "2022-07-09"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -582,6 +568,7 @@
      "ResourceName": "Toy",
      "Summary": "Gets ledger entries from a collection corresponding to a range.",
      "Description": "A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "25"
@@ -594,8 +581,7 @@
        "Type": {
         "$id": "64",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "DefaultValue": {

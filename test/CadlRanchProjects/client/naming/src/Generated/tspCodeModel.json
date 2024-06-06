@@ -17,7 +17,6 @@
    ],
    "Namespace": "Client.Naming.UnionEnum",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Input"
   },
   {
@@ -39,7 +38,6 @@
    ],
    "Namespace": "Client.Naming.UnionEnum",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Input"
   }
  ],
@@ -49,7 +47,6 @@
    "Kind": "Model",
    "Name": "ClientNameModel",
    "Namespace": "Client.Naming.Property",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -60,8 +57,7 @@
      "Type": {
       "$id": "9",
       "Kind": "Primitive",
-      "Name": "Boolean",
-      "IsNullable": false
+      "Name": "Boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -73,7 +69,6 @@
    "Kind": "Model",
    "Name": "LanguageClientNameModel",
    "Namespace": "Client.Naming.Property",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -84,8 +79,7 @@
      "Type": {
       "$id": "12",
       "Kind": "Primitive",
-      "Name": "Boolean",
-      "IsNullable": false
+      "Name": "Boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -97,7 +91,6 @@
    "Kind": "Model",
    "Name": "ClientNameAndJsonEncodedNameModel",
    "Namespace": "Client.Naming.Property",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -108,8 +101,7 @@
      "Type": {
       "$id": "15",
       "Kind": "Primitive",
-      "Name": "Boolean",
-      "IsNullable": false
+      "Name": "Boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -121,7 +113,6 @@
    "Kind": "Model",
    "Name": "ClientModel",
    "Namespace": "Client.Naming.Model",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -132,8 +123,7 @@
      "Type": {
       "$id": "18",
       "Kind": "Primitive",
-      "Name": "Boolean",
-      "IsNullable": false
+      "Name": "Boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -145,7 +135,6 @@
    "Kind": "Model",
    "Name": "CSModel",
    "Namespace": "Client.Naming.Model",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -156,8 +145,7 @@
      "Type": {
       "$id": "21",
       "Kind": "Primitive",
-      "Name": "Boolean",
-      "IsNullable": false
+      "Name": "Boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -175,6 +163,7 @@
      "$id": "23",
      "Name": "clientName",
      "ResourceName": "Naming",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "24",
@@ -258,6 +247,7 @@
      "$id": "32",
      "Name": "parameter",
      "ResourceName": "Naming",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "24"
@@ -269,8 +259,7 @@
        "Type": {
         "$id": "34",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -333,6 +322,7 @@
      "$id": "39",
      "Name": "client",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "24"
@@ -435,6 +425,7 @@
      "$id": "48",
      "Name": "language",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "24"
@@ -537,6 +528,7 @@
      "$id": "57",
      "Name": "compatibleWithEncodedName",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "24"
@@ -639,6 +631,7 @@
      "$id": "66",
      "Name": "request",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "24"
@@ -650,8 +643,7 @@
        "Type": {
         "$id": "68",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -714,6 +706,7 @@
      "$id": "73",
      "Name": "response",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "24"
@@ -762,8 +755,7 @@
          "Type": {
           "$id": "79",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          }
         }
        ],
@@ -798,6 +790,7 @@
      "$id": "82",
      "Name": "client",
      "ResourceName": "Model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "24"
@@ -900,6 +893,7 @@
      "$id": "91",
      "Name": "language",
      "ResourceName": "Model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "24"
@@ -1019,6 +1013,7 @@
      "$id": "102",
      "Name": "unionEnumName",
      "ResourceName": "UnionEnum",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "24"
@@ -1121,6 +1116,7 @@
      "$id": "111",
      "Name": "unionEnumMemberName",
      "ResourceName": "UnionEnum",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "24"

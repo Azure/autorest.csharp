@@ -179,8 +179,6 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 case InputNullableType nullableType:
                     if (visitedTypes.Contains(nullableType.Type))
                         return;
-                    // <invocation>.GetProperty("<key>")
-                    invocation = invocation.Invoke("GetProperty", Literal("<key>"));
                     BuildResponseParseStatements(useAllProperties, nullableType.Type, invocation, statements, visitedTypes);
                     return;
                 case InputModelType modelType:

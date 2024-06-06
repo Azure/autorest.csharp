@@ -14,6 +14,7 @@
      "$id": "3",
      "Name": "withoutApiVersion",
      "ResourceName": "NotVersioned",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "4",
@@ -87,6 +88,7 @@
      "$id": "10",
      "Name": "withQueryApiVersion",
      "ResourceName": "NotVersioned",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -98,8 +100,7 @@
        "Type": {
         "$id": "12",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -162,6 +163,7 @@
      "$id": "17",
      "Name": "withPathApiVersion",
      "ResourceName": "NotVersioned",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -173,8 +175,7 @@
        "Type": {
         "$id": "19",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,

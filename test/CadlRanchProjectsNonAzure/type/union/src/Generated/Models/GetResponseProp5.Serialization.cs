@@ -8,19 +8,11 @@ namespace Scm._Type.Union.Models
 {
     internal static partial class GetResponseProp5Extensions
     {
-        public static string ToSerialString(this GetResponseProp5 value) => value switch
+        public static GetResponseProp5 ToGetResponseProp5(this int value)
         {
-            GetResponseProp5.A => "a",
-            GetResponseProp5.B => "b",
-            GetResponseProp5.C => "c",
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown GetResponseProp5 value.")
-        };
-
-        public static GetResponseProp5 ToGetResponseProp5(this string value)
-        {
-            if (StringComparer.OrdinalIgnoreCase.Equals(value, "a")) return GetResponseProp5.A;
-            if (StringComparer.OrdinalIgnoreCase.Equals(value, "b")) return GetResponseProp5.B;
-            if (StringComparer.OrdinalIgnoreCase.Equals(value, "c")) return GetResponseProp5.C;
+            if (value == 1) return GetResponseProp5._1;
+            if (value == 2) return GetResponseProp5._2;
+            if (value == 3) return GetResponseProp5._3;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown GetResponseProp5 value.");
         }
     }

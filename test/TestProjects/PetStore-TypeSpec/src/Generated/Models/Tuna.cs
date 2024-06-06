@@ -23,7 +23,7 @@ namespace PetStore.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Tuna"/>. </summary>
-        /// <param name="kind"> Discriminator. </param>
+        /// <param name="kind"> Discriminator property for Fish. </param>
         /// <param name="size"> The size of the fish. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="fat"> The amount of fat of the tuna. </param>

@@ -10,7 +10,6 @@
    "Name": "InputRecord",
    "Namespace": "Type.Model.Usage",
    "Description": "Record used in operation parameters",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -21,8 +20,7 @@
      "Type": {
       "$id": "4",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -35,7 +33,6 @@
    "Name": "OutputRecord",
    "Namespace": "Type.Model.Usage",
    "Description": "Record used in operation return type",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -46,8 +43,7 @@
      "Type": {
       "$id": "7",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -60,7 +56,6 @@
    "Name": "InputOutputRecord",
    "Namespace": "Type.Model.Usage",
    "Description": "Record used both as operation parameter and return type",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -71,8 +66,7 @@
      "Type": {
       "$id": "10",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -90,6 +84,7 @@
      "$id": "12",
      "Name": "input",
      "ResourceName": "Usage",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "13",
@@ -220,6 +215,7 @@
      "$id": "25",
      "Name": "output",
      "ResourceName": "Usage",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "13"
@@ -281,6 +277,7 @@
      "$id": "30",
      "Name": "inputAndOutput",
      "ResourceName": "Usage",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "13"

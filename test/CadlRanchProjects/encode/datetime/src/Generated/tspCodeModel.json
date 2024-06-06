@@ -9,7 +9,6 @@
    "Kind": "Model",
    "Name": "DefaultDatetimeProperty",
    "Namespace": "Encode.Datetime",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -33,7 +32,6 @@
    "Kind": "Model",
    "Name": "Rfc3339DatetimeProperty",
    "Namespace": "Encode.Datetime",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -57,7 +55,6 @@
    "Kind": "Model",
    "Name": "Rfc7231DatetimeProperty",
    "Namespace": "Encode.Datetime",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -81,7 +78,6 @@
    "Kind": "Model",
    "Name": "UnixTimestampDatetimeProperty",
    "Namespace": "Encode.Datetime",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -105,7 +101,6 @@
    "Kind": "Model",
    "Name": "UnixTimestampArrayDatetimeProperty",
    "Namespace": "Encode.Datetime",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -122,8 +117,7 @@
        "Kind": "Primitive",
        "Name": "DateTimeUnix",
        "IsNullable": false
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -184,6 +178,7 @@
      "$id": "25",
      "Name": "default",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"
@@ -259,6 +254,7 @@
      "$id": "32",
      "Name": "rfc3339",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"
@@ -334,6 +330,7 @@
      "$id": "39",
      "Name": "rfc7231",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"
@@ -409,6 +406,7 @@
      "$id": "46",
      "Name": "unixTimestamp",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"
@@ -484,6 +482,7 @@
      "$id": "53",
      "Name": "unixTimestampArray",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"
@@ -501,8 +500,7 @@
          "Kind": "Primitive",
          "Name": "DateTimeUnix",
          "IsNullable": false
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -583,6 +581,7 @@
      "$id": "63",
      "Name": "default",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"
@@ -691,6 +690,7 @@
      "$id": "72",
      "Name": "rfc3339",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"
@@ -799,6 +799,7 @@
      "$id": "81",
      "Name": "rfc7231",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"
@@ -907,6 +908,7 @@
      "$id": "90",
      "Name": "unixTimestamp",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"
@@ -1015,6 +1017,7 @@
      "$id": "99",
      "Name": "unixTimestampArray",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"
@@ -1140,6 +1143,7 @@
      "$id": "110",
      "Name": "default",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"
@@ -1215,6 +1219,7 @@
      "$id": "117",
      "Name": "rfc3339",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"
@@ -1290,6 +1295,7 @@
      "$id": "124",
      "Name": "rfc7231",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"
@@ -1365,6 +1371,7 @@
      "$id": "131",
      "Name": "unixTimestamp",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"
@@ -1440,6 +1447,7 @@
      "$id": "138",
      "Name": "unixTimestampArray",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"
@@ -1457,8 +1465,7 @@
          "Kind": "Primitive",
          "Name": "DateTimeUnix",
          "IsNullable": false
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1539,6 +1546,7 @@
      "$id": "148",
      "Name": "default",
      "ResourceName": "ResponseHeader",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"
@@ -1607,6 +1615,7 @@
      "$id": "155",
      "Name": "rfc3339",
      "ResourceName": "ResponseHeader",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"
@@ -1675,6 +1684,7 @@
      "$id": "162",
      "Name": "rfc7231",
      "ResourceName": "ResponseHeader",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"
@@ -1743,6 +1753,7 @@
      "$id": "169",
      "Name": "unixTimestamp",
      "ResourceName": "ResponseHeader",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "20"

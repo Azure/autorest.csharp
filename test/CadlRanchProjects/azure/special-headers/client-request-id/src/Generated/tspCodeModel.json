@@ -15,6 +15,7 @@
      "Name": "get",
      "ResourceName": "XmsClientRequestId",
      "Description": "Get operation with azure `x-ms-client-request-id` header.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "4",
@@ -54,8 +55,7 @@
        "Type": {
         "$id": "9",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Header",
        "IsRequired": false,

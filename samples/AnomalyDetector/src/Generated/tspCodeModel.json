@@ -19,7 +19,6 @@
    ],
    "Namespace": "AnomalyDetector",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "None"
   },
   {
@@ -77,7 +76,6 @@
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "the time granularity of the data points.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input"
   },
   {
@@ -120,7 +118,6 @@
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "The impute mode.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Input"
   },
   {
@@ -153,7 +150,6 @@
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "The batch detection status.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Output"
   },
   {
@@ -178,7 +174,6 @@
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -201,7 +196,6 @@
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "The alignment mode.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -239,7 +233,6 @@
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -272,7 +265,6 @@
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "the model status.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -339,7 +331,6 @@
    ],
    "Namespace": "AnomalyDetector.Univariate",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Output"
   },
   {
@@ -356,7 +347,6 @@
    ],
    "Namespace": "AnomalyDetector",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -367,7 +357,6 @@
    "Name": "UnivariateDetectionOptions",
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "The request of entire or last anomaly detection.",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -385,7 +374,6 @@
        "Name": "TimeSeriesPoint",
        "Namespace": "AnomalyDetector.Univariate",
        "Description": "The definition of input timeseries points.",
-       "IsNullable": false,
        "Usage": "Input",
        "Properties": [
         {
@@ -410,15 +398,13 @@
          "Type": {
           "$id": "64",
           "Kind": "Primitive",
-          "Name": "Float32",
-          "IsNullable": false
+          "Name": "Float32"
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -442,8 +428,7 @@
      "Type": {
       "$id": "67",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -456,8 +441,7 @@
      "Type": {
       "$id": "69",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -470,8 +454,7 @@
      "Type": {
       "$id": "71",
       "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "Name": "Float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -484,8 +467,7 @@
      "Type": {
       "$id": "73",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -509,8 +491,7 @@
      "Type": {
       "$id": "76",
       "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "Name": "Float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -526,7 +507,6 @@
    "Name": "UnivariateEntireDetectionResult",
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "The response of entire anomaly detection.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -537,8 +517,7 @@
      "Type": {
       "$id": "79",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -555,10 +534,8 @@
       "ElementType": {
        "$id": "82",
        "Kind": "Primitive",
-       "Name": "Float32",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "Float32"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -575,10 +552,8 @@
       "ElementType": {
        "$id": "85",
        "Kind": "Primitive",
-       "Name": "Float32",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "Float32"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -595,10 +570,8 @@
       "ElementType": {
        "$id": "88",
        "Kind": "Primitive",
-       "Name": "Float32",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "Float32"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -615,10 +588,8 @@
       "ElementType": {
        "$id": "91",
        "Kind": "Primitive",
-       "Name": "Boolean",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "Boolean"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -635,10 +606,8 @@
       "ElementType": {
        "$id": "94",
        "Kind": "Primitive",
-       "Name": "Boolean",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "Boolean"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -655,10 +624,8 @@
       "ElementType": {
        "$id": "97",
        "Kind": "Primitive",
-       "Name": "Boolean",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "Boolean"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -675,10 +642,8 @@
       "ElementType": {
        "$id": "100",
        "Kind": "Primitive",
-       "Name": "Float32",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "Float32"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -691,7 +656,6 @@
    "Name": "UnivariateLastDetectionResult",
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "The response of last anomaly detection.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -702,8 +666,7 @@
      "Type": {
       "$id": "103",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -716,8 +679,7 @@
      "Type": {
       "$id": "105",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -730,8 +692,7 @@
      "Type": {
       "$id": "107",
       "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "Name": "Float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -744,8 +705,7 @@
      "Type": {
       "$id": "109",
       "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "Name": "Float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -758,8 +718,7 @@
      "Type": {
       "$id": "111",
       "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "Name": "Float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -772,8 +731,7 @@
      "Type": {
       "$id": "113",
       "Kind": "Primitive",
-      "Name": "Boolean",
-      "IsNullable": false
+      "Name": "Boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -786,8 +744,7 @@
      "Type": {
       "$id": "115",
       "Kind": "Primitive",
-      "Name": "Boolean",
-      "IsNullable": false
+      "Name": "Boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -800,8 +757,7 @@
      "Type": {
       "$id": "117",
       "Kind": "Primitive",
-      "Name": "Boolean",
-      "IsNullable": false
+      "Name": "Boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -814,8 +770,7 @@
      "Type": {
       "$id": "119",
       "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "Name": "Float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -828,7 +783,6 @@
    "Name": "UnivariateChangePointDetectionOptions",
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "The request of change point detection.",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -842,8 +796,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "60"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -867,8 +820,7 @@
      "Type": {
       "$id": "125",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -881,8 +833,7 @@
      "Type": {
       "$id": "127",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -895,8 +846,7 @@
      "Type": {
       "$id": "129",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -909,8 +859,7 @@
      "Type": {
       "$id": "131",
       "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "Name": "Float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -923,7 +872,6 @@
    "Name": "UnivariateChangePointDetectionResult",
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "The response of change point detection.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -934,8 +882,7 @@
      "Type": {
       "$id": "134",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": false,
      "IsReadOnly": true
@@ -952,10 +899,8 @@
       "ElementType": {
        "$id": "137",
        "Kind": "Primitive",
-       "Name": "Boolean",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "Boolean"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -972,10 +917,8 @@
       "ElementType": {
        "$id": "140",
        "Kind": "Primitive",
-       "Name": "Float32",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "Float32"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -988,7 +931,6 @@
    "Name": "MultivariateDetectionResult",
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Detection results for the given resultId.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -999,8 +941,7 @@
      "Type": {
       "$id": "143",
       "Kind": "Primitive",
-      "Name": "Guid",
-      "IsNullable": false
+      "Name": "Guid"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1016,7 +957,6 @@
       "Name": "MultivariateBatchDetectionResultSummary",
       "Namespace": "AnomalyDetector.Multivariate",
       "Description": "Multivariate anomaly detection status.",
-      "IsNullable": false,
       "Usage": "Output",
       "Properties": [
        {
@@ -1045,8 +985,7 @@
           "Name": "ErrorResponse",
           "Namespace": "AnomalyDetector.Multivariate",
           "Description": "ErrorResponse contains code and message that shows the error information.",
-          "IsNullable": false,
-          "Usage": "RoundTrip",
+          "Usage": "Output",
           "Properties": [
            {
             "$id": "150",
@@ -1056,8 +995,7 @@
             "Type": {
              "$id": "151",
              "Kind": "Primitive",
-             "Name": "String",
-             "IsNullable": false
+             "Name": "String"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -1070,15 +1008,13 @@
             "Type": {
              "$id": "153",
              "Kind": "Primitive",
-             "Name": "String",
-             "IsNullable": false
+             "Name": "String"
             },
             "IsRequired": true,
             "IsReadOnly": false
            }
           ]
-         },
-         "IsNullable": false
+         }
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -1098,7 +1034,6 @@
           "Name": "VariableState",
           "Namespace": "AnomalyDetector.Multivariate",
           "Description": "Variable Status.",
-          "IsNullable": false,
           "Usage": "RoundTrip",
           "Properties": [
            {
@@ -1109,8 +1044,7 @@
             "Type": {
              "$id": "158",
              "Kind": "Primitive",
-             "Name": "String",
-             "IsNullable": false
+             "Name": "String"
             },
             "IsRequired": false,
             "IsReadOnly": false
@@ -1123,8 +1057,7 @@
             "Type": {
              "$id": "160",
              "Kind": "Primitive",
-             "Name": "Float32",
-             "IsNullable": false
+             "Name": "Float32"
             },
             "IsRequired": false,
             "IsReadOnly": false
@@ -1137,8 +1070,7 @@
             "Type": {
              "$id": "162",
              "Kind": "Primitive",
-             "Name": "Int32",
-             "IsNullable": false
+             "Name": "Int32"
             },
             "IsRequired": false,
             "IsReadOnly": false
@@ -1172,8 +1104,7 @@
             "IsReadOnly": false
            }
           ]
-         },
-         "IsNullable": false
+         }
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -1189,7 +1120,6 @@
          "Name": "MultivariateBatchDetectionOptions",
          "Namespace": "AnomalyDetector.Multivariate",
          "Description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
-         "IsNullable": false,
          "Usage": "RoundTrip",
          "Properties": [
           {
@@ -1200,8 +1130,7 @@
            "Type": {
             "$id": "170",
             "Kind": "Primitive",
-            "Name": "Uri",
-            "IsNullable": false
+            "Name": "Uri"
            },
            "IsRequired": true,
            "IsReadOnly": false
@@ -1214,8 +1143,7 @@
            "Type": {
             "$id": "172",
             "Kind": "Primitive",
-            "Name": "Int32",
-            "IsNullable": false
+            "Name": "Int32"
            },
            "IsRequired": true,
            "IsReadOnly": false
@@ -1273,7 +1201,6 @@
        "Name": "AnomalyState",
        "Namespace": "AnomalyDetector.Multivariate",
        "Description": "Anomaly status and information.",
-       "IsNullable": false,
        "Usage": "Output",
        "Properties": [
         {
@@ -1301,7 +1228,6 @@
           "Name": "AnomalyValue",
           "Namespace": "AnomalyDetector.Multivariate",
           "Description": "Detailed information of the anomalous timestamp.",
-          "IsNullable": false,
           "Usage": "Output",
           "Properties": [
            {
@@ -1312,8 +1238,7 @@
             "Type": {
              "$id": "185",
              "Kind": "Primitive",
-             "Name": "Boolean",
-             "IsNullable": false
+             "Name": "Boolean"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -1326,8 +1251,7 @@
             "Type": {
              "$id": "187",
              "Kind": "Primitive",
-             "Name": "Float32",
-             "IsNullable": false
+             "Name": "Float32"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -1340,8 +1264,7 @@
             "Type": {
              "$id": "189",
              "Kind": "Primitive",
-             "Name": "Float32",
-             "IsNullable": false
+             "Name": "Float32"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -1361,7 +1284,6 @@
               "Name": "AnomalyInterpretation",
               "Namespace": "AnomalyDetector.Multivariate",
               "Description": "Interpretation of the anomalous timestamp.",
-              "IsNullable": false,
               "Usage": "Output",
               "Properties": [
                {
@@ -1372,8 +1294,7 @@
                 "Type": {
                  "$id": "194",
                  "Kind": "Primitive",
-                 "Name": "String",
-                 "IsNullable": false
+                 "Name": "String"
                 },
                 "IsRequired": false,
                 "IsReadOnly": false
@@ -1386,8 +1307,7 @@
                 "Type": {
                  "$id": "196",
                  "Kind": "Primitive",
-                 "Name": "Float32",
-                 "IsNullable": false
+                 "Name": "Float32"
                 },
                 "IsRequired": false,
                 "IsReadOnly": false
@@ -1403,7 +1323,6 @@
                  "Name": "CorrelationChanges",
                  "Namespace": "AnomalyDetector.Multivariate",
                  "Description": "Correlation changes among the anomalous variables",
-                 "IsNullable": false,
                  "Usage": "Output",
                  "Properties": [
                   {
@@ -1418,10 +1337,8 @@
                     "ElementType": {
                      "$id": "201",
                      "Kind": "Primitive",
-                     "Name": "String",
-                     "IsNullable": false
-                    },
-                    "IsNullable": false
+                     "Name": "String"
+                    }
                    },
                    "IsRequired": false,
                    "IsReadOnly": false
@@ -1432,8 +1349,7 @@
                 "IsReadOnly": false
                }
               ]
-             },
-             "IsNullable": false
+             }
             },
             "IsRequired": false,
             "IsReadOnly": false
@@ -1454,15 +1370,13 @@
           "Name": "Array",
           "ElementType": {
            "$ref": "149"
-          },
-          "IsNullable": false
+          }
          },
          "IsRequired": false,
          "IsReadOnly": false
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1499,7 +1413,6 @@
    "Name": "ModelInfo",
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Training result of a model including its status, errors and diagnostics\ninformation.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -1510,8 +1423,7 @@
      "Type": {
       "$id": "206",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1563,8 +1475,7 @@
      "Type": {
       "$id": "213",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1577,8 +1488,7 @@
      "Type": {
       "$id": "215",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1594,7 +1504,6 @@
       "Name": "AlignPolicy",
       "Namespace": "AnomalyDetector.Multivariate",
       "Description": "An optional field, indicating the manner to align multiple variables.",
-      "IsNullable": false,
       "Usage": "RoundTrip",
       "Properties": [
        {
@@ -1627,8 +1536,7 @@
         "Type": {
          "$id": "221",
          "Kind": "Primitive",
-         "Name": "Float32",
-         "IsNullable": false
+         "Name": "Float32"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -1660,8 +1568,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "149"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": true
@@ -1677,7 +1584,6 @@
       "Name": "DiagnosticsInfo",
       "Namespace": "AnomalyDetector.Multivariate",
       "Description": "Diagnostics information to help inspect the states of model or variable.",
-      "IsNullable": false,
       "Usage": "RoundTrip",
       "Properties": [
        {
@@ -1691,7 +1597,6 @@
          "Name": "ModelState",
          "Namespace": "AnomalyDetector.Multivariate",
          "Description": "Model status.",
-         "IsNullable": false,
          "Usage": "RoundTrip",
          "Properties": [
           {
@@ -1706,10 +1611,8 @@
             "ElementType": {
              "$id": "231",
              "Kind": "Primitive",
-             "Name": "Int32",
-             "IsNullable": false
-            },
-            "IsNullable": false
+             "Name": "Int32"
+            }
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -1726,10 +1629,8 @@
             "ElementType": {
              "$id": "234",
              "Kind": "Primitive",
-             "Name": "Float32",
-             "IsNullable": false
-            },
-            "IsNullable": false
+             "Name": "Float32"
+            }
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -1746,10 +1647,8 @@
             "ElementType": {
              "$id": "237",
              "Kind": "Primitive",
-             "Name": "Float32",
-             "IsNullable": false
-            },
-            "IsNullable": false
+             "Name": "Float32"
+            }
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -1766,10 +1665,8 @@
             "ElementType": {
              "$id": "240",
              "Kind": "Primitive",
-             "Name": "Float32",
-             "IsNullable": false
-            },
-            "IsNullable": false
+             "Name": "Float32"
+            }
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -1790,8 +1687,7 @@
          "Name": "Array",
          "ElementType": {
           "$ref": "156"
-         },
-         "IsNullable": false
+         }
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -1818,7 +1714,6 @@
    "Name": "AnomalyDetectionModel",
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Response of getting a model.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -1829,8 +1724,7 @@
      "Type": {
       "$id": "245",
       "Kind": "Primitive",
-      "Name": "Guid",
-      "IsNullable": false
+      "Name": "Guid"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1882,7 +1776,6 @@
    "Name": "ModelList",
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Response of listing models.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -1896,8 +1789,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "243"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1910,8 +1802,7 @@
      "Type": {
       "$id": "255",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1924,8 +1815,7 @@
      "Type": {
       "$id": "257",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1938,8 +1828,7 @@
      "Type": {
       "$id": "259",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1952,7 +1841,6 @@
    "Name": "MultivariateLastDetectionOptions",
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Request of last detection.",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -1970,7 +1858,6 @@
        "Name": "VariableValues",
        "Namespace": "AnomalyDetector.Multivariate",
        "Description": "Variable values.",
-       "IsNullable": false,
        "Usage": "Input",
        "Properties": [
         {
@@ -1981,8 +1868,7 @@
          "Type": {
           "$id": "265",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -1999,10 +1885,8 @@
           "ElementType": {
            "$id": "268",
            "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
-          },
-          "IsNullable": false
+           "Name": "String"
+          }
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -2019,17 +1903,14 @@
           "ElementType": {
            "$id": "271",
            "Kind": "Primitive",
-           "Name": "Float32",
-           "IsNullable": false
-          },
-          "IsNullable": false
+           "Name": "Float32"
+          }
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2042,8 +1923,7 @@
      "Type": {
       "$id": "273",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2059,7 +1939,6 @@
    "Name": "MultivariateLastDetectionResult",
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Results of last detection.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -2073,8 +1952,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "156"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -2090,8 +1968,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "179"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -2104,7 +1981,6 @@
    "Name": "AnomalyDetectorError",
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "Error information returned by the API.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -2126,8 +2002,7 @@
      "Type": {
       "$id": "282",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -2208,6 +2083,7 @@
      "ResourceName": "Univariate",
      "Summary": "Detect anomalies for the entire series in batch.",
      "Description": "This operation generates a model with an entire series, each point is detected\nwith the same model. With this method, points before and after a certain point\nare used to determine whether it is an anomaly. The entire detection can give\nuser an overall status of the time series.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "285"
@@ -2322,6 +2198,7 @@
      "ResourceName": "Univariate",
      "Summary": "Detect anomaly status of the latest point in time series.",
      "Description": "This operation generates a model using the points that you sent into the API,\nand based on all data to determine whether the last point is anomalous.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "285"
@@ -2436,6 +2313,7 @@
      "ResourceName": "Univariate",
      "Summary": "Detect change point for the entire series",
      "Description": "Evaluate change point score of every series point",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "285"
@@ -2570,6 +2448,7 @@
      "ResourceName": "Multivariate",
      "Summary": "Get Multivariate Anomaly Detection Result",
      "Description": "For asynchronous inference, get multivariate anomaly detection result based on\nresultId returned by the BatchDetectAnomaly api.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "285"
@@ -2585,8 +2464,7 @@
        "Type": {
         "$id": "322",
         "Kind": "Primitive",
-        "Name": "Guid",
-        "IsNullable": false
+        "Name": "Guid"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2657,6 +2535,7 @@
      "ResourceName": "Multivariate",
      "Summary": "Train a Multivariate Anomaly Detection Model",
      "Description": "Create and train a multivariate anomaly detection model. The request must\ninclude a source parameter to indicate an externally accessible Azure blob\nstorage URI.There are two types of data input: An URI pointed to an Azure blob\nstorage folder which contains multiple CSV files, and each CSV file contains\ntwo columns, timestamp and variable. Another type of input is an URI pointed to\na CSV file in Azure blob storage, which contains all the variables and a\ntimestamp column.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "285"
@@ -2756,8 +2635,7 @@
          "Type": {
           "$id": "337",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          }
         }
        ],
@@ -2784,6 +2662,7 @@
      "ResourceName": "Multivariate",
      "Summary": "List Multivariate Models",
      "Description": "List models of a resource.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "285"
@@ -2799,8 +2678,7 @@
        "Type": {
         "$id": "340",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -2820,8 +2698,7 @@
        "Type": {
         "$id": "342",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -2897,6 +2774,7 @@
      "ResourceName": "Multivariate",
      "Summary": "Delete Multivariate Model",
      "Description": "Delete an existing multivariate model according to the modelId",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "285"
@@ -2912,8 +2790,7 @@
        "Type": {
         "$id": "350",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2978,6 +2855,7 @@
      "ResourceName": "Multivariate",
      "Summary": "Get Multivariate Model",
      "Description": "Get detailed information of multivariate model, including the training status\nand variables used in the model.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "285"
@@ -2993,8 +2871,7 @@
        "Type": {
         "$id": "357",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -3065,6 +2942,7 @@
      "ResourceName": "Multivariate",
      "Summary": "Detect Multivariate Anomaly",
      "Description": "Submit multivariate anomaly detection task with the modelId of trained model\nand inference data, the input schema should be the same with the training\nrequest. The request will complete asynchronously and return a resultId to\nquery the detection result.The request should be a source link to indicate an\nexternally accessible Azure storage Uri, either pointed to an Azure blob\nstorage folder, or pointed to a CSV file in Azure blob storage.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "285"
@@ -3080,8 +2958,7 @@
        "Type": {
         "$id": "364",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -3185,8 +3062,7 @@
          "Type": {
           "$id": "374",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          }
         },
         {
@@ -3197,8 +3073,7 @@
          "Type": {
           "$id": "376",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          }
         }
        ],
@@ -3225,6 +3100,7 @@
      "ResourceName": "Multivariate",
      "Summary": "Detect anomalies in the last point of the request body",
      "Description": "Submit multivariate anomaly detection task with the modelId of trained model\nand inference data, and the inference data should be put into request body in a\nJSON format. The request will complete synchronously and return the detection\nimmediately in the response body.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "285"
@@ -3240,8 +3116,7 @@
        "Type": {
         "$id": "379",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,

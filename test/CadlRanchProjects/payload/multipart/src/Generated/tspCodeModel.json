@@ -9,7 +9,6 @@
    "Kind": "Model",
    "Name": "MultiPartRequest",
    "Namespace": "Payload.MultiPart",
-   "IsNullable": false,
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -20,8 +19,7 @@
      "Type": {
       "$id": "4",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -34,8 +32,7 @@
      "Type": {
       "$id": "6",
       "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Name": "Bytes"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -47,7 +44,6 @@
    "Kind": "Model",
    "Name": "ComplexPartsRequest",
    "Namespace": "Payload.MultiPart",
-   "IsNullable": false,
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -58,8 +54,7 @@
      "Type": {
       "$id": "9",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -74,7 +69,6 @@
       "Kind": "Model",
       "Name": "Address",
       "Namespace": "Payload.MultiPart",
-      "IsNullable": false,
       "Usage": "Input",
       "Properties": [
        {
@@ -85,8 +79,7 @@
         "Type": {
          "$id": "13",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -104,8 +97,7 @@
      "Type": {
       "$id": "15",
       "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Name": "Bytes"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -121,8 +113,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "11"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -139,10 +130,8 @@
       "ElementType": {
        "$id": "20",
        "Kind": "Primitive",
-       "Name": "Bytes",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "Bytes"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -157,7 +146,6 @@
    "Kind": "Model",
    "Name": "JsonPartRequest",
    "Namespace": "Payload.MultiPart",
-   "IsNullable": false,
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -179,8 +167,7 @@
      "Type": {
       "$id": "24",
       "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Name": "Bytes"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -192,7 +179,6 @@
    "Kind": "Model",
    "Name": "BinaryArrayPartsRequest",
    "Namespace": "Payload.MultiPart",
-   "IsNullable": false,
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -203,8 +189,7 @@
      "Type": {
       "$id": "27",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -221,10 +206,8 @@
       "ElementType": {
        "$id": "30",
        "Kind": "Primitive",
-       "Name": "Bytes",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "Bytes"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -236,7 +219,6 @@
    "Kind": "Model",
    "Name": "JsonArrayPartsRequest",
    "Namespace": "Payload.MultiPart",
-   "IsNullable": false,
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -247,8 +229,7 @@
      "Type": {
       "$id": "33",
       "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Name": "Bytes"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -264,8 +245,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "11"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -277,7 +257,6 @@
    "Kind": "Model",
    "Name": "MultiBinaryPartsRequest",
    "Namespace": "Payload.MultiPart",
-   "IsNullable": false,
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -288,8 +267,7 @@
      "Type": {
       "$id": "38",
       "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Name": "Bytes"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -302,8 +280,7 @@
      "Type": {
       "$id": "40",
       "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Name": "Bytes"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -315,7 +292,6 @@
    "Kind": "Model",
    "Name": "AnonymousModelRequest",
    "Namespace": "",
-   "IsNullable": false,
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -326,8 +302,7 @@
      "Type": {
       "$id": "43",
       "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Name": "Bytes"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -389,6 +364,7 @@
      "Name": "basic",
      "ResourceName": "FormData",
      "Description": "Test content-type: multipart/form-data",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -404,11 +380,9 @@
         "LiteralValueType": {
          "$id": "54",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
-        "Value": "multipart/form-data",
-        "IsNullable": false
+        "Value": "multipart/form-data"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -499,6 +473,7 @@
      "Name": "complex",
      "ResourceName": "FormData",
      "Description": "Test content-type: multipart/form-data for mixed scenarios",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -514,11 +489,9 @@
         "LiteralValueType": {
          "$id": "64",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
-        "Value": "multipart/form-data",
-        "IsNullable": false
+        "Value": "multipart/form-data"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -609,6 +582,7 @@
      "Name": "jsonPart",
      "ResourceName": "FormData",
      "Description": "Test content-type: multipart/form-data for scenario contains json part and binary part ",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -624,11 +598,9 @@
         "LiteralValueType": {
          "$id": "74",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
-        "Value": "multipart/form-data",
-        "IsNullable": false
+        "Value": "multipart/form-data"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -719,6 +691,7 @@
      "Name": "binaryArrayParts",
      "ResourceName": "FormData",
      "Description": "Test content-type: multipart/form-data for scenario contains multi binary parts",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -734,11 +707,9 @@
         "LiteralValueType": {
          "$id": "84",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
-        "Value": "multipart/form-data",
-        "IsNullable": false
+        "Value": "multipart/form-data"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -829,6 +800,7 @@
      "Name": "jsonArrayParts",
      "ResourceName": "FormData",
      "Description": "Test content-type: multipart/form-data for scenario contains multi json parts",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -844,11 +816,9 @@
         "LiteralValueType": {
          "$id": "94",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
-        "Value": "multipart/form-data",
-        "IsNullable": false
+        "Value": "multipart/form-data"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -939,6 +909,7 @@
      "Name": "multiBinaryParts",
      "ResourceName": "FormData",
      "Description": "Test content-type: multipart/form-data for scenario contains multi binary parts",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -954,11 +925,9 @@
         "LiteralValueType": {
          "$id": "104",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
-        "Value": "multipart/form-data",
-        "IsNullable": false
+        "Value": "multipart/form-data"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1049,6 +1018,7 @@
      "Name": "checkFileNameAndContentType",
      "ResourceName": "FormData",
      "Description": "Test content-type: multipart/form-data",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -1064,11 +1034,9 @@
         "LiteralValueType": {
          "$id": "114",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
-        "Value": "multipart/form-data",
-        "IsNullable": false
+        "Value": "multipart/form-data"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1159,6 +1127,7 @@
      "Name": "anonymousModel",
      "ResourceName": "FormData",
      "Description": "Test content-type: multipart/form-data",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -1174,11 +1143,9 @@
         "LiteralValueType": {
          "$id": "124",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
-        "Value": "multipart/form-data",
-        "IsNullable": false
+        "Value": "multipart/form-data"
        },
        "Location": "Header",
        "DefaultValue": {

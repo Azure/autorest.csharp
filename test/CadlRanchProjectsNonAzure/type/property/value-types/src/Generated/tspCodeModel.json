@@ -25,7 +25,6 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Enum that will be used as a property for model EnumProperty. Non-extensible.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -50,7 +49,6 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Enum that will be used as a property for model EnumProperty. Extensible.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -69,7 +67,6 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "The StringLiteralProperty_property",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -88,7 +85,6 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "The IntLiteralProperty_property",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -107,7 +103,6 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "The FloatLiteralProperty_property",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -129,7 +124,6 @@
    ],
    "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -151,7 +145,6 @@
    ],
    "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -173,7 +166,6 @@
    ],
    "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -190,7 +182,6 @@
    ],
    "Namespace": "Type.Property.ValueTypes",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   }
  ],
@@ -201,7 +192,6 @@
    "Name": "BooleanProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a boolean property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -212,8 +202,7 @@
      "Type": {
       "$id": "27",
       "Kind": "Primitive",
-      "Name": "Boolean",
-      "IsNullable": false
+      "Name": "Boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -226,7 +215,6 @@
    "Name": "StringProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a string property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -237,8 +225,7 @@
      "Type": {
       "$id": "30",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -251,7 +238,6 @@
    "Name": "BytesProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a bytes property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -262,8 +248,7 @@
      "Type": {
       "$id": "33",
       "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Name": "Bytes"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -276,7 +261,6 @@
    "Name": "IntProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a int property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -287,8 +271,7 @@
      "Type": {
       "$id": "36",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -301,7 +284,6 @@
    "Name": "FloatProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a float property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -312,8 +294,7 @@
      "Type": {
       "$id": "39",
       "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "Name": "Float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -326,7 +307,6 @@
    "Name": "DecimalProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a decimal property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -337,8 +317,7 @@
      "Type": {
       "$id": "42",
       "Kind": "Primitive",
-      "Name": "Decimal",
-      "IsNullable": false
+      "Name": "Decimal"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -351,7 +330,6 @@
    "Name": "Decimal128Property",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a decimal128 property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -362,8 +340,7 @@
      "Type": {
       "$id": "45",
       "Kind": "Primitive",
-      "Name": "Decimal128",
-      "IsNullable": false
+      "Name": "Decimal128"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -376,7 +353,6 @@
    "Name": "DatetimeProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a datetime property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -401,7 +377,6 @@
    "Name": "DurationProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a duration property",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -426,7 +401,6 @@
    "Name": "EnumProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with enum properties",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -448,7 +422,6 @@
    "Name": "ExtensibleEnumProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with extensible enum properties",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -470,7 +443,6 @@
    "Name": "ModelProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with model properties",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -484,7 +456,6 @@
       "Name": "InnerModel",
       "Namespace": "Type.Property.ValueTypes",
       "Description": "Inner model. Will be a property type for ModelWithModelProperties",
-      "IsNullable": false,
       "Usage": "RoundTrip",
       "Properties": [
        {
@@ -495,8 +466,7 @@
         "Type": {
          "$id": "60",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -517,7 +487,6 @@
    "Name": "CollectionsStringProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with collection string properties",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -532,10 +501,8 @@
       "ElementType": {
        "$id": "64",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "String"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -548,7 +515,6 @@
    "Name": "CollectionsIntProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with collection int properties",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -563,10 +529,8 @@
       "ElementType": {
        "$id": "68",
        "Kind": "Primitive",
-       "Name": "Int32",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "Int32"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -579,7 +543,6 @@
    "Name": "CollectionsModelProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with collection model properties",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -593,8 +556,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "58"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -607,7 +569,6 @@
    "Name": "DictionaryStringProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with dictionary string properties",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -622,16 +583,13 @@
       "KeyType": {
        "$id": "75",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "Name": "String"
       },
       "ValueType": {
        "$id": "76",
        "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Name": "String"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -644,7 +602,6 @@
    "Name": "NeverProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a property never. (This property should not be included).",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": []
   },
@@ -654,7 +611,6 @@
    "Name": "UnknownStringProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a property unknown, and the data is a string.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -665,8 +621,7 @@
      "Type": {
       "$id": "80",
       "Kind": "Intrinsic",
-      "Name": "unknown",
-      "IsNullable": false
+      "Name": "unknown"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -679,7 +634,6 @@
    "Name": "UnknownIntProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a property unknown, and the data is a int32.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -690,8 +644,7 @@
      "Type": {
       "$id": "83",
       "Kind": "Intrinsic",
-      "Name": "unknown",
-      "IsNullable": false
+      "Name": "unknown"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -704,7 +657,6 @@
    "Name": "UnknownDictProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a property unknown, and the data is a dictionnary.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -715,8 +667,7 @@
      "Type": {
       "$id": "86",
       "Kind": "Intrinsic",
-      "Name": "unknown",
-      "IsNullable": false
+      "Name": "unknown"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -729,7 +680,6 @@
    "Name": "UnknownArrayProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a property unknown, and the data is an array.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -740,8 +690,7 @@
      "Type": {
       "$id": "89",
       "Kind": "Intrinsic",
-      "Name": "unknown",
-      "IsNullable": false
+      "Name": "unknown"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -754,7 +703,6 @@
    "Name": "StringLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a string literal property.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -769,8 +717,7 @@
       "LiteralValueType": {
        "$ref": "8"
       },
-      "Value": "hello",
-      "IsNullable": false
+      "Value": "hello"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -783,7 +730,6 @@
    "Name": "IntLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a int literal property.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -798,8 +744,7 @@
       "LiteralValueType": {
        "$ref": "10"
       },
-      "Value": 42,
-      "IsNullable": false
+      "Value": 42
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -812,7 +757,6 @@
    "Name": "FloatLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a float literal property.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -827,8 +771,7 @@
       "LiteralValueType": {
        "$ref": "12"
       },
-      "Value": 43.125,
-      "IsNullable": false
+      "Value": 43.125
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -841,7 +784,6 @@
    "Name": "BooleanLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a boolean literal property.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -856,11 +798,9 @@
       "LiteralValueType": {
        "$id": "102",
        "Kind": "Primitive",
-       "Name": "Boolean",
-       "IsNullable": false
+       "Name": "Boolean"
       },
-      "Value": true,
-      "IsNullable": false
+      "Value": true
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -873,7 +813,6 @@
    "Name": "UnionStringLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a union of string literal as property.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -895,7 +834,6 @@
    "Name": "UnionIntLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a union of int literal as property.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -917,7 +855,6 @@
    "Name": "UnionFloatLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a union of float literal as property.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -939,7 +876,6 @@
    "Name": "UnionEnumValueProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Template type for testing models with specific properties. Pass in the type of the property you are looking for",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -954,8 +890,7 @@
       "LiteralValueType": {
        "$ref": "23"
       },
-      "Value": "value2",
-      "IsNullable": false
+      "Value": "value2"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1017,6 +952,7 @@
      "Name": "get",
      "ResourceName": "Boolean",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -1079,6 +1015,7 @@
      "Name": "put",
      "ResourceName": "Boolean",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -1200,6 +1137,7 @@
      "Name": "get",
      "ResourceName": "String",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -1262,6 +1200,7 @@
      "Name": "put",
      "ResourceName": "String",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -1383,6 +1322,7 @@
      "Name": "get",
      "ResourceName": "Bytes",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -1445,6 +1385,7 @@
      "Name": "put",
      "ResourceName": "Bytes",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -1566,6 +1507,7 @@
      "Name": "get",
      "ResourceName": "Int",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -1628,6 +1570,7 @@
      "Name": "put",
      "ResourceName": "Int",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -1749,6 +1692,7 @@
      "Name": "get",
      "ResourceName": "Float",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -1811,6 +1755,7 @@
      "Name": "put",
      "ResourceName": "Float",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -1932,6 +1877,7 @@
      "Name": "get",
      "ResourceName": "Decimal",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -1994,6 +1940,7 @@
      "Name": "put",
      "ResourceName": "Decimal",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -2115,6 +2062,7 @@
      "Name": "get",
      "ResourceName": "Decimal128",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -2177,6 +2125,7 @@
      "Name": "put",
      "ResourceName": "Decimal128",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -2298,6 +2247,7 @@
      "Name": "get",
      "ResourceName": "Datetime",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -2360,6 +2310,7 @@
      "Name": "put",
      "ResourceName": "Datetime",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -2481,6 +2432,7 @@
      "Name": "get",
      "ResourceName": "Duration",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -2543,6 +2495,7 @@
      "Name": "put",
      "ResourceName": "Duration",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -2664,6 +2617,7 @@
      "Name": "get",
      "ResourceName": "Enum",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -2726,6 +2680,7 @@
      "Name": "put",
      "ResourceName": "Enum",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -2847,6 +2802,7 @@
      "Name": "get",
      "ResourceName": "ExtensibleEnum",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -2909,6 +2865,7 @@
      "Name": "put",
      "ResourceName": "ExtensibleEnum",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -3030,6 +2987,7 @@
      "Name": "get",
      "ResourceName": "Model",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -3092,6 +3050,7 @@
      "Name": "put",
      "ResourceName": "Model",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -3213,6 +3172,7 @@
      "Name": "get",
      "ResourceName": "CollectionsString",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -3275,6 +3235,7 @@
      "Name": "put",
      "ResourceName": "CollectionsString",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -3396,6 +3357,7 @@
      "Name": "get",
      "ResourceName": "CollectionsInt",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -3458,6 +3420,7 @@
      "Name": "put",
      "ResourceName": "CollectionsInt",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -3579,6 +3542,7 @@
      "Name": "get",
      "ResourceName": "CollectionsModel",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -3641,6 +3605,7 @@
      "Name": "put",
      "ResourceName": "CollectionsModel",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -3762,6 +3727,7 @@
      "Name": "get",
      "ResourceName": "DictionaryString",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -3824,6 +3790,7 @@
      "Name": "put",
      "ResourceName": "DictionaryString",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -3945,6 +3912,7 @@
      "Name": "get",
      "ResourceName": "Never",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -4007,6 +3975,7 @@
      "Name": "put",
      "ResourceName": "Never",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -4128,6 +4097,7 @@
      "Name": "get",
      "ResourceName": "UnknownString",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -4190,6 +4160,7 @@
      "Name": "put",
      "ResourceName": "UnknownString",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -4311,6 +4282,7 @@
      "Name": "get",
      "ResourceName": "UnknownInt",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -4373,6 +4345,7 @@
      "Name": "put",
      "ResourceName": "UnknownInt",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -4494,6 +4467,7 @@
      "Name": "get",
      "ResourceName": "UnknownDict",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -4556,6 +4530,7 @@
      "Name": "put",
      "ResourceName": "UnknownDict",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -4677,6 +4652,7 @@
      "Name": "get",
      "ResourceName": "UnknownArray",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -4739,6 +4715,7 @@
      "Name": "put",
      "ResourceName": "UnknownArray",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -4860,6 +4837,7 @@
      "Name": "get",
      "ResourceName": "StringLiteral",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -4922,6 +4900,7 @@
      "Name": "put",
      "ResourceName": "StringLiteral",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -5043,6 +5022,7 @@
      "Name": "get",
      "ResourceName": "IntLiteral",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -5105,6 +5085,7 @@
      "Name": "put",
      "ResourceName": "IntLiteral",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -5226,6 +5207,7 @@
      "Name": "get",
      "ResourceName": "FloatLiteral",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -5288,6 +5270,7 @@
      "Name": "put",
      "ResourceName": "FloatLiteral",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -5409,6 +5392,7 @@
      "Name": "get",
      "ResourceName": "BooleanLiteral",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -5471,6 +5455,7 @@
      "Name": "put",
      "ResourceName": "BooleanLiteral",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -5592,6 +5577,7 @@
      "Name": "get",
      "ResourceName": "UnionStringLiteral",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -5654,6 +5640,7 @@
      "Name": "put",
      "ResourceName": "UnionStringLiteral",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -5775,6 +5762,7 @@
      "Name": "get",
      "ResourceName": "UnionIntLiteral",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -5837,6 +5825,7 @@
      "Name": "put",
      "ResourceName": "UnionIntLiteral",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -5958,6 +5947,7 @@
      "Name": "get",
      "ResourceName": "UnionFloatLiteral",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -6020,6 +6010,7 @@
      "Name": "put",
      "ResourceName": "UnionFloatLiteral",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -6141,6 +6132,7 @@
      "Name": "get",
      "ResourceName": "UnionEnumValue",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"
@@ -6203,6 +6195,7 @@
      "Name": "put",
      "ResourceName": "UnionEnumValue",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "114"

@@ -45,7 +45,6 @@
    "Namespace": "Pagination",
    "Description": "The interval",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Input"
   },
   {
@@ -62,7 +61,6 @@
    ],
    "Namespace": "Pagination",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -73,7 +71,6 @@
    "Name": "ListLedgerEntryInputBody",
    "Namespace": "Pagination",
    "Description": "Type for input model body",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -84,8 +81,7 @@
      "Type": {
       "$id": "12",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -98,8 +94,7 @@
      "Type": {
       "$id": "14",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -112,7 +107,6 @@
    "Name": "PagedLedgerEntries",
    "Namespace": "Pagination",
    "Description": "Paginated ledger entries",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -129,7 +123,6 @@
        "Kind": "Model",
        "Name": "LedgerEntry",
        "Namespace": "Pagination",
-       "IsNullable": false,
        "Usage": "Output",
        "Properties": [
         {
@@ -140,8 +133,7 @@
          "Type": {
           "$id": "20",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -154,8 +146,7 @@
          "Type": {
           "$id": "22",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": true,
          "IsReadOnly": true
@@ -168,15 +159,13 @@
          "Type": {
           "$id": "24",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": true,
          "IsReadOnly": true
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -189,8 +178,7 @@
      "Type": {
       "$id": "26",
       "Kind": "Primitive",
-      "Name": "Uri",
-      "IsNullable": false
+      "Name": "Uri"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -206,7 +194,6 @@
    "Name": "PagedDimensionValueListItem",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of DimensionValueListItem items",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -223,7 +210,6 @@
        "Kind": "Model",
        "Name": "DimensionValueListItem",
        "Namespace": "Pagination",
-       "IsNullable": false,
        "Usage": "Output",
        "Properties": [
         {
@@ -238,17 +224,14 @@
           "ElementType": {
            "$id": "33",
            "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
-          },
-          "IsNullable": false
+           "Name": "String"
+          }
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -261,8 +244,7 @@
      "Type": {
       "$id": "35",
       "Kind": "Primitive",
-      "Name": "Uri",
-      "IsNullable": false
+      "Name": "Uri"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -278,7 +260,6 @@
    "Name": "PagedLedgerEntry",
    "Namespace": "Azure.Core",
    "Description": "Paged collection of LedgerEntry items",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -292,8 +273,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "18"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -306,8 +286,7 @@
      "Type": {
       "$id": "40",
       "Kind": "Primitive",
-      "Name": "Uri",
-      "IsNullable": false
+      "Name": "Uri"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -320,7 +299,6 @@
    "Name": "PagedTextBlocklist",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of TextBlocklist items",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -338,7 +316,6 @@
        "Name": "TextBlocklist",
        "Namespace": "Pagination",
        "Description": "Text Blocklist.",
-       "IsNullable": false,
        "Usage": "Output",
        "Properties": [
         {
@@ -349,8 +326,7 @@
          "Type": {
           "$id": "46",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -363,15 +339,13 @@
          "Type": {
           "$id": "48",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": false,
          "IsReadOnly": false
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -384,8 +358,7 @@
      "Type": {
       "$id": "50",
       "Kind": "Primitive",
-      "Name": "Uri",
-      "IsNullable": false
+      "Name": "Uri"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -401,7 +374,6 @@
    "Name": "PagedTextBlockItem",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of TextBlockItem items",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -419,7 +391,6 @@
        "Name": "TextBlockItem",
        "Namespace": "Pagination",
        "Description": "Item in TextBlocklist.",
-       "IsNullable": false,
        "Usage": "Output",
        "Properties": [
         {
@@ -430,8 +401,7 @@
          "Type": {
           "$id": "56",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -444,8 +414,7 @@
          "Type": {
           "$id": "58",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -458,15 +427,13 @@
          "Type": {
           "$id": "60",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -479,8 +446,7 @@
      "Type": {
       "$id": "62",
       "Kind": "Primitive",
-      "Name": "Uri",
-      "IsNullable": false
+      "Name": "Uri"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -496,7 +462,6 @@
    "Name": "BatchPoolListResult",
    "Namespace": "Pagination",
    "Description": "The result of listing the Pools in an Account.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -514,7 +479,6 @@
        "Name": "BatchPool",
        "Namespace": "Pagination",
        "Description": "A Pool in the Azure Batch service.",
-       "IsNullable": false,
        "Usage": "Output",
        "Properties": [
         {
@@ -525,8 +489,7 @@
          "Type": {
           "$id": "68",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": false,
          "IsReadOnly": true
@@ -539,8 +502,7 @@
          "Type": {
           "$id": "70",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": false,
          "IsReadOnly": true
@@ -553,15 +515,13 @@
          "Type": {
           "$id": "72",
           "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "Name": "String"
          },
          "IsRequired": false,
          "IsReadOnly": true
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -574,8 +534,7 @@
      "Type": {
       "$id": "74",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -591,7 +550,6 @@
    "Name": "BatchError",
    "Namespace": "Pagination",
    "Description": "An error response received from the Azure Batch service.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -602,8 +560,7 @@
      "Type": {
       "$id": "77",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -623,6 +580,7 @@
      "ResourceName": "LedgerEntry",
      "Summary": "Gets ledger entries from a collection corresponding to a range.",
      "Description": "A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "80",
@@ -652,8 +610,7 @@
        "Type": {
         "$id": "83",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -803,6 +760,7 @@
      "ResourceName": "DimensionValueListItem",
      "Summary": "List the dimension values for the given metric dimension name.",
      "Description": "List the dimension values for the given metric dimension name.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "80"
@@ -815,8 +773,7 @@
        "Type": {
         "$id": "99",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -839,8 +796,7 @@
        "Type": {
         "$id": "101",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -860,8 +816,7 @@
        "Type": {
         "$id": "103",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -899,8 +854,7 @@
        "Type": {
         "$id": "106",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -920,8 +874,7 @@
        "Type": {
         "$id": "108",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -941,8 +894,7 @@
        "Type": {
         "$id": "110",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1034,6 +986,7 @@
      "Name": "list",
      "ResourceName": "LedgerEntry",
      "Description": "List upload detail for the discovery resource.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "80"
@@ -1046,8 +999,7 @@
        "Type": {
         "$id": "120",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1143,6 +1095,7 @@
      "ResourceName": "TextBlocklist",
      "Summary": "Get All Text Blocklists",
      "Description": "Get all text blocklists details.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "80"
@@ -1155,8 +1108,7 @@
        "Type": {
         "$id": "130",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1235,6 +1187,7 @@
      "ResourceName": "TextBlockItem",
      "Summary": "Get All BlockItems By blocklistName",
      "Description": "Get all blockItems in a text blocklist",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "80"
@@ -1247,8 +1200,7 @@
        "Type": {
         "$id": "138",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1271,8 +1223,7 @@
        "Type": {
         "$id": "140",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1292,8 +1243,7 @@
        "Type": {
         "$id": "142",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1313,8 +1263,7 @@
        "Type": {
         "$id": "144",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1334,8 +1283,7 @@
        "Type": {
         "$id": "146",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1427,6 +1375,7 @@
      "Name": "listPools",
      "ResourceName": "Pools",
      "Description": "Lists all of the Pools in the specified Account.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "80"
@@ -1439,8 +1388,7 @@
        "Type": {
         "$id": "156",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1463,8 +1411,7 @@
        "Type": {
         "$id": "158",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1488,10 +1435,8 @@
         "ElementType": {
          "$id": "161",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "String"
+        }
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1516,10 +1461,8 @@
         "ElementType": {
          "$id": "164",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Name": "String"
+        }
        },
        "Location": "Query",
        "IsRequired": false,

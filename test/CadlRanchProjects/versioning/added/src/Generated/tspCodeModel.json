@@ -28,7 +28,6 @@
    "Namespace": "Versioning.Added",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   },
   {
@@ -50,7 +49,6 @@
    ],
    "Namespace": "Versioning.Added",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -67,7 +65,6 @@
    ],
    "Namespace": "Versioning.Added",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   }
  ],
@@ -77,7 +74,6 @@
    "Kind": "Model",
    "Name": "ModelV1",
    "Namespace": "Versioning.Added",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -88,8 +84,7 @@
      "Type": {
       "$id": "12",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -118,17 +113,14 @@
        {
         "$id": "16",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        {
         "$id": "17",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        }
-      ],
-      "IsNullable": false
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -140,7 +132,6 @@
    "Kind": "Model",
    "Name": "ModelV2",
    "Namespace": "Versioning.Added",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -151,8 +142,7 @@
      "Type": {
       "$id": "20",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -181,17 +171,14 @@
        {
         "$id": "24",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        {
         "$id": "25",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        }
-      ],
-      "IsNullable": false
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -209,6 +196,7 @@
      "$id": "27",
      "Name": "v1",
      "ResourceName": "Added",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "28",
@@ -256,8 +244,7 @@
        "Type": {
         "$id": "32",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -373,6 +360,7 @@
      "$id": "41",
      "Name": "v2",
      "ResourceName": "Added",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "28"
@@ -503,6 +491,7 @@
      "$id": "52",
      "Name": "v2InInterface",
      "ResourceName": "InterfaceV2",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "28"

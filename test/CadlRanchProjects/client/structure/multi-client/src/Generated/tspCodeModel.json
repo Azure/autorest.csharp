@@ -32,7 +32,6 @@
    ],
    "Namespace": "Client.Structure.Service",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input"
   }
  ],
@@ -47,6 +46,7 @@
      "$id": "8",
      "Name": "renamedOne",
      "ResourceName": "ClientA",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "9",
@@ -138,6 +138,7 @@
      "$id": "16",
      "Name": "renamedThree",
      "ResourceName": "ClientA",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -196,6 +197,7 @@
      "$id": "21",
      "Name": "renamedFive",
      "ResourceName": "ClientA",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -273,6 +275,7 @@
      "$id": "28",
      "Name": "renamedTwo",
      "ResourceName": "ClientB",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -331,6 +334,7 @@
      "$id": "33",
      "Name": "renamedFour",
      "ResourceName": "ClientB",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -389,6 +393,7 @@
      "$id": "38",
      "Name": "renamedSix",
      "ResourceName": "ClientB",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"

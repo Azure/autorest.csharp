@@ -23,7 +23,6 @@
    "Namespace": "PetStore",
    "Description": "Extensible enum Values for pet kind",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Input"
   }
  ],
@@ -33,7 +32,6 @@
    "Kind": "Model",
    "Name": "Pet",
    "Namespace": "PetStore",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -44,8 +42,7 @@
      "Type": {
       "$id": "7",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -58,8 +55,7 @@
      "Type": {
       "$id": "9",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -72,8 +68,7 @@
      "Type": {
       "$id": "11",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -86,7 +81,6 @@
    "Name": "Fish",
    "Namespace": "PetStore",
    "Description": "Fish is the base model",
-   "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "Output",
    "Properties": [
@@ -94,12 +88,11 @@
      "$id": "13",
      "Name": "kind",
      "SerializedName": "kind",
-     "Description": "Discriminator",
+     "Description": "Discriminator property for Fish.",
      "Type": {
       "$id": "14",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -113,8 +106,7 @@
      "Type": {
       "$id": "16",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -127,7 +119,6 @@
    "Name": "Error",
    "Namespace": "PetStore",
    "Description": "Error",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -138,8 +129,7 @@
      "Type": {
       "$id": "19",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -152,8 +142,7 @@
      "Type": {
       "$id": "21",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -166,7 +155,6 @@
    "Name": "Shark",
    "Namespace": "PetStore",
    "Description": "Shark is a fish",
-   "IsNullable": false,
    "DiscriminatorValue": "shark",
    "Usage": "Output",
    "BaseModel": {
@@ -181,8 +169,7 @@
      "Type": {
       "$id": "24",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -195,7 +182,6 @@
    "Name": "Tuna",
    "Namespace": "PetStore",
    "Description": "Tuna is a fish",
-   "IsNullable": false,
    "DiscriminatorValue": "tuna",
    "Usage": "Output",
    "BaseModel": {
@@ -210,8 +196,7 @@
      "Type": {
       "$id": "27",
       "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "Name": "Int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -263,6 +248,7 @@
      "ResourceName": "Pets",
      "Summary": "delete.",
      "Description": "Delete a pet.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "30"
@@ -275,8 +261,7 @@
        "Type": {
         "$id": "35",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -340,6 +325,7 @@
      "Name": "read",
      "ResourceName": "Pets",
      "Description": "Returns a pet. Supports eTags.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "30"
@@ -352,8 +338,7 @@
        "Type": {
         "$id": "42",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -437,6 +422,7 @@
      "$id": "48",
      "Name": "create",
      "ResourceName": "Pets",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "30"
@@ -545,6 +531,7 @@
      "$id": "57",
      "Name": "getPetByKind",
      "ResourceName": "Pets",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "30"
@@ -623,6 +610,7 @@
      "$id": "63",
      "Name": "GetFirstPet",
      "ResourceName": "Pets",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "30"
@@ -634,8 +622,7 @@
        "Type": {
         "$id": "65",
         "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Name": "Int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -704,6 +691,7 @@
      "$id": "70",
      "Name": "getFish",
      "ResourceName": "Pets",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "30"
@@ -715,8 +703,7 @@
        "Type": {
         "$id": "72",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -786,6 +773,7 @@
      "Name": "refresh",
      "ResourceName": "Pets",
      "Description": "Test that an LRO polling operation defined in a namespace wtihout @service decorator will not be generated. This should be removed after cadl-ranch test case update.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "30"

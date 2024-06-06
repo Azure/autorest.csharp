@@ -6,7 +6,7 @@
   {
    "$id": "2",
    "Kind": "Enum",
-   "Name": "OneBinaryBodyTwoContentTypesRequest",
+   "Name": "OneBinaryBodyTwoContentTypesRequestContentType",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -22,13 +22,12 @@
    ],
    "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input"
   },
   {
    "$id": "5",
    "Kind": "Enum",
-   "Name": "OneStringBodyThreeContentTypesRequest",
+   "Name": "OneStringBodyThreeContentTypesRequestContentType",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -49,7 +48,6 @@
    ],
    "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input"
   }
  ],
@@ -59,7 +57,6 @@
    "Kind": "Model",
    "Name": "Body",
    "Namespace": "MultipleMediaTypes",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -70,8 +67,7 @@
      "Type": {
       "$id": "11",
       "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Name": "String"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -89,6 +85,7 @@
      "$id": "13",
      "Name": "oneBinaryBodyTwoContentTypes",
      "ResourceName": "MultipleMediaTypes",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "14",
@@ -134,8 +131,7 @@
        "Type": {
         "$id": "18",
         "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Name": "Bytes"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -202,6 +198,7 @@
      "$id": "23",
      "Name": "oneStringBodyThreeContentTypes",
      "ResourceName": "MultipleMediaTypes",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "14"
@@ -230,8 +227,7 @@
        "Type": {
         "$id": "26",
         "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Name": "String"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -299,6 +295,7 @@
      "$id": "31",
      "Name": "oneModelBodyOneContentType",
      "ResourceName": "MultipleMediaTypes",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "14"
@@ -314,11 +311,9 @@
         "LiteralValueType": {
          "$id": "34",
          "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Name": "String"
         },
-        "Value": "application/json",
-        "IsNullable": false
+        "Value": "application/json"
        },
        "Location": "Header",
        "DefaultValue": {
