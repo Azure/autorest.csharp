@@ -1,25 +1,25 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "SpecialHeaders.Repeatability",
  "ApiVersions": [],
  "Enums": [
   {
-   "$id": "2",
+   "$id": "1",
    "Kind": "enum",
    "Name": "ImmediateSuccessResponse",
    "ValueType": {
-    "$id": "3",
+    "$id": "2",
     "Kind": "string",
     "IsNullable": false
    },
    "Values": [
     {
-     "$id": "4",
+     "$id": "3",
      "Name": "accepted",
      "Value": "accepted"
     },
     {
-     "$id": "5",
+     "$id": "4",
      "Name": "rejected",
      "Value": "rejected"
     }
@@ -33,23 +33,23 @@
  "Models": [],
  "Clients": [
   {
-   "$id": "6",
+   "$id": "5",
    "Name": "RepeatabilityClient",
    "Description": "Illustrates OASIS repeatability headers",
    "Operations": [
     {
-     "$id": "7",
+     "$id": "6",
      "Name": "immediateSuccess",
      "ResourceName": "Repeatability",
      "Description": "Check we recognize Repeatability-Request-ID and Repeatability-First-Sent.",
      "Parameters": [
       {
-       "$id": "8",
+       "$id": "7",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "9",
+        "$id": "8",
         "Kind": "string",
         "IsNullable": false
        },
@@ -63,9 +63,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "10",
+        "$id": "9",
         "Type": {
-         "$id": "11",
+         "$id": "10",
          "Kind": "string",
          "IsNullable": false
         },
@@ -73,11 +73,11 @@
        }
       },
       {
-       "$id": "12",
+       "$id": "11",
        "Name": "repeatabilityRequestID",
        "NameInRequest": "Repeatability-Request-ID",
        "Type": {
-        "$id": "13",
+        "$id": "12",
         "Kind": "string",
         "IsNullable": false
        },
@@ -92,16 +92,16 @@
        "Kind": "Method"
       },
       {
-       "$id": "14",
+       "$id": "13",
        "Name": "repeatabilityFirstSent",
        "NameInRequest": "Repeatability-First-Sent",
        "Type": {
-        "$id": "15",
+        "$id": "14",
         "Kind": "utcDateTime",
         "IsNullable": false,
         "Encode": "rfc7231",
         "WireType": {
-         "$id": "16",
+         "$id": "15",
          "Kind": "string",
          "IsNullable": false
         }
@@ -117,11 +117,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "17",
+       "$id": "16",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "18",
+        "$id": "17",
         "Kind": "string",
         "IsNullable": false
        },
@@ -135,9 +135,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "19",
+        "$id": "18",
         "Type": {
-         "$ref": "18"
+         "$ref": "17"
         },
         "Value": "application/json"
        }
@@ -145,19 +145,19 @@
      ],
      "Responses": [
       {
-       "$id": "20",
+       "$id": "19",
        "StatusCodes": [
         204
        ],
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "21",
+         "$id": "20",
          "Name": "Repeatability-Result",
          "NameInResponse": "repeatabilityResult",
          "Description": "Indicates whether the repeatable request was accepted or rejected.",
          "Type": {
-          "$ref": "2"
+          "$ref": "1"
          }
         }
        ],
@@ -174,12 +174,12 @@
     }
    ],
    "Protocol": {
-    "$id": "22"
+    "$id": "21"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "8"
+     "$ref": "7"
     }
    ]
   }

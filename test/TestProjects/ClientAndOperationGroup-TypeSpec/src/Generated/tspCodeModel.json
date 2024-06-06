@@ -1,26 +1,26 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "ClientAndOperationGroup",
  "ApiVersions": [],
  "Enums": [],
  "Models": [],
  "Clients": [
   {
-   "$id": "2",
+   "$id": "1",
    "Name": "ClientAndOperationGroupClient",
    "Description": "",
    "Operations": [
     {
-     "$id": "3",
+     "$id": "2",
      "Name": "zero",
      "ResourceName": "ClientAndOperationGroup",
      "Parameters": [
       {
-       "$id": "4",
+       "$id": "3",
        "Name": "operationGroupServiceUrl",
        "NameInRequest": "operationGroupServiceUrl",
        "Type": {
-        "$id": "5",
+        "$id": "4",
         "Kind": "uri",
         "IsNullable": false
        },
@@ -35,11 +35,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "6",
+       "$id": "5",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "7",
+        "$id": "6",
         "Kind": "string",
         "IsNullable": false
        },
@@ -53,9 +53,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "8",
+        "$id": "7",
         "Type": {
-         "$ref": "7"
+         "$ref": "6"
         },
         "Value": "application/json"
        }
@@ -63,12 +63,12 @@
      ],
      "Responses": [
       {
-       "$id": "9",
+       "$id": "8",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "10",
+        "$id": "9",
         "Kind": "string",
         "IsNullable": false
        },
@@ -89,19 +89,19 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "11",
+     "$id": "10",
      "Name": "one",
      "ResourceName": "Alpha",
      "Parameters": [
       {
-       "$ref": "4"
+       "$ref": "3"
       },
       {
-       "$id": "12",
+       "$id": "11",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "13",
+        "$id": "12",
         "Kind": "string",
         "IsNullable": false
        },
@@ -115,9 +115,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "14",
+        "$id": "13",
         "Type": {
-         "$ref": "13"
+         "$ref": "12"
         },
         "Value": "application/json"
        }
@@ -125,12 +125,12 @@
      ],
      "Responses": [
       {
-       "$id": "15",
+       "$id": "14",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "16",
+        "$id": "15",
         "Kind": "string",
         "IsNullable": false
        },
@@ -152,34 +152,34 @@
     }
    ],
    "Protocol": {
-    "$id": "17"
+    "$id": "16"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "4"
+     "$ref": "3"
     }
    ]
   },
   {
-   "$id": "18",
+   "$id": "17",
    "Name": "Beta",
    "Description": "",
    "Operations": [
     {
-     "$id": "19",
+     "$id": "18",
      "Name": "two",
      "ResourceName": "Beta",
      "Parameters": [
       {
-       "$ref": "4"
+       "$ref": "3"
       },
       {
-       "$id": "20",
+       "$id": "19",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "21",
+        "$id": "20",
         "Kind": "string",
         "IsNullable": false
        },
@@ -193,9 +193,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "22",
+        "$id": "21",
         "Type": {
-         "$ref": "21"
+         "$ref": "20"
         },
         "Value": "application/json"
        }
@@ -203,12 +203,12 @@
      ],
      "Responses": [
       {
-       "$id": "23",
+       "$id": "22",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "24",
+        "$id": "23",
         "Kind": "string",
         "IsNullable": false
        },
@@ -229,19 +229,19 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "25",
+     "$id": "24",
      "Name": "three",
      "ResourceName": "SubBeta",
      "Parameters": [
       {
-       "$ref": "4"
+       "$ref": "3"
       },
       {
-       "$id": "26",
+       "$id": "25",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "27",
+        "$id": "26",
         "Kind": "string",
         "IsNullable": false
        },
@@ -255,9 +255,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "28",
+        "$id": "27",
         "Type": {
-         "$ref": "27"
+         "$ref": "26"
         },
         "Value": "application/json"
        }
@@ -265,12 +265,12 @@
      ],
      "Responses": [
       {
-       "$id": "29",
+       "$id": "28",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "30",
+        "$id": "29",
         "Kind": "string",
         "IsNullable": false
        },
@@ -292,35 +292,35 @@
     }
    ],
    "Protocol": {
-    "$id": "31"
+    "$id": "30"
    },
    "Creatable": false,
    "Parent": "ClientAndOperationGroupClient",
    "Parameters": [
     {
-     "$ref": "4"
+     "$ref": "3"
     }
    ]
   },
   {
-   "$id": "32",
+   "$id": "31",
    "Name": "Gamma",
    "Description": "",
    "Operations": [
     {
-     "$id": "33",
+     "$id": "32",
      "Name": "four",
      "ResourceName": "Gamma",
      "Parameters": [
       {
-       "$ref": "4"
+       "$ref": "3"
       },
       {
-       "$id": "34",
+       "$id": "33",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "35",
+        "$id": "34",
         "Kind": "string",
         "IsNullable": false
        },
@@ -334,9 +334,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "36",
+        "$id": "35",
         "Type": {
-         "$ref": "35"
+         "$ref": "34"
         },
         "Value": "application/json"
        }
@@ -344,12 +344,12 @@
      ],
      "Responses": [
       {
-       "$id": "37",
+       "$id": "36",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "38",
+        "$id": "37",
         "Kind": "string",
         "IsNullable": false
        },
@@ -370,19 +370,19 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "39",
+     "$id": "38",
      "Name": "five",
      "ResourceName": "Gamma",
      "Parameters": [
       {
-       "$ref": "4"
+       "$ref": "3"
       },
       {
-       "$id": "40",
+       "$id": "39",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "41",
+        "$id": "40",
         "Kind": "string",
         "IsNullable": false
        },
@@ -396,9 +396,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "42",
+        "$id": "41",
         "Type": {
-         "$ref": "41"
+         "$ref": "40"
         },
         "Value": "application/json"
        }
@@ -406,12 +406,12 @@
      ],
      "Responses": [
       {
-       "$id": "43",
+       "$id": "42",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "44",
+        "$id": "43",
         "Kind": "string",
         "IsNullable": false
        },
@@ -433,13 +433,13 @@
     }
    ],
    "Protocol": {
-    "$id": "45"
+    "$id": "44"
    },
    "Creatable": false,
    "Parent": "ClientAndOperationGroupClient",
    "Parameters": [
     {
-     "$ref": "4"
+     "$ref": "3"
     }
    ]
   }

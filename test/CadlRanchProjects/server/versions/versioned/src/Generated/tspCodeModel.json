@@ -1,5 +1,5 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "Server.Versions.Versioned",
  "ApiVersions": [
   "2021-01-01-preview",
@@ -7,23 +7,23 @@
  ],
  "Enums": [
   {
-   "$id": "2",
+   "$id": "1",
    "Kind": "enum",
    "Name": "Versions",
    "ValueType": {
-    "$id": "3",
+    "$id": "2",
     "Kind": "string",
     "IsNullable": false
    },
    "Values": [
     {
-     "$id": "4",
+     "$id": "3",
      "Name": "v2021_01_01_preview",
      "Value": "2021-01-01-preview",
      "Description": "The version 2022-12-01-preview."
     },
     {
-     "$id": "5",
+     "$id": "4",
      "Name": "v2022_12_01_preview",
      "Value": "2022-12-01-preview",
      "Description": "The version 2022-12-01-preview."
@@ -39,22 +39,22 @@
  "Models": [],
  "Clients": [
   {
-   "$id": "6",
+   "$id": "5",
    "Name": "VersionedClient",
    "Description": "Illustrates versioned server.",
    "Operations": [
     {
-     "$id": "7",
+     "$id": "6",
      "Name": "withoutApiVersion",
      "ResourceName": "Versioned",
      "Parameters": [
       {
-       "$id": "8",
+       "$id": "7",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "9",
+        "$id": "8",
         "Kind": "uri",
         "IsNullable": false
        },
@@ -69,11 +69,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "10",
+       "$id": "9",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "11",
+        "$id": "10",
         "Kind": "string",
         "IsNullable": false
        },
@@ -87,9 +87,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "12",
+        "$id": "11",
         "Type": {
-         "$ref": "11"
+         "$ref": "10"
         },
         "Value": "application/json"
        }
@@ -97,7 +97,7 @@
      ],
      "Responses": [
       {
-       "$id": "13",
+       "$id": "12",
        "StatusCodes": [
         200
        ],
@@ -115,27 +115,27 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "14",
+     "$id": "13",
      "Name": "withQueryApiVersion",
      "ResourceName": "Versioned",
      "Parameters": [
       {
-       "$ref": "8"
+       "$ref": "7"
       },
       {
-       "$id": "15",
+       "$id": "14",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Type": {
-        "$id": "16",
+        "$id": "15",
         "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "17",
+        "$id": "16",
         "Type": {
-         "$id": "18",
+         "$id": "17",
          "Kind": "string",
          "IsNullable": false
         },
@@ -151,11 +151,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "19",
+       "$id": "18",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "20",
+        "$id": "19",
         "Kind": "string",
         "IsNullable": false
        },
@@ -169,9 +169,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "21",
+        "$id": "20",
         "Type": {
-         "$ref": "20"
+         "$ref": "19"
         },
         "Value": "application/json"
        }
@@ -179,7 +179,7 @@
      ],
      "Responses": [
       {
-       "$id": "22",
+       "$id": "21",
        "StatusCodes": [
         200
        ],
@@ -197,25 +197,25 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "23",
+     "$id": "22",
      "Name": "withPathApiVersion",
      "ResourceName": "Versioned",
      "Parameters": [
       {
-       "$ref": "8"
+       "$ref": "7"
       },
       {
-       "$id": "24",
+       "$id": "23",
        "Name": "apiVersion",
        "NameInRequest": "apiVersion",
        "Type": {
-        "$id": "25",
+        "$id": "24",
         "Kind": "string",
         "IsNullable": false
        },
        "Location": "Path",
        "DefaultValue": {
-        "$ref": "17"
+        "$ref": "16"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -227,11 +227,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "26",
+       "$id": "25",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "27",
+        "$id": "26",
         "Kind": "string",
         "IsNullable": false
        },
@@ -245,9 +245,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "28",
+        "$id": "27",
         "Type": {
-         "$ref": "27"
+         "$ref": "26"
         },
         "Value": "application/json"
        }
@@ -255,7 +255,7 @@
      ],
      "Responses": [
       {
-       "$id": "29",
+       "$id": "28",
        "StatusCodes": [
         200
        ],
@@ -273,25 +273,25 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "30",
+     "$id": "29",
      "Name": "withQueryOldApiVersion",
      "ResourceName": "Versioned",
      "Parameters": [
       {
-       "$ref": "8"
+       "$ref": "7"
       },
       {
-       "$id": "31",
+       "$id": "30",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Type": {
-        "$id": "32",
+        "$id": "31",
         "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "17"
+        "$ref": "16"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -303,11 +303,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "33",
+       "$id": "32",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "34",
+        "$id": "33",
         "Kind": "string",
         "IsNullable": false
        },
@@ -321,9 +321,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "35",
+        "$id": "34",
         "Type": {
-         "$ref": "34"
+         "$ref": "33"
         },
         "Value": "application/json"
        }
@@ -331,7 +331,7 @@
      ],
      "Responses": [
       {
-       "$id": "36",
+       "$id": "35",
        "StatusCodes": [
         200
        ],
@@ -350,12 +350,12 @@
     }
    ],
    "Protocol": {
-    "$id": "37"
+    "$id": "36"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "8"
+     "$ref": "7"
     }
    ]
   }

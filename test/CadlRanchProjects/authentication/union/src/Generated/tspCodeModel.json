@@ -1,28 +1,28 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "Authentication.Union",
  "ApiVersions": [],
  "Enums": [],
  "Models": [],
  "Clients": [
   {
-   "$id": "2",
+   "$id": "1",
    "Name": "UnionClient",
    "Description": "Illustrates clients generated with ApiKey and OAuth2 authentication.",
    "Operations": [
     {
-     "$id": "3",
+     "$id": "2",
      "Name": "validKey",
      "ResourceName": "Union",
      "Description": "Check whether client is authenticated",
      "Parameters": [
       {
-       "$id": "4",
+       "$id": "3",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "5",
+        "$id": "4",
         "Kind": "string",
         "IsNullable": false
        },
@@ -36,9 +36,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "6",
+        "$id": "5",
         "Type": {
-         "$id": "7",
+         "$id": "6",
          "Kind": "string",
          "IsNullable": false
         },
@@ -46,11 +46,11 @@
        }
       },
       {
-       "$id": "8",
+       "$id": "7",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "9",
+        "$id": "8",
         "Kind": "string",
         "IsNullable": false
        },
@@ -64,9 +64,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "10",
+        "$id": "9",
         "Type": {
-         "$ref": "9"
+         "$ref": "8"
         },
         "Value": "application/json"
        }
@@ -74,7 +74,7 @@
      ],
      "Responses": [
       {
-       "$id": "11",
+       "$id": "10",
        "StatusCodes": [
         204
        ],
@@ -92,20 +92,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "12",
+     "$id": "11",
      "Name": "validToken",
      "ResourceName": "Union",
      "Description": "Check whether client is authenticated",
      "Parameters": [
       {
-       "$ref": "4"
+       "$ref": "3"
       },
       {
-       "$id": "13",
+       "$id": "12",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "14",
+        "$id": "13",
         "Kind": "string",
         "IsNullable": false
        },
@@ -119,9 +119,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "15",
+        "$id": "14",
         "Type": {
-         "$ref": "14"
+         "$ref": "13"
         },
         "Value": "application/json"
        }
@@ -129,7 +129,7 @@
      ],
      "Responses": [
       {
-       "$id": "16",
+       "$id": "15",
        "StatusCodes": [
         204
        ],
@@ -148,24 +148,24 @@
     }
    ],
    "Protocol": {
-    "$id": "17"
+    "$id": "16"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "4"
+     "$ref": "3"
     }
    ]
   }
  ],
  "Auth": {
-  "$id": "18",
+  "$id": "17",
   "ApiKey": {
-   "$id": "19",
+   "$id": "18",
    "Name": "x-ms-api-key"
   },
   "OAuth2": {
-   "$id": "20",
+   "$id": "19",
    "Scopes": [
     "https://security.microsoft.com/.default"
    ]

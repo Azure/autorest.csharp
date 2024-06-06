@@ -1,22 +1,22 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "_Specs_.Azure.Core.Scalar",
  "ApiVersions": [
   "2022-12-01-preview"
  ],
  "Enums": [
   {
-   "$id": "2",
+   "$id": "1",
    "Kind": "enum",
    "Name": "Versions",
    "ValueType": {
-    "$id": "3",
+    "$id": "2",
     "Kind": "string",
     "IsNullable": false
    },
    "Values": [
     {
-     "$id": "4",
+     "$id": "3",
      "Name": "v2022_12_01_preview",
      "Value": "2022-12-01-preview",
      "Description": "The version 2022-12-01-preview."
@@ -31,7 +31,7 @@
  ],
  "Models": [
   {
-   "$id": "5",
+   "$id": "4",
    "Kind": "Model",
    "Name": "AzureLocationModel",
    "Namespace": "_Specs_.Azure.Core.Scalar",
@@ -39,12 +39,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "6",
+     "$id": "5",
      "Name": "location",
      "SerializedName": "location",
      "Description": "",
      "Type": {
-      "$id": "7",
+      "$id": "6",
       "Kind": "azureLocation",
       "IsNullable": false,
       "Encode": "string"
@@ -57,22 +57,22 @@
  ],
  "Clients": [
   {
-   "$id": "8",
+   "$id": "7",
    "Name": "ScalarClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "9"
+    "$id": "8"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$id": "10",
+     "$id": "9",
      "Name": "host",
      "NameInRequest": "host",
      "Description": "TestServer endpoint",
      "Type": {
-      "$id": "11",
+      "$id": "10",
       "Kind": "string",
       "IsNullable": false
      },
@@ -86,9 +86,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "12",
+      "$id": "11",
       "Type": {
-       "$id": "13",
+       "$id": "12",
        "Kind": "string",
        "IsNullable": false
       },
@@ -98,25 +98,25 @@
    ]
   },
   {
-   "$id": "14",
+   "$id": "13",
    "Name": "AzureLocationScalar",
    "Description": "",
    "Operations": [
     {
-     "$id": "15",
+     "$id": "14",
      "Name": "get",
      "ResourceName": "AzureLocationScalar",
      "Description": "get azureLocation value",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "16",
+       "$id": "15",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "17",
+        "$id": "16",
         "Kind": "string",
         "IsNullable": false
        },
@@ -130,9 +130,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "18",
+        "$id": "17",
         "Type": {
-         "$ref": "17"
+         "$ref": "16"
         },
         "Value": "application/json"
        }
@@ -140,12 +140,12 @@
      ],
      "Responses": [
       {
-       "$id": "19",
+       "$id": "18",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "20",
+        "$id": "19",
         "Kind": "azureLocation",
         "IsNullable": false,
         "Encode": "string"
@@ -167,21 +167,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "21",
+     "$id": "20",
      "Name": "put",
      "ResourceName": "AzureLocationScalar",
      "Description": "put azureLocation value",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "22",
+       "$id": "21",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
        "Type": {
-        "$id": "23",
+        "$id": "22",
         "Kind": "azureLocation",
         "IsNullable": false,
         "Encode": "string"
@@ -197,11 +197,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "24",
+       "$id": "23",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "25",
+        "$id": "24",
         "Kind": "string",
         "IsNullable": false
        },
@@ -215,19 +215,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "26",
+        "$id": "25",
         "Type": {
-         "$ref": "25"
+         "$ref": "24"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "27",
+       "$id": "26",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "28",
+        "$id": "27",
         "Kind": "string",
         "IsNullable": false
        },
@@ -241,9 +241,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "29",
+        "$id": "28",
         "Type": {
-         "$ref": "28"
+         "$ref": "27"
         },
         "Value": "application/json"
        }
@@ -251,7 +251,7 @@
      ],
      "Responses": [
       {
-       "$id": "30",
+       "$id": "29",
        "StatusCodes": [
         204
        ],
@@ -272,21 +272,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "31",
+     "$id": "30",
      "Name": "post",
      "ResourceName": "AzureLocationScalar",
      "Description": "post a model which has azureLocation property",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "32",
+       "$id": "31",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
        "Type": {
-        "$ref": "5"
+        "$ref": "4"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -299,11 +299,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "33",
+       "$id": "32",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "34",
+        "$id": "33",
         "Kind": "string",
         "IsNullable": false
        },
@@ -317,19 +317,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "35",
+        "$id": "34",
         "Type": {
-         "$ref": "34"
+         "$ref": "33"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "36",
+       "$id": "35",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "37",
+        "$id": "36",
         "Kind": "string",
         "IsNullable": false
        },
@@ -343,9 +343,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "38",
+        "$id": "37",
         "Type": {
-         "$ref": "37"
+         "$ref": "36"
         },
         "Value": "application/json"
        }
@@ -353,12 +353,12 @@
      ],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "38",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "4"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -380,21 +380,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "40",
+     "$id": "39",
      "Name": "header",
      "ResourceName": "AzureLocationScalar",
      "Description": "azureLocation value header",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "41",
+       "$id": "40",
        "Name": "region",
        "NameInRequest": "region",
        "Description": "_",
        "Type": {
-        "$id": "42",
+        "$id": "41",
         "Kind": "azureLocation",
         "IsNullable": false,
         "Encode": "string"
@@ -410,11 +410,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "43",
+       "$id": "42",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "44",
+        "$id": "43",
         "Kind": "string",
         "IsNullable": false
        },
@@ -428,9 +428,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "45",
+        "$id": "44",
         "Type": {
-         "$ref": "44"
+         "$ref": "43"
         },
         "Value": "application/json"
        }
@@ -438,7 +438,7 @@
      ],
      "Responses": [
       {
-       "$id": "46",
+       "$id": "45",
        "StatusCodes": [
         204
        ],
@@ -456,21 +456,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "47",
+     "$id": "46",
      "Name": "query",
      "ResourceName": "AzureLocationScalar",
      "Description": "azureLocation value query",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "48",
+       "$id": "47",
        "Name": "region",
        "NameInRequest": "region",
        "Description": "_",
        "Type": {
-        "$id": "49",
+        "$id": "48",
         "Kind": "azureLocation",
         "IsNullable": false,
         "Encode": "string"
@@ -486,11 +486,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "50",
+       "$id": "49",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "51",
+        "$id": "50",
         "Kind": "string",
         "IsNullable": false
        },
@@ -504,9 +504,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "52",
+        "$id": "51",
         "Type": {
-         "$ref": "51"
+         "$ref": "50"
         },
         "Value": "application/json"
        }
@@ -514,7 +514,7 @@
      ],
      "Responses": [
       {
-       "$id": "53",
+       "$id": "52",
        "StatusCodes": [
         204
        ],
@@ -533,13 +533,13 @@
     }
    ],
    "Protocol": {
-    "$id": "54"
+    "$id": "53"
    },
    "Creatable": false,
    "Parent": "ScalarClient",
    "Parameters": [
     {
-     "$ref": "10"
+     "$ref": "9"
     }
    ]
   }

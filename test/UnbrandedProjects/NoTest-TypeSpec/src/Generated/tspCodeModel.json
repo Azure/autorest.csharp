@@ -1,20 +1,20 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "NoTestTypeSpec",
  "ApiVersions": [],
  "Enums": [
   {
-   "$id": "2",
+   "$id": "1",
    "Kind": "enum",
    "Name": "Thing_requiredLiteralString",
    "ValueType": {
-    "$id": "3",
+    "$id": "2",
     "Kind": "string",
     "IsNullable": false
    },
    "Values": [
     {
-     "$id": "4",
+     "$id": "3",
      "Name": "accept",
      "Value": "accept",
      "Description": "accept"
@@ -27,17 +27,17 @@
    "Usage": "Output"
   },
   {
-   "$id": "5",
+   "$id": "4",
    "Kind": "enum",
    "Name": "Thing_requiredLiteralInt",
    "ValueType": {
-    "$id": "6",
+    "$id": "5",
     "Kind": "int32",
     "IsNullable": false
    },
    "Values": [
     {
-     "$id": "7",
+     "$id": "6",
      "Name": "123",
      "Value": 123,
      "Description": "123"
@@ -50,17 +50,17 @@
    "Usage": "Output"
   },
   {
-   "$id": "8",
+   "$id": "7",
    "Kind": "enum",
    "Name": "Thing_requiredLiteralFloat",
    "ValueType": {
-    "$id": "9",
+    "$id": "8",
     "Kind": "float32",
     "IsNullable": false
    },
    "Values": [
     {
-     "$id": "10",
+     "$id": "9",
      "Name": "1.23",
      "Value": 1.23,
      "Description": "1.23"
@@ -73,17 +73,17 @@
    "Usage": "Output"
   },
   {
-   "$id": "11",
+   "$id": "10",
    "Kind": "enum",
    "Name": "Thing_optionalLiteralString",
    "ValueType": {
-    "$id": "12",
+    "$id": "11",
     "Kind": "string",
     "IsNullable": false
    },
    "Values": [
     {
-     "$id": "13",
+     "$id": "12",
      "Name": "reject",
      "Value": "reject",
      "Description": "reject"
@@ -96,17 +96,17 @@
    "Usage": "Output"
   },
   {
-   "$id": "14",
+   "$id": "13",
    "Kind": "enum",
    "Name": "Thing_optionalLiteralInt",
    "ValueType": {
-    "$id": "15",
+    "$id": "14",
     "Kind": "int32",
     "IsNullable": false
    },
    "Values": [
     {
-     "$id": "16",
+     "$id": "15",
      "Name": "456",
      "Value": 456,
      "Description": "456"
@@ -119,17 +119,17 @@
    "Usage": "Output"
   },
   {
-   "$id": "17",
+   "$id": "16",
    "Kind": "enum",
    "Name": "Thing_optionalLiteralFloat",
    "ValueType": {
-    "$id": "18",
+    "$id": "17",
     "Kind": "float32",
     "IsNullable": false
    },
    "Values": [
     {
-     "$id": "19",
+     "$id": "18",
      "Name": "4.56",
      "Value": 4.56,
      "Description": "4.56"
@@ -144,7 +144,7 @@
  ],
  "Models": [
   {
-   "$id": "20",
+   "$id": "19",
    "Kind": "Model",
    "Name": "Thing",
    "Namespace": "NoTestTypeSpec",
@@ -153,12 +153,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "21",
+     "$id": "20",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the Thing",
      "Type": {
-      "$id": "22",
+      "$id": "21",
       "Kind": "string",
       "IsNullable": false
      },
@@ -166,33 +166,33 @@
      "IsReadOnly": false
     },
     {
-     "$id": "23",
+     "$id": "22",
      "Name": "requiredUnion",
      "SerializedName": "requiredUnion",
      "Description": "required Union",
      "Type": {
-      "$id": "24",
+      "$id": "23",
       "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
-        "$id": "25",
+        "$id": "24",
         "Kind": "string",
         "IsNullable": false
        },
        {
-        "$id": "26",
+        "$id": "25",
         "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "27",
+         "$id": "26",
          "Kind": "string",
          "IsNullable": false
         },
         "IsNullable": false
        },
        {
-        "$id": "28",
+        "$id": "27",
         "Kind": "int32",
         "IsNullable": false
        }
@@ -203,15 +203,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "29",
+     "$id": "28",
      "Name": "requiredLiteralString",
      "SerializedName": "requiredLiteralString",
      "Description": "required literal string",
      "Type": {
-      "$id": "30",
+      "$id": "29",
       "Kind": "constant",
       "ValueType": {
-       "$ref": "2"
+       "$ref": "1"
       },
       "Value": "accept",
       "IsNullable": false
@@ -220,15 +220,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "31",
+     "$id": "30",
      "Name": "requiredLiteralInt",
      "SerializedName": "requiredLiteralInt",
      "Description": "required literal int",
      "Type": {
-      "$id": "32",
+      "$id": "31",
       "Kind": "constant",
       "ValueType": {
-       "$ref": "5"
+       "$ref": "4"
       },
       "Value": 123,
       "IsNullable": false
@@ -237,15 +237,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "33",
+     "$id": "32",
      "Name": "requiredLiteralFloat",
      "SerializedName": "requiredLiteralFloat",
      "Description": "required literal float",
      "Type": {
-      "$id": "34",
+      "$id": "33",
       "Kind": "constant",
       "ValueType": {
-       "$ref": "8"
+       "$ref": "7"
       },
       "Value": 1.23,
       "IsNullable": false
@@ -254,15 +254,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "35",
+     "$id": "34",
      "Name": "requiredLiteralBool",
      "SerializedName": "requiredLiteralBool",
      "Description": "required literal bool",
      "Type": {
-      "$id": "36",
+      "$id": "35",
       "Kind": "constant",
       "ValueType": {
-       "$id": "37",
+       "$id": "36",
        "Kind": "boolean",
        "IsNullable": false
       },
@@ -273,15 +273,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "38",
+     "$id": "37",
      "Name": "optionalLiteralString",
      "SerializedName": "optionalLiteralString",
      "Description": "optional literal string",
      "Type": {
-      "$id": "39",
+      "$id": "38",
       "Kind": "constant",
       "ValueType": {
-       "$ref": "11"
+       "$ref": "10"
       },
       "Value": "reject",
       "IsNullable": false
@@ -290,15 +290,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "40",
+     "$id": "39",
      "Name": "optionalLiteralInt",
      "SerializedName": "optionalLiteralInt",
      "Description": "optional literal int",
      "Type": {
-      "$id": "41",
+      "$id": "40",
       "Kind": "constant",
       "ValueType": {
-       "$ref": "14"
+       "$ref": "13"
       },
       "Value": 456,
       "IsNullable": false
@@ -307,15 +307,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "42",
+     "$id": "41",
      "Name": "optionalLiteralFloat",
      "SerializedName": "optionalLiteralFloat",
      "Description": "optional literal float",
      "Type": {
-      "$id": "43",
+      "$id": "42",
       "Kind": "constant",
       "ValueType": {
-       "$ref": "17"
+       "$ref": "16"
       },
       "Value": 4.56,
       "IsNullable": false
@@ -324,15 +324,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "44",
+     "$id": "43",
      "Name": "optionalLiteralBool",
      "SerializedName": "optionalLiteralBool",
      "Description": "optional literal bool",
      "Type": {
-      "$id": "45",
+      "$id": "44",
       "Kind": "constant",
       "ValueType": {
-       "$id": "46",
+       "$id": "45",
        "Kind": "boolean",
        "IsNullable": false
       },
@@ -343,12 +343,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "47",
+     "$id": "46",
      "Name": "requiredBadDescription",
      "SerializedName": "requiredBadDescription",
      "Description": "description with xml <|endoftext|>",
      "Type": {
-      "$id": "48",
+      "$id": "47",
       "Kind": "string",
       "IsNullable": false
      },
@@ -356,16 +356,16 @@
      "IsReadOnly": false
     },
     {
-     "$id": "49",
+     "$id": "48",
      "Name": "optionalNullableList",
      "SerializedName": "optionalNullableList",
      "Description": "optional nullable collection",
      "Type": {
-      "$id": "50",
+      "$id": "49",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "51",
+       "$id": "50",
        "Kind": "int32",
        "IsNullable": false
       },
@@ -375,16 +375,16 @@
      "IsReadOnly": false
     },
     {
-     "$id": "52",
+     "$id": "51",
      "Name": "requiredNullableList",
      "SerializedName": "requiredNullableList",
      "Description": "required nullable collection",
      "Type": {
-      "$id": "53",
+      "$id": "52",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "54",
+       "$id": "53",
        "Kind": "int32",
        "IsNullable": false
       },
@@ -398,22 +398,22 @@
  ],
  "Clients": [
   {
-   "$id": "55",
+   "$id": "54",
    "Name": "NoTestTypeSpecClient",
    "Description": "This is a sample typespec project.",
    "Operations": [
     {
-     "$id": "56",
+     "$id": "55",
      "Name": "sayHi",
      "ResourceName": "NoTestTypeSpec",
      "Description": "Return hi",
      "Parameters": [
       {
-       "$id": "57",
+       "$id": "56",
        "Name": "noTestTypeSpecUrl",
        "NameInRequest": "noTestTypeSpecUrl",
        "Type": {
-        "$id": "58",
+        "$id": "57",
         "Kind": "uri",
         "IsNullable": false
        },
@@ -428,11 +428,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "59",
+       "$id": "58",
        "Name": "headParameter",
        "NameInRequest": "head-parameter",
        "Type": {
-        "$id": "60",
+        "$id": "59",
         "Kind": "string",
         "IsNullable": false
        },
@@ -447,11 +447,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "61",
+       "$id": "60",
        "Name": "queryParameter",
        "NameInRequest": "queryParameter",
        "Type": {
-        "$id": "62",
+        "$id": "61",
         "Kind": "string",
         "IsNullable": false
        },
@@ -466,11 +466,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "63",
+       "$id": "62",
        "Name": "optionalQuery",
        "NameInRequest": "optionalQuery",
        "Type": {
-        "$id": "64",
+        "$id": "63",
         "Kind": "string",
         "IsNullable": false
        },
@@ -485,11 +485,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "65",
+       "$id": "64",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "66",
+        "$id": "65",
         "Kind": "string",
         "IsNullable": false
        },
@@ -503,9 +503,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "67",
+        "$id": "66",
         "Type": {
-         "$ref": "66"
+         "$ref": "65"
         },
         "Value": "application/json"
        }
@@ -513,12 +513,12 @@
      ],
      "Responses": [
       {
-       "$id": "68",
+       "$id": "67",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "20"
+        "$ref": "19"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -538,20 +538,20 @@
     }
    ],
    "Protocol": {
-    "$id": "69"
+    "$id": "68"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "57"
+     "$ref": "56"
     }
    ]
   }
  ],
  "Auth": {
-  "$id": "70",
+  "$id": "69",
   "ApiKey": {
-   "$id": "71",
+   "$id": "70",
    "Name": "my-api-key"
   }
  }

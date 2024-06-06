@@ -1,11 +1,11 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "Type.Dictionary",
  "ApiVersions": [],
  "Enums": [],
  "Models": [
   {
-   "$id": "2",
+   "$id": "1",
    "Kind": "Model",
    "Name": "InnerModel",
    "Namespace": "Type.Dictionary",
@@ -14,12 +14,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "3",
+     "$id": "2",
      "Name": "property",
      "SerializedName": "property",
      "Description": "Required string property",
      "Type": {
-      "$id": "4",
+      "$id": "3",
       "Kind": "string",
       "IsNullable": false
      },
@@ -27,21 +27,21 @@
      "IsReadOnly": false
     },
     {
-     "$id": "5",
+     "$id": "4",
      "Name": "children",
      "SerializedName": "children",
      "Description": "",
      "Type": {
-      "$id": "6",
+      "$id": "5",
       "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "7",
+       "$id": "6",
        "Kind": "string",
        "IsNullable": false
       },
       "ValueType": {
-       "$ref": "2"
+       "$ref": "1"
       },
       "IsNullable": false
      },
@@ -53,22 +53,22 @@
  ],
  "Clients": [
   {
-   "$id": "8",
+   "$id": "7",
    "Name": "DictionaryClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "9"
+    "$id": "8"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$id": "10",
+     "$id": "9",
      "Name": "host",
      "NameInRequest": "host",
      "Description": "TestServer endpoint",
      "Type": {
-      "$id": "11",
+      "$id": "10",
       "Kind": "string",
       "IsNullable": false
      },
@@ -82,9 +82,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "12",
+      "$id": "11",
       "Type": {
-       "$id": "13",
+       "$id": "12",
        "Kind": "string",
        "IsNullable": false
       },
@@ -94,24 +94,24 @@
    ]
   },
   {
-   "$id": "14",
+   "$id": "13",
    "Name": "Int32Value",
    "Description": "Dictionary of int32 values",
    "Operations": [
     {
-     "$id": "15",
+     "$id": "14",
      "Name": "get",
      "ResourceName": "Int32Value",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "16",
+       "$id": "15",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "17",
+        "$id": "16",
         "Kind": "string",
         "IsNullable": false
        },
@@ -125,9 +125,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "18",
+        "$id": "17",
         "Type": {
-         "$ref": "17"
+         "$ref": "16"
         },
         "Value": "application/json"
        }
@@ -135,21 +135,21 @@
      ],
      "Responses": [
       {
-       "$id": "19",
+       "$id": "18",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "20",
+        "$id": "19",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "21",
+         "$id": "20",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "22",
+         "$id": "21",
          "Kind": "int32",
          "IsNullable": false
         },
@@ -172,28 +172,28 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "23",
+     "$id": "22",
      "Name": "put",
      "ResourceName": "Int32Value",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "24",
+       "$id": "23",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "25",
+        "$id": "24",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "26",
+         "$id": "25",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "27",
+         "$id": "26",
          "Kind": "int32",
          "IsNullable": false
         },
@@ -210,11 +210,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "28",
+       "$id": "27",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "29",
+        "$id": "28",
         "Kind": "string",
         "IsNullable": false
        },
@@ -228,19 +228,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "30",
+        "$id": "29",
         "Type": {
-         "$ref": "29"
+         "$ref": "28"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "31",
+       "$id": "30",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "32",
+        "$id": "31",
         "Kind": "string",
         "IsNullable": false
        },
@@ -254,9 +254,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "33",
+        "$id": "32",
         "Type": {
-         "$ref": "32"
+         "$ref": "31"
         },
         "Value": "application/json"
        }
@@ -264,7 +264,7 @@
      ],
      "Responses": [
       {
-       "$id": "34",
+       "$id": "33",
        "StatusCodes": [
         204
        ],
@@ -286,35 +286,35 @@
     }
    ],
    "Protocol": {
-    "$id": "35"
+    "$id": "34"
    },
    "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "10"
+     "$ref": "9"
     }
    ]
   },
   {
-   "$id": "36",
+   "$id": "35",
    "Name": "Int64Value",
    "Description": "Dictionary of int64 values",
    "Operations": [
     {
-     "$id": "37",
+     "$id": "36",
      "Name": "get",
      "ResourceName": "Int64Value",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "38",
+       "$id": "37",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "39",
+        "$id": "38",
         "Kind": "string",
         "IsNullable": false
        },
@@ -328,9 +328,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "40",
+        "$id": "39",
         "Type": {
-         "$ref": "39"
+         "$ref": "38"
         },
         "Value": "application/json"
        }
@@ -338,21 +338,21 @@
      ],
      "Responses": [
       {
-       "$id": "41",
+       "$id": "40",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "42",
+        "$id": "41",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "43",
+         "$id": "42",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "44",
+         "$id": "43",
          "Kind": "int64",
          "IsNullable": false
         },
@@ -375,28 +375,28 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "45",
+     "$id": "44",
      "Name": "put",
      "ResourceName": "Int64Value",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "46",
+       "$id": "45",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "47",
+        "$id": "46",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "48",
+         "$id": "47",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "49",
+         "$id": "48",
          "Kind": "int64",
          "IsNullable": false
         },
@@ -413,11 +413,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "50",
+       "$id": "49",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "51",
+        "$id": "50",
         "Kind": "string",
         "IsNullable": false
        },
@@ -431,19 +431,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "52",
+        "$id": "51",
         "Type": {
-         "$ref": "51"
+         "$ref": "50"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "53",
+       "$id": "52",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "54",
+        "$id": "53",
         "Kind": "string",
         "IsNullable": false
        },
@@ -457,9 +457,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "55",
+        "$id": "54",
         "Type": {
-         "$ref": "54"
+         "$ref": "53"
         },
         "Value": "application/json"
        }
@@ -467,7 +467,7 @@
      ],
      "Responses": [
       {
-       "$id": "56",
+       "$id": "55",
        "StatusCodes": [
         204
        ],
@@ -489,35 +489,35 @@
     }
    ],
    "Protocol": {
-    "$id": "57"
+    "$id": "56"
    },
    "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "10"
+     "$ref": "9"
     }
    ]
   },
   {
-   "$id": "58",
+   "$id": "57",
    "Name": "BooleanValue",
    "Description": "Dictionary of boolean values",
    "Operations": [
     {
-     "$id": "59",
+     "$id": "58",
      "Name": "get",
      "ResourceName": "BooleanValue",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "60",
+       "$id": "59",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "61",
+        "$id": "60",
         "Kind": "string",
         "IsNullable": false
        },
@@ -531,9 +531,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "62",
+        "$id": "61",
         "Type": {
-         "$ref": "61"
+         "$ref": "60"
         },
         "Value": "application/json"
        }
@@ -541,21 +541,21 @@
      ],
      "Responses": [
       {
-       "$id": "63",
+       "$id": "62",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "64",
+        "$id": "63",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "65",
+         "$id": "64",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "66",
+         "$id": "65",
          "Kind": "boolean",
          "IsNullable": false
         },
@@ -578,28 +578,28 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "67",
+     "$id": "66",
      "Name": "put",
      "ResourceName": "BooleanValue",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "68",
+       "$id": "67",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "69",
+        "$id": "68",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "70",
+         "$id": "69",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "71",
+         "$id": "70",
          "Kind": "boolean",
          "IsNullable": false
         },
@@ -616,11 +616,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "72",
+       "$id": "71",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "73",
+        "$id": "72",
         "Kind": "string",
         "IsNullable": false
        },
@@ -634,19 +634,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "74",
+        "$id": "73",
         "Type": {
-         "$ref": "73"
+         "$ref": "72"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "75",
+       "$id": "74",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "76",
+        "$id": "75",
         "Kind": "string",
         "IsNullable": false
        },
@@ -660,9 +660,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "77",
+        "$id": "76",
         "Type": {
-         "$ref": "76"
+         "$ref": "75"
         },
         "Value": "application/json"
        }
@@ -670,7 +670,7 @@
      ],
      "Responses": [
       {
-       "$id": "78",
+       "$id": "77",
        "StatusCodes": [
         204
        ],
@@ -692,35 +692,35 @@
     }
    ],
    "Protocol": {
-    "$id": "79"
+    "$id": "78"
    },
    "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "10"
+     "$ref": "9"
     }
    ]
   },
   {
-   "$id": "80",
+   "$id": "79",
    "Name": "StringValue",
    "Description": "Dictionary of string values",
    "Operations": [
     {
-     "$id": "81",
+     "$id": "80",
      "Name": "get",
      "ResourceName": "StringValue",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "82",
+       "$id": "81",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "83",
+        "$id": "82",
         "Kind": "string",
         "IsNullable": false
        },
@@ -734,9 +734,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "84",
+        "$id": "83",
         "Type": {
-         "$ref": "83"
+         "$ref": "82"
         },
         "Value": "application/json"
        }
@@ -744,24 +744,24 @@
      ],
      "Responses": [
       {
-       "$id": "85",
+       "$id": "84",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "86",
+        "$id": "85",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
+         "$id": "86",
+         "Kind": "string",
+         "IsNullable": false
+        },
+        "ValueType": {
          "$id": "87",
          "Kind": "string",
          "IsNullable": false
         },
-        "ValueType": {
-         "$id": "88",
-         "Kind": "string",
-         "IsNullable": false
-        },
         "IsNullable": false
        },
        "BodyMediaType": "Json",
@@ -781,28 +781,28 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "89",
+     "$id": "88",
      "Name": "put",
      "ResourceName": "StringValue",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "90",
+       "$id": "89",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "91",
+        "$id": "90",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "92",
+         "$id": "91",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "93",
+         "$id": "92",
          "Kind": "string",
          "IsNullable": false
         },
@@ -819,11 +819,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "94",
+       "$id": "93",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "95",
+        "$id": "94",
         "Kind": "string",
         "IsNullable": false
        },
@@ -837,19 +837,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "96",
+        "$id": "95",
         "Type": {
-         "$ref": "95"
+         "$ref": "94"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "97",
+       "$id": "96",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "98",
+        "$id": "97",
         "Kind": "string",
         "IsNullable": false
        },
@@ -863,9 +863,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "99",
+        "$id": "98",
         "Type": {
-         "$ref": "98"
+         "$ref": "97"
         },
         "Value": "application/json"
        }
@@ -873,7 +873,7 @@
      ],
      "Responses": [
       {
-       "$id": "100",
+       "$id": "99",
        "StatusCodes": [
         204
        ],
@@ -895,35 +895,35 @@
     }
    ],
    "Protocol": {
-    "$id": "101"
+    "$id": "100"
    },
    "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "10"
+     "$ref": "9"
     }
    ]
   },
   {
-   "$id": "102",
+   "$id": "101",
    "Name": "Float32Value",
    "Description": "Dictionary of float values",
    "Operations": [
     {
-     "$id": "103",
+     "$id": "102",
      "Name": "get",
      "ResourceName": "Float32Value",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "104",
+       "$id": "103",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "105",
+        "$id": "104",
         "Kind": "string",
         "IsNullable": false
        },
@@ -937,9 +937,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "106",
+        "$id": "105",
         "Type": {
-         "$ref": "105"
+         "$ref": "104"
         },
         "Value": "application/json"
        }
@@ -947,21 +947,21 @@
      ],
      "Responses": [
       {
-       "$id": "107",
+       "$id": "106",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "108",
+        "$id": "107",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "109",
+         "$id": "108",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "110",
+         "$id": "109",
          "Kind": "float32",
          "IsNullable": false
         },
@@ -984,28 +984,28 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "111",
+     "$id": "110",
      "Name": "put",
      "ResourceName": "Float32Value",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "112",
+       "$id": "111",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "113",
+        "$id": "112",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "114",
+         "$id": "113",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "115",
+         "$id": "114",
          "Kind": "float32",
          "IsNullable": false
         },
@@ -1022,11 +1022,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "116",
+       "$id": "115",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "117",
+        "$id": "116",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1040,19 +1040,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "118",
+        "$id": "117",
         "Type": {
-         "$ref": "117"
+         "$ref": "116"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "119",
+       "$id": "118",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "120",
+        "$id": "119",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1066,9 +1066,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "121",
+        "$id": "120",
         "Type": {
-         "$ref": "120"
+         "$ref": "119"
         },
         "Value": "application/json"
        }
@@ -1076,7 +1076,7 @@
      ],
      "Responses": [
       {
-       "$id": "122",
+       "$id": "121",
        "StatusCodes": [
         204
        ],
@@ -1098,35 +1098,35 @@
     }
    ],
    "Protocol": {
-    "$id": "123"
+    "$id": "122"
    },
    "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "10"
+     "$ref": "9"
     }
    ]
   },
   {
-   "$id": "124",
+   "$id": "123",
    "Name": "DatetimeValue",
    "Description": "Dictionary of datetime values",
    "Operations": [
     {
-     "$id": "125",
+     "$id": "124",
      "Name": "get",
      "ResourceName": "DatetimeValue",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "126",
+       "$id": "125",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "127",
+        "$id": "126",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1140,9 +1140,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "128",
+        "$id": "127",
         "Type": {
-         "$ref": "127"
+         "$ref": "126"
         },
         "Value": "application/json"
        }
@@ -1150,26 +1150,26 @@
      ],
      "Responses": [
       {
-       "$id": "129",
+       "$id": "128",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "130",
+        "$id": "129",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "131",
+         "$id": "130",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "132",
+         "$id": "131",
          "Kind": "utcDateTime",
          "IsNullable": false,
          "Encode": "rfc3339",
          "WireType": {
-          "$id": "133",
+          "$id": "132",
           "Kind": "string",
           "IsNullable": false
          }
@@ -1193,33 +1193,33 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "134",
+     "$id": "133",
      "Name": "put",
      "ResourceName": "DatetimeValue",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "135",
+       "$id": "134",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "136",
+        "$id": "135",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "137",
+         "$id": "136",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "138",
+         "$id": "137",
          "Kind": "utcDateTime",
          "IsNullable": false,
          "Encode": "rfc3339",
          "WireType": {
-          "$id": "139",
+          "$id": "138",
           "Kind": "string",
           "IsNullable": false
          }
@@ -1237,11 +1237,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "140",
+       "$id": "139",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "141",
+        "$id": "140",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1255,19 +1255,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "142",
+        "$id": "141",
         "Type": {
-         "$ref": "141"
+         "$ref": "140"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "143",
+       "$id": "142",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "144",
+        "$id": "143",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1281,9 +1281,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "145",
+        "$id": "144",
         "Type": {
-         "$ref": "144"
+         "$ref": "143"
         },
         "Value": "application/json"
        }
@@ -1291,7 +1291,7 @@
      ],
      "Responses": [
       {
-       "$id": "146",
+       "$id": "145",
        "StatusCodes": [
         204
        ],
@@ -1313,35 +1313,35 @@
     }
    ],
    "Protocol": {
-    "$id": "147"
+    "$id": "146"
    },
    "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "10"
+     "$ref": "9"
     }
    ]
   },
   {
-   "$id": "148",
+   "$id": "147",
    "Name": "DurationValue",
    "Description": "Dictionary of duration values",
    "Operations": [
     {
-     "$id": "149",
+     "$id": "148",
      "Name": "get",
      "ResourceName": "DurationValue",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "150",
+       "$id": "149",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "151",
+        "$id": "150",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1355,9 +1355,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "152",
+        "$id": "151",
         "Type": {
-         "$ref": "151"
+         "$ref": "150"
         },
         "Value": "application/json"
        }
@@ -1365,26 +1365,26 @@
      ],
      "Responses": [
       {
-       "$id": "153",
+       "$id": "152",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "154",
+        "$id": "153",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "155",
+         "$id": "154",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "156",
+         "$id": "155",
          "Kind": "duration",
          "IsNullable": false,
          "Encode": "ISO8601",
          "WireType": {
-          "$id": "157",
+          "$id": "156",
           "Kind": "string",
           "IsNullable": false
          }
@@ -1408,33 +1408,33 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "158",
+     "$id": "157",
      "Name": "put",
      "ResourceName": "DurationValue",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "159",
+       "$id": "158",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "160",
+        "$id": "159",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "161",
+         "$id": "160",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "162",
+         "$id": "161",
          "Kind": "duration",
          "IsNullable": false,
          "Encode": "ISO8601",
          "WireType": {
-          "$id": "163",
+          "$id": "162",
           "Kind": "string",
           "IsNullable": false
          }
@@ -1452,11 +1452,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "164",
+       "$id": "163",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "165",
+        "$id": "164",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1470,19 +1470,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "166",
+        "$id": "165",
         "Type": {
-         "$ref": "165"
+         "$ref": "164"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "167",
+       "$id": "166",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "168",
+        "$id": "167",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1496,9 +1496,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "169",
+        "$id": "168",
         "Type": {
-         "$ref": "168"
+         "$ref": "167"
         },
         "Value": "application/json"
        }
@@ -1506,7 +1506,7 @@
      ],
      "Responses": [
       {
-       "$id": "170",
+       "$id": "169",
        "StatusCodes": [
         204
        ],
@@ -1528,35 +1528,35 @@
     }
    ],
    "Protocol": {
-    "$id": "171"
+    "$id": "170"
    },
    "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "10"
+     "$ref": "9"
     }
    ]
   },
   {
-   "$id": "172",
+   "$id": "171",
    "Name": "UnknownValue",
    "Description": "Dictionary of unknown values",
    "Operations": [
     {
-     "$id": "173",
+     "$id": "172",
      "Name": "get",
      "ResourceName": "UnknownValue",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "174",
+       "$id": "173",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "175",
+        "$id": "174",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1570,9 +1570,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "176",
+        "$id": "175",
         "Type": {
-         "$ref": "175"
+         "$ref": "174"
         },
         "Value": "application/json"
        }
@@ -1580,21 +1580,21 @@
      ],
      "Responses": [
       {
-       "$id": "177",
+       "$id": "176",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "178",
+        "$id": "177",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "179",
+         "$id": "178",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "180",
+         "$id": "179",
          "Kind": "any",
          "IsNullable": false
         },
@@ -1617,28 +1617,28 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "181",
+     "$id": "180",
      "Name": "put",
      "ResourceName": "UnknownValue",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "182",
+       "$id": "181",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "183",
+        "$id": "182",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "184",
+         "$id": "183",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "185",
+         "$id": "184",
          "Kind": "any",
          "IsNullable": false
         },
@@ -1655,11 +1655,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "186",
+       "$id": "185",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "187",
+        "$id": "186",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1673,19 +1673,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "188",
+        "$id": "187",
         "Type": {
-         "$ref": "187"
+         "$ref": "186"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "189",
+       "$id": "188",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "190",
+        "$id": "189",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1699,9 +1699,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "191",
+        "$id": "190",
         "Type": {
-         "$ref": "190"
+         "$ref": "189"
         },
         "Value": "application/json"
        }
@@ -1709,7 +1709,7 @@
      ],
      "Responses": [
       {
-       "$id": "192",
+       "$id": "191",
        "StatusCodes": [
         204
        ],
@@ -1731,35 +1731,35 @@
     }
    ],
    "Protocol": {
-    "$id": "193"
+    "$id": "192"
    },
    "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "10"
+     "$ref": "9"
     }
    ]
   },
   {
-   "$id": "194",
+   "$id": "193",
    "Name": "ModelValue",
    "Description": "Dictionary of model values",
    "Operations": [
     {
-     "$id": "195",
+     "$id": "194",
      "Name": "get",
      "ResourceName": "ModelValue",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "196",
+       "$id": "195",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "197",
+        "$id": "196",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1773,9 +1773,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "198",
+        "$id": "197",
         "Type": {
-         "$ref": "197"
+         "$ref": "196"
         },
         "Value": "application/json"
        }
@@ -1783,21 +1783,21 @@
      ],
      "Responses": [
       {
-       "$id": "199",
+       "$id": "198",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "200",
+        "$id": "199",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "201",
+         "$id": "200",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$ref": "2"
+         "$ref": "1"
         },
         "IsNullable": false
        },
@@ -1818,28 +1818,28 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "202",
+     "$id": "201",
      "Name": "put",
      "ResourceName": "ModelValue",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "203",
+       "$id": "202",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "204",
+        "$id": "203",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "205",
+         "$id": "204",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$ref": "2"
+         "$ref": "1"
         },
         "IsNullable": false
        },
@@ -1854,11 +1854,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "206",
+       "$id": "205",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "207",
+        "$id": "206",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1872,19 +1872,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "208",
+        "$id": "207",
         "Type": {
-         "$ref": "207"
+         "$ref": "206"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "209",
+       "$id": "208",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "210",
+        "$id": "209",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1898,9 +1898,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "211",
+        "$id": "210",
         "Type": {
-         "$ref": "210"
+         "$ref": "209"
         },
         "Value": "application/json"
        }
@@ -1908,7 +1908,7 @@
      ],
      "Responses": [
       {
-       "$id": "212",
+       "$id": "211",
        "StatusCodes": [
         204
        ],
@@ -1930,35 +1930,35 @@
     }
    ],
    "Protocol": {
-    "$id": "213"
+    "$id": "212"
    },
    "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "10"
+     "$ref": "9"
     }
    ]
   },
   {
-   "$id": "214",
+   "$id": "213",
    "Name": "RecursiveModelValue",
    "Description": "Dictionary of model values",
    "Operations": [
     {
-     "$id": "215",
+     "$id": "214",
      "Name": "get",
      "ResourceName": "RecursiveModelValue",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "216",
+       "$id": "215",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "217",
+        "$id": "216",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1972,9 +1972,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "218",
+        "$id": "217",
         "Type": {
-         "$ref": "217"
+         "$ref": "216"
         },
         "Value": "application/json"
        }
@@ -1982,21 +1982,21 @@
      ],
      "Responses": [
       {
-       "$id": "219",
+       "$id": "218",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "220",
+        "$id": "219",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "221",
+         "$id": "220",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$ref": "2"
+         "$ref": "1"
         },
         "IsNullable": false
        },
@@ -2017,28 +2017,28 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "222",
+     "$id": "221",
      "Name": "put",
      "ResourceName": "RecursiveModelValue",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "223",
+       "$id": "222",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "224",
+        "$id": "223",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "225",
+         "$id": "224",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$ref": "2"
+         "$ref": "1"
         },
         "IsNullable": false
        },
@@ -2053,11 +2053,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "226",
+       "$id": "225",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "227",
+        "$id": "226",
         "Kind": "string",
         "IsNullable": false
        },
@@ -2071,19 +2071,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "228",
+        "$id": "227",
         "Type": {
-         "$ref": "227"
+         "$ref": "226"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "229",
+       "$id": "228",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "230",
+        "$id": "229",
         "Kind": "string",
         "IsNullable": false
        },
@@ -2097,9 +2097,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "231",
+        "$id": "230",
         "Type": {
-         "$ref": "230"
+         "$ref": "229"
         },
         "Value": "application/json"
        }
@@ -2107,7 +2107,7 @@
      ],
      "Responses": [
       {
-       "$id": "232",
+       "$id": "231",
        "StatusCodes": [
         204
        ],
@@ -2129,35 +2129,35 @@
     }
    ],
    "Protocol": {
-    "$id": "233"
+    "$id": "232"
    },
    "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "10"
+     "$ref": "9"
     }
    ]
   },
   {
-   "$id": "234",
+   "$id": "233",
    "Name": "NullableFloatValue",
    "Description": "Dictionary of nullable float values",
    "Operations": [
     {
-     "$id": "235",
+     "$id": "234",
      "Name": "get",
      "ResourceName": "NullableFloatValue",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "236",
+       "$id": "235",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "237",
+        "$id": "236",
         "Kind": "string",
         "IsNullable": false
        },
@@ -2171,9 +2171,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "238",
+        "$id": "237",
         "Type": {
-         "$ref": "237"
+         "$ref": "236"
         },
         "Value": "application/json"
        }
@@ -2181,21 +2181,21 @@
      ],
      "Responses": [
       {
-       "$id": "239",
+       "$id": "238",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "240",
+        "$id": "239",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "241",
+         "$id": "240",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "242",
+         "$id": "241",
          "Kind": "float32",
          "IsNullable": true
         },
@@ -2218,28 +2218,28 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "243",
+     "$id": "242",
      "Name": "put",
      "ResourceName": "NullableFloatValue",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "9"
       },
       {
-       "$id": "244",
+       "$id": "243",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "245",
+        "$id": "244",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "246",
+         "$id": "245",
          "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "247",
+         "$id": "246",
          "Kind": "float32",
          "IsNullable": true
         },
@@ -2256,11 +2256,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "248",
+       "$id": "247",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "249",
+        "$id": "248",
         "Kind": "string",
         "IsNullable": false
        },
@@ -2274,19 +2274,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "250",
+        "$id": "249",
         "Type": {
-         "$ref": "249"
+         "$ref": "248"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "251",
+       "$id": "250",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "252",
+        "$id": "251",
         "Kind": "string",
         "IsNullable": false
        },
@@ -2300,9 +2300,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "253",
+        "$id": "252",
         "Type": {
-         "$ref": "252"
+         "$ref": "251"
         },
         "Value": "application/json"
        }
@@ -2310,7 +2310,7 @@
      ],
      "Responses": [
       {
-       "$id": "254",
+       "$id": "253",
        "StatusCodes": [
         204
        ],
@@ -2332,13 +2332,13 @@
     }
    ],
    "Protocol": {
-    "$id": "255"
+    "$id": "254"
    },
    "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "10"
+     "$ref": "9"
     }
    ]
   }

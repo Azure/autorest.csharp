@@ -1,5 +1,5 @@
 {
- "$id": "1",
+ "$id": "0",
  "Name": "Versioning.Removed",
  "ApiVersions": [
   "v1",
@@ -7,23 +7,23 @@
  ],
  "Enums": [
   {
-   "$id": "2",
+   "$id": "1",
    "Kind": "enum",
    "Name": "Versions",
    "ValueType": {
-    "$id": "3",
+    "$id": "2",
     "Kind": "string",
     "IsNullable": false
    },
    "Values": [
     {
-     "$id": "4",
+     "$id": "3",
      "Name": "v1",
      "Value": "v1",
      "Description": "The version v1."
     },
     {
-     "$id": "5",
+     "$id": "4",
      "Name": "v2",
      "Value": "v2",
      "Description": "The version v2."
@@ -36,17 +36,17 @@
    "Usage": "None"
   },
   {
-   "$id": "6",
+   "$id": "5",
    "Kind": "enum",
    "Name": "EnumV2",
    "ValueType": {
-    "$id": "7",
+    "$id": "6",
     "Kind": "string",
     "IsNullable": false
    },
    "Values": [
     {
-     "$id": "8",
+     "$id": "7",
      "Name": "enumMemberV2",
      "Value": "enumMemberV2"
     }
@@ -59,7 +59,7 @@
  ],
  "Models": [
   {
-   "$id": "9",
+   "$id": "8",
    "Kind": "Model",
    "Name": "ModelV2",
    "Namespace": "Versioning.Removed",
@@ -67,12 +67,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "10",
+     "$id": "9",
      "Name": "prop",
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$id": "11",
+      "$id": "10",
       "Kind": "string",
       "IsNullable": false
      },
@@ -80,33 +80,33 @@
      "IsReadOnly": false
     },
     {
-     "$id": "12",
+     "$id": "11",
      "Name": "enumProp",
      "SerializedName": "enumProp",
      "Description": "",
      "Type": {
-      "$ref": "6"
+      "$ref": "5"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "13",
+     "$id": "12",
      "Name": "unionProp",
      "SerializedName": "unionProp",
      "Description": "",
      "Type": {
-      "$id": "14",
+      "$id": "13",
       "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
-        "$id": "15",
+        "$id": "14",
         "Kind": "string",
         "IsNullable": false
        },
        {
-        "$id": "16",
+        "$id": "15",
         "Kind": "float32",
         "IsNullable": false
        }
@@ -121,22 +121,22 @@
  ],
  "Clients": [
   {
-   "$id": "17",
+   "$id": "16",
    "Name": "RemovedClient",
    "Description": "Test for the `@removed` decorator.",
    "Operations": [
     {
-     "$id": "18",
+     "$id": "17",
      "Name": "v2",
      "ResourceName": "Removed",
      "Parameters": [
       {
-       "$id": "19",
+       "$id": "18",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "20",
+        "$id": "19",
         "Kind": "uri",
         "IsNullable": false
        },
@@ -151,12 +151,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "21",
+       "$id": "20",
        "Name": "version",
        "NameInRequest": "version",
        "Description": "Need to be set as 'v1' or 'v2' in client.",
        "Type": {
-        "$ref": "2"
+        "$ref": "1"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -169,11 +169,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "22",
+       "$id": "21",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "9"
+        "$ref": "8"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -186,11 +186,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "23",
+       "$id": "22",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "24",
+        "$id": "23",
         "Kind": "string",
         "IsNullable": false
        },
@@ -204,19 +204,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "25",
+        "$id": "24",
         "Type": {
-         "$ref": "24"
+         "$ref": "23"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "26",
+       "$id": "25",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "27",
+        "$id": "26",
         "Kind": "string",
         "IsNullable": false
        },
@@ -230,9 +230,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "28",
+        "$id": "27",
         "Type": {
-         "$ref": "27"
+         "$ref": "26"
         },
         "Value": "application/json"
        }
@@ -240,12 +240,12 @@
      ],
      "Responses": [
       {
-       "$id": "29",
+       "$id": "28",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "9"
+        "$ref": "8"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -268,15 +268,15 @@
     }
    ],
    "Protocol": {
-    "$id": "30"
+    "$id": "29"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "19"
+     "$ref": "18"
     },
     {
-     "$ref": "21"
+     "$ref": "20"
     }
    ]
   }
