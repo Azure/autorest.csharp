@@ -306,6 +306,7 @@ export function createModelForService(
                 enumMap
             );
 
+            // TODO: Skip internal operations, we might need a better way to remove operations, tracking in https://github.com/Azure/typespec-azure/issues/964 
             if (inputOperation.Accessibility === 'internal') {
                 continue;
             }
