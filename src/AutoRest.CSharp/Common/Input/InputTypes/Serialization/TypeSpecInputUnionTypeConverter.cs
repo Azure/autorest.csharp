@@ -3,10 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -28,7 +26,7 @@ namespace AutoRest.CSharp.Common.Input
         {
             var isFirstProperty = id == null;
             bool isNullable = false;
-            var unionItemTypes = new List<InputType>();
+            var variantTypes = new List<InputType>();
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
@@ -40,10 +38,10 @@ namespace AutoRest.CSharp.Common.Input
                     continue;
                 }
 
-                if (reader.GetString() == nameof(InputUnionType.ItemTypes))
+                if (reader.GetString() == nameof(InputUnionType.VariantTypes))
                 {
                     reader.Read();
-                    CreateUnionItemTypes(ref reader, unionItemTypes, options);
+                    CreateUnionItemTypes(ref reader, variantTypes, options);
                 }
                 else
                 {
@@ -51,13 +49,13 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            name = name ?? throw new JsonException($"{nameof(InputLiteralType)} must have a name.");
-            if (unionItemTypes == null || unionItemTypes.Count == 0)
+            name = name ?? throw new JsonException($"{nameof(InputUnionType)} must have a name.");
+            if (variantTypes == null || variantTypes.Count == 0)
             {
-                throw new JsonException("Union must have a least one union type");
+                throw new JsonException("Union must have variant types.");
             }
 
-            var unionType = new InputUnionType(name, unionItemTypes, isNullable);
+            var unionType = new InputUnionType(name, variantTypes, isNullable);
             if (id != null)
             {
                 resolver.AddReference(id, unionType);
