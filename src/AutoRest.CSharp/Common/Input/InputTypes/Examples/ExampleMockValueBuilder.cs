@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
             InputPrimitiveType primitiveType => BuildPrimitiveExampleValue(primitiveType, hint),
             InputLiteralType literalType => InputExampleValue.Value(literalType, literalType.Value),
             InputModelType modelType => BuildModelExampleValue(modelType, useAllParameters, visitedModels),
-            InputUnionType unionType => BuildExampleValue(unionType.VariantTypes.First(), hint, useAllParameters, visitedModels),
+            InputUnionType unionType => BuildExampleValue(unionType.VariantTypes[0], hint, useAllParameters, visitedModels),
             InputDateTimeType dateTimeType => BuildDateTimeExampleValue(dateTimeType),
             InputDurationType durationType => BuildDurationExampleValue(durationType),
             _ => InputExampleValue.Object(type, new Dictionary<string, InputExampleValue>())

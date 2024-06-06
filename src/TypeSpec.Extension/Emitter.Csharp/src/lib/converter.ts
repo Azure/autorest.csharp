@@ -343,7 +343,7 @@ function fromUnionType(
     return {
         Kind: "union",
         Name: union.name,
-        ItemTypes: itemTypes,
+        VariantTypes: itemTypes,
         IsNullable: false
     };
 }
