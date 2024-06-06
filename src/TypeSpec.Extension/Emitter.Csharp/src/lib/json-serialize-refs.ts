@@ -1,6 +1,3 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
 // Copyright (c) 2019-2022 Lorenzo Delana
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
