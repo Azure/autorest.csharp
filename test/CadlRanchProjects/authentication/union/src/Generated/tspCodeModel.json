@@ -23,8 +23,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "4",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -40,8 +39,7 @@
         "$id": "5",
         "Type": {
          "$id": "6",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -53,8 +51,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "8",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -109,8 +106,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "13",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",

@@ -8,18 +8,22 @@
  "Enums": [
   {
    "$id": "1",
-   "Kind": "Enum",
+   "Kind": "enum",
    "Name": "Versions",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "ValueType": {
+    "$id": "2",
+    "Kind": "string",
+    "IsNullable": false
+   },
+   "Values": [
     {
-     "$id": "2",
+     "$id": "3",
      "Name": "v1",
      "Value": "v1",
      "Description": "The version v1."
     },
     {
-     "$id": "3",
+     "$id": "4",
      "Name": "v2",
      "Value": "v2",
      "Description": "The version v2."
@@ -35,24 +39,23 @@
  "Models": [],
  "Clients": [
   {
-   "$id": "4",
+   "$id": "5",
    "Name": "ReturnTypeChangedFromClient",
    "Description": "Test for the `@returnTypeChangedFrom` decorator.",
    "Operations": [
     {
-     "$id": "5",
+     "$id": "6",
      "Name": "test",
      "ResourceName": "ReturnTypeChangedFrom",
      "Parameters": [
       {
-       "$id": "6",
+       "$id": "7",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "7",
-        "Kind": "Primitive",
-        "Name": "Uri",
+        "$id": "8",
+        "Kind": "uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -66,7 +69,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "8",
+       "$id": "9",
        "Name": "version",
        "NameInRequest": "version",
        "Description": "Need to be set as 'v1' or 'v2' in client.",
@@ -84,13 +87,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "9",
+       "$id": "10",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "10",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "11",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Body",
@@ -104,13 +106,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "11",
+       "$id": "12",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "12",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "13",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -123,21 +124,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "13",
+        "$id": "14",
         "Type": {
-         "$ref": "12"
+         "$ref": "13"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "14",
+       "$id": "15",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "15",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "16",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -150,9 +150,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "16",
+        "$id": "17",
         "Type": {
-         "$ref": "15"
+         "$ref": "16"
         },
         "Value": "application/json"
        }
@@ -160,14 +160,13 @@
      ],
      "Responses": [
       {
-       "$id": "17",
+       "$id": "18",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "18",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "19",
+        "Kind": "string",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
@@ -191,15 +190,15 @@
     }
    ],
    "Protocol": {
-    "$id": "19"
+    "$id": "20"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "6"
+     "$ref": "7"
     },
     {
-     "$ref": "8"
+     "$ref": "9"
     }
    ]
   }

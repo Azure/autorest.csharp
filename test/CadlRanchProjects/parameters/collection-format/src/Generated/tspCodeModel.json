@@ -22,8 +22,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "4",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "Location": "Uri",
@@ -39,8 +38,7 @@
       "$id": "5",
       "Type": {
        "$id": "6",
-       "Kind": "Primitive",
-       "Name": "String",
+       "Kind": "string",
        "IsNullable": false
       },
       "Value": "http://localhost:3000"
@@ -72,8 +70,7 @@
         "Name": "Array",
         "ElementType": {
          "$id": "11",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "IsNullable": false
@@ -94,8 +91,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "13",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -154,8 +150,7 @@
         "Name": "Array",
         "ElementType": {
          "$id": "19",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "IsNullable": false
@@ -177,8 +172,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "21",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -237,8 +231,7 @@
         "Name": "Array",
         "ElementType": {
          "$id": "27",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "IsNullable": false
@@ -260,8 +253,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "29",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -320,8 +312,7 @@
         "Name": "Array",
         "ElementType": {
          "$id": "35",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "IsNullable": false
@@ -343,8 +334,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "37",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -403,8 +393,7 @@
         "Name": "Array",
         "ElementType": {
          "$id": "43",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "IsNullable": false
@@ -426,8 +415,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "45",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -503,8 +491,7 @@
         "Name": "Array",
         "ElementType": {
          "$id": "53",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "IsNullable": false
@@ -526,8 +513,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "55",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",

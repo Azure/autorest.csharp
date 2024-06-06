@@ -7,12 +7,16 @@
  "Enums": [
   {
    "$id": "1",
-   "Kind": "Enum",
+   "Kind": "enum",
    "Name": "Versions",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "ValueType": {
+    "$id": "2",
+    "Kind": "string",
+    "IsNullable": false
+   },
+   "Values": [
     {
-     "$id": "2",
+     "$id": "3",
      "Name": "v1_0",
      "Value": "v1.0",
      "Description": "Version 1.0"
@@ -28,24 +32,23 @@
  "Models": [],
  "Clients": [
   {
-   "$id": "3",
+   "$id": "4",
    "Name": "MultipleClient",
    "Description": "",
    "Operations": [
     {
-     "$id": "4",
+     "$id": "5",
      "Name": "noOperationParams",
      "ResourceName": "Multiple",
      "Parameters": [
       {
-       "$id": "5",
+       "$id": "6",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Pass in http://localhost:3000 for endpoint.",
        "Type": {
-        "$id": "6",
-        "Kind": "Primitive",
-        "Name": "Uri",
+        "$id": "7",
+        "Kind": "uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -59,7 +62,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "7",
+       "$id": "8",
        "Name": "apiVersion",
        "NameInRequest": "apiVersion",
        "Description": "Pass in v1.0 for API version.",
@@ -76,24 +79,22 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "8",
+        "$id": "9",
         "Type": {
-         "$id": "9",
-         "Kind": "Primitive",
-         "Name": "String",
+         "$id": "10",
+         "Kind": "string",
          "IsNullable": false
         },
         "Value": "v1.0"
        }
       },
       {
-       "$id": "10",
+       "$id": "11",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "11",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "12",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -106,9 +107,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "12",
+        "$id": "13",
         "Type": {
-         "$ref": "11"
+         "$ref": "12"
         },
         "Value": "application/json"
        }
@@ -116,7 +117,7 @@
      ],
      "Responses": [
       {
-       "$id": "13",
+       "$id": "14",
        "StatusCodes": [
         204
        ],
@@ -134,24 +135,23 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "14",
+     "$id": "15",
      "Name": "withOperationPathParam",
      "ResourceName": "Multiple",
      "Parameters": [
       {
-       "$ref": "5"
+       "$ref": "6"
       },
       {
-       "$ref": "7"
+       "$ref": "8"
       },
       {
-       "$id": "15",
+       "$id": "16",
        "Name": "keyword",
        "NameInRequest": "keyword",
        "Type": {
-        "$id": "16",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "17",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Path",
@@ -165,13 +165,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "17",
+       "$id": "18",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "18",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "19",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -184,9 +183,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "19",
+        "$id": "20",
         "Type": {
-         "$ref": "18"
+         "$ref": "19"
         },
         "Value": "application/json"
        }
@@ -194,7 +193,7 @@
      ],
      "Responses": [
       {
-       "$id": "20",
+       "$id": "21",
        "StatusCodes": [
         204
        ],
@@ -213,15 +212,15 @@
     }
    ],
    "Protocol": {
-    "$id": "21"
+    "$id": "22"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "5"
+     "$ref": "6"
     },
     {
-     "$ref": "7"
+     "$ref": "8"
     }
    ]
   }

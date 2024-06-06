@@ -7,12 +7,16 @@
  "Enums": [
   {
    "$id": "1",
-   "Kind": "Enum",
+   "Kind": "enum",
    "Name": "QueryApiVersion",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "ValueType": {
+    "$id": "2",
+    "Kind": "string",
+    "IsNullable": false
+   },
+   "Values": [
     {
-     "$id": "2",
+     "$id": "3",
      "Name": "v2022_01_01_preview",
      "Value": "2022-01-01-preview"
     }
@@ -25,7 +29,7 @@
  ],
  "Models": [
   {
-   "$id": "3",
+   "$id": "4",
    "Kind": "Model",
    "Name": "Thing",
    "Namespace": "SpreadTypeSpec",
@@ -33,28 +37,26 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "4",
+     "$id": "5",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the Thing",
      "Type": {
-      "$id": "5",
-      "Kind": "Primitive",
-      "Name": "String",
+      "$id": "6",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "6",
+     "$id": "7",
      "Name": "age",
      "SerializedName": "age",
      "Description": "age of the Thing",
      "Type": {
-      "$id": "7",
-      "Kind": "Primitive",
-      "Name": "Int32",
+      "$id": "8",
+      "Kind": "int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -63,7 +65,7 @@
    ]
   },
   {
-   "$id": "8",
+   "$id": "9",
    "Kind": "Model",
    "Name": "SpreadAliasRequest",
    "Namespace": "SpreadTypeSpec",
@@ -71,28 +73,26 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "9",
+     "$id": "10",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the Thing",
      "Type": {
-      "$id": "10",
-      "Kind": "Primitive",
-      "Name": "String",
+      "$id": "11",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "11",
+     "$id": "12",
      "Name": "age",
      "SerializedName": "age",
      "Description": "age of the Thing",
      "Type": {
-      "$id": "12",
-      "Kind": "Primitive",
-      "Name": "Int32",
+      "$id": "13",
+      "Kind": "int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -101,7 +101,7 @@
    ]
   },
   {
-   "$id": "13",
+   "$id": "14",
    "Kind": "Model",
    "Name": "SpreadMultiTargetAliasRequest",
    "Namespace": "",
@@ -109,28 +109,26 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "14",
+     "$id": "15",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the Thing",
      "Type": {
-      "$id": "15",
-      "Kind": "Primitive",
-      "Name": "String",
+      "$id": "16",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "16",
+     "$id": "17",
      "Name": "age",
      "SerializedName": "age",
      "Description": "age of the Thing",
      "Type": {
-      "$id": "17",
-      "Kind": "Primitive",
-      "Name": "Int32",
+      "$id": "18",
+      "Kind": "int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -139,7 +137,7 @@
    ]
   },
   {
-   "$id": "18",
+   "$id": "19",
    "Kind": "Model",
    "Name": "SpreadAliasWithSpreadAliasRequest",
    "Namespace": "",
@@ -147,28 +145,26 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "19",
+     "$id": "20",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the Thing",
      "Type": {
-      "$id": "20",
-      "Kind": "Primitive",
-      "Name": "String",
+      "$id": "21",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "21",
+     "$id": "22",
      "Name": "age",
      "SerializedName": "age",
      "Description": "age of the Thing",
      "Type": {
-      "$id": "22",
-      "Kind": "Primitive",
-      "Name": "Int32",
+      "$id": "23",
+      "Kind": "int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -177,7 +173,7 @@
    ]
   },
   {
-   "$id": "23",
+   "$id": "24",
    "Kind": "Model",
    "Name": "SpreadAliasWithOptionalPropsRequest",
    "Namespace": "",
@@ -185,60 +181,56 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "24",
+     "$id": "25",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the Thing",
      "Type": {
-      "$id": "25",
-      "Kind": "Primitive",
-      "Name": "String",
+      "$id": "26",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "26",
+     "$id": "27",
      "Name": "color",
      "SerializedName": "color",
      "Description": "optional property of the Thing",
      "Type": {
-      "$id": "27",
-      "Kind": "Primitive",
-      "Name": "String",
+      "$id": "28",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "28",
+     "$id": "29",
      "Name": "age",
      "SerializedName": "age",
      "Description": "age of the Thing",
      "Type": {
-      "$id": "29",
-      "Kind": "Primitive",
-      "Name": "Int32",
+      "$id": "30",
+      "Kind": "int32",
       "IsNullable": false
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "30",
+     "$id": "31",
      "Name": "items",
      "SerializedName": "items",
      "Description": "required array",
      "Type": {
-      "$id": "31",
+      "$id": "32",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "32",
-       "Kind": "Primitive",
-       "Name": "Int32",
+       "$id": "33",
+       "Kind": "int32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -247,18 +239,17 @@
      "IsReadOnly": false
     },
     {
-     "$id": "33",
+     "$id": "34",
      "Name": "elements",
      "SerializedName": "elements",
      "Description": "optional array",
      "Type": {
-      "$id": "34",
+      "$id": "35",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "35",
-       "Kind": "Primitive",
-       "Name": "String",
+       "$id": "36",
+       "Kind": "string",
        "IsNullable": false
       },
       "IsNullable": false
@@ -269,7 +260,7 @@
    ]
   },
   {
-   "$id": "36",
+   "$id": "37",
    "Kind": "Model",
    "Name": "SpreadAliasWithCollectionsRequest",
    "Namespace": "SpreadTypeSpec",
@@ -277,18 +268,17 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "37",
+     "$id": "38",
      "Name": "requiredStringList",
      "SerializedName": "requiredStringList",
      "Description": "required list",
      "Type": {
-      "$id": "38",
+      "$id": "39",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "39",
-       "Kind": "Primitive",
-       "Name": "String",
+       "$id": "40",
+       "Kind": "string",
        "IsNullable": false
       },
       "IsNullable": false
@@ -297,18 +287,17 @@
      "IsReadOnly": false
     },
     {
-     "$id": "40",
+     "$id": "41",
      "Name": "optionalStringList",
      "SerializedName": "optionalStringList",
      "Description": "optional list",
      "Type": {
-      "$id": "41",
+      "$id": "42",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "42",
-       "Kind": "Primitive",
-       "Name": "String",
+       "$id": "43",
+       "Kind": "string",
        "IsNullable": false
       },
       "IsNullable": false
@@ -321,24 +310,23 @@
  ],
  "Clients": [
   {
-   "$id": "43",
+   "$id": "44",
    "Name": "SpreadTypeSpecClient",
    "Description": "This is a spread model or alias service.",
    "Operations": [
     {
-     "$id": "44",
+     "$id": "45",
      "Name": "spreadModel",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread a model as body.",
      "Parameters": [
       {
-       "$id": "45",
+       "$id": "46",
        "Name": "spreadUrl",
        "NameInRequest": "spreadUrl",
        "Type": {
-        "$id": "46",
-        "Kind": "Primitive",
-        "Name": "Uri",
+        "$id": "47",
+        "Kind": "uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -352,11 +340,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "47",
+       "$id": "48",
        "Name": "Thing",
        "NameInRequest": "Thing",
        "Type": {
-        "$ref": "3"
+        "$ref": "4"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -369,13 +357,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "48",
+       "$id": "49",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "49",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "50",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -388,21 +375,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "50",
+        "$id": "51",
         "Type": {
-         "$ref": "49"
+         "$ref": "50"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "51",
+       "$id": "52",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "52",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "53",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -415,9 +401,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "53",
+        "$id": "54",
         "Type": {
-         "$ref": "52"
+         "$ref": "53"
         },
         "Value": "application/json"
        }
@@ -425,7 +411,7 @@
      ],
      "Responses": [
       {
-       "$id": "54",
+       "$id": "55",
        "StatusCodes": [
         204
        ],
@@ -446,20 +432,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "55",
+     "$id": "56",
      "Name": "spreadAlias",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias as body.",
      "Parameters": [
       {
-       "$ref": "45"
+       "$ref": "46"
       },
       {
-       "$id": "56",
+       "$id": "57",
        "Name": "SpreadAliasRequest",
        "NameInRequest": "",
        "Type": {
-        "$ref": "8"
+        "$ref": "9"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -472,13 +458,12 @@
        "Kind": "Spread"
       },
       {
-       "$id": "57",
+       "$id": "58",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "58",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "59",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -491,21 +476,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "59",
+        "$id": "60",
         "Type": {
-         "$ref": "58"
+         "$ref": "59"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "60",
+       "$id": "61",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "61",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "62",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -518,9 +502,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "62",
+        "$id": "63",
         "Type": {
-         "$ref": "61"
+         "$ref": "62"
         },
         "Value": "application/json"
        }
@@ -528,7 +512,7 @@
      ],
      "Responses": [
       {
-       "$id": "63",
+       "$id": "64",
        "StatusCodes": [
         204
        ],
@@ -549,22 +533,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "64",
+     "$id": "65",
      "Name": "spreadMultiTargetAlias",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias which has multiple target property as body.",
      "Parameters": [
       {
-       "$ref": "45"
+       "$ref": "46"
       },
       {
-       "$id": "65",
+       "$id": "66",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "66",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "67",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Path",
@@ -578,13 +561,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "67",
+       "$id": "68",
        "Name": "top",
        "NameInRequest": "top",
        "Type": {
-        "$id": "68",
-        "Kind": "Primitive",
-        "Name": "Int32",
+        "$id": "69",
+        "Kind": "int32",
         "IsNullable": false
        },
        "Location": "Header",
@@ -598,11 +580,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "69",
+       "$id": "70",
        "Name": "SpreadMultiTargetAliasRequest",
        "NameInRequest": "",
        "Type": {
-        "$ref": "13"
+        "$ref": "14"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -615,13 +597,12 @@
        "Kind": "Spread"
       },
       {
-       "$id": "70",
+       "$id": "71",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "71",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "72",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -634,21 +615,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "72",
+        "$id": "73",
         "Type": {
-         "$ref": "71"
+         "$ref": "72"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "73",
+       "$id": "74",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "74",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "75",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -661,9 +641,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "75",
+        "$id": "76",
         "Type": {
-         "$ref": "74"
+         "$ref": "75"
         },
         "Value": "application/json"
        }
@@ -671,7 +651,7 @@
      ],
      "Responses": [
       {
-       "$id": "76",
+       "$id": "77",
        "StatusCodes": [
         204
        ],
@@ -692,22 +672,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "77",
+     "$id": "78",
      "Name": "spreadAliasWithModel",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias which contains a complex model property as body.",
      "Parameters": [
       {
-       "$ref": "45"
+       "$ref": "46"
       },
       {
-       "$id": "78",
+       "$id": "79",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "79",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "80",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Path",
@@ -721,13 +700,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "80",
+       "$id": "81",
        "Name": "top",
        "NameInRequest": "top",
        "Type": {
-        "$id": "81",
-        "Kind": "Primitive",
-        "Name": "Int32",
+        "$id": "82",
+        "Kind": "int32",
         "IsNullable": false
        },
        "Location": "Header",
@@ -741,11 +719,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "82",
+       "$id": "83",
        "Name": "Thing",
        "NameInRequest": "Thing",
        "Type": {
-        "$ref": "3"
+        "$ref": "4"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -758,13 +736,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "83",
+       "$id": "84",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "84",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "85",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -777,21 +754,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "85",
+        "$id": "86",
         "Type": {
-         "$ref": "84"
+         "$ref": "85"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "86",
+       "$id": "87",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "87",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "88",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -804,9 +780,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "88",
+        "$id": "89",
         "Type": {
-         "$ref": "87"
+         "$ref": "88"
         },
         "Value": "application/json"
        }
@@ -814,7 +790,7 @@
      ],
      "Responses": [
       {
-       "$id": "89",
+       "$id": "90",
        "StatusCodes": [
         204
        ],
@@ -835,22 +811,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "90",
+     "$id": "91",
      "Name": "spreadAliasWithSpreadAlias",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias with contains another alias property as body.",
      "Parameters": [
       {
-       "$ref": "45"
+       "$ref": "46"
       },
       {
-       "$id": "91",
+       "$id": "92",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "92",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "93",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Path",
@@ -864,13 +839,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "93",
+       "$id": "94",
        "Name": "top",
        "NameInRequest": "top",
        "Type": {
-        "$id": "94",
-        "Kind": "Primitive",
-        "Name": "Int32",
+        "$id": "95",
+        "Kind": "int32",
         "IsNullable": false
        },
        "Location": "Header",
@@ -884,11 +858,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "95",
+       "$id": "96",
        "Name": "SpreadAliasWithSpreadAliasRequest",
        "NameInRequest": "",
        "Type": {
-        "$ref": "18"
+        "$ref": "19"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -901,13 +875,12 @@
        "Kind": "Spread"
       },
       {
-       "$id": "96",
+       "$id": "97",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "97",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "98",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -920,21 +893,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "98",
+        "$id": "99",
         "Type": {
-         "$ref": "97"
+         "$ref": "98"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "99",
+       "$id": "100",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "100",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "101",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -947,9 +919,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "101",
+        "$id": "102",
         "Type": {
-         "$ref": "100"
+         "$ref": "101"
         },
         "Value": "application/json"
        }
@@ -957,7 +929,7 @@
      ],
      "Responses": [
       {
-       "$id": "102",
+       "$id": "103",
        "StatusCodes": [
         204
        ],
@@ -978,22 +950,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "103",
+     "$id": "104",
      "Name": "spreadAliasWithOptionalProps",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias with contains optional properties as body.",
      "Parameters": [
       {
-       "$ref": "45"
+       "$ref": "46"
       },
       {
-       "$id": "104",
+       "$id": "105",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "105",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "106",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Path",
@@ -1007,13 +978,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "106",
+       "$id": "107",
        "Name": "top",
        "NameInRequest": "top",
        "Type": {
-        "$id": "107",
-        "Kind": "Primitive",
-        "Name": "Int32",
+        "$id": "108",
+        "Kind": "int32",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1027,11 +997,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "108",
+       "$id": "109",
        "Name": "SpreadAliasWithOptionalPropsRequest",
        "NameInRequest": "",
        "Type": {
-        "$ref": "23"
+        "$ref": "24"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1044,13 +1014,12 @@
        "Kind": "Spread"
       },
       {
-       "$id": "109",
+       "$id": "110",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "110",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "111",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1063,21 +1032,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "111",
+        "$id": "112",
         "Type": {
-         "$ref": "110"
+         "$ref": "111"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "112",
+       "$id": "113",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "113",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "114",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1090,9 +1058,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "114",
+        "$id": "115",
         "Type": {
-         "$ref": "113"
+         "$ref": "114"
         },
         "Value": "application/json"
        }
@@ -1100,7 +1068,7 @@
      ],
      "Responses": [
       {
-       "$id": "115",
+       "$id": "116",
        "StatusCodes": [
         204
        ],
@@ -1121,20 +1089,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "116",
+     "$id": "117",
      "Name": "spreadAliasWithCollections",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias with required and optional collections",
      "Parameters": [
       {
-       "$ref": "45"
+       "$ref": "46"
       },
       {
-       "$id": "117",
+       "$id": "118",
        "Name": "SpreadAliasWithCollectionsRequest",
        "NameInRequest": "",
        "Type": {
-        "$ref": "36"
+        "$ref": "37"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1147,13 +1115,12 @@
        "Kind": "Spread"
       },
       {
-       "$id": "118",
+       "$id": "119",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "119",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "120",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1166,21 +1133,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "120",
+        "$id": "121",
         "Type": {
-         "$ref": "119"
+         "$ref": "120"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "121",
+       "$id": "122",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "122",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "123",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1193,9 +1159,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "123",
+        "$id": "124",
         "Type": {
-         "$ref": "122"
+         "$ref": "123"
         },
         "Value": "application/json"
        }
@@ -1203,7 +1169,7 @@
      ],
      "Responses": [
       {
-       "$id": "124",
+       "$id": "125",
        "StatusCodes": [
         204
        ],
@@ -1225,12 +1191,12 @@
     }
    ],
    "Protocol": {
-    "$id": "125"
+    "$id": "126"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "45"
+     "$ref": "46"
     }
    ]
   }

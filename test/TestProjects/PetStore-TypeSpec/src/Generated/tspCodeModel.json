@@ -5,17 +5,21 @@
  "Enums": [
   {
    "$id": "1",
-   "Kind": "Enum",
+   "Kind": "enum",
    "Name": "PetKind",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "ValueType": {
+    "$id": "2",
+    "Kind": "string",
+    "IsNullable": false
+   },
+   "Values": [
     {
-     "$id": "2",
+     "$id": "3",
      "Name": "Dog",
      "Value": "dog"
     },
     {
-     "$id": "3",
+     "$id": "4",
      "Name": "Cat",
      "Value": "cat"
     }
@@ -29,7 +33,7 @@
  ],
  "Models": [
   {
-   "$id": "4",
+   "$id": "5",
    "Kind": "Model",
    "Name": "Pet",
    "Namespace": "PetStore",
@@ -37,42 +41,39 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "5",
+     "$id": "6",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "6",
-      "Kind": "Primitive",
-      "Name": "String",
+      "$id": "7",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "7",
+     "$id": "8",
      "Name": "tag",
      "SerializedName": "tag",
      "Description": "",
      "Type": {
-      "$id": "8",
-      "Kind": "Primitive",
-      "Name": "String",
+      "$id": "9",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "9",
+     "$id": "10",
      "Name": "age",
      "SerializedName": "age",
      "Description": "",
      "Type": {
-      "$id": "10",
-      "Kind": "Primitive",
-      "Name": "Int32",
+      "$id": "11",
+      "Kind": "int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -81,7 +82,7 @@
    ]
   },
   {
-   "$id": "11",
+   "$id": "12",
    "Kind": "Model",
    "Name": "Fish",
    "Namespace": "PetStore",
@@ -91,14 +92,13 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "12",
+     "$id": "13",
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "Discriminator",
      "Type": {
-      "$id": "13",
-      "Kind": "Primitive",
-      "Name": "String",
+      "$id": "14",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -106,14 +106,13 @@
      "IsDiscriminator": true
     },
     {
-     "$id": "14",
+     "$id": "15",
      "Name": "size",
      "SerializedName": "size",
      "Description": "The size of the fish",
      "Type": {
-      "$id": "15",
-      "Kind": "Primitive",
-      "Name": "Int32",
+      "$id": "16",
+      "Kind": "int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -122,7 +121,7 @@
    ]
   },
   {
-   "$id": "16",
+   "$id": "17",
    "Kind": "Model",
    "Name": "Error",
    "Namespace": "PetStore",
@@ -131,28 +130,26 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "17",
+     "$id": "18",
      "Name": "code",
      "SerializedName": "code",
      "Description": "",
      "Type": {
-      "$id": "18",
-      "Kind": "Primitive",
-      "Name": "Int32",
+      "$id": "19",
+      "Kind": "int32",
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "19",
+     "$id": "20",
      "Name": "message",
      "SerializedName": "message",
      "Description": "",
      "Type": {
-      "$id": "20",
-      "Kind": "Primitive",
-      "Name": "String",
+      "$id": "21",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -161,7 +158,7 @@
    ]
   },
   {
-   "$id": "21",
+   "$id": "22",
    "Kind": "Model",
    "Name": "Shark",
    "Namespace": "PetStore",
@@ -170,18 +167,17 @@
    "DiscriminatorValue": "shark",
    "Usage": "Output",
    "BaseModel": {
-    "$ref": "11"
+    "$ref": "12"
    },
    "Properties": [
     {
-     "$id": "22",
+     "$id": "23",
      "Name": "bite",
      "SerializedName": "bite",
      "Description": "The bite of the shark",
      "Type": {
-      "$id": "23",
-      "Kind": "Primitive",
-      "Name": "String",
+      "$id": "24",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -190,7 +186,7 @@
    ]
   },
   {
-   "$id": "24",
+   "$id": "25",
    "Kind": "Model",
    "Name": "Tuna",
    "Namespace": "PetStore",
@@ -199,18 +195,17 @@
    "DiscriminatorValue": "tuna",
    "Usage": "Output",
    "BaseModel": {
-    "$ref": "11"
+    "$ref": "12"
    },
    "Properties": [
     {
-     "$id": "25",
+     "$id": "26",
      "Name": "fat",
      "SerializedName": "fat",
      "Description": "The amount of fat of the tuna",
      "Type": {
-      "$id": "26",
-      "Kind": "Primitive",
-      "Name": "Int32",
+      "$id": "27",
+      "Kind": "int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -221,23 +216,22 @@
  ],
  "Clients": [
   {
-   "$id": "27",
+   "$id": "28",
    "Name": "PetStoreClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "28"
+    "$id": "29"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$id": "29",
+     "$id": "30",
      "Name": "petStoreUrl",
      "NameInRequest": "petStoreUrl",
      "Type": {
-      "$id": "30",
-      "Kind": "Primitive",
-      "Name": "Uri",
+      "$id": "31",
+      "Kind": "uri",
       "IsNullable": false
      },
      "Location": "Uri",
@@ -253,29 +247,28 @@
    ]
   },
   {
-   "$id": "31",
+   "$id": "32",
    "Name": "Pets",
    "Description": "Manage your pets. You can delete or get the Pet from pet store.",
    "Operations": [
     {
-     "$id": "32",
+     "$id": "33",
      "Name": "delete",
      "ResourceName": "Pets",
      "Summary": "delete.",
      "Description": "Delete a pet.",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "30"
       },
       {
-       "$id": "33",
+       "$id": "34",
        "Name": "petId",
        "NameInRequest": "petId",
        "Description": "The id of pet.",
        "Type": {
-        "$id": "34",
-        "Kind": "Primitive",
-        "Name": "Int32",
+        "$id": "35",
+        "Kind": "int32",
         "IsNullable": false
        },
        "Location": "Path",
@@ -289,13 +282,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "35",
+       "$id": "36",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "36",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "37",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -308,9 +300,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "37",
+        "$id": "38",
         "Type": {
-         "$ref": "36"
+         "$ref": "37"
         },
         "Value": "application/json"
        }
@@ -318,7 +310,7 @@
      ],
      "Responses": [
       {
-       "$id": "38",
+       "$id": "39",
        "StatusCodes": [
         200
        ],
@@ -336,23 +328,22 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "39",
+     "$id": "40",
      "Name": "read",
      "ResourceName": "Pets",
      "Description": "Returns a pet. Supports eTags.",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "30"
       },
       {
-       "$id": "40",
+       "$id": "41",
        "Name": "petId",
        "NameInRequest": "petId",
        "Description": "The id of pet.",
        "Type": {
-        "$id": "41",
-        "Kind": "Primitive",
-        "Name": "Int32",
+        "$id": "42",
+        "Kind": "int32",
         "IsNullable": false
        },
        "Location": "Path",
@@ -366,13 +357,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "42",
+       "$id": "43",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "43",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "44",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -385,9 +375,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "44",
+        "$id": "45",
         "Type": {
-         "$ref": "43"
+         "$ref": "44"
         },
         "Value": "application/json"
        }
@@ -395,12 +385,12 @@
      ],
      "Responses": [
       {
-       "$id": "45",
+       "$id": "46",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "4"
+        "$ref": "5"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -410,12 +400,12 @@
        ]
       },
       {
-       "$id": "46",
+       "$id": "47",
        "StatusCodes": [
         304
        ],
        "BodyType": {
-        "$ref": "4"
+        "$ref": "5"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -434,19 +424,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "47",
+     "$id": "48",
      "Name": "create",
      "ResourceName": "Pets",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "30"
       },
       {
-       "$id": "48",
+       "$id": "49",
        "Name": "pet",
        "NameInRequest": "pet",
        "Type": {
-        "$ref": "4"
+        "$ref": "5"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -459,13 +449,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "49",
+       "$id": "50",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "50",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "51",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -478,21 +467,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "51",
+        "$id": "52",
         "Type": {
-         "$ref": "50"
+         "$ref": "51"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "52",
+       "$id": "53",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "53",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "54",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -505,9 +493,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "54",
+        "$id": "55",
         "Type": {
-         "$ref": "53"
+         "$ref": "54"
         },
         "Value": "application/json"
        }
@@ -515,12 +503,12 @@
      ],
      "Responses": [
       {
-       "$id": "55",
+       "$id": "56",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "4"
+        "$ref": "5"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -542,15 +530,15 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "56",
+     "$id": "57",
      "Name": "getPetByKind",
      "ResourceName": "Pets",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "30"
       },
       {
-       "$id": "57",
+       "$id": "58",
        "Name": "kind",
        "NameInRequest": "kind",
        "Type": {
@@ -567,13 +555,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "58",
+       "$id": "59",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "59",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "60",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -586,9 +573,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "60",
+        "$id": "61",
         "Type": {
-         "$ref": "59"
+         "$ref": "60"
         },
         "Value": "application/json"
        }
@@ -596,12 +583,12 @@
      ],
      "Responses": [
       {
-       "$id": "61",
+       "$id": "62",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "4"
+        "$ref": "5"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -620,21 +607,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "62",
+     "$id": "63",
      "Name": "GetFirstPet",
      "ResourceName": "Pets",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "30"
       },
       {
-       "$id": "63",
+       "$id": "64",
        "Name": "start",
        "NameInRequest": "start",
        "Type": {
-        "$id": "64",
-        "Kind": "Primitive",
-        "Name": "Int32",
+        "$id": "65",
+        "Kind": "int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -648,13 +634,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "65",
+       "$id": "66",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "66",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "67",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -667,9 +652,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "67",
+        "$id": "68",
         "Type": {
-         "$ref": "66"
+         "$ref": "67"
         },
         "Value": "application/json"
        }
@@ -677,12 +662,12 @@
      ],
      "Responses": [
       {
-       "$id": "68",
+       "$id": "69",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "4"
+        "$ref": "5"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -701,21 +686,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "69",
+     "$id": "70",
      "Name": "getFish",
      "ResourceName": "Pets",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "30"
       },
       {
-       "$id": "70",
+       "$id": "71",
        "Name": "kind",
        "NameInRequest": "kind",
        "Type": {
-        "$id": "71",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "72",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -729,13 +713,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "72",
+       "$id": "73",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "73",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "74",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -748,9 +731,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "74",
+        "$id": "75",
         "Type": {
-         "$ref": "73"
+         "$ref": "74"
         },
         "Value": "application/json"
        }
@@ -758,12 +741,12 @@
      ],
      "Responses": [
       {
-       "$id": "75",
+       "$id": "76",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "11"
+        "$ref": "12"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -782,22 +765,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "76",
+     "$id": "77",
      "Name": "refresh",
      "ResourceName": "Pets",
      "Description": "Test that an LRO polling operation defined in a namespace wtihout @service decorator will not be generated. This should be removed after cadl-ranch test case update.",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "30"
       },
       {
-       "$id": "77",
+       "$id": "78",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "78",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "79",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -810,9 +792,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "79",
+        "$id": "80",
         "Type": {
-         "$ref": "78"
+         "$ref": "79"
         },
         "Value": "application/json"
        }
@@ -829,13 +811,13 @@
     }
    ],
    "Protocol": {
-    "$id": "80"
+    "$id": "81"
    },
    "Creatable": false,
    "Parent": "PetStoreClient",
    "Parameters": [
     {
-     "$ref": "29"
+     "$ref": "30"
     }
    ]
   }

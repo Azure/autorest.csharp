@@ -5,27 +5,31 @@
  "Enums": [
   {
    "$id": "1",
-   "Kind": "Enum",
+   "Kind": "enum",
    "Name": "ClientType",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "ValueType": {
+    "$id": "2",
+    "Kind": "string",
+    "IsNullable": false
+   },
+   "Values": [
     {
-     "$id": "2",
+     "$id": "3",
      "Name": "Default",
      "Value": "default"
     },
     {
-     "$id": "3",
+     "$id": "4",
      "Name": "MultiClient",
      "Value": "multi-client"
     },
     {
-     "$id": "4",
+     "$id": "5",
      "Name": "RenamedOperation",
      "Value": "renamed-operation"
     },
     {
-     "$id": "5",
+     "$id": "6",
      "Name": "TwoOperationGroup",
      "Value": "two-operation-group"
     }
@@ -39,24 +43,23 @@
  "Models": [],
  "Clients": [
   {
-   "$id": "6",
+   "$id": "7",
    "Name": "TwoOperationGroupClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "7"
+    "$id": "8"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$id": "8",
+     "$id": "9",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Description": "Need to be set as 'http://localhost:3000' in client.",
      "Type": {
-      "$id": "9",
-      "Kind": "Primitive",
-      "Name": "Uri",
+      "$id": "10",
+      "Kind": "uri",
       "IsNullable": false
      },
      "Location": "Uri",
@@ -70,7 +73,7 @@
      "Kind": "Client"
     },
     {
-     "$id": "10",
+     "$id": "11",
      "Name": "client",
      "NameInRequest": "client",
      "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
@@ -90,29 +93,28 @@
    ]
   },
   {
-   "$id": "11",
+   "$id": "12",
    "Name": "Group1",
    "Description": "",
    "Operations": [
     {
-     "$id": "12",
+     "$id": "13",
      "Name": "one",
      "ResourceName": "Group1",
      "Parameters": [
       {
-       "$ref": "8"
+       "$ref": "9"
       },
       {
-       "$ref": "10"
+       "$ref": "11"
       },
       {
-       "$id": "13",
+       "$id": "14",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "14",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "15",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -125,9 +127,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "15",
+        "$id": "16",
         "Type": {
-         "$ref": "14"
+         "$ref": "15"
         },
         "Value": "application/json"
        }
@@ -135,7 +137,7 @@
      ],
      "Responses": [
       {
-       "$id": "16",
+       "$id": "17",
        "StatusCodes": [
         204
        ],
@@ -153,24 +155,23 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "17",
+     "$id": "18",
      "Name": "three",
      "ResourceName": "Group1",
      "Parameters": [
       {
-       "$ref": "8"
+       "$ref": "9"
       },
       {
-       "$ref": "10"
+       "$ref": "11"
       },
       {
-       "$id": "18",
+       "$id": "19",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "19",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "20",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -183,9 +184,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "20",
+        "$id": "21",
         "Type": {
-         "$ref": "19"
+         "$ref": "20"
         },
         "Value": "application/json"
        }
@@ -193,7 +194,7 @@
      ],
      "Responses": [
       {
-       "$id": "21",
+       "$id": "22",
        "StatusCodes": [
         204
        ],
@@ -211,24 +212,23 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "22",
+     "$id": "23",
      "Name": "four",
      "ResourceName": "Group1",
      "Parameters": [
       {
-       "$ref": "8"
+       "$ref": "9"
       },
       {
-       "$ref": "10"
+       "$ref": "11"
       },
       {
-       "$id": "23",
+       "$id": "24",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "24",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "25",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -241,9 +241,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "25",
+        "$id": "26",
         "Type": {
-         "$ref": "24"
+         "$ref": "25"
         },
         "Value": "application/json"
        }
@@ -251,7 +251,7 @@
      ],
      "Responses": [
       {
-       "$id": "26",
+       "$id": "27",
        "StatusCodes": [
         204
        ],
@@ -270,43 +270,42 @@
     }
    ],
    "Protocol": {
-    "$id": "27"
+    "$id": "28"
    },
    "Creatable": false,
    "Parent": "TwoOperationGroupClient",
    "Parameters": [
     {
-     "$ref": "8"
+     "$ref": "9"
     },
     {
-     "$ref": "10"
+     "$ref": "11"
     }
    ]
   },
   {
-   "$id": "28",
+   "$id": "29",
    "Name": "Group2",
    "Description": "",
    "Operations": [
     {
-     "$id": "29",
+     "$id": "30",
      "Name": "two",
      "ResourceName": "Group2",
      "Parameters": [
       {
-       "$ref": "8"
+       "$ref": "9"
       },
       {
-       "$ref": "10"
+       "$ref": "11"
       },
       {
-       "$id": "30",
+       "$id": "31",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "31",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "32",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -319,9 +318,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "32",
+        "$id": "33",
         "Type": {
-         "$ref": "31"
+         "$ref": "32"
         },
         "Value": "application/json"
        }
@@ -329,7 +328,7 @@
      ],
      "Responses": [
       {
-       "$id": "33",
+       "$id": "34",
        "StatusCodes": [
         204
        ],
@@ -347,24 +346,23 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "34",
+     "$id": "35",
      "Name": "five",
      "ResourceName": "Group2",
      "Parameters": [
       {
-       "$ref": "8"
+       "$ref": "9"
       },
       {
-       "$ref": "10"
+       "$ref": "11"
       },
       {
-       "$id": "35",
+       "$id": "36",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "36",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "37",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -377,9 +375,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "37",
+        "$id": "38",
         "Type": {
-         "$ref": "36"
+         "$ref": "37"
         },
         "Value": "application/json"
        }
@@ -387,7 +385,7 @@
      ],
      "Responses": [
       {
-       "$id": "38",
+       "$id": "39",
        "StatusCodes": [
         204
        ],
@@ -405,24 +403,23 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "39",
+     "$id": "40",
      "Name": "six",
      "ResourceName": "Group2",
      "Parameters": [
       {
-       "$ref": "8"
+       "$ref": "9"
       },
       {
-       "$ref": "10"
+       "$ref": "11"
       },
       {
-       "$id": "40",
+       "$id": "41",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "41",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "42",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -435,9 +432,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "42",
+        "$id": "43",
         "Type": {
-         "$ref": "41"
+         "$ref": "42"
         },
         "Value": "application/json"
        }
@@ -445,7 +442,7 @@
      ],
      "Responses": [
       {
-       "$id": "43",
+       "$id": "44",
        "StatusCodes": [
         204
        ],
@@ -464,16 +461,16 @@
     }
    ],
    "Protocol": {
-    "$id": "44"
+    "$id": "45"
    },
    "Creatable": false,
    "Parent": "TwoOperationGroupClient",
    "Parameters": [
     {
-     "$ref": "8"
+     "$ref": "9"
     },
     {
-     "$ref": "10"
+     "$ref": "11"
     }
    ]
   }

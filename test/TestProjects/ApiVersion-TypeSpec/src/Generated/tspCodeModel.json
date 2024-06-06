@@ -8,17 +8,21 @@
  "Enums": [
   {
    "$id": "1",
-   "Kind": "Enum",
+   "Kind": "enum",
    "Name": "APIVersion",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "ValueType": {
+    "$id": "2",
+    "Kind": "string",
+    "IsNullable": false
+   },
+   "Values": [
     {
-     "$id": "2",
+     "$id": "3",
      "Name": "v1_1",
      "Value": "v1.1"
     },
     {
-     "$id": "3",
+     "$id": "4",
      "Name": "v1_2",
      "Value": "v1.2"
     }
@@ -29,18 +33,22 @@
    "Usage": "None"
   },
   {
-   "$id": "4",
-   "Kind": "Enum",
+   "$id": "5",
+   "Kind": "enum",
    "Name": "Versions",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "ValueType": {
+    "$id": "6",
+    "Kind": "string",
+    "IsNullable": false
+   },
+   "Values": [
     {
-     "$id": "5",
+     "$id": "7",
      "Name": "v1_1",
      "Value": "v1.1"
     },
     {
-     "$id": "6",
+     "$id": "8",
      "Name": "v1_2",
      "Value": "v1.2"
     }
@@ -53,7 +61,7 @@
  ],
  "Models": [
   {
-   "$id": "7",
+   "$id": "9",
    "Kind": "Model",
    "Name": "DetectionResult",
    "Namespace": "ApiVersionInTsp",
@@ -62,15 +70,15 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "8",
+     "$id": "10",
      "Name": "resultId",
      "SerializedName": "resultId",
      "Description": "Result identifier, which is used to fetch the results of an inference call.",
      "Type": {
-      "$id": "9",
-      "Kind": "Primitive",
-      "Name": "Guid",
-      "IsNullable": false
+      "$id": "11",
+      "Kind": "uuid",
+      "IsNullable": false,
+      "Encode": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -80,26 +88,25 @@
  ],
  "Clients": [
   {
-   "$id": "10",
+   "$id": "12",
    "Name": "ApiVersionInTspClient",
    "Description": "CADL project to test api versions.",
    "Operations": [
     {
-     "$id": "11",
+     "$id": "13",
      "Name": "GetBatchDetectionResult",
      "ResourceName": "ApiVersionInTsp",
      "Summary": "Get Multivariate Anomaly Detection Result",
      "Description": "For asynchronous inference, get multivariate anomaly detection result based on\nresultId returned by the BatchDetectAnomaly api.",
      "Parameters": [
       {
-       "$id": "12",
+       "$id": "14",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
        "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
        "Type": {
-        "$id": "13",
-        "Kind": "Primitive",
-        "Name": "Uri",
+        "$id": "15",
+        "Kind": "uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -113,7 +120,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "14",
+       "$id": "16",
        "Name": "ApiVersion",
        "NameInRequest": "ApiVersion",
        "Description": "Api Version",
@@ -130,25 +137,24 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "15",
+        "$id": "17",
         "Type": {
-         "$id": "16",
-         "Kind": "Primitive",
-         "Name": "String",
+         "$id": "18",
+         "Kind": "string",
          "IsNullable": false
         },
         "Value": "v1.2"
        }
       },
       {
-       "$id": "17",
+       "$id": "19",
        "Name": "resultId",
        "NameInRequest": "resultId",
        "Type": {
-        "$id": "18",
-        "Kind": "Primitive",
-        "Name": "Guid",
-        "IsNullable": false
+        "$id": "20",
+        "Kind": "uuid",
+        "IsNullable": false,
+        "Encode": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -161,13 +167,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "19",
+       "$id": "21",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "20",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "22",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -180,9 +185,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "21",
+        "$id": "23",
         "Type": {
-         "$ref": "20"
+         "$ref": "22"
         },
         "Value": "application/json"
        }
@@ -190,12 +195,12 @@
      ],
      "Responses": [
       {
-       "$id": "22",
+       "$id": "24",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "7"
+        "$ref": "9"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -215,23 +220,23 @@
     }
    ],
    "Protocol": {
-    "$id": "23"
+    "$id": "25"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "12"
+     "$ref": "14"
     },
     {
-     "$ref": "14"
+     "$ref": "16"
     }
    ]
   }
  ],
  "Auth": {
-  "$id": "24",
+  "$id": "26",
   "ApiKey": {
-   "$id": "25",
+   "$id": "27",
    "Name": "Ocp-Apim-Subscription-Key"
   }
  }

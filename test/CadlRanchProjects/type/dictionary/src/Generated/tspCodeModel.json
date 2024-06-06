@@ -20,8 +20,7 @@
      "Description": "Required string property",
      "Type": {
       "$id": "3",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -38,8 +37,7 @@
       "Name": "Dictionary",
       "KeyType": {
        "$id": "6",
-       "Kind": "Primitive",
-       "Name": "String",
+       "Kind": "string",
        "IsNullable": false
       },
       "ValueType": {
@@ -71,8 +69,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "10",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "Location": "Uri",
@@ -88,8 +85,7 @@
       "$id": "11",
       "Type": {
        "$id": "12",
-       "Kind": "Primitive",
-       "Name": "String",
+       "Kind": "string",
        "IsNullable": false
       },
       "Value": "http://localhost:3000"
@@ -116,8 +112,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "16",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -150,14 +145,12 @@
         "Name": "Dictionary",
         "KeyType": {
          "$id": "20",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "21",
-         "Kind": "Primitive",
-         "Name": "Int32",
+         "Kind": "int32",
          "IsNullable": false
         },
         "IsNullable": false
@@ -196,14 +189,12 @@
         "Name": "Dictionary",
         "KeyType": {
          "$id": "25",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "26",
-         "Kind": "Primitive",
-         "Name": "Int32",
+         "Kind": "int32",
          "IsNullable": false
         },
         "IsNullable": false
@@ -224,8 +215,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "28",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -251,8 +241,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "31",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -326,8 +315,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "38",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -360,14 +348,12 @@
         "Name": "Dictionary",
         "KeyType": {
          "$id": "42",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "43",
-         "Kind": "Primitive",
-         "Name": "Int64",
+         "Kind": "int64",
          "IsNullable": false
         },
         "IsNullable": false
@@ -406,14 +392,12 @@
         "Name": "Dictionary",
         "KeyType": {
          "$id": "47",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "48",
-         "Kind": "Primitive",
-         "Name": "Int64",
+         "Kind": "int64",
          "IsNullable": false
         },
         "IsNullable": false
@@ -434,8 +418,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "50",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -461,8 +444,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "53",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -536,8 +518,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "60",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -570,14 +551,12 @@
         "Name": "Dictionary",
         "KeyType": {
          "$id": "64",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "65",
-         "Kind": "Primitive",
-         "Name": "Boolean",
+         "Kind": "boolean",
          "IsNullable": false
         },
         "IsNullable": false
@@ -616,14 +595,12 @@
         "Name": "Dictionary",
         "KeyType": {
          "$id": "69",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "70",
-         "Kind": "Primitive",
-         "Name": "Boolean",
+         "Kind": "boolean",
          "IsNullable": false
         },
         "IsNullable": false
@@ -644,8 +621,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "72",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -671,8 +647,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "75",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -746,8 +721,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "82",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -780,14 +754,12 @@
         "Name": "Dictionary",
         "KeyType": {
          "$id": "86",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "87",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "IsNullable": false
@@ -826,14 +798,12 @@
         "Name": "Dictionary",
         "KeyType": {
          "$id": "91",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "92",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "IsNullable": false
@@ -854,8 +824,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "94",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -881,8 +850,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "97",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -956,8 +924,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "104",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -990,14 +957,12 @@
         "Name": "Dictionary",
         "KeyType": {
          "$id": "108",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "109",
-         "Kind": "Primitive",
-         "Name": "Float32",
+         "Kind": "float32",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1036,14 +1001,12 @@
         "Name": "Dictionary",
         "KeyType": {
          "$id": "113",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "114",
-         "Kind": "Primitive",
-         "Name": "Float32",
+         "Kind": "float32",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1064,8 +1027,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "116",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1091,8 +1053,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "119",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1166,8 +1127,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "126",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1200,15 +1160,19 @@
         "Name": "Dictionary",
         "KeyType": {
          "$id": "130",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "131",
-         "Kind": "Primitive",
-         "Name": "DateTimeRFC3339",
-         "IsNullable": false
+         "Kind": "utcDateTime",
+         "IsNullable": false,
+         "Encode": "rfc3339",
+         "WireType": {
+          "$id": "132",
+          "Kind": "string",
+          "IsNullable": false
+         }
         },
         "IsNullable": false
        },
@@ -1229,7 +1193,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "132",
+     "$id": "133",
      "Name": "put",
      "ResourceName": "DatetimeValue",
      "Parameters": [
@@ -1237,24 +1201,28 @@
        "$ref": "9"
       },
       {
-       "$id": "133",
+       "$id": "134",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "134",
+        "$id": "135",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "135",
-         "Kind": "Primitive",
-         "Name": "String",
+         "$id": "136",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "136",
-         "Kind": "Primitive",
-         "Name": "DateTimeRFC3339",
-         "IsNullable": false
+         "$id": "137",
+         "Kind": "utcDateTime",
+         "IsNullable": false,
+         "Encode": "rfc3339",
+         "WireType": {
+          "$id": "138",
+          "Kind": "string",
+          "IsNullable": false
+         }
         },
         "IsNullable": false
        },
@@ -1269,13 +1237,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "137",
+       "$id": "139",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "138",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "140",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1288,21 +1255,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "139",
+        "$id": "141",
         "Type": {
-         "$ref": "138"
+         "$ref": "140"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "140",
+       "$id": "142",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "141",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "143",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1315,9 +1281,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "142",
+        "$id": "144",
         "Type": {
-         "$ref": "141"
+         "$ref": "143"
         },
         "Value": "application/json"
        }
@@ -1325,7 +1291,7 @@
      ],
      "Responses": [
       {
-       "$id": "143",
+       "$id": "145",
        "StatusCodes": [
         204
        ],
@@ -1347,7 +1313,7 @@
     }
    ],
    "Protocol": {
-    "$id": "144"
+    "$id": "146"
    },
    "Creatable": false,
    "Parent": "DictionaryClient",
@@ -1358,12 +1324,12 @@
    ]
   },
   {
-   "$id": "145",
+   "$id": "147",
    "Name": "DurationValue",
    "Description": "Dictionary of duration values",
    "Operations": [
     {
-     "$id": "146",
+     "$id": "148",
      "Name": "get",
      "ResourceName": "DurationValue",
      "Parameters": [
@@ -1371,13 +1337,12 @@
        "$ref": "9"
       },
       {
-       "$id": "147",
+       "$id": "149",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "148",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "150",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1390,9 +1355,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "149",
+        "$id": "151",
         "Type": {
-         "$ref": "148"
+         "$ref": "150"
         },
         "Value": "application/json"
        }
@@ -1400,25 +1365,29 @@
      ],
      "Responses": [
       {
-       "$id": "150",
+       "$id": "152",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "151",
+        "$id": "153",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "152",
-         "Kind": "Primitive",
-         "Name": "String",
+         "$id": "154",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "153",
-         "Kind": "Primitive",
-         "Name": "DurationISO8601",
-         "IsNullable": false
+         "$id": "155",
+         "Kind": "duration",
+         "IsNullable": false,
+         "Encode": "ISO8601",
+         "WireType": {
+          "$id": "156",
+          "Kind": "string",
+          "IsNullable": false
+         }
         },
         "IsNullable": false
        },
@@ -1439,7 +1408,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "154",
+     "$id": "157",
      "Name": "put",
      "ResourceName": "DurationValue",
      "Parameters": [
@@ -1447,24 +1416,28 @@
        "$ref": "9"
       },
       {
-       "$id": "155",
+       "$id": "158",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "156",
+        "$id": "159",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "157",
-         "Kind": "Primitive",
-         "Name": "String",
+         "$id": "160",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "158",
-         "Kind": "Primitive",
-         "Name": "DurationISO8601",
-         "IsNullable": false
+         "$id": "161",
+         "Kind": "duration",
+         "IsNullable": false,
+         "Encode": "ISO8601",
+         "WireType": {
+          "$id": "162",
+          "Kind": "string",
+          "IsNullable": false
+         }
         },
         "IsNullable": false
        },
@@ -1479,13 +1452,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "159",
+       "$id": "163",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "160",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "164",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1498,21 +1470,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "161",
+        "$id": "165",
         "Type": {
-         "$ref": "160"
+         "$ref": "164"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "162",
+       "$id": "166",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "163",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "167",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1525,9 +1496,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "164",
+        "$id": "168",
         "Type": {
-         "$ref": "163"
+         "$ref": "167"
         },
         "Value": "application/json"
        }
@@ -1535,7 +1506,7 @@
      ],
      "Responses": [
       {
-       "$id": "165",
+       "$id": "169",
        "StatusCodes": [
         204
        ],
@@ -1557,7 +1528,7 @@
     }
    ],
    "Protocol": {
-    "$id": "166"
+    "$id": "170"
    },
    "Creatable": false,
    "Parent": "DictionaryClient",
@@ -1568,12 +1539,12 @@
    ]
   },
   {
-   "$id": "167",
+   "$id": "171",
    "Name": "UnknownValue",
    "Description": "Dictionary of unknown values",
    "Operations": [
     {
-     "$id": "168",
+     "$id": "172",
      "Name": "get",
      "ResourceName": "UnknownValue",
      "Parameters": [
@@ -1581,13 +1552,12 @@
        "$ref": "9"
       },
       {
-       "$id": "169",
+       "$id": "173",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "170",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "174",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1600,9 +1570,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "171",
+        "$id": "175",
         "Type": {
-         "$ref": "170"
+         "$ref": "174"
         },
         "Value": "application/json"
        }
@@ -1610,24 +1580,22 @@
      ],
      "Responses": [
       {
-       "$id": "172",
+       "$id": "176",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "173",
+        "$id": "177",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "174",
-         "Kind": "Primitive",
-         "Name": "String",
+         "$id": "178",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "175",
-         "Kind": "Intrinsic",
-         "Name": "unknown",
+         "$id": "179",
+         "Kind": "any",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1649,7 +1617,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "176",
+     "$id": "180",
      "Name": "put",
      "ResourceName": "UnknownValue",
      "Parameters": [
@@ -1657,23 +1625,21 @@
        "$ref": "9"
       },
       {
-       "$id": "177",
+       "$id": "181",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "178",
+        "$id": "182",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "179",
-         "Kind": "Primitive",
-         "Name": "String",
+         "$id": "183",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "180",
-         "Kind": "Intrinsic",
-         "Name": "unknown",
+         "$id": "184",
+         "Kind": "any",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1689,13 +1655,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "181",
+       "$id": "185",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "182",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "186",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1708,21 +1673,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "183",
+        "$id": "187",
         "Type": {
-         "$ref": "182"
+         "$ref": "186"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "184",
+       "$id": "188",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "185",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "189",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1735,9 +1699,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "186",
+        "$id": "190",
         "Type": {
-         "$ref": "185"
+         "$ref": "189"
         },
         "Value": "application/json"
        }
@@ -1745,7 +1709,7 @@
      ],
      "Responses": [
       {
-       "$id": "187",
+       "$id": "191",
        "StatusCodes": [
         204
        ],
@@ -1767,7 +1731,7 @@
     }
    ],
    "Protocol": {
-    "$id": "188"
+    "$id": "192"
    },
    "Creatable": false,
    "Parent": "DictionaryClient",
@@ -1778,12 +1742,12 @@
    ]
   },
   {
-   "$id": "189",
+   "$id": "193",
    "Name": "ModelValue",
    "Description": "Dictionary of model values",
    "Operations": [
     {
-     "$id": "190",
+     "$id": "194",
      "Name": "get",
      "ResourceName": "ModelValue",
      "Parameters": [
@@ -1791,13 +1755,12 @@
        "$ref": "9"
       },
       {
-       "$id": "191",
+       "$id": "195",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "192",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "196",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1810,9 +1773,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "193",
+        "$id": "197",
         "Type": {
-         "$ref": "192"
+         "$ref": "196"
         },
         "Value": "application/json"
        }
@@ -1820,61 +1783,59 @@
      ],
      "Responses": [
       {
-       "$id": "194",
+       "$id": "198",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "195",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
-        "KeyType": {
-         "$id": "196",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "ValueType": {
-         "$ref": "1"
-        },
-        "IsNullable": false
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/type/dictionary/model",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "197",
-     "Name": "put",
-     "ResourceName": "ModelValue",
-     "Parameters": [
-      {
-       "$ref": "9"
-      },
-      {
-       "$id": "198",
-       "Name": "body",
-       "NameInRequest": "body",
-       "Type": {
         "$id": "199",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "200",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
+         "IsNullable": false
+        },
+        "ValueType": {
+         "$ref": "1"
+        },
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/dictionary/model",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "201",
+     "Name": "put",
+     "ResourceName": "ModelValue",
+     "Parameters": [
+      {
+       "$ref": "9"
+      },
+      {
+       "$id": "202",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$id": "203",
+        "Kind": "Dictionary",
+        "Name": "Dictionary",
+        "KeyType": {
+         "$id": "204",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
@@ -1893,13 +1854,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "201",
+       "$id": "205",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "202",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "206",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1912,21 +1872,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "203",
+        "$id": "207",
         "Type": {
-         "$ref": "202"
+         "$ref": "206"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "204",
+       "$id": "208",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "205",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "209",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1939,9 +1898,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "206",
+        "$id": "210",
         "Type": {
-         "$ref": "205"
+         "$ref": "209"
         },
         "Value": "application/json"
        }
@@ -1949,7 +1908,7 @@
      ],
      "Responses": [
       {
-       "$id": "207",
+       "$id": "211",
        "StatusCodes": [
         204
        ],
@@ -1971,7 +1930,7 @@
     }
    ],
    "Protocol": {
-    "$id": "208"
+    "$id": "212"
    },
    "Creatable": false,
    "Parent": "DictionaryClient",
@@ -1982,12 +1941,12 @@
    ]
   },
   {
-   "$id": "209",
+   "$id": "213",
    "Name": "RecursiveModelValue",
    "Description": "Dictionary of model values",
    "Operations": [
     {
-     "$id": "210",
+     "$id": "214",
      "Name": "get",
      "ResourceName": "RecursiveModelValue",
      "Parameters": [
@@ -1995,13 +1954,12 @@
        "$ref": "9"
       },
       {
-       "$id": "211",
+       "$id": "215",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "212",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "216",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2014,9 +1972,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "213",
+        "$id": "217",
         "Type": {
-         "$ref": "212"
+         "$ref": "216"
         },
         "Value": "application/json"
        }
@@ -2024,61 +1982,59 @@
      ],
      "Responses": [
       {
-       "$id": "214",
+       "$id": "218",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "215",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
-        "KeyType": {
-         "$id": "216",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "ValueType": {
-         "$ref": "1"
-        },
-        "IsNullable": false
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/type/dictionary/model/recursive",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "217",
-     "Name": "put",
-     "ResourceName": "RecursiveModelValue",
-     "Parameters": [
-      {
-       "$ref": "9"
-      },
-      {
-       "$id": "218",
-       "Name": "body",
-       "NameInRequest": "body",
-       "Type": {
         "$id": "219",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "220",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
+         "IsNullable": false
+        },
+        "ValueType": {
+         "$ref": "1"
+        },
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/dictionary/model/recursive",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "221",
+     "Name": "put",
+     "ResourceName": "RecursiveModelValue",
+     "Parameters": [
+      {
+       "$ref": "9"
+      },
+      {
+       "$id": "222",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$id": "223",
+        "Kind": "Dictionary",
+        "Name": "Dictionary",
+        "KeyType": {
+         "$id": "224",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
@@ -2097,13 +2053,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "221",
+       "$id": "225",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "222",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "226",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2116,21 +2071,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "223",
+        "$id": "227",
         "Type": {
-         "$ref": "222"
+         "$ref": "226"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "224",
+       "$id": "228",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "225",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "229",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2143,9 +2097,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "226",
+        "$id": "230",
         "Type": {
-         "$ref": "225"
+         "$ref": "229"
         },
         "Value": "application/json"
        }
@@ -2153,7 +2107,7 @@
      ],
      "Responses": [
       {
-       "$id": "227",
+       "$id": "231",
        "StatusCodes": [
         204
        ],
@@ -2175,7 +2129,7 @@
     }
    ],
    "Protocol": {
-    "$id": "228"
+    "$id": "232"
    },
    "Creatable": false,
    "Parent": "DictionaryClient",
@@ -2186,12 +2140,12 @@
    ]
   },
   {
-   "$id": "229",
+   "$id": "233",
    "Name": "NullableFloatValue",
    "Description": "Dictionary of nullable float values",
    "Operations": [
     {
-     "$id": "230",
+     "$id": "234",
      "Name": "get",
      "ResourceName": "NullableFloatValue",
      "Parameters": [
@@ -2199,13 +2153,12 @@
        "$ref": "9"
       },
       {
-       "$id": "231",
+       "$id": "235",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "232",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "236",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2218,9 +2171,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "233",
+        "$id": "237",
         "Type": {
-         "$ref": "232"
+         "$ref": "236"
         },
         "Value": "application/json"
        }
@@ -2228,24 +2181,22 @@
      ],
      "Responses": [
       {
-       "$id": "234",
+       "$id": "238",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "235",
+        "$id": "239",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "236",
-         "Kind": "Primitive",
-         "Name": "String",
+         "$id": "240",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "237",
-         "Kind": "Primitive",
-         "Name": "Float32",
+         "$id": "241",
+         "Kind": "float32",
          "IsNullable": true
         },
         "IsNullable": false
@@ -2267,7 +2218,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "238",
+     "$id": "242",
      "Name": "put",
      "ResourceName": "NullableFloatValue",
      "Parameters": [
@@ -2275,23 +2226,21 @@
        "$ref": "9"
       },
       {
-       "$id": "239",
+       "$id": "243",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "240",
+        "$id": "244",
         "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
-         "$id": "241",
-         "Kind": "Primitive",
-         "Name": "String",
+         "$id": "245",
+         "Kind": "string",
          "IsNullable": false
         },
         "ValueType": {
-         "$id": "242",
-         "Kind": "Primitive",
-         "Name": "Float32",
+         "$id": "246",
+         "Kind": "float32",
          "IsNullable": true
         },
         "IsNullable": false
@@ -2307,13 +2256,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "243",
+       "$id": "247",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "244",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "248",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2326,21 +2274,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "245",
+        "$id": "249",
         "Type": {
-         "$ref": "244"
+         "$ref": "248"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "246",
+       "$id": "250",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "247",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "251",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2353,9 +2300,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "248",
+        "$id": "252",
         "Type": {
-         "$ref": "247"
+         "$ref": "251"
         },
         "Value": "application/json"
        }
@@ -2363,7 +2310,7 @@
      ],
      "Responses": [
       {
-       "$id": "249",
+       "$id": "253",
        "StatusCodes": [
         204
        ],
@@ -2385,7 +2332,7 @@
     }
    ],
    "Protocol": {
-    "$id": "250"
+    "$id": "254"
    },
    "Creatable": false,
    "Parent": "DictionaryClient",

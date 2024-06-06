@@ -8,18 +8,22 @@
  "Enums": [
   {
    "$id": "1",
-   "Kind": "Enum",
+   "Kind": "enum",
    "Name": "Versions",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "ValueType": {
+    "$id": "2",
+    "Kind": "string",
+    "IsNullable": false
+   },
+   "Values": [
     {
-     "$id": "2",
+     "$id": "3",
      "Name": "v1",
      "Value": "v1",
      "Description": "The version v1."
     },
     {
-     "$id": "3",
+     "$id": "4",
      "Name": "v2",
      "Value": "v2",
      "Description": "The version v2."
@@ -32,18 +36,22 @@
    "Usage": "None"
   },
   {
-   "$id": "4",
-   "Kind": "Enum",
+   "$id": "5",
+   "Kind": "enum",
    "Name": "EnumV1",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "ValueType": {
+    "$id": "6",
+    "Kind": "string",
+    "IsNullable": false
+   },
+   "Values": [
     {
-     "$id": "5",
+     "$id": "7",
      "Name": "enumMemberV1",
      "Value": "enumMemberV1"
     },
     {
-     "$id": "6",
+     "$id": "8",
      "Name": "enumMemberV2",
      "Value": "enumMemberV2"
     }
@@ -54,13 +62,17 @@
    "Usage": "RoundTrip"
   },
   {
-   "$id": "7",
-   "Kind": "Enum",
+   "$id": "9",
+   "Kind": "enum",
    "Name": "EnumV2",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "ValueType": {
+    "$id": "10",
+    "Kind": "string",
+    "IsNullable": false
+   },
+   "Values": [
     {
-     "$id": "8",
+     "$id": "11",
      "Name": "enumMember",
      "Value": "enumMember"
     }
@@ -73,7 +85,7 @@
  ],
  "Models": [
   {
-   "$id": "9",
+   "$id": "12",
    "Kind": "Model",
    "Name": "ModelV1",
    "Namespace": "Versioning.Added",
@@ -81,50 +93,47 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "10",
+     "$id": "13",
      "Name": "prop",
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$id": "11",
-      "Kind": "Primitive",
-      "Name": "String",
+      "$id": "14",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "12",
+     "$id": "15",
      "Name": "enumProp",
      "SerializedName": "enumProp",
      "Description": "",
      "Type": {
-      "$ref": "4"
+      "$ref": "5"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "13",
+     "$id": "16",
      "Name": "unionProp",
      "SerializedName": "unionProp",
      "Description": "",
      "Type": {
-      "$id": "14",
+      "$id": "17",
       "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
-        "$id": "15",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "18",
+        "Kind": "string",
         "IsNullable": false
        },
        {
-        "$id": "16",
-        "Kind": "Primitive",
-        "Name": "Int32",
+        "$id": "19",
+        "Kind": "int32",
         "IsNullable": false
        }
       ],
@@ -136,7 +145,7 @@
    ]
   },
   {
-   "$id": "17",
+   "$id": "20",
    "Kind": "Model",
    "Name": "ModelV2",
    "Namespace": "Versioning.Added",
@@ -144,50 +153,47 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "18",
+     "$id": "21",
      "Name": "prop",
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$id": "19",
-      "Kind": "Primitive",
-      "Name": "String",
+      "$id": "22",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "20",
+     "$id": "23",
      "Name": "enumProp",
      "SerializedName": "enumProp",
      "Description": "",
      "Type": {
-      "$ref": "7"
+      "$ref": "9"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "21",
+     "$id": "24",
      "Name": "unionProp",
      "SerializedName": "unionProp",
      "Description": "",
      "Type": {
-      "$id": "22",
+      "$id": "25",
       "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
-        "$id": "23",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "26",
+        "Kind": "string",
         "IsNullable": false
        },
        {
-        "$id": "24",
-        "Kind": "Primitive",
-        "Name": "Int32",
+        "$id": "27",
+        "Kind": "int32",
         "IsNullable": false
        }
       ],
@@ -201,24 +207,23 @@
  ],
  "Clients": [
   {
-   "$id": "25",
+   "$id": "28",
    "Name": "AddedClient",
    "Description": "Test for the `@added` decorator.",
    "Operations": [
     {
-     "$id": "26",
+     "$id": "29",
      "Name": "v1",
      "ResourceName": "Added",
      "Parameters": [
       {
-       "$id": "27",
+       "$id": "30",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "28",
-        "Kind": "Primitive",
-        "Name": "Uri",
+        "$id": "31",
+        "Kind": "uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -232,7 +237,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "29",
+       "$id": "32",
        "Name": "version",
        "NameInRequest": "version",
        "Description": "Need to be set as 'v1' or 'v2' in client.",
@@ -250,13 +255,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "30",
+       "$id": "33",
        "Name": "headerV2",
        "NameInRequest": "header-v2",
        "Type": {
-        "$id": "31",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "34",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -270,11 +274,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "32",
+       "$id": "35",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "9"
+        "$ref": "12"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -287,13 +291,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "33",
+       "$id": "36",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "34",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "37",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -306,21 +309,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "35",
+        "$id": "38",
         "Type": {
-         "$ref": "34"
+         "$ref": "37"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "36",
+       "$id": "39",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "37",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "40",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -333,9 +335,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "38",
+        "$id": "41",
         "Type": {
-         "$ref": "37"
+         "$ref": "40"
         },
         "Value": "application/json"
        }
@@ -343,12 +345,12 @@
      ],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "42",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "9"
+        "$ref": "12"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -370,22 +372,22 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "40",
+     "$id": "43",
      "Name": "v2",
      "ResourceName": "Added",
      "Parameters": [
       {
-       "$ref": "27"
+       "$ref": "30"
       },
       {
-       "$ref": "29"
+       "$ref": "32"
       },
       {
-       "$id": "41",
+       "$id": "44",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "17"
+        "$ref": "20"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -398,13 +400,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "42",
+       "$id": "45",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "43",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "46",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -417,21 +418,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "44",
+        "$id": "47",
         "Type": {
-         "$ref": "43"
+         "$ref": "46"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "45",
+       "$id": "48",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "46",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "49",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -444,9 +444,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "47",
+        "$id": "50",
         "Type": {
-         "$ref": "46"
+         "$ref": "49"
         },
         "Value": "application/json"
        }
@@ -454,12 +454,12 @@
      ],
      "Responses": [
       {
-       "$id": "48",
+       "$id": "51",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "17"
+        "$ref": "20"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -482,40 +482,40 @@
     }
    ],
    "Protocol": {
-    "$id": "49"
+    "$id": "52"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "27"
+     "$ref": "30"
     },
     {
-     "$ref": "29"
+     "$ref": "32"
     }
    ]
   },
   {
-   "$id": "50",
+   "$id": "53",
    "Name": "InterfaceV2",
    "Description": "",
    "Operations": [
     {
-     "$id": "51",
+     "$id": "54",
      "Name": "v2InInterface",
      "ResourceName": "InterfaceV2",
      "Parameters": [
       {
-       "$ref": "27"
+       "$ref": "30"
       },
       {
-       "$ref": "29"
+       "$ref": "32"
       },
       {
-       "$id": "52",
+       "$id": "55",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "17"
+        "$ref": "20"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -528,13 +528,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "53",
+       "$id": "56",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "54",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "57",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -547,21 +546,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "55",
+        "$id": "58",
         "Type": {
-         "$ref": "54"
+         "$ref": "57"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "56",
+       "$id": "59",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "57",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "60",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -574,9 +572,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "58",
+        "$id": "61",
         "Type": {
-         "$ref": "57"
+         "$ref": "60"
         },
         "Value": "application/json"
        }
@@ -584,12 +582,12 @@
      ],
      "Responses": [
       {
-       "$id": "59",
+       "$id": "62",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "17"
+        "$ref": "20"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -612,16 +610,16 @@
     }
    ],
    "Protocol": {
-    "$id": "60"
+    "$id": "63"
    },
    "Creatable": false,
    "Parent": "AddedClient",
    "Parameters": [
     {
-     "$ref": "27"
+     "$ref": "30"
     },
     {
-     "$ref": "29"
+     "$ref": "32"
     }
    ]
   }

@@ -19,8 +19,7 @@
      "Description": "",
      "Type": {
       "$id": "3",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -43,8 +42,7 @@
      "Description": "",
      "Type": {
       "$id": "6",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -67,8 +65,7 @@
      "Description": "",
      "Type": {
       "$id": "9",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -91,8 +88,7 @@
      "Description": "",
      "Type": {
       "$id": "12",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -115,8 +111,7 @@
      "Description": "",
      "Type": {
       "$id": "15",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -139,8 +134,7 @@
      "Description": "",
      "Type": {
       "$id": "18",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -163,8 +157,7 @@
      "Description": "",
      "Type": {
       "$id": "21",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -187,8 +180,7 @@
      "Description": "",
      "Type": {
       "$id": "24",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -211,8 +203,7 @@
      "Description": "",
      "Type": {
       "$id": "27",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -235,8 +226,7 @@
      "Description": "",
      "Type": {
       "$id": "30",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -259,8 +249,7 @@
      "Description": "",
      "Type": {
       "$id": "33",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -283,8 +272,7 @@
      "Description": "",
      "Type": {
       "$id": "36",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -307,8 +295,7 @@
      "Description": "",
      "Type": {
       "$id": "39",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -331,8 +318,7 @@
      "Description": "",
      "Type": {
       "$id": "42",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -355,8 +341,7 @@
      "Description": "",
      "Type": {
       "$id": "45",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -379,8 +364,7 @@
      "Description": "",
      "Type": {
       "$id": "48",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -403,8 +387,7 @@
      "Description": "",
      "Type": {
       "$id": "51",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -427,8 +410,7 @@
      "Description": "",
      "Type": {
       "$id": "54",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -451,8 +433,7 @@
      "Description": "",
      "Type": {
       "$id": "57",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -475,8 +456,7 @@
      "Description": "",
      "Type": {
       "$id": "60",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -499,8 +479,7 @@
      "Description": "",
      "Type": {
       "$id": "63",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -523,8 +502,7 @@
      "Description": "",
      "Type": {
       "$id": "66",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -547,8 +525,7 @@
      "Description": "",
      "Type": {
       "$id": "69",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -571,8 +548,7 @@
      "Description": "",
      "Type": {
       "$id": "72",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -595,8 +571,7 @@
      "Description": "",
      "Type": {
       "$id": "75",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -619,8 +594,7 @@
      "Description": "",
      "Type": {
       "$id": "78",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -643,8 +617,7 @@
      "Description": "",
      "Type": {
       "$id": "81",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -667,8 +640,7 @@
      "Description": "",
      "Type": {
       "$id": "84",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -691,8 +663,7 @@
      "Description": "",
      "Type": {
       "$id": "87",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -715,8 +686,7 @@
      "Description": "",
      "Type": {
       "$id": "90",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -739,8 +709,7 @@
      "Description": "",
      "Type": {
       "$id": "93",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -763,8 +732,7 @@
      "Description": "",
      "Type": {
       "$id": "96",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -787,8 +755,7 @@
      "Description": "",
      "Type": {
       "$id": "99",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -811,8 +778,7 @@
      "Description": "",
      "Type": {
       "$id": "102",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -839,8 +805,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "106",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "Location": "Uri",
@@ -856,8 +821,7 @@
       "$id": "107",
       "Type": {
        "$id": "108",
-       "Kind": "Primitive",
-       "Name": "String",
+       "Kind": "string",
        "IsNullable": false
       },
       "Value": "http://localhost:3000"
@@ -901,8 +865,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "113",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -928,8 +891,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "116",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1003,8 +965,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "122",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1030,8 +991,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "125",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1105,8 +1065,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "131",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1132,8 +1091,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "134",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1207,8 +1165,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "140",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1234,8 +1191,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "143",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1309,8 +1265,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "149",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1336,8 +1291,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "152",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1411,8 +1365,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "158",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1438,8 +1391,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "161",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1513,8 +1465,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "167",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1540,8 +1491,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "170",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1615,8 +1565,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "176",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1642,8 +1591,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "179",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1717,8 +1665,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "185",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1744,8 +1691,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "188",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1819,8 +1765,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "194",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1846,8 +1791,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "197",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1921,8 +1865,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "203",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1948,8 +1891,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "206",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2023,8 +1965,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "212",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2050,8 +1991,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "215",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2125,8 +2065,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "221",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2152,8 +2091,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "224",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2227,8 +2165,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "230",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2254,8 +2191,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "233",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2329,8 +2265,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "239",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2356,8 +2291,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "242",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2431,8 +2365,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "248",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2458,8 +2391,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "251",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2533,8 +2465,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "257",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2560,8 +2491,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "260",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2635,8 +2565,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "266",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2662,8 +2591,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "269",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2737,8 +2665,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "275",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2764,8 +2691,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "278",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2839,8 +2765,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "284",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2866,8 +2791,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "287",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2941,8 +2865,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "293",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2968,8 +2891,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "296",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3043,8 +2965,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "302",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3070,8 +2991,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "305",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3145,8 +3065,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "311",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3172,8 +3091,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "314",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3247,8 +3165,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "320",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3274,8 +3191,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "323",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3349,8 +3265,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "329",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3376,8 +3291,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "332",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3451,8 +3365,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "338",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3478,8 +3391,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "341",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3553,8 +3465,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "347",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3580,8 +3491,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "350",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3655,8 +3565,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "356",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3682,8 +3591,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "359",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3757,8 +3665,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "365",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3784,8 +3691,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "368",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3859,8 +3765,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "374",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3886,8 +3791,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "377",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3961,8 +3865,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "383",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3988,8 +3891,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "386",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4063,8 +3965,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "392",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4090,8 +3991,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "395",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4165,8 +4065,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "401",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4192,8 +4091,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "404",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4284,8 +4182,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "412",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4311,8 +4208,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "415",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4386,8 +4282,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "422",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4441,8 +4336,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "427",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4496,8 +4390,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "432",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4551,8 +4444,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "437",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4606,8 +4498,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "442",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4661,8 +4552,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "447",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4716,8 +4606,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "452",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4771,8 +4660,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "457",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4826,8 +4714,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "462",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4881,8 +4768,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "467",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4936,8 +4822,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "472",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4991,8 +4876,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "477",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -5046,8 +4930,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "482",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -5101,8 +4984,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "487",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -5156,8 +5038,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "492",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -5211,8 +5092,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "497",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -5266,8 +5146,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "502",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -5321,8 +5200,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "507",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -5376,8 +5254,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "512",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -5431,8 +5308,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "517",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -5486,8 +5362,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "522",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -5541,8 +5416,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "527",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -5596,8 +5470,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "532",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -5651,8 +5524,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "537",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -5706,8 +5578,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "542",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -5761,8 +5632,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "547",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -5816,8 +5686,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "552",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -5871,8 +5740,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "557",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -5926,8 +5794,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "562",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -5981,8 +5848,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "567",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6036,8 +5902,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "572",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6091,8 +5956,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "577",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6146,8 +6010,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "582",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6218,8 +6081,7 @@
        "NameInRequest": "and",
        "Type": {
         "$id": "589",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -6238,8 +6100,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "591",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6293,8 +6154,7 @@
        "NameInRequest": "as",
        "Type": {
         "$id": "596",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -6313,8 +6173,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "598",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6368,8 +6227,7 @@
        "NameInRequest": "assert",
        "Type": {
         "$id": "603",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -6388,8 +6246,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "605",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6443,8 +6300,7 @@
        "NameInRequest": "async",
        "Type": {
         "$id": "610",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -6463,8 +6319,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "612",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6518,8 +6373,7 @@
        "NameInRequest": "await",
        "Type": {
         "$id": "617",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -6538,8 +6392,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "619",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6593,8 +6446,7 @@
        "NameInRequest": "break",
        "Type": {
         "$id": "624",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -6613,8 +6465,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "626",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6668,8 +6519,7 @@
        "NameInRequest": "class",
        "Type": {
         "$id": "631",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -6688,8 +6538,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "633",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6743,8 +6592,7 @@
        "NameInRequest": "constructor",
        "Type": {
         "$id": "638",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -6763,8 +6611,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "640",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6818,8 +6665,7 @@
        "NameInRequest": "continue",
        "Type": {
         "$id": "645",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -6838,8 +6684,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "647",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6893,8 +6738,7 @@
        "NameInRequest": "def",
        "Type": {
         "$id": "652",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -6913,8 +6757,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "654",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6968,8 +6811,7 @@
        "NameInRequest": "del",
        "Type": {
         "$id": "659",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -6988,8 +6830,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "661",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7043,8 +6884,7 @@
        "NameInRequest": "elif",
        "Type": {
         "$id": "666",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -7063,8 +6903,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "668",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7118,8 +6957,7 @@
        "NameInRequest": "else",
        "Type": {
         "$id": "673",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -7138,8 +6976,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "675",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7193,8 +7030,7 @@
        "NameInRequest": "except",
        "Type": {
         "$id": "680",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -7213,8 +7049,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "682",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7268,8 +7103,7 @@
        "NameInRequest": "exec",
        "Type": {
         "$id": "687",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -7288,8 +7122,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "689",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7343,8 +7176,7 @@
        "NameInRequest": "finally",
        "Type": {
         "$id": "694",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -7363,8 +7195,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "696",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7418,8 +7249,7 @@
        "NameInRequest": "for",
        "Type": {
         "$id": "701",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -7438,8 +7268,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "703",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7493,8 +7322,7 @@
        "NameInRequest": "from",
        "Type": {
         "$id": "708",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -7513,8 +7341,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "710",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7568,8 +7395,7 @@
        "NameInRequest": "global",
        "Type": {
         "$id": "715",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -7588,8 +7414,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "717",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7643,8 +7468,7 @@
        "NameInRequest": "if",
        "Type": {
         "$id": "722",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -7663,8 +7487,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "724",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7718,8 +7541,7 @@
        "NameInRequest": "import",
        "Type": {
         "$id": "729",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -7738,8 +7560,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "731",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7793,8 +7614,7 @@
        "NameInRequest": "in",
        "Type": {
         "$id": "736",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -7813,8 +7633,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "738",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7868,8 +7687,7 @@
        "NameInRequest": "is",
        "Type": {
         "$id": "743",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -7888,8 +7706,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "745",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7943,8 +7760,7 @@
        "NameInRequest": "lambda",
        "Type": {
         "$id": "750",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -7963,8 +7779,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "752",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8018,8 +7833,7 @@
        "NameInRequest": "not",
        "Type": {
         "$id": "757",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -8038,8 +7852,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "759",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8093,8 +7906,7 @@
        "NameInRequest": "or",
        "Type": {
         "$id": "764",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -8113,8 +7925,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "766",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8168,8 +7979,7 @@
        "NameInRequest": "pass",
        "Type": {
         "$id": "771",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -8188,8 +7998,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "773",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8243,8 +8052,7 @@
        "NameInRequest": "raise",
        "Type": {
         "$id": "778",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -8263,8 +8071,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "780",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8318,8 +8125,7 @@
        "NameInRequest": "return",
        "Type": {
         "$id": "785",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -8338,8 +8144,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "787",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8393,8 +8198,7 @@
        "NameInRequest": "try",
        "Type": {
         "$id": "792",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -8413,8 +8217,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "794",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8468,8 +8271,7 @@
        "NameInRequest": "while",
        "Type": {
         "$id": "799",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -8488,8 +8290,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "801",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8543,8 +8344,7 @@
        "NameInRequest": "with",
        "Type": {
         "$id": "806",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -8563,8 +8363,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "808",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8618,8 +8417,7 @@
        "NameInRequest": "yield",
        "Type": {
         "$id": "813",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -8638,8 +8436,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "815",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8693,8 +8490,7 @@
        "NameInRequest": "cancellationToken",
        "Type": {
         "$id": "820",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Query",
@@ -8713,8 +8509,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "822",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",

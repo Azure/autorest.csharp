@@ -22,8 +22,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "4",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "Location": "Uri",
@@ -39,8 +38,7 @@
       "$id": "5",
       "Type": {
        "$id": "6",
-       "Kind": "Primitive",
-       "Name": "String",
+       "Kind": "string",
        "IsNullable": false
       },
       "Value": "http://localhost:3000"
@@ -67,12 +65,10 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "10",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "11",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "Value": "text/plain",
@@ -101,8 +97,7 @@
        "NameInRequest": "text",
        "Type": {
         "$id": "14",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Body",
@@ -121,8 +116,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "16",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -179,8 +173,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "21",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -209,8 +202,7 @@
        ],
        "BodyType": {
         "$id": "24",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
@@ -243,12 +235,10 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "27",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "28",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "Value": "application/json",
@@ -277,8 +267,7 @@
        "NameInRequest": "text",
        "Type": {
         "$id": "31",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Body",
@@ -297,8 +286,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "33",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -355,8 +343,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "38",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -385,8 +372,7 @@
        ],
        "BodyType": {
         "$id": "41",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
