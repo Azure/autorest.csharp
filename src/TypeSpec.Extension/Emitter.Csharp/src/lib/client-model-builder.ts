@@ -9,9 +9,7 @@ import {
     listOperationsInOperationGroup,
     SdkOperationGroup,
     SdkContext,
-    getLibraryName,
-    getAccess,
-    AccessFlags
+    getLibraryName
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
