@@ -38,7 +38,7 @@ For example, include details on obtaining an account key and endpoint URI, setti
 
 ### Service API versions
 
-The client library targets the latest service API version. A client accepts an optional service API version parameter to specify which API version service to communicate, by default, it is the latest API version.
+The client library targets the latest service API version by default. A client instance accepts an optional service API version parameter to specify which API version service to communicate.
 
 #### Select a service API version
 
