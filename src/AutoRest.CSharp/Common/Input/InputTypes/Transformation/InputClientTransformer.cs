@@ -7,7 +7,6 @@ namespace AutoRest.CSharp.Common.Input.InputTypes.Transformation
 {
     internal class InputClientTransformer
     {
-        // TODO: Skip internal operations for Mgmt, we might need a better way to remove operations, tracking in https://github.com/Azure/typespec-azure/issues/964
         public static void Transform(InputNamespace input)
         {
             foreach (var client in input.Clients)
@@ -21,7 +20,9 @@ namespace AutoRest.CSharp.Common.Input.InputTypes.Transformation
             var operationsToKeep = new List<InputOperation>();
             foreach (var operation in inputClient.Operations)
             {
-                if (operation.Accessibility == "public")
+                // "internal" is set only we set access decorator in typespec, default null represents public
+                // TODO: Skip internal operations for Mgmt, we might need a better way to remove operations, tracking in https://github.com/Azure/typespec-azure/issues/964
+                if (operation.Accessibility is null)
                 {
                     operationsToKeep.Add(operation);
                 }
