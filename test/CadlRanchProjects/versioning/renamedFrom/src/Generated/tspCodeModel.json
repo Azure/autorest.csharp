@@ -91,9 +91,9 @@
      "Description": "",
      "Type": {
       "$id": "14",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "NewUnion",
+      "VariantTypes": [
        {
         "$id": "15",
         "Kind": "string"

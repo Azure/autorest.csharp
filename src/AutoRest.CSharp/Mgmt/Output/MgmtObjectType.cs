@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private string? _defaultNamespace;
         protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(MgmtContext.Context, InputModel, IsResourceType);
 
-        internal ObjectTypeProperty[] MyProperties => _myProperties ??= InputModel.Properties.Select(CreateProperty).ToArray();
+        internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
         private static string GetDefaultName(InputModelType inputModel, bool isResourceType)
         {
@@ -103,6 +103,17 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             // only bother flattening if the single property is public
             return properties.Length == 1 && properties[0].Declaration.Accessibility == "public";
+        }
+
+        private IEnumerable<ObjectTypeProperty> BuildMyProperties()
+        {
+            foreach (var model in InputModel.GetSelfAndBaseModels())
+            {
+                foreach (var property in model.Properties)
+                {
+                    yield return CreateProperty(property);
+                }
+            }
         }
 
         protected virtual ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
@@ -179,10 +190,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var descendantTypes = schemaObjectType.Discriminator.Implementations.Select(implementation => implementation.Type).ToHashSet();
 
             // We need this redundant check as the internal backing schema will not be a part of the discriminator implementations of its base type.
-            var immediateParents = InputModel.GetAllBaseModels().ToArray();
-            if (InputModel.DiscriminatorValue == "Unknown" &&
-                immediateParents.Length == 1 &&
-                immediateParents.Single().Equals(schemaObjectType.InputModel))
+            if (InputModel.IsUnknownDiscriminatorModel && InputModel.BaseModel == schemaObjectType.InputModel)
             {
                 descendantTypes.Add(Type);
             }

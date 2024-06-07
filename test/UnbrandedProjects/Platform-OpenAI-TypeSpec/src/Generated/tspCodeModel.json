@@ -1283,9 +1283,9 @@
      "Description": "Controls how the model responds to function calls. `none` means the model does not call a\nfunction, and responds to the end-user. `auto` means the model can pick between an end-user or\ncalling a function.  Specifying a particular function via `{\\\"name\":\\ \\\"my_function\\\"}` forces the\nmodel to call that function. `none` is the default when no functions are present. `auto` is the\ndefault if functions are present.",
      "Type": {
       "$id": "209",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "CreateChatCompletionRequestFunctionCall1",
+      "VariantTypes": [
        {
         "$id": "210",
         "Kind": "constant",
@@ -1409,9 +1409,9 @@
       "Name": "Nullable",
       "Type": {
        "$id": "231",
-       "Kind": "Union",
-       "Name": "Union",
-       "UnionItemTypes": [
+       "Kind": "union",
+       "Name": "Stop",
+       "VariantTypes": [
         {
          "$id": "232",
          "Kind": "string"
@@ -1863,9 +1863,9 @@
         "Description": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.",
         "Type": {
          "$id": "297",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "CreateFineTuningJobRequestHyperparametersNEpochs",
+         "VariantTypes": [
           {
            "$id": "298",
            "Kind": "constant",
@@ -2056,9 +2056,9 @@
         "Description": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.\n\n\"Auto\" decides the optimal number of epochs based on the size of the dataset. If setting the\nnumber manually, we support any number between 1 and 50 epochs.",
         "Type": {
          "$id": "327",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "FineTuningJobHyperparametersNEpochs",
+         "VariantTypes": [
           {
            "$id": "328",
            "Kind": "constant",
@@ -2404,9 +2404,9 @@
       "Name": "Nullable",
       "Type": {
        "$id": "379",
-       "Kind": "Union",
-       "Name": "Union",
-       "UnionItemTypes": [
+       "Kind": "union",
+       "Name": "Prompt",
+       "VariantTypes": [
         {
          "$id": "380",
          "Kind": "string"
@@ -2545,9 +2545,9 @@
       "Name": "Nullable",
       "Type": {
        "$id": "405",
-       "Kind": "Union",
-       "Name": "Union",
-       "UnionItemTypes": [
+       "Kind": "union",
+       "Name": "Stop",
+       "VariantTypes": [
         {
          "$id": "406",
          "Kind": "string"
@@ -3184,9 +3184,9 @@
      "Description": "Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a\nsingle request, pass an array of strings or array of token arrays. Each input must not exceed\nthe max input tokens for the model (8191 tokens for `text-embedding-ada-002`) and cannot be an empty string.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)\nfor counting tokens.",
      "Type": {
       "$id": "504",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "CreateEmbeddingRequestInput",
+      "VariantTypes": [
        {
         "$id": "505",
         "Kind": "string"
@@ -4783,9 +4783,9 @@
      "Description": "The input text to classify",
      "Type": {
       "$id": "745",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "CreateModerationRequestInput",
+      "VariantTypes": [
        {
         "$id": "746",
         "Kind": "string"

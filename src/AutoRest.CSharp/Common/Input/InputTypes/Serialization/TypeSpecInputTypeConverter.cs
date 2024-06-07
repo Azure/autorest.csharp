@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         private const string LiteralKind = "constant";
-        private const string UnionKind = "Union";
+        private const string UnionKind = "union";
         private const string ModelKind = "Model";
         private const string EnumKind = "enum";
         private const string ArrayKind = "Array";

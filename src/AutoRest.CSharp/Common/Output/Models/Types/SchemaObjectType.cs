@@ -14,6 +14,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
@@ -465,15 +466,18 @@ namespace AutoRest.CSharp.Output.Models.Types
             var propertiesFromSpec = GetParentPropertyDeclarationNames();
             var existingProperties = GetParentPropertySerializedNames();
 
-            foreach (var property in UpdateInputModelProperties())
+            foreach (var model in InputModel.GetSelfAndBaseModels())
             {
-                if (existingProperties.Contains(property.Name))
+                foreach (var property in model.Properties)
                 {
-                    continue;
+                    if (existingProperties.Contains(property.Name))
+                    {
+                        continue;
+                    }
+                    var prop = CreateProperty(property);
+                    propertiesFromSpec.Add(prop.Declaration.Name);
+                    yield return prop;
                 }
-                var prop = CreateProperty(property);
-                propertiesFromSpec.Add(prop.Declaration.Name);
-                yield return prop;
             }
 
             if (AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)
@@ -499,36 +503,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                         null);
                 }
             }
-        }
-
-        protected IReadOnlyList<InputModelProperty> UpdateInputModelProperties()
-        {
-            if (InputModel.BaseModel is not { } baseModel)
-            {
-                return InputModel.Properties;
-            }
-
-            var existingBaseType = GetSourceBaseType();
-            // If base type in custom code is different from the current base type, we need to replace the base type and handle the properties accordingly
-            if (existingBaseType is not null && existingBaseType.Name != baseModel.Name && !SymbolEqualityComparer.Default.Equals(_sourceInputModel?.FindForType(Declaration.Namespace, baseModel.Name.ToCleanName()), existingBaseType))
-            {
-                IEnumerable<InputModelProperty> properties = InputModel.Properties.ToList();
-
-                // Remove all properties in the hierarchy of current base type
-                var currentBaseModelProperties = baseModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
-                properties = properties.Except(currentBaseModelProperties);
-
-                // Add all properties in the hierarchy of existing base type
-                var existingBaseTypeModel = _typeFactory.GetLibraryTypeByName(existingBaseType.Name)?.Implementation as SchemaObjectType;
-                if (existingBaseTypeModel is not null)
-                {
-                    var existingBaseTypeProperties = existingBaseTypeModel.InputModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
-                    properties = properties.Concat(existingBaseTypeProperties);
-                }
-                return properties.ToList();
-            }
-
-            return InputModel.Properties;
         }
 
         protected ObjectTypeProperty CreateProperty(InputModelProperty property)

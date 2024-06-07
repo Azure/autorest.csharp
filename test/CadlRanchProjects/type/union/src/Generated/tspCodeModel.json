@@ -412,9 +412,9 @@
      "Description": "",
      "Type": {
       "$id": "57",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "GetResponseProp3",
+      "VariantTypes": [
        {
         "$id": "58",
         "Kind": "Model",
@@ -484,9 +484,9 @@
      "Description": "",
      "Type": {
       "$id": "66",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "GetResponseProp3",
+      "VariantTypes": [
        {
         "$ref": "58"
        },
@@ -597,9 +597,9 @@
         "Description": "This should be receive/send the string variant",
         "Type": {
          "$id": "78",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "StringAndArrayCasesString",
+         "VariantTypes": [
           {
            "$id": "79",
            "Kind": "string"
@@ -625,9 +625,9 @@
         "Description": "This should be receive/send the array variant",
         "Type": {
          "$id": "83",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "StringAndArrayCasesArray",
+         "VariantTypes": [
           {
            "$id": "84",
            "Kind": "string"
@@ -702,9 +702,9 @@
         "Description": "This should be receive/send the \"a\" variant",
         "Type": {
          "$id": "93",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedLiteralsCasesStringLiteral",
+         "VariantTypes": [
           {
            "$id": "94",
            "Kind": "constant",
@@ -753,9 +753,9 @@
         "Description": "This should be receive/send the 2 variant",
         "Type": {
          "$id": "103",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedLiteralsCasesStringLiteral",
+         "VariantTypes": [
           {
            "$id": "104",
            "Kind": "constant",
@@ -804,9 +804,9 @@
         "Description": "This should be receive/send the 3.3 variant",
         "Type": {
          "$id": "113",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedLiteralsCasesStringLiteral",
+         "VariantTypes": [
           {
            "$id": "114",
            "Kind": "constant",
@@ -855,9 +855,9 @@
         "Description": "This should be receive/send the true variant",
         "Type": {
          "$id": "123",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedLiteralsCasesStringLiteral",
+         "VariantTypes": [
           {
            "$id": "124",
            "Kind": "constant",
@@ -955,9 +955,9 @@
         "Description": "This should be receive/send the Cat variant",
         "Type": {
          "$id": "138",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedTypesCasesModel",
+         "VariantTypes": [
           {
            "$ref": "58"
           },
@@ -990,9 +990,9 @@
         "Description": "This should be receive/send the \"a\" variant",
         "Type": {
          "$id": "144",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedTypesCasesModel",
+         "VariantTypes": [
           {
            "$ref": "58"
           },
@@ -1025,9 +1025,9 @@
         "Description": "This should be receive/send the int variant",
         "Type": {
          "$id": "150",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedTypesCasesModel",
+         "VariantTypes": [
           {
            "$ref": "58"
           },
@@ -1060,9 +1060,9 @@
         "Description": "This should be receive/send the boolean variant",
         "Type": {
          "$id": "156",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedTypesCasesModel",
+         "VariantTypes": [
           {
            "$ref": "58"
           },
@@ -1099,9 +1099,9 @@
          "Name": "Array",
          "ElementType": {
           "$id": "163",
-          "Kind": "Union",
-          "Name": "Union",
-          "UnionItemTypes": [
+          "Kind": "union",
+          "Name": "MixedTypesCasesModel",
+          "VariantTypes": [
            {
             "$ref": "58"
            },

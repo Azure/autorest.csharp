@@ -125,13 +125,22 @@ namespace AutoRest.CSharp.Output.Builders
         {
             // If the type is the common type ManagedServiceIdentity and the schema contains a type property with sealed enum or extensible enum schema which has a choice of v3 "SystemAssigned,UserAssigned" value,
             // then this is a v3 version of ManagedServiceIdentity.
-            if (!type.IsFrameworkType && type.Implementation is SystemObjectType systemObjectType
-                && systemObjectType.SystemType == typeof(ManagedServiceIdentity)
-                && schema is InputModelType objectSchema
-                && (objectSchema.Properties.FirstOrDefault(p => p.SerializedName == "type")?.Type is InputEnumType sealedChoiceSchema && sealedChoiceSchema.Values.Any(c => c.Value.ToString() == ManagedServiceIdentityTypeV3Converter.SystemAssignedUserAssignedV3Value)))
+            if (type is not { IsFrameworkType: false, Implementation: SystemObjectType systemObjectType } || systemObjectType.SystemType != typeof(ManagedServiceIdentity) || schema is not InputModelType objectSchema)
             {
-                return true;
+                return false;
             }
+
+            foreach (var m in objectSchema.GetSelfAndBaseModels())
+            {
+                foreach (var property in m.Properties)
+                {
+                    if (property is { SerializedName: "type", Type: InputEnumType choice } && choice.Values.Any(c => c.Value.ToString() == ManagedServiceIdentityTypeV3Converter.SystemAssignedUserAssignedV3Value))
+                    {
+                        return true;
+                    }
+                }
+            }
+
             return false;
         }
 

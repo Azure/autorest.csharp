@@ -1032,9 +1032,9 @@
     },
     "ValueType": {
      "$id": "155",
-     "Kind": "Union",
-     "Name": "Union",
-     "UnionItemTypes": [
+     "Kind": "union",
+     "Name": "MultipleSpreadRecordAdditionalProperty",
+     "VariantTypes": [
       {
        "$id": "156",
        "Kind": "string"
@@ -1078,9 +1078,9 @@
     },
     "ValueType": {
      "$id": "163",
-     "Kind": "Union",
-     "Name": "Union",
-     "UnionItemTypes": [
+     "Kind": "union",
+     "Name": "SpreadRecordForUnionAdditionalProperty",
+     "VariantTypes": [
       {
        "$id": "164",
        "Kind": "string"
@@ -1124,9 +1124,9 @@
     },
     "ValueType": {
      "$id": "171",
-     "Kind": "Union",
-     "Name": "Union",
-     "UnionItemTypes": [
+     "Kind": "union",
+     "Name": "WidgetData",
+     "VariantTypes": [
       {
        "$id": "172",
        "Kind": "Model",
@@ -1264,9 +1264,9 @@
     },
     "ValueType": {
      "$id": "191",
-     "Kind": "Union",
-     "Name": "Union",
-     "UnionItemTypes": [
+     "Kind": "union",
+     "Name": "SpreadRecordForNonDiscriminatedUnionAdditionalProperty",
+     "VariantTypes": [
       {
        "$ref": "172"
       },
@@ -1308,9 +1308,9 @@
     },
     "ValueType": {
      "$id": "197",
-     "Kind": "Union",
-     "Name": "Union",
-     "UnionItemTypes": [
+     "Kind": "union",
+     "Name": "SpreadRecordForNonDiscriminatedUnion2AdditionalProperty",
+     "VariantTypes": [
       {
        "$id": "198",
        "Kind": "Model",
@@ -1389,9 +1389,9 @@
     },
     "ValueType": {
      "$id": "208",
-     "Kind": "Union",
-     "Name": "Union",
-     "UnionItemTypes": [
+     "Kind": "union",
+     "Name": "SpreadRecordForNonDiscriminatedUnion3AdditionalProperty",
+     "VariantTypes": [
       {
        "$id": "209",
        "Kind": "Array",
