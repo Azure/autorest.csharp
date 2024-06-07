@@ -146,8 +146,8 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
         [Test]
         public void TestCreateDescription_NonInputModelType()
         {
-            InputType literalValueType = new InputPrimitiveType(InputTypeKind.Int32, false);
-            InputLiteralType literalType = new InputLiteralType("sampleLiteral", literalValueType, 21, false);
+            InputType literalValueType = new InputPrimitiveType(InputPrimitiveTypeKind.Int32, false);
+            InputLiteralType literalType = new InputLiteralType(literalValueType, 21, false);
             InputParameter opParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",
@@ -242,8 +242,8 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
         [Test]
         public void TestFromInputParameter_NonInputModelType()
         {
-            InputType literalValueType = new InputPrimitiveType(InputTypeKind.Int32, false);
-            InputLiteralType literalType = new InputLiteralType("sampleLiteral", literalValueType, 21, false);
+            InputType literalValueType = new InputPrimitiveType(InputPrimitiveTypeKind.Int32, false);
+            InputLiteralType literalType = new InputLiteralType(literalValueType, 21, false);
             InputParameter inputParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",

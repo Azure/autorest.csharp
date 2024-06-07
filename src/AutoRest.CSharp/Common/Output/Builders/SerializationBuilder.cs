@@ -50,27 +50,40 @@ namespace AutoRest.CSharp.Output.Builders
 
         public static SerializationFormat GetSerializationFormat(InputType type) => type switch
         {
-            InputLiteralType literalType => GetSerializationFormat(literalType.LiteralValueType),
+            InputLiteralType literalType => GetSerializationFormat(literalType.ValueType),
             InputListType listType => GetSerializationFormat(listType.ElementType),
             InputDictionaryType dictionaryType => GetSerializationFormat(dictionaryType.ValueType),
             InputNullableType nullableType => GetSerializationFormat(nullableType.Type),
+            InputDateTimeType dateTimeType => dateTimeType.Encode switch
+            {
+                DateTimeKnownEncoding.Rfc3339 => SerializationFormat.DateTime_RFC3339,
+                DateTimeKnownEncoding.Rfc7231 => SerializationFormat.DateTime_RFC7231,
+                DateTimeKnownEncoding.UnixTimestamp => SerializationFormat.DateTime_Unix,
+                _ => throw new IndexOutOfRangeException($"unknown encode {dateTimeType.Encode}"),
+            },
+            InputDurationType durationType => durationType.Encode switch
+            {
+                // there is no such thing as `DurationConstant`
+                DurationKnownEncoding.Iso8601 => SerializationFormat.Duration_ISO8601,
+                DurationKnownEncoding.Seconds => durationType.WireType.Kind switch
+                {
+                    InputPrimitiveTypeKind.Int32 => SerializationFormat.Duration_Seconds,
+                    InputPrimitiveTypeKind.Float or InputPrimitiveTypeKind.Float32 => SerializationFormat.Duration_Seconds_Float,
+                    _ => SerializationFormat.Duration_Seconds_Double
+                },
+                DurationKnownEncoding.Constant => SerializationFormat.Duration_Constant,
+                _ => throw new IndexOutOfRangeException($"unknown encode {durationType.Encode}")
+            },
             InputPrimitiveType primitiveType => primitiveType.Kind switch
             {
-                InputTypeKind.BytesBase64Url => SerializationFormat.Bytes_Base64Url,
-                InputTypeKind.Bytes => SerializationFormat.Bytes_Base64,
-                InputTypeKind.Date => SerializationFormat.Date_ISO8601,
-                InputTypeKind.DateTime => SerializationFormat.DateTime_ISO8601,
-                InputTypeKind.DateTimeISO8601 => SerializationFormat.DateTime_ISO8601,
-                InputTypeKind.DateTimeRFC1123 => SerializationFormat.DateTime_RFC1123,
-                InputTypeKind.DateTimeRFC3339 => SerializationFormat.DateTime_RFC3339,
-                InputTypeKind.DateTimeRFC7231 => SerializationFormat.DateTime_RFC7231,
-                InputTypeKind.DateTimeUnix => SerializationFormat.DateTime_Unix,
-                InputTypeKind.DurationISO8601 => SerializationFormat.Duration_ISO8601,
-                InputTypeKind.DurationConstant => SerializationFormat.Duration_Constant,
-                InputTypeKind.DurationSeconds => SerializationFormat.Duration_Seconds,
-                InputTypeKind.DurationSecondsFloat => SerializationFormat.Duration_Seconds_Float,
-                InputTypeKind.DurationSecondsDouble => SerializationFormat.Duration_Seconds_Double,
-                InputTypeKind.Time => SerializationFormat.Time_ISO8601,
+                InputPrimitiveTypeKind.PlainDate => SerializationFormat.Date_ISO8601,
+                InputPrimitiveTypeKind.PlainTime => SerializationFormat.Time_ISO8601,
+                InputPrimitiveTypeKind.Bytes => primitiveType.Encode switch
+                {
+                    BytesKnownEncoding.Base64 => SerializationFormat.Bytes_Base64,
+                    BytesKnownEncoding.Base64Url => SerializationFormat.Bytes_Base64Url,
+                    _ => throw new IndexOutOfRangeException($"unknown encode {primitiveType.Encode}")
+                },
                 _ => SerializationFormat.Default
             },
             _ => SerializationFormat.Default
@@ -115,7 +128,7 @@ namespace AutoRest.CSharp.Output.Builders
             if (!type.IsFrameworkType && type.Implementation is SystemObjectType systemObjectType
                 && systemObjectType.SystemType == typeof(ManagedServiceIdentity)
                 && schema is InputModelType objectSchema
-                && (objectSchema.Properties.FirstOrDefault(p => p.SerializedName == "type")?.Type is InputEnumType sealedChoiceSchema && sealedChoiceSchema.AllowedValues.Any(c => c.Value.ToString() == ManagedServiceIdentityTypeV3Converter.SystemAssignedUserAssignedV3Value)))
+                && (objectSchema.Properties.FirstOrDefault(p => p.SerializedName == "type")?.Type is InputEnumType sealedChoiceSchema && sealedChoiceSchema.Values.Any(c => c.Value.ToString() == ManagedServiceIdentityTypeV3Converter.SystemAssignedUserAssignedV3Value)))
             {
                 return true;
             }
@@ -263,14 +276,13 @@ namespace AutoRest.CSharp.Output.Builders
 
             var valueSerialization = BuildJsonSerialization(inputModelProperty.Type, propertyType, false);
             var serializedName = serializationMapping?.SerializationPath?[^1] ?? inputModelProperty.SerializedName;
-            var serializedType = typeFactory.CreateType(inputModelProperty.Type);
             var memberValueExpression = new TypedMemberExpression(null, declaredName, propertyType);
 
             return new JsonPropertySerialization(
                 name,
                 memberValueExpression,
                 serializedName,
-                serializedType,
+                property.ValueType,
                 valueSerialization,
                 property.IsRequired,
                 ShouldExcludeInWireSerialization(property, inputModelProperty),
@@ -393,7 +405,6 @@ namespace AutoRest.CSharp.Output.Builders
                     propertyBag.Properties.Add(objectTypeProperty, objectType.GetForMemberSerialization(objectTypeProperty.Declaration.Name));
                 }
             }
-
             PopulatePropertyBag(propertyBag, 0);
             var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
             var (additionalProperties, rawDataField) = CreateAdditionalPropertiesSerialization(inputModel, objectType);
@@ -653,7 +664,7 @@ namespace AutoRest.CSharp.Output.Builders
         public static MultipartSerialization BuildMultipartSerialization(InputType? inputType, CSharpType valueType, bool isCollectionElement, SerializationFormat serializationFormat, ValueExpression memberValueExpression)
         {
             /*TODO: need to update to use InputType to identify if it is a Multipart File or not. Current we will set contentType for Bytes and Stream*/
-            if (inputType != null && inputType.Name == InputPrimitiveType.Bytes.Name && valueType.IsFrameworkType && valueType.FrameworkType == typeof(BinaryData))
+            if (inputType != null && inputType is InputPrimitiveType { Kind: InputPrimitiveTypeKind.Bytes } && valueType.IsFrameworkType && valueType.FrameworkType == typeof(BinaryData))
             {
                 var valueSerialization = new MultipartValueSerialization(valueType, serializationFormat, valueType.IsNullable || isCollectionElement);
                 valueSerialization.ContentType = "application/octet-stream"; //TODO: need to set the right content type from InputType

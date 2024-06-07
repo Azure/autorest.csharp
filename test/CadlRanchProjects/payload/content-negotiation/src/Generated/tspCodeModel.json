@@ -18,8 +18,8 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "Primitive",
-      "Name": "Bytes"
+      "Kind": "bytes",
+      "Encode": "base64"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -45,8 +45,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "8",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "Location": "Uri",
@@ -62,8 +61,7 @@
       "$id": "9",
       "Type": {
        "$id": "10",
-       "Kind": "Primitive",
-       "Name": "String",
+       "Kind": "string",
        "IsNullable": false
       },
       "Value": "http://localhost:3000"
@@ -91,8 +89,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "14",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -121,8 +118,8 @@
        ],
        "BodyType": {
         "$id": "17",
-        "Kind": "Primitive",
-        "Name": "Bytes"
+        "Kind": "bytes",
+        "Encode": "base64"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -155,8 +152,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "20",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -185,8 +181,8 @@
        ],
        "BodyType": {
         "$id": "23",
-        "Kind": "Primitive",
-        "Name": "Bytes"
+        "Kind": "bytes",
+        "Encode": "base64"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -236,8 +232,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "28",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -266,8 +261,8 @@
        ],
        "BodyType": {
         "$id": "31",
-        "Kind": "Primitive",
-        "Name": "Bytes"
+        "Kind": "bytes",
+        "Encode": "base64"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -300,8 +295,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "34",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",

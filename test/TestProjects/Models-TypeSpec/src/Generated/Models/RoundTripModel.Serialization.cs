@@ -143,7 +143,12 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredUint8Array)
             {
-                writer.WriteNumberValue(item);
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
+                writer.WriteObjectValue<object>(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsCollectionDefined(OptionalUint8Array))
@@ -152,7 +157,12 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in OptionalUint8Array)
                 {
-                    writer.WriteNumberValue(item);
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+                    writer.WriteObjectValue<object>(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -314,8 +324,8 @@ namespace ModelsTypeSpec.Models
             IDictionary<string, RecordItem> requiredModelRecord = default;
             BinaryData requiredBytes = default;
             BinaryData optionalBytes = default;
-            IList<byte> requiredUint8Array = default;
-            IList<byte> optionalUint8Array = default;
+            IList<object> requiredUint8Array = default;
+            IList<object> optionalUint8Array = default;
             BinaryData requiredUnknown = default;
             BinaryData optionalUnknown = default;
             IList<sbyte> requiredInt8Array = default;
@@ -482,10 +492,17 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredUint8Array"u8))
                 {
-                    List<byte> array = new List<byte>();
+                    List<object> array = new List<object>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetByte());
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(item.GetObject());
+                        }
                     }
                     requiredUint8Array = array;
                     continue;
@@ -496,10 +513,17 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    List<byte> array = new List<byte>();
+                    List<object> array = new List<object>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetByte());
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(item.GetObject());
+                        }
                     }
                     optionalUint8Array = array;
                     continue;
@@ -629,7 +653,7 @@ namespace ModelsTypeSpec.Models
                 requiredBytes,
                 optionalBytes,
                 requiredUint8Array,
-                optionalUint8Array ?? new ChangeTrackingList<byte>(),
+                optionalUint8Array ?? new ChangeTrackingList<object>(),
                 requiredUnknown,
                 optionalUnknown,
                 requiredInt8Array,

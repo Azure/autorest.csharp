@@ -18,9 +18,12 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "Primitive",
-      "Name": "DurationISO8601",
-      "IsNullable": false
+      "Kind": "duration",
+      "Encode": "ISO8601",
+      "WireType": {
+       "$id": "5",
+       "Kind": "string"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -28,22 +31,25 @@
    ]
   },
   {
-   "$id": "5",
+   "$id": "6",
    "Kind": "Model",
    "Name": "ISO8601DurationProperty",
    "Namespace": "Encode.Duration.Property",
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "6",
+     "$id": "7",
      "Name": "value",
      "SerializedName": "value",
      "Description": "",
      "Type": {
-      "$id": "7",
-      "Kind": "Primitive",
-      "Name": "DurationISO8601",
-      "IsNullable": false
+      "$id": "8",
+      "Kind": "duration",
+      "Encode": "ISO8601",
+      "WireType": {
+       "$id": "9",
+       "Kind": "string"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -51,45 +57,25 @@
    ]
   },
   {
-   "$id": "8",
+   "$id": "10",
    "Kind": "Model",
    "Name": "Int32SecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "9",
+     "$id": "11",
      "Name": "value",
      "SerializedName": "value",
      "Description": "",
      "Type": {
-      "$id": "10",
-      "Kind": "Primitive",
-      "Name": "DurationSeconds",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "11",
-   "Kind": "Model",
-   "Name": "FloatSecondsDurationProperty",
-   "Namespace": "Encode.Duration.Property",
-   "Usage": "RoundTrip",
-   "Properties": [
-    {
-     "$id": "12",
-     "Name": "value",
-     "SerializedName": "value",
-     "Description": "",
-     "Type": {
-      "$id": "13",
-      "Kind": "Primitive",
-      "Name": "DurationSecondsFloat",
-      "IsNullable": false
+      "$id": "12",
+      "Kind": "duration",
+      "Encode": "seconds",
+      "WireType": {
+       "$id": "13",
+       "Kind": "int32"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -99,7 +85,7 @@
   {
    "$id": "14",
    "Kind": "Model",
-   "Name": "Float64SecondsDurationProperty",
+   "Name": "FloatSecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
    "Usage": "RoundTrip",
    "Properties": [
@@ -110,9 +96,12 @@
      "Description": "",
      "Type": {
       "$id": "16",
-      "Kind": "Primitive",
-      "Name": "DurationSecondsDouble",
-      "IsNullable": false
+      "Kind": "duration",
+      "Encode": "seconds",
+      "WireType": {
+       "$id": "17",
+       "Kind": "float"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -120,26 +109,55 @@
    ]
   },
   {
-   "$id": "17",
+   "$id": "18",
+   "Kind": "Model",
+   "Name": "Float64SecondsDurationProperty",
+   "Namespace": "Encode.Duration.Property",
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "19",
+     "Name": "value",
+     "SerializedName": "value",
+     "Description": "",
+     "Type": {
+      "$id": "20",
+      "Kind": "duration",
+      "Encode": "seconds",
+      "WireType": {
+       "$id": "21",
+       "Kind": "float64"
+      }
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "22",
    "Kind": "Model",
    "Name": "FloatSecondsDurationArrayProperty",
    "Namespace": "Encode.Duration.Property",
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "18",
+     "$id": "23",
      "Name": "value",
      "SerializedName": "value",
      "Description": "",
      "Type": {
-      "$id": "19",
+      "$id": "24",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "20",
-       "Kind": "Primitive",
-       "Name": "DurationSecondsFloat",
-       "IsNullable": false
+       "$id": "25",
+       "Kind": "duration",
+       "Encode": "seconds",
+       "WireType": {
+        "$id": "26",
+        "Kind": "float32"
+       }
       }
      },
      "IsRequired": true,
@@ -150,24 +168,23 @@
  ],
  "Clients": [
   {
-   "$id": "21",
+   "$id": "27",
    "Name": "DurationClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "22"
+    "$id": "28"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$id": "23",
+     "$id": "29",
      "Name": "host",
      "NameInRequest": "host",
      "Description": "TestServer endpoint",
      "Type": {
-      "$id": "24",
-      "Kind": "Primitive",
-      "Name": "String",
+      "$id": "30",
+      "Kind": "string",
       "IsNullable": false
      },
      "Location": "Uri",
@@ -180,11 +197,10 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "25",
+      "$id": "31",
       "Type": {
-       "$id": "26",
-       "Kind": "Primitive",
-       "Name": "String",
+       "$id": "32",
+       "Kind": "string",
        "IsNullable": false
       },
       "Value": "http://localhost:3000"
@@ -193,104 +209,31 @@
    ]
   },
   {
-   "$id": "27",
+   "$id": "33",
    "Name": "Query",
    "Description": "",
    "Operations": [
     {
-     "$id": "28",
+     "$id": "34",
      "Name": "default",
      "ResourceName": "Query",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "29"
       },
       {
-       "$id": "29",
+       "$id": "35",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$id": "30",
-        "Kind": "Primitive",
-        "Name": "DurationISO8601",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "31",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "32",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "33",
-        "Type": {
-         "$ref": "32"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "34",
-       "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/encode/duration/query/default",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "35",
-     "Name": "iso8601",
-     "ResourceName": "Query",
-     "Accessibility": "public",
-     "Parameters": [
-      {
-       "$ref": "23"
-      },
-      {
-       "$id": "36",
-       "Name": "input",
-       "NameInRequest": "input",
-       "Type": {
-        "$id": "37",
-        "Kind": "Primitive",
-        "Name": "DurationISO8601",
-        "IsNullable": false
+        "$id": "36",
+        "Kind": "duration",
+        "Encode": "ISO8601",
+        "WireType": {
+         "$id": "37",
+         "Kind": "string"
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -308,8 +251,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "39",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -344,19 +286,19 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/encode/duration/query/iso8601",
+     "Path": "/encode/duration/query/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
      "$id": "42",
-     "Name": "int32Seconds",
+     "Name": "iso8601",
      "ResourceName": "Query",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "29"
       },
       {
        "$id": "43",
@@ -364,9 +306,12 @@
        "NameInRequest": "input",
        "Type": {
         "$id": "44",
-        "Kind": "Primitive",
-        "Name": "DurationSeconds",
-        "IsNullable": false
+        "Kind": "duration",
+        "Encode": "ISO8601",
+        "WireType": {
+         "$id": "45",
+         "Kind": "string"
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -379,13 +324,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "45",
+       "$id": "46",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "46",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "47",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -398,9 +342,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "47",
+        "$id": "48",
         "Type": {
-         "$ref": "46"
+         "$ref": "47"
         },
         "Value": "application/json"
        }
@@ -408,7 +352,85 @@
      ],
      "Responses": [
       {
-       "$id": "48",
+       "$id": "49",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/encode/duration/query/iso8601",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "50",
+     "Name": "int32Seconds",
+     "ResourceName": "Query",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "29"
+      },
+      {
+       "$id": "51",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$id": "52",
+        "Kind": "duration",
+        "Encode": "seconds",
+        "WireType": {
+         "$id": "53",
+         "Kind": "int32"
+        }
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "54",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "55",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "56",
+        "Type": {
+         "$ref": "55"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "57",
        "StatusCodes": [
         204
        ],
@@ -426,23 +448,26 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "49",
+     "$id": "58",
      "Name": "floatSeconds",
      "ResourceName": "Query",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "29"
       },
       {
-       "$id": "50",
+       "$id": "59",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$id": "51",
-        "Kind": "Primitive",
-        "Name": "DurationSecondsFloat",
-        "IsNullable": false
+        "$id": "60",
+        "Kind": "duration",
+        "Encode": "seconds",
+        "WireType": {
+         "$id": "61",
+         "Kind": "float"
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -455,13 +480,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "52",
+       "$id": "62",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "53",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "63",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -474,9 +498,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "54",
+        "$id": "64",
         "Type": {
-         "$ref": "53"
+         "$ref": "63"
         },
         "Value": "application/json"
        }
@@ -484,7 +508,7 @@
      ],
      "Responses": [
       {
-       "$id": "55",
+       "$id": "65",
        "StatusCodes": [
         204
        ],
@@ -502,23 +526,26 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "56",
+     "$id": "66",
      "Name": "float64Seconds",
      "ResourceName": "Query",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "29"
       },
       {
-       "$id": "57",
+       "$id": "67",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$id": "58",
-        "Kind": "Primitive",
-        "Name": "DurationSecondsDouble",
-        "IsNullable": false
+        "$id": "68",
+        "Kind": "duration",
+        "Encode": "seconds",
+        "WireType": {
+         "$id": "69",
+         "Kind": "float64"
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -531,13 +558,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "59",
+       "$id": "70",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "60",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "71",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -550,9 +576,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "61",
+        "$id": "72",
         "Type": {
-         "$ref": "60"
+         "$ref": "71"
         },
         "Value": "application/json"
        }
@@ -560,7 +586,7 @@
      ],
      "Responses": [
       {
-       "$id": "62",
+       "$id": "73",
        "StatusCodes": [
         204
        ],
@@ -578,27 +604,30 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "63",
+     "$id": "74",
      "Name": "int32SecondsArray",
      "ResourceName": "Query",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "29"
       },
       {
-       "$id": "64",
+       "$id": "75",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$id": "65",
+        "$id": "76",
         "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "66",
-         "Kind": "Primitive",
-         "Name": "DurationSeconds",
-         "IsNullable": false
+         "$id": "77",
+         "Kind": "duration",
+         "Encode": "seconds",
+         "WireType": {
+          "$id": "78",
+          "Kind": "int32"
+         }
         }
        },
        "Location": "Query",
@@ -613,13 +642,12 @@
        "ArraySerializationDelimiter": ","
       },
       {
-       "$id": "67",
+       "$id": "79",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "68",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "80",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -632,9 +660,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "69",
+        "$id": "81",
         "Type": {
-         "$ref": "68"
+         "$ref": "80"
         },
         "Value": "application/json"
        }
@@ -642,7 +670,7 @@
      ],
      "Responses": [
       {
-       "$id": "70",
+       "$id": "82",
        "StatusCodes": [
         204
        ],
@@ -661,32 +689,32 @@
     }
    ],
    "Protocol": {
-    "$id": "71"
+    "$id": "83"
    },
    "Creatable": false,
    "Parent": "DurationClient",
    "Parameters": [
     {
-     "$ref": "23"
+     "$ref": "29"
     }
    ]
   },
   {
-   "$id": "72",
+   "$id": "84",
    "Name": "Property",
    "Description": "",
    "Operations": [
     {
-     "$id": "73",
+     "$id": "85",
      "Name": "default",
      "ResourceName": "Property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "29"
       },
       {
-       "$id": "74",
+       "$id": "86",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -703,13 +731,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "75",
+       "$id": "87",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "76",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "88",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -722,21 +749,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "77",
+        "$id": "89",
         "Type": {
-         "$ref": "76"
+         "$ref": "88"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "78",
+       "$id": "90",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "79",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "91",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -749,9 +775,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "80",
+        "$id": "92",
         "Type": {
-         "$ref": "79"
+         "$ref": "91"
         },
         "Value": "application/json"
        }
@@ -759,7 +785,7 @@
      ],
      "Responses": [
       {
-       "$id": "81",
+       "$id": "93",
        "StatusCodes": [
         200
        ],
@@ -786,20 +812,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "82",
+     "$id": "94",
      "Name": "iso8601",
      "ResourceName": "Property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "29"
       },
       {
-       "$id": "83",
+       "$id": "95",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "5"
+        "$ref": "6"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -812,13 +838,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "84",
+       "$id": "96",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "85",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "97",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -831,21 +856,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "86",
+        "$id": "98",
         "Type": {
-         "$ref": "85"
+         "$ref": "97"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "87",
+       "$id": "99",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "88",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "100",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -858,9 +882,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "89",
+        "$id": "101",
         "Type": {
-         "$ref": "88"
+         "$ref": "100"
         },
         "Value": "application/json"
        }
@@ -868,12 +892,12 @@
      ],
      "Responses": [
       {
-       "$id": "90",
+       "$id": "102",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "6"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -895,20 +919,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "91",
+     "$id": "103",
      "Name": "int32Seconds",
      "ResourceName": "Property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "29"
       },
       {
-       "$id": "92",
+       "$id": "104",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "8"
+        "$ref": "10"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -921,13 +945,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "93",
+       "$id": "105",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "94",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "106",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -940,21 +963,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "95",
+        "$id": "107",
         "Type": {
-         "$ref": "94"
+         "$ref": "106"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "96",
+       "$id": "108",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "97",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "109",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -967,9 +989,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "98",
+        "$id": "110",
         "Type": {
-         "$ref": "97"
+         "$ref": "109"
         },
         "Value": "application/json"
        }
@@ -977,12 +999,12 @@
      ],
      "Responses": [
       {
-       "$id": "99",
+       "$id": "111",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "8"
+        "$ref": "10"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1004,20 +1026,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "100",
+     "$id": "112",
      "Name": "floatSeconds",
      "ResourceName": "Property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "29"
       },
       {
-       "$id": "101",
+       "$id": "113",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "11"
+        "$ref": "14"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1030,13 +1052,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "102",
+       "$id": "114",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "103",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "115",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1049,21 +1070,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "104",
+        "$id": "116",
         "Type": {
-         "$ref": "103"
+         "$ref": "115"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "105",
+       "$id": "117",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "106",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "118",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1076,9 +1096,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "107",
+        "$id": "119",
         "Type": {
-         "$ref": "106"
+         "$ref": "118"
         },
         "Value": "application/json"
        }
@@ -1086,12 +1106,12 @@
      ],
      "Responses": [
       {
-       "$id": "108",
+       "$id": "120",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "11"
+        "$ref": "14"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1113,20 +1133,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "109",
+     "$id": "121",
      "Name": "float64Seconds",
      "ResourceName": "Property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "29"
       },
       {
-       "$id": "110",
+       "$id": "122",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "14"
+        "$ref": "18"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1139,13 +1159,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "111",
+       "$id": "123",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "112",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "124",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1158,21 +1177,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "113",
+        "$id": "125",
         "Type": {
-         "$ref": "112"
+         "$ref": "124"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "114",
+       "$id": "126",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "115",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "127",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1185,9 +1203,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "116",
+        "$id": "128",
         "Type": {
-         "$ref": "115"
+         "$ref": "127"
         },
         "Value": "application/json"
        }
@@ -1195,12 +1213,12 @@
      ],
      "Responses": [
       {
-       "$id": "117",
+       "$id": "129",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "14"
+        "$ref": "18"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1222,20 +1240,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "118",
+     "$id": "130",
      "Name": "floatSecondsArray",
      "ResourceName": "Property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "29"
       },
       {
-       "$id": "119",
+       "$id": "131",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "17"
+        "$ref": "22"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1248,13 +1266,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "120",
+       "$id": "132",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "121",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "133",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1267,21 +1284,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "122",
+        "$id": "134",
         "Type": {
-         "$ref": "121"
+         "$ref": "133"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "123",
+       "$id": "135",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "124",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "136",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1294,9 +1310,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "125",
+        "$id": "137",
         "Type": {
-         "$ref": "124"
+         "$ref": "136"
         },
         "Value": "application/json"
        }
@@ -1304,12 +1320,12 @@
      ],
      "Responses": [
       {
-       "$id": "126",
+       "$id": "138",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "17"
+        "$ref": "22"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1332,39 +1348,42 @@
     }
    ],
    "Protocol": {
-    "$id": "127"
+    "$id": "139"
    },
    "Creatable": false,
    "Parent": "DurationClient",
    "Parameters": [
     {
-     "$ref": "23"
+     "$ref": "29"
     }
    ]
   },
   {
-   "$id": "128",
+   "$id": "140",
    "Name": "Header",
    "Description": "",
    "Operations": [
     {
-     "$id": "129",
+     "$id": "141",
      "Name": "default",
      "ResourceName": "Header",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "29"
       },
       {
-       "$id": "130",
+       "$id": "142",
        "Name": "duration",
        "NameInRequest": "duration",
        "Type": {
-        "$id": "131",
-        "Kind": "Primitive",
-        "Name": "DurationISO8601",
-        "IsNullable": false
+        "$id": "143",
+        "Kind": "duration",
+        "Encode": "ISO8601",
+        "WireType": {
+         "$id": "144",
+         "Kind": "string"
+        }
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1377,13 +1396,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "132",
+       "$id": "145",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "133",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "146",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1396,9 +1414,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "134",
+        "$id": "147",
         "Type": {
-         "$ref": "133"
+         "$ref": "146"
         },
         "Value": "application/json"
        }
@@ -1406,7 +1424,7 @@
      ],
      "Responses": [
       {
-       "$id": "135",
+       "$id": "148",
        "StatusCodes": [
         204
        ],
@@ -1424,23 +1442,26 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "136",
+     "$id": "149",
      "Name": "iso8601",
      "ResourceName": "Header",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "29"
       },
       {
-       "$id": "137",
+       "$id": "150",
        "Name": "duration",
        "NameInRequest": "duration",
        "Type": {
-        "$id": "138",
-        "Kind": "Primitive",
-        "Name": "DurationISO8601",
-        "IsNullable": false
+        "$id": "151",
+        "Kind": "duration",
+        "Encode": "ISO8601",
+        "WireType": {
+         "$id": "152",
+         "Kind": "string"
+        }
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1453,13 +1474,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "139",
+       "$id": "153",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "140",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "154",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1472,9 +1492,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "141",
+        "$id": "155",
         "Type": {
-         "$ref": "140"
+         "$ref": "154"
         },
         "Value": "application/json"
        }
@@ -1482,7 +1502,7 @@
      ],
      "Responses": [
       {
-       "$id": "142",
+       "$id": "156",
        "StatusCodes": [
         204
        ],
@@ -1500,27 +1520,30 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "143",
+     "$id": "157",
      "Name": "iso8601Array",
      "ResourceName": "Header",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "29"
       },
       {
-       "$id": "144",
+       "$id": "158",
        "Name": "duration",
        "NameInRequest": "duration",
        "Type": {
-        "$id": "145",
+        "$id": "159",
         "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "146",
-         "Kind": "Primitive",
-         "Name": "DurationISO8601",
-         "IsNullable": false
+         "$id": "160",
+         "Kind": "duration",
+         "Encode": "ISO8601",
+         "WireType": {
+          "$id": "161",
+          "Kind": "string"
+         }
         }
        },
        "Location": "Header",
@@ -1535,13 +1558,12 @@
        "ArraySerializationDelimiter": ","
       },
       {
-       "$id": "147",
+       "$id": "162",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "148",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "163",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1554,9 +1576,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "149",
+        "$id": "164",
         "Type": {
-         "$ref": "148"
+         "$ref": "163"
         },
         "Value": "application/json"
        }
@@ -1564,7 +1586,7 @@
      ],
      "Responses": [
       {
-       "$id": "150",
+       "$id": "165",
        "StatusCodes": [
         204
        ],
@@ -1582,23 +1604,26 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "151",
+     "$id": "166",
      "Name": "int32Seconds",
      "ResourceName": "Header",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "29"
       },
       {
-       "$id": "152",
+       "$id": "167",
        "Name": "duration",
        "NameInRequest": "duration",
        "Type": {
-        "$id": "153",
-        "Kind": "Primitive",
-        "Name": "DurationSeconds",
-        "IsNullable": false
+        "$id": "168",
+        "Kind": "duration",
+        "Encode": "seconds",
+        "WireType": {
+         "$id": "169",
+         "Kind": "int32"
+        }
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1611,13 +1636,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "154",
+       "$id": "170",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "155",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "171",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1630,9 +1654,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "156",
+        "$id": "172",
         "Type": {
-         "$ref": "155"
+         "$ref": "171"
         },
         "Value": "application/json"
        }
@@ -1640,7 +1664,7 @@
      ],
      "Responses": [
       {
-       "$id": "157",
+       "$id": "173",
        "StatusCodes": [
         204
        ],
@@ -1658,23 +1682,26 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "158",
+     "$id": "174",
      "Name": "floatSeconds",
      "ResourceName": "Header",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "29"
       },
       {
-       "$id": "159",
+       "$id": "175",
        "Name": "duration",
        "NameInRequest": "duration",
        "Type": {
-        "$id": "160",
-        "Kind": "Primitive",
-        "Name": "DurationSecondsFloat",
-        "IsNullable": false
+        "$id": "176",
+        "Kind": "duration",
+        "Encode": "seconds",
+        "WireType": {
+         "$id": "177",
+         "Kind": "float"
+        }
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1687,13 +1714,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "161",
+       "$id": "178",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "162",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "179",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1706,9 +1732,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "163",
+        "$id": "180",
         "Type": {
-         "$ref": "162"
+         "$ref": "179"
         },
         "Value": "application/json"
        }
@@ -1716,7 +1742,7 @@
      ],
      "Responses": [
       {
-       "$id": "164",
+       "$id": "181",
        "StatusCodes": [
         204
        ],
@@ -1734,23 +1760,26 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "165",
+     "$id": "182",
      "Name": "float64Seconds",
      "ResourceName": "Header",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "29"
       },
       {
-       "$id": "166",
+       "$id": "183",
        "Name": "duration",
        "NameInRequest": "duration",
        "Type": {
-        "$id": "167",
-        "Kind": "Primitive",
-        "Name": "DurationSecondsDouble",
-        "IsNullable": false
+        "$id": "184",
+        "Kind": "duration",
+        "Encode": "seconds",
+        "WireType": {
+         "$id": "185",
+         "Kind": "float64"
+        }
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1763,13 +1792,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "168",
+       "$id": "186",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "169",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "187",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1782,9 +1810,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "170",
+        "$id": "188",
         "Type": {
-         "$ref": "169"
+         "$ref": "187"
         },
         "Value": "application/json"
        }
@@ -1792,7 +1820,7 @@
      ],
      "Responses": [
       {
-       "$id": "171",
+       "$id": "189",
        "StatusCodes": [
         204
        ],
@@ -1811,13 +1839,13 @@
     }
    ],
    "Protocol": {
-    "$id": "172"
+    "$id": "190"
    },
    "Creatable": false,
    "Parent": "DurationClient",
    "Parameters": [
     {
-     "$ref": "23"
+     "$ref": "29"
     }
    ]
   }

@@ -42,10 +42,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             var parametersToFields = new Dictionary<string, FieldDeclaration>();
 
             var visitedMembers = new HashSet<ISymbol>(SymbolEqualityComparer.Default);
-            if (modelName == "RoundTripModel")
-            {
-                Console.WriteLine("RoundTripModel");
-            }
             foreach (var inputModelProperty in properties)
             {
                 var originalFieldName = BuilderHelpers.DisambiguateName(modelName, inputModelProperty.Name.ToCleanName(), "Property");

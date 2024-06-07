@@ -5,18 +5,21 @@
  "Enums": [
   {
    "$id": "2",
-   "Kind": "Enum",
+   "Kind": "enum",
    "Name": "ExtensibleEnumWithOperator",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "ValueType": {
+    "$id": "3",
+    "Kind": "string"
+   },
+   "Values": [
     {
-     "$id": "3",
+     "$id": "4",
      "Name": "Monday",
      "Value": "Monday",
      "Description": "Monday."
     },
     {
-     "$id": "4",
+     "$id": "5",
      "Name": "Tuesday",
      "Value": "Tuesday",
      "Description": "Tuesday."
@@ -28,23 +31,26 @@
    "Usage": "RoundTrip"
   },
   {
-   "$id": "5",
-   "Kind": "Enum",
+   "$id": "6",
+   "Kind": "enum",
    "Name": "EnumToRename",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "ValueType": {
+    "$id": "7",
+    "Kind": "string"
+   },
+   "Values": [
     {
-     "$id": "6",
+     "$id": "8",
      "Name": "One",
      "Value": "1"
     },
     {
-     "$id": "7",
+     "$id": "9",
      "Name": "Two",
      "Value": "2"
     },
     {
-     "$id": "8",
+     "$id": "10",
      "Name": "Three",
      "Value": "3"
     }
@@ -55,23 +61,26 @@
    "Usage": "RoundTrip"
   },
   {
-   "$id": "9",
-   "Kind": "Enum",
+   "$id": "11",
+   "Kind": "enum",
    "Name": "EnumWithValueToRename",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "ValueType": {
+    "$id": "12",
+    "Kind": "string"
+   },
+   "Values": [
     {
-     "$id": "10",
+     "$id": "13",
      "Name": "One",
      "Value": "1"
     },
     {
-     "$id": "11",
+     "$id": "14",
      "Name": "Two",
      "Value": "2"
     },
     {
-     "$id": "12",
+     "$id": "15",
      "Name": "ValueToRename",
      "Value": "3"
     }
@@ -82,23 +91,26 @@
    "Usage": "RoundTrip"
   },
   {
-   "$id": "13",
-   "Kind": "Enum",
+   "$id": "16",
+   "Kind": "enum",
    "Name": "EnumToBeMadeExtensible",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "ValueType": {
+    "$id": "17",
+    "Kind": "string"
+   },
+   "Values": [
     {
-     "$id": "14",
+     "$id": "18",
      "Name": "ExOne",
      "Value": "1"
     },
     {
-     "$id": "15",
+     "$id": "19",
      "Name": "ExTwo",
      "Value": "2"
     },
     {
-     "$id": "16",
+     "$id": "20",
      "Name": "ExThree",
      "Value": "3"
     }
@@ -109,18 +121,21 @@
    "Usage": "RoundTrip"
   },
   {
-   "$id": "17",
-   "Kind": "Enum",
+   "$id": "21",
+   "Kind": "enum",
    "Name": "NormalEnum",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "ValueType": {
+    "$id": "22",
+    "Kind": "string"
+   },
+   "Values": [
     {
-     "$id": "18",
+     "$id": "23",
      "Name": "A",
      "Value": "a"
     },
     {
-     "$id": "19",
+     "$id": "24",
      "Name": "B",
      "Value": "b"
     }
@@ -133,7 +148,7 @@
  ],
  "Models": [
   {
-   "$id": "20",
+   "$id": "25",
    "Kind": "Model",
    "Name": "RootModel",
    "Namespace": "CustomizationsInTsp",
@@ -141,7 +156,7 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "21",
+     "$id": "26",
      "Name": "propertyExtensibleEnum",
      "SerializedName": "propertyExtensibleEnum",
      "Description": "ExtensibleEnumWithOperator",
@@ -152,12 +167,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "22",
+     "$id": "27",
      "Name": "propertyModelToMakeInternal",
      "SerializedName": "propertyModelToMakeInternal",
      "Description": "ModelToMakeInternal",
      "Type": {
-      "$id": "23",
+      "$id": "28",
       "Kind": "Model",
       "Name": "ModelToMakeInternal",
       "Namespace": "CustomizationsInTsp",
@@ -165,14 +180,13 @@
       "Usage": "RoundTrip",
       "Properties": [
        {
-        "$id": "24",
+        "$id": "29",
         "Name": "requiredInt",
         "SerializedName": "requiredInt",
         "Description": "Required int",
         "Type": {
-         "$id": "25",
-         "Kind": "Primitive",
-         "Name": "Int32"
+         "$id": "30",
+         "Kind": "int32"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -183,12 +197,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "26",
+     "$id": "31",
      "Name": "propertyModelToRename",
      "SerializedName": "propertyModelToRename",
      "Description": "ModelToRename",
      "Type": {
-      "$id": "27",
+      "$id": "32",
       "Kind": "Model",
       "Name": "ModelToRename",
       "Namespace": "CustomizationsInTsp",
@@ -196,27 +210,25 @@
       "Usage": "RoundTrip",
       "Properties": [
        {
-        "$id": "28",
+        "$id": "33",
         "Name": "requiredIntOnBase",
         "SerializedName": "requiredIntOnBase",
         "Description": "Required int",
         "Type": {
-         "$id": "29",
-         "Kind": "Primitive",
-         "Name": "Int32"
+         "$id": "34",
+         "Kind": "int32"
         },
         "IsRequired": true,
         "IsReadOnly": false
        },
        {
-        "$id": "30",
+        "$id": "35",
         "Name": "optionalInt",
         "SerializedName": "optionalInt",
         "Description": "Optional int",
         "Type": {
-         "$id": "31",
-         "Kind": "Primitive",
-         "Name": "Int32"
+         "$id": "36",
+         "Kind": "int32"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -227,12 +239,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "32",
+     "$id": "37",
      "Name": "propertyModelToChangeNamespace",
      "SerializedName": "propertyModelToChangeNamespace",
      "Description": "ModelToChangeNamespace",
      "Type": {
-      "$id": "33",
+      "$id": "38",
       "Kind": "Model",
       "Name": "ModelToChangeNamespace",
       "Namespace": "CustomizationsInTsp",
@@ -240,14 +252,13 @@
       "Usage": "RoundTrip",
       "Properties": [
        {
-        "$id": "34",
+        "$id": "39",
         "Name": "requiredInt",
         "SerializedName": "requiredInt",
         "Description": "Required int",
         "Type": {
-         "$id": "35",
-         "Kind": "Primitive",
-         "Name": "Int32"
+         "$id": "40",
+         "Kind": "int32"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -258,12 +269,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "36",
+     "$id": "41",
      "Name": "propertyModelWithCustomizedProperties",
      "SerializedName": "propertyModelWithCustomizedProperties",
      "Description": "ModelWithCustomizedProperties",
      "Type": {
-      "$id": "37",
+      "$id": "42",
       "Kind": "Model",
       "Name": "ModelWithCustomizedProperties",
       "Namespace": "CustomizationsInTsp",
@@ -271,168 +282,160 @@
       "Usage": "RoundTrip",
       "Properties": [
        {
-        "$id": "38",
+        "$id": "43",
         "Name": "propertyToMakeInternal",
         "SerializedName": "propertyToMakeInternal",
         "Description": "Public property made internal",
         "Type": {
-         "$id": "39",
-         "Kind": "Primitive",
-         "Name": "Int32"
+         "$id": "44",
+         "Kind": "int32"
         },
         "IsRequired": true,
         "IsReadOnly": false
        },
        {
-        "$id": "40",
+        "$id": "45",
         "Name": "propertyToRename",
         "SerializedName": "propertyToRename",
         "Description": "Renamed property (original name: PropertyToRename)",
         "Type": {
-         "$id": "41",
-         "Kind": "Primitive",
-         "Name": "Int32"
+         "$id": "46",
+         "Kind": "int32"
         },
         "IsRequired": true,
         "IsReadOnly": false
        },
        {
-        "$id": "42",
+        "$id": "47",
         "Name": "propertyToMakeFloat",
         "SerializedName": "propertyToMakeFloat",
         "Description": "Property with type changed to float (original type: int)",
         "Type": {
-         "$id": "43",
-         "Kind": "Primitive",
-         "Name": "Int32"
+         "$id": "48",
+         "Kind": "int32"
         },
         "IsRequired": true,
         "IsReadOnly": false
        },
        {
-        "$id": "44",
+        "$id": "49",
         "Name": "propertyToMakeInt",
         "SerializedName": "propertyToMakeInt",
         "Description": "Property with type changed to int (original type: float)",
         "Type": {
-         "$id": "45",
-         "Kind": "Primitive",
-         "Name": "Float32"
+         "$id": "50",
+         "Kind": "float32"
         },
         "IsRequired": true,
         "IsReadOnly": false
        },
        {
-        "$id": "46",
+        "$id": "51",
         "Name": "propertyToMakeDuration",
         "SerializedName": "propertyToMakeDuration",
         "Description": "Property with type changed to duration (original type: string)",
         "Type": {
-         "$id": "47",
-         "Kind": "Primitive",
-         "Name": "String"
+         "$id": "52",
+         "Kind": "string"
         },
         "IsRequired": true,
         "IsReadOnly": false
        },
        {
-        "$id": "48",
+        "$id": "53",
         "Name": "propertyToMakeString",
         "SerializedName": "propertyToMakeString",
         "Description": "Property with type changed to string (original type: duration)",
         "Type": {
-         "$id": "49",
-         "Kind": "Primitive",
-         "Name": "DurationISO8601",
-         "IsNullable": false
+         "$id": "54",
+         "Kind": "duration",
+         "Encode": "ISO8601",
+         "WireType": {
+          "$id": "55",
+          "Kind": "string"
+         }
         },
         "IsRequired": true,
         "IsReadOnly": false
        },
        {
-        "$id": "50",
+        "$id": "56",
         "Name": "propertyToMakeJsonElement",
         "SerializedName": "propertyToMakeJsonElement",
         "Description": "Property with type changed to JsonElement (original type: string)",
         "Type": {
-         "$id": "51",
-         "Kind": "Primitive",
-         "Name": "String"
+         "$id": "57",
+         "Kind": "string"
         },
         "IsRequired": true,
         "IsReadOnly": false
        },
        {
-        "$id": "52",
+        "$id": "58",
         "Name": "propertyToField",
         "SerializedName": "propertyToField",
         "Description": "Field that replaces property (original name: PropertyToField)",
         "Type": {
-         "$id": "53",
-         "Kind": "Primitive",
-         "Name": "String"
+         "$id": "59",
+         "Kind": "string"
         },
         "IsRequired": true,
         "IsReadOnly": false
        },
        {
-        "$id": "54",
+        "$id": "60",
         "Name": "badListName",
         "SerializedName": "badListName",
         "Description": "Property renamed that is list",
         "Type": {
-         "$id": "55",
+         "$id": "61",
          "Kind": "Array",
          "Name": "Array",
          "ElementType": {
-          "$id": "56",
-          "Kind": "Primitive",
-          "Name": "String"
+          "$id": "62",
+          "Kind": "string"
          }
         },
         "IsRequired": true,
         "IsReadOnly": false
        },
        {
-        "$id": "57",
+        "$id": "63",
         "Name": "badDictionaryName",
         "SerializedName": "badDictionaryName",
         "Description": "Property renamed that is dictionary",
         "Type": {
-         "$id": "58",
+         "$id": "64",
          "Kind": "Dictionary",
          "Name": "Dictionary",
          "KeyType": {
-          "$id": "59",
-          "Kind": "Primitive",
-          "Name": "String"
+          "$id": "65",
+          "Kind": "string"
          },
          "ValueType": {
-          "$id": "60",
-          "Kind": "Primitive",
-          "Name": "String"
+          "$id": "66",
+          "Kind": "string"
          }
         },
         "IsRequired": true,
         "IsReadOnly": false
        },
        {
-        "$id": "61",
+        "$id": "67",
         "Name": "badListOfListName",
         "SerializedName": "badListOfListName",
         "Description": "Property renamed that is listoflist",
         "Type": {
-         "$id": "62",
+         "$id": "68",
          "Kind": "Array",
          "Name": "Array",
          "ElementType": {
-          "$id": "63",
+          "$id": "69",
           "Kind": "Array",
           "Name": "Array",
           "ElementType": {
-           "$id": "64",
-           "Kind": "Primitive",
-           "Name": "String"
+           "$id": "70",
+           "Kind": "string"
           }
          }
         },
@@ -440,86 +443,81 @@
         "IsReadOnly": false
        },
        {
-        "$id": "65",
+        "$id": "71",
         "Name": "badListOfDictionaryName",
         "SerializedName": "badListOfDictionaryName",
         "Description": "Property renamed that is listofdictionary",
         "Type": {
-         "$id": "66",
+         "$id": "72",
          "Kind": "Array",
          "Name": "Array",
          "ElementType": {
-          "$id": "67",
+          "$id": "73",
           "Kind": "Dictionary",
           "Name": "Dictionary",
           "KeyType": {
-           "$id": "68",
-           "Kind": "Primitive",
-           "Name": "String"
+           "$id": "74",
+           "Kind": "string"
           },
           "ValueType": {
-           "$id": "69",
-           "Kind": "Primitive",
-           "Name": "String"
+           "$id": "75",
+           "Kind": "string"
           }
          }
         },
         "IsRequired": true,
-        "IsReadOnly": false
-       },
-       {
-        "$id": "70",
-        "Name": "vector",
-        "SerializedName": "vector",
-        "Description": "Property type changed to ReadOnlyMemory<float>",
-        "Type": {
-         "$id": "71",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
-          "$id": "72",
-          "Kind": "Primitive",
-          "Name": "Float32"
-         }
-        },
-        "IsRequired": true,
-        "IsReadOnly": false
-       },
-       {
-        "$id": "73",
-        "Name": "vectorOptional",
-        "SerializedName": "vectorOptional",
-        "Description": "Property type changed to ReadOnlyMemory<float>?",
-        "Type": {
-         "$id": "74",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
-          "$id": "75",
-          "Kind": "Primitive",
-          "Name": "Float32"
-         }
-        },
-        "IsRequired": false,
         "IsReadOnly": false
        },
        {
         "$id": "76",
+        "Name": "vector",
+        "SerializedName": "vector",
+        "Description": "Property type changed to ReadOnlyMemory<float>",
+        "Type": {
+         "$id": "77",
+         "Kind": "Array",
+         "Name": "Array",
+         "ElementType": {
+          "$id": "78",
+          "Kind": "float32"
+         }
+        },
+        "IsRequired": true,
+        "IsReadOnly": false
+       },
+       {
+        "$id": "79",
+        "Name": "vectorOptional",
+        "SerializedName": "vectorOptional",
+        "Description": "Property type changed to ReadOnlyMemory<float>?",
+        "Type": {
+         "$id": "80",
+         "Kind": "Array",
+         "Name": "Array",
+         "ElementType": {
+          "$id": "81",
+          "Kind": "float32"
+         }
+        },
+        "IsRequired": false,
+        "IsReadOnly": false
+       },
+       {
+        "$id": "82",
         "Name": "vectorNullable",
         "SerializedName": "vectorNullable",
         "Description": "Property type changed to ReadOnlyMemory<float>?",
         "Type": {
-         "$id": "77",
+         "$id": "83",
          "Kind": "Nullable",
          "Name": "Nullable",
          "Type": {
-          "$id": "78",
+          "$id": "84",
           "Kind": "Array",
           "Name": "Array",
           "ElementType": {
-           "$id": "79",
-           "Kind": "Primitive",
-           "Name": "Float32"
+           "$id": "85",
+           "Kind": "float32"
           }
          }
         },
@@ -527,22 +525,21 @@
         "IsReadOnly": false
        },
        {
-        "$id": "80",
+        "$id": "86",
         "Name": "vectorOptionalNullable",
         "SerializedName": "vectorOptionalNullable",
         "Description": "Property type changed to ReadOnlyMemory<float>?",
         "Type": {
-         "$id": "81",
+         "$id": "87",
          "Kind": "Nullable",
          "Name": "Nullable",
          "Type": {
-          "$id": "82",
+          "$id": "88",
           "Kind": "Array",
           "Name": "Array",
           "ElementType": {
-           "$id": "83",
-           "Kind": "Primitive",
-           "Name": "Float32"
+           "$id": "89",
+           "Kind": "float32"
           }
          }
         },
@@ -550,58 +547,55 @@
         "IsReadOnly": false
        },
        {
-        "$id": "84",
+        "$id": "90",
         "Name": "vectorReadOnly",
         "SerializedName": "vectorReadOnly",
         "Description": "Property type changed to ReadOnlyMemory<float>",
         "Type": {
-         "$id": "85",
+         "$id": "91",
          "Kind": "Array",
          "Name": "Array",
          "ElementType": {
-          "$id": "86",
-          "Kind": "Primitive",
-          "Name": "Float32"
+          "$id": "92",
+          "Kind": "float32"
          }
         },
         "IsRequired": true,
         "IsReadOnly": true
        },
        {
-        "$id": "87",
+        "$id": "93",
         "Name": "vectorOptionalReadOnly",
         "SerializedName": "vectorOptionalReadOnly",
         "Description": "Property type changed to ReadOnlyMemory<float>?",
         "Type": {
-         "$id": "88",
+         "$id": "94",
          "Kind": "Array",
          "Name": "Array",
          "ElementType": {
-          "$id": "89",
-          "Kind": "Primitive",
-          "Name": "Float32"
+          "$id": "95",
+          "Kind": "float32"
          }
         },
         "IsRequired": false,
         "IsReadOnly": true
        },
        {
-        "$id": "90",
+        "$id": "96",
         "Name": "vectorNullableReadOnly",
         "SerializedName": "vectorNullableReadOnly",
         "Description": "Property type changed to ReadOnlyMemory<float>?",
         "Type": {
-         "$id": "91",
+         "$id": "97",
          "Kind": "Nullable",
          "Name": "Nullable",
          "Type": {
-          "$id": "92",
+          "$id": "98",
           "Kind": "Array",
           "Name": "Array",
           "ElementType": {
-           "$id": "93",
-           "Kind": "Primitive",
-           "Name": "Float32"
+           "$id": "99",
+           "Kind": "float32"
           }
          }
         },
@@ -609,22 +603,21 @@
         "IsReadOnly": true
        },
        {
-        "$id": "94",
+        "$id": "100",
         "Name": "vectorOptionalNullableReadOnly",
         "SerializedName": "vectorOptionalNullableReadOnly",
         "Description": "Property type changed to ReadOnlyMemory<float>?",
         "Type": {
-         "$id": "95",
+         "$id": "101",
          "Kind": "Nullable",
          "Name": "Nullable",
          "Type": {
-          "$id": "96",
+          "$id": "102",
           "Kind": "Array",
           "Name": "Array",
           "ElementType": {
-           "$id": "97",
-           "Kind": "Primitive",
-           "Name": "Float32"
+           "$id": "103",
+           "Kind": "float32"
           }
          }
         },
@@ -637,90 +630,89 @@
      "IsReadOnly": false
     },
     {
-     "$id": "98",
+     "$id": "104",
      "Name": "propertyEnumToRename",
      "SerializedName": "propertyEnumToRename",
      "Description": "EnumToRename",
      "Type": {
-      "$ref": "5"
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "99",
-     "Name": "propertyEnumWithValueToRename",
-     "SerializedName": "propertyEnumWithValueToRename",
-     "Description": "EnumWithValueToRename",
-     "Type": {
-      "$ref": "9"
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "100",
-     "Name": "propertyEnumToBeMadeExtensible",
-     "SerializedName": "propertyEnumToBeMadeExtensible",
-     "Description": "EnumToBeMadeExtensible",
-     "Type": {
-      "$ref": "13"
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "101",
-     "Name": "propertyModelToAddAdditionalSerializableProperty",
-     "SerializedName": "propertyModelToAddAdditionalSerializableProperty",
-     "Description": "ModelToAddAdditionalSerializableProperty",
-     "Type": {
-      "$id": "102",
-      "Kind": "Model",
-      "Name": "ModelToAddAdditionalSerializableProperty",
-      "Namespace": "CustomizationsInTsp",
-      "Description": "Model to add additional serializable property",
-      "Usage": "RoundTrip",
-      "BaseModel": {
-       "$ref": "27"
-      },
-      "Properties": [
-       {
-        "$id": "103",
-        "Name": "requiredInt",
-        "SerializedName": "requiredInt",
-        "Description": "Required int",
-        "Type": {
-         "$id": "104",
-         "Kind": "Primitive",
-         "Name": "Int32"
-        },
-        "IsRequired": true,
-        "IsReadOnly": false
-       }
-      ]
+      "$ref": "6"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
      "$id": "105",
-     "Name": "propertyToMoveToCustomization",
-     "SerializedName": "propertyToMoveToCustomization",
-     "Description": "Enum type property to move to customization code",
+     "Name": "propertyEnumWithValueToRename",
+     "SerializedName": "propertyEnumWithValueToRename",
+     "Description": "EnumWithValueToRename",
      "Type": {
-      "$ref": "17"
+      "$ref": "11"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
      "$id": "106",
+     "Name": "propertyEnumToBeMadeExtensible",
+     "SerializedName": "propertyEnumToBeMadeExtensible",
+     "Description": "EnumToBeMadeExtensible",
+     "Type": {
+      "$ref": "16"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "107",
+     "Name": "propertyModelToAddAdditionalSerializableProperty",
+     "SerializedName": "propertyModelToAddAdditionalSerializableProperty",
+     "Description": "ModelToAddAdditionalSerializableProperty",
+     "Type": {
+      "$id": "108",
+      "Kind": "Model",
+      "Name": "ModelToAddAdditionalSerializableProperty",
+      "Namespace": "CustomizationsInTsp",
+      "Description": "Model to add additional serializable property",
+      "Usage": "RoundTrip",
+      "BaseModel": {
+       "$ref": "32"
+      },
+      "Properties": [
+       {
+        "$id": "109",
+        "Name": "requiredInt",
+        "SerializedName": "requiredInt",
+        "Description": "Required int",
+        "Type": {
+         "$id": "110",
+         "Kind": "int32"
+        },
+        "IsRequired": true,
+        "IsReadOnly": false
+       }
+      ]
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "111",
+     "Name": "propertyToMoveToCustomization",
+     "SerializedName": "propertyToMoveToCustomization",
+     "Description": "Enum type property to move to customization code",
+     "Type": {
+      "$ref": "21"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "112",
      "Name": "propertyModelStruct",
      "SerializedName": "propertyModelStruct",
      "Description": "ModelStruct",
      "Type": {
-      "$id": "107",
+      "$id": "113",
       "Kind": "Model",
       "Name": "ModelStruct",
       "Namespace": "CustomizationsInTsp",
@@ -728,40 +720,37 @@
       "Usage": "RoundTrip",
       "Properties": [
        {
-        "$id": "108",
+        "$id": "114",
         "Name": "requiredInt",
         "SerializedName": "requiredInt",
         "Description": "Required int",
         "Type": {
-         "$id": "109",
-         "Kind": "Primitive",
-         "Name": "Int32"
+         "$id": "115",
+         "Kind": "int32"
         },
         "IsRequired": true,
         "IsReadOnly": false
        },
        {
-        "$id": "110",
+        "$id": "116",
         "Name": "optionalInt",
         "SerializedName": "optionalInt",
         "Description": "Optional int",
         "Type": {
-         "$id": "111",
-         "Kind": "Primitive",
-         "Name": "Int32"
+         "$id": "117",
+         "Kind": "int32"
         },
         "IsRequired": false,
         "IsReadOnly": false
        },
        {
-        "$id": "112",
+        "$id": "118",
         "Name": "optionalString",
         "SerializedName": "optionalString",
         "Description": "Optional string",
         "Type": {
-         "$id": "113",
-         "Kind": "Primitive",
-         "Name": "String"
+         "$id": "119",
+         "Kind": "string"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -774,43 +763,43 @@
    ]
   },
   {
-   "$ref": "23"
+   "$ref": "28"
   },
   {
-   "$ref": "27"
+   "$ref": "32"
   },
   {
-   "$ref": "33"
+   "$ref": "38"
   },
   {
-   "$ref": "37"
+   "$ref": "42"
   },
   {
-   "$ref": "102"
+   "$ref": "108"
   },
   {
-   "$ref": "107"
+   "$ref": "113"
   }
  ],
  "Clients": [
   {
-   "$id": "114",
+   "$id": "120",
    "Name": "CustomizationsInTspClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
-     "$id": "115",
+     "$id": "121",
      "Name": "roundTrip",
      "ResourceName": "CustomizationsInTsp",
      "Description": "RoundTrip operation to make RootModel round-trip",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "116",
+       "$id": "122",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "20"
+        "$ref": "25"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -823,13 +812,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "117",
+       "$id": "123",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "118",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "124",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -842,21 +830,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "119",
+        "$id": "125",
         "Type": {
-         "$ref": "118"
+         "$ref": "124"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "120",
+       "$id": "126",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "121",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "127",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -869,9 +856,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "122",
+        "$id": "128",
         "Type": {
-         "$ref": "121"
+         "$ref": "127"
         },
         "Value": "application/json"
        }
@@ -879,12 +866,12 @@
      ],
      "Responses": [
       {
-       "$id": "123",
+       "$id": "129",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "20"
+        "$ref": "25"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -906,18 +893,18 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "124",
+     "$id": "130",
      "Name": "foo",
      "ResourceName": "CustomizationsInTsp",
      "Description": "Sample operation with request body of a renamed model",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "125",
+       "$id": "131",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "27"
+        "$ref": "32"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -930,13 +917,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "126",
+       "$id": "132",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "127",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "133",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -949,21 +935,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "128",
+        "$id": "134",
         "Type": {
-         "$ref": "127"
+         "$ref": "133"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "129",
+       "$id": "135",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "130",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "136",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -976,9 +961,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "131",
+        "$id": "137",
         "Type": {
-         "$ref": "130"
+         "$ref": "136"
         },
         "Value": "application/json"
        }
@@ -986,12 +971,12 @@
      ],
      "Responses": [
       {
-       "$id": "132",
+       "$id": "138",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "27"
+        "$ref": "32"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1013,19 +998,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "133",
+     "$id": "139",
      "Name": "bar",
      "ResourceName": "CustomizationsInTsp",
      "Description": "Sample operation with request body using a model parameter with a spread operator.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "134",
+       "$id": "140",
        "Name": "ModelToRename",
        "NameInRequest": "ModelToRename",
        "Description": "Renamed model (original name: ModelToRename)",
        "Type": {
-        "$ref": "27"
+        "$ref": "32"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1038,13 +1023,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "135",
+       "$id": "141",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "136",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "142",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1057,21 +1041,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "137",
+        "$id": "143",
         "Type": {
-         "$ref": "136"
+         "$ref": "142"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "138",
+       "$id": "144",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "139",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "145",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1084,9 +1067,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "140",
+        "$id": "146",
         "Type": {
-         "$ref": "139"
+         "$ref": "145"
         },
         "Value": "application/json"
        }
@@ -1094,12 +1077,12 @@
      ],
      "Responses": [
       {
-       "$id": "141",
+       "$id": "147",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "27"
+        "$ref": "32"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1122,7 +1105,7 @@
     }
    ],
    "Protocol": {
-    "$id": "142"
+    "$id": "148"
    },
    "Creatable": true
   }

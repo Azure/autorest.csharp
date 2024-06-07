@@ -47,7 +47,7 @@ namespace _Specs_.Azure.Core.Basic.Models
             if (options.Format != "W")
             {
                 writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag);
+                writer.WriteStringValue(Etag.ToString());
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -90,7 +90,7 @@ namespace _Specs_.Azure.Core.Basic.Models
             int id = default;
             string name = default;
             IList<UserOrder> orders = default;
-            string etag = default;
+            ETag etag = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -121,7 +121,7 @@ namespace _Specs_.Azure.Core.Basic.Models
                 }
                 if (property.NameEquals("etag"u8))
                 {
-                    etag = property.Value.GetString();
+                    etag = new ETag(property.Value.GetString());
                     continue;
                 }
                 if (options.Format != "W")

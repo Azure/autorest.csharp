@@ -18,8 +18,7 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "Primitive",
-      "Name": "String"
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -31,8 +30,8 @@
      "Description": "",
      "Type": {
       "$id": "6",
-      "Kind": "Primitive",
-      "Name": "Bytes"
+      "Kind": "bytes",
+      "Encode": "base64"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -53,8 +52,7 @@
      "Description": "",
      "Type": {
       "$id": "9",
-      "Kind": "Primitive",
-      "Name": "String"
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -78,8 +76,7 @@
         "Description": "",
         "Type": {
          "$id": "13",
-         "Kind": "Primitive",
-         "Name": "String"
+         "Kind": "string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -96,8 +93,8 @@
      "Description": "",
      "Type": {
       "$id": "15",
-      "Kind": "Primitive",
-      "Name": "Bytes"
+      "Kind": "bytes",
+      "Encode": "base64"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -129,8 +126,8 @@
       "Name": "Array",
       "ElementType": {
        "$id": "20",
-       "Kind": "Primitive",
-       "Name": "Bytes"
+       "Kind": "bytes",
+       "Encode": "base64"
       }
      },
      "IsRequired": true,
@@ -166,8 +163,8 @@
      "Description": "",
      "Type": {
       "$id": "24",
-      "Kind": "Primitive",
-      "Name": "Bytes"
+      "Kind": "bytes",
+      "Encode": "base64"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -188,8 +185,7 @@
      "Description": "",
      "Type": {
       "$id": "27",
-      "Kind": "Primitive",
-      "Name": "String"
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -205,8 +201,8 @@
       "Name": "Array",
       "ElementType": {
        "$id": "30",
-       "Kind": "Primitive",
-       "Name": "Bytes"
+       "Kind": "bytes",
+       "Encode": "base64"
       }
      },
      "IsRequired": true,
@@ -228,8 +224,8 @@
      "Description": "",
      "Type": {
       "$id": "33",
-      "Kind": "Primitive",
-      "Name": "Bytes"
+      "Kind": "bytes",
+      "Encode": "base64"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -266,8 +262,8 @@
      "Description": "",
      "Type": {
       "$id": "38",
-      "Kind": "Primitive",
-      "Name": "Bytes"
+      "Kind": "bytes",
+      "Encode": "base64"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -279,8 +275,8 @@
      "Description": "",
      "Type": {
       "$id": "40",
-      "Kind": "Primitive",
-      "Name": "Bytes"
+      "Kind": "bytes",
+      "Encode": "base64"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -301,8 +297,8 @@
      "Description": "",
      "Type": {
       "$id": "43",
-      "Kind": "Primitive",
-      "Name": "Bytes"
+      "Kind": "bytes",
+      "Encode": "base64"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -328,8 +324,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "47",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "Location": "Uri",
@@ -345,8 +340,7 @@
       "$id": "48",
       "Type": {
        "$id": "49",
-       "Kind": "Primitive",
-       "Name": "String",
+       "Kind": "string",
        "IsNullable": false
       },
       "Value": "http://localhost:3000"
@@ -375,12 +369,10 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "53",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "54",
-         "Kind": "Primitive",
-         "Name": "String"
+         "Kind": "string"
         },
         "Value": "multipart/form-data"
        },
@@ -424,8 +416,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "58",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -484,12 +475,10 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "63",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "64",
-         "Kind": "Primitive",
-         "Name": "String"
+         "Kind": "string"
         },
         "Value": "multipart/form-data"
        },
@@ -533,8 +522,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "68",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -593,12 +581,10 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "73",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "74",
-         "Kind": "Primitive",
-         "Name": "String"
+         "Kind": "string"
         },
         "Value": "multipart/form-data"
        },
@@ -642,8 +628,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "78",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -702,12 +687,10 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "83",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "84",
-         "Kind": "Primitive",
-         "Name": "String"
+         "Kind": "string"
         },
         "Value": "multipart/form-data"
        },
@@ -751,8 +734,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "88",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -811,12 +793,10 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "93",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "94",
-         "Kind": "Primitive",
-         "Name": "String"
+         "Kind": "string"
         },
         "Value": "multipart/form-data"
        },
@@ -860,8 +840,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "98",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -920,12 +899,10 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "103",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "104",
-         "Kind": "Primitive",
-         "Name": "String"
+         "Kind": "string"
         },
         "Value": "multipart/form-data"
        },
@@ -969,8 +946,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "108",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1029,12 +1005,10 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "113",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "114",
-         "Kind": "Primitive",
-         "Name": "String"
+         "Kind": "string"
         },
         "Value": "multipart/form-data"
        },
@@ -1078,8 +1052,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "118",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1138,12 +1111,10 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "123",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "124",
-         "Kind": "Primitive",
-         "Name": "String"
+         "Kind": "string"
         },
         "Value": "multipart/form-data"
        },
@@ -1187,8 +1158,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "128",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",

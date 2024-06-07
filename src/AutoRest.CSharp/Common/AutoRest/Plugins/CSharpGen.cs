@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var schemaUsageProvider = new SchemaUsageProvider(codeModel); // Create schema usage before transformation applied
             if (Configuration.Generation1ConvenienceClient)
             {
-                CodeModelTransformer.TransfromForDataPlane(codeModel);
+                CodeModelTransformer.TransformForDataPlane(codeModel);
                 DataPlaneTarget.Execute(project, codeModel, sourceInputModel, schemaUsageProvider);
             }
             else if (Configuration.AzureArm)

@@ -3,4 +3,4 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputLiteralType(string Name, InputType LiteralValueType, object Value) : InputType(Name);
+internal record InputLiteralType(InputType ValueType, object Value) : InputType("Literal"); // TODO -- name?

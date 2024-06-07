@@ -102,13 +102,20 @@ namespace CustomizationsInTsp.Models
             writer.WriteEndArray();
             if (Optional.IsDefined(VectorOptional))
             {
-                writer.WritePropertyName("vectorOptional"u8);
-                writer.WriteStartArray();
-                foreach (var item in VectorOptional.Value.Span)
+                if (VectorOptional != null)
                 {
-                    writer.WriteNumberValue(item);
+                    writer.WritePropertyName("vectorOptional"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VectorOptional.Value.Span)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
+                else
+                {
+                    writer.WriteNull("vectorOptional");
+                }
             }
             if (VectorNullable != null)
             {
@@ -153,13 +160,20 @@ namespace CustomizationsInTsp.Models
             }
             if (options.Format != "W" && Optional.IsDefined(VectorOptionalReadOnly))
             {
-                writer.WritePropertyName("vectorOptionalReadOnly"u8);
-                writer.WriteStartArray();
-                foreach (var item in VectorOptionalReadOnly.Value.Span)
+                if (VectorOptionalReadOnly != null)
                 {
-                    writer.WriteNumberValue(item);
+                    writer.WritePropertyName("vectorOptionalReadOnly"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VectorOptionalReadOnly.Value.Span)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
+                else
+                {
+                    writer.WriteNull("vectorOptionalReadOnly");
+                }
             }
             if (options.Format != "W")
             {

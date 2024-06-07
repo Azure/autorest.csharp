@@ -1890,7 +1890,10 @@ default
                     ["key"] = default
                 },
                 BinaryData.FromObjectAsJson(new object()),
-                new byte[] { 123 },
+                new object[]
+            {
+123
+            },
                 BinaryData.FromObjectAsJson(new object()),
                 new sbyte[] { 123 },
                 new int[] { 1234 },
@@ -1937,7 +1940,10 @@ default
                     ["key"] = default
                 },
                 BinaryData.FromObjectAsJson(new object()),
-                new byte[] { 123 },
+                new object[]
+            {
+123
+            },
                 BinaryData.FromObjectAsJson(new object()),
                 new sbyte[] { 123 },
                 new int[] { 1234 },
@@ -2179,7 +2185,10 @@ default
                     ["key"] = default
                 },
                 BinaryData.FromObjectAsJson(new object()),
-                new byte[] { 123 },
+                new object[]
+            {
+123
+            },
                 BinaryData.FromObjectAsJson(new object()),
                 new sbyte[] { 123 },
                 new int[] { 1234 },
@@ -2241,7 +2250,10 @@ default
                     ["key"] = default
                 },
                 BinaryData.FromObjectAsJson(new object()),
-                new byte[] { 123 },
+                new object[]
+            {
+123
+            },
                 BinaryData.FromObjectAsJson(new object()),
                 new sbyte[] { 123 },
                 new int[] { 1234 },

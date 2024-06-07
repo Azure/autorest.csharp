@@ -3,11 +3,4 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal enum InputIntrinsicTypeKind
-{
-    ErrorType,
-    Void,
-    Never,
-    Unknown,
-    Null,
-}
+internal record InputDateTimeType(DateTimeKnownEncoding Encode, InputPrimitiveType WireType) : InputType("DateTime");

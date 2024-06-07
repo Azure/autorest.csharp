@@ -344,7 +344,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
         {
             // we have a request body type
             if (_method.RequestBodyType == null)
-                return InputExampleValue.Null(InputPrimitiveType.Object);
+                return InputExampleValue.Null(InputPrimitiveType.Any);
 
             //if (Method.RequestBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
             //    return InputExampleValue.Stream(Method.RequestBodyType, "<filePath>");
@@ -371,7 +371,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             => parameter.Name == knownParameter.Name && parameter.Type.EqualsIgnoreNullable(knownParameter.Type);
 
         public bool HasResponseBody => _method.ResponseBodyType != null;
-        public bool IsResponseStream => _method.ResponseBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream };
+        public bool IsResponseStream => _method.ResponseBodyType is InputPrimitiveType { Kind: InputPrimitiveTypeKind.Stream };
 
         private InputType? _resultType;
         public InputType? ResultType => _resultType ??= GetEffectiveResponseType();

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputEnumType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string Description, InputModelTypeUsage Usage, InputPrimitiveType EnumValueType, IReadOnlyList<InputEnumTypeValue> AllowedValues, bool IsExtensible)
+internal record InputEnumType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string Description, InputModelTypeUsage Usage, InputPrimitiveType ValueType, IReadOnlyList<InputEnumTypeValue> Values, bool IsExtensible)
     : InputType(Name)
 {
     public static IEqualityComparer<InputEnumType> IgnoreNullabilityComparer { get; } = new IgnoreNullabilityComparerImplementation();
@@ -30,8 +30,8 @@ internal record InputEnumType(string Name, string? Namespace, string? Accessibil
                    && x.Namespace == y.Namespace
                    && x.Accessibility == y.Accessibility
                    && x.Description == y.Description
-                   && x.EnumValueType.Equals(y.EnumValueType)
-                   && x.AllowedValues.SequenceEqual(y.AllowedValues)
+                   && x.ValueType.Equals(y.ValueType)
+                   && x.Values.SequenceEqual(y.Values)
                    && x.IsExtensible == y.IsExtensible;
         }
 
@@ -42,9 +42,9 @@ internal record InputEnumType(string Name, string? Namespace, string? Accessibil
             hashCode.Add(obj.Namespace);
             hashCode.Add(obj.Accessibility);
             hashCode.Add(obj.Description);
-            hashCode.Add(obj.EnumValueType);
+            hashCode.Add(obj.ValueType);
             hashCode.Add(obj.IsExtensible);
-            foreach (var item in obj.AllowedValues)
+            foreach (var item in obj.Values)
             {
                 hashCode.Add(item);
             }

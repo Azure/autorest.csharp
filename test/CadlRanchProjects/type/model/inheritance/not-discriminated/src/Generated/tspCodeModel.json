@@ -33,8 +33,7 @@
        "Description": "",
        "Type": {
         "$id": "6",
-        "Kind": "Primitive",
-        "Name": "String"
+        "Kind": "string"
        },
        "IsRequired": true,
        "IsReadOnly": false
@@ -49,8 +48,7 @@
       "Description": "",
       "Type": {
        "$id": "8",
-       "Kind": "Primitive",
-       "Name": "Int32"
+       "Kind": "int32"
       },
       "IsRequired": true,
       "IsReadOnly": false
@@ -65,8 +63,7 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Kind": "Primitive",
-      "Name": "Boolean"
+      "Kind": "boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -99,8 +96,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "14",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -116,8 +112,7 @@
         "$id": "15",
         "Type": {
          "$id": "16",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -146,8 +141,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "19",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -173,8 +167,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "22",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -232,8 +225,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "27",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -311,8 +303,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "33",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -338,8 +329,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "36",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",

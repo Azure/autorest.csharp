@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (!_isTspInput)
             {
-                return TypeFactory.CreateType(enumType.EnumValueType).WithNullable(isNullable);
+                return TypeFactory.CreateType(enumType.ValueType).WithNullable(isNullable);
             }
 
             if (_enums.TryGetValue(enumType, out var typeProvider))
