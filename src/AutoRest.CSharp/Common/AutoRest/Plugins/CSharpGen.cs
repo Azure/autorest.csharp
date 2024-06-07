@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Common.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -94,6 +95,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (Configuration.AzureArm)
             {
+                InputTypeTransformer.Transform(rootNamespace);
                 MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(rootNamespace, sourceInputModel));
                 await MgmtTarget.ExecuteAsync(project);
             }
