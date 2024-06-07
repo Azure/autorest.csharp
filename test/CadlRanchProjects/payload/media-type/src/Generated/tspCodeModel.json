@@ -13,48 +13,51 @@
    "Protocol": {
     "$id": "3"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "4",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "5",
+      "Kind": "string",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "6",
+      "Type": {
+       "$id": "7",
+       "Kind": "string",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "4",
+   "$id": "8",
    "Name": "StringBody",
    "Description": "",
    "Operations": [
     {
-     "$id": "5",
+     "$id": "9",
      "Name": "sendAsText",
      "ResourceName": "StringBody",
      "Parameters": [
       {
-       "$id": "6",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "7",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "8",
-        "Type": {
-         "$id": "9",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "4"
       },
       {
        "$id": "10",
@@ -62,12 +65,10 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "11",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "12",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "Value": "text/plain",
@@ -96,8 +97,7 @@
        "NameInRequest": "text",
        "Type": {
         "$id": "15",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Body",
@@ -116,8 +116,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "17",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -166,7 +165,7 @@
      "ResourceName": "StringBody",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "21",
@@ -174,8 +173,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "22",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -204,8 +202,7 @@
        ],
        "BodyType": {
         "$id": "25",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
@@ -230,7 +227,7 @@
      "ResourceName": "StringBody",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "27",
@@ -238,12 +235,10 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "28",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "29",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "Value": "application/json",
@@ -272,8 +267,7 @@
        "NameInRequest": "text",
        "Type": {
         "$id": "32",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Body",
@@ -292,8 +286,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "34",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -342,7 +335,7 @@
      "ResourceName": "StringBody",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "38",
@@ -350,8 +343,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "39",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -380,8 +372,7 @@
        ],
        "BodyType": {
         "$id": "42",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
@@ -405,7 +396,12 @@
     "$id": "43"
    },
    "Creatable": false,
-   "Parent": "MediaTypeClient"
+   "Parent": "MediaTypeClient",
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   }
  ]
 }

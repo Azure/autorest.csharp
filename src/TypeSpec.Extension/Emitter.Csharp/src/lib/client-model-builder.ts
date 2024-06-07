@@ -41,7 +41,6 @@ import {
     InputModelType,
     InputPrimitiveType
 } from "../type/input-type.js";
-import { InputPrimitiveTypeKind } from "../type/input-primitive-type-kind.js";
 import { RequestLocation } from "../type/request-location.js";
 import { Usage } from "../type/usage.js";
 import { reportDiagnostic } from "./lib.js";
@@ -51,7 +50,6 @@ import { loadOperation } from "./operation.js";
 import { processServiceAuthentication } from "./service-authentication.js";
 import { resolveServers } from "./typespecServer.js";
 import { createContentTypeOrAcceptParameter } from "./utils.js";
-import { InputTypeKind } from "../type/input-type-kind.js";
 
 export function createModel(
     sdkContext: SdkContext<NetEmitterOptions>
@@ -85,19 +83,32 @@ export function createModelForService(
 
     const apiVersions: Set<string> | undefined = new Set<string>();
     let defaultApiVersion: string | undefined = undefined;
-    const versions = getVersions(program, service.type)[1]?.getVersions();
+    let versions = getVersions(program, service.type)[1]
+        ?.getVersions()
+        .map((v) => v.value);
+    const targetApiVersion = sdkContext.emitContext.options["api-version"];
+    if (
+        versions !== undefined &&
+        targetApiVersion !== undefined &&
+        targetApiVersion !== "all" &&
+        targetApiVersion !== "latest"
+    ) {
+        const targetApiVersionIndex = versions.findIndex(
+            (v) => v === targetApiVersion
+        );
+        versions = versions.slice(0, targetApiVersionIndex + 1);
+    }
     if (versions && versions.length > 0) {
         for (const ver of versions) {
-            apiVersions.add(ver.value);
+            apiVersions.add(ver);
         }
-        defaultApiVersion = versions[versions.length - 1].value;
+        defaultApiVersion = versions[versions.length - 1];
     }
     const defaultApiVersionConstant: InputConstant | undefined =
         defaultApiVersion
             ? {
                   Type: {
-                      Kind: InputTypeKind.Primitive,
-                      Name: InputPrimitiveTypeKind.String,
+                      Kind: "string",
                       IsNullable: false
                   } as InputPrimitiveType,
                   Value: defaultApiVersion
@@ -276,7 +287,8 @@ export function createModelForService(
             Operations: [],
             Protocol: {},
             Creatable: client.kind === ClientKind.SdkClient,
-            Parent: parent === undefined ? undefined : getClientName(parent)
+            Parent: parent === undefined ? undefined : getClientName(parent),
+            Parameters: urlParameters
         } as InputClient;
         for (const op of operations) {
             const httpOperation = ignoreDiagnostics(

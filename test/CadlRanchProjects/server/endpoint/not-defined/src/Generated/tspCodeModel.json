@@ -21,8 +21,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "5",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",

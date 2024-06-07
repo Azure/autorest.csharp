@@ -53,6 +53,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 ]]></code>
 This sample shows how to call DoSomethingAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -75,6 +76,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
 ]]></code></example>
     </member>
     <member name="DoSomething(string,string,RequestContext)">
@@ -95,6 +98,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 ]]></code>
 This sample shows how to call DoSomething with all parameters and parse the result.
 <code><![CDATA[
@@ -117,6 +121,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
 ]]></code></example>
     </member>
   </members>

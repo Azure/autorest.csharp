@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelTransformer
     {
-        public static void TransfromForDataPlane(CodeModel codeModel)
+        public static void TransformForDataPlane(CodeModel codeModel)
         {
             SchemaUsageTransformer.Transform(codeModel);
             ConstantSchemaTransformer.Transform(codeModel);
@@ -32,7 +32,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             // schema usage transformer must run first
             SchemaUsageTransformer.Transform(codeModel);
-            DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
             OmitOperationGroups.RemoveOperationGroups(codeModel);
             SubscriptionIdUpdater.Update(codeModel);
             ConstantSchemaTransformer.Transform(codeModel);

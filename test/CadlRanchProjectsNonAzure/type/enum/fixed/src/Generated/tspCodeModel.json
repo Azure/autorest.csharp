@@ -5,48 +5,52 @@
  "Enums": [
   {
    "$id": "2",
-   "Kind": "Enum",
+   "Kind": "enum",
    "Name": "DaysOfWeekEnum",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "ValueType": {
+    "$id": "3",
+    "Kind": "string",
+    "IsNullable": false
+   },
+   "Values": [
     {
-     "$id": "3",
+     "$id": "4",
      "Name": "Monday",
      "Value": "Monday",
      "Description": "Monday."
     },
     {
-     "$id": "4",
+     "$id": "5",
      "Name": "Tuesday",
      "Value": "Tuesday",
      "Description": "Tuesday."
     },
     {
-     "$id": "5",
+     "$id": "6",
      "Name": "Wednesday",
      "Value": "Wednesday",
      "Description": "Wednesday."
     },
     {
-     "$id": "6",
+     "$id": "7",
      "Name": "Thursday",
      "Value": "Thursday",
      "Description": "Thursday."
     },
     {
-     "$id": "7",
+     "$id": "8",
      "Name": "Friday",
      "Value": "Friday",
      "Description": "Friday."
     },
     {
-     "$id": "8",
+     "$id": "9",
      "Name": "Saturday",
      "Value": "Saturday",
      "Description": "Saturday."
     },
     {
-     "$id": "9",
+     "$id": "10",
      "Name": "Sunday",
      "Value": "Sunday",
      "Description": "Sunday."
@@ -62,65 +66,67 @@
  "Models": [],
  "Clients": [
   {
-   "$id": "10",
+   "$id": "11",
    "Name": "FixedClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "11"
+    "$id": "12"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "13",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "14",
+      "Kind": "string",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "15",
+      "Type": {
+       "$id": "16",
+       "Kind": "string",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "12",
+   "$id": "17",
    "Name": "String",
    "Description": "",
    "Operations": [
     {
-     "$id": "13",
+     "$id": "18",
      "Name": "getKnownValue",
      "ResourceName": "String",
      "Description": "getKnownValue",
      "Parameters": [
       {
-       "$id": "14",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "15",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "16",
-        "Type": {
-         "$id": "17",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "13"
       },
       {
-       "$id": "18",
+       "$id": "19",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "19",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "20",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -133,9 +139,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "20",
+        "$id": "21",
         "Type": {
-         "$ref": "19"
+         "$ref": "20"
         },
         "Value": "application/json"
        }
@@ -143,7 +149,7 @@
      ],
      "Responses": [
       {
-       "$id": "21",
+       "$id": "22",
        "StatusCodes": [
         200
        ],
@@ -167,16 +173,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "22",
+     "$id": "23",
      "Name": "putKnownValue",
      "ResourceName": "String",
      "Description": "putKnownValue",
      "Parameters": [
       {
-       "$ref": "14"
+       "$ref": "13"
       },
       {
-       "$id": "23",
+       "$id": "24",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
@@ -194,13 +200,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "24",
+       "$id": "25",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "25",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "26",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -213,21 +218,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "26",
+        "$id": "27",
         "Type": {
-         "$ref": "25"
+         "$ref": "26"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "27",
+       "$id": "28",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "28",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "29",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -240,9 +244,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "29",
+        "$id": "30",
         "Type": {
-         "$ref": "28"
+         "$ref": "29"
         },
         "Value": "application/json"
        }
@@ -250,7 +254,7 @@
      ],
      "Responses": [
       {
-       "$id": "30",
+       "$id": "31",
        "StatusCodes": [
         204
        ],
@@ -271,16 +275,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "31",
+     "$id": "32",
      "Name": "putUnknownValue",
      "ResourceName": "String",
      "Description": "putUnknownValue",
      "Parameters": [
       {
-       "$ref": "14"
+       "$ref": "13"
       },
       {
-       "$id": "32",
+       "$id": "33",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
@@ -298,13 +302,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "33",
+       "$id": "34",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "34",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "35",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -317,21 +320,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "35",
+        "$id": "36",
         "Type": {
-         "$ref": "34"
+         "$ref": "35"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "36",
+       "$id": "37",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "37",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "38",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -344,9 +346,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "38",
+        "$id": "39",
         "Type": {
-         "$ref": "37"
+         "$ref": "38"
         },
         "Value": "application/json"
        }
@@ -354,7 +356,7 @@
      ],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "40",
        "StatusCodes": [
         204
        ],
@@ -376,10 +378,15 @@
     }
    ],
    "Protocol": {
-    "$id": "40"
+    "$id": "41"
    },
    "Creatable": false,
-   "Parent": "FixedClient"
+   "Parent": "FixedClient",
+   "Parameters": [
+    {
+     "$ref": "13"
+    }
+   ]
   }
  ]
 }

@@ -19,9 +19,9 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Kind": "bytes",
+      "IsNullable": false,
+      "Encode": "base64"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -38,48 +38,51 @@
    "Protocol": {
     "$id": "6"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$id": "7",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "8",
+      "Kind": "string",
+      "IsNullable": false
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "9",
+      "Type": {
+       "$id": "10",
+       "Kind": "string",
+       "IsNullable": false
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "7",
+   "$id": "11",
    "Name": "SameBody",
    "Description": "",
    "Operations": [
     {
-     "$id": "8",
+     "$id": "12",
      "Name": "getAvatarAsPng",
      "ResourceName": "SameBody",
      "Parameters": [
       {
-       "$id": "9",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "10",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "11",
-        "Type": {
-         "$id": "12",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "7"
       },
       {
        "$id": "13",
@@ -87,8 +90,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "14",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -117,9 +119,9 @@
        ],
        "BodyType": {
         "$id": "17",
-        "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Kind": "bytes",
+        "IsNullable": false,
+        "Encode": "base64"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -143,7 +145,7 @@
      "ResourceName": "SameBody",
      "Parameters": [
       {
-       "$ref": "9"
+       "$ref": "7"
       },
       {
        "$id": "19",
@@ -151,8 +153,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "20",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -181,9 +182,9 @@
        ],
        "BodyType": {
         "$id": "23",
-        "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Kind": "bytes",
+        "IsNullable": false,
+        "Encode": "base64"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -206,7 +207,12 @@
     "$id": "24"
    },
    "Creatable": false,
-   "Parent": "ContentNegotiationClient"
+   "Parent": "ContentNegotiationClient",
+   "Parameters": [
+    {
+     "$ref": "7"
+    }
+   ]
   },
   {
    "$id": "25",
@@ -219,7 +225,7 @@
      "ResourceName": "DifferentBody",
      "Parameters": [
       {
-       "$ref": "9"
+       "$ref": "7"
       },
       {
        "$id": "27",
@@ -227,8 +233,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "28",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -257,9 +262,9 @@
        ],
        "BodyType": {
         "$id": "31",
-        "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Kind": "bytes",
+        "IsNullable": false,
+        "Encode": "base64"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -283,7 +288,7 @@
      "ResourceName": "DifferentBody",
      "Parameters": [
       {
-       "$ref": "9"
+       "$ref": "7"
       },
       {
        "$id": "33",
@@ -291,8 +296,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "34",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -343,7 +347,12 @@
     "$id": "37"
    },
    "Creatable": false,
-   "Parent": "ContentNegotiationClient"
+   "Parent": "ContentNegotiationClient",
+   "Parameters": [
+    {
+     "$ref": "7"
+    }
+   ]
   }
  ]
 }

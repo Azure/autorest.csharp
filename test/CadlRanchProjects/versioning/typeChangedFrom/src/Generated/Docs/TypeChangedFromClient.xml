@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="TestAsync(string,TestModel,CancellationToken)">
+      <example>
+This sample shows how to call TestAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TypeChangedFromClient client = new TypeChangedFromClient(endpoint, Versions.V1);
+
+TestModel body = new TestModel("<prop>", "<changedProp>");
+Response<TestModel> response = await client.TestAsync("<param>", body);
+]]></code>
+This sample shows how to call TestAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TypeChangedFromClient client = new TypeChangedFromClient(endpoint, Versions.V1);
+
+TestModel body = new TestModel("<prop>", "<changedProp>");
+Response<TestModel> response = await client.TestAsync("<param>", body);
+]]></code></example>
+    </member>
+    <member name="Test(string,TestModel,CancellationToken)">
+      <example>
+This sample shows how to call Test.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TypeChangedFromClient client = new TypeChangedFromClient(endpoint, Versions.V1);
+
+TestModel body = new TestModel("<prop>", "<changedProp>");
+Response<TestModel> response = client.Test("<param>", body);
+]]></code>
+This sample shows how to call Test with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TypeChangedFromClient client = new TypeChangedFromClient(endpoint, Versions.V1);
+
+TestModel body = new TestModel("<prop>", "<changedProp>");
+Response<TestModel> response = client.Test("<param>", body);
+]]></code></example>
+    </member>
+    <member name="TestAsync(string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call TestAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TypeChangedFromClient client = new TypeChangedFromClient(endpoint, Versions.V1);
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "<prop>",
+    changedProp = "<changedProp>",
+});
+Response response = await client.TestAsync("<param>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("changedProp").ToString());
+]]></code>
+This sample shows how to call TestAsync with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TypeChangedFromClient client = new TypeChangedFromClient(endpoint, Versions.V1);
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "<prop>",
+    changedProp = "<changedProp>",
+});
+Response response = await client.TestAsync("<param>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("changedProp").ToString());
+]]></code></example>
+    </member>
+    <member name="Test(string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Test and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TypeChangedFromClient client = new TypeChangedFromClient(endpoint, Versions.V1);
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "<prop>",
+    changedProp = "<changedProp>",
+});
+Response response = client.Test("<param>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("changedProp").ToString());
+]]></code>
+This sample shows how to call Test with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TypeChangedFromClient client = new TypeChangedFromClient(endpoint, Versions.V1);
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "<prop>",
+    changedProp = "<changedProp>",
+});
+Response response = client.Test("<param>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("changedProp").ToString());
+]]></code></example>
+    </member>
+  </members>
+</doc>

@@ -21,8 +21,7 @@
        "NameInRequest": "operationGroupServiceUrl",
        "Type": {
         "$id": "5",
-        "Kind": "Primitive",
-        "Name": "Uri",
+        "Kind": "uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -41,8 +40,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "7",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -71,8 +69,7 @@
        ],
        "BodyType": {
         "$id": "10",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
@@ -105,8 +102,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "13",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -135,8 +131,7 @@
        ],
        "BodyType": {
         "$id": "16",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
@@ -159,7 +154,12 @@
    "Protocol": {
     "$id": "17"
    },
-   "Creatable": true
+   "Creatable": true,
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   },
   {
    "$id": "18",
@@ -180,8 +180,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "21",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -210,8 +209,7 @@
        ],
        "BodyType": {
         "$id": "24",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
@@ -244,8 +242,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "27",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -274,8 +271,7 @@
        ],
        "BodyType": {
         "$id": "30",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
@@ -299,7 +295,12 @@
     "$id": "31"
    },
    "Creatable": false,
-   "Parent": "ClientAndOperationGroupClient"
+   "Parent": "ClientAndOperationGroupClient",
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   },
   {
    "$id": "32",
@@ -320,8 +321,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "35",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -350,8 +350,7 @@
        ],
        "BodyType": {
         "$id": "38",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
@@ -384,8 +383,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "41",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -414,8 +412,7 @@
        ],
        "BodyType": {
         "$id": "44",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
@@ -439,7 +436,12 @@
     "$id": "45"
    },
    "Creatable": false,
-   "Parent": "ClientAndOperationGroupClient"
+   "Parent": "ClientAndOperationGroupClient",
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   }
  ]
 }

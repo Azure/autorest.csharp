@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="NewOpInNewInterfaceAsync(NewModel,CancellationToken)">
+      <example>
+This sample shows how to call NewOpInNewInterfaceAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+NewInterface client = new RenamedFromClient(endpoint, Versions.V1).GetNewInterfaceClient();
+
+NewModel body = new NewModel("<newProp>", NewEnum.NewEnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
+Response<NewModel> response = await client.NewOpInNewInterfaceAsync(body);
+]]></code>
+This sample shows how to call NewOpInNewInterfaceAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+NewInterface client = new RenamedFromClient(endpoint, Versions.V1).GetNewInterfaceClient();
+
+NewModel body = new NewModel("<newProp>", NewEnum.NewEnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
+Response<NewModel> response = await client.NewOpInNewInterfaceAsync(body);
+]]></code></example>
+    </member>
+    <member name="NewOpInNewInterface(NewModel,CancellationToken)">
+      <example>
+This sample shows how to call NewOpInNewInterface.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+NewInterface client = new RenamedFromClient(endpoint, Versions.V1).GetNewInterfaceClient();
+
+NewModel body = new NewModel("<newProp>", NewEnum.NewEnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
+Response<NewModel> response = client.NewOpInNewInterface(body);
+]]></code>
+This sample shows how to call NewOpInNewInterface with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+NewInterface client = new RenamedFromClient(endpoint, Versions.V1).GetNewInterfaceClient();
+
+NewModel body = new NewModel("<newProp>", NewEnum.NewEnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
+Response<NewModel> response = client.NewOpInNewInterface(body);
+]]></code></example>
+    </member>
+    <member name="NewOpInNewInterfaceAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call NewOpInNewInterfaceAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+NewInterface client = new RenamedFromClient(endpoint, Versions.V1).GetNewInterfaceClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    newProp = "<newProp>",
+    enumProp = "newEnumMember",
+    unionProp = "<unionProp>",
+});
+Response response = await client.NewOpInNewInterfaceAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("newProp").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+Console.WriteLine(result.GetProperty("unionProp").ToString());
+]]></code>
+This sample shows how to call NewOpInNewInterfaceAsync with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+NewInterface client = new RenamedFromClient(endpoint, Versions.V1).GetNewInterfaceClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    newProp = "<newProp>",
+    enumProp = "newEnumMember",
+    unionProp = "<unionProp>",
+});
+Response response = await client.NewOpInNewInterfaceAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("newProp").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+Console.WriteLine(result.GetProperty("unionProp").ToString());
+]]></code></example>
+    </member>
+    <member name="NewOpInNewInterface(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call NewOpInNewInterface and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+NewInterface client = new RenamedFromClient(endpoint, Versions.V1).GetNewInterfaceClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    newProp = "<newProp>",
+    enumProp = "newEnumMember",
+    unionProp = "<unionProp>",
+});
+Response response = client.NewOpInNewInterface(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("newProp").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+Console.WriteLine(result.GetProperty("unionProp").ToString());
+]]></code>
+This sample shows how to call NewOpInNewInterface with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+NewInterface client = new RenamedFromClient(endpoint, Versions.V1).GetNewInterfaceClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    newProp = "<newProp>",
+    enumProp = "newEnumMember",
+    unionProp = "<unionProp>",
+});
+Response response = client.NewOpInNewInterface(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("newProp").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+Console.WriteLine(result.GetProperty("unionProp").ToString());
+]]></code></example>
+    </member>
+  </members>
+</doc>

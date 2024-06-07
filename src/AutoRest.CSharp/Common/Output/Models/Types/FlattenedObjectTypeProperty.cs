@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override string SerializedName => GetSerializedName();
 
-        public override IEnumerable<string>? FlattenedNames => UnderlyingProperty.SchemaProperty?.FlattenedNames;
+        public override IEnumerable<string>? FlattenedNames => UnderlyingProperty.InputModelProperty?.FlattenedNames;
 
         private string GetSerializedName()
         {

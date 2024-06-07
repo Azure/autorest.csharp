@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
         private void WriteSampleSteps(Sample sample)
         {
             // Write sample source file
-            _writer.Line($"// Generated from example definition: {sample.OriginalFilepath}");
+            _writer.Line($"// Generated from example definition: {sample.ExampleFilepath}");
             // Write claimers
             _writer.Line($"// this example is just showing the usage of \"{sample.OperationId}\" operation, for the dependent resources, they will have to be created separately.");
             _writer.Line();

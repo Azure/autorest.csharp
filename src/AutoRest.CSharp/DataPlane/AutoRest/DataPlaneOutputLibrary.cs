@@ -97,10 +97,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 ? modelTypeProvider.Type.WithNullable(model.IsNullable)
                 : new CSharpType(typeof(object), model.IsNullable);
 
-        public override CSharpType FindTypeForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for HLC!");
-
-        public override TypeProvider FindTypeProviderForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeProviderForSchema)} shouldn't be called for HLC!");
-
         public override CSharpType? FindTypeByName(string originalName) => Models.Where(m => m.Declaration.Name == originalName).Select(m => m.Type).FirstOrDefault();
 
         public LongRunningOperation FindLongRunningOperation(InputOperation operation)
@@ -213,7 +209,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var restClients = new Dictionary<InputClient, DataPlaneRestClient>();
             foreach (var client in _input.Clients)
             {
-                var clientParameters = RestClientBuilder.GetParametersFromOperations(client.Operations).ToList();
+                var clientParameters = RestClientBuilder.GetParametersFromClient(client).ToList();
                 var restClientBuilder = new RestClientBuilder(clientParameters, _typeFactory, this);
                 restClients.Add(client, new DataPlaneRestClient(client, restClientBuilder, GetRestClientDefaultName(client), this, _typeFactory, _sourceInputModel));
             }
