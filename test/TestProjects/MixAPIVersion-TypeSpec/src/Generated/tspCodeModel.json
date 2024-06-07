@@ -94,9 +94,8 @@
      "Description": "The Toy items on this page",
      "Type": {
       "$id": "14",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "15",
        "Kind": "Model",
        "Name": "Toy",

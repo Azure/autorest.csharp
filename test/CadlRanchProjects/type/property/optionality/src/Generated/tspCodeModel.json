@@ -277,9 +277,8 @@
      "Description": "Property",
      "Type": {
       "$id": "39",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "40",
        "Kind": "bytes",
        "IsNullable": false,
@@ -308,9 +307,8 @@
      "Description": "Property",
      "Type": {
       "$id": "43",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "23"
       },
       "IsNullable": false

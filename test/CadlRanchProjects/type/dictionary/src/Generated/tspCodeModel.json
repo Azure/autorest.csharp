@@ -33,8 +33,7 @@
      "Description": "",
      "Type": {
       "$id": "6",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "7",
        "Kind": "string",
@@ -141,8 +140,7 @@
        ],
        "BodyType": {
         "$id": "20",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "21",
          "Kind": "string",
@@ -185,8 +183,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "25",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "26",
          "Kind": "string",
@@ -344,8 +341,7 @@
        ],
        "BodyType": {
         "$id": "42",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "43",
          "Kind": "string",
@@ -388,8 +384,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "47",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "48",
          "Kind": "string",
@@ -547,8 +542,7 @@
        ],
        "BodyType": {
         "$id": "64",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "65",
          "Kind": "string",
@@ -591,8 +585,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "69",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "70",
          "Kind": "string",
@@ -750,8 +743,7 @@
        ],
        "BodyType": {
         "$id": "86",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "87",
          "Kind": "string",
@@ -794,8 +786,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "91",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "92",
          "Kind": "string",
@@ -953,8 +944,7 @@
        ],
        "BodyType": {
         "$id": "108",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "109",
          "Kind": "string",
@@ -997,8 +987,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "113",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "114",
          "Kind": "string",
@@ -1156,8 +1145,7 @@
        ],
        "BodyType": {
         "$id": "130",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "131",
          "Kind": "string",
@@ -1206,8 +1194,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "136",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "137",
          "Kind": "string",
@@ -1371,8 +1358,7 @@
        ],
        "BodyType": {
         "$id": "154",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "155",
          "Kind": "string",
@@ -1421,8 +1407,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "160",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "161",
          "Kind": "string",
@@ -1586,8 +1571,7 @@
        ],
        "BodyType": {
         "$id": "178",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "179",
          "Kind": "string",
@@ -1630,8 +1614,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "183",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "184",
          "Kind": "string",
@@ -1789,8 +1772,7 @@
        ],
        "BodyType": {
         "$id": "200",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "201",
          "Kind": "string",
@@ -1831,8 +1813,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "204",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "205",
          "Kind": "string",
@@ -1988,8 +1969,7 @@
        ],
        "BodyType": {
         "$id": "220",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "221",
          "Kind": "string",
@@ -2030,8 +2010,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "224",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "225",
          "Kind": "string",
@@ -2187,8 +2166,7 @@
        ],
        "BodyType": {
         "$id": "240",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "241",
          "Kind": "string",
@@ -2231,8 +2209,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "245",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "246",
          "Kind": "string",

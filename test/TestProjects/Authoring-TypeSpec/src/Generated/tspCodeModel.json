@@ -222,8 +222,7 @@
       "Usage": "None",
       "InheritedDictionaryType": {
        "$id": "34",
-       "Kind": "Dictionary",
-       "Name": "Dictionary",
+       "Kind": "dict",
        "KeyType": {
         "$id": "35",
         "Kind": "string",
@@ -454,9 +453,8 @@
         "Description": "An array of details about specific errors that led to this reported error.",
         "Type": {
          "$id": "68",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$ref": "60"
          },
          "IsNullable": false
@@ -536,9 +534,8 @@
      "Description": "The Project items on this page",
      "Type": {
       "$id": "76",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "26"
       },
       "IsNullable": false
@@ -624,9 +621,8 @@
      "Description": "The Deployment items on this page",
      "Type": {
       "$id": "87",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "82"
       },
       "IsNullable": false
@@ -781,9 +777,8 @@
      "Description": "The warnings that were encountered while executing the job.",
      "Type": {
       "$id": "109",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "110",
        "Kind": "Model",
        "Name": "JobWarning",
@@ -950,9 +945,8 @@
      "Description": "The warnings that were encountered while executing the job.",
      "Type": {
       "$id": "132",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "110"
       },
       "IsNullable": false
@@ -1002,9 +996,8 @@
      "Description": "The SupportedLanguage items on this page",
      "Type": {
       "$id": "138",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "139",
        "Kind": "Model",
        "Name": "SupportedLanguage",
@@ -1080,9 +1073,8 @@
      "Description": "The TrainingConfigVersion items on this page",
      "Type": {
       "$id": "148",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "149",
        "Kind": "Model",
        "Name": "TrainingConfigVersion",

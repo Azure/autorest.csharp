@@ -207,9 +207,8 @@
         "Description": "An array of details about specific errors that led to this reported error.",
         "Type": {
          "$id": "30",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$ref": "22"
          },
          "IsNullable": false

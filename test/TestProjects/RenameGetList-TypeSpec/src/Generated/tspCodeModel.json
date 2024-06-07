@@ -123,8 +123,7 @@
       "Usage": "None",
       "InheritedDictionaryType": {
        "$id": "18",
-       "Kind": "Dictionary",
-       "Name": "Dictionary",
+       "Kind": "dict",
        "KeyType": {
         "$id": "19",
         "Kind": "string",
@@ -278,9 +277,8 @@
      "Description": "The Project items on this page",
      "Type": {
       "$id": "41",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "10"
       },
       "IsNullable": false
@@ -342,9 +340,8 @@
      "Description": "The Deployment items on this page",
      "Type": {
       "$id": "49",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "44"
       },
       "IsNullable": false

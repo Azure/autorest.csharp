@@ -101,9 +101,8 @@
      "Description": "The user's order list",
      "Type": {
       "$id": "15",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "16",
        "Kind": "Model",
        "Name": "UserOrder",
@@ -193,9 +192,8 @@
      "Description": "The User items on this page",
      "Type": {
       "$id": "27",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "9"
       },
       "IsNullable": false
@@ -257,9 +255,8 @@
      "Description": "List of items.",
      "Type": {
       "$id": "35",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "9"
       },
       "IsNullable": false
@@ -298,9 +295,8 @@
      "Description": "The FirstItem items on this page",
      "Type": {
       "$id": "40",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "41",
        "Kind": "Model",
        "Name": "FirstItem",
@@ -363,9 +359,8 @@
      "Description": "The SecondItem items on this page",
      "Type": {
       "$id": "48",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "49",
        "Kind": "Model",
        "Name": "SecondItem",
@@ -997,9 +992,8 @@
        "Description": "Expressions that specify the order of returned results.",
        "Type": {
         "$id": "109",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "110",
          "Kind": "string",
          "IsNullable": false
@@ -1043,9 +1037,8 @@
        "Description": "Select the specified fields to be included in the response.",
        "Type": {
         "$id": "114",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "115",
          "Kind": "string",
          "IsNullable": false
@@ -1069,9 +1062,8 @@
        "Description": "Expand the indicated resources into the response.",
        "Type": {
         "$id": "117",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "118",
          "Kind": "string",
          "IsNullable": false

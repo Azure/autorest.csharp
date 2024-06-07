@@ -66,9 +66,8 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "11",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "12",
          "Kind": "string",
          "IsNullable": false
@@ -146,9 +145,8 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "19",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "20",
          "Kind": "string",
          "IsNullable": false
@@ -227,9 +225,8 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "27",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "28",
          "Kind": "string",
          "IsNullable": false
@@ -308,9 +305,8 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "35",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "36",
          "Kind": "string",
          "IsNullable": false
@@ -389,9 +385,8 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "43",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "44",
          "Kind": "string",
          "IsNullable": false
@@ -487,9 +482,8 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "53",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "54",
          "Kind": "string",
          "IsNullable": false

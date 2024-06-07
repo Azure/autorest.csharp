@@ -28,9 +28,8 @@
       "Description": "",
       "Type": {
        "$id": "5",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$ref": "2"
        },
        "IsNullable": false

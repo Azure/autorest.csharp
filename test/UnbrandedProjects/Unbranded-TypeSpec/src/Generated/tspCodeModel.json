@@ -425,9 +425,8 @@
        },
        {
         "$id": "65",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "66",
          "Kind": "string",
          "IsNullable": false
@@ -605,9 +604,8 @@
      "Description": "optional nullable collection",
      "Type": {
       "$id": "89",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "90",
        "Kind": "int32",
        "IsNullable": false
@@ -624,9 +622,8 @@
      "Description": "required nullable collection",
      "Type": {
       "$id": "92",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "93",
        "Kind": "int32",
        "IsNullable": false
@@ -680,9 +677,8 @@
      "Description": "Required collection of enums",
      "Type": {
       "$id": "100",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "20"
       },
       "IsNullable": false
@@ -697,8 +693,7 @@
      "Description": "Required dictionary of enums",
      "Type": {
       "$id": "102",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "103",
        "Kind": "string",
@@ -741,9 +736,8 @@
      "Description": "this is a collection of int based extensible enum",
      "Type": {
       "$id": "107",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "30"
       },
       "IsNullable": false
@@ -769,9 +763,8 @@
      "Description": "this is a collection of float based extensible enum",
      "Type": {
       "$id": "110",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "35"
       },
       "IsNullable": false
@@ -797,9 +790,8 @@
      "Description": "this is a collection of float based fixed enum",
      "Type": {
       "$id": "113",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "40"
       },
       "IsNullable": false
@@ -825,9 +817,8 @@
      "Description": "this is a collection of int based fixed enum",
      "Type": {
       "$id": "116",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "45"
       },
       "IsNullable": false
@@ -879,8 +870,7 @@
      "Description": "required record of unknown",
      "Type": {
       "$id": "123",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "124",
        "Kind": "string",
@@ -903,8 +893,7 @@
      "Description": "optional record of unknown",
      "Type": {
       "$id": "127",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "128",
        "Kind": "string",
@@ -927,8 +916,7 @@
      "Description": "required readonly record of unknown",
      "Type": {
       "$id": "131",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "132",
        "Kind": "string",
@@ -951,8 +939,7 @@
      "Description": "optional readonly record of unknown",
      "Type": {
       "$id": "135",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "136",
        "Kind": "string",
@@ -2916,9 +2903,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "317",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "318",
          "Kind": "string",
          "IsNullable": false
@@ -2996,9 +2982,8 @@
        ],
        "BodyType": {
         "$id": "326",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "327",
          "Kind": "string",
          "IsNullable": false

@@ -182,9 +182,8 @@
        },
        {
         "$id": "26",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "27",
          "Kind": "string",
          "IsNullable": false
@@ -362,9 +361,8 @@
      "Description": "optional nullable collection",
      "Type": {
       "$id": "50",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "51",
        "Kind": "int32",
        "IsNullable": false
@@ -381,9 +379,8 @@
      "Description": "required nullable collection",
      "Type": {
       "$id": "53",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "54",
        "Kind": "int32",
        "IsNullable": false

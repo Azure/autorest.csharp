@@ -644,9 +644,8 @@
           },
           {
            "$id": "80",
-           "Kind": "Array",
-           "Name": "Array",
-           "ElementType": {
+           "Kind": "array",
+           "ValueType": {
             "$id": "81",
             "Kind": "string",
             "IsNullable": false
@@ -676,9 +675,8 @@
           },
           {
            "$id": "85",
-           "Kind": "Array",
-           "Name": "Array",
-           "ElementType": {
+           "Kind": "array",
+           "ValueType": {
             "$id": "86",
             "Kind": "string",
             "IsNullable": false
@@ -1202,9 +1200,8 @@
         "Description": "This should be receive/send 4 element with Cat, \"a\", int, and boolean",
         "Type": {
          "$id": "162",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "163",
           "Kind": "union",
           "Name": "MixedTypesCasesModel",

@@ -164,9 +164,8 @@
      "Description": "",
      "Type": {
       "$id": "24",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "25",
        "Kind": "duration",
        "IsNullable": false,
@@ -641,9 +640,8 @@
        "NameInRequest": "input",
        "Type": {
         "$id": "76",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "77",
          "Kind": "duration",
          "IsNullable": false,
@@ -1555,9 +1553,8 @@
        "NameInRequest": "duration",
        "Type": {
         "$id": "159",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "160",
          "Kind": "duration",
          "IsNullable": false,

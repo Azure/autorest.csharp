@@ -33,9 +33,8 @@
      "Description": "",
      "Type": {
       "$id": "6",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "2"
       },
       "IsNullable": false
@@ -136,9 +135,8 @@
        ],
        "BodyType": {
         "$id": "19",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "20",
          "Kind": "int32",
          "IsNullable": false
@@ -175,9 +173,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "23",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "24",
          "Kind": "int32",
          "IsNullable": false
@@ -329,9 +326,8 @@
        ],
        "BodyType": {
         "$id": "39",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "40",
          "Kind": "int64",
          "IsNullable": false
@@ -368,9 +364,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "43",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "44",
          "Kind": "int64",
          "IsNullable": false
@@ -522,9 +517,8 @@
        ],
        "BodyType": {
         "$id": "59",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "60",
          "Kind": "boolean",
          "IsNullable": false
@@ -561,9 +555,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "63",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "64",
          "Kind": "boolean",
          "IsNullable": false
@@ -715,9 +708,8 @@
        ],
        "BodyType": {
         "$id": "79",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "80",
          "Kind": "string",
          "IsNullable": false
@@ -754,9 +746,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "83",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "84",
          "Kind": "string",
          "IsNullable": false
@@ -908,9 +899,8 @@
        ],
        "BodyType": {
         "$id": "99",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "100",
          "Kind": "float32",
          "IsNullable": false
@@ -947,9 +937,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "103",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "104",
          "Kind": "float32",
          "IsNullable": false
@@ -1101,9 +1090,8 @@
        ],
        "BodyType": {
         "$id": "119",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "120",
          "Kind": "utcDateTime",
          "IsNullable": false,
@@ -1146,9 +1134,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "124",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "125",
          "Kind": "utcDateTime",
          "IsNullable": false,
@@ -1306,9 +1293,8 @@
        ],
        "BodyType": {
         "$id": "141",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "142",
          "Kind": "duration",
          "IsNullable": false,
@@ -1351,9 +1337,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "146",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "147",
          "Kind": "duration",
          "IsNullable": false,
@@ -1511,9 +1496,8 @@
        ],
        "BodyType": {
         "$id": "163",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "164",
          "Kind": "any",
          "IsNullable": false
@@ -1550,9 +1534,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "167",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "168",
          "Kind": "any",
          "IsNullable": false
@@ -1704,9 +1687,8 @@
        ],
        "BodyType": {
         "$id": "183",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$ref": "2"
         },
         "IsNullable": false
@@ -1741,9 +1723,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "186",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$ref": "2"
         },
         "IsNullable": false
@@ -1893,9 +1874,8 @@
        ],
        "BodyType": {
         "$id": "201",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "202",
          "Kind": "float32",
          "IsNullable": true
@@ -1932,9 +1912,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "205",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "206",
          "Kind": "float32",
          "IsNullable": true

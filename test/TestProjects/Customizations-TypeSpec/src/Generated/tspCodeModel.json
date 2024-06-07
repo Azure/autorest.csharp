@@ -417,9 +417,8 @@
         "Description": "Property renamed that is list",
         "Type": {
          "$id": "61",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "62",
           "Kind": "string",
           "IsNullable": false
@@ -436,8 +435,7 @@
         "Description": "Property renamed that is dictionary",
         "Type": {
          "$id": "64",
-         "Kind": "Dictionary",
-         "Name": "Dictionary",
+         "Kind": "dict",
          "KeyType": {
           "$id": "65",
           "Kind": "string",
@@ -460,13 +458,11 @@
         "Description": "Property renamed that is listoflist",
         "Type": {
          "$id": "68",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "69",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "ValueType": {
            "$id": "70",
            "Kind": "string",
            "IsNullable": false
@@ -485,12 +481,10 @@
         "Description": "Property renamed that is listofdictionary",
         "Type": {
          "$id": "72",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "73",
-          "Kind": "Dictionary",
-          "Name": "Dictionary",
+          "Kind": "dict",
           "KeyType": {
            "$id": "74",
            "Kind": "string",
@@ -515,9 +509,8 @@
         "Description": "Property type changed to ReadOnlyMemory<float>",
         "Type": {
          "$id": "77",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "78",
           "Kind": "float32",
           "IsNullable": false
@@ -534,9 +527,8 @@
         "Description": "Property type changed to ReadOnlyMemory<float>?",
         "Type": {
          "$id": "80",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "81",
           "Kind": "float32",
           "IsNullable": false
@@ -553,9 +545,8 @@
         "Description": "Property type changed to ReadOnlyMemory<float>?",
         "Type": {
          "$id": "83",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "84",
           "Kind": "float32",
           "IsNullable": false
@@ -572,9 +563,8 @@
         "Description": "Property type changed to ReadOnlyMemory<float>?",
         "Type": {
          "$id": "86",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "87",
           "Kind": "float32",
           "IsNullable": false
@@ -591,9 +581,8 @@
         "Description": "Property type changed to ReadOnlyMemory<float>",
         "Type": {
          "$id": "89",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "90",
           "Kind": "float32",
           "IsNullable": false
@@ -610,9 +599,8 @@
         "Description": "Property type changed to ReadOnlyMemory<float>?",
         "Type": {
          "$id": "92",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "93",
           "Kind": "float32",
           "IsNullable": false
@@ -629,9 +617,8 @@
         "Description": "Property type changed to ReadOnlyMemory<float>?",
         "Type": {
          "$id": "95",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "96",
           "Kind": "float32",
           "IsNullable": false
@@ -648,9 +635,8 @@
         "Description": "Property type changed to ReadOnlyMemory<float>?",
         "Type": {
          "$id": "98",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "99",
           "Kind": "float32",
           "IsNullable": false

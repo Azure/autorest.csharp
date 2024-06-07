@@ -194,9 +194,8 @@
      "Description": "Property",
      "Type": {
       "$id": "28",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "29",
        "Kind": "bytes",
        "IsNullable": false,
@@ -238,9 +237,8 @@
      "Description": "Property",
      "Type": {
       "$id": "34",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "35",
        "Kind": "Model",
        "Name": "InnerModel",

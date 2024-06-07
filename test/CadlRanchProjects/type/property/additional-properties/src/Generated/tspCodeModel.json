@@ -84,8 +84,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "12",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "13",
      "Kind": "string",
@@ -165,8 +164,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "23",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "24",
      "Kind": "string",
@@ -219,8 +217,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "31",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "32",
      "Kind": "string",
@@ -300,8 +297,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "42",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "43",
      "Kind": "string",
@@ -354,8 +350,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "50",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "51",
      "Kind": "string",
@@ -394,8 +389,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "56",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "57",
      "Kind": "string",
@@ -434,8 +428,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "62",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "63",
      "Kind": "string",
@@ -474,8 +467,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "68",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "69",
      "Kind": "string",
@@ -514,8 +506,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "74",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "75",
      "Kind": "string",
@@ -554,8 +545,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "80",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "81",
      "Kind": "string",
@@ -594,8 +584,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "86",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "87",
      "Kind": "string",
@@ -654,8 +643,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "93",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "94",
      "Kind": "string",
@@ -690,8 +678,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "97",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "98",
      "Kind": "string",
@@ -726,8 +713,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "101",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "102",
      "Kind": "string",
@@ -735,9 +721,8 @@
     },
     "ValueType": {
      "$id": "103",
-     "Kind": "Array",
-     "Name": "Array",
-     "ElementType": {
+     "Kind": "array",
+     "ValueType": {
       "$ref": "88"
      },
      "IsNullable": false
@@ -752,9 +737,8 @@
      "Description": "",
      "Type": {
       "$id": "105",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "88"
       },
       "IsNullable": false
@@ -774,8 +758,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "107",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "108",
      "Kind": "string",
@@ -783,9 +766,8 @@
     },
     "ValueType": {
      "$id": "109",
-     "Kind": "Array",
-     "Name": "Array",
-     "ElementType": {
+     "Kind": "array",
+     "ValueType": {
       "$ref": "88"
      },
      "IsNullable": false
@@ -800,9 +782,8 @@
      "Description": "",
      "Type": {
       "$id": "111",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "88"
       },
       "IsNullable": false
@@ -821,8 +802,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "113",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "114",
      "Kind": "string",
@@ -830,9 +810,8 @@
     },
     "ValueType": {
      "$id": "115",
-     "Kind": "Array",
-     "Name": "Array",
-     "ElementType": {
+     "Kind": "array",
+     "ValueType": {
       "$ref": "88"
      },
      "IsNullable": false
@@ -847,9 +826,8 @@
      "Description": "",
      "Type": {
       "$id": "117",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "88"
       },
       "IsNullable": false
@@ -869,8 +847,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "119",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "120",
      "Kind": "string",
@@ -909,8 +886,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "125",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "126",
      "Kind": "string",
@@ -949,8 +925,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "131",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "132",
      "Kind": "string",
@@ -987,8 +962,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "136",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "137",
      "Kind": "string",
@@ -996,9 +970,8 @@
     },
     "ValueType": {
      "$id": "138",
-     "Kind": "Array",
-     "Name": "Array",
-     "ElementType": {
+     "Kind": "array",
+     "ValueType": {
       "$ref": "88"
      },
      "IsNullable": false
@@ -1119,9 +1092,8 @@
      "Description": "The index property",
      "Type": {
       "$id": "151",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "88"
       },
       "IsNullable": false
@@ -1141,8 +1113,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "153",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "154",
      "Kind": "string",
@@ -1194,8 +1165,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "161",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "162",
      "Kind": "string",
@@ -1247,8 +1217,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "169",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "170",
      "Kind": "string",
@@ -1401,8 +1370,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "189",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "190",
      "Kind": "string",
@@ -1450,8 +1418,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "195",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "196",
      "Kind": "string",
@@ -1539,8 +1506,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "206",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "207",
      "Kind": "string",
@@ -1553,9 +1519,8 @@
      "VariantTypes": [
       {
        "$id": "209",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$ref": "198"
        },
        "IsNullable": false

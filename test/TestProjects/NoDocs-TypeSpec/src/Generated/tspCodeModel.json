@@ -512,9 +512,8 @@
        },
        {
         "$id": "78",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "79",
          "Kind": "string",
          "IsNullable": false
@@ -692,9 +691,8 @@
      "Description": "optional nullable collection",
      "Type": {
       "$id": "102",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "103",
        "Kind": "int32",
        "IsNullable": false
@@ -711,9 +709,8 @@
      "Description": "required nullable collection",
      "Type": {
       "$id": "105",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "106",
        "Kind": "int32",
        "IsNullable": false
@@ -806,9 +803,8 @@
       "Description": "",
       "Type": {
        "$id": "117",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$ref": "114"
        },
        "IsNullable": false
@@ -853,9 +849,8 @@
      "Description": "Additional Content defined by implementations",
      "Type": {
       "$id": "122",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "123",
        "Kind": "Model",
        "Name": "ThereLevelExtension",
@@ -879,9 +874,8 @@
           "Description": "",
           "Type": {
            "$id": "126",
-           "Kind": "Array",
-           "Name": "Array",
-           "ElementType": {
+           "Kind": "array",
+           "ValueType": {
             "$ref": "123"
            },
            "IsNullable": false
@@ -960,9 +954,8 @@
      "Description": "",
      "Type": {
       "$id": "134",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "130"
       },
       "IsNullable": false
@@ -1084,9 +1077,8 @@
      "Description": "Required collection of enums",
      "Type": {
       "$id": "148",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "30"
       },
       "IsNullable": false
@@ -1101,8 +1093,7 @@
      "Description": "Required dictionary of enums",
      "Type": {
       "$id": "150",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "151",
        "Kind": "string",
@@ -1145,9 +1136,8 @@
      "Description": "this is a collection of int based extensible enum",
      "Type": {
       "$id": "155",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "40"
       },
       "IsNullable": false
@@ -1173,9 +1163,8 @@
      "Description": "this is a collection of float based extensible enum",
      "Type": {
       "$id": "158",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "45"
       },
       "IsNullable": false
@@ -1201,9 +1190,8 @@
      "Description": "this is a collection of float based fixed enum",
      "Type": {
       "$id": "161",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "50"
       },
       "IsNullable": false
@@ -1229,9 +1217,8 @@
      "Description": "this is a collection of int based fixed enum",
      "Type": {
       "$id": "164",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "55"
       },
       "IsNullable": false
@@ -1283,8 +1270,7 @@
      "Description": "required record of unknown",
      "Type": {
       "$id": "171",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "172",
        "Kind": "string",
@@ -1307,8 +1293,7 @@
      "Description": "optional record of unknown",
      "Type": {
       "$id": "175",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "176",
        "Kind": "string",
@@ -1331,8 +1316,7 @@
      "Description": "required readonly record of unknown",
      "Type": {
       "$id": "179",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "180",
        "Kind": "string",
@@ -1355,8 +1339,7 @@
      "Description": "optional readonly record of unknown",
      "Type": {
       "$id": "183",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "184",
        "Kind": "string",
@@ -1433,9 +1416,8 @@
      "Description": "this is a list of union types",
      "Type": {
       "$id": "193",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "194",
        "Kind": "union",
        "Name": "RoundTripModelUnionList",
@@ -1489,9 +1471,8 @@
         },
         {
          "$id": "202",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$ref": "197"
          },
          "IsNullable": false
@@ -3273,8 +3254,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "363",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "364",
          "Kind": "string",

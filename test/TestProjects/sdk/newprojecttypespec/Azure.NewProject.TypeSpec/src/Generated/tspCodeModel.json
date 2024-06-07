@@ -425,9 +425,8 @@
        },
        {
         "$id": "65",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "66",
          "Kind": "string",
          "IsNullable": false
@@ -666,9 +665,8 @@
      "Description": "Required collection of enums",
      "Type": {
       "$id": "97",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "20"
       },
       "IsNullable": false
@@ -683,8 +681,7 @@
      "Description": "Required dictionary of enums",
      "Type": {
       "$id": "99",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "100",
        "Kind": "string",
@@ -727,9 +724,8 @@
      "Description": "this is a collection of int based extensible enum",
      "Type": {
       "$id": "104",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "30"
       },
       "IsNullable": false
@@ -755,9 +751,8 @@
      "Description": "this is a collection of float based extensible enum",
      "Type": {
       "$id": "107",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "35"
       },
       "IsNullable": false
@@ -783,9 +778,8 @@
      "Description": "this is a collection of float based fixed enum",
      "Type": {
       "$id": "110",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "40"
       },
       "IsNullable": false
@@ -811,9 +805,8 @@
      "Description": "this is a collection of int based fixed enum",
      "Type": {
       "$id": "113",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "45"
       },
       "IsNullable": false
@@ -865,8 +858,7 @@
      "Description": "required record of unknown",
      "Type": {
       "$id": "120",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "121",
        "Kind": "string",
@@ -889,8 +881,7 @@
      "Description": "optional record of unknown",
      "Type": {
       "$id": "124",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "125",
        "Kind": "string",
@@ -913,8 +904,7 @@
      "Description": "required readonly record of unknown",
      "Type": {
       "$id": "128",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "129",
        "Kind": "string",
@@ -937,8 +927,7 @@
      "Description": "optional readonly record of unknown",
      "Type": {
       "$id": "132",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "133",
        "Kind": "string",

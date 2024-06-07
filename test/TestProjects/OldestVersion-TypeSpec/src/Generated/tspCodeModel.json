@@ -168,9 +168,8 @@
         "Description": "An array of details about specific errors that led to this reported error.",
         "Type": {
          "$id": "25",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$ref": "17"
          },
          "IsNullable": false
@@ -310,9 +309,8 @@
      "Description": "The Resource items on this page",
      "Type": {
       "$id": "41",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "42",
        "Kind": "Model",
        "Name": "Resource",
@@ -619,9 +617,8 @@
        "Description": "Select the specified fields to be included in the response.",
        "Type": {
         "$id": "79",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "80",
          "Kind": "string",
          "IsNullable": false

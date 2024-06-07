@@ -144,9 +144,8 @@
      "Description": "",
      "Type": {
       "$id": "17",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "2"
       },
       "IsNullable": false
@@ -161,8 +160,7 @@
      "Description": "",
      "Type": {
       "$id": "19",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "20",
        "Kind": "string",

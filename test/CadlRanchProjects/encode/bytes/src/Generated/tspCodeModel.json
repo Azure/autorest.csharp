@@ -91,9 +91,8 @@
      "Description": "",
      "Type": {
       "$id": "13",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "14",
        "Kind": "bytes",
        "IsNullable": false,
@@ -390,9 +389,8 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "45",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "46",
          "Kind": "bytes",
          "IsNullable": false,
@@ -1151,9 +1149,8 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "114",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "115",
          "Kind": "bytes",
          "IsNullable": false,

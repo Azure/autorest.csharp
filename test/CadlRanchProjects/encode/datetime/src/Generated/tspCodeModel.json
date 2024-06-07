@@ -135,9 +135,8 @@
      "Description": "",
      "Type": {
       "$id": "20",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "21",
        "Kind": "utcDateTime",
        "IsNullable": false,
@@ -533,9 +532,8 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "64",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "65",
          "Kind": "utcDateTime",
          "IsNullable": false,
@@ -1499,9 +1497,8 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "154",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "155",
          "Kind": "utcDateTime",
          "IsNullable": false,

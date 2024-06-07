@@ -256,9 +256,8 @@
      "Description": "The fields property.",
      "Type": {
       "$id": "38",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "39",
        "Kind": "string",
        "IsNullable": false
@@ -288,8 +287,7 @@
      "Description": "The key value pairs property.",
      "Type": {
       "$id": "43",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "44",
        "Kind": "string",
@@ -435,8 +433,7 @@
       "Description": "The tags property.",
       "Type": {
        "$id": "64",
-       "Kind": "Dictionary",
-       "Name": "Dictionary",
+       "Kind": "dict",
        "KeyType": {
         "$id": "65",
         "Kind": "string",
@@ -533,9 +530,8 @@
         "Description": "The virtual machines.",
         "Type": {
          "$id": "78",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "79",
           "Kind": "Model",
           "Name": "WritableSubResource",
@@ -677,9 +673,8 @@
      "Description": "The collection of provider resource types.",
      "Type": {
       "$id": "96",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "97",
        "Kind": "Model",
        "Name": "ProviderResourceType",
@@ -707,9 +702,8 @@
          "Description": "The collection of locations where this resource type can be created.",
          "Type": {
           "$id": "101",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "ValueType": {
            "$id": "102",
            "Kind": "string",
            "IsNullable": false
@@ -726,9 +720,8 @@
          "Description": "The location mappings that are supported by this resource type.",
          "Type": {
           "$id": "104",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "ValueType": {
            "$id": "105",
            "Kind": "Model",
            "Name": "ProviderExtendedLocation",
@@ -770,9 +763,8 @@
              "Description": "The extended locations for the azure location.",
              "Type": {
               "$id": "111",
-              "Kind": "Array",
-              "Name": "Array",
-              "ElementType": {
+              "Kind": "array",
+              "ValueType": {
                "$id": "112",
                "Kind": "string",
                "IsNullable": false
@@ -796,9 +788,8 @@
          "Description": "The aliases that are supported by this resource type.",
          "Type": {
           "$id": "114",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "ValueType": {
            "$id": "115",
            "Kind": "Model",
            "Name": "ResourceTypeAlias",
@@ -827,9 +818,8 @@
              "Description": "The paths for an alias.",
              "Type": {
               "$id": "119",
-              "Kind": "Array",
-              "Name": "Array",
-              "ElementType": {
+              "Kind": "array",
+              "ValueType": {
                "$id": "120",
                "Kind": "Model",
                "Name": "ResourceTypeAliasPath",
@@ -858,9 +848,8 @@
                  "Description": "The API versions.",
                  "Type": {
                   "$id": "124",
-                  "Kind": "Array",
-                  "Name": "Array",
-                  "ElementType": {
+                  "Kind": "array",
+                  "ValueType": {
                    "$id": "125",
                    "Kind": "string",
                    "IsNullable": false
@@ -1034,9 +1023,8 @@
          "Description": "The API version.",
          "Type": {
           "$id": "143",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "ValueType": {
            "$id": "144",
            "Kind": "string",
            "IsNullable": false
@@ -1066,9 +1054,8 @@
          "Description": "Gets the zone mappings.",
          "Type": {
           "$id": "148",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "ValueType": {
            "$id": "149",
            "Kind": "Model",
            "Name": "ZoneMapping",
@@ -1097,9 +1084,8 @@
              "Description": "The zones.",
              "Type": {
               "$id": "153",
-              "Kind": "Array",
-              "Name": "Array",
-              "ElementType": {
+              "Kind": "array",
+              "ValueType": {
                "$id": "154",
                "Kind": "string",
                "IsNullable": false
@@ -1123,9 +1109,8 @@
          "Description": "The API profiles for the resource provider.",
          "Type": {
           "$id": "156",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "ValueType": {
            "$id": "157",
            "Kind": "Model",
            "Name": "ApiProfile",
@@ -1186,8 +1171,7 @@
          "Description": "The properties.",
          "Type": {
           "$id": "165",
-          "Kind": "Dictionary",
-          "Name": "Dictionary",
+          "Kind": "dict",
           "KeyType": {
            "$id": "166",
            "Kind": "string",
@@ -1256,8 +1240,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "170",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "171",
      "Kind": "string",
@@ -1321,8 +1304,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "180",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "181",
      "Kind": "string",
@@ -1330,9 +1312,8 @@
     },
     "ValueType": {
      "$id": "182",
-     "Kind": "Array",
-     "Name": "Array",
-     "ElementType": {
+     "Kind": "array",
+     "ValueType": {
       "$ref": "134"
      },
      "IsNullable": false
@@ -1390,8 +1371,7 @@
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "190",
-    "Kind": "Dictionary",
-    "Name": "Dictionary",
+    "Kind": "dict",
     "KeyType": {
      "$id": "191",
      "Kind": "string",
@@ -1466,9 +1446,8 @@
      "Description": "Optional list.",
      "Type": {
       "$id": "201",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "202",
        "Kind": "string",
        "IsNullable": false
@@ -1498,8 +1477,7 @@
      "Description": "Optional dictionary.",
      "Type": {
       "$id": "206",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "207",
        "Kind": "string",

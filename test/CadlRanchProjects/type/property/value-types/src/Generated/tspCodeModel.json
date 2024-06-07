@@ -566,9 +566,8 @@
      "Description": "Property",
      "Type": {
       "$id": "74",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "75",
        "Kind": "string",
        "IsNullable": false
@@ -596,9 +595,8 @@
      "Description": "Property",
      "Type": {
       "$id": "78",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "79",
        "Kind": "int32",
        "IsNullable": false
@@ -626,9 +624,8 @@
      "Description": "Property",
      "Type": {
       "$id": "82",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "69"
       },
       "IsNullable": false
@@ -654,8 +651,7 @@
      "Description": "Property",
      "Type": {
       "$id": "85",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "86",
        "Kind": "string",

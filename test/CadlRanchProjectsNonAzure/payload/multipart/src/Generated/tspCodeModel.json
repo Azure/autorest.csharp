@@ -114,9 +114,8 @@
      "Description": "",
      "Type": {
       "$id": "17",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "11"
       },
       "IsNullable": false
@@ -131,9 +130,8 @@
      "Description": "",
      "Type": {
       "$id": "19",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "20",
        "Kind": "bytes",
        "IsNullable": false,
@@ -212,9 +210,8 @@
      "Description": "",
      "Type": {
       "$id": "29",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "30",
        "Kind": "bytes",
        "IsNullable": false,
@@ -256,9 +253,8 @@
      "Description": "",
      "Type": {
       "$id": "35",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "11"
       },
       "IsNullable": false

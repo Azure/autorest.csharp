@@ -128,9 +128,8 @@
      "Description": "Array of ledger entries",
      "Type": {
       "$id": "19",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "20",
        "Kind": "Model",
        "Name": "LedgerEntry",
@@ -218,9 +217,8 @@
      "Description": "The DimensionValueListItem items on this page",
      "Type": {
       "$id": "31",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "32",
        "Kind": "Model",
        "Name": "DimensionValueListItem",
@@ -235,9 +233,8 @@
          "Description": "",
          "Type": {
           "$id": "34",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "ValueType": {
            "$id": "35",
            "Kind": "string",
            "IsNullable": false
@@ -288,9 +285,8 @@
      "Description": "The LedgerEntry items on this page",
      "Type": {
       "$id": "40",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "20"
       },
       "IsNullable": false
@@ -329,9 +325,8 @@
      "Description": "The TextBlocklist items on this page",
      "Type": {
       "$id": "45",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "46",
        "Kind": "Model",
        "Name": "TextBlocklist",
@@ -407,9 +402,8 @@
      "Description": "The TextBlockItem items on this page",
      "Type": {
       "$id": "55",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "56",
        "Kind": "Model",
        "Name": "TextBlockItem",
@@ -498,9 +492,8 @@
      "Description": "The list of Pools.",
      "Type": {
       "$id": "67",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "68",
        "Kind": "Model",
        "Name": "BatchPool",
@@ -1446,9 +1439,8 @@
        "Description": "An OData $select clause.",
        "Type": {
         "$id": "162",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "163",
          "Kind": "string",
          "IsNullable": false
@@ -1473,9 +1465,8 @@
        "Description": "An OData $expand clause.",
        "Type": {
         "$id": "165",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "166",
          "Kind": "string",
          "IsNullable": false
