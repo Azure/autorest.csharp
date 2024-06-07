@@ -1,9 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using AutoRest.CSharp.Common.Input.InputTypes.Transformation;
-
-namespace AutoRest.CSharp.Common.Input.InputTypes
+namespace AutoRest.CSharp.Common.Input
 {
     internal class InputTypeTransformer
     {

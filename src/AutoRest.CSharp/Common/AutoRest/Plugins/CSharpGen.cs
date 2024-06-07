@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Common.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;

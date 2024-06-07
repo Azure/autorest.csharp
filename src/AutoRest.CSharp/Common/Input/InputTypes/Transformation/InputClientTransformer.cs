@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace AutoRest.CSharp.Common.Input.InputTypes.Transformation
+namespace AutoRest.CSharp.Common.Input
 {
     internal class InputClientTransformer
     {
