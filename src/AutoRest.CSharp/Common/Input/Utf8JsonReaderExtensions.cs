@@ -10,6 +10,13 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal static class Utf8JsonReaderExtensions
     {
+        public static bool MatchesPropertyName(this ref Utf8JsonReader reader, string propertyName, bool caseSensitive = false)
+        {
+            var comparison = caseSensitive ? StringComparison.InvariantCulture : StringComparison.InvariantCultureIgnoreCase;
+
+            return string.Equals(reader.GetString(), propertyName, comparison);
+        }
+
         public static bool TryReadReferenceId(this ref Utf8JsonReader reader, ref bool isFirstProperty, ref string? value)
         {
             if (reader.TokenType != JsonTokenType.PropertyName)
@@ -17,7 +24,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException();
             }
 
-            if (reader.GetString() != "$id")
+            if (!reader.MatchesPropertyName("$id", true))
             {
                 return false;
             }
@@ -42,7 +49,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException();
             }
 
-            if (reader.GetString() != propertyName)
+            if (!reader.MatchesPropertyName(propertyName))
             {
                 return false;
             }
@@ -60,7 +67,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException();
             }
 
-            if (reader.GetString() != propertyName)
+            if (!reader.MatchesPropertyName(propertyName))
             {
                 return false;
             }
@@ -78,7 +85,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException();
             }
 
-            if (reader.GetString() != propertyName)
+            if (!reader.MatchesPropertyName(propertyName))
             {
                 return false;
             }
@@ -118,7 +125,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException();
             }
 
-            if (reader.GetString() != propertyName)
+            if (!reader.MatchesPropertyName(propertyName))
             {
                 return false;
             }
@@ -135,7 +142,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException();
             }
 
-            if (reader.GetString() != propertyName)
+            if (!reader.MatchesPropertyName(propertyName))
             {
                 return false;
             }
@@ -179,7 +186,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException();
             }
 
-            if (reader.GetString() != "$ref")
+            if (!reader.MatchesPropertyName("$ref", true))
             {
                 return null;
             }
@@ -204,7 +211,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException();
             }
 
-            if (reader.GetString() != propertyName)
+            if (!reader.MatchesPropertyName(propertyName))
             {
                 return false;
             }

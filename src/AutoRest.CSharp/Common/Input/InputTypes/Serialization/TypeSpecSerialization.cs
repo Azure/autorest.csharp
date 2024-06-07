@@ -15,6 +15,7 @@ namespace AutoRest.CSharp.Common.Input
             var referenceHandler = new TypeSpecReferenceHandler();
             var options = new JsonSerializerOptions
             {
+                PropertyNameCaseInsensitive = true,
                 ReferenceHandler = referenceHandler,
                 AllowTrailingCommas = true,
                 Converters =

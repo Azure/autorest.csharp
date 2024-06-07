@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Common.Input
                     continue;
                 }
 
-                if (reader.GetString() == nameof(InputLiteralType.Value))
+                if (reader.MatchesPropertyName(nameof(InputLiteralType.Value)))
                 {
                     value = ReadLiteralValue(ref reader, nameof(InputLiteralType.Value), options, type);
                 }
@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException();
             }
 
-            if (reader.GetString() != propertyName)
+            if (!reader.MatchesPropertyName(propertyName))
             {
                 throw new JsonException("This is not for json field " + propertyName);
             }

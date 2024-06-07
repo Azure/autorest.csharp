@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Common.Input
                  * If the model has base model, `BaseModel` and `Properties` should be the last two items in tspCodeModel.
                  * and `BaseModel` should be last but one, and `Properties` should be the last one.
                  */
-                if (reader.GetString() == nameof(InputModelType.BaseModel))
+                if (reader.MatchesPropertyName(nameof(InputModelType.BaseModel)))
                 {
                     model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, inheritedDictionaryType, isNullable, resolver);
                     reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel);
@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Common.Input
                     }
                     continue;
                 }
-                if (reader.GetString() == nameof(InputModelType.Properties))
+                if (reader.MatchesPropertyName(nameof(InputModelType.Properties)))
                 {
                     model = model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, inheritedDictionaryType, isNullable, resolver);
                     reader.Read();
