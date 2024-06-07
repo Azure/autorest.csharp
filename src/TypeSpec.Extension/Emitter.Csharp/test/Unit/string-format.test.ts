@@ -46,9 +46,9 @@ describe("Test string format", () => {
         );
         deepStrictEqual(
             {
-                Kind: "url",
-                IsNullable: false,
-                Encode: undefined
+                kind: "url",
+                isNullable: false,
+                encode: undefined
             } as InputPrimitiveType,
             operation.Parameters[0].Type
         );
@@ -75,11 +75,11 @@ describe("Test string format", () => {
         assert(foo !== undefined);
         deepStrictEqual(
             {
-                Kind: "url",
-                IsNullable: false,
-                Encode: undefined
+                kind: "url",
+                isNullable: false,
+                encode: undefined
             } as InputPrimitiveType,
-            foo.Properties[0].Type
+            foo.properties[0].type
         );
     });
 });

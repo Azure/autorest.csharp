@@ -108,8 +108,8 @@ export function createModelForService(
         defaultApiVersion
             ? {
                   Type: {
-                      Kind: "string",
-                      IsNullable: false
+                      kind: "string",
+                      isNullable: false
                   } as InputPrimitiveType,
                   Value: defaultApiVersion
               }
@@ -184,14 +184,15 @@ export function createModelForService(
                 op.RequestMediaTypes?.forEach((item) => {
                     if (
                         item === "multipart/form-data" &&
-                        !inputModelType.Usage.includes(Usage.Multipart)
+                        !inputModelType.usage.includes(Usage.Multipart)
                     ) {
-                        if (inputModelType.Usage.trim().length === 0) {
-                            inputModelType.Usage = inputModelType.Usage.concat(
+                        if (inputModelType.usage.trim().length === 0) {
+                            inputModelType.usage = inputModelType.usage.concat(
                                 Usage.Multipart
                             );
                         } else {
-                            inputModelType.Usage = inputModelType.Usage.trim()
+                            inputModelType.usage = inputModelType.usage
+                                .trim()
                                 .concat(",")
                                 .concat(Usage.Multipart);
                         }
@@ -318,15 +319,15 @@ function setUsage(
     models: Map<string, InputModelType | InputEnumType>
 ) {
     for (const [name, m] of models) {
-        if (m.Usage !== undefined && m.Usage !== Usage.None) continue;
+        if (m.usage !== undefined && m.usage !== Usage.None) continue;
         if (usages.inputs.includes(name)) {
-            m.Usage = Usage.Input;
+            m.usage = Usage.Input;
         } else if (usages.outputs.includes(name)) {
-            m.Usage = Usage.Output;
+            m.usage = Usage.Output;
         } else if (usages.roundTrips.includes(name)) {
-            m.Usage = Usage.RoundTrip;
+            m.usage = Usage.RoundTrip;
         } else {
-            m.Usage = Usage.None;
+            m.usage = Usage.None;
         }
     }
 }

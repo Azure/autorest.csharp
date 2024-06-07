@@ -50,14 +50,14 @@ describe("Test encode duration", () => {
         );
         deepStrictEqual(
             {
-                Kind: "duration",
-                Encode: "ISO8601",
-                WireType: {
-                    Kind: "string",
-                    IsNullable: false,
-                    Encode: undefined
+                kind: "duration",
+                encode: "ISO8601",
+                wireType: {
+                    kind: "string",
+                    isNullable: false,
+                    encode: undefined
                 },
-                IsNullable: false
+                isNullable: false
             } as InputDurationType,
             operation.Parameters[0].Type
         );
@@ -90,14 +90,14 @@ describe("Test encode duration", () => {
         );
         deepStrictEqual(
             {
-                Kind: "duration",
-                Encode: "seconds",
-                WireType: {
-                    Kind: "int32",
-                    IsNullable: false,
-                    Encode: undefined
+                kind: "duration",
+                encode: "seconds",
+                wireType: {
+                    kind: "int32",
+                    isNullable: false,
+                    encode: undefined
                 },
-                IsNullable: false
+                isNullable: false
             } as InputDurationType,
             operation.Parameters[0].Type
         );
@@ -130,14 +130,14 @@ describe("Test encode duration", () => {
         );
         deepStrictEqual(
             {
-                Kind: "duration",
-                Encode: "seconds",
-                WireType: {
-                    Kind: "float32",
-                    IsNullable: false,
-                    Encode: undefined
+                kind: "duration",
+                encode: "seconds",
+                wireType: {
+                    kind: "float32",
+                    isNullable: false,
+                    encode: undefined
                 },
-                IsNullable: false
+                isNullable: false
             } as InputDurationType,
             operation.Parameters[0].Type
         );
@@ -164,16 +164,16 @@ describe("Test encode duration", () => {
         assert(durationProperty !== undefined);
         deepStrictEqual(
             {
-                Kind: "duration",
-                Encode: "ISO8601",
-                WireType: {
-                    Kind: "string",
-                    IsNullable: false,
-                    Encode: undefined
+                kind: "duration",
+                encode: "ISO8601",
+                wireType: {
+                    kind: "string",
+                    isNullable: false,
+                    encode: undefined
                 },
-                IsNullable: false
+                isNullable: false
             } as InputDurationType,
-            durationProperty.Properties[0].Type
+            durationProperty.properties[0].type
         );
     });
 
@@ -198,16 +198,16 @@ describe("Test encode duration", () => {
         assert(durationProperty !== undefined);
         deepStrictEqual(
             {
-                Kind: "duration",
-                Encode: "seconds",
-                WireType: {
-                    Kind: "int32",
-                    IsNullable: false,
-                    Encode: undefined
+                kind: "duration",
+                encode: "seconds",
+                wireType: {
+                    kind: "int32",
+                    isNullable: false,
+                    encode: undefined
                 },
-                IsNullable: false
+                isNullable: false
             } as InputDurationType,
-            durationProperty.Properties[0].Type
+            durationProperty.properties[0].type
         );
     });
 
@@ -232,16 +232,16 @@ describe("Test encode duration", () => {
         assert(durationProperty !== undefined);
         deepStrictEqual(
             {
-                Kind: "duration",
-                Encode: "seconds",
-                WireType: {
-                    Kind: "float32",
-                    IsNullable: false,
-                    Encode: undefined
+                kind: "duration",
+                encode: "seconds",
+                wireType: {
+                    kind: "float32",
+                    isNullable: false,
+                    encode: undefined
                 },
-                IsNullable: false
+                isNullable: false
             } as InputDurationType,
-            durationProperty.Properties[0].Type
+            durationProperty.properties[0].type
         );
     });
 });

@@ -255,16 +255,16 @@ export function getUsages(
         for (const [name, model] of modelMap) {
             // get the usage of this model
             const usage = usagesMap.get(name);
-            for (const prop of model.Properties) {
-                const type = prop.Type;
+            for (const prop of model.properties) {
+                const type = prop.type;
                 if (!isInputLiteralType(type)) continue;
                 // now type should be a literal type
                 // find its corresponding enum type
-                const literalValueType = type.ValueType;
+                const literalValueType = type.valueType;
                 if (!isInputEnumType(literalValueType)) continue;
                 // now literalValueType should be an enum type
                 // apply the usage on this model to the usagesMap
-                appendUsage(literalValueType.Name, usage!);
+                appendUsage(literalValueType.name, usage!);
             }
         }
     }

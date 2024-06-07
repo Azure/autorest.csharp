@@ -122,15 +122,15 @@ export function loadOperation(
             // workaround for alias model
             if (
                 isInputModelType(bodyParameter.Type) &&
-                bodyParameter.Type.Name === ""
+                bodyParameter.Type.name === ""
             ) {
                 // give body type a name
-                bodyParameter.Type.Name = `${capitalize(op.name)}Request`;
+                bodyParameter.Type.name = `${capitalize(op.name)}Request`;
                 const bodyModelType = bodyParameter.Type as InputModelType;
-                bodyModelType.Usage = Usage.Input;
+                bodyModelType.usage = Usage.Input;
                 // update models cache
                 models.delete("");
-                models.set(bodyModelType.Name, bodyModelType);
+                models.set(bodyModelType.name, bodyModelType);
 
                 // give body parameter a name
                 bodyParameter.Name = `${capitalize(op.name)}Request`;
@@ -173,16 +173,16 @@ export function loadOperation(
         if (isInputLiteralType(contentTypeParameter.Type)) {
             mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
         } else if (isInputUnionType(contentTypeParameter.Type)) {
-            for (const unionItem of contentTypeParameter.Type.VariantTypes) {
+            for (const unionItem of contentTypeParameter.Type.variantTypes) {
                 if (isInputLiteralType(unionItem)) {
-                    mediaTypes.push(unionItem.Value as string);
+                    mediaTypes.push(unionItem.value as string);
                 } else {
                     throw "Media type of content type should be string.";
                 }
             }
         } else if (isInputEnumType(contentTypeParameter.Type)) {
-            const mediaTypeValues = contentTypeParameter.Type.Values.map(
-                (value) => value.Value
+            const mediaTypeValues = contentTypeParameter.Type.values.map(
+                (value) => value.value
             );
             if (mediaTypeValues.some((item) => item === undefined)) {
                 throw "Media type of content type should be string.";
@@ -276,7 +276,7 @@ export function loadOperation(
             requestLocation === RequestLocation.Header &&
             name.toLowerCase() === "content-type";
         const kind: InputOperationParameterKind =
-            isContentType || inputType.Kind === "constant"
+            isContentType || inputType.kind === "constant"
                 ? InputOperationParameterKind.Constant
                 : isApiVer
                 ? defaultValue
@@ -297,7 +297,7 @@ export function loadOperation(
             IsEndpoint: false,
             SkipUrlEncoding: false, //TODO: retrieve out value from extension
             Explode:
-                (inputType as InputListType).ElementType && format === "multi"
+                (inputType as InputListType).elementType && format === "multi"
                     ? true
                     : false,
             Kind: kind,

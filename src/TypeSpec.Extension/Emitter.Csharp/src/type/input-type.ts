@@ -2,18 +2,22 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import { SdkBuiltInKinds } from "@azure-tools/typespec-client-generator-core";
-import { InputEnumTypeValue } from "./input-enum-type-value.js";
-import { InputModelProperty } from "./input-model-property.js";
-import { InputTypeKind } from "./input-type-kind.js";
 import {
     DateTimeKnownEncoding,
     DurationKnownEncoding
 } from "@typespec/compiler";
 
 interface InputTypeBase {
-    Kind: string;
-    IsNullable: boolean;
-    Description?: string;
+    kind: string;
+    isNullable: boolean;
+    description?: string;
+}
+
+export enum InputTypeKind {
+    Model = "Model",
+    Array = "Array",
+    Dictionary = "Dictionary",
+    Intrinsic = "Intrinsic"
 }
 
 export type InputType =
@@ -28,106 +32,121 @@ export type InputType =
     | InputDictionaryType;
 
 export interface InputPrimitiveType extends InputTypeBase {
-    Kind: SdkBuiltInKinds;
-    Encode?: string; // In TCGC this is required, and when there is no encoding, it just has the same value as kind
+    kind: SdkBuiltInKinds;
+    encode?: string; // In TCGC this is required, and when there is no encoding, it just has the same value as kind
 }
 
 export interface InputLiteralType extends InputTypeBase {
-    Kind: "constant";
-    ValueType: InputPrimitiveType | InputEnumType; // this has to be inconsistent because currently we have possibility of having an enum underlying the literal type
-    Value: string | number | boolean | null;
+    kind: "constant";
+    valueType: InputPrimitiveType | InputEnumType; // this has to be inconsistent because currently we have possibility of having an enum underlying the literal type
+    value: string | number | boolean | null;
 }
 
 export function isInputLiteralType(type: InputType): type is InputLiteralType {
-    return type.Kind === "constant";
+    return type.kind === "constant";
 }
 
 export type InputDateTimeType = InputUtcDateTimeType | InputOffsetDateTimeType;
 
 interface InputDateTimeTypeBase extends InputTypeBase {
-    Encode: DateTimeKnownEncoding;
-    WireType: InputPrimitiveType;
+    encode: DateTimeKnownEncoding;
+    wireType: InputPrimitiveType;
 }
 
 export interface InputUtcDateTimeType extends InputDateTimeTypeBase {
-    Kind: "utcDateTime";
+    kind: "utcDateTime";
 }
 
 export interface InputOffsetDateTimeType extends InputDateTimeTypeBase {
-    Kind: "offsetDateTime";
+    kind: "offsetDateTime";
 }
 
 export interface InputDurationType extends InputTypeBase {
-    Kind: "duration";
-    Encode: DurationKnownEncoding;
-    WireType: InputPrimitiveType;
+    kind: "duration";
+    encode: DurationKnownEncoding;
+    wireType: InputPrimitiveType;
 }
 
 export interface InputUnionType extends InputTypeBase {
-    Kind: "union";
-    Name: string;
-    VariantTypes: InputType[];
+    kind: "union";
+    name: string;
+    variantTypes: InputType[];
 }
 
 export function isInputUnionType(type: InputType): type is InputUnionType {
-    return type.Kind === "union";
+    return type.kind === "union";
 }
 
 export interface InputModelType extends InputTypeBase {
-    Kind: InputTypeKind.Model; // TODO -- will change to TCGC value in future refactor
-    Name: string;
-    Namespace?: string;
-    Accessibility?: string;
-    Deprecated?: string;
-    Description?: string;
-    Usage: string;
-    Properties: InputModelProperty[];
-    BaseModel?: InputModelType;
-    DiscriminatorPropertyName?: string;
-    DiscriminatorValue?: string;
-    DerivedModels?: InputModelType[];
-    InheritedDictionaryType?: InputDictionaryType;
+    kind: InputTypeKind.Model; // TODO -- will change to TCGC value in future refactor
+    name: string;
+    namespace?: string;
+    accessibility?: string;
+    deprecated?: string;
+    usage: string;
+    properties: InputModelProperty[];
+    baseModel?: InputModelType;
+    discriminatorPropertyName?: string;
+    discriminatorValue?: string;
+    inheritedDictionaryType?: InputDictionaryType;
 }
 
 export function isInputModelType(type: InputType): type is InputModelType {
-    return type.Kind === InputTypeKind.Model;
+    return type.kind === InputTypeKind.Model;
+}
+
+export interface InputModelProperty {
+    name: string;
+    serializedName: string;
+    description: string;
+    type: InputType;
+    isRequired: boolean;
+    isReadOnly: boolean;
+    isDiscriminator?: boolean;
+    flattenedNames?: string[];
 }
 
 export interface InputEnumType extends InputTypeBase {
-    Kind: "enum";
-    Name: string;
-    ValueType: InputPrimitiveType;
-    Values: InputEnumTypeValue[];
-    Namespace?: string;
-    Accessibility?: string;
-    Deprecated?: string;
-    IsExtensible: boolean;
-    Usage: string;
+    kind: "enum";
+    name: string;
+    valueType: InputPrimitiveType;
+    values: InputEnumTypeValue[];
+    namespace?: string;
+    accessibility?: string;
+    deprecated?: string;
+    isExtensible: boolean;
+    usage: string;
+}
+
+export interface InputEnumTypeValue {
+    name: string;
+    value: any;
+    description?: string;
 }
 
 export function isInputEnumType(type: InputType): type is InputEnumType {
-    return type.Kind === "enum";
+    return type.kind === "enum";
 }
 
 export interface InputListType extends InputTypeBase {
-    Kind: InputTypeKind.Array; // TODO -- will change to TCGC value in future refactor
-    Name: InputTypeKind.Array; // array type does not really have a name right now, we just use its kind
-    ElementType: InputType;
+    kind: InputTypeKind.Array; // TODO -- will change to TCGC value in future refactor
+    name: InputTypeKind.Array; // array type does not really have a name right now, we just use its kind
+    elementType: InputType;
 }
 
 export function isInputListType(type: InputType): type is InputListType {
-    return type.Kind === InputTypeKind.Array;
+    return type.kind === InputTypeKind.Array;
 }
 
 export interface InputDictionaryType extends InputTypeBase {
-    Kind: InputTypeKind.Dictionary; // TODO -- will change to TCGC value in future refactor
-    Name: InputTypeKind.Dictionary; // dictionary type does not really have a name right now, we just use its kind
-    KeyType: InputType;
-    ValueType: InputType;
+    kind: InputTypeKind.Dictionary; // TODO -- will change to TCGC value in future refactor
+    name: InputTypeKind.Dictionary; // dictionary type does not really have a name right now, we just use its kind
+    keyType: InputType;
+    valueType: InputType;
 }
 
 export function isInputDictionaryType(
     type: InputType
 ): type is InputDictionaryType {
-    return type.Kind === InputTypeKind.Dictionary;
+    return type.kind === InputTypeKind.Dictionary;
 }

@@ -22,8 +22,6 @@ import {
 } from "@azure-tools/typespec-client-generator-core";
 import { Model } from "@typespec/compiler";
 import { getFullNamespaceString } from "./utils.js";
-import { InputEnumTypeValue } from "../type/input-enum-type-value.js";
-import { InputModelProperty } from "../type/input-model-property.js";
 import {
     InputDateTimeType,
     InputDictionaryType,
@@ -34,9 +32,11 @@ import {
     InputModelType,
     InputPrimitiveType,
     InputType,
-    InputUnionType
+    InputUnionType,
+    InputEnumTypeValue,
+    InputModelProperty,
+    InputTypeKind
 } from "../type/input-type.js";
-import { InputTypeKind } from "../type/input-type-kind.js";
 import { LiteralTypeContext } from "../type/literal-type-context.js";
 import { Usage } from "../type/usage.js";
 
@@ -98,46 +98,46 @@ export function fromSdkModelType(
     if (!inputModelType) {
         const baseModelHasDiscriminator = hasDiscriminator(modelType.baseModel);
         inputModelType = {
-            Kind: InputTypeKind.Model,
-            Name: modelTypeName,
-            Namespace: getFullNamespaceString(
+            kind: InputTypeKind.Model,
+            name: modelTypeName,
+            namespace: getFullNamespaceString(
                 (modelType.__raw as Model).namespace
             ),
-            Accessibility: modelType.access,
-            Deprecated: modelType.deprecation,
-            Description: modelType.description,
-            IsNullable: modelType.nullable,
-            DiscriminatorPropertyName: baseModelHasDiscriminator
+            accessibility: modelType.access,
+            deprecated: modelType.deprecation,
+            description: modelType.description,
+            isNullable: modelType.nullable,
+            discriminatorPropertyName: baseModelHasDiscriminator
                 ? undefined
                 : getDiscriminatorPropertyNameFromCurrentModel(modelType),
-            DiscriminatorValue: modelType.discriminatorValue,
-            Usage: fromUsageFlags(modelType.usage)
+            discriminatorValue: modelType.discriminatorValue,
+            usage: fromUsageFlags(modelType.usage)
         } as InputModelType;
 
         models.set(modelTypeName, inputModelType);
 
-        inputModelType.BaseModel = modelType.baseModel
+        inputModelType.baseModel = modelType.baseModel
             ? fromSdkModelType(modelType.baseModel, context, models, enums)
             : undefined;
 
-        inputModelType.InheritedDictionaryType = modelType.additionalProperties
+        inputModelType.inheritedDictionaryType = modelType.additionalProperties
             ? {
-                  Kind: InputTypeKind.Dictionary,
-                  Name: InputTypeKind.Dictionary,
-                  KeyType: {
-                      Kind: "string",
-                      IsNullable: false
+                  kind: InputTypeKind.Dictionary,
+                  name: InputTypeKind.Dictionary,
+                  keyType: {
+                      kind: "string",
+                      isNullable: false
                   },
-                  ValueType: fromSdkType(
+                  valueType: fromSdkType(
                       modelType.additionalProperties,
                       context,
                       models,
                       enums
                   ),
-                  IsNullable: false
+                  isNullable: false
               }
             : undefined;
-        inputModelType.Properties = modelType.properties
+        inputModelType.properties = modelType.properties
             .filter(
                 (p) =>
                     !(p as SdkBodyModelPropertyType).discriminator ||
@@ -153,8 +153,8 @@ export function fromSdkModelType(
                 fromSdkModelProperty(
                     p,
                     {
-                        ModelName: inputModelType?.Name,
-                        Namespace: inputModelType?.Namespace
+                        ModelName: inputModelType?.name,
+                        Namespace: inputModelType?.namespace
                     } as LiteralTypeContext,
                     []
                 )
@@ -185,24 +185,24 @@ export function fromSdkModelType(
                     ? true
                     : false;
             const modelProperty: InputModelProperty = {
-                Name: propertyType.name,
-                SerializedName: serializedName,
-                Description:
+                name: propertyType.name,
+                serializedName: serializedName,
+                description:
                     propertyType.description ??
                     (isDiscriminator ? "Discriminator" : ""),
-                Type: fromSdkType(
+                type: fromSdkType(
                     propertyType.type,
                     context,
                     models,
                     enums,
                     literalTypeContext
                 ),
-                IsRequired: isRequired,
-                IsReadOnly:
+                isRequired: isRequired,
+                isReadOnly:
                     propertyType.kind === "property" &&
                     isReadOnly(propertyType),
-                IsDiscriminator: isDiscriminator === true ? true : undefined,
-                FlattenedNames:
+                isDiscriminator: isDiscriminator === true ? true : undefined,
+                flattenedNames:
                     flattenedNamePrefixes.length > 0
                         ? flattenedNamePrefixes.concat(propertyType.name)
                         : undefined
@@ -269,59 +269,59 @@ export function fromSdkEnumType(
     let inputEnumType = enums.get(enumName);
     if (inputEnumType === undefined) {
         const newInputEnumType: InputEnumType = {
-            Kind: "enum",
-            Name: enumName,
-            ValueType: fromSdkBuiltInType(enumType.valueType),
-            Values: enumType.values.map((v) => fromSdkEnumValueType(v)),
-            Namespace: getFullNamespaceString(
+            kind: "enum",
+            name: enumName,
+            valueType: fromSdkBuiltInType(enumType.valueType),
+            values: enumType.values.map((v) => fromSdkEnumValueType(v)),
+            namespace: getFullNamespaceString(
                 // Enum and Union have optional namespace property
                 (enumType.__raw! as any).namespace
             ),
-            Accessibility: enumType.access,
-            Deprecated: enumType.deprecation,
-            Description: enumType.description,
-            IsExtensible: enumType.isFixed ? false : true,
-            IsNullable: enumType.nullable,
-            Usage: fromUsageFlags(enumType.usage)
+            accessibility: enumType.access,
+            deprecated: enumType.deprecation,
+            description: enumType.description,
+            isExtensible: enumType.isFixed ? false : true,
+            isNullable: enumType.nullable,
+            usage: fromUsageFlags(enumType.usage)
         };
         if (addToCollection) enums.set(enumName, newInputEnumType);
         inputEnumType = newInputEnumType;
     }
-    inputEnumType.IsNullable = enumType.nullable; // TO-DO: https://github.com/Azure/autorest.csharp/issues/4314
+    inputEnumType.isNullable = enumType.nullable; // TO-DO: https://github.com/Azure/autorest.csharp/issues/4314
     return inputEnumType;
 }
 
 function fromSdkDateTimeType(dateTimeType: SdkDatetimeType): InputDateTimeType {
     return {
-        Kind: dateTimeType.kind,
-        IsNullable: dateTimeType.nullable,
-        Encode: dateTimeType.encode,
-        WireType: fromSdkBuiltInType(dateTimeType.wireType)
+        kind: dateTimeType.kind,
+        isNullable: dateTimeType.nullable,
+        encode: dateTimeType.encode,
+        wireType: fromSdkBuiltInType(dateTimeType.wireType)
     };
 }
 
 function fromSdkDurationType(durationType: SdkDurationType): InputDurationType {
     return {
-        Kind: durationType.kind,
-        IsNullable: durationType.nullable,
-        Encode: durationType.encode,
-        WireType: fromSdkBuiltInType(durationType.wireType)
+        kind: durationType.kind,
+        isNullable: durationType.nullable,
+        encode: durationType.encode,
+        wireType: fromSdkBuiltInType(durationType.wireType)
     };
 }
 
 // TODO: tuple is not officially supported
 function fromTupleType(tupleType: SdkTupleType): InputPrimitiveType {
     return {
-        Kind: "any",
-        IsNullable: tupleType.nullable
+        kind: "any",
+        isNullable: tupleType.nullable
     };
 }
 
 function fromSdkBuiltInType(builtInType: SdkBuiltInType): InputPrimitiveType {
     return {
-        Kind: builtInType.kind,
-        IsNullable: builtInType.nullable,
-        Encode:
+        kind: builtInType.kind,
+        isNullable: builtInType.nullable,
+        encode:
             builtInType.encode !== builtInType.kind
                 ? builtInType.encode
                 : undefined // In TCGC this is required, and when there is no encoding, it just has the same value as kind, we could remove this when TCGC decides to simplify
@@ -341,10 +341,10 @@ function fromUnionType(
     }
 
     return {
-        Kind: "union",
-        Name: union.name,
-        VariantTypes: variantTypes,
-        IsNullable: false
+        kind: "union",
+        name: union.name,
+        variantTypes: variantTypes,
+        isNullable: false
     };
 }
 
@@ -356,8 +356,8 @@ function fromSdkConstantType(
     literalTypeContext?: LiteralTypeContext
 ): InputLiteralType {
     return {
-        Kind: constantType.kind,
-        ValueType:
+        kind: constantType.kind,
+        valueType:
             constantType.valueType.kind === "boolean" ||
             literalTypeContext === undefined
                 ? fromSdkBuiltInType(constantType.valueType)
@@ -368,8 +368,8 @@ function fromSdkConstantType(
                       enums,
                       literalTypeContext
                   ),
-        Value: constantType.value,
-        IsNullable: false
+        value: constantType.value,
+        isNullable: false
     };
 
     function convertConstantToEnum(
@@ -386,23 +386,23 @@ function fromSdkConstantType(
                 : constantType.value.toString();
         const allowValues: InputEnumTypeValue[] = [
             {
-                Name: enumValueName,
-                Value: constantType.value,
-                Description: enumValueName
+                name: enumValueName,
+                value: constantType.value,
+                description: enumValueName
             }
         ];
         const enumType: InputEnumType = {
-            Kind: "enum",
-            Name: enumName,
-            ValueType: fromSdkBuiltInType(constantType.valueType),
-            Values: allowValues,
-            Namespace: literalTypeContext.Namespace,
-            Accessibility: undefined,
-            Deprecated: undefined,
-            Description: `The ${enumName}`, // TODO -- what should we put here?
-            IsExtensible: true,
-            IsNullable: false,
-            Usage: "None" // will be updated later
+            kind: "enum",
+            name: enumName,
+            valueType: fromSdkBuiltInType(constantType.valueType),
+            values: allowValues,
+            namespace: literalTypeContext.Namespace,
+            accessibility: undefined,
+            deprecated: undefined,
+            description: `The ${enumName}`, // TODO -- what should we put here?
+            isExtensible: true,
+            isNullable: false,
+            usage: "None" // will be updated later
         };
         enums.set(enumName, enumType);
         return enumType;
@@ -416,14 +416,14 @@ function fromSdkEnumValueTypeToConstantType(
     literalTypeContext?: LiteralTypeContext
 ): InputLiteralType {
     return {
-        Kind: "constant",
-        ValueType:
+        kind: "constant",
+        valueType:
             enumValueType.valueType.kind === "boolean" ||
             literalTypeContext === undefined
                 ? fromSdkBuiltInType(enumValueType.valueType as SdkBuiltInType) // TODO: TCGC fix
                 : fromSdkEnumType(enumValueType.enumType, context, enums),
-        Value: enumValueType.value,
-        IsNullable: false
+        value: enumValueType.value,
+        isNullable: false
     };
 }
 
@@ -431,9 +431,9 @@ function fromSdkEnumValueType(
     enumValueType: SdkEnumValueType
 ): InputEnumTypeValue {
     return {
-        Name: enumValueType.name,
-        Value: enumValueType.value,
-        Description: enumValueType.description
+        name: enumValueType.name,
+        value: enumValueType.value,
+        description: enumValueType.description
     };
 }
 
@@ -444,16 +444,16 @@ function fromSdkDictionaryType(
     enums: Map<string, InputEnumType>
 ): InputDictionaryType {
     return {
-        Kind: InputTypeKind.Dictionary,
-        Name: InputTypeKind.Dictionary,
-        KeyType: fromSdkType(dictionaryType.keyType, context, models, enums),
-        ValueType: fromSdkType(
+        kind: InputTypeKind.Dictionary,
+        name: InputTypeKind.Dictionary,
+        keyType: fromSdkType(dictionaryType.keyType, context, models, enums),
+        valueType: fromSdkType(
             dictionaryType.valueType,
             context,
             models,
             enums
         ),
-        IsNullable: dictionaryType.nullable
+        isNullable: dictionaryType.nullable
     };
 }
 
@@ -464,10 +464,10 @@ function fromSdkArrayType(
     enums: Map<string, InputEnumType>
 ): InputListType {
     return {
-        Kind: InputTypeKind.Array,
-        Name: InputTypeKind.Array,
-        ElementType: fromSdkType(arrayType.valueType, context, models, enums),
-        IsNullable: arrayType.nullable
+        kind: InputTypeKind.Array,
+        name: InputTypeKind.Array,
+        elementType: fromSdkType(arrayType.valueType, context, models, enums),
+        isNullable: arrayType.nullable
     };
 }
 
