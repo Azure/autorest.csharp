@@ -118,6 +118,23 @@ namespace AutoRest.CSharp.Common.Input
             return true;
         }
 
+        public static bool TryReadIntoJsonElement(this ref Utf8JsonReader reader, string propertyName, JsonSerializerOptions options, ref JsonElement? rawValue)
+        {
+            if (reader.TokenType != JsonTokenType.PropertyName)
+            {
+                throw new JsonException();
+            }
+
+            if (!reader.MatchesPropertyName(propertyName))
+            {
+                return false;
+            }
+
+            reader.Read();
+            rawValue = JsonElement.ParseValue(ref reader);
+            return true;
+        }
+
         public static bool TryReadWithConverter<T>(this ref Utf8JsonReader reader, string propertyName, JsonSerializerOptions options, ref T? value)
         {
             if (reader.TokenType != JsonTokenType.PropertyName)
