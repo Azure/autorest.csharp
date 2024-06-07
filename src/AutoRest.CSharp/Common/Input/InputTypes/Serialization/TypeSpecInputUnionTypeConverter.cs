@@ -31,19 +31,10 @@ namespace AutoRest.CSharp.Common.Input
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputUnionType.Name), ref name)
-                    || reader.TryReadBoolean(nameof(InputUnionType.IsNullable), ref isNullable);
+                    || reader.TryReadBoolean(nameof(InputUnionType.IsNullable), ref isNullable)
+                    || reader.TryReadWithConverter(nameof(InputUnionType.VariantTypes), options, ref variantTypes);
 
-                if (isKnownProperty)
-                {
-                    continue;
-                }
-
-                if (reader.GetString() == nameof(InputUnionType.VariantTypes))
-                {
-                    reader.Read();
-                    CreateUnionItemTypes(ref reader, variantTypes, options);
-                }
-                else
+                if (!isKnownProperty)
                 {
                     reader.SkipProperty();
                 }
@@ -61,22 +52,6 @@ namespace AutoRest.CSharp.Common.Input
                 resolver.AddReference(id, unionType);
             }
             return unionType;
-        }
-
-        private static void CreateUnionItemTypes(ref Utf8JsonReader reader, ICollection<InputType> itemTypes, JsonSerializerOptions options)
-        {
-            if (reader.TokenType != JsonTokenType.StartArray)
-            {
-                throw new JsonException();
-            }
-            reader.Read();
-
-            while (reader.TokenType != JsonTokenType.EndArray)
-            {
-                var type = reader.ReadWithConverter<InputType>(options);
-                itemTypes.Add(type ?? throw new JsonException($"null {nameof(InputType)} isn't allowed"));
-            }
-            reader.Read();
         }
     }
 }
