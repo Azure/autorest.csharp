@@ -99,7 +99,7 @@
       "$id": "14",
       "Kind": "union",
       "Name": "NewUnion",
-      "ItemTypes": [
+      "VariantTypes": [
        {
         "$id": "15",
         "Kind": "string",

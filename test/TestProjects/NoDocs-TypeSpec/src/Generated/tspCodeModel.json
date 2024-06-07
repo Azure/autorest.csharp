@@ -504,7 +504,7 @@
       "$id": "76",
       "Kind": "union",
       "Name": "ThingRequiredUnion",
-      "ItemTypes": [
+      "VariantTypes": [
        {
         "$id": "77",
         "Kind": "string",
@@ -1439,7 +1439,7 @@
        "$id": "194",
        "Kind": "union",
        "Name": "RoundTripModelUnionList",
-       "ItemTypes": [
+       "VariantTypes": [
         {
          "$id": "195",
          "Kind": "string",

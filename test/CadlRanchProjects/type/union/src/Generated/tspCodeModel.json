@@ -439,7 +439,7 @@
       "$id": "57",
       "Kind": "union",
       "Name": "GetResponseProp",
-      "ItemTypes": [
+      "VariantTypes": [
        {
         "$id": "58",
         "Kind": "model",
@@ -517,7 +517,7 @@
       "$id": "66",
       "Kind": "union",
       "Name": "GetResponseProp",
-      "ItemTypes": [
+      "VariantTypes": [
        {
         "$ref": "58"
        },
@@ -636,7 +636,7 @@
          "$id": "78",
          "Kind": "union",
          "Name": "StringAndArrayCasesString",
-         "ItemTypes": [
+         "VariantTypes": [
           {
            "$id": "79",
            "Kind": "string",
@@ -668,7 +668,7 @@
          "$id": "83",
          "Kind": "union",
          "Name": "StringAndArrayCasesArray",
-         "ItemTypes": [
+         "VariantTypes": [
           {
            "$id": "84",
            "Kind": "string",
@@ -752,7 +752,7 @@
          "$id": "93",
          "Kind": "union",
          "Name": "MixedLiteralsCasesStringLiteral",
-         "ItemTypes": [
+         "VariantTypes": [
           {
            "$id": "94",
            "Kind": "constant",
@@ -812,7 +812,7 @@
          "$id": "103",
          "Kind": "union",
          "Name": "MixedLiteralsCasesStringLiteral",
-         "ItemTypes": [
+         "VariantTypes": [
           {
            "$id": "104",
            "Kind": "constant",
@@ -872,7 +872,7 @@
          "$id": "113",
          "Kind": "union",
          "Name": "MixedLiteralsCasesStringLiteral",
-         "ItemTypes": [
+         "VariantTypes": [
           {
            "$id": "114",
            "Kind": "constant",
@@ -932,7 +932,7 @@
          "$id": "123",
          "Kind": "union",
          "Name": "MixedLiteralsCasesStringLiteral",
-         "ItemTypes": [
+         "VariantTypes": [
           {
            "$id": "124",
            "Kind": "constant",
@@ -1044,7 +1044,7 @@
          "$id": "138",
          "Kind": "union",
          "Name": "MixedTypesCasesModel",
-         "ItemTypes": [
+         "VariantTypes": [
           {
            "$ref": "58"
           },
@@ -1084,7 +1084,7 @@
          "$id": "144",
          "Kind": "union",
          "Name": "MixedTypesCasesModel",
-         "ItemTypes": [
+         "VariantTypes": [
           {
            "$ref": "58"
           },
@@ -1124,7 +1124,7 @@
          "$id": "150",
          "Kind": "union",
          "Name": "MixedTypesCasesModel",
-         "ItemTypes": [
+         "VariantTypes": [
           {
            "$ref": "58"
           },
@@ -1164,7 +1164,7 @@
          "$id": "156",
          "Kind": "union",
          "Name": "MixedTypesCasesModel",
-         "ItemTypes": [
+         "VariantTypes": [
           {
            "$ref": "58"
           },
@@ -1208,7 +1208,7 @@
           "$id": "163",
           "Kind": "union",
           "Name": "MixedTypesCasesModel",
-          "ItemTypes": [
+          "VariantTypes": [
            {
             "$ref": "58"
            },

@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Common.Input
         private readonly Dictionary<Schema, InputEnumType> _enumsCache;
         private readonly Dictionary<string, InputEnumType> _enumsNamingCache;
         private readonly Dictionary<ObjectSchema, InputModelType> _modelsCache;
-        private readonly Dictionary<ObjectSchema, (List<InputModelProperty> Properties, IReadOnlyList<ObjectSchema> CompositeSchemas, IReadOnlyList<ObjectSchema> AllBaseSchemas)> _modelPropertiesCache;
+        private readonly Dictionary<ObjectSchema, (List<InputModelProperty> Properties, IReadOnlyList<ObjectSchema> CompositSchemas)> _modelPropertiesCache;
         private readonly Dictionary<ObjectSchema, (List<InputModelType> DerivedModels, Dictionary<string, InputModelType> DiscriminatedSubtypes)> _derivedModelsCache;
         private readonly Dictionary<Property, InputModelProperty> _propertiesCache;
 
@@ -35,9 +35,9 @@ namespace AutoRest.CSharp.Common.Input
             _operationsCache = new Dictionary<ServiceRequest, Func<InputOperation>>();
             _parametersCache = new Dictionary<RequestParameter, Func<InputParameter>>();
             _modelsCache = new Dictionary<ObjectSchema, InputModelType>();
-            _modelPropertiesCache = new Dictionary<ObjectSchema, (List<InputModelProperty> Properties, IReadOnlyList<ObjectSchema> CompositeSchemas, IReadOnlyList<ObjectSchema> AllBaseSchemas)>();
+            _modelPropertiesCache = new Dictionary<ObjectSchema, (List<InputModelProperty> Properties, IReadOnlyList<ObjectSchema> CompositSchemas)>();
+            _derivedModelsCache = new Dictionary<ObjectSchema, (List<InputModelType> DerivedModels, Dictionary<string, InputModelType> DiscriminatedSubtypes)>();
             _propertiesCache = new Dictionary<Property, InputModelProperty>();
-            _derivedModelsCache = new Dictionary<ObjectSchema, (List<InputModelType>, Dictionary<string, InputModelType>)>();
         }
 
         public InputNamespace CreateNamespace() => CreateNamespace(null, null);
@@ -315,17 +315,10 @@ namespace AutoRest.CSharp.Common.Input
                 GetOrCreateModel(schema);
             }
 
-            foreach (var (schema, (properties, compositionSchemas, allBaseSchemas)) in _modelPropertiesCache)
+            foreach (var (schema, (properties, compositionSchemas)) in _modelPropertiesCache)
             {
                 properties.AddRange(schema.Properties.Select(GetOrCreateProperty));
-                if (Configuration.AzureArm)
-                {
-                    properties.AddRange(allBaseSchemas.SelectMany(x => x.Properties).Select(GetOrCreateProperty));
-                }
-                else
-                {
-                    properties.AddRange(compositionSchemas.SelectMany(EnumerateBase).SelectMany(x => x.Properties).Select(GetOrCreateProperty));
-                }
+                properties.AddRange(compositionSchemas.SelectMany(EnumerateBase).SelectMany(x => x.Properties).Select(GetOrCreateProperty));
             }
 
             foreach (var schema in schemas)
@@ -399,7 +392,7 @@ namespace AutoRest.CSharp.Common.Input
             };
 
             _modelsCache[schema] = model;
-            _modelPropertiesCache[schema] = (properties, compositeSchemas, schema.Parents?.All?.OfType<ObjectSchema>().ToArray() ?? Array.Empty<ObjectSchema>());
+            _modelPropertiesCache[schema] = (properties, compositeSchemas);
             _derivedModelsCache[schema] = (derived, discriminatedSubtypes);
 
             return model;
@@ -702,8 +695,6 @@ namespace AutoRest.CSharp.Common.Input
                 XMsFormat.DataFactoryElementOfKeyObjectValuePairs => CreateDataFactoryElementIntputType(isNullable, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.Any, false)),
                 _ => null
             };
-            ;
-            ;
         }
 
         private static InputModelType CreateDataFactoryElementIntputType(bool isNullable, InputType argumentType)

@@ -312,16 +312,16 @@ function fromUnionType(
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputUnionType {
-    const itemTypes: InputType[] = [];
+    const variantTypes: InputType[] = [];
     for (const value of union.values) {
-        const valueType = fromSdkType(value, context, models, enums);
-        itemTypes.push(valueType);
+        const variantType = fromSdkType(value, context, models, enums);
+        variantTypes.push(variantType);
     }
 
     return {
         Kind: "union",
         Name: union.name,
-        ItemTypes: itemTypes,
+        VariantTypes: variantTypes,
         IsNullable: false
     };
 }

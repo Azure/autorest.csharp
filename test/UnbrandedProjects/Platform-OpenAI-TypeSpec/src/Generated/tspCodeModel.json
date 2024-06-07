@@ -1356,7 +1356,7 @@
       "$id": "206",
       "Kind": "union",
       "Name": "CreateChatCompletionRequestFunctionCall",
-      "ItemTypes": [
+      "VariantTypes": [
        {
         "$id": "207",
         "Kind": "constant",
@@ -1469,7 +1469,7 @@
       "$id": "223",
       "Kind": "union",
       "Name": "Stop",
-      "ItemTypes": [
+      "VariantTypes": [
        {
         "$id": "224",
         "Kind": "string",
@@ -1925,7 +1925,7 @@
          "$id": "283",
          "Kind": "union",
          "Name": "CreateFineTuningJobRequestHyperparametersNEpochs",
-         "ItemTypes": [
+         "VariantTypes": [
           {
            "$id": "284",
            "Kind": "constant",
@@ -2119,7 +2119,7 @@
          "$id": "310",
          "Kind": "union",
          "Name": "FineTuningJobHyperparametersNEpochs",
-         "ItemTypes": [
+         "VariantTypes": [
           {
            "$id": "311",
            "Kind": "constant",
@@ -2470,7 +2470,7 @@
       "$id": "357",
       "Kind": "union",
       "Name": "Prompt",
-      "ItemTypes": [
+      "VariantTypes": [
        {
         "$id": "358",
         "Kind": "string",
@@ -2595,7 +2595,7 @@
       "$id": "377",
       "Kind": "union",
       "Name": "Stop",
-      "ItemTypes": [
+      "VariantTypes": [
        {
         "$id": "378",
         "Kind": "string",
@@ -3223,7 +3223,7 @@
       "$id": "464",
       "Kind": "union",
       "Name": "CreateEmbeddingRequestInput",
-      "ItemTypes": [
+      "VariantTypes": [
        {
         "$id": "465",
         "Kind": "string",
@@ -4835,7 +4835,7 @@
       "$id": "683",
       "Kind": "union",
       "Name": "CreateModerationRequestInput",
-      "ItemTypes": [
+      "VariantTypes": [
        {
         "$id": "684",
         "Kind": "string",

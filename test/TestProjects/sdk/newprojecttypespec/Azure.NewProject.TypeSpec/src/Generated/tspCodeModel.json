@@ -417,7 +417,7 @@
       "$id": "63",
       "Kind": "union",
       "Name": "ThingRequiredUnion",
-      "ItemTypes": [
+      "VariantTypes": [
        {
         "$id": "64",
         "Kind": "string",

@@ -125,7 +125,7 @@
       "$id": "18",
       "Kind": "union",
       "Name": "UnionV1",
-      "ItemTypes": [
+      "VariantTypes": [
        {
         "$id": "19",
         "Kind": "string",
@@ -185,7 +185,7 @@
       "$id": "26",
       "Kind": "union",
       "Name": "UnionV2",
-      "ItemTypes": [
+      "VariantTypes": [
        {
         "$id": "27",
         "Kind": "string",

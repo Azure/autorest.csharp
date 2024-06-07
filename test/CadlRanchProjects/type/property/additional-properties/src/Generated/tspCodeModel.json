@@ -1103,7 +1103,7 @@
     "$id": "135",
     "Kind": "union",
     "Name": "MultipleSpreadRecordAdditionalProperty",
-    "ItemTypes": [
+    "VariantTypes": [
      {
       "$id": "136",
       "Kind": "string",
@@ -1145,7 +1145,7 @@
     "$id": "141",
     "Kind": "union",
     "Name": "SpreadRecordForUnionAdditionalProperty",
-    "ItemTypes": [
+    "VariantTypes": [
      {
       "$id": "142",
       "Kind": "string",
@@ -1187,7 +1187,7 @@
     "$id": "147",
     "Kind": "union",
     "Name": "WidgetData",
-    "ItemTypes": [
+    "VariantTypes": [
      {
       "$id": "148",
       "Kind": "model",
@@ -1330,7 +1330,7 @@
     "$id": "165",
     "Kind": "union",
     "Name": "SpreadRecordForNonDiscriminatedUnionAdditionalProperty",
-    "ItemTypes": [
+    "VariantTypes": [
      {
       "$ref": "148"
      },
@@ -1368,7 +1368,7 @@
     "$id": "169",
     "Kind": "union",
     "Name": "SpreadRecordForNonDiscriminatedUnion2AdditionalProperty",
-    "ItemTypes": [
+    "VariantTypes": [
      {
       "$id": "170",
       "Kind": "model",
@@ -1446,7 +1446,7 @@
     "$id": "178",
     "Kind": "union",
     "Name": "SpreadRecordForNonDiscriminatedUnion3AdditionalProperty",
-    "ItemTypes": [
+    "VariantTypes": [
      {
       "$id": "179",
       "Kind": "Array",

@@ -174,7 +174,7 @@
       "$id": "24",
       "Kind": "union",
       "Name": "ThingRequiredUnion",
-      "ItemTypes": [
+      "VariantTypes": [
        {
         "$id": "25",
         "Kind": "string",

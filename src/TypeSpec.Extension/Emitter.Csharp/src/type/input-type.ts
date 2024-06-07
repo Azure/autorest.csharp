@@ -70,7 +70,7 @@ export interface InputDurationType extends InputTypeBase {
 export interface InputUnionType extends InputTypeBase {
     Kind: "union";
     Name: string;
-    ItemTypes: InputType[];
+    VariantTypes: InputType[];
 }
 
 export function isInputUnionType(type: InputType): type is InputUnionType {
