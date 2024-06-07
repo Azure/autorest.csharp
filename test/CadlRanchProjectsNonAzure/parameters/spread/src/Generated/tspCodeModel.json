@@ -78,8 +78,8 @@
   {
    "$id": "11",
    "Kind": "Model",
-   "Name": "SpreadAsRequestParameterRequest",
-   "Namespace": "",
+   "Name": "ModelParameter",
+   "Namespace": "Parameters.Spread.Alias",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -101,15 +101,15 @@
   {
    "$id": "14",
    "Kind": "Model",
-   "Name": "SpreadWithMultipleParametersRequest",
+   "Name": "SpreadAsRequestParameterRequest",
    "Namespace": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
      "$id": "15",
-     "Name": "prop1",
-     "SerializedName": "prop1",
+     "Name": "name",
+     "SerializedName": "name",
      "Description": "",
      "Type": {
       "$id": "16",
@@ -118,14 +118,37 @@
      },
      "IsRequired": true,
      "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "17",
+   "Kind": "Model",
+   "Name": "SpreadWithMultipleParametersRequest",
+   "Namespace": "",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "18",
+     "Name": "prop1",
+     "SerializedName": "prop1",
+     "Description": "",
+     "Type": {
+      "$id": "19",
+      "Kind": "string",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
     },
     {
-     "$id": "17",
+     "$id": "20",
      "Name": "prop2",
      "SerializedName": "prop2",
      "Description": "",
      "Type": {
-      "$id": "18",
+      "$id": "21",
       "Kind": "string",
       "IsNullable": false
      },
@@ -133,12 +156,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "19",
+     "$id": "22",
      "Name": "prop3",
      "SerializedName": "prop3",
      "Description": "",
      "Type": {
-      "$id": "20",
+      "$id": "23",
       "Kind": "string",
       "IsNullable": false
      },
@@ -146,12 +169,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "21",
+     "$id": "24",
      "Name": "prop4",
      "SerializedName": "prop4",
      "Description": "",
      "Type": {
-      "$id": "22",
+      "$id": "25",
       "Kind": "string",
       "IsNullable": false
      },
@@ -159,12 +182,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "23",
+     "$id": "26",
      "Name": "prop5",
      "SerializedName": "prop5",
      "Description": "",
      "Type": {
-      "$id": "24",
+      "$id": "27",
       "Kind": "string",
       "IsNullable": false
      },
@@ -172,12 +195,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "25",
+     "$id": "28",
      "Name": "prop6",
      "SerializedName": "prop6",
      "Description": "",
      "Type": {
-      "$id": "26",
+      "$id": "29",
       "Kind": "string",
       "IsNullable": false
      },
@@ -185,26 +208,161 @@
      "IsReadOnly": false
     }
    ]
+  },
+  {
+   "$id": "30",
+   "Kind": "Model",
+   "Name": "SpreadAliasWithOptionalPropsRequest",
+   "Namespace": "",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "31",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "name of the Thing",
+     "Type": {
+      "$id": "32",
+      "Kind": "string",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "33",
+     "Name": "color",
+     "SerializedName": "color",
+     "Description": "optional property of the Thing",
+     "Type": {
+      "$id": "34",
+      "Kind": "string",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "35",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "age of the Thing",
+     "Type": {
+      "$id": "36",
+      "Kind": "int32",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "37",
+     "Name": "items",
+     "SerializedName": "items",
+     "Description": "required array",
+     "Type": {
+      "$id": "38",
+      "Kind": "Array",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "39",
+       "Kind": "int32",
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "40",
+     "Name": "elements",
+     "SerializedName": "elements",
+     "Description": "optional array",
+     "Type": {
+      "$id": "41",
+      "Kind": "Array",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "42",
+       "Kind": "string",
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "43",
+   "Kind": "Model",
+   "Name": "SpreadAliasWithOptionalCollectionsRequest",
+   "Namespace": "Parameters.Spread.Alias",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "44",
+     "Name": "requiredStringList",
+     "SerializedName": "requiredStringList",
+     "Description": "required list",
+     "Type": {
+      "$id": "45",
+      "Kind": "Array",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "46",
+       "Kind": "string",
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "47",
+     "Name": "optionalStringList",
+     "SerializedName": "optionalStringList",
+     "Description": "optional list",
+     "Type": {
+      "$id": "48",
+      "Kind": "Array",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "49",
+       "Kind": "string",
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
   }
  ],
  "Clients": [
   {
-   "$id": "27",
+   "$id": "50",
    "Name": "SpreadClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "28"
+    "$id": "51"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$id": "29",
+     "$id": "52",
      "Name": "host",
      "NameInRequest": "host",
      "Description": "TestServer endpoint",
      "Type": {
-      "$id": "30",
+      "$id": "53",
       "Kind": "string",
       "IsNullable": false
      },
@@ -218,9 +376,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "31",
+      "$id": "54",
       "Type": {
-       "$id": "32",
+       "$id": "55",
        "Kind": "string",
        "IsNullable": false
       },
@@ -230,20 +388,20 @@
    ]
   },
   {
-   "$id": "33",
+   "$id": "56",
    "Name": "Model",
    "Description": "",
    "Operations": [
     {
-     "$id": "34",
+     "$id": "57",
      "Name": "spreadAsRequestBody",
      "ResourceName": "Model",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "52"
       },
       {
-       "$id": "35",
+       "$id": "58",
        "Name": "BodyParameter",
        "NameInRequest": "BodyParameter",
        "Description": "This is a simple model.",
@@ -261,11 +419,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "36",
+       "$id": "59",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "37",
+        "$id": "60",
         "Kind": "string",
         "IsNullable": false
        },
@@ -279,19 +437,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "38",
+        "$id": "61",
         "Type": {
-         "$ref": "37"
+         "$ref": "60"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "39",
+       "$id": "62",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "40",
+        "$id": "63",
         "Kind": "string",
         "IsNullable": false
        },
@@ -305,9 +463,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "41",
+        "$id": "64",
         "Type": {
-         "$ref": "40"
+         "$ref": "63"
         },
         "Value": "application/json"
        }
@@ -315,7 +473,7 @@
      ],
      "Responses": [
       {
-       "$id": "42",
+       "$id": "65",
        "StatusCodes": [
         204
        ],
@@ -336,15 +494,15 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "43",
+     "$id": "66",
      "Name": "spreadCompositeRequestOnlyWithBody",
      "ResourceName": "Model",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "52"
       },
       {
-       "$id": "44",
+       "$id": "67",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -361,11 +519,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "45",
+       "$id": "68",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "46",
+        "$id": "69",
         "Kind": "string",
         "IsNullable": false
        },
@@ -379,19 +537,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "47",
+        "$id": "70",
         "Type": {
-         "$ref": "46"
+         "$ref": "69"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "48",
+       "$id": "71",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "49",
+        "$id": "72",
         "Kind": "string",
         "IsNullable": false
        },
@@ -405,9 +563,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "50",
+        "$id": "73",
         "Type": {
-         "$ref": "49"
+         "$ref": "72"
         },
         "Value": "application/json"
        }
@@ -415,7 +573,7 @@
      ],
      "Responses": [
       {
-       "$id": "51",
+       "$id": "74",
        "StatusCodes": [
         204
        ],
@@ -436,19 +594,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "52",
+     "$id": "75",
      "Name": "spreadCompositeRequestWithoutBody",
      "ResourceName": "Model",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "52"
       },
       {
-       "$id": "53",
+       "$id": "76",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "54",
+        "$id": "77",
         "Kind": "string",
         "IsNullable": false
        },
@@ -463,11 +621,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "55",
+       "$id": "78",
        "Name": "testHeader",
        "NameInRequest": "test-header",
        "Type": {
-        "$id": "56",
+        "$id": "79",
         "Kind": "string",
         "IsNullable": false
        },
@@ -482,11 +640,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "57",
+       "$id": "80",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "58",
+        "$id": "81",
         "Kind": "string",
         "IsNullable": false
        },
@@ -500,9 +658,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "59",
+        "$id": "82",
         "Type": {
-         "$ref": "58"
+         "$ref": "81"
         },
         "Value": "application/json"
        }
@@ -510,7 +668,7 @@
      ],
      "Responses": [
       {
-       "$id": "60",
+       "$id": "83",
        "StatusCodes": [
         204
        ],
@@ -528,19 +686,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "61",
+     "$id": "84",
      "Name": "spreadCompositeRequest",
      "ResourceName": "Model",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "52"
       },
       {
-       "$id": "62",
+       "$id": "85",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "63",
+        "$id": "86",
         "Kind": "string",
         "IsNullable": false
        },
@@ -555,11 +713,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "64",
+       "$id": "87",
        "Name": "testHeader",
        "NameInRequest": "test-header",
        "Type": {
-        "$id": "65",
+        "$id": "88",
         "Kind": "string",
         "IsNullable": false
        },
@@ -574,7 +732,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "66",
+       "$id": "89",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -591,11 +749,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "67",
+       "$id": "90",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "68",
+        "$id": "91",
         "Kind": "string",
         "IsNullable": false
        },
@@ -609,19 +767,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "69",
+        "$id": "92",
         "Type": {
-         "$ref": "68"
+         "$ref": "91"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "70",
+       "$id": "93",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "71",
+        "$id": "94",
         "Kind": "string",
         "IsNullable": false
        },
@@ -635,9 +793,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "72",
+        "$id": "95",
         "Type": {
-         "$ref": "71"
+         "$ref": "94"
         },
         "Value": "application/json"
        }
@@ -645,7 +803,7 @@
      ],
      "Responses": [
       {
-       "$id": "73",
+       "$id": "96",
        "StatusCodes": [
         204
        ],
@@ -666,19 +824,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "74",
+     "$id": "97",
      "Name": "spreadCompositeRequestMix",
      "ResourceName": "Model",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "52"
       },
       {
-       "$id": "75",
+       "$id": "98",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "76",
+        "$id": "99",
         "Kind": "string",
         "IsNullable": false
        },
@@ -693,11 +851,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "77",
+       "$id": "100",
        "Name": "testHeader",
        "NameInRequest": "test-header",
        "Type": {
-        "$id": "78",
+        "$id": "101",
         "Kind": "string",
         "IsNullable": false
        },
@@ -712,7 +870,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "79",
+       "$id": "102",
        "Name": "CompositeRequestMix",
        "NameInRequest": "CompositeRequestMix",
        "Description": "This is a model with non-body http request decorator.",
@@ -730,11 +888,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "80",
+       "$id": "103",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "81",
+        "$id": "104",
         "Kind": "string",
         "IsNullable": false
        },
@@ -748,19 +906,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "82",
+        "$id": "105",
         "Type": {
-         "$ref": "81"
+         "$ref": "104"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "83",
+       "$id": "106",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "84",
+        "$id": "107",
         "Kind": "string",
         "IsNullable": false
        },
@@ -774,9 +932,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "85",
+        "$id": "108",
         "Type": {
-         "$ref": "84"
+         "$ref": "107"
         },
         "Value": "application/json"
        }
@@ -784,7 +942,7 @@
      ],
      "Responses": [
       {
-       "$id": "86",
+       "$id": "109",
        "StatusCodes": [
         204
        ],
@@ -806,31 +964,31 @@
     }
    ],
    "Protocol": {
-    "$id": "87"
+    "$id": "110"
    },
    "Creatable": false,
    "Parent": "SpreadClient",
    "Parameters": [
     {
-     "$ref": "29"
+     "$ref": "52"
     }
    ]
   },
   {
-   "$id": "88",
+   "$id": "111",
    "Name": "Alias",
    "Description": "",
    "Operations": [
     {
-     "$id": "89",
+     "$id": "112",
      "Name": "spreadAsRequestBody",
      "ResourceName": "Alias",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "52"
       },
       {
-       "$id": "90",
+       "$id": "113",
        "Name": "SpreadAsRequestBodyRequest",
        "NameInRequest": "",
        "Type": {
@@ -847,11 +1005,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "91",
+       "$id": "114",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "92",
+        "$id": "115",
         "Kind": "string",
         "IsNullable": false
        },
@@ -865,19 +1023,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "93",
+        "$id": "116",
         "Type": {
-         "$ref": "92"
+         "$ref": "115"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "94",
+       "$id": "117",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "95",
+        "$id": "118",
         "Kind": "string",
         "IsNullable": false
        },
@@ -891,9 +1049,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "96",
+        "$id": "119",
         "Type": {
-         "$ref": "95"
+         "$ref": "118"
         },
         "Value": "application/json"
        }
@@ -901,7 +1059,7 @@
      ],
      "Responses": [
       {
-       "$id": "97",
+       "$id": "120",
        "StatusCodes": [
         204
        ],
@@ -922,19 +1080,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "98",
-     "Name": "spreadAsRequestParameter",
+     "$id": "121",
+     "Name": "spreadAliasWithModel",
      "ResourceName": "Alias",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "52"
       },
       {
-       "$id": "99",
+       "$id": "122",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "100",
+        "$id": "123",
         "Kind": "string",
         "IsNullable": false
        },
@@ -949,11 +1107,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "101",
+       "$id": "124",
        "Name": "x-ms-test-header",
        "NameInRequest": "x-ms-test-header",
        "Type": {
-        "$id": "102",
+        "$id": "125",
         "Kind": "string",
         "IsNullable": false
        },
@@ -968,9 +1126,9 @@
        "Kind": "Method"
       },
       {
-       "$id": "103",
-       "Name": "SpreadAsRequestParameterRequest",
-       "NameInRequest": "",
+       "$id": "126",
+       "Name": "ModelParameter",
+       "NameInRequest": "ModelParameter",
        "Type": {
         "$ref": "11"
        },
@@ -982,14 +1140,14 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Spread"
+       "Kind": "Method"
       },
       {
-       "$id": "104",
+       "$id": "127",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "105",
+        "$id": "128",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1003,19 +1161,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "106",
+        "$id": "129",
         "Type": {
-         "$ref": "105"
+         "$ref": "128"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "107",
+       "$id": "130",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "108",
+        "$id": "131",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1029,9 +1187,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "109",
+        "$id": "132",
         "Type": {
-         "$ref": "108"
+         "$ref": "131"
         },
         "Value": "application/json"
        }
@@ -1039,7 +1197,145 @@
      ],
      "Responses": [
       {
-       "$id": "110",
+       "$id": "133",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/parameters/spread/alias/request-with-model/{id}",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "134",
+     "Name": "spreadAsRequestParameter",
+     "ResourceName": "Alias",
+     "Parameters": [
+      {
+       "$ref": "52"
+      },
+      {
+       "$id": "135",
+       "Name": "id",
+       "NameInRequest": "id",
+       "Type": {
+        "$id": "136",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "137",
+       "Name": "x-ms-test-header",
+       "NameInRequest": "x-ms-test-header",
+       "Type": {
+        "$id": "138",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "139",
+       "Name": "SpreadAsRequestParameterRequest",
+       "NameInRequest": "",
+       "Type": {
+        "$ref": "14"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Spread"
+      },
+      {
+       "$id": "140",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "141",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "142",
+        "Type": {
+         "$ref": "141"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "143",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "144",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "145",
+        "Type": {
+         "$ref": "144"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "146",
        "StatusCodes": [
         204
        ],
@@ -1060,19 +1356,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "111",
+     "$id": "147",
      "Name": "spreadWithMultipleParameters",
      "ResourceName": "Alias",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "52"
       },
       {
-       "$id": "112",
+       "$id": "148",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "113",
+        "$id": "149",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1087,11 +1383,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "114",
+       "$id": "150",
        "Name": "x-ms-test-header",
        "NameInRequest": "x-ms-test-header",
        "Type": {
-        "$id": "115",
+        "$id": "151",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1106,11 +1402,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "116",
+       "$id": "152",
        "Name": "SpreadWithMultipleParametersRequest",
        "NameInRequest": "",
        "Type": {
-        "$ref": "14"
+        "$ref": "17"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1123,11 +1419,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "117",
+       "$id": "153",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "118",
+        "$id": "154",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1141,19 +1437,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "119",
+        "$id": "155",
         "Type": {
-         "$ref": "118"
+         "$ref": "154"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "120",
+       "$id": "156",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "121",
+        "$id": "157",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1167,9 +1463,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "122",
+        "$id": "158",
         "Type": {
-         "$ref": "121"
+         "$ref": "157"
         },
         "Value": "application/json"
        }
@@ -1177,7 +1473,7 @@
      ],
      "Responses": [
       {
-       "$id": "123",
+       "$id": "159",
        "StatusCodes": [
         204
        ],
@@ -1196,16 +1492,254 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "160",
+     "Name": "spreadAliasWithOptionalProps",
+     "ResourceName": "Alias",
+     "Parameters": [
+      {
+       "$ref": "52"
+      },
+      {
+       "$id": "161",
+       "Name": "id",
+       "NameInRequest": "id",
+       "Type": {
+        "$id": "162",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "163",
+       "Name": "x-ms-test-header",
+       "NameInRequest": "x-ms-test-header",
+       "Type": {
+        "$id": "164",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "165",
+       "Name": "SpreadAliasWithOptionalPropsRequest",
+       "NameInRequest": "",
+       "Type": {
+        "$ref": "30"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Spread"
+      },
+      {
+       "$id": "166",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "167",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "168",
+        "Type": {
+         "$ref": "167"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "169",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "170",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "171",
+        "Type": {
+         "$ref": "170"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "172",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/parameters/spread/alias/spread-Alias-With-Optional-Props/{id}",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "173",
+     "Name": "spreadAliasWithOptionalCollections",
+     "ResourceName": "Alias",
+     "Parameters": [
+      {
+       "$ref": "52"
+      },
+      {
+       "$id": "174",
+       "Name": "SpreadAliasWithOptionalCollectionsRequest",
+       "NameInRequest": "",
+       "Type": {
+        "$ref": "43"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Spread"
+      },
+      {
+       "$id": "175",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "176",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "177",
+        "Type": {
+         "$ref": "176"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "178",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "179",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "180",
+        "Type": {
+         "$ref": "179"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "181",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/parameters/spread/alias/spread-Alias-With-Optional-Collections",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "124"
+    "$id": "182"
    },
    "Creatable": false,
    "Parent": "SpreadClient",
    "Parameters": [
     {
-     "$ref": "29"
+     "$ref": "52"
     }
    ]
   }

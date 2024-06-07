@@ -11,6 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using Parameters.Spread.Models;
 
 namespace Parameters.Spread.Samples
 {
@@ -110,6 +111,106 @@ namespace Parameters.Spread.Samples
             Alias client = new SpreadClient().GetAliasClient();
 
             Response response = await client.SpreadAsRequestBodyAsync("<name>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Alias_SpreadAliasWithModel_ShortVersion()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+            });
+            Response response = client.SpreadAliasWithModel("<id>", "<x-ms-test-header>", content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Alias_SpreadAliasWithModel_ShortVersion_Async()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+            });
+            Response response = await client.SpreadAliasWithModelAsync("<id>", "<x-ms-test-header>", content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Alias_SpreadAliasWithModel_ShortVersion_Convenience()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            ModelParameter modelParameter = new ModelParameter("<name>");
+            Response response = client.SpreadAliasWithModel("<id>", "<x-ms-test-header>", modelParameter);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Alias_SpreadAliasWithModel_ShortVersion_Convenience_Async()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            ModelParameter modelParameter = new ModelParameter("<name>");
+            Response response = await client.SpreadAliasWithModelAsync("<id>", "<x-ms-test-header>", modelParameter);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Alias_SpreadAliasWithModel_AllParameters()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+            });
+            Response response = client.SpreadAliasWithModel("<id>", "<x-ms-test-header>", content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Alias_SpreadAliasWithModel_AllParameters_Async()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+            });
+            Response response = await client.SpreadAliasWithModelAsync("<id>", "<x-ms-test-header>", content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Alias_SpreadAliasWithModel_AllParameters_Convenience()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            ModelParameter modelParameter = new ModelParameter("<name>");
+            Response response = client.SpreadAliasWithModel("<id>", "<x-ms-test-header>", modelParameter);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Alias_SpreadAliasWithModel_AllParameters_Convenience_Async()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            ModelParameter modelParameter = new ModelParameter("<name>");
+            Response response = await client.SpreadAliasWithModelAsync("<id>", "<x-ms-test-header>", modelParameter);
         }
 
         [Test]
@@ -322,6 +423,246 @@ namespace Parameters.Spread.Samples
             Alias client = new SpreadClient().GetAliasClient();
 
             Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Alias_SpreadAliasWithOptionalProps_ShortVersion()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+                items = new object[]
+            {
+1234
+            },
+            });
+            Response response = client.SpreadAliasWithOptionalProps("<id>", "<x-ms-test-header>", content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Alias_SpreadAliasWithOptionalProps_ShortVersion_Async()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+                items = new object[]
+            {
+1234
+            },
+            });
+            Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", "<x-ms-test-header>", content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Alias_SpreadAliasWithOptionalProps_ShortVersion_Convenience()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            Response response = client.SpreadAliasWithOptionalProps("<id>", "<x-ms-test-header>", "<name>", new int[] { 1234 });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Alias_SpreadAliasWithOptionalProps_ShortVersion_Convenience_Async()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", "<x-ms-test-header>", "<name>", new int[] { 1234 });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Alias_SpreadAliasWithOptionalProps_AllParameters()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+                color = "<color>",
+                age = 1234,
+                items = new object[]
+            {
+1234
+            },
+                elements = new object[]
+            {
+"<elements>"
+            },
+            });
+            Response response = client.SpreadAliasWithOptionalProps("<id>", "<x-ms-test-header>", content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Alias_SpreadAliasWithOptionalProps_AllParameters_Async()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+                color = "<color>",
+                age = 1234,
+                items = new object[]
+            {
+1234
+            },
+                elements = new object[]
+            {
+"<elements>"
+            },
+            });
+            Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", "<x-ms-test-header>", content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Alias_SpreadAliasWithOptionalProps_AllParameters_Convenience()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            Response response = client.SpreadAliasWithOptionalProps("<id>", "<x-ms-test-header>", "<name>", new int[] { 1234 }, color: "<color>", age: 1234, elements: new string[] { "<elements>" });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Alias_SpreadAliasWithOptionalProps_AllParameters_Convenience_Async()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", "<x-ms-test-header>", "<name>", new int[] { 1234 }, color: "<color>", age: 1234, elements: new string[] { "<elements>" });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Alias_SpreadAliasWithOptionalCollections_ShortVersion()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredStringList = new object[]
+            {
+"<requiredStringList>"
+            },
+            });
+            Response response = client.SpreadAliasWithOptionalCollections(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Alias_SpreadAliasWithOptionalCollections_ShortVersion_Async()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredStringList = new object[]
+            {
+"<requiredStringList>"
+            },
+            });
+            Response response = await client.SpreadAliasWithOptionalCollectionsAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Alias_SpreadAliasWithOptionalCollections_ShortVersion_Convenience()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            Response response = client.SpreadAliasWithOptionalCollections(new string[] { "<requiredStringList>" });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Alias_SpreadAliasWithOptionalCollections_ShortVersion_Convenience_Async()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            Response response = await client.SpreadAliasWithOptionalCollectionsAsync(new string[] { "<requiredStringList>" });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Alias_SpreadAliasWithOptionalCollections_AllParameters()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredStringList = new object[]
+            {
+"<requiredStringList>"
+            },
+                optionalStringList = new object[]
+            {
+"<optionalStringList>"
+            },
+            });
+            Response response = client.SpreadAliasWithOptionalCollections(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Alias_SpreadAliasWithOptionalCollections_AllParameters_Async()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredStringList = new object[]
+            {
+"<requiredStringList>"
+            },
+                optionalStringList = new object[]
+            {
+"<optionalStringList>"
+            },
+            });
+            Response response = await client.SpreadAliasWithOptionalCollectionsAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Alias_SpreadAliasWithOptionalCollections_AllParameters_Convenience()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            Response response = client.SpreadAliasWithOptionalCollections(new string[] { "<requiredStringList>" }, optionalStringList: new string[] { "<optionalStringList>" });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Alias_SpreadAliasWithOptionalCollections_AllParameters_Convenience_Async()
+        {
+            Alias client = new SpreadClient().GetAliasClient();
+
+            Response response = await client.SpreadAliasWithOptionalCollectionsAsync(new string[] { "<requiredStringList>" }, optionalStringList: new string[] { "<optionalStringList>" });
         }
     }
 }

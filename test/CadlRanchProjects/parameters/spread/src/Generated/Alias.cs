@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -144,6 +145,134 @@ namespace Parameters.Spread
             try
             {
                 using HttpMessage message = CreateSpreadAsRequestBodyRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Spread alias with model. </summary>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
+        /// <param name="modelParameter"> The <see cref="ModelParameter"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="modelParameter"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithModelAsync(string,string,ModelParameter,CancellationToken)']/*" />
+        public virtual async Task<Response> SpreadAliasWithModelAsync(string id, string xMsTestHeader, ModelParameter modelParameter, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
+            Argument.AssertNotNull(modelParameter, nameof(modelParameter));
+
+            using RequestContent content = modelParameter.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await SpreadAliasWithModelAsync(id, xMsTestHeader, content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> Spread alias with model. </summary>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
+        /// <param name="modelParameter"> The <see cref="ModelParameter"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="modelParameter"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithModel(string,string,ModelParameter,CancellationToken)']/*" />
+        public virtual Response SpreadAliasWithModel(string id, string xMsTestHeader, ModelParameter modelParameter, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
+            Argument.AssertNotNull(modelParameter, nameof(modelParameter));
+
+            using RequestContent content = modelParameter.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = SpreadAliasWithModel(id, xMsTestHeader, content, context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] Spread alias with model.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadAliasWithModelAsync(string,string,ModelParameter,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithModelAsync(string,string,RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> SpreadAliasWithModelAsync(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Alias.SpreadAliasWithModel");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadAliasWithModelRequest(id, xMsTestHeader, content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Spread alias with model.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadAliasWithModel(string,string,ModelParameter,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithModel(string,string,RequestContent,RequestContext)']/*" />
+        public virtual Response SpreadAliasWithModel(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Alias.SpreadAliasWithModel");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadAliasWithModelRequest(id, xMsTestHeader, content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -443,6 +572,266 @@ namespace Parameters.Spread
             }
         }
 
+        /// <summary> Spread alias with optional props. </summary>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="items"> required array. </param>
+        /// <param name="color"> optional property of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
+        /// <param name="elements"> optional array. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/>, <paramref name="name"/> or <paramref name="items"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithOptionalPropsAsync(string,string,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)']/*" />
+        public virtual async Task<Response> SpreadAliasWithOptionalPropsAsync(string id, string xMsTestHeader, string name, IEnumerable<int> items, string color = null, int? age = null, IEnumerable<string> elements = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(items, nameof(items));
+
+            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(
+                name,
+                color,
+                age,
+                items.ToList(),
+                elements?.ToList() as IList<string> ?? new ChangeTrackingList<string>(),
+                null);
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await SpreadAliasWithOptionalPropsAsync(id, xMsTestHeader, spreadAliasWithOptionalPropsRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> Spread alias with optional props. </summary>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="items"> required array. </param>
+        /// <param name="color"> optional property of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
+        /// <param name="elements"> optional array. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/>, <paramref name="name"/> or <paramref name="items"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithOptionalProps(string,string,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)']/*" />
+        public virtual Response SpreadAliasWithOptionalProps(string id, string xMsTestHeader, string name, IEnumerable<int> items, string color = null, int? age = null, IEnumerable<string> elements = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(items, nameof(items));
+
+            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(
+                name,
+                color,
+                age,
+                items.ToList(),
+                elements?.ToList() as IList<string> ?? new ChangeTrackingList<string>(),
+                null);
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = SpreadAliasWithOptionalProps(id, xMsTestHeader, spreadAliasWithOptionalPropsRequest.ToRequestContent(), context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] Spread alias with optional props.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadAliasWithOptionalPropsAsync(string,string,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithOptionalPropsAsync(string,string,RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> SpreadAliasWithOptionalPropsAsync(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Alias.SpreadAliasWithOptionalProps");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadAliasWithOptionalPropsRequest(id, xMsTestHeader, content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Spread alias with optional props.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadAliasWithOptionalProps(string,string,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithOptionalProps(string,string,RequestContent,RequestContext)']/*" />
+        public virtual Response SpreadAliasWithOptionalProps(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Alias.SpreadAliasWithOptionalProps");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadAliasWithOptionalPropsRequest(id, xMsTestHeader, content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Spread alias with optional collections. </summary>
+        /// <param name="requiredStringList"> required list. </param>
+        /// <param name="optionalStringList"> optional list. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredStringList"/> is null. </exception>
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithOptionalCollectionsAsync(IEnumerable{string},IEnumerable{string},CancellationToken)']/*" />
+        public virtual async Task<Response> SpreadAliasWithOptionalCollectionsAsync(IEnumerable<string> requiredStringList, IEnumerable<string> optionalStringList = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
+
+            SpreadAliasWithOptionalCollectionsRequest spreadAliasWithOptionalCollectionsRequest = new SpreadAliasWithOptionalCollectionsRequest(requiredStringList.ToList(), optionalStringList?.ToList() as IList<string> ?? new ChangeTrackingList<string>(), null);
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await SpreadAliasWithOptionalCollectionsAsync(spreadAliasWithOptionalCollectionsRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> Spread alias with optional collections. </summary>
+        /// <param name="requiredStringList"> required list. </param>
+        /// <param name="optionalStringList"> optional list. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredStringList"/> is null. </exception>
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithOptionalCollections(IEnumerable{string},IEnumerable{string},CancellationToken)']/*" />
+        public virtual Response SpreadAliasWithOptionalCollections(IEnumerable<string> requiredStringList, IEnumerable<string> optionalStringList = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
+
+            SpreadAliasWithOptionalCollectionsRequest spreadAliasWithOptionalCollectionsRequest = new SpreadAliasWithOptionalCollectionsRequest(requiredStringList.ToList(), optionalStringList?.ToList() as IList<string> ?? new ChangeTrackingList<string>(), null);
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = SpreadAliasWithOptionalCollections(spreadAliasWithOptionalCollectionsRequest.ToRequestContent(), context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] Spread alias with optional collections.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadAliasWithOptionalCollectionsAsync(IEnumerable{string},IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithOptionalCollectionsAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> SpreadAliasWithOptionalCollectionsAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Alias.SpreadAliasWithOptionalCollections");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadAliasWithOptionalCollectionsRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Spread alias with optional collections.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadAliasWithOptionalCollections(IEnumerable{string},IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithOptionalCollections(RequestContent,RequestContext)']/*" />
+        public virtual Response SpreadAliasWithOptionalCollections(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Alias.SpreadAliasWithOptionalCollections");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadAliasWithOptionalCollectionsRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateSpreadAsRequestBodyRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
@@ -452,6 +841,23 @@ namespace Parameters.Spread
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/spread/alias/request-body", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateSpreadAliasWithModelRequest(string id, string xMsTestHeader, RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/parameters/spread/alias/request-with-model/", false);
+            uri.AppendPath(id, true);
+            request.Uri = uri;
+            request.Headers.Add("x-ms-test-header", xMsTestHeader);
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
@@ -486,6 +892,38 @@ namespace Parameters.Spread
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("x-ms-test-header", xMsTestHeader);
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateSpreadAliasWithOptionalPropsRequest(string id, string xMsTestHeader, RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/parameters/spread/alias/spread-Alias-With-Optional-Props/", false);
+            uri.AppendPath(id, true);
+            request.Uri = uri;
+            request.Headers.Add("x-ms-test-header", xMsTestHeader);
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateSpreadAliasWithOptionalCollectionsRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/parameters/spread/alias/spread-Alias-With-Optional-Collections", false);
+            request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;

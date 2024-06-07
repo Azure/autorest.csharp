@@ -85,6 +85,94 @@ Response response = client.SpreadAsRequestBody(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
+    <member name="SpreadAliasWithModelAsync(string,string,ModelParameter,CancellationToken)">
+      <example>
+This sample shows how to call SpreadAliasWithModelAsync.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+ModelParameter modelParameter = new ModelParameter("<name>");
+Response response = await client.SpreadAliasWithModelAsync("<id>", "<x-ms-test-header>", modelParameter);
+]]></code>
+This sample shows how to call SpreadAliasWithModelAsync with all parameters.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+ModelParameter modelParameter = new ModelParameter("<name>");
+Response response = await client.SpreadAliasWithModelAsync("<id>", "<x-ms-test-header>", modelParameter);
+]]></code></example>
+    </member>
+    <member name="SpreadAliasWithModel(string,string,ModelParameter,CancellationToken)">
+      <example>
+This sample shows how to call SpreadAliasWithModel.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+ModelParameter modelParameter = new ModelParameter("<name>");
+Response response = client.SpreadAliasWithModel("<id>", "<x-ms-test-header>", modelParameter);
+]]></code>
+This sample shows how to call SpreadAliasWithModel with all parameters.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+ModelParameter modelParameter = new ModelParameter("<name>");
+Response response = client.SpreadAliasWithModel("<id>", "<x-ms-test-header>", modelParameter);
+]]></code></example>
+    </member>
+    <member name="SpreadAliasWithModelAsync(string,string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call SpreadAliasWithModelAsync.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = await client.SpreadAliasWithModelAsync("<id>", "<x-ms-test-header>", content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call SpreadAliasWithModelAsync with all parameters and request content.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = await client.SpreadAliasWithModelAsync("<id>", "<x-ms-test-header>", content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="SpreadAliasWithModel(string,string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call SpreadAliasWithModel.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = client.SpreadAliasWithModel("<id>", "<x-ms-test-header>", content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call SpreadAliasWithModel with all parameters and request content.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = client.SpreadAliasWithModel("<id>", "<x-ms-test-header>", content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
     <member name="SpreadAsRequestParameterAsync(string,string,string,CancellationToken)">
       <example>
 This sample shows how to call SpreadAsRequestParameterAsync.
@@ -269,6 +357,222 @@ using RequestContent content = RequestContent.Create(new
     prop6 = "<prop6>",
 });
 Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-header>", content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="SpreadAliasWithOptionalPropsAsync(string,string,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)">
+      <example>
+This sample shows how to call SpreadAliasWithOptionalPropsAsync.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", "<x-ms-test-header>", "<name>", new int[] { 1234 });
+]]></code>
+This sample shows how to call SpreadAliasWithOptionalPropsAsync with all parameters.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", "<x-ms-test-header>", "<name>", new int[] { 1234 }, color: "<color>", age: 1234, elements: new string[] { "<elements>" });
+]]></code></example>
+    </member>
+    <member name="SpreadAliasWithOptionalProps(string,string,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)">
+      <example>
+This sample shows how to call SpreadAliasWithOptionalProps.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+Response response = client.SpreadAliasWithOptionalProps("<id>", "<x-ms-test-header>", "<name>", new int[] { 1234 });
+]]></code>
+This sample shows how to call SpreadAliasWithOptionalProps with all parameters.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+Response response = client.SpreadAliasWithOptionalProps("<id>", "<x-ms-test-header>", "<name>", new int[] { 1234 }, color: "<color>", age: 1234, elements: new string[] { "<elements>" });
+]]></code></example>
+    </member>
+    <member name="SpreadAliasWithOptionalPropsAsync(string,string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call SpreadAliasWithOptionalPropsAsync.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    items = new object[]
+    {
+        1234
+    },
+});
+Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", "<x-ms-test-header>", content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call SpreadAliasWithOptionalPropsAsync with all parameters and request content.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    color = "<color>",
+    age = 1234,
+    items = new object[]
+    {
+        1234
+    },
+    elements = new object[]
+    {
+        "<elements>"
+    },
+});
+Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", "<x-ms-test-header>", content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="SpreadAliasWithOptionalProps(string,string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call SpreadAliasWithOptionalProps.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    items = new object[]
+    {
+        1234
+    },
+});
+Response response = client.SpreadAliasWithOptionalProps("<id>", "<x-ms-test-header>", content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call SpreadAliasWithOptionalProps with all parameters and request content.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+    color = "<color>",
+    age = 1234,
+    items = new object[]
+    {
+        1234
+    },
+    elements = new object[]
+    {
+        "<elements>"
+    },
+});
+Response response = client.SpreadAliasWithOptionalProps("<id>", "<x-ms-test-header>", content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="SpreadAliasWithOptionalCollectionsAsync(IEnumerable{string},IEnumerable{string},CancellationToken)">
+      <example>
+This sample shows how to call SpreadAliasWithOptionalCollectionsAsync.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+Response response = await client.SpreadAliasWithOptionalCollectionsAsync(new string[] { "<requiredStringList>" });
+]]></code>
+This sample shows how to call SpreadAliasWithOptionalCollectionsAsync with all parameters.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+Response response = await client.SpreadAliasWithOptionalCollectionsAsync(new string[] { "<requiredStringList>" }, optionalStringList: new string[] { "<optionalStringList>" });
+]]></code></example>
+    </member>
+    <member name="SpreadAliasWithOptionalCollections(IEnumerable{string},IEnumerable{string},CancellationToken)">
+      <example>
+This sample shows how to call SpreadAliasWithOptionalCollections.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+Response response = client.SpreadAliasWithOptionalCollections(new string[] { "<requiredStringList>" });
+]]></code>
+This sample shows how to call SpreadAliasWithOptionalCollections with all parameters.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+Response response = client.SpreadAliasWithOptionalCollections(new string[] { "<requiredStringList>" }, optionalStringList: new string[] { "<optionalStringList>" });
+]]></code></example>
+    </member>
+    <member name="SpreadAliasWithOptionalCollectionsAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call SpreadAliasWithOptionalCollectionsAsync.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredStringList = new object[]
+    {
+        "<requiredStringList>"
+    },
+});
+Response response = await client.SpreadAliasWithOptionalCollectionsAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call SpreadAliasWithOptionalCollectionsAsync with all request content.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredStringList = new object[]
+    {
+        "<requiredStringList>"
+    },
+    optionalStringList = new object[]
+    {
+        "<optionalStringList>"
+    },
+});
+Response response = await client.SpreadAliasWithOptionalCollectionsAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="SpreadAliasWithOptionalCollections(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call SpreadAliasWithOptionalCollections.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredStringList = new object[]
+    {
+        "<requiredStringList>"
+    },
+});
+Response response = client.SpreadAliasWithOptionalCollections(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call SpreadAliasWithOptionalCollections with all request content.
+<code><![CDATA[
+Alias client = new SpreadClient().GetAliasClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredStringList = new object[]
+    {
+        "<requiredStringList>"
+    },
+    optionalStringList = new object[]
+    {
+        "<optionalStringList>"
+    },
+});
+Response response = client.SpreadAliasWithOptionalCollections(content);
 
 Console.WriteLine(response.Status);
 ]]></code></example>
