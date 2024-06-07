@@ -24,7 +24,7 @@ export type InputType =
     | InputUnionType
     | InputModelType
     | InputEnumType
-    | InputListType
+    | InputArrayType
     | InputDictionaryType;
 
 export interface InputPrimitiveType extends InputTypeBase {
@@ -109,19 +109,17 @@ export function isInputEnumType(type: InputType): type is InputEnumType {
     return type.Kind === "enum";
 }
 
-export interface InputListType extends InputTypeBase {
-    Kind: InputTypeKind.Array; // TODO -- will change to TCGC value in future refactor
-    Name: InputTypeKind.Array; // array type does not really have a name right now, we just use its kind
-    ElementType: InputType;
+export interface InputArrayType extends InputTypeBase {
+    Kind: "array";
+    ValueType: InputType;
 }
 
-export function isInputListType(type: InputType): type is InputListType {
-    return type.Kind === InputTypeKind.Array;
+export function isInputListType(type: InputType): type is InputArrayType {
+    return type.Kind === "array";
 }
 
 export interface InputDictionaryType extends InputTypeBase {
-    Kind: InputTypeKind.Dictionary; // TODO -- will change to TCGC value in future refactor
-    Name: InputTypeKind.Dictionary; // dictionary type does not really have a name right now, we just use its kind
+    Kind: "dict";
     KeyType: InputType;
     ValueType: InputType;
 }
@@ -129,5 +127,5 @@ export interface InputDictionaryType extends InputTypeBase {
 export function isInputDictionaryType(
     type: InputType
 ): type is InputDictionaryType {
-    return type.Kind === InputTypeKind.Dictionary;
+    return type.Kind === "dict";
 }

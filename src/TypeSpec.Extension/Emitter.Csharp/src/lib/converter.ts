@@ -29,7 +29,7 @@ import {
     InputDictionaryType,
     InputDurationType,
     InputEnumType,
-    InputListType,
+    InputArrayType,
     InputLiteralType,
     InputModelType,
     InputPrimitiveType,
@@ -122,8 +122,7 @@ export function fromSdkModelType(
 
         inputModelType.InheritedDictionaryType = modelType.additionalProperties
             ? {
-                  Kind: InputTypeKind.Dictionary,
-                  Name: InputTypeKind.Dictionary,
+                  Kind: "dict",
                   KeyType: {
                       Kind: "string",
                       IsNullable: false
@@ -444,8 +443,7 @@ function fromSdkDictionaryType(
     enums: Map<string, InputEnumType>
 ): InputDictionaryType {
     return {
-        Kind: InputTypeKind.Dictionary,
-        Name: InputTypeKind.Dictionary,
+        Kind: "dict",
         KeyType: fromSdkType(dictionaryType.keyType, context, models, enums),
         ValueType: fromSdkType(
             dictionaryType.valueType,
@@ -462,11 +460,10 @@ function fromSdkArrayType(
     context: SdkContext,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
-): InputListType {
+): InputArrayType {
     return {
-        Kind: InputTypeKind.Array,
-        Name: InputTypeKind.Array,
-        ElementType: fromSdkType(arrayType.valueType, context, models, enums),
+        Kind: "array",
+        ValueType: fromSdkType(arrayType.valueType, context, models, enums),
         IsNullable: arrayType.nullable
     };
 }

@@ -53,8 +53,8 @@ namespace AutoRest.CSharp.Common.Input
         private const string UnionKind = "union";
         private const string ModelKind = "Model";
         private const string EnumKind = "enum";
-        private const string ArrayKind = "Array";
-        private const string DictionaryKind = "Dictionary";
+        private const string ArrayKind = "array";
+        private const string DictionaryKind = "dict";
         private const string UtcDateTimeKind = "utcDateTime";
         private const string OffsetDateTimeKind = "offsetDateTime";
         private const string DurationKind = "duration";
@@ -66,8 +66,8 @@ namespace AutoRest.CSharp.Common.Input
             UnionKind => TypeSpecInputUnionTypeConverter.CreateInputUnionType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             ModelKind => TypeSpecInputModelTypeConverter.CreateModelType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             EnumKind => TypeSpecInputEnumTypeConverter.CreateEnumType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
-            ArrayKind => TypeSpecInputListTypeConverter.CreateListType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
-            DictionaryKind => TypeSpecInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
+            ArrayKind => TypeSpecInputListTypeConverter.CreateListType(ref reader, id, options, _referenceHandler.CurrentResolver),
+            DictionaryKind => TypeSpecInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, options, _referenceHandler.CurrentResolver),
             UtcDateTimeKind or OffsetDateTimeKind => TypeSpecInputDateTimeTypeConverter.CreateDateTimeType(ref reader, id, options, _referenceHandler.CurrentResolver),
             DurationKind => TypeSpecInputDurationTypeConverter.CreateDurationType(ref reader, id, options, _referenceHandler.CurrentResolver),
             _ => ReadPrimitiveType(ref reader, id, kind, _referenceHandler.CurrentResolver),

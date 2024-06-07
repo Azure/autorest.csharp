@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Common.Input
                 case InputDictionaryType otherDictionary:
                     return Equals(otherDictionary.ValueType);
                 case InputListType otherList:
-                    return Equals(otherList.ElementType);
+                    return Equals(otherList.ValueType);
                 default:
                     return Equals(other);
             }

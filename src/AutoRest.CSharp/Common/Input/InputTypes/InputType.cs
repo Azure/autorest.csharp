@@ -20,13 +20,11 @@ internal abstract record InputType
         {
             case InputListType listType:
                 return new InputListType(
-                    listType.Name,
-                    listType.ElementType.GetCollectionEquivalent(inputType),
+                    listType.ValueType.GetCollectionEquivalent(inputType),
                     listType.IsEmbeddingsVector,
                     listType.IsNullable);
             case InputDictionaryType dictionaryType:
                 return new InputDictionaryType(
-                    dictionaryType.Name,
                     dictionaryType.KeyType,
                     dictionaryType.ValueType.GetCollectionEquivalent(inputType),
                     dictionaryType.IsNullable);

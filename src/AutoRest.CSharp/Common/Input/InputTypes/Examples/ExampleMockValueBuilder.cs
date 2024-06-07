@@ -113,7 +113,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
 
         private static InputExampleValue BuildListExampleValue(InputListType listType, string? hint, bool useAllParameters, HashSet<InputModelType> visitedModels)
         {
-            var exampleElementValue = BuildExampleValue(listType.ElementType, hint, useAllParameters, visitedModels);
+            var exampleElementValue = BuildExampleValue(listType.ValueType, hint, useAllParameters, visitedModels);
 
             return InputExampleValue.List(listType, new[] { exampleElementValue });
         }

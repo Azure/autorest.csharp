@@ -162,11 +162,11 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             switch (type)
             {
                 case InputListType listType:
-                    if (visitedTypes.Contains(listType.ElementType))
+                    if (visitedTypes.Contains(listType.ValueType))
                         return;
                     // <invocation>[0]
                     invocation = new IndexerExpression(invocation, Literal(0));
-                    BuildResponseParseStatements(useAllProperties, listType.ElementType, invocation, statements, visitedTypes);
+                    BuildResponseParseStatements(useAllProperties, listType.ValueType, invocation, statements, visitedTypes);
                     return;
                 case InputDictionaryType dictionaryType:
                     if (visitedTypes.Contains(dictionaryType.ValueType))

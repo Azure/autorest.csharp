@@ -35,7 +35,7 @@ import { InputOperationParameterKind } from "../type/input-operation-parameter-k
 import { InputParameter } from "../type/input-parameter.js";
 import {
     InputEnumType,
-    InputListType,
+    InputArrayType,
     InputModelType,
     InputType,
     isInputEnumType,
@@ -297,7 +297,7 @@ export function loadOperation(
             IsEndpoint: false,
             SkipUrlEncoding: false, //TODO: retrieve out value from extension
             Explode:
-                (inputType as InputListType).ElementType && format === "multi"
+                (inputType as InputArrayType).ValueType && format === "multi"
                     ? true
                     : false,
             Kind: kind,
