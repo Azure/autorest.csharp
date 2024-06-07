@@ -931,17 +931,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var rawRequestPathToOperationSets = new Dictionary<string, OperationSet>();
             foreach (var inputClient in _inputClients)
             {
-                // If the client has no operations, we skip it
-                if (inputClient.Operations.Count == 0)
-                {
-                    continue;
-                }
-
-                // Skip "Operations" operation group in the Operations client
-                if (inputClient.Name == "Operations")
-                {
-                    continue;
-                }
                 var requestPathList = new HashSet<string>();
                 _operationGroupToRequestPaths.Add(inputClient, requestPathList);
                 foreach (var operation in inputClient.Operations)
