@@ -52,8 +52,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                 .Select(p => isResourceType(p) ? "Type" : p.Declaration.Name)
                 .ToHashSet();
 
-            // In common-types, "Type" is a property for "ResourceType"
-            // In ResourceData, this property is named as "ResourceType"
+            // In common-types, "type" is a property to represent resource type
+            // In ResourceManager.ResourceData, this property is named as "ResourceType"
             // Return "Type" as property name for it to skip it in the output properties
             bool isResourceType(ObjectTypeProperty property)
                 => property.Declaration.Type.Name == "ResourceType" && property.Declaration.Name == "ResourceType";
