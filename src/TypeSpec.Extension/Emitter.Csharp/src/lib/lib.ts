@@ -15,7 +15,7 @@ const $lib = createTypeSpecLibrary({
             }
         },
         "no-route": {
-            severity: "error",
+            severity: "warning",
             messages: {
                 default: paramMessage`No Route for service for service ${"service"}`
             }
