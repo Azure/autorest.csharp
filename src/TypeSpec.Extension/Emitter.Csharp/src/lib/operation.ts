@@ -17,7 +17,8 @@ import {
     Model,
     ModelProperty,
     Namespace,
-    Operation
+    Operation,
+    Type
 } from "@typespec/compiler";
 import { getResourceOperation } from "@typespec/rest";
 import {
@@ -101,11 +102,17 @@ export function loadOperation(
         parameters.push(loadOperationParameter(sdkContext, p));
     }
 
-    if (typespecParameters.body?.parameter) {
+    if (
+        typespecParameters.body?.parameter &&
+        !isVoidBody(typespecParameters.body.type)
+    ) {
         parameters.push(
             loadBodyParameter(sdkContext, typespecParameters.body?.parameter)
         );
-    } else if (typespecParameters.body?.type) {
+    } else if (
+        typespecParameters.body?.type &&
+        !isVoidBody(typespecParameters.body.type)
+    ) {
         const effectiveBodyType = getEffectiveSchemaType(
             sdkContext,
             typespecParameters.body.type
@@ -247,6 +254,10 @@ export function loadOperation(
         GenerateProtocolMethod: generateProtocol,
         GenerateConvenienceMethod: generateConvenience
     } as InputOperation;
+
+    function isVoidBody(type: Type): boolean {
+        return type.kind === "Intrinsic" && type.name === "void";
+    }
 
     function loadOperationParameter(
         context: SdkContext<NetEmitterOptions>,
