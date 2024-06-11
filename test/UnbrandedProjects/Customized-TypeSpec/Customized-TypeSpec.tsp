@@ -262,7 +262,6 @@ op addTimeHeader(
     @header("Repeatability-First-Sent") repeatabilityFirstSent?: utcDateTime 
 ): void;
 
-
 @route("/projectedName")
 @doc("Model can have its projected name")
 @post

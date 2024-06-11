@@ -362,7 +362,7 @@ internal static class SchemaNameAndFormatUpdater
         switch (inputType)
         {
             case InputEnumType inputEnum:
-                TransformInputEnumType(inputEnum, inputEnum.AllowedValues);
+                TransformInputEnumType(inputEnum, inputEnum.Values);
                 break;
             case InputModelType inputModel:
                 TransformInputModel(inputModel);

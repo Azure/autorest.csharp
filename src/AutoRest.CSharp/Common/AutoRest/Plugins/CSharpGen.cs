@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var schemaUsageProvider = new SchemaUsageProvider(codeModel); // Create schema usage before transformation applied
             if (Configuration.Generation1ConvenienceClient)
             {
-                CodeModelTransformer.TransfromForDataPlane(codeModel);
+                CodeModelTransformer.TransformForDataPlane(codeModel);
                 DataPlaneTarget.Execute(project, codeModel, sourceInputModel, schemaUsageProvider);
             }
             else if (Configuration.AzureArm)
@@ -91,7 +91,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             Directory.CreateDirectory(Configuration.OutputFolder);
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync(), await ProtocolCompilationInput.TryCreate());
-            await LowLevelTarget.ExecuteAsync(project, rootNamespace, sourceInputModel, true);
+
+            if (Configuration.AzureArm)
+            {
+                // TODO: Remove this when we have a better way to remove operations, tracking in https://github.com/Azure/typespec-azure/issues/964
+                InputTypeTransformer.Transform(rootNamespace);
+                MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(rootNamespace, sourceInputModel));
+                await MgmtTarget.ExecuteAsync(project);
+            }
+            else
+            {
+                await LowLevelTarget.ExecuteAsync(project, rootNamespace, sourceInputModel, true);
+            }
             return project;
         }
 

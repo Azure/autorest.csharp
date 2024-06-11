@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly TypeFactory _typeFactory;
         private IList<EnumTypeValue>? _values;
         public EnumType(InputEnumType enumType, BuildContext context)
-            : this(enumType, GetDefaultModelNamespace(enumType.Namespace, context.DefaultNamespace), enumType.Accessibility ?? "public", context.TypeFactory, context.SourceInputModel)
+            : this(enumType, GetDefaultModelNamespace(null, context.DefaultNamespace), enumType.Accessibility ?? "public", context.TypeFactory, context.SourceInputModel)
         {
         }
 
@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             : base(defaultNameSpace, sourceInputModel)
         {
             IsEnum = true;
-            _allowedValues = input.AllowedValues;
+            _allowedValues = input.Values;
             _typeFactory = typeFactory;
             _deprecated = input.Deprecated;
 
@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             Description = string.IsNullOrWhiteSpace(input.Description) ? $"The {input.Name}." : input.Description;
             IsExtensible = isExtensible;
-            ValueType = typeFactory.CreateType(input.EnumValueType);
+            ValueType = typeFactory.CreateType(input.ValueType);
             IsStringValueType = ValueType.Equals(typeof(string));
             IsIntValueType = ValueType.Equals(typeof(int)) || ValueType.Equals(typeof(long));
             IsFloatValueType = ValueType.Equals(typeof(float)) || ValueType.Equals(typeof(double));

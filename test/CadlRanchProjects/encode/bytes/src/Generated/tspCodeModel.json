@@ -19,9 +19,9 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Kind": "bytes",
+      "IsNullable": false,
+      "Encode": "base64"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -43,9 +43,9 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Kind": "bytes",
+      "IsNullable": false,
+      "Encode": "base64"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -67,9 +67,9 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Kind": "Primitive",
-      "Name": "BytesBase64Url",
-      "IsNullable": false
+      "Kind": "bytes",
+      "IsNullable": false,
+      "Encode": "base64url"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -95,9 +95,9 @@
       "Name": "Array",
       "ElementType": {
        "$id": "14",
-       "Kind": "Primitive",
-       "Name": "BytesBase64Url",
-       "IsNullable": false
+       "Kind": "bytes",
+       "IsNullable": false,
+       "Encode": "base64url"
       },
       "IsNullable": false
      },
@@ -125,8 +125,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "18",
-      "Kind": "Primitive",
-      "Name": "String",
+      "Kind": "string",
       "IsNullable": false
      },
      "Location": "Uri",
@@ -142,8 +141,7 @@
       "$id": "19",
       "Type": {
        "$id": "20",
-       "Kind": "Primitive",
-       "Name": "String",
+       "Kind": "string",
        "IsNullable": false
       },
       "Value": "http://localhost:3000"
@@ -170,9 +168,9 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "24",
-        "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Kind": "bytes",
+        "IsNullable": false,
+        "Encode": "base64"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -190,8 +188,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "26",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -245,9 +242,9 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "31",
-        "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Kind": "bytes",
+        "IsNullable": false,
+        "Encode": "base64"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -265,8 +262,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "33",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -320,9 +316,9 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "38",
-        "Kind": "Primitive",
-        "Name": "BytesBase64Url",
-        "IsNullable": false
+        "Kind": "bytes",
+        "IsNullable": false,
+        "Encode": "base64url"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -340,8 +336,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "40",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -399,9 +394,9 @@
         "Name": "Array",
         "ElementType": {
          "$id": "46",
-         "Kind": "Primitive",
-         "Name": "BytesBase64Url",
-         "IsNullable": false
+         "Kind": "bytes",
+         "IsNullable": false,
+         "Encode": "base64url"
         },
         "IsNullable": false
        },
@@ -422,8 +417,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "48",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -511,8 +505,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "56",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -538,8 +531,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "59",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -619,8 +611,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "65",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -646,8 +637,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "68",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -727,8 +717,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "74",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -754,8 +743,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "77",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -835,8 +823,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "83",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -862,8 +849,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "86",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -943,9 +929,9 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "93",
-        "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Kind": "bytes",
+        "IsNullable": false,
+        "Encode": "base64"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -963,8 +949,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "95",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1018,9 +1003,9 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "100",
-        "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Kind": "bytes",
+        "IsNullable": false,
+        "Encode": "base64"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1038,8 +1023,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "102",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1093,9 +1077,9 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "107",
-        "Kind": "Primitive",
-        "Name": "BytesBase64Url",
-        "IsNullable": false
+        "Kind": "bytes",
+        "IsNullable": false,
+        "Encode": "base64url"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1113,8 +1097,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "109",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1172,9 +1155,9 @@
         "Name": "Array",
         "ElementType": {
          "$id": "115",
-         "Kind": "Primitive",
-         "Name": "BytesBase64Url",
-         "IsNullable": false
+         "Kind": "bytes",
+         "IsNullable": false,
+         "Encode": "base64url"
         },
         "IsNullable": false
        },
@@ -1195,8 +1178,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "117",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1267,9 +1249,9 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "124",
-        "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Kind": "bytes",
+        "IsNullable": false,
+        "Encode": "base64"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1287,8 +1269,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "126",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1314,8 +1295,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "129",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1372,12 +1352,10 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "134",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "135",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "Value": "application/octet-stream",
@@ -1406,9 +1384,9 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "138",
-        "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Kind": "bytes",
+        "IsNullable": false,
+        "Encode": "base64"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1426,8 +1404,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "140",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1484,12 +1461,10 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "145",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "146",
-         "Kind": "Primitive",
-         "Name": "String",
+         "Kind": "string",
          "IsNullable": false
         },
         "Value": "image/png",
@@ -1518,9 +1493,9 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "149",
-        "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Kind": "bytes",
+        "IsNullable": false,
+        "Encode": "base64"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1538,8 +1513,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "151",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1596,9 +1570,9 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "156",
-        "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Kind": "bytes",
+        "IsNullable": false,
+        "Encode": "base64"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1616,8 +1590,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "158",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1643,8 +1616,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "161",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1701,9 +1673,9 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "166",
-        "Kind": "Primitive",
-        "Name": "BytesBase64Url",
-        "IsNullable": false
+        "Kind": "bytes",
+        "IsNullable": false,
+        "Encode": "base64url"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1721,8 +1693,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "168",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1748,8 +1719,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "171",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1823,8 +1793,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "178",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1853,9 +1822,9 @@
        ],
        "BodyType": {
         "$id": "181",
-        "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Kind": "bytes",
+        "IsNullable": false,
+        "Encode": "base64"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1887,8 +1856,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "184",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1917,9 +1885,9 @@
        ],
        "BodyType": {
         "$id": "187",
-        "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Kind": "bytes",
+        "IsNullable": false,
+        "Encode": "base64"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1951,8 +1919,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "190",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1981,9 +1948,9 @@
        ],
        "BodyType": {
         "$id": "193",
-        "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Kind": "bytes",
+        "IsNullable": false,
+        "Encode": "base64"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2015,8 +1982,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "196",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2045,9 +2011,9 @@
        ],
        "BodyType": {
         "$id": "199",
-        "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "Kind": "bytes",
+        "IsNullable": false,
+        "Encode": "base64"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2079,8 +2045,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "202",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2109,9 +2074,9 @@
        ],
        "BodyType": {
         "$id": "205",
-        "Kind": "Primitive",
-        "Name": "BytesBase64Url",
-        "IsNullable": false
+        "Kind": "bytes",
+        "IsNullable": false,
+        "Encode": "base64url"
        },
        "BodyMediaType": "Json",
        "Headers": [],

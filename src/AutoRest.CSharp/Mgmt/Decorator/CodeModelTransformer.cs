@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelTransformer
     {
-        public static void TransfromForDataPlane(CodeModel codeModel)
+        public static void TransformForDataPlane(CodeModel codeModel)
         {
             SchemaUsageTransformer.Transform(codeModel);
             ConstantSchemaTransformer.Transform(codeModel);

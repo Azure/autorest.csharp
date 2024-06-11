@@ -109,6 +109,7 @@ namespace FirstTestTypeSpec.Tests
             {
 1234
             },
+                requiredFloatProperty = new object(),
             });
             Response response = await client.PatchActionAsync(content);
         }
@@ -142,6 +143,8 @@ namespace FirstTestTypeSpec.Tests
             {
 1234
             },
+                requiredFloatProperty = new object(),
+                optionalFloatProperty = new object(),
             });
             Response response = await client.PatchActionAsync(content);
         }
@@ -167,6 +170,7 @@ namespace FirstTestTypeSpec.Tests
             {
 1234
             },
+                requiredFloatProperty = new object(),
             });
             Response response = await client.AnonymousBodyAsync(content);
         }
@@ -179,7 +183,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
             Response<Thing> response = await client.AnonymousBodyAsync(thing);
         }
 
@@ -212,6 +216,8 @@ namespace FirstTestTypeSpec.Tests
             {
 1234
             },
+                requiredFloatProperty = new object(),
+                optionalFloatProperty = new object(),
             });
             Response response = await client.AnonymousBodyAsync(content);
         }
@@ -224,13 +230,14 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
             {
                 OptionalLiteralString = ThingOptionalLiteralString.Reject,
                 OptionalLiteralInt = ThingOptionalLiteralInt._456,
                 OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                 OptionalLiteralBool = true,
                 OptionalNullableList = { 1234 },
+                OptionalFloatProperty = (double)default,
             };
             Response<Thing> response = await client.AnonymousBodyAsync(thing);
         }
