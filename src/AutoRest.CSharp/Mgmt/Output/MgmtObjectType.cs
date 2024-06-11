@@ -49,24 +49,27 @@ namespace AutoRest.CSharp.Mgmt.Output
             return EnumerateHierarchy()
                 .Skip(1)
                 .SelectMany(type => type.Properties)
-                .Select(p => isResourceType(p) ? "Type" : p.Declaration.Name)
+                .Select(p => p.Declaration.Name)
                 .ToHashSet();
-
-            // In common-types, "type" is a property to represent resource type
-            // In ResourceManager.ResourceData, this property is named as "ResourceType"
-            // Return "Type" as property name for it to skip it in the output properties
-            bool isResourceType(ObjectTypeProperty property)
-                => property.Declaration.Type.Name == "ResourceType" && property.Declaration.Name == "ResourceType";
         }
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
             var parentProperties = GetParentPropertyNames();
-            foreach (var property in base.BuildProperties())
+            var properties = base.BuildProperties().ToArray();
+            foreach (var property in properties)
             {
                 if (!parentProperties.Contains(property.Declaration.Name))
                 {
                     var propertyType = CreatePropertyType(property);
+
+                    // If "type" property is "ResourceType" and the current output model inherits ResourceData
+                    // skip it since it is same as ResourceData.ResourceType
+                    if (property.SerializedName == "type" && property?.ValueType.Name == "ResourceType" && Inherits?.Name == "ResourceData")
+                    {
+                        continue;
+                    }
+
                     // check if the type of this property is "single property type"
                     if (IsSinglePropertyObject(propertyType))
                     {
