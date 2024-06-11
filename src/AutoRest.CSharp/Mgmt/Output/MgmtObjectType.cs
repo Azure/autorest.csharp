@@ -63,8 +63,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     var propertyType = CreatePropertyType(property);
 
-                    // If "type" property is "ResourceType" and the current output model inherits ResourceData
-                    // skip it since it is same as ResourceData.ResourceType
+                    // If "type" property is "ResourceType" and the current output model inherits ResourceData, skip it since it is same as ResourceData.ResourceType
+                    // This only applies for TypeSpec input, for swagger input we have renamed "type" to "resourceType"in FrameworkTypeUpdater.ValidateAndUpdate
                     if (property.SerializedName == "type" && property?.ValueType.Name == "ResourceType" && Inherits?.Name == "ResourceData")
                     {
                         continue;
