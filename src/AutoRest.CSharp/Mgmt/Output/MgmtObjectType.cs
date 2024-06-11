@@ -56,8 +56,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
             var parentProperties = GetParentPropertyNames();
-            var properties = base.BuildProperties().ToArray();
-            foreach (var property in properties)
+            foreach (var property in base.BuildProperties())
             {
                 if (!parentProperties.Contains(property.Declaration.Name))
                 {
