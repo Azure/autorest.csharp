@@ -49,8 +49,14 @@ namespace AutoRest.CSharp.Mgmt.Output
             return EnumerateHierarchy()
                 .Skip(1)
                 .SelectMany(type => type.Properties)
-                .Select(p => p.Declaration.Name)
+                .Select(p => isResourceType(p) ? "Type" : p.Declaration.Name)
                 .ToHashSet();
+
+            // In common-types, "Type" is a property for "ResourceType"
+            // In ResourceData, this property is named as "ResourceType"
+            // Return "Type" as property name for it to skip it in the output properties
+            bool isResourceType(ObjectTypeProperty property)
+                => property.Declaration.Type.Name == "ResourceType" && property.Declaration.Name == "ResourceType";
         }
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
