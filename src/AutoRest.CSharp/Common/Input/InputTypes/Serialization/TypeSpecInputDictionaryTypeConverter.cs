@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Common.Input
             keyType = keyType ?? throw new JsonException("Dictionary must have key type");
             valueType = valueType ?? throw new JsonException("Dictionary must have value type");
 
-            var dictType = new InputDictionaryType(keyType, valueType, isNullable);
+            var dictType = new InputDictionaryType("Dictionary", keyType, valueType, isNullable);
             if (id != null)
             {
                 resolver.AddReference(id, dictType);

@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             elementType = elementType ?? throw new JsonException("List must have element type");
-            var listType = new InputListType(elementType, false, isNullable);
+            var listType = new InputListType("Array", elementType, false, isNullable);
             if (id != null)
             {
                 resolver.AddReference(id, listType);
