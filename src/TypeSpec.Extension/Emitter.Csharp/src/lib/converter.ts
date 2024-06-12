@@ -205,15 +205,13 @@ export function fromSdkModelType(
         }
 
         const flattenedProperties: InputModelProperty[] = [];
-        const childPropertiesToFlatten = (
-            property.type as SdkModelType
-        ).properties;
+        const childPropertiesToFlatten = (property.type as SdkModelType)
+            .properties;
         const newFlattenedNamePrefixes = flattenedNamePrefixes.concat(
             property.serializedName
         );
         for (const childProperty of childPropertiesToFlatten) {
-            if (childProperty.kind !== "property")
-                continue;
+            if (childProperty.kind !== "property") continue;
             flattenedProperties.push(
                 ...fromSdkModelProperty(
                     childProperty,
