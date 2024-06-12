@@ -146,7 +146,7 @@ The client library targets the latest service API version by default. A client i
 
 #### Select a service API version
 
-You have the flexibility to explicitly select a supported service API version when instantiating a client. This ensures that the client can communicate with services using the specified API version.
+You have the flexibility to explicitly select a supported service API version when instantiating a client by configuring its associated options. This ensures that the client can communicate with services using the specified API version.
 
 For example,
 
