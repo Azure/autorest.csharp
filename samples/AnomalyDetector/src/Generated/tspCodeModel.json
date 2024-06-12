@@ -417,9 +417,8 @@
      "Description": "Time series data points. Points should be sorted by timestamp in ascending\norder to match the anomaly detection result. If the data is not sorted\ncorrectly or there is duplicated timestamp, the API will not work. In such\ncase, an error message will be returned.",
      "Type": {
       "$id": "69",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "70",
        "Kind": "Model",
        "Name": "TimeSeriesPoint",
@@ -588,9 +587,8 @@
      "Description": "ExpectedValues contain expected value for each input point. The index of the\narray is consistent with the input series.",
      "Type": {
       "$id": "92",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "93",
        "Kind": "float32",
        "IsNullable": false
@@ -607,9 +605,8 @@
      "Description": "UpperMargins contain upper margin of each input point. UpperMargin is used to\ncalculate upperBoundary, which equals to expectedValue + (100 -\nmarginScale)*upperMargin. Anomalies in response can be filtered by\nupperBoundary and lowerBoundary. By adjusting marginScale value, less\nsignificant anomalies can be filtered in client side. The index of the array is\nconsistent with the input series.",
      "Type": {
       "$id": "95",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "96",
        "Kind": "float32",
        "IsNullable": false
@@ -626,9 +623,8 @@
      "Description": "LowerMargins contain lower margin of each input point. LowerMargin is used to\ncalculate lowerBoundary, which equals to expectedValue - (100 -\nmarginScale)*lowerMargin. Points between the boundary can be marked as normal\nones in client side. The index of the array is consistent with the input\nseries.",
      "Type": {
       "$id": "98",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "99",
        "Kind": "float32",
        "IsNullable": false
@@ -645,9 +641,8 @@
      "Description": "IsAnomaly contains anomaly properties for each input point. True means an\nanomaly either negative or positive has been detected. The index of the array\nis consistent with the input series.",
      "Type": {
       "$id": "101",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "102",
        "Kind": "boolean",
        "IsNullable": false
@@ -664,9 +659,8 @@
      "Description": "IsNegativeAnomaly contains anomaly status in negative direction for each input\npoint. True means a negative anomaly has been detected. A negative anomaly\nmeans the point is detected as an anomaly and its real value is smaller than\nthe expected one. The index of the array is consistent with the input series.",
      "Type": {
       "$id": "104",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "105",
        "Kind": "boolean",
        "IsNullable": false
@@ -683,9 +677,8 @@
      "Description": "IsPositiveAnomaly contain anomaly status in positive direction for each input\npoint. True means a positive anomaly has been detected. A positive anomaly\nmeans the point is detected as an anomaly and its real value is larger than the\nexpected one. The index of the array is consistent with the input series.",
      "Type": {
       "$id": "107",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "108",
        "Kind": "boolean",
        "IsNullable": false
@@ -702,9 +695,8 @@
      "Description": "The severity score for each input point. The larger the value is, the more\nsever the anomaly is. For normal points, the \"severity\" is always 0.",
      "Type": {
       "$id": "110",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "111",
        "Kind": "float32",
        "IsNullable": false
@@ -860,9 +852,8 @@
      "Description": "Time series data points. Points should be sorted by timestamp in ascending\norder to match the change point detection result.",
      "Type": {
       "$id": "133",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "70"
       },
       "IsNullable": false
@@ -964,9 +955,8 @@
      "Description": "isChangePoint contains change point properties for each input point. True means\nan anomaly either negative or positive has been detected. The index of the\narray is consistent with the input series.",
      "Type": {
       "$id": "147",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "148",
        "Kind": "boolean",
        "IsNullable": false
@@ -983,9 +973,8 @@
      "Description": "the change point confidence of each point",
      "Type": {
       "$id": "150",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "151",
        "Kind": "float32",
        "IsNullable": false
@@ -1052,9 +1041,8 @@
         "Description": "Error message when detection is failed.",
         "Type": {
          "$id": "159",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "160",
           "Kind": "Model",
           "Name": "ErrorResponse",
@@ -1103,9 +1091,8 @@
         "Description": "Variable Status.",
         "Type": {
          "$id": "166",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "167",
           "Kind": "Model",
           "Name": "VariableState",
@@ -1293,9 +1280,8 @@
      "Description": "Detection result for each timestamp.",
      "Type": {
       "$id": "193",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "194",
        "Kind": "Model",
        "Name": "AnomalyState",
@@ -1383,9 +1369,8 @@
             "Description": "Interpretation of this anomalous timestamp.",
             "Type": {
              "$id": "207",
-             "Kind": "Array",
-             "Name": "Array",
-             "ElementType": {
+             "Kind": "array",
+             "ValueType": {
               "$id": "208",
               "Kind": "Model",
               "Name": "AnomalyInterpretation",
@@ -1441,9 +1426,8 @@
                    "Description": "The correlated variables that have correlation changes under an anomaly.",
                    "Type": {
                     "$id": "216",
-                    "Kind": "Array",
-                    "Name": "Array",
-                    "ElementType": {
+                    "Kind": "array",
+                    "ValueType": {
                      "$id": "217",
                      "Kind": "string",
                      "IsNullable": false
@@ -1477,9 +1461,8 @@
          "Description": "Error message for the current timestamp.",
          "Type": {
           "$id": "219",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "ValueType": {
            "$ref": "160"
           },
           "IsNullable": false
@@ -1689,9 +1672,8 @@
      "Description": "Error messages when failed to create a model.",
      "Type": {
       "$id": "242",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "160"
       },
       "IsNullable": false
@@ -1734,9 +1716,8 @@
            "Description": "This indicates the number of passes of the entire training dataset the\nalgorithm has completed.",
            "Type": {
             "$id": "248",
-            "Kind": "Array",
-            "Name": "Array",
-            "ElementType": {
+            "Kind": "array",
+            "ValueType": {
              "$id": "249",
              "Kind": "int32",
              "IsNullable": false
@@ -1753,9 +1734,8 @@
            "Description": "List of metrics used to assess how the model fits the training data for each\nepoch.",
            "Type": {
             "$id": "251",
-            "Kind": "Array",
-            "Name": "Array",
-            "ElementType": {
+            "Kind": "array",
+            "ValueType": {
              "$id": "252",
              "Kind": "float32",
              "IsNullable": false
@@ -1772,9 +1752,8 @@
            "Description": "List of metrics used to assess how the model fits the validation set for each\nepoch.",
            "Type": {
             "$id": "254",
-            "Kind": "Array",
-            "Name": "Array",
-            "ElementType": {
+            "Kind": "array",
+            "ValueType": {
              "$id": "255",
              "Kind": "float32",
              "IsNullable": false
@@ -1791,9 +1770,8 @@
            "Description": "Latency for each epoch. ",
            "Type": {
             "$id": "257",
-            "Kind": "Array",
-            "Name": "Array",
-            "ElementType": {
+            "Kind": "array",
+            "ValueType": {
              "$id": "258",
              "Kind": "float32",
              "IsNullable": false
@@ -1815,9 +1793,8 @@
         "Description": "Variable Status.",
         "Type": {
          "$id": "260",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$ref": "167"
          },
          "IsNullable": false
@@ -1931,9 +1908,8 @@
      "Description": "List of models.",
      "Type": {
       "$id": "273",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "261"
       },
       "IsNullable": false
@@ -1998,9 +1974,8 @@
      "Description": "This contains the inference data, including the name, timestamps(ISO 8601) and\nvalues of variables.",
      "Type": {
       "$id": "282",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "283",
        "Kind": "Model",
        "Name": "VariableValues",
@@ -2029,9 +2004,8 @@
          "Description": "Timestamps of last detection request",
          "Type": {
           "$id": "287",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "ValueType": {
            "$id": "288",
            "Kind": "string",
            "IsNullable": false
@@ -2048,9 +2022,8 @@
          "Description": "Values of variables.",
          "Type": {
           "$id": "290",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "ValueType": {
            "$id": "291",
            "Kind": "float32",
            "IsNullable": false
@@ -2101,9 +2074,8 @@
      "Description": "Variable Status.",
      "Type": {
       "$id": "296",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "167"
       },
       "IsNullable": false
@@ -2118,9 +2090,8 @@
      "Description": "Anomaly status and information.",
      "Type": {
       "$id": "298",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "194"
       },
       "IsNullable": false
