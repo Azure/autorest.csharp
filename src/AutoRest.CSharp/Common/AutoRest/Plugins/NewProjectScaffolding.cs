@@ -157,7 +157,7 @@ DefaultAzureCredential credential = new DefaultAzureCredential();
 var client = new <YourService>Client(endpoint, credential, options);
 ```
 
-While selecting an API version, it's important to verify that there are no breaking changes compared to the latest API version. If there are significant differences, API calls may fail due to incompatibility.
+When selecting an API version, it's important to verify that there are no breaking changes compared to the latest API version. If there are significant differences, API calls may fail due to incompatibility.
 
 Always ensure that the chosen API version is fully supported and operational for your specific use case and that it aligns with the service's versioning policy.";
             const string readmeContent = @"# {0} client library for .NET
