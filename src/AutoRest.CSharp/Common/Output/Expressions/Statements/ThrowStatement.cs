@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
         public sealed override void Write(CodeWriter writer)
         {
             ThrowExpression.Write(writer);
-            writer.LineRaw(";");
+            writer.WriteLineRaw(";");
         }
     }
 }

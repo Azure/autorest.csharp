@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public void Write()
         {
-            using (_writer.Namespace(This.Type.Namespace))
+            using (_writer.SetNamespace(This.Type.Namespace))
             {
                 _writer.WriteXmlDocumentationSummary(This.Description);
                 using (_writer.Scope($"{This.Declaration.Accessibility} static partial class {This.Type:D}"))

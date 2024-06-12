@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
         {
             _writer.Line($"// Example: {testCase.Name}");
 
-            _writer.Line();
+            _writer.WriteLine();
             var collectionName = WriteGetCollection(testCase);
 
             WriteTestOperation(collectionName, testCase);
@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
                 }
             }
             _writer.RemoveTrailingComma();
-            _writer.LineRaw(");");
+            _writer.WriteLineRaw(");");
 
             return collectionName;
         }

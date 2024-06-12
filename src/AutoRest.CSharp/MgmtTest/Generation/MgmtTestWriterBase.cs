@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 _writer.Append($" : {This.BaseType:D}");
             }
-            _writer.Line();
+            _writer.WriteLine();
         }
 
         protected virtual void WriteCreateResourceIdentifier(OperationExample example, CodeWriterDeclaration idDeclaration, RequestPath resourcePath, CSharpType resourceType)
@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     {
                         var parameterDeclaration = new CodeWriterVariableDeclaration(value.Name, value.Type);
                         _writer.AppendDeclaration(parameterDeclaration).AppendRaw(" = ")
-                            .AppendExampleParameterValue(value).LineRaw(";");
+                            .AppendExampleParameterValue(value).WriteLineRaw(";");
                     }
                 }
             }
@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     {
                         var parameterDeclaration = new CodeWriterVariableDeclaration(value.Name, value.Type);
                         _writer.AppendDeclaration(parameterDeclaration).AppendRaw(" = ")
-                            .AppendExampleParameterValue(value).LineRaw(";");
+                            .AppendExampleParameterValue(value).WriteLineRaw(";");
                     }
                 }
             }
@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 }
             }
             _writer.RemoveTrailingComma();
-            _writer.LineRaw("));");
+            _writer.WriteLineRaw("));");
         }
 
         protected CodeWriterDeclaration WriteGetResource(MgmtTypeProvider carrierResource, OperationExample example, FormattableString client)

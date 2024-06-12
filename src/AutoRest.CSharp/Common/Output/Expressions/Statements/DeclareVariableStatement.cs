@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
 
             writer.Append($" {Name:D} = ");
             Value.Write(writer);
-            writer.LineRaw(";");
+            writer.WriteLineRaw(";");
         }
     }
 }

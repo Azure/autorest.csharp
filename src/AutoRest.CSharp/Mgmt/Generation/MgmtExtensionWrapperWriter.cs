@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (extension.IsEmpty)
                     continue;
 
-                _writer.Line();
+                _writer.WriteLine();
 
                 _writer.WriteMethod(extension.MockingExtensionFactoryMethod);
             }
@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     continue;
 
                 MgmtExtensionWriter.GetWriter(_writer, extension).WriteImplementations();
-                _writer.Line();
+                _writer.WriteLine();
             }
         }
     }

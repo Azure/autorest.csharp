@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public void Write()
         {
-            using (_writer.Namespace(MgmtContext.Context.DefaultNamespace))
+            using (_writer.SetNamespace(MgmtContext.Context.DefaultNamespace))
             {
                 _writer.Line($"#pragma warning disable SA1649 // File name should match first type name");
                 _writer.Line($"internal class {_name}{_genericString} : {_operationType}");
@@ -62,13 +62,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.Line($"private readonly {typeof(RehydrationToken?)} _completeRehydrationToken;");
                     _writer.Line($"private readonly {typeof(NextLinkOperationImplementation)}? _nextLinkOperation;");
                     _writer.Line($"private readonly {typeof(string)} _operationId;");
-                    _writer.Line();
+                    _writer.WriteLine();
 
                     _writer.WriteXmlDocumentationSummary($"Initializes a new instance of {_name} for mocking.");
                     using (_writer.Scope($"protected {_name}()"))
                     {
                     }
-                    _writer.Line();
+                    _writer.WriteLine();
 
                     using (_writer.Scope($"internal {_name}({_responseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(RehydrationToken?)} rehydrationToken = null)"))
                     {
@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         _writer.Line($"_completeRehydrationToken = rehydrationToken;");
                         _writer.Line($"_operationId = GetOperationId(rehydrationToken);");
                     }
-                    _writer.Line();
+                    _writer.WriteLine();
 
                     using (_writer.Scope($"internal {_name}({_operationSourceString}{typeof(ClientDiagnostics)} clientDiagnostics, {Configuration.ApiTypes.HttpPipelineType} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(OperationFinalStateVia)} finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)"))
                     {
@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             _writer.Line($"_operation = new {_operationInternalType}({nextLinkOperation}, clientDiagnostics, {Configuration.ApiTypes.ResponseParameterName}, {_name:L}, fallbackStrategy: new {typeof(SequentialDelayStrategy)}());");
                         }
                         }
-                    _writer.Line();
+                    _writer.WriteLine();
 
                     using (_writer.Scope($"private string GetOperationId(RehydrationToken? rehydrationToken)"))
                     {
@@ -118,56 +118,56 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     _writer.WriteXmlDocumentationInheritDoc();
                     _writer
-                        .LineRaw("public override string Id => _operationId ?? NextLinkOperationImplementation.NotSet;")
-                        .Line();
+                        .WriteLineRaw("public override string Id => _operationId ?? NextLinkOperationImplementation.NotSet;")
+                        .WriteLine();
 
                     _writer.WriteXmlDocumentationInheritDoc();
                     _writer
-                        .LineRaw("public override RehydrationToken? GetRehydrationToken() => _nextLinkOperation?.GetRehydrationToken() ?? _completeRehydrationToken;")
-                        .Line();
+                        .WriteLineRaw("public override RehydrationToken? GetRehydrationToken() => _nextLinkOperation?.GetRehydrationToken() ?? _completeRehydrationToken;")
+                        .WriteLine();
 
                     if (_isGeneric)
                     {
                         _writer.WriteXmlDocumentationInheritDoc();
                         _writer.Line($"public override T Value => _operation.Value;");
-                        _writer.Line();
+                        _writer.WriteLine();
 
                         _writer.WriteXmlDocumentationInheritDoc();
                         _writer.Line($"public override bool HasValue => _operation.HasValue;");
-                        _writer.Line();
+                        _writer.WriteLine();
                     }
 
                     _writer.WriteXmlDocumentationInheritDoc();
                     _writer.Line($"public override bool HasCompleted => _operation.HasCompleted;");
-                    _writer.Line();
+                    _writer.WriteLine();
 
                     _writer.WriteXmlDocumentationInheritDoc();
                     _writer.Line($"public override {Configuration.ApiTypes.ResponseType} {Configuration.ApiTypes.GetRawResponseName}() => _operation.RawResponse;");
-                    _writer.Line();
+                    _writer.WriteLine();
 
                     _writer.WriteXmlDocumentationInheritDoc();
                     _writer.Line($"public override {Configuration.ApiTypes.ResponseType} UpdateStatus({typeof(CancellationToken)} cancellationToken = default) => _operation.UpdateStatus(cancellationToken);");
-                    _writer.Line();
+                    _writer.WriteLine();
 
                     _writer.WriteXmlDocumentationInheritDoc();
                     _writer.Line($"public override {typeof(ValueTask<>).MakeGenericType(Configuration.ApiTypes.ResponseType)} UpdateStatusAsync({typeof(CancellationToken)} cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);");
-                    _writer.Line();
+                    _writer.WriteLine();
 
                     _writer.WriteXmlDocumentationInheritDoc();
                     _writer.Line($"public override {_responseType} {_waitMethod}({typeof(CancellationToken)} cancellationToken = default) => _operation.{_waitMethod}(cancellationToken);");
-                    _writer.Line();
+                    _writer.WriteLine();
 
                     _writer.WriteXmlDocumentationInheritDoc();
                     _writer.Line($"public override {_responseType} {_waitMethod}({typeof(TimeSpan)} pollingInterval, {typeof(CancellationToken)} cancellationToken = default) => _operation.{_waitMethod}(pollingInterval, cancellationToken);");
-                    _writer.Line();
+                    _writer.WriteLine();
 
                     _writer.WriteXmlDocumentationInheritDoc();
                     _writer.Line($"public override {typeof(ValueTask<>).MakeGenericType(_responseType)} {_waitMethod}Async({typeof(CancellationToken)} cancellationToken = default) => _operation.{_waitMethod}Async(cancellationToken);");
-                    _writer.Line();
+                    _writer.WriteLine();
 
                     _writer.WriteXmlDocumentationInheritDoc();
                     _writer.Line($"public override {typeof(ValueTask<>).MakeGenericType(_responseType)} {_waitMethod}Async({typeof(TimeSpan)} pollingInterval, {typeof(CancellationToken)} cancellationToken = default) => _operation.{_waitMethod}Async(pollingInterval, cancellationToken);");
-                    _writer.Line();
+                    _writer.WriteLine();
                 }
             }
         }

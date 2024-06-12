@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
                 writer.AppendRaw(" ");
                 Expression.Write(writer);
             }
-            writer.LineRaw(";");
+            writer.WriteLineRaw(";");
         }
     }
 }

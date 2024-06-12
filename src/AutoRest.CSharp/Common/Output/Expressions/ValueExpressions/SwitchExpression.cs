@@ -12,17 +12,17 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
             using (writer.AmbientScope())
             {
                 MatchExpression.Write(writer);
-                writer.LineRaw(" switch");
-                writer.LineRaw("{");
+                writer.WriteLineRaw(" switch");
+                writer.WriteLineRaw("{");
                 foreach (var switchCase in Cases)
                 {
                     switchCase.Case.Write(writer);
                     writer.AppendRaw(" => ");
                     switchCase.Expression.Write(writer);
-                    writer.LineRaw(",");
+                    writer.WriteLineRaw(",");
                 }
                 writer.RemoveTrailingComma();
-                writer.Line();
+                writer.WriteLine();
                 writer.AppendRaw("}");
             }
         }

@@ -238,7 +238,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 writer.Line($"return {message};");
             }
-            writer.Line();
+            writer.WriteLine();
         }
 
         private static void WriteUriCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields? fields, IReadOnlyList<Parameter>? clientParameters = null)
@@ -282,7 +282,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 writer.Line($"return {uri};");
             }
-            writer.Line();
+            writer.WriteLine();
         }
 
         private static ReferenceOrConstant GetFieldReference(ClientFields? fields, ReferenceOrConstant value) =>
@@ -517,7 +517,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static CodeWriter.CodeWriterScope? WriteValueNullCheck(CodeWriter writer, ReferenceOrConstant value, bool checkUndefinedCollection = false)
+        private static CodeWriter.CodeScope? WriteValueNullCheck(CodeWriter writer, ReferenceOrConstant value, bool checkUndefinedCollection = false)
         {
             if (value.IsConstant)
                 return default;
@@ -536,7 +536,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 valueExpression.Write(writer);
                 writer.Append($" is {ChangeTrackingListProvider.Instance.Type.MakeGenericType(type.Arguments)} {changeTrackingList:D} && {changeTrackingList}.IsUndefined)");
 
-                return writer.LineRaw(")").Scope();
+                return writer.WriteLineRaw(")").Scope();
             }
             else if (type.IsNullable)
             {

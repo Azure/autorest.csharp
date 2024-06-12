@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 
         public override void Write()
         {
-            using (_writer.Namespace(This.Namespace))
+            using (_writer.SetNamespace(This.Namespace))
             {
                 WriteClassDeclaration();
                 using (_writer.Scope())
@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
                     _writer.Line($"{typeof(ServicePointManager)}.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;");
                     _writer.Line($"{typeof(Environment)}.SetEnvironmentVariable(\"RESOURCE_MANAGER_URL\", $\"https://localhost:8443\");");
                 }
-                _writer.Line();
+                _writer.WriteLine();
             }
         }
 
@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             foreach (var testCase in This.MockTestCases.OrderBy(testCase => testCase.Operation.Name))
             {
                 WriteTestMethod(testCase, testCaseDict[testCase.Operation].Count > 1);
-                _writer.Line();
+                _writer.WriteLine();
             }
         }
 
@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             {
                 _writer.Append($"await ");
                 WriteTestMethodInvocation(declaration, testCase);
-                _writer.LineRaw(";");
+                _writer.WriteLineRaw(";");
             }
         }
 

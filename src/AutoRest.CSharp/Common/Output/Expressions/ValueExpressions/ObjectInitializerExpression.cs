@@ -31,13 +31,13 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
             }
             else
             {
-                writer.Line();
-                writer.LineRaw("{");
+                writer.WriteLine();
+                writer.WriteLineRaw("{");
                 foreach (var (name, value) in Parameters)
                 {
                     writer.Append($"{name} = ");
                     value.Write(writer);
-                    writer.LineRaw(",");
+                    writer.WriteLineRaw(",");
                 }
                 // Commented to minimize changes in generated code
                 //writer.RemoveTrailingComma();

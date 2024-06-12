@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 Parameters = originalSignature.Parameters.Prepend(_scopeParameter).ToArray()
             };
-            _writer.Line();
+            _writer.WriteLine();
             var returnDescription = clientOperation.ReturnsDescription?.Invoke(isAsync);
             return _writer.WriteCommonMethod(signature, returnDescription, isAsync, This.Accessibility == "public", SkipParameterValidation);
         }

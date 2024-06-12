@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
         {
             _writer.Line($"// Example: {testCase.Name}");
 
-            _writer.Line();
+            _writer.WriteLine();
             var resourceName = WriteGetResource(testCase.Carrier, testCase, GetArmClientExpression);
 
             WriteTestOperation(resourceName, testCase);

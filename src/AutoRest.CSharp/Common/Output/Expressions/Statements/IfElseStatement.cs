@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
                     writer.AppendRaw("else ");
                     if (!If.Inline)
                     {
-                        writer.Line();
+                        writer.WriteLine();
                     }
                     Else.Write(writer);
                 }

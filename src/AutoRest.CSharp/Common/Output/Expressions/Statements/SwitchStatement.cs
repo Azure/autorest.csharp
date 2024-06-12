@@ -29,8 +29,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
             {
                 writer.Append($"switch (");
                 MatchExpression.Write(writer);
-                writer.LineRaw(")");
-                writer.LineRaw("{");
+                writer.WriteLineRaw(")");
+                writer.WriteLineRaw("{");
                 foreach (var switchCase in Cases)
                 {
                     if (switchCase.Match.Any())
@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
                             match.Write(writer);
                             if (i < switchCase.Match.Count - 1)
                             {
-                                writer.LineRaw(":");
+                                writer.WriteLineRaw(":");
                             }
                         }
                     }
@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
                     writer.AppendRaw(": ");
                     if (!switchCase.Inline)
                     {
-                        writer.Line();
+                        writer.WriteLine();
                     }
 
                     if (switchCase.AddScope)
@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
                         switchCase.Statement.Write(writer);
                     }
                 }
-                writer.LineRaw("}");
+                writer.WriteLineRaw("}");
             }
         }
     }

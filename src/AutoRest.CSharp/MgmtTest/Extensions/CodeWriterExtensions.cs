@@ -168,10 +168,10 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                     if (type.IsFrameworkType)
                         writer.AppendRaw(",");
                     else
-                        writer.LineRaw(",");
+                        writer.WriteLineRaw(",");
                 }
                 writer.RemoveTrailingComma();
-                writer.Line();
+                writer.WriteLine();
             }
             return writer;
         }
@@ -197,7 +197,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                     writer.AppendExampleValue(new InputExampleRawValue(InputPrimitiveType.String, key), keyType);
                     writer.AppendRaw("] = ");
                     writer.AppendExampleValue(value, valueType);
-                    writer.LineRaw(", ");
+                    writer.WriteLineRaw(", ");
                 }
             }
             return writer;
@@ -261,7 +261,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                     {
                         writer.Append($"{propertyName} = ");
                         writer.AppendExampleValue(value);
-                        writer.LineRaw(",");
+                        writer.WriteLineRaw(",");
                     }
                     writer.RemoveTrailingComma();
                 }
@@ -296,7 +296,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             }
             else
             {
-                writer.LineRaw("null");
+                writer.WriteLineRaw("null");
             }
 
             return writer;
@@ -323,7 +323,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 {
                     writer.Append($"[{key.ToString():L}] = ");
                     writer.AppendRawValue(value, value?.GetType() ?? typeof(object));
-                    writer.LineRaw(",");
+                    writer.WriteLineRaw(",");
                 }
                 writer.RemoveTrailingComma();
             }
@@ -469,7 +469,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                         writer.Append($"{propertyName} = ");
                         // we need to pass in the current type of this property to make sure its initialization is correct
                         writer.AppendExampleValue(exampleValue, type: propertyType, includeCollectionInitialization: false);
-                        writer.LineRaw(",");
+                        writer.WriteLineRaw(",");
                     }
                 }
             }

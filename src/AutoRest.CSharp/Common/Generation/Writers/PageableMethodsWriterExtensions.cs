@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            return writer.Line();
+            return writer.WriteLine();
         }
 
         public static CodeWriter WritePageable(this CodeWriter writer, ConvenienceMethod convenienceMethod, RestClientMethod? createFirstPageRequestMethod, RestClientMethod? createNextPageRequestMethod, Reference clientDiagnosticsReference, Reference pipelineReference, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, bool async)
@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WritePageableBody(parameters, convenienceMethod.ResponseType, firstPageRequest, nextPageRequest, clientDiagnosticsReference, pipelineReference, scopeName, itemPropertyName, nextLinkPropertyName, async);
             }
 
-            return writer.Line();
+            return writer.WriteLine();
         }
 
         public static CodeWriter WritePageable(this CodeWriter writer, MethodSignature methodSignature, CSharpType? pageItemType, Reference? restClientReference, RestClientMethod? createFirstPageRequestMethod, RestClientMethod? createNextPageRequestMethod, Reference clientDiagnosticsReference, Reference pipelineReference, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, bool async)
@@ -116,7 +116,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WritePageableBody(parameters, pageItemType, firstPageRequest, nextPageRequest, clientDiagnosticsReference, pipelineReference, scopeName, itemPropertyName, nextLinkPropertyName, async);
             }
 
-            return writer.Line();
+            return writer.WriteLine();
         }
 
         public static CodeWriter WritePageableBody(this CodeWriter writer, IReadOnlyList<Parameter> methodParameters, CSharpType? pageItemType, FormattableString? firstPageRequest, FormattableString? nextPageRequest, Reference clientDiagnosticsReference, Reference pipelineReference, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, bool async)

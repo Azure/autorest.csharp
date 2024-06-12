@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public virtual void Write()
         {
-            using (_writer.Namespace(This.Namespace))
+            using (_writer.SetNamespace(This.Namespace))
             {
                 WriteClassDeclaration();
                 using (_writer.Scope())
@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             WritePrivateHelpers();
 
-            _writer.Line(); // TODO -- add this here to minimize the amount of code changes, this could be removed after future refactor
+            _writer.WriteLine(); // TODO -- add this here to minimize the amount of code changes, this could be removed after future refactor
             foreach (var method in This.ChildResourceEntryMethods)
             {
                 _writer.WriteMethodDocumentation(method.Signature);
@@ -119,7 +119,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 _writer.RemoveTrailingComma();
             }
-            _writer.Line();
+            _writer.WriteLine();
         }
 
         protected virtual void WriteCtors()
@@ -135,7 +135,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             }
 
-            _writer.Line();
+            _writer.WriteLine();
             if (This.ResourceDataCtor is not null)
             {
                 _writer.WriteMethodDocumentation(This.ResourceDataCtor);
@@ -146,10 +146,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             }
 
-            _writer.Line();
+            _writer.WriteLine();
             if (This.ArmClientCtor is not null)
             {
-                _writer.Line();
+                _writer.WriteLine();
                 _writer.WriteMethodDocumentation(This.ArmClientCtor);
                 using (_writer.WriteMethodDeclaration(This.ArmClientCtor))
                 {
@@ -169,7 +169,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                 }
             }
-            _writer.Line();
+            _writer.WriteLine();
         }
 
         private string GetEnumerableArgValue()
@@ -187,7 +187,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteIEnumerable(CSharpType type)
         {
-            _writer.Line();
+            _writer.WriteLine();
             var enumeratorType = new CSharpType(typeof(IEnumerator<>), type.Arguments);
             _writer.Line($"{enumeratorType:I} {type:I}.GetEnumerator()");
             string argValue = GetEnumerableArgValue();
@@ -195,7 +195,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 _writer.Line($"return GetAll({argValue}).GetEnumerator();");
             }
-            _writer.Line();
+            _writer.WriteLine();
             _writer.Line($"{typeof(IEnumerator)} {typeof(IEnumerable)}.GetEnumerator()");
             using (_writer.Scope())
             {
@@ -205,7 +205,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteIAsyncEnumerable(CSharpType type)
         {
-            _writer.Line();
+            _writer.WriteLine();
             var enumeratorType = new CSharpType(typeof(IAsyncEnumerator<>), type.Arguments);
             _writer.Line($"{enumeratorType:I} {type:I}.GetAsyncEnumerator({KnownParameters.CancellationTokenParameter.Type:I} {KnownParameters.CancellationTokenParameter.Name})");
             string argValue = GetEnumerableArgValue();
@@ -271,7 +271,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 _writer.WriteField(field);
             }
-            _writer.Line();
+            _writer.WriteLine();
         }
 
         protected FormattableString GetProviderNamespaceFromReturnType(FormattableString? resourceTypeExpression)
@@ -413,7 +413,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual IDisposable WriteCommonMethod(MgmtClientOperation clientOperation, bool isAsync)
         {
-            _writer.Line();
+            _writer.WriteLine();
             var returnDescription = clientOperation.ReturnsDescription?.Invoke(isAsync);
             return _writer.WriteCommonMethod(clientOperation.MethodSignature, returnDescription, isAsync, This.Accessibility == "public", SkipParameterValidation);
         }

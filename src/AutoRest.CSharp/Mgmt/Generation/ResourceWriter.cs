@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override void WriteStaticMethods()
         {
             WriteCreateResourceIdentifierMethods();
-            _writer.Line();
+            _writer.WriteLine();
         }
 
         private void WriteCreateResourceIdentifierMethods()
@@ -57,10 +57,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             foreach (var property in This.Properties)
             {
                 _writer.WriteProperty(property);
-                _writer.Line();
+                _writer.WriteLine();
             }
 
-            _writer.Line();
+            _writer.WriteLine();
             WriteStaticValidate($"ResourceType");
         }
 
@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteTaggableCommonMethodFromPutOrPatch(isAsync, "[key] = value");
                 }
             }
-            _writer.Line();
+            _writer.WriteLine();
         }
 
         private void WriteSetTagsBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteTaggableCommonMethodFromPutOrPatch(isAsync, ".ReplaceWith(tags)", true);
                 }
             }
-            _writer.Line();
+            _writer.WriteLine();
         }
 
         private void WriteRemoveTagBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteTaggableCommonMethodFromPutOrPatch(isAsync, ".Remove(key)");
                 }
             }
-            _writer.Line();
+            _writer.WriteLine();
         }
 
         private static FormattableString GetTagResourceCheckString(bool isAsync)

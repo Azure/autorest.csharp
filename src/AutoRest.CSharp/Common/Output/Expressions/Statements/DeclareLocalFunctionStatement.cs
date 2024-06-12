@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
             {
                 writer.AppendRaw(" => ");
                 BodyExpression.Write(writer);
-                writer.LineRaw(";");
+                writer.WriteLineRaw(";");
             }
             else if (BodyStatement is not null)
             {

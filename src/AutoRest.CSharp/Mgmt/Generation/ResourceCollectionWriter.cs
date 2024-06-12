@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             FormattableString validResourceType = allPossibleTypes.Count() == 1
                 ? validResourceType = GetResourceTypeExpression(allPossibleTypes.First())
                 : validResourceType = $"{typeof(Azure.Core.ResourceIdentifier)}.Root.ResourceType";
-            _writer.Line();
+            _writer.WriteLine();
 
             if (allPossibleTypes.Count() == 1)
                 WriteStaticValidate(validResourceType);

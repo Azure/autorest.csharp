@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
 
         public void Write()
         {
-            using (_writer.Namespace(This.Declaration.Namespace))
+            using (_writer.SetNamespace(This.Declaration.Namespace))
             {
                 WriteClassDeclaration();
                 using (_writer.Scope())
@@ -71,9 +71,9 @@ namespace AutoRest.CSharp.Common.Generation.Writers
                         _writer.Append($"{value},");
                     }
                     _writer.RemoveTrailingComma();
-                    _writer.LineRaw("));");
+                    _writer.WriteLineRaw("));");
                 }
-                _writer.Line();
+                _writer.WriteLine();
             }
 
             foreach (var signature in This.ExtensionMethodsWithoutCallback)
@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
                         _writer.Append($"{parameter.Name:I},");
                     }
                     _writer.RemoveTrailingComma();
-                    _writer.LineRaw(");");
+                    _writer.WriteLineRaw(");");
                 }
             }
         }
