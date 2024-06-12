@@ -2,36 +2,37 @@
  "$id": "1",
  "Name": "_Specs_.Azure.ClientGenerator.Core.Access",
  "ApiVersions": [],
- "Enums": [
+ "Enums": [],
+ "Models": [
   {
    "$id": "2",
-   "Kind": "enum",
-   "Name": "RealModel_kind",
-   "ValueType": {
-    "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
-   },
-   "Values": [
-    {
-     "$id": "4",
-     "Name": "real",
-     "Value": "real",
-     "Description": "real"
-    }
-   ],
-   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
-   "Description": "The RealModel_kind",
-   "IsExtensible": true,
+   "Kind": "model",
+   "Name": "NoDecoratorModelInPublic",
+   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation",
+   "Access": "public",
+   "Usage": "Output",
+   "Description": "Used in a public operation, should be generated and exported.",
    "IsNullable": false,
-   "Usage": "Output"
-  }
- ],
- "Models": [
+   "Properties": [
+    {
+     "$id": "3",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "4",
+      "Kind": "string",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
   {
    "$id": "5",
    "Kind": "model",
-   "Name": "NoDecoratorModelInPublic",
+   "Name": "PublicDecoratorModelInPublic",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation",
    "Access": "public",
    "Usage": "Output",
@@ -56,11 +57,11 @@
   {
    "$id": "8",
    "Kind": "model",
-   "Name": "PublicDecoratorModelInPublic",
-   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation",
-   "Access": "public",
+   "Name": "NoDecoratorModelInInternal",
+   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
+   "Access": "internal",
    "Usage": "Output",
-   "Description": "Used in a public operation, should be generated and exported.",
+   "Description": "Used in an internal operation, should be generated but not exported.",
    "IsNullable": false,
    "Properties": [
     {
@@ -81,7 +82,7 @@
   {
    "$id": "11",
    "Kind": "model",
-   "Name": "NoDecoratorModelInInternal",
+   "Name": "InternalDecoratorModelInInternal",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
    "Access": "internal",
    "Usage": "Output",
@@ -106,11 +107,11 @@
   {
    "$id": "14",
    "Kind": "model",
-   "Name": "InternalDecoratorModelInInternal",
+   "Name": "PublicDecoratorModelInInternal",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
-   "Access": "internal",
+   "Access": "public",
    "Usage": "Output",
-   "Description": "Used in an internal operation, should be generated but not exported.",
+   "Description": "Used in an internal operation but with public decorator, should be generated and exported.",
    "IsNullable": false,
    "Properties": [
     {
@@ -131,11 +132,11 @@
   {
    "$id": "17",
    "Kind": "model",
-   "Name": "PublicDecoratorModelInInternal",
-   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
+   "Name": "SharedModel",
+   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation",
    "Access": "public",
    "Usage": "Output",
-   "Description": "Used in an internal operation but with public decorator, should be generated and exported.",
+   "Description": "Used by both public and internal operation. It should be generated and exported.",
    "IsNullable": false,
    "Properties": [
     {
@@ -156,31 +157,6 @@
   {
    "$id": "20",
    "Kind": "model",
-   "Name": "SharedModel",
-   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation",
-   "Access": "public",
-   "Usage": "Output",
-   "Description": "Used by both public and internal operation. It should be generated and exported.",
-   "IsNullable": false,
-   "Properties": [
-    {
-     "$id": "21",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "",
-     "Type": {
-      "$id": "22",
-      "Kind": "string",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "23",
-   "Kind": "model",
    "Name": "OuterModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
    "Access": "internal",
@@ -188,7 +164,7 @@
    "Description": "Used in internal operations, should be generated but not exported.",
    "IsNullable": false,
    "BaseModel": {
-    "$id": "24",
+    "$id": "21",
     "Kind": "model",
     "Name": "BaseModel",
     "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
@@ -198,12 +174,12 @@
     "IsNullable": false,
     "Properties": [
      {
-      "$id": "25",
+      "$id": "22",
       "Name": "name",
       "SerializedName": "name",
       "Description": "",
       "Type": {
-       "$id": "26",
+       "$id": "23",
        "Kind": "string",
        "IsNullable": false
       },
@@ -214,12 +190,12 @@
    },
    "Properties": [
     {
-     "$id": "27",
+     "$id": "24",
      "Name": "inner",
      "SerializedName": "inner",
      "Description": "",
      "Type": {
-      "$id": "28",
+      "$id": "25",
       "Kind": "model",
       "Name": "InnerModel",
       "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
@@ -229,12 +205,12 @@
       "IsNullable": false,
       "Properties": [
        {
-        "$id": "29",
+        "$id": "26",
         "Name": "name",
         "SerializedName": "name",
         "Description": "",
         "Type": {
-         "$id": "30",
+         "$id": "27",
          "Kind": "string",
          "IsNullable": false
         },
@@ -249,13 +225,13 @@
    ]
   },
   {
-   "$ref": "28"
+   "$ref": "25"
   },
   {
-   "$ref": "24"
+   "$ref": "21"
   },
   {
-   "$id": "31",
+   "$id": "28",
    "Kind": "model",
    "Name": "AbstractModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
@@ -264,12 +240,12 @@
    "Description": "Used in internal operations, should be generated but not exported.",
    "IsNullable": false,
    "DiscriminatorProperty": {
-    "$id": "32",
+    "$id": "29",
     "Name": "kind",
     "SerializedName": "kind",
     "Description": "Discriminator",
     "Type": {
-     "$id": "33",
+     "$id": "30",
      "Kind": "string",
      "IsNullable": false
     },
@@ -279,15 +255,15 @@
    },
    "Properties": [
     {
-     "$ref": "32"
+     "$ref": "29"
     },
     {
-     "$id": "34",
+     "$id": "31",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "35",
+      "$id": "32",
       "Kind": "string",
       "IsNullable": false
      },
@@ -296,9 +272,9 @@
     }
    ],
    "DiscriminatedSubtypes": {
-    "$id": "36",
+    "$id": "33",
     "real": {
-     "$id": "37",
+     "$id": "34",
      "Kind": "model",
      "Name": "RealModel",
      "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
@@ -308,19 +284,21 @@
      "IsNullable": false,
      "DiscriminatorValue": "real",
      "BaseModel": {
-      "$ref": "31"
+      "$ref": "28"
      },
      "Properties": [
       {
-       "$id": "38",
+       "$id": "35",
        "Name": "kind",
        "SerializedName": "kind",
        "Description": "Discriminator",
        "Type": {
-        "$id": "39",
+        "$id": "36",
         "Kind": "constant",
         "ValueType": {
-         "$ref": "2"
+         "$id": "37",
+         "Kind": "string",
+         "IsNullable": false
         },
         "Value": "real",
         "IsNullable": false
@@ -334,27 +312,27 @@
    }
   },
   {
-   "$ref": "37"
+   "$ref": "34"
   }
  ],
  "Clients": [
   {
-   "$id": "40",
+   "$id": "38",
    "Name": "AccessClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "41"
+    "$id": "39"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$id": "42",
+     "$id": "40",
      "Name": "host",
      "NameInRequest": "host",
      "Description": "TestServer endpoint",
      "Type": {
-      "$id": "43",
+      "$id": "41",
       "Kind": "string",
       "IsNullable": false
      },
@@ -368,9 +346,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "44",
+      "$id": "42",
       "Type": {
-       "$id": "45",
+       "$id": "43",
        "Kind": "string",
        "IsNullable": false
       },
@@ -380,25 +358,25 @@
    ]
   },
   {
-   "$id": "46",
+   "$id": "44",
    "Name": "PublicOperation",
    "Description": "",
    "Operations": [
     {
-     "$id": "47",
+     "$id": "45",
      "Name": "noDecoratorInPublic",
      "ResourceName": "PublicOperation",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "42"
+       "$ref": "40"
       },
       {
-       "$id": "48",
+       "$id": "46",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "49",
+        "$id": "47",
         "Kind": "string",
         "IsNullable": false
        },
@@ -413,11 +391,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "50",
+       "$id": "48",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "51",
+        "$id": "49",
         "Kind": "string",
         "IsNullable": false
        },
@@ -431,9 +409,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "52",
+        "$id": "50",
         "Type": {
-         "$ref": "51"
+         "$ref": "49"
         },
         "Value": "application/json"
        }
@@ -441,12 +419,12 @@
      ],
      "Responses": [
       {
-       "$id": "53",
+       "$id": "51",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "2"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -465,20 +443,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "54",
+     "$id": "52",
      "Name": "publicDecoratorInPublic",
      "ResourceName": "PublicOperation",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "42"
+       "$ref": "40"
       },
       {
-       "$id": "55",
+       "$id": "53",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "56",
+        "$id": "54",
         "Kind": "string",
         "IsNullable": false
        },
@@ -493,11 +471,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "57",
+       "$id": "55",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "58",
+        "$id": "56",
         "Kind": "string",
         "IsNullable": false
        },
@@ -511,9 +489,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "59",
+        "$id": "57",
         "Type": {
-         "$ref": "58"
+         "$ref": "56"
         },
         "Value": "application/json"
        }
@@ -521,12 +499,12 @@
      ],
      "Responses": [
       {
-       "$id": "60",
+       "$id": "58",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "8"
+        "$ref": "5"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -546,36 +524,36 @@
     }
    ],
    "Protocol": {
-    "$id": "61"
+    "$id": "59"
    },
    "Creatable": false,
    "Parent": "AccessClient",
    "Parameters": [
     {
-     "$ref": "42"
+     "$ref": "40"
     }
    ]
   },
   {
-   "$id": "62",
+   "$id": "60",
    "Name": "InternalOperation",
    "Description": "",
    "Operations": [
     {
-     "$id": "63",
+     "$id": "61",
      "Name": "noDecoratorInInternal",
      "ResourceName": "InternalOperation",
      "Accessibility": "internal",
      "Parameters": [
       {
-       "$ref": "42"
+       "$ref": "40"
       },
       {
-       "$id": "64",
+       "$id": "62",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "65",
+        "$id": "63",
         "Kind": "string",
         "IsNullable": false
        },
@@ -590,11 +568,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "66",
+       "$id": "64",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "67",
+        "$id": "65",
         "Kind": "string",
         "IsNullable": false
        },
@@ -608,9 +586,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "68",
+        "$id": "66",
         "Type": {
-         "$ref": "67"
+         "$ref": "65"
         },
         "Value": "application/json"
        }
@@ -618,12 +596,12 @@
      ],
      "Responses": [
       {
-       "$id": "69",
+       "$id": "67",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "11"
+        "$ref": "8"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -642,20 +620,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "70",
+     "$id": "68",
      "Name": "internalDecoratorInInternal",
      "ResourceName": "InternalOperation",
      "Accessibility": "internal",
      "Parameters": [
       {
-       "$ref": "42"
+       "$ref": "40"
       },
       {
-       "$id": "71",
+       "$id": "69",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "72",
+        "$id": "70",
         "Kind": "string",
         "IsNullable": false
        },
@@ -670,11 +648,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "73",
+       "$id": "71",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "74",
+        "$id": "72",
         "Kind": "string",
         "IsNullable": false
        },
@@ -688,9 +666,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "75",
+        "$id": "73",
         "Type": {
-         "$ref": "74"
+         "$ref": "72"
         },
         "Value": "application/json"
        }
@@ -698,12 +676,12 @@
      ],
      "Responses": [
       {
-       "$id": "76",
+       "$id": "74",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "14"
+        "$ref": "11"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -722,20 +700,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "77",
+     "$id": "75",
      "Name": "publicDecoratorInInternal",
      "ResourceName": "InternalOperation",
      "Accessibility": "internal",
      "Parameters": [
       {
-       "$ref": "42"
+       "$ref": "40"
       },
       {
-       "$id": "78",
+       "$id": "76",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "79",
+        "$id": "77",
         "Kind": "string",
         "IsNullable": false
        },
@@ -750,11 +728,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "80",
+       "$id": "78",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "81",
+        "$id": "79",
         "Kind": "string",
         "IsNullable": false
        },
@@ -768,9 +746,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "82",
+        "$id": "80",
         "Type": {
-         "$ref": "81"
+         "$ref": "79"
         },
         "Value": "application/json"
        }
@@ -778,12 +756,12 @@
      ],
      "Responses": [
       {
-       "$id": "83",
+       "$id": "81",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "17"
+        "$ref": "14"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -803,36 +781,36 @@
     }
    ],
    "Protocol": {
-    "$id": "84"
+    "$id": "82"
    },
    "Creatable": false,
    "Parent": "AccessClient",
    "Parameters": [
     {
-     "$ref": "42"
+     "$ref": "40"
     }
    ]
   },
   {
-   "$id": "85",
+   "$id": "83",
    "Name": "SharedModelInOperation",
    "Description": "",
    "Operations": [
     {
-     "$id": "86",
+     "$id": "84",
      "Name": "public",
      "ResourceName": "SharedModelInOperation",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "42"
+       "$ref": "40"
       },
       {
-       "$id": "87",
+       "$id": "85",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "88",
+        "$id": "86",
         "Kind": "string",
         "IsNullable": false
        },
@@ -847,11 +825,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "89",
+       "$id": "87",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "90",
+        "$id": "88",
         "Kind": "string",
         "IsNullable": false
        },
@@ -865,9 +843,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "91",
+        "$id": "89",
         "Type": {
-         "$ref": "90"
+         "$ref": "88"
         },
         "Value": "application/json"
        }
@@ -875,12 +853,12 @@
      ],
      "Responses": [
       {
-       "$id": "92",
+       "$id": "90",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "20"
+        "$ref": "17"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -899,20 +877,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "93",
+     "$id": "91",
      "Name": "internal",
      "ResourceName": "SharedModelInOperation",
      "Accessibility": "internal",
      "Parameters": [
       {
-       "$ref": "42"
+       "$ref": "40"
       },
       {
-       "$id": "94",
+       "$id": "92",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "95",
+        "$id": "93",
         "Kind": "string",
         "IsNullable": false
        },
@@ -927,11 +905,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "96",
+       "$id": "94",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "97",
+        "$id": "95",
         "Kind": "string",
         "IsNullable": false
        },
@@ -945,9 +923,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "98",
+        "$id": "96",
         "Type": {
-         "$ref": "97"
+         "$ref": "95"
         },
         "Value": "application/json"
        }
@@ -955,12 +933,12 @@
      ],
      "Responses": [
       {
-       "$id": "99",
+       "$id": "97",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "20"
+        "$ref": "17"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -980,37 +958,37 @@
     }
    ],
    "Protocol": {
-    "$id": "100"
+    "$id": "98"
    },
    "Creatable": false,
    "Parent": "AccessClient",
    "Parameters": [
     {
-     "$ref": "42"
+     "$ref": "40"
     }
    ]
   },
   {
-   "$id": "101",
+   "$id": "99",
    "Name": "RelativeModelInOperation",
    "Description": "",
    "Operations": [
     {
-     "$id": "102",
+     "$id": "100",
      "Name": "operation",
      "ResourceName": "RelativeModelInOperation",
      "Description": "Expected query parameter: name=<any string>\nExpected response body:\n```json\n{\n  \"name\": <any string>,\n  \"inner\":\n  {\n    \"name\": <any string>\n  }\n}\n```",
      "Accessibility": "internal",
      "Parameters": [
       {
-       "$ref": "42"
+       "$ref": "40"
       },
       {
-       "$id": "103",
+       "$id": "101",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "104",
+        "$id": "102",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1025,11 +1003,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "105",
+       "$id": "103",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "106",
+        "$id": "104",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1043,9 +1021,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "107",
+        "$id": "105",
         "Type": {
-         "$ref": "106"
+         "$ref": "104"
         },
         "Value": "application/json"
        }
@@ -1053,12 +1031,12 @@
      ],
      "Responses": [
       {
-       "$id": "108",
+       "$id": "106",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "23"
+        "$ref": "20"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1077,21 +1055,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "109",
+     "$id": "107",
      "Name": "discriminator",
      "ResourceName": "RelativeModelInOperation",
      "Description": "Expected query parameter: kind=<any string>\nExpected response body:\n```json\n{\n  \"name\": <any string>,\n  \"kind\": \"real\"\n}\n```",
      "Accessibility": "internal",
      "Parameters": [
       {
-       "$ref": "42"
+       "$ref": "40"
       },
       {
-       "$id": "110",
+       "$id": "108",
        "Name": "kind",
        "NameInRequest": "kind",
        "Type": {
-        "$id": "111",
+        "$id": "109",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1106,11 +1084,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "112",
+       "$id": "110",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "113",
+        "$id": "111",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1124,9 +1102,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "114",
+        "$id": "112",
         "Type": {
-         "$ref": "113"
+         "$ref": "111"
         },
         "Value": "application/json"
        }
@@ -1134,12 +1112,12 @@
      ],
      "Responses": [
       {
-       "$id": "115",
+       "$id": "113",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "31"
+        "$ref": "28"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1159,13 +1137,13 @@
     }
    ],
    "Protocol": {
-    "$id": "116"
+    "$id": "114"
    },
    "Creatable": false,
    "Parent": "AccessClient",
    "Parameters": [
     {
-     "$ref": "42"
+     "$ref": "40"
     }
    ]
   }

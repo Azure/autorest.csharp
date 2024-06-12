@@ -174,10 +174,7 @@ export function fromSdkModelType(
     ): InputModelProperty[] {
         // TODO -- we should consolidate the flatten somewhere else
         if (!property.flatten) {
-            const serializedName =
-                property.kind === "property"
-                    ? (property as SdkBodyModelPropertyType).serializedName
-                    : "";
+            const serializedName = property.serializedName;
             literalTypeContext.PropertyName = serializedName;
 
             const isRequired = !property.optional;
@@ -193,7 +190,7 @@ export function fromSdkModelType(
                     context,
                     models,
                     enums,
-                    literalTypeContext
+                    isDiscriminator ? undefined : literalTypeContext // this is a workaround because the type of discriminator property in derived models is always literal and we wrap literal into enums, which leads to a lot of extra enum types, adding this check to avoid them
                 ),
                 IsRequired: isRequired,
                 IsReadOnly: isReadOnly(property),
@@ -210,14 +207,16 @@ export function fromSdkModelType(
         const flattenedProperties: InputModelProperty[] = [];
         const childPropertiesToFlatten = (
             property.type as SdkModelType
-        ).properties.filter((p) => p.kind === "property");
+        ).properties;
         const newFlattenedNamePrefixes = flattenedNamePrefixes.concat(
             property.serializedName
         );
-        for (let index = 0; index < childPropertiesToFlatten.length; index++) {
+        for (const childProperty of childPropertiesToFlatten) {
+            if (childProperty.kind !== "property")
+                continue;
             flattenedProperties.push(
                 ...fromSdkModelProperty(
-                    childPropertiesToFlatten[index],
+                    childProperty,
                     literalTypeContext,
                     newFlattenedNamePrefixes
                 )
