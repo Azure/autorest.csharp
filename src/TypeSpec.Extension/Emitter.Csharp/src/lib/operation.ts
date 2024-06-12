@@ -104,14 +104,14 @@ export function loadOperation(
 
     if (
         typespecParameters.body?.parameter &&
-        !isVoidBody(typespecParameters.body.type)
+        !isVoidType(typespecParameters.body.type)
     ) {
         parameters.push(
             loadBodyParameter(sdkContext, typespecParameters.body?.parameter)
         );
     } else if (
         typespecParameters.body?.type &&
-        !isVoidBody(typespecParameters.body.type)
+        !isVoidType(typespecParameters.body.type)
     ) {
         const effectiveBodyType = getEffectiveSchemaType(
             sdkContext,
@@ -255,7 +255,7 @@ export function loadOperation(
         GenerateConvenienceMethod: generateConvenience
     } as InputOperation;
 
-    function isVoidBody(type: Type): boolean {
+    function isVoidType(type: Type): boolean {
         return type.kind === "Intrinsic" && type.name === "void";
     }
 
