@@ -150,7 +150,7 @@ You have the flexibility to explicitly select a supported service API version wh
 
 For example,
 
-```C# Snippet:Create<YourService>ClientForSpecialAPIVersion
+```C# Snippet:Create<YourService>ClientForSpecificApiVersion
 Uri endpoint = new Uri(""<your endpoint>"");
 DefaultAzureCredential credential = new DefaultAzureCredential();
 <YourService>ClientOptions options = new <YourService>ClientOptions(<YourService>ClientOptions.ServiceVersion.<API Version>)
