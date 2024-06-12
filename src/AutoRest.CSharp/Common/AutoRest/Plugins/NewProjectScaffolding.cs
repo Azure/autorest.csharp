@@ -110,7 +110,6 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo(""{0}.Tests{1}"")]
 {2}";
             const string azureResourceProvider = @"
-
 // Replace Microsoft.Test with the correct resource provider namepace for your service and uncomment.
 // See https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers
 // for the list of possible values.
