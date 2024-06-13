@@ -58,7 +58,7 @@
    "Name": "SpreadAsRequestBodyRequest",
    "Namespace": "Parameters.Spread.Alias",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "9",

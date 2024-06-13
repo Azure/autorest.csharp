@@ -471,10 +471,16 @@ function fromSdkArrayType(
     };
 }
 
-function fromUsageFlags(usage: UsageFlags): Usage {
-    if (usage === UsageFlags.Input) return Usage.Input;
-    else if (usage === UsageFlags.Output) return Usage.Output;
-    else if (usage === (UsageFlags.Input | UsageFlags.Output))
-        return Usage.RoundTrip;
-    else return Usage.None;
+function fromUsageFlags(usage: UsageFlags): string {
+    const result: string[] = [];
+    if (usage & UsageFlags.Input) result.push("Input");
+    if (usage & UsageFlags.Output) result.push("Output");
+    if (usage & UsageFlags.ApiVersionEnum) result.push("ApiVersionEnum");
+    if (usage & UsageFlags.JsonMergePatch) result.push("JsonMergePatch");
+    if (usage & UsageFlags.MultipartFormData) result.push("Multipart");
+    // This is because I don't want to much change in TspCodelModel
+    if (result.length === 2 && result.includes("Input") && result.includes("Output")) {
+        return "RoundTrip";
+    }
+    return result.length > 0 ? result.join(", ") : "None";
 }

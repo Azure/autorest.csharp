@@ -50,7 +50,7 @@
    "Description": "Enum describing allowed operation states.",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": "None"
   },
   {
    "$id": "9",
@@ -71,7 +71,7 @@
    "Namespace": "TypeSpec.Versioning.Oldest",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -82,7 +82,7 @@
    "Namespace": "Azure.Core",
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "13",
@@ -120,7 +120,7 @@
       "Namespace": "Azure.Core.Foundations",
       "Description": "The error object.",
       "IsNullable": false,
-      "Usage": "Output",
+      "Usage": "None",
       "Properties": [
        {
         "$id": "18",
@@ -190,7 +190,7 @@
          "Namespace": "Azure.Core.Foundations",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "IsNullable": false,
-         "Usage": "Output",
+         "Usage": "None",
          "Properties": [
           {
            "$id": "28",
@@ -301,7 +301,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Resource items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "40",

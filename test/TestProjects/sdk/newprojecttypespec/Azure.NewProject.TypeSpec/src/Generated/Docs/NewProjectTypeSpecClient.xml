@@ -203,6 +203,60 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code></example>
     </member>
+    <member name="PatchActionAsync(Thing,CancellationToken)">
+      <example>
+This sample shows how to call PatchActionAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
+Response<Thing> response = await client.PatchActionAsync(body);
+]]></code>
+This sample shows how to call PatchActionAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+{
+    OptionalLiteralString = ThingOptionalLiteralString.Reject,
+    OptionalLiteralInt = ThingOptionalLiteralInt._456,
+    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+    OptionalLiteralBool = true,
+};
+Response<Thing> response = await client.PatchActionAsync(body);
+]]></code></example>
+    </member>
+    <member name="PatchAction(Thing,CancellationToken)">
+      <example>
+This sample shows how to call PatchAction.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
+Response<Thing> response = client.PatchAction(body);
+]]></code>
+This sample shows how to call PatchAction with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+{
+    OptionalLiteralString = ThingOptionalLiteralString.Reject,
+    OptionalLiteralInt = ThingOptionalLiteralInt._456,
+    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+    OptionalLiteralBool = true,
+};
+Response<Thing> response = client.PatchAction(body);
+]]></code></example>
+    </member>
     <member name="PatchActionAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call PatchActionAsync and parse the result.

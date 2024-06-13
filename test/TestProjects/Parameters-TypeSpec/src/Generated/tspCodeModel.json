@@ -24,7 +24,7 @@
    "Namespace": "ParametersCadl",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [

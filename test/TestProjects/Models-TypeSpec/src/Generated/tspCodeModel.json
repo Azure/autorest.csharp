@@ -190,7 +190,7 @@
    "Description": "The Int32ValuesFacet_kind",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": "None"
   },
   {
    "$id": "30",
@@ -211,7 +211,7 @@
    "Namespace": "ModelsTypeSpec",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [

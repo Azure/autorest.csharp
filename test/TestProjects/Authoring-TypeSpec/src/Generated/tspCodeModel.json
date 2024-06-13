@@ -158,7 +158,7 @@
    "Namespace": "AuthoringTypeSpec",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [

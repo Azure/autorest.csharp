@@ -49,7 +49,7 @@ namespace SpreadTypeSpec.Models
         /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public SpreadAliasRequest(string name, int age)
+        internal SpreadAliasRequest(string name, int age)
         {
             Argument.AssertNotNull(name, nameof(name));
 

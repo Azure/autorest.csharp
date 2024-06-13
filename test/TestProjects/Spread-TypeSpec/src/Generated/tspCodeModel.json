@@ -24,7 +24,7 @@
    "Namespace": "SpreadTypeSpec",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -70,7 +70,7 @@
    "Name": "SpreadAliasRequest",
    "Namespace": "SpreadTypeSpec",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "11",
@@ -265,7 +265,7 @@
    "Name": "SpreadAliasWithCollectionsRequest",
    "Namespace": "SpreadTypeSpec",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "39",

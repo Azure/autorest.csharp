@@ -71,7 +71,7 @@
    "Namespace": "Pagination",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -209,7 +209,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of DimensionValueListItem items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "30",
@@ -279,7 +279,7 @@
    "Namespace": "Azure.Core",
    "Description": "Paged collection of LedgerEntry items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "39",
@@ -320,7 +320,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of TextBlocklist items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "44",
@@ -398,7 +398,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of TextBlockItem items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "54",

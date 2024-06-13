@@ -47,7 +47,7 @@ namespace _Type.Union.Models
 
         /// <summary> Initializes a new instance of <see cref="SendRequest8"/>. </summary>
         /// <param name="prop"></param>
-        public SendRequest8(GetResponseProp4 prop)
+        internal SendRequest8(GetResponseProp4 prop)
         {
             Prop = prop;
         }

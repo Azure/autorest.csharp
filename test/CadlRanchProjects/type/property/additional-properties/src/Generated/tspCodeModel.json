@@ -24,7 +24,7 @@
    "Description": "The WidgetData0_kind",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": "None"
   },
   {
    "$id": "5",
@@ -47,7 +47,7 @@
    "Description": "The WidgetData1_kind",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": "None"
   },
   {
    "$id": "8",
@@ -70,7 +70,7 @@
    "Description": "The WidgetData2_kind",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": "None"
   }
  ],
  "Models": [

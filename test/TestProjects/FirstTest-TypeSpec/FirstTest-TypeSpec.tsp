@@ -326,7 +326,7 @@ op topAction2(): Thing;
 @route("/patch")
 @doc("top level patch")
 @patch
-@convenientAPI(true)
+@convenientAPI(false)
 op patchAction(@body body: Thing): Thing;
 
 @route("/anonymousBody")

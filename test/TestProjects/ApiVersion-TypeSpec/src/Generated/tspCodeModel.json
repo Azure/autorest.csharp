@@ -56,7 +56,7 @@
    "Namespace": "ApiVersionInTsp",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [

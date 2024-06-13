@@ -240,12 +240,47 @@ namespace Azure.NewProject.TypeSpec
             }
         }
 
+        /// <summary> top level patch. </summary>
+        /// <param name="body"> The <see cref="Thing"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='PatchActionAsync(Thing,CancellationToken)']/*" />
+        public virtual async Task<Response<Thing>> PatchActionAsync(Thing body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await PatchActionAsync(content, context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> top level patch. </summary>
+        /// <param name="body"> The <see cref="Thing"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='PatchAction(Thing,CancellationToken)']/*" />
+        public virtual Response<Thing> PatchAction(Thing body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = PatchAction(content, context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
         /// <summary>
         /// [Protocol Method] top level patch
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PatchActionAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -280,6 +315,11 @@ namespace Azure.NewProject.TypeSpec
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PatchAction(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

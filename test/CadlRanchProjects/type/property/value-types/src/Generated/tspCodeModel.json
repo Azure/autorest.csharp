@@ -82,7 +82,7 @@
    "Description": "The StringLiteralProperty_property",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": "None"
   },
   {
    "$id": "13",
@@ -105,7 +105,7 @@
    "Description": "The IntLiteralProperty_property",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": "None"
   },
   {
    "$id": "16",
@@ -128,7 +128,7 @@
    "Description": "The FloatLiteralProperty_property",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": "None"
   },
   {
    "$id": "19",

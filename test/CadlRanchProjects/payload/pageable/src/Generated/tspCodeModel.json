@@ -11,7 +11,7 @@
    "Namespace": "Azure.Core",
    "Description": "Paged collection of User items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "3",

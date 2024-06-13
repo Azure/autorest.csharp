@@ -239,7 +239,7 @@
    "Name": "SendRequest9",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "38",
@@ -281,7 +281,7 @@
    "Name": "SendRequest8",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "42",
@@ -323,7 +323,7 @@
    "Name": "SendRequest7",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "46",
@@ -365,7 +365,7 @@
    "Name": "SendRequest6",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "50",
@@ -407,7 +407,7 @@
    "Name": "SendRequest5",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "54",
@@ -506,7 +506,7 @@
    "Name": "SendRequest4",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "65",
@@ -591,7 +591,7 @@
    "Name": "SendRequest3",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "73",
@@ -707,7 +707,7 @@
    "Name": "SendRequest2",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "88",
@@ -999,7 +999,7 @@
    "Name": "SendRequest1",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "133",
@@ -1257,7 +1257,7 @@
    "Name": "SendRequest",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "169",

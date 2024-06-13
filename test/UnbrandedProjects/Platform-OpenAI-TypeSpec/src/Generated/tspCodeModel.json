@@ -358,7 +358,7 @@
    "Description": "The FineTuningJob_object",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": "None"
   },
   {
    "$id": "61",
@@ -576,7 +576,7 @@
    "Description": "The CreateEditResponse_object",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": "None"
   },
   {
    "$id": "97",
@@ -646,7 +646,7 @@
    "Description": "The CreateEmbeddingResponse_object",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": "None"
   },
   {
    "$id": "107",
@@ -669,7 +669,7 @@
    "Description": "The Embedding_object",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": "None"
   },
   {
    "$id": "110",
@@ -692,7 +692,7 @@
    "Description": "The OpenAIFile_object",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": "None"
   },
   {
    "$id": "113",
@@ -797,7 +797,7 @@
    "Description": "The FineTune_object",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": "None"
   },
   {
    "$id": "130",
@@ -861,7 +861,7 @@
    "Description": "The Model_object",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": "None"
   },
   {
    "$id": "140",
@@ -954,7 +954,7 @@
    "Name": "CreateTranscriptionRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input,Multipart",
+   "Usage": "Input, Multipart",
    "Properties": [
     {
      "$id": "154",
@@ -1062,7 +1062,7 @@
    "Name": "CreateTranslationRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input,Multipart",
+   "Usage": "Input, Multipart",
    "Properties": [
     {
      "$id": "168",
@@ -3633,7 +3633,7 @@
    "Name": "CreateFileRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input,Multipart",
+   "Usage": "Input, Multipart",
    "Properties": [
     {
      "$id": "521",
@@ -4664,7 +4664,7 @@
    "Name": "CreateImageEditRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input,Multipart",
+   "Usage": "Input, Multipart",
    "Properties": [
     {
      "$id": "662",
@@ -4763,7 +4763,7 @@
    "Name": "CreateImageVariationRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
-   "Usage": "Input,Multipart",
+   "Usage": "Input, Multipart",
    "Properties": [
     {
      "$id": "675",

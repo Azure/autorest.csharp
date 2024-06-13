@@ -55,7 +55,7 @@
    "Description": "The version of the API.",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -184,7 +184,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of User items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "26",
@@ -289,7 +289,7 @@
    "Namespace": "Azure.Core",
    "Description": "Paged collection of FirstItem items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "39",
@@ -354,7 +354,7 @@
    "Namespace": "Azure.Core",
    "Description": "Paged collection of SecondItem items",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "47",

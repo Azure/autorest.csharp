@@ -26,7 +26,7 @@
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": "None"
   },
   {
    "$id": "5",
@@ -49,7 +49,7 @@
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": "None"
   },
   {
    "$id": "8",
@@ -72,7 +72,7 @@
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": "None"
   },
   {
    "$id": "11",
@@ -95,7 +95,7 @@
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": "None"
   },
   {
    "$id": "14",
@@ -118,7 +118,7 @@
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": "None"
   },
   {
    "$id": "17",
@@ -141,7 +141,7 @@
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": "None"
   },
   {
    "$id": "20",
@@ -469,7 +469,7 @@
    "Namespace": "FirstTestTypeSpec",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [

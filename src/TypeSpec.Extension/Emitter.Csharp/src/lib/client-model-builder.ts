@@ -163,10 +163,6 @@ export function createModelForService(
 
     navigateModels(sdkContext, modelMap, enumMap);
 
-    const usages = getUsages(sdkContext, convenienceOperations, modelMap);
-    setUsage(usages, modelMap);
-    setUsage(usages, enumMap);
-
     for (const client of clients) {
         for (const op of client.Operations) {
             /* TODO: remove this when adopt tcgc.

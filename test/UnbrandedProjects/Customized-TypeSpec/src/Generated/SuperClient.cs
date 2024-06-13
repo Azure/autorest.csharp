@@ -566,12 +566,41 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
+        /// <summary> top level patch. </summary>
+        /// <param name="body"> The <see cref="Thing"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<ClientResult<Thing>> PatchActionAsync(Thing body)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using BinaryContent content = body.ToBinaryContent();
+            ClientResult result = await PatchActionAsync(content, null).ConfigureAwait(false);
+            return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+        }
+
+        /// <summary> top level patch. </summary>
+        /// <param name="body"> The <see cref="Thing"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual ClientResult<Thing> PatchAction(Thing body)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using BinaryContent content = body.ToBinaryContent();
+            ClientResult result = PatchAction(content, null);
+            return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+        }
+
         /// <summary>
         /// [Protocol Method] top level patch
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PatchActionAsync(Thing)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -595,6 +624,11 @@ namespace CustomizedTypeSpec.Models
         /// <item>
         /// <description>
         /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PatchAction(Thing)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
