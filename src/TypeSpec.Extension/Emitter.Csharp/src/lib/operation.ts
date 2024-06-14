@@ -309,7 +309,7 @@ export function loadOperation(
             IsResourceParameter: false,
             IsContentType: isContentType,
             IsEndpoint: false,
-            SkipUrlEncoding: getExtensionByKey(sdkContext.program, param, "x-ms-skip-url-encoding-url") === "true",
+            SkipUrlEncoding: getExtensionByKey(sdkContext.program, param, "x-ms-skip-url-encoding") === true,
             Explode:
                 (inputType as InputListType).ElementType && format === "multi"
                     ? true

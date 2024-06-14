@@ -67,7 +67,7 @@ export function resolveServers(
                 IsContentType: false,
                 IsRequired: true,
                 IsEndpoint: isEndpoint,
-                SkipUrlEncoding: getExtensionByKey(context.program, prop, "x-ms-skip-url-encoding-url") === "true",
+                SkipUrlEncoding: getExtensionByKey(context.program, prop, "x-ms-skip-url-encoding") === true,
                 Explode: false,
                 Kind: InputOperationParameterKind.Client,
                 DefaultValue: defaultValue
