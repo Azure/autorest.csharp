@@ -15,6 +15,7 @@ const $lib = createTypeSpecLibrary({
             }
         },
         "no-route": {
+            // TODO - once https://github.com/Azure/typespec-azure/issues/1018 is fixed, change this back to error
             severity: "warning",
             messages: {
                 default: paramMessage`No Route for service for service ${"service"}`
