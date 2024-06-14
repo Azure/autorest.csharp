@@ -18,6 +18,7 @@ import {
     ModelProperty,
     Namespace,
     Operation,
+    Program,
     Type
 } from "@typespec/compiler";
 import { getResourceOperation } from "@typespec/rest";
@@ -26,6 +27,7 @@ import {
     HttpOperationParameter,
     HttpOperationResponse
 } from "@typespec/http";
+import {getExtensions} from "@typespec/json-schema";
 import { NetEmitterOptions } from "../options.js";
 import { BodyMediaType, typeToBodyMediaType } from "../type/body-media-type.js";
 import { collectionFormatToDelimMap } from "../type/collection-format.js";
@@ -66,7 +68,8 @@ import {
 import {
     capitalize,
     createContentTypeOrAcceptParameter,
-    getTypeName
+    getTypeName,
+    getExtensionByKey
 } from "./utils.js";
 import { Usage } from "../type/usage.js";
 
@@ -306,7 +309,7 @@ export function loadOperation(
             IsResourceParameter: false,
             IsContentType: isContentType,
             IsEndpoint: false,
-            SkipUrlEncoding: false, //TODO: retrieve out value from extension
+            SkipUrlEncoding: getExtensionByKey(sdkContext.program, param, "x-ms-skip-url-encoding-url") === "true",
             Explode:
                 (inputType as InputListType).ElementType && format === "multi"
                     ? true

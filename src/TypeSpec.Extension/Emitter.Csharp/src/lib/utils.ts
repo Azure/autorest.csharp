@@ -5,6 +5,7 @@ import {
     ModelProperty,
     Namespace,
     Operation,
+    Program,
     Scalar
 } from "@typespec/compiler";
 import {
@@ -17,6 +18,7 @@ import { InputPrimitiveType, InputType } from "../type/input-type.js";
 import { RequestLocation } from "../type/request-location.js";
 import { InputOperationParameterKind } from "../type/input-operation-parameter-kind.js";
 import { InputConstant } from "../type/input-constant.js";
+import {getExtensions} from "@typespec/json-schema";
 
 export function capitalize(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -102,4 +104,8 @@ export function createContentTypeOrAcceptParameter(
                   } as InputConstant)
                 : undefined
     } as InputParameter;
+}
+
+export function getExtensionByKey(program: Program, type: ModelProperty, key: string): string | undefined {
+    return getExtensions(program, type).find((ext) => ext.key === key)?.value?.toString();
 }
