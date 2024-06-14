@@ -222,9 +222,10 @@ namespace AutoRest.CSharp.Output.Models.Types.System
                 Argument.AssertNotNullOrWhiteSpace(name),
                 Argument.AssertNotNullOrWhiteSpace(value),
                 EmptyLine,
-                new IfElseStatement(Equal(queryBuilder.Length, Int(0)),
-                    queryBuilder.Append(Literal('?')),
-                    queryBuilder.Append(Literal('&'))),
+                new IfStatement(GreaterThan(queryBuilder.Length, Int(0)))
+                {
+                    queryBuilder.Append(Literal('&'))
+                },
                 EmptyLine,
                 new IfStatement(escape)
                 {
