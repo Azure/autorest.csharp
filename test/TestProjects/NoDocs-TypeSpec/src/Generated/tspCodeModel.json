@@ -3630,7 +3630,7 @@
       {
        "$id": "411",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "412",
         "Kind": "constant",

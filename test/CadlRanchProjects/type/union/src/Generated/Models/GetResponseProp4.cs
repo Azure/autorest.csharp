@@ -10,11 +10,11 @@ namespace _Type.Union.Models
     /// <summary> The GetResponseProp4. </summary>
     public enum GetResponseProp4
     {
-        /// <summary> 1.1. </summary>
-        _11,
-        /// <summary> 2.2. </summary>
-        _22,
-        /// <summary> 3.3. </summary>
-        _33
+        /// <summary> a. </summary>
+        A,
+        /// <summary> b. </summary>
+        B,
+        /// <summary> c. </summary>
+        C
     }
 }

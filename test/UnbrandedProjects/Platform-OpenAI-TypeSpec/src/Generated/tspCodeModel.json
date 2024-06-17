@@ -3326,7 +3326,7 @@
          "$id": "527",
          "Name": "embedding",
          "SerializedName": "embedding",
-         "Description": "The embedding vector, which is a list of floats. The length of vector depends on the model as\\\nlisted in the [embedding guide](/docs/guides/embeddings).",
+         "Description": "The embedding vector, which is a list of floats. The length of vector depends on the model as\\\r\nlisted in the [embedding guide](/docs/guides/embeddings).",
          "Type": {
           "$id": "528",
           "Kind": "Array",
@@ -5355,7 +5355,7 @@
       {
        "$id": "831",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "832",
         "Kind": "constant",
@@ -5484,7 +5484,7 @@
       {
        "$id": "843",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "844",
         "Kind": "constant",
@@ -6709,7 +6709,7 @@
       {
        "$id": "953",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "954",
         "Kind": "constant",
@@ -7885,7 +7885,7 @@
       {
        "$id": "1056",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "1057",
         "Kind": "constant",
@@ -7997,7 +7997,7 @@
       {
        "$id": "1066",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "1067",
         "Kind": "constant",

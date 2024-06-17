@@ -6,7 +6,7 @@
   {
    "$id": "2",
    "Kind": "enum",
-   "Name": "GetResponseProp7",
+   "Name": "GetResponseProp4",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -35,7 +35,7 @@
   {
    "$id": "7",
    "Kind": "enum",
-   "Name": "GetResponseProp6",
+   "Name": "GetResponseProp3",
    "ValueType": {
     "$id": "8",
     "Kind": "string"
@@ -83,7 +83,7 @@
   {
    "$id": "15",
    "Kind": "enum",
-   "Name": "GetResponseProp5",
+   "Name": "GetResponseProp2",
    "ValueType": {
     "$id": "16",
     "Kind": "int32"
@@ -112,7 +112,7 @@
   {
    "$id": "20",
    "Kind": "enum",
-   "Name": "GetResponseProp4",
+   "Name": "GetResponseProp1",
    "ValueType": {
     "$id": "21",
     "Kind": "float32"
@@ -413,7 +413,7 @@
      "Type": {
       "$id": "57",
       "Kind": "union",
-      "Name": "GetResponseProp3",
+      "Name": "GetResponseProp",
       "VariantTypes": [
        {
         "$id": "58",
@@ -485,7 +485,7 @@
      "Type": {
       "$id": "66",
       "Kind": "union",
-      "Name": "GetResponseProp3",
+      "Name": "GetResponseProp",
       "VariantTypes": [
        {
         "$ref": "58"
@@ -703,7 +703,7 @@
         "Type": {
          "$id": "93",
          "Kind": "union",
-         "Name": "MixedLiteralsCasesStringLiteral",
+         "Name": "MixedLiteralsCasesStringLiteral1",
          "VariantTypes": [
           {
            "$id": "94",
@@ -754,7 +754,7 @@
         "Type": {
          "$id": "103",
          "Kind": "union",
-         "Name": "MixedLiteralsCasesStringLiteral",
+         "Name": "MixedLiteralsCasesStringLiteral1",
          "VariantTypes": [
           {
            "$id": "104",
@@ -805,7 +805,7 @@
         "Type": {
          "$id": "113",
          "Kind": "union",
-         "Name": "MixedLiteralsCasesStringLiteral",
+         "Name": "MixedLiteralsCasesStringLiteral1",
          "VariantTypes": [
           {
            "$id": "114",
@@ -856,7 +856,7 @@
         "Type": {
          "$id": "123",
          "Kind": "union",
-         "Name": "MixedLiteralsCasesStringLiteral",
+         "Name": "MixedLiteralsCasesStringLiteral1",
          "VariantTypes": [
           {
            "$id": "124",

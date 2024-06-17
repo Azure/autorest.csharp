@@ -8,19 +8,19 @@ namespace Scm._Type.Union.Models
 {
     internal static partial class GetResponseProp4Extensions
     {
-        public static float ToSerialSingle(this GetResponseProp4 value) => value switch
+        public static string ToSerialString(this GetResponseProp4 value) => value switch
         {
-            GetResponseProp4._11 => 1.1F,
-            GetResponseProp4._22 => 2.2F,
-            GetResponseProp4._33 => 3.3F,
+            GetResponseProp4.A => "a",
+            GetResponseProp4.B => "b",
+            GetResponseProp4.C => "c",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown GetResponseProp4 value.")
         };
 
-        public static GetResponseProp4 ToGetResponseProp4(this float value)
+        public static GetResponseProp4 ToGetResponseProp4(this string value)
         {
-            if (value == 1.1F) return GetResponseProp4._11;
-            if (value == 2.2F) return GetResponseProp4._22;
-            if (value == 3.3F) return GetResponseProp4._33;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "a")) return GetResponseProp4.A;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "b")) return GetResponseProp4.B;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "c")) return GetResponseProp4.C;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown GetResponseProp4 value.");
         }
     }

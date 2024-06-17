@@ -1343,7 +1343,7 @@
       {
        "$id": "133",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "134",
         "Kind": "constant",
@@ -1450,7 +1450,7 @@
       {
        "$id": "144",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "145",
         "Kind": "constant",

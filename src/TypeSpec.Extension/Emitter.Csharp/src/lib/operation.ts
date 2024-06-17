@@ -103,11 +103,11 @@ export function loadOperation(
     }
 
     if (
-        typespecParameters.body?.parameter &&
+        typespecParameters.body?.property &&
         !isVoidType(typespecParameters.body.type)
     ) {
         parameters.push(
-            loadBodyParameter(sdkContext, typespecParameters.body?.parameter)
+            loadBodyParameter(sdkContext, typespecParameters.body?.property)
         );
     } else if (
         typespecParameters.body?.type &&

@@ -366,7 +366,7 @@
       {
        "$id": "52",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "53",
         "Kind": "constant",
@@ -472,7 +472,7 @@
       {
        "$id": "62",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "63",
         "Kind": "constant",
@@ -578,7 +578,7 @@
       {
        "$id": "72",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "73",
         "Kind": "constant",
@@ -684,7 +684,7 @@
       {
        "$id": "82",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "83",
         "Kind": "constant",
@@ -790,7 +790,7 @@
       {
        "$id": "92",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "93",
         "Kind": "constant",
@@ -896,7 +896,7 @@
       {
        "$id": "102",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "103",
         "Kind": "constant",
@@ -1002,7 +1002,7 @@
       {
        "$id": "112",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "113",
         "Kind": "constant",
@@ -1108,7 +1108,7 @@
       {
        "$id": "122",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "123",
         "Kind": "constant",

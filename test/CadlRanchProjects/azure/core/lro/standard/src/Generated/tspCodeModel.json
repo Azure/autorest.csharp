@@ -47,7 +47,7 @@
    ],
    "Namespace": "Azure.Core.Foundations",
    "Description": "Enum describing allowed operation states.",
-   "IsExtensible": false,
+   "IsExtensible": true,
    "Usage": "Output"
   },
   {

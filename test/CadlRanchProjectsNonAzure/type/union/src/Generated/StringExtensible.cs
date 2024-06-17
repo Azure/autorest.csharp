@@ -99,7 +99,7 @@ namespace Scm._Type.Union
 
         /// <summary> Send. </summary>
         /// <param name="prop"></param>
-        public virtual async Task<ClientResult> SendAsync(GetResponseProp6 prop)
+        public virtual async Task<ClientResult> SendAsync(GetResponseProp3 prop)
         {
             SendRequest8 sendRequest8 = new SendRequest8(prop, null);
             ClientResult result = await SendAsync(sendRequest8.ToBinaryContent(), null).ConfigureAwait(false);
@@ -108,7 +108,7 @@ namespace Scm._Type.Union
 
         /// <summary> Send. </summary>
         /// <param name="prop"></param>
-        public virtual ClientResult Send(GetResponseProp6 prop)
+        public virtual ClientResult Send(GetResponseProp3 prop)
         {
             SendRequest8 sendRequest8 = new SendRequest8(prop, null);
             ClientResult result = Send(sendRequest8.ToBinaryContent(), null);
@@ -125,7 +125,7 @@ namespace Scm._Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SendAsync(GetResponseProp6)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SendAsync(GetResponseProp3)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -153,7 +153,7 @@ namespace Scm._Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Send(GetResponseProp6)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Send(GetResponseProp3)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
