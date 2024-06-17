@@ -308,6 +308,7 @@ export function loadOperation(
             IsContentType: isContentType,
             IsEndpoint: false,
             SkipUrlEncoding:
+                // TODO: update this when https://github.com/Azure/typespec-azure/issues/1022 is resolved
                 getExtensions(program, param).get("x-ms-skip-url-encoding") ===
                 true,
             Explode:

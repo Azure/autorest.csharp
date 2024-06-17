@@ -68,6 +68,7 @@ export function resolveServers(
                 IsRequired: true,
                 IsEndpoint: isEndpoint,
                 SkipUrlEncoding:
+                    // TODO: update this when https://github.com/Azure/typespec-azure/issues/1022 is resolved
                     getExtensions(context.program, prop).get(
                         "x-ms-skip-url-encoding"
                     ) === true,
