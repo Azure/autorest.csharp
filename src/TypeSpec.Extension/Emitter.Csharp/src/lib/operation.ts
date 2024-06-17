@@ -18,7 +18,6 @@ import {
     ModelProperty,
     Namespace,
     Operation,
-    Program,
     Type
 } from "@typespec/compiler";
 import { getResourceOperation } from "@typespec/rest";
@@ -27,7 +26,6 @@ import {
     HttpOperationParameter,
     HttpOperationResponse
 } from "@typespec/http";
-import { getExtensions } from "@typespec/json-schema";
 import { NetEmitterOptions } from "../options.js";
 import { BodyMediaType, typeToBodyMediaType } from "../type/body-media-type.js";
 import { collectionFormatToDelimMap } from "../type/collection-format.js";
