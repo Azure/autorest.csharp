@@ -16,7 +16,7 @@ import { RequestLocation } from "../type/request-location.js";
 import { getDefaultValue, getInputType } from "./model.js";
 import { SdkContext } from "@azure-tools/typespec-client-generator-core";
 import { NetEmitterOptions } from "../options.js";
-import { getExtensionByKey } from "./utils.js";
+import { getExtensions } from "@typespec/openapi";
 
 export interface TypeSpecServer {
     url: string;
@@ -68,9 +68,7 @@ export function resolveServers(
                 IsRequired: true,
                 IsEndpoint: isEndpoint,
                 SkipUrlEncoding:
-                    getExtensionByKey(
-                        context.program,
-                        prop,
+                    getExtensions(context.program, prop).get(
                         "x-ms-skip-url-encoding"
                     ) === true,
                 Explode: false,

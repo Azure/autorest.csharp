@@ -66,10 +66,10 @@ import {
 import {
     capitalize,
     createContentTypeOrAcceptParameter,
-    getTypeName,
-    getExtensionByKey
+    getTypeName
 } from "./utils.js";
 import { Usage } from "../type/usage.js";
+import { getExtensions } from "@typespec/openapi";
 
 export function loadOperation(
     sdkContext: SdkContext<NetEmitterOptions>,
@@ -308,11 +308,8 @@ export function loadOperation(
             IsContentType: isContentType,
             IsEndpoint: false,
             SkipUrlEncoding:
-                getExtensionByKey(
-                    sdkContext.program,
-                    param,
-                    "x-ms-skip-url-encoding"
-                ) === true,
+                getExtensions(program, param).get("x-ms-skip-url-encoding") ===
+                true,
             Explode:
                 (inputType as InputListType).ElementType && format === "multi"
                     ? true
