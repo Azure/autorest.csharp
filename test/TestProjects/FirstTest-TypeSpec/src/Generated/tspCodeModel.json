@@ -642,8 +642,7 @@
      "Description": "optional nullable collection",
      "Type": {
       "$id": "102",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "103",
        "Kind": "Array",
@@ -664,8 +663,7 @@
      "Description": "required nullable collection",
      "Type": {
       "$id": "106",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "107",
        "Kind": "Array",
@@ -1359,8 +1357,7 @@
         "Description": "required nullable primitive type",
         "Type": {
          "$id": "200",
-         "Kind": "Nullable",
-         "Name": "Nullable",
+         "Kind": "nullable",
          "Type": {
           "$id": "201",
           "Kind": "int32"
@@ -1376,8 +1373,7 @@
         "Description": "required nullable extensible enum type",
         "Type": {
          "$id": "203",
-         "Kind": "Nullable",
-         "Name": "Nullable",
+         "Kind": "nullable",
          "Type": {
           "$ref": "35"
          }
@@ -1392,8 +1388,7 @@
         "Description": "required nullable fixed enum type",
         "Type": {
          "$id": "205",
-         "Kind": "Nullable",
-         "Name": "Nullable",
+         "Kind": "nullable",
          "Type": {
           "$ref": "30"
          }

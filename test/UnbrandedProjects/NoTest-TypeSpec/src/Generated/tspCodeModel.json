@@ -332,8 +332,7 @@
      "Description": "optional nullable collection",
      "Type": {
       "$id": "50",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "51",
        "Kind": "Array",
@@ -354,8 +353,7 @@
      "Description": "required nullable collection",
      "Type": {
       "$id": "54",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "55",
        "Kind": "Array",

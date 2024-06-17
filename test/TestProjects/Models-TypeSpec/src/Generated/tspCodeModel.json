@@ -325,8 +325,7 @@
      "Description": "Required nullable int",
      "Type": {
       "$id": "50",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "51",
        "Kind": "int32"
@@ -342,8 +341,7 @@
      "Description": "Required nullable string",
      "Type": {
       "$id": "53",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "54",
        "Kind": "string"
@@ -359,8 +357,7 @@
      "Description": "Optional nullable int",
      "Type": {
       "$id": "56",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "57",
        "Kind": "int32"
@@ -376,8 +373,7 @@
      "Description": "Optional nullable string",
      "Type": {
       "$id": "59",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "60",
        "Kind": "string"
@@ -557,8 +553,7 @@
       "Name": "Array",
       "ElementType": {
        "$id": "85",
-       "Kind": "Nullable",
-       "Name": "Nullable",
+       "Kind": "nullable",
        "Type": {
         "$id": "86",
         "Kind": "float32"
@@ -579,8 +574,7 @@
       "Name": "Array",
       "ElementType": {
        "$id": "89",
-       "Kind": "Nullable",
-       "Name": "Nullable",
+       "Kind": "nullable",
        "Type": {
         "$id": "90",
         "Kind": "boolean"
@@ -597,8 +591,7 @@
      "Description": "Required model nullable collection",
      "Type": {
       "$id": "92",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "93",
        "Kind": "Array",
@@ -618,8 +611,7 @@
      "Description": "Required string nullable collection",
      "Type": {
       "$id": "95",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "96",
        "Kind": "Array",
@@ -640,8 +632,7 @@
      "Description": "Required int nullable collection",
      "Type": {
       "$id": "99",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "100",
        "Kind": "Array",
@@ -712,8 +703,7 @@
      "Description": "Optional model nullable collection",
      "Type": {
       "$id": "111",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "112",
        "Kind": "Array",
@@ -733,8 +723,7 @@
      "Description": "Optional string nullable collection",
      "Type": {
       "$id": "114",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "115",
        "Kind": "Array",
@@ -755,8 +744,7 @@
      "Description": "Optional int nullable collection",
      "Type": {
       "$id": "118",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "119",
        "Kind": "Array",
@@ -850,8 +838,7 @@
      "Description": "Required nullable int",
      "Type": {
       "$id": "131",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "132",
        "Kind": "int32"
@@ -867,8 +854,7 @@
      "Description": "Required nullable string",
      "Type": {
       "$id": "134",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "135",
        "Kind": "string"
@@ -884,8 +870,7 @@
      "Description": "Optional nullable int",
      "Type": {
       "$id": "137",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "138",
        "Kind": "int32"
@@ -901,8 +886,7 @@
      "Description": "Optional nullable string",
      "Type": {
       "$id": "140",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "141",
        "Kind": "string"
@@ -1227,8 +1211,7 @@
      "Description": "Required nullable int list",
      "Type": {
       "$id": "191",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "192",
        "Kind": "Array",
@@ -1249,8 +1232,7 @@
      "Description": "Required nullable string list",
      "Type": {
       "$id": "195",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "196",
        "Kind": "Array",
@@ -1271,8 +1253,7 @@
      "Description": "Optional nullable model list",
      "Type": {
       "$id": "199",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "200",
        "Kind": "Array",
@@ -1293,8 +1274,7 @@
      "Description": "Optional nullable string list",
      "Type": {
       "$id": "203",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "204",
        "Kind": "Array",
@@ -1453,8 +1433,7 @@
       "Name": "Array",
       "ElementType": {
        "$id": "229",
-       "Kind": "Nullable",
-       "Name": "Nullable",
+       "Kind": "nullable",
        "Type": {
         "$id": "230",
         "Kind": "float32"
@@ -1735,8 +1714,7 @@
       "Name": "Array",
       "ElementType": {
        "$id": "271",
-       "Kind": "Nullable",
-       "Name": "Nullable",
+       "Kind": "nullable",
        "Type": {
         "$id": "272",
         "Kind": "int32"
@@ -2111,8 +2089,7 @@
       "Name": "Array",
       "ElementType": {
        "$id": "328",
-       "Kind": "Nullable",
-       "Name": "Nullable",
+       "Kind": "nullable",
        "Type": {
         "$id": "329",
         "Kind": "int32"
@@ -2133,8 +2110,7 @@
       "Name": "Array",
       "ElementType": {
        "$id": "332",
-       "Kind": "Nullable",
-       "Name": "Nullable",
+       "Kind": "nullable",
        "Type": {
         "$id": "333",
         "Kind": "boolean"
@@ -2248,8 +2224,7 @@
      "Description": "Optional model nullable collection",
      "Type": {
       "$id": "348",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "349",
        "Kind": "Array",
@@ -2289,8 +2264,7 @@
      "Description": "Optional model nullable record",
      "Type": {
       "$id": "354",
-      "Kind": "Nullable",
-      "Name": "Nullable",
+      "Kind": "nullable",
       "Type": {
        "$id": "355",
        "Kind": "Dictionary",

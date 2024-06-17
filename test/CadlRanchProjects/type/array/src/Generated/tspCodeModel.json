@@ -1875,8 +1875,7 @@
         "Name": "Array",
         "ElementType": {
          "$id": "202",
-         "Kind": "Nullable",
-         "Name": "Nullable",
+         "Kind": "nullable",
          "Type": {
           "$id": "203",
           "Kind": "float32"
@@ -1918,8 +1917,7 @@
         "Name": "Array",
         "ElementType": {
          "$id": "207",
-         "Kind": "Nullable",
-         "Name": "Nullable",
+         "Kind": "nullable",
          "Type": {
           "$id": "208",
           "Kind": "float32"

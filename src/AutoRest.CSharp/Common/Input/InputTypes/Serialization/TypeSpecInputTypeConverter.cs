@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Common.Input
         private const string EnumKind = "enum";
         private const string ArrayKind = "Array";
         private const string DictionaryKind = "Dictionary";
-        private const string NullableKind = "Nullable";
+        private const string NullableKind = "nullable";
         private const string UtcDateTimeKind = "utcDateTime";
         private const string OffsetDateTimeKind = "offsetDateTime";
         private const string DurationKind = "duration";

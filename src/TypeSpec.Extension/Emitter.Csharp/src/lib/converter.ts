@@ -53,10 +53,8 @@ export function fromSdkType(
 ): InputType {
     if (sdkType.kind === "nullable") {
         let inputType = fromSdkType(sdkType.type, context, models, enums);
-        //inputType.IsNullable = true;
         return {
-            Kind: InputTypeKind.Nullable,
-            Name: InputTypeKind.Nullable,
+            Kind: "nullable",
             Type: inputType
         } as InputNullableType
     }

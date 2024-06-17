@@ -509,8 +509,7 @@
         "Description": "Property type changed to ReadOnlyMemory<float>?",
         "Type": {
          "$id": "83",
-         "Kind": "Nullable",
-         "Name": "Nullable",
+         "Kind": "nullable",
          "Type": {
           "$id": "84",
           "Kind": "Array",
@@ -531,8 +530,7 @@
         "Description": "Property type changed to ReadOnlyMemory<float>?",
         "Type": {
          "$id": "87",
-         "Kind": "Nullable",
-         "Name": "Nullable",
+         "Kind": "nullable",
          "Type": {
           "$id": "88",
           "Kind": "Array",
@@ -587,8 +585,7 @@
         "Description": "Property type changed to ReadOnlyMemory<float>?",
         "Type": {
          "$id": "97",
-         "Kind": "Nullable",
-         "Name": "Nullable",
+         "Kind": "nullable",
          "Type": {
           "$id": "98",
           "Kind": "Array",
@@ -609,8 +606,7 @@
         "Description": "Property type changed to ReadOnlyMemory<float>?",
         "Type": {
          "$id": "101",
-         "Kind": "Nullable",
-         "Name": "Nullable",
+         "Kind": "nullable",
          "Type": {
           "$id": "102",
           "Kind": "Array",

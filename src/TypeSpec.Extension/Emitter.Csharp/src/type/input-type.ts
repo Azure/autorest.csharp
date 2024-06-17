@@ -106,8 +106,7 @@ export interface InputEnumType extends InputTypeBase {
 }
 
 export interface InputNullableType extends InputTypeBase {
-    Kind: InputTypeKind.Nullable;
-    Name: InputTypeKind.Nullable;
+    Kind: "nullable";
     Type: InputType;
 }
 

@@ -2152,8 +2152,7 @@
         },
         "ValueType": {
          "$id": "242",
-         "Kind": "Nullable",
-         "Name": "Nullable",
+         "Kind": "nullable",
          "Type": {
           "$id": "243",
           "Kind": "float32"
@@ -2199,8 +2198,7 @@
         },
         "ValueType": {
          "$id": "248",
-         "Kind": "Nullable",
-         "Name": "Nullable",
+         "Kind": "nullable",
          "Type": {
           "$id": "249",
           "Kind": "float32"
