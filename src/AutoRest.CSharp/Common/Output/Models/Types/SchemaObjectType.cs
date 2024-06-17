@@ -477,7 +477,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                     // If "Type" property is "String" and "ResourceType" exists in parents properties, skip it since they are the same.
                     // This only applies for TypeSpec input, for swagger input we have renamed "type" property to "resourceType" in FrameworkTypeUpdater.ValidateAndUpdate
-                    if (property.CSharpName() == "Type" && prop.ValueType.Name == "String" && existingProperties.Contains("ReosurceType"))
+                    if (property.CSharpName() == "Type" && prop.ValueType.Name == "String" && existingProperties.Contains("ResourceType"))
                     {
                         continue;
                     }
