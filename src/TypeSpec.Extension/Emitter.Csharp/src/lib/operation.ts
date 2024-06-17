@@ -27,7 +27,7 @@ import {
     HttpOperationParameter,
     HttpOperationResponse
 } from "@typespec/http";
-import {getExtensions} from "@typespec/json-schema";
+import { getExtensions } from "@typespec/json-schema";
 import { NetEmitterOptions } from "../options.js";
 import { BodyMediaType, typeToBodyMediaType } from "../type/body-media-type.js";
 import { collectionFormatToDelimMap } from "../type/collection-format.js";
@@ -309,7 +309,12 @@ export function loadOperation(
             IsResourceParameter: false,
             IsContentType: isContentType,
             IsEndpoint: false,
-            SkipUrlEncoding: getExtensionByKey(sdkContext.program, param, "x-ms-skip-url-encoding") === true,
+            SkipUrlEncoding:
+                getExtensionByKey(
+                    sdkContext.program,
+                    param,
+                    "x-ms-skip-url-encoding"
+                ) === true,
             Explode:
                 (inputType as InputListType).ElementType && format === "multi"
                     ? true

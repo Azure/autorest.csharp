@@ -106,6 +106,10 @@ export function createContentTypeOrAcceptParameter(
     } as InputParameter;
 }
 
-export function getExtensionByKey(program: Program, type: ModelProperty, key: ExtensionKey): any {
+export function getExtensionByKey(
+    program: Program,
+    type: ModelProperty,
+    key: ExtensionKey
+): any {
     return getExtensions(program, type).get(key);
 }
