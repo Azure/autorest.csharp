@@ -16,6 +16,7 @@ import { RequestLocation } from "../type/request-location.js";
 import { getDefaultValue, getInputType } from "./model.js";
 import { SdkContext } from "@azure-tools/typespec-client-generator-core";
 import { NetEmitterOptions } from "../options.js";
+import { getExtensions } from "@typespec/openapi";
 
 export interface TypeSpecServer {
     url: string;
@@ -66,7 +67,11 @@ export function resolveServers(
                 IsContentType: false,
                 IsRequired: true,
                 IsEndpoint: isEndpoint,
-                SkipUrlEncoding: false,
+                SkipUrlEncoding:
+                    // TODO: update this when https://github.com/Azure/typespec-azure/issues/1022 is resolved
+                    getExtensions(context.program, prop).get(
+                        "x-ms-skip-url-encoding"
+                    ) === true,
                 Explode: false,
                 Kind: InputOperationParameterKind.Client,
                 DefaultValue: defaultValue
