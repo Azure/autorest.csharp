@@ -8,9 +8,7 @@ using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -23,7 +21,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static ConcurrentDictionary<InputType, CSharpType?> _valueCache = new ConcurrentDictionary<InputType, CSharpType?>();
 
-        public static CSharpType? GetExactMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties)
+        public static CSharpType? GetExactMatch(MgmtObjectType originalType, IReadOnlyList<ObjectTypeProperty> properties)
         {
             if (_valueCache.TryGetValue(originalType.InputModel, out var result))
                 return result;
@@ -42,7 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return null;
         }
 
-        public static CSharpType? GetSupersetMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties)
+        public static CSharpType? GetSupersetMatch(MgmtObjectType originalType, IReadOnlyList<ObjectTypeProperty> properties)
         {
             foreach (var parentType in ReferenceClassFinder.ReferenceTypes)
             {
@@ -59,7 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return CSharpType.FromSystemType(MgmtContext.Context, parentType);
         }
 
-        private static List<PropertyInfo> GetParentPropertiesToCompare(Type parentType, ObjectTypeProperty[] properties)
+        private static List<PropertyInfo> GetParentPropertiesToCompare(Type parentType, IReadOnlyList<ObjectTypeProperty> properties)
         {
             var propertyNames = properties.Select(p => p.Declaration.Name).ToHashSet();
             var attributeObj = parentType.GetCustomAttributes().Where(a => a.GetType().Name == ReferenceAttributeName).FirstOrDefault();
@@ -68,7 +66,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return parentProperties;
         }
 
-        private static bool IsSuperset(Type parentType, MgmtObjectType originalType, ObjectTypeProperty[] properties)
+        private static bool IsSuperset(Type parentType, MgmtObjectType originalType, IReadOnlyList<ObjectTypeProperty> properties)
         {
             var childProperties = properties.ToList();
             List<PropertyInfo> parentProperties = GetParentPropertiesToCompare(parentType, properties);

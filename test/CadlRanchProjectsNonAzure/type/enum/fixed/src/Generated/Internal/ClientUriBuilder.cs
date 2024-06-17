@@ -105,11 +105,7 @@ namespace Scm._Type._Enum.Fixed
             Argument.AssertNotNullOrWhiteSpace(name, nameof(name));
             Argument.AssertNotNullOrWhiteSpace(value, nameof(value));
 
-            if (QueryBuilder.Length == 0)
-            {
-                QueryBuilder.Append('?');
-            }
-            else
+            if (QueryBuilder.Length > 0)
             {
                 QueryBuilder.Append('&');
             }

@@ -54,7 +54,7 @@
         "@azure-tools/typespec-client-generator-core": "0.43.0-dev.10",
         "@azure-tools/typespec-azure-resource-manager": "0.42.1",
         "@azure-tools/typespec-azure-rulesets": "0.42.1",
-        "@azure-tools/typespec-autorest": ">=0.42.1 <1.0.0",
+        "@azure-tools/typespec-autorest": "0.42.1",
         "@eslint/js": "^9.2.0",
         "@types/lodash.isequal": "^4.5.6",
         "@types/mocha": "~9.1.0",
