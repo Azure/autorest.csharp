@@ -316,10 +316,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\lro-parameterized-endpoints\\Generated"
     },
-    "Lro-TypeSpec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Lro-TypeSpec\\src\\Generated -n"
-    },
     "media_types": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\media_types\\Generated"
@@ -555,10 +551,6 @@
     "ParameterSequence-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ParameterSequence-LowLevel\\src\\Generated -n"
-    },
-    "PetStore-TypeSpec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PetStore-TypeSpec\\src\\Generated -n"
     },
     "Platform-OpenAI-TypeSpec": {
       "commandName": "Project",
