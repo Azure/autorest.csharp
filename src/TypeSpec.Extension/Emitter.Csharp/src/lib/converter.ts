@@ -14,13 +14,11 @@ import {
     SdkEnumValueType,
     SdkModelPropertyType,
     SdkModelType,
-    SdkTupleType,
     SdkType,
     SdkUnionType,
     UsageFlags,
     getAccessOverride,
-    isReadOnly,
-    isSdkBuiltInKind
+    isReadOnly
 } from "@azure-tools/typespec-client-generator-core";
 import { Model } from "@typespec/compiler";
 import { getFullNamespaceString } from "./utils.js";
@@ -42,7 +40,6 @@ import {
 import { InputTypeKind } from "../type/input-type-kind.js";
 import { LiteralTypeContext } from "../type/literal-type-context.js";
 import { Usage } from "../type/usage.js";
-import { fail } from "assert";
 
 export function fromSdkType(
     sdkType: SdkType,
@@ -52,11 +49,11 @@ export function fromSdkType(
     literalTypeContext?: LiteralTypeContext
 ): InputType {
     if (sdkType.kind === "nullable") {
-        let inputType = fromSdkType(sdkType.type, context, models, enums);
+        const inputType = fromSdkType(sdkType.type, context, models, enums);
         return {
             Kind: "nullable",
             Type: inputType
-        } as InputNullableType
+        } as InputNullableType;
     }
     if (sdkType.kind === "model")
         return fromSdkModelType(sdkType, context, models, enums);
@@ -87,7 +84,7 @@ export function fromSdkType(
         return fromSdkDateTimeType(sdkType);
     if (sdkType.kind === "duration")
         return fromSdkDurationType(sdkType as SdkDurationType);
-    if (sdkType.kind === "tuple") return fromTupleType(sdkType);
+    if (sdkType.kind === "tuple") return fromTupleType();
     // TODO -- only in operations we could have these types, considering we did not adopt getAllOperations from TCGC yet, this should be fine.
     // we need to resolve these conversions when we adopt getAllOperations
     if (sdkType.kind === "credential")
@@ -114,7 +111,10 @@ export function fromSdkModelType(
             Namespace: getFullNamespaceString(
                 (modelType.__raw as Model).namespace
             ),
-            Accessibility: getAccessOverride(context, modelType.__raw as Model), /* when tcgc provide a way to identify if the access is override or not, we can get the accessibility from the modelType.access */
+            Accessibility: getAccessOverride(
+                context,
+                modelType.__raw as Model
+            ) /* when tcgc provide a way to identify if the access is override or not, we can get the accessibility from the modelType.access */,
             Deprecated: modelType.deprecation,
             Description: modelType.description,
             DiscriminatorPropertyName: baseModelHasDiscriminator
@@ -135,14 +135,14 @@ export function fromSdkModelType(
                   Kind: InputTypeKind.Dictionary,
                   Name: InputTypeKind.Dictionary,
                   KeyType: {
-                      Kind: "string",
+                      Kind: "string"
                   },
                   ValueType: fromSdkType(
                       modelType.additionalProperties,
                       context,
                       models,
                       enums
-                  ),
+                  )
               }
             : undefined;
         inputModelType.Properties = modelType.properties
@@ -285,7 +285,10 @@ export function fromSdkEnumType(
                 // Enum and Union have optional namespace property
                 (enumType.__raw! as any).namespace
             ),
-            Accessibility: getAccessOverride(context, enumType.__raw as any), /* when tcgc provide a way to identify if the access is override or not, we can get the accessibility from the enumType.access,*/
+            Accessibility: getAccessOverride(
+                context,
+                enumType.__raw as any
+            ) /* when tcgc provide a way to identify if the access is override or not, we can get the accessibility from the enumType.access,*/,
             Deprecated: enumType.deprecation,
             Description: enumType.description,
             IsExtensible: enumType.isFixed ? false : true,
@@ -315,9 +318,9 @@ function fromSdkDurationType(durationType: SdkDurationType): InputDurationType {
 }
 
 // TODO: tuple is not officially supported
-function fromTupleType(tupleType: SdkTupleType): InputPrimitiveType {
+function fromTupleType(): InputPrimitiveType {
     return {
-        Kind: "any",
+        Kind: "any"
     };
 }
 
@@ -370,7 +373,7 @@ function fromSdkConstantType(
                       enums,
                       literalTypeContext
                   ),
-        Value: constantType.value,
+        Value: constantType.value
     };
 
     function convertConstantToEnum(
@@ -422,7 +425,7 @@ function fromSdkEnumValueTypeToConstantType(
             literalTypeContext === undefined
                 ? fromSdkBuiltInType(enumValueType.valueType as SdkBuiltInType) // TODO: TCGC fix
                 : fromSdkEnumType(enumValueType.enumType, context, enums),
-        Value: enumValueType.value,
+        Value: enumValueType.value
     };
 }
 
@@ -446,12 +449,7 @@ function fromSdkDictionaryType(
         Kind: InputTypeKind.Dictionary,
         Name: InputTypeKind.Dictionary,
         KeyType: fromSdkType(dictionaryType.keyType, context, models, enums),
-        ValueType: fromSdkType(
-            dictionaryType.valueType,
-            context,
-            models,
-            enums
-        ),
+        ValueType: fromSdkType(dictionaryType.valueType, context, models, enums)
     };
 }
 
@@ -464,7 +462,7 @@ function fromSdkArrayType(
     return {
         Kind: InputTypeKind.Array,
         Name: InputTypeKind.Array,
-        ElementType: fromSdkType(arrayType.valueType, context, models, enums),
+        ElementType: fromSdkType(arrayType.valueType, context, models, enums)
     };
 }
 
