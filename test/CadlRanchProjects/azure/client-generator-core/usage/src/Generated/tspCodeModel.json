@@ -51,6 +51,47 @@
   {
    "$id": "8",
    "Kind": "Model",
+   "Name": "RoundTripModel",
+   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "9",
+     "Name": "result",
+     "SerializedName": "result",
+     "Description": "",
+     "Type": {
+      "$id": "10",
+      "Kind": "Model",
+      "Name": "ResultModel",
+      "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
+      "Usage": "Output",
+      "Properties": [
+       {
+        "$id": "11",
+        "Name": "name",
+        "SerializedName": "name",
+        "Description": "",
+        "Type": {
+         "$id": "12",
+         "Kind": "string"
+        },
+        "IsRequired": true,
+        "IsReadOnly": false
+       }
+      ]
+     },
+     "IsRequired": true,
+     "IsReadOnly": true
+    }
+   ]
+  },
+  {
+   "$ref": "10"
+  },
+  {
+   "$id": "13",
+   "Kind": "Model",
    "Name": "OrphanModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage",
    "Accessibility": "public",
@@ -58,12 +99,12 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "9",
+     "$id": "14",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "10",
+      "$id": "15",
       "Kind": "string"
      },
      "IsRequired": true,
@@ -74,22 +115,22 @@
  ],
  "Clients": [
   {
-   "$id": "11",
+   "$id": "16",
    "Name": "UsageClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "12"
+    "$id": "17"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$id": "13",
+     "$id": "18",
      "Name": "host",
      "NameInRequest": "host",
      "Description": "TestServer endpoint",
      "Type": {
-      "$id": "14",
+      "$id": "19",
       "Kind": "string",
       "IsNullable": false
      },
@@ -103,9 +144,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "15",
+      "$id": "20",
       "Type": {
-       "$id": "16",
+       "$id": "21",
        "Kind": "string",
        "IsNullable": false
       },
@@ -115,22 +156,22 @@
    ]
   },
   {
-   "$id": "17",
+   "$id": "22",
    "Name": "ModelInOperation",
    "Description": "",
    "Operations": [
     {
-     "$id": "18",
+     "$id": "23",
      "Name": "inputToInputOutput",
      "ResourceName": "ModelInOperation",
      "Description": "Expected body parameter: \n```json\n{\n  \"name\": <any string>\n}\n```",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "13"
+       "$ref": "18"
       },
       {
-       "$id": "19",
+       "$id": "24",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -147,11 +188,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "20",
+       "$id": "25",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "21",
+        "$id": "26",
         "Kind": "string",
         "IsNullable": false
        },
@@ -165,71 +206,12 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "22",
+        "$id": "27",
         "Type": {
-         "$ref": "21"
+         "$ref": "26"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "23",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "24",
-        "Kind": "string",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "25",
-        "Type": {
-         "$ref": "24"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "26",
-       "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/azure/client-generator-core/usage/inputToInputOutput",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "27",
-     "Name": "outputToInputOutput",
-     "ResourceName": "ModelInOperation",
-     "Description": "Expected response body: \n```json\n{\n  \"name\": <any string>\n}\n```",
-     "Accessibility": "public",
-     "Parameters": [
-      {
-       "$ref": "13"
       },
       {
        "$id": "28",
@@ -262,6 +244,65 @@
       {
        "$id": "31",
        "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/azure/client-generator-core/usage/inputToInputOutput",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "32",
+     "Name": "outputToInputOutput",
+     "ResourceName": "ModelInOperation",
+     "Description": "Expected response body: \n```json\n{\n  \"name\": <any string>\n}\n```",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "18"
+      },
+      {
+       "$id": "33",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "34",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "35",
+        "Type": {
+         "$ref": "34"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "36",
+       "StatusCodes": [
         200
        ],
        "BodyType": {
@@ -282,16 +323,124 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "37",
+     "Name": "modelInReadOnlyProperty",
+     "ResourceName": "ModelInOperation",
+     "Description": "\"ResultModel\" should be usage=output, as it is read-only and does not exist in request body.\n\nExpected body parameter: \n```json\n{\n}\n```\n\nExpected response body: \n```json\n{\n  \"name\": <any string>\n}\n```",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "18"
+      },
+      {
+       "$id": "38",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "8"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "39",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "40",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "41",
+        "Type": {
+         "$ref": "40"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "42",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "43",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "44",
+        "Type": {
+         "$ref": "43"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "45",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "8"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/azure/client-generator-core/usage/modelInReadOnlyProperty",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "32"
+    "$id": "46"
    },
    "Creatable": false,
    "Parent": "UsageClient",
    "Parameters": [
     {
-     "$ref": "13"
+     "$ref": "18"
     }
    ]
   }
