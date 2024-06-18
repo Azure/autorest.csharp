@@ -42,7 +42,6 @@ namespace Scm._Type.Property.Nullable
         private Duration _cachedDuration;
         private CollectionsByte _cachedCollectionsByte;
         private CollectionsModel _cachedCollectionsModel;
-        private CollectionsInt32 _cachedCollectionsInt32;
         private CollectionsString _cachedCollectionsString;
 
         /// <summary> Initializes a new instance of String. </summary>
@@ -79,12 +78,6 @@ namespace Scm._Type.Property.Nullable
         public virtual CollectionsModel GetCollectionsModelClient()
         {
             return Volatile.Read(ref _cachedCollectionsModel) ?? Interlocked.CompareExchange(ref _cachedCollectionsModel, new CollectionsModel(_pipeline, _endpoint), null) ?? _cachedCollectionsModel;
-        }
-
-        /// <summary> Initializes a new instance of CollectionsInt32. </summary>
-        public virtual CollectionsInt32 GetCollectionsInt32Client()
-        {
-            return Volatile.Read(ref _cachedCollectionsInt32) ?? Interlocked.CompareExchange(ref _cachedCollectionsInt32, new CollectionsInt32(_pipeline, _endpoint), null) ?? _cachedCollectionsInt32;
         }
 
         /// <summary> Initializes a new instance of CollectionsString. </summary>

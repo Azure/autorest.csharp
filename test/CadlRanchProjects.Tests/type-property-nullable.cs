@@ -247,46 +247,6 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        public Task Type_Property_Nullable_CollectionsInt32_getNonNull() => Test(async (host) =>
-        {
-            var response = await new NullableClient(host, null).GetCollectionsInt32Client().GetNonNullAsync();
-            Assert.AreEqual("foo", response.Value.RequiredProperty);
-            Assert.AreEqual(123, response.Value.NullableProperty.First());
-            Assert.AreEqual(456, response.Value.NullableProperty.Last());
-            Assert.AreEqual(2, response.Value.NullableProperty.Count);
-        });
-
-        [Test]
-        public Task Type_Property_Nullable_CollectionsInt32_getNull() => Test(async (host) =>
-        {
-            var response = await new NullableClient(host, null).GetCollectionsInt32Client().GetNullAsync();
-            Assert.AreEqual("foo", response.Value.RequiredProperty);
-            // we will never construct a null collection therefore this property is actually undefined here.
-            Assert.IsFalse(Optional.IsCollectionDefined(response.Value.NullableProperty));
-            Assert.IsNotNull(response.Value.NullableProperty);
-        });
-
-        [Test]
-        public Task Type_Property_Nullable_CollectionsInt32_patchNonNull() => Test(async (host) =>
-        {
-            var value = new
-            {
-                requiredProperty = "foo",
-                nullableProperty = new[] { 123, 456 }
-            };
-            var response = await new NullableClient(host, null).GetCollectionsInt32Client().PatchNonNullAsync(RequestContent.Create(value));
-            Assert.AreEqual(204, response.Status);
-        });
-
-        [Test]
-        public Task Type_Property_Nullable_CollectionsInt32_patchNull() => Test(async (host) =>
-        {
-            string value = "{ \"requiredProperty\": \"foo\", \"nullableProperty\": null }";
-            var response = await new NullableClient(host, null).GetCollectionsInt32Client().PatchNullAsync(RequestContent.Create(value));
-            Assert.AreEqual(204, response.Status);
-        });
-
-        [Test]
         public Task Type_Property_Nullable_CollectionsString_getNonNull() => Test(async (host) =>
         {
             var response = await new NullableClient(host, null).GetCollectionsStringClient().GetNonNullAsync();
@@ -299,7 +259,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_Nullable_CollectionsString_getNull() => Test(async (host) =>
         {
-            var response = await new NullableClient(host, null).GetCollectionsByteClient().GetNullAsync();
+            var response = await new NullableClient(host, null).GetCollectionsStringClient().GetNullAsync();
             Assert.AreEqual("foo", response.Value.RequiredProperty);
             // we will never construct a null collection therefore this property is actually undefined here.
             Assert.IsFalse(Optional.IsCollectionDefined(response.Value.NullableProperty));
@@ -314,7 +274,7 @@ namespace CadlRanchProjects.Tests
                 requiredProperty = "foo",
                 nullableProperty = new[] { "hello", "world" }
             };
-            var response = await new NullableClient(host, null).GetCollectionsByteClient().PatchNonNullAsync(RequestContent.Create(value));
+            var response = await new NullableClient(host, null).GetCollectionsStringClient().PatchNonNullAsync(RequestContent.Create(value));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -322,7 +282,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_Nullable_CollectionsString_patchNull() => Test(async (host) =>
         {
             string value = "{ \"requiredProperty\": \"foo\", \"nullableProperty\": null }";
-            var response = await new NullableClient(host, null).GetCollectionsByteClient().PatchNullAsync(RequestContent.Create(value));
+            var response = await new NullableClient(host, null).GetCollectionsStringClient().PatchNullAsync(RequestContent.Create(value));
             Assert.AreEqual(204, response.Status);
         });
     }

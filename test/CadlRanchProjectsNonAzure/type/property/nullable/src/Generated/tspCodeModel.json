@@ -277,9 +277,9 @@
   {
    "$id": "38",
    "Kind": "Model",
-   "Name": "CollectionsInt32Property",
+   "Name": "CollectionsStringProperty",
    "Namespace": "Type.Property.Nullable",
-   "Description": "Model with collection int32 properties",
+   "Description": "Model with collection string properties",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -307,49 +307,6 @@
       "Name": "Array",
       "ElementType": {
        "$id": "43",
-       "Kind": "int32",
-       "IsNullable": false
-      },
-      "IsNullable": true
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "44",
-   "Kind": "Model",
-   "Name": "CollectionsStringProperty",
-   "Namespace": "Type.Property.Nullable",
-   "Description": "Model with collection string properties",
-   "IsNullable": false,
-   "Usage": "Output",
-   "Properties": [
-    {
-     "$id": "45",
-     "Name": "requiredProperty",
-     "SerializedName": "requiredProperty",
-     "Description": "Required property",
-     "Type": {
-      "$id": "46",
-      "Kind": "string",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "47",
-     "Name": "nullableProperty",
-     "SerializedName": "nullableProperty",
-     "Description": "Property",
-     "Type": {
-      "$id": "48",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "49",
        "Kind": "string",
        "IsNullable": false
       },
@@ -363,22 +320,22 @@
  ],
  "Clients": [
   {
-   "$id": "50",
+   "$id": "44",
    "Name": "NullableClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "51"
+    "$id": "45"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$id": "52",
+     "$id": "46",
      "Name": "host",
      "NameInRequest": "host",
      "Description": "TestServer endpoint",
      "Type": {
-      "$id": "53",
+      "$id": "47",
       "Kind": "string",
       "IsNullable": false
      },
@@ -392,9 +349,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "54",
+      "$id": "48",
       "Type": {
-       "$id": "55",
+       "$id": "49",
        "Kind": "string",
        "IsNullable": false
       },
@@ -404,25 +361,25 @@
    ]
   },
   {
-   "$id": "56",
+   "$id": "50",
    "Name": "String",
    "Description": "",
    "Operations": [
     {
-     "$id": "57",
+     "$id": "51",
      "Name": "getNonNull",
      "ResourceName": "String",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "58",
+       "$id": "52",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "59",
+        "$id": "53",
         "Kind": "string",
         "IsNullable": false
        },
@@ -436,9 +393,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "60",
+        "$id": "54",
         "Type": {
-         "$ref": "59"
+         "$ref": "53"
         },
         "Value": "application/json"
        }
@@ -446,7 +403,7 @@
      ],
      "Responses": [
       {
-       "$id": "61",
+       "$id": "55",
        "StatusCodes": [
         200
        ],
@@ -470,20 +427,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "62",
+     "$id": "56",
      "Name": "getNull",
      "ResourceName": "String",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "63",
+       "$id": "57",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "64",
+        "$id": "58",
         "Kind": "string",
         "IsNullable": false
        },
@@ -497,9 +454,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "65",
+        "$id": "59",
         "Type": {
-         "$ref": "64"
+         "$ref": "58"
         },
         "Value": "application/json"
        }
@@ -507,7 +464,7 @@
      ],
      "Responses": [
       {
-       "$id": "66",
+       "$id": "60",
        "StatusCodes": [
         200
        ],
@@ -531,24 +488,24 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "67",
+     "$id": "61",
      "Name": "patchNonNull",
      "ResourceName": "String",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "68",
+       "$id": "62",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "content-type is application/merge-patch+json",
        "Type": {
-        "$id": "69",
+        "$id": "63",
         "Kind": "constant",
         "ValueType": {
-         "$id": "70",
+         "$id": "64",
          "Kind": "string",
          "IsNullable": false
         },
@@ -557,9 +514,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "71",
+        "$id": "65",
         "Type": {
-         "$ref": "69"
+         "$ref": "63"
         },
         "Value": "application/merge-patch+json"
        },
@@ -573,7 +530,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "72",
+       "$id": "66",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -590,11 +547,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "73",
+       "$id": "67",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "74",
+        "$id": "68",
         "Kind": "string",
         "IsNullable": false
        },
@@ -608,9 +565,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "75",
+        "$id": "69",
         "Type": {
-         "$ref": "74"
+         "$ref": "68"
         },
         "Value": "application/json"
        }
@@ -618,7 +575,7 @@
      ],
      "Responses": [
       {
-       "$id": "76",
+       "$id": "70",
        "StatusCodes": [
         204
        ],
@@ -639,24 +596,24 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "77",
+     "$id": "71",
      "Name": "patchNull",
      "ResourceName": "String",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "78",
+       "$id": "72",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "content-type is application/merge-patch+json",
        "Type": {
-        "$id": "79",
+        "$id": "73",
         "Kind": "constant",
         "ValueType": {
-         "$id": "80",
+         "$id": "74",
          "Kind": "string",
          "IsNullable": false
         },
@@ -665,9 +622,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "81",
+        "$id": "75",
         "Type": {
-         "$ref": "79"
+         "$ref": "73"
         },
         "Value": "application/merge-patch+json"
        },
@@ -681,7 +638,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "82",
+       "$id": "76",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -698,11 +655,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "83",
+       "$id": "77",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "84",
+        "$id": "78",
         "Kind": "string",
         "IsNullable": false
        },
@@ -716,9 +673,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "85",
+        "$id": "79",
         "Type": {
-         "$ref": "84"
+         "$ref": "78"
         },
         "Value": "application/json"
        }
@@ -726,7 +683,7 @@
      ],
      "Responses": [
       {
-       "$id": "86",
+       "$id": "80",
        "StatusCodes": [
         204
        ],
@@ -748,36 +705,36 @@
     }
    ],
    "Protocol": {
-    "$id": "87"
+    "$id": "81"
    },
    "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {
-     "$ref": "52"
+     "$ref": "46"
     }
    ]
   },
   {
-   "$id": "88",
+   "$id": "82",
    "Name": "Bytes",
    "Description": "",
    "Operations": [
     {
-     "$id": "89",
+     "$id": "83",
      "Name": "getNonNull",
      "ResourceName": "Bytes",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "90",
+       "$id": "84",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "91",
+        "$id": "85",
         "Kind": "string",
         "IsNullable": false
        },
@@ -791,9 +748,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "92",
+        "$id": "86",
         "Type": {
-         "$ref": "91"
+         "$ref": "85"
         },
         "Value": "application/json"
        }
@@ -801,7 +758,7 @@
      ],
      "Responses": [
       {
-       "$id": "93",
+       "$id": "87",
        "StatusCodes": [
         200
        ],
@@ -825,20 +782,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "94",
+     "$id": "88",
      "Name": "getNull",
      "ResourceName": "Bytes",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "95",
+       "$id": "89",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "96",
+        "$id": "90",
         "Kind": "string",
         "IsNullable": false
        },
@@ -852,9 +809,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "97",
+        "$id": "91",
         "Type": {
-         "$ref": "96"
+         "$ref": "90"
         },
         "Value": "application/json"
        }
@@ -862,7 +819,7 @@
      ],
      "Responses": [
       {
-       "$id": "98",
+       "$id": "92",
        "StatusCodes": [
         200
        ],
@@ -886,24 +843,24 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "99",
+     "$id": "93",
      "Name": "patchNonNull",
      "ResourceName": "Bytes",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "100",
+       "$id": "94",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "content-type is application/merge-patch+json",
        "Type": {
-        "$id": "101",
+        "$id": "95",
         "Kind": "constant",
         "ValueType": {
-         "$id": "102",
+         "$id": "96",
          "Kind": "string",
          "IsNullable": false
         },
@@ -912,9 +869,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "103",
+        "$id": "97",
         "Type": {
-         "$ref": "101"
+         "$ref": "95"
         },
         "Value": "application/merge-patch+json"
        },
@@ -928,7 +885,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "104",
+       "$id": "98",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -945,11 +902,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "105",
+       "$id": "99",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "106",
+        "$id": "100",
         "Kind": "string",
         "IsNullable": false
        },
@@ -963,9 +920,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "107",
+        "$id": "101",
         "Type": {
-         "$ref": "106"
+         "$ref": "100"
         },
         "Value": "application/json"
        }
@@ -973,7 +930,7 @@
      ],
      "Responses": [
       {
-       "$id": "108",
+       "$id": "102",
        "StatusCodes": [
         204
        ],
@@ -994,24 +951,24 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "109",
+     "$id": "103",
      "Name": "patchNull",
      "ResourceName": "Bytes",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "110",
+       "$id": "104",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "content-type is application/merge-patch+json",
        "Type": {
-        "$id": "111",
+        "$id": "105",
         "Kind": "constant",
         "ValueType": {
-         "$id": "112",
+         "$id": "106",
          "Kind": "string",
          "IsNullable": false
         },
@@ -1020,9 +977,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "113",
+        "$id": "107",
         "Type": {
-         "$ref": "111"
+         "$ref": "105"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1036,7 +993,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "114",
+       "$id": "108",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -1053,11 +1010,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "115",
+       "$id": "109",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "116",
+        "$id": "110",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1071,9 +1028,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "117",
+        "$id": "111",
         "Type": {
-         "$ref": "116"
+         "$ref": "110"
         },
         "Value": "application/json"
        }
@@ -1081,7 +1038,7 @@
      ],
      "Responses": [
       {
-       "$id": "118",
+       "$id": "112",
        "StatusCodes": [
         204
        ],
@@ -1103,36 +1060,36 @@
     }
    ],
    "Protocol": {
-    "$id": "119"
+    "$id": "113"
    },
    "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {
-     "$ref": "52"
+     "$ref": "46"
     }
    ]
   },
   {
-   "$id": "120",
+   "$id": "114",
    "Name": "Datetime",
    "Description": "",
    "Operations": [
     {
-     "$id": "121",
+     "$id": "115",
      "Name": "getNonNull",
      "ResourceName": "Datetime",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "122",
+       "$id": "116",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "123",
+        "$id": "117",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1146,9 +1103,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "124",
+        "$id": "118",
         "Type": {
-         "$ref": "123"
+         "$ref": "117"
         },
         "Value": "application/json"
        }
@@ -1156,7 +1113,7 @@
      ],
      "Responses": [
       {
-       "$id": "125",
+       "$id": "119",
        "StatusCodes": [
         200
        ],
@@ -1180,20 +1137,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "126",
+     "$id": "120",
      "Name": "getNull",
      "ResourceName": "Datetime",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "127",
+       "$id": "121",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "128",
+        "$id": "122",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1207,9 +1164,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "129",
+        "$id": "123",
         "Type": {
-         "$ref": "128"
+         "$ref": "122"
         },
         "Value": "application/json"
        }
@@ -1217,7 +1174,7 @@
      ],
      "Responses": [
       {
-       "$id": "130",
+       "$id": "124",
        "StatusCodes": [
         200
        ],
@@ -1241,24 +1198,24 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "131",
+     "$id": "125",
      "Name": "patchNonNull",
      "ResourceName": "Datetime",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "132",
+       "$id": "126",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "content-type is application/merge-patch+json",
        "Type": {
-        "$id": "133",
+        "$id": "127",
         "Kind": "constant",
         "ValueType": {
-         "$id": "134",
+         "$id": "128",
          "Kind": "string",
          "IsNullable": false
         },
@@ -1267,9 +1224,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "135",
+        "$id": "129",
         "Type": {
-         "$ref": "133"
+         "$ref": "127"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1283,7 +1240,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "136",
+       "$id": "130",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -1300,11 +1257,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "137",
+       "$id": "131",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "138",
+        "$id": "132",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1318,9 +1275,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "139",
+        "$id": "133",
         "Type": {
-         "$ref": "138"
+         "$ref": "132"
         },
         "Value": "application/json"
        }
@@ -1328,7 +1285,7 @@
      ],
      "Responses": [
       {
-       "$id": "140",
+       "$id": "134",
        "StatusCodes": [
         204
        ],
@@ -1349,24 +1306,24 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "141",
+     "$id": "135",
      "Name": "patchNull",
      "ResourceName": "Datetime",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "142",
+       "$id": "136",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "content-type is application/merge-patch+json",
        "Type": {
-        "$id": "143",
+        "$id": "137",
         "Kind": "constant",
         "ValueType": {
-         "$id": "144",
+         "$id": "138",
          "Kind": "string",
          "IsNullable": false
         },
@@ -1375,9 +1332,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "145",
+        "$id": "139",
         "Type": {
-         "$ref": "143"
+         "$ref": "137"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1391,7 +1348,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "146",
+       "$id": "140",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -1408,11 +1365,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "147",
+       "$id": "141",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "148",
+        "$id": "142",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1426,9 +1383,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "149",
+        "$id": "143",
         "Type": {
-         "$ref": "148"
+         "$ref": "142"
         },
         "Value": "application/json"
        }
@@ -1436,7 +1393,7 @@
      ],
      "Responses": [
       {
-       "$id": "150",
+       "$id": "144",
        "StatusCodes": [
         204
        ],
@@ -1458,36 +1415,36 @@
     }
    ],
    "Protocol": {
-    "$id": "151"
+    "$id": "145"
    },
    "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {
-     "$ref": "52"
+     "$ref": "46"
     }
    ]
   },
   {
-   "$id": "152",
+   "$id": "146",
    "Name": "Duration",
    "Description": "",
    "Operations": [
     {
-     "$id": "153",
+     "$id": "147",
      "Name": "getNonNull",
      "ResourceName": "Duration",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "154",
+       "$id": "148",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "155",
+        "$id": "149",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1501,9 +1458,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "156",
+        "$id": "150",
         "Type": {
-         "$ref": "155"
+         "$ref": "149"
         },
         "Value": "application/json"
        }
@@ -1511,7 +1468,7 @@
      ],
      "Responses": [
       {
-       "$id": "157",
+       "$id": "151",
        "StatusCodes": [
         200
        ],
@@ -1535,20 +1492,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "158",
+     "$id": "152",
      "Name": "getNull",
      "ResourceName": "Duration",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "159",
+       "$id": "153",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "160",
+        "$id": "154",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1562,9 +1519,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "161",
+        "$id": "155",
         "Type": {
-         "$ref": "160"
+         "$ref": "154"
         },
         "Value": "application/json"
        }
@@ -1572,7 +1529,7 @@
      ],
      "Responses": [
       {
-       "$id": "162",
+       "$id": "156",
        "StatusCodes": [
         200
        ],
@@ -1596,24 +1553,24 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "163",
+     "$id": "157",
      "Name": "patchNonNull",
      "ResourceName": "Duration",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "164",
+       "$id": "158",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "content-type is application/merge-patch+json",
        "Type": {
-        "$id": "165",
+        "$id": "159",
         "Kind": "constant",
         "ValueType": {
-         "$id": "166",
+         "$id": "160",
          "Kind": "string",
          "IsNullable": false
         },
@@ -1622,9 +1579,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "167",
+        "$id": "161",
         "Type": {
-         "$ref": "165"
+         "$ref": "159"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1638,7 +1595,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "168",
+       "$id": "162",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -1655,11 +1612,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "169",
+       "$id": "163",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "170",
+        "$id": "164",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1673,9 +1630,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "171",
+        "$id": "165",
         "Type": {
-         "$ref": "170"
+         "$ref": "164"
         },
         "Value": "application/json"
        }
@@ -1683,7 +1640,7 @@
      ],
      "Responses": [
       {
-       "$id": "172",
+       "$id": "166",
        "StatusCodes": [
         204
        ],
@@ -1704,24 +1661,24 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "173",
+     "$id": "167",
      "Name": "patchNull",
      "ResourceName": "Duration",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "174",
+       "$id": "168",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "content-type is application/merge-patch+json",
        "Type": {
-        "$id": "175",
+        "$id": "169",
         "Kind": "constant",
         "ValueType": {
-         "$id": "176",
+         "$id": "170",
          "Kind": "string",
          "IsNullable": false
         },
@@ -1730,9 +1687,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "177",
+        "$id": "171",
         "Type": {
-         "$ref": "175"
+         "$ref": "169"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1746,7 +1703,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "178",
+       "$id": "172",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -1763,11 +1720,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "179",
+       "$id": "173",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "180",
+        "$id": "174",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1781,9 +1738,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "181",
+        "$id": "175",
         "Type": {
-         "$ref": "180"
+         "$ref": "174"
         },
         "Value": "application/json"
        }
@@ -1791,7 +1748,7 @@
      ],
      "Responses": [
       {
-       "$id": "182",
+       "$id": "176",
        "StatusCodes": [
         204
        ],
@@ -1813,36 +1770,36 @@
     }
    ],
    "Protocol": {
-    "$id": "183"
+    "$id": "177"
    },
    "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {
-     "$ref": "52"
+     "$ref": "46"
     }
    ]
   },
   {
-   "$id": "184",
+   "$id": "178",
    "Name": "CollectionsByte",
    "Description": "",
    "Operations": [
     {
-     "$id": "185",
+     "$id": "179",
      "Name": "getNonNull",
      "ResourceName": "CollectionsByte",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "186",
+       "$id": "180",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "187",
+        "$id": "181",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1856,9 +1813,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "188",
+        "$id": "182",
         "Type": {
-         "$ref": "187"
+         "$ref": "181"
         },
         "Value": "application/json"
        }
@@ -1866,7 +1823,7 @@
      ],
      "Responses": [
       {
-       "$id": "189",
+       "$id": "183",
        "StatusCodes": [
         200
        ],
@@ -1890,20 +1847,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "190",
+     "$id": "184",
      "Name": "getNull",
      "ResourceName": "CollectionsByte",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "191",
+       "$id": "185",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "192",
+        "$id": "186",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1917,9 +1874,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "193",
+        "$id": "187",
         "Type": {
-         "$ref": "192"
+         "$ref": "186"
         },
         "Value": "application/json"
        }
@@ -1927,7 +1884,7 @@
      ],
      "Responses": [
       {
-       "$id": "194",
+       "$id": "188",
        "StatusCodes": [
         200
        ],
@@ -1951,24 +1908,24 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "195",
+     "$id": "189",
      "Name": "patchNonNull",
      "ResourceName": "CollectionsByte",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "196",
+       "$id": "190",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "content-type is application/merge-patch+json",
        "Type": {
-        "$id": "197",
+        "$id": "191",
         "Kind": "constant",
         "ValueType": {
-         "$id": "198",
+         "$id": "192",
          "Kind": "string",
          "IsNullable": false
         },
@@ -1977,9 +1934,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "199",
+        "$id": "193",
         "Type": {
-         "$ref": "197"
+         "$ref": "191"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1993,7 +1950,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "200",
+       "$id": "194",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -2010,11 +1967,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "201",
+       "$id": "195",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "202",
+        "$id": "196",
         "Kind": "string",
         "IsNullable": false
        },
@@ -2028,9 +1985,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "203",
+        "$id": "197",
         "Type": {
-         "$ref": "202"
+         "$ref": "196"
         },
         "Value": "application/json"
        }
@@ -2038,7 +1995,7 @@
      ],
      "Responses": [
       {
-       "$id": "204",
+       "$id": "198",
        "StatusCodes": [
         204
        ],
@@ -2059,24 +2016,24 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "205",
+     "$id": "199",
      "Name": "patchNull",
      "ResourceName": "CollectionsByte",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "206",
+       "$id": "200",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "content-type is application/merge-patch+json",
        "Type": {
-        "$id": "207",
+        "$id": "201",
         "Kind": "constant",
         "ValueType": {
-         "$id": "208",
+         "$id": "202",
          "Kind": "string",
          "IsNullable": false
         },
@@ -2085,9 +2042,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "209",
+        "$id": "203",
         "Type": {
-         "$ref": "207"
+         "$ref": "201"
         },
         "Value": "application/merge-patch+json"
        },
@@ -2101,7 +2058,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "210",
+       "$id": "204",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -2118,11 +2075,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "211",
+       "$id": "205",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "212",
+        "$id": "206",
         "Kind": "string",
         "IsNullable": false
        },
@@ -2136,9 +2093,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "213",
+        "$id": "207",
         "Type": {
-         "$ref": "212"
+         "$ref": "206"
         },
         "Value": "application/json"
        }
@@ -2146,7 +2103,7 @@
      ],
      "Responses": [
       {
-       "$id": "214",
+       "$id": "208",
        "StatusCodes": [
         204
        ],
@@ -2168,36 +2125,36 @@
     }
    ],
    "Protocol": {
-    "$id": "215"
+    "$id": "209"
    },
    "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {
-     "$ref": "52"
+     "$ref": "46"
     }
    ]
   },
   {
-   "$id": "216",
+   "$id": "210",
    "Name": "CollectionsModel",
    "Description": "",
    "Operations": [
     {
-     "$id": "217",
+     "$id": "211",
      "Name": "getNonNull",
      "ResourceName": "CollectionsModel",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "218",
+       "$id": "212",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "219",
+        "$id": "213",
         "Kind": "string",
         "IsNullable": false
        },
@@ -2211,9 +2168,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "220",
+        "$id": "214",
         "Type": {
-         "$ref": "219"
+         "$ref": "213"
         },
         "Value": "application/json"
        }
@@ -2221,7 +2178,7 @@
      ],
      "Responses": [
       {
-       "$id": "221",
+       "$id": "215",
        "StatusCodes": [
         200
        ],
@@ -2245,20 +2202,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "222",
+     "$id": "216",
      "Name": "getNull",
      "ResourceName": "CollectionsModel",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "223",
+       "$id": "217",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "224",
+        "$id": "218",
         "Kind": "string",
         "IsNullable": false
        },
@@ -2271,70 +2228,70 @@
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "219",
+        "Type": {
+         "$ref": "218"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "220",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "30"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/nullable/collections/model/null",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "221",
+     "Name": "patchNonNull",
+     "ResourceName": "CollectionsModel",
+     "Description": "Put a body with all properties present.",
+     "Parameters": [
+      {
+       "$ref": "46"
+      },
+      {
+       "$id": "222",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "content-type is application/merge-patch+json",
+       "Type": {
+        "$id": "223",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "224",
+         "Kind": "string",
+         "IsNullable": false
+        },
+        "Value": "application/merge-patch+json",
+        "IsNullable": false
+       },
+       "Location": "Header",
        "DefaultValue": {
         "$id": "225",
         "Type": {
-         "$ref": "224"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "226",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "30"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/type/property/nullable/collections/model/null",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "227",
-     "Name": "patchNonNull",
-     "ResourceName": "CollectionsModel",
-     "Description": "Put a body with all properties present.",
-     "Parameters": [
-      {
-       "$ref": "52"
-      },
-      {
-       "$id": "228",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "content-type is application/merge-patch+json",
-       "Type": {
-        "$id": "229",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "230",
-         "Kind": "string",
-         "IsNullable": false
-        },
-        "Value": "application/merge-patch+json",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "DefaultValue": {
-        "$id": "231",
-        "Type": {
-         "$ref": "229"
+         "$ref": "223"
         },
         "Value": "application/merge-patch+json"
        },
@@ -2348,7 +2305,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "232",
+       "$id": "226",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -2365,11 +2322,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "233",
+       "$id": "227",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "234",
+        "$id": "228",
         "Kind": "string",
         "IsNullable": false
        },
@@ -2383,9 +2340,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "235",
+        "$id": "229",
         "Type": {
-         "$ref": "234"
+         "$ref": "228"
         },
         "Value": "application/json"
        }
@@ -2393,7 +2350,7 @@
      ],
      "Responses": [
       {
-       "$id": "236",
+       "$id": "230",
        "StatusCodes": [
         204
        ],
@@ -2414,24 +2371,24 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "237",
+     "$id": "231",
      "Name": "patchNull",
      "ResourceName": "CollectionsModel",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "238",
+       "$id": "232",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "content-type is application/merge-patch+json",
        "Type": {
-        "$id": "239",
+        "$id": "233",
         "Kind": "constant",
         "ValueType": {
-         "$id": "240",
+         "$id": "234",
          "Kind": "string",
          "IsNullable": false
         },
@@ -2440,9 +2397,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "241",
+        "$id": "235",
         "Type": {
-         "$ref": "239"
+         "$ref": "233"
         },
         "Value": "application/merge-patch+json"
        },
@@ -2456,7 +2413,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "242",
+       "$id": "236",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -2473,11 +2430,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "243",
+       "$id": "237",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "244",
+        "$id": "238",
         "Kind": "string",
         "IsNullable": false
        },
@@ -2491,9 +2448,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "245",
+        "$id": "239",
         "Type": {
-         "$ref": "244"
+         "$ref": "238"
         },
         "Value": "application/json"
        }
@@ -2501,7 +2458,7 @@
      ],
      "Responses": [
       {
-       "$id": "246",
+       "$id": "240",
        "StatusCodes": [
         204
        ],
@@ -2523,391 +2480,36 @@
     }
    ],
    "Protocol": {
-    "$id": "247"
+    "$id": "241"
    },
    "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {
-     "$ref": "52"
+     "$ref": "46"
     }
    ]
   },
   {
-   "$id": "248",
-   "Name": "CollectionsInt32",
-   "Description": "",
-   "Operations": [
-    {
-     "$id": "249",
-     "Name": "getNonNull",
-     "ResourceName": "CollectionsInt32",
-     "Description": "Get models that will return all properties in the model",
-     "Parameters": [
-      {
-       "$ref": "52"
-      },
-      {
-       "$id": "250",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "251",
-        "Kind": "string",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "252",
-        "Type": {
-         "$ref": "251"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "253",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "38"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/type/property/nullable/collections/int32/non-null",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "254",
-     "Name": "getNull",
-     "ResourceName": "CollectionsInt32",
-     "Description": "Get models that will return the default object",
-     "Parameters": [
-      {
-       "$ref": "52"
-      },
-      {
-       "$id": "255",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "256",
-        "Kind": "string",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "257",
-        "Type": {
-         "$ref": "256"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "258",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "38"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/type/property/nullable/collections/int32/null",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "259",
-     "Name": "patchNonNull",
-     "ResourceName": "CollectionsInt32",
-     "Description": "Put a body with all properties present.",
-     "Parameters": [
-      {
-       "$ref": "52"
-      },
-      {
-       "$id": "260",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "content-type is application/merge-patch+json",
-       "Type": {
-        "$id": "261",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "262",
-         "Kind": "string",
-         "IsNullable": false
-        },
-        "Value": "application/merge-patch+json",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "DefaultValue": {
-        "$id": "263",
-        "Type": {
-         "$ref": "261"
-        },
-        "Value": "application/merge-patch+json"
-       },
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "264",
-       "Name": "body",
-       "NameInRequest": "body",
-       "Type": {
-        "$ref": "38"
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "265",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "266",
-        "Kind": "string",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "267",
-        "Type": {
-         "$ref": "266"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "268",
-       "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "PATCH",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/type/property/nullable/collections/int32/non-null",
-     "RequestMediaTypes": [
-      "application/merge-patch+json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
-    },
-    {
-     "$id": "269",
-     "Name": "patchNull",
-     "ResourceName": "CollectionsInt32",
-     "Description": "Put a body with default properties.",
-     "Parameters": [
-      {
-       "$ref": "52"
-      },
-      {
-       "$id": "270",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "content-type is application/merge-patch+json",
-       "Type": {
-        "$id": "271",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "272",
-         "Kind": "string",
-         "IsNullable": false
-        },
-        "Value": "application/merge-patch+json",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "DefaultValue": {
-        "$id": "273",
-        "Type": {
-         "$ref": "271"
-        },
-        "Value": "application/merge-patch+json"
-       },
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "274",
-       "Name": "body",
-       "NameInRequest": "body",
-       "Type": {
-        "$ref": "38"
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "275",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "276",
-        "Kind": "string",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "277",
-        "Type": {
-         "$ref": "276"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "278",
-       "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "PATCH",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/type/property/nullable/collections/int32/null",
-     "RequestMediaTypes": [
-      "application/merge-patch+json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
-    }
-   ],
-   "Protocol": {
-    "$id": "279"
-   },
-   "Creatable": false,
-   "Parent": "NullableClient",
-   "Parameters": [
-    {
-     "$ref": "52"
-    }
-   ]
-  },
-  {
-   "$id": "280",
+   "$id": "242",
    "Name": "CollectionsString",
    "Description": "",
    "Operations": [
     {
-     "$id": "281",
+     "$id": "243",
      "Name": "getNonNull",
      "ResourceName": "CollectionsString",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "282",
+       "$id": "244",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "283",
+        "$id": "245",
         "Kind": "string",
         "IsNullable": false
        },
@@ -2921,9 +2523,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "284",
+        "$id": "246",
         "Type": {
-         "$ref": "283"
+         "$ref": "245"
         },
         "Value": "application/json"
        }
@@ -2931,12 +2533,12 @@
      ],
      "Responses": [
       {
-       "$id": "285",
+       "$id": "247",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "44"
+        "$ref": "38"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2955,20 +2557,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "286",
+     "$id": "248",
      "Name": "getNull",
      "ResourceName": "CollectionsString",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "287",
+       "$id": "249",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "288",
+        "$id": "250",
         "Kind": "string",
         "IsNullable": false
        },
@@ -2982,9 +2584,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "289",
+        "$id": "251",
         "Type": {
-         "$ref": "288"
+         "$ref": "250"
         },
         "Value": "application/json"
        }
@@ -2992,12 +2594,12 @@
      ],
      "Responses": [
       {
-       "$id": "290",
+       "$id": "252",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "44"
+        "$ref": "38"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3016,24 +2618,24 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "291",
+     "$id": "253",
      "Name": "patchNonNull",
      "ResourceName": "CollectionsString",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "292",
+       "$id": "254",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "content-type is application/merge-patch+json",
        "Type": {
-        "$id": "293",
+        "$id": "255",
         "Kind": "constant",
         "ValueType": {
-         "$id": "294",
+         "$id": "256",
          "Kind": "string",
          "IsNullable": false
         },
@@ -3042,9 +2644,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "295",
+        "$id": "257",
         "Type": {
-         "$ref": "293"
+         "$ref": "255"
         },
         "Value": "application/merge-patch+json"
        },
@@ -3058,11 +2660,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "296",
+       "$id": "258",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "44"
+        "$ref": "38"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3075,11 +2677,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "297",
+       "$id": "259",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "298",
+        "$id": "260",
         "Kind": "string",
         "IsNullable": false
        },
@@ -3093,9 +2695,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "299",
+        "$id": "261",
         "Type": {
-         "$ref": "298"
+         "$ref": "260"
         },
         "Value": "application/json"
        }
@@ -3103,7 +2705,7 @@
      ],
      "Responses": [
       {
-       "$id": "300",
+       "$id": "262",
        "StatusCodes": [
         204
        ],
@@ -3124,24 +2726,24 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "301",
+     "$id": "263",
      "Name": "patchNull",
      "ResourceName": "CollectionsString",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "46"
       },
       {
-       "$id": "302",
+       "$id": "264",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "content-type is application/merge-patch+json",
        "Type": {
-        "$id": "303",
+        "$id": "265",
         "Kind": "constant",
         "ValueType": {
-         "$id": "304",
+         "$id": "266",
          "Kind": "string",
          "IsNullable": false
         },
@@ -3150,9 +2752,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "305",
+        "$id": "267",
         "Type": {
-         "$ref": "303"
+         "$ref": "265"
         },
         "Value": "application/merge-patch+json"
        },
@@ -3166,11 +2768,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "306",
+       "$id": "268",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "44"
+        "$ref": "38"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3183,11 +2785,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "307",
+       "$id": "269",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "308",
+        "$id": "270",
         "Kind": "string",
         "IsNullable": false
        },
@@ -3201,9 +2803,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "309",
+        "$id": "271",
         "Type": {
-         "$ref": "308"
+         "$ref": "270"
         },
         "Value": "application/json"
        }
@@ -3211,7 +2813,7 @@
      ],
      "Responses": [
       {
-       "$id": "310",
+       "$id": "272",
        "StatusCodes": [
         204
        ],
@@ -3233,13 +2835,13 @@
     }
    ],
    "Protocol": {
-    "$id": "311"
+    "$id": "273"
    },
    "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {
-     "$ref": "52"
+     "$ref": "46"
     }
    ]
   }

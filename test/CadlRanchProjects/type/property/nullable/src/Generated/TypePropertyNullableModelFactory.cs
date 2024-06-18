@@ -80,17 +80,6 @@ namespace _Type.Property.Nullable.Models
             return new InnerModel(property, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.CollectionsInt32Property"/>. </summary>
-        /// <param name="requiredProperty"> Required property. </param>
-        /// <param name="nullableProperty"> Property. </param>
-        /// <returns> A new <see cref="Models.CollectionsInt32Property"/> instance for mocking. </returns>
-        public static CollectionsInt32Property CollectionsInt32Property(string requiredProperty = null, IEnumerable<int> nullableProperty = null)
-        {
-            nullableProperty ??= new List<int>();
-
-            return new CollectionsInt32Property(requiredProperty, nullableProperty?.ToList(), serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.CollectionsStringProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
