@@ -195,9 +195,9 @@
      "Description": "required Union",
      "Type": {
       "$id": "27",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "ThingRequiredUnion",
+      "VariantTypes": [
        {
         "$id": "28",
         "Kind": "string",
