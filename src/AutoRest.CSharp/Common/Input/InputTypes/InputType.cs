@@ -11,7 +11,6 @@ internal abstract record InputType
     {
         Name = name;
         SpecName = name;
-        //IsNullable = isNullable;
     }
 
     public InputTypeSerialization Serialization { get; init; } = InputTypeSerialization.Default;

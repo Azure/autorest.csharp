@@ -303,9 +303,7 @@ namespace AutoRest.CSharp.Output.Models
                         // This method has a flattened body
                         if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened)
                         {
-                            (InputType bodyType, bool isNullable) = bodyRequestParameter.Type is InputNullableType nullableType ? (nullableType.Type, true) : (bodyRequestParameter.Type, false);
-                            var objectType = (SchemaObjectType)_library.ResolveModel((InputModelType)bodyType, isNullable).Implementation;
-
+                            var objectType = (SchemaObjectType)_context.TypeFactory.CreateType(bodyRequestParameter.Type).Implementation;
                             var initializationMap = new List<ObjectPropertyInitializer>();
                             foreach (var (parameter, _) in allParameters.Values)
                             {
@@ -370,7 +368,7 @@ namespace AutoRest.CSharp.Output.Models
                 return new StreamResponseBody();
             }
             else if (response.BodyType is not null)
-            {;
+            {
                 CSharpType responseType = _context.TypeFactory.CreateType(response.BodyType).OutputType;
 
                 ObjectSerialization serialization = SerializationBuilder.Build(response.BodyMediaType, response.BodyType, responseType, null);

@@ -72,7 +72,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
             type.Setup(t => t.WithNullable(It.IsAny<bool>())).Returns(type.Object);
 
             // mock ResolveModel
-            library.Setup(l => l.ResolveModel(inputModel, It.IsAny<bool>())).Returns(type.Object);
+            library.Setup(l => l.ResolveModel(inputModel)).Returns(type.Object);
 
             CSharpType cSharpType = typeFactory.CreateType(inputModel);
 
@@ -129,7 +129,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
             type.Setup(t => t.WithNullable(It.IsAny<bool>())).Returns(type.Object);
 
             // mock ResolveModel
-            library.Setup(l => l.ResolveModel(inputModel, It.IsAny<bool>())).Returns(type.Object);
+            library.Setup(l => l.ResolveModel(inputModel)).Returns(type.Object);
 
             CSharpType cSharpType = typeFactory.CreateType(nullableInputModel);
 
@@ -225,7 +225,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
             type.Setup(t => t.WithNullable(It.IsAny<bool>())).Returns(type.Object);
 
             // mock ResolveModel
-            library.Setup(l => l.ResolveModel(inputModel, It.IsAny<bool>())).Returns(type.Object);
+            library.Setup(l => l.ResolveModel(inputModel)).Returns(type.Object);
 
             CSharpType cSharpType = typeFactory.CreateType(nullableInputModel);
 

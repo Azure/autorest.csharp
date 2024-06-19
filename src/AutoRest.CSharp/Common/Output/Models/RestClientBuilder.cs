@@ -326,7 +326,7 @@ namespace AutoRest.CSharp.Output.Models
                             (InputType inputType, bool isNullable) = bodyRequestParameter.Type is InputNullableType nullableType ? (nullableType.Type, true) : (bodyRequestParameter.Type, false);
                             var objectType = inputType switch
                             {
-                                InputModelType inputModelType => library.ResolveModel(inputModelType, isNullable).Implementation as SerializableObjectType,
+                                InputModelType inputModelType => library.ResolveModel(inputModelType).WithNullable(isNullable).Implementation as SerializableObjectType,
                                 CodeModelType codeModelType => throw new InvalidOperationException("Expecting model"),
                                 _ => null
                             };

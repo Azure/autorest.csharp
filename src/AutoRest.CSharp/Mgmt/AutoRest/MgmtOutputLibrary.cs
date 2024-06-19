@@ -805,7 +805,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return rawRequestPathToResourceData;
         }
 
-        public override CSharpType ResolveEnum(InputEnumType enumType, bool isNullable)
+        public override CSharpType ResolveEnum(InputEnumType enumType)
         {
             CSharpType resolvedEnum;
             if (AllEnumMap.Value.TryGetValue(enumType, out var value))
@@ -817,10 +817,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 // There could be different instances because of nullability
                 resolvedEnum = FindTypeByModelName(enumType.Name) ?? throw new InvalidOperationException($"Cannot find enum {enumType.Name}");
             }
-            return resolvedEnum.WithNullable(isNullable);
+            return resolvedEnum;
         }
 
-        public override CSharpType ResolveModel(InputModelType model, bool isNullable)
+        public override CSharpType ResolveModel(InputModelType model)
         {
             CSharpType resolvedModel;
             if (_schemaToModels.TryGetValue(model, out var value))
@@ -832,7 +832,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 // There could be different instances because of nullability
                 resolvedModel = FindTypeByModelName(model.Name) ?? throw new InvalidOperationException($"Cannot find model {model.Name}");
             }
-            return resolvedModel.WithNullable(isNullable);
+            return resolvedModel;
         }
 
         private CSharpType? FindTypeByModelName(string name)

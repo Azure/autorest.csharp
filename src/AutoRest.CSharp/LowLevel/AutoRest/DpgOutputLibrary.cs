@@ -118,22 +118,22 @@ namespace AutoRest.CSharp.Output.Models.Types
         public DpgClientSampleProvider? GetSampleForClient(LowLevelClient client)
             => DpgClientSampleProviders.TryGetValue(client, out var sample) ? sample : null;
 
-        public override CSharpType ResolveEnum(InputEnumType enumType, bool isNullable)
+        public override CSharpType ResolveEnum(InputEnumType enumType)
         {
             if (!_isTspInput)
             {
-                return TypeFactory.CreateType(enumType.ValueType).WithNullable(isNullable);
+                return TypeFactory.CreateType(enumType.ValueType);
             }
 
             if (_enums.TryGetValue(enumType, out var typeProvider))
             {
-                return typeProvider.Type.WithNullable(isNullable);
+                return typeProvider.Type;
             }
 
             throw new InvalidOperationException($"No {nameof(EnumType)} has been created for `{enumType.Name}` {nameof(InputEnumType)}.");
         }
 
-        public override CSharpType ResolveModel(InputModelType model, bool isNullable)
+        public override CSharpType ResolveModel(InputModelType model)
             => _models.TryGetValue(model, out var modelTypeProvider) ? modelTypeProvider.Type : new CSharpType(typeof(object));
 
         public override CSharpType? FindTypeByName(string originalName)

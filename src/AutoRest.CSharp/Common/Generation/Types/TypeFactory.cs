@@ -42,15 +42,15 @@ namespace AutoRest.CSharp.Generation.Types
         {
             InputLiteralType literalType => CSharpType.FromLiteral(CreateType(literalType.ValueType), literalType.Value),
             InputUnionType unionType => CSharpType.FromUnion(unionType.VariantTypes.Select(CreateType).ToArray()),
-            InputListType { IsEmbeddingsVector: true } listType => new CSharpType(typeof(ReadOnlyMemory<>), false, CreateType(listType.ElementType)),
+            InputListType { IsEmbeddingsVector: true } listType => new CSharpType(typeof(ReadOnlyMemory<>), CreateType(listType.ElementType)),
             InputListType listType => new CSharpType(typeof(IList<>), false, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), typeof(string), CreateType(dictionaryType.ValueType)),
-            InputEnumType enumType => _library.ResolveEnum(enumType, false),
+            InputEnumType enumType => _library.ResolveEnum(enumType),
             // TODO -- this is a temporary solution until we refactored the type replacement to use input types instead of code model schemas
             InputModelType { Namespace: "Azure.Core.Foundations", Name: "Error" } => SystemObjectType.Create(AzureResponseErrorType, AzureResponseErrorType.Namespace!, null).Type,
             // Handle DataFactoryElement, we are sure that the argument type is not null and contains only 1 element
             InputModelType { Namespace: "Azure.Core.Resources", Name: "DataFactoryElement" } inputModel => new CSharpType(typeof(DataFactoryElement<>), CreateTypeForDataFactoryElement(inputModel.ArgumentTypes![0])),
-            InputModelType model => _library.ResolveModel(model,false),
+            InputModelType model => _library.ResolveModel(model),
             InputNullableType nullableType => CreateType(nullableType.Type).WithNullable(true),
             InputPrimitiveType primitiveType => primitiveType.Kind switch
             {
@@ -77,8 +77,6 @@ namespace AutoRest.CSharp.Generation.Types
                 InputPrimitiveTypeKind.IPAddress => new CSharpType(typeof(IPAddress)),
                 InputPrimitiveTypeKind.ArmId => new CSharpType(typeof(ResourceIdentifier)),
                 InputPrimitiveTypeKind.ResourceType => new CSharpType(typeof(ResourceType)),
-                //InputPrimitiveTypeKind.RequestMethod => new CSharpType(typeof(RequestMethod)),
-                //InputPrimitiveTypeKind.ResourceIdentifier => new CSharpType(typeof(ResourceIdentifier)),
                 InputPrimitiveTypeKind.Stream => new CSharpType(typeof(Stream)),
                 InputPrimitiveTypeKind.String => new CSharpType(typeof(string)),
                 InputPrimitiveTypeKind.Uri or InputPrimitiveTypeKind.Url => new CSharpType(typeof(Uri)),
