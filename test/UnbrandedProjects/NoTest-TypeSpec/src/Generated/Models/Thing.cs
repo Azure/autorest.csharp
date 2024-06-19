@@ -59,6 +59,7 @@ namespace NoTestTypeSpec.Models
             RequiredBadDescription = requiredBadDescription;
             OptionalNullableList = new ChangeTrackingList<int>();
             RequiredNullableList = requiredNullableList?.ToList();
+            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>

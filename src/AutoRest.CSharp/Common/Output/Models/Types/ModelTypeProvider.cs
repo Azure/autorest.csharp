@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -421,8 +420,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var property in Properties)
             {
                 // we do not need to add initialization for raw data field
+                // when the enable-internal-raw-field is enabled we need to initialize this as well
                 if (isInitializer && property == RawDataField)
                 {
+                    if (Configuration.EnableInternalRawData)
+                    {
+                        defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, Constant.NewInstanceOf(property.Declaration.Type.PropertyInitializationType)));
+                    }
                     continue;
                 }
 
@@ -491,7 +495,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
                 else if (!_inputModel.IsUnknownDiscriminatorModel && discriminator.Value is { } value)
                 {
-                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, value));
+                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(discriminator.Property, value));
                 }
             }
 
@@ -654,7 +658,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             // build serialization for additional properties property (if any)
             var additionalPropertiesSerialization = BuildSerializationForAdditionalProperties(additionalPropertiesProperty, additionalPropertiesValueInputType, false);
             // build serialization for raw data field (if any)
-            var rawDataFieldSerialization = BuildSerializationForAdditionalProperties(rawDataField, null, true);
+            // the raw data is excluded when the configuration is turned off (default), when turned on, we should include it
+            var rawDataFieldSerialization = BuildSerializationForAdditionalProperties(rawDataField, null, Configuration.EnableInternalRawData ? false : true);
 
             return (additionalPropertiesSerialization, rawDataFieldSerialization);
 
