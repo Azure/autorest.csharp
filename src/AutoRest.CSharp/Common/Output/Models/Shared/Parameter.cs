@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Builders;
@@ -64,9 +65,16 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 : ValidationType.None;
 
             var inputType = type.InputType;
+            IEnumerable<string>? values = operationParameter.Type switch
+            {
+                InputEnumType enumType => enumType.Values.Select(c => c.GetValueString()),
+                InputNullableType { Type: InputEnumType e} => e.Values.Select(c => c.GetValueString()),
+                _ => null,
+            };
+
             return new Parameter(
                 name,
-                CreateDescription(operationParameter, inputType, (operationParameter.Type as InputEnumType)?.Values.Select(c => c.GetValueString()), keepClientDefaultValue ? null : clientDefaultValue),
+                CreateDescription(operationParameter, inputType, values, keepClientDefaultValue ? null : clientDefaultValue),
                 inputType,
                 defaultValue,
                 validation,
@@ -125,8 +133,13 @@ namespace AutoRest.CSharp.Output.Models.Shared
         {
             string paramName = param.Name;
             string variableName = paramName.ToVariableName();
+            var paramType = param.Type switch
+            {
+                InputNullableType nullableType => nullableType.Type,
+                _ => param.Type
+            };
 
-            if (param.Type is InputModelType paramInputType)
+            if (paramType is InputModelType paramInputType)
             {
                 var paramInputTypeName = paramInputType.Name;
 
@@ -169,6 +182,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return requestParameter.Type switch
             {
                 InputEnumType choiceSchema when type.IsFrameworkType => AddAllowedValues(description, choiceSchema.Values),
+                InputNullableType { Type: InputEnumType ie} => AddAllowedValues(description, ie.Values),
                 _ => description
             };
 

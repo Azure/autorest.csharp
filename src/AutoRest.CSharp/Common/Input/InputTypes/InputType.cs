@@ -45,4 +45,9 @@ internal abstract record InputType
             return new InputNullableType(this);
         return this;
     }
+    public InputType GetImplementType() => this switch
+    {
+        InputNullableType nullableType => nullableType.Type,
+        _ => this
+    };
 }

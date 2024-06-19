@@ -546,26 +546,12 @@ namespace AutoRest.CSharp.Common.Input
             if (schema is ObjectSchema objectSchema)
             {
                 var resolvedType = _modelsCache[objectSchema];
-                //return isNullable != resolvedType.IsNullable ? _modelsCache[objectSchema] with { IsNullable = isNullable } : _modelsCache[objectSchema];
-                /*
-                if (isNullable)
-                {
-                    return new InputNullableType(resolvedType);
-                }
-                */
                 return resolvedType.WithNullable(isNullable);
             }
 
             if (_enumsCache.TryGetValue(schema, out var enumType))
             {
                 var resolvedType = enumType;
-                //return isNullable != enumType.IsNullable ? enumType with { IsNullable = isNullable } : enumType;
-                /*
-                if (isNullable)
-                {
-                    return new InputNullableType(resolvedType);
-                }
-                */
                 return resolvedType.WithNullable(isNullable);
             }
 
@@ -575,7 +561,6 @@ namespace AutoRest.CSharp.Common.Input
                 return type with
                 {
                     Serialization = GetSerialization(schema, SchemaTypeUsage.None),
-                    //IsNullable = isNullable,
                 };
             }
 

@@ -1844,7 +1844,7 @@ namespace header_LowLevel
         /// </list>
         /// </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
-        /// <param name="value"> Send a post request with header values 'GREY'. </param>
+        /// <param name="value"> Send a post request with header values 'GREY' . Allowed values: "White" | "black" | "GREY". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1879,7 +1879,7 @@ namespace header_LowLevel
         /// </list>
         /// </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
-        /// <param name="value"> Send a post request with header values 'GREY'. </param>
+        /// <param name="value"> Send a post request with header values 'GREY' . Allowed values: "White" | "black" | "GREY". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

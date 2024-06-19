@@ -1220,7 +1220,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="enumQuery"> 'green color' enum value. </param>
+        /// <param name="enumQuery"> 'green color' enum value. Allowed values: "red color" | "green color" | "blue color". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1251,7 +1251,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="enumQuery"> 'green color' enum value. </param>
+        /// <param name="enumQuery"> 'green color' enum value. Allowed values: "red color" | "green color" | "blue color". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1282,7 +1282,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="enumQuery"> null string value. </param>
+        /// <param name="enumQuery"> null string value. Allowed values: "red color" | "green color" | "blue color". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1313,7 +1313,7 @@ namespace url_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="enumQuery"> null string value. </param>
+        /// <param name="enumQuery"> null string value. Allowed values: "red color" | "green color" | "blue color". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
