@@ -422,22 +422,6 @@ internal static class SchemaNameAndFormatUpdater
         inputType.Name = result.Name;
     }
 
-    private static void TransformInputOperation(InputOperation inputOperation, string targetFullSerializedName)
-    {
-        var originalName = inputOperation.Name;
-        var tempName = originalName;
-        var result = NameTransformer.Instance.EnsureNameCase(originalName, (applyStep) =>
-        {
-            if (applyStep.MappingValue.RawValue is not null)
-            {
-                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, targetFullSerializedName,
-                    "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
-            }
-            tempName = applyStep.NewName.Name;
-        });
-        inputOperation.Name = result.Name;
-    }
-
     private static void TransformInputParameter(InputParameter inputParameter, string targetFullSerializedName)
     {
         var originalName = inputParameter.Name;
@@ -460,6 +444,23 @@ internal static class SchemaNameAndFormatUpdater
         foreach (var property in inputModel.Properties)
         {
             TransformInputType(property.Type, inputModel.GetFullSerializedName(property));
+            TransformInputModelProperty(property, inputModel.GetFullSerializedName(property));
         }
+    }
+
+    private static void TransformInputModelProperty(InputModelProperty property, string targetFullSerializedName)
+    {
+        var originalName = property.Name;
+        var tempName = originalName;
+        var result = NameTransformer.Instance.EnsureNameCase(originalName, (applyStep) =>
+        {
+            if (applyStep.MappingValue.RawValue is not null)
+            {
+                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, targetFullSerializedName,
+                    "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
+            }
+            tempName = applyStep.NewName.Name;
+        });
+        property.Name = result.Name;
     }
 }

@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             // For swagger input, we still use acronymMapping from configuration
             // For TypeSpec input, we use the defaultAcronymMapping
             _acronymMapping = acronymMapping.Count > 0 ? acronymMapping : _defaultAcronymMapping;
-            _regex = BuildRegex(acronymMapping.Keys);
+            _regex = BuildRegex(_acronymMapping.Keys);
             _wordCache = new ConcurrentDictionary<string, AppliedCache>();
         }
 
@@ -108,38 +108,38 @@ namespace AutoRest.CSharp.Mgmt.Models
             var match = _regex.Match(strToMatch);
             var detailStep = new List<ApplyDetailStep>();
             bool hasFirstWord = false;
-            while (match.Success)
-            {
-                // in our regular expression, the content we want to find is in the second group
-                var matchGroup = match.Groups[2];
-                var replaceValue = _acronymMapping[matchGroup.Value];
-                // append everything between the beginning and the index of this match
-                var everythingBeforeMatch = strToMatch.Substring(0, matchGroup.Index);
-                // append everything before myself
-                propertyNameBuilder.Append(everythingBeforeMatch);
-                parameterNameBuilder.Append(everythingBeforeMatch);
-                // append the replaced value
-                propertyNameBuilder.Append(replaceValue.Value);
-                // see if everything before myself is empty, or is all invalid character for an identifier which will be trimmed off, which makes the current word the first word
-                if (!hasFirstWord && IsEquivelantEmpty(everythingBeforeMatch))
+                while (match.Success)
                 {
-                    hasFirstWord = true;
-                    parameterNameBuilder.Append(replaceValue.ParameterValue ?? replaceValue.Value);
-                }
-                else
-                    parameterNameBuilder.Append(replaceValue.Value);
-                // move to whatever is left unmatched
-                strToMatch = strToMatch.Substring(matchGroup.Index + matchGroup.Length);
+                    // in our regular expression, the content we want to find is in the second group
+                    var matchGroup = match.Groups[2];
+                    var replaceValue = _acronymMapping[matchGroup.Value];
+                    // append everything between the beginning and the index of this match
+                    var everythingBeforeMatch = strToMatch.Substring(0, matchGroup.Index);
+                    // append everything before myself
+                    propertyNameBuilder.Append(everythingBeforeMatch);
+                    parameterNameBuilder.Append(everythingBeforeMatch);
+                    // append the replaced value
+                    propertyNameBuilder.Append(replaceValue.Value);
+                    // see if everything before myself is empty, or is all invalid character for an identifier which will be trimmed off, which makes the current word the first word
+                    if (!hasFirstWord && IsEquivelantEmpty(everythingBeforeMatch))
+                    {
+                        hasFirstWord = true;
+                        parameterNameBuilder.Append(replaceValue.ParameterValue ?? replaceValue.Value);
+                    }
+                    else
+                        parameterNameBuilder.Append(replaceValue.Value);
+                    // move to whatever is left unmatched
+                    strToMatch = strToMatch.Substring(matchGroup.Index + matchGroup.Length);
 
-                string tempPropertyName = propertyNameBuilder.ToString() + strToMatch;
-                string tempParameterName = parameterNameBuilder.ToString() + strToMatch;
-                NameInfo tempNameInfo = new NameInfo(tempPropertyName, tempParameterName);
-                var step = new ApplyDetailStep(matchGroup.Value, replaceValue, tempNameInfo);
-                if (onMappingApplied != null)
-                    onMappingApplied(step);
-                detailStep.Add(step);
-                match = _regex.Match(strToMatch);
-            }
+                    string tempPropertyName = propertyNameBuilder.ToString() + strToMatch;
+                    string tempParameterName = parameterNameBuilder.ToString() + strToMatch;
+                    NameInfo tempNameInfo = new NameInfo(tempPropertyName, tempParameterName);
+                    var step = new ApplyDetailStep(matchGroup.Value, replaceValue, tempNameInfo);
+                    if (onMappingApplied != null)
+                        onMappingApplied(step);
+                    detailStep.Add(step);
+                    match = _regex.Match(strToMatch);
+                }
             if (strToMatch.Length > 0)
             {
                 propertyNameBuilder.Append(strToMatch);
