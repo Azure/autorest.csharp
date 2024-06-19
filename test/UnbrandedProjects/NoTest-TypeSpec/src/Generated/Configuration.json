@@ -8,5 +8,6 @@
   ],
   "head-as-boolean": true,
   "deserialize-null-collection-as-null-value": true,
-  "use-model-reader-writer": true
+  "use-model-reader-writer": true,
+  "enable-internal-raw-data": true
 }

@@ -25,4 +25,5 @@ export interface Configuration {
     "generate-test-project"?: boolean;
     "use-model-reader-writer"?: boolean;
     "disable-xml-docs"?: boolean;
+    "enable-internal-raw-data"?: boolean;
 }

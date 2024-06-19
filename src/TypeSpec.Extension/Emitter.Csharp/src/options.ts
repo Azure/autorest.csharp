@@ -36,6 +36,7 @@ export type NetEmitterOptions = {
     "generate-test-project"?: boolean;
     "use-model-reader-writer"?: boolean;
     "disable-xml-docs"?: boolean;
+    "enable-internal-raw-data"?: boolean;
 } & SdkEmitterOptions;
 
 export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -112,7 +113,8 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
             default: false
         },
         "use-model-reader-writer": { type: "boolean", nullable: true },
-        "disable-xml-docs": { type: "boolean", nullable: true }
+        "disable-xml-docs": { type: "boolean", nullable: true },
+        "enable-internal-raw-data": { type: "boolean", nullable: true }
     },
     required: []
 };

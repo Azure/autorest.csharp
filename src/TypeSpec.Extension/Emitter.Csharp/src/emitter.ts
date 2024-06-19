@@ -152,7 +152,11 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 "disable-xml-docs":
                     options["disable-xml-docs"] === false
                         ? undefined
-                        : options["disable-xml-docs"]
+                        : options["disable-xml-docs"],
+                "enable-internal-raw-data":
+                    options["enable-internal-raw-data"] === false
+                        ? undefined
+                        : options["enable-internal-raw-data"]
             };
 
             await program.host.writeFile(

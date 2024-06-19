@@ -82,11 +82,15 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                 }
 
+                // when the configuration is enabled, generate this as internal
                 // when this model has derived types, the accessibility should change from private to `protected internal`
-                string accessibility = HasDerivedTypes() ? "private protected" : "private";
+                string accessibility = Configuration.EnableInternalRawData
+                    ? "internal"
+                    : HasDerivedTypes() ? "private protected" : "private";
 
                 _rawDataField = new ObjectTypeProperty(
-                    BuilderHelpers.CreateMemberDeclaration(PrivateAdditionalPropertiesPropertyName,
+                    BuilderHelpers.CreateMemberDeclaration(
+                        Configuration.EnableInternalRawData ? InternalAdditionalPropertiesPropertyName : PrivateAdditionalPropertiesPropertyName,
                         _privateAdditionalPropertiesPropertyType, accessibility, null, _typeFactory),
                     PrivateAdditionalPropertiesPropertyDescription,
                     true,

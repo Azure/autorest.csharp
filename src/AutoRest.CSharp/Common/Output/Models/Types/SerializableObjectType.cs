@@ -80,6 +80,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         protected const string PrivateAdditionalPropertiesPropertyDescription = "Keeps track of any properties unknown to the library.";
         protected const string PrivateAdditionalPropertiesPropertyName = "_serializedAdditionalRawData";
+        protected const string InternalAdditionalPropertiesPropertyName = "SerializedAdditionalRawData";
         protected static readonly CSharpType _privateAdditionalPropertiesPropertyType = typeof(IDictionary<string, BinaryData>);
 
         protected internal SourcePropertySerializationMapping? GetForMemberSerialization(string propertyDeclaredName)
