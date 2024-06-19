@@ -123,7 +123,7 @@ internal record InputOperation
     }
 
     public bool IsLongRunning => LongRunning != null;
-    public string Name { get; init; }
+    public string Name { get; internal set; }
     public string? ResourceName { get; }
     public string? Summary { get; }
     public string? Deprecated { get; }

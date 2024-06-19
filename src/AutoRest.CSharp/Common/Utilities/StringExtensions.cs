@@ -108,10 +108,13 @@ namespace AutoRest.CSharp.Utilities
                 if (tempName != applyStep.NewName.VariableName)
                 {
                     var finalName = ToCleanName(applyStep.NewName.VariableName, isCamelCase: false);
-                    MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                        TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue,
-                        $"Variables.{name}",
-                        $"ApplyAcronymMappingOnVariable", tempName, $"{applyStep.NewName.VariableName}(ToCleanName={finalName})");
+                    if (applyStep.MappingValue.RawValue is not null)
+                    {
+                        MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                            TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue,
+                            $"Variables.{name}",
+                            $"ApplyAcronymMappingOnVariable", tempName, $"{applyStep.NewName.VariableName}(ToCleanName={finalName})");
+                    }
                     tempName = applyStep.NewName.VariableName;
                 }
             });
