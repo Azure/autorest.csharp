@@ -54,10 +54,8 @@ describe("Test encode duration", () => {
                 Encode: "ISO8601",
                 WireType: {
                     Kind: "string",
-                    IsNullable: false,
                     Encode: undefined
-                },
-                IsNullable: false
+                }
             } as InputDurationType,
             operation.Parameters[0].Type
         );
@@ -94,10 +92,8 @@ describe("Test encode duration", () => {
                 Encode: "seconds",
                 WireType: {
                     Kind: "int32",
-                    IsNullable: false,
                     Encode: undefined
-                },
-                IsNullable: false
+                }
             } as InputDurationType,
             operation.Parameters[0].Type
         );
@@ -134,10 +130,8 @@ describe("Test encode duration", () => {
                 Encode: "seconds",
                 WireType: {
                     Kind: "float32",
-                    IsNullable: false,
                     Encode: undefined
-                },
-                IsNullable: false
+                }
             } as InputDurationType,
             operation.Parameters[0].Type
         );
@@ -168,10 +162,8 @@ describe("Test encode duration", () => {
                 Encode: "ISO8601",
                 WireType: {
                     Kind: "string",
-                    IsNullable: false,
                     Encode: undefined
-                },
-                IsNullable: false
+                }
             } as InputDurationType,
             durationProperty.Properties[0].Type
         );
@@ -202,10 +194,8 @@ describe("Test encode duration", () => {
                 Encode: "seconds",
                 WireType: {
                     Kind: "int32",
-                    IsNullable: false,
                     Encode: undefined
-                },
-                IsNullable: false
+                }
             } as InputDurationType,
             durationProperty.Properties[0].Type
         );
@@ -236,10 +226,8 @@ describe("Test encode duration", () => {
                 Encode: "seconds",
                 WireType: {
                     Kind: "float32",
-                    IsNullable: false,
                     Encode: undefined
-                },
-                IsNullable: false
+                }
             } as InputDurationType,
             durationProperty.Properties[0].Type
         );
