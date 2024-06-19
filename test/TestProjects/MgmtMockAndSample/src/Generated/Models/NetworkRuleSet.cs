@@ -15,7 +15,7 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="NetworkRuleSet"/>. </summary>
         public NetworkRuleSet()
         {
-            IpRules = new ChangeTrackingList<IPRule>();
+            IPRules = new ChangeTrackingList<IPRule>();
             VirtualNetworkRules = new ChangeTrackingList<VirtualNetworkRule>();
         }
 
@@ -28,7 +28,7 @@ namespace MgmtMockAndSample.Models
         {
             Bypass = bypass;
             DefaultAction = defaultAction;
-            IpRules = ipRules;
+            IPRules = ipRules;
             VirtualNetworkRules = virtualNetworkRules;
         }
 
@@ -37,7 +37,7 @@ namespace MgmtMockAndSample.Models
         /// <summary> The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated. </summary>
         public NetworkRuleAction? DefaultAction { get; set; }
         /// <summary> The list of IP address rules. </summary>
-        public IList<IPRule> IpRules { get; }
+        public IList<IPRule> IPRules { get; }
         /// <summary> The list of virtual network rules. </summary>
         public IList<VirtualNetworkRule> VirtualNetworkRules { get; }
     }

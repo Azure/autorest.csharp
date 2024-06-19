@@ -148,21 +148,21 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Gets an object representing a VMInsightsOnboardingStatusResource along with the instance operations that can be performed on it in the ArmClient.
+        /// Gets an object representing a VmInsightsOnboardingStatusResource along with the instance operations that can be performed on it in the ArmClient.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetVMInsightsOnboardingStatus(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetVmInsightsOnboardingStatus(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource"/> object. </returns>
-        public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus(this ArmClient client, ResourceIdentifier scope)
+        /// <returns> Returns a <see cref="VmInsightsOnboardingStatusResource"/> object. </returns>
+        public static VmInsightsOnboardingStatusResource GetVmInsightsOnboardingStatus(this ArmClient client, ResourceIdentifier scope)
         {
             Argument.AssertNotNull(client, nameof(client));
 
-            return GetMockableMgmtScopeResourceArmClient(client).GetVMInsightsOnboardingStatus(scope);
+            return GetMockableMgmtScopeResourceArmClient(client).GetVmInsightsOnboardingStatus(scope);
         }
 
         /// <summary>
@@ -463,22 +463,22 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="VMInsightsOnboardingStatusResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="VMInsightsOnboardingStatusResource.CreateResourceIdentifier" /> to create a <see cref="VMInsightsOnboardingStatusResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="VmInsightsOnboardingStatusResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VmInsightsOnboardingStatusResource.CreateResourceIdentifier" /> to create a <see cref="VmInsightsOnboardingStatusResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetVMInsightsOnboardingStatusResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmClient.GetVmInsightsOnboardingStatusResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource"/> object. </returns>
-        public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatusResource(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="VmInsightsOnboardingStatusResource"/> object. </returns>
+        public static VmInsightsOnboardingStatusResource GetVmInsightsOnboardingStatusResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
 
-            return GetMockableMgmtScopeResourceArmClient(client).GetVMInsightsOnboardingStatusResource(id);
+            return GetMockableMgmtScopeResourceArmClient(client).GetVmInsightsOnboardingStatusResource(id);
         }
 
         /// <summary>
@@ -594,20 +594,20 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
-        /// Gets an object representing a VMInsightsOnboardingStatusResource along with the instance operations that can be performed on it in the ArmResource.
+        /// Gets an object representing a VmInsightsOnboardingStatusResource along with the instance operations that can be performed on it in the ArmResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmResource.GetVMInsightsOnboardingStatus()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtScopeResourceArmResource.GetVmInsightsOnboardingStatus()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="armResource"/> is null. </exception>
-        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource"/> object. </returns>
-        public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus(this ArmResource armResource)
+        /// <returns> Returns a <see cref="VmInsightsOnboardingStatusResource"/> object. </returns>
+        public static VmInsightsOnboardingStatusResource GetVmInsightsOnboardingStatus(this ArmResource armResource)
         {
             Argument.AssertNotNull(armResource, nameof(armResource));
 
-            return GetMockableMgmtScopeResourceArmResource(armResource).GetVMInsightsOnboardingStatus();
+            return GetMockableMgmtScopeResourceArmResource(armResource).GetVmInsightsOnboardingStatus();
         }
 
         /// <summary>

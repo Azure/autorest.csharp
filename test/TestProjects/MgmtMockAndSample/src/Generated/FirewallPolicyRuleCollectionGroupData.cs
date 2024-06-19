@@ -38,7 +38,7 @@ namespace MgmtMockAndSample
         internal FirewallPolicyRuleCollectionGroupData(string id, string name, string etag, ResourceType? resourceType, int? priority, IList<FirewallPolicyRuleCollection> ruleCollections, ProvisioningState? provisioningState) : base(id)
         {
             Name = name;
-            Etag = etag;
+            ETag = etag;
             ResourceType = resourceType;
             Priority = priority;
             RuleCollections = ruleCollections;
@@ -48,7 +48,7 @@ namespace MgmtMockAndSample
         /// <summary> The name of the resource that is unique within a resource group. This name can be used to access the resource. </summary>
         public string Name { get; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; }
+        public string ETag { get; }
         /// <summary> Rule Group type. </summary>
         public ResourceType? ResourceType { get; }
         /// <summary> Priority of the Firewall Policy Rule Collection Group resource. </summary>

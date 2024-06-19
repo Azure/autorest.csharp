@@ -22,14 +22,14 @@ namespace MgmtSupersetInheritance.Models
         /// <param name="new"></param>
         internal SupersetModel2(string id, string name, string supersetModel2Type, string @new)
         {
-            ID = id;
+            Id = id;
             Name = name;
             SupersetModel2Type = supersetModel2Type;
             New = @new;
         }
 
         /// <summary> Gets or sets the id. </summary>
-        public string ID { get; set; }
+        public string Id { get; set; }
         /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
         /// <summary> Gets or sets the superset model 2 type. </summary>

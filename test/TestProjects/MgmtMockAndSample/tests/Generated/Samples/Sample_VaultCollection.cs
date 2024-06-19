@@ -117,7 +117,7 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
                 {
                     Bypass = NetworkRuleBypassOption.AzureServices,
                     DefaultAction = NetworkRuleAction.Deny,
-                    IpRules =
+                    IPRules =
 {
 new IPRule("124.56.78.91"),new IPRule("'10.91.4.0/24'")
 },

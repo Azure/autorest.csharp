@@ -8,7 +8,7 @@
 namespace MgmtAcronymMapping.Models
 {
     /// <summary>
-    /// The VmScaleSetConvertToSinglePlacementGroupInput.
+    /// The VMScaleSetConvertToSinglePlacementGroupInput.
     /// Serialized Name: VMScaleSetConvertToSinglePlacementGroupInput
     /// </summary>
     public partial class VmScaleSetConvertToSinglePlacementGroupContent

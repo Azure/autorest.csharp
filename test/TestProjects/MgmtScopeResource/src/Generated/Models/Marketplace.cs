@@ -82,7 +82,7 @@ namespace MgmtScopeResource.Models
             PublisherName = publisherName;
             PlanName = planName;
             IsRecurringCharge = isRecurringCharge;
-            Etag = etag;
+            ETag = etag;
             Tags = tags;
         }
 
@@ -139,7 +139,7 @@ namespace MgmtScopeResource.Models
         /// <summary> Flag indicating whether this is a recurring charge or not. </summary>
         public bool? IsRecurringCharge { get; }
         /// <summary> The etag for the resource. </summary>
-        public string Etag { get; }
+        public string ETag { get; }
         /// <summary> Resource tags. </summary>
         public IReadOnlyDictionary<string, string> Tags { get; }
     }

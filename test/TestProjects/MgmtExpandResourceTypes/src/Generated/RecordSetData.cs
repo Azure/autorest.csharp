@@ -56,7 +56,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="caaRecords"> The list of CAA records in the record set. </param>
         internal RecordSetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string etag, IDictionary<string, string> metadata, long? ttl, string fqdn, string provisioningState, WritableSubResource targetResource, IList<ARecord> aRecords, IList<AaaaRecord> aaaaRecords, IList<MxRecord> mxRecords, IList<NsRecord> nsRecords, IList<PtrRecord> ptrRecords, IList<SrvRecord> srvRecords, IList<TxtRecord> txtRecords, CnameRecord cnameRecord, SoaRecord soaRecord, IList<CaaRecord> caaRecords) : base(id, name, resourceType, systemData)
         {
-            Etag = etag;
+            ETag = etag;
             Metadata = metadata;
             TTL = ttl;
             Fqdn = fqdn;
@@ -75,7 +75,7 @@ namespace MgmtExpandResourceTypes
         }
 
         /// <summary> The etag of the record set. </summary>
-        public string Etag { get; set; }
+        public string ETag { get; set; }
         /// <summary> The metadata attached to the record set. </summary>
         public IDictionary<string, string> Metadata { get; }
         /// <summary> The TTL (time-to-live) of the records in the record set. </summary>

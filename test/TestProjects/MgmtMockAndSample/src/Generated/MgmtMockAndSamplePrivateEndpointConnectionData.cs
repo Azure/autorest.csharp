@@ -38,7 +38,7 @@ namespace MgmtMockAndSample
         /// <param name="tags"> Tags assigned to the key vault resource. </param>
         internal MgmtMockAndSamplePrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string etag, Azure.ResourceManager.Resources.Models.SubResource privateEndpoint, MgmtMockAndSamplePrivateLinkServiceConnectionState connectionState, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState, AzureLocation? location, IReadOnlyDictionary<string, string> tags) : base(id, name, resourceType, systemData)
         {
-            Etag = etag;
+            ETag = etag;
             PrivateEndpoint = privateEndpoint;
             ConnectionState = connectionState;
             ProvisioningState = provisioningState;
@@ -47,7 +47,7 @@ namespace MgmtMockAndSample
         }
 
         /// <summary> Modified whenever there is a change in the state of private endpoint connection. </summary>
-        public string Etag { get; set; }
+        public string ETag { get; set; }
         /// <summary> Properties of the private endpoint object. </summary>
         internal Azure.ResourceManager.Resources.Models.SubResource PrivateEndpoint { get; set; }
         /// <summary> Gets Id. </summary>

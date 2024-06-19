@@ -104,11 +104,11 @@ namespace MgmtScopeResource.Mocking
             return GetFakePolicyAssignments().Get(policyAssignmentName, cancellationToken);
         }
 
-        /// <summary> Gets an object representing a VMInsightsOnboardingStatusResource along with the instance operations that can be performed on it in the ArmResource. </summary>
-        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource"/> object. </returns>
-        public virtual VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus()
+        /// <summary> Gets an object representing a VmInsightsOnboardingStatusResource along with the instance operations that can be performed on it in the ArmResource. </summary>
+        /// <returns> Returns a <see cref="VmInsightsOnboardingStatusResource"/> object. </returns>
+        public virtual VmInsightsOnboardingStatusResource GetVmInsightsOnboardingStatus()
         {
-            return new VMInsightsOnboardingStatusResource(Client, Id.AppendProviderResource("Microsoft.Insights", "vmInsightsOnboardingStatuses", "default"));
+            return new VmInsightsOnboardingStatusResource(Client, Id.AppendProviderResource("Microsoft.Insights", "vmInsightsOnboardingStatuses", "default"));
         }
 
         /// <summary> Gets a collection of GuestConfigurationAssignmentResources in the ArmResource. </summary>

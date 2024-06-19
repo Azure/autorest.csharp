@@ -68,7 +68,7 @@ namespace MgmtScopeResource
         /// <param name="resourceUri"> The fully qualified Azure Resource manager identifier of the resource, or scope, whose status to retrieve. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceUri"/> is null. </exception>
-        public async Task<Response<VMInsightsOnboardingStatusData>> GetOnboardingStatusAsync(string resourceUri, CancellationToken cancellationToken = default)
+        public async Task<Response<VmInsightsOnboardingStatusData>> GetOnboardingStatusAsync(string resourceUri, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(resourceUri, nameof(resourceUri));
 
@@ -78,13 +78,13 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        VMInsightsOnboardingStatusData value = default;
+                        VmInsightsOnboardingStatusData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = VMInsightsOnboardingStatusData.DeserializeVMInsightsOnboardingStatusData(document.RootElement);
+                        value = VmInsightsOnboardingStatusData.DeserializeVmInsightsOnboardingStatusData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((VMInsightsOnboardingStatusData)null, message.Response);
+                    return Response.FromValue((VmInsightsOnboardingStatusData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -94,7 +94,7 @@ namespace MgmtScopeResource
         /// <param name="resourceUri"> The fully qualified Azure Resource manager identifier of the resource, or scope, whose status to retrieve. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceUri"/> is null. </exception>
-        public Response<VMInsightsOnboardingStatusData> GetOnboardingStatus(string resourceUri, CancellationToken cancellationToken = default)
+        public Response<VmInsightsOnboardingStatusData> GetOnboardingStatus(string resourceUri, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(resourceUri, nameof(resourceUri));
 
@@ -104,13 +104,13 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        VMInsightsOnboardingStatusData value = default;
+                        VmInsightsOnboardingStatusData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = VMInsightsOnboardingStatusData.DeserializeVMInsightsOnboardingStatusData(document.RootElement);
+                        value = VmInsightsOnboardingStatusData.DeserializeVmInsightsOnboardingStatusData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((VMInsightsOnboardingStatusData)null, message.Response);
+                    return Response.FromValue((VmInsightsOnboardingStatusData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

@@ -44,11 +44,11 @@ namespace MgmtPartialResource
         internal PublicIPAddressData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, PublicIPAddressSku sku, string etag, IList<string> zones, IPAllocationMethod? publicIPAllocationMethod, IPVersion? publicIPAddressVersion, string ipAddress, int? idleTimeoutInMinutes, string resourceGuid, PublicIPAddressData servicePublicIPAddress, PublicIPAddressMigrationPhase? migrationPhase, PublicIPAddressData linkedPublicIPAddress, DeleteOption? deleteOption) : base(id, name, resourceType, systemData)
         {
             Sku = sku;
-            Etag = etag;
+            ETag = etag;
             Zones = zones;
             PublicIPAllocationMethod = publicIPAllocationMethod;
             PublicIPAddressVersion = publicIPAddressVersion;
-            IpAddress = ipAddress;
+            IPAddress = ipAddress;
             IdleTimeoutInMinutes = idleTimeoutInMinutes;
             ResourceGuid = resourceGuid;
             ServicePublicIPAddress = servicePublicIPAddress;
@@ -60,7 +60,7 @@ namespace MgmtPartialResource
         /// <summary> The public IP address SKU. </summary>
         public PublicIPAddressSku Sku { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; }
+        public string ETag { get; }
         /// <summary> A list of availability zones denoting the IP allocated for the resource needs to come from. </summary>
         public IList<string> Zones { get; }
         /// <summary> The public IP address allocation method. </summary>
@@ -68,7 +68,7 @@ namespace MgmtPartialResource
         /// <summary> The public IP address version. </summary>
         public IPVersion? PublicIPAddressVersion { get; set; }
         /// <summary> The IP address associated with the public IP address resource. </summary>
-        public string IpAddress { get; set; }
+        public string IPAddress { get; set; }
         /// <summary> The idle timeout of the public IP address. </summary>
         public int? IdleTimeoutInMinutes { get; set; }
         /// <summary> The resource GUID property of the public IP address resource. </summary>

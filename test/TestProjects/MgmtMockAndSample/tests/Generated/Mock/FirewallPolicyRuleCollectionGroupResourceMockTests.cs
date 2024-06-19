@@ -94,7 +94,7 @@ Rules =
 {
 new NatRule()
 {
-IpProtocols =
+IPProtocols =
 {
 FirewallPolicyRuleNetworkProtocol.TCP,FirewallPolicyRuleNetworkProtocol.UDP
 },
@@ -111,7 +111,7 @@ DestinationPorts =
 "8080"
 },
 TranslatedPort = "8080",
-SourceIpGroups =
+SourceIPGroups =
 {
 },
 TranslatedFqdn = "internalhttp.server.net",
@@ -144,7 +144,7 @@ Rules =
 {
 new NetworkRule()
 {
-IpProtocols =
+IPProtocols =
 {
 FirewallPolicyRuleNetworkProtocol.TCP
 },
@@ -199,7 +199,7 @@ Rules =
 {
 new NetworkRule()
 {
-IpProtocols =
+IPProtocols =
 {
 FirewallPolicyRuleNetworkProtocol.TCP
 },
@@ -207,11 +207,11 @@ DestinationPorts =
 {
 "*"
 },
-SourceIpGroups =
+SourceIPGroups =
 {
 "/subscriptions/subid/providers/Microsoft.Network/resourceGroup/rg1/ipGroups/ipGroups1"
 },
-DestinationIpGroups =
+DestinationIPGroups =
 {
 "/subscriptions/subid/providers/Microsoft.Network/resourceGroup/rg1/ipGroups/ipGroups2"
 },

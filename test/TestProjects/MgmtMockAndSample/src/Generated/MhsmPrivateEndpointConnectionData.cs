@@ -39,7 +39,7 @@ namespace MgmtMockAndSample
         /// <param name="sku"> SKU details. </param>
         internal MhsmPrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string etag, Azure.ResourceManager.Resources.Models.SubResource privateEndpoint, MhsmPrivateLinkServiceConnectionState privateLinkServiceConnectionState, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState, ManagedHsmSku sku) : base(id, name, resourceType, systemData, tags, location)
         {
-            Etag = etag;
+            ETag = etag;
             PrivateEndpoint = privateEndpoint;
             PrivateLinkServiceConnectionState = privateLinkServiceConnectionState;
             ProvisioningState = provisioningState;
@@ -47,7 +47,7 @@ namespace MgmtMockAndSample
         }
 
         /// <summary> Modified whenever there is a change in the state of private endpoint connection. </summary>
-        public string Etag { get; set; }
+        public string ETag { get; set; }
         /// <summary> Properties of the private endpoint object. </summary>
         internal Azure.ResourceManager.Resources.Models.SubResource PrivateEndpoint { get; set; }
         /// <summary> Gets Id. </summary>

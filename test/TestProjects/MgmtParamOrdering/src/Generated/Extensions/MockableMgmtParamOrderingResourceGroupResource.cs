@@ -279,7 +279,7 @@ namespace MgmtParamOrdering.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
-        public virtual async Task<Response<VirtualMachineScaleSetResource>> GetVirtualMachineScaleSetAsync(string vmScaleSetName, ExpandTypesForGetVMScaleSet? expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<VirtualMachineScaleSetResource>> GetVirtualMachineScaleSetAsync(string vmScaleSetName, ExpandTypesForGetVmScaleSet? expand = null, CancellationToken cancellationToken = default)
         {
             return await GetVirtualMachineScaleSets().GetAsync(vmScaleSetName, expand, cancellationToken).ConfigureAwait(false);
         }
@@ -311,7 +311,7 @@ namespace MgmtParamOrdering.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
-        public virtual Response<VirtualMachineScaleSetResource> GetVirtualMachineScaleSet(string vmScaleSetName, ExpandTypesForGetVMScaleSet? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineScaleSetResource> GetVirtualMachineScaleSet(string vmScaleSetName, ExpandTypesForGetVmScaleSet? expand = null, CancellationToken cancellationToken = default)
         {
             return GetVirtualMachineScaleSets().Get(vmScaleSetName, expand, cancellationToken);
         }

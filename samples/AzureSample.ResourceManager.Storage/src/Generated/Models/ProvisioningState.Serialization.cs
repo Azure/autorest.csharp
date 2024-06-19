@@ -14,7 +14,7 @@ namespace AzureSample.ResourceManager.Storage.Models
         public static string ToSerialString(this ProvisioningState value) => value switch
         {
             ProvisioningState.Creating => "Creating",
-            ProvisioningState.ResolvingDNS => "ResolvingDNS",
+            ProvisioningState.ResolvingDns => "ResolvingDNS",
             ProvisioningState.Succeeded => "Succeeded",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ProvisioningState value.")
         };
@@ -22,7 +22,7 @@ namespace AzureSample.ResourceManager.Storage.Models
         public static ProvisioningState ToProvisioningState(this string value)
         {
             if (StringComparer.OrdinalIgnoreCase.Equals(value, "Creating")) return ProvisioningState.Creating;
-            if (StringComparer.OrdinalIgnoreCase.Equals(value, "ResolvingDNS")) return ProvisioningState.ResolvingDNS;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "ResolvingDNS")) return ProvisioningState.ResolvingDns;
             if (StringComparer.OrdinalIgnoreCase.Equals(value, "Succeeded")) return ProvisioningState.Succeeded;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ProvisioningState value.");
         }

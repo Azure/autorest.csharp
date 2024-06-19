@@ -221,7 +221,7 @@ namespace MgmtScopeResource.Models
             return new ResourceLinkProperties(sourceId, targetId, notes);
         }
 
-        /// <summary> Initializes a new instance of <see cref="MgmtScopeResource.VMInsightsOnboardingStatusData"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtScopeResource.VmInsightsOnboardingStatusData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -230,12 +230,12 @@ namespace MgmtScopeResource.Models
         /// <param name="onboardingStatus"> The onboarding status for the resource. Note that, a higher level scope, e.g., resource group or subscription, is considered onboarded if at least one resource under it is onboarded. </param>
         /// <param name="dataStatus"> The status of VM Insights data from the resource. When reported as `present` the data array will contain information about the data containers to which data for the specified resource is being routed. </param>
         /// <param name="data"> Containers that currently store VM Insights data for the specified resource. </param>
-        /// <returns> A new <see cref="MgmtScopeResource.VMInsightsOnboardingStatusData"/> instance for mocking. </returns>
-        public static VMInsightsOnboardingStatusData VMInsightsOnboardingStatusData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string resourceId = null, OnboardingStatus? onboardingStatus = null, DataStatus? dataStatus = null, IEnumerable<DataContainer> data = null)
+        /// <returns> A new <see cref="MgmtScopeResource.VmInsightsOnboardingStatusData"/> instance for mocking. </returns>
+        public static VmInsightsOnboardingStatusData VmInsightsOnboardingStatusData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string resourceId = null, OnboardingStatus? onboardingStatus = null, DataStatus? dataStatus = null, IEnumerable<DataContainer> data = null)
         {
             data ??= new List<DataContainer>();
 
-            return new VMInsightsOnboardingStatusData(
+            return new VmInsightsOnboardingStatusData(
                 id,
                 name,
                 resourceType,

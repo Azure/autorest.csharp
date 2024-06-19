@@ -19,10 +19,10 @@ namespace MgmtMockAndSample
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Etag))
+            if (Optional.IsDefined(ETag))
             {
                 writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag);
+                writer.WriteStringValue(ETag);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();

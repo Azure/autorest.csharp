@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyThreatIntelWhitelist"/>. </summary>
         public FirewallPolicyThreatIntelWhitelist()
         {
-            IpAddresses = new ChangeTrackingList<IPAddress>();
+            IPAddresses = new ChangeTrackingList<IPAddress>();
             Fqdns = new ChangeTrackingList<string>();
         }
 
@@ -25,12 +25,12 @@ namespace MgmtMockAndSample.Models
         /// <param name="fqdns"> List of FQDNs for the ThreatIntel Whitelist. </param>
         internal FirewallPolicyThreatIntelWhitelist(IList<IPAddress> ipAddresses, IList<string> fqdns)
         {
-            IpAddresses = ipAddresses;
+            IPAddresses = ipAddresses;
             Fqdns = fqdns;
         }
 
         /// <summary> List of IP addresses for the ThreatIntel Whitelist. </summary>
-        public IList<IPAddress> IpAddresses { get; }
+        public IList<IPAddress> IPAddresses { get; }
         /// <summary> List of FQDNs for the ThreatIntel Whitelist. </summary>
         public IList<string> Fqdns { get; }
     }

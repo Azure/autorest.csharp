@@ -124,12 +124,12 @@ namespace MgmtScopeResource.Mocking
             return GetFakePolicyAssignments(scope).Get(policyAssignmentName, cancellationToken);
         }
 
-        /// <summary> Gets an object representing a VMInsightsOnboardingStatusResource along with the instance operations that can be performed on it in the ArmClient. </summary>
+        /// <summary> Gets an object representing a VmInsightsOnboardingStatusResource along with the instance operations that can be performed on it in the ArmClient. </summary>
         /// <param name="scope"> The scope that the resource will apply against. </param>
-        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource"/> object. </returns>
-        public virtual VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus(ResourceIdentifier scope)
+        /// <returns> Returns a <see cref="VmInsightsOnboardingStatusResource"/> object. </returns>
+        public virtual VmInsightsOnboardingStatusResource GetVmInsightsOnboardingStatus(ResourceIdentifier scope)
         {
-            return new VMInsightsOnboardingStatusResource(Client, scope.AppendProviderResource("Microsoft.Insights", "vmInsightsOnboardingStatuses", "default"));
+            return new VmInsightsOnboardingStatusResource(Client, scope.AppendProviderResource("Microsoft.Insights", "vmInsightsOnboardingStatuses", "default"));
         }
 
         /// <summary> Gets a collection of GuestConfigurationAssignmentResources in the ArmClient. </summary>
@@ -380,15 +380,15 @@ namespace MgmtScopeResource.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="VMInsightsOnboardingStatusResource"/> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="VMInsightsOnboardingStatusResource.CreateResourceIdentifier" /> to create a <see cref="VMInsightsOnboardingStatusResource"/> <see cref="ResourceIdentifier"/> from its components.
+        /// Gets an object representing a <see cref="VmInsightsOnboardingStatusResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VmInsightsOnboardingStatusResource.CreateResourceIdentifier" /> to create a <see cref="VmInsightsOnboardingStatusResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource"/> object. </returns>
-        public virtual VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatusResource(ResourceIdentifier id)
+        /// <returns> Returns a <see cref="VmInsightsOnboardingStatusResource"/> object. </returns>
+        public virtual VmInsightsOnboardingStatusResource GetVmInsightsOnboardingStatusResource(ResourceIdentifier id)
         {
-            VMInsightsOnboardingStatusResource.ValidateResourceId(id);
-            return new VMInsightsOnboardingStatusResource(Client, id);
+            VmInsightsOnboardingStatusResource.ValidateResourceId(id);
+            return new VmInsightsOnboardingStatusResource(Client, id);
         }
 
         /// <summary>

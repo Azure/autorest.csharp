@@ -74,7 +74,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             MgmtMockAndSamplePrivateEndpointConnectionData data = new MgmtMockAndSamplePrivateEndpointConnectionData()
             {
-                Etag = "",
+                ETag = "",
                 ConnectionState = new MgmtMockAndSamplePrivateLinkServiceConnectionState()
                 {
                     Status = MgmtMockAndSamplePrivateEndpointServiceConnectionStatus.Approved,

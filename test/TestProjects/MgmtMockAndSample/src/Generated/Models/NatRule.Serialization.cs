@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(IpProtocols))
+            if (Optional.IsCollectionDefined(IPProtocols))
             {
                 writer.WritePropertyName("ipProtocols"u8);
                 writer.WriteStartArray();
-                foreach (var item in IpProtocols)
+                foreach (var item in IPProtocols)
                 {
                     writer.WriteStringValue(item.ToString());
                 }
@@ -66,11 +66,11 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("translatedPort"u8);
                 writer.WriteStringValue(TranslatedPort);
             }
-            if (Optional.IsCollectionDefined(SourceIpGroups))
+            if (Optional.IsCollectionDefined(SourceIPGroups))
             {
                 writer.WritePropertyName("sourceIpGroups"u8);
                 writer.WriteStartArray();
-                foreach (var item in SourceIpGroups)
+                foreach (var item in SourceIPGroups)
                 {
                     writer.WriteStringValue(item);
                 }
@@ -131,7 +131,7 @@ namespace MgmtMockAndSample.Models
             IList<string> destinationPorts = default;
             string translatedAddress = default;
             string translatedPort = default;
-            IList<string> sourceIpGroups = default;
+            IList<string> sourceIPGroups = default;
             string translatedFqdn = default;
             string name = default;
             string description = default;
@@ -218,7 +218,7 @@ namespace MgmtMockAndSample.Models
                     {
                         array.Add(item.GetString());
                     }
-                    sourceIpGroups = array;
+                    sourceIPGroups = array;
                     continue;
                 }
                 if (property.NameEquals("translatedFqdn"u8))
@@ -291,7 +291,7 @@ namespace MgmtMockAndSample.Models
                 destinationPorts ?? new ChangeTrackingList<string>(),
                 translatedAddress,
                 translatedPort,
-                sourceIpGroups ?? new ChangeTrackingList<string>(),
+                sourceIPGroups ?? new ChangeTrackingList<string>(),
                 translatedFqdn);
         }
     }

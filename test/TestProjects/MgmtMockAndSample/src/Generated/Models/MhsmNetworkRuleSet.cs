@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="MhsmNetworkRuleSet"/>. </summary>
         public MhsmNetworkRuleSet()
         {
-            IpRules = new ChangeTrackingList<MhsmipRule>();
+            IPRules = new ChangeTrackingList<MhsmipRule>();
             VirtualNetworkRules = new ChangeTrackingList<WritableSubResource>();
         }
 
@@ -29,7 +29,7 @@ namespace MgmtMockAndSample.Models
         {
             Bypass = bypass;
             DefaultAction = defaultAction;
-            IpRules = ipRules;
+            IPRules = ipRules;
             VirtualNetworkRules = virtualNetworkRules;
         }
 
@@ -38,7 +38,7 @@ namespace MgmtMockAndSample.Models
         /// <summary> The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated. </summary>
         public NetworkRuleAction? DefaultAction { get; set; }
         /// <summary> The list of IP address rules. </summary>
-        public IList<MhsmipRule> IpRules { get; }
+        public IList<MhsmipRule> IPRules { get; }
         /// <summary> The list of virtual network rules. </summary>
         public IList<WritableSubResource> VirtualNetworkRules { get; }
     }

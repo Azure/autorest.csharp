@@ -54,7 +54,7 @@ namespace MgmtMockAndSample.Tests.Mock
             MgmtMockAndSamplePrivateEndpointConnectionResource mgmtMockAndSamplePrivateEndpointConnection = GetArmClient().GetMgmtMockAndSamplePrivateEndpointConnectionResource(mgmtMockAndSamplePrivateEndpointConnectionResourceId);
             await mgmtMockAndSamplePrivateEndpointConnection.UpdateAsync(WaitUntil.Completed, new MgmtMockAndSamplePrivateEndpointConnectionData()
             {
-                Etag = "",
+                ETag = "",
                 ConnectionState = new MgmtMockAndSamplePrivateLinkServiceConnectionState()
                 {
                     Status = MgmtMockAndSamplePrivateEndpointServiceConnectionStatus.Approved,
