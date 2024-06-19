@@ -46,6 +46,10 @@ namespace Scm._Type._Array
         private UnknownValue _cachedUnknownValue;
         private ModelValue _cachedModelValue;
         private NullableFloatValue _cachedNullableFloatValue;
+        private NullableInt32Value _cachedNullableInt32Value;
+        private NullableBooleanValue _cachedNullableBooleanValue;
+        private NullableStringValue _cachedNullableStringValue;
+        private NullableModelValue _cachedNullableModelValue;
 
         /// <summary> Initializes a new instance of Int32Value. </summary>
         public virtual Int32Value GetInt32ValueClient()
@@ -105,6 +109,30 @@ namespace Scm._Type._Array
         public virtual NullableFloatValue GetNullableFloatValueClient()
         {
             return Volatile.Read(ref _cachedNullableFloatValue) ?? Interlocked.CompareExchange(ref _cachedNullableFloatValue, new NullableFloatValue(_pipeline, _endpoint), null) ?? _cachedNullableFloatValue;
+        }
+
+        /// <summary> Initializes a new instance of NullableInt32Value. </summary>
+        public virtual NullableInt32Value GetNullableInt32ValueClient()
+        {
+            return Volatile.Read(ref _cachedNullableInt32Value) ?? Interlocked.CompareExchange(ref _cachedNullableInt32Value, new NullableInt32Value(_pipeline, _endpoint), null) ?? _cachedNullableInt32Value;
+        }
+
+        /// <summary> Initializes a new instance of NullableBooleanValue. </summary>
+        public virtual NullableBooleanValue GetNullableBooleanValueClient()
+        {
+            return Volatile.Read(ref _cachedNullableBooleanValue) ?? Interlocked.CompareExchange(ref _cachedNullableBooleanValue, new NullableBooleanValue(_pipeline, _endpoint), null) ?? _cachedNullableBooleanValue;
+        }
+
+        /// <summary> Initializes a new instance of NullableStringValue. </summary>
+        public virtual NullableStringValue GetNullableStringValueClient()
+        {
+            return Volatile.Read(ref _cachedNullableStringValue) ?? Interlocked.CompareExchange(ref _cachedNullableStringValue, new NullableStringValue(_pipeline, _endpoint), null) ?? _cachedNullableStringValue;
+        }
+
+        /// <summary> Initializes a new instance of NullableModelValue. </summary>
+        public virtual NullableModelValue GetNullableModelValueClient()
+        {
+            return Volatile.Read(ref _cachedNullableModelValue) ?? Interlocked.CompareExchange(ref _cachedNullableModelValue, new NullableModelValue(_pipeline, _endpoint), null) ?? _cachedNullableModelValue;
         }
     }
 }
