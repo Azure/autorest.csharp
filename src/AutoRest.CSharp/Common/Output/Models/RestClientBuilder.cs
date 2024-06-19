@@ -327,7 +327,6 @@ namespace AutoRest.CSharp.Output.Models
                             var objectType = inputType switch
                             {
                                 InputModelType inputModelType => library.ResolveModel(inputModelType).WithNullable(isNullable).Implementation as SerializableObjectType,
-                                CodeModelType codeModelType => throw new InvalidOperationException("Expecting model"),
                                 _ => null
                             };
 
