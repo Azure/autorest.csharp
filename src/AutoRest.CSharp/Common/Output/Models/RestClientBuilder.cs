@@ -325,7 +325,6 @@ namespace AutoRest.CSharp.Output.Models
                             var objectType = bodyRequestParameter.Type switch
                             {
                                 InputModelType inputModelType => library.ResolveModel(inputModelType).Implementation as SerializableObjectType,
-                                CodeModelType codeModelType => throw new InvalidOperationException("Expecting model"),
                                 _ => null
                             };
 
