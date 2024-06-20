@@ -50,6 +50,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     CodeModelTransformer.TransformForMgmt(codeModel);
                     var inputNamespace = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
+                    InputTypeTransformer.Transform(inputNamespace);
                     MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(inputNamespace, sourceInputModel));
                     await MgmtTarget.ExecuteAsync(project);
                     if (Configuration.MgmtTestConfiguration is not null && !Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)

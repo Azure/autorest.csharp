@@ -37,7 +37,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             ConstantSchemaTransformer.Transform(codeModel);
             CommonSingleWordModels.Update(codeModel);
             SchemaNameAndFormatUpdater.ApplyRenameMapping(codeModel);
-            SchemaNameAndFormatUpdater.UpdateAcronyms(codeModel);
             UrlToUri.UpdateSuffix(codeModel);
             FrameworkTypeUpdater.ValidateAndUpdate(codeModel);
             SchemaFormatByNameTransformer.Update(codeModel);
