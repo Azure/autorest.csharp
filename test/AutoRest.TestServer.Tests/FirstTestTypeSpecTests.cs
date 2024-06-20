@@ -30,7 +30,7 @@ namespace AutoRest.TestServer.Tests
         }
 
         [TestCaseSource(nameof(ExtensibleEnumData))]
-        public void ExtensibleEnumInHashSet(string[] values)
+        public void ExtensibleEnumInHashSet(string[] values, int expectedCount)
         {
             var enums = values.Select(v => new StringExtensibleEnum(v));
             var set = new HashSet<StringExtensibleEnum>(enums);
@@ -38,14 +38,17 @@ namespace AutoRest.TestServer.Tests
             {
                 Assert.IsTrue(set.Contains(e));
             }
+
+            Assert.AreEqual(expectedCount, set.Count);
         }
 
-        private object[] ExtensibleEnumData = new object[] {
+        private static object[] ExtensibleEnumData = new object[] {
             new object[] {
                 new string[]
                 {
                     "a", "A", "foo", "fOO"
-                }
+                },
+                2
             }
         };
     }
