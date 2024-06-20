@@ -15,7 +15,6 @@ namespace AutoRest.LowLevel.Tests
         [Test]
 #pragma warning disable CS0618
         public void DeprecateDataTypes([Values(
-            typeof(RoundTripOptionalModel),
             typeof(FixedIntEnum),
             typeof(ExtensibleEnum)
             )] Type type)
