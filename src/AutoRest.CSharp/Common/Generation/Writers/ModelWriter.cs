@@ -7,7 +7,6 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Output;
@@ -447,7 +446,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($"public override int GetHashCode() => ");
                     if (isString)
                     {
-                        writer.Line($"_value?.GetHashCode() ?? 0;");
+                        writer.Line($"{typeof(StringComparer)}.OrdinalIgnoreCase.GetHashCode(_value);");
                     }
                     else
                     {
