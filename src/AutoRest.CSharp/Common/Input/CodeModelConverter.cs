@@ -372,7 +372,7 @@ namespace AutoRest.CSharp.Common.Input
                 IsNullable: false)
             {
                 Serialization = GetSerialization(schema, usage),
-                SpecName = schema.Language.Default.SerializedName
+                SpecName = schema.Language.Default.SerializedName ?? schema.Language.Default.Name
             };
 
             _modelsCache[schema] = model;
@@ -517,7 +517,6 @@ namespace AutoRest.CSharp.Common.Input
         private InputType GetOrCreateType(Property property)
         {
             var name = property.Schema.Name;
-            var type = typeof(DataFactoryElement<>);
             object? elementType = null;
             if ((property.Schema is AnyObjectSchema || property.Schema is StringSchema) && true == property.Extensions?.TryGetValue("x-ms-format-element-type", out elementType))
             {
