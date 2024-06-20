@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using NUnit.Framework;
@@ -181,7 +178,7 @@ public bool Equals(global::Cadl.TestServer.EnumPropertiesBasic.TranslationLangua
 
 /// <inheritdoc />
 [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-public override int GetHashCode() => _value?.GetHashCode() ?? 0;
+public override int GetHashCode() => global::System.StringComparer.InvariantCultureIgnoreCase.GetHashCode(_value);
 /// <inheritdoc />
 public override string ToString() => _value;
 }
