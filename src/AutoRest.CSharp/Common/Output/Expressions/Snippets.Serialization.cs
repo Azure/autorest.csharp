@@ -5,6 +5,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -24,7 +25,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 
             public static MethodBodyStatement WrapInCheckInRawData(ValueExpression? rawDataExpression, string propertyName, MethodBodyStatement statement)
             {
-                if (rawDataExpression == null)
+                if (rawDataExpression == null || !Configuration.EnableInternalRawData)
                 {
                     return statement;
                 }
