@@ -22,6 +22,30 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static StringExpression BicepFormat = Literal("bicep");
             public static StringExpression MultipartFormat = Literal("MFD");
 
+            public static MethodBodyStatement WrapInCheckInRawData(ValueExpression? rawDataExpression, string propertyName, MethodBodyStatement statement)
+            {
+                if (rawDataExpression == null)
+                {
+                    return statement;
+                }
+
+                var rawDataDict = new DictionaryExpression(typeof(string), typeof(BinaryData), rawDataExpression);
+                var condition = Not(rawDataDict.ContainsKey(Literal(propertyName)));
+
+                if (statement is IfStatement ifStatement)
+                {
+                    return ifStatement with
+                    {
+                        Condition = And(condition, ifStatement.Condition)
+                    };
+                }
+
+                return new IfStatement(condition)
+                {
+                    statement
+                };
+            }
+
             // TODO -- make the options parameter non-nullable again when we remove the `UseModelReaderWriter` flag.
             public static MethodBodyStatement WrapInCheckNotWire(bool shouldExcludeInWire, ValueExpression? format, MethodBodyStatement statement)
             {

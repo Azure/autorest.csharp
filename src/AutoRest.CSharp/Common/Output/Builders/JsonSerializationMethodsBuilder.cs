@@ -189,30 +189,31 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 Serializations.ValidateJsonFormat(options, iPersistableModelTInterface, Serializations.ValidationType.Write),
                 utf8JsonWriter.WriteStartObject(),
-                WriteProperties(utf8JsonWriter, serialization.Properties, options).ToArray(),
+                WriteProperties(utf8JsonWriter, serialization.Properties, serialization.RawDataField?.Value, options).ToArray(),
                 SerializeAdditionalProperties(utf8JsonWriter, options, serialization.AdditionalProperties),
                 SerializeAdditionalProperties(utf8JsonWriter, options, serialization.RawDataField),
                 utf8JsonWriter.WriteEndObject()
             };
 
         // TODO -- make the options parameter non-nullable again when we remove the `UseModelReaderWriter` flag.
-        private static IEnumerable<MethodBodyStatement> WriteProperties(Utf8JsonWriterExpression utf8JsonWriter, IEnumerable<JsonPropertySerialization> properties, ModelReaderWriterOptionsExpression? options)
+        private static IEnumerable<MethodBodyStatement> WriteProperties(Utf8JsonWriterExpression utf8JsonWriter, IEnumerable<JsonPropertySerialization> properties, ValueExpression? rawData, ModelReaderWriterOptionsExpression? options)
         {
+            // TODO -- update this so that we could decide if we want to write the extra check of checking if this thing is in the raw data field dictionary
             foreach (JsonPropertySerialization property in properties)
             {
                 if (property.ValueSerialization == null)
                 {
                     // Flattened property
-                    yield return Serializations.WrapInCheckNotWire(
+                    yield return Serializations.WrapInCheckInRawData(rawData, property.SerializedName, Serializations.WrapInCheckNotWire(
                         property.ShouldExcludeInWireSerialization,
                         options?.Format,
                         new[]
                         {
                             utf8JsonWriter.WritePropertyName(property.SerializedName),
                             utf8JsonWriter.WriteStartObject(),
-                            WriteProperties(utf8JsonWriter, property.PropertySerializations!, options).ToArray(),
+                            WriteProperties(utf8JsonWriter, property.PropertySerializations!, null, options).ToArray(), // the raw data should not pass through to the flattened properties
                             utf8JsonWriter.WriteEndObject(),
-                        });
+                        }));
                 }
                 else if (property.SerializedType is { IsNullable: true })
                 {
@@ -220,7 +221,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         ? And(NotEqual(property.Value, Null), InvokeOptional.IsCollectionDefined(property.Value))
                         : NotEqual(property.Value, Null);
 
-                    yield return Serializations.WrapInCheckNotWire(
+                    yield return Serializations.WrapInCheckInRawData(rawData, property.SerializedName, Serializations.WrapInCheckNotWire(
                         property.ShouldExcludeInWireSerialization,
                         options?.Format,
                         InvokeOptional.WrapInIsDefined(
@@ -229,14 +230,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
                                 WritePropertySerialization(utf8JsonWriter, property, options),
                                 utf8JsonWriter.WriteNull(property.SerializedName)
                             ))
-                    );
+                    ));
                 }
                 else
                 {
-                    yield return Serializations.WrapInCheckNotWire(
+                    yield return Serializations.WrapInCheckInRawData(rawData, property.SerializedName, Serializations.WrapInCheckNotWire(
                         property.ShouldExcludeInWireSerialization,
                         options?.Format,
-                        InvokeOptional.WrapInIsDefined(property, WritePropertySerialization(utf8JsonWriter, property, options)));
+                        InvokeOptional.WrapInIsDefined(property, WritePropertySerialization(utf8JsonWriter, property, options))));
                 }
             }
         }
