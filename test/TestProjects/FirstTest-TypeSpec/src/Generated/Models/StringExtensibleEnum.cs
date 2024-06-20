@@ -47,7 +47,7 @@ namespace FirstTestTypeSpec.Models
 
         /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override int GetHashCode() => StringComparer.OrdinalIgnoreCase.GetHashCode(_value);
+        public override int GetHashCode() => StringComparer.InvariantCultureIgnoreCase.GetHashCode(_value);
         /// <inheritdoc />
         public override string ToString() => _value;
     }

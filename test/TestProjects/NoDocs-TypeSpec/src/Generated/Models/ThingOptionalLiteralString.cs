@@ -31,7 +31,7 @@ namespace NoDocsTypeSpec.Models
         public bool Equals(ThingOptionalLiteralString other) => string.Equals(_value, other._value, StringComparison.InvariantCultureIgnoreCase);
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override int GetHashCode() => _value?.GetHashCode() ?? 0;
+        public override int GetHashCode() => StringComparer.InvariantCultureIgnoreCase.GetHashCode(_value);
         public override string ToString() => _value;
     }
 }

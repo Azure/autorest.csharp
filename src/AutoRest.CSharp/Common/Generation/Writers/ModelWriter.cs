@@ -446,7 +446,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($"public override int GetHashCode() => ");
                     if (isString)
                     {
-                        writer.Line($"{typeof(StringComparer)}.OrdinalIgnoreCase.GetHashCode(_value);");
+                        writer.Line($"{typeof(StringComparer)}.InvariantCultureIgnoreCase.GetHashCode(_value);");
                     }
                     else
                     {
