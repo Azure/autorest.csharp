@@ -344,7 +344,6 @@
    "Protocol": {
     "$id": "53"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "54",
@@ -573,7 +572,6 @@
    "Protocol": {
     "$id": "76"
    },
-   "Creatable": false,
    "Parent": "RenameGetListClient",
    "Parameters": [
     {
@@ -817,7 +815,6 @@
    "Protocol": {
     "$id": "99"
    },
-   "Creatable": false,
    "Parent": "RenameGetListClient",
    "Parameters": [
     {

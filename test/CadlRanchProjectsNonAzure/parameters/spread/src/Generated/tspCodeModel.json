@@ -181,7 +181,6 @@
    "Protocol": {
     "$id": "28"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "29",
@@ -792,7 +791,6 @@
    "Protocol": {
     "$id": "87"
    },
-   "Creatable": false,
    "Parent": "SpreadClient",
    "Parameters": [
     {
@@ -1184,7 +1182,6 @@
    "Protocol": {
     "$id": "124"
    },
-   "Creatable": false,
    "Parent": "SpreadClient",
    "Parameters": [
     {

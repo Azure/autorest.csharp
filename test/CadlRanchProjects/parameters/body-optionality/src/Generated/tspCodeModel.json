@@ -264,7 +264,6 @@
    "Protocol": {
     "$id": "28"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "7"
@@ -482,7 +481,6 @@
    "Protocol": {
     "$id": "48"
    },
-   "Creatable": false,
    "Parent": "BodyOptionalityClient",
    "Parameters": [
     {

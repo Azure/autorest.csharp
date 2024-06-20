@@ -1991,7 +1991,6 @@
    "Protocol": {
     "$id": "304"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "305",
@@ -2390,7 +2389,6 @@
    "Protocol": {
     "$id": "338"
    },
-   "Creatable": false,
    "Parent": "AnomalyDetectorClient",
    "Parameters": [
     {
@@ -3178,7 +3176,6 @@
    "Protocol": {
     "$id": "408"
    },
-   "Creatable": false,
    "Parent": "AnomalyDetectorClient",
    "Parameters": [
     {

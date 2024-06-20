@@ -1826,8 +1826,7 @@
    ],
    "Protocol": {
     "$id": "168"
-   },
-   "Creatable": true
+   }
   }
  ]
 }

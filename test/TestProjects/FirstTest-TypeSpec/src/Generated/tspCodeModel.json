@@ -3677,7 +3677,6 @@
    "Protocol": {
     "$id": "419"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "219"
@@ -3692,7 +3691,6 @@
    "Protocol": {
     "$id": "421"
    },
-   "Creatable": false,
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {
@@ -3825,7 +3823,6 @@
    "Protocol": {
     "$id": "434"
    },
-   "Creatable": false,
    "Parent": "Hello",
    "Parameters": [
     {
@@ -4456,7 +4453,6 @@
    "Protocol": {
     "$id": "494"
    },
-   "Creatable": false,
    "Parent": "Hello",
    "Parameters": [
     {
@@ -4575,7 +4571,6 @@
    "Protocol": {
     "$id": "505"
    },
-   "Creatable": false,
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {
@@ -4756,7 +4751,6 @@
    "Protocol": {
     "$id": "521"
    },
-   "Creatable": false,
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {
@@ -4853,7 +4847,6 @@
    "Protocol": {
     "$id": "530"
    },
-   "Creatable": false,
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {
@@ -4968,7 +4961,6 @@
    "Protocol": {
     "$id": "541"
    },
-   "Creatable": false,
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {

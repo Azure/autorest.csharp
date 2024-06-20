@@ -280,7 +280,6 @@
    "Protocol": {
     "$id": "32"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "19"
@@ -409,7 +408,6 @@
    "Protocol": {
     "$id": "43"
    },
-   "Creatable": false,
    "Parent": "RenamedFromClient",
    "Parameters": [
     {

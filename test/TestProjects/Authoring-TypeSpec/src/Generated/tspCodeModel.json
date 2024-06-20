@@ -1061,7 +1061,6 @@
    "Protocol": {
     "$id": "157"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "158",
@@ -2032,7 +2031,6 @@
    "Protocol": {
     "$id": "258"
    },
-   "Creatable": false,
    "Parent": "AuthoringTypeSpecClient",
    "Parameters": [
     {
@@ -2801,7 +2799,6 @@
    "Protocol": {
     "$id": "335"
    },
-   "Creatable": false,
    "Parent": "AuthoringTypeSpecClient",
    "Parameters": [
     {
@@ -3094,7 +3091,6 @@
    "Protocol": {
     "$id": "363"
    },
-   "Creatable": false,
    "Parent": "AuthoringTypeSpecClient",
    "Parameters": [
     {
@@ -3395,7 +3391,6 @@
    "Protocol": {
     "$id": "393"
    },
-   "Creatable": false,
    "Parent": "AuthoringTypeSpecClient",
    "Parameters": [
     {

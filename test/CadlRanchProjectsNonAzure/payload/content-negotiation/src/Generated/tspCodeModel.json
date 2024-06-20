@@ -36,7 +36,6 @@
    "Protocol": {
     "$id": "6"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "7",
@@ -204,7 +203,6 @@
    "Protocol": {
     "$id": "24"
    },
-   "Creatable": false,
    "Parent": "ContentNegotiationClient",
    "Parameters": [
     {
@@ -345,7 +343,6 @@
    "Protocol": {
     "$id": "37"
    },
-   "Creatable": false,
    "Parent": "ContentNegotiationClient",
    "Parameters": [
     {
