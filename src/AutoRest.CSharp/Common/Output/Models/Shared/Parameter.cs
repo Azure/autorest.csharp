@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             IEnumerable<string>? values = operationParameter.Type switch
             {
                 InputEnumType enumType => enumType.Values.Select(c => c.GetValueString()),
-                InputNullableType { Type: InputEnumType e} => e.Values.Select(c => c.GetValueString()),
+                InputNullableType { Type: InputEnumType e } => e.Values.Select(c => c.GetValueString()),
                 _ => null,
             };
 
@@ -182,7 +182,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return requestParameter.Type switch
             {
                 InputEnumType choiceSchema when type.IsFrameworkType => AddAllowedValues(description, choiceSchema.Values),
-                InputNullableType { Type: InputEnumType ie} => AddAllowedValues(description, ie.Values),
+                InputNullableType { Type: InputEnumType ie } => AddAllowedValues(description, ie.Values),
                 _ => description
             };
 

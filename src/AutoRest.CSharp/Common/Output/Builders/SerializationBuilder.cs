@@ -292,7 +292,7 @@ namespace AutoRest.CSharp.Output.Builders
                 name,
                 memberValueExpression,
                 serializedName,
-                propertyType.WithNullable(propertyType.IsNullable ? serializedType.IsNullable: false),
+                propertyType.WithNullable(propertyType.IsNullable ? serializedType.IsNullable : false),
                 valueSerialization,
                 property.IsRequired,
                 ShouldExcludeInWireSerialization(property, inputModelProperty),

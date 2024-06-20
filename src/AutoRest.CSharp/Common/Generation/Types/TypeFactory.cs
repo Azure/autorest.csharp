@@ -68,6 +68,7 @@ namespace AutoRest.CSharp.Generation.Types
                 InputPrimitiveTypeKind.Float128 => new CSharpType(typeof(decimal)),
                 InputPrimitiveTypeKind.Guid or InputPrimitiveTypeKind.Uuid => new CSharpType(typeof(Guid)),
                 InputPrimitiveTypeKind.Int8 => new CSharpType(typeof(sbyte)),
+                InputPrimitiveTypeKind.UInt8 => new CSharpType(typeof(byte)),
                 InputPrimitiveTypeKind.Int32 => new CSharpType(typeof(int)),
                 InputPrimitiveTypeKind.Int64 => new CSharpType(typeof(long)),
                 InputPrimitiveTypeKind.SafeInt => new CSharpType(typeof(long)),
