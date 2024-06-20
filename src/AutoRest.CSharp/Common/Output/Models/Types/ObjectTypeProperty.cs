@@ -261,7 +261,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         internal string CreateExtraDescriptionWithManagedServiceIdentity()
         {
             var extraDescription = string.Empty;
-            var originalModelType = InputModelProperty?.Type as InputModelType;
+            var originalModelType = (InputModelProperty?.Type.GetImplementType()) as InputModelType;
             var identityType = originalModelType?.GetAllProperties()!.FirstOrDefault(p => p.SerializedName == "type")!.Type;
             if (identityType != null)
             {
