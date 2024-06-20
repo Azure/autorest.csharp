@@ -204,7 +204,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     // Flattened property
                     yield return Serializations.WrapInCheckNotWire(
-                        property,
+                        property.ShouldExcludeInWireSerialization,
                         options?.Format,
                         new[]
                         {
@@ -221,7 +221,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         : NotEqual(property.Value, Null);
 
                     yield return Serializations.WrapInCheckNotWire(
-                        property,
+                        property.ShouldExcludeInWireSerialization,
                         options?.Format,
                         InvokeOptional.WrapInIsDefined(
                             property,
@@ -234,7 +234,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 else
                 {
                     yield return Serializations.WrapInCheckNotWire(
-                        property,
+                        property.ShouldExcludeInWireSerialization,
                         options?.Format,
                         InvokeOptional.WrapInIsDefined(property, WritePropertySerialization(utf8JsonWriter, property, options)));
                 }
@@ -276,7 +276,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 } : statement;
 
             return Serializations.WrapInCheckNotWire(
-                additionalProperties,
+                additionalProperties.ShouldExcludeInWireSerialization,
                 options?.Format,
                 statement);
         }
@@ -634,7 +634,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 var additionalPropertiesStatement = additionalPropertiesDictionary.Add(jsonProperty.Name, value);
                 additionalPropertiesStatement = Serializations.WrapInCheckNotWire(
-                    additionalProperties,
+                    additionalProperties.ShouldExcludeInWireDeserialization,
                     options?.Format,
                     additionalPropertiesStatement);
 
@@ -661,7 +661,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 var rawDataFieldStatement = rawDataFieldDictionary.Add(jsonProperty.Name, value);
 
                 yield return Serializations.WrapInCheckNotWire(
-                    rawDataField,
+                    rawDataField.ShouldExcludeInWireDeserialization,
                     options?.Format,
                     rawDataFieldStatement);
             }

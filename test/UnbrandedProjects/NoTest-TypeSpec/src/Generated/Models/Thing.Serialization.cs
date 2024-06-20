@@ -246,7 +246,10 @@ namespace NoTestTypeSpec.Models
                     requiredNullableList = array;
                     continue;
                 }
-                rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
             serializedAdditionalRawData = rawDataDictionary;
             return new Thing(

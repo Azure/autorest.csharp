@@ -649,14 +649,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             // build serialization for additional properties property (if any)
-            var additionalPropertiesSerialization = BuildSerializationForAdditionalProperties(additionalPropertiesProperty, additionalPropertiesValueInputType, false);
+            var additionalPropertiesSerialization = BuildSerializationForAdditionalProperties(additionalPropertiesProperty, additionalPropertiesValueInputType, false, false);
             // build serialization for raw data field (if any)
             // the raw data is excluded when the configuration is turned off (default), when turned on, we should include it
-            var rawDataFieldSerialization = BuildSerializationForAdditionalProperties(rawDataField, null, Configuration.EnableInternalRawData ? false : true);
+            var rawDataFieldSerialization = BuildSerializationForAdditionalProperties(rawDataField, null, Configuration.EnableInternalRawData ? false : true, true);
 
             return (additionalPropertiesSerialization, rawDataFieldSerialization);
 
-            static JsonAdditionalPropertiesSerialization? BuildSerializationForAdditionalProperties(ObjectTypeProperty? additionalPropertiesProperty, InputType? additionalPropertiesValueType, bool shouldExcludeInWireSerialization)
+            static JsonAdditionalPropertiesSerialization? BuildSerializationForAdditionalProperties(ObjectTypeProperty? additionalPropertiesProperty, InputType? additionalPropertiesValueType, bool shouldExcludeInWireSerialization, bool shouldExcludeInWireDeserialization)
             {
                 if (additionalPropertiesProperty is null)
                     return null;
@@ -676,7 +676,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                     additionalPropertiesProperty,
                     valueSerialization,
                     new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
-                    shouldExcludeInWireSerialization);
+                    shouldExcludeInWireSerialization,
+                    shouldExcludeInWireDeserialization);
             }
         }
 
