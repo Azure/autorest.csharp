@@ -99,9 +99,9 @@ namespace AzureSample.ResourceManager.Storage.Models
         /// <param name="immutableStorageWithVersioning"> The object level immutability property of the container. The property is immutable and can only be set to true at the container creation time. Existing containers must undergo a migration process. </param>
         /// <param name="enableNfsV3RootSquash"> Enable NFSv3 root squash on blob container. </param>
         /// <param name="enableNfsV3AllSquash"> Enable NFSv3 all squash on blob container. </param>
-        /// <param name="eTag"> Resource Etag. </param>
+        /// <param name="etag"> Resource Etag. </param>
         /// <returns> A new <see cref="Storage.BlobContainerData"/> instance for mocking. </returns>
-        public static BlobContainerData BlobContainerData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string version = null, bool? deleted = null, DateTimeOffset? deletedOn = null, int? remainingRetentionDays = null, string defaultEncryptionScope = null, bool? denyEncryptionScopeOverride = null, PublicAccess? publicAccess = null, DateTimeOffset? lastModifiedOn = null, LeaseStatus? leaseStatus = null, LeaseState? leaseState = null, LeaseDuration? leaseDuration = null, IDictionary<string, string> metadata = null, ImmutabilityPolicyProperties immutabilityPolicy = null, LegalHoldProperties legalHold = null, bool? hasLegalHold = null, bool? hasImmutabilityPolicy = null, ImmutableStorageWithVersioning immutableStorageWithVersioning = null, bool? enableNfsV3RootSquash = null, bool? enableNfsV3AllSquash = null, ETag? eTag = null)
+        public static BlobContainerData BlobContainerData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string version = null, bool? deleted = null, DateTimeOffset? deletedOn = null, int? remainingRetentionDays = null, string defaultEncryptionScope = null, bool? denyEncryptionScopeOverride = null, PublicAccess? publicAccess = null, DateTimeOffset? lastModifiedOn = null, LeaseStatus? leaseStatus = null, LeaseState? leaseState = null, LeaseDuration? leaseDuration = null, IDictionary<string, string> metadata = null, ImmutabilityPolicyProperties immutabilityPolicy = null, LegalHoldProperties legalHold = null, bool? hasLegalHold = null, bool? hasImmutabilityPolicy = null, ImmutableStorageWithVersioning immutableStorageWithVersioning = null, bool? enableNfsV3RootSquash = null, bool? enableNfsV3AllSquash = null, ETag? etag = null)
         {
             metadata ??= new Dictionary<string, string>();
 
@@ -129,23 +129,23 @@ namespace AzureSample.ResourceManager.Storage.Models
                 immutableStorageWithVersioning,
                 enableNfsV3RootSquash,
                 enableNfsV3AllSquash,
-                eTag);
+                etag);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ImmutabilityPolicyProperties"/>. </summary>
-        /// <param name="eTag"> ImmutabilityPolicy Etag. </param>
+        /// <param name="etag"> ImmutabilityPolicy Etag. </param>
         /// <param name="updateHistory"> The ImmutabilityPolicy update history of the blob container. </param>
         /// <param name="immutabilityPeriodSinceCreationInDays"> The immutability period for the blobs in the container since the policy creation, in days. </param>
         /// <param name="state"> The ImmutabilityPolicy state of a blob container, possible values include: Locked and Unlocked. </param>
         /// <param name="allowProtectedAppendWrites"> This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. </param>
         /// <param name="allowProtectedAppendWritesAll"> This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. The 'allowProtectedAppendWrites' and 'allowProtectedAppendWritesAll' properties are mutually exclusive. </param>
         /// <returns> A new <see cref="Models.ImmutabilityPolicyProperties"/> instance for mocking. </returns>
-        public static ImmutabilityPolicyProperties ImmutabilityPolicyProperties(ETag? eTag = null, IEnumerable<UpdateHistoryProperty> updateHistory = null, int? immutabilityPeriodSinceCreationInDays = null, ImmutabilityPolicyState? state = null, bool? allowProtectedAppendWrites = null, bool? allowProtectedAppendWritesAll = null)
+        public static ImmutabilityPolicyProperties ImmutabilityPolicyProperties(ETag? etag = null, IEnumerable<UpdateHistoryProperty> updateHistory = null, int? immutabilityPeriodSinceCreationInDays = null, ImmutabilityPolicyState? state = null, bool? allowProtectedAppendWrites = null, bool? allowProtectedAppendWritesAll = null)
         {
             updateHistory ??= new List<UpdateHistoryProperty>();
 
             return new ImmutabilityPolicyProperties(
-                eTag,
+                etag,
                 updateHistory?.ToList(),
                 immutabilityPeriodSinceCreationInDays,
                 state,
@@ -240,9 +240,9 @@ namespace AzureSample.ResourceManager.Storage.Models
         /// <param name="state"> The ImmutabilityPolicy state of a blob container, possible values include: Locked and Unlocked. </param>
         /// <param name="allowProtectedAppendWrites"> This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. </param>
         /// <param name="allowProtectedAppendWritesAll"> This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. The 'allowProtectedAppendWrites' and 'allowProtectedAppendWritesAll' properties are mutually exclusive. </param>
-        /// <param name="eTag"> Resource Etag. </param>
+        /// <param name="etag"> Resource Etag. </param>
         /// <returns> A new <see cref="Storage.ImmutabilityPolicyData"/> instance for mocking. </returns>
-        public static ImmutabilityPolicyData ImmutabilityPolicyData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, int? immutabilityPeriodSinceCreationInDays = null, ImmutabilityPolicyState? state = null, bool? allowProtectedAppendWrites = null, bool? allowProtectedAppendWritesAll = null, ETag? eTag = null)
+        public static ImmutabilityPolicyData ImmutabilityPolicyData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, int? immutabilityPeriodSinceCreationInDays = null, ImmutabilityPolicyState? state = null, bool? allowProtectedAppendWrites = null, bool? allowProtectedAppendWritesAll = null, ETag? etag = null)
         {
             return new ImmutabilityPolicyData(
                 id,
@@ -253,7 +253,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                 state,
                 allowProtectedAppendWrites,
                 allowProtectedAppendWritesAll,
-                eTag);
+                etag);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.LeaseContainerResponse"/>. </summary>
@@ -313,9 +313,9 @@ namespace AzureSample.ResourceManager.Storage.Models
         /// <param name="leaseDuration"> Specifies whether the lease on a share is of infinite or fixed duration, only when the share is leased. </param>
         /// <param name="signedIdentifiers"> List of stored access policies specified on the share. </param>
         /// <param name="snapshotOn"> Creation time of share snapshot returned in the response of list shares with expand param "snapshots". </param>
-        /// <param name="eTag"> Resource Etag. </param>
+        /// <param name="etag"> Resource Etag. </param>
         /// <returns> A new <see cref="Storage.FileShareData"/> instance for mocking. </returns>
-        public static FileShareData FileShareData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, DateTimeOffset? lastModifiedOn = null, IDictionary<string, string> metadata = null, int? shareQuota = null, EnabledProtocol? enabledProtocols = null, RootSquashType? rootSquash = null, string version = null, bool? deleted = null, DateTimeOffset? deletedOn = null, int? remainingRetentionDays = null, ShareAccessTier? accessTier = null, DateTimeOffset? accessTierChangeOn = null, string accessTierStatus = null, long? shareUsageBytes = null, LeaseStatus? leaseStatus = null, LeaseState? leaseState = null, LeaseDuration? leaseDuration = null, IEnumerable<SignedIdentifier> signedIdentifiers = null, DateTimeOffset? snapshotOn = null, ETag? eTag = null)
+        public static FileShareData FileShareData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, DateTimeOffset? lastModifiedOn = null, IDictionary<string, string> metadata = null, int? shareQuota = null, EnabledProtocol? enabledProtocols = null, RootSquashType? rootSquash = null, string version = null, bool? deleted = null, DateTimeOffset? deletedOn = null, int? remainingRetentionDays = null, ShareAccessTier? accessTier = null, DateTimeOffset? accessTierChangeOn = null, string accessTierStatus = null, long? shareUsageBytes = null, LeaseStatus? leaseStatus = null, LeaseState? leaseState = null, LeaseDuration? leaseDuration = null, IEnumerable<SignedIdentifier> signedIdentifiers = null, DateTimeOffset? snapshotOn = null, ETag? etag = null)
         {
             metadata ??= new Dictionary<string, string>();
             signedIdentifiers ??= new List<SignedIdentifier>();
@@ -343,7 +343,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                 leaseDuration,
                 signedIdentifiers?.ToList(),
                 snapshotOn,
-                eTag);
+                etag);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.LeaseShareResponse"/>. </summary>

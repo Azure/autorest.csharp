@@ -68,7 +68,7 @@ namespace AzureSample.ResourceManager.Sample.Models
         /// The list of OS upgrades performed on the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.value
         /// </param>
-        /// <param name="eTag">
+        /// <param name="etag">
         /// Modified whenever there is a change.
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.etag
         /// </param>
@@ -77,10 +77,10 @@ namespace AzureSample.ResourceManager.Sample.Models
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.nextLink
         /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetListOSUpgradeHistory(IReadOnlyList<UpgradeOperationHistoricalStatusInfo> value, ETag? eTag, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal VirtualMachineScaleSetListOSUpgradeHistory(IReadOnlyList<UpgradeOperationHistoricalStatusInfo> value, ETag? etag, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
-            ETag = eTag;
+            ETag = etag;
             NextLink = nextLink;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
