@@ -297,7 +297,6 @@ export function fromSdkEnumType(
         if (addToCollection) enums.set(enumName, newInputEnumType);
         inputEnumType = newInputEnumType;
     }
-    //inputEnumType.IsNullable = false; // TO-DO: https://github.com/Azure/autorest.csharp/issues/4314
     return inputEnumType;
 }
 
