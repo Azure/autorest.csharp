@@ -43,6 +43,8 @@ namespace AutoRest.CSharp.Mgmt.Models
             { "Ipv6", new AcronymMappingTarget("IPv6", "ipv6") },
             { "Ipsec", new AcronymMappingTarget("IPsec", "ipsec") },
             { "URI", new AcronymMappingTarget("Uri") },
+            // Need to set parameter value for ETag to "etag" as well
+            { "ETag", new AcronymMappingTarget("ETag", "etag") },
             { "Etag", new AcronymMappingTarget("ETag", "etag") },
             { "QoS", new AcronymMappingTarget("Qos") },
         };
