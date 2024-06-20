@@ -65,16 +65,9 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 : ValidationType.None;
 
             var inputType = type.InputType;
-            IEnumerable<string>? values = operationParameter.Type switch
-            {
-                InputEnumType enumType => enumType.Values.Select(c => c.GetValueString()),
-                InputNullableType { Type: InputEnumType e } => e.Values.Select(c => c.GetValueString()),
-                _ => null,
-            };
-
             return new Parameter(
                 name,
-                CreateDescription(operationParameter, inputType, values, keepClientDefaultValue ? null : clientDefaultValue),
+                CreateDescription(operationParameter, inputType, (operationParameter.Type.GetImplementType() as InputEnumType)?.Values.Select(c => c.GetValueString()), keepClientDefaultValue ? null : clientDefaultValue),
                 inputType,
                 defaultValue,
                 validation,
@@ -133,13 +126,8 @@ namespace AutoRest.CSharp.Output.Models.Shared
         {
             string paramName = param.Name;
             string variableName = paramName.ToVariableName();
-            var paramType = param.Type switch
-            {
-                InputNullableType nullableType => nullableType.Type,
-                _ => param.Type
-            };
 
-            if (paramType is InputModelType paramInputType)
+            if (param.Type.GetImplementType() is InputModelType paramInputType)
             {
                 var paramInputTypeName = paramInputType.Name;
 

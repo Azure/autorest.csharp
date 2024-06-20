@@ -209,7 +209,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 if (!visitedTypes.Contains(property.Type))
                 {
                     // <invocation>.GetProperty("<propertyName>");
-                    InputType type = property.Type is InputNullableType nullableType ? nullableType.Type : property.Type;
+                    InputType type = property.Type.GetImplementType();
                     visitedTypes.Add(type);
                     var next = invocation.Invoke("GetProperty", Literal(property.SerializedName));
                     BuildResponseParseStatements(useAllProperties, type, next, statements, visitedTypes);

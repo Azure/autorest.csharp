@@ -681,10 +681,9 @@ namespace AutoRest.CSharp.Common.Input
             {
                 return new InputConstant(null, valueType);
             }
-            var targetValueType = valueType is InputNullableType nullableType ? nullableType.Type : valueType;
 
             // normalize the value, because the "value" coming from the code model is always a string
-            var kind = targetValueType switch
+            var kind = valueType.GetImplementType() switch
             {
                 InputPrimitiveType primitiveType => primitiveType.Kind,
                 InputEnumType enumType => enumType.ValueType.Kind,
