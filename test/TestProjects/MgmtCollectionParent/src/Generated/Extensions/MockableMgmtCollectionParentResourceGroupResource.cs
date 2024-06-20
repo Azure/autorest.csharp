@@ -66,10 +66,10 @@ namespace MgmtCollectionParent.Mocking
         /// <param name="location"> The name of Azure region. </param>
         /// <param name="orderName"> The name of the order. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="orderName"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="orderName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="orderName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="orderName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
-        public virtual async Task<Response<OrderResource>> GetOrderResourceAsync(string location, string orderName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<OrderResource>> GetOrderResourceAsync(AzureLocation location, string orderName, CancellationToken cancellationToken = default)
         {
             return await GetOrderResources().GetAsync(location, orderName, cancellationToken).ConfigureAwait(false);
         }
@@ -98,10 +98,10 @@ namespace MgmtCollectionParent.Mocking
         /// <param name="location"> The name of Azure region. </param>
         /// <param name="orderName"> The name of the order. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="orderName"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="orderName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="orderName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="orderName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
-        public virtual Response<OrderResource> GetOrderResource(string location, string orderName, CancellationToken cancellationToken = default)
+        public virtual Response<OrderResource> GetOrderResource(AzureLocation location, string orderName, CancellationToken cancellationToken = default)
         {
             return GetOrderResources().Get(location, orderName, cancellationToken);
         }

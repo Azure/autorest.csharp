@@ -68,7 +68,7 @@ namespace AzureSample.ResourceManager.Sample.Models
         /// The list of OS upgrades performed on the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.value
         /// </param>
-        /// <param name="etag">
+        /// <param name="eTag">
         /// Modified whenever there is a change.
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.etag
         /// </param>
@@ -77,10 +77,10 @@ namespace AzureSample.ResourceManager.Sample.Models
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.nextLink
         /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetListOSUpgradeHistory(IReadOnlyList<UpgradeOperationHistoricalStatusInfo> value, ETag? etag, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal VirtualMachineScaleSetListOSUpgradeHistory(IReadOnlyList<UpgradeOperationHistoricalStatusInfo> value, ETag? eTag, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
-            Etag = etag;
+            ETag = eTag;
             NextLink = nextLink;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
@@ -99,7 +99,7 @@ namespace AzureSample.ResourceManager.Sample.Models
         /// Modified whenever there is a change.
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.etag
         /// </summary>
-        public ETag? Etag { get; }
+        public ETag? ETag { get; }
         /// <summary>
         /// The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades.
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.nextLink

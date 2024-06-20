@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using MgmtPartialResource.Models;
@@ -86,7 +87,7 @@ namespace MgmtPartialResource
                 return null;
             }
             PublicIPAddressSku sku = default;
-            string etag = default;
+            ETag? etag = default;
             IList<string> zones = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -114,7 +115,11 @@ namespace MgmtPartialResource
                 }
                 if (property.NameEquals("etag"u8))
                 {
-                    etag = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    etag = new ETag(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("zones"u8))

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace MgmtListMethods.Models
 {
@@ -21,7 +22,7 @@ namespace MgmtListMethods.Models
         /// <summary> Initializes a new instance of <see cref="QuotaUpdateContent"/>. </summary>
         /// <param name="value"> The list for update quota. </param>
         /// <param name="location"> Region of workspace quota to be updated. </param>
-        internal QuotaUpdateContent(IList<QuotaBaseProperties> value, string location)
+        internal QuotaUpdateContent(IList<QuotaBaseProperties> value, AzureLocation? location)
         {
             Value = value;
             Location = location;
@@ -30,6 +31,6 @@ namespace MgmtListMethods.Models
         /// <summary> The list for update quota. </summary>
         public IList<QuotaBaseProperties> Value { get; }
         /// <summary> Region of workspace quota to be updated. </summary>
-        public string Location { get; set; }
+        public AzureLocation? Location { get; set; }
     }
 }

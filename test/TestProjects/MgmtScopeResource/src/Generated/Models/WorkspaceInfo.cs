@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
@@ -16,11 +17,10 @@ namespace MgmtScopeResource.Models
         /// <param name="id"> Azure Resource Manager identifier of the Log Analytics Workspace. </param>
         /// <param name="location"> Location of the Log Analytics workspace. </param>
         /// <param name="customerId"> Log Analytics workspace identifier. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="location"/> or <paramref name="customerId"/> is null. </exception>
-        internal WorkspaceInfo(string id, string location, string customerId)
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="customerId"/> is null. </exception>
+        internal WorkspaceInfo(string id, AzureLocation location, string customerId)
         {
             Argument.AssertNotNull(id, nameof(id));
-            Argument.AssertNotNull(location, nameof(location));
             Argument.AssertNotNull(customerId, nameof(customerId));
 
             Id = id;
@@ -31,7 +31,7 @@ namespace MgmtScopeResource.Models
         /// <summary> Azure Resource Manager identifier of the Log Analytics Workspace. </summary>
         public string Id { get; }
         /// <summary> Location of the Log Analytics workspace. </summary>
-        public string Location { get; }
+        public AzureLocation Location { get; }
         /// <summary> Log Analytics workspace identifier. </summary>
         public string CustomerId { get; }
     }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.ResourceManager.Models;
 
@@ -24,7 +25,7 @@ namespace MgmtPropertyChooser.Models
         /// <param name="tenantId"> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </param>
         /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine. </param>
         /// <param name="userAssignedIdentities"> The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'. </param>
-        internal IdentityWithRenamedProperty(string testPrincipalId, string tenantId, ResourceIdentityType? resourceIdentityType, IDictionary<string, UserAssignedIdentity> userAssignedIdentities)
+        internal IdentityWithRenamedProperty(string testPrincipalId, Guid? tenantId, ResourceIdentityType? resourceIdentityType, IDictionary<string, UserAssignedIdentity> userAssignedIdentities)
         {
             TestPrincipalId = testPrincipalId;
             TenantId = tenantId;
@@ -35,7 +36,7 @@ namespace MgmtPropertyChooser.Models
         /// <summary> The principal id of virtual machine identity. This property will only be provided for a system assigned identity. </summary>
         public string TestPrincipalId { get; }
         /// <summary> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </summary>
-        public string TenantId { get; }
+        public Guid? TenantId { get; }
         /// <summary> The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine. </summary>
         public ResourceIdentityType? ResourceIdentityType { get; set; }
         /// <summary> The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'. </summary>

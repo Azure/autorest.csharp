@@ -32,7 +32,7 @@ namespace MgmtScopeResource
         /// <param name="location"> the location of the deployment. </param>
         /// <param name="properties"> Deployment properties. </param>
         /// <param name="tags"> Deployment tags. </param>
-        internal DeploymentExtendedData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, DeploymentPropertiesExtended properties, IReadOnlyDictionary<string, string> tags) : base(id, name, resourceType, systemData)
+        internal DeploymentExtendedData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, AzureLocation? location, DeploymentPropertiesExtended properties, IReadOnlyDictionary<string, string> tags) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Properties = properties;
@@ -40,7 +40,7 @@ namespace MgmtScopeResource
         }
 
         /// <summary> the location of the deployment. </summary>
-        public string Location { get; }
+        public AzureLocation? Location { get; }
         /// <summary> Deployment properties. </summary>
         public DeploymentPropertiesExtended Properties { get; }
         /// <summary> Deployment tags. </summary>

@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
@@ -21,7 +22,7 @@ namespace MgmtExpandResourceTypes.Models
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
-        /// <param name="etag"> The etag of the record set. </param>
+        /// <param name="eTag"> The etag of the record set. </param>
         /// <param name="metadata"> The metadata attached to the record set. </param>
         /// <param name="ttl"> The TTL (time-to-live) of the records in the record set. </param>
         /// <param name="fqdn"> Fully qualified domain name of the record set. </param>
@@ -38,7 +39,7 @@ namespace MgmtExpandResourceTypes.Models
         /// <param name="soaRecord"> The SOA record in the record set. </param>
         /// <param name="caaRecords"> The list of CAA records in the record set. </param>
         /// <returns> A new <see cref="MgmtExpandResourceTypes.RecordSetData"/> instance for mocking. </returns>
-        public static RecordSetData RecordSetData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string etag = null, IDictionary<string, string> metadata = null, long? ttl = null, string fqdn = null, string provisioningState = null, ResourceIdentifier targetResourceId = null, IEnumerable<ARecord> aRecords = null, IEnumerable<AaaaRecord> aaaaRecords = null, IEnumerable<MxRecord> mxRecords = null, IEnumerable<NsRecord> nsRecords = null, IEnumerable<PtrRecord> ptrRecords = null, IEnumerable<SrvRecord> srvRecords = null, IEnumerable<TxtRecord> txtRecords = null, string cname = null, SoaRecord soaRecord = null, IEnumerable<CaaRecord> caaRecords = null)
+        public static RecordSetData RecordSetData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, ETag? eTag = null, IDictionary<string, string> metadata = null, long? ttl = null, string fqdn = null, string provisioningState = null, ResourceIdentifier targetResourceId = null, IEnumerable<ARecord> aRecords = null, IEnumerable<AaaaRecord> aaaaRecords = null, IEnumerable<MxRecord> mxRecords = null, IEnumerable<NsRecord> nsRecords = null, IEnumerable<PtrRecord> ptrRecords = null, IEnumerable<SrvRecord> srvRecords = null, IEnumerable<TxtRecord> txtRecords = null, string cname = null, SoaRecord soaRecord = null, IEnumerable<CaaRecord> caaRecords = null)
         {
             metadata ??= new Dictionary<string, string>();
             aRecords ??= new List<ARecord>();
@@ -55,7 +56,7 @@ namespace MgmtExpandResourceTypes.Models
                 name,
                 resourceType,
                 systemData,
-                etag,
+                eTag,
                 metadata,
                 ttl,
                 fqdn,
@@ -80,7 +81,7 @@ namespace MgmtExpandResourceTypes.Models
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
-        /// <param name="etag"> The etag of the zone. </param>
+        /// <param name="eTag"> The etag of the zone. </param>
         /// <param name="maxNumberOfRecordSets"> The maximum number of record sets that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored. </param>
         /// <param name="maxNumberOfRecordsPerRecordSet"> The maximum number of records per record set that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored. </param>
         /// <param name="numberOfRecordSets"> The current number of record sets in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored. </param>
@@ -92,7 +93,7 @@ namespace MgmtExpandResourceTypes.Models
         /// <param name="registrationVirtualNetworks"> A list of references to virtual networks that register hostnames in this DNS zone. This is a only when ZoneType is Private. </param>
         /// <param name="resolutionVirtualNetworks"> A list of references to virtual networks that resolve records in this DNS zone. This is a only when ZoneType is Private. </param>
         /// <returns> A new <see cref="MgmtExpandResourceTypes.ZoneData"/> instance for mocking. </returns>
-        public static ZoneData ZoneData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string etag = null, long? maxNumberOfRecordSets = null, long? maxNumberOfRecordsPerRecordSet = null, long? numberOfRecordSets = null, IEnumerable<string> nameServers = null, ZoneType? zoneType = null, MachineType? machineType = null, StorageType? storageType = null, MemoryType? memoryType = null, IEnumerable<WritableSubResource> registrationVirtualNetworks = null, IEnumerable<WritableSubResource> resolutionVirtualNetworks = null)
+        public static ZoneData ZoneData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, ETag? eTag = null, long? maxNumberOfRecordSets = null, long? maxNumberOfRecordsPerRecordSet = null, long? numberOfRecordSets = null, IEnumerable<string> nameServers = null, ZoneType? zoneType = null, MachineType? machineType = null, StorageType? storageType = null, MemoryType? memoryType = null, IEnumerable<WritableSubResource> registrationVirtualNetworks = null, IEnumerable<WritableSubResource> resolutionVirtualNetworks = null)
         {
             tags ??= new Dictionary<string, string>();
             nameServers ??= new List<string>();
@@ -106,7 +107,7 @@ namespace MgmtExpandResourceTypes.Models
                 systemData,
                 tags,
                 location,
-                etag,
+                eTag,
                 maxNumberOfRecordSets,
                 maxNumberOfRecordsPerRecordSet,
                 numberOfRecordSets,

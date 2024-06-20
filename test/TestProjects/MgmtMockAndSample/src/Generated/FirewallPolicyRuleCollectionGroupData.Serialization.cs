@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using MgmtMockAndSample.Models;
 
@@ -50,7 +51,7 @@ namespace MgmtMockAndSample
                 return null;
             }
             string name = default;
-            string etag = default;
+            ETag? etag = default;
             ResourceType? type = default;
             string id = default;
             int? priority = default;
@@ -65,7 +66,11 @@ namespace MgmtMockAndSample
                 }
                 if (property.NameEquals("etag"u8))
                 {
-                    etag = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    etag = new ETag(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("type"u8))

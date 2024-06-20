@@ -40,7 +40,7 @@ namespace MgmtPropertyChooser.Models
         /// <param name="vmId"> Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands. </param>
         /// <param name="extensionsTimeBudget"> Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). &lt;br&gt;&lt;br&gt; Minimum api-version: 2020-06-01. </param>
         /// <returns> A new <see cref="MgmtPropertyChooser.VirtualMachineData"/> instance for mocking. </returns>
-        public static VirtualMachineData VirtualMachineData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, ArmPlan plan = null, IEnumerable<VirtualMachineExtension> resources = null, ManagedServiceIdentity identity = null, IdentityWithRenamedProperty identityWithRenamedProperty = null, IdentityWithDifferentPropertyType identityWithDifferentPropertyType = null, ManagedServiceIdentity identityWithNoUserIdentity = null, IdentityWithNoSystemIdentity identityWithNoSystemIdentity = null, ManagedServiceIdentity identityV3 = null, IEnumerable<string> zones = null, IEnumerable<MgmtPropertyChooserResourceData> fakeResources = null, ResourceIdentifier fakeSubResourceId = null, ResourceIdentifier fakeWritableSubResourceId = null, string provisioningState = null, string licenseType = null, string vmId = null, string extensionsTimeBudget = null)
+        public static VirtualMachineData VirtualMachineData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, ArmPlan plan = null, IEnumerable<VirtualMachineExtension> resources = null, ManagedServiceIdentity identity = null, IdentityWithRenamedProperty identityWithRenamedProperty = null, ManagedServiceIdentity identityWithDifferentPropertyType = null, ManagedServiceIdentity identityWithNoUserIdentity = null, IdentityWithNoSystemIdentity identityWithNoSystemIdentity = null, ManagedServiceIdentity identityV3 = null, IEnumerable<string> zones = null, IEnumerable<MgmtPropertyChooserResourceData> fakeResources = null, ResourceIdentifier fakeSubResourceId = null, ResourceIdentifier fakeWritableSubResourceId = null, string provisioningState = null, string licenseType = null, string vmId = null, string extensionsTimeBudget = null)
         {
             tags ??= new Dictionary<string, string>();
             resources ??= new List<VirtualMachineExtension>();
@@ -119,7 +119,7 @@ namespace MgmtPropertyChooser.Models
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
         /// <returns> A new <see cref="Models.MgmtPropertyChooserResourceData"/> instance for mocking. </returns>
-        public static MgmtPropertyChooserResourceData MgmtPropertyChooserResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string location = null, IDictionary<string, string> tags = null)
+        public static MgmtPropertyChooserResourceData MgmtPropertyChooserResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, AzureLocation location = default, IDictionary<string, string> tags = null)
         {
             tags ??= new Dictionary<string, string>();
 
@@ -138,24 +138,11 @@ namespace MgmtPropertyChooser.Models
         /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine. </param>
         /// <param name="userAssignedIdentities"> The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'. </param>
         /// <returns> A new <see cref="Models.IdentityWithRenamedProperty"/> instance for mocking. </returns>
-        public static IdentityWithRenamedProperty IdentityWithRenamedProperty(string testPrincipalId = null, string tenantId = null, ResourceIdentityType? resourceIdentityType = null, IDictionary<string, UserAssignedIdentity> userAssignedIdentities = null)
+        public static IdentityWithRenamedProperty IdentityWithRenamedProperty(string testPrincipalId = null, Guid? tenantId = null, ResourceIdentityType? resourceIdentityType = null, IDictionary<string, UserAssignedIdentity> userAssignedIdentities = null)
         {
             userAssignedIdentities ??= new Dictionary<string, UserAssignedIdentity>();
 
             return new IdentityWithRenamedProperty(testPrincipalId, tenantId, resourceIdentityType, userAssignedIdentities);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.IdentityWithDifferentPropertyType"/>. </summary>
-        /// <param name="principalId"> The principal id of virtual machine identity. This property will only be provided for a system assigned identity. </param>
-        /// <param name="tenantId"> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </param>
-        /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine. </param>
-        /// <param name="userAssignedIdentities"> The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'. </param>
-        /// <returns> A new <see cref="Models.IdentityWithDifferentPropertyType"/> instance for mocking. </returns>
-        public static IdentityWithDifferentPropertyType IdentityWithDifferentPropertyType(string principalId = null, int? tenantId = null, ResourceIdentityType? resourceIdentityType = null, IDictionary<string, UserAssignedIdentity> userAssignedIdentities = null)
-        {
-            userAssignedIdentities ??= new Dictionary<string, UserAssignedIdentity>();
-
-            return new IdentityWithDifferentPropertyType(principalId, tenantId, resourceIdentityType, userAssignedIdentities);
         }
     }
 }

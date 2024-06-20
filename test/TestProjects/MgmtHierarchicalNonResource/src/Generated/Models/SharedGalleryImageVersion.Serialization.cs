@@ -7,6 +7,7 @@
 
 using System;
 using System.Text.Json;
+using Azure.Core;
 
 namespace MgmtHierarchicalNonResource.Models
 {
@@ -19,7 +20,7 @@ namespace MgmtHierarchicalNonResource.Models
                 return null;
             }
             string name = default;
-            string location = default;
+            AzureLocation? location = default;
             DateTimeOffset? publishedDate = default;
             DateTimeOffset? endOfLifeDate = default;
             string uniqueId = default;
@@ -32,7 +33,11 @@ namespace MgmtHierarchicalNonResource.Models
                 }
                 if (property.NameEquals("location"u8))
                 {
-                    location = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("properties"u8))

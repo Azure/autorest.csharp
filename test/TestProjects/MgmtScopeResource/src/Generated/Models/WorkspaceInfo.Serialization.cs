@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
@@ -18,7 +19,7 @@ namespace MgmtScopeResource.Models
                 return null;
             }
             string id = default;
-            string location = default;
+            AzureLocation location = default;
             string customerId = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -29,7 +30,7 @@ namespace MgmtScopeResource.Models
                 }
                 if (property.NameEquals("location"u8))
                 {
-                    location = property.Value.GetString();
+                    location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("properties"u8))

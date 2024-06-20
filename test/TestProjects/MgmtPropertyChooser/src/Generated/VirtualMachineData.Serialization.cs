@@ -37,7 +37,7 @@ namespace MgmtPropertyChooser
             if (Optional.IsDefined(IdentityWithDifferentPropertyType))
             {
                 writer.WritePropertyName("identityWithDifferentPropertyType"u8);
-                writer.WriteObjectValue(IdentityWithDifferentPropertyType);
+                JsonSerializer.Serialize(writer, IdentityWithDifferentPropertyType);
             }
             if (Optional.IsDefined(IdentityWithNoUserIdentity))
             {
@@ -114,7 +114,7 @@ namespace MgmtPropertyChooser
             IReadOnlyList<VirtualMachineExtension> resources = default;
             ManagedServiceIdentity identity = default;
             IdentityWithRenamedProperty identityWithRenamedProperty = default;
-            IdentityWithDifferentPropertyType identityWithDifferentPropertyType = default;
+            ManagedServiceIdentity identityWithDifferentPropertyType = default;
             ManagedServiceIdentity identityWithNoUserIdentity = default;
             IdentityWithNoSystemIdentity identityWithNoSystemIdentity = default;
             ManagedServiceIdentity identityV3 = default;
@@ -181,7 +181,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    identityWithDifferentPropertyType = IdentityWithDifferentPropertyType.DeserializeIdentityWithDifferentPropertyType(property.Value);
+                    identityWithDifferentPropertyType = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("identityWithNoUserIdentity"u8))

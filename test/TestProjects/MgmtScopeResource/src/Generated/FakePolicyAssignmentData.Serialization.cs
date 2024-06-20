@@ -22,7 +22,7 @@ namespace MgmtScopeResource
             if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location"u8);
-                writer.WriteStringValue(Location);
+                writer.WriteStringValue(Location.Value);
             }
             if (Optional.IsDefined(Identity))
             {
@@ -104,7 +104,7 @@ namespace MgmtScopeResource
             {
                 return null;
             }
-            string location = default;
+            AzureLocation? location = default;
             ManagedServiceIdentity identity = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -123,7 +123,11 @@ namespace MgmtScopeResource
             {
                 if (property.NameEquals("location"u8))
                 {
-                    location = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("identity"u8))

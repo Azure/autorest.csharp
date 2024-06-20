@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 
@@ -21,7 +22,7 @@ namespace MgmtPartialResource.Models
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="sku"> The public IP address SKU. </param>
-        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="eTag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="zones"> A list of availability zones denoting the IP allocated for the resource needs to come from. </param>
         /// <param name="publicIPAllocationMethod"> The public IP address allocation method. </param>
         /// <param name="publicIPAddressVersion"> The public IP address version. </param>
@@ -33,7 +34,7 @@ namespace MgmtPartialResource.Models
         /// <param name="linkedPublicIPAddress"> The linked public IP address of the public IP address resource. </param>
         /// <param name="deleteOption"> Specify what happens to the public IP address when the VM using it is deleted. </param>
         /// <returns> A new <see cref="MgmtPartialResource.PublicIPAddressData"/> instance for mocking. </returns>
-        public static PublicIPAddressData PublicIPAddressData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, PublicIPAddressSku sku = null, string etag = null, IEnumerable<string> zones = null, IPAllocationMethod? publicIPAllocationMethod = null, IPVersion? publicIPAddressVersion = null, string ipAddress = null, int? idleTimeoutInMinutes = null, string resourceGuid = null, PublicIPAddressData servicePublicIPAddress = null, PublicIPAddressMigrationPhase? migrationPhase = null, PublicIPAddressData linkedPublicIPAddress = null, DeleteOption? deleteOption = null)
+        public static PublicIPAddressData PublicIPAddressData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, PublicIPAddressSku sku = null, ETag? eTag = null, IEnumerable<string> zones = null, IPAllocationMethod? publicIPAllocationMethod = null, IPVersion? publicIPAddressVersion = null, string ipAddress = null, int? idleTimeoutInMinutes = null, string resourceGuid = null, PublicIPAddressData servicePublicIPAddress = null, PublicIPAddressMigrationPhase? migrationPhase = null, PublicIPAddressData linkedPublicIPAddress = null, DeleteOption? deleteOption = null)
         {
             zones ??= new List<string>();
 
@@ -43,7 +44,7 @@ namespace MgmtPartialResource.Models
                 resourceType,
                 systemData,
                 sku,
-                etag,
+                eTag,
                 zones?.ToList(),
                 publicIPAllocationMethod,
                 publicIPAddressVersion,

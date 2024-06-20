@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,11 +16,8 @@ namespace MgmtPropertyChooser.Models
     {
         /// <summary> Initializes a new instance of <see cref="MgmtPropertyChooserResourceData"/>. </summary>
         /// <param name="location"> Resource location. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public MgmtPropertyChooserResourceData(string location)
+        public MgmtPropertyChooserResourceData(AzureLocation location)
         {
-            Argument.AssertNotNull(location, nameof(location));
-
             Location = location;
             Tags = new ChangeTrackingDictionary<string, string>();
         }
@@ -33,14 +29,14 @@ namespace MgmtPropertyChooser.Models
         /// <param name="systemData"> The systemData. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        internal MgmtPropertyChooserResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IDictionary<string, string> tags) : base(id, name, resourceType, systemData)
+        internal MgmtPropertyChooserResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, AzureLocation location, IDictionary<string, string> tags) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Tags = tags;
         }
 
         /// <summary> Resource location. </summary>
-        public string Location { get; set; }
+        public AzureLocation Location { get; set; }
         /// <summary> Resource tags. </summary>
         public IDictionary<string, string> Tags { get; }
     }

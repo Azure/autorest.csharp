@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace MgmtHierarchicalNonResource
 {
@@ -18,7 +19,7 @@ namespace MgmtHierarchicalNonResource
                 return null;
             }
             string name = default;
-            string location = default;
+            AzureLocation? location = default;
             string uniqueId = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -29,7 +30,11 @@ namespace MgmtHierarchicalNonResource
                 }
                 if (property.NameEquals("location"u8))
                 {
-                    location = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("identifier"u8))

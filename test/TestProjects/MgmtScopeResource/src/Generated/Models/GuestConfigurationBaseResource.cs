@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.Core;
+
 namespace MgmtScopeResource.Models
 {
     /// <summary> The core properties of ARM resources. </summary>
@@ -20,7 +22,7 @@ namespace MgmtScopeResource.Models
         /// <param name="name"> Name of the guest configuration assignment. </param>
         /// <param name="location"> Region where the VM is located. </param>
         /// <param name="resourceType"> The type of the resource. </param>
-        internal GuestConfigurationBaseResource(string id, string name, string location, string resourceType)
+        internal GuestConfigurationBaseResource(string id, string name, AzureLocation? location, string resourceType)
         {
             Id = id;
             Name = name;
@@ -33,7 +35,7 @@ namespace MgmtScopeResource.Models
         /// <summary> Name of the guest configuration assignment. </summary>
         public string Name { get; set; }
         /// <summary> Region where the VM is located. </summary>
-        public string Location { get; set; }
+        public AzureLocation? Location { get; set; }
         /// <summary> The type of the resource. </summary>
         public string ResourceType { get; }
     }

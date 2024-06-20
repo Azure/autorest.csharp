@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
@@ -28,7 +29,7 @@ namespace MgmtScopeResource.Models
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="properties"> The deployment properties. </param>
         /// <param name="tags"> Deployment tags. </param>
-        internal Deployment(string location, DeploymentProperties properties, IDictionary<string, string> tags)
+        internal Deployment(AzureLocation? location, DeploymentProperties properties, IDictionary<string, string> tags)
         {
             Location = location;
             Properties = properties;
@@ -36,7 +37,7 @@ namespace MgmtScopeResource.Models
         }
 
         /// <summary> The location to store the deployment data. </summary>
-        public string Location { get; set; }
+        public AzureLocation? Location { get; set; }
         /// <summary> The deployment properties. </summary>
         public DeploymentProperties Properties { get; }
         /// <summary> Deployment tags. </summary>
