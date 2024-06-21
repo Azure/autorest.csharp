@@ -27,7 +27,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 2
+   "Usage": "Input"
   },
   {
    "$id": "6",
@@ -58,7 +58,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 2
+   "Usage": "Input"
   }
  ],
  "Models": [
@@ -68,7 +68,7 @@
    "Name": "Body",
    "Namespace": "MultipleMediaTypes",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "12",

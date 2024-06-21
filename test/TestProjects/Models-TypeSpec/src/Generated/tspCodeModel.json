@@ -35,7 +35,7 @@
    "Description": "Fixed string enum",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "7",
@@ -68,7 +68,7 @@
    "Description": "Fixed int enum",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "12",
@@ -101,7 +101,7 @@
    "Description": "Extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "17",
@@ -134,7 +134,7 @@
    "Description": "Fixed float enum",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 2
+   "Usage": "Input"
   },
   {
    "$id": "22",
@@ -167,7 +167,7 @@
    "Description": "Extensible int enum",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 2
+   "Usage": "Input"
   },
   {
    "$id": "27",
@@ -190,7 +190,7 @@
    "Description": "The Int32ValuesFacet_kind",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 2
+   "Usage": "Input"
   },
   {
    "$id": "30",
@@ -211,7 +211,7 @@
    "Namespace": "ModelsTypeSpec",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 8
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -223,7 +223,7 @@
    "Description": "A base model in the discriminated set inheriting from a base with the predefined discriminator property",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
-   "Usage": 6,
+   "Usage": "Input,Output",
    "BaseModel": {
     "$id": "34",
     "Kind": "Model",
@@ -231,7 +231,7 @@
     "Namespace": "ModelsTypeSpec",
     "Description": "A base model with a required property",
     "IsNullable": false,
-    "Usage": 6,
+    "Usage": "Input,Output",
     "Properties": [
      {
       "$id": "35",
@@ -289,7 +289,7 @@
    "Description": "Output model with a discriminator",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "42",
@@ -314,7 +314,7 @@
    "Namespace": "ModelsTypeSpec",
    "Description": "Model used only as input",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "45",
@@ -406,7 +406,7 @@
       "Namespace": "ModelsTypeSpec",
       "Description": "Base model",
       "IsNullable": false,
-      "Usage": 6,
+      "Usage": "Input,Output",
       "Properties": []
      },
      "IsRequired": true,
@@ -477,7 +477,7 @@
        "Namespace": "ModelsTypeSpec",
        "Description": "Collection item model",
        "IsNullable": false,
-       "Usage": 6,
+       "Usage": "Input,Output",
        "Properties": [
         {
          "$id": "69",
@@ -500,7 +500,7 @@
            "Namespace": "ModelsTypeSpec",
            "Description": "Record item model",
            "IsNullable": false,
-           "Usage": 6,
+           "Usage": "Input,Output",
            "BaseModel": {
             "$id": "73",
             "Kind": "Model",
@@ -508,7 +508,7 @@
             "Namespace": "ModelsTypeSpec",
             "Description": "Derived model",
             "IsNullable": false,
-            "Usage": 6,
+            "Usage": "Input,Output",
             "BaseModel": {
              "$ref": "58"
             },
@@ -792,7 +792,7 @@
    "Namespace": "ModelsTypeSpec",
    "Description": "Model used both as input and output",
    "IsNullable": false,
-   "Usage": 6,
+   "Usage": "Input,Output",
    "BaseModel": {
     "$ref": "58"
    },
@@ -940,7 +940,7 @@
       "Description": "Base model with discriminator property.",
       "IsNullable": false,
       "DiscriminatorPropertyName": "discriminatorProperty",
-      "Usage": 6,
+      "Usage": "Input,Output",
       "Properties": [
        {
         "$id": "132",
@@ -1325,7 +1325,7 @@
    "Namespace": "ModelsTypeSpec",
    "Description": "Model used both as input and output with primitive types",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "BaseModel": {
     "$ref": "58"
    },
@@ -1488,7 +1488,7 @@
    "Deprecated": "deprecated for test",
    "Description": "RoundTrip model with optional properties.",
    "IsNullable": false,
-   "Usage": 6,
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "211",
@@ -1594,7 +1594,7 @@
       "Namespace": "ModelsTypeSpec",
       "Description": "Derived model with properties",
       "IsNullable": false,
-      "Usage": 6,
+      "Usage": "Input,Output",
       "BaseModel": {
        "$id": "226",
        "Kind": "Model",
@@ -1602,7 +1602,7 @@
        "Namespace": "ModelsTypeSpec",
        "Description": "Base model with properties",
        "IsNullable": false,
-       "Usage": 6,
+       "Usage": "Input,Output",
        "Properties": [
         {
          "$id": "227",
@@ -1794,7 +1794,7 @@
    "Namespace": "ModelsTypeSpec",
    "Description": "Output model with readonly properties.",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "252",
@@ -2211,7 +2211,7 @@
    "Namespace": "ModelsTypeSpec",
    "Description": "Model used only as output",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "311",
@@ -2376,7 +2376,7 @@
    "Namespace": "ModelsTypeSpec",
    "Description": "Input model that has property of its own type",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "332",
@@ -2411,7 +2411,7 @@
    "Namespace": "ModelsTypeSpec",
    "Description": "Roundtrip model that has property of its own type",
    "IsNullable": false,
-   "Usage": 6,
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "336",
@@ -2446,7 +2446,7 @@
    "Namespace": "ModelsTypeSpec",
    "Description": "Output model that has property of its own type",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "340",
@@ -2481,7 +2481,7 @@
    "Namespace": "ModelsTypeSpec",
    "Description": "Derived model",
    "IsNullable": false,
-   "Usage": 6,
+   "Usage": "Input,Output",
    "BaseModel": {
     "$id": "344",
     "Kind": "Model",
@@ -2489,7 +2489,7 @@
     "Namespace": "ModelsTypeSpec",
     "Description": "Base model",
     "IsNullable": false,
-    "Usage": 6,
+    "Usage": "Input,Output",
     "Properties": [
      {
       "$id": "345",
@@ -2537,7 +2537,7 @@
    "Description": "Single base model without any child model.",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "350",
@@ -2575,14 +2575,14 @@
    "Namespace": "ModelsTypeSpec",
    "Description": "Facets an int32 field by the specified value ranges.",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "Input",
    "BaseModel": {
     "$id": "355",
     "Kind": "Model",
     "Name": "NumericValuesFacet",
     "Namespace": "ModelsTypeSpec",
     "IsNullable": false,
-    "Usage": 2,
+    "Usage": "Input",
     "BaseModel": {
      "$id": "356",
      "Kind": "Model",
@@ -2590,7 +2590,7 @@
      "Namespace": "ModelsTypeSpec",
      "Description": "Facet",
      "IsNullable": false,
-     "Usage": 2,
+     "Usage": "Input",
      "Properties": [
       {
        "$id": "357",
@@ -2676,7 +2676,7 @@
    "Description": "A derived class in the discriminated set inheriting from a base with the predefined discriminator property",
    "IsNullable": false,
    "DiscriminatorValue": "A",
-   "Usage": 6,
+   "Usage": "Input,Output",
    "BaseModel": {
     "$ref": "33"
    },
@@ -2717,7 +2717,7 @@
    "Description": "First derived model as an output",
    "IsNullable": false,
    "DiscriminatorValue": "first",
-   "Usage": 4,
+   "Usage": "Output",
    "BaseModel": {
     "$ref": "41"
    },
@@ -2745,7 +2745,7 @@
    "Description": "Second derived model as an output",
    "IsNullable": false,
    "DiscriminatorValue": "second",
-   "Usage": 4,
+   "Usage": "Output",
    "BaseModel": {
     "$ref": "41"
    },
@@ -2773,7 +2773,7 @@
    "Description": "Deriver model with discriminator property.",
    "IsNullable": false,
    "DiscriminatorValue": "A",
-   "Usage": 6,
+   "Usage": "Input,Output",
    "BaseModel": {
     "$ref": "131"
    },
@@ -2801,7 +2801,7 @@
    "Description": "Deriver model with discriminator property.",
    "IsNullable": false,
    "DiscriminatorValue": "B",
-   "Usage": 6,
+   "Usage": "Input,Output",
    "BaseModel": {
     "$ref": "131"
    },

@@ -54,7 +54,7 @@
    "Namespace": "Versioning.RenamedFrom",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output"
   }
  ],
  "Models": [
@@ -64,7 +64,7 @@
    "Name": "NewModel",
    "Namespace": "Versioning.RenamedFrom",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "10",

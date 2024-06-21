@@ -10,7 +10,7 @@
    "Name": "MultiPartRequest",
    "Namespace": "Payload.MultiPart",
    "IsNullable": false,
-   "Usage": 34,
+   "Usage": "Input,MultipartFormData",
    "Properties": [
     {
      "$id": "3",
@@ -47,7 +47,7 @@
    "Name": "ComplexPartsRequest",
    "Namespace": "Payload.MultiPart",
    "IsNullable": false,
-   "Usage": 34,
+   "Usage": "Input,MultipartFormData",
    "Properties": [
     {
      "$id": "8",
@@ -73,7 +73,7 @@
       "Name": "Address",
       "Namespace": "Payload.MultiPart",
       "IsNullable": false,
-      "Usage": 2,
+      "Usage": "Input",
       "Properties": [
        {
         "$id": "12",
@@ -155,7 +155,7 @@
    "Name": "JsonPartRequest",
    "Namespace": "Payload.MultiPart",
    "IsNullable": false,
-   "Usage": 34,
+   "Usage": "Input,MultipartFormData",
    "Properties": [
     {
      "$id": "22",
@@ -190,7 +190,7 @@
    "Name": "BinaryArrayPartsRequest",
    "Namespace": "Payload.MultiPart",
    "IsNullable": false,
-   "Usage": 34,
+   "Usage": "Input,MultipartFormData",
    "Properties": [
     {
      "$id": "26",
@@ -233,7 +233,7 @@
    "Name": "JsonArrayPartsRequest",
    "Namespace": "Payload.MultiPart",
    "IsNullable": false,
-   "Usage": 34,
+   "Usage": "Input,MultipartFormData",
    "Properties": [
     {
      "$id": "32",
@@ -274,7 +274,7 @@
    "Name": "MultiBinaryPartsRequest",
    "Namespace": "Payload.MultiPart",
    "IsNullable": false,
-   "Usage": 34,
+   "Usage": "Input,MultipartFormData",
    "Properties": [
     {
      "$id": "37",
@@ -312,7 +312,7 @@
    "Name": "AnonymousModelRequest",
    "Namespace": "",
    "IsNullable": false,
-   "Usage": 34,
+   "Usage": "Input,MultipartFormData",
    "Properties": [
     {
      "$id": "42",

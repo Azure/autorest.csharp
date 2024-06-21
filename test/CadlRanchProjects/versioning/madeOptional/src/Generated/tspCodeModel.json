@@ -43,7 +43,7 @@
    "Name": "TestModel",
    "Namespace": "Versioning.MadeOptional",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "7",

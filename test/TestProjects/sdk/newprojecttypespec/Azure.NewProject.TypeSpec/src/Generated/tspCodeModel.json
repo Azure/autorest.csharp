@@ -24,7 +24,7 @@
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "5",
@@ -47,7 +47,7 @@
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "8",
@@ -70,7 +70,7 @@
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "11",
@@ -93,7 +93,7 @@
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "14",
@@ -116,7 +116,7 @@
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "17",
@@ -139,7 +139,7 @@
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "20",
@@ -171,7 +171,7 @@
    "Description": "Simple enum",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "25",
@@ -203,7 +203,7 @@
    "Description": "Extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "30",
@@ -235,7 +235,7 @@
    "Description": "Int based extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "35",
@@ -267,7 +267,7 @@
    "Description": "Float based extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "40",
@@ -299,7 +299,7 @@
    "Description": "float fixed enum",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "45",
@@ -331,7 +331,7 @@
    "Description": "int fixed enum",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "50",
@@ -382,7 +382,7 @@
    "Namespace": "NewProjectTypeSpec",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 0
+   "Usage": "None"
   }
  ],
  "Models": [
@@ -393,7 +393,7 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "A model with a few properties of literal types",
    "IsNullable": false,
-   "Usage": 6,
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "60",
@@ -607,7 +607,7 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "this is not a friendly model but with a friendly name",
    "IsNullable": false,
-   "Usage": 6,
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "89",
@@ -631,7 +631,7 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "this is a roundtrip model",
    "IsNullable": false,
-   "Usage": 6,
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "92",

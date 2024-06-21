@@ -216,9 +216,14 @@ export function loadOperation(
 
     const requestMethod = parseHttpRequestMethod(verb);
     const generateProtocol: boolean = shouldGenerateProtocol(sdkContext, op);
-    const generateConvenience: boolean =
-        requestMethod !== RequestMethod.PATCH &&
-        shouldGenerateConvenient(sdkContext, op);
+    let generateConvenience: boolean = shouldGenerateConvenient(sdkContext, op);
+
+    if (requestMethod === RequestMethod.PATCH && generateProtocol) {
+        Logger.getInstance().warn(
+            `Convenience method is not supported for PATCH method, it will be automatically turned off. Please set the '@convenientAPI' to false for operation ${op.name}.`
+        )
+        generateConvenience = false;
+    }
 
     /* handle lro */
     /* handle paging. */

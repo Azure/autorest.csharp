@@ -11,7 +11,7 @@
    "Namespace": "ConvenienceInCadl",
    "Description": "A model.",
    "IsNullable": false,
-   "Usage": 6,
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "3",

@@ -10,7 +10,7 @@
    "Name": "PngImageAsJson",
    "Namespace": "Payload.ContentNegotiation.DifferentBody",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "3",

@@ -32,7 +32,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "7",
@@ -58,7 +58,7 @@
    "Namespace": "",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "11",
@@ -84,7 +84,7 @@
    "Namespace": "Type.Union",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "15",
@@ -115,7 +115,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "20",
@@ -146,7 +146,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "25",
@@ -182,7 +182,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "31",
@@ -208,7 +208,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   }
  ],
  "Models": [
@@ -218,7 +218,7 @@
    "Name": "GetResponse9",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "36",
@@ -239,7 +239,7 @@
    "Name": "SendRequest9",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "38",
@@ -260,7 +260,7 @@
    "Name": "GetResponse8",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "40",
@@ -281,7 +281,7 @@
    "Name": "SendRequest8",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "42",
@@ -302,7 +302,7 @@
    "Name": "GetResponse7",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "44",
@@ -323,7 +323,7 @@
    "Name": "SendRequest7",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "46",
@@ -344,7 +344,7 @@
    "Name": "GetResponse6",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "48",
@@ -365,7 +365,7 @@
    "Name": "SendRequest6",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "50",
@@ -386,7 +386,7 @@
    "Name": "GetResponse5",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "52",
@@ -407,7 +407,7 @@
    "Name": "SendRequest5",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "54",
@@ -428,7 +428,7 @@
    "Name": "GetResponse4",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "56",
@@ -446,7 +446,7 @@
         "Name": "Cat",
         "Namespace": "Type.Union",
         "IsNullable": false,
-        "Usage": 6,
+        "Usage": "Input,Output",
         "Properties": [
          {
           "$id": "59",
@@ -469,7 +469,7 @@
         "Name": "Dog",
         "Namespace": "Type.Union",
         "IsNullable": false,
-        "Usage": 6,
+        "Usage": "Input,Output",
         "Properties": [
          {
           "$id": "62",
@@ -506,7 +506,7 @@
    "Name": "SendRequest4",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "65",
@@ -533,89 +533,12 @@
    ]
   },
   {
-<<<<<<< HEAD
-   "$id": "60",
-   "Kind": "Model",
-   "Name": "GetResponse3",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
-   "Usage": 4,
-   "Properties": [
-    {
-     "$id": "61",
-     "Name": "prop",
-     "SerializedName": "prop",
-     "Description": "",
-     "Type": {
-      "$id": "62",
-      "Kind": "Model",
-      "Name": "EnumsOnlyCases",
-      "Namespace": "Type.Union",
-      "IsNullable": false,
-      "Usage": 6,
-      "Properties": [
-       {
-        "$id": "63",
-        "Name": "lr",
-        "SerializedName": "lr",
-        "Description": "This should be receive/send the left variant",
-        "Type": {
-         "$ref": "20"
-        },
-        "IsRequired": true,
-        "IsReadOnly": false
-       },
-       {
-        "$id": "64",
-        "Name": "ud",
-        "SerializedName": "ud",
-        "Description": "This should be receive/send the up variant",
-        "Type": {
-         "$ref": "25"
-        },
-        "IsRequired": true,
-        "IsReadOnly": false
-       }
-      ]
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$ref": "62"
-  },
-  {
-   "$id": "65",
-   "Kind": "Model",
-   "Name": "SendRequest3",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
-   "Usage": 2,
-   "Properties": [
-    {
-     "$id": "66",
-     "Name": "prop",
-     "SerializedName": "prop",
-     "Description": "",
-     "Type": {
-      "$ref": "62"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-=======
->>>>>>> origin/feature/v3
    "$id": "67",
    "Kind": "Model",
    "Name": "GetResponse3",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "68",
@@ -628,7 +551,7 @@
       "Name": "EnumsOnlyCases",
       "Namespace": "Type.Union",
       "IsNullable": false,
-      "Usage": 6,
+      "Usage": "Input,Output",
       "Properties": [
        {
         "$id": "70",
@@ -668,7 +591,7 @@
    "Name": "SendRequest3",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "73",
@@ -702,7 +625,7 @@
       "Name": "StringAndArrayCases",
       "Namespace": "Type.Union",
       "IsNullable": false,
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output",
       "Properties": [
        {
         "$id": "77",
@@ -784,7 +707,7 @@
    "Name": "SendRequest2",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "88",
@@ -805,7 +728,7 @@
    "Name": "GetResponse1",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "90",
@@ -818,7 +741,7 @@
       "Name": "MixedLiteralsCases",
       "Namespace": "Type.Union",
       "IsNullable": false,
-      "Usage": 6,
+      "Usage": "Input,Output",
       "Properties": [
        {
         "$id": "92",
@@ -1076,7 +999,7 @@
    "Name": "SendRequest1",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "133",
@@ -1097,7 +1020,7 @@
    "Name": "GetResponse",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "135",
@@ -1110,7 +1033,7 @@
       "Name": "MixedTypesCases",
       "Namespace": "Type.Union",
       "IsNullable": false,
-      "Usage": 6,
+      "Usage": "Input,Output",
       "Properties": [
        {
         "$id": "137",
@@ -1334,7 +1257,7 @@
    "Name": "SendRequest",
    "Namespace": "Type.Union",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "169",

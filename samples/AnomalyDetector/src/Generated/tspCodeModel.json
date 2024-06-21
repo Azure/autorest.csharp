@@ -24,7 +24,7 @@
    "Namespace": "AnomalyDetector",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 0
+   "Usage": "None"
   },
   {
    "$id": "5",
@@ -86,7 +86,7 @@
    "Description": "the time granularity of the data points.",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 2
+   "Usage": "Input"
   },
   {
    "$id": "16",
@@ -133,7 +133,7 @@
    "Description": "The impute mode.",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 2
+   "Usage": "Input"
   },
   {
    "$id": "24",
@@ -170,7 +170,7 @@
    "Description": "The batch detection status.",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 4
+   "Usage": "Output"
   },
   {
    "$id": "30",
@@ -199,7 +199,7 @@
    "Description": "Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "34",
@@ -226,7 +226,7 @@
    "Description": "The alignment mode.",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "38",
@@ -268,7 +268,7 @@
    "Description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "45",
@@ -305,7 +305,7 @@
    "Description": "the model status.",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "51",
@@ -376,7 +376,7 @@
    "Namespace": "AnomalyDetector.Univariate",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 4
+   "Usage": "Output"
   },
   {
    "$id": "64",
@@ -397,7 +397,7 @@
    "Namespace": "AnomalyDetector",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 8
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -408,7 +408,7 @@
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "The request of entire or last anomaly detection.",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "68",
@@ -426,7 +426,7 @@
        "Namespace": "AnomalyDetector.Univariate",
        "Description": "The definition of input timeseries points.",
        "IsNullable": false,
-       "Usage": 2,
+       "Usage": "Input",
        "Properties": [
         {
          "$id": "71",
@@ -566,7 +566,7 @@
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "The response of entire anomaly detection.",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "89",
@@ -723,7 +723,7 @@
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "The response of last anomaly detection.",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "113",
@@ -851,7 +851,7 @@
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "The request of change point detection.",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "132",
@@ -942,7 +942,7 @@
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "The response of change point detection.",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "144",
@@ -1004,7 +1004,7 @@
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Detection results for the given resultId.",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "153",
@@ -1032,7 +1032,7 @@
       "Namespace": "AnomalyDetector.Multivariate",
       "Description": "Multivariate anomaly detection status.",
       "IsNullable": false,
-      "Usage": 4,
+      "Usage": "Output",
       "Properties": [
        {
         "$id": "157",
@@ -1061,7 +1061,7 @@
           "Namespace": "AnomalyDetector.Multivariate",
           "Description": "ErrorResponse contains code and message that shows the error information.",
           "IsNullable": false,
-          "Usage": 6,
+          "Usage": "Input,Output",
           "Properties": [
            {
             "$id": "161",
@@ -1112,7 +1112,7 @@
           "Namespace": "AnomalyDetector.Multivariate",
           "Description": "Variable Status.",
           "IsNullable": false,
-          "Usage": 6,
+          "Usage": "Input,Output",
           "Properties": [
            {
             "$id": "168",
@@ -1210,7 +1210,7 @@
          "Namespace": "AnomalyDetector.Multivariate",
          "Description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
          "IsNullable": false,
-         "Usage": 6,
+         "Usage": "Input,Output",
          "Properties": [
           {
            "$id": "182",
@@ -1302,7 +1302,7 @@
        "Namespace": "AnomalyDetector.Multivariate",
        "Description": "Anomaly status and information.",
        "IsNullable": false,
-       "Usage": 4,
+       "Usage": "Output",
        "Properties": [
         {
          "$id": "195",
@@ -1335,7 +1335,7 @@
           "Namespace": "AnomalyDetector.Multivariate",
           "Description": "Detailed information of the anomalous timestamp.",
           "IsNullable": false,
-          "Usage": 4,
+          "Usage": "Output",
           "Properties": [
            {
             "$id": "200",
@@ -1392,7 +1392,7 @@
               "Namespace": "AnomalyDetector.Multivariate",
               "Description": "Interpretation of the anomalous timestamp.",
               "IsNullable": false,
-              "Usage": 4,
+              "Usage": "Output",
               "Properties": [
                {
                 "$id": "209",
@@ -1432,7 +1432,7 @@
                  "Namespace": "AnomalyDetector.Multivariate",
                  "Description": "Correlation changes among the anomalous variables",
                  "IsNullable": false,
-                 "Usage": 4,
+                 "Usage": "Output",
                  "Properties": [
                   {
                    "$id": "215",
@@ -1527,7 +1527,7 @@
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Training result of a model including its status, errors and diagnostics\ninformation.",
    "IsNullable": false,
-   "Usage": 6,
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "221",
@@ -1629,7 +1629,7 @@
       "Namespace": "AnomalyDetector.Multivariate",
       "Description": "An optional field, indicating the manner to align multiple variables.",
       "IsNullable": false,
-      "Usage": 6,
+      "Usage": "Input,Output",
       "Properties": [
        {
         "$id": "236",
@@ -1711,7 +1711,7 @@
       "Namespace": "AnomalyDetector.Multivariate",
       "Description": "Diagnostics information to help inspect the states of model or variable.",
       "IsNullable": false,
-      "Usage": 6,
+      "Usage": "Input,Output",
       "Properties": [
        {
         "$id": "245",
@@ -1725,7 +1725,7 @@
          "Namespace": "AnomalyDetector.Multivariate",
          "Description": "Model status.",
          "IsNullable": false,
-         "Usage": 6,
+         "Usage": "Input,Output",
          "Properties": [
           {
            "$id": "247",
@@ -1848,7 +1848,7 @@
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Response of getting a model.",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "262",
@@ -1922,7 +1922,7 @@
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Response of listing models.",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "272",
@@ -1989,7 +1989,7 @@
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Request of last detection.",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "281",
@@ -2007,7 +2007,7 @@
        "Namespace": "AnomalyDetector.Multivariate",
        "Description": "Variable values.",
        "IsNullable": false,
-       "Usage": 2,
+       "Usage": "Input",
        "Properties": [
         {
          "$id": "284",
@@ -2092,7 +2092,7 @@
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Results of last detection.",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "295",
@@ -2137,7 +2137,7 @@
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "Error information returned by the API.",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "300",

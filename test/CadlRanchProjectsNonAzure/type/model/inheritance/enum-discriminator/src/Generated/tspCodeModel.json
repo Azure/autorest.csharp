@@ -24,7 +24,7 @@
    "Description": "extensible enum type for discriminator",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   },
   {
    "$id": "5",
@@ -47,7 +47,7 @@
    "Description": "fixed enum type for discriminator",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   }
  ],
  "Models": [
@@ -59,7 +59,7 @@
    "Description": "Test extensible enum type for discriminator",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
-   "Usage": 6,
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "9",
@@ -96,7 +96,7 @@
    "Description": "Test fixed enum type for discriminator",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
-   "Usage": 6,
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "13",
@@ -133,7 +133,7 @@
    "Description": "Golden dog model",
    "IsNullable": false,
    "DiscriminatorValue": "golden",
-   "Usage": 6,
+   "Usage": "Input,Output",
    "BaseModel": {
     "$ref": "8"
    },
@@ -147,7 +147,7 @@
    "Description": "Cobra model",
    "IsNullable": false,
    "DiscriminatorValue": "cobra",
-   "Usage": 6,
+   "Usage": "Input,Output",
    "BaseModel": {
     "$ref": "12"
    },

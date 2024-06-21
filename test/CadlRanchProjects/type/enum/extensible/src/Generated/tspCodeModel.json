@@ -60,7 +60,7 @@
    "Description": "Days of the week",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 6
+   "Usage": "Input,Output"
   }
  ],
  "Models": [],

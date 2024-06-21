@@ -11,7 +11,7 @@
    "Namespace": "Type.Dictionary",
    "Description": "Dictionary inner model",
    "IsNullable": false,
-   "Usage": 6,
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "3",

@@ -24,7 +24,7 @@
    "Namespace": "ParametersCadl",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 8
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -34,7 +34,7 @@
    "Name": "Result",
    "Namespace": "ParametersCadl.ParameterOrders",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "6",

@@ -24,7 +24,7 @@
    "Namespace": "SpreadTypeSpec",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 8
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -34,7 +34,7 @@
    "Name": "Thing",
    "Namespace": "SpreadTypeSpec",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "6",
@@ -70,7 +70,7 @@
    "Name": "SpreadAliasRequest",
    "Namespace": "SpreadTypeSpec",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "11",
@@ -106,7 +106,7 @@
    "Name": "SpreadMultiTargetAliasRequest",
    "Namespace": "",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "16",
@@ -142,7 +142,7 @@
    "Name": "SpreadAliasWithSpreadAliasRequest",
    "Namespace": "",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "21",
@@ -178,7 +178,7 @@
    "Name": "SpreadAliasWithOptionalPropsRequest",
    "Namespace": "",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "26",
@@ -265,7 +265,7 @@
    "Name": "SpreadAliasWithCollectionsRequest",
    "Namespace": "SpreadTypeSpec",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "39",

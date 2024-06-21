@@ -11,7 +11,7 @@
    "Namespace": "Type.Model.Usage",
    "Description": "Record used in operation parameters",
    "IsNullable": false,
-   "Usage": 2,
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "3",
@@ -35,7 +35,7 @@
    "Namespace": "Type.Model.Usage",
    "Description": "Record used in operation return type",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "6",
@@ -59,7 +59,7 @@
    "Namespace": "Type.Model.Usage",
    "Description": "Record used both as operation parameter and return type",
    "IsNullable": false,
-   "Usage": 6,
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "9",

@@ -59,7 +59,7 @@
    "Namespace": "Versioning.Added",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output"
   },
   {
    "$id": "10",
@@ -80,7 +80,7 @@
    "Namespace": "Versioning.Added",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output"
   }
  ],
  "Models": [
@@ -90,7 +90,7 @@
    "Name": "ModelV1",
    "Namespace": "Versioning.Added",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "14",
@@ -150,7 +150,7 @@
    "Name": "ModelV2",
    "Namespace": "Versioning.Added",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "22",

@@ -11,7 +11,7 @@
    "Namespace": "Type.Property.Nullable",
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "IsNullable": false,
-   "Usage": 22,
+   "Usage": "Input,Output,JsonMergePatch",
    "Properties": [
     {
      "$id": "3",
@@ -48,7 +48,7 @@
    "Namespace": "Type.Property.Nullable",
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "IsNullable": false,
-   "Usage": 22,
+   "Usage": "Input,Output,JsonMergePatch",
    "Properties": [
     {
      "$id": "8",
@@ -86,7 +86,7 @@
    "Namespace": "Type.Property.Nullable",
    "Description": "Model with a datetime property",
    "IsNullable": false,
-   "Usage": 22,
+   "Usage": "Input,Output,JsonMergePatch",
    "Properties": [
     {
      "$id": "13",
@@ -129,7 +129,7 @@
    "Namespace": "Type.Property.Nullable",
    "Description": "Model with a duration property",
    "IsNullable": false,
-   "Usage": 22,
+   "Usage": "Input,Output,JsonMergePatch",
    "Properties": [
     {
      "$id": "19",
@@ -172,7 +172,7 @@
    "Namespace": "Type.Property.Nullable",
    "Description": "Model with collection bytes properties",
    "IsNullable": false,
-   "Usage": 22,
+   "Usage": "Input,Output,JsonMergePatch",
    "Properties": [
     {
      "$id": "25",
@@ -216,7 +216,7 @@
    "Namespace": "Type.Property.Nullable",
    "Description": "Model with collection models properties",
    "IsNullable": false,
-   "Usage": 22,
+   "Usage": "Input,Output,JsonMergePatch",
    "Properties": [
     {
      "$id": "31",
@@ -247,7 +247,7 @@
        "Namespace": "Type.Property.Nullable",
        "Description": "Inner model used in collections model property",
        "IsNullable": false,
-       "Usage": 22,
+       "Usage": "Input,Output,JsonMergePatch",
        "Properties": [
         {
          "$id": "36",

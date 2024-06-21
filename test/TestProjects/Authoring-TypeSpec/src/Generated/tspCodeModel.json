@@ -38,7 +38,7 @@
    "Description": "Represents the project kind.",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 0
+   "Usage": "None"
   },
   {
    "$id": "7",
@@ -85,7 +85,7 @@
    "Description": "Enum describing allowed operation states.",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 0
+   "Usage": "None"
   },
   {
    "$id": "14",
@@ -137,7 +137,7 @@
    "Description": "Represents the job status values.",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 4
+   "Usage": "Output"
   },
   {
    "$id": "23",
@@ -158,7 +158,7 @@
    "Namespace": "AuthoringTypeSpec",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 8
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -168,7 +168,7 @@
    "Name": "Project",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
-   "Usage": 0,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "27",
@@ -219,7 +219,7 @@
       "Namespace": "AuthoringTypeSpec",
       "Description": "Represents the settings used to define the project behavior.",
       "IsNullable": false,
-      "Usage": 0,
+      "Usage": "None",
       "InheritedDictionaryType": {
        "$id": "34",
        "Kind": "Dictionary",
@@ -368,7 +368,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
-   "Usage": 0,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "56",
@@ -406,7 +406,7 @@
       "Namespace": "Azure.Core.Foundations",
       "Description": "The error object.",
       "IsNullable": false,
-      "Usage": 4,
+      "Usage": "Output",
       "Properties": [
        {
         "$id": "61",
@@ -476,7 +476,7 @@
          "Namespace": "Azure.Core.Foundations",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "IsNullable": false,
-         "Usage": 4,
+         "Usage": "Output",
          "Properties": [
           {
            "$id": "71",
@@ -527,7 +527,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Project items",
    "IsNullable": false,
-   "Usage": 0,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "75",
@@ -568,7 +568,7 @@
    "Namespace": "AuthoringTypeSpec",
    "Description": "Training job parameters.",
    "IsNullable": false,
-   "Usage": 0,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "80",
@@ -591,7 +591,7 @@
    "Name": "Deployment",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
-   "Usage": 0,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "83",
@@ -615,7 +615,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Deployment items",
    "IsNullable": false,
-   "Usage": 0,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "86",
@@ -655,7 +655,7 @@
    "Name": "SwapDeploymentsOptions",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
-   "Usage": 0,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "91",
@@ -691,7 +691,7 @@
    "Name": "DeploymentJob",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "96",
@@ -790,7 +790,7 @@
        "Namespace": "AuthoringTypeSpec",
        "Description": "Represents a warning that was encountered while executing the request.",
        "IsNullable": false,
-       "Usage": 4,
+       "Usage": "Output",
        "Properties": [
         {
          "$id": "111",
@@ -860,7 +860,7 @@
    "Name": "SwapDeploymentsJob",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "119",
@@ -993,7 +993,7 @@
    "Namespace": "AuthoringTypeSpec",
    "Description": "Paged collection of SupportedLanguage items",
    "IsNullable": false,
-   "Usage": 0,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "137",
@@ -1011,7 +1011,7 @@
        "Namespace": "AuthoringTypeSpec",
        "Description": "Represents a supported language.",
        "IsNullable": false,
-       "Usage": 0,
+       "Usage": "None",
        "Properties": [
         {
          "$id": "140",
@@ -1071,7 +1071,7 @@
    "Namespace": "AuthoringTypeSpec",
    "Description": "Paged collection of TrainingConfigVersion items",
    "IsNullable": false,
-   "Usage": 0,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "147",
@@ -1089,7 +1089,7 @@
        "Namespace": "AuthoringTypeSpec",
        "Description": "Represents a training config version.",
        "IsNullable": false,
-       "Usage": 0,
+       "Usage": "None",
        "Properties": [
         {
          "$id": "150",

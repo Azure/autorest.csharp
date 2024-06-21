@@ -33,7 +33,7 @@
    "Description": "The version of the API.",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 8
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [],

@@ -50,7 +50,7 @@
    "Description": "Enum describing allowed operation states.",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 4
+   "Usage": "None"
   },
   {
    "$id": "9",
@@ -73,7 +73,7 @@
    "Description": "The API version.",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": 8
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -84,7 +84,7 @@
    "Namespace": "_Specs_.Azure.Core.Lro.Standard",
    "Description": "Details about a user.",
    "IsNullable": false,
-   "Usage": 6,
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "13",
@@ -121,7 +121,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "18",
@@ -159,7 +159,7 @@
       "Namespace": "Azure.Core.Foundations",
       "Description": "The error object.",
       "IsNullable": false,
-      "Usage": 4,
+      "Usage": "None",
       "Properties": [
        {
         "$id": "23",
@@ -229,7 +229,7 @@
          "Namespace": "Azure.Core.Foundations",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "IsNullable": false,
-         "Usage": 4,
+         "Usage": "None",
          "Properties": [
           {
            "$id": "33",
@@ -280,7 +280,7 @@
    "Namespace": "Azure.Core",
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "37",
@@ -329,7 +329,7 @@
       "Namespace": "_Specs_.Azure.Core.Lro.Standard",
       "Description": "The exported user data.",
       "IsNullable": false,
-      "Usage": 4,
+      "Usage": "Output",
       "Properties": [
        {
         "$id": "43",
@@ -374,7 +374,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "48",

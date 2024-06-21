@@ -11,7 +11,7 @@
    "Namespace": "Type.Model.Inheritance.Recursive",
    "Description": "extension",
    "IsNullable": false,
-   "Usage": 6,
+   "Usage": "Input,Output",
    "BaseModel": {
     "$id": "3",
     "Kind": "Model",
@@ -19,7 +19,7 @@
     "Namespace": "Type.Model.Inheritance.Recursive",
     "Description": "element",
     "IsNullable": false,
-    "Usage": 6,
+    "Usage": "Input,Output",
     "Properties": [
      {
       "$id": "4",

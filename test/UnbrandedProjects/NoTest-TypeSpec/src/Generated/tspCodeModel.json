@@ -24,7 +24,7 @@
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 4
+   "Usage": "Output"
   },
   {
    "$id": "5",
@@ -47,7 +47,7 @@
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 4
+   "Usage": "Output"
   },
   {
    "$id": "8",
@@ -70,7 +70,7 @@
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 4
+   "Usage": "Output"
   },
   {
    "$id": "11",
@@ -93,7 +93,7 @@
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 4
+   "Usage": "Output"
   },
   {
    "$id": "14",
@@ -116,7 +116,7 @@
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 4
+   "Usage": "Output"
   },
   {
    "$id": "17",
@@ -139,7 +139,7 @@
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": 4
+   "Usage": "Output"
   }
  ],
  "Models": [
@@ -150,7 +150,7 @@
    "Namespace": "NoTestTypeSpec",
    "Description": "A model with a few properties of literal types",
    "IsNullable": false,
-   "Usage": 4,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "21",

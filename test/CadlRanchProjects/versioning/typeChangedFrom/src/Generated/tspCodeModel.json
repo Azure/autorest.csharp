@@ -43,7 +43,7 @@
    "Name": "TestModel",
    "Namespace": "Versioning.TypeChangedFrom",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "7",
