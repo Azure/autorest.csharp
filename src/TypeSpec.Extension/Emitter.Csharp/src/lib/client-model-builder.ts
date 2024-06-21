@@ -9,8 +9,7 @@ import {
     listOperationsInOperationGroup,
     SdkOperationGroup,
     SdkContext,
-    getLibraryName,
-    UsageFlags
+    getLibraryName
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -45,7 +44,7 @@ import {
 import { RequestLocation } from "../type/request-location.js";
 import { reportDiagnostic } from "./lib.js";
 import { Logger } from "./logger.js";
-import { getUsages, navigateModels } from "./model.js";
+import { navigateModels } from "./model.js";
 import { loadOperation } from "./operation.js";
 import { processServiceAuthentication } from "./service-authentication.js";
 import { resolveServers } from "./typespecServer.js";
@@ -163,10 +162,6 @@ export function createModelForService(
 
     navigateModels(sdkContext, modelMap, enumMap);
 
-    const usages = getUsages(sdkContext, convenienceOperations, modelMap);
-    setUsage(usages, modelMap);
-    setUsage(usages, enumMap);
-
     for (const client of clients) {
         for (const op of client.Operations) {
             const apiVersionIndex = op.Parameters.findIndex(
@@ -280,24 +275,6 @@ export function createModelForService(
                 convenienceOperations.push(httpOperation);
         }
         return inputClient;
-    }
-}
-
-function setUsage(
-    usages: { inputs: string[]; outputs: string[]; roundTrips: string[] },
-    models: Map<string, InputModelType | InputEnumType>
-) {
-    for (const [name, m] of models) {
-        if (m.Usage !== undefined && m.Usage !== UsageFlags.None) continue;
-        if (usages.inputs.includes(name)) {
-            m.Usage = UsageFlags.Input;
-        } else if (usages.outputs.includes(name)) {
-            m.Usage = UsageFlags.Output;
-        } else if (usages.roundTrips.includes(name)) {
-            m.Usage = UsageFlags.Input | UsageFlags.Output;
-        } else {
-            m.Usage = UsageFlags.None;
-        }
     }
 }
 

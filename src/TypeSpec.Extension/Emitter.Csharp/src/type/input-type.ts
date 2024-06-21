@@ -1,7 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { SdkBuiltInKinds, UsageFlags } from "@azure-tools/typespec-client-generator-core";
+import {
+    SdkBuiltInKinds,
+    UsageFlags
+} from "@azure-tools/typespec-client-generator-core";
 import { InputEnumTypeValue } from "./input-enum-type-value.js";
 import { InputModelProperty } from "./input-model-property.js";
 import { InputTypeKind } from "./input-type-kind.js";
