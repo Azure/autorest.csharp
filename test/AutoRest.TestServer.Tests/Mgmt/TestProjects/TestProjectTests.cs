@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Utilities;
@@ -124,7 +125,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void VerifyNoSingleWordsThatShouldBeReplaced()
         {
-            var singlesToReplace = typeof(CommonSingleWordModels).GetField("_schemasToChange", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null) as HashSet<string>;
+            var singlesToReplace = typeof(InputTypeTransformer).GetField("_schemasToChange", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null) as HashSet<string>;
             foreach (var type in MyTypes())
             {
                 Assert.IsFalse(singlesToReplace.Contains(type.Name));
