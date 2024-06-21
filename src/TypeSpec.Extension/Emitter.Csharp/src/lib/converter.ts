@@ -17,7 +17,6 @@ import {
     SdkTupleType,
     SdkType,
     SdkUnionType,
-    UsageFlags,
     isReadOnly
 } from "@azure-tools/typespec-client-generator-core";
 import { Model } from "@typespec/compiler";
@@ -152,8 +151,9 @@ export function fromSdkModelType(
                 fromSdkModelProperty(
                     p,
                     {
-                        ModelName: inputModelType?.Name,
-                        Namespace: inputModelType?.Namespace
+                        ModelName: inputModelType!.Name,
+                        Namespace: inputModelType!.Namespace,
+                        Usage: inputModelType!.Usage
                     } as LiteralTypeContext,
                     []
                 )
@@ -401,7 +401,7 @@ function fromSdkConstantType(
             Description: `The ${enumName}`, // TODO -- what should we put here?
             IsExtensible: true,
             IsNullable: false,
-            Usage: UsageFlags.None // will be updated later
+            Usage: literalTypeContext.Usage
         };
         enums.set(enumName, enumType);
         return enumType;

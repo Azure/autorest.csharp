@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Common.Input
             string? accessibility = null;
             string? deprecated = null;
             string? description = null;
-            int usageValue = default;
+            string? usageString = default;
             bool isExtendable = false;
             InputType? valueType = null;
             IReadOnlyList<InputEnumTypeValue>? values = null;
@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputEnumType.Accessibility), ref accessibility)
                     || reader.TryReadString(nameof(InputEnumType.Deprecated), ref deprecated)
                     || reader.TryReadString(nameof(InputEnumType.Description), ref description)
-                    || reader.TryReadInt32(nameof(InputEnumType.Usage), ref usageValue)
+                    || reader.TryReadString(nameof(InputEnumType.Usage), ref usageString)
                     || reader.TryReadBoolean(nameof(InputEnumType.IsExtensible), ref isExtendable)
                     || reader.TryReadWithConverter(nameof(InputEnumType.ValueType), options, ref valueType)
                     || reader.TryReadWithConverter(nameof(InputEnumType.Values), options, ref values);
@@ -75,7 +75,12 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException("The ValueType of an EnumType must be a primitive type.");
             }
 
-            var enumType = new InputEnumType(name, ns, accessibility, deprecated, description!, (InputModelTypeUsage)usageValue, inputValueType, NormalizeValues(values, inputValueType), isExtendable, isNullable);
+            if (!Enum.TryParse<InputModelTypeUsage>(usageString, out var usage))
+            {
+                throw new JsonException($"Cannot parse usage {usageString}");
+            }
+
+            var enumType = new InputEnumType(name, ns, accessibility, deprecated, description!, usage, inputValueType, NormalizeValues(values, inputValueType), isExtendable, isNullable);
             if (id != null)
             {
                 resolver.AddReference(id, enumType);

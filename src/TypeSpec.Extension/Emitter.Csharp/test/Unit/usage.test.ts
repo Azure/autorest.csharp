@@ -124,7 +124,9 @@ describe("Test Usage", () => {
         const sdkContext = createNetSdkContext(context);
         const root = createModel(sdkContext);
         const fooModel = root.Models.find((model) => model.Name === "Foo");
-        const templateModel = root.Models.find((model) => model.Name === "TemplateModelFoo");
+        const templateModel = root.Models.find(
+            (model) => model.Name === "TemplateModelFoo"
+        );
 
         ok(fooModel);
         strictEqual(fooModel.Usage, UsageFlags.Input);
@@ -153,7 +155,9 @@ describe("Test Usage", () => {
         const context = createEmitterContext(program);
         const sdkContext = createNetSdkContext(context);
         const root = createModel(sdkContext);
-        const baseModel = root.Models.find((model) => model.Name === "BaseModel");
+        const baseModel = root.Models.find(
+            (model) => model.Name === "BaseModel"
+        );
         const fooModel = root.Models.find((model) => model.Name === "Foo");
 
         ok(baseModel);
@@ -190,9 +194,13 @@ describe("Test Usage", () => {
         const context = createEmitterContext(program);
         const sdkContext = createNetSdkContext(context);
         const root = createModel(sdkContext);
-        const baseModel = root.Models.find((model) => model.Name === "BaseModel");
+        const baseModel = root.Models.find(
+            (model) => model.Name === "BaseModel"
+        );
         const fooModel = root.Models.find((model) => model.Name === "Foo");
-        const propertyModel = root.Models.find((model) => model.Name === "PropertyModel");
+        const propertyModel = root.Models.find(
+            (model) => model.Name === "PropertyModel"
+        );
 
         ok(baseModel);
         strictEqual(baseModel.Usage, UsageFlags.Input | UsageFlags.Output);
@@ -217,9 +225,11 @@ describe("Test Usage", () => {
         const context = createEmitterContext(program);
         const sdkContext = createNetSdkContext(context);
         const root = createModel(sdkContext);
-        const fooAlias = root.Models.find((model) => model.Name === "TestRequest");
+        const fooAlias = root.Models.find(
+            (model) => model.Name === "TestRequest"
+        );
 
-            ok(fooAlias);
+        ok(fooAlias);
         strictEqual(fooAlias.Usage, UsageFlags.Input);
     });
 
@@ -266,8 +276,12 @@ describe("Test Usage", () => {
         const sdkContext = createNetSdkContext(context);
         const root = createModel(sdkContext);
         const fooInfo = root.Models.find((model) => model.Name === "FooInfo");
-        const batchCreateFooListItemsRequest = root.Models.find((model) => model.Name === "BatchCreateFooListItemsRequest");
-        const batchCreateTextListItemsResponse = root.Models.find((model) => model.Name === "BatchCreateTextListItemsResponse");
+        const batchCreateFooListItemsRequest = root.Models.find(
+            (model) => model.Name === "BatchCreateFooListItemsRequest"
+        );
+        const batchCreateTextListItemsResponse = root.Models.find(
+            (model) => model.Name === "BatchCreateTextListItemsResponse"
+        );
 
         ok(fooInfo);
         strictEqual(fooInfo.Usage, UsageFlags.Input);
@@ -310,7 +324,10 @@ describe("Test Usage", () => {
         const fooModel = root.Models.find((model) => model.Name === "Foo");
 
         ok(fooModel);
-        strictEqual(fooModel.Usage, UsageFlags.Input | UsageFlags.Output | UsageFlags.JsonMergePatch);
+        strictEqual(
+            fooModel.Usage,
+            UsageFlags.Input | UsageFlags.Output | UsageFlags.JsonMergePatch
+        );
     });
 
     it("Test the usage of body polymorphism type in azure core resource operation.", async () => {
@@ -363,8 +380,12 @@ describe("Test Usage", () => {
         const context = createEmitterContext(program);
         const sdkContext = createNetSdkContext(context);
         const root = createModel(sdkContext);
-        const baseModel = root.Models.find((model) => model.Name === "BaseModelWithDiscriminator");
-        const derivedModel = root.Models.find((model) => model.Name === "DerivedModelWithDiscriminatorA");
+        const baseModel = root.Models.find(
+            (model) => model.Name === "BaseModelWithDiscriminator"
+        );
+        const derivedModel = root.Models.find(
+            (model) => model.Name === "DerivedModelWithDiscriminatorA"
+        );
 
         ok(baseModel);
         strictEqual(baseModel.Usage, UsageFlags.Input);
@@ -431,9 +452,15 @@ describe("Test Usage", () => {
         const context = createEmitterContext(program);
         const sdkContext = createNetSdkContext(context);
         const root = createModel(sdkContext);
-        const baseModel = root.Models.find((model) => model.Name === "BaseModelWithDiscriminator");
-        const derivedModel = root.Models.find((model) => model.Name === "DerivedModelWithDiscriminatorA");
-        const nestedModel = root.Models.find((model) => model.Name === "NestedModel");
+        const baseModel = root.Models.find(
+            (model) => model.Name === "BaseModelWithDiscriminator"
+        );
+        const derivedModel = root.Models.find(
+            (model) => model.Name === "DerivedModelWithDiscriminatorA"
+        );
+        const nestedModel = root.Models.find(
+            (model) => model.Name === "NestedModel"
+        );
 
         ok(baseModel);
         strictEqual(baseModel.Usage, UsageFlags.Output);
@@ -466,7 +493,9 @@ describe("Test Usage", () => {
         const context = createEmitterContext(program);
         const sdkContext = createNetSdkContext(context);
         const root = createModel(sdkContext);
-        const simpleEnumRenamed = root.Enums.find((enumType) => enumType.Name === "SimpleEnumRenamed");
+        const simpleEnumRenamed = root.Enums.find(
+            (enumType) => enumType.Name === "SimpleEnumRenamed"
+        );
 
         ok(simpleEnumRenamed);
         strictEqual(simpleEnumRenamed.Usage, UsageFlags.Input);
@@ -490,7 +519,9 @@ describe("Test Usage", () => {
         const context = createEmitterContext(program);
         const sdkContext = createNetSdkContext(context);
         const root = createModel(sdkContext);
-        const renamedModel = root.Models.find((model) => model.Name === "RenamedModel");
+        const renamedModel = root.Models.find(
+            (model) => model.Name === "RenamedModel"
+        );
 
         ok(renamedModel);
         strictEqual(renamedModel.Usage, UsageFlags.Input);
@@ -647,8 +678,10 @@ interface LegacyLro {
 
         const context = createEmitterContext(program);
         const sdkContext = createNetSdkContext(context);
-        const root = createModel(sdkContext);   
-        const radiologyInsightsInferenceResult = root.Models.find((model) => model.Name === "RadiologyInsightsInferenceResult");
+        const root = createModel(sdkContext);
+        const radiologyInsightsInferenceResult = root.Models.find(
+            (model) => model.Name === "RadiologyInsightsInferenceResult"
+        );
 
         ok(radiologyInsightsInferenceResult);
         strictEqual(radiologyInsightsInferenceResult.Usage, UsageFlags.Output);

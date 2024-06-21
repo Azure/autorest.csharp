@@ -19,7 +19,7 @@ import {
     ModelProperty,
     Namespace,
     Operation,
-    Type,
+    Type
 } from "@typespec/compiler";
 import { getResourceOperation } from "@typespec/rest";
 import {

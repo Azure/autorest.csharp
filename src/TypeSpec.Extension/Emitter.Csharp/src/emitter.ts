@@ -1,7 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
+import {
+    createSdkContext,
+    UsageFlags
+} from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
     Program,
@@ -88,7 +91,12 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             await program.host.writeFile(
                 resolvePath(generatedFolder, tspOutputFileName),
                 prettierOutput(
-                    stringifyRefs(root, null, 1, PreserveType.Objects)
+                    stringifyRefs(
+                        root,
+                        convertUsageNumbersToStrings,
+                        1,
+                        PreserveType.Objects
+                    )
                 )
             );
 
@@ -202,6 +210,27 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             }
         }
     }
+}
+
+function convertUsageNumbersToStrings(this: any, key: string, value: any): any {
+    if (this["Kind"] === "Model" || this["Kind"] === "enum") {
+        if (key === "Usage" && typeof value === "number") {
+            if (value === 0) {
+                return "None";
+            }
+            const result: string[] = [];
+            for (const prop in UsageFlags) {
+                if (!isNaN(Number(prop))) {
+                    if ((value & Number(prop)) !== 0) {
+                        result.push(UsageFlags[prop]);
+                    }
+                }
+            }
+            return result.join(",");
+        }
+    }
+
+    return value;
 }
 
 function deleteFile(filePath: string) {
