@@ -40,7 +40,16 @@ extends:
     UseTypeSpecNext: ${{ variables.UseTypeSpecNext }}
     EmitterPackageJsonPath: ${{ variables.EmitterPackageJsonPath }}
     PublishInternal: ${{ variables.PublishInternal }}
-    Packages: ${{ variables.Packages }}
+    Packages:
+    - name: generator
+      file: autorest-csharp-*.tgz
+      type: npm
+    - name: emitter
+      file: azure-tools-typespec-csharp-*.tgz
+      type: npm
+    - name: nuget package
+      file: 'Microsoft.Azure.AutoRest.CSharp.*.nupkg'
+      type: nuget
     SdkInitializationSteps: ${{ variables.SdkInitializationSteps }}
     TestMatrix: ${{ variables.TestMatrix }}
     PublishDependsOnTest: ${{ variables.PublishDependsOnTest }}

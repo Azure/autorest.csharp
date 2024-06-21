@@ -22,16 +22,6 @@ variables:
     UseTypeSpecNext: ${{ parameters.UseTypeSpecNext }}
   EmitterPackageJsonPath: src/TypeSpec.Extension/Emitter.Csharp/package.json
   PublishInternal: true
-  Packages:
-  - name: generator
-    file: autorest-csharp-*.tgz
-    type: npm
-  - name: emitter
-    file: azure-tools-typespec-csharp-*.tgz
-    type: npm
-  - name: nuget package
-    file: 'Microsoft.Azure.AutoRest.CSharp.*.nupkg'
-    type: nuget
   SdkInitializationSteps:
   - pwsh: |
       $packageVersions = Get-Content "$(buildArtifactsPath)/package-versions.json" -Raw | ConvertFrom-Json
