@@ -47,8 +47,7 @@ namespace AutoRest.CSharp.Common.Input
                 result = CreateDerivedType(ref reader, id, kind, name, options);
             }
 
-            result = result ?? CreateDerivedType(ref reader, id, kind, name, options);
-            return result ?? throw new JsonException("cannot deserialize InputType");
+            return result ?? CreateDerivedType(ref reader, id, kind, name, options);
         }
 
         private const string LiteralKind = "constant";
