@@ -78,7 +78,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             { "*ETag", "etag" },
             { "*Etag", "etag" },
             { "location", "azure-location" },
-            { "defaultCustomBlockResponseBody", "any" },
             { "*Uri", "Uri" },
             { "*Uris", "Uri" },
             { "*URI", "Uri" },
@@ -89,14 +88,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             { "*URLs", "Uri" },
             { "*ResourceId", "arm-id" },
             { "*ResourceID", "arm-id" },
-            { "hostId", "uuid" },
-            { "hostID", "uuid" },
             { "*IpAddress", "ip-address" },
             { "*IPAddress", "ip-address" },
             { "Ipv6Address", "ip-address" },
             { "IPv6Address", "ip-address" },
             { "Ipv4Address", "ip-address" },
-            { "IPv4Address", "ip-address" },
             { "IPv4Address", "ip-address" },
         };
         private Dictionary<Schema, (string CSharpName, TransformItem? Transform, string TransformLogMessage)> schemaCache = new();
