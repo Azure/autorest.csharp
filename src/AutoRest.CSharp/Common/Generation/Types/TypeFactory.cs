@@ -91,7 +91,7 @@ namespace AutoRest.CSharp.Generation.Types
             },
             InputDateTimeType dateTimeType => new CSharpType(typeof(DateTimeOffset)),
             InputDurationType durationType => new CSharpType(typeof(TimeSpan)),
-            _ => throw new Exception("Unknown type")
+            _ => throw new InvalidOperationException($"Unknown type: {inputType}")
         };
 
         /// <summary>
