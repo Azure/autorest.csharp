@@ -29,7 +29,7 @@ variables:
 - template: /eng/pipelines/preview-variables.yml
   parameters:
     UseTypeSpecNext: true
-    RunUnitTests: ${{ paramters.RunUnitTests }}
+    RunUnitTests: ${{ parameters.RunUnitTests }}
     RunGenerationChecks: ${{ parameters.RunGenerationChecks }}
 
 extends:
