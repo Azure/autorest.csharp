@@ -7,7 +7,8 @@ import {
     shouldGenerateConvenient,
     shouldGenerateProtocol,
     SdkContext,
-    getAccess
+    getAccess,
+    UsageFlags
 } from "@azure-tools/typespec-client-generator-core";
 import {
     getDeprecated,
@@ -19,7 +20,6 @@ import {
     Namespace,
     Operation,
     Type,
-    UsageFlags
 } from "@typespec/compiler";
 import { getResourceOperation } from "@typespec/rest";
 import {
@@ -198,6 +198,22 @@ export function loadOperation(
             mediaTypes.push(...mediaTypeValues);
         }
     }
+
+    // TODO -- to be removed when adopt TCGC's getAllOperations
+    // fix the usage of body parameter
+    // we have to do this when there is an anonymous model in the body parameter, other cases are already handled by TCGC
+    const bodyParameter = parameters.find(
+        (value) => value.Location === RequestLocation.Body
+    );
+    if (
+        bodyParameter &&
+        bodyParameter.Type &&
+        isInputModelType(bodyParameter.Type) &&
+        mediaTypes?.includes("multipart/form-data")
+    ) {
+        bodyParameter.Type.Usage |= UsageFlags.MultipartFormData;
+    }
+
     const requestMethod = parseHttpRequestMethod(verb);
     const generateProtocol: boolean = shouldGenerateProtocol(sdkContext, op);
     const generateConvenience: boolean =
