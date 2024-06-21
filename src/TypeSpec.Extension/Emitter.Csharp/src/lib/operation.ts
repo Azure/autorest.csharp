@@ -221,7 +221,7 @@ export function loadOperation(
     if (requestMethod === RequestMethod.PATCH && generateProtocol) {
         Logger.getInstance().warn(
             `Convenience method is not supported for PATCH method, it will be automatically turned off. Please set the '@convenientAPI' to false for operation ${op.name}.`
-        )
+        );
         generateConvenience = false;
     }
 
