@@ -6,6 +6,7 @@ using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 
 namespace Payload.MultiPart.Models
@@ -22,7 +23,14 @@ namespace Payload.MultiPart.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("profileImage"u8);
-            writer.WriteBase64StringValue(ProfileImage.ToArray(), "D");
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(global::System.BinaryData.FromStream(ProfileImage));
+#else
+            using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(ProfileImage)))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
+#endif
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -61,14 +69,14 @@ namespace Payload.MultiPart.Models
             {
                 return null;
             }
-            BinaryData profileImage = default;
+            Stream profileImage = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("profileImage"u8))
                 {
-                    profileImage = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
+                    profileImage = BinaryData.FromString(property.Value.GetRawText()).ToStream();
                     continue;
                 }
                 if (options.Format != "W")
@@ -80,6 +88,28 @@ namespace Payload.MultiPart.Models
             return new AnonymousModelRequest(profileImage, serializedAdditionalRawData);
         }
 
+        private BinaryData SerializeMultipart(ModelReaderWriterOptions options)
+        {
+            using MultipartFormDataBinaryContent content = ToMultipartBinaryBody();
+            using MemoryStream stream = new MemoryStream();
+            content.WriteTo(stream);
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        internal virtual MultipartFormDataBinaryContent ToMultipartBinaryBody()
+        {
+            MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
+            content.Add(ProfileImage, "profileImage", "profileImage", "application/octet-stream");
+            return content;
+        }
+
         BinaryData IPersistableModel<AnonymousModelRequest>.Write(ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<AnonymousModelRequest>)this).GetFormatFromOptions(options) : options.Format;
@@ -88,6 +118,8 @@ namespace Payload.MultiPart.Models
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
+                case "MFD":
+                    return SerializeMultipart(options);
                 default:
                     throw new FormatException($"The model {nameof(AnonymousModelRequest)} does not support writing '{options.Format}' format.");
             }
@@ -109,7 +141,7 @@ namespace Payload.MultiPart.Models
             }
         }
 
-        string IPersistableModel<AnonymousModelRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<AnonymousModelRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "MFD";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>

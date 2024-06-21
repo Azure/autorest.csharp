@@ -6,6 +6,7 @@ using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Payload.MultiPart.Models;
 
@@ -612,7 +613,7 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="profileImage"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> is null. </exception>
-        public virtual async Task<ClientResult> AnonymousModelAsync(BinaryData profileImage)
+        public virtual async Task<ClientResult> AnonymousModelAsync(Stream profileImage)
         {
             Argument.AssertNotNull(profileImage, nameof(profileImage));
 
@@ -625,7 +626,7 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="profileImage"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> is null. </exception>
-        public virtual ClientResult AnonymousModel(BinaryData profileImage)
+        public virtual ClientResult AnonymousModel(Stream profileImage)
         {
             Argument.AssertNotNull(profileImage, nameof(profileImage));
 
@@ -645,7 +646,7 @@ namespace Payload.MultiPart
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousModelAsync(BinaryData)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousModelAsync(Stream)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -674,7 +675,7 @@ namespace Payload.MultiPart
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousModel(BinaryData)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousModel(Stream)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

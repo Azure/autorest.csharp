@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Payload.MultiPart.Models
 {
@@ -45,7 +46,7 @@ namespace Payload.MultiPart.Models
         /// <summary> Initializes a new instance of <see cref="AnonymousModelRequest"/>. </summary>
         /// <param name="profileImage"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> is null. </exception>
-        public AnonymousModelRequest(BinaryData profileImage)
+        public AnonymousModelRequest(Stream profileImage)
         {
             Argument.AssertNotNull(profileImage, nameof(profileImage));
 
@@ -55,7 +56,7 @@ namespace Payload.MultiPart.Models
         /// <summary> Initializes a new instance of <see cref="AnonymousModelRequest"/>. </summary>
         /// <param name="profileImage"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal AnonymousModelRequest(BinaryData profileImage, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal AnonymousModelRequest(Stream profileImage, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ProfileImage = profileImage;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -66,22 +67,7 @@ namespace Payload.MultiPart.Models
         {
         }
 
-        /// <summary>
-        /// Gets the profile image
-        /// <para>
-        /// To assign a byte[] to this property use <see cref="BinaryData.FromBytes(byte[])"/>.
-        /// The byte[] will be serialized to a Base64 encoded string.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromBytes(new byte[] { 1, 2, 3 })</term>
-        /// <description>Creates a payload of "AQID".</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        public BinaryData ProfileImage { get; }
+        /// <summary> Gets the profile image. </summary>
+        public Stream ProfileImage { get; }
     }
 }

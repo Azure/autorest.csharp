@@ -9,7 +9,8 @@ import {
     listOperationsInOperationGroup,
     SdkOperationGroup,
     SdkContext,
-    getLibraryName
+    getLibraryName,
+    UsageFlags
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -39,7 +40,8 @@ import { InputParameter } from "../type/input-parameter.js";
 import {
     InputEnumType,
     InputModelType,
-    InputPrimitiveType
+    InputPrimitiveType,
+    isInputModelType
 } from "../type/input-type.js";
 import { RequestLocation } from "../type/request-location.js";
 import { reportDiagnostic } from "./lib.js";
@@ -164,6 +166,21 @@ export function createModelForService(
 
     for (const client of clients) {
         for (const op of client.Operations) {
+            /* TODO: remove this when adopt TCGC's getAllOperations, and/or TCGC fixes the issue that anonymous body models do not have a usage.
+             *append Multipart usage for models.
+             */
+            const bodyParameter = op.Parameters.find(
+                (value) => value.Location === RequestLocation.Body
+            );
+            if (
+                bodyParameter &&
+                bodyParameter.Type &&
+                isInputModelType(bodyParameter.Type) &&
+                op.RequestMediaTypes?.includes("multipart/form-data")
+            ) {
+                bodyParameter.Type.Usage |= UsageFlags.MultipartFormData;
+            }
+
             const apiVersionIndex = op.Parameters.findIndex(
                 (value: InputParameter) => value.IsApiVersion
             );
