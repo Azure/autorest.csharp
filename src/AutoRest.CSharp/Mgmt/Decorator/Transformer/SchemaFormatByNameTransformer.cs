@@ -73,9 +73,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         private IEnumerable<OperationGroup> _allOperationGroups;
         private IDictionary<string, string> _allFormatByNameRules = new Dictionary<string, string>()
         {
+            { "tenantID", "uuid" },
             { "tenantId", "uuid" },
-            { "ETag", "etag" },
-            { "Etag", "etag" },
+            { "*ETag", "etag" },
+            { "*Etag", "etag" },
             { "location", "azure-location" },
             { "defaultCustomBlockResponseBody", "any" },
             { "*Uri", "Uri" },
@@ -86,10 +87,21 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             { "*Urls", "Uri" },
             { "*URL", "Uri" },
             { "*URLs", "Uri" },
+            { "*ResourceId", "arm-id" },
+            { "*ResourceID", "arm-id" },
+            { "hostId", "uuid" },
+            { "hostID", "uuid" },
+            { "*IpAddress", "ip-address" },
+            { "*IPAddress", "ip-address" },
+            { "Ipv6Address", "ip-address" },
+            { "IPv6Address", "ip-address" },
+            { "Ipv4Address", "ip-address" },
+            { "IPv4Address", "ip-address" },
+            { "IPv4Address", "ip-address" },
         };
         private Dictionary<Schema, (string CSharpName, TransformItem? Transform, string TransformLogMessage)> schemaCache = new();
 
-        internal SchemaFormatByNameTransformer(
+        private SchemaFormatByNameTransformer(
             IEnumerable<Schema> generalSchemas,
             IEnumerable<OperationGroup> operationGroups,
             IReadOnlyDictionary<string, string> allFormatByNameRules)
