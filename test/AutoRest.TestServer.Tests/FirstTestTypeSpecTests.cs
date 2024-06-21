@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using FirstTestTypeSpec.Models;
 using NUnit.Framework;
 
@@ -40,6 +41,17 @@ namespace AutoRest.TestServer.Tests
             }
 
             Assert.AreEqual(expectedCount, set.Count);
+        }
+
+        [Test]
+        public void ExtensibleEnumCanHandleNullValue()
+        {
+            StringExtensibleEnum e = default;
+            var field = typeof(StringExtensibleEnum).GetField("_value", BindingFlags.NonPublic | BindingFlags.Instance);
+            var value = field.GetValue(e);
+
+            Assert.IsNull(value);
+            Assert.AreEqual(0, e.GetHashCode());
         }
 
         private static object[] ExtensibleEnumData = new object[] {
