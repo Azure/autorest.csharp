@@ -94,8 +94,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (Configuration.AzureArm)
             {
-                // TODO: Remove this when we have a better way to remove operations, tracking in https://github.com/Azure/typespec-azure/issues/964
-                InputTypeTransformer.Transform(rootNamespace);
                 MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(rootNamespace, sourceInputModel));
                 await MgmtTarget.ExecuteAsync(project);
             }
