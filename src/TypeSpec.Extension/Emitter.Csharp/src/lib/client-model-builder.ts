@@ -9,7 +9,8 @@ import {
     listOperationsInOperationGroup,
     SdkOperationGroup,
     SdkContext,
-    getLibraryName
+    getLibraryName,
+    UsageFlags
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -42,7 +43,6 @@ import {
     InputPrimitiveType
 } from "../type/input-type.js";
 import { RequestLocation } from "../type/request-location.js";
-import { Usage } from "../type/usage.js";
 import { reportDiagnostic } from "./lib.js";
 import { Logger } from "./logger.js";
 import { getUsages, navigateModels } from "./model.js";
@@ -169,36 +169,6 @@ export function createModelForService(
 
     for (const client of clients) {
         for (const op of client.Operations) {
-            /* TODO: remove this when adopt tcgc.
-             *set Multipart usage for models.
-             */
-            const bodyParameter = op.Parameters.find(
-                (value) => value.Location === RequestLocation.Body
-            );
-            if (
-                bodyParameter &&
-                bodyParameter.Type &&
-                (bodyParameter.Type as InputModelType)
-            ) {
-                const inputModelType = bodyParameter.Type as InputModelType;
-                op.RequestMediaTypes?.forEach((item) => {
-                    if (
-                        item === "multipart/form-data" &&
-                        !inputModelType.Usage.includes(Usage.Multipart)
-                    ) {
-                        if (inputModelType.Usage.trim().length === 0) {
-                            inputModelType.Usage = inputModelType.Usage.concat(
-                                Usage.Multipart
-                            );
-                        } else {
-                            inputModelType.Usage = inputModelType.Usage.trim()
-                                .concat(",")
-                                .concat(Usage.Multipart);
-                        }
-                    }
-                });
-            }
-
             const apiVersionIndex = op.Parameters.findIndex(
                 (value: InputParameter) => value.IsApiVersion
             );
@@ -318,15 +288,15 @@ function setUsage(
     models: Map<string, InputModelType | InputEnumType>
 ) {
     for (const [name, m] of models) {
-        if (m.Usage !== undefined && m.Usage !== Usage.None) continue;
+        if (m.Usage !== undefined && m.Usage !== UsageFlags.None) continue;
         if (usages.inputs.includes(name)) {
-            m.Usage = Usage.Input;
+            m.Usage = UsageFlags.Input;
         } else if (usages.outputs.includes(name)) {
-            m.Usage = Usage.Output;
+            m.Usage = UsageFlags.Output;
         } else if (usages.roundTrips.includes(name)) {
-            m.Usage = Usage.RoundTrip;
+            m.Usage = UsageFlags.Input | UsageFlags.Output;
         } else {
-            m.Usage = Usage.None;
+            m.Usage = UsageFlags.None;
         }
     }
 }

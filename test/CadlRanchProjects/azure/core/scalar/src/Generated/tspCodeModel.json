@@ -26,7 +26,7 @@
    "Description": "The version of the API.",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": 8
   }
  ],
  "Models": [
@@ -36,7 +36,7 @@
    "Name": "AzureLocationModel",
    "Namespace": "_Specs_.Azure.Core.Scalar",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "6",

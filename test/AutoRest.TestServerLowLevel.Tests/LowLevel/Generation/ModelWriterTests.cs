@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void RoundTripBasic(string expectedModelCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/roundtrip-basic/main.cadl#L15-L23
-            var input = new InputModelType("InputModel", "Cadl.TestServer.InputBasic", null, "public", "Round-trip Model", InputModelTypeUsage.RoundTrip,
+            var input = new InputModelType("InputModel", "Cadl.TestServer.InputBasic", null, "public", "Round-trip Model", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
                 new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
                 null, new List<InputModelType>(), null, null, null, false);
 
@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/primitive-properties/main.cadl
             var input = new InputModelType("PrimitivePropertyModel", "Cadl.TestServer.PrimitiveProperties", null, "public",
-                "Round-trip model with primitive properties to show serialization and deserialization of each.", InputModelTypeUsage.RoundTrip,
+                "Round-trip model with primitive properties to show serialization and deserialization of each.", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
                 new List<InputModelProperty>{
                     new InputModelProperty("requiredString", "requiredString", "", InputPrimitiveType.String, null, true, false, false),
                     new InputModelProperty("requiredInt", "requiredInt", "", InputPrimitiveType.Int32, null, true, false, false),

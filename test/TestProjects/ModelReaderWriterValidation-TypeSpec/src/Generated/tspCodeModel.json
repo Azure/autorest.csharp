@@ -30,7 +30,7 @@
    "Description": "The type of alias pattern.",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "6",
@@ -95,7 +95,7 @@
    "Description": "The type of the token that the alias path is referring to.",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "16",
@@ -124,7 +124,7 @@
    "Description": "The attributes of the token that the alias path is referring to.",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "20",
@@ -159,7 +159,7 @@
    "Description": "The type of the alias.",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   },
   {
    "$id": "25",
@@ -200,7 +200,7 @@
    "Description": "The provider authorization consent state.",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Output"
+   "Usage": 4
   }
  ],
  "Models": [
@@ -211,7 +211,7 @@
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The model to change to struct.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "32",
@@ -234,7 +234,7 @@
    "Name": "ModelWithPersistableOnly",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "35",
@@ -328,7 +328,7 @@
    "Description": "The BaseModel in the discriminated set",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "49",
@@ -366,7 +366,7 @@
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The availability set data",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "BaseModel": {
     "$id": "54",
     "Kind": "Model",
@@ -374,7 +374,7 @@
     "Namespace": "ModelReaderWriterValidationTypeSpec",
     "Description": "The tracked resource data",
     "IsNullable": false,
-    "Usage": "RoundTrip",
+    "Usage": 6,
     "Properties": [
      {
       "$id": "55",
@@ -466,7 +466,7 @@
       "Name": "ComputeSku",
       "Namespace": "ModelReaderWriterValidationTypeSpec",
       "IsNullable": false,
-      "Usage": "RoundTrip",
+      "Usage": 6,
       "Properties": [
        {
         "$id": "69",
@@ -524,7 +524,7 @@
       "Namespace": "ModelReaderWriterValidationTypeSpec",
       "Description": "The availability set properties",
       "IsNullable": false,
-      "Usage": "RoundTrip",
+      "Usage": 6,
       "Properties": [
        {
         "$id": "77",
@@ -542,7 +542,7 @@
           "Namespace": "ModelReaderWriterValidationTypeSpec",
           "Description": "The writable sub resource",
           "IsNullable": false,
-          "Usage": "RoundTrip",
+          "Usage": 6,
           "Properties": [
            {
             "$id": "80",
@@ -616,7 +616,7 @@
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "A class representing the ResourceProvider data model.\nResource provider information.",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "87",
@@ -685,7 +685,7 @@
        "Name": "ProviderResourceType",
        "Namespace": "ModelReaderWriterValidationTypeSpec",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": 4,
        "Properties": [
         {
          "$id": "98",
@@ -735,7 +735,7 @@
            "Namespace": "ModelReaderWriterValidationTypeSpec",
            "Description": "The provider extended location.",
            "IsNullable": false,
-           "Usage": "Output",
+           "Usage": 4,
            "Properties": [
             {
              "$id": "106",
@@ -805,7 +805,7 @@
            "Namespace": "ModelReaderWriterValidationTypeSpec",
            "Description": "The alias type.",
            "IsNullable": false,
-           "Usage": "Output",
+           "Usage": 4,
            "Properties": [
             {
              "$id": "116",
@@ -836,7 +836,7 @@
                "Namespace": "ModelReaderWriterValidationTypeSpec",
                "Description": "The type of the paths for alias.",
                "IsNullable": false,
-               "Usage": "Output",
+               "Usage": 4,
                "Properties": [
                 {
                  "$id": "121",
@@ -882,7 +882,7 @@
                   "Namespace": "ModelReaderWriterValidationTypeSpec",
                   "Description": "The type of the pattern for an alias path.",
                   "IsNullable": false,
-                  "Usage": "Output",
+                  "Usage": 4,
                   "Properties": [
                    {
                     "$id": "128",
@@ -938,7 +938,7 @@
                   "Namespace": "ModelReaderWriterValidationTypeSpec",
                   "Description": "The ResourceTypeAliasPathMetadata.",
                   "IsNullable": false,
-                  "Usage": "RoundTrip",
+                  "Usage": 6,
                   "Properties": [
                    {
                     "$id": "135",
@@ -1075,7 +1075,7 @@
            "Namespace": "ModelReaderWriterValidationTypeSpec",
            "Description": "The ZoneMapping.",
            "IsNullable": false,
-           "Usage": "Output",
+           "Usage": 4,
            "Properties": [
             {
              "$id": "150",
@@ -1131,7 +1131,7 @@
            "Name": "ApiProfile",
            "Namespace": "ModelReaderWriterValidationTypeSpec",
            "IsNullable": false,
-           "Usage": "Output",
+           "Usage": 4,
            "Properties": [
             {
              "$id": "158",
@@ -1253,7 +1253,7 @@
    "Name": "ModelWithStringAdditionalProperties",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "170",
     "Kind": "Dictionary",
@@ -1318,7 +1318,7 @@
    "Name": "ModelWithArrayAdditionalProperties",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "180",
     "Kind": "Dictionary",
@@ -1387,7 +1387,7 @@
    "Name": "ModelWithUnknownAdditionalProperties",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "190",
     "Kind": "Dictionary",
@@ -1454,7 +1454,7 @@
    "Description": "The ModelX in the discriminated set",
    "IsNullable": false,
    "DiscriminatorValue": "X",
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "BaseModel": {
     "$ref": "48"
    },
@@ -1538,7 +1538,7 @@
    "Description": "The ModelY in the discriminated set",
    "IsNullable": false,
    "DiscriminatorValue": "Y",
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "BaseModel": {
     "$ref": "48"
    },

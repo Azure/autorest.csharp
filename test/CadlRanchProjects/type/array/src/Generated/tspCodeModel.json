@@ -11,7 +11,7 @@
    "Namespace": "Type.Array",
    "Description": "Array inner model",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "3",

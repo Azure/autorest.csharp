@@ -18,7 +18,8 @@ import {
     ModelProperty,
     Namespace,
     Operation,
-    Type
+    Type,
+    UsageFlags
 } from "@typespec/compiler";
 import { getResourceOperation } from "@typespec/rest";
 import {
@@ -68,7 +69,6 @@ import {
     createContentTypeOrAcceptParameter,
     getTypeName
 } from "./utils.js";
-import { Usage } from "../type/usage.js";
 import { getExtensions } from "@typespec/openapi";
 
 export function loadOperation(
@@ -135,7 +135,7 @@ export function loadOperation(
                 // give body type a name
                 bodyParameter.Type.Name = `${capitalize(op.name)}Request`;
                 const bodyModelType = bodyParameter.Type as InputModelType;
-                bodyModelType.Usage = Usage.Input;
+                bodyModelType.Usage = UsageFlags.Input;
                 // update models cache
                 models.delete("");
                 models.set(bodyModelType.Name, bodyModelType);

@@ -12,7 +12,7 @@
    "Description": "This is base model for polymorphic single level inheritance with a discriminator.",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "3",
@@ -51,7 +51,7 @@
    "Description": "Define a base class in the legacy way. Discriminator property is not explicitly defined in the model.",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "8",
@@ -90,7 +90,7 @@
    "Description": "The second level model in polymorphic single level inheritance.",
    "IsNullable": false,
    "DiscriminatorValue": "seagull",
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "BaseModel": {
     "$ref": "2"
    },
@@ -104,7 +104,7 @@
    "Description": "The second level model in polymorphic single level inheritance.",
    "IsNullable": false,
    "DiscriminatorValue": "sparrow",
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "BaseModel": {
     "$ref": "2"
    },
@@ -118,7 +118,7 @@
    "Description": "The second level model in polymorphic single level inheritance.",
    "IsNullable": false,
    "DiscriminatorValue": "goose",
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "BaseModel": {
     "$ref": "2"
    },
@@ -132,7 +132,7 @@
    "Description": "The second level model in polymorphic single levels inheritance which contains references to other polymorphic instances.",
    "IsNullable": false,
    "DiscriminatorValue": "eagle",
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "BaseModel": {
     "$ref": "2"
    },
@@ -197,7 +197,7 @@
    "Description": "The second level legacy model in polymorphic single level inheritance.",
    "IsNullable": false,
    "DiscriminatorValue": "t-rex",
-   "Usage": "Output",
+   "Usage": 4,
    "BaseModel": {
     "$ref": "7"
    },

@@ -24,7 +24,7 @@
    "Namespace": "MixApiVersion",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": 8
   }
  ],
  "Models": [
@@ -35,7 +35,7 @@
    "Namespace": "MixApiVersion",
    "Description": "Pet",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": 0,
    "Properties": [
     {
      "$id": "6",
@@ -85,7 +85,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Toy items",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": 0,
    "Properties": [
     {
      "$id": "13",
@@ -102,7 +102,7 @@
        "Name": "Toy",
        "Namespace": "MixApiVersion",
        "IsNullable": false,
-       "Usage": "None",
+       "Usage": 0,
        "Properties": [
         {
          "$id": "16",

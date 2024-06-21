@@ -10,7 +10,7 @@
    "Name": "DefaultDatetimeProperty",
    "Namespace": "Encode.Datetime",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "3",
@@ -39,7 +39,7 @@
    "Name": "Rfc3339DatetimeProperty",
    "Namespace": "Encode.Datetime",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "7",
@@ -68,7 +68,7 @@
    "Name": "Rfc7231DatetimeProperty",
    "Namespace": "Encode.Datetime",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "11",
@@ -97,7 +97,7 @@
    "Name": "UnixTimestampDatetimeProperty",
    "Namespace": "Encode.Datetime",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "15",
@@ -126,7 +126,7 @@
    "Name": "UnixTimestampArrayDatetimeProperty",
    "Namespace": "Encode.Datetime",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "19",

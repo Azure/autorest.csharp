@@ -24,7 +24,7 @@
    "Namespace": "ParametersCadl",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": 8
   }
  ],
  "Models": [
@@ -34,7 +34,7 @@
    "Name": "Result",
    "Namespace": "ParametersCadl.ParameterOrders",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "6",

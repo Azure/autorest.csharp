@@ -30,7 +30,7 @@
    "Description": "Enum that will be used as a property for model EnumProperty. Non-extensible.",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "6",
@@ -59,7 +59,7 @@
    "Description": "Enum that will be used as a property for model EnumProperty. Extensible.",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "10",
@@ -82,7 +82,7 @@
    "Description": "The StringLiteralProperty_property",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "13",
@@ -105,7 +105,7 @@
    "Description": "The IntLiteralProperty_property",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "16",
@@ -128,7 +128,7 @@
    "Description": "The FloatLiteralProperty_property",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "19",
@@ -154,7 +154,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "23",
@@ -180,7 +180,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "27",
@@ -206,7 +206,7 @@
    "Namespace": "",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "31",
@@ -227,7 +227,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   }
  ],
  "Models": [
@@ -238,9 +238,87 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a boolean property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
+<<<<<<< HEAD
+     "$id": "26",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$id": "27",
+      "Kind": "Primitive",
+      "Name": "Boolean",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "28",
+   "Kind": "Model",
+   "Name": "StringProperty",
+   "Namespace": "Type.Property.ValueTypes",
+   "Description": "Model with a string property",
+   "IsNullable": false,
+   "Usage": 6,
+   "Properties": [
+    {
+     "$id": "29",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$id": "30",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "31",
+   "Kind": "Model",
+   "Name": "BytesProperty",
+   "Namespace": "Type.Property.ValueTypes",
+   "Description": "Model with a bytes property",
+   "IsNullable": false,
+   "Usage": 6,
+   "Properties": [
+    {
+     "$id": "32",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$id": "33",
+      "Kind": "Primitive",
+      "Name": "Bytes",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "34",
+   "Kind": "Model",
+   "Name": "IntProperty",
+   "Namespace": "Type.Property.ValueTypes",
+   "Description": "Model with a int property",
+   "IsNullable": false,
+   "Usage": 6,
+   "Properties": [
+    {
+=======
+>>>>>>> origin/feature/v3
      "$id": "35",
      "Name": "property",
      "SerializedName": "property",
@@ -262,7 +340,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a string property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "38",
@@ -286,7 +364,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a bytes property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "41",
@@ -311,7 +389,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a int property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "44",
@@ -335,7 +413,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a float property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "47",
@@ -359,7 +437,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a decimal property",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "50",
@@ -467,7 +545,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with enum properties",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "64",
@@ -489,7 +567,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with extensible enum properties",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "66",
@@ -511,7 +589,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with model properties",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "68",
@@ -525,7 +603,7 @@
       "Namespace": "Type.Property.ValueTypes",
       "Description": "Inner model. Will be a property type for ModelWithModelProperties",
       "IsNullable": false,
-      "Usage": "RoundTrip",
+      "Usage": 6,
       "Properties": [
        {
         "$id": "70",
@@ -548,7 +626,101 @@
    ]
   },
   {
+<<<<<<< HEAD
+   "$ref": "58"
+  },
+  {
+   "$id": "61",
+   "Kind": "Model",
+   "Name": "CollectionsStringProperty",
+   "Namespace": "Type.Property.ValueTypes",
+   "Description": "Model with collection string properties",
+   "IsNullable": false,
+   "Usage": 6,
+   "Properties": [
+    {
+     "$id": "62",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$id": "63",
+      "Kind": "Array",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "64",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "65",
+   "Kind": "Model",
+   "Name": "CollectionsIntProperty",
+   "Namespace": "Type.Property.ValueTypes",
+   "Description": "Model with collection int properties",
+   "IsNullable": false,
+   "Usage": 6,
+   "Properties": [
+    {
+     "$id": "66",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$id": "67",
+      "Kind": "Array",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "68",
+       "Kind": "Primitive",
+       "Name": "Int32",
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "69",
+   "Kind": "Model",
+   "Name": "CollectionsModelProperty",
+   "Namespace": "Type.Property.ValueTypes",
+   "Description": "Model with collection model properties",
+   "IsNullable": false,
+   "Usage": 6,
+   "Properties": [
+    {
+     "$id": "70",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "Property",
+     "Type": {
+      "$id": "71",
+      "Kind": "Array",
+      "Name": "Array",
+      "ElementType": {
+       "$ref": "58"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+=======
    "$ref": "69"
+>>>>>>> origin/feature/v3
   },
   {
    "$id": "72",
@@ -557,7 +729,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with collection string properties",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "73",
@@ -680,7 +852,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a property never. (This property should not be included).",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": []
   },
   {
@@ -690,7 +862,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a property unknown, and the data is a string.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "90",
@@ -714,7 +886,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a property unknown, and the data is a int32.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "93",
@@ -738,7 +910,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a property unknown, and the data is a dictionnary.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "96",
@@ -762,7 +934,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a property unknown, and the data is an array.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "99",
@@ -786,7 +958,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a string literal property.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "102",
@@ -814,7 +986,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a int literal property.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "105",
@@ -842,7 +1014,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a float literal property.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "108",
@@ -870,7 +1042,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a boolean literal property.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "111",
@@ -900,7 +1072,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a union of string literal as property.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "115",
@@ -922,7 +1094,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a union of int literal as property.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "117",
@@ -944,7 +1116,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a union of float literal as property.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "119",
@@ -966,7 +1138,7 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Template type for testing models with specific properties. Pass in the type of the property you are looking for",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "121",

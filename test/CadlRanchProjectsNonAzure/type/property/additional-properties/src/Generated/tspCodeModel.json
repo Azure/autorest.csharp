@@ -24,7 +24,7 @@
    "Description": "The WidgetData0_kind",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "5",
@@ -47,7 +47,7 @@
    "Description": "The WidgetData1_kind",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "8",
@@ -70,7 +70,7 @@
    "Description": "The WidgetData2_kind",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   }
  ],
  "Models": [
@@ -81,7 +81,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from Record<unknown> type.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "12",
     "Kind": "Dictionary",
@@ -121,7 +121,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from a type that extends from Record<unknown>.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "BaseModel": {
     "$ref": "11"
    },
@@ -162,7 +162,7 @@
    "Description": "The model extends from Record<unknown> with a discriminator.",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "23",
     "Kind": "Dictionary",
@@ -216,7 +216,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model is from Record<unknown> type.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "31",
     "Kind": "Dictionary",
@@ -256,7 +256,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from a type that is Record<unknown> type",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "BaseModel": {
     "$ref": "30"
    },
@@ -297,7 +297,7 @@
    "Description": "The model is Record<unknown> with a discriminator.",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "42",
     "Kind": "Dictionary",
@@ -351,7 +351,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from Record<string> type.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "50",
     "Kind": "Dictionary",
@@ -391,7 +391,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model is from Record<string> type.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "56",
     "Kind": "Dictionary",
@@ -431,7 +431,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<string> with the same known property type",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "62",
     "Kind": "Dictionary",
@@ -471,7 +471,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from Record<float32> type.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "68",
     "Kind": "Dictionary",
@@ -511,7 +511,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model is from Record<float32> type.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "74",
     "Kind": "Dictionary",
@@ -551,7 +551,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<float32> with the same known property type",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "80",
     "Kind": "Dictionary",
@@ -591,7 +591,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from Record<ModelForRecord> type.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "86",
     "Kind": "Dictionary",
@@ -608,7 +608,7 @@
      "Namespace": "Type.Property.AdditionalProperties",
      "Description": "model for record",
      "IsNullable": false,
-     "Usage": "RoundTrip",
+     "Usage": 6,
      "Properties": [
       {
        "$id": "89",
@@ -651,7 +651,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model is from Record<ModelForRecord> type.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "93",
     "Kind": "Dictionary",
@@ -687,7 +687,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<ModelForRecord> with the same known property type",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "97",
     "Kind": "Dictionary",
@@ -723,7 +723,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from Record<ModelForRecord[]> type.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "101",
     "Kind": "Dictionary",
@@ -771,7 +771,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model is from Record<ModelForRecord[]> type.",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "107",
     "Kind": "Dictionary",
@@ -818,7 +818,7 @@
    "Name": "SpreadModelArrayRecord",
    "Namespace": "Type.Property.AdditionalProperties",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "113",
     "Kind": "Dictionary",
@@ -866,7 +866,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<string> with the different known property type",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "119",
     "Kind": "Dictionary",
@@ -906,7 +906,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<float32> with the different known property type",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "125",
     "Kind": "Dictionary",
@@ -946,7 +946,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<ModelForRecord> with the different known property type",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "131",
     "Kind": "Dictionary",
@@ -984,7 +984,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<ModelForRecord[]> with the different known property type",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "136",
     "Kind": "Dictionary",
@@ -1012,6 +1012,37 @@
      "SerializedName": "knownProp",
      "Description": "",
      "Type": {
+<<<<<<< HEAD
+      "$id": "137",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "138",
+   "Kind": "Model",
+   "Name": "DifferentSpreadStringDerived",
+   "Namespace": "Type.Property.AdditionalProperties",
+   "Description": "The model extends from a model that spread Record<string> with the different known property type",
+   "IsNullable": false,
+   "Usage": 6,
+   "BaseModel": {
+    "$ref": "115"
+   },
+   "Properties": [
+    {
+     "$id": "139",
+     "Name": "derivedProp",
+     "SerializedName": "derivedProp",
+     "Description": "The index property",
+     "Type": {
+=======
+>>>>>>> origin/feature/v3
       "$id": "140",
       "Kind": "string",
       "IsNullable": false
@@ -1028,7 +1059,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from a model that spread Record<string> with the different known property type",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "BaseModel": {
     "$ref": "118"
    },
@@ -1055,7 +1086,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from a model that spread Record<float32> with the different known property type",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "BaseModel": {
     "$ref": "124"
    },
@@ -1082,7 +1113,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model extends from a model that spread Record<ModelForRecord> with the different known property type",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "BaseModel": {
     "$ref": "130"
    },
@@ -1138,7 +1169,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<string> and Record<float32>",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "153",
     "Kind": "Dictionary",
@@ -1191,7 +1222,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<string | float32>",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "161",
     "Kind": "Dictionary",
@@ -1244,7 +1275,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<WidgetData>",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "169",
     "Kind": "Dictionary",
@@ -1265,7 +1296,7 @@
        "Name": "WidgetData0",
        "Namespace": "Type.Property.AdditionalProperties",
        "IsNullable": false,
-       "Usage": "RoundTrip",
+       "Usage": 6,
        "Properties": [
         {
          "$id": "173",
@@ -1305,7 +1336,7 @@
        "Name": "WidgetData1",
        "Namespace": "Type.Property.AdditionalProperties",
        "IsNullable": false,
-       "Usage": "RoundTrip",
+       "Usage": 6,
        "Properties": [
         {
          "$id": "178",
@@ -1398,7 +1429,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<WidgetData0 | WidgetData1>",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "189",
     "Kind": "Dictionary",
@@ -1447,7 +1478,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<WidgetData2 | WidgetData1>",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "195",
     "Kind": "Dictionary",
@@ -1468,7 +1499,7 @@
        "Name": "WidgetData2",
        "Namespace": "Type.Property.AdditionalProperties",
        "IsNullable": false,
-       "Usage": "RoundTrip",
+       "Usage": 6,
        "Properties": [
         {
          "$id": "199",
@@ -1536,7 +1567,7 @@
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model spread Record<WidgetData2[] | WidgetData1>",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "InheritedDictionaryType": {
     "$id": "206",
     "Kind": "Dictionary",
@@ -1592,9 +1623,56 @@
    "Description": "The derived discriminated type",
    "IsNullable": false,
    "DiscriminatorValue": "derived",
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "BaseModel": {
+<<<<<<< HEAD
+    "$ref": "38"
+   },
+   "Properties": [
+    {
+     "$id": "208",
+     "Name": "index",
+     "SerializedName": "index",
+     "Description": "The index property",
+     "Type": {
+      "$id": "209",
+      "Kind": "Primitive",
+      "Name": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "210",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "The age property",
+     "Type": {
+      "$id": "211",
+      "Kind": "Primitive",
+      "Name": "Float32",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "212",
+   "Kind": "Model",
+   "Name": "ExtendsUnknownAdditionalPropertiesDiscriminatedDerived",
+   "Namespace": "Type.Property.AdditionalProperties",
+   "Description": "The derived discriminated type",
+   "IsNullable": false,
+   "DiscriminatorValue": "derived",
+   "Usage": 6,
+   "BaseModel": {
+    "$ref": "19"
+=======
     "$ref": "41"
+>>>>>>> origin/feature/v3
    },
    "Properties": [
     {

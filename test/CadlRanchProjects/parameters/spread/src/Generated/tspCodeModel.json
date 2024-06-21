@@ -11,7 +11,7 @@
    "Namespace": "Parameters.Spread.Model",
    "Description": "This is a simple model.",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "3",
@@ -35,7 +35,7 @@
    "Namespace": "Parameters.Spread.Model",
    "Description": "This is a model with non-body http request decorator.",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "6",
@@ -58,7 +58,7 @@
    "Name": "SpreadAsRequestBodyRequest",
    "Namespace": "Parameters.Spread.Alias",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "9",
@@ -81,7 +81,7 @@
    "Name": "SpreadAsRequestParameterRequest",
    "Namespace": "",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "12",
@@ -104,7 +104,7 @@
    "Name": "SpreadWithMultipleParametersRequest",
    "Namespace": "",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "15",

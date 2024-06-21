@@ -10,6 +10,7 @@ import {
     createNetSdkContext,
     typeSpecCompile
 } from "./utils/test-util.js";
+import { UsageFlags } from "@azure-tools/typespec-client-generator-core";
 
 describe("Test GetInputType for array", () => {
     let runner: TestHost;
@@ -141,7 +142,7 @@ describe("Test GetInputType for enum", () => {
                 ],
                 IsExtensible: false,
                 IsNullable: false,
-                Usage: "Input"
+                Usage: UsageFlags.Input
             } as InputEnumType,
             root.Clients[0].Operations[0].Parameters[0].Type,
             `Enum type is not correct, got ${JSON.stringify(
@@ -210,7 +211,7 @@ describe("Test GetInputType for enum", () => {
                 ],
                 IsExtensible: false,
                 IsNullable: false,
-                Usage: "Input"
+                Usage: UsageFlags.Input
             } as InputEnumType,
             root.Clients[0].Operations[0].Parameters[0].Type,
             `Enum type is not correct, got ${JSON.stringify(
@@ -260,7 +261,7 @@ describe("Test GetInputType for enum", () => {
                 ],
                 IsExtensible: false,
                 IsNullable: false,
-                Usage: "Input"
+                Usage: UsageFlags.Input
             } as InputEnumType,
             root.Clients[0].Operations[0].Parameters[0].Type,
             `Enum type is not correct, got ${JSON.stringify(

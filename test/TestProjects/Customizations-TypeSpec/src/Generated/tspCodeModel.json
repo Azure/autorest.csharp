@@ -30,7 +30,7 @@
    "Description": "Extensible enum to customize operator",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "6",
@@ -62,7 +62,7 @@
    "Description": "Renamed enum (original name: EnumToRename)",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "11",
@@ -94,7 +94,7 @@
    "Description": "Enum with renamed value (original name: ValueToRename)",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "16",
@@ -126,7 +126,7 @@
    "Description": "Extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   },
   {
    "$id": "21",
@@ -153,7 +153,7 @@
    "Description": "A normal enum",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "RoundTrip"
+   "Usage": 6
   }
  ],
  "Models": [
@@ -164,7 +164,7 @@
    "Namespace": "CustomizationsInTsp",
    "Description": "Root RoundTrip model to reference all other types to ensure generation",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "Properties": [
     {
      "$id": "26",
@@ -189,7 +189,7 @@
       "Namespace": "CustomizationsInTsp",
       "Description": "Public model made internal",
       "IsNullable": false,
-      "Usage": "RoundTrip",
+      "Usage": 6,
       "Properties": [
        {
         "$id": "29",
@@ -221,7 +221,7 @@
       "Namespace": "CustomizationsInTsp",
       "Description": "Renamed model (original name: ModelToRename)",
       "IsNullable": false,
-      "Usage": "RoundTrip",
+      "Usage": 6,
       "Properties": [
        {
         "$id": "33",
@@ -266,7 +266,7 @@
       "Namespace": "CustomizationsInTsp",
       "Description": "Model moved into custom namespace",
       "IsNullable": false,
-      "Usage": "RoundTrip",
+      "Usage": 6,
       "Properties": [
        {
         "$id": "39",
@@ -298,7 +298,7 @@
       "Namespace": "CustomizationsInTsp",
       "Description": "Model with customized properties",
       "IsNullable": false,
-      "Usage": "RoundTrip",
+      "Usage": 6,
       "Properties": [
        {
         "$id": "43",
@@ -710,7 +710,7 @@
       "Namespace": "CustomizationsInTsp",
       "Description": "Model to add additional serializable property",
       "IsNullable": false,
-      "Usage": "RoundTrip",
+      "Usage": 6,
       "BaseModel": {
        "$ref": "32"
       },
@@ -756,7 +756,7 @@
       "Namespace": "CustomizationsInTsp",
       "Description": "Model to make to a struct",
       "IsNullable": false,
-      "Usage": "RoundTrip",
+      "Usage": 6,
       "Properties": [
        {
         "$id": "110",

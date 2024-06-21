@@ -10,7 +10,7 @@
    "Name": "InvalidAuth",
    "Namespace": "Authentication.OAuth2",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "3",

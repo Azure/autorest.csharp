@@ -10,7 +10,7 @@
    "Name": "BodyModel",
    "Namespace": "Parameters.BodyOptionality",
    "IsNullable": false,
-   "Usage": "Input",
+   "Usage": 2,
    "Properties": [
     {
      "$id": "3",

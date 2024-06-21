@@ -11,7 +11,7 @@
    "Namespace": "Type.Model.Inheritance.Recursive",
    "Description": "extension",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": 6,
    "BaseModel": {
     "$id": "3",
     "Kind": "Model",
@@ -19,7 +19,7 @@
     "Namespace": "Type.Model.Inheritance.Recursive",
     "Description": "element",
     "IsNullable": false,
-    "Usage": "RoundTrip",
+    "Usage": 6,
     "Properties": [
      {
       "$id": "4",

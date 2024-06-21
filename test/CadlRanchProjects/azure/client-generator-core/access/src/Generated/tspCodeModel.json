@@ -12,7 +12,7 @@
    "Accessibility": "public",
    "Description": "Used in a public operation, should be generated and exported.",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "3",
@@ -37,7 +37,7 @@
    "Accessibility": "public",
    "Description": "Used in a public operation, should be generated and exported.",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "6",
@@ -62,7 +62,7 @@
    "Accessibility": "internal",
    "Description": "Used in an internal operation, should be generated but not exported.",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "9",
@@ -87,7 +87,7 @@
    "Accessibility": "internal",
    "Description": "Used in an internal operation, should be generated but not exported.",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "12",
@@ -112,7 +112,7 @@
    "Accessibility": "public",
    "Description": "Used in an internal operation but with public decorator, should be generated and exported.",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "15",
@@ -137,7 +137,7 @@
    "Accessibility": "public",
    "Description": "Used by both public and internal operation. It should be generated and exported.",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "18",
@@ -162,7 +162,7 @@
    "Accessibility": "internal",
    "Description": "Used in internal operations, should be generated but not exported.",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": 4,
    "BaseModel": {
     "$id": "21",
     "Kind": "Model",
@@ -171,7 +171,7 @@
     "Accessibility": "internal",
     "Description": "Used in internal operations, should be generated but not exported.",
     "IsNullable": false,
-    "Usage": "Output",
+    "Usage": 4,
     "Properties": [
      {
       "$id": "22",
@@ -202,7 +202,7 @@
       "Accessibility": "internal",
       "Description": "Used in internal operations, should be generated but not exported.",
       "IsNullable": false,
-      "Usage": "Output",
+      "Usage": 4,
       "Properties": [
        {
         "$id": "26",
@@ -239,7 +239,7 @@
    "Description": "Used in internal operations, should be generated but not exported.",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
-   "Usage": "Output",
+   "Usage": 4,
    "Properties": [
     {
      "$id": "29",
@@ -279,7 +279,7 @@
    "Description": "Used in internal operations, should be generated but not exported.",
    "IsNullable": false,
    "DiscriminatorValue": "real",
-   "Usage": "Output",
+   "Usage": 4,
    "BaseModel": {
     "$ref": "28"
    },

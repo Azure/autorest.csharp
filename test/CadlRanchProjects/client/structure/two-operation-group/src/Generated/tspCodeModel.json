@@ -37,7 +37,7 @@
    "Namespace": "Client.Structure.Service",
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": 2
   }
  ],
  "Models": [],

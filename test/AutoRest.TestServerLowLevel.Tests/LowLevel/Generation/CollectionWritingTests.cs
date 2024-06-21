@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void RoundTripPrimitiveCollectionProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/primitive-properties/main.cadl
-            var input = new InputModelType("RoundTripModel", "Cadl.TestServer.CollectionPropertiesBasic.Models", "public", null, "Round-trip model with collection properties", InputModelTypeUsage.RoundTrip,
+            var input = new InputModelType("RoundTripModel", "Cadl.TestServer.CollectionPropertiesBasic.Models", "public", null, "Round-trip model with collection properties", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
                 new List<InputModelProperty> { RequiredStringListProperty, RequiredIntListProperty },
                 null, new List<InputModelType>(), null, null, null, false);
 
@@ -53,11 +53,11 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/collections-models/main.cadl#L36-L44
             var elementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public", null,
-                    "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip,
+                    "Simple model that will appear in a collection.", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
                     new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
                 null, new List<InputModelType>(), null, null, null, false);
             var collectionModelType = new InputModelType("ModelCollectionModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public", null,
-                    "Simple model with model collection properties", InputModelTypeUsage.RoundTrip,
+                    "Simple model with model collection properties", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
                 new List<InputModelProperty>{
                         new InputModelProperty("requiredModelCollection", "requiredModelCollection", "Required collection of models.", new InputListType("requiredModelCollection", elementModelType, false, false), null, true, false, false),
                         new InputModelProperty("optionalModelCollection", "optionalModelCollection", "Optional collection of models.", new InputListType("optionalModelCollection", elementModelType, false, false), null, false, false, false),
@@ -75,11 +75,11 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/collections-models/main.cadl#L36-L44
             var elementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public", null,
-                    "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip,
+                    "Simple model that will appear in a collection.", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
                     new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
                 null, new List<InputModelType>(), null, null, null, false);
             var collectionModelType = new InputModelType("ModelCollectionModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public", null,
-                    "Simple model with model collection properties", InputModelTypeUsage.RoundTrip,
+                    "Simple model with model collection properties", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
                 new List<InputModelProperty>{
                         new InputModelProperty("required2DCollection", "required2DCollection", "Required collection of models.", new InputListType("required2DCollection", new InputListType("requiredModelCollection", elementModelType, false, false), false, false), null, true, false, false),
                         new InputModelProperty("optional2DCollection", "optional2DCollection", "Optional collection of models.", new InputListType("optional2DCollection", new InputListType("optionalModelCollection", elementModelType, false, false), false, false), null, false, false, false),

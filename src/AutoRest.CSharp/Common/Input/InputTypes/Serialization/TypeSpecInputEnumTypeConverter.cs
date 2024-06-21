@@ -32,8 +32,7 @@ namespace AutoRest.CSharp.Common.Input
             string? accessibility = null;
             string? deprecated = null;
             string? description = null;
-            InputModelTypeUsage usage = InputModelTypeUsage.None;
-            string? usageString = null;
+            int usageValue = default;
             bool isExtendable = false;
             InputType? valueType = null;
             IReadOnlyList<InputEnumTypeValue>? values = null;
@@ -46,7 +45,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputEnumType.Accessibility), ref accessibility)
                     || reader.TryReadString(nameof(InputEnumType.Deprecated), ref deprecated)
                     || reader.TryReadString(nameof(InputEnumType.Description), ref description)
-                    || reader.TryReadString(nameof(InputEnumType.Usage), ref usageString)
+                    || reader.TryReadInt32(nameof(InputEnumType.Usage), ref usageValue)
                     || reader.TryReadBoolean(nameof(InputEnumType.IsExtensible), ref isExtendable)
                     || reader.TryReadWithConverter(nameof(InputEnumType.ValueType), options, ref valueType)
                     || reader.TryReadWithConverter(nameof(InputEnumType.Values), options, ref values);
@@ -66,11 +65,6 @@ namespace AutoRest.CSharp.Common.Input
                 description = $"The {name}.";
             }
 
-            if (usageString != null)
-            {
-                Enum.TryParse(usageString, ignoreCase: true, out usage);
-            }
-
             if (values == null || values.Count == 0)
             {
                 throw new JsonException("Enum must have at least one value");
@@ -81,7 +75,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException("The ValueType of an EnumType must be a primitive type.");
             }
 
-            var enumType = new InputEnumType(name, ns, accessibility, deprecated, description!, usage, inputValueType, NormalizeValues(values, inputValueType), isExtendable, isNullable);
+            var enumType = new InputEnumType(name, ns, accessibility, deprecated, description!, (InputModelTypeUsage)usageValue, inputValueType, NormalizeValues(values, inputValueType), isExtendable, isNullable);
             if (id != null)
             {
                 resolver.AddReference(id, enumType);
