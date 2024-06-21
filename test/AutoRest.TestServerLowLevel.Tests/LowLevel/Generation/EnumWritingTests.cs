@@ -178,7 +178,7 @@ public bool Equals(global::Cadl.TestServer.EnumPropertiesBasic.TranslationLangua
 
 /// <inheritdoc />
 [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-public override int GetHashCode() => global::System.StringComparer.InvariantCultureIgnoreCase.GetHashCode(_value);
+public override int GetHashCode() => _value != null ? global::System.StringComparer.InvariantCultureIgnoreCase.GetHashCode(_value) : 0;
 /// <inheritdoc />
 public override string ToString() => _value;
 }
