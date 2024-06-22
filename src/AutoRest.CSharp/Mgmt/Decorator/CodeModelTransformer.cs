@@ -40,7 +40,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             FrameworkTypeUpdater.ValidateAndUpdate(codeModel);
             SchemaFormatByNameTransformer.Update(codeModel);
             SealedChoicesUpdater.UpdateSealChoiceTypes(codeModel);
-            RenameTimeToOn.Update(codeModel);
             RearrangeParameterOrder.Update(codeModel);
             RenamePluralEnums.Update(codeModel);
             DuplicateSchemaResolver.ResolveDuplicates(codeModel);

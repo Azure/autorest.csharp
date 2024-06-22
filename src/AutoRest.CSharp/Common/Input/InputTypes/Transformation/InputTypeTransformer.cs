@@ -12,6 +12,7 @@ namespace AutoRest.CSharp.Common.Input
             InputClientTransformer.Transform(input);
             SchemaNameAndFormatUpdater.UpdateAcronyms(input);
             UrlToUri.UpdateSuffix(input);
+            RenameTimeToOn.Update(input);
         }
     }
 }

@@ -3,8 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Builders;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
@@ -19,23 +18,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             {"Modification", "Modified"},
         };
 
-        public static void Update(CodeModel codeModel)
+        public static void Update(InputNamespace inputNamespace)
         {
-            foreach (var schema in codeModel.AllSchemas)
+            foreach (var model in inputNamespace.Models)
             {
-                if (schema is not ObjectSchema objSchema)
+                if (model is not InputModelType inputModel)
                     continue;
 
-                foreach (var property in objSchema.Properties)
+                foreach (var property in inputModel.Properties)
                 {
-                    if (property.Schema.Type is AllSchemaTypes.String or AllSchemaTypes.AnyObject)
+                    if (property.Type is InputPrimitiveType inputPrimitiveType && inputPrimitiveType.Kind != InputPrimitiveTypeKind.PlainDate)
                     {
-                        if (TypeFactory.ToXMsFormatType(property.Schema.Extensions?.Format) != typeof(DateTimeOffset))
-                        {
-                            continue;
-                        }
+                        continue;
                     }
-                    else if (property.Schema.Type is not (AllSchemaTypes.Date or AllSchemaTypes.DateTime or AllSchemaTypes.Unixtime))
+                    else if (property.Type is not InputDateTimeType)
                     {
                         continue;
                     }
@@ -69,7 +65,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     {
                         var prefix = propName.Substring(0, propName.Length - lengthToCut);
                         var newName = (_nounToVerbDicts.TryGetValue(prefix, out var verb) ? verb : prefix) + "On";
-                        property.Language.Default.Name = newName;
+                        property.Name = newName;
                     }
                 }
             }

@@ -224,7 +224,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
         private int CheckRules(string name, IReadOnlyList<FormatRule> rules)
         {
-            for (int i = 0; i < rules.Count; i++)
+            // The later rule has higher priority since they are user defined
+            for (int i = rules.Count - 1; i >= 0; i--)
             {
                 var namePattern = rules[i].NamePattern;
                 var isMatch = namePattern.Pattern switch
