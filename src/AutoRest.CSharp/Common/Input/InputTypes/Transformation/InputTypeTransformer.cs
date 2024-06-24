@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Common.Input
                 string prefix = Configuration.Namespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : MgmtContext.RPName;
                 string suffix = serializedName.Equals("Resource") ? "Data" : string.Empty;
                 inputModelType.SpecName ??= inputModelType.Name;
-                inputModelType.Name = prefix + serializedName + suffix;
+                inputModelType.Name = prefix + inputModelType.Name + suffix;
                 MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                     new TransformItem(TransformTypeName.PrependRpPrefix, serializedName), inputModelType.SpecName, "ApplyPrependRpPrefix", oriName, inputModelType.Name);
             }
@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Common.Input
                 string prefix = Configuration.Namespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : MgmtContext.RPName;
                 string suffix = serializedName.Equals("Resource") ? "Data" : string.Empty;
                 inputEnumType.SpecName ??= inputEnumType.Name;
-                inputEnumType.Name = prefix + serializedName + suffix;
+                inputEnumType.Name = prefix + inputEnumType.Name + suffix;
                 MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                     new TransformItem(TransformTypeName.PrependRpPrefix, serializedName), inputEnumType.SpecName, "ApplyPrependRpPrefix", oriName, inputEnumType.Name);
             }
