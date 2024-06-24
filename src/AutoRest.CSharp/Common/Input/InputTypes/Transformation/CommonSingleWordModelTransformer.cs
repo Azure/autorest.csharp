@@ -64,11 +64,10 @@ namespace AutoRest.CSharp.Common.Input
 
         private static void TransformCommonSingleWord(InputEnumType inputEnumType)
         {
-            string serializedName = inputEnumType.SpecName ?? inputEnumType.Name;
-            if (_schemasToChange.Contains(serializedName))
+            if (_schemasToChange.Contains(inputEnumType.Name))
             {
                 string prefix = Configuration.Namespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : MgmtContext.RPName;
-                string suffix = serializedName.Equals("Resource") ? "Data" : string.Empty;
+                string suffix = inputEnumType.Name.Equals("Resource") ? "Data" : string.Empty;
                 inputEnumType.Name = prefix + inputEnumType.Name + suffix;
             }
         }
