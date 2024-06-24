@@ -36,7 +36,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(CertificateUri))
             {
                 writer.WritePropertyName("certificateUrl"u8);
-                writer.WriteStringValue(CertificateUri);
+                writer.WriteStringValue(CertificateUri.AbsoluteUri);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -77,7 +77,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 return null;
             }
             ProtocolType? protocol = default;
-            string certificateUrl = default;
+            Uri certificateUrl = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -93,7 +93,11 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
                 if (property.NameEquals("certificateUrl"u8))
                 {
-                    certificateUrl = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    certificateUrl = new Uri(property.Value.GetString());
                     continue;
                 }
                 if (options.Format != "W")
@@ -142,15 +146,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 if (Optional.IsDefined(CertificateUri))
                 {
                     builder.Append("  certificateUrl: ");
-                    if (CertificateUri.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{CertificateUri}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{CertificateUri}'");
-                    }
+                    builder.AppendLine($"'{CertificateUri.AbsoluteUri}'");
                 }
             }
 

@@ -30,7 +30,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("secretUrl"u8);
-            writer.WriteStringValue(SecretUri);
+            writer.WriteStringValue(SecretUri.AbsoluteUri);
             writer.WritePropertyName("sourceVault"u8);
             JsonSerializer.Serialize(writer, SourceVault);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -71,7 +71,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             {
                 return null;
             }
-            string secretUrl = default;
+            Uri secretUrl = default;
             WritableSubResource sourceVault = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
@@ -79,7 +79,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             {
                 if (property.NameEquals("secretUrl"u8))
                 {
-                    secretUrl = property.Value.GetString();
+                    secretUrl = new Uri(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("sourceVault"u8))
@@ -118,15 +118,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 if (Optional.IsDefined(SecretUri))
                 {
                     builder.Append("  secretUrl: ");
-                    if (SecretUri.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{SecretUri}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{SecretUri}'");
-                    }
+                    builder.AppendLine($"'{SecretUri.AbsoluteUri}'");
                 }
             }
 

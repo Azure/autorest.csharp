@@ -63,7 +63,7 @@ namespace AzureSample.ResourceManager.Sample.Models
         /// Serialized Name: WinRMListener.certificateUrl
         /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal WinRMListener(ProtocolType? protocol, string certificateUri, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal WinRMListener(ProtocolType? protocol, Uri certificateUri, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Protocol = protocol;
             CertificateUri = certificateUri;
@@ -81,6 +81,6 @@ namespace AzureSample.ResourceManager.Sample.Models
         /// Serialized Name: WinRMListener.certificateUrl
         /// </summary>
         [WirePath("certificateUrl")]
-        public string CertificateUri { get; set; }
+        public Uri CertificateUri { get; set; }
     }
 }
