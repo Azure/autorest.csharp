@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -17,7 +18,7 @@ namespace MgmtAcronymMapping.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("secretUrl"u8);
-            writer.WriteStringValue(SecretUri);
+            writer.WriteStringValue(SecretUri.AbsoluteUri);
             writer.WritePropertyName("sourceVault"u8);
             JsonSerializer.Serialize(writer, SourceVault);
             writer.WriteEndObject();
@@ -29,13 +30,13 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            string secretUrl = default;
+            Uri secretUrl = default;
             WritableSubResource sourceVault = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("secretUrl"u8))
                 {
-                    secretUrl = property.Value.GetString();
+                    secretUrl = new Uri(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("sourceVault"u8))

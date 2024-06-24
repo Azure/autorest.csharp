@@ -43,7 +43,7 @@ namespace MgmtPropertyChooser.Models
                 return null;
             }
             string principalId = default;
-            int? tenant1Id = default;
+            int? tenantId = default;
             ResourceIdentityType? type = default;
             IDictionary<string, UserAssignedIdentity> userAssignedIdentities = default;
             foreach (var property in element.EnumerateObject())
@@ -53,13 +53,13 @@ namespace MgmtPropertyChooser.Models
                     principalId = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("tenant1Id"u8))
+                if (property.NameEquals("tenantId"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    tenant1Id = property.Value.GetInt32();
+                    tenantId = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("type"u8))
@@ -86,7 +86,7 @@ namespace MgmtPropertyChooser.Models
                     continue;
                 }
             }
-            return new IdentityWithDifferentPropertyType(principalId, tenant1Id, type, userAssignedIdentities ?? new ChangeTrackingDictionary<string, UserAssignedIdentity>());
+            return new IdentityWithDifferentPropertyType(principalId, tenantId, type, userAssignedIdentities ?? new ChangeTrackingDictionary<string, UserAssignedIdentity>());
         }
     }
 }

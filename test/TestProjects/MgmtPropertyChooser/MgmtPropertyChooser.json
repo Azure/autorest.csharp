@@ -700,7 +700,7 @@
                     "type": "string",
                     "description": "The principal id of virtual machine identity. This property will only be provided for a system assigned identity."
                 },
-                "tenant1Id": {
+                "tenantId": {
                     "readOnly": true,
                     "type": "integer",
                     "description": "The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity."

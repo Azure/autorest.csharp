@@ -147,15 +147,15 @@ namespace MgmtPropertyChooser.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.IdentityWithDifferentPropertyType"/>. </summary>
         /// <param name="principalId"> The principal id of virtual machine identity. This property will only be provided for a system assigned identity. </param>
-        /// <param name="tenant1Id"> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </param>
+        /// <param name="tenantId"> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </param>
         /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine. </param>
         /// <param name="userAssignedIdentities"> The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'. </param>
         /// <returns> A new <see cref="Models.IdentityWithDifferentPropertyType"/> instance for mocking. </returns>
-        public static IdentityWithDifferentPropertyType IdentityWithDifferentPropertyType(string principalId = null, int? tenant1Id = null, ResourceIdentityType? resourceIdentityType = null, IDictionary<string, UserAssignedIdentity> userAssignedIdentities = null)
+        public static IdentityWithDifferentPropertyType IdentityWithDifferentPropertyType(string principalId = null, int? tenantId = null, ResourceIdentityType? resourceIdentityType = null, IDictionary<string, UserAssignedIdentity> userAssignedIdentities = null)
         {
             userAssignedIdentities ??= new Dictionary<string, UserAssignedIdentity>();
 
-            return new IdentityWithDifferentPropertyType(principalId, tenant1Id, resourceIdentityType, userAssignedIdentities);
+            return new IdentityWithDifferentPropertyType(principalId, tenantId, resourceIdentityType, userAssignedIdentities);
         }
     }
 }

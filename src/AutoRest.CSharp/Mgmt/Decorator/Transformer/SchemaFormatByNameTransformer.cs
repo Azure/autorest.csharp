@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         private IDictionary<string, string> _allFormatByNameRules = new Dictionary<string, string>()
         {
             { "eTag", "etag" },
-            { "*URL", "Uri" },
+            { "*Url", "Uri" },
         };
 
         private Dictionary<Schema, (string CSharpName, TransformItem? Transform, string TransformLogMessage)> schemaCache = new();

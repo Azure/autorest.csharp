@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -23,7 +24,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(CertificateUri))
             {
                 writer.WritePropertyName("certificateUrl"u8);
-                writer.WriteStringValue(CertificateUri);
+                writer.WriteStringValue(CertificateUri.AbsoluteUri);
             }
             writer.WriteEndObject();
         }
@@ -35,7 +36,7 @@ namespace MgmtAcronymMapping.Models
                 return null;
             }
             ProtocolType? protocol = default;
-            string certificateUrl = default;
+            Uri certificateUrl = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("protocol"u8))
@@ -49,7 +50,11 @@ namespace MgmtAcronymMapping.Models
                 }
                 if (property.NameEquals("certificateUrl"u8))
                 {
-                    certificateUrl = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    certificateUrl = new Uri(property.Value.GetString());
                     continue;
                 }
             }

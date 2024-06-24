@@ -21,13 +21,13 @@ namespace MgmtPropertyChooser.Models
 
         /// <summary> Initializes a new instance of <see cref="IdentityWithDifferentPropertyType"/>. </summary>
         /// <param name="principalId"> The principal id of virtual machine identity. This property will only be provided for a system assigned identity. </param>
-        /// <param name="tenant1Id"> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </param>
+        /// <param name="tenantId"> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </param>
         /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine. </param>
         /// <param name="userAssignedIdentities"> The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'. </param>
-        internal IdentityWithDifferentPropertyType(string principalId, int? tenant1Id, ResourceIdentityType? resourceIdentityType, IDictionary<string, UserAssignedIdentity> userAssignedIdentities)
+        internal IdentityWithDifferentPropertyType(string principalId, int? tenantId, ResourceIdentityType? resourceIdentityType, IDictionary<string, UserAssignedIdentity> userAssignedIdentities)
         {
             PrincipalId = principalId;
-            Tenant1Id = tenant1Id;
+            TenantId = tenantId;
             ResourceIdentityType = resourceIdentityType;
             UserAssignedIdentities = userAssignedIdentities;
         }
@@ -35,7 +35,7 @@ namespace MgmtPropertyChooser.Models
         /// <summary> The principal id of virtual machine identity. This property will only be provided for a system assigned identity. </summary>
         public string PrincipalId { get; }
         /// <summary> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </summary>
-        public int? Tenant1Id { get; }
+        public int? TenantId { get; }
         /// <summary> The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine. </summary>
         public ResourceIdentityType? ResourceIdentityType { get; set; }
         /// <summary> The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'. </summary>

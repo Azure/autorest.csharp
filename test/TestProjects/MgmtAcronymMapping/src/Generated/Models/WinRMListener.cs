@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace MgmtAcronymMapping.Models
 {
     /// <summary>
@@ -27,7 +29,7 @@ namespace MgmtAcronymMapping.Models
         /// This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: &lt;br&gt;&lt;br&gt; {&lt;br&gt;  "data":"&lt;Base64-encoded-certificate&gt;",&lt;br&gt;  "dataType":"pfx",&lt;br&gt;  "password":"&lt;pfx-file-password&gt;"&lt;br&gt;}
         /// Serialized Name: WinRMListener.certificateUrl
         /// </param>
-        internal WinRMListener(ProtocolType? protocol, string certificateUri)
+        internal WinRMListener(ProtocolType? protocol, Uri certificateUri)
         {
             Protocol = protocol;
             CertificateUri = certificateUri;
@@ -42,6 +44,6 @@ namespace MgmtAcronymMapping.Models
         /// This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: &lt;br&gt;&lt;br&gt; {&lt;br&gt;  "data":"&lt;Base64-encoded-certificate&gt;",&lt;br&gt;  "dataType":"pfx",&lt;br&gt;  "password":"&lt;pfx-file-password&gt;"&lt;br&gt;}
         /// Serialized Name: WinRMListener.certificateUrl
         /// </summary>
-        public string CertificateUri { get; set; }
+        public Uri CertificateUri { get; set; }
     }
 }

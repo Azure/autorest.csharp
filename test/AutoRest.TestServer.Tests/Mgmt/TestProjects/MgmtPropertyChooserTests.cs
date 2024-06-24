@@ -81,7 +81,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var tenantIdProperty = properties[1];
             Assert.NotNull(tenantIdProperty);
             Assert.AreEqual("TenantId", tenantIdProperty.Name);
-            Assert.AreEqual(typeof(Guid?), tenantIdProperty.PropertyType);
+            Assert.AreEqual(typeof(string), tenantIdProperty.PropertyType);
 
             var userAssignedProperty = properties[3];
             Assert.NotNull(userAssignedProperty);
@@ -112,7 +112,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             var tenantIdProperty = properties[1];
             Assert.NotNull(tenantIdProperty);
-            Assert.AreEqual("Tenant1Id", tenantIdProperty.Name);
+            Assert.AreEqual("TenantId", tenantIdProperty.Name);
             Assert.AreEqual(typeof(int?), tenantIdProperty.PropertyType);
 
             var userAssignedProperty = properties[3];

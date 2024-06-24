@@ -39,7 +39,7 @@ schemas: !Schemas
       precision: 32
       language: !Languages 
         default:
-          name: IdentityWithDifferentPropertyTypeTenant1Id
+          name: IdentityWithDifferentPropertyTypeTenantId
           description: The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.
       protocol: !Protocols {}
   strings:
@@ -1357,10 +1357,10 @@ schemas: !Schemas
                       - !Property 
                         schema: *ref_37
                         readOnly: true
-                        serializedName: tenant1Id
+                        serializedName: tenantId
                         language: !Languages 
                           default:
-                            name: tenant1Id
+                            name: tenantId
                             description: The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.
                         protocol: !Protocols {}
                       - !Property 

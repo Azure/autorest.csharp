@@ -48,7 +48,7 @@ namespace MgmtParamOrdering
         /// <param name="allowPublicAccessWhenBehindVnet"> The flag to indicate whether to allow public access when behind VNet. </param>
         /// <param name="primaryUserAssignedIdentity"> The user assigned identity resource id that represents the workspace identity. </param>
         /// <param name="tenantId"> The tenant id associated with this workspace. </param>
-        internal WorkspaceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string workspaceId, string description, string friendlyName, string keyVault, string applicationInsights, string containerRegistry, string storageAccount, string discoveryUri, ProvisioningState? provisioningState, bool? hbiWorkspace, string serviceProvisionedResourceGroup, int? privateLinkCount, string imageBuildCompute, bool? allowPublicAccessWhenBehindVnet, string primaryUserAssignedIdentity, Guid? tenantId) : base(id, name, resourceType, systemData, tags, location)
+        internal WorkspaceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string workspaceId, string description, string friendlyName, string keyVault, string applicationInsights, string containerRegistry, string storageAccount, Uri discoveryUri, ProvisioningState? provisioningState, bool? hbiWorkspace, string serviceProvisionedResourceGroup, int? privateLinkCount, string imageBuildCompute, bool? allowPublicAccessWhenBehindVnet, string primaryUserAssignedIdentity, Guid? tenantId) : base(id, name, resourceType, systemData, tags, location)
         {
             WorkspaceId = workspaceId;
             Description = description;
@@ -83,7 +83,7 @@ namespace MgmtParamOrdering
         /// <summary> ARM id of the storage account associated with this workspace. This cannot be changed once the workspace has been created. </summary>
         public string StorageAccount { get; set; }
         /// <summary> Url for the discovery service to identify regional endpoints for machine learning experimentation services. </summary>
-        public string DiscoveryUri { get; set; }
+        public Uri DiscoveryUri { get; set; }
         /// <summary> The current deployment state of workspace resource. The provisioningState is to indicate states for resource provisioning. </summary>
         public ProvisioningState? ProvisioningState { get; }
         /// <summary> The flag to signal HBI data in the workspace and reduce diagnostic data collected by the service. </summary>

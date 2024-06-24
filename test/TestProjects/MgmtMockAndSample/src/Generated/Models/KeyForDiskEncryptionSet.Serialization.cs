@@ -24,7 +24,7 @@ namespace MgmtMockAndSample.Models
                 JsonSerializer.Serialize(writer, SourceVault);
             }
             writer.WritePropertyName("keyUrl"u8);
-            writer.WriteStringValue(KeyUri);
+            writer.WriteStringValue(KeyUri.AbsoluteUri);
             if (Optional.IsDefined(NewKeyUri))
             {
                 writer.WritePropertyName("newKeyUrl"u8);
@@ -40,7 +40,7 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             WritableSubResource sourceVault = default;
-            string keyUrl = default;
+            Uri keyUrl = default;
             Uri newKeyUrl = default;
             IList<string> newReadOnlyArrayProperty = default;
             foreach (var property in element.EnumerateObject())
@@ -56,7 +56,7 @@ namespace MgmtMockAndSample.Models
                 }
                 if (property.NameEquals("keyUrl"u8))
                 {
-                    keyUrl = property.Value.GetString();
+                    keyUrl = new Uri(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("newKeyUrl"u8))
