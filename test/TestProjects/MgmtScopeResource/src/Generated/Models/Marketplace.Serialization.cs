@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 
@@ -21,7 +22,7 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            string etag = default;
+            ETag? etag = default;
             IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -57,7 +58,11 @@ namespace MgmtScopeResource.Models
             {
                 if (property.NameEquals("etag"u8))
                 {
-                    etag = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    etag = new ETag(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
@@ -22,7 +23,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(ETag))
             {
                 writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(ETag);
+                writer.WriteStringValue(ETag.Value.ToString());
             }
             if (Optional.IsDefined(Sku))
             {
@@ -69,7 +70,7 @@ namespace MgmtMockAndSample
             {
                 return null;
             }
-            string etag = default;
+            ETag? etag = default;
             ManagedHsmSku sku = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
@@ -84,7 +85,11 @@ namespace MgmtMockAndSample
             {
                 if (property.NameEquals("etag"u8))
                 {
-                    etag = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    etag = new ETag(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("sku"u8))

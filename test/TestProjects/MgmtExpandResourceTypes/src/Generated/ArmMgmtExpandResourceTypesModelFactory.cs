@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
@@ -38,7 +39,7 @@ namespace MgmtExpandResourceTypes.Models
         /// <param name="soaRecord"> The SOA record in the record set. </param>
         /// <param name="caaRecords"> The list of CAA records in the record set. </param>
         /// <returns> A new <see cref="MgmtExpandResourceTypes.RecordSetData"/> instance for mocking. </returns>
-        public static RecordSetData RecordSetData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string etag = null, IDictionary<string, string> metadata = null, long? ttl = null, string fqdn = null, string provisioningState = null, ResourceIdentifier targetResourceId = null, IEnumerable<ARecord> aRecords = null, IEnumerable<AaaaRecord> aaaaRecords = null, IEnumerable<MxRecord> mxRecords = null, IEnumerable<NsRecord> nsRecords = null, IEnumerable<PtrRecord> ptrRecords = null, IEnumerable<SrvRecord> srvRecords = null, IEnumerable<TxtRecord> txtRecords = null, string cname = null, SoaRecord soaRecord = null, IEnumerable<CaaRecord> caaRecords = null)
+        public static RecordSetData RecordSetData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, ETag? etag = null, IDictionary<string, string> metadata = null, long? ttl = null, string fqdn = null, string provisioningState = null, ResourceIdentifier targetResourceId = null, IEnumerable<ARecord> aRecords = null, IEnumerable<AaaaRecord> aaaaRecords = null, IEnumerable<MxRecord> mxRecords = null, IEnumerable<NsRecord> nsRecords = null, IEnumerable<PtrRecord> ptrRecords = null, IEnumerable<SrvRecord> srvRecords = null, IEnumerable<TxtRecord> txtRecords = null, string cname = null, SoaRecord soaRecord = null, IEnumerable<CaaRecord> caaRecords = null)
         {
             metadata ??= new Dictionary<string, string>();
             aRecords ??= new List<ARecord>();
@@ -92,7 +93,7 @@ namespace MgmtExpandResourceTypes.Models
         /// <param name="registrationVirtualNetworks"> A list of references to virtual networks that register hostnames in this DNS zone. This is a only when ZoneType is Private. </param>
         /// <param name="resolutionVirtualNetworks"> A list of references to virtual networks that resolve records in this DNS zone. This is a only when ZoneType is Private. </param>
         /// <returns> A new <see cref="MgmtExpandResourceTypes.ZoneData"/> instance for mocking. </returns>
-        public static ZoneData ZoneData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string etag = null, long? maxNumberOfRecordSets = null, long? maxNumberOfRecordsPerRecordSet = null, long? numberOfRecordSets = null, IEnumerable<string> nameServers = null, ZoneType? zoneType = null, MachineType? machineType = null, StorageType? storageType = null, MemoryType? memoryType = null, IEnumerable<WritableSubResource> registrationVirtualNetworks = null, IEnumerable<WritableSubResource> resolutionVirtualNetworks = null)
+        public static ZoneData ZoneData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, ETag? etag = null, long? maxNumberOfRecordSets = null, long? maxNumberOfRecordsPerRecordSet = null, long? numberOfRecordSets = null, IEnumerable<string> nameServers = null, ZoneType? zoneType = null, MachineType? machineType = null, StorageType? storageType = null, MemoryType? memoryType = null, IEnumerable<WritableSubResource> registrationVirtualNetworks = null, IEnumerable<WritableSubResource> resolutionVirtualNetworks = null)
         {
             tags ??= new Dictionary<string, string>();
             nameServers ??= new List<string>();

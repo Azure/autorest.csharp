@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 
@@ -366,7 +367,7 @@ namespace MgmtScopeResource.Models
         /// <param name="etag"> The etag for the resource. </param>
         /// <param name="tags"> Resource tags. </param>
         /// <returns> A new <see cref="Models.Marketplace"/> instance for mocking. </returns>
-        public static Marketplace Marketplace(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string billingPeriodId = null, DateTimeOffset? usageStart = null, DateTimeOffset? usageEnd = null, decimal? resourceRate = null, string offerName = null, string resourceGroup = null, string additionalInfo = null, string orderNumber = null, string instanceName = null, string instanceId = null, string currency = null, decimal? consumedQuantity = null, string unitOfMeasure = null, decimal? pretaxCost = null, bool? isEstimated = null, Guid? meterId = null, Guid? subscriptionGuid = null, string subscriptionName = null, string accountName = null, string departmentName = null, string consumedService = null, string costCenter = null, string additionalProperties = null, string publisherName = null, string planName = null, bool? isRecurringCharge = null, string etag = null, IReadOnlyDictionary<string, string> tags = null)
+        public static Marketplace Marketplace(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string billingPeriodId = null, DateTimeOffset? usageStart = null, DateTimeOffset? usageEnd = null, decimal? resourceRate = null, string offerName = null, string resourceGroup = null, string additionalInfo = null, string orderNumber = null, string instanceName = null, string instanceId = null, string currency = null, decimal? consumedQuantity = null, string unitOfMeasure = null, decimal? pretaxCost = null, bool? isEstimated = null, Guid? meterId = null, Guid? subscriptionGuid = null, string subscriptionName = null, string accountName = null, string departmentName = null, string consumedService = null, string costCenter = null, string additionalProperties = null, string publisherName = null, string planName = null, bool? isRecurringCharge = null, ETag? etag = null, IReadOnlyDictionary<string, string> tags = null)
         {
             tags ??= new Dictionary<string, string>();
 

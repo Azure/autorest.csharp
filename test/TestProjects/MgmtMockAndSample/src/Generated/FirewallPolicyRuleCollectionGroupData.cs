@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure;
 using Azure.Core;
 using MgmtMockAndSample.Models;
 
@@ -35,7 +36,7 @@ namespace MgmtMockAndSample
         /// The available derived classes include <see cref="FirewallPolicyFilterRuleCollection"/> and <see cref="FirewallPolicyNatRuleCollection"/>.
         /// </param>
         /// <param name="provisioningState"> The provisioning state of the firewall policy rule collection group resource. </param>
-        internal FirewallPolicyRuleCollectionGroupData(string id, string name, string etag, ResourceType? resourceType, int? priority, IList<FirewallPolicyRuleCollection> ruleCollections, ProvisioningState? provisioningState) : base(id)
+        internal FirewallPolicyRuleCollectionGroupData(string id, string name, ETag? etag, ResourceType? resourceType, int? priority, IList<FirewallPolicyRuleCollection> ruleCollections, ProvisioningState? provisioningState) : base(id)
         {
             Name = name;
             ETag = etag;
@@ -48,7 +49,7 @@ namespace MgmtMockAndSample
         /// <summary> The name of the resource that is unique within a resource group. This name can be used to access the resource. </summary>
         public string Name { get; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string ETag { get; }
+        public ETag? ETag { get; }
         /// <summary> Rule Group type. </summary>
         public ResourceType? ResourceType { get; }
         /// <summary> Priority of the Firewall Policy Rule Collection Group resource. </summary>

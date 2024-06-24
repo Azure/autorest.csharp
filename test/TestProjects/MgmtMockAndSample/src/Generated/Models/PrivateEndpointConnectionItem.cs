@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
@@ -24,7 +25,7 @@ namespace MgmtMockAndSample.Models
         /// <param name="privateEndpoint"> Properties of the private endpoint object. </param>
         /// <param name="connectionState"> Approval state of the private link connection. </param>
         /// <param name="provisioningState"> Provisioning state of the private endpoint connection. </param>
-        internal PrivateEndpointConnectionItem(string id, string etag, Azure.ResourceManager.Resources.Models.SubResource privateEndpoint, MgmtMockAndSamplePrivateLinkServiceConnectionState connectionState, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState)
+        internal PrivateEndpointConnectionItem(string id, ETag? etag, Azure.ResourceManager.Resources.Models.SubResource privateEndpoint, MgmtMockAndSamplePrivateLinkServiceConnectionState connectionState, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState)
         {
             Id = id;
             ETag = etag;
@@ -36,7 +37,7 @@ namespace MgmtMockAndSample.Models
         /// <summary> Id of private endpoint connection. </summary>
         public string Id { get; }
         /// <summary> Modified whenever there is a change in the state of private endpoint connection. </summary>
-        public string ETag { get; }
+        public ETag? ETag { get; }
         /// <summary> Properties of the private endpoint object. </summary>
         internal Azure.ResourceManager.Resources.Models.SubResource PrivateEndpoint { get; }
         /// <summary> Gets Id. </summary>
