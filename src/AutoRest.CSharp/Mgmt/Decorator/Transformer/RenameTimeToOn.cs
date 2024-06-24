@@ -27,45 +27,39 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
                 foreach (var property in inputModel.Properties)
                 {
-                    if (property.Type is InputPrimitiveType inputPrimitiveType && inputPrimitiveType.Kind != InputPrimitiveTypeKind.PlainDate)
+                    if ((property.Type is InputPrimitiveType inputPrimitiveType && inputPrimitiveType.Kind == InputPrimitiveTypeKind.PlainDate) || property.Type is InputDateTimeType)
                     {
-                        continue;
-                    }
-                    else if (property.Type is not InputDateTimeType)
-                    {
-                        continue;
-                    }
+                        var propName = property.CSharpName();
 
-                    var propName = property.CSharpName();
+                        if (propName.StartsWith("From", StringComparison.Ordinal) ||
+                            propName.StartsWith("To", StringComparison.Ordinal) ||
+                            propName.EndsWith("PointInTime", StringComparison.Ordinal))
+                            continue;
 
-                    if (propName.StartsWith("From", StringComparison.Ordinal) ||
-                        propName.StartsWith("To", StringComparison.Ordinal) ||
-                        propName.EndsWith("PointInTime", StringComparison.Ordinal))
-                        continue;
+                        var lengthToCut = 0;
+                        if (propName.Length > 8 &&
+                            propName.EndsWith("DateTime", StringComparison.Ordinal))
+                        {
+                            lengthToCut = 8;
+                        }
+                        else if (propName.Length > 4 &&
+                            propName.EndsWith("Time", StringComparison.Ordinal) ||
+                            propName.EndsWith("Date", StringComparison.Ordinal))
+                        {
+                            lengthToCut = 4;
+                        }
+                        else if (propName.Length > 2 &&
+                            propName.EndsWith("At", StringComparison.Ordinal))
+                        {
+                            lengthToCut = 2;
+                        }
 
-                    var lengthToCut = 0;
-                    if (propName.Length > 8 &&
-                        propName.EndsWith("DateTime", StringComparison.Ordinal))
-                    {
-                        lengthToCut = 8;
-                    }
-                    else if (propName.Length > 4 &&
-                        propName.EndsWith("Time", StringComparison.Ordinal) ||
-                        propName.EndsWith("Date", StringComparison.Ordinal))
-                    {
-                        lengthToCut = 4;
-                    }
-                    else if (propName.Length > 2 &&
-                        propName.EndsWith("At", StringComparison.Ordinal))
-                    {
-                        lengthToCut = 2;
-                    }
-
-                    if (lengthToCut > 0)
-                    {
-                        var prefix = propName.Substring(0, propName.Length - lengthToCut);
-                        var newName = (_nounToVerbDicts.TryGetValue(prefix, out var verb) ? verb : prefix) + "On";
-                        property.Name = newName;
+                        if (lengthToCut > 0)
+                        {
+                            var prefix = propName.Substring(0, propName.Length - lengthToCut);
+                            var newName = (_nounToVerbDicts.TryGetValue(prefix, out var verb) ? verb : prefix) + "On";
+                            property.Name = newName;
+                        }
                     }
                 }
             }

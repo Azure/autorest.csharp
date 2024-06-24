@@ -69,50 +69,24 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             transformer.UpdateAllSchemas();
         }
 
-        private IEnumerable<Schema> _allGeneralSchemas;
-        private IEnumerable<OperationGroup> _allOperationGroups;
-        private IDictionary<string, string> _allFormatByNameRules = new Dictionary<string, string>()
-        {
-            { "tenantID", "uuid" },
-            { "tenantId", "uuid" },
-            { "*ETag", "etag" },
-            { "*Etag", "etag" },
-            { "location", "azure-location" },
-            { "*Uri", "Uri" },
-            { "*Uris", "Uri" },
-            { "*URI", "Uri" },
-            { "*URIs", "Uri" },
-            { "*Url", "Uri" },
-            { "*Urls", "Uri" },
-            { "*URL", "Uri" },
-            { "*URLs", "Uri" },
-            { "*ResourceId", "arm-id" },
-            { "*ResourceID", "arm-id" },
-            { "*IpAddress", "ip-address" },
-            { "*IPAddress", "ip-address" },
-            { "Ipv6Address", "ip-address" },
-            { "IPv6Address", "ip-address" },
-            { "Ipv4Address", "ip-address" },
-            { "IPv4Address", "ip-address" },
-        };
+        private IEnumerable<Schema> allGeneralSchemas;
+        private IEnumerable<OperationGroup> allOperationGroups;
+        private IReadOnlyDictionary<string, string> allFormatByNameRules;
         private Dictionary<Schema, (string CSharpName, TransformItem? Transform, string TransformLogMessage)> schemaCache = new();
 
-        private SchemaFormatByNameTransformer(
+        internal SchemaFormatByNameTransformer(
             IEnumerable<Schema> generalSchemas,
             IEnumerable<OperationGroup> operationGroups,
             IReadOnlyDictionary<string, string> allFormatByNameRules)
         {
-            _allGeneralSchemas = generalSchemas;
-            _allOperationGroups = operationGroups;
-            foreach (var (key, value) in allFormatByNameRules)
-            {
-                _allFormatByNameRules[key] = value;
-            }
+            this.allGeneralSchemas = generalSchemas;
+            this.allOperationGroups = operationGroups;
+            this.allFormatByNameRules = allFormatByNameRules;
         }
 
         public void UpdateAllSchemas()
         {
-            var rules = ParseRules(_allFormatByNameRules).ToList();
+            var rules = ParseRules(allFormatByNameRules).ToList();
             if (rules.Count == 0)
                 return;
             UpdateGeneralSchema(rules);
@@ -121,7 +95,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
         internal void UpdateGeneralSchema(IReadOnlyList<FormatRule> rules)
         {
-            foreach (Schema schema in _allGeneralSchemas)
+            foreach (Schema schema in allGeneralSchemas)
             {
                 if (schema is ObjectSchema objectSchema)
                 {
@@ -132,7 +106,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
         internal void UpdateOperationSchema(IReadOnlyList<FormatRule> rules)
         {
-            foreach (var operationGroup in _allOperationGroups)
+            foreach (var operationGroup in allOperationGroups)
             {
                 foreach (var operation in operationGroup.Operations)
                 {
@@ -224,8 +198,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
         private int CheckRules(string name, IReadOnlyList<FormatRule> rules)
         {
-            // The later rule has higher priority since they are user defined
-            for (int i = rules.Count - 1; i >= 0; i--)
+            for (int i = 0; i < rules.Count; i++)
             {
                 var namePattern = rules[i].NamePattern;
                 var isMatch = namePattern.Pattern switch
@@ -243,7 +216,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             return -1;
         }
 
-        private IEnumerable<FormatRule> ParseRules(IDictionary<string, string> formatByNameRules)
+        private IEnumerable<FormatRule> ParseRules(IReadOnlyDictionary<string, string> formatByNameRules)
         {
             if (formatByNameRules == null)
                 yield break;
