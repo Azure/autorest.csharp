@@ -72,7 +72,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         private IEnumerable<OperationGroup> _allOperationGroups;
         private IDictionary<string, string> _allFormatByNameRules = new Dictionary<string, string>()
         {
-            { "eTag", "etag" },
+            { "etag", "etag" },
             { "*Url", "Uri" },
         };
 
