@@ -36,7 +36,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(CertificateUri))
             {
                 writer.WritePropertyName("certificateUrl"u8);
-                writer.WriteStringValue(CertificateUri.AbsoluteUri);
+                writer.WriteStringValue(CertificateUri);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -77,7 +77,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 return null;
             }
             ProtocolType? protocol = default;
-            Uri certificateUrl = default;
+            string certificateUrl = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -93,11 +93,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
                 if (property.NameEquals("certificateUrl"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    certificateUrl = new Uri(property.Value.GetString());
+                    certificateUrl = property.Value.GetString();
                     continue;
                 }
                 if (options.Format != "W")
@@ -146,7 +142,15 @@ namespace AzureSample.ResourceManager.Sample.Models
                 if (Optional.IsDefined(CertificateUri))
                 {
                     builder.Append("  certificateUrl: ");
-                    builder.AppendLine($"'{CertificateUri.AbsoluteUri}'");
+                    if (CertificateUri.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{CertificateUri}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{CertificateUri}'");
+                    }
                 }
             }
 

@@ -491,7 +491,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal RequestUriBuilder CreateListTestByLocationsRequestUri(string subscriptionId, AzureLocation location)
+        internal RequestUriBuilder CreateListTestByLocationsRequestUri(string subscriptionId, string location)
         {
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
@@ -504,7 +504,7 @@ namespace MgmtListMethods
             return uri;
         }
 
-        internal HttpMessage CreateListTestByLocationsRequest(string subscriptionId, AzureLocation location)
+        internal HttpMessage CreateListTestByLocationsRequest(string subscriptionId, string location)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -527,11 +527,12 @@ namespace MgmtListMethods
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<NonResourceChildListResult>> ListTestByLocationsAsync(string subscriptionId, AzureLocation location, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
+        public async Task<Response<NonResourceChildListResult>> ListTestByLocationsAsync(string subscriptionId, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             using var message = CreateListTestByLocationsRequest(subscriptionId, location);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -553,11 +554,12 @@ namespace MgmtListMethods
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<NonResourceChildListResult> ListTestByLocations(string subscriptionId, AzureLocation location, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
+        public Response<NonResourceChildListResult> ListTestByLocations(string subscriptionId, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             using var message = CreateListTestByLocationsRequest(subscriptionId, location);
             _pipeline.Send(message, cancellationToken);

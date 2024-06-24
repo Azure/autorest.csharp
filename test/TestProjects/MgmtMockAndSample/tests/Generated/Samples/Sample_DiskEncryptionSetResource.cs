@@ -45,7 +45,7 @@ namespace MgmtMockAndSample.Samples
             {
                 Identity = new ManagedServiceIdentity("SystemAssigned"),
                 EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
-                ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion1")),
+                ActiveKey = new KeyForDiskEncryptionSet("https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion1"),
                 RotationToLatestKeyVersionEnabled = true,
             };
             ArmOperation<DiskEncryptionSetResource> lro = await diskEncryptionSet.UpdateAsync(WaitUntil.Completed, patch);
@@ -84,7 +84,7 @@ namespace MgmtMockAndSample.Samples
             {
                 Identity = new ManagedServiceIdentity("SystemAssigned"),
                 EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
-                ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion1")),
+                ActiveKey = new KeyForDiskEncryptionSet("https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion1"),
                 RotationToLatestKeyVersionEnabled = true,
             };
             ArmOperation<DiskEncryptionSetResource> lro = await diskEncryptionSet.UpdateAsync(WaitUntil.Completed, patch);
@@ -127,7 +127,7 @@ namespace MgmtMockAndSample.Samples
 ["project"] = "Encryption",
 },
                 EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
-                ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvmvault.vault-int.azure-int.net/keys/keyName/keyVersion"))
+                ActiveKey = new KeyForDiskEncryptionSet("https://myvmvault.vault-int.azure-int.net/keys/keyName/keyVersion")
                 {
                     SourceVaultId = new ResourceIdentifier("/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"),
                 },

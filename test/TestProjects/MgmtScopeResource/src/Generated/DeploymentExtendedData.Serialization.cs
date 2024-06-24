@@ -21,7 +21,7 @@ namespace MgmtScopeResource
             {
                 return null;
             }
-            AzureLocation? location = default;
+            string location = default;
             DeploymentPropertiesExtended properties = default;
             IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
@@ -32,11 +32,7 @@ namespace MgmtScopeResource
             {
                 if (property.NameEquals("location"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    location = new AzureLocation(property.Value.GetString());
+                    location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"u8))

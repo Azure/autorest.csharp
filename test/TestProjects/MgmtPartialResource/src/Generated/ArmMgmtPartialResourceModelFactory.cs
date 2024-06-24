@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 
@@ -34,7 +33,7 @@ namespace MgmtPartialResource.Models
         /// <param name="linkedPublicIPAddress"> The linked public IP address of the public IP address resource. </param>
         /// <param name="deleteOption"> Specify what happens to the public IP address when the VM using it is deleted. </param>
         /// <returns> A new <see cref="MgmtPartialResource.PublicIPAddressData"/> instance for mocking. </returns>
-        public static PublicIPAddressData PublicIPAddressData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, PublicIPAddressSku sku = null, ETag? etag = null, IEnumerable<string> zones = null, IPAllocationMethod? publicIPAllocationMethod = null, IPVersion? publicIPAddressVersion = null, string ipAddress = null, int? idleTimeoutInMinutes = null, string resourceGuid = null, PublicIPAddressData servicePublicIPAddress = null, PublicIPAddressMigrationPhase? migrationPhase = null, PublicIPAddressData linkedPublicIPAddress = null, DeleteOption? deleteOption = null)
+        public static PublicIPAddressData PublicIPAddressData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, PublicIPAddressSku sku = null, string etag = null, IEnumerable<string> zones = null, IPAllocationMethod? publicIPAllocationMethod = null, IPVersion? publicIPAddressVersion = null, string ipAddress = null, int? idleTimeoutInMinutes = null, string resourceGuid = null, PublicIPAddressData servicePublicIPAddress = null, PublicIPAddressMigrationPhase? migrationPhase = null, PublicIPAddressData linkedPublicIPAddress = null, DeleteOption? deleteOption = null)
         {
             zones ??= new List<string>();
 

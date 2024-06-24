@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using Azure.Core;
 using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
@@ -27,7 +26,7 @@ namespace MgmtScopeResource
         /// <param name="location"> Region where the VM is located. </param>
         /// <param name="resourceType"> The type of the resource. </param>
         /// <param name="properties"> Properties of the Guest configuration assignment. </param>
-        internal GuestConfigurationAssignmentData(string id, string name, AzureLocation? location, string resourceType, GuestConfigurationAssignmentProperties properties) : base(id, name, location, resourceType)
+        internal GuestConfigurationAssignmentData(string id, string name, string location, string resourceType, GuestConfigurationAssignmentProperties properties) : base(id, name, location, resourceType)
         {
             Properties = properties;
         }

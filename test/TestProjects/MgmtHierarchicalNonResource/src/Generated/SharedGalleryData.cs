@@ -25,7 +25,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>
-        internal SharedGalleryData(string name, AzureLocation? location, string uniqueId) : base(name, location, uniqueId)
+        internal SharedGalleryData(string name, string location, string uniqueId) : base(name, location, uniqueId)
         {
         }
 

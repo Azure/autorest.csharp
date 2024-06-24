@@ -29,7 +29,7 @@ namespace MgmtScopeResource
             if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location"u8);
-                writer.WriteStringValue(Location.Value);
+                writer.WriteStringValue(Location);
             }
             writer.WriteEndObject();
         }
@@ -43,7 +43,7 @@ namespace MgmtScopeResource
             GuestConfigurationAssignmentProperties properties = default;
             string id = default;
             string name = default;
-            AzureLocation? location = default;
+            string location = default;
             string type = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -68,11 +68,7 @@ namespace MgmtScopeResource
                 }
                 if (property.NameEquals("location"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    location = new AzureLocation(property.Value.GetString());
+                    location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"u8))

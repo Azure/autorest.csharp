@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtMockAndSample.Models
@@ -20,7 +19,7 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             string id = default;
-            ETag? etag = default;
+            string etag = default;
             Azure.ResourceManager.Resources.Models.SubResource privateEndpoint = default;
             MgmtMockAndSamplePrivateLinkServiceConnectionState privateLinkServiceConnectionState = default;
             MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState = default;
@@ -33,11 +32,7 @@ namespace MgmtMockAndSample.Models
                 }
                 if (property.NameEquals("etag"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    etag = new ETag(property.Value.GetString());
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"u8))

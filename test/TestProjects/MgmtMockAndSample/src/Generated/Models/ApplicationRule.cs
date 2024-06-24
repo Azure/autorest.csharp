@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 
 namespace MgmtMockAndSample.Models
@@ -20,7 +19,7 @@ namespace MgmtMockAndSample.Models
             DestinationAddresses = new ChangeTrackingList<string>();
             Protocols = new ChangeTrackingList<FirewallPolicyRuleApplicationProtocol>();
             TargetFqdns = new ChangeTrackingList<string>();
-            TargetUrls = new ChangeTrackingList<Uri>();
+            TargetUrls = new ChangeTrackingList<string>();
             FqdnTags = new ChangeTrackingList<string>();
             SourceIPGroups = new ChangeTrackingList<string>();
             WebCategories = new ChangeTrackingList<string>();
@@ -45,7 +44,7 @@ namespace MgmtMockAndSample.Models
         /// <param name="webCategories"> List of destination azure web categories. </param>
         /// <param name="newIntSerializeProperty"></param>
         /// <param name="newGeneratedTypeSerializeProperty"></param>
-        internal ApplicationRule(string name, string description, FirewallPolicyRuleType ruleType, string newStringSerializeProperty, IList<string> newArraySerializedProperty, IDictionary<string, string> newDictionarySerializedProperty, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<FirewallPolicyRuleApplicationProtocol> protocols, IList<string> targetFqdns, IList<Uri> targetUrls, IList<string> fqdnTags, IList<string> sourceIPGroups, bool? terminateTLS, IList<string> webCategories, int? newIntSerializeProperty, VaultKey newGeneratedTypeSerializeProperty) : base(name, description, ruleType, newStringSerializeProperty, newArraySerializedProperty, newDictionarySerializedProperty)
+        internal ApplicationRule(string name, string description, FirewallPolicyRuleType ruleType, string newStringSerializeProperty, IList<string> newArraySerializedProperty, IDictionary<string, string> newDictionarySerializedProperty, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<FirewallPolicyRuleApplicationProtocol> protocols, IList<string> targetFqdns, IList<string> targetUrls, IList<string> fqdnTags, IList<string> sourceIPGroups, bool? terminateTLS, IList<string> webCategories, int? newIntSerializeProperty, VaultKey newGeneratedTypeSerializeProperty) : base(name, description, ruleType, newStringSerializeProperty, newArraySerializedProperty, newDictionarySerializedProperty)
         {
             SourceAddresses = sourceAddresses;
             DestinationAddresses = destinationAddresses;
@@ -70,7 +69,7 @@ namespace MgmtMockAndSample.Models
         /// <summary> List of FQDNs for this rule. </summary>
         public IList<string> TargetFqdns { get; }
         /// <summary> List of Urls for this rule condition. </summary>
-        public IList<Uri> TargetUrls { get; }
+        public IList<string> TargetUrls { get; }
         /// <summary> List of FQDN Tags for this rule. </summary>
         public IList<string> FqdnTags { get; }
         /// <summary> List of source IpGroups for this rule. </summary>

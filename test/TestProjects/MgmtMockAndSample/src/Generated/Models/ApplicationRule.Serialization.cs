@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -63,12 +62,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in TargetUrls)
                 {
-                    if (item == null)
-                    {
-                        writer.WriteNullValue();
-                        continue;
-                    }
-                    writer.WriteStringValue(item.AbsoluteUri);
+                    writer.WriteStringValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -172,7 +166,7 @@ namespace MgmtMockAndSample.Models
             IList<string> destinationAddresses = default;
             IList<FirewallPolicyRuleApplicationProtocol> protocols = default;
             IList<string> targetFqdns = default;
-            IList<Uri> targetUrls = default;
+            IList<string> targetUrls = default;
             IList<string> fqdnTags = default;
             IList<string> sourceIPGroups = default;
             bool? terminateTLS = default;
@@ -249,17 +243,10 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    List<Uri> array = new List<Uri>();
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(new Uri(item.GetString()));
-                        }
+                        array.Add(item.GetString());
                     }
                     targetUrls = array;
                     continue;
@@ -397,7 +384,7 @@ namespace MgmtMockAndSample.Models
                 destinationAddresses ?? new ChangeTrackingList<string>(),
                 protocols ?? new ChangeTrackingList<FirewallPolicyRuleApplicationProtocol>(),
                 targetFqdns ?? new ChangeTrackingList<string>(),
-                targetUrls ?? new ChangeTrackingList<Uri>(),
+                targetUrls ?? new ChangeTrackingList<string>(),
                 fqdnTags ?? new ChangeTrackingList<string>(),
                 sourceIPGroups ?? new ChangeTrackingList<string>(),
                 terminateTLS,

@@ -80,7 +80,7 @@ namespace MgmtMockAndSample.Tests.Mock
             {
                 Identity = new ManagedServiceIdentity("SystemAssigned"),
                 EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
-                ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion1")),
+                ActiveKey = new KeyForDiskEncryptionSet("https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion1"),
                 RotationToLatestKeyVersionEnabled = true,
             });
         }
@@ -96,7 +96,7 @@ namespace MgmtMockAndSample.Tests.Mock
             {
                 Identity = new ManagedServiceIdentity("SystemAssigned"),
                 EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
-                ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion1")),
+                ActiveKey = new KeyForDiskEncryptionSet("https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion1"),
                 RotationToLatestKeyVersionEnabled = true,
             });
         }
@@ -116,7 +116,7 @@ namespace MgmtMockAndSample.Tests.Mock
 ["project"] = "Encryption",
 },
                 EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
-                ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvmvault.vault-int.azure-int.net/keys/keyName/keyVersion"))
+                ActiveKey = new KeyForDiskEncryptionSet("https://myvmvault.vault-int.azure-int.net/keys/keyName/keyVersion")
                 {
                     SourceVaultId = new ResourceIdentifier("/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"),
                 },

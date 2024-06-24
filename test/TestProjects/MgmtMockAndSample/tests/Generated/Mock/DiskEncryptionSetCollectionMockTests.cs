@@ -39,7 +39,7 @@ namespace MgmtMockAndSample.Tests.Mock
             {
                 Identity = new ManagedServiceIdentity("SystemAssigned"),
                 EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
-                ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferentsub.vault-int.azure-int.net/keys/{key}")),
+                ActiveKey = new KeyForDiskEncryptionSet("https://myvaultdifferentsub.vault-int.azure-int.net/keys/{key}"),
                 MinimumTlsVersion = MinimumTlsVersion.Tls1_1,
             });
         }
@@ -62,7 +62,7 @@ namespace MgmtMockAndSample.Tests.Mock
 },
                 },
                 EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
-                ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferenttenant.vault-int.azure-int.net/keys/{key}")),
+                ActiveKey = new KeyForDiskEncryptionSet("https://myvaultdifferenttenant.vault-int.azure-int.net/keys/{key}"),
                 FederatedClientId = "00000000-0000-0000-0000-000000000000",
             });
         }
@@ -79,7 +79,7 @@ namespace MgmtMockAndSample.Tests.Mock
             {
                 Identity = new ManagedServiceIdentity("SystemAssigned"),
                 EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
-                ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvmvault.vault-int.azure-int.net/keys/{key}"))
+                ActiveKey = new KeyForDiskEncryptionSet("https://myvmvault.vault-int.azure-int.net/keys/{key}")
                 {
                     SourceVaultId = new ResourceIdentifier("/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"),
                 },

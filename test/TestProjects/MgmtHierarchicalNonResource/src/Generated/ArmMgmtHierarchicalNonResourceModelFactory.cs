@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 
 namespace MgmtHierarchicalNonResource.Models
 {
@@ -20,7 +19,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <param name="location"> Resource location. </param>
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>
         /// <returns> A new <see cref="MgmtHierarchicalNonResource.SharedGalleryData"/> instance for mocking. </returns>
-        public static SharedGalleryData SharedGalleryData(string name = null, AzureLocation? location = null, string uniqueId = null)
+        public static SharedGalleryData SharedGalleryData(string name = null, string location = null, string uniqueId = null)
         {
             return new SharedGalleryData(name, location, uniqueId);
         }
@@ -30,7 +29,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <param name="location"> Resource location. </param>
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>
         /// <returns> A new <see cref="Models.PirSharedGalleryResource"/> instance for mocking. </returns>
-        public static PirSharedGalleryResource PirSharedGalleryResource(string name = null, AzureLocation? location = null, string uniqueId = null)
+        public static PirSharedGalleryResource PirSharedGalleryResource(string name = null, string location = null, string uniqueId = null)
         {
             return new PirSharedGalleryResource(name, location, uniqueId);
         }
@@ -39,7 +38,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
         /// <returns> A new <see cref="Models.PirResource"/> instance for mocking. </returns>
-        public static PirResource PirResource(string name = null, AzureLocation? location = null)
+        public static PirResource PirResource(string name = null, string location = null)
         {
             return new PirResource(name, location);
         }
@@ -58,7 +57,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <param name="features"> A list of gallery image features. </param>
         /// <param name="purchasePlan"> Describes the gallery image definition purchase plan. This is used by marketplace images. </param>
         /// <returns> A new <see cref="Models.SharedGalleryImage"/> instance for mocking. </returns>
-        public static SharedGalleryImage SharedGalleryImage(string name = null, AzureLocation? location = null, string uniqueId = null, OperatingSystemType? osType = null, OperatingSystemStateType? osState = null, DateTimeOffset? endOfLifeOn = null, GalleryImageIdentifier identifier = null, RecommendedMachineConfiguration recommended = null, IEnumerable<string> disallowedDiskTypes = null, HyperVGeneration? hyperVGeneration = null, IEnumerable<GalleryImageFeature> features = null, ImagePurchasePlan purchasePlan = null)
+        public static SharedGalleryImage SharedGalleryImage(string name = null, string location = null, string uniqueId = null, OperatingSystemType? osType = null, OperatingSystemStateType? osState = null, DateTimeOffset? endOfLifeOn = null, GalleryImageIdentifier identifier = null, RecommendedMachineConfiguration recommended = null, IEnumerable<string> disallowedDiskTypes = null, HyperVGeneration? hyperVGeneration = null, IEnumerable<GalleryImageFeature> features = null, ImagePurchasePlan purchasePlan = null)
         {
             disallowedDiskTypes ??= new List<string>();
             features ??= new List<GalleryImageFeature>();
@@ -146,7 +145,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <param name="publishedOn"> The published date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable. </param>
         /// <param name="endOfLifeOn"> The end of life date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable. </param>
         /// <returns> A new <see cref="Models.SharedGalleryImageVersion"/> instance for mocking. </returns>
-        public static SharedGalleryImageVersion SharedGalleryImageVersion(string name = null, AzureLocation? location = null, string uniqueId = null, DateTimeOffset? publishedOn = null, DateTimeOffset? endOfLifeOn = null)
+        public static SharedGalleryImageVersion SharedGalleryImageVersion(string name = null, string location = null, string uniqueId = null, DateTimeOffset? publishedOn = null, DateTimeOffset? endOfLifeOn = null)
         {
             return new SharedGalleryImageVersion(name, location, uniqueId, publishedOn, endOfLifeOn);
         }

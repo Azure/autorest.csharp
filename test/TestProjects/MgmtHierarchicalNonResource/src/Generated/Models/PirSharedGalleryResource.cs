@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using Azure.Core;
-
 namespace MgmtHierarchicalNonResource.Models
 {
     /// <summary> Base information about the shared gallery resource in pir. </summary>
@@ -21,7 +19,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>
-        internal PirSharedGalleryResource(string name, AzureLocation? location, string uniqueId) : base(name, location)
+        internal PirSharedGalleryResource(string name, string location, string uniqueId) : base(name, location)
         {
             UniqueId = uniqueId;
         }

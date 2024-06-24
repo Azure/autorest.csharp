@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
@@ -23,7 +22,7 @@ namespace MgmtExpandResourceTypes
             if (Optional.IsDefined(ETag))
             {
                 writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(ETag.Value.ToString());
+                writer.WriteStringValue(ETag);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -148,7 +147,7 @@ namespace MgmtExpandResourceTypes
             {
                 return null;
             }
-            ETag? etag = default;
+            string etag = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -172,11 +171,7 @@ namespace MgmtExpandResourceTypes
             {
                 if (property.NameEquals("etag"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    etag = new ETag(property.Value.GetString());
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"u8))

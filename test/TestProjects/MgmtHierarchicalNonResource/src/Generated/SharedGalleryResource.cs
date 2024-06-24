@@ -128,10 +128,10 @@ namespace MgmtHierarchicalNonResource
             scope.Start();
             try
             {
-                var response = await _sharedGalleryRestClient.GetAsync(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _sharedGalleryRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name);
+                response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name);
                 return Response.FromValue(new SharedGalleryResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -169,10 +169,10 @@ namespace MgmtHierarchicalNonResource
             scope.Start();
             try
             {
-                var response = _sharedGalleryRestClient.Get(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, cancellationToken);
+                var response = _sharedGalleryRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name);
+                response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name);
                 return Response.FromValue(new SharedGalleryResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -204,8 +204,8 @@ namespace MgmtHierarchicalNonResource
         /// <returns> An async collection of <see cref="SharedGalleryImage"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SharedGalleryImage> GetSharedGalleryImagesAsync(SharedToValue? sharedTo = null, CancellationToken cancellationToken = default)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryImagesRestClient.CreateListRequest(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, sharedTo);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryImagesRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, sharedTo);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryImagesRestClient.CreateListRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name, sharedTo);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryImagesRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.Parent.Name, Id.Name, sharedTo);
             return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, SharedGalleryImage.DeserializeSharedGalleryImage, _sharedGalleryImagesClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImages", "value", "nextLink", cancellationToken);
         }
 
@@ -231,8 +231,8 @@ namespace MgmtHierarchicalNonResource
         /// <returns> A collection of <see cref="SharedGalleryImage"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SharedGalleryImage> GetSharedGalleryImages(SharedToValue? sharedTo = null, CancellationToken cancellationToken = default)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryImagesRestClient.CreateListRequest(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, sharedTo);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryImagesRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, sharedTo);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryImagesRestClient.CreateListRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name, sharedTo);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryImagesRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.Parent.Name, Id.Name, sharedTo);
             return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, SharedGalleryImage.DeserializeSharedGalleryImage, _sharedGalleryImagesClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImages", "value", "nextLink", cancellationToken);
         }
 
@@ -265,7 +265,7 @@ namespace MgmtHierarchicalNonResource
             scope.Start();
             try
             {
-                var response = await _sharedGalleryImagesRestClient.GetAsync(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, galleryImageName, cancellationToken).ConfigureAwait(false);
+                var response = await _sharedGalleryImagesRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -304,7 +304,7 @@ namespace MgmtHierarchicalNonResource
             scope.Start();
             try
             {
-                var response = _sharedGalleryImagesRestClient.Get(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, galleryImageName, cancellationToken);
+                var response = _sharedGalleryImagesRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -341,8 +341,8 @@ namespace MgmtHierarchicalNonResource
         {
             Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
 
-            HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryImageVersionsRestClient.CreateListRequest(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, galleryImageName, sharedTo);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryImageVersionsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, galleryImageName, sharedTo);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryImageVersionsRestClient.CreateListRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, sharedTo);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryImageVersionsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, sharedTo);
             return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, SharedGalleryImageVersion.DeserializeSharedGalleryImageVersion, _sharedGalleryImageVersionsClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImageVersions", "value", "nextLink", cancellationToken);
         }
 
@@ -373,8 +373,8 @@ namespace MgmtHierarchicalNonResource
         {
             Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
 
-            HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryImageVersionsRestClient.CreateListRequest(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, galleryImageName, sharedTo);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryImageVersionsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, galleryImageName, sharedTo);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryImageVersionsRestClient.CreateListRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, sharedTo);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryImageVersionsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, sharedTo);
             return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, SharedGalleryImageVersion.DeserializeSharedGalleryImageVersion, _sharedGalleryImageVersionsClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImageVersions", "value", "nextLink", cancellationToken);
         }
 
@@ -409,7 +409,7 @@ namespace MgmtHierarchicalNonResource
             scope.Start();
             try
             {
-                var response = await _sharedGalleryImageVersionsRestClient.GetAsync(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, galleryImageName, galleryImageVersionName, cancellationToken).ConfigureAwait(false);
+                var response = await _sharedGalleryImageVersionsRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, galleryImageVersionName, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -450,7 +450,7 @@ namespace MgmtHierarchicalNonResource
             scope.Start();
             try
             {
-                var response = _sharedGalleryImageVersionsRestClient.Get(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, galleryImageName, galleryImageVersionName, cancellationToken);
+                var response = _sharedGalleryImageVersionsRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, galleryImageVersionName, cancellationToken);
                 return response;
             }
             catch (Exception e)

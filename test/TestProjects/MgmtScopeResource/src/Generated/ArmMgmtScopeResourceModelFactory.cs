@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 
@@ -34,7 +33,7 @@ namespace MgmtScopeResource.Models
         /// <param name="enforcementMode"> The policy assignment enforcement mode. Possible values are Default and DoNotEnforce. </param>
         /// <param name="nonComplianceMessages"> The messages that describe why a resource is non-compliant with the policy. </param>
         /// <returns> A new <see cref="MgmtScopeResource.FakePolicyAssignmentData"/> instance for mocking. </returns>
-        public static FakePolicyAssignmentData FakePolicyAssignmentData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, AzureLocation? location = null, ManagedServiceIdentity identity = null, string displayName = null, string policyDefinitionId = null, string scope = null, IEnumerable<string> notScopes = null, IDictionary<string, ParameterValuesValue> parameters = null, string description = null, BinaryData metadata = null, EnforcementMode? enforcementMode = null, IEnumerable<NonComplianceMessage> nonComplianceMessages = null)
+        public static FakePolicyAssignmentData FakePolicyAssignmentData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string location = null, ManagedServiceIdentity identity = null, string displayName = null, string policyDefinitionId = null, string scope = null, IEnumerable<string> notScopes = null, IDictionary<string, ParameterValuesValue> parameters = null, string description = null, BinaryData metadata = null, EnforcementMode? enforcementMode = null, IEnumerable<NonComplianceMessage> nonComplianceMessages = null)
         {
             notScopes ??= new List<string>();
             parameters ??= new Dictionary<string, ParameterValuesValue>();
@@ -67,7 +66,7 @@ namespace MgmtScopeResource.Models
         /// <param name="properties"> Deployment properties. </param>
         /// <param name="tags"> Deployment tags. </param>
         /// <returns> A new <see cref="MgmtScopeResource.DeploymentExtendedData"/> instance for mocking. </returns>
-        public static DeploymentExtendedData DeploymentExtendedData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, AzureLocation? location = null, DeploymentPropertiesExtended properties = null, IReadOnlyDictionary<string, string> tags = null)
+        public static DeploymentExtendedData DeploymentExtendedData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string location = null, DeploymentPropertiesExtended properties = null, IReadOnlyDictionary<string, string> tags = null)
         {
             tags ??= new Dictionary<string, string>();
 
@@ -265,13 +264,17 @@ namespace MgmtScopeResource.Models
         /// <param name="id"> Azure Resource Manager identifier of the Log Analytics Workspace. </param>
         /// <param name="location"> Location of the Log Analytics workspace. </param>
         /// <param name="customerId"> Log Analytics workspace identifier. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="customerId"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="location"/> or <paramref name="customerId"/> is null. </exception>
         /// <returns> A new <see cref="Models.WorkspaceInfo"/> instance for mocking. </returns>
-        public static WorkspaceInfo WorkspaceInfo(string id = null, AzureLocation location = default, string customerId = null)
+        public static WorkspaceInfo WorkspaceInfo(string id = null, string location = null, string customerId = null)
         {
             if (id == null)
             {
                 throw new ArgumentNullException(nameof(id));
+            }
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
             }
             if (customerId == null)
             {
@@ -288,7 +291,7 @@ namespace MgmtScopeResource.Models
         /// <param name="resourceType"> The type of the resource. </param>
         /// <param name="properties"> Properties of the Guest configuration assignment. </param>
         /// <returns> A new <see cref="MgmtScopeResource.GuestConfigurationAssignmentData"/> instance for mocking. </returns>
-        public static GuestConfigurationAssignmentData GuestConfigurationAssignmentData(string id = null, string name = null, AzureLocation? location = null, string resourceType = null, GuestConfigurationAssignmentProperties properties = null)
+        public static GuestConfigurationAssignmentData GuestConfigurationAssignmentData(string id = null, string name = null, string location = null, string resourceType = null, GuestConfigurationAssignmentProperties properties = null)
         {
             return new GuestConfigurationAssignmentData(id, name, location, resourceType, properties);
         }
@@ -324,7 +327,7 @@ namespace MgmtScopeResource.Models
         /// <param name="location"> Region where the VM is located. </param>
         /// <param name="resourceType"> The type of the resource. </param>
         /// <returns> A new <see cref="Models.GuestConfigurationBaseResource"/> instance for mocking. </returns>
-        public static GuestConfigurationBaseResource GuestConfigurationBaseResource(string id = null, string name = null, AzureLocation? location = null, string resourceType = null)
+        public static GuestConfigurationBaseResource GuestConfigurationBaseResource(string id = null, string name = null, string location = null, string resourceType = null)
         {
             return new GuestConfigurationBaseResource(id, name, location, resourceType);
         }
@@ -363,7 +366,7 @@ namespace MgmtScopeResource.Models
         /// <param name="etag"> The etag for the resource. </param>
         /// <param name="tags"> Resource tags. </param>
         /// <returns> A new <see cref="Models.Marketplace"/> instance for mocking. </returns>
-        public static Marketplace Marketplace(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string billingPeriodId = null, DateTimeOffset? usageStart = null, DateTimeOffset? usageEnd = null, decimal? resourceRate = null, string offerName = null, string resourceGroup = null, string additionalInfo = null, string orderNumber = null, string instanceName = null, string instanceId = null, string currency = null, decimal? consumedQuantity = null, string unitOfMeasure = null, decimal? pretaxCost = null, bool? isEstimated = null, Guid? meterId = null, Guid? subscriptionGuid = null, string subscriptionName = null, string accountName = null, string departmentName = null, string consumedService = null, string costCenter = null, string additionalProperties = null, string publisherName = null, string planName = null, bool? isRecurringCharge = null, ETag? etag = null, IReadOnlyDictionary<string, string> tags = null)
+        public static Marketplace Marketplace(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string billingPeriodId = null, DateTimeOffset? usageStart = null, DateTimeOffset? usageEnd = null, decimal? resourceRate = null, string offerName = null, string resourceGroup = null, string additionalInfo = null, string orderNumber = null, string instanceName = null, string instanceId = null, string currency = null, decimal? consumedQuantity = null, string unitOfMeasure = null, decimal? pretaxCost = null, bool? isEstimated = null, Guid? meterId = null, Guid? subscriptionGuid = null, string subscriptionName = null, string accountName = null, string departmentName = null, string consumedService = null, string costCenter = null, string additionalProperties = null, string publisherName = null, string planName = null, bool? isRecurringCharge = null, string etag = null, IReadOnlyDictionary<string, string> tags = null)
         {
             tags ??= new Dictionary<string, string>();
 

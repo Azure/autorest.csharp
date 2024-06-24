@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using Azure.Core;
-
 namespace MgmtHierarchicalNonResource.Models
 {
     /// <summary> The Resource model definition. </summary>
@@ -20,7 +18,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <summary> Initializes a new instance of <see cref="PirResource"/>. </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
-        internal PirResource(string name, AzureLocation? location)
+        internal PirResource(string name, string location)
         {
             Name = name;
             Location = location;
@@ -29,6 +27,6 @@ namespace MgmtHierarchicalNonResource.Models
         /// <summary> Resource name. </summary>
         public string Name { get; }
         /// <summary> Resource location. </summary>
-        public AzureLocation? Location { get; }
+        public string Location { get; }
     }
 }

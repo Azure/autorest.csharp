@@ -31,7 +31,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(CertificateUri))
             {
                 writer.WritePropertyName("certificateUrl"u8);
-                writer.WriteStringValue(CertificateUri.AbsoluteUri);
+                writer.WriteStringValue(CertificateUri);
             }
             if (Optional.IsDefined(CertificateStore))
             {
@@ -76,7 +76,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Uri certificateUrl = default;
+            string certificateUrl = default;
             string certificateStore = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
@@ -84,11 +84,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             {
                 if (property.NameEquals("certificateUrl"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    certificateUrl = new Uri(property.Value.GetString());
+                    certificateUrl = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("certificateStore"u8))
@@ -127,7 +123,15 @@ namespace AzureSample.ResourceManager.Sample.Models
                 if (Optional.IsDefined(CertificateUri))
                 {
                     builder.Append("  certificateUrl: ");
-                    builder.AppendLine($"'{CertificateUri.AbsoluteUri}'");
+                    if (CertificateUri.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{CertificateUri}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{CertificateUri}'");
+                    }
                 }
             }
 

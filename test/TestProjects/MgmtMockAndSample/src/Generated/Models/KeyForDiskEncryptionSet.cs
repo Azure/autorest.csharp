@@ -18,7 +18,7 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="KeyForDiskEncryptionSet"/>. </summary>
         /// <param name="keyUri"> Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="keyUri"/> is null. </exception>
-        public KeyForDiskEncryptionSet(Uri keyUri)
+        public KeyForDiskEncryptionSet(string keyUri)
         {
             Argument.AssertNotNull(keyUri, nameof(keyUri));
 
@@ -31,7 +31,7 @@ namespace MgmtMockAndSample.Models
         /// <param name="keyUri"> Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value. </param>
         /// <param name="newKeyUri"></param>
         /// <param name="newReadOnlyArrayProperty"></param>
-        internal KeyForDiskEncryptionSet(WritableSubResource sourceVault, Uri keyUri, Uri newKeyUri, IList<string> newReadOnlyArrayProperty)
+        internal KeyForDiskEncryptionSet(WritableSubResource sourceVault, string keyUri, Uri newKeyUri, IList<string> newReadOnlyArrayProperty)
         {
             SourceVault = sourceVault;
             KeyUri = keyUri;
@@ -54,6 +54,6 @@ namespace MgmtMockAndSample.Models
         }
 
         /// <summary> Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value. </summary>
-        public Uri KeyUri { get; set; }
+        public string KeyUri { get; set; }
     }
 }

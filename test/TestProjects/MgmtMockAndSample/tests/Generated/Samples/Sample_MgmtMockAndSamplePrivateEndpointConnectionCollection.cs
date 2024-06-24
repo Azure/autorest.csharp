@@ -154,7 +154,7 @@ namespace MgmtMockAndSample.Samples
             string privateEndpointConnectionName = "sample-pec";
             MgmtMockAndSamplePrivateEndpointConnectionData data = new MgmtMockAndSamplePrivateEndpointConnectionData()
             {
-                ETag = new ETag(""),
+                ETag = "",
                 ConnectionState = new MgmtMockAndSamplePrivateLinkServiceConnectionState()
                 {
                     Status = MgmtMockAndSamplePrivateEndpointServiceConnectionStatus.Approved,

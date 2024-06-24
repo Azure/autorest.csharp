@@ -39,7 +39,7 @@ namespace MgmtPropertyChooser.Models
             {
                 return null;
             }
-            AzureLocation location = default;
+            string location = default;
             IDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -49,7 +49,7 @@ namespace MgmtPropertyChooser.Models
             {
                 if (property.NameEquals("location"u8))
                 {
-                    location = new AzureLocation(property.Value.GetString());
+                    location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

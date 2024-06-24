@@ -119,7 +119,7 @@ namespace MgmtPropertyChooser.Models
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
         /// <returns> A new <see cref="Models.MgmtPropertyChooserResourceData"/> instance for mocking. </returns>
-        public static MgmtPropertyChooserResourceData MgmtPropertyChooserResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, AzureLocation location = default, IDictionary<string, string> tags = null)
+        public static MgmtPropertyChooserResourceData MgmtPropertyChooserResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string location = null, IDictionary<string, string> tags = null)
         {
             tags ??= new Dictionary<string, string>();
 
@@ -138,7 +138,7 @@ namespace MgmtPropertyChooser.Models
         /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine. </param>
         /// <param name="userAssignedIdentities"> The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'. </param>
         /// <returns> A new <see cref="Models.IdentityWithRenamedProperty"/> instance for mocking. </returns>
-        public static IdentityWithRenamedProperty IdentityWithRenamedProperty(string testPrincipalId = null, Guid? tenantId = null, ResourceIdentityType? resourceIdentityType = null, IDictionary<string, UserAssignedIdentity> userAssignedIdentities = null)
+        public static IdentityWithRenamedProperty IdentityWithRenamedProperty(string testPrincipalId = null, string tenantId = null, ResourceIdentityType? resourceIdentityType = null, IDictionary<string, UserAssignedIdentity> userAssignedIdentities = null)
         {
             userAssignedIdentities ??= new Dictionary<string, UserAssignedIdentity>();
 

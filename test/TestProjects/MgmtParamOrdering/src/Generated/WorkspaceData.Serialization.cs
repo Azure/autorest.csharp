@@ -74,7 +74,7 @@ namespace MgmtParamOrdering
             if (Optional.IsDefined(DiscoveryUri))
             {
                 writer.WritePropertyName("discoveryUrl"u8);
-                writer.WriteStringValue(DiscoveryUri.AbsoluteUri);
+                writer.WriteStringValue(DiscoveryUri);
             }
             if (Optional.IsDefined(HbiWorkspace))
             {
@@ -119,7 +119,7 @@ namespace MgmtParamOrdering
             string applicationInsights = default;
             string containerRegistry = default;
             string storageAccount = default;
-            Uri discoveryUrl = default;
+            string discoveryUrl = default;
             ProvisioningState? provisioningState = default;
             bool? hbiWorkspace = default;
             string serviceProvisionedResourceGroup = default;
@@ -224,11 +224,7 @@ namespace MgmtParamOrdering
                         }
                         if (property0.NameEquals("discoveryUrl"u8))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
-                            discoveryUrl = new Uri(property0.Value.GetString());
+                            discoveryUrl = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

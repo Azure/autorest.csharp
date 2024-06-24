@@ -28,7 +28,7 @@ namespace MgmtListMethods.Models
             if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location"u8);
-                writer.WriteStringValue(Location.Value);
+                writer.WriteStringValue(Location);
             }
             writer.WriteEndObject();
         }

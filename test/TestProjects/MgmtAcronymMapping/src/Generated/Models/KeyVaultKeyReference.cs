@@ -27,7 +27,7 @@ namespace MgmtAcronymMapping.Models
         /// Serialized Name: KeyVaultKeyReference.sourceVault
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="keyUri"/> or <paramref name="sourceVault"/> is null. </exception>
-        public KeyVaultKeyReference(Uri keyUri, WritableSubResource sourceVault)
+        public KeyVaultKeyReference(string keyUri, WritableSubResource sourceVault)
         {
             Argument.AssertNotNull(keyUri, nameof(keyUri));
             Argument.AssertNotNull(sourceVault, nameof(sourceVault));
@@ -40,7 +40,7 @@ namespace MgmtAcronymMapping.Models
         /// The URL referencing a key encryption key in Key Vault.
         /// Serialized Name: KeyVaultKeyReference.keyUrl
         /// </summary>
-        public Uri KeyUri { get; set; }
+        public string KeyUri { get; set; }
         /// <summary>
         /// The relative URL of the Key Vault containing the key.
         /// Serialized Name: KeyVaultKeyReference.sourceVault

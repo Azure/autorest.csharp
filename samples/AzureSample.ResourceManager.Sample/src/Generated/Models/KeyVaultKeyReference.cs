@@ -60,7 +60,7 @@ namespace AzureSample.ResourceManager.Sample.Models
         /// Serialized Name: KeyVaultKeyReference.sourceVault
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="keyUri"/> or <paramref name="sourceVault"/> is null. </exception>
-        public KeyVaultKeyReference(Uri keyUri, WritableSubResource sourceVault)
+        public KeyVaultKeyReference(string keyUri, WritableSubResource sourceVault)
         {
             Argument.AssertNotNull(keyUri, nameof(keyUri));
             Argument.AssertNotNull(sourceVault, nameof(sourceVault));
@@ -79,7 +79,7 @@ namespace AzureSample.ResourceManager.Sample.Models
         /// Serialized Name: KeyVaultKeyReference.sourceVault
         /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal KeyVaultKeyReference(Uri keyUri, WritableSubResource sourceVault, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal KeyVaultKeyReference(string keyUri, WritableSubResource sourceVault, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             KeyUri = keyUri;
             SourceVault = sourceVault;
@@ -96,7 +96,7 @@ namespace AzureSample.ResourceManager.Sample.Models
         /// Serialized Name: KeyVaultKeyReference.keyUrl
         /// </summary>
         [WirePath("keyUrl")]
-        public Uri KeyUri { get; set; }
+        public string KeyUri { get; set; }
         /// <summary>
         /// The relative URL of the Key Vault containing the key.
         /// Serialized Name: KeyVaultKeyReference.sourceVault

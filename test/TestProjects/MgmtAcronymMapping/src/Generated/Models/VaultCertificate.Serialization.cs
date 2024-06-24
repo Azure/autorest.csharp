@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -19,7 +18,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(CertificateUri))
             {
                 writer.WritePropertyName("certificateUrl"u8);
-                writer.WriteStringValue(CertificateUri.AbsoluteUri);
+                writer.WriteStringValue(CertificateUri);
             }
             if (Optional.IsDefined(CertificateStore))
             {
@@ -35,17 +34,13 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Uri certificateUrl = default;
+            string certificateUrl = default;
             string certificateStore = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("certificateUrl"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    certificateUrl = new Uri(property.Value.GetString());
+                    certificateUrl = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("certificateStore"u8))

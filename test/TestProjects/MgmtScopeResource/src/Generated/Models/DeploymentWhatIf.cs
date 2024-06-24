@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
@@ -26,14 +25,14 @@ namespace MgmtScopeResource.Models
         /// <summary> Initializes a new instance of <see cref="DeploymentWhatIf"/>. </summary>
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="properties"> The deployment properties. </param>
-        internal DeploymentWhatIf(AzureLocation? location, DeploymentWhatIfProperties properties)
+        internal DeploymentWhatIf(string location, DeploymentWhatIfProperties properties)
         {
             Location = location;
             Properties = properties;
         }
 
         /// <summary> The location to store the deployment data. </summary>
-        public AzureLocation? Location { get; set; }
+        public string Location { get; set; }
         /// <summary> The deployment properties. </summary>
         public DeploymentWhatIfProperties Properties { get; }
     }
