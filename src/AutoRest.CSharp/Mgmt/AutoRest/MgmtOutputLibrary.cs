@@ -91,8 +91,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public MgmtOutputLibrary(InputNamespace inputNamespace)
         {
-            InputNamespaceTransformer.Transform(inputNamespace);
-
             _input = inputNamespace;
 
             // For TypeSpec input, we need to filter out the client that has no operations

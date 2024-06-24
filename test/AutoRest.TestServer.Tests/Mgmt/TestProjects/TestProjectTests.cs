@@ -125,7 +125,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void VerifyNoSingleWordsThatShouldBeReplaced()
         {
-            var singlesToReplace = typeof(InputTypeTransformer).GetField("_schemasToChange", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null) as HashSet<string>;
+            var singlesToReplace = typeof(CommonSingleWordModelTransformer).GetField("_schemasToChange", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null) as HashSet<string>;
             foreach (var type in MyTypes())
             {
                 Assert.IsFalse(singlesToReplace.Contains(type.Name));

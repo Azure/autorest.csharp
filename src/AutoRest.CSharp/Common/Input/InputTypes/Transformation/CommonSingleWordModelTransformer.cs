@@ -3,12 +3,11 @@
 
 using System.Collections.Generic;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Report;
 using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal class InputTypeTransformer
+    internal class CommonSingleWordModelTransformer
     {
         private static readonly HashSet<string> _schemasToChange = new HashSet<string>()
         {
@@ -42,11 +41,6 @@ namespace AutoRest.CSharp.Common.Input
 
         private static void TransformCommonSingleWord(InputNamespace inputNamespace)
         {
-            foreach (var schemaName in Configuration.MgmtConfiguration.PrependRPPrefix)
-            {
-                _schemasToChange.Add(schemaName);
-            }
-
             foreach (var model in inputNamespace.Models)
             {
                 TransformCommonSingleWord(model);
@@ -60,16 +54,11 @@ namespace AutoRest.CSharp.Common.Input
 
         private static void TransformCommonSingleWord(InputModelType inputModelType)
         {
-            string serializedName = inputModelType.SpecName ?? inputModelType.Name;
-            if (_schemasToChange.Contains(serializedName))
+            if (_schemasToChange.Contains(inputModelType.Name))
             {
-                string oriName = inputModelType.Name;
                 string prefix = Configuration.Namespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : MgmtContext.RPName;
-                string suffix = serializedName.Equals("Resource") ? "Data" : string.Empty;
-                inputModelType.SpecName ??= inputModelType.Name;
+                string suffix = inputModelType.Name.Equals("Resource") ? "Data" : string.Empty;
                 inputModelType.Name = prefix + inputModelType.Name + suffix;
-                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                    new TransformItem(TransformTypeName.PrependRpPrefix, serializedName), inputModelType.SpecName, "ApplyPrependRpPrefix", oriName, inputModelType.Name);
             }
         }
 
@@ -78,13 +67,9 @@ namespace AutoRest.CSharp.Common.Input
             string serializedName = inputEnumType.SpecName ?? inputEnumType.Name;
             if (_schemasToChange.Contains(serializedName))
             {
-                string oriName = inputEnumType.Name;
                 string prefix = Configuration.Namespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : MgmtContext.RPName;
                 string suffix = serializedName.Equals("Resource") ? "Data" : string.Empty;
-                inputEnumType.SpecName ??= inputEnumType.Name;
                 inputEnumType.Name = prefix + inputEnumType.Name + suffix;
-                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                    new TransformItem(TransformTypeName.PrependRpPrefix, serializedName), inputEnumType.SpecName, "ApplyPrependRpPrefix", oriName, inputEnumType.Name);
             }
         }
     }

@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.Common.Input
         {
             // TODO: Remove this when we have a better way to remove operations, tracking in https://github.com/Azure/typespec-azure/issues/964
             InputClientTransformer.Transform(input);
-            InputTypeTransformer.Transform(input);
+            CommonSingleWordModelTransformer.Transform(input);
         }
     }
 }
