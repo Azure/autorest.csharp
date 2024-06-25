@@ -119,7 +119,7 @@ export interface InputArrayType extends InputTypeBase {
     ValueType: InputType;
 }
 
-export function isInputListType(type: InputType): type is InputArrayType {
+export function isInputArrayType(type: InputType): type is InputArrayType {
     return type.Kind === "array";
 }
 
