@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static ObjectTypeProperty? GetValueProperty(SchemaObjectType schemaObject, string pageingItemName)
         {
             return schemaObject.Properties.FirstOrDefault(p => p.InputModelProperty?.SerializedName == pageingItemName &&
-                p.InputModelProperty?.FlattenedNames?.Count == 0 && p.Declaration.Type.IsFrameworkType &&
+                (p.InputModelProperty?.FlattenedNames is null || p.InputModelProperty?.FlattenedNames?.Count == 0) && p.Declaration.Type.IsFrameworkType &&
                 p.Declaration.Type.IsList);
         }
     }

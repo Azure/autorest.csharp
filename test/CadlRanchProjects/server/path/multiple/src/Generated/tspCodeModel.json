@@ -11,8 +11,7 @@
    "Name": "Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -25,7 +24,6 @@
    "Namespace": "Server.Path.Multiple",
    "Description": "Service versions",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -40,6 +38,7 @@
      "$id": "6",
      "Name": "noOperationParams",
      "ResourceName": "Multiple",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "7",
@@ -138,6 +137,7 @@
      "$id": "16",
      "Name": "withOperationPathParam",
      "ResourceName": "Multiple",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"
@@ -151,8 +151,7 @@
        "NameInRequest": "keyword",
        "Type": {
         "$id": "18",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,

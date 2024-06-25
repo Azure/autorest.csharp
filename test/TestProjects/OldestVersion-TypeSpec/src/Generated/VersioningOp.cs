@@ -257,16 +257,17 @@ namespace TypeSpec.Versioning.Oldest
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="projectFileVersion"> The <see cref="string"/> to use. </param>
         /// <param name="removedQueryParam"> The <see cref="string"/> to use. </param>
+        /// <param name="maxLines"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='ExportAsync(WaitUntil,string,string,string,CancellationToken)']/*" />
-        public virtual async Task<Operation<ExportedResource>> ExportAsync(WaitUntil waitUntil, string name, string projectFileVersion = null, string removedQueryParam = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='ExportAsync(WaitUntil,string,string,string,int?,CancellationToken)']/*" />
+        public virtual async Task<Operation<ExportedResource>> ExportAsync(WaitUntil waitUntil, string name, string projectFileVersion = null, string removedQueryParam = null, int? maxLines = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Operation<BinaryData> response = await ExportAsync(waitUntil, name, projectFileVersion, removedQueryParam, context).ConfigureAwait(false);
+            Operation<BinaryData> response = await ExportAsync(waitUntil, name, projectFileVersion, removedQueryParam, maxLines, context).ConfigureAwait(false);
             return ProtocolOperationHelpers.Convert(response, FetchExportedResourceFromResourceOperationStatusResourceExportedResourceError, ClientDiagnostics, "VersioningOp.Export");
         }
 
@@ -275,16 +276,17 @@ namespace TypeSpec.Versioning.Oldest
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="projectFileVersion"> The <see cref="string"/> to use. </param>
         /// <param name="removedQueryParam"> The <see cref="string"/> to use. </param>
+        /// <param name="maxLines"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='Export(WaitUntil,string,string,string,CancellationToken)']/*" />
-        public virtual Operation<ExportedResource> Export(WaitUntil waitUntil, string name, string projectFileVersion = null, string removedQueryParam = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='Export(WaitUntil,string,string,string,int?,CancellationToken)']/*" />
+        public virtual Operation<ExportedResource> Export(WaitUntil waitUntil, string name, string projectFileVersion = null, string removedQueryParam = null, int? maxLines = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Operation<BinaryData> response = Export(waitUntil, name, projectFileVersion, removedQueryParam, context);
+            Operation<BinaryData> response = Export(waitUntil, name, projectFileVersion, removedQueryParam, maxLines, context);
             return ProtocolOperationHelpers.Convert(response, FetchExportedResourceFromResourceOperationStatusResourceExportedResourceError, ClientDiagnostics, "VersioningOp.Export");
         }
 
@@ -298,7 +300,7 @@ namespace TypeSpec.Versioning.Oldest
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ExportAsync(WaitUntil,string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ExportAsync(WaitUntil,string,string,string,int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -307,13 +309,14 @@ namespace TypeSpec.Versioning.Oldest
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="projectFileVersion"> The <see cref="string"/> to use. </param>
         /// <param name="removedQueryParam"> The <see cref="string"/> to use. </param>
+        /// <param name="maxLines"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='ExportAsync(WaitUntil,string,string,string,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> ExportAsync(WaitUntil waitUntil, string name, string projectFileVersion, string removedQueryParam, RequestContext context)
+        /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='ExportAsync(WaitUntil,string,string,string,int?,RequestContext)']/*" />
+        public virtual async Task<Operation<BinaryData>> ExportAsync(WaitUntil waitUntil, string name, string projectFileVersion, string removedQueryParam, int? maxLines, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -321,7 +324,7 @@ namespace TypeSpec.Versioning.Oldest
             scope.Start();
             try
             {
-                using HttpMessage message = CreateExportRequest(name, projectFileVersion, removedQueryParam, context);
+                using HttpMessage message = CreateExportRequest(name, projectFileVersion, removedQueryParam, maxLines, context);
                 return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "VersioningOp.Export", OperationFinalStateVia.OperationLocation, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -341,7 +344,7 @@ namespace TypeSpec.Versioning.Oldest
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Export(WaitUntil,string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Export(WaitUntil,string,string,string,int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -350,13 +353,14 @@ namespace TypeSpec.Versioning.Oldest
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="projectFileVersion"> The <see cref="string"/> to use. </param>
         /// <param name="removedQueryParam"> The <see cref="string"/> to use. </param>
+        /// <param name="maxLines"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='Export(WaitUntil,string,string,string,RequestContext)']/*" />
-        public virtual Operation<BinaryData> Export(WaitUntil waitUntil, string name, string projectFileVersion, string removedQueryParam, RequestContext context)
+        /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='Export(WaitUntil,string,string,string,int?,RequestContext)']/*" />
+        public virtual Operation<BinaryData> Export(WaitUntil waitUntil, string name, string projectFileVersion, string removedQueryParam, int? maxLines, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -364,7 +368,7 @@ namespace TypeSpec.Versioning.Oldest
             scope.Start();
             try
             {
-                using HttpMessage message = CreateExportRequest(name, projectFileVersion, removedQueryParam, context);
+                using HttpMessage message = CreateExportRequest(name, projectFileVersion, removedQueryParam, maxLines, context);
                 return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "VersioningOp.Export", OperationFinalStateVia.OperationLocation, context, waitUntil);
             }
             catch (Exception e)
@@ -374,7 +378,7 @@ namespace TypeSpec.Versioning.Oldest
             }
         }
 
-        internal HttpMessage CreateExportRequest(string name, string projectFileVersion, string removedQueryParam, RequestContext context)
+        internal HttpMessage CreateExportRequest(string name, string projectFileVersion, string removedQueryParam, int? maxLines, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
             var request = message.Request;
@@ -392,6 +396,10 @@ namespace TypeSpec.Versioning.Oldest
             if (removedQueryParam != null)
             {
                 uri.AppendQuery("removedQueryParam", removedQueryParam, true);
+            }
+            if (maxLines != null)
+            {
+                uri.AppendQuery("maxLines", maxLines.Value, true);
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

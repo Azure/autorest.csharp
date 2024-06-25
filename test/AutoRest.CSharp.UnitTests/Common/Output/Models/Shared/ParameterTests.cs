@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -44,8 +45,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Properties: modelProps,
                 BaseModel: null,
                 DerivedModels: derivedModels,
-                InheritedDictionaryType: null,
-                IsNullable: true);
+                InheritedDictionaryType: null);
             InputParameter opParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",
@@ -100,13 +100,13 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Properties: modelProps,
                 BaseModel: null,
                 DerivedModels: derivedModels,
-                InheritedDictionaryType: null,
-                IsNullable: true);
+                InheritedDictionaryType: null);
+            InputNullableType nullableInputModel = new InputNullableType(inputModel);
             InputParameter opParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",
                 Description: string.Empty,
-                Type: inputModel,
+                Type: nullableInputModel,
                 Location: new RequestLocation(),
                 DefaultValue: null,
                 GroupedBy: null,
@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
             // mock ResolveModel
             library.Setup(l => l.ResolveModel(inputModel)).Returns(type.Object);
 
-            CSharpType cSharpType = typeFactory.CreateType(inputModel);
+            CSharpType cSharpType = typeFactory.CreateType(nullableInputModel);
 
             FormattableString result = Parameter.CreateDescription(opParam, cSharpType, null, null);
             var writer = new CodeWriter();
@@ -146,8 +146,8 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
         [Test]
         public void TestCreateDescription_NonInputModelType()
         {
-            InputType literalValueType = new InputPrimitiveType(InputPrimitiveTypeKind.Int32, false);
-            InputLiteralType literalType = new InputLiteralType(literalValueType, 21, false);
+            InputType literalValueType = new InputPrimitiveType(InputPrimitiveTypeKind.Int32);
+            InputLiteralType literalType = new InputLiteralType(literalValueType, 21);
             InputParameter opParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",
@@ -197,13 +197,13 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Properties: modelProps,
                 BaseModel: null,
                 DerivedModels: derivedModels,
-                InheritedDictionaryType: null,
-                IsNullable: true);
+                InheritedDictionaryType: null);
+            InputNullableType nullableInputModel = new InputNullableType(inputModel);
             InputParameter inputParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",
                 Description: "sampleDescription",
-                Type: inputModel,
+                Type: nullableInputModel,
                 Location: new RequestLocation(),
                 DefaultValue: null,
                 GroupedBy: null,
@@ -227,7 +227,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
             // mock ResolveModel
             library.Setup(l => l.ResolveModel(inputModel)).Returns(type.Object);
 
-            CSharpType cSharpType = typeFactory.CreateType(inputModel);
+            CSharpType cSharpType = typeFactory.CreateType(nullableInputModel);
 
             var parameter = Parameter.FromInputParameter(inputParam, cSharpType, typeFactory);
             Assert.IsNotNull(parameter);
@@ -242,8 +242,8 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
         [Test]
         public void TestFromInputParameter_NonInputModelType()
         {
-            InputType literalValueType = new InputPrimitiveType(InputPrimitiveTypeKind.Int32, false);
-            InputLiteralType literalType = new InputLiteralType(literalValueType, 21, false);
+            InputType literalValueType = new InputPrimitiveType(InputPrimitiveTypeKind.Int32);
+            InputLiteralType literalType = new InputLiteralType(literalValueType, 21);
             InputParameter inputParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",

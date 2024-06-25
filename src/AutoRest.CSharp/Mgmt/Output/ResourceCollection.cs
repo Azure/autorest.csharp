@@ -138,8 +138,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             var suppressListException = Configuration.MgmtConfiguration.ListException.Contains(RequestPath)
                 || Configuration.MgmtConfiguration.MgmtDebug.SuppressListException;
             var getAllOperation = ClientOperations.Where(operation => operation.Name == "GetAll").OrderBy(operation => ReferenceSegments(operation).Count()).FirstOrDefault();
-            if (!suppressListException && getAllOperation == null)
-                throw new ErrorHelpers.ErrorException($"The ResourceCollection {Type.Name} (RequestPath: {RequestPath}) does not have a `GetAll` method");
 
             if (getAllOperation == null)
                 return getAllOperation;

@@ -11,8 +11,8 @@ HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHe
 RoundTripModel action = new RoundTripModel(
 "<requiredString>",
 1234,
-new StringFixedEnum?[] { StringFixedEnum.One },
-new Dictionary<string, StringExtensibleEnum?>
+new StringFixedEnum[] { StringFixedEnum.One },
+new Dictionary<string, StringExtensibleEnum>
 {
     ["key"] = StringExtensibleEnum.One
 },
@@ -37,8 +37,8 @@ HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHe
 RoundTripModel action = new RoundTripModel(
 "<requiredString>",
 1234,
-new StringFixedEnum?[] { StringFixedEnum.One },
-new Dictionary<string, StringExtensibleEnum?>
+new StringFixedEnum[] { StringFixedEnum.One },
+new Dictionary<string, StringExtensibleEnum>
 {
     ["key"] = StringExtensibleEnum.One
 },
@@ -90,8 +90,8 @@ HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHe
 RoundTripModel action = new RoundTripModel(
 "<requiredString>",
 1234,
-new StringFixedEnum?[] { StringFixedEnum.One },
-new Dictionary<string, StringExtensibleEnum?>
+new StringFixedEnum[] { StringFixedEnum.One },
+new Dictionary<string, StringExtensibleEnum>
 {
     ["key"] = StringExtensibleEnum.One
 },
@@ -116,8 +116,8 @@ HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHe
 RoundTripModel action = new RoundTripModel(
 "<requiredString>",
 1234,
-new StringFixedEnum?[] { StringFixedEnum.One },
-new Dictionary<string, StringExtensibleEnum?>
+new StringFixedEnum[] { StringFixedEnum.One },
+new Dictionary<string, StringExtensibleEnum>
 {
     ["key"] = StringExtensibleEnum.One
 },

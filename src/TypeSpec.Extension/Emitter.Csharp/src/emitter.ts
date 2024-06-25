@@ -84,7 +84,9 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             prettierOutput(JSON.stringify(configurations, null, 2))
         );
         const csProjFile = resolvePath(
-            outputFolder,
+            outputFolder.endsWith("src")
+                ? outputFolder
+                : resolvePath(outputFolder, "src"),
             `${configurations["library-name"]}.csproj`
         );
         Logger.getInstance().info(`Checking if ${csProjFile} exists`);

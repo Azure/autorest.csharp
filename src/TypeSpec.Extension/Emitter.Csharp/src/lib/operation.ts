@@ -17,7 +17,8 @@ import {
     Model,
     ModelProperty,
     Namespace,
-    Operation
+    Operation,
+    Type
 } from "@typespec/compiler";
 import { getResourceOperation } from "@typespec/rest";
 import {
@@ -68,6 +69,7 @@ import {
     getTypeName
 } from "./utils.js";
 import { Usage } from "../type/usage.js";
+import { getExtensions } from "@typespec/openapi";
 
 export function loadOperation(
     sdkContext: SdkContext<NetEmitterOptions>,
@@ -101,11 +103,17 @@ export function loadOperation(
         parameters.push(loadOperationParameter(sdkContext, p));
     }
 
-    if (typespecParameters.body?.parameter) {
+    if (
+        typespecParameters.body?.property &&
+        !isVoidType(typespecParameters.body.type)
+    ) {
         parameters.push(
-            loadBodyParameter(sdkContext, typespecParameters.body?.parameter)
+            loadBodyParameter(sdkContext, typespecParameters.body?.property)
         );
-    } else if (typespecParameters.body?.type) {
+    } else if (
+        typespecParameters.body?.type &&
+        !isVoidType(typespecParameters.body.type)
+    ) {
         const effectiveBodyType = getEffectiveSchemaType(
             sdkContext,
             typespecParameters.body.type
@@ -248,6 +256,10 @@ export function loadOperation(
         GenerateConvenienceMethod: generateConvenience
     } as InputOperation;
 
+    function isVoidType(type: Type): boolean {
+        return type.kind === "Intrinsic" && type.name === "void";
+    }
+
     function loadOperationParameter(
         context: SdkContext<NetEmitterOptions>,
         parameter: HttpOperationParameter
@@ -295,7 +307,10 @@ export function loadOperation(
             IsResourceParameter: false,
             IsContentType: isContentType,
             IsEndpoint: false,
-            SkipUrlEncoding: false, //TODO: retrieve out value from extension
+            SkipUrlEncoding:
+                // TODO: update this when https://github.com/Azure/typespec-azure/issues/1022 is resolved
+                getExtensions(program, param).get("x-ms-skip-url-encoding") ===
+                true,
             Explode:
                 (inputType as InputListType).ElementType && format === "multi"
                     ? true

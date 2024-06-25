@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -41,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _typeFactory = typeFactory;
             DefaultName = inputModel.CSharpName();
-            DefaultNamespace = GetDefaultModelNamespace(inputModel.Namespace, defaultNamespace);
+            DefaultNamespace = GetDefaultModelNamespace(null, defaultNamespace);
             InputModel = inputModel;
             _serializationBuilder = new SerializationBuilder();
             _usage = inputModel.Usage;
@@ -324,7 +325,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultParameterValue = Constant.Default(inputType);
                     }
 
-                    var validate = property.InputModelProperty?.Type.IsNullable != true && !inputType.IsValueType && property.InputModelProperty?.IsReadOnly != true ? ValidationType.AssertNotNull : ValidationType.None;
+                    var validate = property.InputModelProperty?.Type is not InputNullableType && !inputType.IsValueType && property.InputModelProperty?.IsReadOnly != true ? ValidationType.AssertNotNull : ValidationType.None;
                     var defaultCtorParameter = new Parameter(
                         property.Declaration.Name.ToVariableName(),
                         property.ParameterDescription,
@@ -474,6 +475,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                         continue;
                     }
                     var prop = CreateProperty(property);
+
+                    // If "Type" property is "String" and "ResourceType" exists in parents properties, skip it since they are the same.
+                    // This only applies for TypeSpec input, for swagger input we have renamed "type" property to "resourceType" in FrameworkTypeUpdater.ValidateAndUpdate
+                    if (property.CSharpName() == "Type" && prop.ValueType.Name == "String" && existingProperties.Contains("ResourceType"))
+                    {
+                        continue;
+                    }
                     propertiesFromSpec.Add(prop.Declaration.Name);
                     yield return prop;
                 }
@@ -516,7 +524,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             // We represent property being optional by making it nullable
             // Except in the case of collection where there is a special handling
             bool optionalViaNullability = !property.IsRequired &&
-                                          !property.Type.IsNullable &&
+                                          property.Type is not InputNullableType &&
                                           !propertyType.IsCollection;
 
             if (optionalViaNullability)
@@ -548,7 +556,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (isCollection)
             {
-                propertyShouldOmitSetter |= !property.Type.IsNullable;
+                propertyShouldOmitSetter |= property.Type is not InputNullableType;
             }
             else
             {
