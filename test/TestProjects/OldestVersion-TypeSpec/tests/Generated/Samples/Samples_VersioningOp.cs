@@ -258,13 +258,14 @@ namespace TypeSpec.Versioning.Oldest.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
-            Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", null, null, null);
+            Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", null, null, null, null);
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("resourceUri").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
         }
 
         [Test]
@@ -274,13 +275,14 @@ namespace TypeSpec.Versioning.Oldest.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
-            Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", null, null, null);
+            Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", null, null, null, null);
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("resourceUri").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
         }
 
         [Test]
@@ -312,13 +314,14 @@ namespace TypeSpec.Versioning.Oldest.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
-            Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", "<projectFileVersion>", "<removedQueryParam>", null);
+            Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", "<projectFileVersion>", "<removedQueryParam>", 1234, null);
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("resourceUri").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
         }
 
         [Test]
@@ -328,13 +331,14 @@ namespace TypeSpec.Versioning.Oldest.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
-            Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<projectFileVersion>", "<removedQueryParam>", null);
+            Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<projectFileVersion>", "<removedQueryParam>", 1234, null);
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("resourceUri").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
         }
 
         [Test]
@@ -344,7 +348,7 @@ namespace TypeSpec.Versioning.Oldest.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
-            Operation<ExportedResource> operation = client.Export(WaitUntil.Completed, "<name>", projectFileVersion: "<projectFileVersion>", removedQueryParam: "<removedQueryParam>");
+            Operation<ExportedResource> operation = client.Export(WaitUntil.Completed, "<name>", projectFileVersion: "<projectFileVersion>", removedQueryParam: "<removedQueryParam>", maxLines: 1234);
             ExportedResource responseData = operation.Value;
         }
 
@@ -355,7 +359,7 @@ namespace TypeSpec.Versioning.Oldest.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
-            Operation<ExportedResource> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", projectFileVersion: "<projectFileVersion>", removedQueryParam: "<removedQueryParam>");
+            Operation<ExportedResource> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", projectFileVersion: "<projectFileVersion>", removedQueryParam: "<removedQueryParam>", maxLines: 1234);
             ExportedResource responseData = operation.Value;
         }
     }

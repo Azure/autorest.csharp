@@ -7,8 +7,8 @@ using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, InputDictionaryType? InheritedDictionaryType, bool IsNullable, IReadOnlyList<InputType>? ArgumentTypes = null)
-        : InputType(Name, IsNullable)
+    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, InputDictionaryType? InheritedDictionaryType, IReadOnlyList<InputType>? ArgumentTypes = null)
+        : InputType(Name)
     {
         /// <summary>
         /// Indicates if this model is the Unknown derived version of a model with discriminator
@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Common.Input
                 case InputDictionaryType otherDictionary:
                     return Equals(otherDictionary.ValueType);
                 case InputListType otherList:
-                    return Equals(otherList.ElementType);
+                    return Equals(otherList.ValueType);
                 default:
                     return Equals(other);
             }

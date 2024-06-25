@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -322,9 +323,10 @@ namespace AutoRest.CSharp.Output.Models
                         // This method has a flattened body
                         if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened && library != null)
                         {
-                            var objectType = bodyRequestParameter.Type switch
+                            (InputType inputType, bool isNullable) = bodyRequestParameter.Type is InputNullableType nullableType ? (nullableType.Type, true) : (bodyRequestParameter.Type, false);
+                            var objectType = inputType switch
                             {
-                                InputModelType inputModelType => library.ResolveModel(inputModelType).Implementation as SerializableObjectType,
+                                InputModelType inputModelType => library.ResolveModel(inputModelType).WithNullable(isNullable).Implementation as SerializableObjectType,
                                 _ => null
                             };
 
@@ -494,7 +496,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private Parameter BuildParameter(in InputParameter operationParameter, Type? typeOverride = null)
         {
-            CSharpType type = typeOverride != null ? new CSharpType(typeOverride, operationParameter.Type.IsNullable) :
+            CSharpType type = typeOverride != null ? new CSharpType(typeOverride, operationParameter.Type is InputNullableType) :
                 // for apiVersion, we still convert enum type to enum value type
                 operationParameter is { IsApiVersion: true, Type: InputEnumType enumType } ? _typeFactory.CreateType(enumType.ValueType) : _typeFactory.CreateType(operationParameter.Type);
             return Parameter.FromInputParameter(operationParameter, type, _typeFactory);

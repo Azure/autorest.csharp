@@ -322,7 +322,7 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SingleBase"/>. </summary>
-        /// <param name="kind"> Discriminator. </param>
+        /// <param name="kind"> Discriminator property for SingleBase. </param>
         /// <param name="size"></param>
         /// <returns> A new <see cref="Models.SingleBase"/> instance for mocking. </returns>
         public static SingleBase SingleBase(string kind = null, int size = default)

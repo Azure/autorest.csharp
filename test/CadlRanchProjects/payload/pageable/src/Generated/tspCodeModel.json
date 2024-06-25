@@ -10,7 +10,6 @@
    "Name": "PagedUser",
    "Namespace": "Azure.Core",
    "Description": "Paged collection of User items",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -20,15 +19,13 @@
      "Description": "The User items on this page",
      "Type": {
       "$id": "4",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "5",
        "Kind": "Model",
        "Name": "User",
        "Namespace": "Payload.Pageable",
        "Description": "User model",
-       "IsNullable": false,
        "Usage": "Output",
        "Properties": [
         {
@@ -38,15 +35,13 @@
          "Description": "User name",
          "Type": {
           "$id": "7",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -58,8 +53,7 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "9",
-      "Kind": "url",
-      "IsNullable": false
+      "Kind": "url"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -81,6 +75,7 @@
      "Name": "list",
      "ResourceName": "Pageable",
      "Description": "List users",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "12",
@@ -118,8 +113,7 @@
        "Description": "The maximum number of result items per page.",
        "Type": {
         "$id": "17",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,

@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         internal static void UpdateUsingReplacement(InputParameter bodyParameter, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary, InputOperation operation, List<InputType> updatedTypes)
         {
-            var schemaName = bodyParameter.Type.Name;
+            var schemaName = bodyParameter.Type.GetImplementType().Name;
             if (schemaName.EndsWith("Parameters", StringComparison.Ordinal))
                 schemaName = schemaName.ReplaceLast("Parameters", Content);
             if (schemaName.EndsWith("Request", StringComparison.Ordinal))
@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         internal static void UpdateParameterNameOnly(InputParameter bodyParam, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary, InputOperation operation)
         {
             string oriName = bodyParam.Name;
-            bodyParam.Name = NormalizeParamNames.GetNewName(bodyParam.Name, bodyParam.Type.Name, resourceDataDictionary);
+            bodyParam.Name = NormalizeParamNames.GetNewName(bodyParam.Name, bodyParam.Type.GetImplementType().Name, resourceDataDictionary);
             string fullSerializedName = operation.GetFullSerializedName(bodyParam);
             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                 new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
@@ -66,19 +66,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
                 fullSerializedName, "UpdateParameterName", oriParameterName, parameter.Name);
 
-            string oriSchemaName = parameter.Type.Name;
+            InputType parameterType = parameter.Type.GetImplementType();
+            string oriSchemaName = parameterType.Name;
             if (oriSchemaName != schemaName)
             {
                 // we only need to update the schema name if it is a model or enum type
-                if (parameter.Type is InputModelType || parameter.Type is InputEnumType)
+                if (parameterType is InputModelType || parameter.Type is InputEnumType)
                 {
-                    updatedTypes.Add(parameter.Type);
+                    updatedTypes.Add(parameterType);
                 }
-                parameter.Type.Name = schemaName;
-                fullSerializedName = parameter.Type.GetFullSerializedName();
+                parameterType.Name = schemaName;
+                fullSerializedName = parameterType.GetFullSerializedName();
                 MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                     new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
-                    fullSerializedName, "UpdateParameterSchemaName", oriSchemaName, parameter.Type.Name);
+                    fullSerializedName, "UpdateParameterSchemaName", oriSchemaName, parameterType.Name);
             }
 
             if (parameter.Type is InputEnumType || parameter.Type is InputModelType)

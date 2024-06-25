@@ -36,7 +36,7 @@ import { InputOperationParameterKind } from "../type/input-operation-parameter-k
 import { InputParameter } from "../type/input-parameter.js";
 import {
     InputEnumType,
-    InputListType,
+    InputArrayType,
     InputModelType,
     InputType,
     isInputEnumType,
@@ -104,11 +104,11 @@ export function loadOperation(
     }
 
     if (
-        typespecParameters.body?.parameter &&
+        typespecParameters.body?.property &&
         !isVoidType(typespecParameters.body.type)
     ) {
         parameters.push(
-            loadBodyParameter(sdkContext, typespecParameters.body?.parameter)
+            loadBodyParameter(sdkContext, typespecParameters.body?.property)
         );
     } else if (
         typespecParameters.body?.type &&
@@ -312,7 +312,7 @@ export function loadOperation(
                 getExtensions(program, param).get("x-ms-skip-url-encoding") ===
                 true,
             Explode:
-                (inputType as InputListType).ElementType && format === "multi"
+                (inputType as InputArrayType).ValueType && format === "multi"
                     ? true
                     : false,
             Kind: kind,

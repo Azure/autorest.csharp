@@ -12,8 +12,7 @@
    "Name": "Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -32,7 +31,6 @@
    "Namespace": "Versioning.ReturnTypeChangedFrom",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -47,6 +45,7 @@
      "$id": "7",
      "Name": "test",
      "ResourceName": "ReturnTypeChangedFrom",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "8",
@@ -92,8 +91,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "12",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -166,8 +164,7 @@
        ],
        "BodyType": {
         "$id": "20",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "BodyMediaType": "Json",
        "Headers": [],

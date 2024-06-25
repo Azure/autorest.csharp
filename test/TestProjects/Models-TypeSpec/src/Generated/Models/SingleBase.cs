@@ -53,7 +53,7 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="SingleBase"/>. </summary>
-        /// <param name="kind"> Discriminator. </param>
+        /// <param name="kind"> Discriminator property for SingleBase. </param>
         /// <param name="size"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal SingleBase(string kind, int size, IDictionary<string, BinaryData> serializedAdditionalRawData)
@@ -68,7 +68,7 @@ namespace ModelsTypeSpec.Models
         {
         }
 
-        /// <summary> Discriminator. </summary>
+        /// <summary> Discriminator property for SingleBase. </summary>
         internal string Kind { get; set; }
         /// <summary> Gets the size. </summary>
         public int Size { get; }

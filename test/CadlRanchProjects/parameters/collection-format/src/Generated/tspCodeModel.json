@@ -55,6 +55,7 @@
      "$id": "9",
      "Name": "multi",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -66,14 +67,11 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "11",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "12",
-         "Kind": "string",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "string"
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -135,6 +133,7 @@
      "$id": "17",
      "Name": "ssv",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -146,14 +145,11 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "19",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "20",
-         "Kind": "string",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "string"
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -216,6 +212,7 @@
      "$id": "25",
      "Name": "tsv",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -227,14 +224,11 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "27",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "28",
-         "Kind": "string",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "string"
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -297,6 +291,7 @@
      "$id": "33",
      "Name": "pipes",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -308,14 +303,11 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "35",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "36",
-         "Kind": "string",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "string"
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -378,6 +370,7 @@
      "$id": "41",
      "Name": "csv",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -389,14 +382,11 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "43",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "44",
-         "Kind": "string",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "string"
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -476,6 +466,7 @@
      "$id": "51",
      "Name": "csv",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -487,14 +478,11 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "53",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "54",
-         "Kind": "string",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "string"
+        }
        },
        "Location": "Header",
        "IsRequired": true,
