@@ -59,7 +59,8 @@ namespace AutoRest.CSharp.Common.Input
 
         private static void TransformCommonSingleWord(InputModelType inputModelType)
         {
-            if (_schemasToChange.Contains(inputModelType.Name))
+            var name = inputModelType.SpecName ?? inputModelType.Name;
+            if (_schemasToChange.Contains(name))
             {
                 string prefix = Configuration.Namespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : MgmtContext.RPName;
                 string suffix = inputModelType.Name.Equals("Resource") ? "Data" : string.Empty;
@@ -69,7 +70,8 @@ namespace AutoRest.CSharp.Common.Input
 
         private static void TransformCommonSingleWord(InputEnumType inputEnumType)
         {
-            if (_schemasToChange.Contains(inputEnumType.Name))
+            var name = inputEnumType.SpecName ?? inputEnumType.Name;
+            if (_schemasToChange.Contains(name))
             {
                 string prefix = Configuration.Namespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : MgmtContext.RPName;
                 string suffix = inputEnumType.Name.Equals("Resource") ? "Data" : string.Empty;
