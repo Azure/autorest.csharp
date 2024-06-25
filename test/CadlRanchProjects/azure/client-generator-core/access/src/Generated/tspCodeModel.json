@@ -9,9 +9,7 @@
    "Kind": "Model",
    "Name": "NoDecoratorModelInPublic",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation",
-   "Accessibility": "public",
    "Description": "Used in a public operation, should be generated and exported.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -21,8 +19,7 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -36,7 +33,6 @@
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation",
    "Accessibility": "public",
    "Description": "Used in a public operation, should be generated and exported.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -46,8 +42,7 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -59,9 +54,7 @@
    "Kind": "Model",
    "Name": "NoDecoratorModelInInternal",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
-   "Accessibility": "internal",
    "Description": "Used in an internal operation, should be generated but not exported.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -71,8 +64,7 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -86,7 +78,6 @@
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
    "Accessibility": "internal",
    "Description": "Used in an internal operation, should be generated but not exported.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -96,8 +87,7 @@
      "Description": "",
      "Type": {
       "$id": "13",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -111,7 +101,6 @@
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
    "Accessibility": "public",
    "Description": "Used in an internal operation but with public decorator, should be generated and exported.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -121,8 +110,7 @@
      "Description": "",
      "Type": {
       "$id": "16",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -134,9 +122,7 @@
    "Kind": "Model",
    "Name": "SharedModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation",
-   "Accessibility": "public",
    "Description": "Used by both public and internal operation. It should be generated and exported.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -146,8 +132,7 @@
      "Description": "",
      "Type": {
       "$id": "19",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -159,18 +144,14 @@
    "Kind": "Model",
    "Name": "OuterModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
-   "Accessibility": "internal",
    "Description": "Used in internal operations, should be generated but not exported.",
-   "IsNullable": false,
    "Usage": "Output",
    "BaseModel": {
     "$id": "21",
     "Kind": "Model",
     "Name": "BaseModel",
     "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
-    "Accessibility": "internal",
     "Description": "Used in internal operations, should be generated but not exported.",
-    "IsNullable": false,
     "Usage": "Output",
     "Properties": [
      {
@@ -180,8 +161,7 @@
       "Description": "",
       "Type": {
        "$id": "23",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "IsRequired": true,
       "IsReadOnly": false
@@ -199,9 +179,7 @@
       "Kind": "Model",
       "Name": "InnerModel",
       "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
-      "Accessibility": "internal",
       "Description": "Used in internal operations, should be generated but not exported.",
-      "IsNullable": false,
       "Usage": "Output",
       "Properties": [
        {
@@ -211,8 +189,7 @@
         "Description": "",
         "Type": {
          "$id": "27",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -235,9 +212,7 @@
    "Kind": "Model",
    "Name": "AbstractModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
-   "Accessibility": "internal",
    "Description": "Used in internal operations, should be generated but not exported.",
-   "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "Output",
    "Properties": [
@@ -245,11 +220,10 @@
      "$id": "29",
      "Name": "kind",
      "SerializedName": "kind",
-     "Description": "Discriminator",
+     "Description": "Discriminator property for AbstractModel.",
      "Type": {
       "$id": "30",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -262,8 +236,7 @@
      "Description": "",
      "Type": {
       "$id": "32",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -275,9 +248,7 @@
    "Kind": "Model",
    "Name": "RealModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
-   "Accessibility": "internal",
    "Description": "Used in internal operations, should be generated but not exported.",
-   "IsNullable": false,
    "DiscriminatorValue": "real",
    "Usage": "Output",
    "BaseModel": {
@@ -348,8 +319,7 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "43",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -428,8 +398,7 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "50",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -525,8 +494,7 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "59",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -605,8 +573,7 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "66",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -685,8 +652,7 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "73",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -782,8 +748,7 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "82",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -862,8 +827,7 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "89",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -960,8 +924,7 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "98",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1041,8 +1004,7 @@
        "NameInRequest": "kind",
        "Type": {
         "$id": "105",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,

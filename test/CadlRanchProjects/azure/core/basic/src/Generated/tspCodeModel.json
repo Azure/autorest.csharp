@@ -11,8 +11,7 @@
    "Name": "ListItemInputExtensibleEnum",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -31,7 +30,6 @@
    "Namespace": "_Specs_.Azure.Core.Basic",
    "Description": "An extensible enum input parameter.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Input"
   },
   {
@@ -40,8 +38,7 @@
    "Name": "Versions",
    "ValueType": {
     "$id": "7",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -54,7 +51,6 @@
    "Namespace": "_Specs_.Azure.Core.Basic",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -65,7 +61,6 @@
    "Name": "User",
    "Namespace": "_Specs_.Azure.Core.Basic",
    "Description": "Details about a user.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -75,8 +70,7 @@
      "Description": "The user's id.",
      "Type": {
       "$id": "11",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -88,8 +82,7 @@
      "Description": "The user's name.",
      "Type": {
       "$id": "13",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -108,7 +101,6 @@
        "Name": "UserOrder",
        "Namespace": "_Specs_.Azure.Core.Basic",
        "Description": "UserOrder for testing list with expand.",
-       "IsNullable": false,
        "Usage": "RoundTrip",
        "Properties": [
         {
@@ -118,8 +110,7 @@
          "Description": "The user's id.",
          "Type": {
           "$id": "18",
-          "Kind": "int32",
-          "IsNullable": false
+          "Kind": "int32"
          },
          "IsRequired": true,
          "IsReadOnly": true
@@ -131,8 +122,7 @@
          "Description": "The user's id.",
          "Type": {
           "$id": "20",
-          "Kind": "int32",
-          "IsNullable": false
+          "Kind": "int32"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -144,15 +134,13 @@
          "Description": "The user's order detail",
          "Type": {
           "$id": "22",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -165,7 +153,6 @@
      "Type": {
       "$id": "24",
       "Kind": "eTag",
-      "IsNullable": false,
       "Encode": "string"
      },
      "IsRequired": true,
@@ -182,7 +169,6 @@
    "Name": "PagedUser",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of User items",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -195,8 +181,7 @@
       "Kind": "array",
       "ValueType": {
        "$ref": "9"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -208,8 +193,7 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "29",
-      "Kind": "url",
-      "IsNullable": false
+      "Kind": "url"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -222,7 +206,6 @@
    "Name": "ListItemInputBody",
    "Namespace": "_Specs_.Azure.Core.Basic",
    "Description": "The body of the input.",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -232,8 +215,7 @@
      "Description": "The name of the input.",
      "Type": {
       "$id": "32",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -245,7 +227,6 @@
    "Kind": "Model",
    "Name": "UserListResults",
    "Namespace": "_Specs_.Azure.Core.Basic",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -258,8 +239,7 @@
       "Kind": "array",
       "ValueType": {
        "$ref": "9"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -271,8 +251,7 @@
      "Description": "Link to fetch more items.",
      "Type": {
       "$id": "37",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -285,7 +264,6 @@
    "Name": "PagedFirstItem",
    "Namespace": "Azure.Core",
    "Description": "Paged collection of FirstItem items",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -302,7 +280,6 @@
        "Name": "FirstItem",
        "Namespace": "_Specs_.Azure.Core.Basic",
        "Description": "First item.",
-       "IsNullable": false,
        "Usage": "Output",
        "Properties": [
         {
@@ -312,15 +289,13 @@
          "Description": "The id of the item.",
          "Type": {
           "$id": "43",
-          "Kind": "int32",
-          "IsNullable": false
+          "Kind": "int32"
          },
          "IsRequired": true,
          "IsReadOnly": true
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -332,8 +307,7 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "45",
-      "Kind": "url",
-      "IsNullable": false
+      "Kind": "url"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -349,7 +323,6 @@
    "Name": "PagedSecondItem",
    "Namespace": "Azure.Core",
    "Description": "Paged collection of SecondItem items",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -366,7 +339,6 @@
        "Name": "SecondItem",
        "Namespace": "_Specs_.Azure.Core.Basic",
        "Description": "Second item.",
-       "IsNullable": false,
        "Usage": "Output",
        "Properties": [
         {
@@ -376,15 +348,13 @@
          "Description": "The name of the item.",
          "Type": {
           "$id": "51",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          },
          "IsRequired": true,
          "IsReadOnly": true
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -396,8 +366,7 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "53",
-      "Kind": "url",
-      "IsNullable": false
+      "Kind": "url"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -420,6 +389,7 @@
      "ResourceName": "User",
      "Summary": "Adds a user or updates a user's fields.",
      "Description": "Creates or updates a User",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "56",
@@ -457,8 +427,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "61",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -486,8 +455,7 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "65",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -509,11 +477,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "68",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "application/merge-patch+json",
-        "IsNullable": false
+        "Value": "application/merge-patch+json"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -626,6 +592,7 @@
      "ResourceName": "User",
      "Summary": "Adds a user or replaces a user's fields.",
      "Description": "Creates or replaces a User",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "56"
@@ -637,8 +604,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "78",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -660,8 +626,7 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "80",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -793,6 +758,7 @@
      "ResourceName": "User",
      "Summary": "Gets a user.",
      "Description": "Gets a User",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "56"
@@ -804,8 +770,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "92",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -827,8 +792,7 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "94",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -898,6 +862,7 @@
      "ResourceName": "User",
      "Summary": "Lists all users.",
      "Description": "Lists all Users",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "56"
@@ -909,8 +874,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "101",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -932,8 +896,7 @@
        "Description": "The number of result items to return.",
        "Type": {
         "$id": "103",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -952,8 +915,7 @@
        "Description": "The number of result items to skip.",
        "Type": {
         "$id": "105",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -972,8 +934,7 @@
        "Description": "The maximum number of result items per page.",
        "Type": {
         "$id": "107",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -995,10 +956,8 @@
         "Kind": "array",
         "ValueType": {
          "$id": "110",
-         "Kind": "string",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "string"
+        }
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1017,8 +976,7 @@
        "Description": "Filter the result list using the given expression.",
        "Type": {
         "$id": "112",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1040,10 +998,8 @@
         "Kind": "array",
         "ValueType": {
          "$id": "115",
-         "Kind": "string",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "string"
+        }
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1065,10 +1021,8 @@
         "Kind": "array",
         "ValueType": {
          "$id": "118",
-         "Kind": "string",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "string"
+        }
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1142,6 +1096,7 @@
      "Name": "listWithPage",
      "ResourceName": "Basic",
      "Description": "List with Azure.Core.Page<>.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "56"
@@ -1153,8 +1108,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "126",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1231,6 +1185,7 @@
      "Name": "listWithParameters",
      "ResourceName": "Basic",
      "Description": "List with extensible enum parameter Azure.Core.Page<>.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "56"
@@ -1242,8 +1197,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "134",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1385,6 +1339,7 @@
      "Name": "listWithCustomPageModel",
      "ResourceName": "Basic",
      "Description": "List with custom page model.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "56"
@@ -1396,8 +1351,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "147",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1475,6 +1429,7 @@
      "ResourceName": "User",
      "Summary": "Deletes a user.",
      "Description": "Deletes a User",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "56"
@@ -1486,8 +1441,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "155",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1509,8 +1463,7 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "157",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1574,6 +1527,7 @@
      "ResourceName": "Basic",
      "Summary": "Exports a user.",
      "Description": "Exports a User",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "56"
@@ -1585,8 +1539,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "164",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1608,8 +1561,7 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "166",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1628,8 +1580,7 @@
        "Description": "The format of the data.",
        "Type": {
         "$id": "168",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1714,6 +1665,7 @@
      "Name": "listFirstItem",
      "ResourceName": "TwoModelsAsPageItem",
      "Description": "Two operations with two different page item types should be successfully generated. Should generate model for FirstItem.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "56"
@@ -1725,8 +1677,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "177",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1803,6 +1754,7 @@
      "Name": "listSecondItem",
      "ResourceName": "TwoModelsAsPageItem",
      "Description": "Two operations with two different page item types should be successfully generated. Should generate model for SecondItem.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "56"
@@ -1814,8 +1766,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "185",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {

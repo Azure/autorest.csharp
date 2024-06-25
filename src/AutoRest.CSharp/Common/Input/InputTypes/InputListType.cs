@@ -3,9 +3,9 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputListType(string Name, InputType ValueType, bool IsNullable) : InputType(Name, IsNullable)
+internal record InputListType(string Name, InputType ValueType) : InputType(Name)
 {
-    public InputListType(string name, InputType valueType, bool isEmbeddingsVector, bool isNullable) : this(name, valueType, isNullable)
+    public InputListType(string name, InputType valueType, bool isEmbeddingsVector) : this(name, valueType)
     {
         IsEmbeddingsVector = isEmbeddingsVector;
     }

@@ -10,7 +10,6 @@
    "Name": "Extension",
    "Namespace": "Type.Model.Inheritance.Recursive",
    "Description": "extension",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "BaseModel": {
     "$id": "3",
@@ -18,7 +17,6 @@
     "Name": "Element",
     "Namespace": "Type.Model.Inheritance.Recursive",
     "Description": "element",
-    "IsNullable": false,
     "Usage": "RoundTrip",
     "Properties": [
      {
@@ -31,8 +29,7 @@
        "Kind": "array",
        "ValueType": {
         "$ref": "2"
-       },
-       "IsNullable": false
+       }
       },
       "IsRequired": false,
       "IsReadOnly": false
@@ -47,8 +44,7 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "int8",
-      "IsNullable": false
+      "Kind": "int8"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -69,6 +65,7 @@
      "$id": "9",
      "Name": "put",
      "ResourceName": "Recursive",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "10",
@@ -195,6 +192,7 @@
      "$id": "22",
      "Name": "get",
      "ResourceName": "Recursive",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"

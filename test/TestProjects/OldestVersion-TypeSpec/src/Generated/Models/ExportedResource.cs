@@ -49,28 +49,33 @@ namespace TypeSpec.Versioning.Oldest.Models
         /// <param name="id"></param>
         /// <param name="resourceUri"></param>
         /// <param name="name"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="resourceUri"/> or <paramref name="name"/> is null. </exception>
-        internal ExportedResource(string id, string resourceUri, string name)
+        /// <param name="type"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="resourceUri"/>, <paramref name="name"/> or <paramref name="type"/> is null. </exception>
+        internal ExportedResource(string id, string resourceUri, string name, string type)
         {
             Argument.AssertNotNull(id, nameof(id));
             Argument.AssertNotNull(resourceUri, nameof(resourceUri));
             Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(type, nameof(type));
 
             Id = id;
             ResourceUri = resourceUri;
             Name = name;
+            Type = type;
         }
 
         /// <summary> Initializes a new instance of <see cref="ExportedResource"/>. </summary>
         /// <param name="id"></param>
         /// <param name="resourceUri"></param>
         /// <param name="name"></param>
+        /// <param name="type"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ExportedResource(string id, string resourceUri, string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ExportedResource(string id, string resourceUri, string name, string type, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             ResourceUri = resourceUri;
             Name = name;
+            Type = type;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -85,5 +90,7 @@ namespace TypeSpec.Versioning.Oldest.Models
         public string ResourceUri { get; }
         /// <summary> Gets the name. </summary>
         public string Name { get; }
+        /// <summary> Gets the type. </summary>
+        public string Type { get; }
     }
 }

@@ -69,6 +69,7 @@ import {
     getTypeName
 } from "./utils.js";
 import { Usage } from "../type/usage.js";
+import { getExtensions } from "@typespec/openapi";
 
 export function loadOperation(
     sdkContext: SdkContext<NetEmitterOptions>,
@@ -103,11 +104,11 @@ export function loadOperation(
     }
 
     if (
-        typespecParameters.body?.parameter &&
+        typespecParameters.body?.property &&
         !isVoidType(typespecParameters.body.type)
     ) {
         parameters.push(
-            loadBodyParameter(sdkContext, typespecParameters.body?.parameter)
+            loadBodyParameter(sdkContext, typespecParameters.body?.property)
         );
     } else if (
         typespecParameters.body?.type &&
@@ -306,7 +307,10 @@ export function loadOperation(
             IsResourceParameter: false,
             IsContentType: isContentType,
             IsEndpoint: false,
-            SkipUrlEncoding: false, //TODO: retrieve out value from extension
+            SkipUrlEncoding:
+                // TODO: update this when https://github.com/Azure/typespec-azure/issues/1022 is resolved
+                getExtensions(program, param).get("x-ms-skip-url-encoding") ===
+                true,
             Explode:
                 (inputType as InputArrayType).ValueType && format === "multi"
                     ? true

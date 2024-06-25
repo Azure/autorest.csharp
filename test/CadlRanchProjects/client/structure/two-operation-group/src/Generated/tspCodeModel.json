@@ -9,8 +9,7 @@
    "Name": "ClientType",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -36,7 +35,6 @@
    ],
    "Namespace": "Client.Structure.Service",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input"
   }
  ],
@@ -101,6 +99,7 @@
      "$id": "14",
      "Name": "one",
      "ResourceName": "Group1",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -158,6 +157,7 @@
      "$id": "19",
      "Name": "three",
      "ResourceName": "Group1",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -215,6 +215,7 @@
      "$id": "24",
      "Name": "four",
      "ResourceName": "Group1",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -292,6 +293,7 @@
      "$id": "31",
      "Name": "two",
      "ResourceName": "Group2",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -349,6 +351,7 @@
      "$id": "36",
      "Name": "five",
      "ResourceName": "Group2",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -406,6 +409,7 @@
      "$id": "41",
      "Name": "six",
      "ResourceName": "Group2",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"

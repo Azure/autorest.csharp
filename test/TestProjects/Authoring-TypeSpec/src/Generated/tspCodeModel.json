@@ -11,8 +11,7 @@
    "Name": "ProjectKind",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -37,7 +36,6 @@
    "Namespace": "AuthoringTypeSpec",
    "Description": "Represents the project kind.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "None"
   },
   {
@@ -46,8 +44,7 @@
    "Name": "OperationState",
    "ValueType": {
     "$id": "8",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -83,8 +80,7 @@
    ],
    "Namespace": "Azure.Core.Foundations",
    "Description": "Enum describing allowed operation states.",
-   "IsExtensible": false,
-   "IsNullable": false,
+   "IsExtensible": true,
    "Usage": "None"
   },
   {
@@ -93,8 +89,7 @@
    "Name": "JobStatus",
    "ValueType": {
     "$id": "15",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -136,7 +131,6 @@
    "Namespace": "AuthoringTypeSpec",
    "Description": "Represents the job status values.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Output"
   },
   {
@@ -145,8 +139,7 @@
    "Name": "Versions",
    "ValueType": {
     "$id": "24",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -157,7 +150,6 @@
    ],
    "Namespace": "AuthoringTypeSpec",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -167,7 +159,6 @@
    "Kind": "Model",
    "Name": "Project",
    "Namespace": "AuthoringTypeSpec",
-   "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
@@ -177,8 +168,7 @@
      "Description": "",
      "Type": {
       "$id": "28",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -201,8 +191,7 @@
      "Description": "The storage container name.",
      "Type": {
       "$id": "31",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -218,22 +207,18 @@
       "Name": "ProjectSettings",
       "Namespace": "AuthoringTypeSpec",
       "Description": "Represents the settings used to define the project behavior.",
-      "IsNullable": false,
       "Usage": "None",
       "InheritedDictionaryType": {
        "$id": "34",
        "Kind": "dict",
        "KeyType": {
         "$id": "35",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "ValueType": {
         "$id": "36",
-        "Kind": "string",
-        "IsNullable": false
-       },
-       "IsNullable": false
+        "Kind": "string"
+       }
       },
       "Properties": []
      },
@@ -247,8 +232,7 @@
      "Description": "Whether the project would be used for multiple languages or not.",
      "Type": {
       "$id": "38",
-      "Kind": "boolean",
-      "IsNullable": false
+      "Kind": "boolean"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -260,8 +244,7 @@
      "Description": "The project description.",
      "Type": {
       "$id": "40",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -273,8 +256,7 @@
      "Description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
      "Type": {
       "$id": "42",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -287,12 +269,10 @@
      "Type": {
       "$id": "44",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "45",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -306,12 +286,10 @@
      "Type": {
       "$id": "47",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "48",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -325,12 +303,10 @@
      "Type": {
       "$id": "50",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "51",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -344,12 +320,10 @@
      "Type": {
       "$id": "53",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "54",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -366,7 +340,6 @@
    "Name": "OperationStatusError",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Provides status details for long running operations.",
-   "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
@@ -376,8 +349,7 @@
      "Description": "The unique ID of the operation.",
      "Type": {
       "$id": "57",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -404,7 +376,6 @@
       "Name": "Error",
       "Namespace": "Azure.Core.Foundations",
       "Description": "The error object.",
-      "IsNullable": false,
       "Usage": "Output",
       "Properties": [
        {
@@ -414,8 +385,7 @@
         "Description": "One of a server-defined set of error codes.",
         "Type": {
          "$id": "62",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -427,8 +397,7 @@
         "Description": "A human-readable representation of the error.",
         "Type": {
          "$id": "64",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -440,8 +409,7 @@
         "Description": "The target of the error.",
         "Type": {
          "$id": "66",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -456,8 +424,7 @@
          "Kind": "array",
          "ValueType": {
           "$ref": "60"
-         },
-         "IsNullable": false
+         }
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -473,7 +440,6 @@
          "Name": "InnerError",
          "Namespace": "Azure.Core.Foundations",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-         "IsNullable": false,
          "Usage": "Output",
          "Properties": [
           {
@@ -483,8 +449,7 @@
            "Description": "One of a server-defined set of error codes.",
            "Type": {
             "$id": "72",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -524,7 +489,6 @@
    "Name": "PagedProject",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Project items",
-   "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
@@ -537,8 +501,7 @@
       "Kind": "array",
       "ValueType": {
        "$ref": "26"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -550,8 +513,7 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "78",
-      "Kind": "url",
-      "IsNullable": false
+      "Kind": "url"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -564,7 +526,6 @@
    "Name": "TrainingJobOptions",
    "Namespace": "AuthoringTypeSpec",
    "Description": "Training job parameters.",
-   "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
@@ -574,8 +535,7 @@
      "Description": "",
      "Type": {
       "$id": "81",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -587,7 +547,6 @@
    "Kind": "Model",
    "Name": "Deployment",
    "Namespace": "AuthoringTypeSpec",
-   "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
@@ -597,8 +556,7 @@
      "Description": "",
      "Type": {
       "$id": "84",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -611,7 +569,6 @@
    "Name": "PagedDeployment",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Deployment items",
-   "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
@@ -624,8 +581,7 @@
       "Kind": "array",
       "ValueType": {
        "$ref": "82"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -637,8 +593,7 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "89",
-      "Kind": "url",
-      "IsNullable": false
+      "Kind": "url"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -650,7 +605,6 @@
    "Kind": "Model",
    "Name": "SwapDeploymentsOptions",
    "Namespace": "AuthoringTypeSpec",
-   "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
@@ -660,8 +614,7 @@
      "Description": "Represents the first deployment name.",
      "Type": {
       "$id": "92",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -673,8 +626,7 @@
      "Description": "Represents the second deployment name.",
      "Type": {
       "$id": "94",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -686,7 +638,6 @@
    "Kind": "Model",
    "Name": "DeploymentJob",
    "Namespace": "AuthoringTypeSpec",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -696,8 +647,7 @@
      "Description": "The job ID.",
      "Type": {
       "$id": "97",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -710,12 +660,10 @@
      "Type": {
       "$id": "99",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "100",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -729,12 +677,10 @@
      "Type": {
       "$id": "102",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "103",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -748,12 +694,10 @@
      "Type": {
       "$id": "105",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "106",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -784,7 +728,6 @@
        "Name": "JobWarning",
        "Namespace": "AuthoringTypeSpec",
        "Description": "Represents a warning that was encountered while executing the request.",
-       "IsNullable": false,
        "Usage": "Output",
        "Properties": [
         {
@@ -794,8 +737,7 @@
          "Description": "The warning code.",
          "Type": {
           "$id": "112",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -807,15 +749,13 @@
          "Description": "The warning message.",
          "Type": {
           "$id": "114",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -838,8 +778,7 @@
      "Description": "",
      "Type": {
       "$id": "117",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -854,7 +793,6 @@
    "Kind": "Model",
    "Name": "SwapDeploymentsJob",
    "Namespace": "AuthoringTypeSpec",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -864,8 +802,7 @@
      "Description": "The job ID.",
      "Type": {
       "$id": "120",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -878,12 +815,10 @@
      "Type": {
       "$id": "122",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "123",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -897,12 +832,10 @@
      "Type": {
       "$id": "125",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "126",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -916,12 +849,10 @@
      "Type": {
       "$id": "128",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "129",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -948,8 +879,7 @@
       "Kind": "array",
       "ValueType": {
        "$ref": "110"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -972,8 +902,7 @@
      "Description": "",
      "Type": {
       "$id": "135",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -986,7 +915,6 @@
    "Name": "PagedSupportedLanguage",
    "Namespace": "AuthoringTypeSpec",
    "Description": "Paged collection of SupportedLanguage items",
-   "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
@@ -1003,7 +931,6 @@
        "Name": "SupportedLanguage",
        "Namespace": "AuthoringTypeSpec",
        "Description": "Represents a supported language.",
-       "IsNullable": false,
        "Usage": "None",
        "Properties": [
         {
@@ -1013,8 +940,7 @@
          "Description": "The language name.",
          "Type": {
           "$id": "141",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -1026,15 +952,13 @@
          "Description": "The language code. This is BCP-47 representation of a language. For example, \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
          "Type": {
           "$id": "143",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1046,8 +970,7 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "145",
-      "Kind": "url",
-      "IsNullable": false
+      "Kind": "url"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1063,7 +986,6 @@
    "Name": "PagedTrainingConfigVersion",
    "Namespace": "AuthoringTypeSpec",
    "Description": "Paged collection of TrainingConfigVersion items",
-   "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
@@ -1080,7 +1002,6 @@
        "Name": "TrainingConfigVersion",
        "Namespace": "AuthoringTypeSpec",
        "Description": "Represents a training config version.",
-       "IsNullable": false,
        "Usage": "None",
        "Properties": [
         {
@@ -1090,8 +1011,7 @@
          "Description": "Represents the version of the config.",
          "Type": {
           "$id": "151",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -1103,15 +1023,13 @@
          "Description": "Represents the training config version expiration date.",
          "Type": {
           "$id": "153",
-          "Kind": "plainDate",
-          "IsNullable": false
+          "Kind": "plainDate"
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1123,8 +1041,7 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "155",
-      "Kind": "url",
-      "IsNullable": false
+      "Kind": "url"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1177,6 +1094,7 @@
      "Name": "createOrUpdate",
      "ResourceName": "Project",
      "Description": "Creates a new project or updates an existing one.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "158"
@@ -1188,8 +1106,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "163",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1216,8 +1133,7 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "167",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1318,8 +1234,7 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "177",
-          "Kind": "url",
-          "IsNullable": false
+          "Kind": "url"
          }
         }
        ],
@@ -1345,8 +1260,7 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "180",
-          "Kind": "url",
-          "IsNullable": false
+          "Kind": "url"
          }
         }
        ],
@@ -1386,6 +1300,7 @@
      "Name": "get",
      "ResourceName": "Project",
      "Description": "Gets the details of a project.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "158"
@@ -1397,8 +1312,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "185",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1419,8 +1333,7 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "187",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1489,6 +1402,7 @@
      "Name": "delete",
      "ResourceName": "Project",
      "Description": "Deletes a project.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "158"
@@ -1500,8 +1414,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "194",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1522,8 +1435,7 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "196",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1580,8 +1492,7 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "202",
-          "Kind": "url",
-          "IsNullable": false
+          "Kind": "url"
          }
         }
        ],
@@ -1615,6 +1526,7 @@
      "Name": "list",
      "ResourceName": "Project",
      "Description": "Lists the existing projects.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "158"
@@ -1626,8 +1538,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "207",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1704,6 +1615,7 @@
      "Name": "export",
      "ResourceName": "Projects",
      "Description": "Triggers a job to export a project's data.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "158"
@@ -1715,8 +1627,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "215",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1737,8 +1648,7 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "217",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1756,8 +1666,7 @@
        "NameInRequest": "projectFileVersion",
        "Type": {
         "$id": "219",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1811,8 +1720,7 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "225",
-          "Kind": "url",
-          "IsNullable": false
+          "Kind": "url"
          }
         }
        ],
@@ -1843,6 +1751,7 @@
      "Name": "importx",
      "ResourceName": "Projects",
      "Description": "Triggers a job to export a project's data.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "158"
@@ -1854,8 +1763,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "230",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1876,8 +1784,7 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "232",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1931,8 +1838,7 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "238",
-          "Kind": "url",
-          "IsNullable": false
+          "Kind": "url"
          }
         }
        ],
@@ -1963,6 +1869,7 @@
      "Name": "train",
      "ResourceName": "Projects",
      "Description": "Triggers a training job for a project.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "158"
@@ -1974,8 +1881,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "243",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1996,8 +1902,7 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "245",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2094,8 +1999,7 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "255",
-          "Kind": "url",
-          "IsNullable": false
+          "Kind": "url"
          }
         }
        ],
@@ -2146,6 +2050,7 @@
      "Name": "getDeployment",
      "ResourceName": "Deployment",
      "Description": "Gets the details of a deployment.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "158"
@@ -2157,8 +2062,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "262",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -2179,8 +2083,7 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "264",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2198,8 +2101,7 @@
        "NameInRequest": "deploymentName",
        "Type": {
         "$id": "266",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2268,6 +2170,7 @@
      "Name": "deployProject",
      "ResourceName": "Deployment",
      "Description": "Creates a new deployment or replaces an existing one.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "158"
@@ -2279,8 +2182,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "273",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -2301,8 +2203,7 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "275",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2320,8 +2221,7 @@
        "NameInRequest": "deploymentName",
        "Type": {
         "$id": "277",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2422,8 +2322,7 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "287",
-          "Kind": "url",
-          "IsNullable": false
+          "Kind": "url"
          }
         }
        ],
@@ -2449,8 +2348,7 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "290",
-          "Kind": "url",
-          "IsNullable": false
+          "Kind": "url"
          }
         }
        ],
@@ -2490,6 +2388,7 @@
      "Name": "deleteDeployment",
      "ResourceName": "Deployment",
      "Description": "Deletes a project deployment.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "158"
@@ -2501,8 +2400,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "295",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -2523,8 +2421,7 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "297",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2542,8 +2439,7 @@
        "NameInRequest": "deploymentName",
        "Type": {
         "$id": "299",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2600,8 +2496,7 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "305",
-          "Kind": "url",
-          "IsNullable": false
+          "Kind": "url"
          }
         }
        ],
@@ -2635,6 +2530,7 @@
      "Name": "list",
      "ResourceName": "Deployment",
      "Description": "Lists the existing deployments.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "158"
@@ -2646,8 +2542,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "310",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -2668,8 +2563,7 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "312",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2743,6 +2637,7 @@
      "Name": "swapDeployments",
      "ResourceName": "Deployments",
      "Description": "Swaps two existing deployments with each other.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "158"
@@ -2754,8 +2649,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "320",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -2776,8 +2670,7 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "322",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2875,8 +2768,7 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "332",
-          "Kind": "url",
-          "IsNullable": false
+          "Kind": "url"
          }
         }
        ],
@@ -2927,6 +2819,7 @@
      "Name": "getDeploymentStatus",
      "ResourceName": "DeploymentJob",
      "Description": "Gets the status of an existing deployment job.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "158"
@@ -2938,8 +2831,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "339",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -2960,8 +2852,7 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "341",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2979,8 +2870,7 @@
        "NameInRequest": "deploymentName",
        "Type": {
         "$id": "343",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2998,8 +2888,7 @@
        "NameInRequest": "jobId",
        "Type": {
         "$id": "345",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -3068,6 +2957,7 @@
      "Name": "getSwapDeploymentsStatus",
      "ResourceName": "SwapDeploymentsJob",
      "Description": "Gets the status of an existing swap deployment job.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "158"
@@ -3079,8 +2969,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "352",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -3101,8 +2990,7 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "354",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -3120,8 +3008,7 @@
        "NameInRequest": "deploymentName",
        "Type": {
         "$id": "356",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -3139,8 +3026,7 @@
        "NameInRequest": "jobId",
        "Type": {
         "$id": "358",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -3225,6 +3111,7 @@
      "$id": "365",
      "Name": "getSupportedLanguages",
      "ResourceName": "Global",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "158"
@@ -3235,8 +3122,7 @@
        "NameInRequest": "top",
        "Type": {
         "$id": "367",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -3254,8 +3140,7 @@
        "NameInRequest": "skip",
        "Type": {
         "$id": "369",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -3273,8 +3158,7 @@
        "NameInRequest": "maxpagesize",
        "Type": {
         "$id": "371",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -3293,8 +3177,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "373",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -3370,6 +3253,7 @@
      "$id": "379",
      "Name": "listTrainingConfigVersions",
      "ResourceName": "Global",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "158"
@@ -3380,8 +3264,7 @@
        "NameInRequest": "top",
        "Type": {
         "$id": "381",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -3399,8 +3282,7 @@
        "NameInRequest": "skip",
        "Type": {
         "$id": "383",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -3418,8 +3300,7 @@
        "NameInRequest": "maxpagesize",
        "Type": {
         "$id": "385",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -3438,8 +3319,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "387",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {

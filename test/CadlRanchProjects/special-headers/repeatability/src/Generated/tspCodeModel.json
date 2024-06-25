@@ -6,11 +6,10 @@
   {
    "$id": "2",
    "Kind": "enum",
-   "Name": "ImmediateSuccessResponse",
+   "Name": "ImmediateSuccessResponseRepeatabilityResult",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -26,8 +25,7 @@
    ],
    "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
-   "Usage": "None"
+   "Usage": "Output"
   }
  ],
  "Models": [],
@@ -42,6 +40,7 @@
      "Name": "immediateSuccess",
      "ResourceName": "Repeatability",
      "Description": "Check we recognize Repeatability-Request-ID and Repeatability-First-Sent.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "8",
@@ -78,8 +77,7 @@
        "NameInRequest": "Repeatability-Request-ID",
        "Type": {
         "$id": "13",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -98,12 +96,10 @@
        "Type": {
         "$id": "15",
         "Kind": "utcDateTime",
-        "IsNullable": false,
         "Encode": "rfc7231",
         "WireType": {
          "$id": "16",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         }
        },
        "Location": "Header",

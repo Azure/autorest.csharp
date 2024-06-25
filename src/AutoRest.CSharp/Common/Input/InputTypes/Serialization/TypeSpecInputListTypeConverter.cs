@@ -25,12 +25,10 @@ namespace AutoRest.CSharp.Common.Input
         public static InputListType CreateListType(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null;
-            bool isNullable = false;
             InputType? elementType = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadBoolean(nameof(InputListType.IsNullable), ref isNullable)
                     || reader.TryReadWithConverter(nameof(InputListType.ValueType), options, ref elementType);
 
                 if (!isKnownProperty)
@@ -40,7 +38,7 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             elementType = elementType ?? throw new JsonException("List must have element type");
-            var listType = new InputListType("Array", elementType, isNullable);
+            var listType = new InputListType("Array", elementType);
             if (id != null)
             {
                 resolver.AddReference(id, listType);

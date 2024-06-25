@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             name= name ?? throw new JsonException("InputClient must have name");
-            description = description ?? throw new JsonException("InputClient must have description");
+            description = description ?? string.Empty;
             operations = operations ?? Array.Empty<InputOperation>();
             parameters = parameters ?? Array.Empty<InputParameter>();
             var inputClient = new InputClient(name, description, operations, parameters, parent);

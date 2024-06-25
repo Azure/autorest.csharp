@@ -10,7 +10,6 @@
    "Name": "InnerModel",
    "Namespace": "Type.Array",
    "Description": "Array inner model",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -20,8 +19,7 @@
      "Description": "Required string property",
      "Type": {
       "$id": "4",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -36,8 +34,7 @@
       "Kind": "array",
       "ValueType": {
        "$ref": "2"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -96,6 +93,7 @@
      "$id": "14",
      "Name": "get",
      "ResourceName": "Int32Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -138,10 +136,8 @@
         "Kind": "array",
         "ValueType": {
          "$id": "20",
-         "Kind": "int32",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "int32"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -163,6 +159,7 @@
      "$id": "21",
      "Name": "put",
      "ResourceName": "Int32Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -176,10 +173,8 @@
         "Kind": "array",
         "ValueType": {
          "$id": "24",
-         "Kind": "int32",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "int32"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -287,6 +282,7 @@
      "$id": "34",
      "Name": "get",
      "ResourceName": "Int64Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -329,10 +325,8 @@
         "Kind": "array",
         "ValueType": {
          "$id": "40",
-         "Kind": "int64",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "int64"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -354,6 +348,7 @@
      "$id": "41",
      "Name": "put",
      "ResourceName": "Int64Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -367,10 +362,8 @@
         "Kind": "array",
         "ValueType": {
          "$id": "44",
-         "Kind": "int64",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "int64"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -478,6 +471,7 @@
      "$id": "54",
      "Name": "get",
      "ResourceName": "BooleanValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -520,10 +514,8 @@
         "Kind": "array",
         "ValueType": {
          "$id": "60",
-         "Kind": "boolean",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "boolean"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -545,6 +537,7 @@
      "$id": "61",
      "Name": "put",
      "ResourceName": "BooleanValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -558,10 +551,8 @@
         "Kind": "array",
         "ValueType": {
          "$id": "64",
-         "Kind": "boolean",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "boolean"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -669,6 +660,7 @@
      "$id": "74",
      "Name": "get",
      "ResourceName": "StringValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -711,10 +703,8 @@
         "Kind": "array",
         "ValueType": {
          "$id": "80",
-         "Kind": "string",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "string"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -736,6 +726,7 @@
      "$id": "81",
      "Name": "put",
      "ResourceName": "StringValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -749,10 +740,8 @@
         "Kind": "array",
         "ValueType": {
          "$id": "84",
-         "Kind": "string",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "string"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -860,6 +849,7 @@
      "$id": "94",
      "Name": "get",
      "ResourceName": "Float32Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -902,10 +892,8 @@
         "Kind": "array",
         "ValueType": {
          "$id": "100",
-         "Kind": "float32",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "float32"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -927,6 +915,7 @@
      "$id": "101",
      "Name": "put",
      "ResourceName": "Float32Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -940,10 +929,8 @@
         "Kind": "array",
         "ValueType": {
          "$id": "104",
-         "Kind": "float32",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "float32"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1051,6 +1038,7 @@
      "$id": "114",
      "Name": "get",
      "ResourceName": "DatetimeValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -1094,15 +1082,12 @@
         "ValueType": {
          "$id": "120",
          "Kind": "utcDateTime",
-         "IsNullable": false,
          "Encode": "rfc3339",
          "WireType": {
           "$id": "121",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          }
-        },
-        "IsNullable": false
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1124,6 +1109,7 @@
      "$id": "122",
      "Name": "put",
      "ResourceName": "DatetimeValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -1138,15 +1124,12 @@
         "ValueType": {
          "$id": "125",
          "Kind": "utcDateTime",
-         "IsNullable": false,
          "Encode": "rfc3339",
          "WireType": {
           "$id": "126",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          }
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1254,6 +1237,7 @@
      "$id": "136",
      "Name": "get",
      "ResourceName": "DurationValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -1297,15 +1281,12 @@
         "ValueType": {
          "$id": "142",
          "Kind": "duration",
-         "IsNullable": false,
          "Encode": "ISO8601",
          "WireType": {
           "$id": "143",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          }
-        },
-        "IsNullable": false
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1327,6 +1308,7 @@
      "$id": "144",
      "Name": "put",
      "ResourceName": "DurationValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -1341,15 +1323,12 @@
         "ValueType": {
          "$id": "147",
          "Kind": "duration",
-         "IsNullable": false,
          "Encode": "ISO8601",
          "WireType": {
           "$id": "148",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          }
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1457,6 +1436,7 @@
      "$id": "158",
      "Name": "get",
      "ResourceName": "UnknownValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -1499,10 +1479,8 @@
         "Kind": "array",
         "ValueType": {
          "$id": "164",
-         "Kind": "any",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "any"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1524,6 +1502,7 @@
      "$id": "165",
      "Name": "put",
      "ResourceName": "UnknownValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -1537,10 +1516,8 @@
         "Kind": "array",
         "ValueType": {
          "$id": "168",
-         "Kind": "any",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "any"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1648,6 +1625,7 @@
      "$id": "178",
      "Name": "get",
      "ResourceName": "ModelValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -1690,8 +1668,7 @@
         "Kind": "array",
         "ValueType": {
          "$ref": "2"
-        },
-        "IsNullable": false
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1713,6 +1690,7 @@
      "$id": "184",
      "Name": "put",
      "ResourceName": "ModelValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -1726,8 +1704,7 @@
         "Kind": "array",
         "ValueType": {
          "$ref": "2"
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1835,6 +1812,7 @@
      "$id": "196",
      "Name": "get",
      "ResourceName": "NullableFloatValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
@@ -1877,10 +1855,12 @@
         "Kind": "array",
         "ValueType": {
          "$id": "202",
-         "Kind": "float32",
-         "IsNullable": true
-        },
-        "IsNullable": false
+         "Kind": "nullable",
+         "Type": {
+          "$id": "203",
+          "Kind": "float32"
+         }
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1899,26 +1879,29 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "203",
+     "$id": "204",
      "Name": "put",
      "ResourceName": "NullableFloatValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "9"
       },
       {
-       "$id": "204",
+       "$id": "205",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "205",
+        "$id": "206",
         "Kind": "array",
         "ValueType": {
-         "$id": "206",
-         "Kind": "float32",
-         "IsNullable": true
-        },
-        "IsNullable": false
+         "$id": "207",
+         "Kind": "nullable",
+         "Type": {
+          "$id": "208",
+          "Kind": "float32"
+         }
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1931,11 +1914,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "207",
+       "$id": "209",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "208",
+        "$id": "210",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1949,19 +1932,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "209",
+        "$id": "211",
         "Type": {
-         "$ref": "208"
+         "$ref": "210"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "210",
+       "$id": "212",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "211",
+        "$id": "213",
         "Kind": "string",
         "IsNullable": false
        },
@@ -1975,9 +1958,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "212",
+        "$id": "214",
         "Type": {
-         "$ref": "211"
+         "$ref": "213"
         },
         "Value": "application/json"
        }
@@ -1985,7 +1968,7 @@
      ],
      "Responses": [
       {
-       "$id": "213",
+       "$id": "215",
        "StatusCodes": [
         204
        ],
@@ -2007,7 +1990,793 @@
     }
    ],
    "Protocol": {
-    "$id": "214"
+    "$id": "216"
+   },
+   "Creatable": false,
+   "Parent": "ArrayClient",
+   "Parameters": [
+    {
+     "$ref": "9"
+    }
+   ]
+  },
+  {
+   "$id": "217",
+   "Name": "NullableInt32Value",
+   "Description": "Array of nullable int32 values",
+   "Operations": [
+    {
+     "$id": "218",
+     "Name": "get",
+     "ResourceName": "NullableInt32Value",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "9"
+      },
+      {
+       "$id": "219",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "220",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "221",
+        "Type": {
+         "$ref": "220"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "222",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "223",
+        "Kind": "array",
+        "ValueType": {
+         "$id": "224",
+         "Kind": "nullable",
+         "Type": {
+          "$id": "225",
+          "Kind": "int32"
+         }
+        }
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/array/nullable-int32",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "226",
+     "Name": "put",
+     "ResourceName": "NullableInt32Value",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "9"
+      },
+      {
+       "$id": "227",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$id": "228",
+        "Kind": "array",
+        "ValueType": {
+         "$id": "229",
+         "Kind": "nullable",
+         "Type": {
+          "$id": "230",
+          "Kind": "int32"
+         }
+        }
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "231",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "232",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "233",
+        "Type": {
+         "$ref": "232"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "234",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "235",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "236",
+        "Type": {
+         "$ref": "235"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "237",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/array/nullable-int32",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "238"
+   },
+   "Creatable": false,
+   "Parent": "ArrayClient",
+   "Parameters": [
+    {
+     "$ref": "9"
+    }
+   ]
+  },
+  {
+   "$id": "239",
+   "Name": "NullableBooleanValue",
+   "Description": "Array of nullable boolean values",
+   "Operations": [
+    {
+     "$id": "240",
+     "Name": "get",
+     "ResourceName": "NullableBooleanValue",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "9"
+      },
+      {
+       "$id": "241",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "242",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "243",
+        "Type": {
+         "$ref": "242"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "244",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "245",
+        "Kind": "array",
+        "ValueType": {
+         "$id": "246",
+         "Kind": "nullable",
+         "Type": {
+          "$id": "247",
+          "Kind": "boolean"
+         }
+        }
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/array/nullable-boolean",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "248",
+     "Name": "put",
+     "ResourceName": "NullableBooleanValue",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "9"
+      },
+      {
+       "$id": "249",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$id": "250",
+        "Kind": "array",
+        "ValueType": {
+         "$id": "251",
+         "Kind": "nullable",
+         "Type": {
+          "$id": "252",
+          "Kind": "boolean"
+         }
+        }
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "253",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "254",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "255",
+        "Type": {
+         "$ref": "254"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "256",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "257",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "258",
+        "Type": {
+         "$ref": "257"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "259",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/array/nullable-boolean",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "260"
+   },
+   "Creatable": false,
+   "Parent": "ArrayClient",
+   "Parameters": [
+    {
+     "$ref": "9"
+    }
+   ]
+  },
+  {
+   "$id": "261",
+   "Name": "NullableStringValue",
+   "Description": "Array of nullable string values",
+   "Operations": [
+    {
+     "$id": "262",
+     "Name": "get",
+     "ResourceName": "NullableStringValue",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "9"
+      },
+      {
+       "$id": "263",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "264",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "265",
+        "Type": {
+         "$ref": "264"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "266",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "267",
+        "Kind": "array",
+        "ValueType": {
+         "$id": "268",
+         "Kind": "nullable",
+         "Type": {
+          "$id": "269",
+          "Kind": "string"
+         }
+        }
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/array/nullable-string",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "270",
+     "Name": "put",
+     "ResourceName": "NullableStringValue",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "9"
+      },
+      {
+       "$id": "271",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$id": "272",
+        "Kind": "array",
+        "ValueType": {
+         "$id": "273",
+         "Kind": "nullable",
+         "Type": {
+          "$id": "274",
+          "Kind": "string"
+         }
+        }
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "275",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "276",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "277",
+        "Type": {
+         "$ref": "276"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "278",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "279",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "280",
+        "Type": {
+         "$ref": "279"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "281",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/array/nullable-string",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "282"
+   },
+   "Creatable": false,
+   "Parent": "ArrayClient",
+   "Parameters": [
+    {
+     "$ref": "9"
+    }
+   ]
+  },
+  {
+   "$id": "283",
+   "Name": "NullableModelValue",
+   "Description": "Array of nullable model values",
+   "Operations": [
+    {
+     "$id": "284",
+     "Name": "get",
+     "ResourceName": "NullableModelValue",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "9"
+      },
+      {
+       "$id": "285",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "286",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "287",
+        "Type": {
+         "$ref": "286"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "288",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "289",
+        "Kind": "array",
+        "ValueType": {
+         "$id": "290",
+         "Kind": "nullable",
+         "Type": {
+          "$ref": "2"
+         }
+        }
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/array/nullable-model",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "291",
+     "Name": "put",
+     "ResourceName": "NullableModelValue",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "9"
+      },
+      {
+       "$id": "292",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$id": "293",
+        "Kind": "array",
+        "ValueType": {
+         "$id": "294",
+         "Kind": "nullable",
+         "Type": {
+          "$ref": "2"
+         }
+        }
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "295",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "296",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "297",
+        "Type": {
+         "$ref": "296"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "298",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "299",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "300",
+        "Type": {
+         "$ref": "299"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "301",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/array/nullable-model",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "302"
    },
    "Creatable": false,
    "Parent": "ArrayClient",

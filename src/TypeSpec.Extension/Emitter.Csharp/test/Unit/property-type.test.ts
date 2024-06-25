@@ -37,10 +37,8 @@ describe("Test GetInputType for array", () => {
                 Kind: "array",
                 ValueType: {
                     Kind: "string",
-                    IsNullable: false,
                     Encode: undefined
-                },
-                IsNullable: false
+                }
             } as InputArrayType,
             root.Clients[0].Operations[0].Parameters[0].Type
         );
@@ -65,10 +63,8 @@ describe("Test GetInputType for array", () => {
                 Kind: "array",
                 ValueType: {
                     Kind: "string",
-                    IsNullable: false,
                     Encode: undefined
-                },
-                IsNullable: false
+                }
             } as InputArrayType,
             root.Clients[0].Operations[0].Responses[0].BodyType
         );
@@ -116,7 +112,6 @@ describe("Test GetInputType for enum", () => {
                 Description: "fixed string enum",
                 ValueType: {
                     Kind: "string",
-                    IsNullable: false,
                     Encode: undefined
                 },
                 Values: [
@@ -137,7 +132,6 @@ describe("Test GetInputType for enum", () => {
                     }
                 ],
                 IsExtensible: false,
-                IsNullable: false,
                 Usage: "Input"
             } as InputEnumType,
             root.Clients[0].Operations[0].Parameters[0].Type,
@@ -185,7 +179,6 @@ describe("Test GetInputType for enum", () => {
                 Description: "Fixed int enum",
                 ValueType: {
                     Kind: "int32",
-                    IsNullable: false,
                     Encode: undefined
                 },
                 Values: [
@@ -206,7 +199,6 @@ describe("Test GetInputType for enum", () => {
                     }
                 ],
                 IsExtensible: false,
-                IsNullable: false,
                 Usage: "Input"
             } as InputEnumType,
             root.Clients[0].Operations[0].Parameters[0].Type,
@@ -247,7 +239,6 @@ describe("Test GetInputType for enum", () => {
                 Description: "Fixed enum",
                 ValueType: {
                     Kind: "string",
-                    IsNullable: false,
                     Encode: undefined
                 },
                 Values: [
@@ -256,7 +247,6 @@ describe("Test GetInputType for enum", () => {
                     { Name: "Four", Value: "4", Description: undefined }
                 ],
                 IsExtensible: false,
-                IsNullable: false,
                 Usage: "Input"
             } as InputEnumType,
             root.Clients[0].Operations[0].Parameters[0].Type,

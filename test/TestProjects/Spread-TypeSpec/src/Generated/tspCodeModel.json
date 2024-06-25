@@ -11,8 +11,7 @@
    "Name": "QueryApiVersion",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -23,7 +22,6 @@
    ],
    "Namespace": "SpreadTypeSpec",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -33,7 +31,6 @@
    "Kind": "Model",
    "Name": "Thing",
    "Namespace": "SpreadTypeSpec",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -43,8 +40,7 @@
      "Description": "name of the Thing",
      "Type": {
       "$id": "7",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -56,8 +52,7 @@
      "Description": "age of the Thing",
      "Type": {
       "$id": "9",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -69,7 +64,6 @@
    "Kind": "Model",
    "Name": "SpreadAliasRequest",
    "Namespace": "SpreadTypeSpec",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -79,8 +73,7 @@
      "Description": "name of the Thing",
      "Type": {
       "$id": "12",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -92,8 +85,7 @@
      "Description": "age of the Thing",
      "Type": {
       "$id": "14",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -105,7 +97,6 @@
    "Kind": "Model",
    "Name": "SpreadMultiTargetAliasRequest",
    "Namespace": "",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -115,8 +106,7 @@
      "Description": "name of the Thing",
      "Type": {
       "$id": "17",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -128,8 +118,7 @@
      "Description": "age of the Thing",
      "Type": {
       "$id": "19",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -141,7 +130,6 @@
    "Kind": "Model",
    "Name": "SpreadAliasWithSpreadAliasRequest",
    "Namespace": "",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -151,8 +139,7 @@
      "Description": "name of the Thing",
      "Type": {
       "$id": "22",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -164,8 +151,7 @@
      "Description": "age of the Thing",
      "Type": {
       "$id": "24",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -177,7 +163,6 @@
    "Kind": "Model",
    "Name": "SpreadAliasWithOptionalPropsRequest",
    "Namespace": "",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -187,8 +172,7 @@
      "Description": "name of the Thing",
      "Type": {
       "$id": "27",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -200,8 +184,7 @@
      "Description": "optional property of the Thing",
      "Type": {
       "$id": "29",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -213,8 +196,7 @@
      "Description": "age of the Thing",
      "Type": {
       "$id": "31",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -229,10 +211,8 @@
       "Kind": "array",
       "ValueType": {
        "$id": "34",
-       "Kind": "int32",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Kind": "int32"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -247,10 +227,8 @@
       "Kind": "array",
       "ValueType": {
        "$id": "37",
-       "Kind": "string",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Kind": "string"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -262,7 +240,6 @@
    "Kind": "Model",
    "Name": "SpreadAliasWithCollectionsRequest",
    "Namespace": "SpreadTypeSpec",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -275,10 +252,8 @@
       "Kind": "array",
       "ValueType": {
        "$id": "41",
-       "Kind": "string",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Kind": "string"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -293,10 +268,8 @@
       "Kind": "array",
       "ValueType": {
        "$id": "44",
-       "Kind": "string",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Kind": "string"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -315,6 +288,7 @@
      "Name": "spreadModel",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread a model as body.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "47",
@@ -432,6 +406,7 @@
      "Name": "spreadAlias",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias as body.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "47"
@@ -533,6 +508,7 @@
      "Name": "spreadMultiTargetAlias",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias which has multiple target property as body.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "47"
@@ -543,8 +519,7 @@
        "NameInRequest": "id",
        "Type": {
         "$id": "68",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -562,8 +537,7 @@
        "NameInRequest": "top",
        "Type": {
         "$id": "70",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -672,6 +646,7 @@
      "Name": "spreadAliasWithModel",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias which contains a complex model property as body.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "47"
@@ -682,8 +657,7 @@
        "NameInRequest": "id",
        "Type": {
         "$id": "81",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -701,8 +675,7 @@
        "NameInRequest": "top",
        "Type": {
         "$id": "83",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -811,6 +784,7 @@
      "Name": "spreadAliasWithSpreadAlias",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias with contains another alias property as body.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "47"
@@ -821,8 +795,7 @@
        "NameInRequest": "id",
        "Type": {
         "$id": "94",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -840,8 +813,7 @@
        "NameInRequest": "top",
        "Type": {
         "$id": "96",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -950,6 +922,7 @@
      "Name": "spreadAliasWithOptionalProps",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias with contains optional properties as body.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "47"
@@ -960,8 +933,7 @@
        "NameInRequest": "id",
        "Type": {
         "$id": "107",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -979,8 +951,7 @@
        "NameInRequest": "top",
        "Type": {
         "$id": "109",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1089,6 +1060,7 @@
      "Name": "spreadAliasWithCollections",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias with required and optional collections",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "47"
