@@ -417,9 +417,8 @@
      "Description": "Required primitive value type collection",
      "Type": {
       "$id": "65",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "66",
        "Kind": "int32"
       }
@@ -434,9 +433,8 @@
      "Description": "Required primitive reference type collection",
      "Type": {
       "$id": "68",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "69",
        "Kind": "string"
       }
@@ -451,9 +449,8 @@
      "Description": "Required model collection",
      "Type": {
       "$id": "71",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "72",
        "Kind": "Model",
        "Name": "CollectionItem",
@@ -468,8 +465,7 @@
          "Description": "Required model record",
          "Type": {
           "$id": "74",
-          "Kind": "Dictionary",
-          "Name": "Dictionary",
+          "Kind": "dict",
           "KeyType": {
            "$id": "75",
            "Kind": "string"
@@ -499,9 +495,8 @@
               "Description": "Required collection",
               "Type": {
                "$id": "79",
-               "Kind": "Array",
-               "Name": "Array",
-               "ElementType": {
+               "Kind": "array",
+               "ValueType": {
                 "$ref": "72"
                }
               },
@@ -529,8 +524,7 @@
      "Description": "Required model record",
      "Type": {
       "$id": "81",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "82",
        "Kind": "string"
@@ -549,9 +543,8 @@
      "Description": "Required collection of which the element is a nullable float",
      "Type": {
       "$id": "84",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "85",
        "Kind": "nullable",
        "Type": {
@@ -570,9 +563,8 @@
      "Description": "Required collection of which the element is a nullable boolean",
      "Type": {
       "$id": "88",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "89",
        "Kind": "nullable",
        "Type": {
@@ -594,9 +586,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "93",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$ref": "72"
        }
       }
@@ -614,9 +605,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "96",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "97",
         "Kind": "string"
        }
@@ -635,9 +625,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "100",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "101",
         "Kind": "int32"
        }
@@ -653,9 +642,8 @@
      "Description": "Optional model collection",
      "Type": {
       "$id": "103",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "72"
       }
      },
@@ -669,9 +657,8 @@
      "Description": "Optional string collection",
      "Type": {
       "$id": "105",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "106",
        "Kind": "string"
       }
@@ -686,9 +673,8 @@
      "Description": "Optional int collection",
      "Type": {
       "$id": "108",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "109",
        "Kind": "int32"
       }
@@ -706,9 +692,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "112",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$ref": "72"
        }
       }
@@ -726,9 +711,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "115",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "116",
         "Kind": "string"
        }
@@ -747,9 +731,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "119",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "120",
         "Kind": "int32"
        }
@@ -1015,9 +998,8 @@
      "Description": "Required collection",
      "Type": {
       "$id": "158",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "72"
       }
      },
@@ -1031,8 +1013,7 @@
      "Description": "Required int record",
      "Type": {
       "$id": "160",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "161",
        "Kind": "string"
@@ -1052,8 +1033,7 @@
      "Description": "Required string record",
      "Type": {
       "$id": "164",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "165",
        "Kind": "string"
@@ -1073,8 +1053,7 @@
      "Description": "Required Model Record",
      "Type": {
       "$id": "168",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "169",
        "Kind": "string"
@@ -1119,9 +1098,8 @@
      "Description": "Required uint8[]",
      "Type": {
       "$id": "175",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "176",
        "Kind": "uint8"
       }
@@ -1136,9 +1114,8 @@
      "Description": "Optional uint8[]",
      "Type": {
       "$id": "178",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "179",
        "Kind": "uint8"
       }
@@ -1177,9 +1154,8 @@
      "Description": "Required int8[]",
      "Type": {
       "$id": "185",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "186",
        "Kind": "int8"
       }
@@ -1194,9 +1170,8 @@
      "Description": "Optional int8[]",
      "Type": {
       "$id": "188",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "189",
        "Kind": "int8"
       }
@@ -1214,9 +1189,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "192",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "193",
         "Kind": "int32"
        }
@@ -1235,9 +1209,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "196",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "197",
         "Kind": "string"
        }
@@ -1256,9 +1229,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "200",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "201",
         "Kind": "int32"
        }
@@ -1277,9 +1249,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "204",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "205",
         "Kind": "string"
        }
@@ -1429,9 +1400,8 @@
      "Description": "Required collection of which the element is a nullable float",
      "Type": {
       "$id": "228",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "229",
        "Kind": "nullable",
        "Type": {
@@ -1485,9 +1455,8 @@
      "Description": "Optional string collection.",
      "Type": {
       "$id": "237",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "238",
        "Kind": "string"
       }
@@ -1502,9 +1471,8 @@
      "Description": "Optional int collection.",
      "Type": {
       "$id": "240",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "241",
        "Kind": "int32"
       }
@@ -1519,9 +1487,8 @@
      "Description": "Optional model collection",
      "Type": {
       "$id": "243",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "72"
       }
      },
@@ -1581,9 +1548,8 @@
         "Description": "Required collection",
         "Type": {
          "$id": "251",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$ref": "72"
          }
         },
@@ -1624,8 +1590,7 @@
      "Description": "Optional int record",
      "Type": {
       "$id": "255",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "256",
        "Kind": "string"
@@ -1645,8 +1610,7 @@
      "Description": "Optional string record",
      "Type": {
       "$id": "259",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "260",
        "Kind": "string"
@@ -1666,8 +1630,7 @@
      "Description": "Optional model record",
      "Type": {
       "$id": "263",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "264",
        "Kind": "string"
@@ -1710,9 +1673,8 @@
      "Description": "Optional collection of which the element is a nullable int",
      "Type": {
       "$id": "270",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "271",
        "Kind": "nullable",
        "Type": {
@@ -1861,9 +1823,8 @@
      "Description": "Required readonly string collection.",
      "Type": {
       "$id": "289",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "290",
        "Kind": "string"
       }
@@ -1878,9 +1839,8 @@
      "Description": "Required readonly int collection.",
      "Type": {
       "$id": "292",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "293",
        "Kind": "int32"
       }
@@ -1895,9 +1855,8 @@
      "Description": "Required model collection",
      "Type": {
       "$id": "295",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "72"
       }
      },
@@ -1911,8 +1870,7 @@
      "Description": "Required int record",
      "Type": {
       "$id": "297",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "298",
        "Kind": "string"
@@ -1932,8 +1890,7 @@
      "Description": "Required string record",
      "Type": {
       "$id": "301",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "302",
        "Kind": "string"
@@ -1953,8 +1910,7 @@
      "Description": "Required model record",
      "Type": {
       "$id": "305",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "306",
        "Kind": "string"
@@ -1973,9 +1929,8 @@
      "Description": "Optional readonly string collection.",
      "Type": {
       "$id": "308",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "309",
        "Kind": "string"
       }
@@ -1990,9 +1945,8 @@
      "Description": "Optional readonly int collection.",
      "Type": {
       "$id": "311",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "312",
        "Kind": "int32"
       }
@@ -2007,9 +1961,8 @@
      "Description": "Optional model collection",
      "Type": {
       "$id": "314",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "72"
       }
      },
@@ -2023,8 +1976,7 @@
      "Description": "Optional int record",
      "Type": {
       "$id": "316",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "317",
        "Kind": "string"
@@ -2044,8 +1996,7 @@
      "Description": "Optional string record",
      "Type": {
       "$id": "320",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "321",
        "Kind": "string"
@@ -2065,8 +2016,7 @@
      "Description": "Optional model record",
      "Type": {
       "$id": "324",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "325",
        "Kind": "string"
@@ -2085,9 +2035,8 @@
      "Description": "Required collection of which the element is a nullable int",
      "Type": {
       "$id": "327",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "328",
        "Kind": "nullable",
        "Type": {
@@ -2106,9 +2055,8 @@
      "Description": "Optional collection of which the element is a nullable boolean",
      "Type": {
       "$id": "331",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "332",
        "Kind": "nullable",
        "Type": {
@@ -2172,9 +2120,8 @@
      "Description": "Required collection",
      "Type": {
       "$id": "341",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "72"
       }
      },
@@ -2188,8 +2135,7 @@
      "Description": "Required model record",
      "Type": {
       "$id": "343",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "344",
        "Kind": "string"
@@ -2208,9 +2154,8 @@
      "Description": "Optional model collection",
      "Type": {
       "$id": "346",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "72"
       }
      },
@@ -2227,9 +2172,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "349",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$ref": "72"
        }
       }
@@ -2244,8 +2188,7 @@
      "Description": "Optional model record",
      "Type": {
       "$id": "351",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "352",
        "Kind": "string"
@@ -2267,8 +2210,7 @@
       "Kind": "nullable",
       "Type": {
        "$id": "355",
-       "Kind": "Dictionary",
-       "Name": "Dictionary",
+       "Kind": "dict",
        "KeyType": {
         "$id": "356",
         "Kind": "string"
@@ -2419,9 +2361,8 @@
      "Description": "Required collection",
      "Type": {
       "$id": "374",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "72"
       }
      },
@@ -2512,9 +2453,8 @@
       "Description": "The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher.",
       "Type": {
        "$id": "386",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "387",
         "Kind": "int32"
        }

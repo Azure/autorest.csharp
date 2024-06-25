@@ -42,8 +42,8 @@ namespace AutoRest.CSharp.Generation.Types
         {
             InputLiteralType literalType => CSharpType.FromLiteral(CreateType(literalType.ValueType), literalType.Value),
             InputUnionType unionType => CSharpType.FromUnion(unionType.VariantTypes.Select(CreateType).ToArray()),
-            InputListType { IsEmbeddingsVector: true } listType => new CSharpType(typeof(ReadOnlyMemory<>), CreateType(listType.ElementType)),
-            InputListType listType => new CSharpType(typeof(IList<>), CreateType(listType.ElementType)),
+            InputListType { IsEmbeddingsVector: true } listType => new CSharpType(typeof(ReadOnlyMemory<>), CreateType(listType.ValueType)),
+            InputListType listType => new CSharpType(typeof(IList<>), CreateType(listType.ValueType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType => _library.ResolveEnum(enumType),
             // TODO -- this is a temporary solution until we refactored the type replacement to use input types instead of code model schemas
@@ -159,7 +159,7 @@ namespace AutoRest.CSharp.Generation.Types
                 INamedTypeSymbol namedTypeSymbol => TryCreateTypeForINamedTypeSymbol(namedTypeSymbol, validator, out type),
 
                 // We can only handle IArrayTypeSymbol of framework type and INamedTypeSymbol for now since CSharpType can't represent other types such as IArrayTypeSymbol of user types
-                // Instead of throwing an exception, wihch causes more side effects, we just return false and let the caller handle it.
+                // Instead of throwing an exception, which causes more side effects, we just return false and let the caller handle it.
                 _ => false
             };
         }
@@ -236,9 +236,9 @@ namespace AutoRest.CSharp.Generation.Types
         {
             arguments = null;
             var result = new List<CSharpType>();
-            foreach (var typeArgtment in typeArguments)
+            foreach (var typeArgument in typeArguments)
             {
-                if (!TryCreateType(typeArgtment, validator, out CSharpType? type))
+                if (!TryCreateType(typeArgument, validator, out CSharpType? type))
                 {
                     return false;
                 }

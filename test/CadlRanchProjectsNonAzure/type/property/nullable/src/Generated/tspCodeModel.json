@@ -197,9 +197,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "33",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "34",
         "Kind": "bytes",
         "Encode": "base64"
@@ -241,9 +240,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "40",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "41",
         "Kind": "Model",
         "Name": "InnerModel",
@@ -305,9 +303,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "49",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "50",
         "Kind": "string"
        }

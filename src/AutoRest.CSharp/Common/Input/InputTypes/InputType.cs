@@ -22,7 +22,7 @@ internal abstract record InputType
             case InputListType listType:
                 return new InputListType(
                     listType.Name,
-                    listType.ElementType.GetCollectionEquivalent(inputType),
+                    listType.ValueType.GetCollectionEquivalent(inputType),
                     listType.IsEmbeddingsVector);
             case InputDictionaryType dictionaryType:
                 return new InputDictionaryType(
