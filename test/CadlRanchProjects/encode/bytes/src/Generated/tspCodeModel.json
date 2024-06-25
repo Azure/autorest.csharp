@@ -84,9 +84,8 @@
      "Description": "",
      "Type": {
       "$id": "13",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "14",
        "Kind": "bytes",
        "Encode": "base64url"
@@ -382,9 +381,8 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "45",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "46",
          "Kind": "bytes",
          "Encode": "base64url"
@@ -1146,9 +1144,8 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "114",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "115",
          "Kind": "bytes",
          "Encode": "base64url"

@@ -650,7 +650,6 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputType? ToDataFactoryElementType(string name, string? format, bool isNullable, Schema? elementType = null)
         {
-
             var type = typeof(DataFactoryElement<>);
             return format switch
             {

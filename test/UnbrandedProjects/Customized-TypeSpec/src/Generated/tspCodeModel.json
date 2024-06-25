@@ -188,9 +188,8 @@
        },
        {
         "$id": "29",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "30",
          "Kind": "string"
         }
@@ -356,9 +355,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "54",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "55",
         "Kind": "int32"
        }
@@ -377,9 +375,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "58",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "59",
         "Kind": "int32"
        }
