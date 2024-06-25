@@ -10,5 +10,5 @@ internal record OperationResponse(IReadOnlyList<int> StatusCodes, InputType? Bod
 {
     public OperationResponse() : this(StatusCodes: Array.Empty<int>(), BodyType: null, BodyMediaType: BodyMediaType.None, Headers: Array.Empty<OperationResponseHeader>(), IsErrorResponse: false, ContentTypes: Array.Empty<string>()) { }
 
-    public InputType? BodyType { get; internal set; } = BodyType;
+    public InputType? BodyType { get; set; } = BodyType;
 }
