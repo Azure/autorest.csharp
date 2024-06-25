@@ -5,7 +5,7 @@ using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal class InputTypeTransformer
+    internal class InputNamespaceTransformer
     {
         public static void Transform(InputNamespace input)
         {

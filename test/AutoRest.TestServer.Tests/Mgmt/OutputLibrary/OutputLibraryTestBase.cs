@@ -48,7 +48,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             CodeModelTransformer.TransformForMgmt(model);
             var schemaUsageProvider = new SchemaUsageProvider(model);
             var inputNamespace = new CodeModelConverter(model, schemaUsageProvider).CreateNamespace();
-            InputTypeTransformer.Transform(inputNamespace);
+            InputNamespaceTransformer.Transform(inputNamespace);
             MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(inputNamespace, sourceInputModel));
 
             // load all the models to prepare AllSchemaMap, otherwise it will throw in tests only getting ArmResources

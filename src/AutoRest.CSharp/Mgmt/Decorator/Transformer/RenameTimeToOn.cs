@@ -27,7 +27,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
                 foreach (var property in inputModel.Properties)
                 {
-                    if ((property.Type is InputPrimitiveType inputPrimitiveType && inputPrimitiveType.Kind == InputPrimitiveTypeKind.PlainDate) || property.Type is InputDateTimeType)
+                    var propertyType = property.Type.GetImplementType();
+                    if ((propertyType is InputPrimitiveType inputPrimitiveType && inputPrimitiveType.Kind == InputPrimitiveTypeKind.PlainDate) || propertyType is InputDateTimeType)
                     {
                         var propName = property.CSharpName();
 
