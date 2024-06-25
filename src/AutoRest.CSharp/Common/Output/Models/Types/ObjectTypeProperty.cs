@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -260,13 +261,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         internal string CreateExtraDescriptionWithManagedServiceIdentity()
         {
             var extraDescription = string.Empty;
-            var originalModelType = InputModelProperty?.Type as InputModelType;
+            var originalModelType = (InputModelProperty?.Type.GetImplementType()) as InputModelType;
             var identityType = originalModelType?.GetAllProperties()!.FirstOrDefault(p => p.SerializedName == "type")!.Type;
             if (identityType != null)
             {
                 var supportedTypesToShow = new List<string>();
                 var commonMsiSupportedTypeCount = typeof(ManagedServiceIdentityType).GetProperties().Length;
-                if (identityType is InputEnumType enumType && enumType.Values.Count < commonMsiSupportedTypeCount)
+                if (identityType.GetImplementType() is InputEnumType enumType && enumType.Values.Count < commonMsiSupportedTypeCount)
                 {
                     supportedTypesToShow = enumType.Values.Select(c => c.GetValueString()).ToList();
                 }

@@ -405,7 +405,7 @@ namespace AutoRest.CSharp.Output.Builders
                 return type.MakeGenericType(new[] { ReplaceUnverifiableType(type.Arguments[0], unknownType), ReplaceUnverifiableType(type.Arguments[1], unknownType) });
             }
             // for the other cases, wrap them in a union
-            return CSharpType.FromUnion(new[] { type }, type.IsNullable);
+            return CSharpType.FromUnion(new[] { type });
         }
 
         private static readonly HashSet<Type> _verifiableTypes = new HashSet<Type>

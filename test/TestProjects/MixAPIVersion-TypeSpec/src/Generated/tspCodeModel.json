@@ -11,8 +11,7 @@
    "Name": "Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -23,7 +22,6 @@
    ],
    "Namespace": "MixApiVersion",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -34,7 +32,6 @@
    "Name": "Pet",
    "Namespace": "MixApiVersion",
    "Description": "Pet",
-   "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
@@ -44,8 +41,7 @@
      "Description": "pet name",
      "Type": {
       "$id": "7",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -57,8 +53,7 @@
      "Description": "",
      "Type": {
       "$id": "9",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -70,8 +65,7 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -84,7 +78,6 @@
    "Name": "PagedToy",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Toy items",
-   "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
@@ -101,7 +94,6 @@
        "Kind": "Model",
        "Name": "Toy",
        "Namespace": "MixApiVersion",
-       "IsNullable": false,
        "Usage": "None",
        "Properties": [
         {
@@ -111,8 +103,7 @@
          "Description": "",
          "Type": {
           "$id": "17",
-          "Kind": "int64",
-          "IsNullable": false
+          "Kind": "int64"
          },
          "IsRequired": true,
          "IsReadOnly": true
@@ -124,8 +115,7 @@
          "Description": "",
          "Type": {
           "$id": "19",
-          "Kind": "int64",
-          "IsNullable": false
+          "Kind": "int64"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -137,15 +127,13 @@
          "Description": "",
          "Type": {
           "$id": "21",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -157,8 +145,7 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "23",
-      "Kind": "url",
-      "IsNullable": false
+      "Kind": "url"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -212,6 +199,7 @@
      "ResourceName": "Pet",
      "Summary": "delete.",
      "Description": "Delete a pet.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "26"
@@ -223,8 +211,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "31",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -252,8 +239,7 @@
        "Description": "pet name",
        "Type": {
         "$id": "35",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -316,6 +302,7 @@
      "Name": "read",
      "ResourceName": "Pets",
      "Description": "Returns a pet. Supports eTags.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "26"
@@ -327,8 +314,7 @@
        "Description": "The id of pet.",
        "Type": {
         "$id": "42",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -411,6 +397,7 @@
      "$id": "48",
      "Name": "create",
      "ResourceName": "Pets",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "26"
@@ -424,11 +411,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "51",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "2022-07-09",
-        "IsNullable": false
+        "Value": "2022-07-09"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -568,6 +553,7 @@
      "ResourceName": "Toy",
      "Summary": "Gets ledger entries from a collection corresponding to a range.",
      "Description": "A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "26"
@@ -579,8 +565,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "65",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
