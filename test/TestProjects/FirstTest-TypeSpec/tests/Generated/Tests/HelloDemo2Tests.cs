@@ -87,8 +87,8 @@ namespace FirstTestTypeSpec.Tests
             RoundTripModel action = new RoundTripModel(
                 "<requiredString>",
                 1234,
-                new StringFixedEnum?[] { StringFixedEnum.One },
-                new Dictionary<string, StringExtensibleEnum?>
+                new StringFixedEnum[] { StringFixedEnum.One },
+                new Dictionary<string, StringExtensibleEnum>
                 {
                     ["key"] = StringExtensibleEnum.One
                 },
@@ -206,8 +206,8 @@ BinaryData.FromObjectAsJson("<unionList>")
             RoundTripModel action = new RoundTripModel(
                 "<requiredString>",
                 1234,
-                new StringFixedEnum?[] { StringFixedEnum.One },
-                new Dictionary<string, StringExtensibleEnum?>
+                new StringFixedEnum[] { StringFixedEnum.One },
+                new Dictionary<string, StringExtensibleEnum>
                 {
                     ["key"] = StringExtensibleEnum.One
                 },

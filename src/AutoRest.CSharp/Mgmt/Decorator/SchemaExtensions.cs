@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 
@@ -34,13 +35,13 @@ internal static class SchemaExtensions
 
     private static bool IsTagsProperty(InputModelProperty property)
         => property.CSharpName().Equals("Tags")
-            && property.Type is InputDictionaryType dictType
-            && dictType.ValueType is InputPrimitiveType inputPrimitive
+            && property.Type.GetImplementType() is InputDictionaryType dictType
+            && dictType.ValueType.GetImplementType() is InputPrimitiveType inputPrimitive
             && inputPrimitive.Kind == InputPrimitiveTypeKind.String;
 
     public static bool HasTags(this InputType schema)
     {
-        if (schema is not InputModelType inputModel)
+        if (schema.GetImplementType() is not InputModelType inputModel)
         {
             return false;
         }
@@ -67,15 +68,15 @@ internal static class SchemaExtensions
             switch (property.SerializedName)
             {
                 case "id":
-                    if (property.Type is InputPrimitiveType { Kind: InputPrimitiveTypeKind.String or InputPrimitiveTypeKind.ArmId } inputPrimitiveType)
+                    if (property.Type.GetImplementType() is InputPrimitiveType { Kind: InputPrimitiveTypeKind.String or InputPrimitiveTypeKind.ArmId } inputPrimitiveType)
                         idPropertyFound = true;
                     continue;
                 case "type":
-                    if (property.Type is InputPrimitiveType { Kind: InputPrimitiveTypeKind.ResourceType or InputPrimitiveTypeKind.String } inputPrimitive)
+                    if (property.Type.GetImplementType() is InputPrimitiveType { Kind: InputPrimitiveTypeKind.ResourceType or InputPrimitiveTypeKind.String } inputPrimitive)
                         typePropertyFound = true;
                     continue;
                 case "name":
-                    if (property.Type is InputPrimitiveType { Kind: InputPrimitiveTypeKind.String } primitive)
+                    if (property.Type.GetImplementType() is InputPrimitiveType { Kind: InputPrimitiveTypeKind.String } primitive)
                         namePropertyFound = true;
                     continue;
             }
@@ -106,7 +107,7 @@ internal static class SchemaExtensions
         return objSchema.GetAllProperties().Any(p => p.SerializedName.Equals(propertyName, StringComparison.Ordinal) && p.Schema.Type == AllSchemaTypes.String);
     }
 
-    internal static string GetOriginalName(this InputType inputType) => inputType.SpecName ?? inputType.Name;
+    internal static string GetOriginalName(this InputType inputType) => inputType.GetImplementType().SpecName ?? inputType.GetImplementType().Name;
 
     internal static string GetOriginalName(this Schema schema) => schema.Language.Default.SerializedName ?? schema.Language.Default.Name;
 
@@ -121,6 +122,7 @@ internal static class SchemaExtensions
         return inputType switch
         {
             InputEnumType c => c.GetFullSerializedName(choice),
+            InputNullableType { Type: InputType i } => i.GetFullSerializedName(choice),
             _ => throw new InvalidOperationException($"Given input type is not InputEnumType: {inputType.Name}")
         };
     }

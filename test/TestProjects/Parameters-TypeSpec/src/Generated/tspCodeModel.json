@@ -11,8 +11,7 @@
    "Name": "Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -23,7 +22,6 @@
    ],
    "Namespace": "ParametersCadl",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -33,7 +31,6 @@
    "Kind": "Model",
    "Name": "Result",
    "Namespace": "ParametersCadl.ParameterOrders",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -43,8 +40,7 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -72,6 +68,7 @@
      "$id": "11",
      "Name": "Operation",
      "ResourceName": "ParameterOrders",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "12",
@@ -79,8 +76,7 @@
        "NameInRequest": "start",
        "Type": {
         "$id": "13",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -98,8 +94,7 @@
        "NameInRequest": "end",
        "Type": {
         "$id": "15",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -117,8 +112,7 @@
        "NameInRequest": "api-version",
        "Type": {
         "$id": "17",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -195,6 +189,7 @@
      "$id": "24",
      "Name": "Operation2",
      "ResourceName": "ParameterOrders",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "25",
@@ -202,8 +197,7 @@
        "NameInRequest": "start",
        "Type": {
         "$id": "26",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -221,8 +215,7 @@
        "NameInRequest": "end",
        "Type": {
         "$id": "28",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": true,

@@ -705,7 +705,7 @@ namespace Payload.MultiPart
             uri.AppendPath("/multipart/form-data/mixed-parts", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("content-type", contentType);
+            request.Headers.Set("Content-Type", contentType);
             request.Content = content;
             message.Apply(options);
             return message;
@@ -722,7 +722,7 @@ namespace Payload.MultiPart
             uri.AppendPath("/multipart/form-data/complex-parts", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("content-type", contentType);
+            request.Headers.Set("Content-Type", contentType);
             request.Content = content;
             message.Apply(options);
             return message;
@@ -739,7 +739,7 @@ namespace Payload.MultiPart
             uri.AppendPath("/multipart/form-data/json-part", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("content-type", contentType);
+            request.Headers.Set("Content-Type", contentType);
             request.Content = content;
             message.Apply(options);
             return message;
@@ -756,7 +756,7 @@ namespace Payload.MultiPart
             uri.AppendPath("/multipart/form-data/binary-array-parts", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("content-type", contentType);
+            request.Headers.Set("Content-Type", contentType);
             request.Content = content;
             message.Apply(options);
             return message;
@@ -773,7 +773,7 @@ namespace Payload.MultiPart
             uri.AppendPath("/multipart/form-data/json-array-parts", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("content-type", contentType);
+            request.Headers.Set("Content-Type", contentType);
             request.Content = content;
             message.Apply(options);
             return message;
@@ -790,7 +790,7 @@ namespace Payload.MultiPart
             uri.AppendPath("/multipart/form-data/multi-binary-parts", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("content-type", contentType);
+            request.Headers.Set("Content-Type", contentType);
             request.Content = content;
             message.Apply(options);
             return message;
@@ -807,7 +807,7 @@ namespace Payload.MultiPart
             uri.AppendPath("/multipart/form-data/check-filename-and-content-type", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("content-type", contentType);
+            request.Headers.Set("Content-Type", contentType);
             request.Content = content;
             message.Apply(options);
             return message;
@@ -824,7 +824,7 @@ namespace Payload.MultiPart
             uri.AppendPath("/multipart/form-data/anonymous-model", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("content-type", contentType);
+            request.Headers.Set("Content-Type", contentType);
             request.Content = content;
             message.Apply(options);
             return message;
