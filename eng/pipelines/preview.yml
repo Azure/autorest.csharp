@@ -68,6 +68,7 @@ extends:
         $newContent | Set-Content $path -NoNewline
       displayName: 'Update Packages.Data.props'
       workingDirectory: $(sdkRepositoryPath)
+    AutorestInitializationSteps:
     - ${{ if eq(parameters.UseTypeSpecNext, 'true') }}:
       - task: Bash@3
         inputs:
