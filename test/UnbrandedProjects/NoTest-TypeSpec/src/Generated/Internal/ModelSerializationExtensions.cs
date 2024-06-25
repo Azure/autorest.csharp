@@ -15,6 +15,7 @@ namespace NoTestTypeSpec
     internal static class ModelSerializationExtensions
     {
         internal static readonly ModelReaderWriterOptions WireOptions = new ModelReaderWriterOptions("W");
+        internal static readonly BinaryData SentinelValue = BinaryData.FromObjectAsJson("__EMPTY__");
 
         public static object GetObject(this JsonElement element)
         {
@@ -247,6 +248,24 @@ namespace NoTestTypeSpec
         public static void WriteObjectValue(this Utf8JsonWriter writer, object value, ModelReaderWriterOptions options = null)
         {
             writer.WriteObjectValue<object>(value, options);
+        }
+
+        internal static bool IsSentinelValue(BinaryData value)
+        {
+            ReadOnlySpan<byte> sentinelSpan = SentinelValue.ToMemory().Span;
+            ReadOnlySpan<byte> valueSpan = value.ToMemory().Span;
+            if (sentinelSpan.Length != valueSpan.Length)
+            {
+                return false;
+            }
+            for (int i = 0; i < sentinelSpan.Length; i++)
+            {
+                if (sentinelSpan[i] != valueSpan[i])
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         internal static class TypeFormatters

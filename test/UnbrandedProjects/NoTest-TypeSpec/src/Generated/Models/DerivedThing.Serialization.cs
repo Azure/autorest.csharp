@@ -10,17 +10,22 @@ using System.Text.Json;
 
 namespace NoTestTypeSpec.Models
 {
-    public partial class Thing : IJsonModel<Thing>
+    public partial class DerivedThing : IJsonModel<DerivedThing>
     {
-        void IJsonModel<Thing>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<DerivedThing>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Thing>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<DerivedThing>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Thing)} does not support writing '{format}' format.");
+                throw new FormatException($"The model {nameof(DerivedThing)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
+            if (!SerializedAdditionalRawData.ContainsKey("myProperty") && Optional.IsDefined(MyProperty))
+            {
+                writer.WritePropertyName("myProperty"u8);
+                writer.WriteStringValue(MyProperty);
+            }
             if (!SerializedAdditionalRawData.ContainsKey("name"))
             {
                 writer.WritePropertyName("name"u8);
@@ -136,19 +141,19 @@ namespace NoTestTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        Thing IJsonModel<Thing>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DerivedThing IJsonModel<DerivedThing>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Thing>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<DerivedThing>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Thing)} does not support reading '{format}' format.");
+                throw new FormatException($"The model {nameof(DerivedThing)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeThing(document.RootElement, options);
+            return DeserializeDerivedThing(document.RootElement, options);
         }
 
-        internal static Thing DeserializeThing(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static DerivedThing DeserializeDerivedThing(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -156,6 +161,7 @@ namespace NoTestTypeSpec.Models
             {
                 return null;
             }
+            string myProperty = default;
             string name = default;
             BinaryData requiredUnion = default;
             ThingRequiredLiteralString requiredLiteralString = default;
@@ -173,6 +179,11 @@ namespace NoTestTypeSpec.Models
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("myProperty"u8))
+                {
+                    myProperty = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
@@ -280,7 +291,7 @@ namespace NoTestTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new Thing(
+            return new DerivedThing(
                 name,
                 requiredUnion,
                 requiredLiteralString,
@@ -294,50 +305,51 @@ namespace NoTestTypeSpec.Models
                 requiredBadDescription,
                 optionalNullableList ?? new ChangeTrackingList<int>(),
                 requiredNullableList,
-                serializedAdditionalRawData);
+                serializedAdditionalRawData,
+                myProperty);
         }
 
-        BinaryData IPersistableModel<Thing>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DerivedThing>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Thing>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<DerivedThing>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Thing)} does not support writing '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DerivedThing)} does not support writing '{options.Format}' format.");
             }
         }
 
-        Thing IPersistableModel<Thing>.Create(BinaryData data, ModelReaderWriterOptions options)
+        DerivedThing IPersistableModel<DerivedThing>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Thing>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<DerivedThing>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeThing(document.RootElement, options);
+                        return DeserializeDerivedThing(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Thing)} does not support reading '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DerivedThing)} does not support reading '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<Thing>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DerivedThing>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
-        internal static Thing FromResponse(PipelineResponse response)
+        internal static new DerivedThing FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeThing(document.RootElement);
+            return DeserializeDerivedThing(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>
-        internal virtual BinaryContent ToBinaryContent()
+        internal override BinaryContent ToBinaryContent()
         {
             return BinaryContent.Create(this, ModelSerializationExtensions.WireOptions);
         }

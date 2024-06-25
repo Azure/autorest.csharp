@@ -48,7 +48,7 @@ namespace NoTestTypeSpec.Models
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
         /// <param name="requiredNullableList"> required nullable collection. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
-        internal Thing(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList)
+        public Thing(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
@@ -77,7 +77,7 @@ namespace NoTestTypeSpec.Models
         /// <param name="optionalNullableList"> optional nullable collection. </param>
         /// <param name="requiredNullableList"> required nullable collection. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal Thing(string name, BinaryData requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IReadOnlyList<int> optionalNullableList, IReadOnlyList<int> requiredNullableList, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal Thing(string name, BinaryData requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IList<int> optionalNullableList, IList<int> requiredNullableList, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             RequiredUnion = requiredUnion;
@@ -101,7 +101,7 @@ namespace NoTestTypeSpec.Models
         }
 
         /// <summary> name of the Thing. </summary>
-        public string Name { get; }
+        public string Name { get; set; }
         /// <summary>
         /// required Union
         /// <para>
@@ -146,7 +146,7 @@ namespace NoTestTypeSpec.Models
         /// </list>
         /// </para>
         /// </summary>
-        public BinaryData RequiredUnion { get; }
+        public BinaryData RequiredUnion { get; set; }
         /// <summary> required literal string. </summary>
         public ThingRequiredLiteralString RequiredLiteralString { get; } = ThingRequiredLiteralString.Accept;
 
@@ -160,18 +160,18 @@ namespace NoTestTypeSpec.Models
         public bool RequiredLiteralBool { get; } = false;
 
         /// <summary> optional literal string. </summary>
-        public ThingOptionalLiteralString? OptionalLiteralString { get; }
+        public ThingOptionalLiteralString? OptionalLiteralString { get; set; }
         /// <summary> optional literal int. </summary>
-        public ThingOptionalLiteralInt? OptionalLiteralInt { get; }
+        public ThingOptionalLiteralInt? OptionalLiteralInt { get; set; }
         /// <summary> optional literal float. </summary>
-        public ThingOptionalLiteralFloat? OptionalLiteralFloat { get; }
+        public ThingOptionalLiteralFloat? OptionalLiteralFloat { get; set; }
         /// <summary> optional literal bool. </summary>
-        public bool? OptionalLiteralBool { get; }
+        public bool? OptionalLiteralBool { get; set; }
         /// <summary> description with xml &lt;|endoftext|&gt;. </summary>
-        public string RequiredBadDescription { get; }
+        public string RequiredBadDescription { get; set; }
         /// <summary> optional nullable collection. </summary>
-        public IReadOnlyList<int> OptionalNullableList { get; }
+        public IList<int> OptionalNullableList { get; set; }
         /// <summary> required nullable collection. </summary>
-        public IReadOnlyList<int> RequiredNullableList { get; }
+        public IList<int> RequiredNullableList { get; set; }
     }
 }

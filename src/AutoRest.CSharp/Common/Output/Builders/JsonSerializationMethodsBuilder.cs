@@ -190,8 +190,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 Serializations.ValidateJsonFormat(options, iPersistableModelTInterface, Serializations.ValidationType.Write),
                 utf8JsonWriter.WriteStartObject(),
                 WriteProperties(utf8JsonWriter, serialization.Properties, serialization.RawDataField?.Value, options).ToArray(),
-                SerializeAdditionalProperties(utf8JsonWriter, options, serialization.AdditionalProperties),
-                SerializeAdditionalProperties(utf8JsonWriter, options, serialization.RawDataField),
+                SerializeAdditionalProperties(utf8JsonWriter, options, serialization.AdditionalProperties, false),
+                SerializeAdditionalProperties(utf8JsonWriter, options, serialization.RawDataField, true),
                 utf8JsonWriter.WriteEndObject()
             };
 
@@ -254,7 +254,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         }
 
         // TODO -- make the options parameter non-nullable again when we remove the `UseModelReaderWriter` flag.
-        private static MethodBodyStatement SerializeAdditionalProperties(Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression? options, JsonAdditionalPropertiesSerialization? additionalProperties)
+        private static MethodBodyStatement SerializeAdditionalProperties(Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression? options, JsonAdditionalPropertiesSerialization? additionalProperties, bool isRawData)
         {
             if (additionalProperties is null)
             {
@@ -264,8 +264,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var additionalPropertiesExpression = new DictionaryExpression(additionalProperties.ImplementationType.Arguments[0], additionalProperties.ImplementationType.Arguments[1], additionalProperties.Value);
             MethodBodyStatement statement = new ForeachStatement("item", additionalPropertiesExpression, out KeyValuePairExpression item)
             {
-                utf8JsonWriter.WritePropertyName(item.Key),
-                SerializeExpression(utf8JsonWriter, additionalProperties.ValueSerialization, item.Value, options)
+                SerializeForRawData(utf8JsonWriter, additionalProperties.ValueSerialization, item, options, isRawData)
             };
 
             // if it should be excluded in wire serialization, it is a raw data field and we need to check if it is null
@@ -280,6 +279,33 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 additionalProperties.ShouldExcludeInWireSerialization,
                 options?.Format,
                 statement);
+
+            static MethodBodyStatement SerializeForRawData(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization? valueSerialization, KeyValuePairExpression item, ModelReaderWriterOptionsExpression? options, bool isRawData)
+            {
+                MethodBodyStatement statement = new MethodBodyStatement[]
+                {
+                    utf8JsonWriter.WritePropertyName(item.Key),
+                    SerializeExpression(utf8JsonWriter, valueSerialization, item.Value, options)
+                };
+                if (!isRawData)
+                {
+                    return statement;
+                }
+
+                if (Configuration.EnableInternalRawData && options != null)
+                {
+                    statement = new MethodBodyStatement[]
+                    {
+                        new IfStatement(ModelSerializationExtensionsProvider.Instance.IsSentinelValue(item.Value))
+                        {
+                            Continue
+                        },
+                        statement
+                    };
+                }
+
+                return statement;
+            }
         }
 
         public static MethodBodyStatement SerializeExpression(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization? serialization, TypedValueExpression expression, ModelReaderWriterOptionsExpression? options)
