@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Output.Models
             return library;
         }
 
-        public static void CreateEnums(IReadOnlyList<InputEnumType> inputEnums, IDictionary<InputEnumType, EnumType> enums, IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+        public static void CreateEnums(IList<InputEnumType> inputEnums, IDictionary<InputEnumType, EnumType> enums, IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
         {
             foreach (var inputEnum in inputEnums)
             {

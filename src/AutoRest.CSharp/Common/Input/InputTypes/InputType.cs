@@ -50,4 +50,10 @@ internal abstract record InputType
         InputNullableType nullableType => nullableType.Type,
         _ => this
     };
+
+    public InputType SetImplementType(InputType newType) => this switch
+    {
+        InputNullableType => new InputNullableType(newType),
+        _ => newType
+    };
 }

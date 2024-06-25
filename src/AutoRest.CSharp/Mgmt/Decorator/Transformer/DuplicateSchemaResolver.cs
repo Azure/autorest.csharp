@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
@@ -17,136 +17,112 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
     /// </summary>
     internal static class DuplicateSchemaResolver
     {
-        public static void ResolveDuplicates(CodeModel codeModel)
+        public static void ResolveDuplicates(InputNamespace inputNamespace)
         {
             // step 1: categorize the schema by their names
-            var schemaNameDict = new Dictionary<string, HashSet<Schema>>();
-            foreach (var schema in codeModel.AllSchemas)
+            var modelNameDict = new Dictionary<string, HashSet<InputModelType>>();
+            var enumNameDict = new Dictionary<string, HashSet<InputEnumType>>();
+            foreach (var model in inputNamespace.Models)
             {
-                schemaNameDict.AddInList(schema.Name, schema);
+                modelNameDict.AddInList(model.Name, model);
+            }
+
+            // for simplicity, if any duplciated InputModelType, we just throw exception. We should never use this to combine models - maybe we could add the support in the future? If needed.
+            var duplicatedModels = modelNameDict.Values.Where(l => l.Count > 1);
+            if (duplicatedModels.Any())
+                throw new InvalidOperationException($"There are duplicated models and there is at least 2 models naming `{duplicatedModels.First().First().Name}`, this is not allowed (for now)");
+
+            foreach (var enumType in inputNamespace.Enums)
+            {
+                enumNameDict.AddInList(enumType.Name, enumType);
             }
 
             // step 2: collapse the schemas with the same name
-            foreach (var schemas in schemaNameDict.Values.Where(l => l.Count > 1))
+            foreach (var schemas in enumNameDict.Values.Where(l => l.Count > 1))
             {
-                CollapseMultipleSchemas(schemas, codeModel);
+                CollapseMultipleSchemas(schemas, inputNamespace);
             }
         }
 
-        private static void CollapseMultipleSchemas(HashSet<Schema> schemas, CodeModel codeModel)
+        private static void CollapseMultipleSchemas(HashSet<InputEnumType> models, InputNamespace inputNamespace)
         {
-            // for simplicity, if the list has any ObjectSchema, we just throw exception. We should never use this to combine schemas - maybe we could add the support in the future? If needed.
-            if (schemas.Any(schema => schema is not ChoiceSchema && schema is not SealedChoiceSchema))
-                throw new InvalidOperationException($"There are duplicated schemas and there is at least one schema `{schemas.First().Name}` which is not a ChoiceSchema or SealedChoiceSchema, this is not allowed (for now)");
             // now all things in the list should be Choices or SealedChoices
-            var collapsedSchema = CollapseChoices(schemas);
+            var collapsedEnum = CollapseChoices(models);
             // now we need to update everything which is referencing the schemas in the list to the new schema
-            ReplaceSchemas(schemas, collapsedSchema, codeModel);
+            ReplaceSchemas(models, collapsedEnum, inputNamespace);
         }
 
-        private static void ReplaceSchemas(HashSet<Schema> schemas, Schema replaceSchema, CodeModel codeModel)
+        private static void ReplaceSchemas(HashSet<InputEnumType> enums, InputEnumType replaceEnum, InputNamespace inputNamespace)
         {
             // remove the things that should be replaced by the replaceSchmea
-            foreach (var schema in schemas)
+            foreach (var inputEnum in enums)
             {
-                if (schema == replaceSchema)
+                if (inputEnum == replaceEnum)
                     continue;
-                switch (schema)
-                {
-                    case ChoiceSchema choiceSchema:
-                        codeModel.Schemas.Choices.Remove(choiceSchema);
-                        break;
-                    case SealedChoiceSchema sealedChoiceSchema:
-                        codeModel.Schemas.SealedChoices.Remove(sealedChoiceSchema);
-                        break;
-                    default:
-                        throw new InvalidOperationException("This will never happen");
-                }
+
+                inputNamespace.Enums.Remove(inputEnum);
             }
+
             // we have to iterate everything on the code model
-            foreach (var schema in codeModel.AllSchemas)
+            foreach (var model in inputNamespace.Models)
             {
-                // only change things in ObjectSchema because we only change ChoiceSchema and SealedChoiceSchema
-                // they could only appear as properties of ObjectSchemas
-                if (schema is ObjectSchema objectSchema)
+                foreach (var property in model.Properties)
                 {
-                    foreach (var property in objectSchema.Properties)
-                    {
-                        if (schemas.Contains(property.Schema))
-                            property.Schema = replaceSchema;
-                    }
+                    if (enums.Contains(property.Type))
+                        property.Type = replaceEnum;
                 }
             }
 
             // we also have to iterate all operations
-            foreach (var operationGroup in codeModel.OperationGroups)
+            foreach (var client in inputNamespace.Clients)
             {
-                foreach (var operation in operationGroup.Operations)
+                foreach (var operation in client.Operations)
                 {
                     foreach (var operationResponse in operation.Responses)
                     {
-                        ReplaceResponseSchema(schemas, operationResponse as SchemaResponse, replaceSchema);
-                    }
-
-                    foreach (var operationResponse in operation.Exceptions)
-                    {
-                        ReplaceResponseSchema(schemas, operationResponse as SchemaResponse, replaceSchema);
+                        ReplaceResponseSchema(enums, operationResponse, replaceEnum);
                     }
 
                     foreach (var parameter in operation.Parameters)
                     {
-                        ReplaceRequestParamSchema(schemas, parameter, replaceSchema);
-                    }
-
-                    foreach (var request in operation.Requests)
-                    {
-                        foreach (var parameter in request.Parameters)
-                        {
-                            ReplaceRequestParamSchema(schemas, parameter, replaceSchema);
-                        }
+                        ReplaceRequestParamSchema(enums, parameter, replaceEnum);
                     }
                 }
             }
         }
 
-        private static void ReplaceResponseSchema(HashSet<Schema> schemas, SchemaResponse? response, Schema replaceSchema)
+        private static void ReplaceResponseSchema(HashSet<InputEnumType> schemas, OperationResponse? response, InputEnumType replaceEnum)
         {
-            if (response == null || response.Schema == null)
+            if (response is null || response?.BodyType is null)
                 return;
-            if (response.Schema is ChoiceSchema || response.Schema is SealedChoiceSchema)
+            if (response.BodyType.GetImplementType() is InputEnumType responseType)
             {
-                if (schemas.Contains(response.Schema))
-                    response.Schema = replaceSchema;
+                if (schemas.Contains(responseType.GetImplementType()))
+                    response.BodyType = response.BodyType.SetImplementType(replaceEnum);
             }
         }
 
-        private static void ReplaceRequestParamSchema(HashSet<Schema> schemas, RequestParameter parameter, Schema replaceSchema)
+        private static void ReplaceRequestParamSchema(HashSet<InputEnumType> eunms, InputParameter parameter, InputEnumType replaceEnum)
         {
-            if (parameter.Schema is ChoiceSchema || parameter.Schema is SealedChoiceSchema)
-                if (schemas.Contains(parameter.Schema))
-                    parameter.Schema = replaceSchema;
+            if (parameter.Type.GetImplementType() is InputEnumType)
+                if (eunms.Contains(parameter.Type.GetImplementType()))
+                    parameter.Type = parameter.Type.SetImplementType(replaceEnum);
         }
 
-        private static Schema CollapseChoices(IEnumerable<Schema> schemas)
+        private static InputEnumType CollapseChoices(IEnumerable<InputEnumType> enums)
         {
-            var choiceValuesList = schemas.Select(schema => schema switch
-            {
-                ChoiceSchema choiceSchema => choiceSchema.Choices.Select(v => v.Value).OrderBy(v => v),
-                SealedChoiceSchema sealedChoiceSchema => sealedChoiceSchema.Choices.Select(v => v.Value).OrderBy(v => v),
-                _ => throw new InvalidOperationException("This will never happen"),
-            });
+            var choiceValuesList = enums.Select(x => x.Values.Select(v => v.GetValueString()).OrderBy(v => v));
             // determine if the choices in this list are the same
             var deduplicated = choiceValuesList.ToHashSet(new CollectionComparer());
             if (deduplicated.Count == 1)
             {
                 // this means all the choices in the in-coming list are the same
-                // return the first ChoiceSchema, if none is ChoiceSchema (which means all of these are SealedChoiceSchema), we just return the first
-                return schemas.FirstOrDefault(schema => schema is ChoiceSchema) ?? schemas.First();
+                return enums.First();
             }
 
-            // otherwise throw exception to say we have unresolvable duplicated schema after our renaming
+            // otherwise throw exception to say we have unresolvable duplicated InputEnumType after our renaming
             var listStrings = deduplicated.Select(list => $"[{string.Join(", ", list)}]");
-            throw new InvalidOperationException($"We have unresolvable duplicated ChoiceSchemas. These are: {string.Join(", ", listStrings)}");
+            throw new InvalidOperationException($"We have unresolvable duplicated enums. These are: {string.Join(", ", listStrings)}");
         }
 
         private struct CollectionComparer : IEqualityComparer<IOrderedEnumerable<string>>

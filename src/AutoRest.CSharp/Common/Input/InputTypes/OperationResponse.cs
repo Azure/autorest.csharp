@@ -9,4 +9,6 @@ namespace AutoRest.CSharp.Common.Input;
 internal record OperationResponse(IReadOnlyList<int> StatusCodes, InputType? BodyType, BodyMediaType BodyMediaType, IReadOnlyList<OperationResponseHeader> Headers, bool IsErrorResponse, IReadOnlyList<string> ContentTypes)
 {
     public OperationResponse() : this(StatusCodes: Array.Empty<int>(), BodyType: null, BodyMediaType: BodyMediaType.None, Headers: Array.Empty<OperationResponseHeader>(), IsErrorResponse: false, ContentTypes: Array.Empty<string>()) { }
+
+    public InputType? BodyType { get; internal set; } = BodyType;
 }

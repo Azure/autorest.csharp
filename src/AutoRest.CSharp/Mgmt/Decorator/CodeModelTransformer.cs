@@ -44,7 +44,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             RenameTimeToOn.Update(codeModel);
             RearrangeParameterOrder.Update(codeModel);
             RenamePluralEnums.Update(codeModel);
-            DuplicateSchemaResolver.ResolveDuplicates(codeModel);
 
             if (Configuration.MgmtConfiguration.MgmtDebug.ShowSerializedNames)
             {
