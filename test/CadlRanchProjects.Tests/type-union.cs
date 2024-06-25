@@ -21,13 +21,13 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new UnionClient(host, null).GetStringsOnlyClient().GetStringsOnlyAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
-            Assert.AreEqual(GetResponseProp5.B, response.Value.Prop);
+            Assert.AreEqual(GetResponseProp4.B, response.Value.Prop);
         });
 
         [Test]
         public Task SendStringsOnly() => Test(async (host) =>
         {
-            var response = await new UnionClient(host, null).GetStringsOnlyClient().SendAsync(GetResponseProp5.B);
+            var response = await new UnionClient(host, null).GetStringsOnlyClient().SendAsync(GetResponseProp4.B);
             Assert.AreEqual(204, response.Status);
         });
 
@@ -36,13 +36,13 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new UnionClient(host, null).GetStringExtensibleClient().GetStringExtensibleAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
-            Assert.AreEqual(new GetResponseProp4("custom"), response.Value.Prop);
+            Assert.AreEqual(new GetResponseProp3("custom"), response.Value.Prop);
         });
 
         [Test]
         public Task SendStringExtensibleOnly() => Test(async (host) =>
         {
-            var response = await new UnionClient(host, null).GetStringExtensibleClient().SendAsync(new GetResponseProp4("custom"));
+            var response = await new UnionClient(host, null).GetStringExtensibleClient().SendAsync(new GetResponseProp3("custom"));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -66,13 +66,13 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new UnionClient(host, null).GetIntsOnlyClient().GetIntsOnlyAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
-            Assert.AreEqual(GetResponseProp3._2, response.Value.Prop);
+            Assert.AreEqual(GetResponseProp2._2, response.Value.Prop);
         });
 
         [Test]
         public Task SendIntsOnly() => Test(async (host) =>
         {
-            var response = await new UnionClient(host, null).GetIntsOnlyClient().SendAsync(GetResponseProp3._2);
+            var response = await new UnionClient(host, null).GetIntsOnlyClient().SendAsync(GetResponseProp2._2);
             Assert.AreEqual(204, response.Status);
         });
 

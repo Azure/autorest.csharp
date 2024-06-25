@@ -20,8 +20,7 @@ namespace AutoRest.TestServer.Tests
         public void OldestVersion()
         {
             var allProperties = new HashSet<string>(typeof(ExportedResource).GetProperties().Select(p => p.Name));
-            // TODO: add "Type" after https://github.com/microsoft/typespec/issues/3239 is fixed
-            CollectionAssert.AreEquivalent(new HashSet<string>(new string[] { "Id", "ResourceUri", "Name" }), allProperties);
+            CollectionAssert.AreEquivalent(new HashSet<string>(new string[] { "Id", "ResourceUri", "Name", "Type" }), allProperties);
 
             var versionOpClient = typeof(VersioningOp);
 
@@ -36,7 +35,7 @@ namespace AutoRest.TestServer.Tests
             var exportOperation = versionOpClient.GetMethods().Where(m => m.Name == "Export" && m.ReturnType.BaseType.Name == "Operation" && m.ReturnType.GenericTypeArguments.Length == 1 &&
                 m.ReturnType.GenericTypeArguments[0] == typeof(ExportedResource)).FirstOrDefault();
             var exportOperationParameters = exportOperation.GetParameters().Select(p => (p.Name, p.ParameterType)).ToArray();
-            Assert.AreEqual(new (string, Type)[] { ("waitUntil", typeof(WaitUntil)), ("name", typeof(string)), ("projectFileVersion", typeof(string)), ("removedQueryParam", typeof(string)), ("cancellationToken", typeof(CancellationToken)) }, exportOperationParameters);
+            Assert.AreEqual(new (string, Type)[] { ("waitUntil", typeof(WaitUntil)), ("name", typeof(string)), ("projectFileVersion", typeof(string)), ("removedQueryParam", typeof(string)), ("maxLines", typeof(int?)), ("cancellationToken", typeof(CancellationToken)) }, exportOperationParameters);
 
             var getResourcesOperation = versionOpClient.GetMethods().Where(m =>
                 m.Name == "GetResources" && m.ReturnType.Name.StartsWith("Pageable") && m.ReturnType.GenericTypeArguments.Length == 1 &&

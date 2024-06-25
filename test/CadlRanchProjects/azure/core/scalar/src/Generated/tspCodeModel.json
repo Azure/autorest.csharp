@@ -11,8 +11,7 @@
    "Name": "Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -25,7 +24,6 @@
    "Namespace": "_Specs_.Azure.Core.Scalar",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -35,7 +33,6 @@
    "Kind": "Model",
    "Name": "AzureLocationModel",
    "Namespace": "_Specs_.Azure.Core.Scalar",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -46,7 +43,6 @@
      "Type": {
       "$id": "7",
       "Kind": "azureLocation",
-      "IsNullable": false,
       "Encode": "string"
      },
      "IsRequired": true,
@@ -107,6 +103,7 @@
      "Name": "get",
      "ResourceName": "AzureLocationScalar",
      "Description": "get azureLocation value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -147,7 +144,6 @@
        "BodyType": {
         "$id": "20",
         "Kind": "azureLocation",
-        "IsNullable": false,
         "Encode": "string"
        },
        "BodyMediaType": "Json",
@@ -171,6 +167,7 @@
      "Name": "put",
      "ResourceName": "AzureLocationScalar",
      "Description": "put azureLocation value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -183,7 +180,6 @@
        "Type": {
         "$id": "23",
         "Kind": "azureLocation",
-        "IsNullable": false,
         "Encode": "string"
        },
        "Location": "Body",
@@ -276,6 +272,7 @@
      "Name": "post",
      "ResourceName": "AzureLocationScalar",
      "Description": "post a model which has azureLocation property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -384,6 +381,7 @@
      "Name": "header",
      "ResourceName": "AzureLocationScalar",
      "Description": "azureLocation value header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -396,7 +394,6 @@
        "Type": {
         "$id": "42",
         "Kind": "azureLocation",
-        "IsNullable": false,
         "Encode": "string"
        },
        "Location": "Header",
@@ -460,6 +457,7 @@
      "Name": "query",
      "ResourceName": "AzureLocationScalar",
      "Description": "azureLocation value query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -472,7 +470,6 @@
        "Type": {
         "$id": "49",
         "Kind": "azureLocation",
-        "IsNullable": false,
         "Encode": "string"
        },
        "Location": "Query",

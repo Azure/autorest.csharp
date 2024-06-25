@@ -55,6 +55,7 @@
      "$id": "9",
      "Name": "sendAsText",
      "ResourceName": "StringBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -62,17 +63,15 @@
       {
        "$id": "10",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "11",
         "Kind": "constant",
         "ValueType": {
          "$id": "12",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "text/plain",
-        "IsNullable": false
+        "Value": "text/plain"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -97,8 +96,7 @@
        "NameInRequest": "text",
        "Type": {
         "$id": "15",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -163,6 +161,7 @@
      "$id": "20",
      "Name": "getAsText",
      "ResourceName": "StringBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -202,8 +201,7 @@
        ],
        "BodyType": {
         "$id": "25",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -225,6 +223,7 @@
      "$id": "26",
      "Name": "sendAsJson",
      "ResourceName": "StringBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -232,17 +231,15 @@
       {
        "$id": "27",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "28",
         "Kind": "constant",
         "ValueType": {
          "$id": "29",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "application/json",
-        "IsNullable": false
+        "Value": "application/json"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -267,8 +264,7 @@
        "NameInRequest": "text",
        "Type": {
         "$id": "32",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -333,6 +329,7 @@
      "$id": "37",
      "Name": "getAsJson",
      "ResourceName": "StringBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -372,8 +369,7 @@
        ],
        "BodyType": {
         "$id": "42",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "BodyMediaType": "Json",
        "Headers": [],

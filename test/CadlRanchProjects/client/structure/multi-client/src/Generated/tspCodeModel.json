@@ -9,8 +9,7 @@
    "Name": "ClientType",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -36,7 +35,6 @@
    ],
    "Namespace": "Client.Structure.Service",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input"
   }
  ],
@@ -51,6 +49,7 @@
      "$id": "9",
      "Name": "renamedOne",
      "ResourceName": "ClientA",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "10",
@@ -140,6 +139,7 @@
      "$id": "17",
      "Name": "renamedThree",
      "ResourceName": "ClientA",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -197,6 +197,7 @@
      "$id": "22",
      "Name": "renamedFive",
      "ResourceName": "ClientA",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -273,6 +274,7 @@
      "$id": "29",
      "Name": "renamedTwo",
      "ResourceName": "ClientB",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -330,6 +332,7 @@
      "$id": "34",
      "Name": "renamedFour",
      "ResourceName": "ClientB",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -387,6 +390,7 @@
      "$id": "39",
      "Name": "renamedSix",
      "ResourceName": "ClientB",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
