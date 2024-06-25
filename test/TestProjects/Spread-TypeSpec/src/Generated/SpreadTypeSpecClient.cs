@@ -806,7 +806,7 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
 
-            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList(), optionalStringList?.ToList() as IReadOnlyList<string> ?? new ChangeTrackingList<string>(), null);
+            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList(), optionalStringList?.ToList() as IList<string> ?? new ChangeTrackingList<string>(), null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadAliasWithCollectionsAsync(spreadAliasWithCollectionsRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
@@ -822,7 +822,7 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
 
-            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList(), optionalStringList?.ToList() as IReadOnlyList<string> ?? new ChangeTrackingList<string>(), null);
+            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList(), optionalStringList?.ToList() as IList<string> ?? new ChangeTrackingList<string>(), null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadAliasWithCollections(spreadAliasWithCollectionsRequest.ToRequestContent(), context);
             return response;

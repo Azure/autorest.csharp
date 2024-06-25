@@ -53,7 +53,7 @@
    "Kind": "Model",
    "Name": "SpreadAsRequestBodyRequest",
    "Namespace": "Parameters.Spread.Alias",
-   "Usage": "None",
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "9",

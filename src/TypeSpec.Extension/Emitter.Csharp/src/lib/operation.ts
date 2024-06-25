@@ -128,19 +128,22 @@ export function loadOperation(
             }
             // TODO: remove this after https://github.com/Azure/typespec-azure/issues/69 is resolved
             // workaround for alias model
-            if (
-                isInputModelType(bodyParameter.Type) &&
-                bodyParameter.Type.Name === ""
-            ) {
-                // give body type a name
-                bodyParameter.Type.Name = `${capitalize(op.name)}Request`;
-                bodyParameter.Type.Usage = UsageFlags.Input;
-                // update models cache
-                models.delete("");
-                models.set(bodyParameter.Type.Name, bodyParameter.Type);
-
-                // give body parameter a name
-                bodyParameter.Name = `${capitalize(op.name)}Request`;
+            if (isInputModelType(bodyParameter.Type)) {
+                // sometimes the alias model returned by TCGC does not have usage, we set it here.
+                bodyParameter.Type.Usage |= UsageFlags.Input;
+                // sometimes it does not have a name
+                if (bodyParameter.Type.Name === "")
+                {
+                    // give body type a name
+                    bodyParameter.Type.Name = `${capitalize(op.name)}Request`;
+                    bodyParameter.Type.Usage = UsageFlags.Input;
+                    // update models cache
+                    models.delete("");
+                    models.set(bodyParameter.Type.Name, bodyParameter.Type);
+    
+                    // give body parameter a name
+                    bodyParameter.Name = `${capitalize(op.name)}Request`;
+                }
             }
             parameters.push(bodyParameter);
         }

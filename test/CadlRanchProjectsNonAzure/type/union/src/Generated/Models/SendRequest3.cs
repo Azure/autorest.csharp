@@ -45,7 +45,7 @@ namespace Scm._Type.Union.Models
         /// <summary> Initializes a new instance of <see cref="SendRequest3"/>. </summary>
         /// <param name="prop"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
-        internal SendRequest3(EnumsOnlyCases prop)
+        public SendRequest3(EnumsOnlyCases prop)
         {
             Argument.AssertNotNull(prop, nameof(prop));
 

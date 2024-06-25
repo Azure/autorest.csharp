@@ -64,7 +64,7 @@
    "Kind": "Model",
    "Name": "SpreadAliasRequest",
    "Namespace": "SpreadTypeSpec",
-   "Usage": "None",
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "11",
@@ -242,7 +242,7 @@
    "Kind": "Model",
    "Name": "SpreadAliasWithCollectionsRequest",
    "Namespace": "SpreadTypeSpec",
-   "Usage": "None",
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "39",
