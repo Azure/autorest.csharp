@@ -41,6 +41,11 @@ namespace AutoRest.CSharp.Common.Input
 
         private static void TransformCommonSingleWord(InputNamespace inputNamespace)
         {
+            foreach (var schemaName in Configuration.MgmtConfiguration.PrependRPPrefix)
+            {
+                _schemasToChange.Add(schemaName);
+            }
+
             foreach (var model in inputNamespace.Models)
             {
                 TransformCommonSingleWord(model);
