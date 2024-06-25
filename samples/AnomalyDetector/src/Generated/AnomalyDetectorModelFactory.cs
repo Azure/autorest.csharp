@@ -233,6 +233,15 @@ namespace AnomalyDetector.Models
             return new MultivariateBatchDetectionResultSummary(status, errors?.ToList(), variableStates?.ToList(), setupInfo, serializedAdditionalRawData: null);
         }
 
+        /// <summary> Initializes a new instance of <see cref="Models.ErrorResponse"/>. </summary>
+        /// <param name="code"> The error code. </param>
+        /// <param name="message"> The message explaining the error reported by the service. </param>
+        /// <returns> A new <see cref="Models.ErrorResponse"/> instance for mocking. </returns>
+        public static ErrorResponse ErrorResponse(string code = null, string message = null)
+        {
+            return new ErrorResponse(code, message, serializedAdditionalRawData: null);
+        }
+
         /// <summary> Initializes a new instance of <see cref="Models.AnomalyState"/>. </summary>
         /// <param name="timestamp"> The timestamp for this anomaly. </param>
         /// <param name="value"> The detailed value of this anomalous timestamp. </param>

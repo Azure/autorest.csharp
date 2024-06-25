@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -324,7 +325,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultParameterValue = Constant.Default(inputType);
                     }
 
-                    var validate = property.InputModelProperty?.Type.IsNullable != true && !inputType.IsValueType && property.InputModelProperty?.IsReadOnly != true ? ValidationType.AssertNotNull : ValidationType.None;
+                    var validate = property.InputModelProperty?.Type is not InputNullableType && !inputType.IsValueType && property.InputModelProperty?.IsReadOnly != true ? ValidationType.AssertNotNull : ValidationType.None;
                     var defaultCtorParameter = new Parameter(
                         property.Declaration.Name.ToVariableName(),
                         property.ParameterDescription,
@@ -523,7 +524,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             // We represent property being optional by making it nullable
             // Except in the case of collection where there is a special handling
             bool optionalViaNullability = !property.IsRequired &&
-                                          !property.Type.IsNullable &&
+                                          property.Type is not InputNullableType &&
                                           !propertyType.IsCollection;
 
             if (optionalViaNullability)
@@ -555,7 +556,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (isCollection)
             {
-                propertyShouldOmitSetter |= !property.Type.IsNullable;
+                propertyShouldOmitSetter |= property.Type is not InputNullableType;
             }
             else
             {

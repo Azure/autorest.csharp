@@ -597,7 +597,7 @@ namespace AutoRest.CSharp.Generation.Types
         /// <param name="unionItemTypes">The list of union item types.</param>
         /// <param name="isNullable">Flag used to determine if a type is nullable.</param>
         /// <returns>A <see cref="CSharpType"/> instance representing those unioned types.</returns>
-        public static CSharpType FromUnion(IReadOnlyList<CSharpType> unionItemTypes, bool isNullable)
+        public static CSharpType FromUnion(IReadOnlyList<CSharpType> unionItemTypes, bool isNullable = false)
         {
             return new CSharpType(typeof(BinaryData), isNullable)
             {

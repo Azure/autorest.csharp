@@ -209,7 +209,7 @@ foreach (BinaryData item in client.GetResources(new string[] { "<select>" }, "<e
 }
 ]]></code></example>
     </member>
-    <member name="ExportAsync(WaitUntil,string,string,string,CancellationToken)">
+    <member name="ExportAsync(WaitUntil,string,string,string,int?,CancellationToken)">
       <example>
 This sample shows how to call ExportAsync.
 <code><![CDATA[
@@ -224,11 +224,11 @@ This sample shows how to call ExportAsync with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
-Operation<ExportedResource> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", projectFileVersion: "<projectFileVersion>", removedQueryParam: "<removedQueryParam>");
+Operation<ExportedResource> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", projectFileVersion: "<projectFileVersion>", removedQueryParam: "<removedQueryParam>", maxLines: 1234);
 ExportedResource responseData = operation.Value;
 ]]></code></example>
     </member>
-    <member name="Export(WaitUntil,string,string,string,CancellationToken)">
+    <member name="Export(WaitUntil,string,string,string,int?,CancellationToken)">
       <example>
 This sample shows how to call Export.
 <code><![CDATA[
@@ -243,66 +243,70 @@ This sample shows how to call Export with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
-Operation<ExportedResource> operation = client.Export(WaitUntil.Completed, "<name>", projectFileVersion: "<projectFileVersion>", removedQueryParam: "<removedQueryParam>");
+Operation<ExportedResource> operation = client.Export(WaitUntil.Completed, "<name>", projectFileVersion: "<projectFileVersion>", removedQueryParam: "<removedQueryParam>", maxLines: 1234);
 ExportedResource responseData = operation.Value;
 ]]></code></example>
     </member>
-    <member name="ExportAsync(WaitUntil,string,string,string,RequestContext)">
+    <member name="ExportAsync(WaitUntil,string,string,string,int?,RequestContext)">
       <example>
 This sample shows how to call ExportAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
-Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", null, null, null);
+Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", null, null, null, null);
 BinaryData responseData = operation.Value;
 
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("resourceUri").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("type").ToString());
 ]]></code>
 This sample shows how to call ExportAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
-Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<projectFileVersion>", "<removedQueryParam>", null);
+Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<projectFileVersion>", "<removedQueryParam>", 1234, null);
 BinaryData responseData = operation.Value;
 
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("resourceUri").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("type").ToString());
 ]]></code></example>
     </member>
-    <member name="Export(WaitUntil,string,string,string,RequestContext)">
+    <member name="Export(WaitUntil,string,string,string,int?,RequestContext)">
       <example>
 This sample shows how to call Export and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
-Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", null, null, null);
+Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", null, null, null, null);
 BinaryData responseData = operation.Value;
 
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("resourceUri").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("type").ToString());
 ]]></code>
 This sample shows how to call Export with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
-Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", "<projectFileVersion>", "<removedQueryParam>", null);
+Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", "<projectFileVersion>", "<removedQueryParam>", 1234, null);
 BinaryData responseData = operation.Value;
 
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("resourceUri").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("type").ToString());
 ]]></code></example>
     </member>
   </members>

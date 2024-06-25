@@ -19,10 +19,11 @@ namespace TypeSpec.Versioning.Oldest.Models
         /// <param name="id"></param>
         /// <param name="resourceUri"></param>
         /// <param name="name"></param>
+        /// <param name="type"></param>
         /// <returns> A new <see cref="Models.ExportedResource"/> instance for mocking. </returns>
-        public static ExportedResource ExportedResource(string id = null, string resourceUri = null, string name = null)
+        public static ExportedResource ExportedResource(string id = null, string resourceUri = null, string name = null, string type = null)
         {
-            return new ExportedResource(id, resourceUri, name, serializedAdditionalRawData: null);
+            return new ExportedResource(id, resourceUri, name, type, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Resource"/>. </summary>
