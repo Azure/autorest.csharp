@@ -132,15 +132,14 @@ export function loadOperation(
                 // sometimes the alias model returned by TCGC does not have usage, we set it here.
                 bodyParameter.Type.Usage |= UsageFlags.Input;
                 // sometimes it does not have a name
-                if (bodyParameter.Type.Name === "")
-                {
+                if (bodyParameter.Type.Name === "") {
                     // give body type a name
                     bodyParameter.Type.Name = `${capitalize(op.name)}Request`;
                     bodyParameter.Type.Usage = UsageFlags.Input;
                     // update models cache
                     models.delete("");
                     models.set(bodyParameter.Type.Name, bodyParameter.Type);
-    
+
                     // give body parameter a name
                     bodyParameter.Name = `${capitalize(op.name)}Request`;
                 }
