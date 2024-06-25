@@ -134,11 +134,10 @@ export function loadOperation(
             ) {
                 // give body type a name
                 bodyParameter.Type.Name = `${capitalize(op.name)}Request`;
-                const bodyModelType = bodyParameter.Type as InputModelType;
-                bodyModelType.Usage = UsageFlags.Input;
+                bodyParameter.Type.Usage = UsageFlags.Input;
                 // update models cache
                 models.delete("");
-                models.set(bodyModelType.Name, bodyModelType);
+                models.set(bodyParameter.Type.Name, bodyParameter.Type);
 
                 // give body parameter a name
                 bodyParameter.Name = `${capitalize(op.name)}Request`;
