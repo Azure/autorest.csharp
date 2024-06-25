@@ -9,7 +9,6 @@
    "Kind": "Model",
    "Name": "and",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -19,8 +18,7 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -32,7 +30,6 @@
    "Kind": "Model",
    "Name": "as",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -42,8 +39,7 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -55,7 +51,6 @@
    "Kind": "Model",
    "Name": "assert",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -65,8 +60,7 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -78,7 +72,6 @@
    "Kind": "Model",
    "Name": "async",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -88,8 +81,7 @@
      "Description": "",
      "Type": {
       "$id": "13",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -101,7 +93,6 @@
    "Kind": "Model",
    "Name": "await",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -111,8 +102,7 @@
      "Description": "",
      "Type": {
       "$id": "16",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -124,7 +114,6 @@
    "Kind": "Model",
    "Name": "break",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -134,8 +123,7 @@
      "Description": "",
      "Type": {
       "$id": "19",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -147,7 +135,6 @@
    "Kind": "Model",
    "Name": "class",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -157,8 +144,7 @@
      "Description": "",
      "Type": {
       "$id": "22",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -170,7 +156,6 @@
    "Kind": "Model",
    "Name": "constructor",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -180,8 +165,7 @@
      "Description": "",
      "Type": {
       "$id": "25",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -193,7 +177,6 @@
    "Kind": "Model",
    "Name": "continue",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -203,8 +186,7 @@
      "Description": "",
      "Type": {
       "$id": "28",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -216,7 +198,6 @@
    "Kind": "Model",
    "Name": "def",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -226,8 +207,7 @@
      "Description": "",
      "Type": {
       "$id": "31",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -239,7 +219,6 @@
    "Kind": "Model",
    "Name": "del",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -249,8 +228,7 @@
      "Description": "",
      "Type": {
       "$id": "34",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -262,7 +240,6 @@
    "Kind": "Model",
    "Name": "elif",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -272,8 +249,7 @@
      "Description": "",
      "Type": {
       "$id": "37",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -285,7 +261,6 @@
    "Kind": "Model",
    "Name": "else",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -295,8 +270,7 @@
      "Description": "",
      "Type": {
       "$id": "40",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -308,7 +282,6 @@
    "Kind": "Model",
    "Name": "except",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -318,8 +291,7 @@
      "Description": "",
      "Type": {
       "$id": "43",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -331,7 +303,6 @@
    "Kind": "Model",
    "Name": "exec",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -341,8 +312,7 @@
      "Description": "",
      "Type": {
       "$id": "46",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -354,7 +324,6 @@
    "Kind": "Model",
    "Name": "finally",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -364,8 +333,7 @@
      "Description": "",
      "Type": {
       "$id": "49",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -377,7 +345,6 @@
    "Kind": "Model",
    "Name": "for",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -387,8 +354,7 @@
      "Description": "",
      "Type": {
       "$id": "52",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -400,7 +366,6 @@
    "Kind": "Model",
    "Name": "from",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -410,8 +375,7 @@
      "Description": "",
      "Type": {
       "$id": "55",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -423,7 +387,6 @@
    "Kind": "Model",
    "Name": "global",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -433,8 +396,7 @@
      "Description": "",
      "Type": {
       "$id": "58",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -446,7 +408,6 @@
    "Kind": "Model",
    "Name": "if",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -456,8 +417,7 @@
      "Description": "",
      "Type": {
       "$id": "61",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -469,7 +429,6 @@
    "Kind": "Model",
    "Name": "import",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -479,8 +438,7 @@
      "Description": "",
      "Type": {
       "$id": "64",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -492,7 +450,6 @@
    "Kind": "Model",
    "Name": "in",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -502,8 +459,7 @@
      "Description": "",
      "Type": {
       "$id": "67",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -515,7 +471,6 @@
    "Kind": "Model",
    "Name": "is",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -525,8 +480,7 @@
      "Description": "",
      "Type": {
       "$id": "70",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -538,7 +492,6 @@
    "Kind": "Model",
    "Name": "lambda",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -548,8 +501,7 @@
      "Description": "",
      "Type": {
       "$id": "73",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -561,7 +513,6 @@
    "Kind": "Model",
    "Name": "not",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -571,8 +522,7 @@
      "Description": "",
      "Type": {
       "$id": "76",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -584,7 +534,6 @@
    "Kind": "Model",
    "Name": "or",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -594,8 +543,7 @@
      "Description": "",
      "Type": {
       "$id": "79",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -607,7 +555,6 @@
    "Kind": "Model",
    "Name": "pass",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -617,8 +564,7 @@
      "Description": "",
      "Type": {
       "$id": "82",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -630,7 +576,6 @@
    "Kind": "Model",
    "Name": "raise",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -640,8 +585,7 @@
      "Description": "",
      "Type": {
       "$id": "85",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -653,7 +597,6 @@
    "Kind": "Model",
    "Name": "return",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -663,8 +606,7 @@
      "Description": "",
      "Type": {
       "$id": "88",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -676,7 +618,6 @@
    "Kind": "Model",
    "Name": "try",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -686,8 +627,7 @@
      "Description": "",
      "Type": {
       "$id": "91",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -699,7 +639,6 @@
    "Kind": "Model",
    "Name": "while",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -709,8 +648,7 @@
      "Description": "",
      "Type": {
       "$id": "94",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -722,7 +660,6 @@
    "Kind": "Model",
    "Name": "with",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -732,8 +669,7 @@
      "Description": "",
      "Type": {
       "$id": "97",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -745,7 +681,6 @@
    "Kind": "Model",
    "Name": "yield",
    "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -755,8 +690,7 @@
      "Description": "",
      "Type": {
       "$id": "100",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -768,7 +702,6 @@
    "Kind": "Model",
    "Name": "SameAsModel",
    "Namespace": "SpecialWords.ModelProperties",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -778,8 +711,7 @@
      "Description": "",
      "Type": {
       "$id": "103",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -838,6 +770,7 @@
      "$id": "111",
      "Name": "withAnd",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -938,6 +871,7 @@
      "$id": "120",
      "Name": "withAs",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1038,6 +972,7 @@
      "$id": "129",
      "Name": "withAssert",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1138,6 +1073,7 @@
      "$id": "138",
      "Name": "withAsync",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1238,6 +1174,7 @@
      "$id": "147",
      "Name": "withAwait",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1338,6 +1275,7 @@
      "$id": "156",
      "Name": "withBreak",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1438,6 +1376,7 @@
      "$id": "165",
      "Name": "withClass",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1538,6 +1477,7 @@
      "$id": "174",
      "Name": "withConstructor",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1638,6 +1578,7 @@
      "$id": "183",
      "Name": "withContinue",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1738,6 +1679,7 @@
      "$id": "192",
      "Name": "withDef",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1838,6 +1780,7 @@
      "$id": "201",
      "Name": "withDel",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1938,6 +1881,7 @@
      "$id": "210",
      "Name": "withElif",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2038,6 +1982,7 @@
      "$id": "219",
      "Name": "withElse",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2138,6 +2083,7 @@
      "$id": "228",
      "Name": "withExcept",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2238,6 +2184,7 @@
      "$id": "237",
      "Name": "withExec",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2338,6 +2285,7 @@
      "$id": "246",
      "Name": "withFinally",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2438,6 +2386,7 @@
      "$id": "255",
      "Name": "withFor",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2538,6 +2487,7 @@
      "$id": "264",
      "Name": "withFrom",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2638,6 +2588,7 @@
      "$id": "273",
      "Name": "withGlobal",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2738,6 +2689,7 @@
      "$id": "282",
      "Name": "withIf",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2838,6 +2790,7 @@
      "$id": "291",
      "Name": "withImport",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2938,6 +2891,7 @@
      "$id": "300",
      "Name": "withIn",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3038,6 +2992,7 @@
      "$id": "309",
      "Name": "withIs",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3138,6 +3093,7 @@
      "$id": "318",
      "Name": "withLambda",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3238,6 +3194,7 @@
      "$id": "327",
      "Name": "withNot",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3338,6 +3295,7 @@
      "$id": "336",
      "Name": "withOr",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3438,6 +3396,7 @@
      "$id": "345",
      "Name": "withPass",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3538,6 +3497,7 @@
      "$id": "354",
      "Name": "withRaise",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3638,6 +3598,7 @@
      "$id": "363",
      "Name": "withReturn",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3738,6 +3699,7 @@
      "$id": "372",
      "Name": "withTry",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3838,6 +3800,7 @@
      "$id": "381",
      "Name": "withWhile",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3938,6 +3901,7 @@
      "$id": "390",
      "Name": "withWith",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4038,6 +4002,7 @@
      "$id": "399",
      "Name": "withYield",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4155,6 +4120,7 @@
      "$id": "410",
      "Name": "sameAsModel",
      "ResourceName": "ModelProperties",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4272,6 +4238,7 @@
      "$id": "421",
      "Name": "and",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4326,6 +4293,7 @@
      "$id": "426",
      "Name": "as",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4380,6 +4348,7 @@
      "$id": "431",
      "Name": "assert",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4434,6 +4403,7 @@
      "$id": "436",
      "Name": "async",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4488,6 +4458,7 @@
      "$id": "441",
      "Name": "await",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4542,6 +4513,7 @@
      "$id": "446",
      "Name": "break",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4596,6 +4568,7 @@
      "$id": "451",
      "Name": "class",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4650,6 +4623,7 @@
      "$id": "456",
      "Name": "constructor",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4704,6 +4678,7 @@
      "$id": "461",
      "Name": "continue",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4758,6 +4733,7 @@
      "$id": "466",
      "Name": "def",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4812,6 +4788,7 @@
      "$id": "471",
      "Name": "del",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4866,6 +4843,7 @@
      "$id": "476",
      "Name": "elif",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4920,6 +4898,7 @@
      "$id": "481",
      "Name": "else",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4974,6 +4953,7 @@
      "$id": "486",
      "Name": "except",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5028,6 +5008,7 @@
      "$id": "491",
      "Name": "exec",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5082,6 +5063,7 @@
      "$id": "496",
      "Name": "finally",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5136,6 +5118,7 @@
      "$id": "501",
      "Name": "for",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5190,6 +5173,7 @@
      "$id": "506",
      "Name": "from",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5244,6 +5228,7 @@
      "$id": "511",
      "Name": "global",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5298,6 +5283,7 @@
      "$id": "516",
      "Name": "if",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5352,6 +5338,7 @@
      "$id": "521",
      "Name": "import",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5406,6 +5393,7 @@
      "$id": "526",
      "Name": "in",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5460,6 +5448,7 @@
      "$id": "531",
      "Name": "is",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5514,6 +5503,7 @@
      "$id": "536",
      "Name": "lambda",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5568,6 +5558,7 @@
      "$id": "541",
      "Name": "not",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5622,6 +5613,7 @@
      "$id": "546",
      "Name": "or",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5676,6 +5668,7 @@
      "$id": "551",
      "Name": "pass",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5730,6 +5723,7 @@
      "$id": "556",
      "Name": "raise",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5784,6 +5778,7 @@
      "$id": "561",
      "Name": "return",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5838,6 +5833,7 @@
      "$id": "566",
      "Name": "try",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5892,6 +5888,7 @@
      "$id": "571",
      "Name": "while",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5946,6 +5943,7 @@
      "$id": "576",
      "Name": "with",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6000,6 +5998,7 @@
      "$id": "581",
      "Name": "yield",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6071,6 +6070,7 @@
      "$id": "588",
      "Name": "withAnd",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6081,8 +6081,7 @@
        "NameInRequest": "and",
        "Type": {
         "$id": "590",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6144,6 +6143,7 @@
      "$id": "595",
      "Name": "withAs",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6154,8 +6154,7 @@
        "NameInRequest": "as",
        "Type": {
         "$id": "597",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6217,6 +6216,7 @@
      "$id": "602",
      "Name": "withAssert",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6227,8 +6227,7 @@
        "NameInRequest": "assert",
        "Type": {
         "$id": "604",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6290,6 +6289,7 @@
      "$id": "609",
      "Name": "withAsync",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6300,8 +6300,7 @@
        "NameInRequest": "async",
        "Type": {
         "$id": "611",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6363,6 +6362,7 @@
      "$id": "616",
      "Name": "withAwait",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6373,8 +6373,7 @@
        "NameInRequest": "await",
        "Type": {
         "$id": "618",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6436,6 +6435,7 @@
      "$id": "623",
      "Name": "withBreak",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6446,8 +6446,7 @@
        "NameInRequest": "break",
        "Type": {
         "$id": "625",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6509,6 +6508,7 @@
      "$id": "630",
      "Name": "withClass",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6519,8 +6519,7 @@
        "NameInRequest": "class",
        "Type": {
         "$id": "632",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6582,6 +6581,7 @@
      "$id": "637",
      "Name": "withConstructor",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6592,8 +6592,7 @@
        "NameInRequest": "constructor",
        "Type": {
         "$id": "639",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6655,6 +6654,7 @@
      "$id": "644",
      "Name": "withContinue",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6665,8 +6665,7 @@
        "NameInRequest": "continue",
        "Type": {
         "$id": "646",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6728,6 +6727,7 @@
      "$id": "651",
      "Name": "withDef",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6738,8 +6738,7 @@
        "NameInRequest": "def",
        "Type": {
         "$id": "653",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6801,6 +6800,7 @@
      "$id": "658",
      "Name": "withDel",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6811,8 +6811,7 @@
        "NameInRequest": "del",
        "Type": {
         "$id": "660",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6874,6 +6873,7 @@
      "$id": "665",
      "Name": "withElif",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6884,8 +6884,7 @@
        "NameInRequest": "elif",
        "Type": {
         "$id": "667",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6947,6 +6946,7 @@
      "$id": "672",
      "Name": "withElse",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6957,8 +6957,7 @@
        "NameInRequest": "else",
        "Type": {
         "$id": "674",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7020,6 +7019,7 @@
      "$id": "679",
      "Name": "withExcept",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7030,8 +7030,7 @@
        "NameInRequest": "except",
        "Type": {
         "$id": "681",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7093,6 +7092,7 @@
      "$id": "686",
      "Name": "withExec",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7103,8 +7103,7 @@
        "NameInRequest": "exec",
        "Type": {
         "$id": "688",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7166,6 +7165,7 @@
      "$id": "693",
      "Name": "withFinally",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7176,8 +7176,7 @@
        "NameInRequest": "finally",
        "Type": {
         "$id": "695",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7239,6 +7238,7 @@
      "$id": "700",
      "Name": "withFor",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7249,8 +7249,7 @@
        "NameInRequest": "for",
        "Type": {
         "$id": "702",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7312,6 +7311,7 @@
      "$id": "707",
      "Name": "withFrom",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7322,8 +7322,7 @@
        "NameInRequest": "from",
        "Type": {
         "$id": "709",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7385,6 +7384,7 @@
      "$id": "714",
      "Name": "withGlobal",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7395,8 +7395,7 @@
        "NameInRequest": "global",
        "Type": {
         "$id": "716",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7458,6 +7457,7 @@
      "$id": "721",
      "Name": "withIf",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7468,8 +7468,7 @@
        "NameInRequest": "if",
        "Type": {
         "$id": "723",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7531,6 +7530,7 @@
      "$id": "728",
      "Name": "withImport",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7541,8 +7541,7 @@
        "NameInRequest": "import",
        "Type": {
         "$id": "730",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7604,6 +7603,7 @@
      "$id": "735",
      "Name": "withIn",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7614,8 +7614,7 @@
        "NameInRequest": "in",
        "Type": {
         "$id": "737",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7677,6 +7676,7 @@
      "$id": "742",
      "Name": "withIs",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7687,8 +7687,7 @@
        "NameInRequest": "is",
        "Type": {
         "$id": "744",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7750,6 +7749,7 @@
      "$id": "749",
      "Name": "withLambda",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7760,8 +7760,7 @@
        "NameInRequest": "lambda",
        "Type": {
         "$id": "751",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7823,6 +7822,7 @@
      "$id": "756",
      "Name": "withNot",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7833,8 +7833,7 @@
        "NameInRequest": "not",
        "Type": {
         "$id": "758",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7896,6 +7895,7 @@
      "$id": "763",
      "Name": "withOr",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7906,8 +7906,7 @@
        "NameInRequest": "or",
        "Type": {
         "$id": "765",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7969,6 +7968,7 @@
      "$id": "770",
      "Name": "withPass",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7979,8 +7979,7 @@
        "NameInRequest": "pass",
        "Type": {
         "$id": "772",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8042,6 +8041,7 @@
      "$id": "777",
      "Name": "withRaise",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -8052,8 +8052,7 @@
        "NameInRequest": "raise",
        "Type": {
         "$id": "779",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8115,6 +8114,7 @@
      "$id": "784",
      "Name": "withReturn",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -8125,8 +8125,7 @@
        "NameInRequest": "return",
        "Type": {
         "$id": "786",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8188,6 +8187,7 @@
      "$id": "791",
      "Name": "withTry",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -8198,8 +8198,7 @@
        "NameInRequest": "try",
        "Type": {
         "$id": "793",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8261,6 +8260,7 @@
      "$id": "798",
      "Name": "withWhile",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -8271,8 +8271,7 @@
        "NameInRequest": "while",
        "Type": {
         "$id": "800",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8334,6 +8333,7 @@
      "$id": "805",
      "Name": "withWith",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -8344,8 +8344,7 @@
        "NameInRequest": "with",
        "Type": {
         "$id": "807",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8407,6 +8406,7 @@
      "$id": "812",
      "Name": "withYield",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -8417,8 +8417,7 @@
        "NameInRequest": "yield",
        "Type": {
         "$id": "814",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8480,6 +8479,7 @@
      "$id": "819",
      "Name": "withCancellationToken",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -8490,8 +8490,7 @@
        "NameInRequest": "cancellationToken",
        "Type": {
         "$id": "821",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,

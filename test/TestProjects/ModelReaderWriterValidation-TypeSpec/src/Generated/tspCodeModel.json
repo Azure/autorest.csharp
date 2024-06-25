@@ -9,8 +9,7 @@
    "Name": "ResourceTypeAliasPatternType",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -29,7 +28,6 @@
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The type of alias pattern.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Output"
   },
   {
@@ -38,8 +36,7 @@
    "Name": "ResourceTypeAliasPathTokenType",
    "ValueType": {
     "$id": "7",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -94,7 +91,6 @@
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The type of the token that the alias path is referring to.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -103,8 +99,7 @@
    "Name": "ResourceTypeAliasPathAttributes",
    "ValueType": {
     "$id": "17",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -123,7 +118,6 @@
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The attributes of the token that the alias path is referring to.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -132,8 +126,7 @@
    "Name": "ResourceTypeAliasType",
    "ValueType": {
     "$id": "21",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -158,7 +151,6 @@
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The type of the alias.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Output"
   },
   {
@@ -167,8 +159,7 @@
    "Name": "ProviderAuthorizationConsentState",
    "ValueType": {
     "$id": "26",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -199,7 +190,6 @@
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The provider authorization consent state.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Output"
   }
  ],
@@ -210,7 +200,6 @@
    "Name": "ModelAsStruct",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The model to change to struct.",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -220,8 +209,7 @@
      "Description": "The id property.",
      "Type": {
       "$id": "33",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -233,7 +221,6 @@
    "Kind": "Model",
    "Name": "ModelWithPersistableOnly",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -243,8 +230,7 @@
      "Description": "The name.",
      "Type": {
       "$id": "36",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -260,10 +246,8 @@
       "Name": "Array",
       "ElementType": {
        "$id": "39",
-       "Kind": "string",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Kind": "string"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -275,8 +259,7 @@
      "Description": "The nullable property.",
      "Type": {
       "$id": "41",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -292,15 +275,12 @@
       "Name": "Dictionary",
       "KeyType": {
        "$id": "44",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "ValueType": {
        "$id": "45",
-       "Kind": "string",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Kind": "string"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -312,8 +292,7 @@
      "Description": "The x property.",
      "Type": {
       "$id": "47",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -326,7 +305,6 @@
    "Name": "BaseModel",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The BaseModel in the discriminated set",
-   "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "RoundTrip",
    "Properties": [
@@ -337,8 +315,7 @@
      "Description": "The kind",
      "Type": {
       "$id": "50",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -351,8 +328,7 @@
      "Description": "The name property.",
      "Type": {
       "$id": "52",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -365,7 +341,6 @@
    "Name": "AvailabilitySetData",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The availability set data",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "BaseModel": {
     "$id": "54",
@@ -373,7 +348,6 @@
     "Name": "TrackedResourceData",
     "Namespace": "ModelReaderWriterValidationTypeSpec",
     "Description": "The tracked resource data",
-    "IsNullable": false,
     "Usage": "RoundTrip",
     "Properties": [
      {
@@ -383,8 +357,7 @@
       "Description": "The id property.",
       "Type": {
        "$id": "56",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "IsRequired": true,
       "IsReadOnly": true
@@ -396,8 +369,7 @@
       "Description": "The name property.",
       "Type": {
        "$id": "58",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "IsRequired": true,
       "IsReadOnly": true
@@ -409,8 +381,7 @@
       "Description": "The resource type.",
       "Type": {
        "$id": "60",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "IsRequired": true,
       "IsReadOnly": true
@@ -422,8 +393,7 @@
       "Description": "The location property.",
       "Type": {
        "$id": "62",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "IsRequired": true,
       "IsReadOnly": false
@@ -439,15 +409,12 @@
        "Name": "Dictionary",
        "KeyType": {
         "$id": "65",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "ValueType": {
         "$id": "66",
-        "Kind": "string",
-        "IsNullable": false
-       },
-       "IsNullable": false
+        "Kind": "string"
+       }
       },
       "IsRequired": false,
       "IsReadOnly": false
@@ -465,7 +432,6 @@
       "Kind": "Model",
       "Name": "ComputeSku",
       "Namespace": "ModelReaderWriterValidationTypeSpec",
-      "IsNullable": false,
       "Usage": "RoundTrip",
       "Properties": [
        {
@@ -475,8 +441,7 @@
         "Description": "The sku name.",
         "Type": {
          "$id": "70",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -488,8 +453,7 @@
         "Description": "Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**.",
         "Type": {
          "$id": "72",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -501,8 +465,7 @@
         "Description": "Specifies the number of virtual machines in the scale set.",
         "Type": {
          "$id": "74",
-         "Kind": "int64",
-         "IsNullable": false
+         "Kind": "int64"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -523,7 +486,6 @@
       "Name": "AvailabilitySetProperties",
       "Namespace": "ModelReaderWriterValidationTypeSpec",
       "Description": "The availability set properties",
-      "IsNullable": false,
       "Usage": "RoundTrip",
       "Properties": [
        {
@@ -541,7 +503,6 @@
           "Name": "WritableSubResource",
           "Namespace": "ModelReaderWriterValidationTypeSpec",
           "Description": "The writable sub resource",
-          "IsNullable": false,
           "Usage": "RoundTrip",
           "Properties": [
            {
@@ -551,15 +512,13 @@
             "Description": "The resource id",
             "Type": {
              "$id": "81",
-             "Kind": "string",
-             "IsNullable": false
+             "Kind": "string"
             },
             "IsRequired": false,
             "IsReadOnly": false
            }
           ]
-         },
-         "IsNullable": false
+         }
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -571,8 +530,7 @@
         "Description": "The platform fault domain count property.",
         "Type": {
          "$id": "83",
-         "Kind": "int32",
-         "IsNullable": false
+         "Kind": "int32"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -584,8 +542,7 @@
         "Description": "The platform update domain count property.",
         "Type": {
          "$id": "85",
-         "Kind": "int32",
-         "IsNullable": false
+         "Kind": "int32"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -615,7 +572,6 @@
    "Name": "ResourceProviderData",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "A class representing the ResourceProvider data model.\nResource provider information.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -625,8 +581,7 @@
      "Description": "The provider ID.",
      "Type": {
       "$id": "88",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -638,8 +593,7 @@
      "Description": "The namespace of the resource provider.",
      "Type": {
       "$id": "90",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -651,8 +605,7 @@
      "Description": "The registration state of the resource provider.",
      "Type": {
       "$id": "92",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -664,8 +617,7 @@
      "Description": "The registration policy of the resource provider.",
      "Type": {
       "$id": "94",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -684,7 +636,6 @@
        "Kind": "Model",
        "Name": "ProviderResourceType",
        "Namespace": "ModelReaderWriterValidationTypeSpec",
-       "IsNullable": false,
        "Usage": "Output",
        "Properties": [
         {
@@ -694,8 +645,7 @@
          "Description": "The resource type.",
          "Type": {
           "$id": "99",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -711,10 +661,8 @@
           "Name": "Array",
           "ElementType": {
            "$id": "102",
-           "Kind": "string",
-           "IsNullable": false
-          },
-          "IsNullable": false
+           "Kind": "string"
+          }
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -734,7 +682,6 @@
            "Name": "ProviderExtendedLocation",
            "Namespace": "ModelReaderWriterValidationTypeSpec",
            "Description": "The provider extended location.",
-           "IsNullable": false,
            "Usage": "Output",
            "Properties": [
             {
@@ -744,8 +691,7 @@
              "Description": "The azure location.",
              "Type": {
               "$id": "107",
-              "Kind": "string",
-              "IsNullable": false
+              "Kind": "string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -757,8 +703,7 @@
              "Description": "The extended location type.",
              "Type": {
               "$id": "109",
-              "Kind": "string",
-              "IsNullable": false
+              "Kind": "string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -774,17 +719,14 @@
               "Name": "Array",
               "ElementType": {
                "$id": "112",
-               "Kind": "string",
-               "IsNullable": false
-              },
-              "IsNullable": false
+               "Kind": "string"
+              }
              },
              "IsRequired": false,
              "IsReadOnly": false
             }
            ]
-          },
-          "IsNullable": false
+          }
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -804,7 +746,6 @@
            "Name": "ResourceTypeAlias",
            "Namespace": "ModelReaderWriterValidationTypeSpec",
            "Description": "The alias type.",
-           "IsNullable": false,
            "Usage": "Output",
            "Properties": [
             {
@@ -814,8 +755,7 @@
              "Description": "The alias name.",
              "Type": {
               "$id": "117",
-              "Kind": "string",
-              "IsNullable": false
+              "Kind": "string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -835,7 +775,6 @@
                "Name": "ResourceTypeAliasPath",
                "Namespace": "ModelReaderWriterValidationTypeSpec",
                "Description": "The type of the paths for alias.",
-               "IsNullable": false,
                "Usage": "Output",
                "Properties": [
                 {
@@ -845,8 +784,7 @@
                  "Description": "The path of an alias.",
                  "Type": {
                   "$id": "122",
-                  "Kind": "string",
-                  "IsNullable": false
+                  "Kind": "string"
                  },
                  "IsRequired": false,
                  "IsReadOnly": false
@@ -862,10 +800,8 @@
                   "Name": "Array",
                   "ElementType": {
                    "$id": "125",
-                   "Kind": "string",
-                   "IsNullable": false
-                  },
-                  "IsNullable": false
+                   "Kind": "string"
+                  }
                  },
                  "IsRequired": false,
                  "IsReadOnly": false
@@ -881,7 +817,6 @@
                   "Name": "ResourceTypeAliasPattern",
                   "Namespace": "ModelReaderWriterValidationTypeSpec",
                   "Description": "The type of the pattern for an alias path.",
-                  "IsNullable": false,
                   "Usage": "Output",
                   "Properties": [
                    {
@@ -891,8 +826,7 @@
                     "Description": "The alias pattern phrase.",
                     "Type": {
                      "$id": "129",
-                     "Kind": "string",
-                     "IsNullable": false
+                     "Kind": "string"
                     },
                     "IsRequired": false,
                     "IsReadOnly": false
@@ -904,8 +838,7 @@
                     "Description": "The alias pattern variable.",
                     "Type": {
                      "$id": "131",
-                     "Kind": "string",
-                     "IsNullable": false
+                     "Kind": "string"
                     },
                     "IsRequired": false,
                     "IsReadOnly": false
@@ -937,7 +870,6 @@
                   "Name": "ResourceTypeAliasPathMetadata",
                   "Namespace": "ModelReaderWriterValidationTypeSpec",
                   "Description": "The ResourceTypeAliasPathMetadata.",
-                  "IsNullable": false,
                   "Usage": "RoundTrip",
                   "Properties": [
                    {
@@ -968,8 +900,7 @@
                  "IsReadOnly": false
                 }
                ]
-              },
-              "IsNullable": false
+              }
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -992,8 +923,7 @@
              "Description": "The default path for an alias.",
              "Type": {
               "$id": "139",
-              "Kind": "string",
-              "IsNullable": false
+              "Kind": "string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -1021,8 +951,7 @@
              "IsReadOnly": false
             }
            ]
-          },
-          "IsNullable": false
+          }
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1038,10 +967,8 @@
           "Name": "Array",
           "ElementType": {
            "$id": "144",
-           "Kind": "string",
-           "IsNullable": false
-          },
-          "IsNullable": false
+           "Kind": "string"
+          }
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1053,8 +980,7 @@
          "Description": "The default API version.",
          "Type": {
           "$id": "146",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1074,7 +1000,6 @@
            "Name": "ZoneMapping",
            "Namespace": "ModelReaderWriterValidationTypeSpec",
            "Description": "The ZoneMapping.",
-           "IsNullable": false,
            "Usage": "Output",
            "Properties": [
             {
@@ -1084,8 +1009,7 @@
              "Description": "The location of the zone mapping.",
              "Type": {
               "$id": "151",
-              "Kind": "string",
-              "IsNullable": false
+              "Kind": "string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -1101,17 +1025,14 @@
               "Name": "Array",
               "ElementType": {
                "$id": "154",
-               "Kind": "string",
-               "IsNullable": false
-              },
-              "IsNullable": false
+               "Kind": "string"
+              }
              },
              "IsRequired": false,
              "IsReadOnly": false
             }
            ]
-          },
-          "IsNullable": false
+          }
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1130,7 +1051,6 @@
            "Kind": "Model",
            "Name": "ApiProfile",
            "Namespace": "ModelReaderWriterValidationTypeSpec",
-           "IsNullable": false,
            "Usage": "Output",
            "Properties": [
             {
@@ -1140,8 +1060,7 @@
              "Description": "The profile version.",
              "Type": {
               "$id": "159",
-              "Kind": "string",
-              "IsNullable": false
+              "Kind": "string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -1153,15 +1072,13 @@
              "Description": "The API version.",
              "Type": {
               "$id": "161",
-              "Kind": "string",
-              "IsNullable": false
+              "Kind": "string"
              },
              "IsRequired": false,
              "IsReadOnly": false
             }
            ]
-          },
-          "IsNullable": false
+          }
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1173,8 +1090,7 @@
          "Description": "The additional capabilities offered by this resource type.",
          "Type": {
           "$id": "163",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1190,22 +1106,18 @@
           "Name": "Dictionary",
           "KeyType": {
            "$id": "166",
-           "Kind": "string",
-           "IsNullable": false
+           "Kind": "string"
           },
           "ValueType": {
            "$id": "167",
-           "Kind": "string",
-           "IsNullable": false
-          },
-          "IsNullable": false
+           "Kind": "string"
+          }
          },
          "IsRequired": false,
          "IsReadOnly": false
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1252,7 +1164,6 @@
    "Kind": "Model",
    "Name": "ModelWithStringAdditionalProperties",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "170",
@@ -1260,15 +1171,12 @@
     "Name": "Dictionary",
     "KeyType": {
      "$id": "171",
-     "Kind": "string",
-     "IsNullable": false
+     "Kind": "string"
     },
     "ValueType": {
      "$id": "172",
-     "Kind": "string",
-     "IsNullable": false
-    },
-    "IsNullable": false
+     "Kind": "string"
+    }
    },
    "Properties": [
     {
@@ -1278,8 +1186,7 @@
      "Description": "The id property.",
      "Type": {
       "$id": "174",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1291,8 +1198,7 @@
      "Description": "The name property.",
      "Type": {
       "$id": "176",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1304,8 +1210,7 @@
      "Description": "The age property.",
      "Type": {
       "$id": "178",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1317,7 +1222,6 @@
    "Kind": "Model",
    "Name": "ModelWithArrayAdditionalProperties",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "180",
@@ -1325,8 +1229,7 @@
     "Name": "Dictionary",
     "KeyType": {
      "$id": "181",
-     "Kind": "string",
-     "IsNullable": false
+     "Kind": "string"
     },
     "ValueType": {
      "$id": "182",
@@ -1334,10 +1237,8 @@
      "Name": "Array",
      "ElementType": {
       "$ref": "134"
-     },
-     "IsNullable": false
-    },
-    "IsNullable": false
+     }
+    }
    },
    "Properties": [
     {
@@ -1347,8 +1248,7 @@
      "Description": "The id property.",
      "Type": {
       "$id": "184",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1360,8 +1260,7 @@
      "Description": "The name property.",
      "Type": {
       "$id": "186",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1373,8 +1272,7 @@
      "Description": "The age property.",
      "Type": {
       "$id": "188",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1386,7 +1284,6 @@
    "Kind": "Model",
    "Name": "ModelWithUnknownAdditionalProperties",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "IsNullable": false,
    "Usage": "RoundTrip",
    "InheritedDictionaryType": {
     "$id": "190",
@@ -1394,15 +1291,12 @@
     "Name": "Dictionary",
     "KeyType": {
      "$id": "191",
-     "Kind": "string",
-     "IsNullable": false
+     "Kind": "string"
     },
     "ValueType": {
      "$id": "192",
-     "Kind": "any",
-     "IsNullable": false
-    },
-    "IsNullable": false
+     "Kind": "any"
+    }
    },
    "Properties": [
     {
@@ -1412,8 +1306,7 @@
      "Description": "The id property.",
      "Type": {
       "$id": "194",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1425,8 +1318,7 @@
      "Description": "The name property.",
      "Type": {
       "$id": "196",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1438,8 +1330,7 @@
      "Description": "The age property.",
      "Type": {
       "$id": "198",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1452,7 +1343,6 @@
    "Name": "ModelX",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The ModelX in the discriminated set",
-   "IsNullable": false,
    "DiscriminatorValue": "X",
    "Usage": "RoundTrip",
    "BaseModel": {
@@ -1470,10 +1360,8 @@
       "Name": "Array",
       "ElementType": {
        "$id": "202",
-       "Kind": "string",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Kind": "string"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1485,8 +1373,7 @@
      "Description": "Nullable integer.",
      "Type": {
       "$id": "204",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1502,15 +1389,12 @@
       "Name": "Dictionary",
       "KeyType": {
        "$id": "207",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "ValueType": {
        "$id": "208",
-       "Kind": "string",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Kind": "string"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1522,8 +1406,7 @@
      "Description": "The XProperty property.",
      "Type": {
       "$id": "210",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1536,7 +1419,6 @@
    "Name": "ModelY",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The ModelY in the discriminated set",
-   "IsNullable": false,
    "DiscriminatorValue": "Y",
    "Usage": "RoundTrip",
    "BaseModel": {
@@ -1550,8 +1432,7 @@
      "Description": "The YProperty property.",
      "Type": {
       "$id": "213",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1569,6 +1450,7 @@
      "$id": "215",
      "Name": "op1",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "216",
@@ -1691,6 +1573,7 @@
      "$id": "226",
      "Name": "op2",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "216"
@@ -1797,6 +1680,7 @@
      "$id": "235",
      "Name": "op3",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "216"
@@ -1903,6 +1787,7 @@
      "$id": "244",
      "Name": "op4",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "216"
@@ -2009,6 +1894,7 @@
      "$id": "253",
      "Name": "op5",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "216"
@@ -2069,6 +1955,7 @@
      "$id": "258",
      "Name": "op6",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "216"
@@ -2175,6 +2062,7 @@
      "$id": "267",
      "Name": "op7",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "216"
@@ -2281,6 +2169,7 @@
      "$id": "276",
      "Name": "op8",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "216"

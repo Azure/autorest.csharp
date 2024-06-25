@@ -3,4 +3,4 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputDateTimeType(DateTimeKnownEncoding Encode, InputPrimitiveType WireType, bool IsNullable) : InputType("DateTime", IsNullable);
+internal record InputDateTimeType(DateTimeKnownEncoding Encode, InputPrimitiveType WireType) : InputType("DateTime");

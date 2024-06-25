@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -175,6 +176,11 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                     invocation = invocation.Invoke("GetProperty", Literal("<key>"));
                     BuildResponseParseStatements(useAllProperties, dictionaryType.ValueType, invocation, statements, visitedTypes);
                     return;
+                case InputNullableType nullableType:
+                    if (visitedTypes.Contains(nullableType.Type))
+                        return;
+                    BuildResponseParseStatements(useAllProperties, nullableType.Type, invocation, statements, visitedTypes);
+                    return;
                 case InputModelType modelType:
                     BuildResponseParseStatementsForModelType(useAllProperties, modelType, invocation, statements, visitedTypes);
                     return;
@@ -203,10 +209,11 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 if (!visitedTypes.Contains(property.Type))
                 {
                     // <invocation>.GetProperty("<propertyName>");
-                    visitedTypes.Add(property.Type);
+                    InputType type = property.Type.GetImplementType();
+                    visitedTypes.Add(type);
                     var next = invocation.Invoke("GetProperty", Literal(property.SerializedName));
-                    BuildResponseParseStatements(useAllProperties, property.Type, next, statements, visitedTypes);
-                    visitedTypes.Remove(property.Type);
+                    BuildResponseParseStatements(useAllProperties, type, next, statements, visitedTypes);
+                    visitedTypes.Remove(type);
                 }
             }
         }

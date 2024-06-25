@@ -1,15 +1,16 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using AutoRest.CSharp.Common.Input.InputTypes;
+
 namespace AutoRest.CSharp.Common.Input;
 
 internal abstract record InputType
 {
-    protected InputType(string name, bool isNullable)
+    protected InputType(string name)
     {
         Name = name;
         SpecName = name;
-        IsNullable = isNullable;
     }
 
     public InputTypeSerialization Serialization { get; init; } = InputTypeSerialization.Default;
@@ -22,21 +23,31 @@ internal abstract record InputType
                 return new InputListType(
                     listType.Name,
                     listType.ElementType.GetCollectionEquivalent(inputType),
-                    listType.IsEmbeddingsVector,
-                    listType.IsNullable);
+                    listType.IsEmbeddingsVector);
             case InputDictionaryType dictionaryType:
                 return new InputDictionaryType(
                     dictionaryType.Name,
                     dictionaryType.KeyType,
-                    dictionaryType.ValueType.GetCollectionEquivalent(inputType),
-                    dictionaryType.IsNullable);
+                    dictionaryType.ValueType.GetCollectionEquivalent(inputType));
             default:
                 return inputType;
         }
     }
 
-    public bool IsNullable { get; init; }
+    //public bool IsNullable { get; init; }
     public string Name { get; internal set; }
     //TODO: Remove this until the SDK nullable is enabled, traking in https://github.com/Azure/autorest.csharp/issues/4780
     internal string? SpecName { get; init; }
+
+    public InputType WithNullable(bool isNullable)
+    {
+        if (isNullable)
+            return new InputNullableType(this);
+        return this;
+    }
+    public InputType GetImplementType() => this switch
+    {
+        InputNullableType nullableType => nullableType.Type,
+        _ => this
+    };
 }
