@@ -9,8 +9,7 @@
    "Name": "DaysOfWeekEnum",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -59,7 +58,6 @@
    "Namespace": "Type.Enum.Fixed",
    "Description": "Days of the week",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input,Output"
   }
  ],
@@ -116,6 +114,7 @@
      "Name": "getKnownValue",
      "ResourceName": "String",
      "Description": "getKnownValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "13"
@@ -177,6 +176,7 @@
      "Name": "putKnownValue",
      "ResourceName": "String",
      "Description": "putKnownValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "13"
@@ -279,6 +279,7 @@
      "Name": "putUnknownValue",
      "ResourceName": "String",
      "Description": "putUnknownValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "13"

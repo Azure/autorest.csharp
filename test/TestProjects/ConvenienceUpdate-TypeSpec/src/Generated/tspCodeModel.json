@@ -10,7 +10,6 @@
    "Name": "Model",
    "Namespace": "ConvenienceInCadl",
    "Description": "A model.",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -20,8 +19,7 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -40,6 +38,7 @@
      "Name": "updateConvenience",
      "ResourceName": "ConvenienceInCadl",
      "Description": "No initial operation methods. In the updated version, we add the protocol method and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "7",
@@ -98,6 +97,7 @@
      "Name": "convenienceOptionalBeforeRequired",
      "ResourceName": "ConvenienceInCadl",
      "Description": "No initial operation methods. In the updated version, we add the protocol method and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "12",
@@ -105,8 +105,7 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "13",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -215,6 +214,7 @@
      "Name": "noConvenience",
      "ResourceName": "ConvenienceInCadl",
      "Description": "No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "23",
@@ -273,6 +273,7 @@
      "Name": "noConvenienceRequiredBody",
      "ResourceName": "ConvenienceInCadl",
      "Description": "No convenience method. But if we add the convenientAPI decorator, there will be no ambiguity.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "28",
@@ -371,6 +372,7 @@
      "Name": "noConvenienceOptionalBody",
      "ResourceName": "ConvenienceInCadl",
      "Description": "No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "37",
@@ -469,6 +471,7 @@
      "Name": "protocol",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation only has protocol method. In the updated version, we add the convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "46",
@@ -527,6 +530,7 @@
      "Name": "convenienceWithOptional",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with optional RequestContext and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "51",
@@ -585,6 +589,7 @@
      "Name": "convenienceWithRequired",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with required RequestContext and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "56",
@@ -643,6 +648,7 @@
      "Name": "convenienceShouldNotGenerate",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method marked with convenience method, but the convenience method should not be generated.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "61",
@@ -695,6 +701,7 @@
      "Name": "protocolShouldNotGenerateConvenience",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "66",
@@ -747,6 +754,7 @@
      "Name": "protocolOptionalQuery",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "71",
@@ -754,8 +762,7 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "72",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -824,6 +831,7 @@
      "Name": "protocolRequiredQuery",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "78",
@@ -831,8 +839,7 @@
        "NameInRequest": "required",
        "Type": {
         "$id": "79",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -901,6 +908,7 @@
      "Name": "protocolOptionalModel",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "85",
@@ -999,6 +1007,7 @@
      "Name": "protocolRequiredModel",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "94",
@@ -1097,6 +1106,7 @@
      "Name": "convenienceOptionalQueryWithOptional",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with optional query parameter and optional RequestContext and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "103",
@@ -1104,8 +1114,7 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "104",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1174,6 +1183,7 @@
      "Name": "convenienceRequiredQueryWithOptional",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with required query parameter and optional RequestContext and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "110",
@@ -1181,8 +1191,7 @@
        "NameInRequest": "required",
        "Type": {
         "$id": "111",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1251,6 +1260,7 @@
      "Name": "convenienceOptionalQueryWithRequired",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with optional query parameter and required RequestContext and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "117",
@@ -1258,8 +1268,7 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "118",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1328,6 +1337,7 @@
      "Name": "convenienceRequiredQueryWithRequired",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with required query parameter and required RequestContext and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "124",
@@ -1335,8 +1345,7 @@
        "NameInRequest": "required",
        "Type": {
         "$id": "125",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1405,6 +1414,7 @@
      "Name": "convenienceOptionalModelWithOptional",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with optional body parameter and optional RequestContext and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "131",
@@ -1503,6 +1513,7 @@
      "Name": "convenienceRequiredModelWithOptional",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with required body parameter and optional RequestContext and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "140",
@@ -1601,6 +1612,7 @@
      "Name": "convenienceOptionalModelWithRequired",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with optional body parameter and required RequestContext and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "149",
@@ -1699,6 +1711,7 @@
      "Name": "protocolOptionalBeforeRequired",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "158",
@@ -1706,8 +1719,7 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "159",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,

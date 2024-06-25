@@ -12,8 +12,7 @@
    "Name": "Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -32,7 +31,6 @@
    "Namespace": "Versioning.Added",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   },
   {
@@ -41,8 +39,7 @@
    "Name": "EnumV1",
    "ValueType": {
     "$id": "7",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -58,7 +55,6 @@
    ],
    "Namespace": "Versioning.Added",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input,Output"
   },
   {
@@ -67,8 +63,7 @@
    "Name": "EnumV2",
    "ValueType": {
     "$id": "11",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -79,7 +74,6 @@
    ],
    "Namespace": "Versioning.Added",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input,Output"
   }
  ],
@@ -89,7 +83,6 @@
    "Kind": "Model",
    "Name": "ModelV1",
    "Namespace": "Versioning.Added",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -99,8 +92,7 @@
      "Description": "",
      "Type": {
       "$id": "15",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -128,16 +120,13 @@
       "VariantTypes": [
        {
         "$id": "19",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        {
         "$id": "20",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        }
-      ],
-      "IsNullable": false
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -149,7 +138,6 @@
    "Kind": "Model",
    "Name": "ModelV2",
    "Namespace": "Versioning.Added",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -159,8 +147,7 @@
      "Description": "",
      "Type": {
       "$id": "23",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -188,16 +175,13 @@
       "VariantTypes": [
        {
         "$id": "27",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        {
         "$id": "28",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        }
-      ],
-      "IsNullable": false
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -215,6 +199,7 @@
      "$id": "30",
      "Name": "v1",
      "ResourceName": "Added",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "31",
@@ -260,8 +245,7 @@
        "NameInRequest": "header-v2",
        "Type": {
         "$id": "35",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -375,6 +359,7 @@
      "$id": "44",
      "Name": "v2",
      "ResourceName": "Added",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "31"
@@ -503,6 +488,7 @@
      "$id": "55",
      "Name": "v2InInterface",
      "ResourceName": "InterfaceV2",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "31"

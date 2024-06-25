@@ -134,7 +134,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public override CSharpType ResolveModel(InputModelType model)
-            => _models.TryGetValue(model, out var modelTypeProvider) ? modelTypeProvider.Type : new CSharpType(typeof(object), model.IsNullable);
+            => _models.TryGetValue(model, out var modelTypeProvider) ? modelTypeProvider.Type : new CSharpType(typeof(object));
 
         public override CSharpType? FindTypeByName(string originalName)
         {

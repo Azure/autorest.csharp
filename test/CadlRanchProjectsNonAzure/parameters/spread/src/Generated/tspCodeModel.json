@@ -10,7 +10,6 @@
    "Name": "BodyParameter",
    "Namespace": "Parameters.Spread.Model",
    "Description": "This is a simple model.",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -20,8 +19,7 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -34,7 +32,6 @@
    "Name": "CompositeRequestMix",
    "Namespace": "Parameters.Spread.Model",
    "Description": "This is a model with non-body http request decorator.",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -44,8 +41,7 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -57,7 +53,6 @@
    "Kind": "Model",
    "Name": "SpreadAsRequestBodyRequest",
    "Namespace": "Parameters.Spread.Alias",
-   "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
@@ -67,8 +62,7 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -80,7 +74,6 @@
    "Kind": "Model",
    "Name": "SpreadAsRequestParameterRequest",
    "Namespace": "",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -90,8 +83,7 @@
      "Description": "",
      "Type": {
       "$id": "13",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -103,7 +95,6 @@
    "Kind": "Model",
    "Name": "SpreadWithMultipleParametersRequest",
    "Namespace": "",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
@@ -113,8 +104,7 @@
      "Description": "",
      "Type": {
       "$id": "16",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -126,8 +116,7 @@
      "Description": "",
      "Type": {
       "$id": "18",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -139,8 +128,7 @@
      "Description": "",
      "Type": {
       "$id": "20",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -152,8 +140,7 @@
      "Description": "",
      "Type": {
       "$id": "22",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -165,8 +152,7 @@
      "Description": "",
      "Type": {
       "$id": "24",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -178,8 +164,7 @@
      "Description": "",
      "Type": {
       "$id": "26",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -238,6 +223,7 @@
      "$id": "34",
      "Name": "spreadAsRequestBody",
      "ResourceName": "Model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -339,6 +325,7 @@
      "$id": "43",
      "Name": "spreadCompositeRequestOnlyWithBody",
      "ResourceName": "Model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -439,6 +426,7 @@
      "$id": "52",
      "Name": "spreadCompositeRequestWithoutBody",
      "ResourceName": "Model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -449,8 +437,7 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "54",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -468,8 +455,7 @@
        "NameInRequest": "test-header",
        "Type": {
         "$id": "56",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -531,6 +517,7 @@
      "$id": "61",
      "Name": "spreadCompositeRequest",
      "ResourceName": "Model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -541,8 +528,7 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "63",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -560,8 +546,7 @@
        "NameInRequest": "test-header",
        "Type": {
         "$id": "65",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -669,6 +654,7 @@
      "$id": "74",
      "Name": "spreadCompositeRequestMix",
      "ResourceName": "Model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -679,8 +665,7 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "76",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -698,8 +683,7 @@
        "NameInRequest": "test-header",
        "Type": {
         "$id": "78",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -825,6 +809,7 @@
      "$id": "89",
      "Name": "spreadAsRequestBody",
      "ResourceName": "Alias",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -925,6 +910,7 @@
      "$id": "98",
      "Name": "spreadAsRequestParameter",
      "ResourceName": "Alias",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -935,8 +921,7 @@
        "NameInRequest": "id",
        "Type": {
         "$id": "100",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -954,8 +939,7 @@
        "NameInRequest": "x-ms-test-header",
        "Type": {
         "$id": "102",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1063,6 +1047,7 @@
      "$id": "111",
      "Name": "spreadWithMultipleParameters",
      "ResourceName": "Alias",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -1073,8 +1058,7 @@
        "NameInRequest": "id",
        "Type": {
         "$id": "113",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1092,8 +1076,7 @@
        "NameInRequest": "x-ms-test-header",
        "Type": {
         "$id": "115",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsRequired": true,

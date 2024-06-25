@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -41,7 +42,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             var parametersToFields = new Dictionary<string, FieldDeclaration>();
 
             var visitedMembers = new HashSet<ISymbol>(SymbolEqualityComparer.Default);
-
             foreach (var inputModelProperty in properties)
             {
                 var originalFieldName = BuilderHelpers.DisambiguateName(modelName, inputModelProperty.Name.ToCleanName(), "Property");
@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 // We represent property being optional by making it nullable (when it is a value type)
                 // Except in the case of collection where there is a special handling
-                var optionalViaNullability = inputModelProperty is { IsRequired: false, Type.IsNullable: false } &&
+                var optionalViaNullability = inputModelProperty is { IsRequired: false} && inputModelProperty.Type is not InputNullableType &&
                                              !propertyType.IsCollection;
 
                 var existingMember = modelTypeMapping?.GetMemberByOriginalName(originalFieldName);
@@ -234,7 +234,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 // nullable collection should be settable
                 // one exception is in the property bag, we never let them to be settable.
-                return !property.Type.IsNullable || isPropertyBag;
+                return property.Type is not InputNullableType || isPropertyBag;
             }
 
             // In mixed models required properties are not readonly

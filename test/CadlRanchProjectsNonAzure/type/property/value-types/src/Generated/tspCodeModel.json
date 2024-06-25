@@ -9,8 +9,7 @@
    "Name": "FixedInnerEnum",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -29,7 +28,6 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Enum that will be used as a property for model EnumProperty. Non-extensible.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input,Output"
   },
   {
@@ -38,8 +36,7 @@
    "Name": "InnerEnum",
    "ValueType": {
     "$id": "7",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -58,7 +55,6 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Enum that will be used as a property for model EnumProperty. Extensible.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Input,Output"
   },
   {
@@ -67,8 +63,7 @@
    "Name": "StringLiteralProperty_property",
    "ValueType": {
     "$id": "11",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -81,7 +76,6 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "The StringLiteralProperty_property",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Input,Output"
   },
   {
@@ -90,8 +84,7 @@
    "Name": "IntLiteralProperty_property",
    "ValueType": {
     "$id": "14",
-    "Kind": "int32",
-    "IsNullable": false
+    "Kind": "int32"
    },
    "Values": [
     {
@@ -104,7 +97,6 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "The IntLiteralProperty_property",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Input,Output"
   },
   {
@@ -113,8 +105,7 @@
    "Name": "FloatLiteralProperty_property",
    "ValueType": {
     "$id": "17",
-    "Kind": "float32",
-    "IsNullable": false
+    "Kind": "float32"
    },
    "Values": [
     {
@@ -127,7 +118,6 @@
    "Namespace": "Type.Property.ValueTypes",
    "Description": "The FloatLiteralProperty_property",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Input,Output"
   },
   {
@@ -136,8 +126,7 @@
    "Name": "UnionStringLiteralPropertyProperty",
    "ValueType": {
     "$id": "20",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -153,7 +142,6 @@
    ],
    "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input,Output"
   },
   {
@@ -162,8 +150,7 @@
    "Name": "UnionIntLiteralPropertyProperty",
    "ValueType": {
     "$id": "24",
-    "Kind": "int32",
-    "IsNullable": false
+    "Kind": "int32"
    },
    "Values": [
     {
@@ -179,7 +166,6 @@
    ],
    "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input,Output"
   },
   {
@@ -188,8 +174,7 @@
    "Name": "UnionFloatLiteralPropertyProperty",
    "ValueType": {
     "$id": "28",
-    "Kind": "float32",
-    "IsNullable": false
+    "Kind": "float32"
    },
    "Values": [
     {
@@ -205,7 +190,6 @@
    ],
    "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input,Output"
   },
   {
@@ -214,8 +198,7 @@
    "Name": "ExtendedEnum",
    "ValueType": {
     "$id": "32",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -226,7 +209,6 @@
    ],
    "Namespace": "Type.Property.ValueTypes",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Input,Output"
   }
  ],
@@ -237,7 +219,6 @@
    "Name": "BooleanProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a boolean property",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -247,8 +228,7 @@
      "Description": "Property",
      "Type": {
       "$id": "36",
-      "Kind": "boolean",
-      "IsNullable": false
+      "Kind": "boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -261,7 +241,6 @@
    "Name": "StringProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a string property",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -271,8 +250,7 @@
      "Description": "Property",
      "Type": {
       "$id": "39",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -285,7 +263,6 @@
    "Name": "BytesProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a bytes property",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -296,7 +273,6 @@
      "Type": {
       "$id": "42",
       "Kind": "bytes",
-      "IsNullable": false,
       "Encode": "base64"
      },
      "IsRequired": true,
@@ -310,7 +286,6 @@
    "Name": "IntProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a int property",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -320,8 +295,7 @@
      "Description": "Property",
      "Type": {
       "$id": "45",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -334,7 +308,6 @@
    "Name": "FloatProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a float property",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -344,8 +317,7 @@
      "Description": "Property",
      "Type": {
       "$id": "48",
-      "Kind": "float32",
-      "IsNullable": false
+      "Kind": "float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -358,7 +330,6 @@
    "Name": "DecimalProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a decimal property",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -368,8 +339,7 @@
      "Description": "Property",
      "Type": {
       "$id": "51",
-      "Kind": "decimal",
-      "IsNullable": false
+      "Kind": "decimal"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -382,7 +352,6 @@
    "Name": "Decimal128Property",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a decimal128 property",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -392,8 +361,7 @@
      "Description": "Property",
      "Type": {
       "$id": "54",
-      "Kind": "decimal128",
-      "IsNullable": false
+      "Kind": "decimal128"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -406,7 +374,6 @@
    "Name": "DatetimeProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a datetime property",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -417,12 +384,10 @@
      "Type": {
       "$id": "57",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "58",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -436,7 +401,6 @@
    "Name": "DurationProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a duration property",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -447,12 +411,10 @@
      "Type": {
       "$id": "61",
       "Kind": "duration",
-      "IsNullable": false,
       "Encode": "ISO8601",
       "WireType": {
        "$id": "62",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -466,7 +428,6 @@
    "Name": "EnumProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with enum properties",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -488,7 +449,6 @@
    "Name": "ExtensibleEnumProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with extensible enum properties",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -510,7 +470,6 @@
    "Name": "ModelProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with model properties",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -524,7 +483,6 @@
       "Name": "InnerModel",
       "Namespace": "Type.Property.ValueTypes",
       "Description": "Inner model. Will be a property type for ModelWithModelProperties",
-      "IsNullable": false,
       "Usage": "Input,Output",
       "Properties": [
        {
@@ -534,8 +492,7 @@
         "Description": "Required string property",
         "Type": {
          "$id": "71",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -556,7 +513,6 @@
    "Name": "CollectionsStringProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with collection string properties",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -570,10 +526,8 @@
       "Name": "Array",
       "ElementType": {
        "$id": "75",
-       "Kind": "string",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Kind": "string"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -586,7 +540,6 @@
    "Name": "CollectionsIntProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with collection int properties",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -600,10 +553,8 @@
       "Name": "Array",
       "ElementType": {
        "$id": "79",
-       "Kind": "int32",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Kind": "int32"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -616,7 +567,6 @@
    "Name": "CollectionsModelProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with collection model properties",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -630,8 +580,7 @@
       "Name": "Array",
       "ElementType": {
        "$ref": "69"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -644,7 +593,6 @@
    "Name": "DictionaryStringProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with dictionary string properties",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -658,15 +606,12 @@
       "Name": "Dictionary",
       "KeyType": {
        "$id": "86",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "ValueType": {
        "$id": "87",
-       "Kind": "string",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Kind": "string"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -679,7 +624,6 @@
    "Name": "NeverProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a property never. (This property should not be included).",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": []
   },
@@ -689,7 +633,6 @@
    "Name": "UnknownStringProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a property unknown, and the data is a string.",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -699,8 +642,7 @@
      "Description": "Property",
      "Type": {
       "$id": "91",
-      "Kind": "any",
-      "IsNullable": false
+      "Kind": "any"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -713,7 +655,6 @@
    "Name": "UnknownIntProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a property unknown, and the data is a int32.",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -723,8 +664,7 @@
      "Description": "Property",
      "Type": {
       "$id": "94",
-      "Kind": "any",
-      "IsNullable": false
+      "Kind": "any"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -737,7 +677,6 @@
    "Name": "UnknownDictProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a property unknown, and the data is a dictionnary.",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -747,8 +686,7 @@
      "Description": "Property",
      "Type": {
       "$id": "97",
-      "Kind": "any",
-      "IsNullable": false
+      "Kind": "any"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -761,7 +699,6 @@
    "Name": "UnknownArrayProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a property unknown, and the data is an array.",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -771,8 +708,7 @@
      "Description": "Property",
      "Type": {
       "$id": "100",
-      "Kind": "any",
-      "IsNullable": false
+      "Kind": "any"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -785,7 +721,6 @@
    "Name": "StringLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a string literal property.",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -799,8 +734,7 @@
       "ValueType": {
        "$ref": "10"
       },
-      "Value": "hello",
-      "IsNullable": false
+      "Value": "hello"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -813,7 +747,6 @@
    "Name": "IntLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a int literal property.",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -827,8 +760,7 @@
       "ValueType": {
        "$ref": "13"
       },
-      "Value": 42,
-      "IsNullable": false
+      "Value": 42
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -841,7 +773,6 @@
    "Name": "FloatLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a float literal property.",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -855,8 +786,7 @@
       "ValueType": {
        "$ref": "16"
       },
-      "Value": 43.125,
-      "IsNullable": false
+      "Value": 43.125
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -869,7 +799,6 @@
    "Name": "BooleanLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a boolean literal property.",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -882,11 +811,9 @@
       "Kind": "constant",
       "ValueType": {
        "$id": "113",
-       "Kind": "boolean",
-       "IsNullable": false
+       "Kind": "boolean"
       },
-      "Value": true,
-      "IsNullable": false
+      "Value": true
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -899,7 +826,6 @@
    "Name": "UnionStringLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a union of string literal as property.",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -921,7 +847,6 @@
    "Name": "UnionIntLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a union of int literal as property.",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -943,7 +868,6 @@
    "Name": "UnionFloatLiteralProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Model with a union of float literal as property.",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -965,7 +889,6 @@
    "Name": "UnionEnumValueProperty",
    "Namespace": "Type.Property.ValueTypes",
    "Description": "Template type for testing models with specific properties. Pass in the type of the property you are looking for",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -979,8 +902,7 @@
       "ValueType": {
        "$ref": "31"
       },
-      "Value": "value2",
-      "IsNullable": false
+      "Value": "value2"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1040,6 +962,7 @@
      "Name": "get",
      "ResourceName": "Boolean",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -1101,6 +1024,7 @@
      "Name": "put",
      "ResourceName": "Boolean",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -1220,6 +1144,7 @@
      "Name": "get",
      "ResourceName": "String",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -1281,6 +1206,7 @@
      "Name": "put",
      "ResourceName": "String",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -1400,6 +1326,7 @@
      "Name": "get",
      "ResourceName": "Bytes",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -1461,6 +1388,7 @@
      "Name": "put",
      "ResourceName": "Bytes",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -1580,6 +1508,7 @@
      "Name": "get",
      "ResourceName": "Int",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -1641,6 +1570,7 @@
      "Name": "put",
      "ResourceName": "Int",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -1760,6 +1690,7 @@
      "Name": "get",
      "ResourceName": "Float",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -1821,6 +1752,7 @@
      "Name": "put",
      "ResourceName": "Float",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -1940,6 +1872,7 @@
      "Name": "get",
      "ResourceName": "Decimal",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -2001,6 +1934,7 @@
      "Name": "put",
      "ResourceName": "Decimal",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -2120,6 +2054,7 @@
      "Name": "get",
      "ResourceName": "Decimal128",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -2181,6 +2116,7 @@
      "Name": "put",
      "ResourceName": "Decimal128",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -2300,6 +2236,7 @@
      "Name": "get",
      "ResourceName": "Datetime",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -2361,6 +2298,7 @@
      "Name": "put",
      "ResourceName": "Datetime",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -2480,6 +2418,7 @@
      "Name": "get",
      "ResourceName": "Duration",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -2541,6 +2480,7 @@
      "Name": "put",
      "ResourceName": "Duration",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -2660,6 +2600,7 @@
      "Name": "get",
      "ResourceName": "Enum",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -2721,6 +2662,7 @@
      "Name": "put",
      "ResourceName": "Enum",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -2840,6 +2782,7 @@
      "Name": "get",
      "ResourceName": "ExtensibleEnum",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -2901,6 +2844,7 @@
      "Name": "put",
      "ResourceName": "ExtensibleEnum",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -3020,6 +2964,7 @@
      "Name": "get",
      "ResourceName": "Model",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -3081,6 +3026,7 @@
      "Name": "put",
      "ResourceName": "Model",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -3200,6 +3146,7 @@
      "Name": "get",
      "ResourceName": "CollectionsString",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -3261,6 +3208,7 @@
      "Name": "put",
      "ResourceName": "CollectionsString",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -3380,6 +3328,7 @@
      "Name": "get",
      "ResourceName": "CollectionsInt",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -3441,6 +3390,7 @@
      "Name": "put",
      "ResourceName": "CollectionsInt",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -3560,6 +3510,7 @@
      "Name": "get",
      "ResourceName": "CollectionsModel",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -3621,6 +3572,7 @@
      "Name": "put",
      "ResourceName": "CollectionsModel",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -3740,6 +3692,7 @@
      "Name": "get",
      "ResourceName": "DictionaryString",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -3801,6 +3754,7 @@
      "Name": "put",
      "ResourceName": "DictionaryString",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -3920,6 +3874,7 @@
      "Name": "get",
      "ResourceName": "Never",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -3981,6 +3936,7 @@
      "Name": "put",
      "ResourceName": "Never",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -4100,6 +4056,7 @@
      "Name": "get",
      "ResourceName": "UnknownString",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -4161,6 +4118,7 @@
      "Name": "put",
      "ResourceName": "UnknownString",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -4280,6 +4238,7 @@
      "Name": "get",
      "ResourceName": "UnknownInt",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -4341,6 +4300,7 @@
      "Name": "put",
      "ResourceName": "UnknownInt",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -4460,6 +4420,7 @@
      "Name": "get",
      "ResourceName": "UnknownDict",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -4521,6 +4482,7 @@
      "Name": "put",
      "ResourceName": "UnknownDict",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -4640,6 +4602,7 @@
      "Name": "get",
      "ResourceName": "UnknownArray",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -4701,6 +4664,7 @@
      "Name": "put",
      "ResourceName": "UnknownArray",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -4820,6 +4784,7 @@
      "Name": "get",
      "ResourceName": "StringLiteral",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -4881,6 +4846,7 @@
      "Name": "put",
      "ResourceName": "StringLiteral",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -5000,6 +4966,7 @@
      "Name": "get",
      "ResourceName": "IntLiteral",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -5061,6 +5028,7 @@
      "Name": "put",
      "ResourceName": "IntLiteral",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -5180,6 +5148,7 @@
      "Name": "get",
      "ResourceName": "FloatLiteral",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -5241,6 +5210,7 @@
      "Name": "put",
      "ResourceName": "FloatLiteral",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -5360,6 +5330,7 @@
      "Name": "get",
      "ResourceName": "BooleanLiteral",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -5421,6 +5392,7 @@
      "Name": "put",
      "ResourceName": "BooleanLiteral",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -5540,6 +5512,7 @@
      "Name": "get",
      "ResourceName": "UnionStringLiteral",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -5601,6 +5574,7 @@
      "Name": "put",
      "ResourceName": "UnionStringLiteral",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -5720,6 +5694,7 @@
      "Name": "get",
      "ResourceName": "UnionIntLiteral",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -5781,6 +5756,7 @@
      "Name": "put",
      "ResourceName": "UnionIntLiteral",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -5900,6 +5876,7 @@
      "Name": "get",
      "ResourceName": "UnionFloatLiteral",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -5961,6 +5938,7 @@
      "Name": "put",
      "ResourceName": "UnionFloatLiteral",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -6080,6 +6058,7 @@
      "Name": "get",
      "ResourceName": "UnionEnumValue",
      "Description": "Get call",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"
@@ -6141,6 +6120,7 @@
      "Name": "put",
      "ResourceName": "UnionEnumValue",
      "Description": "Put operation",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "125"

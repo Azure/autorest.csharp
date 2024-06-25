@@ -12,8 +12,7 @@
    "Name": "Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -32,7 +31,6 @@
    "Namespace": "Versioning.Removed",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   },
   {
@@ -41,8 +39,7 @@
    "Name": "EnumV2",
    "ValueType": {
     "$id": "7",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -53,7 +50,6 @@
    ],
    "Namespace": "Versioning.Removed",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input,Output"
   }
  ],
@@ -63,7 +59,6 @@
    "Kind": "Model",
    "Name": "ModelV2",
    "Namespace": "Versioning.Removed",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -73,8 +68,7 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -102,16 +96,13 @@
       "VariantTypes": [
        {
         "$id": "15",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        {
         "$id": "16",
-        "Kind": "float32",
-        "IsNullable": false
+        "Kind": "float32"
        }
-      ],
-      "IsNullable": false
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -129,6 +120,7 @@
      "$id": "18",
      "Name": "v2",
      "ResourceName": "Removed",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "19",

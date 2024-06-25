@@ -12,8 +12,7 @@
    "Name": "Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -32,7 +31,6 @@
    "Namespace": "Server.Versions.Versioned",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "ApiVersionEnum"
   }
  ],
@@ -47,6 +45,7 @@
      "$id": "7",
      "Name": "withoutApiVersion",
      "ResourceName": "Versioned",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "8",
@@ -118,6 +117,7 @@
      "$id": "14",
      "Name": "withQueryApiVersion",
      "ResourceName": "Versioned",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "8"
@@ -128,8 +128,7 @@
        "NameInRequest": "api-version",
        "Type": {
         "$id": "16",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -200,6 +199,7 @@
      "$id": "23",
      "Name": "withPathApiVersion",
      "ResourceName": "Versioned",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "8"
@@ -210,8 +210,7 @@
        "NameInRequest": "apiVersion",
        "Type": {
         "$id": "25",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "DefaultValue": {
@@ -276,6 +275,7 @@
      "$id": "30",
      "Name": "withQueryOldApiVersion",
      "ResourceName": "Versioned",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "8"
@@ -286,8 +286,7 @@
        "NameInRequest": "api-version",
        "Type": {
         "$id": "32",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {

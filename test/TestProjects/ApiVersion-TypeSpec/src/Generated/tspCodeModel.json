@@ -12,8 +12,7 @@
    "Name": "APIVersion",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -29,7 +28,6 @@
    ],
    "Namespace": "ApiVersionInTsp",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "None"
   },
   {
@@ -38,8 +36,7 @@
    "Name": "Versions",
    "ValueType": {
     "$id": "7",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -55,7 +52,6 @@
    ],
    "Namespace": "ApiVersionInTsp",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "ApiVersionEnum"
   }
  ],
@@ -66,7 +62,6 @@
    "Name": "DetectionResult",
    "Namespace": "ApiVersionInTsp",
    "Description": "Detection results for the given resultId.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -77,7 +72,6 @@
      "Type": {
       "$id": "12",
       "Kind": "uuid",
-      "IsNullable": false,
       "Encode": "string"
      },
      "IsRequired": true,
@@ -98,6 +92,7 @@
      "ResourceName": "ApiVersionInTsp",
      "Summary": "Get Multivariate Anomaly Detection Result",
      "Description": "For asynchronous inference, get multivariate anomaly detection result based on\nresultId returned by the BatchDetectAnomaly api.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "15",
@@ -153,7 +148,6 @@
        "Type": {
         "$id": "21",
         "Kind": "uuid",
-        "IsNullable": false,
         "Encode": "string"
        },
        "Location": "Path",

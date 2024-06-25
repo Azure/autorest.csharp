@@ -10,7 +10,6 @@
    "Name": "EmptyInput",
    "Namespace": "Type.Model.Empty",
    "Description": "Empty model used in operation parameters",
-   "IsNullable": false,
    "Usage": "Input",
    "Properties": []
   },
@@ -20,7 +19,6 @@
    "Name": "EmptyOutput",
    "Namespace": "Type.Model.Empty",
    "Description": "Empty model used in operation return type",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": []
   },
@@ -30,7 +28,6 @@
    "Name": "EmptyInputOutput",
    "Namespace": "Type.Model.Empty",
    "Description": "Empty model used in both parameter and return type",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": []
   }
@@ -45,6 +42,7 @@
      "$id": "6",
      "Name": "putEmpty",
      "ResourceName": "Empty",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "7",
@@ -171,6 +169,7 @@
      "$id": "19",
      "Name": "getEmpty",
      "ResourceName": "Empty",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"
@@ -231,6 +230,7 @@
      "$id": "24",
      "Name": "postRoundTripEmpty",
      "ResourceName": "Empty",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"

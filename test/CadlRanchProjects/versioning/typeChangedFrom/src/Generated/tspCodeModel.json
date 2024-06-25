@@ -12,8 +12,7 @@
    "Name": "Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -32,7 +31,6 @@
    "Namespace": "Versioning.TypeChangedFrom",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -42,7 +40,6 @@
    "Kind": "Model",
    "Name": "TestModel",
    "Namespace": "Versioning.TypeChangedFrom",
-   "IsNullable": false,
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -52,8 +49,7 @@
      "Description": "",
      "Type": {
       "$id": "8",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -65,8 +61,7 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -84,6 +79,7 @@
      "$id": "12",
      "Name": "test",
      "ResourceName": "TypeChangedFrom",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "13",
@@ -129,8 +125,7 @@
        "NameInRequest": "param",
        "Type": {
         "$id": "17",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,

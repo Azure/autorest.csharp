@@ -70,13 +70,12 @@ op test(@body input: Pet): Pet;
                 SerializedName: "kind",
                 Type: {
                     Kind: "string",
-                    IsNullable: false,
                     Encode: undefined
                 },
                 IsRequired: true,
                 IsReadOnly: false,
                 IsDiscriminator: true,
-                Description: "Discriminator",
+                Description: "Discriminator property for Pet.",
                 FlattenedNames: undefined
             } as InputModelProperty,
             discriminatorProperty
@@ -170,7 +169,6 @@ op test(@body input: Pet): Pet;
                     Deprecated: undefined,
                     ValueType: {
                         Kind: "string",
-                        IsNullable: false,
                         Encode: undefined
                     },
                     Values: [
@@ -186,7 +184,6 @@ op test(@body input: Pet): Pet;
                         }
                     ],
                     IsExtensible: false,
-                    IsNullable: false,
                     Usage: UsageFlags.Input | UsageFlags.Output
                 },
                 IsRequired: true,
@@ -299,7 +296,6 @@ op test(@body input: Pet): Pet;
                     Description: "The pet kind",
                     ValueType: {
                         Kind: "string",
-                        IsNullable: false,
                         Encode: undefined
                     },
                     Values: [
@@ -315,7 +311,6 @@ op test(@body input: Pet): Pet;
                         }
                     ],
                     IsExtensible: false,
-                    IsNullable: false,
                     Usage: UsageFlags.Input | UsageFlags.Output
                 },
                 IsRequired: true,
@@ -456,14 +451,11 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
             {
                 Kind: InputTypeKind.Dictionary,
                 Name: InputTypeKind.Dictionary,
-                IsNullable: false,
                 KeyType: {
-                    Kind: "string",
-                    IsNullable: false
+                    Kind: "string"
                 },
                 ValueType: {
                     Kind: "any",
-                    IsNullable: false,
                     Encode: undefined
                 }
             } as InputDictionaryType,
@@ -473,14 +465,11 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
             {
                 Kind: InputTypeKind.Dictionary,
                 Name: InputTypeKind.Dictionary,
-                IsNullable: false,
                 KeyType: {
-                    Kind: "string",
-                    IsNullable: false
+                    Kind: "string"
                 },
                 ValueType: {
                     Kind: "string",
-                    IsNullable: false,
                     Encode: undefined
                 }
             } as InputDictionaryType,
@@ -490,14 +479,11 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
             {
                 Kind: InputTypeKind.Dictionary,
                 Name: InputTypeKind.Dictionary,
-                IsNullable: false,
                 KeyType: {
-                    Kind: "string",
-                    IsNullable: false
+                    Kind: "string"
                 },
                 ValueType: {
                     Kind: "int32",
-                    IsNullable: false,
                     Encode: undefined
                 }
             } as InputDictionaryType,
@@ -507,10 +493,8 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
             {
                 Kind: InputTypeKind.Dictionary,
                 Name: InputTypeKind.Dictionary,
-                IsNullable: false,
                 KeyType: {
-                    Kind: "string",
-                    IsNullable: false
+                    Kind: "string"
                 },
                 ValueType: fooModel
             } as InputDictionaryType,
@@ -520,16 +504,13 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
             {
                 Kind: InputTypeKind.Dictionary,
                 Name: InputTypeKind.Dictionary,
-                IsNullable: false,
                 KeyType: {
-                    Kind: "string",
-                    IsNullable: false
+                    Kind: "string"
                 },
                 ValueType: {
                     Kind: InputTypeKind.Array,
                     Name: InputTypeKind.Array,
-                    ElementType: fooModel,
-                    IsNullable: false
+                    ElementType: fooModel
                 }
             } as InputDictionaryType,
             extendsFooArrayModel.InheritedDictionaryType
@@ -621,14 +602,11 @@ op op5(@body body: IsFooArray): IsFooArray;
             {
                 Kind: InputTypeKind.Dictionary,
                 Name: InputTypeKind.Dictionary,
-                IsNullable: false,
                 KeyType: {
-                    Kind: "string",
-                    IsNullable: false
+                    Kind: "string"
                 },
                 ValueType: {
                     Kind: "any",
-                    IsNullable: false,
                     Encode: undefined
                 }
             } as InputDictionaryType,
@@ -638,14 +616,11 @@ op op5(@body body: IsFooArray): IsFooArray;
             {
                 Kind: InputTypeKind.Dictionary,
                 Name: InputTypeKind.Dictionary,
-                IsNullable: false,
                 KeyType: {
-                    Kind: "string",
-                    IsNullable: false
+                    Kind: "string"
                 },
                 ValueType: {
                     Kind: "string",
-                    IsNullable: false,
                     Encode: undefined
                 }
             } as InputDictionaryType,
@@ -655,14 +630,11 @@ op op5(@body body: IsFooArray): IsFooArray;
             {
                 Kind: InputTypeKind.Dictionary,
                 Name: InputTypeKind.Dictionary,
-                IsNullable: false,
                 KeyType: {
-                    Kind: "string",
-                    IsNullable: false
+                    Kind: "string"
                 },
                 ValueType: {
                     Kind: "int32",
-                    IsNullable: false,
                     Encode: undefined
                 }
             } as InputDictionaryType,
@@ -672,10 +644,8 @@ op op5(@body body: IsFooArray): IsFooArray;
             {
                 Kind: InputTypeKind.Dictionary,
                 Name: InputTypeKind.Dictionary,
-                IsNullable: false,
                 KeyType: {
-                    Kind: "string",
-                    IsNullable: false
+                    Kind: "string"
                 },
                 ValueType: fooModel
             } as InputDictionaryType,
@@ -685,16 +655,13 @@ op op5(@body body: IsFooArray): IsFooArray;
             {
                 Kind: InputTypeKind.Dictionary,
                 Name: InputTypeKind.Dictionary,
-                IsNullable: false,
                 KeyType: {
-                    Kind: "string",
-                    IsNullable: false
+                    Kind: "string"
                 },
                 ValueType: {
                     Kind: InputTypeKind.Array,
                     Name: InputTypeKind.Array,
-                    ElementType: fooModel,
-                    IsNullable: false
+                    ElementType: fooModel
                 }
             } as InputDictionaryType,
             isFooArrayModel.InheritedDictionaryType

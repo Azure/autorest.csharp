@@ -9,8 +9,7 @@
    "Name": "DaysOfWeekExtensibleEnum",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -59,7 +58,6 @@
    "Namespace": "Type.Enum.Extensible",
    "Description": "Days of the week",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Input,Output"
   }
  ],
@@ -115,6 +113,7 @@
      "$id": "18",
      "Name": "getKnownValue",
      "ResourceName": "String",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "13"
@@ -175,6 +174,7 @@
      "$id": "23",
      "Name": "getUnknownValue",
      "ResourceName": "String",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "13"
@@ -235,6 +235,7 @@
      "$id": "28",
      "Name": "putKnownValue",
      "ResourceName": "String",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "13"
@@ -335,6 +336,7 @@
      "$id": "37",
      "Name": "putUnknownValue",
      "ResourceName": "String",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "13"

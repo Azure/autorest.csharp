@@ -49,7 +49,7 @@ namespace _Type.Property.Nullable.Models
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
-        public DurationProperty(string requiredProperty, TimeSpan? nullableProperty)
+        internal DurationProperty(string requiredProperty, TimeSpan? nullableProperty)
         {
             Argument.AssertNotNull(requiredProperty, nameof(requiredProperty));
 
@@ -74,8 +74,8 @@ namespace _Type.Property.Nullable.Models
         }
 
         /// <summary> Required property. </summary>
-        public string RequiredProperty { get; set; }
+        public string RequiredProperty { get; }
         /// <summary> Property. </summary>
-        public TimeSpan? NullableProperty { get; set; }
+        public TimeSpan? NullableProperty { get; }
     }
 }
