@@ -4,7 +4,7 @@
 import { EmitContext, Program, resolvePath } from "@typespec/compiler";
 
 import { execSync } from "child_process";
-import fs, { existsSync } from "fs";
+import fs, { cp, existsSync } from "fs";
 import path from "node:path";
 import { configurationFileName, tspOutputFileName } from "./constants.js";
 import { LoggerLevel } from "./lib/log-level.js";
@@ -58,8 +58,14 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
         ? resolvePath(outputFolder, "Generated")
         : resolvePath(outputFolder, "src", "Generated");
     if (options.skipSDKGeneration !== true) {
+        /*
         const configurationFilePath = resolvePath(
             generatedFolder,
+            configurationFileName
+        );
+        */
+        const configurationFilePath = resolvePath(
+            outputFolder,
             configurationFileName
         );
         const configurations = JSON.parse(
@@ -83,6 +89,23 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             resolvePath(generatedFolder, configurationFileName),
             prettierOutput(JSON.stringify(configurations, null, 2))
         );
+
+        /* copy tspConfiguration.json to the generated folder. */
+        try {
+            fs.copyFileSync(resolvePath(outputFolder, tspOutputFileName), resolvePath(generatedFolder, tspOutputFileName));
+            Logger.getInstance().info(`${tspOutputFileName} was copied to ${generatedFolder}`);
+        } catch (err) {
+            throw err;
+        }
+        /*
+        fs.rename(resolvePath(outputFolder, tspOutputFileName), resolvePath(generatedFolder, tspOutputFileName), (err) => {
+            if (err) throw err;
+            Logger.getInstance().info(`${tspOutputFileName} was moved to ${generatedFolder}`);
+        });
+        */
+        /* clean up */
+        deleteFile(resolvePath(outputFolder, tspOutputFileName));
+        deleteFile(resolvePath(outputFolder, configurationFileName));
         const csProjFile = resolvePath(
             outputFolder.endsWith("src")
                 ? outputFolder
