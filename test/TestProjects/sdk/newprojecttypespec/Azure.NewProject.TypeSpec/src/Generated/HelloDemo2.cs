@@ -467,7 +467,7 @@ namespace Azure.NewProject.TypeSpec
             request.Uri = uri;
             request.Headers.Add("p1", p1);
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("content-type", "text/plain");
+            request.Headers.Add("Content-Type", "text/plain");
             request.Content = content;
             return message;
         }

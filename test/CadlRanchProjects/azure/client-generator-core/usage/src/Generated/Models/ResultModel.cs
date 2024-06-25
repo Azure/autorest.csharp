@@ -48,7 +48,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
         /// <summary> Initializes a new instance of <see cref="ResultModel"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public ResultModel(string name)
+        internal ResultModel(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
 
@@ -69,7 +69,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
         {
         }
 
-        /// <summary> Gets or sets the name. </summary>
-        public string Name { get; set; }
+        /// <summary> Gets the name. </summary>
+        public string Name { get; }
     }
 }

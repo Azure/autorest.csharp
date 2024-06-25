@@ -12,7 +12,6 @@ import {
 
 interface InputTypeBase {
     Kind: string;
-    IsNullable: boolean;
     Description?: string;
 }
 
@@ -25,7 +24,8 @@ export type InputType =
     | InputModelType
     | InputEnumType
     | InputListType
-    | InputDictionaryType;
+    | InputDictionaryType
+    | InputNullableType;
 
 export interface InputPrimitiveType extends InputTypeBase {
     Kind: SdkBuiltInKinds;
@@ -103,6 +103,11 @@ export interface InputEnumType extends InputTypeBase {
     Deprecated?: string;
     IsExtensible: boolean;
     Usage: string;
+}
+
+export interface InputNullableType extends InputTypeBase {
+    Kind: "nullable";
+    Type: InputType;
 }
 
 export function isInputEnumType(type: InputType): type is InputEnumType {

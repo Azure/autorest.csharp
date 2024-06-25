@@ -17,5 +17,13 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
         {
             return new RoundTripModel(result, serializedAdditionalRawData: null);
         }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ResultModel"/>. </summary>
+        /// <param name="name"></param>
+        /// <returns> A new <see cref="Models.ResultModel"/> instance for mocking. </returns>
+        public static ResultModel ResultModel(string name = null)
+        {
+            return new ResultModel(name, serializedAdditionalRawData: null);
+        }
     }
 }

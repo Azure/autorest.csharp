@@ -14,7 +14,7 @@ namespace ModelsTypeSpec.Models
     internal partial class UnknownSingleBase : SingleBase
     {
         /// <summary> Initializes a new instance of <see cref="UnknownSingleBase"/>. </summary>
-        /// <param name="kind"> Discriminator. </param>
+        /// <param name="kind"> Discriminator property for SingleBase. </param>
         /// <param name="size"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal UnknownSingleBase(string kind, int size, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, size, serializedAdditionalRawData)
