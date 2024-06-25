@@ -57,7 +57,7 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="BaseModelWithDiscriminator"/>. </summary>
-        /// <param name="discriminatorProperty"> Discriminator. </param>
+        /// <param name="discriminatorProperty"> Discriminator property for BaseModelWithDiscriminator. </param>
         /// <param name="optionalPropertyOnBase"> Optional property on base. </param>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
@@ -74,7 +74,7 @@ namespace ModelsTypeSpec.Models
         {
         }
 
-        /// <summary> Discriminator. </summary>
+        /// <summary> Discriminator property for BaseModelWithDiscriminator. </summary>
         internal string DiscriminatorProperty { get; set; }
         /// <summary> Optional property on base. </summary>
         public string OptionalPropertyOnBase { get; set; }

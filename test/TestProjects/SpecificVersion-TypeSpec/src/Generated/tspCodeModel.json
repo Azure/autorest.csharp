@@ -12,8 +12,7 @@
    "Name": "OperationState",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -49,8 +48,7 @@
    ],
    "Namespace": "Azure.Core.Foundations",
    "Description": "Enum describing allowed operation states.",
-   "IsExtensible": false,
-   "IsNullable": false,
+   "IsExtensible": true,
    "Usage": "Output"
   },
   {
@@ -59,8 +57,7 @@
    "Name": "ApiVersions",
    "ValueType": {
     "$id": "10",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -76,7 +73,6 @@
    ],
    "Namespace": "TypeSpec.Versioning.Specific",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -87,7 +83,6 @@
    "Name": "ResourceOperationStatusResourceExportedResourceError",
    "Namespace": "Azure.Core",
    "Description": "Provides status details for long running operations.",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -97,8 +92,7 @@
      "Description": "The unique ID of the operation.",
      "Type": {
       "$id": "15",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -125,7 +119,6 @@
       "Name": "Error",
       "Namespace": "Azure.Core.Foundations",
       "Description": "The error object.",
-      "IsNullable": false,
       "Usage": "Output",
       "Properties": [
        {
@@ -135,8 +128,7 @@
         "Description": "One of a server-defined set of error codes.",
         "Type": {
          "$id": "20",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -148,8 +140,7 @@
         "Description": "A human-readable representation of the error.",
         "Type": {
          "$id": "22",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -161,8 +152,7 @@
         "Description": "The target of the error.",
         "Type": {
          "$id": "24",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -178,8 +168,7 @@
          "Name": "Array",
          "ElementType": {
           "$ref": "18"
-         },
-         "IsNullable": false
+         }
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -195,7 +184,6 @@
          "Name": "InnerError",
          "Namespace": "Azure.Core.Foundations",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-         "IsNullable": false,
          "Usage": "Output",
          "Properties": [
           {
@@ -205,8 +193,7 @@
            "Description": "One of a server-defined set of error codes.",
            "Type": {
             "$id": "30",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -242,7 +229,6 @@
       "Kind": "Model",
       "Name": "ExportedResource",
       "Namespace": "TypeSpec.Versioning.Specific",
-      "IsNullable": false,
       "Usage": "Output",
       "Properties": [
        {
@@ -252,8 +238,7 @@
         "Description": "",
         "Type": {
          "$id": "35",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -265,8 +250,7 @@
         "Description": "",
         "Type": {
          "$id": "37",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -293,7 +277,6 @@
    "Name": "PagedResource",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Resource items",
-   "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
@@ -310,7 +293,6 @@
        "Kind": "Model",
        "Name": "Resource",
        "Namespace": "TypeSpec.Versioning.Specific",
-       "IsNullable": false,
        "Usage": "RoundTrip",
        "Properties": [
         {
@@ -320,8 +302,7 @@
          "Description": "",
          "Type": {
           "$id": "43",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          },
          "IsRequired": true,
          "IsReadOnly": true
@@ -333,8 +314,7 @@
          "Description": "",
          "Type": {
           "$id": "45",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          },
          "IsRequired": true,
          "IsReadOnly": true
@@ -346,15 +326,13 @@
          "Description": "",
          "Type": {
           "$id": "47",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -366,8 +344,7 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "49",
-      "Kind": "url",
-      "IsNullable": false
+      "Kind": "url"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -410,6 +387,7 @@
      "Name": "export",
      "ResourceName": "VersioningOp",
      "Description": "Long-running resource action operation template.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "56",
@@ -418,8 +396,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "57",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -446,8 +423,7 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "61",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -465,8 +441,7 @@
        "NameInRequest": "projectFileVersion",
        "Type": {
         "$id": "63",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -523,8 +498,7 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "69",
-          "Kind": "url",
-          "IsNullable": false
+          "Kind": "url"
          }
         }
        ],
@@ -562,6 +536,7 @@
      "Name": "list",
      "ResourceName": "Resource",
      "Description": "Resource list operation template.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "73",
@@ -570,8 +545,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "74",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -597,10 +571,8 @@
         "Name": "Array",
         "ElementType": {
          "$id": "77",
-         "Kind": "string",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "string"
+        }
        },
        "Location": "Query",
        "IsRequired": false,
@@ -618,8 +590,7 @@
        "NameInRequest": "expand",
        "Type": {
         "$id": "79",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -693,6 +664,7 @@
      "Name": "create",
      "ResourceName": "Resource",
      "Description": "Create or replace operation template.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "86",
@@ -701,8 +673,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "87",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -723,8 +694,7 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "89",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,

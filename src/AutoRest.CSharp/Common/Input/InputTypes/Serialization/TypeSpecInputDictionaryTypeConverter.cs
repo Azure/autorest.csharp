@@ -25,14 +25,12 @@ namespace AutoRest.CSharp.Common.Input
         public static InputDictionaryType CreateDictionaryType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null && name == null;
-            bool isNullable = false;
             InputType? keyType = null;
             InputType? valueType = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputDictionaryType.Name), ref name)
-                    || reader.TryReadBoolean(nameof(InputDictionaryType.IsNullable), ref isNullable)
                     || reader.TryReadWithConverter(nameof(InputDictionaryType.KeyType), options, ref keyType)
                     || reader.TryReadWithConverter(nameof(InputDictionaryType.ValueType), options, ref valueType);
 
@@ -46,7 +44,7 @@ namespace AutoRest.CSharp.Common.Input
             keyType = keyType ?? throw new JsonException("Dictionary must have key type");
             valueType = valueType ?? throw new JsonException("Dictionary must have value type");
 
-            var dictType = new InputDictionaryType(name, keyType, valueType, isNullable);
+            var dictType = new InputDictionaryType(name, keyType, valueType);
             if (id != null)
             {
                 resolver.AddReference(id, dictType);
