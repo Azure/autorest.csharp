@@ -447,7 +447,6 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
         deepStrictEqual(
             {
                 Kind: "any",
-                IsNullable: false,
                 Encode: undefined
             },
             extendsUnknownModel.AdditionalProperties
@@ -455,7 +454,6 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
         deepStrictEqual(
             {
                 Kind: "string",
-                IsNullable: false,
                 Encode: undefined
             },
             extendsStringModel.AdditionalProperties
@@ -463,7 +461,6 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
         deepStrictEqual(
             {
                 Kind: "int32",
-                IsNullable: false,
                 Encode: undefined
             },
             extendsInt32Model.AdditionalProperties
@@ -472,8 +469,7 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
         deepStrictEqual(
             {
                 Kind: "array",
-                ElementType: fooModel,
-                IsNullable: false
+                ValueType: fooModel
             },
             extendsFooArrayModel.AdditionalProperties
         );
@@ -563,7 +559,6 @@ op op5(@body body: IsFooArray): IsFooArray;
         deepStrictEqual(
             {
                 Kind: "any",
-                IsNullable: false,
                 Encode: undefined
             },
             isUnknownModel.AdditionalProperties
@@ -571,7 +566,6 @@ op op5(@body body: IsFooArray): IsFooArray;
         deepStrictEqual(
             {
                 Kind: "string",
-                IsNullable: false,
                 Encode: undefined
             },
             isStringModel.AdditionalProperties
@@ -579,7 +573,6 @@ op op5(@body body: IsFooArray): IsFooArray;
         deepStrictEqual(
             {
                 Kind: "int32",
-                IsNullable: false,
                 Encode: undefined
             },
             isInt32Model.AdditionalProperties
@@ -588,8 +581,7 @@ op op5(@body body: IsFooArray): IsFooArray;
         deepStrictEqual(
             {
                 Kind: "array",
-                ElementType: fooModel,
-                IsNullable: false
+                ValueType: fooModel
             },
             isFooArrayModel.AdditionalProperties
         );
