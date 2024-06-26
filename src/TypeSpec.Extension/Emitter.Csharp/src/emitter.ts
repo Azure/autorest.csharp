@@ -91,7 +91,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
         );
 
         /* copy tspConfiguration.json to the generated folder. */
-        fs.copyFileSync(
+        fs.renameSync(
             resolvePath(outputFolder, tspOutputFileName),
             resolvePath(generatedFolder, tspOutputFileName)
         );
@@ -105,7 +105,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
         });
         */
         /* clean up */
-        deleteFile(resolvePath(outputFolder, tspOutputFileName));
+        //deleteFile(resolvePath(outputFolder, tspOutputFileName));
         deleteFile(resolvePath(outputFolder, configurationFileName));
         const csProjFile = resolvePath(
             outputFolder.endsWith("src")
