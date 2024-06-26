@@ -117,18 +117,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     Declare("sentinelSpan", new TypedValueExpression(typeof(ReadOnlySpan<byte>), sentinelValue.ToMemory().Property(nameof(ReadOnlyMemory<byte>.Span))), out var sentinelSpan),
                     Declare("valueSpan", new TypedValueExpression(typeof(ReadOnlySpan<byte>), value.ToMemory().Property(nameof(ReadOnlyMemory<byte>.Span))), out var valueSpan),
-                    new IfStatement(NotEqual(sentinelSpan.Property(nameof(Span<byte>.Length)), valueSpan.Property(nameof(Span<byte>.Length))))
-                    {
-                        Return(False)
-                    },
-                    new ForStatement(new AssignmentExpression(indexer, Int(0)), LessThan(indexer, sentinelSpan.Property(nameof(Span<byte>.Length))), new UnaryOperatorExpression("++", indexer, true))
-                    {
-                        new IfStatement(NotEqual(new IndexerExpression(sentinelSpan, indexer), new IndexerExpression(valueSpan, indexer)))
-                        {
-                            Return(False)
-                        }
-                    },
-                    Return(True)
+                    Return(new InvokeStaticMethodExpression(typeof(MemoryExtensions), nameof(MemoryExtensions.SequenceEqual), new[] { sentinelSpan, valueSpan }, CallAsExtension: true)),
                 };
 
                 yield return new(signature, body);

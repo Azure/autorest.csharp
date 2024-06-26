@@ -254,18 +254,7 @@ namespace NoTestTypeSpec
         {
             ReadOnlySpan<byte> sentinelSpan = SentinelValue.ToMemory().Span;
             ReadOnlySpan<byte> valueSpan = value.ToMemory().Span;
-            if (sentinelSpan.Length != valueSpan.Length)
-            {
-                return false;
-            }
-            for (int i = 0; i < sentinelSpan.Length; i++)
-            {
-                if (sentinelSpan[i] != valueSpan[i])
-                {
-                    return false;
-                }
-            }
-            return true;
+            return sentinelSpan.SequenceEqual(valueSpan);
         }
 
         internal static class TypeFormatters
