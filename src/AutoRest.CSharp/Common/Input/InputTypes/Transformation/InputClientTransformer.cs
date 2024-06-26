@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 // "internal" is set only we set access decorator in typespec, default null represents public
                 // TODO: Skip internal operations for Mgmt, we might need a better way to remove operations, tracking in https://github.com/Azure/typespec-azure/issues/964
-                if (operation.Accessibility is null)
+                if (operation.Accessibility == "public")
                 {
                     operationsToKeep.Add(operation);
                 }
