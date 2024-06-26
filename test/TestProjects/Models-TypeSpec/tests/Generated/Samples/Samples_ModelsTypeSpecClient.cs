@@ -620,6 +620,8 @@ null
             Console.WriteLine(result.GetProperty("requiredNullableStringList")[0].ToString());
             Console.WriteLine(result.GetProperty("nonRequiredNullableIntList")[0].ToString());
             Console.WriteLine(result.GetProperty("nonRequiredNullableStringList")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalModel").GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("optionalModel").GetProperty("optionalString").ToString());
         }
 
         [Test]
@@ -741,6 +743,8 @@ null
             Console.WriteLine(result.GetProperty("requiredNullableStringList")[0].ToString());
             Console.WriteLine(result.GetProperty("nonRequiredNullableIntList")[0].ToString());
             Console.WriteLine(result.GetProperty("nonRequiredNullableStringList")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalModel").GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("optionalModel").GetProperty("optionalString").ToString());
         }
 
         [Test]
@@ -2033,6 +2037,13 @@ null
             {
 "<nonRequiredNullableStringList>"
             },
+                optionalModel = new
+                {
+                    kind = "A",
+                    requiredString = "<requiredString>",
+                    optionalInt = 1234,
+                    optionalString = "<optionalString>",
+                },
             });
             Response response = client.RoundTripToOutput(content);
 
@@ -2129,6 +2140,13 @@ null
             {
 "<nonRequiredNullableStringList>"
             },
+                optionalModel = new
+                {
+                    kind = "A",
+                    requiredString = "<requiredString>",
+                    optionalInt = 1234,
+                    optionalString = "<optionalString>",
+                },
             });
             Response response = await client.RoundTripToOutputAsync(content);
 
@@ -2195,6 +2213,11 @@ default
                 OptionalInt8Array = { 123 },
                 NonRequiredNullableIntList = { 1234 },
                 NonRequiredNullableStringList = { "<nonRequiredNullableStringList>" },
+                OptionalModel = new DerivedWithDiscriminatorFromIsKeyword("<requiredString>")
+                {
+                    OptionalInt = 1234,
+                    OptionalString = "<optionalString>",
+                },
             };
             Response<OutputModel> response = client.RoundTripToOutput(input);
         }
@@ -2257,6 +2280,11 @@ default
                 OptionalInt8Array = { 123 },
                 NonRequiredNullableIntList = { 1234 },
                 NonRequiredNullableStringList = { "<nonRequiredNullableStringList>" },
+                OptionalModel = new DerivedWithDiscriminatorFromIsKeyword("<requiredString>")
+                {
+                    OptionalInt = 1234,
+                    OptionalString = "<optionalString>",
+                },
             };
             Response<OutputModel> response = await client.RoundTripToOutputAsync(input);
         }
