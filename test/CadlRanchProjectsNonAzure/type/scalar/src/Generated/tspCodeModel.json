@@ -1155,9 +1155,8 @@
        ],
        "BodyType": {
         "$id": "118",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "119",
          "Kind": "decimal"
         }
@@ -1341,9 +1340,8 @@
        ],
        "BodyType": {
         "$id": "137",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "138",
          "Kind": "decimal"
         }

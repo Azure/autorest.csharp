@@ -19,9 +19,8 @@
      "Description": "The User items on this page",
      "Type": {
       "$id": "4",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "5",
        "Kind": "Model",
        "Name": "User",

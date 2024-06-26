@@ -37,7 +37,7 @@ import { InputOperationParameterKind } from "../type/input-operation-parameter-k
 import { InputParameter } from "../type/input-parameter.js";
 import {
     InputEnumType,
-    InputListType,
+    InputArrayType,
     InputModelType,
     InputType,
     isInputEnumType,
@@ -334,7 +334,7 @@ export function loadOperation(
                 getExtensions(program, param).get("x-ms-skip-url-encoding") ===
                 true,
             Explode:
-                (inputType as InputListType).ElementType && format === "multi"
+                (inputType as InputArrayType).ValueType && format === "multi"
                     ? true
                     : false,
             Kind: kind,

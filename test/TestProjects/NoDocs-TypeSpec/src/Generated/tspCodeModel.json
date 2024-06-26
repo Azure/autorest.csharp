@@ -477,9 +477,8 @@
        },
        {
         "$id": "78",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "79",
          "Kind": "string"
         }
@@ -645,9 +644,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "103",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "104",
         "Kind": "int32"
        }
@@ -666,9 +664,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "107",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "108",
         "Kind": "int32"
        }
@@ -753,9 +750,8 @@
       "Description": "",
       "Type": {
        "$id": "119",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$ref": "116"
        }
       },
@@ -797,9 +793,8 @@
      "Description": "Additional Content defined by implementations",
      "Type": {
       "$id": "124",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "125",
        "Kind": "Model",
        "Name": "ThereLevelExtension",
@@ -821,9 +816,8 @@
           "Description": "",
           "Type": {
            "$id": "128",
-           "Kind": "Array",
-           "Name": "Array",
-           "ElementType": {
+           "Kind": "array",
+           "ValueType": {
             "$ref": "125"
            }
           },
@@ -896,9 +890,8 @@
      "Description": "",
      "Type": {
       "$id": "136",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "132"
       }
      },
@@ -1012,9 +1005,8 @@
      "Description": "Required collection of enums",
      "Type": {
       "$id": "150",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "30"
       }
      },
@@ -1028,8 +1020,7 @@
      "Description": "Required dictionary of enums",
      "Type": {
       "$id": "152",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "153",
        "Kind": "string"
@@ -1070,9 +1061,8 @@
      "Description": "this is a collection of int based extensible enum",
      "Type": {
       "$id": "157",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "40"
       }
      },
@@ -1097,9 +1087,8 @@
      "Description": "this is a collection of float based extensible enum",
      "Type": {
       "$id": "160",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "45"
       }
      },
@@ -1124,9 +1113,8 @@
      "Description": "this is a collection of float based fixed enum",
      "Type": {
       "$id": "163",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "50"
       }
      },
@@ -1151,9 +1139,8 @@
      "Description": "this is a collection of int based fixed enum",
      "Type": {
       "$id": "166",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "55"
       }
      },
@@ -1202,8 +1189,7 @@
      "Description": "required record of unknown",
      "Type": {
       "$id": "173",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "174",
        "Kind": "string"
@@ -1223,8 +1209,7 @@
      "Description": "optional record of unknown",
      "Type": {
       "$id": "177",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "178",
        "Kind": "string"
@@ -1244,8 +1229,7 @@
      "Description": "required readonly record of unknown",
      "Type": {
       "$id": "181",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "182",
        "Kind": "string"
@@ -1265,8 +1249,7 @@
      "Description": "optional readonly record of unknown",
      "Type": {
       "$id": "185",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "186",
        "Kind": "string"
@@ -1350,9 +1333,8 @@
      "Description": "this is a list of union types",
      "Type": {
       "$id": "198",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "199",
        "Kind": "union",
        "Name": "RoundTripModelUnionList",
@@ -1401,9 +1383,8 @@
         },
         {
          "$id": "207",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$ref": "202"
          }
         }
@@ -3193,8 +3174,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "368",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "369",
          "Kind": "string"

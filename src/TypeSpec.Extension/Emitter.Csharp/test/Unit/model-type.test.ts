@@ -3,7 +3,6 @@ import assert, { deepStrictEqual, strictEqual } from "assert";
 import { beforeEach, describe, it } from "vitest";
 import { createModel } from "../../src/lib/client-model-builder.js";
 import { InputModelProperty } from "../../src/type/input-model-property.js";
-import { InputTypeKind } from "../../src/type/input-type-kind.js";
 import { InputDictionaryType } from "../../src/type/input-type.js";
 import {
     createEmitterContext,
@@ -449,8 +448,7 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
         // assert the inherited dictionary type is expected
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
+                Kind: "dict",
                 KeyType: {
                     Kind: "string"
                 },
@@ -463,8 +461,7 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
         );
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
+                Kind: "dict",
                 KeyType: {
                     Kind: "string"
                 },
@@ -477,8 +474,7 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
         );
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
+                Kind: "dict",
                 KeyType: {
                     Kind: "string"
                 },
@@ -491,8 +487,7 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
         );
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
+                Kind: "dict",
                 KeyType: {
                     Kind: "string"
                 },
@@ -502,15 +497,13 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
         );
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
+                Kind: "dict",
                 KeyType: {
                     Kind: "string"
                 },
                 ValueType: {
-                    Kind: InputTypeKind.Array,
-                    Name: InputTypeKind.Array,
-                    ElementType: fooModel
+                    Kind: "array",
+                    ValueType: fooModel
                 }
             } as InputDictionaryType,
             extendsFooArrayModel.InheritedDictionaryType
@@ -600,8 +593,7 @@ op op5(@body body: IsFooArray): IsFooArray;
         // assert the inherited dictionary type is expected
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
+                Kind: "dict",
                 KeyType: {
                     Kind: "string"
                 },
@@ -614,8 +606,7 @@ op op5(@body body: IsFooArray): IsFooArray;
         );
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
+                Kind: "dict",
                 KeyType: {
                     Kind: "string"
                 },
@@ -628,8 +619,7 @@ op op5(@body body: IsFooArray): IsFooArray;
         );
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
+                Kind: "dict",
                 KeyType: {
                     Kind: "string"
                 },
@@ -642,8 +632,7 @@ op op5(@body body: IsFooArray): IsFooArray;
         );
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
+                Kind: "dict",
                 KeyType: {
                     Kind: "string"
                 },
@@ -653,15 +642,13 @@ op op5(@body body: IsFooArray): IsFooArray;
         );
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
+                Kind: "dict",
                 KeyType: {
                     Kind: "string"
                 },
                 ValueType: {
-                    Kind: InputTypeKind.Array,
-                    Name: InputTypeKind.Array,
-                    ElementType: fooModel
+                    Kind: "array",
+                    ValueType: fooModel
                 }
             } as InputDictionaryType,
             isFooArrayModel.InheritedDictionaryType

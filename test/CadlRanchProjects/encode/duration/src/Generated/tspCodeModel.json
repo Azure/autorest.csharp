@@ -148,9 +148,8 @@
      "Description": "",
      "Type": {
       "$id": "24",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "25",
        "Kind": "duration",
        "Encode": "seconds",
@@ -618,9 +617,8 @@
        "NameInRequest": "input",
        "Type": {
         "$id": "76",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "77",
          "Kind": "duration",
          "Encode": "seconds",
@@ -1534,9 +1532,8 @@
        "NameInRequest": "duration",
        "Type": {
         "$id": "159",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "160",
          "Kind": "duration",
          "Encode": "ISO8601",
