@@ -116,7 +116,7 @@ export function fromSdkModelType(
             Usage: fromUsageFlags(modelType.usage),
             Deprecation: modelType.deprecation,
             Description: modelType.description,
-            DiscriminatorValue: modelType.discriminatorValue,
+            DiscriminatorValue: modelType.discriminatorValue
         } as InputModelType;
 
         models.set(modelTypeName, inputModelType);
