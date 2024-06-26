@@ -38,18 +38,6 @@
         "json-serialize-refs": "0.1.0-0",
         "@typespec/http-client-csharp":"https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest/npm/registry/@typespec/http-client-csharp/-/http-client-csharp-0.1.9-alpha.20240625.9.tgz"
     },
-    "peerDependencies": {
-        "@azure-tools/typespec-azure-core": ">=0.36.0 <1.0.0",
-        "@azure-tools/typespec-client-generator-core": ">=0.36.0 <1.0.0",
-        "@azure-tools/typespec-azure-resource-manager": ">=0.36.0 <1.0.0",
-        "@azure-tools/typespec-azure-rulesets": ">=0.36.0 <1.0.0",
-        "@azure-tools/typespec-autorest": ">=0.42.1 <1.0.0",
-        "@typespec/compiler": ">=0.50.0 <1.0.0",
-        "@typespec/http": ">=0.50.0 <1.0.0",
-        "@typespec/openapi": ">=0.50.0 <1.0.0",
-        "@typespec/rest": ">=0.50.0 <1.0.0",
-        "@typespec/versioning": ">=0.50.0 <1.0.0"
-    },
     "devDependencies": {
         "@eslint/js": "^9.2.0",
         "@types/lodash.isequal": "^4.5.6",
