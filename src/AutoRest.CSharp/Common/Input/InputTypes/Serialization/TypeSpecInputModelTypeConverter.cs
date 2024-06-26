@@ -141,7 +141,7 @@ namespace AutoRest.CSharp.Common.Input
                         return propertyType switch
                         {
                             InputPrimitiveType { Kind: InputPrimitiveTypeKind.Bytes } => InputPrimitiveType.Stream,
-                            InputListType listType => new InputListType(listType.Name, ConvertPropertyType(listType.ElementType), listType.IsEmbeddingsVector),
+                            InputListType listType => new InputListType(listType.Name, ConvertPropertyType(listType.ValueType), listType.IsEmbeddingsVector),
                             InputDictionaryType dictionaryType => new InputDictionaryType(dictionaryType.Name, dictionaryType.KeyType, ConvertPropertyType(dictionaryType.ValueType)),
                             InputNullableType nullableType => new InputNullableType(ConvertPropertyType(nullableType.Type)),
                             _ => propertyType
