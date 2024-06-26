@@ -131,7 +131,7 @@ namespace MgmtMockAndSample.Models
             IList<string> destinationPorts = default;
             string translatedAddress = default;
             string translatedPort = default;
-            IList<string> sourceIpGroups = default;
+            IList<string> sourceIPGroups = default;
             string translatedFqdn = default;
             string name = default;
             string description = default;
@@ -218,7 +218,7 @@ namespace MgmtMockAndSample.Models
                     {
                         array.Add(item.GetString());
                     }
-                    sourceIpGroups = array;
+                    sourceIPGroups = array;
                     continue;
                 }
                 if (property.NameEquals("translatedFqdn"u8))
@@ -291,7 +291,7 @@ namespace MgmtMockAndSample.Models
                 destinationPorts ?? new ChangeTrackingList<string>(),
                 translatedAddress,
                 translatedPort,
-                sourceIpGroups ?? new ChangeTrackingList<string>(),
+                sourceIPGroups ?? new ChangeTrackingList<string>(),
                 translatedFqdn);
         }
     }
