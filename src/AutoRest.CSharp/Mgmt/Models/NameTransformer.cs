@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         private static NameTransformer? _instance;
         public static NameTransformer Instance => _instance ??= new NameTransformer(Configuration.MgmtConfiguration.AcronymMapping);
 
-        private IDictionary<string, AcronymMappingTarget> _acronymMapping = new Dictionary<string, AcronymMappingTarget>
+        private IReadOnlyDictionary<string, AcronymMappingTarget> _acronymMapping = new Dictionary<string, AcronymMappingTarget>
         {
             { "CPU", new AcronymMappingTarget("Cpu") },
             { "CPUs", new AcronymMappingTarget("Cpus") },
@@ -58,9 +58,10 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <param name="acronymMapping"></param>
         internal NameTransformer(IReadOnlyDictionary<string, AcronymMappingTarget> acronymMapping)
         {
-            foreach (var (key, value) in acronymMapping)
+            // Keep the behavior for swagger configuration
+            if (acronymMapping.Count > 0)
             {
-                _acronymMapping[key] = value;
+                _acronymMapping = acronymMapping;
             }
             _regex = BuildRegex(_acronymMapping.Keys);
             _wordCache = new ConcurrentDictionary<string, AppliedCache>();
