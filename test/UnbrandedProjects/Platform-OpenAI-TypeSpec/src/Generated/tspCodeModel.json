@@ -1105,9 +1105,8 @@
      "Description": "A list of messages comprising the conversation so far.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).",
      "Type": {
       "$id": "182",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "183",
        "Kind": "Model",
        "Name": "ChatCompletionRequestMessage",
@@ -1207,9 +1206,8 @@
      "Description": "A list of functions the model may generate JSON inputs for.",
      "Type": {
       "$id": "197",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "198",
        "Kind": "Model",
        "Name": "ChatCompletionFunctions",
@@ -1253,8 +1251,7 @@
           "Usage": "Input",
           "InheritedDictionaryType": {
            "$id": "205",
-           "Kind": "Dictionary",
-           "Name": "Dictionary",
+           "Kind": "dict",
            "KeyType": {
             "$id": "206",
             "Kind": "string"
@@ -1412,9 +1409,8 @@
         },
         {
          "$id": "233",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "234",
           "Kind": "string"
          }
@@ -1467,8 +1463,7 @@
       "Kind": "nullable",
       "Type": {
        "$id": "243",
-       "Kind": "Dictionary",
-       "Name": "Dictionary",
+       "Kind": "dict",
        "KeyType": {
         "$id": "244",
         "Kind": "string"
@@ -1595,9 +1590,8 @@
      "Description": "A list of chat completion choices. Can be more than one if `n` is greater than 1.",
      "Type": {
       "$id": "262",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "263",
        "Kind": "Model",
        "Name": "CreateChatCompletionResponseChoice",
@@ -2102,9 +2096,8 @@
      "Description": "The compiled results file ID(s) for the fine-tuning job. You can retrieve the results with the\n[Files API](/docs/api-reference/files/retrieve-contents).",
      "Type": {
       "$id": "337",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "338",
        "Kind": "string"
       }
@@ -2223,9 +2216,8 @@
      "Description": "",
      "Type": {
       "$id": "356",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "304"
       }
      },
@@ -2272,9 +2264,8 @@
      "Description": "",
      "Type": {
       "$id": "363",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "364",
        "Kind": "Model",
        "Name": "FineTuningJobEvent",
@@ -2393,31 +2384,27 @@
         },
         {
          "$id": "381",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "382",
           "Kind": "string"
          }
         },
         {
          "$id": "383",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "384",
           "Kind": "safeint"
          }
         },
         {
          "$id": "385",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "386",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "ValueType": {
            "$id": "387",
            "Kind": "safeint"
           }
@@ -2528,9 +2515,8 @@
         },
         {
          "$id": "407",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "408",
           "Kind": "string"
          }
@@ -2583,8 +2569,7 @@
       "Kind": "nullable",
       "Type": {
        "$id": "417",
-       "Kind": "Dictionary",
-       "Name": "Dictionary",
+       "Kind": "dict",
        "KeyType": {
         "$id": "418",
         "Kind": "string"
@@ -2744,9 +2729,8 @@
      "Description": "The list of completion choices the model generated for the input.",
      "Type": {
       "$id": "445",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "446",
        "Kind": "Model",
        "Name": "CreateCompletionResponseChoice",
@@ -2799,9 +2783,8 @@
              "Description": "",
              "Type": {
               "$id": "455",
-              "Kind": "Array",
-              "Name": "Array",
-              "ElementType": {
+              "Kind": "array",
+              "ValueType": {
                "$id": "456",
                "Kind": "string"
               }
@@ -2816,9 +2799,8 @@
              "Description": "",
              "Type": {
               "$id": "458",
-              "Kind": "Array",
-              "Name": "Array",
-              "ElementType": {
+              "Kind": "array",
+              "ValueType": {
                "$id": "459",
                "Kind": "float64"
               }
@@ -2833,12 +2815,10 @@
              "Description": "",
              "Type": {
               "$id": "461",
-              "Kind": "Array",
-              "Name": "Array",
-              "ElementType": {
+              "Kind": "array",
+              "ValueType": {
                "$id": "462",
-               "Kind": "Dictionary",
-               "Name": "Dictionary",
+               "Kind": "dict",
                "KeyType": {
                 "$id": "463",
                 "Kind": "string"
@@ -2859,9 +2839,8 @@
              "Description": "",
              "Type": {
               "$id": "466",
-              "Kind": "Array",
-              "Name": "Array",
-              "ElementType": {
+              "Kind": "array",
+              "ValueType": {
                "$id": "467",
                "Kind": "safeint"
               }
@@ -3055,9 +3034,8 @@
      "Description": "description: A list of edit choices. Can be more than one if `n` is greater than 1.",
      "Type": {
       "$id": "493",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "494",
        "Kind": "Model",
        "Name": "CreateEditResponseChoice",
@@ -3155,31 +3133,27 @@
        },
        {
         "$id": "506",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "507",
          "Kind": "string"
         }
        },
        {
         "$id": "508",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "509",
          "Kind": "safeint"
         }
        },
        {
         "$id": "510",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "511",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "512",
           "Kind": "safeint"
          }
@@ -3246,9 +3220,8 @@
      "Description": "The list of embeddings generated by the model.",
      "Type": {
       "$id": "521",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "522",
        "Kind": "Model",
        "Name": "Embedding",
@@ -3291,9 +3264,8 @@
          "Description": "The embedding vector, which is a list of floats. The length of vector depends on the model as\\\r\nlisted in the [embedding guide](/docs/guides/embeddings).",
          "Type": {
           "$id": "528",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "ValueType": {
            "$id": "529",
            "Kind": "float64"
           }
@@ -3382,9 +3354,8 @@
      "Description": "",
      "Type": {
       "$id": "540",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "541",
        "Kind": "Model",
        "Name": "OpenAIFile",
@@ -3762,9 +3733,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "602",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "603",
         "Kind": "float64"
        }
@@ -4021,9 +3991,8 @@
      "Description": "The list of files used for training.",
      "Type": {
       "$id": "643",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "541"
       }
      },
@@ -4037,9 +4006,8 @@
      "Description": "The list of files used for validation.",
      "Type": {
       "$id": "645",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "541"
       }
      },
@@ -4053,9 +4021,8 @@
      "Description": "The compiled results files for the fine-tuning job.",
      "Type": {
       "$id": "647",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "541"
       }
      },
@@ -4069,9 +4036,8 @@
      "Description": "The list of events that have been observed in the lifecycle of the FineTune job.",
      "Type": {
       "$id": "649",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "650",
        "Kind": "Model",
        "Name": "FineTuneEvent",
@@ -4171,9 +4137,8 @@
      "Description": "",
      "Type": {
       "$id": "664",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "607"
       }
      },
@@ -4208,9 +4173,8 @@
      "Description": "",
      "Type": {
       "$id": "669",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "650"
       }
      },
@@ -4245,9 +4209,8 @@
      "Description": "",
      "Type": {
       "$id": "674",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "675",
        "Kind": "Model",
        "Name": "Model",
@@ -4478,9 +4441,8 @@
      "Description": "",
      "Type": {
       "$id": "709",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "710",
        "Kind": "Model",
        "Name": "Image",
@@ -4732,9 +4694,8 @@
        },
        {
         "$id": "747",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "748",
          "Kind": "string"
         }
@@ -4795,9 +4756,8 @@
      "Description": "A list of moderation objects.",
      "Type": {
       "$id": "756",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "757",
        "Kind": "Model",
        "Name": "CreateModerationResponseResult",
