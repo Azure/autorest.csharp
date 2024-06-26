@@ -98,14 +98,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
         Logger.getInstance().info(
             `${tspOutputFileName} was copied to ${generatedFolder}`
         );
-        /*
-        fs.rename(resolvePath(outputFolder, tspOutputFileName), resolvePath(generatedFolder, tspOutputFileName), (err) => {
-            if (err) throw err;
-            Logger.getInstance().info(`${tspOutputFileName} was moved to ${generatedFolder}`);
-        });
-        */
         /* clean up */
-        //deleteFile(resolvePath(outputFolder, tspOutputFileName));
         deleteFile(resolvePath(outputFolder, configurationFileName));
         const csProjFile = resolvePath(
             outputFolder.endsWith("src")
