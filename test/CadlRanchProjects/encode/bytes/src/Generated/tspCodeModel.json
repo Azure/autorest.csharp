@@ -10,7 +10,6 @@
    "Name": "DefaultBytesProperty",
    "Namespace": "Encode.Bytes",
    "Usage": "RoundTrip",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "3",
@@ -20,7 +19,6 @@
      "Type": {
       "$id": "4",
       "Kind": "bytes",
-      "IsNullable": false,
       "Encode": "base64"
      },
      "IsRequired": true,
@@ -34,7 +32,6 @@
    "Name": "Base64BytesProperty",
    "Namespace": "Encode.Bytes",
    "Usage": "RoundTrip",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "6",
@@ -44,7 +41,6 @@
      "Type": {
       "$id": "7",
       "Kind": "bytes",
-      "IsNullable": false,
       "Encode": "base64"
      },
      "IsRequired": true,
@@ -58,7 +54,6 @@
    "Name": "Base64urlBytesProperty",
    "Namespace": "Encode.Bytes",
    "Usage": "RoundTrip",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "9",
@@ -68,7 +63,6 @@
      "Type": {
       "$id": "10",
       "Kind": "bytes",
-      "IsNullable": false,
       "Encode": "base64url"
      },
      "IsRequired": true,
@@ -82,7 +76,6 @@
    "Name": "Base64urlArrayBytesProperty",
    "Namespace": "Encode.Bytes",
    "Usage": "RoundTrip",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "12",
@@ -91,15 +84,12 @@
      "Description": "",
      "Type": {
       "$id": "13",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "14",
        "Kind": "bytes",
-       "IsNullable": false,
        "Encode": "base64url"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -158,6 +148,7 @@
      "$id": "22",
      "Name": "default",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -169,7 +160,6 @@
        "Type": {
         "$id": "24",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64"
        },
        "Location": "Query",
@@ -232,6 +222,7 @@
      "$id": "29",
      "Name": "base64",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -243,7 +234,6 @@
        "Type": {
         "$id": "31",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64"
        },
        "Location": "Query",
@@ -306,6 +296,7 @@
      "$id": "36",
      "Name": "base64url",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -317,7 +308,6 @@
        "Type": {
         "$id": "38",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64url"
        },
        "Location": "Query",
@@ -380,6 +370,7 @@
      "$id": "43",
      "Name": "base64urlArray",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -390,15 +381,12 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "45",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "46",
          "Kind": "bytes",
-         "IsNullable": false,
          "Encode": "base64url"
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -478,6 +466,7 @@
      "$id": "53",
      "Name": "default",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -584,6 +573,7 @@
      "$id": "62",
      "Name": "base64",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -690,6 +680,7 @@
      "$id": "71",
      "Name": "base64url",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -796,6 +787,7 @@
      "$id": "80",
      "Name": "base64urlArray",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -919,6 +911,7 @@
      "$id": "91",
      "Name": "default",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -930,7 +923,6 @@
        "Type": {
         "$id": "93",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64"
        },
        "Location": "Header",
@@ -993,6 +985,7 @@
      "$id": "98",
      "Name": "base64",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1004,7 +997,6 @@
        "Type": {
         "$id": "100",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64"
        },
        "Location": "Header",
@@ -1067,6 +1059,7 @@
      "$id": "105",
      "Name": "base64url",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1078,7 +1071,6 @@
        "Type": {
         "$id": "107",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64url"
        },
        "Location": "Header",
@@ -1141,6 +1133,7 @@
      "$id": "112",
      "Name": "base64urlArray",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1151,15 +1144,12 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "114",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "115",
          "Kind": "bytes",
-         "IsNullable": false,
          "Encode": "base64url"
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1239,6 +1229,7 @@
      "$id": "122",
      "Name": "default",
      "ResourceName": "RequestBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1250,7 +1241,6 @@
        "Type": {
         "$id": "124",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64"
        },
        "Location": "Body",
@@ -1342,6 +1332,7 @@
      "$id": "132",
      "Name": "octetStream",
      "ResourceName": "RequestBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1349,17 +1340,15 @@
       {
        "$id": "133",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "134",
         "Kind": "constant",
         "ValueType": {
          "$id": "135",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "application/octet-stream",
-        "IsNullable": false
+        "Value": "application/octet-stream"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1385,7 +1374,6 @@
        "Type": {
         "$id": "138",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64"
        },
        "Location": "Body",
@@ -1451,6 +1439,7 @@
      "$id": "143",
      "Name": "customContentType",
      "ResourceName": "RequestBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1458,17 +1447,15 @@
       {
        "$id": "144",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "145",
         "Kind": "constant",
         "ValueType": {
          "$id": "146",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "image/png",
-        "IsNullable": false
+        "Value": "image/png"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1494,7 +1481,6 @@
        "Type": {
         "$id": "149",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64"
        },
        "Location": "Body",
@@ -1560,6 +1546,7 @@
      "$id": "154",
      "Name": "base64",
      "ResourceName": "RequestBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1571,7 +1558,6 @@
        "Type": {
         "$id": "156",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64"
        },
        "Location": "Body",
@@ -1663,6 +1649,7 @@
      "$id": "164",
      "Name": "base64url",
      "ResourceName": "RequestBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1674,7 +1661,6 @@
        "Type": {
         "$id": "166",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64url"
        },
        "Location": "Body",
@@ -1783,6 +1769,7 @@
      "$id": "176",
      "Name": "default",
      "ResourceName": "ResponseBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1823,7 +1810,6 @@
        "BodyType": {
         "$id": "181",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64"
        },
        "BodyMediaType": "Json",
@@ -1846,6 +1832,7 @@
      "$id": "182",
      "Name": "octetStream",
      "ResourceName": "ResponseBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1886,7 +1873,6 @@
        "BodyType": {
         "$id": "187",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64"
        },
        "BodyMediaType": "Json",
@@ -1909,6 +1895,7 @@
      "$id": "188",
      "Name": "customContentType",
      "ResourceName": "ResponseBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -1949,7 +1936,6 @@
        "BodyType": {
         "$id": "193",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64"
        },
        "BodyMediaType": "Json",
@@ -1972,6 +1958,7 @@
      "$id": "194",
      "Name": "base64",
      "ResourceName": "ResponseBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -2012,7 +1999,6 @@
        "BodyType": {
         "$id": "199",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64"
        },
        "BodyMediaType": "Json",
@@ -2035,6 +2021,7 @@
      "$id": "200",
      "Name": "base64url",
      "ResourceName": "ResponseBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "17"
@@ -2075,7 +2062,6 @@
        "BodyType": {
         "$id": "205",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64url"
        },
        "BodyMediaType": "Json",

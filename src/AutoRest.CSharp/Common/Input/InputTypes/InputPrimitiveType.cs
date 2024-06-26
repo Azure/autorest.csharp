@@ -3,21 +3,19 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputPrimitiveType(InputPrimitiveTypeKind Kind, bool IsNullable) : InputType(Kind.ToString(), IsNullable)
+internal record InputPrimitiveType(InputPrimitiveTypeKind Kind) : InputType(Kind.ToString())
 {
-    internal InputPrimitiveType(InputPrimitiveTypeKind kind, string? encode, bool isNullable) : this(kind, isNullable)
+    internal InputPrimitiveType(InputPrimitiveTypeKind kind, string? encode) : this(kind)
     {
         Encode = encode;
     }
 
     public string? Encode { get; init; }
 
-    private InputPrimitiveType(InputPrimitiveTypeKind kind) : this(kind, false) { }
-
     public static InputPrimitiveType AzureLocation { get; } = new(InputPrimitiveTypeKind.AzureLocation);
     public static InputPrimitiveType Boolean { get; } = new(InputPrimitiveTypeKind.Boolean);
-    public static InputPrimitiveType Base64 { get; } = new(InputPrimitiveTypeKind.Bytes, BytesKnownEncoding.Base64, false);
-    public static InputPrimitiveType Base64Url { get; } = new(InputPrimitiveTypeKind.Bytes, BytesKnownEncoding.Base64Url, false);
+    public static InputPrimitiveType Base64 { get; } = new(InputPrimitiveTypeKind.Bytes, BytesKnownEncoding.Base64);
+    public static InputPrimitiveType Base64Url { get; } = new(InputPrimitiveTypeKind.Bytes, BytesKnownEncoding.Base64Url);
     public static InputPrimitiveType Char { get; } = new(InputPrimitiveTypeKind.Char);
     public static InputPrimitiveType ContentType { get; } = new(InputPrimitiveTypeKind.ContentType);
     public static InputPrimitiveType PlainDate { get; } = new(InputPrimitiveTypeKind.PlainDate);

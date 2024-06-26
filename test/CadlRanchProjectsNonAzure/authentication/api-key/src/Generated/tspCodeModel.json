@@ -10,7 +10,6 @@
    "Name": "InvalidAuth",
    "Namespace": "Authentication.ApiKey",
    "Usage": "Output",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "3",
@@ -19,8 +18,7 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -39,6 +37,7 @@
      "Name": "valid",
      "ResourceName": "ApiKey",
      "Description": "Check whether client is authenticated",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "7",
@@ -120,6 +119,7 @@
      "Name": "invalid",
      "ResourceName": "ApiKey",
      "Description": "Check whether client is authenticated.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"

@@ -11,8 +11,7 @@
    "Name": "OperationState",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -48,8 +47,7 @@
    ],
    "Namespace": "Azure.Core.Foundations",
    "Description": "Enum describing allowed operation states.",
-   "IsExtensible": false,
-   "IsNullable": false,
+   "IsExtensible": true,
    "Usage": "Output"
   },
   {
@@ -58,8 +56,7 @@
    "Name": "Versions",
    "ValueType": {
     "$id": "10",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -72,7 +69,6 @@
    "Namespace": "_Specs_.Azure.Core.Lro.Standard",
    "Description": "The API version.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -84,7 +80,6 @@
    "Namespace": "_Specs_.Azure.Core.Lro.Standard",
    "Usage": "RoundTrip",
    "Description": "Details about a user.",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "13",
@@ -93,8 +88,7 @@
      "Description": "The name of user.",
      "Type": {
       "$id": "14",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -106,8 +100,7 @@
      "Description": "The role of user",
      "Type": {
       "$id": "16",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -121,7 +114,6 @@
    "Namespace": "Azure.Core.Foundations",
    "Usage": "Output",
    "Description": "Provides status details for long running operations.",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "18",
@@ -130,8 +122,7 @@
      "Description": "The unique ID of the operation.",
      "Type": {
       "$id": "19",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -159,7 +150,6 @@
       "Namespace": "Azure.Core.Foundations",
       "Usage": "Output",
       "Description": "The error object.",
-      "IsNullable": false,
       "Properties": [
        {
         "$id": "23",
@@ -168,8 +158,7 @@
         "Description": "One of a server-defined set of error codes.",
         "Type": {
          "$id": "24",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -181,8 +170,7 @@
         "Description": "A human-readable representation of the error.",
         "Type": {
          "$id": "26",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -194,8 +182,7 @@
         "Description": "The target of the error.",
         "Type": {
          "$id": "28",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -207,12 +194,10 @@
         "Description": "An array of details about specific errors that led to this reported error.",
         "Type": {
          "$id": "30",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$ref": "22"
-         },
-         "IsNullable": false
+         }
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -229,7 +214,6 @@
          "Namespace": "Azure.Core.Foundations",
          "Usage": "Output",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-         "IsNullable": false,
          "Properties": [
           {
            "$id": "33",
@@ -238,8 +222,7 @@
            "Description": "One of a server-defined set of error codes.",
            "Type": {
             "$id": "34",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -280,7 +263,6 @@
    "Namespace": "Azure.Core",
    "Usage": "Output",
    "Description": "Provides status details for long running operations.",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "37",
@@ -289,8 +271,7 @@
      "Description": "The unique ID of the operation.",
      "Type": {
       "$id": "38",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -329,7 +310,6 @@
       "Namespace": "_Specs_.Azure.Core.Lro.Standard",
       "Usage": "Output",
       "Description": "The exported user data.",
-      "IsNullable": false,
       "Properties": [
        {
         "$id": "43",
@@ -338,8 +318,7 @@
         "Description": "The name of user.",
         "Type": {
          "$id": "44",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -351,8 +330,7 @@
         "Description": "The exported URI.",
         "Type": {
          "$id": "46",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -374,7 +352,6 @@
    "Namespace": "Azure.Core.Foundations",
    "Usage": "Output",
    "Description": "Provides status details for long running operations.",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "48",
@@ -383,8 +360,7 @@
      "Description": "The unique ID of the operation.",
      "Type": {
       "$id": "49",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -437,6 +413,7 @@
      "ResourceName": "User",
      "Summary": "Adds a user or replaces a user's fields.",
      "Description": "Creates or replaces a User",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "55",
@@ -474,8 +451,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "60",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -503,8 +479,7 @@
        "Description": "The name of user.",
        "Type": {
         "$id": "64",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -605,8 +580,7 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "74",
-          "Kind": "url",
-          "IsNullable": false
+          "Kind": "url"
          }
         }
        ],
@@ -632,8 +606,7 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "77",
-          "Kind": "url",
-          "IsNullable": false
+          "Kind": "url"
          }
         }
        ],
@@ -674,6 +647,7 @@
      "ResourceName": "User",
      "Summary": "Deletes a user.",
      "Description": "Deletes a User",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "55"
@@ -685,8 +659,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "82",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -708,8 +681,7 @@
        "Description": "The name of user.",
        "Type": {
         "$id": "84",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -766,8 +738,7 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "90",
-          "Kind": "url",
-          "IsNullable": false
+          "Kind": "url"
          }
         }
        ],
@@ -802,6 +773,7 @@
      "ResourceName": "Standard",
      "Summary": "Exports a user.",
      "Description": "Exports a User",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "55"
@@ -813,8 +785,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "95",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -836,8 +807,7 @@
        "Description": "The name of user.",
        "Type": {
         "$id": "97",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -856,8 +826,7 @@
        "Description": "The format of the data.",
        "Type": {
         "$id": "99",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -914,8 +883,7 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "105",
-          "Kind": "url",
-          "IsNullable": false
+          "Kind": "url"
          }
         }
        ],

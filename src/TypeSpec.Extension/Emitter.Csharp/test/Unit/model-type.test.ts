@@ -3,7 +3,6 @@ import assert, { deepStrictEqual, strictEqual } from "assert";
 import { beforeEach, describe, it } from "vitest";
 import { createModel } from "../../src/lib/client-model-builder.js";
 import { InputModelProperty } from "../../src/type/input-model-property.js";
-import { InputTypeKind } from "../../src/type/input-type-kind.js";
 import {
     createEmitterContext,
     createEmitterTestHost,
@@ -68,13 +67,12 @@ op test(@body input: Pet): Pet;
                 SerializedName: "kind",
                 Type: {
                     Kind: "string",
-                    IsNullable: false,
                     Encode: undefined
                 },
                 IsRequired: true,
                 IsReadOnly: false,
                 IsDiscriminator: true,
-                Description: "Discriminator",
+                Description: "Discriminator property for Pet.",
                 FlattenedNames: undefined
             } as InputModelProperty,
             discriminatorProperty
@@ -168,7 +166,6 @@ op test(@body input: Pet): Pet;
                     Deprecated: undefined,
                     ValueType: {
                         Kind: "string",
-                        IsNullable: false,
                         Encode: undefined
                     },
                     Values: [
@@ -184,7 +181,6 @@ op test(@body input: Pet): Pet;
                         }
                     ],
                     IsExtensible: false,
-                    IsNullable: false,
                     Usage: "RoundTrip"
                 },
                 IsRequired: true,
@@ -297,7 +293,6 @@ op test(@body input: Pet): Pet;
                     Description: "The pet kind",
                     ValueType: {
                         Kind: "string",
-                        IsNullable: false,
                         Encode: undefined
                     },
                     Values: [
@@ -313,7 +308,6 @@ op test(@body input: Pet): Pet;
                         }
                     ],
                     IsExtensible: false,
-                    IsNullable: false,
                     Usage: "RoundTrip"
                 },
                 IsRequired: true,
@@ -477,8 +471,7 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
         deepStrictEqual(fooModel, extendsFooModel.AdditionalProperties);
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Array,
-                Name: InputTypeKind.Array,
+                Kind: "array",
                 ElementType: fooModel,
                 IsNullable: false
             },
@@ -594,8 +587,7 @@ op op5(@body body: IsFooArray): IsFooArray;
         deepStrictEqual(fooModel, isFooModel.AdditionalProperties);
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Array,
-                Name: InputTypeKind.Array,
+                Kind: "array",
                 ElementType: fooModel,
                 IsNullable: false
             },

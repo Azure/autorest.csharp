@@ -61,8 +61,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 null,
                 null,
                 new Dictionary<string, InputModelType>(),
-                null,
-                false)
+                null)
             {
                 IsPropertyBag = true
             };

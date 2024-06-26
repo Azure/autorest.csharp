@@ -138,8 +138,8 @@ namespace _Type.Union
         /// <summary> Send. </summary>
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/StringExtensible.xml" path="doc/members/member[@name='SendAsync(GetResponseProp4,CancellationToken)']/*" />
-        public virtual async Task<Response> SendAsync(GetResponseProp4 prop, CancellationToken cancellationToken = default)
+        /// <include file="Docs/StringExtensible.xml" path="doc/members/member[@name='SendAsync(GetResponseProp3,CancellationToken)']/*" />
+        public virtual async Task<Response> SendAsync(GetResponseProp3 prop, CancellationToken cancellationToken = default)
         {
             SendRequest8 sendRequest8 = new SendRequest8(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -150,8 +150,8 @@ namespace _Type.Union
         /// <summary> Send. </summary>
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/StringExtensible.xml" path="doc/members/member[@name='Send(GetResponseProp4,CancellationToken)']/*" />
-        public virtual Response Send(GetResponseProp4 prop, CancellationToken cancellationToken = default)
+        /// <include file="Docs/StringExtensible.xml" path="doc/members/member[@name='Send(GetResponseProp3,CancellationToken)']/*" />
+        public virtual Response Send(GetResponseProp3 prop, CancellationToken cancellationToken = default)
         {
             SendRequest8 sendRequest8 = new SendRequest8(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -169,7 +169,7 @@ namespace _Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SendAsync(GetResponseProp4,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SendAsync(GetResponseProp3,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -208,7 +208,7 @@ namespace _Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Send(GetResponseProp4,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Send(GetResponseProp3,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

@@ -138,7 +138,7 @@ namespace _Type.Union.Samples
         {
             StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
-            Response response = client.Send(GetResponseProp4.B);
+            Response response = client.Send(GetResponseProp3.B);
         }
 
         [Test]
@@ -147,7 +147,7 @@ namespace _Type.Union.Samples
         {
             StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
-            Response response = await client.SendAsync(GetResponseProp4.B);
+            Response response = await client.SendAsync(GetResponseProp3.B);
         }
 
         [Test]
@@ -186,7 +186,7 @@ namespace _Type.Union.Samples
         {
             StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
-            Response response = client.Send(GetResponseProp4.B);
+            Response response = client.Send(GetResponseProp3.B);
         }
 
         [Test]
@@ -195,7 +195,7 @@ namespace _Type.Union.Samples
         {
             StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
-            Response response = await client.SendAsync(GetResponseProp4.B);
+            Response response = await client.SendAsync(GetResponseProp3.B);
         }
     }
 }

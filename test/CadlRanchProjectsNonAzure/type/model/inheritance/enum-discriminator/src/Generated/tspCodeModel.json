@@ -9,8 +9,7 @@
    "Name": "DogKind",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -23,7 +22,6 @@
    "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
    "Description": "extensible enum type for discriminator",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -32,8 +30,7 @@
    "Name": "SnakeKind",
    "ValueType": {
     "$id": "6",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -46,7 +43,6 @@
    "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
    "Description": "fixed enum type for discriminator",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   }
  ],
@@ -58,7 +54,6 @@
    "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
    "Usage": "RoundTrip",
    "Description": "Test extensible enum type for discriminator",
-   "IsNullable": false,
    "DiscriminatorProperty": {
     "$id": "9",
     "Name": "kind",
@@ -82,8 +77,7 @@
      "Description": "Weight of the dog",
      "Type": {
       "$id": "11",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -98,7 +92,6 @@
      "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
      "Usage": "RoundTrip",
      "Description": "Golden dog model",
-     "IsNullable": false,
      "DiscriminatorValue": "golden",
      "BaseModel": {
       "$ref": "8"
@@ -114,11 +107,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "16",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "golden",
-        "IsNullable": false
+        "Value": "golden"
        },
        "IsRequired": true,
        "IsReadOnly": false,
@@ -138,7 +129,6 @@
    "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
    "Usage": "RoundTrip",
    "Description": "Test fixed enum type for discriminator",
-   "IsNullable": false,
    "DiscriminatorProperty": {
     "$id": "18",
     "Name": "kind",
@@ -162,8 +152,7 @@
      "Description": "Length of the snake",
      "Type": {
       "$id": "20",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -178,7 +167,6 @@
      "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
      "Usage": "RoundTrip",
      "Description": "Cobra model",
-     "IsNullable": false,
      "DiscriminatorValue": "cobra",
      "BaseModel": {
       "$ref": "17"
@@ -194,11 +182,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "25",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "cobra",
-        "IsNullable": false
+        "Value": "cobra"
        },
        "IsRequired": true,
        "IsReadOnly": false,
@@ -223,6 +209,7 @@
      "Name": "getExtensibleModel",
      "ResourceName": "EnumDiscriminator",
      "Description": "Receive model with extensible enum discriminator type.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "28",
@@ -310,6 +297,7 @@
      "Name": "putExtensibleModel",
      "ResourceName": "EnumDiscriminator",
      "Description": "Send model with extensible enum discriminator type.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "28"
@@ -412,6 +400,7 @@
      "Name": "getExtensibleModelMissingDiscriminator",
      "ResourceName": "EnumDiscriminator",
      "Description": "Get a model omitting the discriminator.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "28"
@@ -473,6 +462,7 @@
      "Name": "getExtensibleModelWrongDiscriminator",
      "ResourceName": "EnumDiscriminator",
      "Description": "Get a model containing discriminator value never defined.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "28"
@@ -534,6 +524,7 @@
      "Name": "getFixedModel",
      "ResourceName": "EnumDiscriminator",
      "Description": "Receive model with fixed enum discriminator type.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "28"
@@ -595,6 +586,7 @@
      "Name": "putFixedModel",
      "ResourceName": "EnumDiscriminator",
      "Description": "Send model with fixed enum discriminator type.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "28"
@@ -697,6 +689,7 @@
      "Name": "getFixedModelMissingDiscriminator",
      "ResourceName": "EnumDiscriminator",
      "Description": "Get a model omitting the discriminator.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "28"
@@ -758,6 +751,7 @@
      "Name": "getFixedModelWrongDiscriminator",
      "ResourceName": "EnumDiscriminator",
      "Description": "Get a model containing discriminator value never defined.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "28"

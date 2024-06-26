@@ -10,7 +10,6 @@
    "Name": "PngImageAsJson",
    "Namespace": "Payload.ContentNegotiation.DifferentBody",
    "Usage": "Output",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "3",
@@ -20,7 +19,6 @@
      "Type": {
       "$id": "4",
       "Kind": "bytes",
-      "IsNullable": false,
       "Encode": "base64"
      },
      "IsRequired": true,
@@ -80,6 +78,7 @@
      "$id": "12",
      "Name": "getAvatarAsPng",
      "ResourceName": "SameBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"
@@ -120,7 +119,6 @@
        "BodyType": {
         "$id": "17",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64"
        },
        "BodyMediaType": "Json",
@@ -143,6 +141,7 @@
      "$id": "18",
      "Name": "getAvatarAsJpeg",
      "ResourceName": "SameBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"
@@ -183,7 +182,6 @@
        "BodyType": {
         "$id": "23",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64"
        },
        "BodyMediaType": "Json",
@@ -223,6 +221,7 @@
      "$id": "26",
      "Name": "getAvatarAsPng",
      "ResourceName": "DifferentBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"
@@ -263,7 +262,6 @@
        "BodyType": {
         "$id": "31",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64"
        },
        "BodyMediaType": "Json",
@@ -286,6 +284,7 @@
      "$id": "32",
      "Name": "getAvatarAsJson",
      "ResourceName": "DifferentBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"

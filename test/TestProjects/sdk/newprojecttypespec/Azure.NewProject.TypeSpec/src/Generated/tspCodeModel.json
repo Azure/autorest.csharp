@@ -9,8 +9,7 @@
    "Name": "Thing_requiredLiteralString",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -23,7 +22,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -32,8 +30,7 @@
    "Name": "Thing_requiredLiteralInt",
    "ValueType": {
     "$id": "6",
-    "Kind": "int32",
-    "IsNullable": false
+    "Kind": "int32"
    },
    "Values": [
     {
@@ -46,7 +43,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -55,8 +51,7 @@
    "Name": "Thing_requiredLiteralFloat",
    "ValueType": {
     "$id": "9",
-    "Kind": "float32",
-    "IsNullable": false
+    "Kind": "float32"
    },
    "Values": [
     {
@@ -69,7 +64,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -78,8 +72,7 @@
    "Name": "Thing_optionalLiteralString",
    "ValueType": {
     "$id": "12",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -92,7 +85,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -101,8 +93,7 @@
    "Name": "Thing_optionalLiteralInt",
    "ValueType": {
     "$id": "15",
-    "Kind": "int32",
-    "IsNullable": false
+    "Kind": "int32"
    },
    "Values": [
     {
@@ -115,7 +106,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -124,8 +114,7 @@
    "Name": "Thing_optionalLiteralFloat",
    "ValueType": {
     "$id": "18",
-    "Kind": "float32",
-    "IsNullable": false
+    "Kind": "float32"
    },
    "Values": [
     {
@@ -138,7 +127,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -147,8 +135,7 @@
    "Name": "StringFixedEnum",
    "ValueType": {
     "$id": "21",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -170,7 +157,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "Simple enum",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -179,8 +165,7 @@
    "Name": "StringExtensibleEnum",
    "ValueType": {
     "$id": "26",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -202,7 +187,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "Extensible enum",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -211,8 +195,7 @@
    "Name": "IntExtensibleEnum",
    "ValueType": {
     "$id": "31",
-    "Kind": "int32",
-    "IsNullable": false
+    "Kind": "int32"
    },
    "Values": [
     {
@@ -234,7 +217,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "Int based extensible enum",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -243,8 +225,7 @@
    "Name": "FloatExtensibleEnum",
    "ValueType": {
     "$id": "36",
-    "Kind": "float32",
-    "IsNullable": false
+    "Kind": "float32"
    },
    "Values": [
     {
@@ -266,7 +247,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "Float based extensible enum",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -275,8 +255,7 @@
    "Name": "FloatFixedEnum",
    "ValueType": {
     "$id": "41",
-    "Kind": "float32",
-    "IsNullable": false
+    "Kind": "float32"
    },
    "Values": [
     {
@@ -298,7 +277,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "float fixed enum",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -307,8 +285,7 @@
    "Name": "IntFixedEnum",
    "ValueType": {
     "$id": "46",
-    "Kind": "int32",
-    "IsNullable": false
+    "Kind": "int32"
    },
    "Values": [
     {
@@ -330,7 +307,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "int fixed enum",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -339,8 +315,7 @@
    "Name": "DaysOfWeekExtensibleEnum",
    "ValueType": {
     "$id": "51",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -381,7 +356,6 @@
    ],
    "Namespace": "NewProjectTypeSpec",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -393,7 +367,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Usage": "RoundTrip",
    "Description": "A model with a few properties of literal types",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "60",
@@ -402,8 +375,7 @@
      "Description": "name of the Thing",
      "Type": {
       "$id": "61",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -420,27 +392,21 @@
       "VariantTypes": [
        {
         "$id": "64",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        {
         "$id": "65",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "66",
-         "Kind": "string",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "string"
+        }
        },
        {
         "$id": "67",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        }
-      ],
-      "IsNullable": false
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -456,8 +422,7 @@
       "ValueType": {
        "$ref": "2"
       },
-      "Value": "accept",
-      "IsNullable": false
+      "Value": "accept"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -473,8 +438,7 @@
       "ValueType": {
        "$ref": "5"
       },
-      "Value": 123,
-      "IsNullable": false
+      "Value": 123
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -490,8 +454,7 @@
       "ValueType": {
        "$ref": "8"
       },
-      "Value": 1.23,
-      "IsNullable": false
+      "Value": 1.23
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -506,11 +469,9 @@
       "Kind": "constant",
       "ValueType": {
        "$id": "76",
-       "Kind": "boolean",
-       "IsNullable": false
+       "Kind": "boolean"
       },
-      "Value": false,
-      "IsNullable": false
+      "Value": false
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -526,8 +487,7 @@
       "ValueType": {
        "$ref": "11"
       },
-      "Value": "reject",
-      "IsNullable": false
+      "Value": "reject"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -543,8 +503,7 @@
       "ValueType": {
        "$ref": "14"
       },
-      "Value": 456,
-      "IsNullable": false
+      "Value": 456
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -560,8 +519,7 @@
       "ValueType": {
        "$ref": "17"
       },
-      "Value": 4.56,
-      "IsNullable": false
+      "Value": 4.56
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -576,11 +534,9 @@
       "Kind": "constant",
       "ValueType": {
        "$id": "85",
-       "Kind": "boolean",
-       "IsNullable": false
+       "Kind": "boolean"
       },
-      "Value": true,
-      "IsNullable": false
+      "Value": true
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -592,8 +548,7 @@
      "Description": "description with xml <|endoftext|>",
      "Type": {
       "$id": "87",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -607,7 +562,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Usage": "RoundTrip",
    "Description": "this is not a friendly model but with a friendly name",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "89",
@@ -616,8 +570,7 @@
      "Description": "name of the NotFriend",
      "Type": {
       "$id": "90",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -631,7 +584,6 @@
    "Namespace": "NewProjectTypeSpec",
    "Usage": "RoundTrip",
    "Description": "this is a roundtrip model",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "92",
@@ -640,8 +592,7 @@
      "Description": "Required string, illustrating a reference type property.",
      "Type": {
       "$id": "93",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -653,8 +604,7 @@
      "Description": "Required int, illustrating a value type property.",
      "Type": {
       "$id": "95",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -666,12 +616,10 @@
      "Description": "Required collection of enums",
      "Type": {
       "$id": "97",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "20"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -683,17 +631,14 @@
      "Description": "Required dictionary of enums",
      "Type": {
       "$id": "99",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "100",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "ValueType": {
        "$ref": "25"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -727,12 +672,10 @@
      "Description": "this is a collection of int based extensible enum",
      "Type": {
       "$id": "104",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "30"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -755,12 +698,10 @@
      "Description": "this is a collection of float based extensible enum",
      "Type": {
       "$id": "107",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "35"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -783,12 +724,10 @@
      "Description": "this is a collection of float based fixed enum",
      "Type": {
       "$id": "110",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "40"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -811,12 +750,10 @@
      "Description": "this is a collection of int based fixed enum",
      "Type": {
       "$id": "113",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "45"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -839,8 +776,7 @@
      "Description": "required unknown",
      "Type": {
       "$id": "116",
-      "Kind": "any",
-      "IsNullable": false
+      "Kind": "any"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -852,8 +788,7 @@
      "Description": "optional unknown",
      "Type": {
       "$id": "118",
-      "Kind": "any",
-      "IsNullable": false
+      "Kind": "any"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -865,19 +800,15 @@
      "Description": "required record of unknown",
      "Type": {
       "$id": "120",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "121",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "ValueType": {
        "$id": "122",
-       "Kind": "any",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Kind": "any"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -889,19 +820,15 @@
      "Description": "optional record of unknown",
      "Type": {
       "$id": "124",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "125",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "ValueType": {
        "$id": "126",
-       "Kind": "any",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Kind": "any"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -913,19 +840,15 @@
      "Description": "required readonly record of unknown",
      "Type": {
       "$id": "128",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "129",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "ValueType": {
        "$id": "130",
-       "Kind": "any",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Kind": "any"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -937,19 +860,15 @@
      "Description": "optional readonly record of unknown",
      "Type": {
       "$id": "132",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "133",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "ValueType": {
        "$id": "134",
-       "Kind": "any",
-       "IsNullable": false
-      },
-      "IsNullable": false
+       "Kind": "any"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": true
@@ -968,6 +887,7 @@
      "Name": "topAction",
      "ResourceName": "NewProjectTypeSpec",
      "Description": "top level method",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "137",
@@ -995,12 +915,10 @@
        "Type": {
         "$id": "140",
         "Kind": "utcDateTime",
-        "IsNullable": false,
         "Encode": "rfc3339",
         "WireType": {
          "$id": "141",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         }
        },
        "Location": "Path",
@@ -1070,6 +988,7 @@
      "Name": "topAction2",
      "ResourceName": "NewProjectTypeSpec",
      "Description": "top level method2",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "137"
@@ -1131,6 +1050,7 @@
      "Name": "patchAction",
      "ResourceName": "NewProjectTypeSpec",
      "Description": "top level patch",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "137"
@@ -1238,6 +1158,7 @@
      "Name": "anonymousBody",
      "ResourceName": "NewProjectTypeSpec",
      "Description": "body parameter without body decorator",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "137"
@@ -1346,6 +1267,7 @@
      "Name": "friendlyModel",
      "ResourceName": "NewProjectTypeSpec",
      "Description": "Model can have its friendly name",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "137"
@@ -1453,6 +1375,7 @@
      "$id": "178",
      "Name": "addTimeHeader",
      "ResourceName": "NewProjectTypeSpec",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "137"
@@ -1464,12 +1387,10 @@
        "Type": {
         "$id": "180",
         "Kind": "utcDateTime",
-        "IsNullable": false,
         "Encode": "rfc7231",
         "WireType": {
          "$id": "181",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         }
        },
        "Location": "Header",
@@ -1565,6 +1486,7 @@
      "Name": "sayHi",
      "ResourceName": "Demo",
      "Description": "Return hi",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "137"
@@ -1575,8 +1497,7 @@
        "NameInRequest": "head-parameter",
        "Type": {
         "$id": "192",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1594,8 +1515,7 @@
        "NameInRequest": "queryParameter",
        "Type": {
         "$id": "194",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1613,8 +1533,7 @@
        "NameInRequest": "optionalQuery",
        "Type": {
         "$id": "196",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1700,6 +1619,7 @@
      "Name": "helloAgain",
      "ResourceName": "Demo2",
      "Description": "Return hi again",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "137"
@@ -1710,8 +1630,7 @@
        "NameInRequest": "p1",
        "Type": {
         "$id": "205",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1726,17 +1645,15 @@
       {
        "$id": "206",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "207",
         "Kind": "constant",
         "ValueType": {
          "$id": "208",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "text/plain",
-        "IsNullable": false
+        "Value": "text/plain"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1761,8 +1678,7 @@
        "NameInRequest": "p2",
        "Type": {
         "$id": "211",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1851,6 +1767,7 @@
      "Name": "noContentType",
      "ResourceName": "Demo2",
      "Description": "Return hi again",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "137"
@@ -1861,8 +1778,7 @@
        "NameInRequest": "p1",
        "Type": {
         "$id": "219",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1880,8 +1796,7 @@
        "NameInRequest": "p2",
        "Type": {
         "$id": "221",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1996,6 +1911,7 @@
      "Name": "createLiteral",
      "ResourceName": "Demo2",
      "Description": "Create with literal value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "137"
@@ -2103,6 +2019,7 @@
      "Name": "helloLiteral",
      "ResourceName": "Demo2",
      "Description": "Send literal parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "137"
@@ -2116,11 +2033,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "242",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "test",
-        "IsNullable": false
+        "Value": "test"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -2148,11 +2063,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "246",
-         "Kind": "int32",
-         "IsNullable": false
+         "Kind": "int32"
         },
-        "Value": 123,
-        "IsNullable": false
+        "Value": 123
        },
        "Location": "Path",
        "DefaultValue": {
@@ -2180,11 +2093,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "250",
-         "Kind": "boolean",
-         "IsNullable": false
+         "Kind": "boolean"
         },
-        "Value": true,
-        "IsNullable": false
+        "Value": true
        },
        "Location": "Query",
        "DefaultValue": {
@@ -2277,6 +2188,7 @@
      "Name": "getUnknownValue",
      "ResourceName": "EnumTest",
      "Description": "create extensible enum",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "137"
@@ -2395,6 +2307,7 @@
      "Name": "internalProtocol",
      "ResourceName": "ProtocolAndConvenient",
      "Description": "When set protocol false and convenient true, then the protocol method should be internal",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "137"
@@ -2502,6 +2415,7 @@
      "Name": "stillConvenient",
      "ResourceName": "ProtocolAndConvenient",
      "Description": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "137"

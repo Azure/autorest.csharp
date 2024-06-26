@@ -6,11 +6,10 @@
   {
    "$id": "2",
    "Kind": "enum",
-   "Name": "GetResponseProp5",
+   "Name": "GetResponseProp4",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -31,17 +30,15 @@
    ],
    "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
    "$id": "7",
    "Kind": "enum",
-   "Name": "GetResponseProp4",
+   "Name": "GetResponseProp3",
    "ValueType": {
     "$id": "8",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -57,7 +54,6 @@
    ],
    "Namespace": "",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -66,8 +62,7 @@
    "Name": "StringExtensibleNamedUnion",
    "ValueType": {
     "$id": "12",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -83,17 +78,15 @@
    ],
    "Namespace": "Type.Union",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
    "$id": "15",
    "Kind": "enum",
-   "Name": "GetResponseProp3",
+   "Name": "GetResponseProp2",
    "ValueType": {
     "$id": "16",
-    "Kind": "int32",
-    "IsNullable": false
+    "Kind": "int32"
    },
    "Values": [
     {
@@ -114,7 +107,6 @@
    ],
    "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -123,8 +115,7 @@
    "Name": "GetResponseProp1",
    "ValueType": {
     "$id": "21",
-    "Kind": "float32",
-    "IsNullable": false
+    "Kind": "float32"
    },
    "Values": [
     {
@@ -145,7 +136,6 @@
    ],
    "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -154,8 +144,7 @@
    "Name": "EnumsOnlyCasesLr",
    "ValueType": {
     "$id": "26",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -181,7 +170,6 @@
    ],
    "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -190,8 +178,7 @@
    "Name": "EnumsOnlyCasesUd",
    "ValueType": {
     "$id": "32",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -207,7 +194,6 @@
    ],
    "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   }
  ],
@@ -218,7 +204,6 @@
    "Name": "GetResponse9",
    "Namespace": "Type.Union",
    "Usage": "Output",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "36",
@@ -239,7 +224,6 @@
    "Name": "SendRequest9",
    "Namespace": "Type.Union",
    "Usage": "Input",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "38",
@@ -260,7 +244,6 @@
    "Name": "GetResponse8",
    "Namespace": "Type.Union",
    "Usage": "Output",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "40",
@@ -281,7 +264,6 @@
    "Name": "SendRequest8",
    "Namespace": "Type.Union",
    "Usage": "Input",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "42",
@@ -302,7 +284,6 @@
    "Name": "GetResponse7",
    "Namespace": "Type.Union",
    "Usage": "Output",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "44",
@@ -323,7 +304,6 @@
    "Name": "SendRequest7",
    "Namespace": "Type.Union",
    "Usage": "Input",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "46",
@@ -344,7 +324,6 @@
    "Name": "GetResponse6",
    "Namespace": "Type.Union",
    "Usage": "Output",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "48",
@@ -365,7 +344,6 @@
    "Name": "SendRequest6",
    "Namespace": "Type.Union",
    "Usage": "Input",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "50",
@@ -386,7 +364,6 @@
    "Name": "GetResponse5",
    "Namespace": "Type.Union",
    "Usage": "Output",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "52",
@@ -407,7 +384,6 @@
    "Name": "SendRequest5",
    "Namespace": "Type.Union",
    "Usage": "Input",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "54",
@@ -428,7 +404,6 @@
    "Name": "GetResponse4",
    "Namespace": "Type.Union",
    "Usage": "Output",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "56",
@@ -446,7 +421,6 @@
         "Name": "Cat",
         "Namespace": "Type.Union",
         "Usage": "RoundTrip",
-        "IsNullable": false,
         "Properties": [
          {
           "$id": "59",
@@ -455,8 +429,7 @@
           "Description": "",
           "Type": {
            "$id": "60",
-           "Kind": "string",
-           "IsNullable": false
+           "Kind": "string"
           },
           "IsRequired": true,
           "IsReadOnly": false
@@ -469,7 +442,6 @@
         "Name": "Dog",
         "Namespace": "Type.Union",
         "Usage": "RoundTrip",
-        "IsNullable": false,
         "Properties": [
          {
           "$id": "62",
@@ -478,16 +450,14 @@
           "Description": "",
           "Type": {
            "$id": "63",
-           "Kind": "string",
-           "IsNullable": false
+           "Kind": "string"
           },
           "IsRequired": true,
           "IsReadOnly": false
          }
         ]
        }
-      ],
-      "IsNullable": false
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -506,7 +476,6 @@
    "Name": "SendRequest4",
    "Namespace": "Type.Union",
    "Usage": "Input",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "65",
@@ -524,8 +493,7 @@
        {
         "$ref": "61"
        }
-      ],
-      "IsNullable": false
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -538,7 +506,6 @@
    "Name": "GetResponse3",
    "Namespace": "Type.Union",
    "Usage": "Output",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "68",
@@ -551,7 +518,6 @@
       "Name": "EnumsOnlyCases",
       "Namespace": "Type.Union",
       "Usage": "RoundTrip",
-      "IsNullable": false,
       "Properties": [
        {
         "$id": "70",
@@ -591,7 +557,6 @@
    "Name": "SendRequest3",
    "Namespace": "Type.Union",
    "Usage": "Input",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "73",
@@ -612,7 +577,6 @@
    "Name": "GetResponse2",
    "Namespace": "Type.Union",
    "Usage": "Output",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "75",
@@ -625,7 +589,6 @@
       "Name": "StringAndArrayCases",
       "Namespace": "Type.Union",
       "Usage": "RoundTrip",
-      "IsNullable": false,
       "Properties": [
        {
         "$id": "77",
@@ -639,22 +602,17 @@
          "VariantTypes": [
           {
            "$id": "79",
-           "Kind": "string",
-           "IsNullable": false
+           "Kind": "string"
           },
           {
            "$id": "80",
-           "Kind": "Array",
-           "Name": "Array",
-           "ElementType": {
+           "Kind": "array",
+           "ValueType": {
             "$id": "81",
-            "Kind": "string",
-            "IsNullable": false
-           },
-           "IsNullable": false
+            "Kind": "string"
+           }
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -671,22 +629,17 @@
          "VariantTypes": [
           {
            "$id": "84",
-           "Kind": "string",
-           "IsNullable": false
+           "Kind": "string"
           },
           {
            "$id": "85",
-           "Kind": "Array",
-           "Name": "Array",
-           "ElementType": {
+           "Kind": "array",
+           "ValueType": {
             "$id": "86",
-            "Kind": "string",
-            "IsNullable": false
-           },
-           "IsNullable": false
+            "Kind": "string"
+           }
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -707,7 +660,6 @@
    "Name": "SendRequest2",
    "Namespace": "Type.Union",
    "Usage": "Input",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "88",
@@ -728,7 +680,6 @@
    "Name": "GetResponse1",
    "Namespace": "Type.Union",
    "Usage": "Output",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "90",
@@ -741,7 +692,6 @@
       "Name": "MixedLiteralsCases",
       "Namespace": "Type.Union",
       "Usage": "RoundTrip",
-      "IsNullable": false,
       "Properties": [
        {
         "$id": "92",
@@ -751,54 +701,45 @@
         "Type": {
          "$id": "93",
          "Kind": "union",
-         "Name": "MixedLiteralsCasesStringLiteral",
+         "Name": "MixedLiteralsCasesStringLiteral1",
          "VariantTypes": [
           {
            "$id": "94",
            "Kind": "constant",
            "ValueType": {
             "$id": "95",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
-           "Value": "a",
-           "IsNullable": false
+           "Value": "a"
           },
           {
            "$id": "96",
            "Kind": "constant",
            "ValueType": {
             "$id": "97",
-            "Kind": "int32",
-            "IsNullable": false
+            "Kind": "int32"
            },
-           "Value": 2,
-           "IsNullable": false
+           "Value": 2
           },
           {
            "$id": "98",
            "Kind": "constant",
            "ValueType": {
             "$id": "99",
-            "Kind": "float32",
-            "IsNullable": false
+            "Kind": "float32"
            },
-           "Value": 3.3,
-           "IsNullable": false
+           "Value": 3.3
           },
           {
            "$id": "100",
            "Kind": "constant",
            "ValueType": {
             "$id": "101",
-            "Kind": "boolean",
-            "IsNullable": false
+            "Kind": "boolean"
            },
-           "Value": true,
-           "IsNullable": false
+           "Value": true
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -811,54 +752,45 @@
         "Type": {
          "$id": "103",
          "Kind": "union",
-         "Name": "MixedLiteralsCasesStringLiteral",
+         "Name": "MixedLiteralsCasesStringLiteral1",
          "VariantTypes": [
           {
            "$id": "104",
            "Kind": "constant",
            "ValueType": {
             "$id": "105",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
-           "Value": "a",
-           "IsNullable": false
+           "Value": "a"
           },
           {
            "$id": "106",
            "Kind": "constant",
            "ValueType": {
             "$id": "107",
-            "Kind": "int32",
-            "IsNullable": false
+            "Kind": "int32"
            },
-           "Value": 2,
-           "IsNullable": false
+           "Value": 2
           },
           {
            "$id": "108",
            "Kind": "constant",
            "ValueType": {
             "$id": "109",
-            "Kind": "float32",
-            "IsNullable": false
+            "Kind": "float32"
            },
-           "Value": 3.3,
-           "IsNullable": false
+           "Value": 3.3
           },
           {
            "$id": "110",
            "Kind": "constant",
            "ValueType": {
             "$id": "111",
-            "Kind": "boolean",
-            "IsNullable": false
+            "Kind": "boolean"
            },
-           "Value": true,
-           "IsNullable": false
+           "Value": true
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -871,54 +803,45 @@
         "Type": {
          "$id": "113",
          "Kind": "union",
-         "Name": "MixedLiteralsCasesStringLiteral",
+         "Name": "MixedLiteralsCasesStringLiteral1",
          "VariantTypes": [
           {
            "$id": "114",
            "Kind": "constant",
            "ValueType": {
             "$id": "115",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
-           "Value": "a",
-           "IsNullable": false
+           "Value": "a"
           },
           {
            "$id": "116",
            "Kind": "constant",
            "ValueType": {
             "$id": "117",
-            "Kind": "int32",
-            "IsNullable": false
+            "Kind": "int32"
            },
-           "Value": 2,
-           "IsNullable": false
+           "Value": 2
           },
           {
            "$id": "118",
            "Kind": "constant",
            "ValueType": {
             "$id": "119",
-            "Kind": "float32",
-            "IsNullable": false
+            "Kind": "float32"
            },
-           "Value": 3.3,
-           "IsNullable": false
+           "Value": 3.3
           },
           {
            "$id": "120",
            "Kind": "constant",
            "ValueType": {
             "$id": "121",
-            "Kind": "boolean",
-            "IsNullable": false
+            "Kind": "boolean"
            },
-           "Value": true,
-           "IsNullable": false
+           "Value": true
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -931,54 +854,45 @@
         "Type": {
          "$id": "123",
          "Kind": "union",
-         "Name": "MixedLiteralsCasesStringLiteral",
+         "Name": "MixedLiteralsCasesStringLiteral1",
          "VariantTypes": [
           {
            "$id": "124",
            "Kind": "constant",
            "ValueType": {
             "$id": "125",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
-           "Value": "a",
-           "IsNullable": false
+           "Value": "a"
           },
           {
            "$id": "126",
            "Kind": "constant",
            "ValueType": {
             "$id": "127",
-            "Kind": "int32",
-            "IsNullable": false
+            "Kind": "int32"
            },
-           "Value": 2,
-           "IsNullable": false
+           "Value": 2
           },
           {
            "$id": "128",
            "Kind": "constant",
            "ValueType": {
             "$id": "129",
-            "Kind": "float32",
-            "IsNullable": false
+            "Kind": "float32"
            },
-           "Value": 3.3,
-           "IsNullable": false
+           "Value": 3.3
           },
           {
            "$id": "130",
            "Kind": "constant",
            "ValueType": {
             "$id": "131",
-            "Kind": "boolean",
-            "IsNullable": false
+            "Kind": "boolean"
            },
-           "Value": true,
-           "IsNullable": false
+           "Value": true
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -999,7 +913,6 @@
    "Name": "SendRequest1",
    "Namespace": "Type.Union",
    "Usage": "Input",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "133",
@@ -1020,7 +933,6 @@
    "Name": "GetResponse",
    "Namespace": "Type.Union",
    "Usage": "Output",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "135",
@@ -1033,7 +945,6 @@
       "Name": "MixedTypesCases",
       "Namespace": "Type.Union",
       "Usage": "RoundTrip",
-      "IsNullable": false,
       "Properties": [
        {
         "$id": "137",
@@ -1053,24 +964,19 @@
            "Kind": "constant",
            "ValueType": {
             "$id": "140",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
-           "Value": "a",
-           "IsNullable": false
+           "Value": "a"
           },
           {
            "$id": "141",
-           "Kind": "int32",
-           "IsNullable": false
+           "Kind": "int32"
           },
           {
            "$id": "142",
-           "Kind": "boolean",
-           "IsNullable": false
+           "Kind": "boolean"
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -1093,24 +999,19 @@
            "Kind": "constant",
            "ValueType": {
             "$id": "146",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
-           "Value": "a",
-           "IsNullable": false
+           "Value": "a"
           },
           {
            "$id": "147",
-           "Kind": "int32",
-           "IsNullable": false
+           "Kind": "int32"
           },
           {
            "$id": "148",
-           "Kind": "boolean",
-           "IsNullable": false
+           "Kind": "boolean"
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -1133,24 +1034,19 @@
            "Kind": "constant",
            "ValueType": {
             "$id": "152",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
-           "Value": "a",
-           "IsNullable": false
+           "Value": "a"
           },
           {
            "$id": "153",
-           "Kind": "int32",
-           "IsNullable": false
+           "Kind": "int32"
           },
           {
            "$id": "154",
-           "Kind": "boolean",
-           "IsNullable": false
+           "Kind": "boolean"
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -1173,24 +1069,19 @@
            "Kind": "constant",
            "ValueType": {
             "$id": "158",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
-           "Value": "a",
-           "IsNullable": false
+           "Value": "a"
           },
           {
            "$id": "159",
-           "Kind": "int32",
-           "IsNullable": false
+           "Kind": "int32"
           },
           {
            "$id": "160",
-           "Kind": "boolean",
-           "IsNullable": false
+           "Kind": "boolean"
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -1202,9 +1093,8 @@
         "Description": "This should be receive/send 4 element with Cat, \"a\", int, and boolean",
         "Type": {
          "$id": "162",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "163",
           "Kind": "union",
           "Name": "MixedTypesCasesModel",
@@ -1217,26 +1107,20 @@
             "Kind": "constant",
             "ValueType": {
              "$id": "165",
-             "Kind": "string",
-             "IsNullable": false
+             "Kind": "string"
             },
-            "Value": "a",
-            "IsNullable": false
+            "Value": "a"
            },
            {
             "$id": "166",
-            "Kind": "int32",
-            "IsNullable": false
+            "Kind": "int32"
            },
            {
             "$id": "167",
-            "Kind": "boolean",
-            "IsNullable": false
+            "Kind": "boolean"
            }
-          ],
-          "IsNullable": false
-         },
-         "IsNullable": false
+          ]
+         }
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -1257,7 +1141,6 @@
    "Name": "SendRequest",
    "Namespace": "Type.Union",
    "Usage": "Input",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "169",
@@ -1324,6 +1207,7 @@
      "$id": "177",
      "Name": "get",
      "ResourceName": "StringsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -1384,6 +1268,7 @@
      "$id": "182",
      "Name": "send",
      "ResourceName": "StringsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -1501,6 +1386,7 @@
      "$id": "193",
      "Name": "get",
      "ResourceName": "StringExtensible",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -1561,6 +1447,7 @@
      "$id": "198",
      "Name": "send",
      "ResourceName": "StringExtensible",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -1678,6 +1565,7 @@
      "$id": "209",
      "Name": "get",
      "ResourceName": "StringExtensibleNamed",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -1738,6 +1626,7 @@
      "$id": "214",
      "Name": "send",
      "ResourceName": "StringExtensibleNamed",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -1855,6 +1744,7 @@
      "$id": "225",
      "Name": "get",
      "ResourceName": "IntsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -1915,6 +1805,7 @@
      "$id": "230",
      "Name": "send",
      "ResourceName": "IntsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2032,6 +1923,7 @@
      "$id": "241",
      "Name": "get",
      "ResourceName": "FloatsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2092,6 +1984,7 @@
      "$id": "246",
      "Name": "send",
      "ResourceName": "FloatsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2209,6 +2102,7 @@
      "$id": "257",
      "Name": "get",
      "ResourceName": "ModelsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2269,6 +2163,7 @@
      "$id": "262",
      "Name": "send",
      "ResourceName": "ModelsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2386,6 +2281,7 @@
      "$id": "273",
      "Name": "get",
      "ResourceName": "EnumsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2446,6 +2342,7 @@
      "$id": "278",
      "Name": "send",
      "ResourceName": "EnumsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2563,6 +2460,7 @@
      "$id": "289",
      "Name": "get",
      "ResourceName": "StringAndArray",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2623,6 +2521,7 @@
      "$id": "294",
      "Name": "send",
      "ResourceName": "StringAndArray",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2740,6 +2639,7 @@
      "$id": "305",
      "Name": "get",
      "ResourceName": "MixedLiterals",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2800,6 +2700,7 @@
      "$id": "310",
      "Name": "send",
      "ResourceName": "MixedLiterals",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2917,6 +2818,7 @@
      "$id": "321",
      "Name": "get",
      "ResourceName": "MixedTypes",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2977,6 +2879,7 @@
      "$id": "326",
      "Name": "send",
      "ResourceName": "MixedTypes",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"

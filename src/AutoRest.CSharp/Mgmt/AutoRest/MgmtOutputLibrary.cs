@@ -20,6 +20,7 @@ using AutoRest.CSharp.Utilities;
 using OutputResourceData = AutoRest.CSharp.Mgmt.Output.ResourceData;
 using Azure.Core;
 using System.Runtime.CompilerServices;
+using AutoRest.CSharp.Common.Input.InputTypes;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {
@@ -139,7 +140,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (parameter.Location != RequestLocation.Body)
                             continue;
 
-                        IncrementCount(usageCounts, parameter.Type.Name);
+                        IncrementCount(usageCounts, parameter.Type.GetImplementType().Name);
                     }
                     foreach (var response in operation.Responses)
                     {
@@ -147,7 +148,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (responseSchema is null)
                             continue;
 
-                        IncrementCount(usageCounts, responseSchema.Name);
+                        IncrementCount(usageCounts, responseSchema.GetImplementType().Name);
                     }
                 }
             }
@@ -164,7 +165,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     if (bodyParam is null)
                         continue;
 
-                    if (!usageCounts.TryGetValue(bodyParam.Type.Name, out var count))
+                    if (!usageCounts.TryGetValue(bodyParam.Type.GetImplementType().Name, out var count))
                         continue;
 
                     // get the request path and operation set
@@ -210,7 +211,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (param.Location != RequestLocation.Body)
                             continue;
 
-                        if (param.Type is not InputModelType inputModel)
+                        if (param.Type.GetImplementType() is not InputModelType inputModel)
                             continue;
 
                         string originalName = param.Name;
@@ -362,8 +363,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     "Unknown", //TODO: do we need to support extensible enum / int values?
                     null,
                     new Dictionary<string, InputModelType>(),
-                    null,
-                    false)
+                    null)
                 {
                     IsUnknownDiscriminatorModel = true,
                 };
@@ -785,7 +785,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var rawRequestPathToResourceData = new Dictionary<string, ResourceData>();
             foreach ((var schema, var provider) in ResourceSchemaMap.Value)
             {
-                if (ResourceDataSchemaNameToOperationSets.TryGetValue(schema.Name, out var operationSets))
+                if (ResourceDataSchemaNameToOperationSets.TryGetValue(schema.GetImplementType().Name, out var operationSets))
                 {
                     // we are iterating over the ResourceSchemaMap, the value can only be [ResourceData]s
                     var resourceData = (ResourceData)provider;
@@ -877,12 +877,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             InputModelType inputModel => (MgmtReferenceType.IsPropertyReferenceType(inputModel) || MgmtReferenceType.IsTypeReferenceType(inputModel) || MgmtReferenceType.IsReferenceType(inputModel))
                 ? new MgmtReferenceType(inputModel)
                 : new MgmtObjectType(inputModel, defaultDerivedType: defaultDerivedType),
+            InputNullableType nullableType => BuildModel(nullableType.Type, defaultDerivedType),
             _ => throw new NotImplementedException($"Unhandled schema type {inputType.GetType()} with name {inputType.Name}")
         };
 
         private TypeProvider BuildResourceData(InputType inputType, MgmtObjectType? defaultDerivedType)
         {
-            if (inputType is InputModelType inputModel)
+            if (inputType.GetImplementType() is InputModelType inputModel)
             {
                 return new ResourceData(inputModel, defaultDerivedType: defaultDerivedType);
             }

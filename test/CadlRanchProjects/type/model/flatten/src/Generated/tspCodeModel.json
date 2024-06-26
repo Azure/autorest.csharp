@@ -11,7 +11,6 @@
    "Namespace": "Type.Model.Flatten",
    "Usage": "RoundTrip",
    "Description": "This is the model with one level of flattening.",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "3",
@@ -20,8 +19,7 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -33,8 +31,7 @@
      "Description": "",
      "Type": {
       "$id": "6",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -50,8 +47,7 @@
      "Description": "",
      "Type": {
       "$id": "8",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -69,7 +65,6 @@
    "Namespace": "Type.Model.Flatten",
    "Usage": "RoundTrip",
    "Description": "This is the model with two levels of flattening.",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "10",
@@ -78,8 +73,7 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -91,8 +85,7 @@
      "Description": "",
      "Type": {
       "$id": "13",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -108,8 +101,7 @@
      "Description": "",
      "Type": {
       "$id": "15",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -126,8 +118,7 @@
      "Description": "",
      "Type": {
       "$id": "17",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -146,7 +137,6 @@
    "Namespace": "Type.Model.Flatten",
    "Usage": "RoundTrip",
    "Description": "This is the child model to be flattened.",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "19",
@@ -155,8 +145,7 @@
      "Description": "",
      "Type": {
       "$id": "20",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -168,8 +157,7 @@
      "Description": "",
      "Type": {
       "$id": "22",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -183,7 +171,6 @@
    "Namespace": "Type.Model.Flatten",
    "Usage": "RoundTrip",
    "Description": "This is the child model to be flattened. And it has flattened property as well.",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "24",
@@ -192,8 +179,7 @@
      "Description": "",
      "Type": {
       "$id": "25",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -205,8 +191,7 @@
      "Description": "",
      "Type": {
       "$id": "27",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -222,8 +207,7 @@
      "Description": "",
      "Type": {
       "$id": "29",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -245,6 +229,7 @@
      "$id": "31",
      "Name": "putFlattenModel",
      "ResourceName": "Flatten",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "32",
@@ -377,6 +362,7 @@
      "$id": "44",
      "Name": "putNestedFlattenModel",
      "ResourceName": "Flatten",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "32"

@@ -11,7 +11,6 @@
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
    "Usage": "RoundTrip",
    "Description": "This is base model for polymorphic single level inheritance with a discriminator.",
-   "IsNullable": false,
    "DiscriminatorProperty": {
     "$id": "3",
     "Name": "kind",
@@ -19,8 +18,7 @@
     "Description": "Discriminator",
     "Type": {
      "$id": "4",
-     "Kind": "string",
-     "IsNullable": false
+     "Kind": "string"
     },
     "IsRequired": true,
     "IsReadOnly": false,
@@ -37,8 +35,7 @@
      "Description": "",
      "Type": {
       "$id": "6",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -53,7 +50,6 @@
      "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
      "Usage": "RoundTrip",
      "Description": "The second level model in polymorphic single level inheritance.",
-     "IsNullable": false,
      "DiscriminatorValue": "seagull",
      "BaseModel": {
       "$ref": "2"
@@ -69,11 +65,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "11",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "seagull",
-        "IsNullable": false
+        "Value": "seagull"
        },
        "IsRequired": true,
        "IsReadOnly": false,
@@ -88,7 +82,6 @@
      "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
      "Usage": "RoundTrip",
      "Description": "The second level model in polymorphic single level inheritance.",
-     "IsNullable": false,
      "DiscriminatorValue": "sparrow",
      "BaseModel": {
       "$ref": "2"
@@ -104,11 +97,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "15",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "sparrow",
-        "IsNullable": false
+        "Value": "sparrow"
        },
        "IsRequired": true,
        "IsReadOnly": false,
@@ -123,7 +114,6 @@
      "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
      "Usage": "RoundTrip",
      "Description": "The second level model in polymorphic single level inheritance.",
-     "IsNullable": false,
      "DiscriminatorValue": "goose",
      "BaseModel": {
       "$ref": "2"
@@ -139,11 +129,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "19",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "goose",
-        "IsNullable": false
+        "Value": "goose"
        },
        "IsRequired": true,
        "IsReadOnly": false,
@@ -158,7 +146,6 @@
      "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
      "Usage": "RoundTrip",
      "Description": "The second level model in polymorphic single levels inheritance which contains references to other polymorphic instances.",
-     "IsNullable": false,
      "DiscriminatorValue": "eagle",
      "BaseModel": {
       "$ref": "2"
@@ -174,11 +161,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "23",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "eagle",
-        "IsNullable": false
+        "Value": "eagle"
        },
        "IsRequired": true,
        "IsReadOnly": false,
@@ -191,12 +176,10 @@
        "Description": "",
        "Type": {
         "$id": "25",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$ref": "2"
-        },
-        "IsNullable": false
+        }
        },
        "IsRequired": false,
        "IsReadOnly": false
@@ -208,17 +191,14 @@
        "Description": "",
        "Type": {
         "$id": "27",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "28",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$ref": "2"
-        },
-        "IsNullable": false
+        }
        },
        "IsRequired": false,
        "IsReadOnly": false
@@ -257,16 +237,14 @@
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
    "Usage": "Output",
    "Description": "Define a base class in the legacy way. Discriminator property is not explicitly defined in the model.",
-   "IsNullable": false,
    "DiscriminatorProperty": {
     "$id": "31",
     "Name": "kind",
     "SerializedName": "kind",
-    "Description": "Discriminator",
+    "Description": "Discriminator property for Dinosaur.",
     "Type": {
      "$id": "32",
-     "Kind": "string",
-     "IsNullable": false
+     "Kind": "string"
     },
     "IsRequired": true,
     "IsReadOnly": false,
@@ -283,8 +261,7 @@
      "Description": "",
      "Type": {
       "$id": "34",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -299,7 +276,6 @@
      "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
      "Usage": "Output",
      "Description": "The second level legacy model in polymorphic single level inheritance.",
-     "IsNullable": false,
      "DiscriminatorValue": "t-rex",
      "BaseModel": {
       "$ref": "30"
@@ -315,11 +291,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "39",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "t-rex",
-        "IsNullable": false
+        "Value": "t-rex"
        },
        "IsRequired": true,
        "IsReadOnly": false,
@@ -343,6 +317,7 @@
      "$id": "41",
      "Name": "getModel",
      "ResourceName": "SingleDiscriminator",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "42",
@@ -429,6 +404,7 @@
      "$id": "50",
      "Name": "putModel",
      "ResourceName": "SingleDiscriminator",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "42"
@@ -529,6 +505,7 @@
      "$id": "59",
      "Name": "getRecursiveModel",
      "ResourceName": "SingleDiscriminator",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "42"
@@ -589,6 +566,7 @@
      "$id": "64",
      "Name": "putRecursiveModel",
      "ResourceName": "SingleDiscriminator",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "42"
@@ -689,6 +667,7 @@
      "$id": "73",
      "Name": "getMissingDiscriminator",
      "ResourceName": "SingleDiscriminator",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "42"
@@ -749,6 +728,7 @@
      "$id": "78",
      "Name": "getWrongDiscriminator",
      "ResourceName": "SingleDiscriminator",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "42"
@@ -809,6 +789,7 @@
      "$id": "83",
      "Name": "getLegacyModel",
      "ResourceName": "SingleDiscriminator",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "42"

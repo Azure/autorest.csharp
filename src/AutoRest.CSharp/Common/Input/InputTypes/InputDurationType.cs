@@ -3,4 +3,4 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputDurationType(DurationKnownEncoding Encode, InputPrimitiveType WireType, bool IsNullable) : InputType("Duration", IsNullable);
+internal record InputDurationType(DurationKnownEncoding Encode, InputPrimitiveType WireType) : InputType("Duration");

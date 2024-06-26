@@ -9,8 +9,7 @@
    "Name": "Thing_requiredLiteralString",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -23,7 +22,6 @@
    "Namespace": "NoDocsUnbrandedTypeSpec",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Output"
   },
   {
@@ -32,8 +30,7 @@
    "Name": "Thing_requiredLiteralInt",
    "ValueType": {
     "$id": "6",
-    "Kind": "int32",
-    "IsNullable": false
+    "Kind": "int32"
    },
    "Values": [
     {
@@ -46,7 +43,6 @@
    "Namespace": "NoDocsUnbrandedTypeSpec",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Output"
   },
   {
@@ -55,8 +51,7 @@
    "Name": "Thing_requiredLiteralFloat",
    "ValueType": {
     "$id": "9",
-    "Kind": "float32",
-    "IsNullable": false
+    "Kind": "float32"
    },
    "Values": [
     {
@@ -69,7 +64,6 @@
    "Namespace": "NoDocsUnbrandedTypeSpec",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Output"
   },
   {
@@ -78,8 +72,7 @@
    "Name": "Thing_optionalLiteralString",
    "ValueType": {
     "$id": "12",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -92,7 +85,6 @@
    "Namespace": "NoDocsUnbrandedTypeSpec",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Output"
   },
   {
@@ -101,8 +93,7 @@
    "Name": "Thing_optionalLiteralInt",
    "ValueType": {
     "$id": "15",
-    "Kind": "int32",
-    "IsNullable": false
+    "Kind": "int32"
    },
    "Values": [
     {
@@ -115,7 +106,6 @@
    "Namespace": "NoDocsUnbrandedTypeSpec",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Output"
   },
   {
@@ -124,8 +114,7 @@
    "Name": "Thing_optionalLiteralFloat",
    "ValueType": {
     "$id": "18",
-    "Kind": "float32",
-    "IsNullable": false
+    "Kind": "float32"
    },
    "Values": [
     {
@@ -138,7 +127,6 @@
    "Namespace": "NoDocsUnbrandedTypeSpec",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Output"
   }
  ],
@@ -150,7 +138,6 @@
    "Namespace": "NoDocsUnbrandedTypeSpec",
    "Usage": "Output",
    "Description": "A model with a few properties of literal types",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "21",
@@ -159,8 +146,7 @@
      "Description": "name of the Thing",
      "Type": {
       "$id": "22",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -177,27 +163,21 @@
       "VariantTypes": [
        {
         "$id": "25",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        {
         "$id": "26",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "27",
-         "Kind": "string",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "string"
+        }
        },
        {
         "$id": "28",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        }
-      ],
-      "IsNullable": false
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -213,8 +193,7 @@
       "ValueType": {
        "$ref": "2"
       },
-      "Value": "accept",
-      "IsNullable": false
+      "Value": "accept"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -230,8 +209,7 @@
       "ValueType": {
        "$ref": "5"
       },
-      "Value": 123,
-      "IsNullable": false
+      "Value": 123
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -247,8 +225,7 @@
       "ValueType": {
        "$ref": "8"
       },
-      "Value": 1.23,
-      "IsNullable": false
+      "Value": 1.23
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -263,11 +240,9 @@
       "Kind": "constant",
       "ValueType": {
        "$id": "37",
-       "Kind": "boolean",
-       "IsNullable": false
+       "Kind": "boolean"
       },
-      "Value": false,
-      "IsNullable": false
+      "Value": false
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -283,8 +258,7 @@
       "ValueType": {
        "$ref": "11"
       },
-      "Value": "reject",
-      "IsNullable": false
+      "Value": "reject"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -300,8 +274,7 @@
       "ValueType": {
        "$ref": "14"
       },
-      "Value": 456,
-      "IsNullable": false
+      "Value": 456
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -317,8 +290,7 @@
       "ValueType": {
        "$ref": "17"
       },
-      "Value": 4.56,
-      "IsNullable": false
+      "Value": 4.56
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -333,11 +305,9 @@
       "Kind": "constant",
       "ValueType": {
        "$id": "46",
-       "Kind": "boolean",
-       "IsNullable": false
+       "Kind": "boolean"
       },
-      "Value": true,
-      "IsNullable": false
+      "Value": true
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -349,8 +319,7 @@
      "Description": "description with xml <|endoftext|>",
      "Type": {
       "$id": "48",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -362,33 +331,35 @@
      "Description": "optional nullable collection",
      "Type": {
       "$id": "50",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "nullable",
+      "Type": {
        "$id": "51",
-       "Kind": "int32",
-       "IsNullable": false
-      },
-      "IsNullable": true
+       "Kind": "array",
+       "ValueType": {
+        "$id": "52",
+        "Kind": "int32"
+       }
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "52",
+     "$id": "53",
      "Name": "requiredNullableList",
      "SerializedName": "requiredNullableList",
      "Description": "required nullable collection",
      "Type": {
-      "$id": "53",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "54",
-       "Kind": "int32",
-       "IsNullable": false
-      },
-      "IsNullable": true
+      "$id": "54",
+      "Kind": "nullable",
+      "Type": {
+       "$id": "55",
+       "Kind": "array",
+       "ValueType": {
+        "$id": "56",
+        "Kind": "int32"
+       }
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -398,22 +369,23 @@
  ],
  "Clients": [
   {
-   "$id": "55",
+   "$id": "57",
    "Name": "NoDocsUnbrandedTypeSpecClient",
    "Description": "This is a sample typespec project.",
    "Operations": [
     {
-     "$id": "56",
+     "$id": "58",
      "Name": "sayHi",
      "ResourceName": "NoDocsUnbrandedTypeSpec",
      "Description": "Return hi",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "57",
+       "$id": "59",
        "Name": "noTestTypeSpecUrl",
        "NameInRequest": "noTestTypeSpecUrl",
        "Type": {
-        "$id": "58",
+        "$id": "60",
         "Kind": "uri",
         "IsNullable": false
        },
@@ -428,13 +400,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "59",
+       "$id": "61",
        "Name": "headParameter",
        "NameInRequest": "head-parameter",
        "Type": {
-        "$id": "60",
-        "Kind": "string",
-        "IsNullable": false
+        "$id": "62",
+        "Kind": "string"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -447,13 +418,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "61",
+       "$id": "63",
        "Name": "queryParameter",
        "NameInRequest": "queryParameter",
        "Type": {
-        "$id": "62",
-        "Kind": "string",
-        "IsNullable": false
+        "$id": "64",
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -466,13 +436,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "63",
+       "$id": "65",
        "Name": "optionalQuery",
        "NameInRequest": "optionalQuery",
        "Type": {
-        "$id": "64",
-        "Kind": "string",
-        "IsNullable": false
+        "$id": "66",
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -485,11 +454,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "65",
+       "$id": "67",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "66",
+        "$id": "68",
         "Kind": "string",
         "IsNullable": false
        },
@@ -503,9 +472,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "67",
+        "$id": "69",
         "Type": {
-         "$ref": "66"
+         "$ref": "68"
         },
         "Value": "application/json"
        }
@@ -513,7 +482,7 @@
      ],
      "Responses": [
       {
-       "$id": "68",
+       "$id": "70",
        "StatusCodes": [
         200
        ],
@@ -538,20 +507,20 @@
     }
    ],
    "Protocol": {
-    "$id": "69"
+    "$id": "71"
    },
    "Creatable": true,
    "Parameters": [
     {
-     "$ref": "57"
+     "$ref": "59"
     }
    ]
   }
  ],
  "Auth": {
-  "$id": "70",
+  "$id": "72",
   "ApiKey": {
-   "$id": "71",
+   "$id": "73",
    "Name": "my-api-key"
   }
  }

@@ -11,8 +11,7 @@
    "Name": "ProjectKind",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -37,7 +36,6 @@
    "Namespace": "RenameGetList",
    "Description": "Represents the project kind.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "None"
   },
   {
@@ -46,8 +44,7 @@
    "Name": "Versions",
    "ValueType": {
     "$id": "8",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -58,7 +55,6 @@
    ],
    "Namespace": "RenameGetList",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -69,7 +65,6 @@
    "Name": "Project",
    "Namespace": "RenameGetList",
    "Usage": "None",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "11",
@@ -78,8 +73,7 @@
      "Description": "",
      "Type": {
       "$id": "12",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -102,8 +96,7 @@
      "Description": "The storage container name.",
      "Type": {
       "$id": "15",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -120,11 +113,9 @@
       "Namespace": "RenameGetList",
       "Usage": "None",
       "Description": "Represents the settings used to define the project behavior.",
-      "IsNullable": false,
       "AdditionalProperties": {
        "$id": "18",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Properties": []
      },
@@ -138,8 +129,7 @@
      "Description": "Whether the project would be used for multiple languages or not.",
      "Type": {
       "$id": "20",
-      "Kind": "boolean",
-      "IsNullable": false
+      "Kind": "boolean"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -151,8 +141,7 @@
      "Description": "The project description.",
      "Type": {
       "$id": "22",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -164,8 +153,7 @@
      "Description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
      "Type": {
       "$id": "24",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -178,12 +166,10 @@
      "Type": {
       "$id": "26",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "27",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -197,12 +183,10 @@
      "Type": {
       "$id": "29",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "30",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -216,12 +200,10 @@
      "Type": {
       "$id": "32",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "33",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -235,12 +217,10 @@
      "Type": {
       "$id": "35",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "36",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -258,7 +238,6 @@
    "Namespace": "Azure.Core.Foundations",
    "Usage": "None",
    "Description": "Paged collection of Project items",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "38",
@@ -267,12 +246,10 @@
      "Description": "The Project items on this page",
      "Type": {
       "$id": "39",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "10"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -284,8 +261,7 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "41",
-      "Kind": "url",
-      "IsNullable": false
+      "Kind": "url"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -298,7 +274,6 @@
    "Name": "Deployment",
    "Namespace": "RenameGetList",
    "Usage": "None",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "43",
@@ -307,8 +282,7 @@
      "Description": "",
      "Type": {
       "$id": "44",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -322,7 +296,6 @@
    "Namespace": "Azure.Core.Foundations",
    "Usage": "None",
    "Description": "Paged collection of Deployment items",
-   "IsNullable": false,
    "Properties": [
     {
      "$id": "46",
@@ -331,12 +304,10 @@
      "Description": "The Deployment items on this page",
      "Type": {
       "$id": "47",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "42"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -348,8 +319,7 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "49",
-      "Kind": "url",
-      "IsNullable": false
+      "Kind": "url"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -399,6 +369,7 @@
      "Name": "get",
      "ResourceName": "Project",
      "Description": "Gets the details of a project.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "52"
@@ -410,8 +381,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "57",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -438,8 +408,7 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "61",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -508,6 +477,7 @@
      "Name": "list",
      "ResourceName": "Project",
      "Description": "Lists the existing projects.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "52"
@@ -519,8 +489,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "68",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -614,6 +583,7 @@
      "Name": "get",
      "ResourceName": "Deployment",
      "Description": "Gets the details of a deployment.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "52"
@@ -625,8 +595,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "78",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -647,8 +616,7 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "80",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -666,8 +634,7 @@
        "NameInRequest": "deploymentName",
        "Type": {
         "$id": "82",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -736,6 +703,7 @@
      "Name": "list",
      "ResourceName": "Deployment",
      "Description": "Lists the existing deployments.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "52"
@@ -747,8 +715,7 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "89",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -769,8 +736,7 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "91",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,

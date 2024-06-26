@@ -168,7 +168,7 @@ export function getUsages(
     }
 
     for (const op of ops) {
-        if (!op.parameters.body?.parameter && op.parameters.body?.type) {
+        if (!op.parameters.body?.property && op.parameters.body?.type) {
             let effectiveBodyType = undefined;
             const affectTypes: Set<string> = new Set<string>();
             effectiveBodyType = getEffectiveSchemaType(

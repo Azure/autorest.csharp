@@ -453,7 +453,7 @@ namespace Payload.MediaType
             uri.AppendPath("/payload/media-type/string-body/sendAsText", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("content-type", "text/plain");
+            request.Headers.Add("Content-Type", "text/plain");
             request.Content = content;
             return message;
         }
@@ -481,7 +481,7 @@ namespace Payload.MediaType
             uri.AppendPath("/payload/media-type/string-body/sendAsJson", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("content-type", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
         }

@@ -4,7 +4,6 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -18,22 +17,19 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         public override InputListType? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            => reader.ReadReferenceAndResolve<InputListType>(_referenceHandler.CurrentResolver) ?? CreateListType(ref reader, null, null, options, _referenceHandler.CurrentResolver);
+            => reader.ReadReferenceAndResolve<InputListType>(_referenceHandler.CurrentResolver) ?? CreateListType(ref reader, null, options, _referenceHandler.CurrentResolver);
 
         public override void Write(Utf8JsonWriter writer, InputListType value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
 
-        public static InputListType CreateListType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
+        public static InputListType CreateListType(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver resolver)
         {
-            var isFirstProperty = id == null && name == null;
-            bool isNullable = false;
+            var isFirstProperty = id == null;
             InputType? elementType = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputListType.Name), ref name)
-                    || reader.TryReadBoolean(nameof(InputListType.IsNullable), ref isNullable)
-                    || reader.TryReadWithConverter(nameof(InputListType.ElementType), options, ref elementType);
+                    || reader.TryReadWithConverter(nameof(InputListType.ValueType), options, ref elementType);
 
                 if (!isKnownProperty)
                 {
@@ -42,7 +38,7 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             elementType = elementType ?? throw new JsonException("List must have element type");
-            var listType = new InputListType(name ?? "List", elementType, false, isNullable);
+            var listType = new InputListType("Array", elementType);
             if (id != null)
             {
                 resolver.AddReference(id, listType);

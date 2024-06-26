@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
@@ -50,8 +51,9 @@ namespace AutoRest.CSharp.Output.Builders
         public static SerializationFormat GetSerializationFormat(InputType type) => type switch
         {
             InputLiteralType literalType => GetSerializationFormat(literalType.ValueType),
-            InputListType listType => GetSerializationFormat(listType.ElementType),
+            InputListType listType => GetSerializationFormat(listType.ValueType),
             InputDictionaryType dictionaryType => GetSerializationFormat(dictionaryType.ValueType),
+            InputNullableType nullableType => GetSerializationFormat(nullableType.Type),
             InputDateTimeType dateTimeType => dateTimeType.Encode switch
             {
                 DateTimeKnownEncoding.Rfc3339 => SerializationFormat.DateTime_RFC3339,
@@ -107,11 +109,13 @@ namespace AutoRest.CSharp.Output.Builders
             {
                 case InputListType listType:
                     var wrapped = isRoot || listType.Serialization.Xml?.IsWrapped == true;
-                    var arrayElement = BuildXmlElementSerialization(listType.ElementType, type.ElementType, null, false);
+                    var arrayElement = BuildXmlElementSerialization(listType.ValueType, type.ElementType, null, false);
                     return new XmlArraySerialization(type.InitializationType, arrayElement, xmlName, wrapped);
                 case InputDictionaryType dictionaryType:
                     var valueElement = BuildXmlElementSerialization(dictionaryType.ValueType, type.ElementType, null, false);
                     return new XmlDictionarySerialization(type.InitializationType, valueElement, xmlName);
+                case InputNullableType nullableType:
+                    return BuildXmlElementSerialization(nullableType.Type, type, name, isRoot);
                 default:
                     return new XmlElementValueSerialization(xmlName, new XmlValueSerialization(type, GetSerializationFormat(inputType)));
             }
@@ -149,8 +153,9 @@ namespace AutoRest.CSharp.Output.Builders
 
             return inputType switch
             {
-                InputListType listType => new JsonArraySerialization(valueType, BuildJsonSerialization(listType.ElementType, valueType.ElementType, true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                InputListType listType => new JsonArraySerialization(valueType, BuildJsonSerialization(listType.ValueType, valueType.ElementType, true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
                 InputDictionaryType dictionaryType => new JsonDictionarySerialization(valueType, BuildJsonSerialization(dictionaryType.ValueType, valueType.ElementType, true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                InputNullableType nullableType => BuildJsonSerialization(nullableType.Type, valueType, isCollectionElement, serializationFormat),
                 _ =>
                 Configuration.AzureArm
                     ? new JsonValueSerialization(valueType, serializationFormat, valueType.IsNullable || (isCollectionElement && !valueType.IsValueType), IsManagedServiceIdentityV3(inputType, valueType) ? JsonSerializationOptions.UseManagedServiceIdentityV3 : JsonSerializationOptions.None)
@@ -287,7 +292,7 @@ namespace AutoRest.CSharp.Output.Builders
                 name,
                 memberValueExpression,
                 serializedName,
-                serializedType,
+                propertyType.WithNullable(propertyType.IsNullable ? serializedType.IsNullable : false),
                 valueSerialization,
                 property.IsRequired,
                 ShouldExcludeInWireSerialization(property, inputModelProperty),
@@ -410,7 +415,6 @@ namespace AutoRest.CSharp.Output.Builders
                     propertyBag.Properties.Add(objectTypeProperty, objectType.GetForMemberSerialization(objectTypeProperty.Declaration.Name));
                 }
             }
-
             PopulatePropertyBag(propertyBag, 0);
             var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
             var (additionalProperties, rawDataField) = CreateAdditionalPropertiesSerialization(inputModel, objectType);
@@ -684,8 +688,9 @@ namespace AutoRest.CSharp.Output.Builders
             }
             return inputType switch
             {
-                InputListType listType => new MultipartArraySerialization(valueType, BuildMultipartSerialization(listType.ElementType, valueType.ElementType, true, serializationFormat, new VariableReference(valueType.ElementType, "item")), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                InputListType listType => new MultipartArraySerialization(valueType, BuildMultipartSerialization(listType.ValueType, valueType.ElementType, true, serializationFormat, new VariableReference(valueType.ElementType, "item")), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
                 InputDictionaryType dictionaryType => new MultipartDictionarySerialization(valueType, BuildMultipartSerialization(dictionaryType.ValueType, valueType.ElementType, true, serializationFormat, memberValueExpression), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                InputNullableType nullableType => BuildMultipartSerialization(nullableType.Type, valueType, isCollectionElement, serializationFormat, memberValueExpression),
                 _ => new MultipartValueSerialization(valueType, serializationFormat, valueType.IsNullable || isCollectionElement)// nullable CSharp type like int?, Etag?, and reference type in collection
             };
         }
