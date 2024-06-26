@@ -85,7 +85,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public NameInfo EnsureNameCase(string name, Action<ApplyDetailStep>? onMappingApplied)
+        public NameInfo EnsureNameCase(string name, Action<ApplyDetailStep>? onMappingApplied = null)
         {
             if (_wordCache.TryGetValue(name, out var result))
             {

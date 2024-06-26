@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 
@@ -222,7 +221,7 @@ namespace MgmtScopeResource.Models
             return new ResourceLinkProperties(sourceId, targetId, notes);
         }
 
-        /// <summary> Initializes a new instance of <see cref="MgmtScopeResource.VmInsightsOnboardingStatusData"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtScopeResource.VMInsightsOnboardingStatusData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -231,12 +230,12 @@ namespace MgmtScopeResource.Models
         /// <param name="onboardingStatus"> The onboarding status for the resource. Note that, a higher level scope, e.g., resource group or subscription, is considered onboarded if at least one resource under it is onboarded. </param>
         /// <param name="dataStatus"> The status of VM Insights data from the resource. When reported as `present` the data array will contain information about the data containers to which data for the specified resource is being routed. </param>
         /// <param name="data"> Containers that currently store VM Insights data for the specified resource. </param>
-        /// <returns> A new <see cref="MgmtScopeResource.VmInsightsOnboardingStatusData"/> instance for mocking. </returns>
-        public static VmInsightsOnboardingStatusData VmInsightsOnboardingStatusData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string resourceId = null, OnboardingStatus? onboardingStatus = null, DataStatus? dataStatus = null, IEnumerable<DataContainer> data = null)
+        /// <returns> A new <see cref="MgmtScopeResource.VMInsightsOnboardingStatusData"/> instance for mocking. </returns>
+        public static VMInsightsOnboardingStatusData VMInsightsOnboardingStatusData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string resourceId = null, OnboardingStatus? onboardingStatus = null, DataStatus? dataStatus = null, IEnumerable<DataContainer> data = null)
         {
             data ??= new List<DataContainer>();
 
-            return new VmInsightsOnboardingStatusData(
+            return new VMInsightsOnboardingStatusData(
                 id,
                 name,
                 resourceType,
@@ -367,7 +366,7 @@ namespace MgmtScopeResource.Models
         /// <param name="etag"> The etag for the resource. </param>
         /// <param name="tags"> Resource tags. </param>
         /// <returns> A new <see cref="Models.Marketplace"/> instance for mocking. </returns>
-        public static Marketplace Marketplace(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string billingPeriodId = null, DateTimeOffset? usageStart = null, DateTimeOffset? usageEnd = null, decimal? resourceRate = null, string offerName = null, string resourceGroup = null, string additionalInfo = null, string orderNumber = null, string instanceName = null, string instanceId = null, string currency = null, decimal? consumedQuantity = null, string unitOfMeasure = null, decimal? pretaxCost = null, bool? isEstimated = null, Guid? meterId = null, Guid? subscriptionGuid = null, string subscriptionName = null, string accountName = null, string departmentName = null, string consumedService = null, string costCenter = null, string additionalProperties = null, string publisherName = null, string planName = null, bool? isRecurringCharge = null, ETag? etag = null, IReadOnlyDictionary<string, string> tags = null)
+        public static Marketplace Marketplace(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string billingPeriodId = null, DateTimeOffset? usageStart = null, DateTimeOffset? usageEnd = null, decimal? resourceRate = null, string offerName = null, string resourceGroup = null, string additionalInfo = null, string orderNumber = null, string instanceName = null, string instanceId = null, string currency = null, decimal? consumedQuantity = null, string unitOfMeasure = null, decimal? pretaxCost = null, bool? isEstimated = null, Guid? meterId = null, Guid? subscriptionGuid = null, string subscriptionName = null, string accountName = null, string departmentName = null, string consumedService = null, string costCenter = null, string additionalProperties = null, string publisherName = null, string planName = null, bool? isRecurringCharge = null, string etag = null, IReadOnlyDictionary<string, string> tags = null)
         {
             tags ??= new Dictionary<string, string>();
 

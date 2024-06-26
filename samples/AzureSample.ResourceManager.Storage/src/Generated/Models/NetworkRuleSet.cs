@@ -18,7 +18,7 @@ namespace AzureSample.ResourceManager.Storage.Models
         {
             ResourceAccessRules = new ChangeTrackingList<ResourceAccessRule>();
             VirtualNetworkRules = new ChangeTrackingList<VirtualNetworkRule>();
-            IPRules = new ChangeTrackingList<IPRule>();
+            IpRules = new ChangeTrackingList<IPRule>();
             DefaultAction = defaultAction;
         }
 
@@ -33,7 +33,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             Bypass = bypass;
             ResourceAccessRules = resourceAccessRules;
             VirtualNetworkRules = virtualNetworkRules;
-            IPRules = ipRules;
+            IpRules = ipRules;
             DefaultAction = defaultAction;
         }
 
@@ -44,7 +44,7 @@ namespace AzureSample.ResourceManager.Storage.Models
         /// <summary> Sets the virtual network rules. </summary>
         public IList<VirtualNetworkRule> VirtualNetworkRules { get; }
         /// <summary> Sets the IP ACL rules. </summary>
-        public IList<IPRule> IPRules { get; }
+        public IList<IPRule> IpRules { get; }
         /// <summary> Specifies the default action of allow or deny when no other rules match. </summary>
         public DefaultAction DefaultAction { get; set; }
     }

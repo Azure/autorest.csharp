@@ -27,7 +27,7 @@ namespace MgmtListMethods.Models
         private const string FailureValue = "Failure";
         private const string InvalidQuotaBelowClusterMinimumValue = "InvalidQuotaBelowClusterMinimum";
         private const string InvalidQuotaExceedsSubscriptionLimitValue = "InvalidQuotaExceedsSubscriptionLimit";
-        private const string InvalidVmFamilyNameValue = "InvalidVMFamilyName";
+        private const string InvalidVMFamilyNameValue = "InvalidVMFamilyName";
         private const string OperationNotSupportedForSkuValue = "OperationNotSupportedForSku";
         private const string OperationNotEnabledForRegionValue = "OperationNotEnabledForRegion";
 
@@ -42,7 +42,7 @@ namespace MgmtListMethods.Models
         /// <summary> InvalidQuotaExceedsSubscriptionLimit. </summary>
         public static Status InvalidQuotaExceedsSubscriptionLimit { get; } = new Status(InvalidQuotaExceedsSubscriptionLimitValue);
         /// <summary> InvalidVMFamilyName. </summary>
-        public static Status InvalidVmFamilyName { get; } = new Status(InvalidVmFamilyNameValue);
+        public static Status InvalidVMFamilyName { get; } = new Status(InvalidVMFamilyNameValue);
         /// <summary> OperationNotSupportedForSku. </summary>
         public static Status OperationNotSupportedForSku { get; } = new Status(OperationNotSupportedForSkuValue);
         /// <summary> OperationNotEnabledForRegion. </summary>
@@ -62,7 +62,7 @@ namespace MgmtListMethods.Models
 
         /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override int GetHashCode() => _value?.GetHashCode() ?? 0;
+        public override int GetHashCode() => _value != null ? StringComparer.InvariantCultureIgnoreCase.GetHashCode(_value) : 0;
         /// <inheritdoc />
         public override string ToString() => _value;
     }

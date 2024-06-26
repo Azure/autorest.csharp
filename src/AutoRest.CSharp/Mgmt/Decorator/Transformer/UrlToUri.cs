@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
-using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
@@ -10,22 +10,22 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
     {
         private static readonly char LowerCaseI = 'i';
 
-        public static void UpdateSuffix(InputNamespace input)
+        public static void UpdateSuffix(CodeModel codeModel)
         {
-            foreach (var model in input.Models)
+            foreach (var schema in codeModel.AllSchemas)
             {
-                if (model is not InputModelType inputModel)
+                if (schema is not ObjectSchema objSchema)
                     continue;
 
-                var schemaName = model.Name;
+                var schemaName = schema.Language.Default.Name;
                 if (schemaName.EndsWith("Url", StringComparison.Ordinal))
-                    model.Name = schemaName.Substring(0, schemaName.Length - 1) + LowerCaseI;
+                    schema.Language.Default.Name = schemaName.Substring(0, schemaName.Length - 1) + LowerCaseI;
 
-                foreach (var property in inputModel.Properties)
+                foreach (var property in objSchema.Properties)
                 {
-                    var propertyName = property.Name;
+                    var propertyName = property.Language.Default.Name;
                     if (propertyName.EndsWith("Url", StringComparison.Ordinal))
-                        property.Name = propertyName.Substring(0, propertyName.Length - 1) + LowerCaseI;
+                        property.Language.Default.Name = propertyName.Substring(0, propertyName.Length - 1) + LowerCaseI;
                 }
             }
         }

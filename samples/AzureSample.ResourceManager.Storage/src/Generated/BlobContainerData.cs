@@ -72,7 +72,7 @@ namespace AzureSample.ResourceManager.Storage
             ImmutableStorageWithVersioning = immutableStorageWithVersioning;
             EnableNfsV3RootSquash = enableNfsV3RootSquash;
             EnableNfsV3AllSquash = enableNfsV3AllSquash;
-            ETag = etag;
+            Etag = etag;
         }
 
         /// <summary> The version of the deleted blob container. </summary>
@@ -114,6 +114,6 @@ namespace AzureSample.ResourceManager.Storage
         /// <summary> Enable NFSv3 all squash on blob container. </summary>
         public bool? EnableNfsV3AllSquash { get; set; }
         /// <summary> Resource Etag. </summary>
-        public ETag? ETag { get; }
+        public ETag? Etag { get; }
     }
 }

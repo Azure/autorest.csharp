@@ -371,8 +371,7 @@ namespace AutoRest.CSharp.Common.Input
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
                 InheritedDictionaryType: dictionarySchema is not null ? (InputDictionaryType)GetOrCreateType(dictionarySchema, false) : null)
             {
-                Serialization = GetSerialization(schema, usage),
-                SpecName = schema.Language.Default.SerializedName ?? schema.Language.Default.Name
+                Serialization = GetSerialization(schema, usage)
             };
 
             _modelsCache[schema] = model;

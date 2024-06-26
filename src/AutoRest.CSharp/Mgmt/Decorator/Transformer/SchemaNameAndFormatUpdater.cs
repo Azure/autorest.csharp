@@ -210,12 +210,14 @@ internal static class SchemaNameAndFormatUpdater
         }
     }
 
-    public static void UpdateAcronyms(InputNamespace input)
+    public static void UpdateAcronyms(CodeModel codeModel)
     {
-        UpdateAcronyms(input.Models);
-        UpdateAcronyms(input.Enums);
+        if (Configuration.MgmtConfiguration.AcronymMapping.Count == 0)
+            return;
+        // first transform all the name of schemas, properties
+        UpdateAcronyms(codeModel.AllSchemas);
         // transform all the parameter names
-        UpdateAcronyms(input.Clients);
+        UpdateAcronyms(codeModel.OperationGroups);
     }
 
     private static void ApplyNewName(Languages language, RenameAndReformatTarget rrt, string targetFullSerializedName)
@@ -317,52 +319,41 @@ internal static class SchemaNameAndFormatUpdater
         TransformInputType(schema);
     }
 
-    private static void UpdateAcronyms(IEnumerable<InputModelType> allModels)
+    private static void UpdateAcronyms(IEnumerable<Schema> allSchemas)
     {
-        foreach (var model in allModels)
+        foreach (var schema in allSchemas)
         {
-            TransformInputType(model);
+            TransformSchema(schema);
         }
     }
 
-    private static void UpdateAcronyms(IEnumerable<InputEnumType> allEnums)
+    private static void UpdateAcronyms(IEnumerable<OperationGroup> operationGroups)
     {
-        foreach (var inputEnum in allEnums)
+        foreach (var operationGroup in operationGroups)
         {
-            TransformInputType(inputEnum);
-        }
-    }
-
-    private static void UpdateAcronyms(IEnumerable<InputClient> clients)
-    {
-        foreach (var client in clients)
-        {
-            foreach (var operation in client.Operations)
+            foreach (var operation in operationGroup.Operations)
             {
                 TransformOperation(operation);
             }
         }
     }
 
-    private static void TransformOperation(InputOperation inputOperation)
+    private static void TransformOperation(Operation operation)
     {
-        var originalName = inputOperation.Name;
-        var tempName = originalName;
-        var result = NameTransformer.Instance.EnsureNameCase(originalName, (applyStep) =>
-        {
-            if (applyStep.MappingValue.RawValue is not null)
-            {
-                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, inputOperation.GetFullSerializedName(),
-                    "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
-            }
-            tempName = applyStep.NewName.Name;
-        });
-        inputOperation.Name = result.Name;
-
+        TransformLanguage(operation.Language, operation.GetFullSerializedName());
         // this iteration only applies to path and query parameter (maybe headers?) but not to body parameter
-        foreach (var parameter in inputOperation.Parameters)
+        foreach (var parameter in operation.Parameters)
         {
-            TransformInputParameter(parameter, inputOperation.GetFullSerializedName(parameter));
+            TransformLanguage(parameter.Language, operation.GetFullSerializedName(parameter));
+        }
+
+        // we need to iterate over the parameters in each request (actually only one request) to ensure the name of body parameters are also taken care of
+        foreach (var request in operation.Requests)
+        {
+            foreach (var parameter in request.Parameters)
+            {
+                TransformLanguage(parameter.Language, operation.GetFullSerializedName(parameter));
+            }
         }
     }
 
@@ -387,7 +378,7 @@ internal static class SchemaNameAndFormatUpdater
         TransformChoices(inputEnum, choiceValues);
     }
 
-    private static void TransformChoices(InputEnumType inputEnum, IReadOnlyList<InputEnumTypeValue> choiceValues)
+    private static void TransformChoices(InputEnumType schema, IReadOnlyList<InputEnumTypeValue> choiceValues)
     {
         foreach (var choiceValue in choiceValues)
         {
@@ -395,11 +386,8 @@ internal static class SchemaNameAndFormatUpdater
             var tempName = originalName;
             var result = NameTransformer.Instance.EnsureNameCase(originalName, (applyStep) =>
             {
-                if (applyStep.MappingValue.RawValue is not null)
-                {
-                    MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, inputEnum.GetFullSerializedName(choiceValue),
-                        "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
-                }
+                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue!, schema.GetFullSerializedName(choiceValue),
+                    "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
                 tempName = applyStep.NewName.Name;
             });
             choiceValue.Name = result.Name;
@@ -412,55 +400,76 @@ internal static class SchemaNameAndFormatUpdater
         var tempName = originalName;
         var result = NameTransformer.Instance.EnsureNameCase(originalName, (applyStep) =>
         {
-            if (applyStep.MappingValue.RawValue is not null)
-            {
-                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, targetFullSerializedName,
-                    "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
-            }
+            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue!, targetFullSerializedName,
+                "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
             tempName = applyStep.NewName.Name;
         });
         inputType.Name = result.Name;
     }
 
-    private static void TransformInputParameter(InputParameter inputParameter, string targetFullSerializedName)
-    {
-        var originalName = inputParameter.Name;
-        var tempName = originalName;
-        var result = NameTransformer.Instance.EnsureNameCase(originalName, (applyStep) =>
-        {
-            if (applyStep.MappingValue.RawValue is not null)
-            {
-                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, targetFullSerializedName,
-                    "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
-            }
-            tempName = applyStep.NewName.Name;
-        });
-        inputParameter.Name = result.Name;
-    }
-
     private static void TransformInputModel(InputModelType inputModel)
     {
+        // transform the name of this schema
         TransformInputType(inputModel, inputModel.GetFullSerializedName());
         foreach (var property in inputModel.Properties)
         {
             TransformInputType(property.Type, inputModel.GetFullSerializedName(property));
-            TransformInputModelProperty(property, inputModel.GetFullSerializedName(property));
         }
     }
 
-    private static void TransformInputModelProperty(InputModelProperty property, string targetFullSerializedName)
+    private static void TransformSchema(Schema schema)
     {
-        var originalName = property.Name;
+        switch (schema)
+        {
+            case ChoiceSchema choiceSchema:
+                TransformChoiceSchema(choiceSchema, choiceSchema.Choices);
+                break;
+            case SealedChoiceSchema sealedChoiceSchema:
+                TransformChoiceSchema(sealedChoiceSchema, sealedChoiceSchema.Choices);
+                break;
+            case ObjectSchema objSchema: // GroupSchema inherits ObjectSchema, therefore we do not need to handle that
+                TransformObjectSchema(objSchema);
+                break;
+            default:
+                throw new InvalidOperationException($"Unknown schema type {schema.GetType()}");
+        }
+    }
+
+    private static void TransformChoiceSchema(Schema schema, ICollection<ChoiceValue> choiceValues)
+    {
+        TransformLanguage(schema.Language, schema.GetFullSerializedName());
+        TransformChoices(schema, choiceValues);
+    }
+
+    private static void TransformChoices(Schema schema, ICollection<ChoiceValue> choiceValues)
+    {
+        foreach (var choiceValue in choiceValues)
+        {
+            TransformLanguage(choiceValue.Language, schema.GetFullSerializedName(choiceValue));
+        }
+    }
+
+    private static void TransformLanguage(Languages languages, string targetFullSerializedName)
+    {
+        var originalName = languages.Default.Name;
         var tempName = originalName;
         var result = NameTransformer.Instance.EnsureNameCase(originalName, (applyStep) =>
         {
-            if (applyStep.MappingValue.RawValue is not null)
-            {
-                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, targetFullSerializedName,
-                    "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
-            }
+            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue!, targetFullSerializedName,
+                "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
             tempName = applyStep.NewName.Name;
         });
-        property.Name = result.Name;
+        languages.Default.Name = result.Name;
+        languages.Default.SerializedName ??= originalName;
+    }
+
+    private static void TransformObjectSchema(ObjectSchema objSchema)
+    {
+        // transform the name of this schema
+        TransformLanguage(objSchema.Language, objSchema.GetFullSerializedName());
+        foreach (var property in objSchema.Properties)
+        {
+            TransformLanguage(property.Language, objSchema.GetFullSerializedName(property));
+        }
     }
 }

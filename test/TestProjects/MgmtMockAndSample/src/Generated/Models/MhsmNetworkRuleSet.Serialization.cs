@@ -27,11 +27,11 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("defaultAction"u8);
                 writer.WriteStringValue(DefaultAction.Value.ToString());
             }
-            if (Optional.IsCollectionDefined(IPRules))
+            if (Optional.IsCollectionDefined(IpRules))
             {
                 writer.WritePropertyName("ipRules"u8);
                 writer.WriteStartArray();
-                foreach (var item in IPRules)
+                foreach (var item in IpRules)
                 {
                     writer.WriteObjectValue(item);
                 }

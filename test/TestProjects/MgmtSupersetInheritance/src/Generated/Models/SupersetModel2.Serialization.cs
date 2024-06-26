@@ -15,10 +15,10 @@ namespace MgmtSupersetInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (Optional.IsDefined(ID))
             {
                 writer.WritePropertyName("iD"u8);
-                writer.WriteStringValue(Id);
+                writer.WriteStringValue(ID);
             }
             if (Optional.IsDefined(Name))
             {

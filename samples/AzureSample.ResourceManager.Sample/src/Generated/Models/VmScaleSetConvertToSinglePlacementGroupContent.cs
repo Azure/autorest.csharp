@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace AzureSample.ResourceManager.Sample.Models
 {
     /// <summary>
-    /// The VMScaleSetConvertToSinglePlacementGroupInput.
+    /// The VmScaleSetConvertToSinglePlacementGroupInput.
     /// Serialized Name: VMScaleSetConvertToSinglePlacementGroupInput
     /// </summary>
     public partial class VmScaleSetConvertToSinglePlacementGroupContent

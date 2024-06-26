@@ -80,7 +80,7 @@ namespace AzureSample.ResourceManager.Sample.Models
         internal VirtualMachineScaleSetListOSUpgradeHistory(IReadOnlyList<UpgradeOperationHistoricalStatusInfo> value, ETag? etag, string nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
-            ETag = etag;
+            Etag = etag;
             NextLink = nextLink;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
@@ -99,7 +99,7 @@ namespace AzureSample.ResourceManager.Sample.Models
         /// Modified whenever there is a change.
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.etag
         /// </summary>
-        public ETag? ETag { get; }
+        public ETag? Etag { get; }
         /// <summary>
         /// The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades.
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.nextLink

@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using MgmtPartialResource.Models;
@@ -46,10 +45,10 @@ namespace MgmtPartialResource
                 writer.WritePropertyName("publicIPAddressVersion"u8);
                 writer.WriteStringValue(PublicIPAddressVersion.Value.ToString());
             }
-            if (Optional.IsDefined(IPAddress))
+            if (Optional.IsDefined(IpAddress))
             {
                 writer.WritePropertyName("ipAddress"u8);
-                writer.WriteStringValue(IPAddress);
+                writer.WriteStringValue(IpAddress);
             }
             if (Optional.IsDefined(IdleTimeoutInMinutes))
             {
@@ -87,7 +86,7 @@ namespace MgmtPartialResource
                 return null;
             }
             PublicIPAddressSku sku = default;
-            ETag? etag = default;
+            string etag = default;
             IList<string> zones = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -115,11 +114,7 @@ namespace MgmtPartialResource
                 }
                 if (property.NameEquals("etag"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    etag = new ETag(property.Value.GetString());
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("zones"u8))

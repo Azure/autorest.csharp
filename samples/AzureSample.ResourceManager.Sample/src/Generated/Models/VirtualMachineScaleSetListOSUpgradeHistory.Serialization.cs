@@ -37,10 +37,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(ETag))
+            if (Optional.IsDefined(Etag))
             {
                 writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(ETag.Value.ToString());
+                writer.WriteStringValue(Etag.Value.ToString());
             }
             if (Optional.IsDefined(NextLink))
             {
@@ -159,7 +159,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ETag), out propertyOverride);
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Etag), out propertyOverride);
             if (hasPropertyOverride)
             {
                 builder.Append("  etag: ");
@@ -167,10 +167,10 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
             else
             {
-                if (Optional.IsDefined(ETag))
+                if (Optional.IsDefined(Etag))
                 {
                     builder.Append("  etag: ");
-                    builder.AppendLine($"'{ETag.Value.ToString()}'");
+                    builder.AppendLine($"'{Etag.Value.ToString()}'");
                 }
             }
 

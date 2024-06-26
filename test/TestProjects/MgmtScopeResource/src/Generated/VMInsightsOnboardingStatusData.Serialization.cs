@@ -13,9 +13,9 @@ using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
-    public partial class VmInsightsOnboardingStatusData
+    public partial class VMInsightsOnboardingStatusData
     {
-        internal static VmInsightsOnboardingStatusData DeserializeVmInsightsOnboardingStatusData(JsonElement element)
+        internal static VMInsightsOnboardingStatusData DeserializeVMInsightsOnboardingStatusData(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -105,7 +105,7 @@ namespace MgmtScopeResource
                     continue;
                 }
             }
-            return new VmInsightsOnboardingStatusData(
+            return new VMInsightsOnboardingStatusData(
                 id,
                 name,
                 type,

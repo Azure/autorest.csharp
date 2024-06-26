@@ -35,7 +35,7 @@ namespace MgmtMockAndSample.Tests.Mock
             var collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
             await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-pec", new MgmtMockAndSamplePrivateEndpointConnectionData()
             {
-                ETag = new ETag(""),
+                Etag = "",
                 ConnectionState = new MgmtMockAndSamplePrivateLinkServiceConnectionState()
                 {
                     Status = MgmtMockAndSamplePrivateEndpointServiceConnectionStatus.Approved,

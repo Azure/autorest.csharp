@@ -20,10 +20,10 @@ namespace MgmtExactMatchInheritance.Models
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
-            if (Optional.IsDefined(Id))
+            if (Optional.IsDefined(ID))
             {
                 writer.WritePropertyName("iD"u8);
-                writer.WriteStringValue(Id);
+                writer.WriteStringValue(ID);
             }
             if (Optional.IsDefined(Name))
             {

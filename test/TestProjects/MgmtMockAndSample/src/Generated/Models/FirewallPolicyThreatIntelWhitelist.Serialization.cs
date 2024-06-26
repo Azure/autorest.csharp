@@ -17,11 +17,11 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(IPAddresses))
+            if (Optional.IsCollectionDefined(IpAddresses))
             {
                 writer.WritePropertyName("ipAddresses"u8);
                 writer.WriteStartArray();
-                foreach (var item in IPAddresses)
+                foreach (var item in IpAddresses)
                 {
                     if (item == null)
                     {

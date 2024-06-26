@@ -71,7 +71,7 @@ namespace AzureSample.ResourceManager.Storage
             LeaseDuration = leaseDuration;
             SignedIdentifiers = signedIdentifiers;
             SnapshotOn = snapshotOn;
-            ETag = etag;
+            Etag = etag;
         }
 
         /// <summary> Returns the date and time the share was last modified. </summary>
@@ -111,6 +111,6 @@ namespace AzureSample.ResourceManager.Storage
         /// <summary> Creation time of share snapshot returned in the response of list shares with expand param "snapshots". </summary>
         public DateTimeOffset? SnapshotOn { get; }
         /// <summary> Resource Etag. </summary>
-        public ETag? ETag { get; }
+        public ETag? Etag { get; }
     }
 }

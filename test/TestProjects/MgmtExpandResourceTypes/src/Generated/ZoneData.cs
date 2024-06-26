@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
@@ -47,9 +46,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="memoryType"></param>
         /// <param name="registrationVirtualNetworks"> A list of references to virtual networks that register hostnames in this DNS zone. This is a only when ZoneType is Private. </param>
         /// <param name="resolutionVirtualNetworks"> A list of references to virtual networks that resolve records in this DNS zone. This is a only when ZoneType is Private. </param>
-        internal ZoneData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ETag? etag, long? maxNumberOfRecordSets, long? maxNumberOfRecordsPerRecordSet, long? numberOfRecordSets, IReadOnlyList<string> nameServers, ZoneType? zoneType, MachineType? machineType, StorageType? storageType, MemoryType? memoryType, IList<WritableSubResource> registrationVirtualNetworks, IList<WritableSubResource> resolutionVirtualNetworks) : base(id, name, resourceType, systemData, tags, location)
+        internal ZoneData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string etag, long? maxNumberOfRecordSets, long? maxNumberOfRecordsPerRecordSet, long? numberOfRecordSets, IReadOnlyList<string> nameServers, ZoneType? zoneType, MachineType? machineType, StorageType? storageType, MemoryType? memoryType, IList<WritableSubResource> registrationVirtualNetworks, IList<WritableSubResource> resolutionVirtualNetworks) : base(id, name, resourceType, systemData, tags, location)
         {
-            ETag = etag;
+            Etag = etag;
             MaxNumberOfRecordSets = maxNumberOfRecordSets;
             MaxNumberOfRecordsPerRecordSet = maxNumberOfRecordsPerRecordSet;
             NumberOfRecordSets = numberOfRecordSets;
@@ -63,7 +62,7 @@ namespace MgmtExpandResourceTypes
         }
 
         /// <summary> The etag of the zone. </summary>
-        public ETag? ETag { get; set; }
+        public string Etag { get; set; }
         /// <summary> The maximum number of record sets that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored. </summary>
         public long? MaxNumberOfRecordSets { get; }
         /// <summary> The maximum number of records per record set that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored. </summary>

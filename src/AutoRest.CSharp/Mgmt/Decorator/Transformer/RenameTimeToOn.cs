@@ -3,7 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
@@ -18,49 +19,57 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             {"Modification", "Modified"},
         };
 
-        public static void Update(InputNamespace inputNamespace)
+        public static void Update(CodeModel codeModel)
         {
-            foreach (var model in inputNamespace.Models)
+            foreach (var schema in codeModel.AllSchemas)
             {
-                if (model is not InputModelType inputModel)
+                if (schema is not ObjectSchema objSchema)
                     continue;
 
-                foreach (var property in inputModel.Properties)
+                foreach (var property in objSchema.Properties)
                 {
-                    var propertyType = property.Type.GetImplementType();
-                    if ((propertyType is InputPrimitiveType inputPrimitiveType && inputPrimitiveType.Kind == InputPrimitiveTypeKind.PlainDate) || propertyType is InputDateTimeType)
+                    if (property.Schema.Type is AllSchemaTypes.String or AllSchemaTypes.AnyObject)
                     {
-                        var propName = property.CSharpName();
-
-                        if (propName.StartsWith("From", StringComparison.Ordinal) ||
-                            propName.StartsWith("To", StringComparison.Ordinal) ||
-                            propName.EndsWith("PointInTime", StringComparison.Ordinal))
+                        if (TypeFactory.ToXMsFormatType(property.Schema.Extensions?.Format) != typeof(DateTimeOffset))
+                        {
                             continue;
+                        }
+                    }
+                    else if (property.Schema.Type is not (AllSchemaTypes.Date or AllSchemaTypes.DateTime or AllSchemaTypes.Unixtime))
+                    {
+                        continue;
+                    }
 
-                        var lengthToCut = 0;
-                        if (propName.Length > 8 &&
-                            propName.EndsWith("DateTime", StringComparison.Ordinal))
-                        {
-                            lengthToCut = 8;
-                        }
-                        else if (propName.Length > 4 &&
-                            propName.EndsWith("Time", StringComparison.Ordinal) ||
-                            propName.EndsWith("Date", StringComparison.Ordinal))
-                        {
-                            lengthToCut = 4;
-                        }
-                        else if (propName.Length > 2 &&
-                            propName.EndsWith("At", StringComparison.Ordinal))
-                        {
-                            lengthToCut = 2;
-                        }
+                    var propName = property.CSharpName();
 
-                        if (lengthToCut > 0)
-                        {
-                            var prefix = propName.Substring(0, propName.Length - lengthToCut);
-                            var newName = (_nounToVerbDicts.TryGetValue(prefix, out var verb) ? verb : prefix) + "On";
-                            property.Name = newName;
-                        }
+                    if (propName.StartsWith("From", StringComparison.Ordinal) ||
+                        propName.StartsWith("To", StringComparison.Ordinal) ||
+                        propName.EndsWith("PointInTime", StringComparison.Ordinal))
+                        continue;
+
+                    var lengthToCut = 0;
+                    if (propName.Length > 8 &&
+                        propName.EndsWith("DateTime", StringComparison.Ordinal))
+                    {
+                        lengthToCut = 8;
+                    }
+                    else if (propName.Length > 4 &&
+                        propName.EndsWith("Time", StringComparison.Ordinal) ||
+                        propName.EndsWith("Date", StringComparison.Ordinal))
+                    {
+                        lengthToCut = 4;
+                    }
+                    else if (propName.Length > 2 &&
+                        propName.EndsWith("At", StringComparison.Ordinal))
+                    {
+                        lengthToCut = 2;
+                    }
+
+                    if (lengthToCut > 0)
+                    {
+                        var prefix = propName.Substring(0, propName.Length - lengthToCut);
+                        var newName = (_nounToVerbDicts.TryGetValue(prefix, out var verb) ? verb : prefix) + "On";
+                        property.Language.Default.Name = newName;
                     }
                 }
             }

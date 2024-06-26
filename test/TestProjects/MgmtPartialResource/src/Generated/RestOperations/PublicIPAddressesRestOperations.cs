@@ -131,7 +131,7 @@ namespace MgmtPartialResource
             }
         }
 
-        internal RequestUriBuilder CreateDeleteRequestUri(string subscriptionId, string resourceGroupName, string publicIPAddressName)
+        internal RequestUriBuilder CreateDeleteRequestUri(string subscriptionId, string resourceGroupName, string publicIpAddressName)
         {
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
@@ -140,12 +140,12 @@ namespace MgmtPartialResource
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Network/publicIPAddresses/", false);
-            uri.AppendPath(publicIPAddressName, true);
+            uri.AppendPath(publicIpAddressName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             return uri;
         }
 
-        internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string publicIPAddressName)
+        internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string publicIpAddressName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -157,7 +157,7 @@ namespace MgmtPartialResource
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Network/publicIPAddresses/", false);
-            uri.AppendPath(publicIPAddressName, true);
+            uri.AppendPath(publicIpAddressName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             _userAgent.Apply(message);
@@ -167,17 +167,17 @@ namespace MgmtPartialResource
         /// <summary> Deletes the specified public IP address. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="publicIPAddressName"> The name of the public IP address. </param>
+        /// <param name="publicIpAddressName"> The name of the public IP address. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIPAddressName"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIPAddressName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string publicIPAddressName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIpAddressName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
+        public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string publicIpAddressName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(publicIPAddressName, nameof(publicIPAddressName));
+            Argument.AssertNotNullOrEmpty(publicIpAddressName, nameof(publicIpAddressName));
 
-            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, publicIPAddressName);
+            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, publicIpAddressName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -193,17 +193,17 @@ namespace MgmtPartialResource
         /// <summary> Deletes the specified public IP address. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="publicIPAddressName"> The name of the public IP address. </param>
+        /// <param name="publicIpAddressName"> The name of the public IP address. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIPAddressName"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIPAddressName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response Delete(string subscriptionId, string resourceGroupName, string publicIPAddressName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIpAddressName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
+        public Response Delete(string subscriptionId, string resourceGroupName, string publicIpAddressName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(publicIPAddressName, nameof(publicIPAddressName));
+            Argument.AssertNotNullOrEmpty(publicIpAddressName, nameof(publicIpAddressName));
 
-            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, publicIPAddressName);
+            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, publicIpAddressName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -216,7 +216,7 @@ namespace MgmtPartialResource
             }
         }
 
-        internal RequestUriBuilder CreateGetRequestUri(string subscriptionId, string resourceGroupName, string publicIPAddressName, string expand)
+        internal RequestUriBuilder CreateGetRequestUri(string subscriptionId, string resourceGroupName, string publicIpAddressName, string expand)
         {
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
@@ -225,7 +225,7 @@ namespace MgmtPartialResource
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Network/publicIPAddresses/", false);
-            uri.AppendPath(publicIPAddressName, true);
+            uri.AppendPath(publicIpAddressName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             if (expand != null)
             {
@@ -234,7 +234,7 @@ namespace MgmtPartialResource
             return uri;
         }
 
-        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string publicIPAddressName, string expand)
+        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string publicIpAddressName, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -246,7 +246,7 @@ namespace MgmtPartialResource
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Network/publicIPAddresses/", false);
-            uri.AppendPath(publicIPAddressName, true);
+            uri.AppendPath(publicIpAddressName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             if (expand != null)
             {
@@ -261,18 +261,18 @@ namespace MgmtPartialResource
         /// <summary> Gets the specified public IP address in a specified resource group. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="publicIPAddressName"> The name of the public IP address. </param>
+        /// <param name="publicIpAddressName"> The name of the public IP address. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIPAddressName"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIPAddressName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<PublicIPAddressData>> GetAsync(string subscriptionId, string resourceGroupName, string publicIPAddressName, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIpAddressName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
+        public async Task<Response<PublicIPAddressData>> GetAsync(string subscriptionId, string resourceGroupName, string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(publicIPAddressName, nameof(publicIPAddressName));
+            Argument.AssertNotNullOrEmpty(publicIpAddressName, nameof(publicIpAddressName));
 
-            using var message = CreateGetRequest(subscriptionId, resourceGroupName, publicIPAddressName, expand);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, publicIpAddressName, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -293,18 +293,18 @@ namespace MgmtPartialResource
         /// <summary> Gets the specified public IP address in a specified resource group. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="publicIPAddressName"> The name of the public IP address. </param>
+        /// <param name="publicIpAddressName"> The name of the public IP address. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIPAddressName"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIPAddressName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<PublicIPAddressData> Get(string subscriptionId, string resourceGroupName, string publicIPAddressName, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIpAddressName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
+        public Response<PublicIPAddressData> Get(string subscriptionId, string resourceGroupName, string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(publicIPAddressName, nameof(publicIPAddressName));
+            Argument.AssertNotNullOrEmpty(publicIpAddressName, nameof(publicIpAddressName));
 
-            using var message = CreateGetRequest(subscriptionId, resourceGroupName, publicIPAddressName, expand);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, publicIpAddressName, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -322,7 +322,7 @@ namespace MgmtPartialResource
             }
         }
 
-        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string subscriptionId, string resourceGroupName, string publicIPAddressName, PublicIPAddressData data)
+        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string subscriptionId, string resourceGroupName, string publicIpAddressName, PublicIPAddressData data)
         {
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
@@ -331,12 +331,12 @@ namespace MgmtPartialResource
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Network/publicIPAddresses/", false);
-            uri.AppendPath(publicIPAddressName, true);
+            uri.AppendPath(publicIpAddressName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             return uri;
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string publicIPAddressName, PublicIPAddressData data)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string publicIpAddressName, PublicIPAddressData data)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -348,7 +348,7 @@ namespace MgmtPartialResource
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Network/publicIPAddresses/", false);
-            uri.AppendPath(publicIPAddressName, true);
+            uri.AppendPath(publicIpAddressName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -363,19 +363,19 @@ namespace MgmtPartialResource
         /// <summary> Creates or updates a static or dynamic public IP address. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="publicIPAddressName"> The name of the public IP address. </param>
+        /// <param name="publicIpAddressName"> The name of the public IP address. </param>
         /// <param name="data"> Parameters supplied to the create or update public IP address operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="publicIPAddressName"/> or <paramref name="data"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIPAddressName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string publicIPAddressName, PublicIPAddressData data, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="publicIpAddressName"/> or <paramref name="data"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
+        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string publicIpAddressName, PublicIPAddressData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(publicIPAddressName, nameof(publicIPAddressName));
+            Argument.AssertNotNullOrEmpty(publicIpAddressName, nameof(publicIpAddressName));
             Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, publicIPAddressName, data);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, publicIpAddressName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -390,19 +390,19 @@ namespace MgmtPartialResource
         /// <summary> Creates or updates a static or dynamic public IP address. </summary>
         /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="publicIPAddressName"> The name of the public IP address. </param>
+        /// <param name="publicIpAddressName"> The name of the public IP address. </param>
         /// <param name="data"> Parameters supplied to the create or update public IP address operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="publicIPAddressName"/> or <paramref name="data"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIPAddressName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string publicIPAddressName, PublicIPAddressData data, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="publicIpAddressName"/> or <paramref name="data"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
+        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string publicIpAddressName, PublicIPAddressData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(publicIPAddressName, nameof(publicIPAddressName));
+            Argument.AssertNotNullOrEmpty(publicIpAddressName, nameof(publicIpAddressName));
             Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, publicIPAddressName, data);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, publicIpAddressName, data);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

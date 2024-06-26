@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(IPProtocols))
+            if (Optional.IsCollectionDefined(IpProtocols))
             {
                 writer.WritePropertyName("ipProtocols"u8);
                 writer.WriteStartArray();
-                foreach (var item in IPProtocols)
+                foreach (var item in IpProtocols)
                 {
                     writer.WriteStringValue(item.ToString());
                 }
@@ -56,21 +56,21 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(SourceIPGroups))
+            if (Optional.IsCollectionDefined(SourceIpGroups))
             {
                 writer.WritePropertyName("sourceIpGroups"u8);
                 writer.WriteStartArray();
-                foreach (var item in SourceIPGroups)
+                foreach (var item in SourceIpGroups)
                 {
                     writer.WriteStringValue(item);
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(DestinationIPGroups))
+            if (Optional.IsCollectionDefined(DestinationIpGroups))
             {
                 writer.WritePropertyName("destinationIpGroups"u8);
                 writer.WriteStartArray();
-                foreach (var item in DestinationIPGroups)
+                foreach (var item in DestinationIpGroups)
                 {
                     writer.WriteStringValue(item);
                 }
@@ -134,8 +134,8 @@ namespace MgmtMockAndSample.Models
             IList<string> sourceAddresses = default;
             IList<string> destinationAddresses = default;
             IList<string> destinationPorts = default;
-            IList<string> sourceIPGroups = default;
-            IList<string> destinationIPGroups = default;
+            IList<string> sourceIpGroups = default;
+            IList<string> destinationIpGroups = default;
             IList<string> destinationFqdns = default;
             string name = default;
             string description = default;
@@ -212,7 +212,7 @@ namespace MgmtMockAndSample.Models
                     {
                         array.Add(item.GetString());
                     }
-                    sourceIPGroups = array;
+                    sourceIpGroups = array;
                     continue;
                 }
                 if (property.NameEquals("destinationIpGroups"u8))
@@ -226,7 +226,7 @@ namespace MgmtMockAndSample.Models
                     {
                         array.Add(item.GetString());
                     }
-                    destinationIPGroups = array;
+                    destinationIpGroups = array;
                     continue;
                 }
                 if (property.NameEquals("destinationFqdns"u8))
@@ -306,8 +306,8 @@ namespace MgmtMockAndSample.Models
                 sourceAddresses ?? new ChangeTrackingList<string>(),
                 destinationAddresses ?? new ChangeTrackingList<string>(),
                 destinationPorts ?? new ChangeTrackingList<string>(),
-                sourceIPGroups ?? new ChangeTrackingList<string>(),
-                destinationIPGroups ?? new ChangeTrackingList<string>(),
+                sourceIpGroups ?? new ChangeTrackingList<string>(),
+                destinationIpGroups ?? new ChangeTrackingList<string>(),
                 destinationFqdns ?? new ChangeTrackingList<string>());
         }
     }

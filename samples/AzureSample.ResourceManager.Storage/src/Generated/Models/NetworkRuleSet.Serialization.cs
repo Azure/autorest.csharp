@@ -41,11 +41,11 @@ namespace AzureSample.ResourceManager.Storage.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(IPRules))
+            if (Optional.IsCollectionDefined(IpRules))
             {
                 writer.WritePropertyName("ipRules"u8);
                 writer.WriteStartArray();
-                foreach (var item in IPRules)
+                foreach (var item in IpRules)
                 {
                     writer.WriteObjectValue(item);
                 }

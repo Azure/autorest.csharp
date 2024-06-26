@@ -13,7 +13,7 @@ namespace AzureSample.ResourceManager.Storage.Models
         /// <summary> Creating. </summary>
         Creating,
         /// <summary> ResolvingDNS. </summary>
-        ResolvingDns,
+        ResolvingDNS,
         /// <summary> Succeeded. </summary>
         Succeeded
     }

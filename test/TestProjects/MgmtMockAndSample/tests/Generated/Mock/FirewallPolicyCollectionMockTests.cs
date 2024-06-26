@@ -46,7 +46,7 @@ namespace MgmtMockAndSample.Tests.Mock
                 DesiredStatusCode = DesiredStatusCode.TwoHundredTwo,
                 ThreatIntelWhitelist = new FirewallPolicyThreatIntelWhitelist()
                 {
-                    IPAddresses =
+                    IpAddresses =
 {
 IPAddress.Parse("20.3.4.5")
 },
@@ -158,7 +158,7 @@ DestinationPorts =
                 DesiredStatusCode = new DesiredStatusCode(600),
                 ThreatIntelWhitelist = new FirewallPolicyThreatIntelWhitelist()
                 {
-                    IPAddresses =
+                    IpAddresses =
 {
 IPAddress.Parse("20.3.4.5")
 },

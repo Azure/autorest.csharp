@@ -21,13 +21,13 @@ namespace MgmtExactMatchInheritance.Models
         /// <param name="exactMatchModel7Type"></param>
         internal ExactMatchModel7(string id, string name, string exactMatchModel7Type)
         {
-            Id = id;
+            ID = id;
             Name = name;
             ExactMatchModel7Type = exactMatchModel7Type;
         }
 
         /// <summary> Gets or sets the id. </summary>
-        public string Id { get; set; }
+        public string ID { get; set; }
         /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
         /// <summary> Gets or sets the exact match model 7 type. </summary>

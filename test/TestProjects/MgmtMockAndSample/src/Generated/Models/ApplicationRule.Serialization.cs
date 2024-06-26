@@ -76,11 +76,11 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(SourceIPGroups))
+            if (Optional.IsCollectionDefined(SourceIpGroups))
             {
                 writer.WritePropertyName("sourceIpGroups"u8);
                 writer.WriteStartArray();
-                foreach (var item in SourceIPGroups)
+                foreach (var item in SourceIpGroups)
                 {
                     writer.WriteStringValue(item);
                 }
@@ -168,7 +168,7 @@ namespace MgmtMockAndSample.Models
             IList<string> targetFqdns = default;
             IList<string> targetUrls = default;
             IList<string> fqdnTags = default;
-            IList<string> sourceIPGroups = default;
+            IList<string> sourceIpGroups = default;
             bool? terminateTLS = default;
             IList<string> webCategories = default;
             int? newIntSerializeProperty = default;
@@ -276,7 +276,7 @@ namespace MgmtMockAndSample.Models
                     {
                         array.Add(item.GetString());
                     }
-                    sourceIPGroups = array;
+                    sourceIpGroups = array;
                     continue;
                 }
                 if (property.NameEquals("terminateTLS"u8))
@@ -386,7 +386,7 @@ namespace MgmtMockAndSample.Models
                 targetFqdns ?? new ChangeTrackingList<string>(),
                 targetUrls ?? new ChangeTrackingList<string>(),
                 fqdnTags ?? new ChangeTrackingList<string>(),
-                sourceIPGroups ?? new ChangeTrackingList<string>(),
+                sourceIpGroups ?? new ChangeTrackingList<string>(),
                 terminateTLS,
                 webCategories ?? new ChangeTrackingList<string>(),
                 newIntSerializeProperty,
