@@ -5,7 +5,7 @@ import { LoggerLevel } from "./lib/log-level.js";
 import { tspOutputFileName } from "./constants.js";
 
 export type NetEmitterOptions = {
-    emitterName?: string,
+    emitterName?: string;
     "api-version"?: string;
     outputFile?: string;
     logFile?: string;
@@ -43,7 +43,7 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
     type: "object",
     additionalProperties: false,
     properties: {
-        emitterName:{ type: "string", nullable: true },
+        emitterName: { type: "string", nullable: true },
         "api-version": { type: "string", nullable: true },
         outputFile: { type: "string", nullable: true },
         logFile: { type: "string", nullable: true },

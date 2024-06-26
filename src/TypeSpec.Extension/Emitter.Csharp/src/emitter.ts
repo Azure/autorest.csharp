@@ -91,12 +91,13 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
         );
 
         /* copy tspConfiguration.json to the generated folder. */
-        try {
-            fs.copyFileSync(resolvePath(outputFolder, tspOutputFileName), resolvePath(generatedFolder, tspOutputFileName));
-            Logger.getInstance().info(`${tspOutputFileName} was copied to ${generatedFolder}`);
-        } catch (err) {
-            throw err;
-        }
+        fs.copyFileSync(
+            resolvePath(outputFolder, tspOutputFileName),
+            resolvePath(generatedFolder, tspOutputFileName)
+        );
+        Logger.getInstance().info(
+            `${tspOutputFileName} was copied to ${generatedFolder}`
+        );
         /*
         fs.rename(resolvePath(outputFolder, tspOutputFileName), resolvePath(generatedFolder, tspOutputFileName), (err) => {
             if (err) throw err;
