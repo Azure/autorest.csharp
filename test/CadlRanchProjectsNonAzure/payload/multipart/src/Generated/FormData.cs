@@ -29,7 +29,7 @@ namespace Payload.MultiPart
 
         /// <summary> Initializes a new instance of FormData. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal FormData(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -39,6 +39,7 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="body"> The <see cref="MultiPartRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Basic. </remarks>
         public virtual async Task<ClientResult> BasicAsync(MultiPartRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -51,6 +52,7 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="body"> The <see cref="MultiPartRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Basic. </remarks>
         public virtual ClientResult Basic(MultiPartRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -121,6 +123,7 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for mixed scenarios. </summary>
         /// <param name="body"> The <see cref="ComplexPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Complex. </remarks>
         public virtual async Task<ClientResult> ComplexAsync(ComplexPartsRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -133,6 +136,7 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for mixed scenarios. </summary>
         /// <param name="body"> The <see cref="ComplexPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Complex. </remarks>
         public virtual ClientResult Complex(ComplexPartsRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -203,6 +207,7 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for scenario contains json part and binary part. </summary>
         /// <param name="body"> The <see cref="JsonPartRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Json part. </remarks>
         public virtual async Task<ClientResult> JsonPartAsync(JsonPartRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -215,6 +220,7 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for scenario contains json part and binary part. </summary>
         /// <param name="body"> The <see cref="JsonPartRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Json part. </remarks>
         public virtual ClientResult JsonPart(JsonPartRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -285,6 +291,7 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
         /// <param name="body"> The <see cref="BinaryArrayPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Binary array parts. </remarks>
         public virtual async Task<ClientResult> BinaryArrayPartsAsync(BinaryArrayPartsRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -297,6 +304,7 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
         /// <param name="body"> The <see cref="BinaryArrayPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Binary array parts. </remarks>
         public virtual ClientResult BinaryArrayParts(BinaryArrayPartsRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -367,6 +375,7 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for scenario contains multi json parts. </summary>
         /// <param name="body"> The <see cref="JsonArrayPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Json array parts. </remarks>
         public virtual async Task<ClientResult> JsonArrayPartsAsync(JsonArrayPartsRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -379,6 +388,7 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for scenario contains multi json parts. </summary>
         /// <param name="body"> The <see cref="JsonArrayPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Json array parts. </remarks>
         public virtual ClientResult JsonArrayParts(JsonArrayPartsRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -449,6 +459,7 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
         /// <param name="body"> The <see cref="MultiBinaryPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Multi binary parts. </remarks>
         public virtual async Task<ClientResult> MultiBinaryPartsAsync(MultiBinaryPartsRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -461,6 +472,7 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
         /// <param name="body"> The <see cref="MultiBinaryPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Multi binary parts. </remarks>
         public virtual ClientResult MultiBinaryParts(MultiBinaryPartsRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -531,6 +543,7 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="body"> The <see cref="MultiPartRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Check file name and content type. </remarks>
         public virtual async Task<ClientResult> CheckFileNameAndContentTypeAsync(MultiPartRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -543,6 +556,7 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="body"> The <see cref="MultiPartRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Check file name and content type. </remarks>
         public virtual ClientResult CheckFileNameAndContentType(MultiPartRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -613,6 +627,7 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="profileImage"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> is null. </exception>
+        /// <remarks> Anonymous model. </remarks>
         public virtual async Task<ClientResult> AnonymousModelAsync(Stream profileImage)
         {
             Argument.AssertNotNull(profileImage, nameof(profileImage));
@@ -626,6 +641,7 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="profileImage"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> is null. </exception>
+        /// <remarks> Anonymous model. </remarks>
         public virtual ClientResult AnonymousModel(Stream profileImage)
         {
             Argument.AssertNotNull(profileImage, nameof(profileImage));
@@ -704,8 +720,7 @@ namespace Payload.MultiPart
             uri.Reset(_endpoint);
             uri.AppendPath("/multipart/form-data/mixed-parts", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("Content-Type", contentType);
+            request.Headers.Set("content-type", contentType);
             request.Content = content;
             message.Apply(options);
             return message;
@@ -721,8 +736,7 @@ namespace Payload.MultiPart
             uri.Reset(_endpoint);
             uri.AppendPath("/multipart/form-data/complex-parts", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("Content-Type", contentType);
+            request.Headers.Set("content-type", contentType);
             request.Content = content;
             message.Apply(options);
             return message;
@@ -738,8 +752,7 @@ namespace Payload.MultiPart
             uri.Reset(_endpoint);
             uri.AppendPath("/multipart/form-data/json-part", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("Content-Type", contentType);
+            request.Headers.Set("content-type", contentType);
             request.Content = content;
             message.Apply(options);
             return message;
@@ -755,8 +768,7 @@ namespace Payload.MultiPart
             uri.Reset(_endpoint);
             uri.AppendPath("/multipart/form-data/binary-array-parts", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("Content-Type", contentType);
+            request.Headers.Set("content-type", contentType);
             request.Content = content;
             message.Apply(options);
             return message;
@@ -772,8 +784,7 @@ namespace Payload.MultiPart
             uri.Reset(_endpoint);
             uri.AppendPath("/multipart/form-data/json-array-parts", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("Content-Type", contentType);
+            request.Headers.Set("content-type", contentType);
             request.Content = content;
             message.Apply(options);
             return message;
@@ -789,8 +800,7 @@ namespace Payload.MultiPart
             uri.Reset(_endpoint);
             uri.AppendPath("/multipart/form-data/multi-binary-parts", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("Content-Type", contentType);
+            request.Headers.Set("content-type", contentType);
             request.Content = content;
             message.Apply(options);
             return message;
@@ -806,8 +816,7 @@ namespace Payload.MultiPart
             uri.Reset(_endpoint);
             uri.AppendPath("/multipart/form-data/check-filename-and-content-type", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("Content-Type", contentType);
+            request.Headers.Set("content-type", contentType);
             request.Content = content;
             message.Apply(options);
             return message;
@@ -823,8 +832,7 @@ namespace Payload.MultiPart
             uri.Reset(_endpoint);
             uri.AppendPath("/multipart/form-data/anonymous-model", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("Content-Type", contentType);
+            request.Headers.Set("content-type", contentType);
             request.Content = content;
             message.Apply(options);
             return message;

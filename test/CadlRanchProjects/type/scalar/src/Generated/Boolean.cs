@@ -35,7 +35,7 @@ namespace _Type.Scalar
         /// <summary> Initializes a new instance of Boolean. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Boolean(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -45,6 +45,7 @@ namespace _Type.Scalar
 
         /// <summary> get boolean value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='GetBooleanAsync(CancellationToken)']/*" />
         public virtual async Task<Response<bool>> GetBooleanAsync(CancellationToken cancellationToken = default)
         {
@@ -55,6 +56,7 @@ namespace _Type.Scalar
 
         /// <summary> get boolean value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='GetBoolean(CancellationToken)']/*" />
         public virtual Response<bool> GetBoolean(CancellationToken cancellationToken = default)
         {
@@ -136,6 +138,7 @@ namespace _Type.Scalar
         /// <summary> put boolean value. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='PutAsync(bool,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(bool body, CancellationToken cancellationToken = default)
         {
@@ -148,6 +151,7 @@ namespace _Type.Scalar
         /// <summary> put boolean value. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='Put(bool,CancellationToken)']/*" />
         public virtual Response Put(bool body, CancellationToken cancellationToken = default)
         {
@@ -257,7 +261,6 @@ namespace _Type.Scalar
             uri.Reset(_endpoint);
             uri.AppendPath("/type/scalar/boolean", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

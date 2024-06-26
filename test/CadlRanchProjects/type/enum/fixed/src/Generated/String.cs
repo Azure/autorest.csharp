@@ -36,7 +36,7 @@ namespace _Type._Enum.Fixed
         /// <summary> Initializes a new instance of String. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal String(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -46,6 +46,7 @@ namespace _Type._Enum.Fixed
 
         /// <summary> getKnownValue. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get known value. </remarks>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetKnownValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DaysOfWeekEnum>> GetKnownValueAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type._Enum.Fixed
 
         /// <summary> getKnownValue. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get known value. </remarks>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetKnownValue(CancellationToken)']/*" />
         public virtual Response<DaysOfWeekEnum> GetKnownValue(CancellationToken cancellationToken = default)
         {
@@ -137,6 +139,7 @@ namespace _Type._Enum.Fixed
         /// <summary> putKnownValue. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Put known value. </remarks>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutKnownValueAsync(DaysOfWeekEnum,CancellationToken)']/*" />
         public virtual async Task<Response> PutKnownValueAsync(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
         {
@@ -149,6 +152,7 @@ namespace _Type._Enum.Fixed
         /// <summary> putKnownValue. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Put known value. </remarks>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutKnownValue(DaysOfWeekEnum,CancellationToken)']/*" />
         public virtual Response PutKnownValue(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
         {
@@ -239,6 +243,7 @@ namespace _Type._Enum.Fixed
         /// <summary> putUnknownValue. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Put unknown value. </remarks>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutUnknownValueAsync(DaysOfWeekEnum,CancellationToken)']/*" />
         public virtual async Task<Response> PutUnknownValueAsync(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
         {
@@ -251,6 +256,7 @@ namespace _Type._Enum.Fixed
         /// <summary> putUnknownValue. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Put unknown value. </remarks>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutUnknownValue(DaysOfWeekEnum,CancellationToken)']/*" />
         public virtual Response PutUnknownValue(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
         {
@@ -360,7 +366,6 @@ namespace _Type._Enum.Fixed
             uri.Reset(_endpoint);
             uri.AppendPath("/type/enum/fixed/string/known-value", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -375,7 +380,6 @@ namespace _Type._Enum.Fixed
             uri.Reset(_endpoint);
             uri.AppendPath("/type/enum/fixed/string/unknown-value", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

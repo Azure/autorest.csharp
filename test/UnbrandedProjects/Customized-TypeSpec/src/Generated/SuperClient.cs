@@ -27,7 +27,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of SuperClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Endpoint Service. </param>
         /// <param name="credential"> A credential used to authenticate to the service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public SuperClient(Uri endpoint, ApiKeyCredential credential) : this(endpoint, credential, new SuperClientOptions())
@@ -35,7 +35,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of SuperClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Endpoint Service. </param>
         /// <param name="credential"> A credential used to authenticate to the service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
@@ -108,6 +108,7 @@ namespace CustomizedTypeSpec.Models
         /// <param name="action"> The <see cref="SuperRoundTripModel"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Hello again. </remarks>
         public virtual async Task<ClientResult<SuperRoundTripModel>> HelloAgainAsync(string p2, string p1, SuperRoundTripModel action)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -125,6 +126,7 @@ namespace CustomizedTypeSpec.Models
         /// <param name="action"> The <see cref="SuperRoundTripModel"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Hello again. </remarks>
         public virtual ClientResult<SuperRoundTripModel> HelloAgain(string p2, string p1, SuperRoundTripModel action)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -259,6 +261,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> Return hi in demo2. </summary>
+        /// <remarks> Hello demo 2. </remarks>
         public virtual async Task<ClientResult<Thing>> HelloDemo2Async()
         {
             ClientResult result = await HelloDemo2Async(null).ConfigureAwait(false);
@@ -266,6 +269,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> Return hi in demo2. </summary>
+        /// <remarks> Hello demo 2. </remarks>
         public virtual ClientResult<Thing> HelloDemo2()
         {
             ClientResult result = HelloDemo2(null);
@@ -323,6 +327,7 @@ namespace CustomizedTypeSpec.Models
         /// <summary> Create with literal value. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Create literal. </remarks>
         public virtual async Task<ClientResult<Thing>> CreateLiteralAsync(Thing body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -335,6 +340,7 @@ namespace CustomizedTypeSpec.Models
         /// <summary> Create with literal value. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Create literal. </remarks>
         public virtual ClientResult<Thing> CreateLiteral(Thing body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -401,6 +407,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> Send literal parameters. </summary>
+        /// <remarks> Hello literal. </remarks>
         public virtual async Task<ClientResult<Thing>> HelloLiteralAsync()
         {
             ClientResult result = await HelloLiteralAsync(null).ConfigureAwait(false);
@@ -408,6 +415,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> Send literal parameters. </summary>
+        /// <remarks> Hello literal. </remarks>
         public virtual ClientResult<Thing> HelloLiteral()
         {
             ClientResult result = HelloLiteral(null);
@@ -464,6 +472,7 @@ namespace CustomizedTypeSpec.Models
 
         /// <summary> top level method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
+        /// <remarks> Top action. </remarks>
         public virtual async Task<ClientResult<Thing>> TopActionAsync(DateTimeOffset action)
         {
             ClientResult result = await TopActionAsync(action, null).ConfigureAwait(false);
@@ -472,6 +481,7 @@ namespace CustomizedTypeSpec.Models
 
         /// <summary> top level method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
+        /// <remarks> Top action. </remarks>
         public virtual ClientResult<Thing> TopAction(DateTimeOffset action)
         {
             ClientResult result = TopAction(action, null);
@@ -613,8 +623,9 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> body parameter without body decorator. </summary>
-        /// <param name="thing"> A model with a few properties of literal types. </param>
+        /// <param name="thing"> The <see cref="Thing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
+        /// <remarks> Anonymous body. </remarks>
         public virtual async Task<ClientResult<Thing>> AnonymousBodyAsync(Thing thing)
         {
             Argument.AssertNotNull(thing, nameof(thing));
@@ -625,8 +636,9 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> body parameter without body decorator. </summary>
-        /// <param name="thing"> A model with a few properties of literal types. </param>
+        /// <param name="thing"> The <see cref="Thing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
+        /// <remarks> Anonymous body. </remarks>
         public virtual ClientResult<Thing> AnonymousBody(Thing thing)
         {
             Argument.AssertNotNull(thing, nameof(thing));
@@ -693,25 +705,27 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="superFriend"> this is not a friendly model but with a friendly name. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="superFriend"/> is null. </exception>
-        public virtual async Task<ClientResult<SuperFriend>> FriendlyModelAsync(SuperFriend superFriend)
+        /// <param name="friend"> The <see cref="SuperFriend"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
+        /// <remarks> Friendly model. </remarks>
+        public virtual async Task<ClientResult<SuperFriend>> FriendlyModelAsync(SuperFriend friend)
         {
-            Argument.AssertNotNull(superFriend, nameof(superFriend));
+            Argument.AssertNotNull(friend, nameof(friend));
 
-            using BinaryContent content = superFriend.ToBinaryContent();
+            using BinaryContent content = friend.ToBinaryContent();
             ClientResult result = await FriendlyModelAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="superFriend"> this is not a friendly model but with a friendly name. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="superFriend"/> is null. </exception>
-        public virtual ClientResult<SuperFriend> FriendlyModel(SuperFriend superFriend)
+        /// <param name="friend"> The <see cref="SuperFriend"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
+        /// <remarks> Friendly model. </remarks>
+        public virtual ClientResult<SuperFriend> FriendlyModel(SuperFriend friend)
         {
-            Argument.AssertNotNull(superFriend, nameof(superFriend));
+            Argument.AssertNotNull(friend, nameof(friend));
 
-            using BinaryContent content = superFriend.ToBinaryContent();
+            using BinaryContent content = friend.ToBinaryContent();
             ClientResult result = FriendlyModel(content, null);
             return ClientResult.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
@@ -811,8 +825,9 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> Model can have its projected name. </summary>
-        /// <param name="projectedModel"> this is a model with a projected name. </param>
+        /// <param name="projectedModel"> The <see cref="ProjectedModel"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
+        /// <remarks> Projected name model. </remarks>
         public virtual async Task<ClientResult<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel projectedModel)
         {
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
@@ -823,8 +838,9 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> Model can have its projected name. </summary>
-        /// <param name="projectedModel"> this is a model with a projected name. </param>
+        /// <param name="projectedModel"> The <see cref="ProjectedModel"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
+        /// <remarks> Projected name model. </remarks>
         public virtual ClientResult<ProjectedModel> ProjectedNameModel(ProjectedModel projectedModel)
         {
             Argument.AssertNotNull(projectedModel, nameof(projectedModel));
@@ -891,6 +907,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> return anonymous model. </summary>
+        /// <remarks> Returns anonymous model. </remarks>
         public virtual async Task<ClientResult<ReturnsAnonymousModelResponse>> ReturnsAnonymousModelAsync()
         {
             ClientResult result = await ReturnsAnonymousModelAsync(null).ConfigureAwait(false);
@@ -898,6 +915,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> return anonymous model. </summary>
+        /// <remarks> Returns anonymous model. </remarks>
         public virtual ClientResult<ReturnsAnonymousModelResponse> ReturnsAnonymousModel()
         {
             ClientResult result = ReturnsAnonymousModel(null);
@@ -962,12 +980,16 @@ namespace CustomizedTypeSpec.Models
         /// </item>
         /// </list>
         /// </summary>
+        /// <param name="accept"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="accept"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> GetUnknownValueAsync(RequestOptions options)
+        public virtual async Task<ClientResult> GetUnknownValueAsync(string accept, RequestOptions options)
         {
-            using PipelineMessage message = CreateGetUnknownValueRequest(options);
+            Argument.AssertNotNull(accept, nameof(accept));
+
+            using PipelineMessage message = CreateGetUnknownValueRequest(accept, options);
             return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
@@ -981,18 +1003,23 @@ namespace CustomizedTypeSpec.Models
         /// </item>
         /// </list>
         /// </summary>
+        /// <param name="accept"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="accept"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult GetUnknownValue(RequestOptions options)
+        public virtual ClientResult GetUnknownValue(string accept, RequestOptions options)
         {
-            using PipelineMessage message = CreateGetUnknownValueRequest(options);
+            Argument.AssertNotNull(accept, nameof(accept));
+
+            using PipelineMessage message = CreateGetUnknownValueRequest(accept, options);
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
         /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Internal protocol. </remarks>
         public virtual async Task<ClientResult<Thing>> InternalProtocolAsync(Thing body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1005,6 +1032,7 @@ namespace CustomizedTypeSpec.Models
         /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Internal protocol. </remarks>
         public virtual ClientResult<Thing> InternalProtocol(Thing body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1061,6 +1089,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
+        /// <remarks> Still convenient. </remarks>
         public virtual async Task<ClientResult> StillConvenientValueAsync()
         {
             ClientResult result = await StillConvenientAsync(null).ConfigureAwait(false);
@@ -1068,6 +1097,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
+        /// <remarks> Still convenient. </remarks>
         public virtual ClientResult StillConvenientValue()
         {
             ClientResult result = StillConvenient(null);
@@ -1198,7 +1228,7 @@ namespace CustomizedTypeSpec.Models
             request.Uri = uri.ToUri();
             request.Headers.Set("p1", p1);
             request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("Content-Type", "text/plain");
+            request.Headers.Set("content-type", "text/plain");
             request.Content = content;
             message.Apply(options);
             return message;
@@ -1365,7 +1395,6 @@ namespace CustomizedTypeSpec.Models
             uri.Reset(_endpoint);
             uri.AppendPath("/", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Repeatability-First-Sent", DateTimeOffset.Now.ToString("R"));
             message.Apply(options);
             return message;
@@ -1403,7 +1432,7 @@ namespace CustomizedTypeSpec.Models
             return message;
         }
 
-        internal PipelineMessage CreateGetUnknownValueRequest(RequestOptions options)
+        internal PipelineMessage CreateGetUnknownValueRequest(string accept, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
@@ -1413,7 +1442,7 @@ namespace CustomizedTypeSpec.Models
             uri.Reset(_endpoint);
             uri.AppendPath("/unknown-value", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Accept", accept);
             message.Apply(options);
             return message;
         }
@@ -1445,7 +1474,6 @@ namespace CustomizedTypeSpec.Models
             uri.Reset(_endpoint);
             uri.AppendPath("/stillConvenient", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1461,7 +1489,6 @@ namespace CustomizedTypeSpec.Models
             uri.AppendPath("/headAsBoolean/", false);
             uri.AppendPath(id, true);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }

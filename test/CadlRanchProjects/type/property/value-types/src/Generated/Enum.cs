@@ -36,7 +36,7 @@ namespace _Type.Property.ValueTypes
         /// <summary> Initializes a new instance of Enum. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Enum(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -46,6 +46,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Enum.xml" path="doc/members/member[@name='GetEnumAsync(CancellationToken)']/*" />
         public virtual async Task<Response<EnumProperty>> GetEnumAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Enum.xml" path="doc/members/member[@name='GetEnum(CancellationToken)']/*" />
         public virtual Response<EnumProperty> GetEnum(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Enum.xml" path="doc/members/member[@name='PutAsync(EnumProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(EnumProperty body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Enum.xml" path="doc/members/member[@name='Put(EnumProperty,CancellationToken)']/*" />
         public virtual Response Put(EnumProperty body, CancellationToken cancellationToken = default)
         {
@@ -264,7 +268,6 @@ namespace _Type.Property.ValueTypes
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/value-types/enum", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

@@ -36,7 +36,7 @@ namespace Parameters.Spread
         /// <summary> Initializes a new instance of Model. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Model(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -45,7 +45,7 @@ namespace Parameters.Spread
         }
 
         /// <summary> Spread as request body. </summary>
-        /// <param name="bodyParameter"> This is a simple model. </param>
+        /// <param name="bodyParameter"> The <see cref="BodyParameter"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBodyAsync(BodyParameter,CancellationToken)']/*" />
@@ -60,7 +60,7 @@ namespace Parameters.Spread
         }
 
         /// <summary> Spread as request body. </summary>
-        /// <param name="bodyParameter"> This is a simple model. </param>
+        /// <param name="bodyParameter"> The <see cref="BodyParameter"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBody(BodyParameter,CancellationToken)']/*" />
@@ -467,7 +467,7 @@ namespace Parameters.Spread
         /// <summary> Spread composite request mix. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="testHeader"> The <see cref="string"/> to use. </param>
-        /// <param name="compositeRequestMix"> This is a model with non-body http request decorator. </param>
+        /// <param name="compositeRequestMix"> The <see cref="CompositeRequestMix"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="compositeRequestMix"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
@@ -487,7 +487,7 @@ namespace Parameters.Spread
         /// <summary> Spread composite request mix. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="testHeader"> The <see cref="string"/> to use. </param>
-        /// <param name="compositeRequestMix"> This is a model with non-body http request decorator. </param>
+        /// <param name="compositeRequestMix"> The <see cref="CompositeRequestMix"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="compositeRequestMix"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
@@ -601,7 +601,6 @@ namespace Parameters.Spread
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/spread/model/request-body", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -616,7 +615,6 @@ namespace Parameters.Spread
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/spread/model/composite-request-only-with-body", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -633,7 +631,6 @@ namespace Parameters.Spread
             uri.AppendPath(name, true);
             request.Uri = uri;
             request.Headers.Add("test-header", testHeader);
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -648,7 +645,6 @@ namespace Parameters.Spread
             uri.AppendPath(name, true);
             request.Uri = uri;
             request.Headers.Add("test-header", testHeader);
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -665,7 +661,6 @@ namespace Parameters.Spread
             uri.AppendPath(name, true);
             request.Uri = uri;
             request.Headers.Add("test-header", testHeader);
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

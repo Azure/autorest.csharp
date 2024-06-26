@@ -34,14 +34,14 @@ namespace CustomizationsInTsp
         }
 
         /// <summary> Initializes a new instance of CustomizationsInTspClient. </summary>
-        /// <param name="endpoint"> Service endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public CustomizationsInTspClient(Uri endpoint) : this(endpoint, new CustomizationsInTspClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of CustomizationsInTspClient. </summary>
-        /// <param name="endpoint"> Service endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public CustomizationsInTspClient(Uri endpoint, CustomizationsInTspClientOptions options)
@@ -58,6 +58,7 @@ namespace CustomizationsInTsp
         /// <param name="input"> The <see cref="RootModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <remarks> Round trip. </remarks>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='RoundTripAsync(RootModel,CancellationToken)']/*" />
         public virtual async Task<Response<RootModel>> RoundTripAsync(RootModel input, CancellationToken cancellationToken = default)
         {
@@ -73,6 +74,7 @@ namespace CustomizationsInTsp
         /// <param name="input"> The <see cref="RootModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <remarks> Round trip. </remarks>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='RoundTrip(RootModel,CancellationToken)']/*" />
         public virtual Response<RootModel> RoundTrip(RootModel input, CancellationToken cancellationToken = default)
         {
@@ -166,6 +168,7 @@ namespace CustomizationsInTsp
         /// <param name="input"> The <see cref="RenamedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <remarks> Foo. </remarks>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='FooAsync(RenamedModel,CancellationToken)']/*" />
         public virtual async Task<Response<RenamedModel>> FooAsync(RenamedModel input, CancellationToken cancellationToken = default)
         {
@@ -181,6 +184,7 @@ namespace CustomizationsInTsp
         /// <param name="input"> The <see cref="RenamedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <remarks> Foo. </remarks>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='Foo(RenamedModel,CancellationToken)']/*" />
         public virtual Response<RenamedModel> Foo(RenamedModel input, CancellationToken cancellationToken = default)
         {
@@ -271,30 +275,32 @@ namespace CustomizationsInTsp
         }
 
         /// <summary> Sample operation with request body using a model parameter with a spread operator. </summary>
-        /// <param name="renamedModel"> Renamed model (original name: ModelToRename). </param>
+        /// <param name="modelToRename"> The <see cref="RenamedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="renamedModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="modelToRename"/> is null. </exception>
+        /// <remarks> Bar. </remarks>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='BarAsync(RenamedModel,CancellationToken)']/*" />
-        public virtual async Task<Response<RenamedModel>> BarAsync(RenamedModel renamedModel, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RenamedModel>> BarAsync(RenamedModel modelToRename, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(renamedModel, nameof(renamedModel));
+            Argument.AssertNotNull(modelToRename, nameof(modelToRename));
 
-            using RequestContent content = renamedModel.ToRequestContent();
+            using RequestContent content = modelToRename.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await BarAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(RenamedModel.FromResponse(response), response);
         }
 
         /// <summary> Sample operation with request body using a model parameter with a spread operator. </summary>
-        /// <param name="renamedModel"> Renamed model (original name: ModelToRename). </param>
+        /// <param name="modelToRename"> The <see cref="RenamedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="renamedModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="modelToRename"/> is null. </exception>
+        /// <remarks> Bar. </remarks>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='Bar(RenamedModel,CancellationToken)']/*" />
-        public virtual Response<RenamedModel> Bar(RenamedModel renamedModel, CancellationToken cancellationToken = default)
+        public virtual Response<RenamedModel> Bar(RenamedModel modelToRename, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(renamedModel, nameof(renamedModel));
+            Argument.AssertNotNull(modelToRename, nameof(modelToRename));
 
-            using RequestContent content = renamedModel.ToRequestContent();
+            using RequestContent content = modelToRename.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Bar(content, context);
             return Response.FromValue(RenamedModel.FromResponse(response), response);

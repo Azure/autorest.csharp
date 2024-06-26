@@ -31,7 +31,7 @@ namespace OpenAI
         /// <summary> Initializes a new instance of FineTuningJobs. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
-        /// <param name="endpoint"> OpenAI Endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal FineTuningJobs(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -49,6 +49,7 @@ namespace OpenAI
         /// </summary>
         /// <param name="job"> The <see cref="CreateFineTuningJobRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="job"/> is null. </exception>
+        /// <remarks> Create. </remarks>
         public virtual async Task<ClientResult<FineTuningJob>> CreateAsync(CreateFineTuningJobRequest job)
         {
             Argument.AssertNotNull(job, nameof(job));
@@ -68,6 +69,7 @@ namespace OpenAI
         /// </summary>
         /// <param name="job"> The <see cref="CreateFineTuningJobRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="job"/> is null. </exception>
+        /// <remarks> Create. </remarks>
         public virtual ClientResult<FineTuningJob> Create(CreateFineTuningJobRequest job)
         {
             Argument.AssertNotNull(job, nameof(job));

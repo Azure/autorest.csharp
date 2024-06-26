@@ -29,7 +29,7 @@ describe("Test GetInputType for array", () => {
         const sdkContext = createNetSdkContext(context);
         const root = createModel(sdkContext);
         deepStrictEqual(
-            root.Clients[0].Operations[0].Parameters[0].Type.Kind,
+            root.Clients[0].Operations[0].Parameters[3].Type.Kind,
             "array"
         );
         deepStrictEqual(
@@ -38,9 +38,9 @@ describe("Test GetInputType for array", () => {
                 ValueType: {
                     Kind: "string",
                     Encode: undefined
-                }
+                },
             } as InputArrayType,
-            root.Clients[0].Operations[0].Parameters[0].Type
+            root.Clients[0].Operations[0].Parameters[3].Type
         );
     });
 
@@ -64,7 +64,7 @@ describe("Test GetInputType for array", () => {
                 ValueType: {
                     Kind: "string",
                     Encode: undefined
-                }
+                },
             } as InputArrayType,
             root.Clients[0].Operations[0].Responses[0].BodyType
         );
@@ -134,12 +134,12 @@ describe("Test GetInputType for enum", () => {
                 IsExtensible: false,
                 Usage: "Input"
             } as InputEnumType,
-            root.Clients[0].Operations[0].Parameters[0].Type,
+            root.Clients[0].Operations[0].Parameters[3].Type,
             `Enum type is not correct, got ${JSON.stringify(
-                root.Clients[0].Operations[0].Parameters[0].Type
+                root.Clients[0].Operations[0].Parameters[3].Type
             )}`
         );
-        const type = root.Clients[0].Operations[0].Parameters[0]
+        const type = root.Clients[0].Operations[0].Parameters[3]
             .Type as InputEnumType;
         assert(type.ValueType !== undefined);
         deepStrictEqual(type.Name, "SimpleEnum");
@@ -201,12 +201,12 @@ describe("Test GetInputType for enum", () => {
                 IsExtensible: false,
                 Usage: "Input"
             } as InputEnumType,
-            root.Clients[0].Operations[0].Parameters[0].Type,
+            root.Clients[0].Operations[0].Parameters[3].Type,
             `Enum type is not correct, got ${JSON.stringify(
-                root.Clients[0].Operations[0].Parameters[0].Type
+                root.Clients[0].Operations[0].Parameters[3].Type
             )}`
         );
-        const type = root.Clients[0].Operations[0].Parameters[0]
+        const type = root.Clients[0].Operations[0].Parameters[3]
             .Type as InputEnumType;
         assert(type.ValueType !== undefined);
         deepStrictEqual(type.Name, "FixedIntEnum");
@@ -249,12 +249,12 @@ describe("Test GetInputType for enum", () => {
                 IsExtensible: false,
                 Usage: "Input"
             } as InputEnumType,
-            root.Clients[0].Operations[0].Parameters[0].Type,
+            root.Clients[0].Operations[0].Parameters[3].Type,
             `Enum type is not correct, got ${JSON.stringify(
-                root.Clients[0].Operations[0].Parameters[0].Type
+                root.Clients[0].Operations[0].Parameters[3].Type
             )}`
         );
-        const type = root.Clients[0].Operations[0].Parameters[0]
+        const type = root.Clients[0].Operations[0].Parameters[3]
             .Type as InputEnumType;
         assert(type.ValueType !== undefined);
         deepStrictEqual(type.Name, "FixedEnum");

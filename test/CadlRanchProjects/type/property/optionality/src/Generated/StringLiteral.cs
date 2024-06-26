@@ -36,7 +36,7 @@ namespace _Type.Property.Optionality
         /// <summary> Initializes a new instance of StringLiteral. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal StringLiteral(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -46,6 +46,7 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get all. </remarks>
         /// <include file="Docs/StringLiteral.xml" path="doc/members/member[@name='GetAllAsync(CancellationToken)']/*" />
         public virtual async Task<Response<StringLiteralProperty>> GetAllAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get all. </remarks>
         /// <include file="Docs/StringLiteral.xml" path="doc/members/member[@name='GetAll(CancellationToken)']/*" />
         public virtual Response<StringLiteralProperty> GetAll(CancellationToken cancellationToken = default)
         {
@@ -136,6 +138,7 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get default. </remarks>
         /// <include file="Docs/StringLiteral.xml" path="doc/members/member[@name='GetDefaultAsync(CancellationToken)']/*" />
         public virtual async Task<Response<StringLiteralProperty>> GetDefaultAsync(CancellationToken cancellationToken = default)
         {
@@ -146,6 +149,7 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get default. </remarks>
         /// <include file="Docs/StringLiteral.xml" path="doc/members/member[@name='GetDefault(CancellationToken)']/*" />
         public virtual Response<StringLiteralProperty> GetDefault(CancellationToken cancellationToken = default)
         {
@@ -228,6 +232,7 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="StringLiteralProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put all. </remarks>
         /// <include file="Docs/StringLiteral.xml" path="doc/members/member[@name='PutAllAsync(StringLiteralProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAllAsync(StringLiteralProperty body, CancellationToken cancellationToken = default)
         {
@@ -243,6 +248,7 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="StringLiteralProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put all. </remarks>
         /// <include file="Docs/StringLiteral.xml" path="doc/members/member[@name='PutAll(StringLiteralProperty,CancellationToken)']/*" />
         public virtual Response PutAll(StringLiteralProperty body, CancellationToken cancellationToken = default)
         {
@@ -336,6 +342,7 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="StringLiteralProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put default. </remarks>
         /// <include file="Docs/StringLiteral.xml" path="doc/members/member[@name='PutDefaultAsync(StringLiteralProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutDefaultAsync(StringLiteralProperty body, CancellationToken cancellationToken = default)
         {
@@ -351,6 +358,7 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="StringLiteralProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put default. </remarks>
         /// <include file="Docs/StringLiteral.xml" path="doc/members/member[@name='PutDefault(StringLiteralProperty,CancellationToken)']/*" />
         public virtual Response PutDefault(StringLiteralProperty body, CancellationToken cancellationToken = default)
         {
@@ -475,7 +483,6 @@ namespace _Type.Property.Optionality
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/optional/string/literal/all", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -490,7 +497,6 @@ namespace _Type.Property.Optionality
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/optional/string/literal/default", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

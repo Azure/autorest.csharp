@@ -37,7 +37,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <summary> Initializes a new instance of TwoModelsAsPageItem. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="apiVersion"> The API version to use for this operation. </param>
         internal TwoModelsAsPageItem(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
@@ -49,6 +49,7 @@ namespace _Specs_.Azure.Core.Basic
 
         /// <summary> Two operations with two different page item types should be successfully generated. Should generate model for FirstItem. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> List first item. </remarks>
         /// <include file="Docs/TwoModelsAsPageItem.xml" path="doc/members/member[@name='GetFirstItemsAsync(CancellationToken)']/*" />
         public virtual AsyncPageable<FirstItem> GetFirstItemsAsync(CancellationToken cancellationToken = default)
         {
@@ -60,6 +61,7 @@ namespace _Specs_.Azure.Core.Basic
 
         /// <summary> Two operations with two different page item types should be successfully generated. Should generate model for FirstItem. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> List first item. </remarks>
         /// <include file="Docs/TwoModelsAsPageItem.xml" path="doc/members/member[@name='GetFirstItems(CancellationToken)']/*" />
         public virtual Pageable<FirstItem> GetFirstItems(CancellationToken cancellationToken = default)
         {
@@ -123,6 +125,7 @@ namespace _Specs_.Azure.Core.Basic
 
         /// <summary> Two operations with two different page item types should be successfully generated. Should generate model for SecondItem. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> List second item. </remarks>
         /// <include file="Docs/TwoModelsAsPageItem.xml" path="doc/members/member[@name='GetSecondItemsAsync(CancellationToken)']/*" />
         public virtual AsyncPageable<SecondItem> GetSecondItemsAsync(CancellationToken cancellationToken = default)
         {
@@ -134,6 +137,7 @@ namespace _Specs_.Azure.Core.Basic
 
         /// <summary> Two operations with two different page item types should be successfully generated. Should generate model for SecondItem. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> List second item. </remarks>
         /// <include file="Docs/TwoModelsAsPageItem.xml" path="doc/members/member[@name='GetSecondItems(CancellationToken)']/*" />
         public virtual Pageable<SecondItem> GetSecondItems(CancellationToken cancellationToken = default)
         {

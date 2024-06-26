@@ -36,7 +36,7 @@ namespace _Type.Property.AdditionalProperties
         /// <summary> Initializes a new instance of SpreadDifferentModel. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal SpreadDifferentModel(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -46,6 +46,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/SpreadDifferentModel.xml" path="doc/members/member[@name='GetSpreadDifferentModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DifferentSpreadModelRecord>> GetSpreadDifferentModelAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/SpreadDifferentModel.xml" path="doc/members/member[@name='GetSpreadDifferentModel(CancellationToken)']/*" />
         public virtual Response<DifferentSpreadModelRecord> GetSpreadDifferentModel(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/SpreadDifferentModel.xml" path="doc/members/member[@name='PutAsync(DifferentSpreadModelRecord,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(DifferentSpreadModelRecord body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/SpreadDifferentModel.xml" path="doc/members/member[@name='Put(DifferentSpreadModelRecord,CancellationToken)']/*" />
         public virtual Response Put(DifferentSpreadModelRecord body, CancellationToken cancellationToken = default)
         {
@@ -264,7 +268,6 @@ namespace _Type.Property.AdditionalProperties
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/additionalProperties/spreadDifferentRecordModel", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

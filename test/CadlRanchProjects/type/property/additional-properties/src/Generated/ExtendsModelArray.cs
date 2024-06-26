@@ -36,7 +36,7 @@ namespace _Type.Property.AdditionalProperties
         /// <summary> Initializes a new instance of ExtendsModelArray. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal ExtendsModelArray(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -46,6 +46,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/ExtendsModelArray.xml" path="doc/members/member[@name='GetExtendsModelArrayAsync(CancellationToken)']/*" />
         public virtual async Task<Response<ExtendsModelArrayAdditionalProperties>> GetExtendsModelArrayAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/ExtendsModelArray.xml" path="doc/members/member[@name='GetExtendsModelArray(CancellationToken)']/*" />
         public virtual Response<ExtendsModelArrayAdditionalProperties> GetExtendsModelArray(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/ExtendsModelArray.xml" path="doc/members/member[@name='PutAsync(ExtendsModelArrayAdditionalProperties,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(ExtendsModelArrayAdditionalProperties body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/ExtendsModelArray.xml" path="doc/members/member[@name='Put(ExtendsModelArrayAdditionalProperties,CancellationToken)']/*" />
         public virtual Response Put(ExtendsModelArrayAdditionalProperties body, CancellationToken cancellationToken = default)
         {
@@ -264,7 +268,6 @@ namespace _Type.Property.AdditionalProperties
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/additionalProperties/extendsRecordModelArray", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

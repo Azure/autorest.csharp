@@ -32,7 +32,7 @@ namespace SpecialHeaders.Repeatability
         }
 
         /// <summary> Initializes a new instance of RepeatabilityClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public RepeatabilityClient(Uri endpoint, RepeatabilityClientOptions options)
@@ -118,7 +118,6 @@ namespace SpecialHeaders.Repeatability
             request.Uri = uri;
             request.Headers.Add("Repeatability-Request-ID", Guid.NewGuid());
             request.Headers.Add("Repeatability-First-Sent", DateTimeOffset.Now, "R");
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

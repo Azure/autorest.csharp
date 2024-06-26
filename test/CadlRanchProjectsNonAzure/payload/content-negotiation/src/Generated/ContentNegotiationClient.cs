@@ -9,7 +9,7 @@ using System.Threading;
 namespace Scm.Payload.ContentNegotiation
 {
     // Data plane generated client.
-    /// <summary> The ContentNegotiation service client. </summary>
+    /// <summary> Test describing optionality of the request body. </summary>
     public partial class ContentNegotiationClient
     {
         private readonly ClientPipeline _pipeline;
@@ -24,7 +24,7 @@ namespace Scm.Payload.ContentNegotiation
         }
 
         /// <summary> Initializes a new instance of ContentNegotiationClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ContentNegotiationClient(Uri endpoint, ContentNegotiationClientOptions options)

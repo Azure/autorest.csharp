@@ -78,14 +78,15 @@ namespace CadlRanchProjectsNonAzure.Tests
         [Test]
         public Task Client_Naming_Model_client() => Test(async (host) =>
         {
-            var response = await new NamingClient(host, null).GetClientModelClient().ClientAsync(new Scm.Client.Naming.Models.ClientModel(true));
+            // rollback after https://github.com/Azure/typespec-azure/issues/1091 is fixed
+            var response = await new NamingClient(host, null).GetModelClient().ClientAsync(new Scm.Client.Naming.Models.ClientModel(true));
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
         public Task Client_Naming_Model_language() => Test(async (host) =>
         {
-            var response = await new NamingClient(host, null).GetClientModelClient().LanguageAsync(new CSModel(true));
+            var response = await new NamingClient(host, null).GetModelClient().LanguageAsync(new CSModel(true));
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 

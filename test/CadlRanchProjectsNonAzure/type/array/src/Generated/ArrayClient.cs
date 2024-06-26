@@ -9,7 +9,7 @@ using System.Threading;
 namespace Scm._Type._Array
 {
     // Data plane generated client.
-    /// <summary> The Array service client. </summary>
+    /// <summary> Illustrates various types of arrays. </summary>
     public partial class ArrayClient
     {
         private readonly ClientPipeline _pipeline;
@@ -24,7 +24,7 @@ namespace Scm._Type._Array
         }
 
         /// <summary> Initializes a new instance of ArrayClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ArrayClient(Uri endpoint, ArrayClientOptions options)

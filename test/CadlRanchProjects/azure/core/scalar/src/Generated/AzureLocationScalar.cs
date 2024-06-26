@@ -36,7 +36,7 @@ namespace _Specs_.Azure.Core.Scalar
         /// <summary> Initializes a new instance of AzureLocationScalar. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal AzureLocationScalar(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -46,6 +46,7 @@ namespace _Specs_.Azure.Core.Scalar
 
         /// <summary> get azureLocation value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='GetAzureLocationScalarAsync(CancellationToken)']/*" />
         public virtual async Task<Response<AzureLocation>> GetAzureLocationScalarAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Specs_.Azure.Core.Scalar
 
         /// <summary> get azureLocation value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='GetAzureLocationScalar(CancellationToken)']/*" />
         public virtual Response<AzureLocation> GetAzureLocationScalar(CancellationToken cancellationToken = default)
         {
@@ -137,6 +139,7 @@ namespace _Specs_.Azure.Core.Scalar
         /// <summary> put azureLocation value. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='PutAsync(AzureLocation,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(AzureLocation body, CancellationToken cancellationToken = default)
         {
@@ -149,6 +152,7 @@ namespace _Specs_.Azure.Core.Scalar
         /// <summary> put azureLocation value. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='Put(AzureLocation,CancellationToken)']/*" />
         public virtual Response Put(AzureLocation body, CancellationToken cancellationToken = default)
         {
@@ -240,6 +244,7 @@ namespace _Specs_.Azure.Core.Scalar
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Post. </remarks>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='PostAsync(AzureLocationModel,CancellationToken)']/*" />
         public virtual async Task<Response<AzureLocationModel>> PostAsync(AzureLocationModel body, CancellationToken cancellationToken = default)
         {
@@ -255,6 +260,7 @@ namespace _Specs_.Azure.Core.Scalar
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Post. </remarks>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='Post(AzureLocationModel,CancellationToken)']/*" />
         public virtual Response<AzureLocationModel> Post(AzureLocationModel body, CancellationToken cancellationToken = default)
         {
@@ -494,7 +500,6 @@ namespace _Specs_.Azure.Core.Scalar
             uri.Reset(_endpoint);
             uri.AppendPath("/azure/core/scalar/azureLocation", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -525,7 +530,6 @@ namespace _Specs_.Azure.Core.Scalar
             uri.AppendPath("/azure/core/scalar/azureLocation/header", false);
             request.Uri = uri;
             request.Headers.Add("region", region);
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -539,7 +543,6 @@ namespace _Specs_.Azure.Core.Scalar
             uri.AppendPath("/azure/core/scalar/azureLocation/query", false);
             uri.AppendQuery("region", region, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

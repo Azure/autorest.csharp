@@ -36,7 +36,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <summary> Initializes a new instance of RelativeModelInOperation. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal RelativeModelInOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -60,6 +60,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <remarks> Operation. </remarks>
         internal virtual async Task<Response<OuterModel>> OperationAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -85,6 +86,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <remarks> Operation. </remarks>
         internal virtual Response<OuterModel> Operation(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -203,6 +205,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="kind"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
+        /// <remarks> Discriminator. </remarks>
         internal virtual async Task<Response<AbstractModel>> DiscriminatorAsync(string kind, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(kind, nameof(kind));
@@ -225,6 +228,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="kind"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
+        /// <remarks> Discriminator. </remarks>
         internal virtual Response<AbstractModel> Discriminator(string kind, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(kind, nameof(kind));

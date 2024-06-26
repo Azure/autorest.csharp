@@ -1061,7 +1061,7 @@ default
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
             InputRecursiveModel input = new InputRecursiveModel("<message>");
-            Response response = await client.InputRecursiveAsync(input);
+            Response<ErrorModel> response = await client.InputRecursiveAsync(input);
         }
 
         [Test]
@@ -1089,7 +1089,7 @@ default
             {
                 Inner = default,
             };
-            Response response = await client.InputRecursiveAsync(input);
+            Response<ErrorModel> response = await client.InputRecursiveAsync(input);
         }
 
         [Test]

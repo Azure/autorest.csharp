@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 namespace MixApiVersion
 {
     // Data plane generated sub-client.
-    /// <summary> Manage your pets. You can delete or get the Pet from pet store. </summary>
+    /// <summary> Manage your pets. </summary>
     public partial class Pets
     {
         private readonly HttpPipeline _pipeline;
@@ -35,7 +35,7 @@ namespace MixApiVersion
         /// <summary> Initializes a new instance of Pets. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Endpoint Service. </param>
         /// <param name="apiVersion"> The API version to use for this operation. </param>
         internal Pets(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
@@ -282,7 +282,7 @@ namespace MixApiVersion
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/pets", false);
-            uri.AppendQuery("apiVersion", "2022-07-09", true);
+            uri.AppendQuery("apiVersion", "2022-11-30-preview", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

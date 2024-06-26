@@ -28,7 +28,7 @@
     }
    ],
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Input"
   },
   {
    "$id": "6",
@@ -101,8 +101,7 @@
        "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
        "Type": {
         "$id": "16",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "uri"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -135,8 +134,7 @@
         "$id": "18",
         "Type": {
          "$id": "19",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "v1.2"
        }
@@ -151,13 +149,11 @@
         "Encode": "string"
        },
        "Location": "Path",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
@@ -166,25 +162,20 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "23",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "24",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "24",
-        "Type": {
-         "$ref": "23"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [

@@ -36,18 +36,17 @@
      "$id": "6",
      "Name": "valid",
      "ResourceName": "Custom",
-     "Description": "Check whether client is authenticated",
+     "Summary": "Check whether client is authenticated",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "7",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
+       "Description": "Service host",
        "Type": {
         "$id": "8",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -62,42 +61,15 @@
         "$id": "9",
         "Type": {
          "$id": "10",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "11",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "12",
-        "Kind": "string",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "13",
-        "Type": {
-         "$ref": "12"
-        },
-        "Value": "application/json"
        }
       }
      ],
      "Responses": [
       {
-       "$id": "14",
+       "$id": "11",
        "StatusCodes": [
         204
        ],
@@ -108,78 +80,58 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{host}",
+     "Uri": "{endpoint}",
      "Path": "/authentication/http/custom/valid",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "15",
+     "$id": "12",
      "Name": "invalid",
      "ResourceName": "Custom",
-     "Description": "Check whether client is authenticated.",
+     "Summary": "Check whether client is authenticated.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"
       },
       {
-       "$id": "16",
+       "$id": "13",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "17",
-        "Kind": "string",
-        "IsNullable": false
+        "$id": "14",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "15",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "18",
-        "Type": {
-         "$ref": "17"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "19",
+       "$id": "16",
        "StatusCodes": [
         204
        ],
        "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
-      },
-      {
-       "$id": "20",
-       "StatusCodes": [
-        403
-       ],
-       "BodyType": {
-        "$ref": "2"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": true,
-       "ContentTypes": [
-        "application/json"
-       ]
       }
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{host}",
+     "Uri": "{endpoint}",
      "Path": "/authentication/http/custom/invalid",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
@@ -187,7 +139,7 @@
     }
    ],
    "Protocol": {
-    "$id": "21"
+    "$id": "17"
    },
    "Parameters": [
     {
@@ -197,9 +149,9 @@
   }
  ],
  "Auth": {
-  "$id": "22",
+  "$id": "18",
   "ApiKey": {
-   "$id": "23",
+   "$id": "19",
    "Name": "Authorization",
    "Prefix": "SharedAccessKey"
   }

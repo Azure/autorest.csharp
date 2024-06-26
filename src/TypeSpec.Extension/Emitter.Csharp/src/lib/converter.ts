@@ -24,11 +24,11 @@ import { Model } from "@typespec/compiler";
 import { InputEnumTypeValue } from "../type/input-enum-type-value.js";
 import { InputModelProperty } from "../type/input-model-property.js";
 import {
+    InputArrayType,
     InputDateTimeType,
     InputDictionaryType,
     InputDurationType,
     InputEnumType,
-    InputArrayType,
     InputLiteralType,
     InputModelType,
     InputNullableType,
@@ -55,6 +55,8 @@ export function fromSdkType(
     }
     if (sdkType.kind === "model")
         return fromSdkModelType(sdkType, context, models, enums);
+    if (sdkType.kind === "endpoint")
+        return fromSdkEndpointType();
     if (sdkType.kind === "enum")
         return fromSdkEnumType(sdkType, context, enums);
     if (sdkType.kind === "enumvalue")
@@ -87,8 +89,6 @@ export function fromSdkType(
     // we need to resolve these conversions when we adopt getAllOperations
     if (sdkType.kind === "credential")
         throw new Error("Credential type is not supported yet.");
-    if (sdkType.kind === "endpoint")
-        throw new Error("Endpoint type is not supported yet.");
 
     return fromSdkBuiltInType(sdkType);
 }
@@ -423,10 +423,23 @@ function fromSdkArrayType(
     };
 }
 
-function fromUsageFlags(usage: UsageFlags): Usage {
-    if (usage === UsageFlags.Input) return Usage.Input;
-    else if (usage === UsageFlags.Output) return Usage.Output;
-    else if (usage === (UsageFlags.Input | UsageFlags.Output))
-        return Usage.RoundTrip;
-    else return Usage.None;
+function fromUsageFlags(usage: UsageFlags): string {
+    const usages: string[] = [];
+    if ((usage & (UsageFlags.Input) && (usage & UsageFlags.Output)))
+        usages.push(Usage.RoundTrip);
+    else if (usage & UsageFlags.Input) usages.push(Usage.Input);
+    else if (usage & UsageFlags.Output) usages.push(Usage.Output);
+
+    if (usage & UsageFlags.MultipartFormData) usages.push(Usage.Multipart);
+
+    if (usages.length > 0) return usages.join(",");
+
+    return Usage.None;
+}
+
+function fromSdkEndpointType(
+): InputPrimitiveType {
+    return {
+        Kind: "string",
+    };
 }

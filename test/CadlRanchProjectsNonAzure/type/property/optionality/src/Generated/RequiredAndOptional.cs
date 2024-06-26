@@ -27,7 +27,7 @@ namespace Scm._Type.Property.Optionality
 
         /// <summary> Initializes a new instance of RequiredAndOptional. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal RequiredAndOptional(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -35,6 +35,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
+        /// <remarks> Get all. </remarks>
         public virtual async Task<ClientResult<RequiredAndOptionalProperty>> GetAllAsync()
         {
             ClientResult result = await GetAllAsync(null).ConfigureAwait(false);
@@ -42,6 +43,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
+        /// <remarks> Get all. </remarks>
         public virtual ClientResult<RequiredAndOptionalProperty> GetAll()
         {
             ClientResult result = GetAll(null);
@@ -97,6 +99,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Get models that will return only the required properties. </summary>
+        /// <remarks> Get required only. </remarks>
         public virtual async Task<ClientResult<RequiredAndOptionalProperty>> GetRequiredOnlyAsync()
         {
             ClientResult result = await GetRequiredOnlyAsync(null).ConfigureAwait(false);
@@ -104,6 +107,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Get models that will return only the required properties. </summary>
+        /// <remarks> Get required only. </remarks>
         public virtual ClientResult<RequiredAndOptionalProperty> GetRequiredOnly()
         {
             ClientResult result = GetRequiredOnly(null);
@@ -161,6 +165,7 @@ namespace Scm._Type.Property.Optionality
         /// <summary> Put a body with all properties present. </summary>
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put all. </remarks>
         public virtual async Task<ClientResult> PutAllAsync(RequiredAndOptionalProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -173,6 +178,7 @@ namespace Scm._Type.Property.Optionality
         /// <summary> Put a body with all properties present. </summary>
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put all. </remarks>
         public virtual ClientResult PutAll(RequiredAndOptionalProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -241,6 +247,7 @@ namespace Scm._Type.Property.Optionality
         /// <summary> Put a body with only required properties. </summary>
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put required only. </remarks>
         public virtual async Task<ClientResult> PutRequiredOnlyAsync(RequiredAndOptionalProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -253,6 +260,7 @@ namespace Scm._Type.Property.Optionality
         /// <summary> Put a body with only required properties. </summary>
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put required only. </remarks>
         public virtual ClientResult PutRequiredOnly(RequiredAndOptionalProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -358,7 +366,6 @@ namespace Scm._Type.Property.Optionality
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/optional/requiredAndOptional/all", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -375,7 +382,6 @@ namespace Scm._Type.Property.Optionality
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/optional/requiredAndOptional/requiredOnly", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

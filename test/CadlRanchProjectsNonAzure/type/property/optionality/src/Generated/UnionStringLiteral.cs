@@ -27,7 +27,7 @@ namespace Scm._Type.Property.Optionality
 
         /// <summary> Initializes a new instance of UnionStringLiteral. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal UnionStringLiteral(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -35,6 +35,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
+        /// <remarks> Get all. </remarks>
         public virtual async Task<ClientResult<UnionStringLiteralProperty>> GetAllAsync()
         {
             ClientResult result = await GetAllAsync(null).ConfigureAwait(false);
@@ -42,6 +43,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
+        /// <remarks> Get all. </remarks>
         public virtual ClientResult<UnionStringLiteralProperty> GetAll()
         {
             ClientResult result = GetAll(null);
@@ -97,6 +99,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Get models that will return the default object. </summary>
+        /// <remarks> Get default. </remarks>
         public virtual async Task<ClientResult<UnionStringLiteralProperty>> GetDefaultAsync()
         {
             ClientResult result = await GetDefaultAsync(null).ConfigureAwait(false);
@@ -104,6 +107,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Get models that will return the default object. </summary>
+        /// <remarks> Get default. </remarks>
         public virtual ClientResult<UnionStringLiteralProperty> GetDefault()
         {
             ClientResult result = GetDefault(null);
@@ -161,6 +165,7 @@ namespace Scm._Type.Property.Optionality
         /// <summary> Put a body with all properties present. </summary>
         /// <param name="body"> The <see cref="UnionStringLiteralProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put all. </remarks>
         public virtual async Task<ClientResult> PutAllAsync(UnionStringLiteralProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -173,6 +178,7 @@ namespace Scm._Type.Property.Optionality
         /// <summary> Put a body with all properties present. </summary>
         /// <param name="body"> The <see cref="UnionStringLiteralProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put all. </remarks>
         public virtual ClientResult PutAll(UnionStringLiteralProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -241,6 +247,7 @@ namespace Scm._Type.Property.Optionality
         /// <summary> Put a body with default properties. </summary>
         /// <param name="body"> The <see cref="UnionStringLiteralProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put default. </remarks>
         public virtual async Task<ClientResult> PutDefaultAsync(UnionStringLiteralProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -253,6 +260,7 @@ namespace Scm._Type.Property.Optionality
         /// <summary> Put a body with default properties. </summary>
         /// <param name="body"> The <see cref="UnionStringLiteralProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put default. </remarks>
         public virtual ClientResult PutDefault(UnionStringLiteralProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -358,7 +366,6 @@ namespace Scm._Type.Property.Optionality
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/optional/union/string/literal/all", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -375,7 +382,6 @@ namespace Scm._Type.Property.Optionality
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/optional/union/string/literal/default", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

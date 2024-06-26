@@ -27,7 +27,7 @@ namespace Scm.Client.Naming
         }
 
         /// <summary> Initializes a new instance of NamingClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NamingClient(Uri endpoint, NamingClientOptions options)
@@ -455,13 +455,13 @@ namespace Scm.Client.Naming
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        private ClientModel _cachedClientModel;
+        private Model _cachedModel;
         private UnionEnum _cachedUnionEnum;
 
-        /// <summary> Initializes a new instance of ClientModel. </summary>
-        public virtual ClientModel GetClientModelClient()
+        /// <summary> Initializes a new instance of Model. </summary>
+        public virtual Model GetModelClient()
         {
-            return Volatile.Read(ref _cachedClientModel) ?? Interlocked.CompareExchange(ref _cachedClientModel, new ClientModel(_pipeline, _endpoint), null) ?? _cachedClientModel;
+            return Volatile.Read(ref _cachedModel) ?? Interlocked.CompareExchange(ref _cachedModel, new Model(_pipeline, _endpoint), null) ?? _cachedModel;
         }
 
         /// <summary> Initializes a new instance of UnionEnum. </summary>
@@ -480,7 +480,6 @@ namespace Scm.Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/operation", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -496,7 +495,6 @@ namespace Scm.Client.Naming
             uri.AppendPath("/client/naming/parameter", false);
             uri.AppendQuery("defaultName", clientName, true);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -511,7 +509,6 @@ namespace Scm.Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/property/client", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -528,7 +525,6 @@ namespace Scm.Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/property/language", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -545,7 +541,6 @@ namespace Scm.Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/property/compatible-with-encoded-name", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -563,7 +558,6 @@ namespace Scm.Client.Naming
             uri.AppendPath("/client/naming/header", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("default-name", clientName);
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -578,7 +572,6 @@ namespace Scm.Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/header", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }

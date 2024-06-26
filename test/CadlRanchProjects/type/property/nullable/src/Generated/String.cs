@@ -36,7 +36,7 @@ namespace _Type.Property.Nullable
         /// <summary> Initializes a new instance of String. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal String(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -46,6 +46,7 @@ namespace _Type.Property.Nullable
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get non null. </remarks>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetNonNullAsync(CancellationToken)']/*" />
         public virtual async Task<Response<StringProperty>> GetNonNullAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.Nullable
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get non null. </remarks>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetNonNull(CancellationToken)']/*" />
         public virtual Response<StringProperty> GetNonNull(CancellationToken cancellationToken = default)
         {
@@ -136,6 +138,7 @@ namespace _Type.Property.Nullable
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get null. </remarks>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetNullAsync(CancellationToken)']/*" />
         public virtual async Task<Response<StringProperty>> GetNullAsync(CancellationToken cancellationToken = default)
         {
@@ -146,6 +149,7 @@ namespace _Type.Property.Nullable
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get null. </remarks>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetNull(CancellationToken)']/*" />
         public virtual Response<StringProperty> GetNull(CancellationToken cancellationToken = default)
         {
@@ -395,7 +399,6 @@ namespace _Type.Property.Nullable
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/nullable/string/non-null", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/merge-patch+json");
             request.Content = content;
             return message;
@@ -410,7 +413,6 @@ namespace _Type.Property.Nullable
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/nullable/string/null", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/merge-patch+json");
             request.Content = content;
             return message;

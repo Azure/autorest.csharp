@@ -15,8 +15,8 @@ import { PreserveType, stringifyRefs } from "json-serialize-refs";
 import path from "node:path";
 import {
     configurationFileName,
-    tspOutputFileName,
-    packageName
+    packageName,
+    tspOutputFileName
 } from "./constants.js";
 import { createModel } from "./lib/client-model-builder.js";
 import { LoggerLevel } from "./lib/log-level.js";

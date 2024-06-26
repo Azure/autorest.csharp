@@ -32,7 +32,7 @@ namespace _Azure.SpecialHeaders.XmsClientRequestId
         }
 
         /// <summary> Initializes a new instance of XmsClientRequestIdClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public XmsClientRequestIdClient(Uri endpoint, XmsClientRequestIdClientOptions options)
@@ -116,7 +116,6 @@ namespace _Azure.SpecialHeaders.XmsClientRequestId
             uri.Reset(_endpoint);
             uri.AppendPath("/azure/special-headers/x-ms-client-request-id", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

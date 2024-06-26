@@ -35,7 +35,7 @@ namespace _Type.Scalar
         /// <summary> Initializes a new instance of Unknown. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Unknown(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -45,6 +45,7 @@ namespace _Type.Scalar
 
         /// <summary> get unknown value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Unknown.xml" path="doc/members/member[@name='GetUnknownAsync(CancellationToken)']/*" />
         public virtual async Task<Response<BinaryData>> GetUnknownAsync(CancellationToken cancellationToken = default)
         {
@@ -55,6 +56,7 @@ namespace _Type.Scalar
 
         /// <summary> get unknown value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Unknown.xml" path="doc/members/member[@name='GetUnknown(CancellationToken)']/*" />
         public virtual Response<BinaryData> GetUnknown(CancellationToken cancellationToken = default)
         {
@@ -137,6 +139,7 @@ namespace _Type.Scalar
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Unknown.xml" path="doc/members/member[@name='PutAsync(BinaryData,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(BinaryData body, CancellationToken cancellationToken = default)
         {
@@ -152,6 +155,7 @@ namespace _Type.Scalar
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Unknown.xml" path="doc/members/member[@name='Put(BinaryData,CancellationToken)']/*" />
         public virtual Response Put(BinaryData body, CancellationToken cancellationToken = default)
         {
@@ -263,7 +267,6 @@ namespace _Type.Scalar
             uri.Reset(_endpoint);
             uri.AppendPath("/type/scalar/unknown", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

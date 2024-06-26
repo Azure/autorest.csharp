@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 namespace Encode.Bytes
 {
     // Data plane generated client.
-    /// <summary> The Bytes service client. </summary>
+    /// <summary> Test for encode decorator on bytes. </summary>
     public partial class BytesClient
     {
         private readonly HttpPipeline _pipeline;
@@ -31,7 +31,7 @@ namespace Encode.Bytes
         }
 
         /// <summary> Initializes a new instance of BytesClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public BytesClient(Uri endpoint, BytesClientOptions options)

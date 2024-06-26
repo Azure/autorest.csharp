@@ -29,7 +29,7 @@ namespace Payload.MultiPart.Samples
                 id = "<id>",
                 profileImage = File.OpenRead("<filePath>"),
             });
-            Response response = client.Basic(content, "multipart/form-data");
+            Response response = client.Basic(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -45,7 +45,7 @@ namespace Payload.MultiPart.Samples
                 id = "<id>",
                 profileImage = File.OpenRead("<filePath>"),
             });
-            Response response = await client.BasicAsync(content, "multipart/form-data");
+            Response response = await client.BasicAsync(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -81,7 +81,7 @@ namespace Payload.MultiPart.Samples
                 id = "<id>",
                 profileImage = File.OpenRead("<filePath>"),
             });
-            Response response = client.Basic(content, "multipart/form-data");
+            Response response = client.Basic(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -97,7 +97,7 @@ namespace Payload.MultiPart.Samples
                 id = "<id>",
                 profileImage = File.OpenRead("<filePath>"),
             });
-            Response response = await client.BasicAsync(content, "multipart/form-data");
+            Response response = await client.BasicAsync(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -145,7 +145,7 @@ null
 File.OpenRead("<filePath>")
             },
             });
-            Response response = client.Complex(content, "multipart/form-data");
+            Response response = client.Complex(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -173,7 +173,7 @@ null
 File.OpenRead("<filePath>")
             },
             });
-            Response response = await client.ComplexAsync(content, "multipart/form-data");
+            Response response = await client.ComplexAsync(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -227,7 +227,7 @@ null
 File.OpenRead("<filePath>")
             },
             });
-            Response response = client.Complex(content, "multipart/form-data");
+            Response response = client.Complex(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -255,7 +255,7 @@ null
 File.OpenRead("<filePath>")
             },
             });
-            Response response = await client.ComplexAsync(content, "multipart/form-data");
+            Response response = await client.ComplexAsync(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -300,7 +300,7 @@ default
                 },
                 profileImage = File.OpenRead("<filePath>"),
             });
-            Response response = client.JsonPart(content, "multipart/form-data");
+            Response response = client.JsonPart(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -319,7 +319,7 @@ default
                 },
                 profileImage = File.OpenRead("<filePath>"),
             });
-            Response response = await client.JsonPartAsync(content, "multipart/form-data");
+            Response response = await client.JsonPartAsync(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -358,7 +358,7 @@ default
                 },
                 profileImage = File.OpenRead("<filePath>"),
             });
-            Response response = client.JsonPart(content, "multipart/form-data");
+            Response response = client.JsonPart(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -377,7 +377,7 @@ default
                 },
                 profileImage = File.OpenRead("<filePath>"),
             });
-            Response response = await client.JsonPartAsync(content, "multipart/form-data");
+            Response response = await client.JsonPartAsync(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -416,7 +416,7 @@ default
 File.OpenRead("<filePath>")
             },
             });
-            Response response = client.BinaryArrayParts(content, "multipart/form-data");
+            Response response = client.BinaryArrayParts(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -435,7 +435,7 @@ File.OpenRead("<filePath>")
 File.OpenRead("<filePath>")
             },
             });
-            Response response = await client.BinaryArrayPartsAsync(content, "multipart/form-data");
+            Response response = await client.BinaryArrayPartsAsync(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -474,7 +474,7 @@ File.OpenRead("<filePath>")
 File.OpenRead("<filePath>")
             },
             });
-            Response response = client.BinaryArrayParts(content, "multipart/form-data");
+            Response response = client.BinaryArrayParts(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -493,7 +493,7 @@ File.OpenRead("<filePath>")
 File.OpenRead("<filePath>")
             },
             });
-            Response response = await client.BinaryArrayPartsAsync(content, "multipart/form-data");
+            Response response = await client.BinaryArrayPartsAsync(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -535,7 +535,7 @@ city = "<city>",
 }
             },
             });
-            Response response = client.JsonArrayParts(content, "multipart/form-data");
+            Response response = client.JsonArrayParts(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -557,7 +557,7 @@ city = "<city>",
 }
             },
             });
-            Response response = await client.JsonArrayPartsAsync(content, "multipart/form-data");
+            Response response = await client.JsonArrayPartsAsync(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -605,7 +605,7 @@ city = "<city>",
 }
             },
             });
-            Response response = client.JsonArrayParts(content, "multipart/form-data");
+            Response response = client.JsonArrayParts(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -627,7 +627,7 @@ city = "<city>",
 }
             },
             });
-            Response response = await client.JsonArrayPartsAsync(content, "multipart/form-data");
+            Response response = await client.JsonArrayPartsAsync(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -668,7 +668,7 @@ new Address("<city>")
             {
                 profileImage = File.OpenRead("<filePath>"),
             });
-            Response response = client.MultiBinaryParts(content, "multipart/form-data");
+            Response response = client.MultiBinaryParts(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -683,7 +683,7 @@ new Address("<city>")
             {
                 profileImage = File.OpenRead("<filePath>"),
             });
-            Response response = await client.MultiBinaryPartsAsync(content, "multipart/form-data");
+            Response response = await client.MultiBinaryPartsAsync(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -719,7 +719,7 @@ new Address("<city>")
                 profileImage = File.OpenRead("<filePath>"),
                 picture = File.OpenRead("<filePath>"),
             });
-            Response response = client.MultiBinaryParts(content, "multipart/form-data");
+            Response response = client.MultiBinaryParts(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -735,7 +735,7 @@ new Address("<city>")
                 profileImage = File.OpenRead("<filePath>"),
                 picture = File.OpenRead("<filePath>"),
             });
-            Response response = await client.MultiBinaryPartsAsync(content, "multipart/form-data");
+            Response response = await client.MultiBinaryPartsAsync(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -777,7 +777,7 @@ new Address("<city>")
                 id = "<id>",
                 profileImage = File.OpenRead("<filePath>"),
             });
-            Response response = client.CheckFileNameAndContentType(content, "multipart/form-data");
+            Response response = client.CheckFileNameAndContentType(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -793,7 +793,7 @@ new Address("<city>")
                 id = "<id>",
                 profileImage = File.OpenRead("<filePath>"),
             });
-            Response response = await client.CheckFileNameAndContentTypeAsync(content, "multipart/form-data");
+            Response response = await client.CheckFileNameAndContentTypeAsync(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -829,7 +829,7 @@ new Address("<city>")
                 id = "<id>",
                 profileImage = File.OpenRead("<filePath>"),
             });
-            Response response = client.CheckFileNameAndContentType(content, "multipart/form-data");
+            Response response = client.CheckFileNameAndContentType(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -845,7 +845,7 @@ new Address("<city>")
                 id = "<id>",
                 profileImage = File.OpenRead("<filePath>"),
             });
-            Response response = await client.CheckFileNameAndContentTypeAsync(content, "multipart/form-data");
+            Response response = await client.CheckFileNameAndContentTypeAsync(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -880,7 +880,7 @@ new Address("<city>")
             {
                 profileImage = File.OpenRead("<filePath>"),
             });
-            Response response = client.AnonymousModel(content, "multipart/form-data");
+            Response response = client.AnonymousModel(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -895,7 +895,7 @@ new Address("<city>")
             {
                 profileImage = File.OpenRead("<filePath>"),
             });
-            Response response = await client.AnonymousModelAsync(content, "multipart/form-data");
+            Response response = await client.AnonymousModelAsync(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -928,7 +928,7 @@ new Address("<city>")
             {
                 profileImage = File.OpenRead("<filePath>"),
             });
-            Response response = client.AnonymousModel(content, "multipart/form-data");
+            Response response = client.AnonymousModel(content, null);
 
             Console.WriteLine(response.Status);
         }
@@ -943,7 +943,7 @@ new Address("<city>")
             {
                 profileImage = File.OpenRead("<filePath>"),
             });
-            Response response = await client.AnonymousModelAsync(content, "multipart/form-data");
+            Response response = await client.AnonymousModelAsync(content, null);
 
             Console.WriteLine(response.Status);
         }

@@ -37,7 +37,7 @@ namespace AuthoringTypeSpec
         /// <summary> Initializes a new instance of Jobs. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Language Service. </param>
         /// <param name="apiVersion"> The API version to use for this operation. </param>
         internal Jobs(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
@@ -54,6 +54,7 @@ namespace AuthoringTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Get deployment status. </remarks>
         /// <include file="Docs/Jobs.xml" path="doc/members/member[@name='GetDeploymentStatusValueAsync(string,string,string,CancellationToken)']/*" />
         public virtual async Task<Response<DeploymentJob>> GetDeploymentStatusValueAsync(string projectName, string deploymentName, string jobId, CancellationToken cancellationToken = default)
         {
@@ -83,6 +84,7 @@ namespace AuthoringTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Get deployment status. </remarks>
         /// <include file="Docs/Jobs.xml" path="doc/members/member[@name='GetDeploymentStatusValue(string,string,string,CancellationToken)']/*" />
         public virtual Response<DeploymentJob> GetDeploymentStatusValue(string projectName, string deploymentName, string jobId, CancellationToken cancellationToken = default)
         {
@@ -200,6 +202,7 @@ namespace AuthoringTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Get swap deployments status. </remarks>
         /// <include file="Docs/Jobs.xml" path="doc/members/member[@name='GetSwapDeploymentsStatusValueAsync(string,string,string,CancellationToken)']/*" />
         public virtual async Task<Response<SwapDeploymentsJob>> GetSwapDeploymentsStatusValueAsync(string projectName, string deploymentName, string jobId, CancellationToken cancellationToken = default)
         {
@@ -229,6 +232,7 @@ namespace AuthoringTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Get swap deployments status. </remarks>
         /// <include file="Docs/Jobs.xml" path="doc/members/member[@name='GetSwapDeploymentsStatusValue(string,string,string,CancellationToken)']/*" />
         public virtual Response<SwapDeploymentsJob> GetSwapDeploymentsStatusValue(string projectName, string deploymentName, string jobId, CancellationToken cancellationToken = default)
         {

@@ -11,8 +11,8 @@ using Scm.Client.Naming.Models;
 namespace Scm.Client.Naming
 {
     // Data plane generated sub-client.
-    /// <summary> The ClientModel sub-client. </summary>
-    public partial class ClientModel
+    /// <summary> The Model sub-client. </summary>
+    public partial class Model
     {
         private readonly ClientPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -20,24 +20,24 @@ namespace Scm.Client.Naming
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual ClientPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of ClientModel for mocking. </summary>
-        protected ClientModel()
+        /// <summary> Initializes a new instance of Model for mocking. </summary>
+        protected Model()
         {
         }
 
-        /// <summary> Initializes a new instance of ClientModel. </summary>
+        /// <summary> Initializes a new instance of Model. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
-        internal ClientModel(ClientPipeline pipeline, Uri endpoint)
+        /// <param name="endpoint"> Service host. </param>
+        internal Model(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;
         }
 
         /// <summary> Client. </summary>
-        /// <param name="clientModel"> The <see cref="Models.ClientModel"/> to use. </param>
+        /// <param name="clientModel"> The <see cref="ClientModel"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientModel"/> is null. </exception>
-        public virtual async Task<ClientResult> ClientAsync(Models.ClientModel clientModel)
+        public virtual async Task<ClientResult> ClientAsync(ClientModel clientModel)
         {
             Argument.AssertNotNull(clientModel, nameof(clientModel));
 
@@ -47,9 +47,9 @@ namespace Scm.Client.Naming
         }
 
         /// <summary> Client. </summary>
-        /// <param name="clientModel"> The <see cref="Models.ClientModel"/> to use. </param>
+        /// <param name="clientModel"> The <see cref="ClientModel"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientModel"/> is null. </exception>
-        public virtual ClientResult Client(Models.ClientModel clientModel)
+        public virtual ClientResult Client(ClientModel clientModel)
         {
             Argument.AssertNotNull(clientModel, nameof(clientModel));
 
@@ -68,7 +68,7 @@ namespace Scm.Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ClientAsync(Models.ClientModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ClientAsync(ClientModel)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -96,7 +96,7 @@ namespace Scm.Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Client(Models.ClientModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Client(ClientModel)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -204,7 +204,6 @@ namespace Scm.Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/model/client", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -221,7 +220,6 @@ namespace Scm.Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/model/language", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

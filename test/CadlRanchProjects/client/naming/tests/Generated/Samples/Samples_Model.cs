@@ -15,13 +15,13 @@ using NUnit.Framework;
 
 namespace Client.Naming.Samples
 {
-    public partial class Samples_ClientModel
+    public partial class Samples_Model
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Model_Client_ShortVersion()
         {
-            ClientModel client = new NamingClient().GetClientModelClient();
+            Model client = new NamingClient().GetModelClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -36,7 +36,7 @@ namespace Client.Naming.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Model_Client_ShortVersion_Async()
         {
-            ClientModel client = new NamingClient().GetClientModelClient();
+            Model client = new NamingClient().GetModelClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -51,9 +51,9 @@ namespace Client.Naming.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Model_Client_ShortVersion_Convenience()
         {
-            ClientModel client = new NamingClient().GetClientModelClient();
+            Model client = new NamingClient().GetModelClient();
 
-            Models.ClientModel clientModel = new Models.ClientModel(true);
+            ClientModel clientModel = new ClientModel(true);
             Response response = client.Client(clientModel);
         }
 
@@ -61,9 +61,9 @@ namespace Client.Naming.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Model_Client_ShortVersion_Convenience_Async()
         {
-            ClientModel client = new NamingClient().GetClientModelClient();
+            Model client = new NamingClient().GetModelClient();
 
-            Models.ClientModel clientModel = new Models.ClientModel(true);
+            ClientModel clientModel = new ClientModel(true);
             Response response = await client.ClientAsync(clientModel);
         }
 
@@ -71,7 +71,7 @@ namespace Client.Naming.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Model_Client_AllParameters()
         {
-            ClientModel client = new NamingClient().GetClientModelClient();
+            Model client = new NamingClient().GetModelClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -86,7 +86,7 @@ namespace Client.Naming.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Model_Client_AllParameters_Async()
         {
-            ClientModel client = new NamingClient().GetClientModelClient();
+            Model client = new NamingClient().GetModelClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -101,9 +101,9 @@ namespace Client.Naming.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Model_Client_AllParameters_Convenience()
         {
-            ClientModel client = new NamingClient().GetClientModelClient();
+            Model client = new NamingClient().GetModelClient();
 
-            Models.ClientModel clientModel = new Models.ClientModel(true);
+            ClientModel clientModel = new ClientModel(true);
             Response response = client.Client(clientModel);
         }
 
@@ -111,9 +111,9 @@ namespace Client.Naming.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Model_Client_AllParameters_Convenience_Async()
         {
-            ClientModel client = new NamingClient().GetClientModelClient();
+            Model client = new NamingClient().GetModelClient();
 
-            Models.ClientModel clientModel = new Models.ClientModel(true);
+            ClientModel clientModel = new ClientModel(true);
             Response response = await client.ClientAsync(clientModel);
         }
 
@@ -121,7 +121,7 @@ namespace Client.Naming.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Model_Language_ShortVersion()
         {
-            ClientModel client = new NamingClient().GetClientModelClient();
+            Model client = new NamingClient().GetModelClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -136,7 +136,7 @@ namespace Client.Naming.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Model_Language_ShortVersion_Async()
         {
-            ClientModel client = new NamingClient().GetClientModelClient();
+            Model client = new NamingClient().GetModelClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -151,7 +151,7 @@ namespace Client.Naming.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Model_Language_ShortVersion_Convenience()
         {
-            ClientModel client = new NamingClient().GetClientModelClient();
+            Model client = new NamingClient().GetModelClient();
 
             CSModel csModel = new CSModel(true);
             Response response = client.Language(csModel);
@@ -161,7 +161,7 @@ namespace Client.Naming.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Model_Language_ShortVersion_Convenience_Async()
         {
-            ClientModel client = new NamingClient().GetClientModelClient();
+            Model client = new NamingClient().GetModelClient();
 
             CSModel csModel = new CSModel(true);
             Response response = await client.LanguageAsync(csModel);
@@ -171,7 +171,7 @@ namespace Client.Naming.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Model_Language_AllParameters()
         {
-            ClientModel client = new NamingClient().GetClientModelClient();
+            Model client = new NamingClient().GetModelClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -186,7 +186,7 @@ namespace Client.Naming.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Model_Language_AllParameters_Async()
         {
-            ClientModel client = new NamingClient().GetClientModelClient();
+            Model client = new NamingClient().GetModelClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -201,7 +201,7 @@ namespace Client.Naming.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Model_Language_AllParameters_Convenience()
         {
-            ClientModel client = new NamingClient().GetClientModelClient();
+            Model client = new NamingClient().GetModelClient();
 
             CSModel csModel = new CSModel(true);
             Response response = client.Language(csModel);
@@ -211,7 +211,7 @@ namespace Client.Naming.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Model_Language_AllParameters_Convenience_Async()
         {
-            ClientModel client = new NamingClient().GetClientModelClient();
+            Model client = new NamingClient().GetModelClient();
 
             CSModel csModel = new CSModel(true);
             Response response = await client.LanguageAsync(csModel);

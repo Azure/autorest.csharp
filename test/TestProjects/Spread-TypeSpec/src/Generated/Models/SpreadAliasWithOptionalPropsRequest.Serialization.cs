@@ -97,8 +97,8 @@ namespace SpreadTypeSpec.Models
             string name = default;
             string color = default;
             int? age = default;
-            IList<int> items = default;
-            IList<string> elements = default;
+            IReadOnlyList<int> items = default;
+            IReadOnlyList<string> elements = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

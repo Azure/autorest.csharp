@@ -40,7 +40,7 @@ namespace Pagination
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="tokenCredential"> The token credential to copy. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Pagination Service. </param>
         /// <param name="apiVersion"> The API version to use for this operation. </param>
         internal UseFoundationsResourceList(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, TokenCredential tokenCredential, Uri endpoint, string apiVersion)
         {
@@ -53,6 +53,7 @@ namespace Pagination
 
         /// <summary> List upload detail for the discovery resource. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> List. </remarks>
         /// <include file="Docs/UseFoundationsResourceList.xml" path="doc/members/member[@name='GetLedgerEntriesAsync(CancellationToken)']/*" />
         public virtual AsyncPageable<LedgerEntry> GetLedgerEntriesAsync(CancellationToken cancellationToken = default)
         {
@@ -64,6 +65,7 @@ namespace Pagination
 
         /// <summary> List upload detail for the discovery resource. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> List. </remarks>
         /// <include file="Docs/UseFoundationsResourceList.xml" path="doc/members/member[@name='GetLedgerEntries(CancellationToken)']/*" />
         public virtual Pageable<LedgerEntry> GetLedgerEntries(CancellationToken cancellationToken = default)
         {

@@ -44,7 +44,6 @@ export function resolveServers(
             const inputType: InputType = isEndpoint
                 ? ({
                       Kind: "uri",
-                      IsNullable: false
                   } as InputPrimitiveType)
                 : getInputType(context, prop, models, enums);
 
@@ -87,7 +86,6 @@ export function resolveServers(
                 Description: server.description,
                 Type: {
                     Kind: "string",
-                    IsNullable: false
                 } as InputPrimitiveType,
                 Location: RequestLocation.Uri,
                 IsApiVersion: false,
@@ -101,7 +99,6 @@ export function resolveServers(
                 DefaultValue: {
                     Type: {
                         Kind: "string",
-                        IsNullable: false
                     } as InputPrimitiveType,
                     Value: server.url
                 } as InputConstant

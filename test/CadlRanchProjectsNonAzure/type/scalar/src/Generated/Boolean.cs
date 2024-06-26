@@ -26,7 +26,7 @@ namespace Scm._Type.Scalar
 
         /// <summary> Initializes a new instance of Boolean. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Boolean(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -34,6 +34,7 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary> get boolean value. </summary>
+        /// <remarks> Get. </remarks>
         public virtual async Task<ClientResult<bool>> GetBooleanAsync()
         {
             ClientResult result = await GetBooleanAsync(null).ConfigureAwait(false);
@@ -41,6 +42,7 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary> get boolean value. </summary>
+        /// <remarks> Get. </remarks>
         public virtual ClientResult<bool> GetBoolean()
         {
             ClientResult result = GetBoolean(null);
@@ -97,6 +99,7 @@ namespace Scm._Type.Scalar
 
         /// <summary> put boolean value. </summary>
         /// <param name="body"> _. </param>
+        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(bool body)
         {
             using BinaryContent content = BinaryContentHelper.FromObject(body);
@@ -106,6 +109,7 @@ namespace Scm._Type.Scalar
 
         /// <summary> put boolean value. </summary>
         /// <param name="body"> _. </param>
+        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(bool body)
         {
             using BinaryContent content = BinaryContentHelper.FromObject(body);
@@ -194,7 +198,6 @@ namespace Scm._Type.Scalar
             uri.Reset(_endpoint);
             uri.AppendPath("/type/scalar/boolean", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

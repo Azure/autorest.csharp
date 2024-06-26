@@ -27,7 +27,7 @@ namespace Scm._Type.Property.AdditionalProperties
 
         /// <summary> Initializes a new instance of SpreadRecordNonDiscriminatedUnion3. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal SpreadRecordNonDiscriminatedUnion3(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -35,6 +35,7 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary> Get call. </summary>
+        /// <remarks> Get. </remarks>
         public virtual async Task<ClientResult<SpreadRecordForNonDiscriminatedUnion3>> GetSpreadRecordNonDiscriminatedUnion3Async()
         {
             ClientResult result = await GetSpreadRecordNonDiscriminatedUnion3Async(null).ConfigureAwait(false);
@@ -42,6 +43,7 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary> Get call. </summary>
+        /// <remarks> Get. </remarks>
         public virtual ClientResult<SpreadRecordForNonDiscriminatedUnion3> GetSpreadRecordNonDiscriminatedUnion3()
         {
             ClientResult result = GetSpreadRecordNonDiscriminatedUnion3(null);
@@ -99,6 +101,7 @@ namespace Scm._Type.Property.AdditionalProperties
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(SpreadRecordForNonDiscriminatedUnion3 body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -111,6 +114,7 @@ namespace Scm._Type.Property.AdditionalProperties
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(SpreadRecordForNonDiscriminatedUnion3 body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -201,7 +205,6 @@ namespace Scm._Type.Property.AdditionalProperties
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/additionalProperties/spreadRecordNonDiscriminatedUnion3", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

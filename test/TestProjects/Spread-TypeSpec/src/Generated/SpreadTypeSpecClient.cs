@@ -36,14 +36,14 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> Initializes a new instance of SpreadTypeSpecClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Endpoint Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SpreadTypeSpecClient(Uri endpoint) : this(endpoint, new SpreadTypeSpecClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of SpreadTypeSpecClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Endpoint Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SpreadTypeSpecClient(Uri endpoint, SpreadTypeSpecClientOptions options)
@@ -60,6 +60,7 @@ namespace SpreadTypeSpec
         /// <param name="thing"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
+        /// <remarks> Spread model. </remarks>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadModelAsync(Thing,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadModelAsync(Thing thing, CancellationToken cancellationToken = default)
         {
@@ -75,6 +76,7 @@ namespace SpreadTypeSpec
         /// <param name="thing"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
+        /// <remarks> Spread model. </remarks>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadModel(Thing,CancellationToken)']/*" />
         public virtual Response SpreadModel(Thing thing, CancellationToken cancellationToken = default)
         {
@@ -169,6 +171,7 @@ namespace SpreadTypeSpec
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <remarks> Spread alias. </remarks>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasAsync(string,int,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAliasAsync(string name, int age, CancellationToken cancellationToken = default)
         {
@@ -185,6 +188,7 @@ namespace SpreadTypeSpec
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <remarks> Spread alias. </remarks>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAlias(string,int,CancellationToken)']/*" />
         public virtual Response SpreadAlias(string name, int age, CancellationToken cancellationToken = default)
         {
@@ -282,6 +286,7 @@ namespace SpreadTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Spread multi target alias. </remarks>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadMultiTargetAliasAsync(string,int,string,int,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadMultiTargetAliasAsync(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
@@ -302,6 +307,7 @@ namespace SpreadTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Spread multi target alias. </remarks>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadMultiTargetAlias(string,int,string,int,CancellationToken)']/*" />
         public virtual Response SpreadMultiTargetAlias(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
@@ -407,6 +413,7 @@ namespace SpreadTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="thing"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Spread alias with model. </remarks>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithModelAsync(string,int,Thing,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAliasWithModelAsync(string id, int top, Thing thing, CancellationToken cancellationToken = default)
         {
@@ -426,6 +433,7 @@ namespace SpreadTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="thing"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Spread alias with model. </remarks>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithModel(string,int,Thing,CancellationToken)']/*" />
         public virtual Response SpreadAliasWithModel(string id, int top, Thing thing, CancellationToken cancellationToken = default)
         {
@@ -532,6 +540,7 @@ namespace SpreadTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Spread alias with spread alias. </remarks>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAliasAsync(string,int,string,int,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAliasWithSpreadAliasAsync(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
@@ -552,6 +561,7 @@ namespace SpreadTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Spread alias with spread alias. </remarks>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAlias(string,int,string,int,CancellationToken)']/*" />
         public virtual Response SpreadAliasWithSpreadAlias(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
@@ -661,6 +671,7 @@ namespace SpreadTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/> or <paramref name="items"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Spread alias with optional props. </remarks>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalPropsAsync(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAliasWithOptionalPropsAsync(string id, int top, string name, IEnumerable<int> items, string color = null, int? age = null, IEnumerable<string> elements = null, CancellationToken cancellationToken = default)
         {
@@ -673,7 +684,7 @@ namespace SpreadTypeSpec
                 color,
                 age,
                 items.ToList(),
-                elements?.ToList() as IList<string> ?? new ChangeTrackingList<string>(),
+                elements?.ToList() as IReadOnlyList<string> ?? new ChangeTrackingList<string>(),
                 null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadAliasWithOptionalPropsAsync(id, top, spreadAliasWithOptionalPropsRequest.ToRequestContent(), context).ConfigureAwait(false);
@@ -691,6 +702,7 @@ namespace SpreadTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/> or <paramref name="items"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Spread alias with optional props. </remarks>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalProps(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)']/*" />
         public virtual Response SpreadAliasWithOptionalProps(string id, int top, string name, IEnumerable<int> items, string color = null, int? age = null, IEnumerable<string> elements = null, CancellationToken cancellationToken = default)
         {
@@ -703,7 +715,7 @@ namespace SpreadTypeSpec
                 color,
                 age,
                 items.ToList(),
-                elements?.ToList() as IList<string> ?? new ChangeTrackingList<string>(),
+                elements?.ToList() as IReadOnlyList<string> ?? new ChangeTrackingList<string>(),
                 null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadAliasWithOptionalProps(id, top, spreadAliasWithOptionalPropsRequest.ToRequestContent(), context);
@@ -801,12 +813,13 @@ namespace SpreadTypeSpec
         /// <param name="optionalStringList"> optional list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredStringList"/> is null. </exception>
+        /// <remarks> Spread alias with collections. </remarks>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithCollectionsAsync(IEnumerable{string},IEnumerable{string},CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAliasWithCollectionsAsync(IEnumerable<string> requiredStringList, IEnumerable<string> optionalStringList = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
 
-            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList(), optionalStringList?.ToList() as IList<string> ?? new ChangeTrackingList<string>(), null);
+            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList(), optionalStringList?.ToList() as IReadOnlyList<string> ?? new ChangeTrackingList<string>(), null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadAliasWithCollectionsAsync(spreadAliasWithCollectionsRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
@@ -817,12 +830,13 @@ namespace SpreadTypeSpec
         /// <param name="optionalStringList"> optional list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredStringList"/> is null. </exception>
+        /// <remarks> Spread alias with collections. </remarks>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithCollections(IEnumerable{string},IEnumerable{string},CancellationToken)']/*" />
         public virtual Response SpreadAliasWithCollections(IEnumerable<string> requiredStringList, IEnumerable<string> optionalStringList = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
 
-            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList(), optionalStringList?.ToList() as IList<string> ?? new ChangeTrackingList<string>(), null);
+            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList(), optionalStringList?.ToList() as IReadOnlyList<string> ?? new ChangeTrackingList<string>(), null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadAliasWithCollections(spreadAliasWithCollectionsRequest.ToRequestContent(), context);
             return response;
@@ -915,7 +929,6 @@ namespace SpreadTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/spreadModel", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -930,7 +943,6 @@ namespace SpreadTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/spreadAlias", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -947,7 +959,6 @@ namespace SpreadTypeSpec
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("top", top);
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -964,7 +975,6 @@ namespace SpreadTypeSpec
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("top", top);
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -981,7 +991,6 @@ namespace SpreadTypeSpec
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("top", top);
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -998,7 +1007,6 @@ namespace SpreadTypeSpec
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("top", top);
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -1013,7 +1021,6 @@ namespace SpreadTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/spreadAliasWithCollections", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

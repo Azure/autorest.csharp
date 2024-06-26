@@ -7,40 +7,43 @@
   {
    "$id": "2",
    "Kind": "model",
-   "Name": "PagedUser",
-   "CrossLanguageDefinitionId": "Azure.Core.Page",
+   "Name": "User",
+   "CrossLanguageDefinitionId": "Payload.Pageable.User",
    "Usage": "Output",
-   "Description": "Paged collection of User items",
+   "Description": "User model",
    "Properties": [
     {
      "$id": "3",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "User name",
+     "Type": {
+      "$id": "4",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "5",
+   "Kind": "model",
+   "Name": "PagedUser",
+   "CrossLanguageDefinitionId": "Azure.Core.Page",
+   "Usage": "None",
+   "Description": "Paged collection of User items",
+   "Properties": [
+    {
+     "$id": "6",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The User items on this page",
      "Type": {
-      "$id": "4",
+      "$id": "7",
       "Kind": "array",
       "ValueType": {
-       "$id": "5",
-       "Kind": "model",
-       "Name": "User",
-       "CrossLanguageDefinitionId": "Payload.Pageable.User",
-       "Usage": "Output",
-       "Description": "User model",
-       "Properties": [
-        {
-         "$id": "6",
-         "Name": "name",
-         "SerializedName": "name",
-         "Description": "User name",
-         "Type": {
-          "$id": "7",
-          "Kind": "string"
-         },
-         "IsRequired": true,
-         "IsReadOnly": false
-        }
-       ]
+       "$ref": "2"
       }
      },
      "IsRequired": true,
@@ -59,9 +62,6 @@
      "IsReadOnly": false
     }
    ]
-  },
-  {
-   "$ref": "5"
   }
  ],
  "Clients": [
@@ -74,18 +74,17 @@
      "$id": "11",
      "Name": "list",
      "ResourceName": "Pageable",
-     "Description": "List users",
+     "Summary": "List users",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "12",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
+       "Description": "Service host",
        "Type": {
         "$id": "13",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -100,8 +99,7 @@
         "$id": "14",
         "Type": {
          "$id": "15",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
@@ -116,13 +114,11 @@
         "Kind": "int32"
        },
        "Location": "Query",
-       "IsRequired": false,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": false,
        "Kind": "Method"
       },
       {
@@ -131,25 +127,20 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "19",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "20",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "20",
-        "Type": {
-         "$ref": "19"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
@@ -159,7 +150,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "2"
+        "$ref": "5"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -171,13 +162,13 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{host}",
+     "Uri": "{endpoint}",
      "Path": "/payload/pageable",
      "BufferResponse": true,
      "Paging": {
       "$id": "22",
-      "NextLinkName": "nextLink",
-      "ItemName": "value"
+      "ItemName": "value",
+      "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true

@@ -41,7 +41,7 @@ namespace Pagination
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="tokenCredential"> The token credential to copy. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Pagination Service. </param>
         /// <param name="apiVersion"> The API version to use for this operation. </param>
         internal Pools(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, TokenCredential tokenCredential, Uri endpoint, string apiVersion)
         {
@@ -60,6 +60,7 @@ namespace Pagination
         /// <param name="select"> An OData $select clause. </param>
         /// <param name="expand"> An OData $expand clause. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> List pools. </remarks>
         /// <include file="Docs/Pools.xml" path="doc/members/member[@name='GetPoolsAsync(string,IEnumerable{string},IEnumerable{string},CancellationToken)']/*" />
         public virtual AsyncPageable<BatchPool> GetPoolsAsync(string filter = null, IEnumerable<string> select = null, IEnumerable<string> expand = null, CancellationToken cancellationToken = default)
         {
@@ -77,6 +78,7 @@ namespace Pagination
         /// <param name="select"> An OData $select clause. </param>
         /// <param name="expand"> An OData $expand clause. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> List pools. </remarks>
         /// <include file="Docs/Pools.xml" path="doc/members/member[@name='GetPools(string,IEnumerable{string},IEnumerable{string},CancellationToken)']/*" />
         public virtual Pageable<BatchPool> GetPools(string filter = null, IEnumerable<string> select = null, IEnumerable<string> expand = null, CancellationToken cancellationToken = default)
         {

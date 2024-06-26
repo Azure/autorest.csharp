@@ -35,7 +35,7 @@ namespace Encode.Duration
         /// <summary> Initializes a new instance of Query. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Query(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -443,7 +443,6 @@ namespace Encode.Duration
             uri.AppendPath("/encode/duration/query/default", false);
             uri.AppendQuery("input", input, "P", true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -457,7 +456,6 @@ namespace Encode.Duration
             uri.AppendPath("/encode/duration/query/iso8601", false);
             uri.AppendQuery("input", input, "P", true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -471,7 +469,6 @@ namespace Encode.Duration
             uri.AppendPath("/encode/duration/query/int32-seconds", false);
             uri.AppendQuery("input", input, "%s", true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -485,7 +482,6 @@ namespace Encode.Duration
             uri.AppendPath("/encode/duration/query/float-seconds", false);
             uri.AppendQuery("input", input, "s\\.FFF", true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -499,7 +495,6 @@ namespace Encode.Duration
             uri.AppendPath("/encode/duration/query/float64-seconds", false);
             uri.AppendQuery("input", input, "s\\.FFFFFF", true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -516,7 +511,6 @@ namespace Encode.Duration
                 uri.AppendQueryDelimited("input", input, ",", "%s", true);
             }
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

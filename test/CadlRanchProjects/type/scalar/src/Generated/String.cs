@@ -35,7 +35,7 @@ namespace _Type.Scalar
         /// <summary> Initializes a new instance of String. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal String(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -45,6 +45,7 @@ namespace _Type.Scalar
 
         /// <summary> get string value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetStringAsync(CancellationToken)']/*" />
         public virtual async Task<Response<string>> GetStringAsync(CancellationToken cancellationToken = default)
         {
@@ -55,6 +56,7 @@ namespace _Type.Scalar
 
         /// <summary> get string value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetString(CancellationToken)']/*" />
         public virtual Response<string> GetString(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Scalar
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(string body, CancellationToken cancellationToken = default)
         {
@@ -154,6 +157,7 @@ namespace _Type.Scalar
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='Put(string,CancellationToken)']/*" />
         public virtual Response Put(string body, CancellationToken cancellationToken = default)
         {
@@ -265,7 +269,6 @@ namespace _Type.Scalar
             uri.Reset(_endpoint);
             uri.AppendPath("/type/scalar/string", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
