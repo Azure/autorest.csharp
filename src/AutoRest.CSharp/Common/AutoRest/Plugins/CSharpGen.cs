@@ -50,7 +50,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     CodeModelTransformer.TransformForMgmt(codeModel);
                     var inputNamespace = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
-                    InputNamespaceTransformer.Transform(inputNamespace);
                     MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(inputNamespace, sourceInputModel));
                     await MgmtTarget.ExecuteAsync(project);
                     if (Configuration.MgmtTestConfiguration is not null && !Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)
@@ -95,7 +94,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (Configuration.AzureArm)
             {
-                // TODO: Remove this when we have a better way to remove operations, tracking in https://github.com/Azure/typespec-azure/issues/964
                 InputNamespaceTransformer.Transform(rootNamespace);
                 MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(rootNamespace, sourceInputModel));
                 await MgmtTarget.ExecuteAsync(project);

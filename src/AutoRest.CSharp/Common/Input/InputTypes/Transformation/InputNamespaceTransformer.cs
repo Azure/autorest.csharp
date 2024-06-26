@@ -7,6 +7,7 @@ namespace AutoRest.CSharp.Common.Input
     {
         public static void Transform(InputNamespace input)
         {
+            // TODO: Remove this when we have a better way to remove operations, tracking in https://github.com/Azure/typespec-azure/issues/964
             InputClientTransformer.Transform(input);
             InputAcronymTransformer.UpdateAcronyms(input);
             InputUrlToUriTransformer.UpdateSuffix(input);
