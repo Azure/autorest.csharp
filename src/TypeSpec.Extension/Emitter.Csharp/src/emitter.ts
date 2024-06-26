@@ -4,7 +4,7 @@
 import { EmitContext, Program, resolvePath } from "@typespec/compiler";
 
 import { execSync } from "child_process";
-import fs, { cp, existsSync } from "fs";
+import fs, { existsSync } from "fs";
 import path from "node:path";
 import { configurationFileName, tspOutputFileName } from "./constants.js";
 import { LoggerLevel } from "./lib/log-level.js";
