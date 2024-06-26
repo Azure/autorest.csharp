@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private static void TransformInputEnumType(InputEnumType inputEnum, IReadOnlyList<InputEnumTypeValue> choiceValues)
         {
-            TransformInputType(inputEnum);
+            TransformInputTypeName(inputEnum);
             TransformChoices(inputEnum, choiceValues);
         }
 
@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private static void TransformInputModel(InputModelType inputModel)
         {
-            TransformInputType(inputModel);
+            TransformInputTypeName(inputModel);
             foreach (var property in inputModel.Properties)
             {
                 TransformInputTypeName(property.Type);
