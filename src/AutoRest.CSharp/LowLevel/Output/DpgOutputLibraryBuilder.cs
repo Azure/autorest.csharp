@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Output.Models
             if (Configuration.Generation1ConvenienceClient)
             {
                 var index = crossLanguageDefinitionId.LastIndexOf(".");
-                return index >= 0 ? crossLanguageDefinitionId[(index + 1)..] : null;
+                return index >= 0 ? crossLanguageDefinitionId[..index] : null;
             }
 
             return null;
