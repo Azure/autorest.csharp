@@ -159,12 +159,12 @@ namespace NamedTypeSymbolExtensionsTests
         public void IsSameType_ModelTypes()
         {
             // Different namespace
-            var input = new InputModelType("MetadataModel", "", null, null, null, InputModelTypeUsage.Input | InputModelTypeUsage.Output, null, null, Array.Empty<InputModelType>(), null, null, null);
+            var input = new InputModelType("MetadataModel", string.Empty, null, null, null, InputModelTypeUsage.Input | InputModelTypeUsage.Output, null, null, Array.Empty<InputModelType>(), null, null, new Dictionary<string, InputModelType>(), null);
             CSharpType modelType = new CSharpType(new ModelTypeProvider(input, "", null, null));
             Assert.IsFalse(_modelSymbol.IsSameType(modelType));
 
             // Same namespace
-            input = new InputModelType("MetadataModel", "NamedTypeSymbolExtensionsTests", null, null, null, InputModelTypeUsage.Input | InputModelTypeUsage.Output, null, null, Array.Empty<InputModelType>(), null, null, null);
+            input = new InputModelType("MetadataModel", "NamedTypeSymbolExtensionsTests", null, null, null, InputModelTypeUsage.Input | InputModelTypeUsage.Output, null, null, Array.Empty<InputModelType>(), null, null, new Dictionary<string, InputModelType>(), null);
             modelType = new CSharpType(new ModelTypeProvider(input, "NamedTypeSymbolExtensionsTests", null, null));
             Assert.IsTrue(_modelSymbol.IsSameType(modelType));
         }

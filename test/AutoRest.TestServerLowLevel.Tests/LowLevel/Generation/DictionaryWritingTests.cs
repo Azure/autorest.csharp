@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void RoundTripDictionaryProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             var model = new InputModelType("RoundTripModel", "Cadl.TestServer.DictionaryProperties.Models", "public", null, "Round-trip model with dictionary properties", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
-                DictionaryProperties, null, new List<InputModelType>(), null, null, null);
+                DictionaryProperties, null, new List<InputModelType>(), null, null, new Dictionary<string, InputModelType>(), null);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.DictionaryProperties.Models", new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { model, ElementModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);

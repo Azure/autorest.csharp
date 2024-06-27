@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/bed837a2e29e55569360206afa3393e044dfb070/packages/cadl-ranch-specs/http/models/optional-properties/main.cadl#L35-L38
             var model = new InputModelType("RoundTripModel", "Cadl.TestServer.OptionalProperties.Models", "public", null, "Round-trip model with optional properties.", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
-                    OptionalProperties, null, Array.Empty<InputModelType>(), null, null, null);
+                    OptionalProperties, null, Array.Empty<InputModelType>(), null, null, new Dictionary<string, InputModelType>(), null);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.OptionalProperties.Models", new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { ElementModelType, model }, new List<InputClient>(), new InputAuth()), default).Build(true);
