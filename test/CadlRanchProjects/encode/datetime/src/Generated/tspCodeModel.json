@@ -6,7 +6,7 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "DefaultDatetimeProperty",
    "Namespace": "Encode.Datetime",
    "Usage": "RoundTrip",
@@ -32,7 +32,7 @@
   },
   {
    "$id": "6",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Rfc3339DatetimeProperty",
    "Namespace": "Encode.Datetime",
    "Usage": "RoundTrip",
@@ -58,7 +58,7 @@
   },
   {
    "$id": "10",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Rfc7231DatetimeProperty",
    "Namespace": "Encode.Datetime",
    "Usage": "RoundTrip",
@@ -84,7 +84,7 @@
   },
   {
    "$id": "14",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnixTimestampDatetimeProperty",
    "Namespace": "Encode.Datetime",
    "Usage": "RoundTrip",
@@ -110,7 +110,7 @@
   },
   {
    "$id": "18",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnixTimestampArrayDatetimeProperty",
    "Namespace": "Encode.Datetime",
    "Usage": "RoundTrip",
