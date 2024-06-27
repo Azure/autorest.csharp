@@ -36,7 +36,7 @@
     "dependencies": {
         "@autorest/csharp": "3.0.0-beta.20240625.4",
         "json-serialize-refs": "0.1.0-0",
-        "@typespec/http-client-csharp":"https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest/npm/registry/@typespec/http-client-csharp/-/http-client-csharp-0.1.9-alpha.20240625.9.tgz"
+        "@typespec/http-client-csharp":"https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest/npm/registry/@typespec/http-client-csharp/-/http-client-csharp-0.1.9-alpha.20240627.2.tgz"
     },
     "peerDependencies": {
         "@azure-tools/typespec-azure-core": ">=0.36.0 <1.0.0",
