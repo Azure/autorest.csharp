@@ -26,7 +26,7 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="DerivedModelWithDiscriminatorA"/>. </summary>
-        /// <param name="discriminatorProperty"> Discriminator property for BaseModelWithDiscriminator. </param>
+        /// <param name="discriminatorProperty"> Discriminator. </param>
         /// <param name="optionalPropertyOnBase"> Optional property on base. </param>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>

@@ -10,12 +10,8 @@ using System.Collections.Generic;
 
 namespace ModelsTypeSpec.Models
 {
-    /// <summary>
-    /// Output model with a discriminator
-    /// Please note <see cref="OutputBaseModelWithDiscriminator"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-    /// The available derived classes include <see cref="FirstDerivedOutputModel"/> and <see cref="SecondDerivedOutputModel"/>.
-    /// </summary>
-    public abstract partial class OutputBaseModelWithDiscriminator
+    /// <summary> Base model with properties. </summary>
+    public partial class BaseModelWithProperties
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -49,21 +45,21 @@ namespace ModelsTypeSpec.Models
         /// </summary>
         private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="OutputBaseModelWithDiscriminator"/>. </summary>
-        protected OutputBaseModelWithDiscriminator()
+        /// <summary> Initializes a new instance of <see cref="BaseModelWithProperties"/>. </summary>
+        public BaseModelWithProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="OutputBaseModelWithDiscriminator"/>. </summary>
-        /// <param name="kind"> Discriminator. </param>
+        /// <summary> Initializes a new instance of <see cref="BaseModelWithProperties"/>. </summary>
+        /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal OutputBaseModelWithDiscriminator(string kind, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal BaseModelWithProperties(string optionalPropertyOnBase, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Kind = kind;
+            OptionalPropertyOnBase = optionalPropertyOnBase;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Discriminator. </summary>
-        internal string Kind { get; set; }
+        /// <summary> Optional properties on base. </summary>
+        public string OptionalPropertyOnBase { get; set; }
     }
 }

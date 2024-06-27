@@ -62,10 +62,11 @@ namespace ModelsTypeSpec.Models
         /// <param name="requiredNullableModelList"> Required model nullable collection. </param>
         /// <param name="requiredNullableStringList"> Required string nullable collection. </param>
         /// <param name="requiredNullableIntList"> Required int nullable collection. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredModel2"/>, <paramref name="requiredIntList"/>, <paramref name="requiredStringList"/>, <paramref name="requiredModelList"/>, <paramref name="requiredModelRecord"/>, <paramref name="requiredCollectionWithNullableFloatElement"/> or <paramref name="requiredCollectionWithNullableBooleanElement"/> is null. </exception>
-        public InputModel(string requiredString, int requiredInt, int? requiredNullableInt, string requiredNullableString, BaseModel requiredModel, BaseModel requiredModel2, IEnumerable<int> requiredIntList, IEnumerable<string> requiredStringList, IEnumerable<CollectionItem> requiredModelList, IDictionary<string, RecordItem> requiredModelRecord, IEnumerable<float?> requiredCollectionWithNullableFloatElement, IEnumerable<bool?> requiredCollectionWithNullableBooleanElement, IEnumerable<CollectionItem> requiredNullableModelList, IEnumerable<string> requiredNullableStringList, IEnumerable<int> requiredNullableIntList)
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredNullableString"/>, <paramref name="requiredModel"/>, <paramref name="requiredModel2"/>, <paramref name="requiredIntList"/>, <paramref name="requiredStringList"/>, <paramref name="requiredModelList"/>, <paramref name="requiredModelRecord"/>, <paramref name="requiredCollectionWithNullableFloatElement"/>, <paramref name="requiredCollectionWithNullableBooleanElement"/>, <paramref name="requiredNullableModelList"/>, <paramref name="requiredNullableStringList"/> or <paramref name="requiredNullableIntList"/> is null. </exception>
+        public InputModel(string requiredString, int requiredInt, int requiredNullableInt, string requiredNullableString, BaseModel requiredModel, BaseModel requiredModel2, IEnumerable<int> requiredIntList, IEnumerable<string> requiredStringList, IEnumerable<CollectionItem> requiredModelList, IDictionary<string, RecordItem> requiredModelRecord, IEnumerable<float> requiredCollectionWithNullableFloatElement, IEnumerable<bool> requiredCollectionWithNullableBooleanElement, IEnumerable<CollectionItem> requiredNullableModelList, IEnumerable<string> requiredNullableStringList, IEnumerable<int> requiredNullableIntList)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
+            Argument.AssertNotNull(requiredNullableString, nameof(requiredNullableString));
             Argument.AssertNotNull(requiredModel, nameof(requiredModel));
             Argument.AssertNotNull(requiredModel2, nameof(requiredModel2));
             Argument.AssertNotNull(requiredIntList, nameof(requiredIntList));
@@ -74,6 +75,9 @@ namespace ModelsTypeSpec.Models
             Argument.AssertNotNull(requiredModelRecord, nameof(requiredModelRecord));
             Argument.AssertNotNull(requiredCollectionWithNullableFloatElement, nameof(requiredCollectionWithNullableFloatElement));
             Argument.AssertNotNull(requiredCollectionWithNullableBooleanElement, nameof(requiredCollectionWithNullableBooleanElement));
+            Argument.AssertNotNull(requiredNullableModelList, nameof(requiredNullableModelList));
+            Argument.AssertNotNull(requiredNullableStringList, nameof(requiredNullableStringList));
+            Argument.AssertNotNull(requiredNullableIntList, nameof(requiredNullableIntList));
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -87,9 +91,9 @@ namespace ModelsTypeSpec.Models
             RequiredModelRecord = requiredModelRecord;
             RequiredCollectionWithNullableFloatElement = requiredCollectionWithNullableFloatElement.ToList();
             RequiredCollectionWithNullableBooleanElement = requiredCollectionWithNullableBooleanElement.ToList();
-            RequiredNullableModelList = requiredNullableModelList?.ToList();
-            RequiredNullableStringList = requiredNullableStringList?.ToList();
-            RequiredNullableIntList = requiredNullableIntList?.ToList();
+            RequiredNullableModelList = requiredNullableModelList.ToList();
+            RequiredNullableStringList = requiredNullableStringList.ToList();
+            RequiredNullableIntList = requiredNullableIntList.ToList();
             NonRequiredModelList = new ChangeTrackingList<CollectionItem>();
             NonRequiredStringList = new ChangeTrackingList<string>();
             NonRequiredIntList = new ChangeTrackingList<int>();
@@ -123,7 +127,7 @@ namespace ModelsTypeSpec.Models
         /// <param name="nonRequiredNullableStringList"> Optional string nullable collection. </param>
         /// <param name="nonRequiredNullableIntList"> Optional int nullable collection. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal InputModel(string requiredString, int requiredInt, int? requiredNullableInt, string requiredNullableString, int? nonRequiredNullableInt, string nonRequiredNullableString, BaseModel requiredModel, BaseModel requiredModel2, IList<int> requiredIntList, IList<string> requiredStringList, IList<CollectionItem> requiredModelList, IDictionary<string, RecordItem> requiredModelRecord, IList<float?> requiredCollectionWithNullableFloatElement, IList<bool?> requiredCollectionWithNullableBooleanElement, IList<CollectionItem> requiredNullableModelList, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList, IList<CollectionItem> nonRequiredModelList, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList, IList<CollectionItem> nonRequiredNullableModelList, IList<string> nonRequiredNullableStringList, IList<int> nonRequiredNullableIntList, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal InputModel(string requiredString, int requiredInt, int requiredNullableInt, string requiredNullableString, int? nonRequiredNullableInt, string nonRequiredNullableString, BaseModel requiredModel, BaseModel requiredModel2, IList<int> requiredIntList, IList<string> requiredStringList, IList<CollectionItem> requiredModelList, IDictionary<string, RecordItem> requiredModelRecord, IList<float> requiredCollectionWithNullableFloatElement, IList<bool> requiredCollectionWithNullableBooleanElement, IList<CollectionItem> requiredNullableModelList, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList, IList<CollectionItem> nonRequiredModelList, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList, IList<CollectionItem> nonRequiredNullableModelList, IList<string> nonRequiredNullableStringList, IList<int> nonRequiredNullableIntList, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -161,7 +165,7 @@ namespace ModelsTypeSpec.Models
         /// <summary> Required int. </summary>
         public int RequiredInt { get; }
         /// <summary> Required nullable int. </summary>
-        public int? RequiredNullableInt { get; }
+        public int RequiredNullableInt { get; }
         /// <summary> Required nullable string. </summary>
         public string RequiredNullableString { get; }
         /// <summary> Optional nullable int. </summary>
@@ -181,15 +185,15 @@ namespace ModelsTypeSpec.Models
         /// <summary> Required model record. </summary>
         public IDictionary<string, RecordItem> RequiredModelRecord { get; }
         /// <summary> Required collection of which the element is a nullable float. </summary>
-        public IList<float?> RequiredCollectionWithNullableFloatElement { get; }
+        public IList<float> RequiredCollectionWithNullableFloatElement { get; }
         /// <summary> Required collection of which the element is a nullable boolean. </summary>
-        public IList<bool?> RequiredCollectionWithNullableBooleanElement { get; }
+        public IList<bool> RequiredCollectionWithNullableBooleanElement { get; }
         /// <summary> Required model nullable collection. </summary>
-        public IList<CollectionItem> RequiredNullableModelList { get; set; }
+        public IList<CollectionItem> RequiredNullableModelList { get; }
         /// <summary> Required string nullable collection. </summary>
-        public IList<string> RequiredNullableStringList { get; set; }
+        public IList<string> RequiredNullableStringList { get; }
         /// <summary> Required int nullable collection. </summary>
-        public IList<int> RequiredNullableIntList { get; set; }
+        public IList<int> RequiredNullableIntList { get; }
         /// <summary> Optional model collection. </summary>
         public IList<CollectionItem> NonRequiredModelList { get; }
         /// <summary> Optional string collection. </summary>
@@ -197,10 +201,10 @@ namespace ModelsTypeSpec.Models
         /// <summary> Optional int collection. </summary>
         public IList<int> NonRequiredIntList { get; }
         /// <summary> Optional model nullable collection. </summary>
-        public IList<CollectionItem> NonRequiredNullableModelList { get; set; }
+        public IList<CollectionItem> NonRequiredNullableModelList { get; }
         /// <summary> Optional string nullable collection. </summary>
-        public IList<string> NonRequiredNullableStringList { get; set; }
+        public IList<string> NonRequiredNullableStringList { get; }
         /// <summary> Optional int nullable collection. </summary>
-        public IList<int> NonRequiredNullableIntList { get; set; }
+        public IList<int> NonRequiredNullableIntList { get; }
     }
 }

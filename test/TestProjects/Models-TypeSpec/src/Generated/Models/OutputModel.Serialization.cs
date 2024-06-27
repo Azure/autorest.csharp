@@ -60,20 +60,13 @@ namespace ModelsTypeSpec.Models
             }
             if (Optional.IsCollectionDefined(OptionalNullableList))
             {
-                if (OptionalNullableList != null)
+                writer.WritePropertyName("optionalNullableList"u8);
+                writer.WriteStartArray();
+                foreach (var item in OptionalNullableList)
                 {
-                    writer.WritePropertyName("optionalNullableList"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in OptionalNullableList)
-                    {
-                        writer.WriteObjectValue(item, options);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item, options);
                 }
-                else
-                {
-                    writer.WriteNull("optionalNullableList");
-                }
+                writer.WriteEndArray();
             }
             if (Optional.IsCollectionDefined(OptionalRecord))
             {
@@ -88,21 +81,14 @@ namespace ModelsTypeSpec.Models
             }
             if (Optional.IsCollectionDefined(OptionalNullableRecord))
             {
-                if (OptionalNullableRecord != null)
+                writer.WritePropertyName("optionalNullableRecord"u8);
+                writer.WriteStartObject();
+                foreach (var item in OptionalNullableRecord)
                 {
-                    writer.WritePropertyName("optionalNullableRecord"u8);
-                    writer.WriteStartObject();
-                    foreach (var item in OptionalNullableRecord)
-                    {
-                        writer.WritePropertyName(item.Key);
-                        writer.WriteObjectValue(item.Value, options);
-                    }
-                    writer.WriteEndObject();
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteObjectValue(item.Value, options);
                 }
-                else
-                {
-                    writer.WriteNull("optionalNullableRecord");
-                }
+                writer.WriteEndObject();
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

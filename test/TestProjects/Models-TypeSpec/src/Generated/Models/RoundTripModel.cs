@@ -37,10 +37,11 @@ namespace ModelsTypeSpec.Models
         /// <param name="requiredInt8Array"> Required int8[]. </param>
         /// <param name="requiredNullableIntList"> Required nullable int list. </param>
         /// <param name="requiredNullableStringList"> Required nullable string list. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredList"/>, <paramref name="requiredIntRecord"/>, <paramref name="requiredStringRecord"/>, <paramref name="requiredModelRecord"/>, <paramref name="requiredBytes"/>, <paramref name="requiredUint8Array"/>, <paramref name="requiredUnknown"/> or <paramref name="requiredInt8Array"/> is null. </exception>
-        public RoundTripModel(string requiredString, int requiredInt, int? requiredNullableInt, string requiredNullableString, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, FixedIntEnum requiredFixedIntEnum, ExtensibleEnum requiredExtensibleEnum, IEnumerable<CollectionItem> requiredList, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord, BinaryData requiredBytes, IEnumerable<byte> requiredUint8Array, BinaryData requiredUnknown, IEnumerable<sbyte> requiredInt8Array, IEnumerable<int> requiredNullableIntList, IEnumerable<string> requiredNullableStringList)
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredNullableString"/>, <paramref name="requiredModel"/>, <paramref name="requiredList"/>, <paramref name="requiredIntRecord"/>, <paramref name="requiredStringRecord"/>, <paramref name="requiredModelRecord"/>, <paramref name="requiredBytes"/>, <paramref name="requiredUint8Array"/>, <paramref name="requiredUnknown"/>, <paramref name="requiredInt8Array"/>, <paramref name="requiredNullableIntList"/> or <paramref name="requiredNullableStringList"/> is null. </exception>
+        public RoundTripModel(string requiredString, int requiredInt, int requiredNullableInt, string requiredNullableString, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, FixedIntEnum requiredFixedIntEnum, ExtensibleEnum requiredExtensibleEnum, IEnumerable<CollectionItem> requiredList, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord, BinaryData requiredBytes, IEnumerable<byte> requiredUint8Array, BinaryData requiredUnknown, IEnumerable<sbyte> requiredInt8Array, IEnumerable<int> requiredNullableIntList, IEnumerable<string> requiredNullableStringList)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
+            Argument.AssertNotNull(requiredNullableString, nameof(requiredNullableString));
             Argument.AssertNotNull(requiredModel, nameof(requiredModel));
             Argument.AssertNotNull(requiredList, nameof(requiredList));
             Argument.AssertNotNull(requiredIntRecord, nameof(requiredIntRecord));
@@ -50,6 +51,8 @@ namespace ModelsTypeSpec.Models
             Argument.AssertNotNull(requiredUint8Array, nameof(requiredUint8Array));
             Argument.AssertNotNull(requiredUnknown, nameof(requiredUnknown));
             Argument.AssertNotNull(requiredInt8Array, nameof(requiredInt8Array));
+            Argument.AssertNotNull(requiredNullableIntList, nameof(requiredNullableIntList));
+            Argument.AssertNotNull(requiredNullableStringList, nameof(requiredNullableStringList));
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -69,8 +72,8 @@ namespace ModelsTypeSpec.Models
             RequiredUnknown = requiredUnknown;
             RequiredInt8Array = requiredInt8Array.ToList();
             OptionalInt8Array = new ChangeTrackingList<sbyte>();
-            RequiredNullableIntList = requiredNullableIntList?.ToList();
-            RequiredNullableStringList = requiredNullableStringList?.ToList();
+            RequiredNullableIntList = requiredNullableIntList.ToList();
+            RequiredNullableStringList = requiredNullableStringList.ToList();
             NonRequiredNullableIntList = new ChangeTrackingList<int>();
             NonRequiredNullableStringList = new ChangeTrackingList<string>();
         }
@@ -116,7 +119,7 @@ namespace ModelsTypeSpec.Models
         /// Please note <see cref="BaseModelWithDiscriminatorFromIsKeyword"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="DerivedWithDiscriminatorFromIsKeyword"/>.
         /// </param>
-        internal RoundTripModel(IDictionary<string, BinaryData> serializedAdditionalRawData, string requiredString, int requiredInt, string nonRequiredString, int? nonRequiredInt, int? requiredNullableInt, string requiredNullableString, int? nonRequiredNullableInt, string nonRequiredNullableString, int requiredReadonlyInt, int? nonRequiredReadonlyInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, FixedIntEnum requiredFixedIntEnum, ExtensibleEnum requiredExtensibleEnum, IList<CollectionItem> requiredList, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord, BinaryData requiredBytes, BinaryData optionalBytes, IList<byte> requiredUint8Array, IList<byte> optionalUint8Array, BinaryData requiredUnknown, BinaryData optionalUnknown, IList<sbyte> requiredInt8Array, IList<sbyte> optionalInt8Array, IList<int> requiredNullableIntList, IList<string> requiredNullableStringList, IList<int> nonRequiredNullableIntList, IList<string> nonRequiredNullableStringList, BaseModelWithDiscriminatorFromIsKeyword optionalModel) : base(serializedAdditionalRawData)
+        internal RoundTripModel(IDictionary<string, BinaryData> serializedAdditionalRawData, string requiredString, int requiredInt, string nonRequiredString, int? nonRequiredInt, int requiredNullableInt, string requiredNullableString, int? nonRequiredNullableInt, string nonRequiredNullableString, int requiredReadonlyInt, int? nonRequiredReadonlyInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, FixedIntEnum requiredFixedIntEnum, ExtensibleEnum requiredExtensibleEnum, IList<CollectionItem> requiredList, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord, BinaryData requiredBytes, BinaryData optionalBytes, IList<byte> requiredUint8Array, IList<byte> optionalUint8Array, BinaryData requiredUnknown, BinaryData optionalUnknown, IList<sbyte> requiredInt8Array, IList<sbyte> optionalInt8Array, IList<int> requiredNullableIntList, IList<string> requiredNullableStringList, IList<int> nonRequiredNullableIntList, IList<string> nonRequiredNullableStringList, BaseModelWithDiscriminatorFromIsKeyword optionalModel) : base(serializedAdditionalRawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -165,7 +168,7 @@ namespace ModelsTypeSpec.Models
         /// <summary> Optional int. </summary>
         public int? NonRequiredInt { get; set; }
         /// <summary> Required nullable int. </summary>
-        public int? RequiredNullableInt { get; set; }
+        public int RequiredNullableInt { get; set; }
         /// <summary> Required nullable string. </summary>
         public string RequiredNullableString { get; set; }
         /// <summary> Optional nullable int. </summary>
@@ -301,13 +304,13 @@ namespace ModelsTypeSpec.Models
         /// <summary> Optional int8[]. </summary>
         public IList<sbyte> OptionalInt8Array { get; }
         /// <summary> Required nullable int list. </summary>
-        public IList<int> RequiredNullableIntList { get; set; }
+        public IList<int> RequiredNullableIntList { get; }
         /// <summary> Required nullable string list. </summary>
-        public IList<string> RequiredNullableStringList { get; set; }
+        public IList<string> RequiredNullableStringList { get; }
         /// <summary> Optional nullable model list. </summary>
-        public IList<int> NonRequiredNullableIntList { get; set; }
+        public IList<int> NonRequiredNullableIntList { get; }
         /// <summary> Optional nullable string list. </summary>
-        public IList<string> NonRequiredNullableStringList { get; set; }
+        public IList<string> NonRequiredNullableStringList { get; }
         /// <summary>
         /// optional model with discriminator
         /// Please note <see cref="BaseModelWithDiscriminatorFromIsKeyword"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.

@@ -14,7 +14,7 @@ namespace ModelsTypeSpec.Models
     internal partial class UnknownOutputBaseModelWithDiscriminator : OutputBaseModelWithDiscriminator
     {
         /// <summary> Initializes a new instance of <see cref="UnknownOutputBaseModelWithDiscriminator"/>. </summary>
-        /// <param name="kind"> Discriminator property for OutputBaseModelWithDiscriminator. </param>
+        /// <param name="kind"> Discriminator. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal UnknownOutputBaseModelWithDiscriminator(string kind, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, serializedAdditionalRawData)
         {

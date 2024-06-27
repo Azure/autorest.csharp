@@ -44,11 +44,11 @@ namespace ModelsTypeSpec.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
+            BaseModelWithDiscriminatorDefinedOnBase baseModelWithDiscriminatorDefinedOnBase = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
             {
                 Kind = "A",
             };
-            Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(body);
+            Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(baseModelWithDiscriminatorDefinedOnBase);
         }
 
         [Test]
@@ -75,13 +75,13 @@ namespace ModelsTypeSpec.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
+            BaseModelWithDiscriminatorDefinedOnBase baseModelWithDiscriminatorDefinedOnBase = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
             {
                 OptionalInt = 1234,
                 OptionalString = "<optionalString>",
                 Kind = "A",
             };
-            Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(body);
+            Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(baseModelWithDiscriminatorDefinedOnBase);
         }
 
         [Test]
@@ -194,7 +194,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            InputModel input = new InputModel(
+            InputModel inputModel = new InputModel(
                 "<requiredString>",
                 1234,
                 1234,
@@ -217,15 +217,15 @@ default
                 {
                     ["key"] = default
                 },
-                new float?[] { 123.45F },
-                new bool?[] { true },
+                new float[] { 123.45F },
+                new bool[] { true },
                 new CollectionItem[]
             {
 default
             },
                 new string[] { "<requiredNullableStringList>" },
                 new int[] { 1234 });
-            Response<RoundTripModel> response = await client.InputToRoundTripAsync(input);
+            Response<RoundTripModel> response = await client.InputToRoundTripAsync(inputModel);
         }
 
         [Test]
@@ -324,7 +324,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            InputModel input = new InputModel(
+            InputModel inputModel = new InputModel(
                 "<requiredString>",
                 1234,
                 1234,
@@ -347,8 +347,8 @@ default
                 {
                     ["key"] = default
                 },
-                new float?[] { 123.45F },
-                new bool?[] { true },
+                new float[] { 123.45F },
+                new bool[] { true },
                 new CollectionItem[]
             {
 default
@@ -365,7 +365,396 @@ default
                 NonRequiredNullableStringList = { "<nonRequiredNullableStringList>" },
                 NonRequiredNullableIntList = { 1234 },
             };
-            Response<RoundTripModel> response = await client.InputToRoundTripAsync(input);
+            Response<RoundTripModel> response = await client.InputToRoundTripAsync(inputModel);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_InputToRoundTripPrimitive_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                requiredModel = new object(),
+                requiredIntList = new object[]
+            {
+1234
+            },
+                requiredStringList = new object[]
+            {
+"<requiredStringList>"
+            },
+                requiredModelList = new object[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+requiredList = new object[]
+{
+null
+},
+},
+},
+}
+            },
+                requiredModelRecord = new { },
+                requiredCollectionWithNullableFloatElement = new object[]
+            {
+123.45F
+            },
+                requiredCollectionWithNullableBooleanElement = new object[]
+            {
+true
+            },
+                requiredNullableModelList = new object[]
+            {
+null
+            },
+                requiredNullableStringList = new object[]
+            {
+"<requiredNullableStringList>"
+            },
+                requiredNullableIntList = new object[]
+            {
+1234
+            },
+            });
+            Response response = await client.InputToRoundTripPrimitiveAsync(content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_InputToRoundTripPrimitive_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            InputModel inputModel = new InputModel(
+                "<requiredString>",
+                1234,
+                1234,
+                "<requiredNullableString>",
+                new BaseModel(),
+                default,
+                new int[] { 1234 },
+                new string[] { "<requiredStringList>" },
+                new CollectionItem[]
+            {
+new CollectionItem(new Dictionary<string, RecordItem>
+{
+["key"] = new RecordItem(new CollectionItem[]
+{
+default
+})
+})
+            },
+                new Dictionary<string, RecordItem>
+                {
+                    ["key"] = default
+                },
+                new float[] { 123.45F },
+                new bool[] { true },
+                new CollectionItem[]
+            {
+default
+            },
+                new string[] { "<requiredNullableStringList>" },
+                new int[] { 1234 });
+            Response<RoundTripPrimitiveModel> response = await client.InputToRoundTripPrimitiveAsync(inputModel);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_InputToRoundTripPrimitive_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                nonRequiredNullableInt = 1234,
+                nonRequiredNullableString = "<nonRequiredNullableString>",
+                requiredModel = new object(),
+                requiredIntList = new object[]
+            {
+1234
+            },
+                requiredStringList = new object[]
+            {
+"<requiredStringList>"
+            },
+                requiredModelList = new object[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+requiredList = new object[]
+{
+null
+},
+},
+},
+}
+            },
+                requiredModelRecord = new { },
+                requiredCollectionWithNullableFloatElement = new object[]
+            {
+123.45F
+            },
+                requiredCollectionWithNullableBooleanElement = new object[]
+            {
+true
+            },
+                requiredNullableModelList = new object[]
+            {
+null
+            },
+                requiredNullableStringList = new object[]
+            {
+"<requiredNullableStringList>"
+            },
+                requiredNullableIntList = new object[]
+            {
+1234
+            },
+                nonRequiredModelList = new object[]
+            {
+null
+            },
+                nonRequiredStringList = new object[]
+            {
+"<nonRequiredStringList>"
+            },
+                nonRequiredIntList = new object[]
+            {
+1234
+            },
+                nonRequiredNullableModelList = new object[]
+            {
+null
+            },
+                nonRequiredNullableStringList = new object[]
+            {
+"<nonRequiredNullableStringList>"
+            },
+                nonRequiredNullableIntList = new object[]
+            {
+1234
+            },
+            });
+            Response response = await client.InputToRoundTripPrimitiveAsync(content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_InputToRoundTripPrimitive_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            InputModel inputModel = new InputModel(
+                "<requiredString>",
+                1234,
+                1234,
+                "<requiredNullableString>",
+                new BaseModel(),
+                default,
+                new int[] { 1234 },
+                new string[] { "<requiredStringList>" },
+                new CollectionItem[]
+            {
+new CollectionItem(new Dictionary<string, RecordItem>
+{
+["key"] = new RecordItem(new CollectionItem[]
+{
+default
+})
+})
+            },
+                new Dictionary<string, RecordItem>
+                {
+                    ["key"] = default
+                },
+                new float[] { 123.45F },
+                new bool[] { true },
+                new CollectionItem[]
+            {
+default
+            },
+                new string[] { "<requiredNullableStringList>" },
+                new int[] { 1234 })
+            {
+                NonRequiredNullableInt = 1234,
+                NonRequiredNullableString = "<nonRequiredNullableString>",
+                NonRequiredModelList = { default },
+                NonRequiredStringList = { "<nonRequiredStringList>" },
+                NonRequiredIntList = { 1234 },
+                NonRequiredNullableModelList = { default },
+                NonRequiredNullableStringList = { "<nonRequiredNullableStringList>" },
+                NonRequiredNullableIntList = { 1234 },
+            };
+            Response<RoundTripPrimitiveModel> response = await client.InputToRoundTripPrimitiveAsync(inputModel);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_InputToRoundTripOptional_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new object());
+            Response response = await client.InputToRoundTripOptionalAsync(content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_InputToRoundTripOptional_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            RoundTripOptionalModel roundTripOptionalModel = new RoundTripOptionalModel();
+            Response<RoundTripOptionalModel> response = await client.InputToRoundTripOptionalAsync(roundTripOptionalModel);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_InputToRoundTripOptional_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                optionalString = "<optionalString>",
+                optionalInt = 1234,
+                optionalStringList = new object[]
+            {
+"<optionalStringList>"
+            },
+                optionalIntList = new object[]
+            {
+1234
+            },
+                optionalModelList = new object[]
+            {
+new
+{
+requiredModelRecord = new
+{
+key = new
+{
+requiredList = new object[]
+{
+null
+},
+},
+},
+}
+            },
+                optionalModel = new
+                {
+                    requiredList = new object[]
+            {
+null
+            },
+                },
+                optionalModelWithPropertiesOnBase = new
+                {
+                    requiredList = new object[]
+            {
+null
+            },
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
+                },
+                optionalFixedStringEnum = "1",
+                optionalExtensibleEnum = "1",
+                optionalIntRecord = new
+                {
+                    key = 1234,
+                },
+                optionalStringRecord = new
+                {
+                    key = "<optionalStringRecord>",
+                },
+                optionalModelRecord = new { },
+                optionalPlainDate = "2022-05-10",
+                optionalPlainTime = "01:23:45",
+                optionalCollectionWithNullableIntElement = new object[]
+            {
+1234
+            },
+            });
+            Response response = await client.InputToRoundTripOptionalAsync(content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_InputToRoundTripOptional_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            RoundTripOptionalModel roundTripOptionalModel = new RoundTripOptionalModel
+            {
+                OptionalString = "<optionalString>",
+                OptionalInt = 1234,
+                OptionalStringList = { "<optionalStringList>" },
+                OptionalIntList = { 1234 },
+                OptionalModelList = {new CollectionItem(new Dictionary<string, RecordItem>
+{
+["key"] = new RecordItem(new CollectionItem[]
+{
+default
+})
+})},
+                OptionalModel = new DerivedModel(new CollectionItem[]
+            {
+default
+            }),
+                OptionalModelWithPropertiesOnBase = new DerivedModelWithProperties(new CollectionItem[]
+            {
+default
+            })
+                {
+                    OptionalPropertyOnBase = "<optionalPropertyOnBase>",
+                },
+                OptionalFixedStringEnum = FixedStringEnum.One,
+                OptionalExtensibleEnum = ExtensibleEnum.One,
+                OptionalIntRecord =
+{
+["key"] = 1234
+},
+                OptionalStringRecord =
+{
+["key"] = "<optionalStringRecord>"
+},
+                OptionalModelRecord =
+{
+["key"] = default
+},
+                OptionalPlainDate = DateTimeOffset.Parse("2022-05-10"),
+                OptionalPlainTime = TimeSpan.Parse("01:23:45"),
+                OptionalCollectionWithNullableIntElement = { 1234 },
+            };
+            Response<RoundTripOptionalModel> response = await client.InputToRoundTripOptionalAsync(roundTripOptionalModel);
         }
 
         [Test]
@@ -444,7 +833,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RoundTripModel input = new RoundTripModel(
+            RoundTripModel roundTripModel = new RoundTripModel(
                 "<requiredString>",
                 1234,
                 1234,
@@ -481,7 +870,7 @@ default
                 new sbyte[] { 123 },
                 new int[] { 1234 },
                 new string[] { "<requiredNullableStringList>" });
-            Response<OutputModel> response = await client.RoundTripToOutputAsync(input);
+            Response<OutputModel> response = await client.RoundTripToOutputAsync(roundTripModel);
         }
 
         [Test]
@@ -590,7 +979,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RoundTripModel input = new RoundTripModel(
+            RoundTripModel roundTripModel = new RoundTripModel(
                 "<requiredString>",
                 1234,
                 1234,
@@ -647,7 +1036,7 @@ default
                     OptionalString = "<optionalString>",
                 },
             };
-            Response<OutputModel> response = await client.RoundTripToOutputAsync(input);
+            Response<OutputModel> response = await client.RoundTripToOutputAsync(roundTripModel);
         }
 
         [Test]
@@ -671,8 +1060,8 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            InputRecursiveModel input = new InputRecursiveModel("<message>");
-            Response response = await client.InputRecursiveAsync(input);
+            InputRecursiveModel inputRecursiveModel = new InputRecursiveModel("<message>");
+            Response response = await client.InputRecursiveAsync(inputRecursiveModel);
         }
 
         [Test]
@@ -696,11 +1085,11 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            InputRecursiveModel input = new InputRecursiveModel("<message>")
+            InputRecursiveModel inputRecursiveModel = new InputRecursiveModel("<message>")
             {
                 Inner = default,
             };
-            Response response = await client.InputRecursiveAsync(input);
+            Response response = await client.InputRecursiveAsync(inputRecursiveModel);
         }
 
         [Test]
@@ -724,8 +1113,8 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RoundTripRecursiveModel input = new RoundTripRecursiveModel("<message>");
-            Response<RoundTripRecursiveModel> response = await client.RoundTripRecursiveAsync(input);
+            RoundTripRecursiveModel roundTripRecursiveModel = new RoundTripRecursiveModel("<message>");
+            Response<RoundTripRecursiveModel> response = await client.RoundTripRecursiveAsync(roundTripRecursiveModel);
         }
 
         [Test]
@@ -749,11 +1138,11 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RoundTripRecursiveModel input = new RoundTripRecursiveModel("<message>")
+            RoundTripRecursiveModel roundTripRecursiveModel = new RoundTripRecursiveModel("<message>")
             {
                 Inner = default,
             };
-            Response<RoundTripRecursiveModel> response = await client.RoundTripRecursiveAsync(input);
+            Response<RoundTripRecursiveModel> response = await client.RoundTripRecursiveAsync(roundTripRecursiveModel);
         }
 
         [Test]
@@ -913,7 +1302,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RoundTripOnNoUse input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[]
+            RoundTripOnNoUse roundTripOnNoUse = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[]
             {
 new CollectionItem(new Dictionary<string, RecordItem>
 {
@@ -923,7 +1312,7 @@ default
 })
 })
             });
-            Response<RoundTripOnNoUse> response = await client.RoundTripToOutputWithNoUseBaseAsync(input);
+            Response<RoundTripOnNoUse> response = await client.RoundTripToOutputWithNoUseBaseAsync(roundTripOnNoUse);
         }
 
         [Test]
@@ -963,7 +1352,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RoundTripOnNoUse input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[]
+            RoundTripOnNoUse roundTripOnNoUse = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[]
             {
 new CollectionItem(new Dictionary<string, RecordItem>
 {
@@ -973,7 +1362,7 @@ default
 })
 })
             });
-            Response<RoundTripOnNoUse> response = await client.RoundTripToOutputWithNoUseBaseAsync(input);
+            Response<RoundTripOnNoUse> response = await client.RoundTripToOutputWithNoUseBaseAsync(roundTripOnNoUse);
         }
 
         [Test]
@@ -1043,8 +1432,8 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            Int32ValuesFacet input = new Int32ValuesFacet("<field>", new int[] { 1234 }, 1234);
-            Response response = await client.GenericTypeAsync(input);
+            Int32ValuesFacet int32ValuesFacet = new Int32ValuesFacet("<field>", new int[] { 1234 }, 1234);
+            Response response = await client.GenericTypeAsync(int32ValuesFacet);
         }
 
         [Test]
@@ -1074,8 +1463,8 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            Int32ValuesFacet input = new Int32ValuesFacet("<field>", new int[] { 1234 }, 1234);
-            Response response = await client.GenericTypeAsync(input);
+            Int32ValuesFacet int32ValuesFacet = new Int32ValuesFacet("<field>", new int[] { 1234 }, 1234);
+            Response response = await client.GenericTypeAsync(int32ValuesFacet);
         }
     }
 }
