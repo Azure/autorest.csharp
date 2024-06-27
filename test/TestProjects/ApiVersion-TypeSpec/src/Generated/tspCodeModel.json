@@ -58,11 +58,11 @@
  "Models": [
   {
    "$id": "10",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "DetectionResult",
    "Namespace": "ApiVersionInTsp",
-   "Description": "Detection results for the given resultId.",
    "Usage": "Output",
+   "Description": "Detection results for the given resultId.",
    "Properties": [
     {
      "$id": "11",

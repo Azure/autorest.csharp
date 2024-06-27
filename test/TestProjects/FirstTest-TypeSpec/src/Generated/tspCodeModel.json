@@ -443,11 +443,11 @@
  "Models": [
   {
    "$id": "72",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Thing",
    "Namespace": "FirstTestTypeSpec",
-   "Description": "A model with a few properties of literal types",
    "Usage": "RoundTrip",
+   "Description": "A model with a few properties of literal types",
    "Properties": [
     {
      "$id": "73",
@@ -477,9 +477,8 @@
        },
        {
         "$id": "78",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "79",
          "Kind": "string"
         }
@@ -645,9 +644,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "103",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "104",
         "Kind": "int32"
        }
@@ -666,9 +664,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "107",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "108",
         "Kind": "int32"
        }
@@ -705,11 +702,11 @@
   },
   {
    "$id": "113",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Friend",
    "Namespace": "FirstTestTypeSpec",
-   "Description": "this is not a friendly model but with a friendly name",
    "Usage": "RoundTrip",
+   "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
     {
      "$id": "114",
@@ -727,7 +724,7 @@
   },
   {
    "$id": "116",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelWithFormat",
    "Namespace": "FirstTestTypeSpec",
    "Usage": "Input",
@@ -761,11 +758,11 @@
   },
   {
    "$id": "121",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ProjectedModel",
    "Namespace": "FirstTestTypeSpec",
-   "Description": "this is a model with a projected name",
    "Usage": "RoundTrip",
+   "Description": "this is a model with a projected name",
    "Properties": [
     {
      "$id": "122",
@@ -783,7 +780,7 @@
   },
   {
    "$id": "124",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
    "Namespace": "FirstTestTypeSpec",
    "Usage": "Output",
@@ -791,18 +788,18 @@
   },
   {
    "$id": "125",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Extension",
    "Namespace": "FirstTestTypeSpec",
-   "Description": "extension",
    "Usage": "Input",
+   "Description": "extension",
    "BaseModel": {
     "$id": "126",
-    "Kind": "Model",
+    "Kind": "model",
     "Name": "Element",
     "Namespace": "FirstTestTypeSpec",
-    "Description": "element",
     "Usage": "Input",
+    "Description": "element",
     "Properties": [
      {
       "$id": "127",
@@ -811,9 +808,8 @@
       "Description": "",
       "Type": {
        "$id": "128",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$ref": "125"
        }
       },
@@ -842,11 +838,11 @@
   },
   {
    "$id": "131",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Extendible",
    "Namespace": "FirstTestTypeSpec",
-   "Description": "FHIR extendible element",
    "Usage": "Input",
+   "Description": "FHIR extendible element",
    "Properties": [
     {
      "$id": "132",
@@ -855,22 +851,21 @@
      "Description": "Additional Content defined by implementations",
      "Type": {
       "$id": "133",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "134",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "ThereLevelExtension",
        "Namespace": "FirstTestTypeSpec",
-       "Description": "extension",
        "Usage": "Input",
+       "Description": "extension",
        "BaseModel": {
         "$id": "135",
-        "Kind": "Model",
+        "Kind": "model",
         "Name": "ThereLevelElement",
         "Namespace": "FirstTestTypeSpec",
-        "Description": "element",
         "Usage": "Input",
+        "Description": "element",
         "Properties": [
          {
           "$id": "136",
@@ -879,9 +874,8 @@
           "Description": "",
           "Type": {
            "$id": "137",
-           "Kind": "Array",
-           "Name": "Array",
-           "ElementType": {
+           "Kind": "array",
+           "ValueType": {
             "$ref": "134"
            }
           },
@@ -919,18 +913,18 @@
   },
   {
    "$id": "140",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ChildModel",
    "Namespace": "FirstTestTypeSpec",
-   "Description": "ChildModel",
    "Usage": "Input",
+   "Description": "ChildModel",
    "BaseModel": {
     "$id": "141",
-    "Kind": "Model",
+    "Kind": "model",
     "Name": "BaseModel",
     "Namespace": "FirstTestTypeSpec",
-    "Description": "parenetModel",
     "Usage": "Input",
+    "Description": "parenetModel",
     "Properties": [
      {
       "$id": "142",
@@ -954,9 +948,8 @@
      "Description": "",
      "Type": {
       "$id": "145",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "141"
       }
      },
@@ -970,11 +963,11 @@
   },
   {
    "$id": "146",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ContainSelf",
    "Namespace": "FirstTestTypeSpec",
-   "Description": "containself",
    "Usage": "Input",
+   "Description": "containself",
    "Properties": [
     {
      "$id": "147",
@@ -991,7 +984,7 @@
   },
   {
    "$id": "148",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelWithProjectedEnum",
    "Namespace": "FirstTestTypeSpec",
    "Usage": "Input",
@@ -1011,7 +1004,7 @@
   },
   {
    "$id": "150",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "AzureLocationModel",
    "Namespace": "FirstTestTypeSpec",
    "Usage": "Input",
@@ -1033,11 +1026,11 @@
   },
   {
    "$id": "153",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RoundTripModel",
    "Namespace": "FirstTestTypeSpec",
-   "Description": "this is a roundtrip model",
    "Usage": "RoundTrip",
+   "Description": "this is a roundtrip model",
    "Properties": [
     {
      "$id": "154",
@@ -1070,9 +1063,8 @@
      "Description": "Required collection of enums",
      "Type": {
       "$id": "159",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "30"
       }
      },
@@ -1086,8 +1078,7 @@
      "Description": "Required dictionary of enums",
      "Type": {
       "$id": "161",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "162",
        "Kind": "string"
@@ -1128,9 +1119,8 @@
      "Description": "this is a collection of int based extensible enum",
      "Type": {
       "$id": "166",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "40"
       }
      },
@@ -1155,9 +1145,8 @@
      "Description": "this is a collection of float based extensible enum",
      "Type": {
       "$id": "169",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "45"
       }
      },
@@ -1182,9 +1171,8 @@
      "Description": "this is a collection of float based fixed enum",
      "Type": {
       "$id": "172",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "50"
       }
      },
@@ -1209,9 +1197,8 @@
      "Description": "this is a collection of int based fixed enum",
      "Type": {
       "$id": "175",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "55"
       }
      },
@@ -1260,8 +1247,7 @@
      "Description": "required record of unknown",
      "Type": {
       "$id": "182",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "183",
        "Kind": "string"
@@ -1281,8 +1267,7 @@
      "Description": "optional record of unknown",
      "Type": {
       "$id": "186",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "187",
        "Kind": "string"
@@ -1302,8 +1287,7 @@
      "Description": "required readonly record of unknown",
      "Type": {
       "$id": "190",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "191",
        "Kind": "string"
@@ -1323,8 +1307,7 @@
      "Description": "optional readonly record of unknown",
      "Type": {
       "$id": "194",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "195",
        "Kind": "string"
@@ -1344,11 +1327,11 @@
      "Description": "this is a model with required nullable properties",
      "Type": {
       "$id": "198",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelWithRequiredNullableProperties",
       "Namespace": "FirstTestTypeSpec",
-      "Description": "A model with a few required nullable properties",
       "Usage": "RoundTrip",
+      "Description": "A model with a few required nullable properties",
       "Properties": [
        {
         "$id": "199",
@@ -1408,9 +1391,8 @@
      "Description": "this is a list of union types",
      "Type": {
       "$id": "207",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "208",
        "Kind": "union",
        "Name": "RoundTripModelUnionList",
@@ -1425,11 +1407,11 @@
         },
         {
          "$id": "211",
-         "Kind": "Model",
+         "Kind": "model",
          "Name": "ModelForUnion",
          "Namespace": "FirstTestTypeSpec",
-         "Description": "This is a model only used in union types, please do not use it anywhere else.",
          "Usage": "RoundTrip",
+         "Description": "This is a model only used in union types, please do not use it anywhere else.",
          "Properties": [
           {
            "$id": "212",
@@ -1459,9 +1441,8 @@
         },
         {
          "$id": "216",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$ref": "211"
          }
         }
@@ -3457,8 +3438,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "396",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "397",
          "Kind": "string"

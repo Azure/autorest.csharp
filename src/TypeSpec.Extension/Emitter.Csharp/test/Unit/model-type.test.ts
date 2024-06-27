@@ -3,8 +3,6 @@ import assert, { deepStrictEqual, strictEqual } from "assert";
 import { beforeEach, describe, it } from "vitest";
 import { createModel } from "../../src/lib/client-model-builder.js";
 import { InputModelProperty } from "../../src/type/input-model-property.js";
-import { InputTypeKind } from "../../src/type/input-type-kind.js";
-import { InputDictionaryType } from "../../src/type/input-type.js";
 import {
     createEmitterContext,
     createEmitterTestHost,
@@ -58,10 +56,10 @@ op test(@body input: Pet): Pet;
         const catModel = models.find((m) => m.Name === "Cat");
         const dogModel = models.find((m) => m.Name === "Dog");
         // assert the discriminator property name
-        deepStrictEqual("kind", petModel?.DiscriminatorPropertyName);
+        deepStrictEqual("kind", petModel?.DiscriminatorProperty?.Name);
         // assert we have a property corresponding to the discriminator property above on the base model
         const discriminatorProperty = petModel?.Properties.find(
-            (p) => p.Name === petModel?.DiscriminatorPropertyName
+            (p) => p === petModel?.DiscriminatorProperty
         );
         deepStrictEqual(
             {
@@ -79,29 +77,29 @@ op test(@body input: Pet): Pet;
             } as InputModelProperty,
             discriminatorProperty
         );
-        // assert we will NOT have a DiscriminatorPropertyName on the derived models
+        // assert we will NOT have a DiscriminatorProperty on the derived models
         assert(
-            catModel?.DiscriminatorPropertyName === undefined,
-            "Cat model should not have the discriminator property name"
-        );
-        assert(
-            dogModel?.DiscriminatorPropertyName === undefined,
-            "Dog model should not have the discriminator property name"
-        );
-        // assert we will NOT have a property corresponding to the discriminator property on the derived models
-        const catDiscriminatorProperty = catModel?.Properties.find(
-            (p) => p.Name === petModel?.DiscriminatorPropertyName
-        );
-        const dogDiscriminatorProperty = dogModel?.Properties.find(
-            (p) => p.Name === petModel?.DiscriminatorPropertyName
-        );
-        assert(
-            catDiscriminatorProperty === undefined,
+            catModel?.DiscriminatorProperty === undefined,
             "Cat model should not have the discriminator property"
         );
         assert(
-            dogDiscriminatorProperty === undefined,
+            dogModel?.DiscriminatorProperty === undefined,
             "Dog model should not have the discriminator property"
+        );
+        // assert we will NOT have a property corresponding to the discriminator property on the derived models
+        const catDiscriminatorProperty = catModel?.Properties.find(
+            (p) => p === petModel?.DiscriminatorProperty
+        );
+        const dogDiscriminatorProperty = dogModel?.Properties.find(
+            (p) => p === petModel?.DiscriminatorProperty
+        );
+        assert(
+            catDiscriminatorProperty === undefined,
+            "Cat model should not have the discriminator property in the properties list"
+        );
+        assert(
+            dogDiscriminatorProperty === undefined,
+            "Dog model should not have the discriminator property in the properties list"
         );
     });
 
@@ -149,10 +147,10 @@ op test(@body input: Pet): Pet;
         const pet = models.find((m) => m.Name === "Pet");
         assert(pet !== undefined);
         // assert the discriminator property name
-        strictEqual("kind", pet?.DiscriminatorPropertyName);
+        strictEqual("kind", pet?.DiscriminatorProperty?.Name);
         // assert we have a property corresponding to the discriminator property above on the base model
         const discriminatorProperty = pet?.Properties.find(
-            (p) => p.Name === pet?.DiscriminatorPropertyName
+            (p) => p === pet?.DiscriminatorProperty
         );
         deepStrictEqual(
             {
@@ -200,16 +198,16 @@ op test(@body input: Pet): Pet;
         assert(cat.BaseModel === pet);
         // assert we will NOT have a DiscriminatorPropertyName on the derived models
         assert(
-            cat.DiscriminatorPropertyName === undefined,
-            "Cat model should not have the discriminator property name"
+            cat.DiscriminatorProperty === undefined,
+            "Cat model should not have the discriminator property"
         );
         // assert we will NOT have a property corresponding to the discriminator property on the derived models
         const catDiscriminatorProperty = cat.Properties.find(
-            (p) => p.Name === pet.DiscriminatorPropertyName
+            (p) => p === pet.DiscriminatorProperty
         );
         assert(
             catDiscriminatorProperty === undefined,
-            "Cat model should not have the discriminator property"
+            "Cat model should not have the discriminator property in the properties list"
         );
 
         // verify derived model Dog
@@ -217,18 +215,18 @@ op test(@body input: Pet): Pet;
         assert(dog !== undefined);
         assert(dog.DiscriminatorValue === "Dog");
         assert(dog.BaseModel === pet);
-        // assert we will NOT have a DiscriminatorPropertyName on the derived models
+        // assert we will NOT have a DiscriminatorProperty on the derived models
         assert(
-            dog.DiscriminatorPropertyName === undefined,
-            "Dog model should not have the discriminator property name"
+            dog.DiscriminatorProperty === undefined,
+            "Dog model should not have the discriminator property"
         );
         // assert we will NOT have a property corresponding to the discriminator property on the derived models
         const dogDiscriminatorProperty = dog.Properties.find(
-            (p) => p.Name === pet.DiscriminatorPropertyName
+            (p) => p === pet.DiscriminatorProperty
         );
         assert(
             dogDiscriminatorProperty === undefined,
-            "Dog model should not have the discriminator property"
+            "Dog model should not have the discriminator property in the properties list"
         );
     });
 
@@ -276,10 +274,10 @@ op test(@body input: Pet): Pet;
         const pet = models.find((m) => m.Name === "Pet");
         assert(pet !== undefined);
         // assert the discriminator property name
-        strictEqual("kind", pet?.DiscriminatorPropertyName);
+        strictEqual("kind", pet?.DiscriminatorProperty?.Name);
         // assert we have a property corresponding to the discriminator property above on the base model
         const discriminatorProperty = pet?.Properties.find(
-            (p) => p.Name === pet?.DiscriminatorPropertyName
+            (p) => p === pet?.DiscriminatorProperty
         );
         deepStrictEqual(
             {
@@ -327,16 +325,16 @@ op test(@body input: Pet): Pet;
         assert(cat.BaseModel === pet);
         // assert we will NOT have a DiscriminatorPropertyName on the derived models
         assert(
-            cat.DiscriminatorPropertyName === undefined,
-            "Cat model should not have the discriminator property name"
+            cat.DiscriminatorProperty === undefined,
+            "Cat model should not have the discriminator property"
         );
         // assert we will NOT have a property corresponding to the discriminator property on the derived models
         const catDiscriminatorProperty = cat.Properties.find(
-            (p) => p.Name === pet.DiscriminatorPropertyName
+            (p) => p === pet.DiscriminatorProperty
         );
         assert(
             catDiscriminatorProperty === undefined,
-            "Cat model should not have the discriminator property"
+            "Cat model should not have the discriminator property in the properties list"
         );
 
         // verify derived model Dog
@@ -344,18 +342,18 @@ op test(@body input: Pet): Pet;
         assert(dog !== undefined);
         assert(dog.DiscriminatorValue === "dog");
         assert(dog.BaseModel === pet);
-        // assert we will NOT have a DiscriminatorPropertyName on the derived models
+        // assert we will NOT have a DiscriminatorProperty on the derived models
         assert(
-            dog.DiscriminatorPropertyName === undefined,
+            dog.DiscriminatorProperty === undefined,
             "Dog model should not have the discriminator property name"
         );
         // assert we will NOT have a property corresponding to the discriminator property on the derived models
         const dogDiscriminatorProperty = dog.Properties.find(
-            (p) => p.Name === pet.DiscriminatorPropertyName
+            (p) => p === pet.DiscriminatorProperty
         );
         assert(
             dogDiscriminatorProperty === undefined,
-            "Dog model should not have the discriminator property"
+            "Dog model should not have the discriminator property in the properties list"
         );
     });
 });
@@ -448,71 +446,32 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
         // assert the inherited dictionary type is expected
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
-                KeyType: {
-                    Kind: "string"
-                },
-                ValueType: {
-                    Kind: "any",
-                    Encode: undefined
-                }
-            } as InputDictionaryType,
-            extendsUnknownModel.InheritedDictionaryType
+                Kind: "any",
+                Encode: undefined
+            },
+            extendsUnknownModel.AdditionalProperties
         );
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
-                KeyType: {
-                    Kind: "string"
-                },
-                ValueType: {
-                    Kind: "string",
-                    Encode: undefined
-                }
-            } as InputDictionaryType,
-            extendsStringModel.InheritedDictionaryType
+                Kind: "string",
+                Encode: undefined
+            },
+            extendsStringModel.AdditionalProperties
         );
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
-                KeyType: {
-                    Kind: "string"
-                },
-                ValueType: {
-                    Kind: "int32",
-                    Encode: undefined
-                }
-            } as InputDictionaryType,
-            extendsInt32Model.InheritedDictionaryType
+                Kind: "int32",
+                Encode: undefined
+            },
+            extendsInt32Model.AdditionalProperties
         );
+        deepStrictEqual(fooModel, extendsFooModel.AdditionalProperties);
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
-                KeyType: {
-                    Kind: "string"
-                },
+                Kind: "array",
                 ValueType: fooModel
-            } as InputDictionaryType,
-            extendsFooModel.InheritedDictionaryType
-        );
-        deepStrictEqual(
-            {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
-                KeyType: {
-                    Kind: "string"
-                },
-                ValueType: {
-                    Kind: InputTypeKind.Array,
-                    Name: InputTypeKind.Array,
-                    ElementType: fooModel
-                }
-            } as InputDictionaryType,
-            extendsFooArrayModel.InheritedDictionaryType
+            },
+            extendsFooArrayModel.AdditionalProperties
         );
     });
 });
@@ -599,71 +558,32 @@ op op5(@body body: IsFooArray): IsFooArray;
         // assert the inherited dictionary type is expected
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
-                KeyType: {
-                    Kind: "string"
-                },
-                ValueType: {
-                    Kind: "any",
-                    Encode: undefined
-                }
-            } as InputDictionaryType,
-            isUnknownModel.InheritedDictionaryType
+                Kind: "any",
+                Encode: undefined
+            },
+            isUnknownModel.AdditionalProperties
         );
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
-                KeyType: {
-                    Kind: "string"
-                },
-                ValueType: {
-                    Kind: "string",
-                    Encode: undefined
-                }
-            } as InputDictionaryType,
-            isStringModel.InheritedDictionaryType
+                Kind: "string",
+                Encode: undefined
+            },
+            isStringModel.AdditionalProperties
         );
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
-                KeyType: {
-                    Kind: "string"
-                },
-                ValueType: {
-                    Kind: "int32",
-                    Encode: undefined
-                }
-            } as InputDictionaryType,
-            isInt32Model.InheritedDictionaryType
+                Kind: "int32",
+                Encode: undefined
+            },
+            isInt32Model.AdditionalProperties
         );
+        deepStrictEqual(fooModel, isFooModel.AdditionalProperties);
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
-                KeyType: {
-                    Kind: "string"
-                },
+                Kind: "array",
                 ValueType: fooModel
-            } as InputDictionaryType,
-            isFooModel.InheritedDictionaryType
-        );
-        deepStrictEqual(
-            {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
-                KeyType: {
-                    Kind: "string"
-                },
-                ValueType: {
-                    Kind: InputTypeKind.Array,
-                    Name: InputTypeKind.Array,
-                    ElementType: fooModel
-                }
-            } as InputDictionaryType,
-            isFooArrayModel.InheritedDictionaryType
+            },
+            isFooArrayModel.AdditionalProperties
         );
     });
 });

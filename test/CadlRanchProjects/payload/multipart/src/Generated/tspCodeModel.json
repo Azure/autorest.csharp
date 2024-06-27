@@ -6,7 +6,7 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "MultiPartRequest",
    "Namespace": "Payload.MultiPart",
    "Usage": "Input,Multipart",
@@ -40,7 +40,7 @@
   },
   {
    "$id": "7",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ComplexPartsRequest",
    "Namespace": "Payload.MultiPart",
    "Usage": "Input,Multipart",
@@ -64,7 +64,7 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "Address",
       "Namespace": "Payload.MultiPart",
       "Usage": "Input",
@@ -106,9 +106,8 @@
      "Description": "",
      "Type": {
       "$id": "17",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "11"
       }
      },
@@ -122,9 +121,8 @@
      "Description": "",
      "Type": {
       "$id": "19",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "20",
        "Kind": "bytes",
        "Encode": "base64"
@@ -140,7 +138,7 @@
   },
   {
    "$id": "21",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "JsonPartRequest",
    "Namespace": "Payload.MultiPart",
    "Usage": "Input,Multipart",
@@ -173,7 +171,7 @@
   },
   {
    "$id": "25",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "BinaryArrayPartsRequest",
    "Namespace": "Payload.MultiPart",
    "Usage": "Input,Multipart",
@@ -197,9 +195,8 @@
      "Description": "",
      "Type": {
       "$id": "29",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "30",
        "Kind": "bytes",
        "Encode": "base64"
@@ -212,7 +209,7 @@
   },
   {
    "$id": "31",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "JsonArrayPartsRequest",
    "Namespace": "Payload.MultiPart",
    "Usage": "Input,Multipart",
@@ -237,9 +234,8 @@
      "Description": "",
      "Type": {
       "$id": "35",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "11"
       }
      },
@@ -250,7 +246,7 @@
   },
   {
    "$id": "36",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "MultiBinaryPartsRequest",
    "Namespace": "Payload.MultiPart",
    "Usage": "Input,Multipart",
@@ -285,7 +281,7 @@
   },
   {
    "$id": "41",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "AnonymousModelRequest",
    "Namespace": "",
    "Usage": "Input,Multipart",

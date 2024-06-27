@@ -73,11 +73,11 @@
  "Models": [
   {
    "$id": "12",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ListLedgerEntryInputBody",
    "Namespace": "Pagination",
-   "Description": "Type for input model body",
    "Usage": "Input",
+   "Description": "Type for input model body",
    "Properties": [
     {
      "$id": "13",
@@ -107,11 +107,11 @@
   },
   {
    "$id": "17",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedLedgerEntries",
    "Namespace": "Pagination",
-   "Description": "Paginated ledger entries",
    "Usage": "Output",
+   "Description": "Paginated ledger entries",
    "Properties": [
     {
      "$id": "18",
@@ -120,11 +120,10 @@
      "Description": "Array of ledger entries",
      "Type": {
       "$id": "19",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "20",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "LedgerEntry",
        "Namespace": "Pagination",
        "Usage": "Output",
@@ -190,11 +189,11 @@
   },
   {
    "$id": "29",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedDimensionValueListItem",
    "Namespace": "Azure.Core.Foundations",
-   "Description": "Paged collection of DimensionValueListItem items",
    "Usage": "Output",
+   "Description": "Paged collection of DimensionValueListItem items",
    "Properties": [
     {
      "$id": "30",
@@ -203,11 +202,10 @@
      "Description": "The DimensionValueListItem items on this page",
      "Type": {
       "$id": "31",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "32",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "DimensionValueListItem",
        "Namespace": "Pagination",
        "Usage": "Output",
@@ -219,9 +217,8 @@
          "Description": "",
          "Type": {
           "$id": "34",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "ValueType": {
            "$id": "35",
            "Kind": "string"
           }
@@ -254,11 +251,11 @@
   },
   {
    "$id": "38",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedLedgerEntry",
    "Namespace": "Azure.Core",
-   "Description": "Paged collection of LedgerEntry items",
    "Usage": "Output",
+   "Description": "Paged collection of LedgerEntry items",
    "Properties": [
     {
      "$id": "39",
@@ -267,9 +264,8 @@
      "Description": "The LedgerEntry items on this page",
      "Type": {
       "$id": "40",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "20"
       }
      },
@@ -292,11 +288,11 @@
   },
   {
    "$id": "43",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedTextBlocklist",
    "Namespace": "Azure.Core.Foundations",
-   "Description": "Paged collection of TextBlocklist items",
    "Usage": "Output",
+   "Description": "Paged collection of TextBlocklist items",
    "Properties": [
     {
      "$id": "44",
@@ -305,15 +301,14 @@
      "Description": "The TextBlocklist items on this page",
      "Type": {
       "$id": "45",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "46",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "TextBlocklist",
        "Namespace": "Pagination",
-       "Description": "Text Blocklist.",
        "Usage": "Output",
+       "Description": "Text Blocklist.",
        "Properties": [
         {
          "$id": "47",
@@ -364,11 +359,11 @@
   },
   {
    "$id": "53",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedTextBlockItem",
    "Namespace": "Azure.Core.Foundations",
-   "Description": "Paged collection of TextBlockItem items",
    "Usage": "Output",
+   "Description": "Paged collection of TextBlockItem items",
    "Properties": [
     {
      "$id": "54",
@@ -377,15 +372,14 @@
      "Description": "The TextBlockItem items on this page",
      "Type": {
       "$id": "55",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "56",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "TextBlockItem",
        "Namespace": "Pagination",
-       "Description": "Item in TextBlocklist.",
        "Usage": "Output",
+       "Description": "Item in TextBlocklist.",
        "Properties": [
         {
          "$id": "57",
@@ -448,11 +442,11 @@
   },
   {
    "$id": "65",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "BatchPoolListResult",
    "Namespace": "Pagination",
-   "Description": "The result of listing the Pools in an Account.",
    "Usage": "Output",
+   "Description": "The result of listing the Pools in an Account.",
    "Properties": [
     {
      "$id": "66",
@@ -461,15 +455,14 @@
      "Description": "The list of Pools.",
      "Type": {
       "$id": "67",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "68",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "BatchPool",
        "Namespace": "Pagination",
-       "Description": "A Pool in the Azure Batch service.",
        "Usage": "Output",
+       "Description": "A Pool in the Azure Batch service.",
        "Properties": [
         {
          "$id": "69",
@@ -532,11 +525,11 @@
   },
   {
    "$id": "77",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "BatchError",
    "Namespace": "Pagination",
-   "Description": "An error response received from the Azure Batch service.",
    "Usage": "Output",
+   "Description": "An error response received from the Azure Batch service.",
    "Properties": [
     {
      "$id": "78",
@@ -1391,9 +1384,8 @@
        "Description": "An OData $select clause.",
        "Type": {
         "$id": "162",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "163",
          "Kind": "string"
         }
@@ -1416,9 +1408,8 @@
        "Description": "An OData $expand clause.",
        "Type": {
         "$id": "165",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "166",
          "Kind": "string"
         }

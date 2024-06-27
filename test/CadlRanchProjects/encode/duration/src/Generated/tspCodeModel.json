@@ -6,7 +6,7 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "DefaultDurationProperty",
    "Namespace": "Encode.Duration.Property",
    "Usage": "RoundTrip",
@@ -32,7 +32,7 @@
   },
   {
    "$id": "6",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ISO8601DurationProperty",
    "Namespace": "Encode.Duration.Property",
    "Usage": "RoundTrip",
@@ -58,7 +58,7 @@
   },
   {
    "$id": "10",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Int32SecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
    "Usage": "RoundTrip",
@@ -84,7 +84,7 @@
   },
   {
    "$id": "14",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "FloatSecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
    "Usage": "RoundTrip",
@@ -110,7 +110,7 @@
   },
   {
    "$id": "18",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Float64SecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
    "Usage": "RoundTrip",
@@ -136,7 +136,7 @@
   },
   {
    "$id": "22",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "FloatSecondsDurationArrayProperty",
    "Namespace": "Encode.Duration.Property",
    "Usage": "RoundTrip",
@@ -148,9 +148,8 @@
      "Description": "",
      "Type": {
       "$id": "24",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "25",
        "Kind": "duration",
        "Encode": "seconds",
@@ -618,9 +617,8 @@
        "NameInRequest": "input",
        "Type": {
         "$id": "76",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "77",
          "Kind": "duration",
          "Encode": "seconds",
@@ -1534,9 +1532,8 @@
        "NameInRequest": "duration",
        "Type": {
         "$id": "159",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "160",
          "Kind": "duration",
          "Encode": "ISO8601",

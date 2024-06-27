@@ -36,16 +36,17 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
             InputModelType inputModel = new InputModelType(
                 Name: "testInputModel",
                 Namespace: "ns",
-                Accessibility: "accessibility",
-                Deprecated: "test",
+                Access: "accessibility",
+                Deprecation: "test",
                 Description: "sample",
                 DiscriminatorValue: null,
-                DiscriminatorPropertyName: null,
+                DiscriminatorProperty: null,
+                DiscriminatedSubtypes: null,
                 Usage: new InputModelTypeUsage(),
                 Properties: modelProps,
                 BaseModel: null,
                 DerivedModels: derivedModels,
-                InheritedDictionaryType: null);
+                AdditionalProperties: null);
             InputParameter opParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",
@@ -91,16 +92,17 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
             InputModelType inputModel = new InputModelType(
                 Name: "testInputModel",
                 Namespace: "ns",
-                Accessibility: "accessibility",
-                Deprecated: "test",
+                Access: "accessibility",
+                Deprecation: "test",
                 Description: "sample",
                 DiscriminatorValue: null,
-                DiscriminatorPropertyName: null,
+                DiscriminatorProperty: null,
+                DiscriminatedSubtypes: null,
                 Usage: new InputModelTypeUsage(),
                 Properties: modelProps,
                 BaseModel: null,
                 DerivedModels: derivedModels,
-                InheritedDictionaryType: null);
+                AdditionalProperties: null);
             InputNullableType nullableInputModel = new InputNullableType(inputModel);
             InputParameter opParam = new InputParameter(
                 Name: "testParam",
@@ -188,16 +190,17 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
             InputModelType inputModel = new InputModelType(
                 Name: "testInputModel",
                 Namespace: "ns",
-                Accessibility: "accessibility",
-                Deprecated: "test",
+                Access: "accessibility",
+                Deprecation: "test",
                 Description: "sample",
                 DiscriminatorValue: null,
-                DiscriminatorPropertyName: null,
+                DiscriminatorProperty: null,
+                DiscriminatedSubtypes: null,
                 Usage: new InputModelTypeUsage(),
                 Properties: modelProps,
                 BaseModel: null,
                 DerivedModels: derivedModels,
-                InheritedDictionaryType: null);
+                AdditionalProperties: null);
             InputNullableType nullableInputModel = new InputNullableType(inputModel);
             InputParameter inputParam = new InputParameter(
                 Name: "testParam",

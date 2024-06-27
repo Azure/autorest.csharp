@@ -362,11 +362,11 @@
  "Models": [
   {
    "$id": "59",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Thing",
    "Namespace": "NewProjectTypeSpec",
-   "Description": "A model with a few properties of literal types",
    "Usage": "RoundTrip",
+   "Description": "A model with a few properties of literal types",
    "Properties": [
     {
      "$id": "60",
@@ -396,9 +396,8 @@
        },
        {
         "$id": "65",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "66",
          "Kind": "string"
         }
@@ -558,11 +557,11 @@
   },
   {
    "$id": "88",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Friend",
    "Namespace": "NewProjectTypeSpec",
-   "Description": "this is not a friendly model but with a friendly name",
    "Usage": "RoundTrip",
+   "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
     {
      "$id": "89",
@@ -580,11 +579,11 @@
   },
   {
    "$id": "91",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RoundTripModel",
    "Namespace": "NewProjectTypeSpec",
-   "Description": "this is a roundtrip model",
    "Usage": "RoundTrip",
+   "Description": "this is a roundtrip model",
    "Properties": [
     {
      "$id": "92",
@@ -617,9 +616,8 @@
      "Description": "Required collection of enums",
      "Type": {
       "$id": "97",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "20"
       }
      },
@@ -633,8 +631,7 @@
      "Description": "Required dictionary of enums",
      "Type": {
       "$id": "99",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "100",
        "Kind": "string"
@@ -675,9 +672,8 @@
      "Description": "this is a collection of int based extensible enum",
      "Type": {
       "$id": "104",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "30"
       }
      },
@@ -702,9 +698,8 @@
      "Description": "this is a collection of float based extensible enum",
      "Type": {
       "$id": "107",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "35"
       }
      },
@@ -729,9 +724,8 @@
      "Description": "this is a collection of float based fixed enum",
      "Type": {
       "$id": "110",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "40"
       }
      },
@@ -756,9 +750,8 @@
      "Description": "this is a collection of int based fixed enum",
      "Type": {
       "$id": "113",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "45"
       }
      },
@@ -807,8 +800,7 @@
      "Description": "required record of unknown",
      "Type": {
       "$id": "120",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "121",
        "Kind": "string"
@@ -828,8 +820,7 @@
      "Description": "optional record of unknown",
      "Type": {
       "$id": "124",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "125",
        "Kind": "string"
@@ -849,8 +840,7 @@
      "Description": "required readonly record of unknown",
      "Type": {
       "$id": "128",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "129",
        "Kind": "string"
@@ -870,8 +860,7 @@
      "Description": "optional readonly record of unknown",
      "Type": {
       "$id": "132",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "133",
        "Kind": "string"

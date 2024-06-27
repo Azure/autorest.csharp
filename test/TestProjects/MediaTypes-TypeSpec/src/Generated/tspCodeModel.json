@@ -60,7 +60,7 @@
  "Models": [
   {
    "$id": "11",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Body",
    "Namespace": "MultipleMediaTypes",
    "Usage": "Input",

@@ -154,11 +154,11 @@
  "Models": [
   {
    "$id": "23",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Thing",
    "Namespace": "CustomizedTypeSpec",
-   "Description": "A model with a few properties of literal types",
    "Usage": "RoundTrip",
+   "Description": "A model with a few properties of literal types",
    "Properties": [
     {
      "$id": "24",
@@ -188,9 +188,8 @@
        },
        {
         "$id": "29",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "30",
          "Kind": "string"
         }
@@ -356,9 +355,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "54",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "55",
         "Kind": "int32"
        }
@@ -377,9 +375,8 @@
       "Kind": "nullable",
       "Type": {
        "$id": "58",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "ValueType": {
         "$id": "59",
         "Kind": "int32"
        }
@@ -392,11 +389,11 @@
   },
   {
    "$id": "60",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RoundTripModel",
    "Namespace": "CustomizedTypeSpec",
-   "Description": "this is a roundtrip model",
    "Usage": "RoundTrip",
+   "Description": "this is a roundtrip model",
    "Properties": [
     {
      "$id": "61",
@@ -438,11 +435,11 @@
   },
   {
    "$id": "67",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Friend",
    "Namespace": "CustomizedTypeSpec",
-   "Description": "this is not a friendly model but with a friendly name",
    "Usage": "RoundTrip",
+   "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
     {
      "$id": "68",
@@ -463,7 +460,7 @@
      "Description": "",
      "Type": {
       "$id": "71",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelWithFormat",
       "Namespace": "CustomizedTypeSpec",
       "Usage": "RoundTrip",
@@ -505,11 +502,11 @@
   },
   {
    "$id": "76",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ProjectedModel",
    "Namespace": "CustomizedTypeSpec",
-   "Description": "this is a model with a projected name",
    "Usage": "RoundTrip",
+   "Description": "this is a model with a projected name",
    "Properties": [
     {
      "$id": "77",
@@ -527,7 +524,7 @@
   },
   {
    "$id": "79",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
    "Namespace": "CustomizedTypeSpec",
    "Usage": "Output",

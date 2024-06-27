@@ -114,9 +114,9 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                kind = "derived",
                 index = 1234,
                 name = "<name>",
-                kind = "derived",
             });
             Response response = client.Put(content);
 
@@ -131,9 +131,9 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                kind = "derived",
                 index = 1234,
                 name = "<name>",
-                kind = "derived",
             });
             Response response = await client.PutAsync(content);
 
@@ -168,10 +168,10 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                kind = "derived",
                 index = 1234,
                 age = 123.45F,
                 name = "<name>",
-                kind = "derived",
             });
             Response response = client.Put(content);
 
@@ -186,10 +186,10 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                kind = "derived",
                 index = 1234,
                 age = 123.45F,
                 name = "<name>",
-                kind = "derived",
             });
             Response response = await client.PutAsync(content);
 

@@ -149,11 +149,11 @@
  "Models": [
   {
    "$id": "25",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RootModel",
    "Namespace": "CustomizationsInTsp",
-   "Description": "Root RoundTrip model to reference all other types to ensure generation",
    "Usage": "RoundTrip",
+   "Description": "Root RoundTrip model to reference all other types to ensure generation",
    "Properties": [
     {
      "$id": "26",
@@ -173,11 +173,11 @@
      "Description": "ModelToMakeInternal",
      "Type": {
       "$id": "28",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelToMakeInternal",
       "Namespace": "CustomizationsInTsp",
-      "Description": "Public model made internal",
       "Usage": "RoundTrip",
+      "Description": "Public model made internal",
       "Properties": [
        {
         "$id": "29",
@@ -203,11 +203,11 @@
      "Description": "ModelToRename",
      "Type": {
       "$id": "32",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelToRename",
       "Namespace": "CustomizationsInTsp",
-      "Description": "Renamed model (original name: ModelToRename)",
       "Usage": "RoundTrip",
+      "Description": "Renamed model (original name: ModelToRename)",
       "Properties": [
        {
         "$id": "33",
@@ -245,11 +245,11 @@
      "Description": "ModelToChangeNamespace",
      "Type": {
       "$id": "38",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelToChangeNamespace",
       "Namespace": "CustomizationsInTsp",
-      "Description": "Model moved into custom namespace",
       "Usage": "RoundTrip",
+      "Description": "Model moved into custom namespace",
       "Properties": [
        {
         "$id": "39",
@@ -275,11 +275,11 @@
      "Description": "ModelWithCustomizedProperties",
      "Type": {
       "$id": "42",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelWithCustomizedProperties",
       "Namespace": "CustomizationsInTsp",
-      "Description": "Model with customized properties",
       "Usage": "RoundTrip",
+      "Description": "Model with customized properties",
       "Properties": [
        {
         "$id": "43",
@@ -389,9 +389,8 @@
         "Description": "Property renamed that is list",
         "Type": {
          "$id": "61",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "62",
           "Kind": "string"
          }
@@ -406,8 +405,7 @@
         "Description": "Property renamed that is dictionary",
         "Type": {
          "$id": "64",
-         "Kind": "Dictionary",
-         "Name": "Dictionary",
+         "Kind": "dict",
          "KeyType": {
           "$id": "65",
           "Kind": "string"
@@ -427,13 +425,11 @@
         "Description": "Property renamed that is listoflist",
         "Type": {
          "$id": "68",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "69",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "ValueType": {
            "$id": "70",
            "Kind": "string"
           }
@@ -449,12 +445,10 @@
         "Description": "Property renamed that is listofdictionary",
         "Type": {
          "$id": "72",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "73",
-          "Kind": "Dictionary",
-          "Name": "Dictionary",
+          "Kind": "dict",
           "KeyType": {
            "$id": "74",
            "Kind": "string"
@@ -475,9 +469,8 @@
         "Description": "Property type changed to ReadOnlyMemory<float>",
         "Type": {
          "$id": "77",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "78",
           "Kind": "float32"
          }
@@ -492,9 +485,8 @@
         "Description": "Property type changed to ReadOnlyMemory<float>?",
         "Type": {
          "$id": "80",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "81",
           "Kind": "float32"
          }
@@ -512,9 +504,8 @@
          "Kind": "nullable",
          "Type": {
           "$id": "84",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "ValueType": {
            "$id": "85",
            "Kind": "float32"
           }
@@ -533,9 +524,8 @@
          "Kind": "nullable",
          "Type": {
           "$id": "88",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "ValueType": {
            "$id": "89",
            "Kind": "float32"
           }
@@ -551,9 +541,8 @@
         "Description": "Property type changed to ReadOnlyMemory<float>",
         "Type": {
          "$id": "91",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "92",
           "Kind": "float32"
          }
@@ -568,9 +557,8 @@
         "Description": "Property type changed to ReadOnlyMemory<float>?",
         "Type": {
          "$id": "94",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$id": "95",
           "Kind": "float32"
          }
@@ -588,9 +576,8 @@
          "Kind": "nullable",
          "Type": {
           "$id": "98",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "ValueType": {
            "$id": "99",
            "Kind": "float32"
           }
@@ -609,9 +596,8 @@
          "Kind": "nullable",
          "Type": {
           "$id": "102",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "ValueType": {
            "$id": "103",
            "Kind": "float32"
           }
@@ -665,11 +651,11 @@
      "Description": "ModelToAddAdditionalSerializableProperty",
      "Type": {
       "$id": "108",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelToAddAdditionalSerializableProperty",
       "Namespace": "CustomizationsInTsp",
-      "Description": "Model to add additional serializable property",
       "Usage": "RoundTrip",
+      "Description": "Model to add additional serializable property",
       "BaseModel": {
        "$ref": "32"
       },
@@ -709,11 +695,11 @@
      "Description": "ModelStruct",
      "Type": {
       "$id": "113",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelStruct",
       "Namespace": "CustomizationsInTsp",
-      "Description": "Model to make to a struct",
       "Usage": "RoundTrip",
+      "Description": "Model to make to a struct",
       "Properties": [
        {
         "$id": "114",
