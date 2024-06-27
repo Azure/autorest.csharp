@@ -382,12 +382,6 @@ namespace AutoRest.CSharp.Common.Input
             return model;
         }
 
-        private IReadOnlyList<Property> CreateCompositionProperties(ObjectSchema objectSchema, ObjectSchema? baseModelSchema)
-        {
-            var compositeSchemas = objectSchema.Parents?.Immediate?.OfType<ObjectSchema>().Where(s => s != baseModelSchema);
-            return compositeSchemas is null ? Array.Empty<Property>() : compositeSchemas.SelectMany(m => m.Properties).ToList();
-        }
-
         private static InputModelTypeUsage GetUsage(SchemaTypeUsage usage)
         {
             var result = InputModelTypeUsage.None;

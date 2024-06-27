@@ -68,15 +68,9 @@ namespace AutoRest.CSharp.Output.Models
                 .Distinct();
         }
 
-        private static string GetRequestParameterName(RequestParameter requestParameter)
-        {
-            var language = requestParameter.Language.Default;
-            return language.SerializedName ?? language.Name;
-        }
-
         public static RestClientMethod BuildRequestMethod(InputOperation operation, Parameter[] parameters, IReadOnlyCollection<RequestPartSource> requestParts, Parameter? bodyParameter, TypeFactory typeFactory)
         {
-            Request request = BuildRequest(operation, requestParts, bodyParameter);
+            Request request = BuildRequest(operation, requestParts, bodyParameter, typeFactory);
             Response[] responses = BuildResponses(operation, typeFactory, out var responseType);
 
             return new RestClientMethod(
@@ -108,7 +102,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Select(kvp => new RequestPartSource(kvp.Key.NameInRequest, (InputParameter?)kvp.Key, CreateReference(kvp.Key, kvp.Value), SerializationBuilder.GetSerializationFormat(kvp.Key.Type)))
                 .ToList();
 
-            var request = BuildRequest(operation, requestParts, null, _library);
+            var request = BuildRequest(operation, requestParts, null, _typeFactory, _library);
             Response[] responses = BuildResponses(operation, _typeFactory, out var responseType);
 
             return new RestClientMethod(
@@ -169,7 +163,7 @@ namespace AutoRest.CSharp.Output.Models
             return clientResponse.ToArray();
         }
 
-        private static Request BuildRequest(InputOperation operation, IReadOnlyCollection<RequestPartSource> requestParts, Parameter? bodyParameter, OutputLibrary? library = null)
+        private static Request BuildRequest(InputOperation operation, IReadOnlyCollection<RequestPartSource> requestParts, Parameter? bodyParameter, TypeFactory typeFactory, OutputLibrary? library = null)
         {
             var uriParametersMap = new Dictionary<string, PathSegment>();
             var pathParametersMap = new Dictionary<string, PathSegment>();
@@ -210,7 +204,7 @@ namespace AutoRest.CSharp.Output.Models
             var body = bodyParameter != null
                 ? new RequestContentRequestBody(bodyParameter)
                 : operation.RequestBodyMediaType != BodyMediaType.None
-                    ? BuildRequestBody(requestParts, operation.RequestBodyMediaType, library)
+                    ? BuildRequestBody(requestParts, operation.RequestBodyMediaType, library, typeFactory)
                     : null;
 
             return new Request(
@@ -237,7 +231,7 @@ namespace AutoRest.CSharp.Output.Models
             return OrderParametersByRequired(methodParameters);
         }
 
-        private static RequestBody? BuildRequestBody(IReadOnlyCollection<RequestPartSource> allParameters, BodyMediaType bodyMediaType, OutputLibrary? library)
+        private static RequestBody? BuildRequestBody(IReadOnlyCollection<RequestPartSource> allParameters, BodyMediaType bodyMediaType, OutputLibrary? library, TypeFactory typeFactory)
         {
             RequestBody? body = null;
 
@@ -326,7 +320,7 @@ namespace AutoRest.CSharp.Output.Models
                             (InputType inputType, bool isNullable) = bodyRequestParameter.Type is InputNullableType nullableType ? (nullableType.Type, true) : (bodyRequestParameter.Type, false);
                             var objectType = inputType switch
                             {
-                                InputModelType inputModelType => library.ResolveModel(inputModelType).WithNullable(isNullable).Implementation as SerializableObjectType,
+                                InputModelType inputModelType => typeFactory.CreateType(inputModelType).Implementation as SerializableObjectType,
                                 _ => null
                             };
 
