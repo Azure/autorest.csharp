@@ -63,6 +63,11 @@ namespace AutoRest.CSharp.Common.Input
                 description = $"The {name}.";
             }
 
+            if (!Enum.TryParse<InputModelTypeUsage>(usageString, out var usage))
+            {
+                throw new JsonException($"Cannot parse usage {usageString}");
+            }
+
             if (values == null || values.Count == 0)
             {
                 throw new JsonException("Enum must have at least one value");
@@ -71,11 +76,6 @@ namespace AutoRest.CSharp.Common.Input
             if (valueType is not InputPrimitiveType inputValueType)
             {
                 throw new JsonException("The ValueType of an EnumType must be a primitive type.");
-            }
-
-            if (!Enum.TryParse<InputModelTypeUsage>(usageString, out var usage))
-            {
-                throw new JsonException($"Cannot parse usage {usageString}");
             }
 
             var enumType = new InputEnumType(name, ns, accessibility, deprecated, description!, usage, inputValueType, NormalizeValues(values, inputValueType), isExtendable);
