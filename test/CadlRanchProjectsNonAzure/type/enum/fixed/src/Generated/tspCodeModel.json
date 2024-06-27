@@ -71,7 +71,6 @@
    "Protocol": {
     "$id": "12"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "13",
@@ -381,7 +380,6 @@
    "Protocol": {
     "$id": "41"
    },
-   "Creatable": false,
    "Parent": "FixedClient",
    "Parameters": [
     {

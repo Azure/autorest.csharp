@@ -293,7 +293,6 @@
    "Protocol": {
     "$id": "39"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "40",
@@ -493,7 +492,6 @@
    "Protocol": {
     "$id": "59"
    },
-   "Creatable": false,
    "Parent": "AccessClient",
    "Parameters": [
     {
@@ -747,7 +745,6 @@
    "Protocol": {
     "$id": "82"
    },
-   "Creatable": false,
    "Parent": "AccessClient",
    "Parameters": [
     {
@@ -922,7 +919,6 @@
    "Protocol": {
     "$id": "98"
    },
-   "Creatable": false,
    "Parent": "AccessClient",
    "Parameters": [
     {
@@ -1099,7 +1095,6 @@
    "Protocol": {
     "$id": "114"
    },
-   "Creatable": false,
    "Parent": "AccessClient",
    "Parameters": [
     {

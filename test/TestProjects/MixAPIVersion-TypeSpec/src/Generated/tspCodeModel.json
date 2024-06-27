@@ -164,7 +164,6 @@
    "Protocol": {
     "$id": "25"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "26",
@@ -533,7 +532,6 @@
    "Protocol": {
     "$id": "61"
    },
-   "Creatable": false,
    "Parent": "MixApiVersionClient",
    "Parameters": [
     {
@@ -640,7 +638,6 @@
    "Protocol": {
     "$id": "71"
    },
-   "Creatable": false,
    "Parent": "MixApiVersionClient",
    "Parameters": [
     {
