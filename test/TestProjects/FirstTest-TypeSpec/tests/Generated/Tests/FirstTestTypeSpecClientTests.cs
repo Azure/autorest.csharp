@@ -145,6 +145,10 @@ namespace FirstTestTypeSpec.Tests
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
+                embeddingVector = new object[]
+            {
+1234
+            },
             });
             Response response = await client.PatchActionAsync(content);
         }
@@ -218,6 +222,10 @@ namespace FirstTestTypeSpec.Tests
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
+                embeddingVector = new object[]
+            {
+1234
+            },
             });
             Response response = await client.AnonymousBodyAsync(content);
         }
@@ -238,6 +246,7 @@ namespace FirstTestTypeSpec.Tests
                 OptionalLiteralBool = true,
                 OptionalNullableList = { 1234 },
                 OptionalFloatProperty = (double)default,
+                EmbeddingVector = new int[] { 1234 },
             };
             Response<Thing> response = await client.AnonymousBodyAsync(thing);
         }

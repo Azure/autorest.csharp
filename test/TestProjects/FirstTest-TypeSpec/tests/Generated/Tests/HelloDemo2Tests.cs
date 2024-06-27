@@ -149,6 +149,10 @@ BinaryData.FromObjectAsJson("<unionList>")
             },
                     requiredFloatProperty = new object(),
                     optionalFloatProperty = new object(),
+                    embeddingVector = new object[]
+            {
+1234
+            },
                 },
                 intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new object[]
@@ -219,6 +223,7 @@ BinaryData.FromObjectAsJson("<unionList>")
                     OptionalLiteralBool = true,
                     OptionalNullableList = { 1234 },
                     OptionalFloatProperty = (double)default,
+                    EmbeddingVector = new int[] { 1234 },
                 },
                 BinaryData.FromObjectAsJson(new object()),
                 new Dictionary<string, BinaryData>
@@ -346,6 +351,10 @@ BinaryData.FromObjectAsJson("<unionList>")
             },
                     requiredFloatProperty = new object(),
                     optionalFloatProperty = new object(),
+                    embeddingVector = new object[]
+            {
+1234
+            },
                 },
                 intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new object[]
@@ -505,6 +514,10 @@ BinaryData.FromObjectAsJson("<unionList>")
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
+                embeddingVector = new object[]
+            {
+1234
+            },
             });
             Response response = await client.CreateLiteralAsync(content);
         }
@@ -525,6 +538,7 @@ BinaryData.FromObjectAsJson("<unionList>")
                 OptionalLiteralBool = true,
                 OptionalNullableList = { 1234 },
                 OptionalFloatProperty = (double)default,
+                EmbeddingVector = new int[] { 1234 },
             };
             Response<Thing> response = await client.CreateLiteralAsync(body);
         }

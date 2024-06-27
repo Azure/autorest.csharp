@@ -131,6 +131,9 @@ model Thing {
 
     @doc("optional float property")
     optionalFloatProperty?: float;
+
+    @doc("optional embedding vector")
+    embeddingVector?: EmbeddingVector<int32>;
 }
 
 @doc("A model with a few required nullable properties")

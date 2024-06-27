@@ -78,6 +78,7 @@ Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
 ]]></code></example>
     </member>
     <member name="TopAction(DateTimeOffset,RequestContext)">
@@ -123,6 +124,7 @@ Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
 ]]></code></example>
     </member>
     <member name="TopAction2Async(RequestContext)">
@@ -168,6 +170,7 @@ Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
 ]]></code></example>
     </member>
     <member name="TopAction2(RequestContext)">
@@ -213,6 +216,7 @@ Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
 ]]></code></example>
     </member>
     <member name="PatchActionAsync(RequestContent,RequestContext)">
@@ -278,6 +282,10 @@ using RequestContent content = RequestContent.Create(new
     },
     requiredFloatProperty = new object(),
     optionalFloatProperty = new object(),
+    embeddingVector = new object[]
+    {
+        1234
+    },
 });
 Response response = await client.PatchActionAsync(content);
 
@@ -297,6 +305,7 @@ Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
 ]]></code></example>
     </member>
     <member name="PatchAction(RequestContent,RequestContext)">
@@ -362,6 +371,10 @@ using RequestContent content = RequestContent.Create(new
     },
     requiredFloatProperty = new object(),
     optionalFloatProperty = new object(),
+    embeddingVector = new object[]
+    {
+        1234
+    },
 });
 Response response = client.PatchAction(content);
 
@@ -381,6 +394,7 @@ Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
 ]]></code></example>
     </member>
     <member name="AnonymousBodyAsync(Thing,CancellationToken)">
@@ -406,6 +420,7 @@ Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>")
     OptionalLiteralBool = true,
     OptionalNullableList = { 1234 },
     OptionalFloatProperty = (double)default,
+    EmbeddingVector = new int[] { 1234 },
 };
 Response<Thing> response = await client.AnonymousBodyAsync(thing);
 ]]></code></example>
@@ -433,6 +448,7 @@ Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>")
     OptionalLiteralBool = true,
     OptionalNullableList = { 1234 },
     OptionalFloatProperty = (double)default,
+    EmbeddingVector = new int[] { 1234 },
 };
 Response<Thing> response = client.AnonymousBody(thing);
 ]]></code></example>
@@ -500,6 +516,10 @@ using RequestContent content = RequestContent.Create(new
     },
     requiredFloatProperty = new object(),
     optionalFloatProperty = new object(),
+    embeddingVector = new object[]
+    {
+        1234
+    },
 });
 Response response = await client.AnonymousBodyAsync(content);
 
@@ -519,6 +539,7 @@ Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
 ]]></code></example>
     </member>
     <member name="AnonymousBody(RequestContent,RequestContext)">
@@ -584,6 +605,10 @@ using RequestContent content = RequestContent.Create(new
     },
     requiredFloatProperty = new object(),
     optionalFloatProperty = new object(),
+    embeddingVector = new object[]
+    {
+        1234
+    },
 });
 Response response = client.AnonymousBody(content);
 
@@ -603,6 +628,7 @@ Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
 ]]></code></example>
     </member>
     <member name="FriendlyModelAsync(Friend,CancellationToken)">
