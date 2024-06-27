@@ -200,7 +200,7 @@
  "Models": [
   {
    "$id": "35",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse9",
    "Namespace": "Type.Union",
    "Usage": "Output",
@@ -220,7 +220,7 @@
   },
   {
    "$id": "37",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest9",
    "Namespace": "Type.Union",
    "Usage": "Input",
@@ -240,7 +240,7 @@
   },
   {
    "$id": "39",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse8",
    "Namespace": "Type.Union",
    "Usage": "Output",
@@ -260,7 +260,7 @@
   },
   {
    "$id": "41",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest8",
    "Namespace": "Type.Union",
    "Usage": "Input",
@@ -280,7 +280,7 @@
   },
   {
    "$id": "43",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse7",
    "Namespace": "Type.Union",
    "Usage": "Output",
@@ -300,7 +300,7 @@
   },
   {
    "$id": "45",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest7",
    "Namespace": "Type.Union",
    "Usage": "Input",
@@ -320,7 +320,7 @@
   },
   {
    "$id": "47",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse6",
    "Namespace": "Type.Union",
    "Usage": "Output",
@@ -340,7 +340,7 @@
   },
   {
    "$id": "49",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest6",
    "Namespace": "Type.Union",
    "Usage": "Input",
@@ -360,7 +360,7 @@
   },
   {
    "$id": "51",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse5",
    "Namespace": "Type.Union",
    "Usage": "Output",
@@ -380,7 +380,7 @@
   },
   {
    "$id": "53",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest5",
    "Namespace": "Type.Union",
    "Usage": "Input",
@@ -400,7 +400,7 @@
   },
   {
    "$id": "55",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse4",
    "Namespace": "Type.Union",
    "Usage": "Output",
@@ -417,7 +417,7 @@
       "VariantTypes": [
        {
         "$id": "58",
-        "Kind": "Model",
+        "Kind": "model",
         "Name": "Cat",
         "Namespace": "Type.Union",
         "Usage": "Input,Output",
@@ -438,7 +438,7 @@
        },
        {
         "$id": "61",
-        "Kind": "Model",
+        "Kind": "model",
         "Name": "Dog",
         "Namespace": "Type.Union",
         "Usage": "Input,Output",
@@ -472,7 +472,7 @@
   },
   {
    "$id": "64",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest4",
    "Namespace": "Type.Union",
    "Usage": "Input",
@@ -502,7 +502,7 @@
   },
   {
    "$id": "67",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse3",
    "Namespace": "Type.Union",
    "Usage": "Output",
@@ -514,7 +514,7 @@
      "Description": "",
      "Type": {
       "$id": "69",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "EnumsOnlyCases",
       "Namespace": "Type.Union",
       "Usage": "Input,Output",
@@ -553,7 +553,7 @@
   },
   {
    "$id": "72",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest3",
    "Namespace": "Type.Union",
    "Usage": "Input",
@@ -573,7 +573,7 @@
   },
   {
    "$id": "74",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse2",
    "Namespace": "Type.Union",
    "Usage": "Output",
@@ -585,7 +585,7 @@
      "Description": "",
      "Type": {
       "$id": "76",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "StringAndArrayCases",
       "Namespace": "Type.Union",
       "Usage": "Input,Output",
@@ -656,7 +656,7 @@
   },
   {
    "$id": "87",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest2",
    "Namespace": "Type.Union",
    "Usage": "Input",
@@ -676,7 +676,7 @@
   },
   {
    "$id": "89",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse1",
    "Namespace": "Type.Union",
    "Usage": "Output",
@@ -688,7 +688,7 @@
      "Description": "",
      "Type": {
       "$id": "91",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "MixedLiteralsCases",
       "Namespace": "Type.Union",
       "Usage": "Input,Output",
@@ -909,7 +909,7 @@
   },
   {
    "$id": "132",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest1",
    "Namespace": "Type.Union",
    "Usage": "Input",
@@ -929,7 +929,7 @@
   },
   {
    "$id": "134",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse",
    "Namespace": "Type.Union",
    "Usage": "Output",
@@ -941,7 +941,7 @@
      "Description": "",
      "Type": {
       "$id": "136",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "MixedTypesCases",
       "Namespace": "Type.Union",
       "Usage": "Input,Output",
@@ -1137,7 +1137,7 @@
   },
   {
    "$id": "168",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest",
    "Namespace": "Type.Union",
    "Usage": "Input",

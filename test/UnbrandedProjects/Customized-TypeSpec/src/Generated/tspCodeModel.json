@@ -24,7 +24,7 @@
    "Namespace": "CustomizedTypeSpec",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "5",
@@ -45,7 +45,7 @@
    "Namespace": "CustomizedTypeSpec",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "8",
@@ -66,7 +66,7 @@
    "Namespace": "CustomizedTypeSpec",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "11",
@@ -87,7 +87,7 @@
    "Namespace": "CustomizedTypeSpec",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "14",
@@ -108,7 +108,7 @@
    "Namespace": "CustomizedTypeSpec",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "17",
@@ -129,7 +129,7 @@
    "Namespace": "CustomizedTypeSpec",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "20",
@@ -154,11 +154,11 @@
  "Models": [
   {
    "$id": "23",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Thing",
    "Namespace": "CustomizedTypeSpec",
-   "Description": "A model with a few properties of literal types",
    "Usage": "Input,Output",
+   "Description": "A model with a few properties of literal types",
    "Properties": [
     {
      "$id": "24",
@@ -389,11 +389,11 @@
   },
   {
    "$id": "60",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RoundTripModel",
    "Namespace": "CustomizedTypeSpec",
-   "Description": "this is a roundtrip model",
    "Usage": "Input,Output",
+   "Description": "this is a roundtrip model",
    "Properties": [
     {
      "$id": "61",
@@ -435,11 +435,11 @@
   },
   {
    "$id": "67",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Friend",
    "Namespace": "CustomizedTypeSpec",
-   "Description": "this is not a friendly model but with a friendly name",
    "Usage": "Input,Output",
+   "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
     {
      "$id": "68",
@@ -460,7 +460,7 @@
      "Description": "",
      "Type": {
       "$id": "71",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelWithFormat",
       "Namespace": "CustomizedTypeSpec",
       "Usage": "Input,Output",
@@ -502,11 +502,11 @@
   },
   {
    "$id": "76",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ProjectedModel",
    "Namespace": "CustomizedTypeSpec",
-   "Description": "this is a model with a projected name",
    "Usage": "Input,Output",
+   "Description": "this is a model with a projected name",
    "Properties": [
     {
      "$id": "77",
@@ -524,7 +524,7 @@
   },
   {
    "$id": "79",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
    "Namespace": "CustomizedTypeSpec",
    "Usage": "Output",

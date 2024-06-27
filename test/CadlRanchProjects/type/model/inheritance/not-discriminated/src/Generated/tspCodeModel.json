@@ -6,25 +6,25 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Siamese",
    "Namespace": "Type.Model.Inheritance.NotDiscriminated",
-   "Description": "The third level model in the normal multiple levels inheritance.",
    "Usage": "Input,Output",
+   "Description": "The third level model in the normal multiple levels inheritance.",
    "BaseModel": {
     "$id": "3",
-    "Kind": "Model",
+    "Kind": "model",
     "Name": "Cat",
     "Namespace": "Type.Model.Inheritance.NotDiscriminated",
-    "Description": "The second level model in the normal multiple levels inheritance.",
     "Usage": "Input,Output",
+    "Description": "The second level model in the normal multiple levels inheritance.",
     "BaseModel": {
      "$id": "4",
-     "Kind": "Model",
+     "Kind": "model",
      "Name": "Pet",
      "Namespace": "Type.Model.Inheritance.NotDiscriminated",
-     "Description": "This is base model for not-discriminated normal multiple levels inheritance.",
      "Usage": "Input,Output",
+     "Description": "This is base model for not-discriminated normal multiple levels inheritance.",
      "Properties": [
       {
        "$id": "5",

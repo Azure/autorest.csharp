@@ -6,7 +6,7 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "DefaultBytesProperty",
    "Namespace": "Encode.Bytes",
    "Usage": "Input,Output",
@@ -28,7 +28,7 @@
   },
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Base64BytesProperty",
    "Namespace": "Encode.Bytes",
    "Usage": "Input,Output",
@@ -50,7 +50,7 @@
   },
   {
    "$id": "8",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Base64urlBytesProperty",
    "Namespace": "Encode.Bytes",
    "Usage": "Input,Output",
@@ -72,7 +72,7 @@
   },
   {
    "$id": "11",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Base64urlArrayBytesProperty",
    "Namespace": "Encode.Bytes",
    "Usage": "Input,Output",

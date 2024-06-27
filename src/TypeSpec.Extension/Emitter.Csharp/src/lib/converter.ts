@@ -37,7 +37,6 @@ import {
     InputType,
     InputUnionType
 } from "../type/input-type.js";
-import { InputTypeKind } from "../type/input-type-kind.js";
 import { LiteralTypeContext } from "../type/literal-type-context.js";
 
 export function fromSdkType(
@@ -103,133 +102,127 @@ export function fromSdkModelType(
     const modelTypeName = modelType.name;
     let inputModelType = models.get(modelTypeName);
     if (!inputModelType) {
-        const baseModelHasDiscriminator = hasDiscriminator(modelType.baseModel);
         inputModelType = {
-            Kind: InputTypeKind.Model,
+            Kind: "model",
             Name: modelTypeName,
             Namespace: getFullNamespaceString(
                 (modelType.__raw as Model).namespace
-            ),
-            Accessibility: getAccessOverride(
+            ), // TODO -- use the value from TCGC when this is included in TCGC
+            Access: getAccessOverride(
                 context,
                 modelType.__raw as Model
             ) /* when tcgc provide a way to identify if the access is override or not, we can get the accessibility from the modelType.access */,
-            Deprecated: modelType.deprecation,
+            Usage: modelType.usage,
+            Deprecation: modelType.deprecation,
             Description: modelType.description,
-            DiscriminatorPropertyName: baseModelHasDiscriminator
-                ? undefined
-                : getDiscriminatorPropertyNameFromCurrentModel(modelType),
-            DiscriminatorValue: modelType.discriminatorValue,
-            Usage: modelType.usage
+            DiscriminatorValue: modelType.discriminatorValue
         } as InputModelType;
 
         models.set(modelTypeName, inputModelType);
+
+        inputModelType.AdditionalProperties = modelType.additionalProperties
+            ? fromSdkType(
+                  modelType.additionalProperties,
+                  context,
+                  models,
+                  enums
+              )
+            : undefined;
+
+        const propertiesDict = new Map<
+            SdkModelPropertyType,
+            InputModelProperty[]
+        >();
+        for (const property of modelType.properties) {
+            if (property.kind !== "property") {
+                continue;
+            }
+            const ourProperties = fromSdkModelProperty(
+                property,
+                {
+                    ModelName: modelTypeName,
+                    Namespace: inputModelType.Namespace
+                } as LiteralTypeContext,
+                []
+            );
+            propertiesDict.set(property, ourProperties);
+        }
+
+        inputModelType.DiscriminatorProperty = modelType.discriminatorProperty
+            ? propertiesDict.get(modelType.discriminatorProperty)![0]
+            : undefined;
 
         inputModelType.BaseModel = modelType.baseModel
             ? fromSdkModelType(modelType.baseModel, context, models, enums)
             : undefined;
 
-        inputModelType.InheritedDictionaryType = modelType.additionalProperties
-            ? {
-                  Kind: "dict",
-                  KeyType: {
-                      Kind: "string"
-                  },
-                  ValueType: fromSdkType(
-                      modelType.additionalProperties,
-                      context,
-                      models,
-                      enums
-                  )
-              }
-            : undefined;
-        inputModelType.Properties = modelType.properties
-            .filter(
-                (p) =>
-                    !(p as SdkBodyModelPropertyType).discriminator ||
-                    !baseModelHasDiscriminator
-            )
-            .filter(
-                (p) =>
-                    p.kind !== "header" &&
-                    p.kind !== "query" &&
-                    p.kind !== "path"
-            )
-            .map((p) =>
-                fromSdkModelProperty(
-                    p,
-                    {
-                        ModelName: inputModelType!.Name,
-                        Namespace: inputModelType!.Namespace,
-                        Usage: inputModelType!.Usage
-                    } as LiteralTypeContext,
-                    []
-                )
-            )
-            .flat();
+        inputModelType.Properties = Array.from(propertiesDict.values()).flat();
+
+        if (modelType.discriminatedSubtypes) {
+            const discriminatedSubtypes: Record<string, InputModelType> = {};
+            for (const key in modelType.discriminatedSubtypes) {
+                const subtype = modelType.discriminatedSubtypes[key];
+                discriminatedSubtypes[key] = fromSdkModelType(
+                    subtype,
+                    context,
+                    models,
+                    enums
+                );
+            }
+            inputModelType.DiscriminatedSubtypes = discriminatedSubtypes;
+        }
     }
 
     return inputModelType;
 
     function fromSdkModelProperty(
-        propertyType: SdkModelPropertyType,
+        property: SdkBodyModelPropertyType,
         literalTypeContext: LiteralTypeContext,
         flattenedNamePrefixes: string[]
     ): InputModelProperty[] {
-        if (propertyType.kind !== "property" || !propertyType.flatten) {
-            const serializedName =
-                propertyType.kind === "property"
-                    ? (propertyType as SdkBodyModelPropertyType).serializedName
-                    : "";
+        // TODO -- we should consolidate the flatten somewhere else
+        if (!property.flatten) {
+            const serializedName = property.serializedName;
             literalTypeContext.PropertyName = serializedName;
 
-            const isRequired =
-                propertyType.kind === "path" || propertyType.kind === "body"
-                    ? true
-                    : !propertyType.optional; // TO-DO: SdkBodyParameter lacks of optional
-            const isDiscriminator =
-                propertyType.kind === "property" && propertyType.discriminator
-                    ? true
-                    : false;
+            const isRequired = !property.optional;
+            const isDiscriminator = property.discriminator;
             const modelProperty: InputModelProperty = {
-                Name: propertyType.name,
+                Name: property.name,
                 SerializedName: serializedName,
                 Description:
-                    propertyType.description ??
+                    property.description ??
                     (isDiscriminator ? "Discriminator" : ""),
                 Type: fromSdkType(
-                    propertyType.type,
+                    property.type,
                     context,
                     models,
                     enums,
-                    literalTypeContext
+                    isDiscriminator ? undefined : literalTypeContext // this is a workaround because the type of discriminator property in derived models is always literal and we wrap literal into enums, which leads to a lot of extra enum types, adding this check to avoid them
                 ),
                 IsRequired: isRequired,
-                IsReadOnly:
-                    propertyType.kind === "property" &&
-                    isReadOnly(propertyType),
+                IsReadOnly: isReadOnly(property),
                 IsDiscriminator: isDiscriminator === true ? true : undefined,
                 FlattenedNames:
                     flattenedNamePrefixes.length > 0
-                        ? flattenedNamePrefixes.concat(propertyType.name)
+                        ? flattenedNamePrefixes.concat(property.name)
                         : undefined
             };
 
             return [modelProperty];
         }
 
-        let flattenedProperties: InputModelProperty[] = [];
-        const modelPropertyType = propertyType as SdkBodyModelPropertyType;
-        const childPropertiesToFlatten = (
-            modelPropertyType.type as SdkModelType
-        ).properties;
+        const flattenedProperties: InputModelProperty[] = [];
+        const childPropertiesToFlatten = (property.type as SdkModelType)
+            .properties;
         const newFlattenedNamePrefixes = flattenedNamePrefixes.concat(
-            modelPropertyType.serializedName
+            property.serializedName
         );
-        for (let index = 0; index < childPropertiesToFlatten.length; index++) {
-            flattenedProperties = flattenedProperties.concat(
-                fromSdkModelProperty(
-                    childPropertiesToFlatten[index],
+        for (const childProperty of childPropertiesToFlatten) {
+            if (childProperty.kind !== "property") continue;
+            flattenedProperties.push(
+                ...fromSdkModelProperty(
+                    childProperty,
                     literalTypeContext,
                     newFlattenedNamePrefixes
                 )
@@ -238,32 +231,6 @@ export function fromSdkModelType(
 
         return flattenedProperties;
     }
-}
-
-function getDiscriminatorPropertyNameFromCurrentModel(
-    model?: SdkModelType
-): string | undefined {
-    if (model == null) return undefined;
-
-    const discriminatorProperty = model.properties.find(
-        (p) => (p as SdkBodyModelPropertyType).discriminator
-    );
-    if (discriminatorProperty) return discriminatorProperty.name;
-
-    return undefined;
-}
-
-function hasDiscriminator(model?: SdkModelType): boolean {
-    if (model == null) return false;
-
-    if (
-        model.properties.some(
-            (p) => (p as SdkBodyModelPropertyType).discriminator
-        )
-    )
-        return true;
-
-    return hasDiscriminator(model.baseModel);
 }
 
 export function fromSdkEnumType(

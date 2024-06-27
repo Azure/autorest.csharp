@@ -6,11 +6,11 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "FlattenModel",
    "Namespace": "Type.Model.Flatten",
-   "Description": "This is the model with one level of flattening.",
    "Usage": "Input,Output",
+   "Description": "This is the model with one level of flattening.",
    "Properties": [
     {
      "$id": "3",
@@ -60,11 +60,11 @@
   },
   {
    "$id": "9",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "NestedFlattenModel",
    "Namespace": "Type.Model.Flatten",
-   "Description": "This is the model with two levels of flattening.",
    "Usage": "Input,Output",
+   "Description": "This is the model with two levels of flattening.",
    "Properties": [
     {
      "$id": "10",
@@ -132,11 +132,11 @@
   },
   {
    "$id": "18",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ChildModel",
    "Namespace": "Type.Model.Flatten",
-   "Description": "This is the child model to be flattened.",
    "Usage": "Input,Output",
+   "Description": "This is the child model to be flattened.",
    "Properties": [
     {
      "$id": "19",
@@ -166,11 +166,11 @@
   },
   {
    "$id": "23",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ChildFlattenModel",
    "Namespace": "Type.Model.Flatten",
-   "Description": "This is the child model to be flattened. And it has flattened property as well.",
    "Usage": "Input,Output",
+   "Description": "This is the child model to be flattened. And it has flattened property as well.",
    "Properties": [
     {
      "$id": "24",

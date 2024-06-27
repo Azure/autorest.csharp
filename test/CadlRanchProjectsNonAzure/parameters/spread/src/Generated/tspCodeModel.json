@@ -6,11 +6,11 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "BodyParameter",
    "Namespace": "Parameters.Spread.Model",
-   "Description": "This is a simple model.",
    "Usage": "Input",
+   "Description": "This is a simple model.",
    "Properties": [
     {
      "$id": "3",
@@ -28,11 +28,11 @@
   },
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "CompositeRequestMix",
    "Namespace": "Parameters.Spread.Model",
-   "Description": "This is a model with non-body http request decorator.",
    "Usage": "Input",
+   "Description": "This is a model with non-body http request decorator.",
    "Properties": [
     {
      "$id": "6",
@@ -50,7 +50,7 @@
   },
   {
    "$id": "8",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadAsRequestBodyRequest",
    "Namespace": "Parameters.Spread.Alias",
    "Usage": "Input",
@@ -71,7 +71,7 @@
   },
   {
    "$id": "11",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadAsRequestParameterRequest",
    "Namespace": "",
    "Usage": "Input",
@@ -92,7 +92,7 @@
   },
   {
    "$id": "14",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadWithMultipleParametersRequest",
    "Namespace": "",
    "Usage": "Input",

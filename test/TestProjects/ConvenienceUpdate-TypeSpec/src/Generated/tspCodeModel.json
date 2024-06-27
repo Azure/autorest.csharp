@@ -6,11 +6,11 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Model",
    "Namespace": "ConvenienceInCadl",
-   "Description": "A model.",
    "Usage": "Input,Output",
+   "Description": "A model.",
    "Properties": [
     {
      "$id": "3",

@@ -6,11 +6,11 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "InputRecord",
    "Namespace": "Type.Model.Usage",
-   "Description": "Record used in operation parameters",
    "Usage": "Input",
+   "Description": "Record used in operation parameters",
    "Properties": [
     {
      "$id": "3",
@@ -28,11 +28,11 @@
   },
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "OutputRecord",
    "Namespace": "Type.Model.Usage",
-   "Description": "Record used in operation return type",
    "Usage": "Output",
+   "Description": "Record used in operation return type",
    "Properties": [
     {
      "$id": "6",
@@ -50,11 +50,11 @@
   },
   {
    "$id": "8",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "InputOutputRecord",
    "Namespace": "Type.Model.Usage",
-   "Description": "Record used both as operation parameter and return type",
    "Usage": "Input,Output",
+   "Description": "Record used both as operation parameter and return type",
    "Properties": [
     {
      "$id": "9",

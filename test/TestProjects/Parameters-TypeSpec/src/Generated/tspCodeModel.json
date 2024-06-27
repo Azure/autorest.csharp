@@ -28,7 +28,7 @@
  "Models": [
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Result",
    "Namespace": "ParametersCadl.ParameterOrders",
    "Usage": "Output",

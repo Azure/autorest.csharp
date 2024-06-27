@@ -6,7 +6,7 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "BodyModel",
    "Namespace": "Parameters.BodyOptionality",
    "Usage": "Input",

@@ -22,7 +22,7 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "5",
@@ -43,7 +43,7 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "8",
@@ -64,7 +64,7 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "11",
@@ -85,7 +85,7 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "14",
@@ -106,7 +106,7 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "17",
@@ -127,7 +127,7 @@
    "Namespace": "NewProjectTypeSpec",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "20",
@@ -362,11 +362,11 @@
  "Models": [
   {
    "$id": "59",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Thing",
    "Namespace": "NewProjectTypeSpec",
-   "Description": "A model with a few properties of literal types",
    "Usage": "Input,Output",
+   "Description": "A model with a few properties of literal types",
    "Properties": [
     {
      "$id": "60",
@@ -557,11 +557,11 @@
   },
   {
    "$id": "88",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Friend",
    "Namespace": "NewProjectTypeSpec",
-   "Description": "this is not a friendly model but with a friendly name",
    "Usage": "Input,Output",
+   "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
     {
      "$id": "89",
@@ -579,11 +579,11 @@
   },
   {
    "$id": "91",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RoundTripModel",
    "Namespace": "NewProjectTypeSpec",
-   "Description": "this is a roundtrip model",
    "Usage": "Input,Output",
+   "Description": "this is a roundtrip model",
    "Properties": [
     {
      "$id": "92",

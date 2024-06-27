@@ -56,7 +56,7 @@
  "Models": [
   {
    "$id": "9",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelV2",
    "Namespace": "Versioning.Removed",
    "Usage": "Input,Output",

@@ -6,29 +6,29 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "EmptyInput",
    "Namespace": "Type.Model.Empty",
-   "Description": "Empty model used in operation parameters",
    "Usage": "Input",
+   "Description": "Empty model used in operation parameters",
    "Properties": []
   },
   {
    "$id": "3",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "EmptyOutput",
    "Namespace": "Type.Model.Empty",
-   "Description": "Empty model used in operation return type",
    "Usage": "Output",
+   "Description": "Empty model used in operation return type",
    "Properties": []
   },
   {
    "$id": "4",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "EmptyInputOutput",
    "Namespace": "Type.Model.Empty",
-   "Description": "Empty model used in both parameter and return type",
    "Usage": "Input,Output",
+   "Description": "Empty model used in both parameter and return type",
    "Properties": []
   }
  ],

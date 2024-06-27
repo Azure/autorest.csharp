@@ -111,7 +111,12 @@ namespace ModelsTypeSpec.Models
         /// <param name="requiredNullableStringList"> Required nullable string list. </param>
         /// <param name="nonRequiredNullableIntList"> Optional nullable model list. </param>
         /// <param name="nonRequiredNullableStringList"> Optional nullable string list. </param>
-        internal RoundTripModel(IDictionary<string, BinaryData> serializedAdditionalRawData, string requiredString, int requiredInt, string nonRequiredString, int? nonRequiredInt, int? requiredNullableInt, string requiredNullableString, int? nonRequiredNullableInt, string nonRequiredNullableString, int requiredReadonlyInt, int? nonRequiredReadonlyInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, FixedIntEnum requiredFixedIntEnum, ExtensibleEnum requiredExtensibleEnum, IList<CollectionItem> requiredList, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord, BinaryData requiredBytes, BinaryData optionalBytes, IList<byte> requiredUint8Array, IList<byte> optionalUint8Array, BinaryData requiredUnknown, BinaryData optionalUnknown, IList<sbyte> requiredInt8Array, IList<sbyte> optionalInt8Array, IList<int> requiredNullableIntList, IList<string> requiredNullableStringList, IList<int> nonRequiredNullableIntList, IList<string> nonRequiredNullableStringList) : base(serializedAdditionalRawData)
+        /// <param name="optionalModel">
+        /// optional model with discriminator
+        /// Please note <see cref="BaseModelWithDiscriminatorFromIsKeyword"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="DerivedWithDiscriminatorFromIsKeyword"/>.
+        /// </param>
+        internal RoundTripModel(IDictionary<string, BinaryData> serializedAdditionalRawData, string requiredString, int requiredInt, string nonRequiredString, int? nonRequiredInt, int? requiredNullableInt, string requiredNullableString, int? nonRequiredNullableInt, string nonRequiredNullableString, int requiredReadonlyInt, int? nonRequiredReadonlyInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, FixedIntEnum requiredFixedIntEnum, ExtensibleEnum requiredExtensibleEnum, IList<CollectionItem> requiredList, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord, BinaryData requiredBytes, BinaryData optionalBytes, IList<byte> requiredUint8Array, IList<byte> optionalUint8Array, BinaryData requiredUnknown, BinaryData optionalUnknown, IList<sbyte> requiredInt8Array, IList<sbyte> optionalInt8Array, IList<int> requiredNullableIntList, IList<string> requiredNullableStringList, IList<int> nonRequiredNullableIntList, IList<string> nonRequiredNullableStringList, BaseModelWithDiscriminatorFromIsKeyword optionalModel) : base(serializedAdditionalRawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -143,6 +148,7 @@ namespace ModelsTypeSpec.Models
             RequiredNullableStringList = requiredNullableStringList;
             NonRequiredNullableIntList = nonRequiredNullableIntList;
             NonRequiredNullableStringList = nonRequiredNullableStringList;
+            OptionalModel = optionalModel;
         }
 
         /// <summary> Initializes a new instance of <see cref="RoundTripModel"/> for deserialization. </summary>
@@ -302,5 +308,11 @@ namespace ModelsTypeSpec.Models
         public IList<int> NonRequiredNullableIntList { get; set; }
         /// <summary> Optional nullable string list. </summary>
         public IList<string> NonRequiredNullableStringList { get; set; }
+        /// <summary>
+        /// optional model with discriminator
+        /// Please note <see cref="BaseModelWithDiscriminatorFromIsKeyword"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="DerivedWithDiscriminatorFromIsKeyword"/>.
+        /// </summary>
+        public BaseModelWithDiscriminatorFromIsKeyword OptionalModel { get; set; }
     }
 }

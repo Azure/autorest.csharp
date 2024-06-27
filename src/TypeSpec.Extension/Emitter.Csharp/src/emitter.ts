@@ -213,7 +213,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 }
 
 function convertUsageNumbersToStrings(this: any, key: string, value: any): any {
-    if (this["Kind"] === "Model" || this["Kind"] === "enum") {
+    if (this["Kind"] === "model" || this["Kind"] === "enum") {
         if (key === "Usage" && typeof value === "number") {
             if (value === 0) {
                 return "None";

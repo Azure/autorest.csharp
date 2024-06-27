@@ -30,7 +30,7 @@
  "Models": [
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "AzureLocationModel",
    "Namespace": "_Specs_.Azure.Core.Scalar",
    "Usage": "Input,Output",

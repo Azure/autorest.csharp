@@ -22,7 +22,7 @@
    "Namespace": "Type.Property.Optional",
    "Description": "The StringLiteralProperty_property",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "5",
@@ -43,7 +43,7 @@
    "Namespace": "Type.Property.Optional",
    "Description": "The IntLiteralProperty_property",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "8",
@@ -64,7 +64,7 @@
    "Namespace": "Type.Property.Optional",
    "Description": "The FloatLiteralProperty_property",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "11",
@@ -142,11 +142,11 @@
  "Models": [
   {
    "$id": "23",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "StringProperty",
    "Namespace": "Type.Property.Optional",
-   "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "Usage": "Input,Output",
+   "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "Properties": [
     {
      "$id": "24",
@@ -164,11 +164,11 @@
   },
   {
    "$id": "26",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "BytesProperty",
    "Namespace": "Type.Property.Optional",
-   "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "Usage": "Input,Output",
+   "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "Properties": [
     {
      "$id": "27",
@@ -187,11 +187,11 @@
   },
   {
    "$id": "29",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "DatetimeProperty",
    "Namespace": "Type.Property.Optional",
-   "Description": "Model with a datetime property",
    "Usage": "Input,Output",
+   "Description": "Model with a datetime property",
    "Properties": [
     {
      "$id": "30",
@@ -214,11 +214,11 @@
   },
   {
    "$id": "33",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "DurationProperty",
    "Namespace": "Type.Property.Optional",
-   "Description": "Model with a duration property",
    "Usage": "Input,Output",
+   "Description": "Model with a duration property",
    "Properties": [
     {
      "$id": "34",
@@ -241,11 +241,11 @@
   },
   {
    "$id": "37",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "CollectionsByteProperty",
    "Namespace": "Type.Property.Optional",
-   "Description": "Model with collection bytes properties",
    "Usage": "Input,Output",
+   "Description": "Model with collection bytes properties",
    "Properties": [
     {
      "$id": "38",
@@ -268,11 +268,11 @@
   },
   {
    "$id": "41",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "CollectionsModelProperty",
    "Namespace": "Type.Property.Optional",
-   "Description": "Model with collection models properties",
    "Usage": "Input,Output",
+   "Description": "Model with collection models properties",
    "Properties": [
     {
      "$id": "42",
@@ -293,11 +293,11 @@
   },
   {
    "$id": "44",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "StringLiteralProperty",
    "Namespace": "Type.Property.Optional",
-   "Description": "Model with string literal property",
    "Usage": "Input,Output",
+   "Description": "Model with string literal property",
    "Properties": [
     {
      "$id": "45",
@@ -319,11 +319,11 @@
   },
   {
    "$id": "47",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "IntLiteralProperty",
    "Namespace": "Type.Property.Optional",
-   "Description": "Model with int literal property",
    "Usage": "Input,Output",
+   "Description": "Model with int literal property",
    "Properties": [
     {
      "$id": "48",
@@ -345,11 +345,11 @@
   },
   {
    "$id": "50",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "FloatLiteralProperty",
    "Namespace": "Type.Property.Optional",
-   "Description": "Model with float literal property",
    "Usage": "Input,Output",
+   "Description": "Model with float literal property",
    "Properties": [
     {
      "$id": "51",
@@ -371,11 +371,11 @@
   },
   {
    "$id": "53",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "BooleanLiteralProperty",
    "Namespace": "Type.Property.Optional",
-   "Description": "Model with boolean literal property",
    "Usage": "Input,Output",
+   "Description": "Model with boolean literal property",
    "Properties": [
     {
      "$id": "54",
@@ -398,11 +398,11 @@
   },
   {
    "$id": "57",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnionStringLiteralProperty",
    "Namespace": "Type.Property.Optional",
-   "Description": "Model with union of string literal property",
    "Usage": "Input,Output",
+   "Description": "Model with union of string literal property",
    "Properties": [
     {
      "$id": "58",
@@ -419,11 +419,11 @@
   },
   {
    "$id": "59",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnionIntLiteralProperty",
    "Namespace": "Type.Property.Optional",
-   "Description": "Model with union of int literal property",
    "Usage": "Input,Output",
+   "Description": "Model with union of int literal property",
    "Properties": [
     {
      "$id": "60",
@@ -440,11 +440,11 @@
   },
   {
    "$id": "61",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnionFloatLiteralProperty",
    "Namespace": "Type.Property.Optional",
-   "Description": "Model with union of float literal property",
    "Usage": "Input,Output",
+   "Description": "Model with union of float literal property",
    "Properties": [
     {
      "$id": "62",
@@ -461,11 +461,11 @@
   },
   {
    "$id": "63",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RequiredAndOptionalProperty",
    "Namespace": "Type.Property.Optional",
-   "Description": "Model with required and optional properties",
    "Usage": "Input,Output",
+   "Description": "Model with required and optional properties",
    "Properties": [
     {
      "$id": "64",

@@ -6,7 +6,7 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "DefaultDurationProperty",
    "Namespace": "Encode.Duration.Property",
    "Usage": "Input,Output",
@@ -32,7 +32,7 @@
   },
   {
    "$id": "6",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ISO8601DurationProperty",
    "Namespace": "Encode.Duration.Property",
    "Usage": "Input,Output",
@@ -58,7 +58,7 @@
   },
   {
    "$id": "10",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Int32SecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
    "Usage": "Input,Output",
@@ -84,7 +84,7 @@
   },
   {
    "$id": "14",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "FloatSecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
    "Usage": "Input,Output",
@@ -110,7 +110,7 @@
   },
   {
    "$id": "18",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Float64SecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
    "Usage": "Input,Output",
@@ -136,7 +136,7 @@
   },
   {
    "$id": "22",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "FloatSecondsDurationArrayProperty",
    "Namespace": "Encode.Duration.Property",
    "Usage": "Input,Output",

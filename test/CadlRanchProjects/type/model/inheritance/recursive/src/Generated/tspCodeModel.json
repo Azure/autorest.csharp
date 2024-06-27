@@ -6,18 +6,18 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Extension",
    "Namespace": "Type.Model.Inheritance.Recursive",
-   "Description": "extension",
    "Usage": "Input,Output",
+   "Description": "extension",
    "BaseModel": {
     "$id": "3",
-    "Kind": "Model",
+    "Kind": "model",
     "Name": "Element",
     "Namespace": "Type.Model.Inheritance.Recursive",
-    "Description": "element",
     "Usage": "Input,Output",
+    "Description": "element",
     "Properties": [
      {
       "$id": "4",

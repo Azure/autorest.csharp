@@ -47,9 +47,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultAccessibility { get; }
         public bool IsAccessibilityOverridden { get; }
 
-        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null && _inputModel.DiscriminatorValue is null;
+        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorProperty is not null && _inputModel.DiscriminatorValue is null;
 
-        public ModelTypeProviderFields Fields => _fields ??= new ModelTypeProviderFields(UpdateInputModelProperties(), Declaration.Name, _inputModelUsage, _typeFactory, ModelTypeMapping, _inputModel.InheritedDictionaryType, IsStruct, _inputModel.IsPropertyBag);
+        public ModelTypeProviderFields Fields => _fields ??= new ModelTypeProviderFields(UpdateInputModelProperties(), Declaration.Name, _inputModelUsage, _typeFactory, ModelTypeMapping, _inputModel.AdditionalProperties, IsStruct, _inputModel.IsPropertyBag);
         private ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
         private ConstructorSignature SerializationConstructorSignature => _serializationConstructor ??= EnsureSerializationConstructorSignature();
 
@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (_derivedModels.Any())
                 return true;
 
-            if (_inputModel.DiscriminatorPropertyName is not null)
+            if (_inputModel.DiscriminatorProperty is not null)
                 return true;
 
             return false;
@@ -112,14 +112,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             : base(defaultNamespace, sourceInputModel)
         {
             DefaultName = inputModel.Name.ToCleanName();
-            DefaultAccessibility = inputModel.Accessibility ?? "public";
-            IsAccessibilityOverridden = inputModel.Accessibility != null;
+            DefaultAccessibility = inputModel.Access ?? "public";
+            IsAccessibilityOverridden = inputModel.Access != null;
 
             _typeFactory = typeFactory;
             _inputModel = inputModel;
-            _deprecated = inputModel.Deprecated;
+            _deprecation = inputModel.Deprecation;
             _derivedModels = inputModel.DerivedModels;
-            _defaultDerivedType = inputModel.DerivedModels.Any() && inputModel.BaseModel is { DiscriminatorPropertyName: not null }
+            _defaultDerivedType = inputModel.DerivedModels.Any() && inputModel.BaseModel is { DiscriminatorProperty: not null }
                 ? this //if I have children and parents then I am my own defaultDerivedType
                 : defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
 
@@ -581,9 +581,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     // if this is a real "AdditionalProperties", we should NOT exclude it in wire
                     shouldExcludeInWireSerialization = additionalPropertiesProperty != model.AdditionalPropertiesProperty;
-                    if (model is ModelTypeProvider { AdditionalPropertiesProperty: { } additionalProperties, _inputModel.InheritedDictionaryType: { } inheritedDictionaryType })
+                    if (model is ModelTypeProvider { AdditionalPropertiesProperty: { }, _inputModel.AdditionalProperties: { } additionalProperties })
                     {
-                        additionalPropertiesValueType = inheritedDictionaryType.ValueType;
+                        additionalPropertiesValueType = additionalProperties;
                     }
                     break;
                 }
@@ -628,9 +628,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 additionalPropertiesProperty ??= model.AdditionalPropertiesProperty;
                 if (additionalPropertiesProperty != null && additionalPropertiesValueInputType == null)
                 {
-                    if (model is ModelTypeProvider { AdditionalPropertiesProperty: { } additionalProperties, _inputModel.InheritedDictionaryType: { } inheritedDictionaryType })
+                    if (model is ModelTypeProvider { AdditionalPropertiesProperty: { }, _inputModel.AdditionalProperties: { } additionalProperties })
                     {
-                        additionalPropertiesValueInputType = inheritedDictionaryType.ValueType;
+                        additionalPropertiesValueInputType = additionalProperties;
                     }
                 }
                 rawDataField ??= (model as SerializableObjectType)?.RawDataField;
@@ -741,7 +741,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override ObjectTypeDiscriminator? BuildDiscriminator()
         {
-            string? discriminatorPropertyName = _inputModel.DiscriminatorPropertyName;
+            string? discriminatorPropertyName = _inputModel.DiscriminatorProperty?.SerializedName;
             ObjectTypeDiscriminatorImplementation[] implementations = Array.Empty<ObjectTypeDiscriminatorImplementation>();
             Constant? value = null;
             ObjectTypeProperty property;

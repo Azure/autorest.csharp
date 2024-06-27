@@ -6,11 +6,11 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "InnerModel",
    "Namespace": "Type.Array",
-   "Description": "Array inner model",
    "Usage": "Input,Output",
+   "Description": "Array inner model",
    "Properties": [
     {
      "$id": "3",

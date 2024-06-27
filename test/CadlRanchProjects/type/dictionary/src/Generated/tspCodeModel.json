@@ -6,11 +6,11 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "InnerModel",
    "Namespace": "Type.Dictionary",
-   "Description": "Dictionary inner model",
    "Usage": "Input,Output",
+   "Description": "Dictionary inner model",
    "Properties": [
     {
      "$id": "3",

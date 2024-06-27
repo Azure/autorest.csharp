@@ -24,7 +24,7 @@
    "Namespace": "FirstTestTypeSpec",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "5",
@@ -45,7 +45,7 @@
    "Namespace": "FirstTestTypeSpec",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "8",
@@ -66,7 +66,7 @@
    "Namespace": "FirstTestTypeSpec",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "11",
@@ -87,7 +87,7 @@
    "Namespace": "FirstTestTypeSpec",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "14",
@@ -108,7 +108,7 @@
    "Namespace": "FirstTestTypeSpec",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "17",
@@ -129,7 +129,7 @@
    "Namespace": "FirstTestTypeSpec",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input"
   },
   {
    "$id": "20",
@@ -443,11 +443,11 @@
  "Models": [
   {
    "$id": "72",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Thing",
    "Namespace": "FirstTestTypeSpec",
-   "Description": "A model with a few properties of literal types",
    "Usage": "Input,Output",
+   "Description": "A model with a few properties of literal types",
    "Properties": [
     {
      "$id": "73",
@@ -702,11 +702,11 @@
   },
   {
    "$id": "113",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Friend",
    "Namespace": "FirstTestTypeSpec",
-   "Description": "this is not a friendly model but with a friendly name",
    "Usage": "Input,Output",
+   "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
     {
      "$id": "114",
@@ -724,7 +724,7 @@
   },
   {
    "$id": "116",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelWithFormat",
    "Namespace": "FirstTestTypeSpec",
    "Usage": "Input",
@@ -758,11 +758,11 @@
   },
   {
    "$id": "121",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ProjectedModel",
    "Namespace": "FirstTestTypeSpec",
-   "Description": "this is a model with a projected name",
    "Usage": "Input,Output",
+   "Description": "this is a model with a projected name",
    "Properties": [
     {
      "$id": "122",
@@ -780,7 +780,7 @@
   },
   {
    "$id": "124",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
    "Namespace": "FirstTestTypeSpec",
    "Usage": "Output",
@@ -788,18 +788,18 @@
   },
   {
    "$id": "125",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Extension",
    "Namespace": "FirstTestTypeSpec",
-   "Description": "extension",
    "Usage": "Input",
+   "Description": "extension",
    "BaseModel": {
     "$id": "126",
-    "Kind": "Model",
+    "Kind": "model",
     "Name": "Element",
     "Namespace": "FirstTestTypeSpec",
-    "Description": "element",
     "Usage": "Input",
+    "Description": "element",
     "Properties": [
      {
       "$id": "127",
@@ -838,11 +838,11 @@
   },
   {
    "$id": "131",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Extendible",
    "Namespace": "FirstTestTypeSpec",
-   "Description": "FHIR extendible element",
    "Usage": "Input",
+   "Description": "FHIR extendible element",
    "Properties": [
     {
      "$id": "132",
@@ -854,18 +854,18 @@
       "Kind": "array",
       "ValueType": {
        "$id": "134",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "ThereLevelExtension",
        "Namespace": "FirstTestTypeSpec",
-       "Description": "extension",
        "Usage": "Input",
+       "Description": "extension",
        "BaseModel": {
         "$id": "135",
-        "Kind": "Model",
+        "Kind": "model",
         "Name": "ThereLevelElement",
         "Namespace": "FirstTestTypeSpec",
-        "Description": "element",
         "Usage": "Input",
+        "Description": "element",
         "Properties": [
          {
           "$id": "136",
@@ -913,18 +913,18 @@
   },
   {
    "$id": "140",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ChildModel",
    "Namespace": "FirstTestTypeSpec",
-   "Description": "ChildModel",
    "Usage": "Input",
+   "Description": "ChildModel",
    "BaseModel": {
     "$id": "141",
-    "Kind": "Model",
+    "Kind": "model",
     "Name": "BaseModel",
     "Namespace": "FirstTestTypeSpec",
-    "Description": "parenetModel",
     "Usage": "Input",
+    "Description": "parenetModel",
     "Properties": [
      {
       "$id": "142",
@@ -963,11 +963,11 @@
   },
   {
    "$id": "146",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ContainSelf",
    "Namespace": "FirstTestTypeSpec",
-   "Description": "containself",
    "Usage": "Input",
+   "Description": "containself",
    "Properties": [
     {
      "$id": "147",
@@ -984,7 +984,7 @@
   },
   {
    "$id": "148",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelWithProjectedEnum",
    "Namespace": "FirstTestTypeSpec",
    "Usage": "Input",
@@ -1004,7 +1004,7 @@
   },
   {
    "$id": "150",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "AzureLocationModel",
    "Namespace": "FirstTestTypeSpec",
    "Usage": "Input",
@@ -1026,11 +1026,11 @@
   },
   {
    "$id": "153",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RoundTripModel",
    "Namespace": "FirstTestTypeSpec",
-   "Description": "this is a roundtrip model",
    "Usage": "Input,Output",
+   "Description": "this is a roundtrip model",
    "Properties": [
     {
      "$id": "154",
@@ -1327,11 +1327,11 @@
      "Description": "this is a model with required nullable properties",
      "Type": {
       "$id": "198",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelWithRequiredNullableProperties",
       "Namespace": "FirstTestTypeSpec",
-      "Description": "A model with a few required nullable properties",
       "Usage": "Input,Output",
+      "Description": "A model with a few required nullable properties",
       "Properties": [
        {
         "$id": "199",
@@ -1407,11 +1407,11 @@
         },
         {
          "$id": "211",
-         "Kind": "Model",
+         "Kind": "model",
          "Name": "ModelForUnion",
          "Namespace": "FirstTestTypeSpec",
-         "Description": "This is a model only used in union types, please do not use it anywhere else.",
          "Usage": "Input,Output",
+         "Description": "This is a model only used in union types, please do not use it anywhere else.",
          "Properties": [
           {
            "$id": "212",

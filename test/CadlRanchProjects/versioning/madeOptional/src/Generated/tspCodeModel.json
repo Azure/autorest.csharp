@@ -37,7 +37,7 @@
  "Models": [
   {
    "$id": "6",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "TestModel",
    "Namespace": "Versioning.MadeOptional",
    "Usage": "Input,Output",
