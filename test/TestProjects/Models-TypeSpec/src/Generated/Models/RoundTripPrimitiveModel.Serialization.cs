@@ -49,7 +49,12 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredCollectionWithNullableFloatElement)
             {
-                writer.WriteNumberValue(item);
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
+                writer.WriteNumberValue(item.Value);
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -99,7 +104,7 @@ namespace ModelsTypeSpec.Models
             bool requiredBoolean = default;
             DateTimeOffset requiredDateTimeOffset = default;
             TimeSpan requiredTimeSpan = default;
-            IReadOnlyList<float> requiredCollectionWithNullableFloatElement = default;
+            IReadOnlyList<float?> requiredCollectionWithNullableFloatElement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -151,10 +156,17 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredCollectionWithNullableFloatElement"u8))
                 {
-                    List<float> array = new List<float>();
+                    List<float?> array = new List<float?>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetSingle());
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(item.GetSingle());
+                        }
                     }
                     requiredCollectionWithNullableFloatElement = array;
                     continue;

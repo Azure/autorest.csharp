@@ -26,7 +26,7 @@ namespace ModelsTypeSpec.Models
         /// <param name="requiredTimeSpan"> Required time span, illustrating a value type property. </param>
         /// <param name="requiredCollectionWithNullableFloatElement"> Required collection of which the element is a nullable float. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> or <paramref name="requiredCollectionWithNullableFloatElement"/> is null. </exception>
-        internal RoundTripPrimitiveModel(string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan, IEnumerable<float> requiredCollectionWithNullableFloatElement)
+        internal RoundTripPrimitiveModel(string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan, IEnumerable<float?> requiredCollectionWithNullableFloatElement)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredCollectionWithNullableFloatElement, nameof(requiredCollectionWithNullableFloatElement));
@@ -55,7 +55,7 @@ namespace ModelsTypeSpec.Models
         /// <param name="requiredDateTimeOffset"> Required date time offset, illustrating a reference type property. </param>
         /// <param name="requiredTimeSpan"> Required time span, illustrating a value type property. </param>
         /// <param name="requiredCollectionWithNullableFloatElement"> Required collection of which the element is a nullable float. </param>
-        internal RoundTripPrimitiveModel(IDictionary<string, BinaryData> serializedAdditionalRawData, string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan, IReadOnlyList<float> requiredCollectionWithNullableFloatElement) : base(serializedAdditionalRawData)
+        internal RoundTripPrimitiveModel(IDictionary<string, BinaryData> serializedAdditionalRawData, string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan, IReadOnlyList<float?> requiredCollectionWithNullableFloatElement) : base(serializedAdditionalRawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -93,6 +93,6 @@ namespace ModelsTypeSpec.Models
         /// <summary> Required time span, illustrating a value type property. </summary>
         public TimeSpan RequiredTimeSpan { get; }
         /// <summary> Required collection of which the element is a nullable float. </summary>
-        public IReadOnlyList<float> RequiredCollectionWithNullableFloatElement { get; }
+        public IReadOnlyList<float?> RequiredCollectionWithNullableFloatElement { get; }
     }
 }

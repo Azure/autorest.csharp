@@ -57,30 +57,30 @@ namespace ModelsTypeSpec
         }
 
         /// <summary> Put base model with discriminator defined on base. </summary>
-        /// <param name="baseModelWithDiscriminatorDefinedOnBase"> A base model in the discriminated set inheriting from a base with the predefined discriminator property. </param>
+        /// <param name="body"> The <see cref="BaseModelWithDiscriminatorDefinedOnBase"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="baseModelWithDiscriminatorDefinedOnBase"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='PutBaseModelWithDiscriminatorDefinedOnBaseAsync(BaseModelWithDiscriminatorDefinedOnBase,CancellationToken)']/*" />
-        public virtual async Task<Response<BaseModelWithDiscriminatorDefinedOnBase>> PutBaseModelWithDiscriminatorDefinedOnBaseAsync(BaseModelWithDiscriminatorDefinedOnBase baseModelWithDiscriminatorDefinedOnBase, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BaseModelWithDiscriminatorDefinedOnBase>> PutBaseModelWithDiscriminatorDefinedOnBaseAsync(BaseModelWithDiscriminatorDefinedOnBase body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(baseModelWithDiscriminatorDefinedOnBase, nameof(baseModelWithDiscriminatorDefinedOnBase));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = baseModelWithDiscriminatorDefinedOnBase.ToRequestContent();
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PutBaseModelWithDiscriminatorDefinedOnBaseAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(BaseModelWithDiscriminatorDefinedOnBase.FromResponse(response), response);
         }
 
         /// <summary> Put base model with discriminator defined on base. </summary>
-        /// <param name="baseModelWithDiscriminatorDefinedOnBase"> A base model in the discriminated set inheriting from a base with the predefined discriminator property. </param>
+        /// <param name="body"> The <see cref="BaseModelWithDiscriminatorDefinedOnBase"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="baseModelWithDiscriminatorDefinedOnBase"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='PutBaseModelWithDiscriminatorDefinedOnBase(BaseModelWithDiscriminatorDefinedOnBase,CancellationToken)']/*" />
-        public virtual Response<BaseModelWithDiscriminatorDefinedOnBase> PutBaseModelWithDiscriminatorDefinedOnBase(BaseModelWithDiscriminatorDefinedOnBase baseModelWithDiscriminatorDefinedOnBase, CancellationToken cancellationToken = default)
+        public virtual Response<BaseModelWithDiscriminatorDefinedOnBase> PutBaseModelWithDiscriminatorDefinedOnBase(BaseModelWithDiscriminatorDefinedOnBase body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(baseModelWithDiscriminatorDefinedOnBase, nameof(baseModelWithDiscriminatorDefinedOnBase));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = baseModelWithDiscriminatorDefinedOnBase.ToRequestContent();
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = PutBaseModelWithDiscriminatorDefinedOnBase(content, context);
             return Response.FromValue(BaseModelWithDiscriminatorDefinedOnBase.FromResponse(response), response);
@@ -255,30 +255,30 @@ namespace ModelsTypeSpec
         }
 
         /// <summary> Input model that has property of its own type. </summary>
-        /// <param name="inputModel"> Model used only as input. </param>
+        /// <param name="input"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="inputModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripAsync(InputModel,CancellationToken)']/*" />
-        public virtual async Task<Response<RoundTripModel>> InputToRoundTripAsync(InputModel inputModel, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RoundTripModel>> InputToRoundTripAsync(InputModel input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(inputModel, nameof(inputModel));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = inputModel.ToRequestContent();
+            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await InputToRoundTripAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
 
         /// <summary> Input model that has property of its own type. </summary>
-        /// <param name="inputModel"> Model used only as input. </param>
+        /// <param name="input"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="inputModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTrip(InputModel,CancellationToken)']/*" />
-        public virtual Response<RoundTripModel> InputToRoundTrip(InputModel inputModel, CancellationToken cancellationToken = default)
+        public virtual Response<RoundTripModel> InputToRoundTrip(InputModel input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(inputModel, nameof(inputModel));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = inputModel.ToRequestContent();
+            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = InputToRoundTrip(content, context);
             return Response.FromValue(RoundTripModel.FromResponse(response), response);
@@ -363,30 +363,30 @@ namespace ModelsTypeSpec
         }
 
         /// <summary> Input to RoundTripPrimitive. </summary>
-        /// <param name="inputModel"> Model used only as input. </param>
+        /// <param name="input"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="inputModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripPrimitiveAsync(InputModel,CancellationToken)']/*" />
-        public virtual async Task<Response<RoundTripPrimitiveModel>> InputToRoundTripPrimitiveAsync(InputModel inputModel, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RoundTripPrimitiveModel>> InputToRoundTripPrimitiveAsync(InputModel input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(inputModel, nameof(inputModel));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = inputModel.ToRequestContent();
+            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await InputToRoundTripPrimitiveAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(RoundTripPrimitiveModel.FromResponse(response), response);
         }
 
         /// <summary> Input to RoundTripPrimitive. </summary>
-        /// <param name="inputModel"> Model used only as input. </param>
+        /// <param name="input"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="inputModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripPrimitive(InputModel,CancellationToken)']/*" />
-        public virtual Response<RoundTripPrimitiveModel> InputToRoundTripPrimitive(InputModel inputModel, CancellationToken cancellationToken = default)
+        public virtual Response<RoundTripPrimitiveModel> InputToRoundTripPrimitive(InputModel input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(inputModel, nameof(inputModel));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = inputModel.ToRequestContent();
+            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = InputToRoundTripPrimitive(content, context);
             return Response.FromValue(RoundTripPrimitiveModel.FromResponse(response), response);
@@ -471,30 +471,30 @@ namespace ModelsTypeSpec
         }
 
         /// <summary> Input to RoundTripOptional. </summary>
-        /// <param name="roundTripOptionalModel"> RoundTrip model with optional properties. </param>
+        /// <param name="input"> The <see cref="RoundTripOptionalModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="roundTripOptionalModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripOptionalAsync(RoundTripOptionalModel,CancellationToken)']/*" />
-        public virtual async Task<Response<RoundTripOptionalModel>> InputToRoundTripOptionalAsync(RoundTripOptionalModel roundTripOptionalModel, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RoundTripOptionalModel>> InputToRoundTripOptionalAsync(RoundTripOptionalModel input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(roundTripOptionalModel, nameof(roundTripOptionalModel));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = roundTripOptionalModel.ToRequestContent();
+            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await InputToRoundTripOptionalAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(RoundTripOptionalModel.FromResponse(response), response);
         }
 
         /// <summary> Input to RoundTripOptional. </summary>
-        /// <param name="roundTripOptionalModel"> RoundTrip model with optional properties. </param>
+        /// <param name="input"> The <see cref="RoundTripOptionalModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="roundTripOptionalModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripOptional(RoundTripOptionalModel,CancellationToken)']/*" />
-        public virtual Response<RoundTripOptionalModel> InputToRoundTripOptional(RoundTripOptionalModel roundTripOptionalModel, CancellationToken cancellationToken = default)
+        public virtual Response<RoundTripOptionalModel> InputToRoundTripOptional(RoundTripOptionalModel input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(roundTripOptionalModel, nameof(roundTripOptionalModel));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = roundTripOptionalModel.ToRequestContent();
+            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = InputToRoundTripOptional(content, context);
             return Response.FromValue(RoundTripOptionalModel.FromResponse(response), response);
@@ -579,30 +579,30 @@ namespace ModelsTypeSpec
         }
 
         /// <summary> Input to RoundTripReadOnly. </summary>
-        /// <param name="inputModel"> Model used only as input. </param>
+        /// <param name="input"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="inputModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         [Obsolete("deprecated for test")]
-        public virtual async Task<Response<RoundTripReadOnlyModel>> InputToRoundTripReadOnlyAsync(InputModel inputModel, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RoundTripReadOnlyModel>> InputToRoundTripReadOnlyAsync(InputModel input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(inputModel, nameof(inputModel));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = inputModel.ToRequestContent();
+            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await InputToRoundTripReadOnlyAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(RoundTripReadOnlyModel.FromResponse(response), response);
         }
 
         /// <summary> Input to RoundTripReadOnly. </summary>
-        /// <param name="inputModel"> Model used only as input. </param>
+        /// <param name="input"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="inputModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         [Obsolete("deprecated for test")]
-        public virtual Response<RoundTripReadOnlyModel> InputToRoundTripReadOnly(InputModel inputModel, CancellationToken cancellationToken = default)
+        public virtual Response<RoundTripReadOnlyModel> InputToRoundTripReadOnly(InputModel input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(inputModel, nameof(inputModel));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = inputModel.ToRequestContent();
+            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = InputToRoundTripReadOnly(content, context);
             return Response.FromValue(RoundTripReadOnlyModel.FromResponse(response), response);
@@ -687,30 +687,30 @@ namespace ModelsTypeSpec
         }
 
         /// <summary> RoundTrip to Output. </summary>
-        /// <param name="roundTripModel"> Model used both as input and output. </param>
+        /// <param name="input"> The <see cref="RoundTripModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="roundTripModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripToOutputAsync(RoundTripModel,CancellationToken)']/*" />
-        public virtual async Task<Response<OutputModel>> RoundTripToOutputAsync(RoundTripModel roundTripModel, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<OutputModel>> RoundTripToOutputAsync(RoundTripModel input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(roundTripModel, nameof(roundTripModel));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = roundTripModel.ToRequestContent();
+            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await RoundTripToOutputAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(OutputModel.FromResponse(response), response);
         }
 
         /// <summary> RoundTrip to Output. </summary>
-        /// <param name="roundTripModel"> Model used both as input and output. </param>
+        /// <param name="input"> The <see cref="RoundTripModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="roundTripModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripToOutput(RoundTripModel,CancellationToken)']/*" />
-        public virtual Response<OutputModel> RoundTripToOutput(RoundTripModel roundTripModel, CancellationToken cancellationToken = default)
+        public virtual Response<OutputModel> RoundTripToOutput(RoundTripModel input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(roundTripModel, nameof(roundTripModel));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = roundTripModel.ToRequestContent();
+            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = RoundTripToOutput(content, context);
             return Response.FromValue(OutputModel.FromResponse(response), response);
@@ -795,30 +795,30 @@ namespace ModelsTypeSpec
         }
 
         /// <summary> Input recursive model. </summary>
-        /// <param name="inputRecursiveModel"> Input model that has property of its own type. </param>
+        /// <param name="input"> The <see cref="InputRecursiveModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="inputRecursiveModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputRecursiveAsync(InputRecursiveModel,CancellationToken)']/*" />
-        public virtual async Task<Response> InputRecursiveAsync(InputRecursiveModel inputRecursiveModel, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> InputRecursiveAsync(InputRecursiveModel input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(inputRecursiveModel, nameof(inputRecursiveModel));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = inputRecursiveModel.ToRequestContent();
+            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await InputRecursiveAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Input recursive model. </summary>
-        /// <param name="inputRecursiveModel"> Input model that has property of its own type. </param>
+        /// <param name="input"> The <see cref="InputRecursiveModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="inputRecursiveModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputRecursive(InputRecursiveModel,CancellationToken)']/*" />
-        public virtual Response InputRecursive(InputRecursiveModel inputRecursiveModel, CancellationToken cancellationToken = default)
+        public virtual Response InputRecursive(InputRecursiveModel input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(inputRecursiveModel, nameof(inputRecursiveModel));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = inputRecursiveModel.ToRequestContent();
+            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = InputRecursive(content, context);
             return response;
@@ -903,30 +903,30 @@ namespace ModelsTypeSpec
         }
 
         /// <summary> RoundTrip recursive model. </summary>
-        /// <param name="roundTripRecursiveModel"> Roundtrip model that has property of its own type. </param>
+        /// <param name="input"> The <see cref="RoundTripRecursiveModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="roundTripRecursiveModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripRecursiveAsync(RoundTripRecursiveModel,CancellationToken)']/*" />
-        public virtual async Task<Response<RoundTripRecursiveModel>> RoundTripRecursiveAsync(RoundTripRecursiveModel roundTripRecursiveModel, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RoundTripRecursiveModel>> RoundTripRecursiveAsync(RoundTripRecursiveModel input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(roundTripRecursiveModel, nameof(roundTripRecursiveModel));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = roundTripRecursiveModel.ToRequestContent();
+            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await RoundTripRecursiveAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(RoundTripRecursiveModel.FromResponse(response), response);
         }
 
         /// <summary> RoundTrip recursive model. </summary>
-        /// <param name="roundTripRecursiveModel"> Roundtrip model that has property of its own type. </param>
+        /// <param name="input"> The <see cref="RoundTripRecursiveModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="roundTripRecursiveModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripRecursive(RoundTripRecursiveModel,CancellationToken)']/*" />
-        public virtual Response<RoundTripRecursiveModel> RoundTripRecursive(RoundTripRecursiveModel roundTripRecursiveModel, CancellationToken cancellationToken = default)
+        public virtual Response<RoundTripRecursiveModel> RoundTripRecursive(RoundTripRecursiveModel input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(roundTripRecursiveModel, nameof(roundTripRecursiveModel));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = roundTripRecursiveModel.ToRequestContent();
+            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = RoundTripRecursive(content, context);
             return Response.FromValue(RoundTripRecursiveModel.FromResponse(response), response);
@@ -1289,30 +1289,30 @@ namespace ModelsTypeSpec
         }
 
         /// <summary> Returns RoundTripOnNoUse. </summary>
-        /// <param name="roundTripOnNoUse"> Derived model. </param>
+        /// <param name="input"> The <see cref="RoundTripOnNoUse"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="roundTripOnNoUse"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripToOutputWithNoUseBaseAsync(RoundTripOnNoUse,CancellationToken)']/*" />
-        public virtual async Task<Response<RoundTripOnNoUse>> RoundTripToOutputWithNoUseBaseAsync(RoundTripOnNoUse roundTripOnNoUse, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RoundTripOnNoUse>> RoundTripToOutputWithNoUseBaseAsync(RoundTripOnNoUse input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(roundTripOnNoUse, nameof(roundTripOnNoUse));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = roundTripOnNoUse.ToRequestContent();
+            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await RoundTripToOutputWithNoUseBaseAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(RoundTripOnNoUse.FromResponse(response), response);
         }
 
         /// <summary> Returns RoundTripOnNoUse. </summary>
-        /// <param name="roundTripOnNoUse"> Derived model. </param>
+        /// <param name="input"> The <see cref="RoundTripOnNoUse"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="roundTripOnNoUse"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripToOutputWithNoUseBase(RoundTripOnNoUse,CancellationToken)']/*" />
-        public virtual Response<RoundTripOnNoUse> RoundTripToOutputWithNoUseBase(RoundTripOnNoUse roundTripOnNoUse, CancellationToken cancellationToken = default)
+        public virtual Response<RoundTripOnNoUse> RoundTripToOutputWithNoUseBase(RoundTripOnNoUse input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(roundTripOnNoUse, nameof(roundTripOnNoUse));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = roundTripOnNoUse.ToRequestContent();
+            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = RoundTripToOutputWithNoUseBase(content, context);
             return Response.FromValue(RoundTripOnNoUse.FromResponse(response), response);
@@ -1487,30 +1487,30 @@ namespace ModelsTypeSpec
         }
 
         /// <summary> Generic type. </summary>
-        /// <param name="int32ValuesFacet"> Facets an int32 field by the specified value ranges. </param>
+        /// <param name="input"> The <see cref="Int32ValuesFacet"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="int32ValuesFacet"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GenericTypeAsync(Int32ValuesFacet,CancellationToken)']/*" />
-        public virtual async Task<Response> GenericTypeAsync(Int32ValuesFacet int32ValuesFacet, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GenericTypeAsync(Int32ValuesFacet input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(int32ValuesFacet, nameof(int32ValuesFacet));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = int32ValuesFacet.ToRequestContent();
+            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GenericTypeAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Generic type. </summary>
-        /// <param name="int32ValuesFacet"> Facets an int32 field by the specified value ranges. </param>
+        /// <param name="input"> The <see cref="Int32ValuesFacet"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="int32ValuesFacet"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GenericType(Int32ValuesFacet,CancellationToken)']/*" />
-        public virtual Response GenericType(Int32ValuesFacet int32ValuesFacet, CancellationToken cancellationToken = default)
+        public virtual Response GenericType(Int32ValuesFacet input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(int32ValuesFacet, nameof(int32ValuesFacet));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using RequestContent content = int32ValuesFacet.ToRequestContent();
+            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GenericType(content, context);
             return response;

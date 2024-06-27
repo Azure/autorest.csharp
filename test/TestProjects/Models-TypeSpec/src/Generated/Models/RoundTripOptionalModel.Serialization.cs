@@ -136,7 +136,12 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in OptionalCollectionWithNullableIntElement)
                 {
-                    writer.WriteNumberValue(item);
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+                    writer.WriteNumberValue(item.Value);
                 }
                 writer.WriteEndArray();
             }
@@ -192,7 +197,7 @@ namespace ModelsTypeSpec.Models
             IDictionary<string, RecordItem> optionalModelRecord = default;
             DateTimeOffset? optionalPlainDate = default;
             TimeSpan? optionalPlainTime = default;
-            IList<int> optionalCollectionWithNullableIntElement = default;
+            IList<int?> optionalCollectionWithNullableIntElement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -355,10 +360,17 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    List<int> array = new List<int>();
+                    List<int?> array = new List<int?>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetInt32());
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(item.GetInt32());
+                        }
                     }
                     optionalCollectionWithNullableIntElement = array;
                     continue;
@@ -384,7 +396,7 @@ namespace ModelsTypeSpec.Models
                 optionalModelRecord ?? new ChangeTrackingDictionary<string, RecordItem>(),
                 optionalPlainDate,
                 optionalPlainTime,
-                optionalCollectionWithNullableIntElement ?? new ChangeTrackingList<int>(),
+                optionalCollectionWithNullableIntElement ?? new ChangeTrackingList<int?>(),
                 serializedAdditionalRawData);
         }
 

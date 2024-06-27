@@ -201,7 +201,12 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredCollectionWithNullableIntElement)
             {
-                writer.WriteNumberValue(item);
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
+                writer.WriteNumberValue(item.Value);
             }
             writer.WriteEndArray();
             if (Optional.IsCollectionDefined(OptionalCollectionWithNullableBooleanElement))
@@ -210,7 +215,12 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in OptionalCollectionWithNullableBooleanElement)
                 {
-                    writer.WriteBooleanValue(item);
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+                    writer.WriteBooleanValue(item.Value);
                 }
                 writer.WriteEndArray();
             }
@@ -274,8 +284,8 @@ namespace ModelsTypeSpec.Models
             IReadOnlyDictionary<string, int> optionalReadOnlyIntRecord = default;
             IReadOnlyDictionary<string, string> optionalReadOnlyStringRecord = default;
             IReadOnlyDictionary<string, RecordItem> optionalModelRecord = default;
-            IReadOnlyList<int> requiredCollectionWithNullableIntElement = default;
-            IReadOnlyList<bool> optionalCollectionWithNullableBooleanElement = default;
+            IReadOnlyList<int?> requiredCollectionWithNullableIntElement = default;
+            IReadOnlyList<bool?> optionalCollectionWithNullableBooleanElement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -476,10 +486,17 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredCollectionWithNullableIntElement"u8))
                 {
-                    List<int> array = new List<int>();
+                    List<int?> array = new List<int?>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetInt32());
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(item.GetInt32());
+                        }
                     }
                     requiredCollectionWithNullableIntElement = array;
                     continue;
@@ -490,10 +507,17 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    List<bool> array = new List<bool>();
+                    List<bool?> array = new List<bool?>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetBoolean());
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(item.GetBoolean());
+                        }
                     }
                     optionalCollectionWithNullableBooleanElement = array;
                     continue;
@@ -528,7 +552,7 @@ namespace ModelsTypeSpec.Models
                 optionalReadOnlyStringRecord,
                 optionalModelRecord ?? new ChangeTrackingDictionary<string, RecordItem>(),
                 requiredCollectionWithNullableIntElement,
-                optionalCollectionWithNullableBooleanElement ?? new ChangeTrackingList<bool>(),
+                optionalCollectionWithNullableBooleanElement ?? new ChangeTrackingList<bool?>(),
                 serializedAdditionalRawData);
         }
 

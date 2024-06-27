@@ -55,7 +55,7 @@ namespace ModelsTypeSpec.Models
             OptionalIntRecord = new ChangeTrackingDictionary<string, int>();
             OptionalStringRecord = new ChangeTrackingDictionary<string, string>();
             OptionalModelRecord = new ChangeTrackingDictionary<string, RecordItem>();
-            OptionalCollectionWithNullableIntElement = new ChangeTrackingList<int>();
+            OptionalCollectionWithNullableIntElement = new ChangeTrackingList<int?>();
         }
 
         /// <summary> Initializes a new instance of <see cref="RoundTripOptionalModel"/>. </summary>
@@ -75,7 +75,7 @@ namespace ModelsTypeSpec.Models
         /// <param name="optionalPlainTime"> Optional plainTime. </param>
         /// <param name="optionalCollectionWithNullableIntElement"> Optional collection of which the element is a nullable int. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IList<string> optionalStringList, IList<int> optionalIntList, IList<CollectionItem> optionalModelList, DerivedModel optionalModel, DerivedModelWithProperties optionalModelWithPropertiesOnBase, FixedStringEnum? optionalFixedStringEnum, ExtensibleEnum? optionalExtensibleEnum, IDictionary<string, int> optionalIntRecord, IDictionary<string, string> optionalStringRecord, IDictionary<string, RecordItem> optionalModelRecord, DateTimeOffset? optionalPlainDate, TimeSpan? optionalPlainTime, IList<int> optionalCollectionWithNullableIntElement, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IList<string> optionalStringList, IList<int> optionalIntList, IList<CollectionItem> optionalModelList, DerivedModel optionalModel, DerivedModelWithProperties optionalModelWithPropertiesOnBase, FixedStringEnum? optionalFixedStringEnum, ExtensibleEnum? optionalExtensibleEnum, IDictionary<string, int> optionalIntRecord, IDictionary<string, string> optionalStringRecord, IDictionary<string, RecordItem> optionalModelRecord, DateTimeOffset? optionalPlainDate, TimeSpan? optionalPlainTime, IList<int?> optionalCollectionWithNullableIntElement, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             OptionalString = optionalString;
             OptionalInt = optionalInt;
@@ -124,6 +124,6 @@ namespace ModelsTypeSpec.Models
         /// <summary> Optional plainTime. </summary>
         public TimeSpan? OptionalPlainTime { get; set; }
         /// <summary> Optional collection of which the element is a nullable int. </summary>
-        public IList<int> OptionalCollectionWithNullableIntElement { get; }
+        public IList<int?> OptionalCollectionWithNullableIntElement { get; }
     }
 }
