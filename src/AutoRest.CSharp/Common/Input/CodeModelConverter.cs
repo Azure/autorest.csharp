@@ -373,7 +373,7 @@ namespace AutoRest.CSharp.Common.Input
 
             model = new InputModelType(
                 Name: schema.Language.Default.Name,
-                Namespace: schema.Extensions?.Namespace,
+                CrossLanguageDefinitionId: GetCrossLanguageDefinitionId(schema),
                 Access: schema.Extensions?.Accessibility ?? (usage.HasFlag(SchemaTypeUsage.Model) ? "public" : "internal"),
                 Deprecation: schema.Deprecated?.Reason,
                 Description: schema.CreateDescription(),
@@ -537,7 +537,6 @@ namespace AutoRest.CSharp.Common.Input
         private InputType GetOrCreateType(Property property)
         {
             var name = property.Schema.Name;
-            var type = typeof(DataFactoryElement<>);
             object? elementType = null;
             if ((property.Schema is AnyObjectSchema || property.Schema is StringSchema) && true == property.Extensions?.TryGetValue("x-ms-format-element-type", out elementType))
             {
@@ -690,7 +689,7 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         private static InputType CreateDataFactoryElementInputType(bool isNullable, InputType argumentType)
-            => new InputModelType("DataFactoryElement", "Azure.Core.Resources", null, null, null, InputModelTypeUsage.None, Array.Empty<InputModelProperty>(), null, Array.Empty<InputModelType>(), null, null, new Dictionary<string, InputModelType>(), null, new List<InputType> { argumentType }).WithNullable(isNullable);
+            => new InputModelType("DataFactoryElement", "Azure.Core.Resources.DataFactoryElement", null, null, null, InputModelTypeUsage.None, Array.Empty<InputModelProperty>(), null, Array.Empty<InputModelType>(), null, null, new Dictionary<string, InputModelType>(), null, new List<InputType> { argumentType }).WithNullable(isNullable);
 
         private InputConstant CreateConstant(ConstantSchema constantSchema, string? format, bool isNullable)
         {
@@ -727,7 +726,7 @@ namespace AutoRest.CSharp.Common.Input
             var usage = _schemaUsageProvider.GetUsage(schema);
             var inputEnumType = new InputEnumType(
                 Name: schema.Name,
-                Namespace: schema.Extensions?.Namespace,
+                CrossLanguageDefinitionId: GetCrossLanguageDefinitionId(schema),
                 Accessibility: schema.Extensions?.Accessibility ?? (usage.HasFlag(SchemaTypeUsage.Model) ? "public" : "internal"),
                 Deprecated: schema.Deprecated?.Reason,
                 Description: schema.CreateDescription(),
@@ -740,6 +739,18 @@ namespace AutoRest.CSharp.Common.Input
                 Serialization = GetSerialization(schema, usage)
             };
             return inputEnumType;
+        }
+
+        private static string GetCrossLanguageDefinitionId(Schema schema)
+        {
+            var ns = schema.Extensions?.Namespace;
+            var name = schema.Language.Default.Name;
+            if (ns == null)
+            {
+                return name;
+            }
+
+            return $"{ns}.{name}";
         }
 
         private static InputEnumTypeValue CreateEnumValue(ChoiceValue choiceValue) => new(

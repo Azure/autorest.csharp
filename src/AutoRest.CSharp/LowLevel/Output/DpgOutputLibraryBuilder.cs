@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Output.Models
 
             SetRequestsToClients(clientInfosByName.Values);
 
-            var enums = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
+            var enums = new Dictionary<InputEnumType, EnumType>();
             var models = new Dictionary<InputModelType, ModelTypeProvider>();
             var clients = new List<LowLevelClient>();
 
@@ -69,9 +69,20 @@ namespace AutoRest.CSharp.Output.Models
             foreach (var inputEnum in inputEnums)
             {
                 // [TODO]: Consolidate default namespace choice between HLC and DPG
-                var ns = Configuration.Generation1ConvenienceClient ? inputEnum.Namespace : null;
+                var ns = ExtractNamespace(inputEnum.CrossLanguageDefinitionId);
                 enums.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(ns, Configuration.Namespace), "public", typeFactory, sourceInputModel));
             }
+        }
+
+        private static string? ExtractNamespace(string crossLanguageDefinitionId)
+        {
+            if (Configuration.Generation1ConvenienceClient)
+            {
+                var index = crossLanguageDefinitionId.LastIndexOf(".");
+                return index >= 0 ? crossLanguageDefinitionId[(index + 1)..] : null;
+            }
+
+            return null;
         }
 
         public static void CreateModels(IReadOnlyList<InputModelType> inputModels, IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
@@ -81,7 +92,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, defaultDerivedTypes, sourceInputModel);
                 // [TODO]: Consolidate default namespace choice between HLC and DPG
-                var ns = Configuration.Generation1ConvenienceClient ? model.Namespace : null;
+                var ns = ExtractNamespace(model.CrossLanguageDefinitionId);
                 var typeProvider = new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(ns, Configuration.Namespace), sourceInputModel, typeFactory, defaultDerivedType);
                 models.Add(model, typeProvider);
             }
@@ -116,7 +127,7 @@ namespace AutoRest.CSharp.Output.Models
                 //create the "Unknown" version
                 var unknownDerivedType = new InputModelType(
                     defaultDerivedName,
-                    actualBase.Namespace,
+                    string.Empty,
                     "internal",
                     null,
                     $"Unknown version of {actualBase.Name}",
