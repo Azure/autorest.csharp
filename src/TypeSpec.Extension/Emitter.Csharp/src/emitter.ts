@@ -15,6 +15,7 @@ import {
     resolveOutputFolder
 } from "./options.js";
 import { loadLibrary } from "./lib/load-module.js";
+import * as url from "url";
 
 export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     const program: Program = context.program;
@@ -23,7 +24,8 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     Logger.initialize(program, options.logLevel ?? LoggerLevel.INFO);
 
     /* load microsft csharp emitter. */
-    const basedir = "./";
+    const basedir = url.fileURLToPath(new URL(".", import.meta.url));
+    Logger.getInstance().info(`basedir: ${basedir}.`);
     const emitterNameOrPath = "@typespec/http-client-csharp";
     const library = await loadLibrary(
         basedir,
