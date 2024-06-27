@@ -9,6 +9,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.Versions",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -21,7 +22,6 @@
      "Description": "The version 2022-12-01-preview."
     }
    ],
-   "Namespace": "_Specs_.Azure.Core.Scalar",
    "Description": "The version of the API.",
    "IsExtensible": false,
    "Usage": "None"
@@ -32,7 +32,7 @@
    "$id": "5",
    "Kind": "model",
    "Name": "AzureLocationModel",
-   "Namespace": "_Specs_.Azure.Core.Scalar",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationModel",
    "Usage": "RoundTrip",
    "Properties": [
     {

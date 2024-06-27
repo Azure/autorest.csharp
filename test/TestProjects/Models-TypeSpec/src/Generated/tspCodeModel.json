@@ -9,6 +9,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "FixedStringEnum",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.FixedStringEnum",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -30,7 +31,6 @@
      "Value": "4"
     }
    ],
-   "Namespace": "ModelsTypeSpec",
    "Description": "Fixed string enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -39,6 +39,7 @@
    "$id": "7",
    "Kind": "enum",
    "Name": "FixedIntEnum",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.FixedIntEnum",
    "ValueType": {
     "$id": "8",
     "Kind": "int32"
@@ -60,7 +61,6 @@
      "Value": 4
     }
    ],
-   "Namespace": "ModelsTypeSpec",
    "Deprecated": "deprecated for test",
    "Description": "Fixed int enum",
    "IsExtensible": false,
@@ -70,6 +70,7 @@
    "$id": "12",
    "Kind": "enum",
    "Name": "ExtensibleEnum",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.ExtensibleEnum",
    "ValueType": {
     "$id": "13",
     "Kind": "string"
@@ -91,7 +92,6 @@
      "Value": "4"
     }
    ],
-   "Namespace": "ModelsTypeSpec",
    "Deprecated": "deprecated for test",
    "Description": "Extensible enum",
    "IsExtensible": true,
@@ -101,6 +101,7 @@
    "$id": "17",
    "Kind": "enum",
    "Name": "FixedFloatEnum",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.FixedFloatEnum",
    "ValueType": {
     "$id": "18",
     "Kind": "float32"
@@ -122,7 +123,6 @@
      "Value": 4
     }
    ],
-   "Namespace": "ModelsTypeSpec",
    "Deprecated": "should be replaced by cadl-ranch",
    "Description": "Fixed float enum",
    "IsExtensible": false,
@@ -132,6 +132,7 @@
    "$id": "22",
    "Kind": "enum",
    "Name": "ExtensibleIntEnum",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.ExtensibleIntEnum",
    "ValueType": {
     "$id": "23",
     "Kind": "int32"
@@ -153,7 +154,6 @@
      "Value": 4
     }
    ],
-   "Namespace": "ModelsTypeSpec",
    "Deprecated": "should be replaced by cadl-ranch",
    "Description": "Extensible int enum",
    "IsExtensible": true,
@@ -175,7 +175,7 @@
      "Description": "Int32Values"
     }
    ],
-   "Namespace": "ModelsTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Int32ValuesFacet_kind",
    "IsExtensible": true,
    "Usage": "Input"
@@ -184,6 +184,7 @@
    "$id": "30",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.Versions",
    "ValueType": {
     "$id": "31",
     "Kind": "string"
@@ -195,7 +196,6 @@
      "Value": "0.1.0"
     }
    ],
-   "Namespace": "ModelsTypeSpec",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -205,7 +205,7 @@
    "$id": "33",
    "Kind": "model",
    "Name": "BaseModelWithDiscriminatorDefinedOnBase",
-   "Namespace": "ModelsTypeSpec",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithDiscriminatorDefinedOnBase",
    "Usage": "RoundTrip",
    "Description": "A base model in the discriminated set inheriting from a base with the predefined discriminator property",
    "DiscriminatorProperty": {
@@ -225,7 +225,7 @@
     "$id": "36",
     "Kind": "model",
     "Name": "BaseModelWithARequiredProperty",
-    "Namespace": "ModelsTypeSpec",
+    "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithARequiredProperty",
     "Usage": "RoundTrip",
     "Description": "A base model with a required property",
     "Properties": [
@@ -266,7 +266,7 @@
      "$id": "42",
      "Kind": "model",
      "Name": "DerivedWithDiscriminatorDefinedOnBase",
-     "Namespace": "ModelsTypeSpec",
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedWithDiscriminatorDefinedOnBase",
      "Usage": "RoundTrip",
      "Description": "A derived class in the discriminated set inheriting from a base with the predefined discriminator property",
      "DiscriminatorValue": "A",
@@ -330,7 +330,7 @@
    "$id": "50",
    "Kind": "model",
    "Name": "OutputBaseModelWithDiscriminator",
-   "Namespace": "ModelsTypeSpec",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.OutputBaseModelWithDiscriminator",
    "Usage": "Output",
    "Description": "Output model with a discriminator",
    "DiscriminatorProperty": {
@@ -357,7 +357,7 @@
      "$id": "54",
      "Kind": "model",
      "Name": "FirstDerivedOutputModel",
-     "Namespace": "ModelsTypeSpec",
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.FirstDerivedOutputModel",
      "Usage": "Output",
      "Description": "First derived model as an output",
      "DiscriminatorValue": "first",
@@ -401,7 +401,7 @@
      "$id": "60",
      "Kind": "model",
      "Name": "SecondDerivedOutputModel",
-     "Namespace": "ModelsTypeSpec",
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.SecondDerivedOutputModel",
      "Usage": "Output",
      "Description": "Second derived model as an output",
      "DiscriminatorValue": "second",
@@ -453,7 +453,7 @@
    "$id": "66",
    "Kind": "model",
    "Name": "InputModel",
-   "Namespace": "ModelsTypeSpec",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.InputModel",
    "Usage": "Input",
    "Description": "Model used only as input",
    "Properties": [
@@ -554,7 +554,7 @@
       "$id": "84",
       "Kind": "model",
       "Name": "BaseModel",
-      "Namespace": "ModelsTypeSpec",
+      "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModel",
       "Usage": "RoundTrip",
       "Description": "Base model",
       "Properties": []
@@ -617,7 +617,7 @@
        "$id": "94",
        "Kind": "model",
        "Name": "CollectionItem",
-       "Namespace": "ModelsTypeSpec",
+       "CrossLanguageDefinitionId": "ModelsTypeSpec.CollectionItem",
        "Usage": "RoundTrip",
        "Description": "Collection item model",
        "Properties": [
@@ -637,14 +637,14 @@
            "$id": "98",
            "Kind": "model",
            "Name": "RecordItem",
-           "Namespace": "ModelsTypeSpec",
+           "CrossLanguageDefinitionId": "ModelsTypeSpec.RecordItem",
            "Usage": "RoundTrip",
            "Description": "Record item model",
            "BaseModel": {
             "$id": "99",
             "Kind": "model",
             "Name": "DerivedModel",
-            "Namespace": "ModelsTypeSpec",
+            "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedModel",
             "Usage": "RoundTrip",
             "Description": "Derived model",
             "BaseModel": {
@@ -922,7 +922,7 @@
    "$id": "143",
    "Kind": "model",
    "Name": "RoundTripModel",
-   "Namespace": "ModelsTypeSpec",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripModel",
    "Usage": "RoundTrip",
    "Description": "Model used both as input and output",
    "BaseModel": {
@@ -1074,7 +1074,7 @@
       "$id": "169",
       "Kind": "model",
       "Name": "BaseModelWithDiscriminator",
-      "Namespace": "ModelsTypeSpec",
+      "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithDiscriminator",
       "Usage": "RoundTrip",
       "Description": "Base model with discriminator property.",
       "DiscriminatorProperty": {
@@ -1125,7 +1125,7 @@
         "$id": "177",
         "Kind": "model",
         "Name": "DerivedModelWithDiscriminatorA",
-        "Namespace": "ModelsTypeSpec",
+        "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedModelWithDiscriminatorA",
         "Usage": "RoundTrip",
         "Description": "Deriver model with discriminator property.",
         "DiscriminatorValue": "A",
@@ -1169,7 +1169,7 @@
         "$id": "183",
         "Kind": "model",
         "Name": "DerivedModelWithDiscriminatorB",
-        "Namespace": "ModelsTypeSpec",
+        "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedModelWithDiscriminatorB",
         "Usage": "RoundTrip",
         "Description": "Deriver model with discriminator property.",
         "DiscriminatorValue": "B",
@@ -1524,7 +1524,7 @@
       "$id": "242",
       "Kind": "model",
       "Name": "BaseModelWithDiscriminatorFromIsKeyword",
-      "Namespace": "ModelsTypeSpec",
+      "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithDiscriminatorFromIsKeyword",
       "Usage": "RoundTrip",
       "Description": "A base model in the discriminated set but its discriminator propery comes with the is keyword",
       "DiscriminatorProperty": {
@@ -1563,7 +1563,7 @@
         "$id": "248",
         "Kind": "model",
         "Name": "DerivedWithDiscriminatorFromIsKeyword",
-        "Namespace": "ModelsTypeSpec",
+        "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedWithDiscriminatorFromIsKeyword",
         "Usage": "RoundTrip",
         "Description": "A derived class in the discriminated set inheriting from a base whose discriminator property comes from is keyword",
         "DiscriminatorValue": "A",
@@ -1641,7 +1641,7 @@
    "$id": "256",
    "Kind": "model",
    "Name": "RoundTripPrimitiveModel",
-   "Namespace": "ModelsTypeSpec",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripPrimitiveModel",
    "Usage": "Output",
    "Description": "Model used both as input and output with primitive types",
    "BaseModel": {
@@ -1792,7 +1792,7 @@
    "$id": "281",
    "Kind": "model",
    "Name": "RoundTripOptionalModel",
-   "Namespace": "ModelsTypeSpec",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripOptionalModel",
    "Usage": "RoundTrip",
    "Deprecation": "deprecated for test",
    "Description": "RoundTrip model with optional properties.",
@@ -1888,14 +1888,14 @@
       "$id": "296",
       "Kind": "model",
       "Name": "DerivedModelWithProperties",
-      "Namespace": "ModelsTypeSpec",
+      "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedModelWithProperties",
       "Usage": "RoundTrip",
       "Description": "Derived model with properties",
       "BaseModel": {
        "$id": "297",
        "Kind": "model",
        "Name": "BaseModelWithProperties",
-       "Namespace": "ModelsTypeSpec",
+       "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithProperties",
        "Usage": "RoundTrip",
        "Description": "Base model with properties",
        "Properties": [
@@ -2071,7 +2071,7 @@
    "$id": "323",
    "Kind": "model",
    "Name": "RoundTripReadOnlyModel",
-   "Namespace": "ModelsTypeSpec",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripReadOnlyModel",
    "Usage": "Output",
    "Description": "Output model with readonly properties.",
    "Properties": [
@@ -2447,7 +2447,7 @@
    "$id": "384",
    "Kind": "model",
    "Name": "OutputModel",
-   "Namespace": "ModelsTypeSpec",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.OutputModel",
    "Usage": "Output",
    "Description": "Model used only as output",
    "Properties": [
@@ -2602,7 +2602,7 @@
    "$id": "407",
    "Kind": "model",
    "Name": "InputRecursiveModel",
-   "Namespace": "ModelsTypeSpec",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.InputRecursiveModel",
    "Usage": "Input",
    "Description": "Input model that has property of its own type",
    "Properties": [
@@ -2635,7 +2635,7 @@
    "$id": "411",
    "Kind": "model",
    "Name": "RoundTripRecursiveModel",
-   "Namespace": "ModelsTypeSpec",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripRecursiveModel",
    "Usage": "RoundTrip",
    "Description": "Roundtrip model that has property of its own type",
    "Properties": [
@@ -2668,7 +2668,7 @@
    "$id": "415",
    "Kind": "model",
    "Name": "ErrorModel",
-   "Namespace": "ModelsTypeSpec",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.ErrorModel",
    "Usage": "Output",
    "Description": "Output model that has property of its own type",
    "Properties": [
@@ -2701,14 +2701,14 @@
    "$id": "419",
    "Kind": "model",
    "Name": "RoundTripOnNoUse",
-   "Namespace": "ModelsTypeSpec",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripOnNoUse",
    "Usage": "RoundTrip",
    "Description": "Derived model",
    "BaseModel": {
     "$id": "420",
     "Kind": "model",
     "Name": "NoUseBase",
-    "Namespace": "ModelsTypeSpec",
+    "CrossLanguageDefinitionId": "ModelsTypeSpec.NoUseBase",
     "Usage": "RoundTrip",
     "Description": "Base model",
     "Properties": [
@@ -2751,7 +2751,7 @@
    "$id": "425",
    "Kind": "model",
    "Name": "SingleBase",
-   "Namespace": "ModelsTypeSpec",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.SingleBase",
    "Usage": "Output",
    "Description": "Single base model without any child model.",
    "DiscriminatorProperty": {
@@ -2789,20 +2789,20 @@
    "$id": "430",
    "Kind": "model",
    "Name": "Int32ValuesFacet",
-   "Namespace": "ModelsTypeSpec",
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.Int32ValuesFacet",
    "Usage": "Input",
    "Description": "Facets an int32 field by the specified value ranges.",
    "BaseModel": {
     "$id": "431",
     "Kind": "model",
     "Name": "NumericValuesFacet",
-    "Namespace": "ModelsTypeSpec",
+    "CrossLanguageDefinitionId": "ModelsTypeSpec.NumericValuesFacet",
     "Usage": "Input",
     "BaseModel": {
      "$id": "432",
      "Kind": "model",
      "Name": "Facet",
-     "Namespace": "ModelsTypeSpec",
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.Facet",
      "Usage": "Input",
      "Description": "Facet",
      "Properties": [

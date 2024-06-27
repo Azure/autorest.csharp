@@ -7,6 +7,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "ExtensibleEnumWithOperator",
+   "CrossLanguageDefinitionId": "CustomizationsInTsp.ExtensibleEnumWithOperator",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -25,7 +26,6 @@
      "Description": "Tuesday."
     }
    ],
-   "Namespace": "CustomizationsInTsp",
    "Description": "Extensible enum to customize operator",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -34,6 +34,7 @@
    "$id": "6",
    "Kind": "enum",
    "Name": "EnumToRename",
+   "CrossLanguageDefinitionId": "CustomizationsInTsp.EnumToRename",
    "ValueType": {
     "$id": "7",
     "Kind": "string"
@@ -55,7 +56,6 @@
      "Value": "3"
     }
    ],
-   "Namespace": "CustomizationsInTsp",
    "Description": "Renamed enum (original name: EnumToRename)",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -64,6 +64,7 @@
    "$id": "11",
    "Kind": "enum",
    "Name": "EnumWithValueToRename",
+   "CrossLanguageDefinitionId": "CustomizationsInTsp.EnumWithValueToRename",
    "ValueType": {
     "$id": "12",
     "Kind": "string"
@@ -85,7 +86,6 @@
      "Value": "3"
     }
    ],
-   "Namespace": "CustomizationsInTsp",
    "Description": "Enum with renamed value (original name: ValueToRename)",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -94,6 +94,7 @@
    "$id": "16",
    "Kind": "enum",
    "Name": "EnumToBeMadeExtensible",
+   "CrossLanguageDefinitionId": "CustomizationsInTsp.EnumToBeMadeExtensible",
    "ValueType": {
     "$id": "17",
     "Kind": "string"
@@ -115,7 +116,6 @@
      "Value": "3"
     }
    ],
-   "Namespace": "CustomizationsInTsp",
    "Description": "Extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -124,6 +124,7 @@
    "$id": "21",
    "Kind": "enum",
    "Name": "NormalEnum",
+   "CrossLanguageDefinitionId": "CustomizationsInTsp.NormalEnum",
    "ValueType": {
     "$id": "22",
     "Kind": "string"
@@ -140,7 +141,6 @@
      "Value": "b"
     }
    ],
-   "Namespace": "CustomizationsInTsp",
    "Description": "A normal enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -151,7 +151,7 @@
    "$id": "25",
    "Kind": "model",
    "Name": "RootModel",
-   "Namespace": "CustomizationsInTsp",
+   "CrossLanguageDefinitionId": "CustomizationsInTsp.RootModel",
    "Usage": "RoundTrip",
    "Description": "Root RoundTrip model to reference all other types to ensure generation",
    "Properties": [
@@ -175,7 +175,7 @@
       "$id": "28",
       "Kind": "model",
       "Name": "ModelToMakeInternal",
-      "Namespace": "CustomizationsInTsp",
+      "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToMakeInternal",
       "Usage": "RoundTrip",
       "Description": "Public model made internal",
       "Properties": [
@@ -205,7 +205,7 @@
       "$id": "32",
       "Kind": "model",
       "Name": "ModelToRename",
-      "Namespace": "CustomizationsInTsp",
+      "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToRename",
       "Usage": "RoundTrip",
       "Description": "Renamed model (original name: ModelToRename)",
       "Properties": [
@@ -247,7 +247,7 @@
       "$id": "38",
       "Kind": "model",
       "Name": "ModelToChangeNamespace",
-      "Namespace": "CustomizationsInTsp",
+      "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToChangeNamespace",
       "Usage": "RoundTrip",
       "Description": "Model moved into custom namespace",
       "Properties": [
@@ -277,7 +277,7 @@
       "$id": "42",
       "Kind": "model",
       "Name": "ModelWithCustomizedProperties",
-      "Namespace": "CustomizationsInTsp",
+      "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties",
       "Usage": "RoundTrip",
       "Description": "Model with customized properties",
       "Properties": [
@@ -653,7 +653,7 @@
       "$id": "108",
       "Kind": "model",
       "Name": "ModelToAddAdditionalSerializableProperty",
-      "Namespace": "CustomizationsInTsp",
+      "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToAddAdditionalSerializableProperty",
       "Usage": "RoundTrip",
       "Description": "Model to add additional serializable property",
       "BaseModel": {
@@ -697,7 +697,7 @@
       "$id": "113",
       "Kind": "model",
       "Name": "ModelStruct",
-      "Namespace": "CustomizationsInTsp",
+      "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelStruct",
       "Usage": "RoundTrip",
       "Description": "Model to make to a struct",
       "Properties": [

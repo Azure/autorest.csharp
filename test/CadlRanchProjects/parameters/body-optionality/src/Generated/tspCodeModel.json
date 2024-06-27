@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "model",
    "Name": "BodyModel",
-   "Namespace": "Parameters.BodyOptionality",
+   "CrossLanguageDefinitionId": "Parameters.BodyOptionality.BodyModel",
    "Usage": "Input",
    "Properties": [
     {

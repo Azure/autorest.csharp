@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "model",
    "Name": "InputModel",
-   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.InputModel",
    "Usage": "RoundTrip",
    "Description": "Usage override to roundtrip.",
    "Properties": [
@@ -30,7 +30,7 @@
    "$id": "5",
    "Kind": "model",
    "Name": "OutputModel",
-   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.OutputModel",
    "Usage": "RoundTrip",
    "Description": "Usage override to roundtrip.",
    "Properties": [
@@ -52,7 +52,7 @@
    "$id": "8",
    "Kind": "model",
    "Name": "RoundTripModel",
-   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.RoundTripModel",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -64,7 +64,7 @@
       "$id": "10",
       "Kind": "model",
       "Name": "ResultModel",
-      "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
+      "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.ResultModel",
       "Usage": "Output",
       "Properties": [
        {
@@ -93,7 +93,7 @@
    "$id": "13",
    "Kind": "model",
    "Name": "OrphanModel",
-   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.OrphanModel",
    "Access": "public",
    "Usage": "Input",
    "Description": "Not used anywhere, but access is override to public so still need to be generated and exported with serialization.",

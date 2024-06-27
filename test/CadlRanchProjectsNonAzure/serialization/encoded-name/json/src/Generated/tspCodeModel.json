@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "model",
    "Name": "JsonEncodedNameModel",
-   "Namespace": "Serialization.EncodedName.Json.Property",
+   "CrossLanguageDefinitionId": "Serialization.EncodedName.Json.Property.JsonEncodedNameModel",
    "Usage": "RoundTrip",
    "Properties": [
     {

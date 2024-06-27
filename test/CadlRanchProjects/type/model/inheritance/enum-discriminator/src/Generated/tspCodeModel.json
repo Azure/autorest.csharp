@@ -7,6 +7,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "DogKind",
+   "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.DogKind",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -19,7 +20,6 @@
      "Description": "Species golden"
     }
    ],
-   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
    "Description": "extensible enum type for discriminator",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -28,6 +28,7 @@
    "$id": "5",
    "Kind": "enum",
    "Name": "SnakeKind",
+   "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.SnakeKind",
    "ValueType": {
     "$id": "6",
     "Kind": "string"
@@ -40,7 +41,6 @@
      "Description": "Species cobra"
     }
    ],
-   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
    "Description": "fixed enum type for discriminator",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -51,7 +51,7 @@
    "$id": "8",
    "Kind": "model",
    "Name": "Dog",
-   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
+   "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.Dog",
    "Usage": "RoundTrip",
    "Description": "Test extensible enum type for discriminator",
    "DiscriminatorProperty": {
@@ -89,7 +89,7 @@
      "$id": "13",
      "Kind": "model",
      "Name": "Golden",
-     "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.Golden",
      "Usage": "RoundTrip",
      "Description": "Golden dog model",
      "DiscriminatorValue": "golden",
@@ -126,7 +126,7 @@
    "$id": "17",
    "Kind": "model",
    "Name": "Snake",
-   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
+   "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.Snake",
    "Usage": "RoundTrip",
    "Description": "Test fixed enum type for discriminator",
    "DiscriminatorProperty": {
@@ -164,7 +164,7 @@
      "$id": "22",
      "Kind": "model",
      "Name": "Cobra",
-     "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.Cobra",
      "Usage": "RoundTrip",
      "Description": "Cobra model",
      "DiscriminatorValue": "cobra",

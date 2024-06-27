@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "model",
    "Name": "StringProperty",
-   "Namespace": "Type.Property.Nullable",
+   "CrossLanguageDefinitionId": "Type.Property.Nullable.StringProperty",
    "Usage": "Output",
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "Properties": [
@@ -46,7 +46,7 @@
    "$id": "8",
    "Kind": "model",
    "Name": "BytesProperty",
-   "Namespace": "Type.Property.Nullable",
+   "CrossLanguageDefinitionId": "Type.Property.Nullable.BytesProperty",
    "Usage": "Output",
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "Properties": [
@@ -85,7 +85,7 @@
    "$id": "14",
    "Kind": "model",
    "Name": "DatetimeProperty",
-   "Namespace": "Type.Property.Nullable",
+   "CrossLanguageDefinitionId": "Type.Property.Nullable.DatetimeProperty",
    "Usage": "Output",
    "Description": "Model with a datetime property",
    "Properties": [
@@ -128,7 +128,7 @@
    "$id": "21",
    "Kind": "model",
    "Name": "DurationProperty",
-   "Namespace": "Type.Property.Nullable",
+   "CrossLanguageDefinitionId": "Type.Property.Nullable.DurationProperty",
    "Usage": "Output",
    "Description": "Model with a duration property",
    "Properties": [
@@ -171,7 +171,7 @@
    "$id": "28",
    "Kind": "model",
    "Name": "CollectionsByteProperty",
-   "Namespace": "Type.Property.Nullable",
+   "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsByteProperty",
    "Usage": "Output",
    "Description": "Model with collection bytes properties",
    "Properties": [
@@ -214,7 +214,7 @@
    "$id": "35",
    "Kind": "model",
    "Name": "CollectionsModelProperty",
-   "Namespace": "Type.Property.Nullable",
+   "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsModelProperty",
    "Usage": "Output",
    "Description": "Model with collection models properties",
    "Properties": [
@@ -245,7 +245,7 @@
         "$id": "41",
         "Kind": "model",
         "Name": "InnerModel",
-        "Namespace": "Type.Property.Nullable",
+        "CrossLanguageDefinitionId": "Type.Property.Nullable.InnerModel",
         "Usage": "Output",
         "Description": "Inner model used in collections model property",
         "Properties": [
@@ -277,7 +277,7 @@
    "$id": "44",
    "Kind": "model",
    "Name": "CollectionsStringProperty",
-   "Namespace": "Type.Property.Nullable",
+   "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsStringProperty",
    "Usage": "Output",
    "Description": "Model with collection string properties",
    "Properties": [

@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "model",
    "Name": "InnerModel",
-   "Namespace": "Type.Array",
+   "CrossLanguageDefinitionId": "Type.Array.InnerModel",
    "Usage": "RoundTrip",
    "Description": "Array inner model",
    "Properties": [
