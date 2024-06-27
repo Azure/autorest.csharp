@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "model",
    "Name": "InnerModel",
-   "Namespace": "Type.Dictionary",
+   "CrossLanguageDefinitionId": "Type.Dictionary.InnerModel",
    "Usage": "Input,Output",
    "Description": "Dictionary inner model",
    "Properties": [

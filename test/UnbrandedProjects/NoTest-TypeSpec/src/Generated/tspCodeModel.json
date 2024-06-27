@@ -19,7 +19,7 @@
      "Description": "accept"
     }
    ],
-   "Namespace": "NoTestTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
    "Usage": "Input"
@@ -40,7 +40,7 @@
      "Description": "123"
     }
    ],
-   "Namespace": "NoTestTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
    "Usage": "Input"
@@ -61,7 +61,7 @@
      "Description": "1.23"
     }
    ],
-   "Namespace": "NoTestTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
    "Usage": "Input"
@@ -82,7 +82,7 @@
      "Description": "reject"
     }
    ],
-   "Namespace": "NoTestTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
    "Usage": "Input"
@@ -103,7 +103,7 @@
      "Description": "456"
     }
    ],
-   "Namespace": "NoTestTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
    "Usage": "Input"
@@ -124,7 +124,7 @@
      "Description": "4.56"
     }
    ],
-   "Namespace": "NoTestTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
    "Usage": "Input"
@@ -135,7 +135,7 @@
    "$id": "20",
    "Kind": "model",
    "Name": "Thing",
-   "Namespace": "NoTestTypeSpec",
+   "CrossLanguageDefinitionId": "NoTestTypeSpec.Thing",
    "Usage": "Output",
    "Description": "A model with a few properties of literal types",
    "Properties": [

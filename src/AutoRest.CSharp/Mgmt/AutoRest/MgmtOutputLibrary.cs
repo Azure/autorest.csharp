@@ -317,7 +317,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private IEnumerable<OperationSet>? _resourceOperationSets;
         public IEnumerable<OperationSet> ResourceOperationSets => _resourceOperationSets ??= ResourceDataSchemaNameToOperationSets.SelectMany(pair => pair.Value);
 
-
         private MgmtObjectType? GetDefaultDerivedType(InputModelType model, Dictionary<string, MgmtObjectType> defaultDerivedTypes)
         {
             //only want to create one instance of the default derived per polymorphic set
@@ -351,7 +350,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 //create the "Unknown" version
                 var unknownDerivedType = new InputModelType(
                     defaultDerivedName,
-                    actualBase.Namespace,
+                    string.Empty,
                     "internal",
                     null,
                     // [TODO]: Condition is added to minimize change
@@ -502,7 +501,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         public Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
-            => _input.Enums.ToDictionary(e => e, e => new EnumType(e, MgmtContext.Context), InputEnumType.IgnoreNullabilityComparer);
+            => _input.Enums.ToDictionary(e => e, e => new EnumType(e, MgmtContext.Context));
 
         private IEnumerable<TypeProvider>? _models;
         public IEnumerable<TypeProvider> Models => _models ??= SchemaMap.Value.Values.Where(m => m is not SystemObjectType);
@@ -816,8 +815,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
             else
             {
-                // There could be different instances because of nullability
-                resolvedEnum = FindTypeByModelName(enumType.Name) ?? throw new InvalidOperationException($"Cannot find enum {enumType.Name}");
+                throw new InvalidOperationException($"Cannot find enum {enumType.Name}");
             }
             return resolvedEnum;
         }
@@ -831,20 +829,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
             else
             {
-                // There could be different instances because of nullability
-                resolvedModel = FindTypeByModelName(model.Name) ?? throw new InvalidOperationException($"Cannot find model {model.Name}");
+                throw new InvalidOperationException($"Cannot find model {model.Name}");
             }
             return resolvedModel;
-        }
-
-        private CSharpType? FindTypeByModelName(string name)
-        {
-            _schemaNameToModels.Value.TryGetValue(name, out TypeProvider? provider);
-
-            // Since we have multiple instances for the same type due to nullability, we need to find the match based on name or spec name
-            provider ??= _schemaToModels.FirstOrDefault(s => s.Key.SpecName == name).Value;
-
-            return provider?.Type;
         }
 
         public override CSharpType? FindTypeByName(string originalName)
@@ -855,15 +842,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             provider ??= _schemaToModels.FirstOrDefault(s => s.Value is MgmtObjectType mot && mot.Declaration.Name == originalName).Value;
 
             return provider?.Type;
-        }
-
-        public bool TryGetTypeProvider(string originalName, [MaybeNullWhen(false)] out TypeProvider provider)
-        {
-            if (_schemaNameToModels.Value.TryGetValue(originalName, out provider))
-                return true;
-
-            provider = ResourceSchemaMap.Value.Values.FirstOrDefault(m => m.Type.Name == originalName);
-            return provider != null;
         }
 
         public IEnumerable<Resource> FindResources(ResourceData resourceData)

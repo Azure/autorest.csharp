@@ -21,7 +21,7 @@
      "Description": "accept"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
    "Usage": "Input"
@@ -42,7 +42,7 @@
      "Description": "123"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
    "Usage": "Input"
@@ -63,7 +63,7 @@
      "Description": "1.23"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
    "Usage": "Input"
@@ -84,7 +84,7 @@
      "Description": "reject"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
    "Usage": "Input"
@@ -105,7 +105,7 @@
      "Description": "456"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
    "Usage": "Input"
@@ -126,7 +126,7 @@
      "Description": "4.56"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
    "Usage": "Input"
@@ -135,6 +135,7 @@
    "$id": "20",
    "Kind": "enum",
    "Name": "CsProjectedEnum",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.ProjectedEnum",
    "ValueType": {
     "$id": "21",
     "Kind": "float32"
@@ -156,7 +157,6 @@
      "Value": 4.4
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "Description": "enum with projected name",
    "IsExtensible": false,
    "Usage": "Input"
@@ -165,6 +165,7 @@
    "$id": "25",
    "Kind": "enum",
    "Name": "CsProjectedEnumInModel",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.ProjectedEnumInModel",
    "ValueType": {
     "$id": "26",
     "Kind": "float32"
@@ -186,7 +187,6 @@
      "Value": 4.4
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "Description": "enum with projected name used in a model",
    "IsExtensible": false,
    "Usage": "Input"
@@ -195,6 +195,7 @@
    "$id": "30",
    "Kind": "enum",
    "Name": "StringFixedEnum",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.StringFixedEnum",
    "ValueType": {
     "$id": "31",
     "Kind": "string"
@@ -216,7 +217,6 @@
      "Value": "4"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "Description": "Simple enum",
    "IsExtensible": false,
    "Usage": "Input,Output"
@@ -225,6 +225,7 @@
    "$id": "35",
    "Kind": "enum",
    "Name": "StringExtensibleEnum",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.StringExtensibleEnum",
    "ValueType": {
     "$id": "36",
     "Kind": "string"
@@ -246,7 +247,6 @@
      "Value": "4"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "Description": "Extensible enum",
    "IsExtensible": true,
    "Usage": "Input,Output"
@@ -255,6 +255,7 @@
    "$id": "40",
    "Kind": "enum",
    "Name": "IntExtensibleEnum",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.IntExtensibleEnum",
    "ValueType": {
     "$id": "41",
     "Kind": "int32"
@@ -276,7 +277,6 @@
      "Value": 4
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "Description": "Int based extensible enum",
    "IsExtensible": true,
    "Usage": "Input,Output"
@@ -285,6 +285,7 @@
    "$id": "45",
    "Kind": "enum",
    "Name": "FloatExtensibleEnum",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.FloatExtensibleEnum",
    "ValueType": {
     "$id": "46",
     "Kind": "float32"
@@ -306,7 +307,6 @@
      "Value": 4
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "Description": "Float based extensible enum",
    "IsExtensible": true,
    "Usage": "Input,Output"
@@ -315,6 +315,7 @@
    "$id": "50",
    "Kind": "enum",
    "Name": "FloatFixedEnum",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.FloatFixedEnum",
    "ValueType": {
     "$id": "51",
     "Kind": "float32"
@@ -336,7 +337,6 @@
      "Value": 4.4
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "Description": "float fixed enum",
    "IsExtensible": false,
    "Usage": "Input,Output"
@@ -345,6 +345,7 @@
    "$id": "55",
    "Kind": "enum",
    "Name": "IntFixedEnum",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.IntFixedEnum",
    "ValueType": {
     "$id": "56",
     "Kind": "int32"
@@ -366,7 +367,6 @@
      "Value": 4
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "Description": "int fixed enum",
    "IsExtensible": false,
    "Usage": "Input,Output"
@@ -375,6 +375,7 @@
    "$id": "60",
    "Kind": "enum",
    "Name": "DaysOfWeekExtensibleEnum",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.DaysOfWeekExtensibleEnum",
    "ValueType": {
     "$id": "61",
     "Kind": "string"
@@ -416,7 +417,6 @@
      "Value": "Sunday"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "IsExtensible": true,
    "Usage": "None"
   },
@@ -424,6 +424,7 @@
    "$id": "69",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.Versions",
    "ValueType": {
     "$id": "70",
     "Kind": "string"
@@ -435,7 +436,6 @@
      "Value": "2022-05-15-preview"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "IsExtensible": false,
    "Usage": "ApiVersionEnum"
   }
@@ -445,7 +445,7 @@
    "$id": "72",
    "Kind": "model",
    "Name": "Thing",
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.Thing",
    "Usage": "Input,Output",
    "Description": "A model with a few properties of literal types",
    "Properties": [
@@ -680,7 +680,7 @@
    "$id": "109",
    "Kind": "model",
    "Name": "Friend",
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.NotFriend",
    "Usage": "Input,Output",
    "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
@@ -702,7 +702,7 @@
    "$id": "112",
    "Kind": "model",
    "Name": "ProjectedModel",
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithProjectedName",
    "Usage": "Input,Output",
    "Description": "this is a model with a projected name",
    "Properties": [
@@ -724,7 +724,7 @@
    "$id": "115",
    "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.returnsAnonymousModel.Response.anonymous",
    "Usage": "Output",
    "Properties": []
   },
@@ -732,14 +732,14 @@
    "$id": "116",
    "Kind": "model",
    "Name": "Extension",
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.Extension",
    "Usage": "Input",
    "Description": "extension",
    "BaseModel": {
     "$id": "117",
     "Kind": "model",
     "Name": "Element",
-    "Namespace": "NoDocsTypeSpec",
+    "CrossLanguageDefinitionId": "NoDocsTypeSpec.Element",
     "Usage": "Input",
     "Description": "element",
     "Properties": [
@@ -782,7 +782,7 @@
    "$id": "122",
    "Kind": "model",
    "Name": "Extendible",
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.Extendible",
    "Usage": "Input",
    "Description": "FHIR extendible element",
    "Properties": [
@@ -798,14 +798,14 @@
        "$id": "125",
        "Kind": "model",
        "Name": "ThereLevelExtension",
-       "Namespace": "NoDocsTypeSpec",
+       "CrossLanguageDefinitionId": "NoDocsTypeSpec.ThereLevelExtension",
        "Usage": "Input",
        "Description": "extension",
        "BaseModel": {
         "$id": "126",
         "Kind": "model",
         "Name": "ThereLevelElement",
-        "Namespace": "NoDocsTypeSpec",
+        "CrossLanguageDefinitionId": "NoDocsTypeSpec.ThereLevelElement",
         "Usage": "Input",
         "Description": "element",
         "Properties": [
@@ -857,14 +857,14 @@
    "$id": "131",
    "Kind": "model",
    "Name": "ChildModel",
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.ChildModel",
    "Usage": "Input",
    "Description": "ChildModel",
    "BaseModel": {
     "$id": "132",
     "Kind": "model",
     "Name": "BaseModel",
-    "Namespace": "NoDocsTypeSpec",
+    "CrossLanguageDefinitionId": "NoDocsTypeSpec.BaseModel",
     "Usage": "Input",
     "Description": "parenetModel",
     "Properties": [
@@ -907,7 +907,7 @@
    "$id": "137",
    "Kind": "model",
    "Name": "ContainSelf",
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.ContainSelf",
    "Usage": "Input",
    "Description": "containself",
    "Properties": [
@@ -928,7 +928,7 @@
    "$id": "139",
    "Kind": "model",
    "Name": "ModelWithProjectedEnum",
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithProjectedEnum",
    "Usage": "Input",
    "Properties": [
     {
@@ -948,7 +948,7 @@
    "$id": "141",
    "Kind": "model",
    "Name": "AzureLocationModel",
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.AzureLocationModel",
    "Usage": "Input",
    "Properties": [
     {
@@ -970,7 +970,7 @@
    "$id": "144",
    "Kind": "model",
    "Name": "RoundTripModel",
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel",
    "Usage": "Input,Output",
    "Description": "this is a roundtrip model",
    "Properties": [
@@ -1271,7 +1271,7 @@
       "$id": "189",
       "Kind": "model",
       "Name": "ModelWithRequiredNullableProperties",
-      "Namespace": "NoDocsTypeSpec",
+      "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithRequiredNullableProperties",
       "Usage": "Input,Output",
       "Description": "A model with a few required nullable properties",
       "Properties": [
@@ -1351,7 +1351,7 @@
          "$id": "202",
          "Kind": "model",
          "Name": "ModelForUnion",
-         "Namespace": "NoDocsTypeSpec",
+         "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelForUnion",
          "Usage": "Input,Output",
          "Description": "This is a model only used in union types, please do not use it anywhere else.",
          "Properties": [

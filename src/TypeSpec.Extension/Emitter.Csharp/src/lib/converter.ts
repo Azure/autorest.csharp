@@ -21,7 +21,6 @@ import {
     isReadOnly
 } from "@azure-tools/typespec-client-generator-core";
 import { Model } from "@typespec/compiler";
-import { getFullNamespaceString } from "./utils.js";
 import { InputEnumTypeValue } from "../type/input-enum-type-value.js";
 import { InputModelProperty } from "../type/input-model-property.js";
 import {
@@ -105,9 +104,7 @@ export function fromSdkModelType(
         inputModelType = {
             Kind: "model",
             Name: modelTypeName,
-            Namespace: getFullNamespaceString(
-                (modelType.__raw as Model).namespace
-            ), // TODO -- use the value from TCGC when this is included in TCGC
+            CrossLanguageDefinitionId: modelType.crossLanguageDefinitionId,
             Access: getAccessOverride(
                 context,
                 modelType.__raw as Model
@@ -140,8 +137,7 @@ export function fromSdkModelType(
             const ourProperties = fromSdkModelProperty(
                 property,
                 {
-                    ModelName: modelTypeName,
-                    Namespace: inputModelType.Namespace
+                    ModelName: modelTypeName
                 } as LiteralTypeContext,
                 []
             );
@@ -245,12 +241,9 @@ export function fromSdkEnumType(
         const newInputEnumType: InputEnumType = {
             Kind: "enum",
             Name: enumName,
+            CrossLanguageDefinitionId: enumType.crossLanguageDefinitionId,
             ValueType: fromSdkBuiltInType(enumType.valueType),
             Values: enumType.values.map((v) => fromSdkEnumValueType(v)),
-            Namespace: getFullNamespaceString(
-                // Enum and Union have optional namespace property
-                (enumType.__raw! as any).namespace
-            ),
             Accessibility: getAccessOverride(
                 context,
                 enumType.__raw as any
@@ -365,7 +358,7 @@ function fromSdkConstantType(
             Name: enumName,
             ValueType: fromSdkBuiltInType(constantType.valueType),
             Values: allowValues,
-            Namespace: literalTypeContext.Namespace,
+            CrossLanguageDefinitionId: "",
             Accessibility: undefined,
             Deprecated: undefined,
             Description: `The ${enumName}`, // TODO -- what should we put here?

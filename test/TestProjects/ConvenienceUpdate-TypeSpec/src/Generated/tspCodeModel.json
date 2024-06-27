@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "model",
    "Name": "Model",
-   "Namespace": "ConvenienceInCadl",
+   "CrossLanguageDefinitionId": "ConvenienceInCadl.Model",
    "Usage": "Input,Output",
    "Description": "A model.",
    "Properties": [

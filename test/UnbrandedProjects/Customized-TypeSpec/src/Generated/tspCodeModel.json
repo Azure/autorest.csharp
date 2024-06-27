@@ -21,7 +21,7 @@
      "Description": "accept"
     }
    ],
-   "Namespace": "CustomizedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
    "Usage": "Input"
@@ -42,7 +42,7 @@
      "Description": "123"
     }
    ],
-   "Namespace": "CustomizedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
    "Usage": "Input"
@@ -63,7 +63,7 @@
      "Description": "1.23"
     }
    ],
-   "Namespace": "CustomizedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
    "Usage": "Input"
@@ -84,7 +84,7 @@
      "Description": "reject"
     }
    ],
-   "Namespace": "CustomizedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
    "Usage": "Input"
@@ -105,7 +105,7 @@
      "Description": "456"
     }
    ],
-   "Namespace": "CustomizedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
    "Usage": "Input"
@@ -126,7 +126,7 @@
      "Description": "4.56"
     }
    ],
-   "Namespace": "CustomizedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
    "Usage": "Input"
@@ -135,6 +135,7 @@
    "$id": "20",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "CustomizedTypeSpec.Versions",
    "ValueType": {
     "$id": "21",
     "Kind": "string"
@@ -146,7 +147,6 @@
      "Value": "2022-05-15-preview"
     }
    ],
-   "Namespace": "CustomizedTypeSpec",
    "IsExtensible": false,
    "Usage": "ApiVersionEnum"
   }
@@ -156,7 +156,7 @@
    "$id": "23",
    "Kind": "model",
    "Name": "Thing",
-   "Namespace": "CustomizedTypeSpec",
+   "CrossLanguageDefinitionId": "CustomizedTypeSpec.Thing",
    "Usage": "Input,Output",
    "Description": "A model with a few properties of literal types",
    "Properties": [
@@ -391,7 +391,7 @@
    "$id": "60",
    "Kind": "model",
    "Name": "RoundTripModel",
-   "Namespace": "CustomizedTypeSpec",
+   "CrossLanguageDefinitionId": "CustomizedTypeSpec.RoundTripModel",
    "Usage": "Input,Output",
    "Description": "this is a roundtrip model",
    "Properties": [
@@ -437,7 +437,7 @@
    "$id": "67",
    "Kind": "model",
    "Name": "Friend",
-   "Namespace": "CustomizedTypeSpec",
+   "CrossLanguageDefinitionId": "CustomizedTypeSpec.NotFriend",
    "Usage": "Input,Output",
    "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
@@ -462,7 +462,7 @@
       "$id": "71",
       "Kind": "model",
       "Name": "ModelWithFormat",
-      "Namespace": "CustomizedTypeSpec",
+      "CrossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithFormat",
       "Usage": "Input,Output",
       "Properties": [
        {
@@ -504,7 +504,7 @@
    "$id": "76",
    "Kind": "model",
    "Name": "ProjectedModel",
-   "Namespace": "CustomizedTypeSpec",
+   "CrossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithProjectedName",
    "Usage": "Input,Output",
    "Description": "this is a model with a projected name",
    "Properties": [
@@ -526,7 +526,7 @@
    "$id": "79",
    "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
-   "Namespace": "CustomizedTypeSpec",
+   "CrossLanguageDefinitionId": "CustomizedTypeSpec.returnsAnonymousModel.Response.anonymous",
    "Usage": "Output",
    "Properties": []
   }

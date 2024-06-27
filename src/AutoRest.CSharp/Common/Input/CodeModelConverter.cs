@@ -373,7 +373,7 @@ namespace AutoRest.CSharp.Common.Input
 
             model = new InputModelType(
                 Name: schema.Language.Default.Name,
-                Namespace: schema.Extensions?.Namespace,
+                CrossLanguageDefinitionId: GetCrossLanguageDefinitionId(schema),
                 Access: schema.Extensions?.Accessibility ?? (usage.HasFlag(SchemaTypeUsage.Model) ? "public" : "internal"),
                 Deprecation: schema.Deprecated?.Reason,
                 Description: schema.CreateDescription(),
@@ -396,12 +396,6 @@ namespace AutoRest.CSharp.Common.Input
             _derivedModelsCache[schema] = (derived, discriminatedSubtypes);
 
             return model;
-        }
-
-        private IReadOnlyList<Property> CreateCompositionProperties(ObjectSchema objectSchema, ObjectSchema? baseModelSchema)
-        {
-            var compositeSchemas = objectSchema.Parents?.Immediate?.OfType<ObjectSchema>().Where(s => s != baseModelSchema);
-            return compositeSchemas is null ? Array.Empty<Property>() : compositeSchemas.SelectMany(m => m.Properties).ToList();
         }
 
         private static InputModelTypeUsage GetUsage(SchemaTypeUsage usage)
@@ -539,7 +533,6 @@ namespace AutoRest.CSharp.Common.Input
         private InputType GetOrCreateType(Property property)
         {
             var name = property.Schema.Name;
-            var type = typeof(DataFactoryElement<>);
             object? elementType = null;
             if ((property.Schema is AnyObjectSchema || property.Schema is StringSchema) && true == property.Extensions?.TryGetValue("x-ms-format-element-type", out elementType))
             {
@@ -592,7 +585,7 @@ namespace AutoRest.CSharp.Common.Input
         private InputType CreateType(Schema schema, string? format, bool isNullable) => schema switch
         {
             // Respect schema.Type firstly since we might have applied the type change based on rename-mapping
-            { Type: AllSchemaTypes.ArmId } => new InputPrimitiveType(InputPrimitiveTypeKind.ArmId).WithNullable(isNullable),
+            { Type: AllSchemaTypes.ArmId } => new InputPrimitiveType(InputPrimitiveTypeKind.ArmResourceIdentifier).WithNullable(isNullable),
             { Type: AllSchemaTypes.Boolean } => new InputPrimitiveType(InputPrimitiveTypeKind.Boolean).WithNullable(isNullable),
             { Type: AllSchemaTypes.Binary } => new InputPrimitiveType(InputPrimitiveTypeKind.Stream).WithNullable(isNullable),
             ByteArraySchema { Type: AllSchemaTypes.ByteArray, Format: ByteArraySchemaFormat.Base64url } => new InputPrimitiveType(InputPrimitiveTypeKind.Bytes, BytesKnownEncoding.Base64Url).WithNullable(isNullable),
@@ -613,7 +606,7 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.Unixtime } => new InputDateTimeType(DateTimeKnownEncoding.UnixTimestamp, InputPrimitiveType.String).WithNullable(isNullable),
             { Type: AllSchemaTypes.Uri } => new InputPrimitiveType(InputPrimitiveTypeKind.Uri).WithNullable(isNullable),
             { Type: AllSchemaTypes.Uuid } => new InputPrimitiveType(InputPrimitiveTypeKind.Guid).WithNullable(isNullable),
-            { Type: AllSchemaTypes.String } when format == XMsFormat.ArmId => new InputPrimitiveType(InputPrimitiveTypeKind.ArmId).WithNullable(isNullable),
+            { Type: AllSchemaTypes.String } when format == XMsFormat.ArmId => new InputPrimitiveType(InputPrimitiveTypeKind.ArmResourceIdentifier).WithNullable(isNullable),
             { Type: AllSchemaTypes.String } when format == XMsFormat.AzureLocation => new InputPrimitiveType(InputPrimitiveTypeKind.AzureLocation).WithNullable(isNullable),
             { Type: AllSchemaTypes.String } when format == XMsFormat.ContentType => new InputPrimitiveType(InputPrimitiveTypeKind.ContentType).WithNullable(isNullable),
             { Type: AllSchemaTypes.String } when format == XMsFormat.DateTime => new InputDateTimeType(DateTimeKnownEncoding.Rfc3339, InputPrimitiveType.String).WithNullable(isNullable),
@@ -692,7 +685,7 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         private static InputType CreateDataFactoryElementInputType(bool isNullable, InputType argumentType)
-            => new InputModelType("DataFactoryElement", "Azure.Core.Resources", null, null, null, InputModelTypeUsage.None, Array.Empty<InputModelProperty>(), null, Array.Empty<InputModelType>(), null, null, new Dictionary<string, InputModelType>(), null, new List<InputType> { argumentType }).WithNullable(isNullable);
+            => new InputModelType("DataFactoryElement", "Azure.Core.Resources.DataFactoryElement", null, null, null, InputModelTypeUsage.None, Array.Empty<InputModelProperty>(), null, Array.Empty<InputModelType>(), null, null, new Dictionary<string, InputModelType>(), null, new List<InputType> { argumentType }).WithNullable(isNullable);
 
         private InputConstant CreateConstant(ConstantSchema constantSchema, string? format, bool isNullable)
         {
@@ -729,7 +722,7 @@ namespace AutoRest.CSharp.Common.Input
             var usage = _schemaUsageProvider.GetUsage(schema);
             var inputEnumType = new InputEnumType(
                 Name: schema.Name,
-                Namespace: schema.Extensions?.Namespace,
+                CrossLanguageDefinitionId: GetCrossLanguageDefinitionId(schema),
                 Accessibility: schema.Extensions?.Accessibility ?? (usage.HasFlag(SchemaTypeUsage.Model) ? "public" : "internal"),
                 Deprecated: schema.Deprecated?.Reason,
                 Description: schema.CreateDescription(),
@@ -742,6 +735,18 @@ namespace AutoRest.CSharp.Common.Input
                 Serialization = GetSerialization(schema, usage)
             };
             return inputEnumType;
+        }
+
+        private static string GetCrossLanguageDefinitionId(Schema schema)
+        {
+            var ns = schema.Extensions?.Namespace;
+            var name = schema.Language.Default.Name;
+            if (ns == null)
+            {
+                return name;
+            }
+
+            return $"{ns}.{name}";
         }
 
         private static InputEnumTypeValue CreateEnumValue(ChoiceValue choiceValue) => new(

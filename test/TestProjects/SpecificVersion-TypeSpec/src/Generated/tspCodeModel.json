@@ -10,6 +10,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "OperationState",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -46,7 +47,6 @@
      "Description": "The operation has been canceled by the user."
     }
    ],
-   "Namespace": "Azure.Core.Foundations",
    "Description": "Enum describing allowed operation states.",
    "IsExtensible": true,
    "Usage": "None"
@@ -55,6 +55,7 @@
    "$id": "9",
    "Kind": "enum",
    "Name": "ApiVersions",
+   "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.ApiVersions",
    "ValueType": {
     "$id": "10",
     "Kind": "string"
@@ -71,7 +72,6 @@
      "Value": "2022-09-01"
     }
    ],
-   "Namespace": "TypeSpec.Versioning.Specific",
    "IsExtensible": false,
    "Usage": "ApiVersionEnum"
   }
@@ -81,7 +81,7 @@
    "$id": "13",
    "Kind": "model",
    "Name": "ResourceOperationStatusResourceExportedResourceError",
-   "Namespace": "Azure.Core",
+   "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
    "Usage": "None",
    "Description": "Provides status details for long running operations.",
    "Properties": [
@@ -117,7 +117,7 @@
       "$id": "18",
       "Kind": "model",
       "Name": "Error",
-      "Namespace": "Azure.Core.Foundations",
+      "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error",
       "Usage": "None",
       "Description": "The error object.",
       "Properties": [
@@ -181,7 +181,7 @@
          "$id": "28",
          "Kind": "model",
          "Name": "InnerError",
-         "Namespace": "Azure.Core.Foundations",
+         "CrossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
          "Usage": "None",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "Properties": [
@@ -227,7 +227,7 @@
       "$id": "33",
       "Kind": "model",
       "Name": "ExportedResource",
-      "Namespace": "TypeSpec.Versioning.Specific",
+      "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.ExportedResource",
       "Usage": "Output",
       "Properties": [
        {
@@ -274,7 +274,7 @@
    "$id": "38",
    "Kind": "model",
    "Name": "PagedResource",
-   "Namespace": "Azure.Core.Foundations",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "None",
    "Description": "Paged collection of Resource items",
    "Properties": [
@@ -290,7 +290,7 @@
        "$id": "41",
        "Kind": "model",
        "Name": "Resource",
-       "Namespace": "TypeSpec.Versioning.Specific",
+       "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.Resource",
        "Usage": "Input,Output",
        "Properties": [
         {

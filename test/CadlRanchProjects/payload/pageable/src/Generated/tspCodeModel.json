@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "model",
    "Name": "PagedUser",
-   "Namespace": "Azure.Core",
+   "CrossLanguageDefinitionId": "Azure.Core.Page",
    "Usage": "None",
    "Description": "Paged collection of User items",
    "Properties": [
@@ -24,7 +24,7 @@
        "$id": "5",
        "Kind": "model",
        "Name": "User",
-       "Namespace": "Payload.Pageable",
+       "CrossLanguageDefinitionId": "Payload.Pageable.User",
        "Usage": "Output",
        "Description": "User model",
        "Properties": [

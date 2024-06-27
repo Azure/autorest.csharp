@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "model",
    "Name": "InputRecord",
-   "Namespace": "Type.Model.Usage",
+   "CrossLanguageDefinitionId": "Type.Model.Usage.InputRecord",
    "Usage": "Input",
    "Description": "Record used in operation parameters",
    "Properties": [
@@ -30,7 +30,7 @@
    "$id": "5",
    "Kind": "model",
    "Name": "OutputRecord",
-   "Namespace": "Type.Model.Usage",
+   "CrossLanguageDefinitionId": "Type.Model.Usage.OutputRecord",
    "Usage": "Output",
    "Description": "Record used in operation return type",
    "Properties": [
@@ -52,7 +52,7 @@
    "$id": "8",
    "Kind": "model",
    "Name": "InputOutputRecord",
-   "Namespace": "Type.Model.Usage",
+   "CrossLanguageDefinitionId": "Type.Model.Usage.InputOutputRecord",
    "Usage": "Input,Output",
    "Description": "Record used both as operation parameter and return type",
    "Properties": [

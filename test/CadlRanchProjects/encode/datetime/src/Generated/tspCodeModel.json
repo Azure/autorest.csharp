@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "model",
    "Name": "DefaultDatetimeProperty",
-   "Namespace": "Encode.Datetime",
+   "CrossLanguageDefinitionId": "Encode.Datetime.DefaultDatetimeProperty",
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -34,7 +34,7 @@
    "$id": "6",
    "Kind": "model",
    "Name": "Rfc3339DatetimeProperty",
-   "Namespace": "Encode.Datetime",
+   "CrossLanguageDefinitionId": "Encode.Datetime.Rfc3339DatetimeProperty",
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -60,7 +60,7 @@
    "$id": "10",
    "Kind": "model",
    "Name": "Rfc7231DatetimeProperty",
-   "Namespace": "Encode.Datetime",
+   "CrossLanguageDefinitionId": "Encode.Datetime.Rfc7231DatetimeProperty",
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -86,7 +86,7 @@
    "$id": "14",
    "Kind": "model",
    "Name": "UnixTimestampDatetimeProperty",
-   "Namespace": "Encode.Datetime",
+   "CrossLanguageDefinitionId": "Encode.Datetime.UnixTimestampDatetimeProperty",
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -112,7 +112,7 @@
    "$id": "18",
    "Kind": "model",
    "Name": "UnixTimestampArrayDatetimeProperty",
-   "Namespace": "Encode.Datetime",
+   "CrossLanguageDefinitionId": "Encode.Datetime.UnixTimestampArrayDatetimeProperty",
    "Usage": "Input,Output",
    "Properties": [
     {

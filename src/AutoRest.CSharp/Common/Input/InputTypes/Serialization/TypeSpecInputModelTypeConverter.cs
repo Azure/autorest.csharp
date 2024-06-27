@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Common.Input
             var isFirstProperty = id == null && name == null;
             var properties = new List<InputModelProperty>();
             var discriminatedSubtypes = new Dictionary<string, InputModelType>();
-            string? ns = null;
+            string? crossLanguageDefinitionId = null;
             string? accessibility = null;
             string? deprecated = null;
             string? description = null;
@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputModelType.Name), ref name)
-                    || reader.TryReadString(nameof(InputModelType.Namespace), ref ns)
+                    || reader.TryReadString(nameof(InputModelType.CrossLanguageDefinitionId), ref crossLanguageDefinitionId)
                     || reader.TryReadString(nameof(InputModelType.Access), ref accessibility)
                     || reader.TryReadString(nameof(InputModelType.Deprecation), ref deprecated)
                     || reader.TryReadString(nameof(InputModelType.Description), ref description)
@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Common.Input
                  */
                 if (reader.GetString() == nameof(InputModelType.BaseModel))
                 {
-                    model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, resolver);
+                    model = CreateInputModelTypeInstance(id, name, crossLanguageDefinitionId, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, resolver);
                     reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel);
                     if (baseModel != null)
                     {
@@ -77,14 +77,14 @@ namespace AutoRest.CSharp.Common.Input
                 }
                 if (reader.GetString() == nameof(InputModelType.Properties))
                 {
-                    model = model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, resolver);
+                    model = model ?? CreateInputModelTypeInstance(id, name, crossLanguageDefinitionId, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, resolver);
                     reader.Read();
                     CreateProperties(ref reader, properties, options, model.Usage.HasFlag(InputModelTypeUsage.MultipartFormData));
                     continue;
                 }
                 if (reader.GetString() == nameof(InputModelType.DiscriminatedSubtypes))
                 {
-                    model = model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, resolver);
+                    model = model ?? CreateInputModelTypeInstance(id, name, crossLanguageDefinitionId, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, resolver);
                     reader.Read();
                     CreateDiscriminatedSubtypes(ref reader, discriminatedSubtypes, options);
                     if (reader.TokenType != JsonTokenType.EndObject)
@@ -97,10 +97,10 @@ namespace AutoRest.CSharp.Common.Input
                 reader.SkipProperty();
             }
 
-            return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, resolver);
+            return model ?? CreateInputModelTypeInstance(id, name, crossLanguageDefinitionId, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, resolver);
         }
 
-        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, InputModelProperty? discriminatorProperty, InputModelType? baseModel, IReadOnlyList<InputModelProperty> properties, IReadOnlyDictionary<string, InputModelType> discriminatedSubtypes, InputType? additionalProperties, ReferenceResolver resolver)
+        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? crossLanguageDefinitionId, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, InputModelProperty? discriminatorProperty, InputModelType? baseModel, IReadOnlyList<InputModelProperty> properties, IReadOnlyDictionary<string, InputModelType> discriminatedSubtypes, InputType? additionalProperties, ReferenceResolver resolver)
         {
             name = name ?? throw new JsonException("Model must have name");
 
@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             var derivedModels = new List<InputModelType>();
-            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, derivedModels, discriminatorValue, discriminatorProperty, discriminatedSubtypes, additionalProperties);
+            var model = new InputModelType(name, crossLanguageDefinitionId ?? string.Empty, accessibility, deprecated, description, usage, properties, baseModel, derivedModels, discriminatorValue, discriminatorProperty, discriminatedSubtypes, additionalProperties);
 
             if (id is not null)
             {

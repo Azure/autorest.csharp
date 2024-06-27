@@ -7,6 +7,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "DaysOfWeekEnum",
+   "CrossLanguageDefinitionId": "Type.Enum.Fixed.DaysOfWeekEnum",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -55,7 +56,6 @@
      "Description": "Sunday."
     }
    ],
-   "Namespace": "Type.Enum.Fixed",
    "Description": "Days of the week",
    "IsExtensible": false,
    "Usage": "Input,Output"

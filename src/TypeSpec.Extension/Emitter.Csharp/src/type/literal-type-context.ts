@@ -7,5 +7,4 @@ export interface LiteralTypeContext {
     ModelName: string;
     PropertyName: string;
     Usage: UsageFlags;
-    Namespace?: string;
 }

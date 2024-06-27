@@ -21,7 +21,7 @@
      "Description": "accept"
     }
    ],
-   "Namespace": "FirstTestTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
    "Usage": "Input"
@@ -42,7 +42,7 @@
      "Description": "123"
     }
    ],
-   "Namespace": "FirstTestTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
    "Usage": "Input"
@@ -63,7 +63,7 @@
      "Description": "1.23"
     }
    ],
-   "Namespace": "FirstTestTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
    "Usage": "Input"
@@ -84,7 +84,7 @@
      "Description": "reject"
     }
    ],
-   "Namespace": "FirstTestTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
    "Usage": "Input"
@@ -105,7 +105,7 @@
      "Description": "456"
     }
    ],
-   "Namespace": "FirstTestTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
    "Usage": "Input"
@@ -126,7 +126,7 @@
      "Description": "4.56"
     }
    ],
-   "Namespace": "FirstTestTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
    "Usage": "Input"
@@ -135,6 +135,7 @@
    "$id": "20",
    "Kind": "enum",
    "Name": "CsProjectedEnum",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.ProjectedEnum",
    "ValueType": {
     "$id": "21",
     "Kind": "float32"
@@ -156,7 +157,6 @@
      "Value": 4.4
     }
    ],
-   "Namespace": "FirstTestTypeSpec",
    "Description": "enum with projected name",
    "IsExtensible": false,
    "Usage": "Input"
@@ -165,6 +165,7 @@
    "$id": "25",
    "Kind": "enum",
    "Name": "CsProjectedEnumInModel",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.ProjectedEnumInModel",
    "ValueType": {
     "$id": "26",
     "Kind": "float32"
@@ -186,7 +187,6 @@
      "Value": 4.4
     }
    ],
-   "Namespace": "FirstTestTypeSpec",
    "Description": "enum with projected name used in a model",
    "IsExtensible": false,
    "Usage": "Input"
@@ -195,6 +195,7 @@
    "$id": "30",
    "Kind": "enum",
    "Name": "StringFixedEnum",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.StringFixedEnum",
    "ValueType": {
     "$id": "31",
     "Kind": "string"
@@ -216,7 +217,6 @@
      "Value": "4"
     }
    ],
-   "Namespace": "FirstTestTypeSpec",
    "Description": "Simple enum",
    "IsExtensible": false,
    "Usage": "Input,Output"
@@ -225,6 +225,7 @@
    "$id": "35",
    "Kind": "enum",
    "Name": "StringExtensibleEnum",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.StringExtensibleEnum",
    "ValueType": {
     "$id": "36",
     "Kind": "string"
@@ -246,7 +247,6 @@
      "Value": "4"
     }
    ],
-   "Namespace": "FirstTestTypeSpec",
    "Description": "Extensible enum",
    "IsExtensible": true,
    "Usage": "Input,Output"
@@ -255,6 +255,7 @@
    "$id": "40",
    "Kind": "enum",
    "Name": "IntExtensibleEnum",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.IntExtensibleEnum",
    "ValueType": {
     "$id": "41",
     "Kind": "int32"
@@ -276,7 +277,6 @@
      "Value": 4
     }
    ],
-   "Namespace": "FirstTestTypeSpec",
    "Description": "Int based extensible enum",
    "IsExtensible": true,
    "Usage": "Input,Output"
@@ -285,6 +285,7 @@
    "$id": "45",
    "Kind": "enum",
    "Name": "FloatExtensibleEnum",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.FloatExtensibleEnum",
    "ValueType": {
     "$id": "46",
     "Kind": "float32"
@@ -306,7 +307,6 @@
      "Value": 4
     }
    ],
-   "Namespace": "FirstTestTypeSpec",
    "Description": "Float based extensible enum",
    "IsExtensible": true,
    "Usage": "Input,Output"
@@ -315,6 +315,7 @@
    "$id": "50",
    "Kind": "enum",
    "Name": "FloatFixedEnum",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.FloatFixedEnum",
    "ValueType": {
     "$id": "51",
     "Kind": "float32"
@@ -336,7 +337,6 @@
      "Value": 4.4
     }
    ],
-   "Namespace": "FirstTestTypeSpec",
    "Description": "float fixed enum",
    "IsExtensible": false,
    "Usage": "Input,Output"
@@ -345,6 +345,7 @@
    "$id": "55",
    "Kind": "enum",
    "Name": "IntFixedEnum",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.IntFixedEnum",
    "ValueType": {
     "$id": "56",
     "Kind": "int32"
@@ -366,7 +367,6 @@
      "Value": 4
     }
    ],
-   "Namespace": "FirstTestTypeSpec",
    "Description": "int fixed enum",
    "IsExtensible": false,
    "Usage": "Input,Output"
@@ -375,6 +375,7 @@
    "$id": "60",
    "Kind": "enum",
    "Name": "DaysOfWeekExtensibleEnum",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.DaysOfWeekExtensibleEnum",
    "ValueType": {
     "$id": "61",
     "Kind": "string"
@@ -416,7 +417,6 @@
      "Value": "Sunday"
     }
    ],
-   "Namespace": "FirstTestTypeSpec",
    "IsExtensible": true,
    "Usage": "None"
   },
@@ -424,6 +424,7 @@
    "$id": "69",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.Versions",
    "ValueType": {
     "$id": "70",
     "Kind": "string"
@@ -435,7 +436,6 @@
      "Value": "2022-05-15-preview"
     }
    ],
-   "Namespace": "FirstTestTypeSpec",
    "IsExtensible": false,
    "Usage": "ApiVersionEnum"
   }
@@ -445,7 +445,7 @@
    "$id": "72",
    "Kind": "model",
    "Name": "Thing",
-   "Namespace": "FirstTestTypeSpec",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.Thing",
    "Usage": "Input,Output",
    "Description": "A model with a few properties of literal types",
    "Properties": [
@@ -704,7 +704,7 @@
    "$id": "113",
    "Kind": "model",
    "Name": "Friend",
-   "Namespace": "FirstTestTypeSpec",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.NotFriend",
    "Usage": "Input,Output",
    "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
@@ -726,7 +726,7 @@
    "$id": "116",
    "Kind": "model",
    "Name": "ModelWithFormat",
-   "Namespace": "FirstTestTypeSpec",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithFormat",
    "Usage": "Input",
    "Properties": [
     {
@@ -760,7 +760,7 @@
    "$id": "121",
    "Kind": "model",
    "Name": "ProjectedModel",
-   "Namespace": "FirstTestTypeSpec",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithProjectedName",
    "Usage": "Input,Output",
    "Description": "this is a model with a projected name",
    "Properties": [
@@ -782,7 +782,7 @@
    "$id": "124",
    "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
-   "Namespace": "FirstTestTypeSpec",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.returnsAnonymousModel.Response.anonymous",
    "Usage": "Output",
    "Properties": []
   },
@@ -790,14 +790,14 @@
    "$id": "125",
    "Kind": "model",
    "Name": "Extension",
-   "Namespace": "FirstTestTypeSpec",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.Extension",
    "Usage": "Input",
    "Description": "extension",
    "BaseModel": {
     "$id": "126",
     "Kind": "model",
     "Name": "Element",
-    "Namespace": "FirstTestTypeSpec",
+    "CrossLanguageDefinitionId": "FirstTestTypeSpec.Element",
     "Usage": "Input",
     "Description": "element",
     "Properties": [
@@ -840,7 +840,7 @@
    "$id": "131",
    "Kind": "model",
    "Name": "Extendible",
-   "Namespace": "FirstTestTypeSpec",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.Extendible",
    "Usage": "Input",
    "Description": "FHIR extendible element",
    "Properties": [
@@ -856,14 +856,14 @@
        "$id": "134",
        "Kind": "model",
        "Name": "ThereLevelExtension",
-       "Namespace": "FirstTestTypeSpec",
+       "CrossLanguageDefinitionId": "FirstTestTypeSpec.ThereLevelExtension",
        "Usage": "Input",
        "Description": "extension",
        "BaseModel": {
         "$id": "135",
         "Kind": "model",
         "Name": "ThereLevelElement",
-        "Namespace": "FirstTestTypeSpec",
+        "CrossLanguageDefinitionId": "FirstTestTypeSpec.ThereLevelElement",
         "Usage": "Input",
         "Description": "element",
         "Properties": [
@@ -915,14 +915,14 @@
    "$id": "140",
    "Kind": "model",
    "Name": "ChildModel",
-   "Namespace": "FirstTestTypeSpec",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.ChildModel",
    "Usage": "Input",
    "Description": "ChildModel",
    "BaseModel": {
     "$id": "141",
     "Kind": "model",
     "Name": "BaseModel",
-    "Namespace": "FirstTestTypeSpec",
+    "CrossLanguageDefinitionId": "FirstTestTypeSpec.BaseModel",
     "Usage": "Input",
     "Description": "parenetModel",
     "Properties": [
@@ -965,7 +965,7 @@
    "$id": "146",
    "Kind": "model",
    "Name": "ContainSelf",
-   "Namespace": "FirstTestTypeSpec",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.ContainSelf",
    "Usage": "Input",
    "Description": "containself",
    "Properties": [
@@ -986,7 +986,7 @@
    "$id": "148",
    "Kind": "model",
    "Name": "ModelWithProjectedEnum",
-   "Namespace": "FirstTestTypeSpec",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithProjectedEnum",
    "Usage": "Input",
    "Properties": [
     {
@@ -1006,7 +1006,7 @@
    "$id": "150",
    "Kind": "model",
    "Name": "AzureLocationModel",
-   "Namespace": "FirstTestTypeSpec",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.AzureLocationModel",
    "Usage": "Input",
    "Properties": [
     {
@@ -1028,7 +1028,7 @@
    "$id": "153",
    "Kind": "model",
    "Name": "RoundTripModel",
-   "Namespace": "FirstTestTypeSpec",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel",
    "Usage": "Input,Output",
    "Description": "this is a roundtrip model",
    "Properties": [
@@ -1329,7 +1329,7 @@
       "$id": "198",
       "Kind": "model",
       "Name": "ModelWithRequiredNullableProperties",
-      "Namespace": "FirstTestTypeSpec",
+      "CrossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithRequiredNullableProperties",
       "Usage": "Input,Output",
       "Description": "A model with a few required nullable properties",
       "Properties": [
@@ -1409,7 +1409,7 @@
          "$id": "211",
          "Kind": "model",
          "Name": "ModelForUnion",
-         "Namespace": "FirstTestTypeSpec",
+         "CrossLanguageDefinitionId": "FirstTestTypeSpec.ModelForUnion",
          "Usage": "Input,Output",
          "Description": "This is a model only used in union types, please do not use it anywhere else.",
          "Properties": [

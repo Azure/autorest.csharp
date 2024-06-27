@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Common.Input
         public static InputEnumType CreateEnumType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null && name == null;
-            string? ns = null;
+            string? crossLanguageDefinitionId = null;
             string? accessibility = null;
             string? deprecated = null;
             string? description = null;
@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputEnumType.Name), ref name)
-                    || reader.TryReadString(nameof(InputEnumType.Namespace), ref ns)
+                    || reader.TryReadString(nameof(InputEnumType.CrossLanguageDefinitionId), ref crossLanguageDefinitionId)
                     || reader.TryReadString(nameof(InputEnumType.Accessibility), ref accessibility)
                     || reader.TryReadString(nameof(InputEnumType.Deprecated), ref deprecated)
                     || reader.TryReadString(nameof(InputEnumType.Description), ref description)
@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException("The ValueType of an EnumType must be a primitive type.");
             }
 
-            var enumType = new InputEnumType(name, ns, accessibility, deprecated, description!, usage, inputValueType, NormalizeValues(values, inputValueType), isExtendable);
+            var enumType = new InputEnumType(name, crossLanguageDefinitionId ?? string.Empty, accessibility, deprecated, description!, usage, inputValueType, NormalizeValues(values, inputValueType), isExtendable);
             if (id != null)
             {
                 resolver.AddReference(id, enumType);

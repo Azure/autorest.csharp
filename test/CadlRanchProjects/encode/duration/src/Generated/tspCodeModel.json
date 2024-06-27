@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "model",
    "Name": "DefaultDurationProperty",
-   "Namespace": "Encode.Duration.Property",
+   "CrossLanguageDefinitionId": "Encode.Duration.Property.DefaultDurationProperty",
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -34,7 +34,7 @@
    "$id": "6",
    "Kind": "model",
    "Name": "ISO8601DurationProperty",
-   "Namespace": "Encode.Duration.Property",
+   "CrossLanguageDefinitionId": "Encode.Duration.Property.ISO8601DurationProperty",
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -60,7 +60,7 @@
    "$id": "10",
    "Kind": "model",
    "Name": "Int32SecondsDurationProperty",
-   "Namespace": "Encode.Duration.Property",
+   "CrossLanguageDefinitionId": "Encode.Duration.Property.Int32SecondsDurationProperty",
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -86,7 +86,7 @@
    "$id": "14",
    "Kind": "model",
    "Name": "FloatSecondsDurationProperty",
-   "Namespace": "Encode.Duration.Property",
+   "CrossLanguageDefinitionId": "Encode.Duration.Property.FloatSecondsDurationProperty",
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -112,7 +112,7 @@
    "$id": "18",
    "Kind": "model",
    "Name": "Float64SecondsDurationProperty",
-   "Namespace": "Encode.Duration.Property",
+   "CrossLanguageDefinitionId": "Encode.Duration.Property.Float64SecondsDurationProperty",
    "Usage": "Input,Output",
    "Properties": [
     {
@@ -138,7 +138,7 @@
    "$id": "22",
    "Kind": "model",
    "Name": "FloatSecondsDurationArrayProperty",
-   "Namespace": "Encode.Duration.Property",
+   "CrossLanguageDefinitionId": "Encode.Duration.Property.FloatSecondsDurationArrayProperty",
    "Usage": "Input,Output",
    "Properties": [
     {
