@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsEnum = true;
             _allowedValues = input.Values;
             _typeFactory = typeFactory;
-            _deprecated = input.Deprecated;
+            _deprecation = input.Deprecated;
 
             DefaultName = input.Name.ToCleanName();
             DefaultAccessibility = input.Accessibility ?? defaultAccessibility;

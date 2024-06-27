@@ -6,7 +6,7 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PngImageAsJson",
    "Namespace": "Payload.ContentNegotiation.DifferentBody",
    "Usage": "Output",

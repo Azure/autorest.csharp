@@ -321,7 +321,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private MgmtObjectType? GetDefaultDerivedType(InputModelType model, Dictionary<string, MgmtObjectType> defaultDerivedTypes)
         {
             //only want to create one instance of the default derived per polymorphic set
-            bool isBasePolyType = model.DiscriminatorPropertyName is not null;
+            bool isBasePolyType = model.DiscriminatorProperty is not null;
             bool isChildPolyType = model.DiscriminatorValue is not null;
             if (!isBasePolyType && !isChildPolyType)
             {
@@ -329,7 +329,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             var actualBase = model;
-            while (actualBase.BaseModel?.DiscriminatorPropertyName is not null)
+            while (actualBase.BaseModel?.DiscriminatorProperty is not null)
             {
                 actualBase = actualBase.BaseModel;
             }
@@ -340,7 +340,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 return null;
 
             //if I have children and parents then I am my own defaultDerivedType
-            if (model.DerivedModels.Any() && model.BaseModel is { DiscriminatorPropertyName: not null })
+            if (model.DerivedModels.Any() && model.BaseModel is { DiscriminatorProperty: not null })
             {
                 return null;
             }
@@ -362,6 +362,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     Array.Empty<InputModelType>(),
                     "Unknown", //TODO: do we need to support extensible enum / int values?
                     null,
+                    new Dictionary<string, InputModelType>(),
                     null)
                 {
                     IsUnknownDiscriminatorModel = true,

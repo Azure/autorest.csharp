@@ -133,11 +133,11 @@
  "Models": [
   {
    "$id": "20",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Thing",
    "Namespace": "NoDocsUnbrandedTypeSpec",
-   "Description": "A model with a few properties of literal types",
    "Usage": "Output",
+   "Description": "A model with a few properties of literal types",
    "Properties": [
     {
      "$id": "21",

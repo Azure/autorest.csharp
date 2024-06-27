@@ -28,7 +28,7 @@
  "Models": [
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Thing",
    "Namespace": "SpreadTypeSpec",
    "Usage": "Input",
@@ -61,7 +61,7 @@
   },
   {
    "$id": "10",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadAliasRequest",
    "Namespace": "SpreadTypeSpec",
    "Usage": "Input",
@@ -94,7 +94,7 @@
   },
   {
    "$id": "15",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadMultiTargetAliasRequest",
    "Namespace": "",
    "Usage": "Input",
@@ -127,7 +127,7 @@
   },
   {
    "$id": "20",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadAliasWithSpreadAliasRequest",
    "Namespace": "",
    "Usage": "Input",
@@ -160,7 +160,7 @@
   },
   {
    "$id": "25",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadAliasWithOptionalPropsRequest",
    "Namespace": "",
    "Usage": "Input",
@@ -237,7 +237,7 @@
   },
   {
    "$id": "38",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadAliasWithCollectionsRequest",
    "Namespace": "SpreadTypeSpec",
    "Usage": "Input",

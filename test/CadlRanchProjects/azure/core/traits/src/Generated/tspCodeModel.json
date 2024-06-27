@@ -57,11 +57,11 @@
  "Models": [
   {
    "$id": "9",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "User",
    "Namespace": "_Specs_.Azure.Core.Traits",
-   "Description": "Sample Model",
    "Usage": "Output",
+   "Description": "Sample Model",
    "Properties": [
     {
      "$id": "10",
@@ -91,11 +91,11 @@
   },
   {
    "$id": "14",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UserActionParam",
    "Namespace": "_Specs_.Azure.Core.Traits",
-   "Description": "User action param",
    "Usage": "Input",
+   "Description": "User action param",
    "Properties": [
     {
      "$id": "15",
@@ -113,11 +113,11 @@
   },
   {
    "$id": "17",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UserActionResponse",
    "Namespace": "_Specs_.Azure.Core.Traits",
-   "Description": "User action response",
    "Usage": "Output",
+   "Description": "User action response",
    "Properties": [
     {
      "$id": "18",
