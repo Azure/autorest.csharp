@@ -6,8 +6,8 @@ using System;
 namespace AutoRest.CSharp.Common.Input
 {
     // TODO: remove this workaround
-    // We might firstly refine the logoc of getting parent resource for now.
-    // Ideally, we should get the parent resource from typespec directly to not depend on Subscriptionid type.
+    // We might firstly refine the logic of getting parent resource to get rid of the SubscriptionId type dependency for now.
+    // Ideally, we should get the parent resource from typespec directly to not depend on SubscriptionId type.
     internal class InputSubscriptionIdTransformer
     {
         public static void Transform(InputNamespace inputNamespace)
