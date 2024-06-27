@@ -47,4 +47,6 @@ internal record InputParameter(
 
     public string Name { get; internal set; } = Name;
     public bool IsRequired { get; internal set; } = IsRequired;
+    public InputOperationParameterKind Kind { get; internal set; } = Kind;
+    public InputType Type { get; internal set; } = Type;
 }
