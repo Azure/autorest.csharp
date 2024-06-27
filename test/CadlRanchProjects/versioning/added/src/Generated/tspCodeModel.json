@@ -80,7 +80,7 @@
  "Models": [
   {
    "$id": "13",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelV1",
    "Namespace": "Versioning.Added",
    "Usage": "RoundTrip",
@@ -135,7 +135,7 @@
   },
   {
    "$id": "21",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelV2",
    "Namespace": "Versioning.Added",
    "Usage": "RoundTrip",

@@ -256,6 +256,11 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("nonRequiredNullableStringList");
                 }
             }
+            if (Optional.IsDefined(OptionalModel))
+            {
+                writer.WritePropertyName("optionalModel"u8);
+                writer.WriteObjectValue(OptionalModel, options);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -324,6 +329,7 @@ namespace ModelsTypeSpec.Models
             IList<string> requiredNullableStringList = default;
             IList<int> nonRequiredNullableIntList = default;
             IList<string> nonRequiredNullableStringList = default;
+            BaseModelWithDiscriminatorFromIsKeyword optionalModel = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -600,6 +606,15 @@ namespace ModelsTypeSpec.Models
                     nonRequiredNullableStringList = array;
                     continue;
                 }
+                if (property.NameEquals("optionalModel"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalModel = BaseModelWithDiscriminatorFromIsKeyword.DeserializeBaseModelWithDiscriminatorFromIsKeyword(property.Value, options);
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
@@ -637,7 +652,8 @@ namespace ModelsTypeSpec.Models
                 requiredNullableIntList,
                 requiredNullableStringList,
                 nonRequiredNullableIntList ?? new ChangeTrackingList<int>(),
-                nonRequiredNullableStringList ?? new ChangeTrackingList<string>());
+                nonRequiredNullableStringList ?? new ChangeTrackingList<string>(),
+                optionalModel);
         }
 
         BinaryData IPersistableModel<RoundTripModel>.Write(ModelReaderWriterOptions options)

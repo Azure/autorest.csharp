@@ -6,7 +6,7 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "and",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -27,7 +27,7 @@
   },
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "as",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -48,7 +48,7 @@
   },
   {
    "$id": "8",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "assert",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -69,7 +69,7 @@
   },
   {
    "$id": "11",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "async",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -90,7 +90,7 @@
   },
   {
    "$id": "14",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "await",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -111,7 +111,7 @@
   },
   {
    "$id": "17",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "break",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -132,7 +132,7 @@
   },
   {
    "$id": "20",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "class",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -153,7 +153,7 @@
   },
   {
    "$id": "23",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "constructor",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -174,7 +174,7 @@
   },
   {
    "$id": "26",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "continue",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -195,7 +195,7 @@
   },
   {
    "$id": "29",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "def",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -216,7 +216,7 @@
   },
   {
    "$id": "32",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "del",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -237,7 +237,7 @@
   },
   {
    "$id": "35",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "elif",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -258,7 +258,7 @@
   },
   {
    "$id": "38",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "else",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -279,7 +279,7 @@
   },
   {
    "$id": "41",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "except",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -300,7 +300,7 @@
   },
   {
    "$id": "44",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "exec",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -321,7 +321,7 @@
   },
   {
    "$id": "47",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "finally",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -342,7 +342,7 @@
   },
   {
    "$id": "50",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "for",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -363,7 +363,7 @@
   },
   {
    "$id": "53",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "from",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -384,7 +384,7 @@
   },
   {
    "$id": "56",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "global",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -405,7 +405,7 @@
   },
   {
    "$id": "59",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "if",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -426,7 +426,7 @@
   },
   {
    "$id": "62",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "import",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -447,7 +447,7 @@
   },
   {
    "$id": "65",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "in",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -468,7 +468,7 @@
   },
   {
    "$id": "68",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "is",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -489,7 +489,7 @@
   },
   {
    "$id": "71",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "lambda",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -510,7 +510,7 @@
   },
   {
    "$id": "74",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "not",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -531,7 +531,7 @@
   },
   {
    "$id": "77",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "or",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -552,7 +552,7 @@
   },
   {
    "$id": "80",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "pass",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -573,7 +573,7 @@
   },
   {
    "$id": "83",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "raise",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -594,7 +594,7 @@
   },
   {
    "$id": "86",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "return",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -615,7 +615,7 @@
   },
   {
    "$id": "89",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "try",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -636,7 +636,7 @@
   },
   {
    "$id": "92",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "while",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -657,7 +657,7 @@
   },
   {
    "$id": "95",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "with",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -678,7 +678,7 @@
   },
   {
    "$id": "98",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "yield",
    "Namespace": "SpecialWords.Models",
    "Usage": "Input",
@@ -699,7 +699,7 @@
   },
   {
    "$id": "101",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SameAsModel",
    "Namespace": "SpecialWords.ModelProperties",
    "Usage": "Input",

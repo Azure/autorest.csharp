@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.Output.Models
         private static ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, Dictionary<string, ModelTypeProvider> defaultDerivedTypes, SourceInputModel? sourceInputModel)
         {
             //only want to create one instance of the default derived per polymorphic set
-            bool isBasePolyType = model.DiscriminatorPropertyName is not null;
+            bool isBasePolyType = model.DiscriminatorProperty is not null;
             bool isChildPolyType = model.DiscriminatorValue is not null;
             if (!isBasePolyType && !isChildPolyType)
             {
@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             var actualBase = model;
-            while (actualBase.BaseModel?.DiscriminatorPropertyName is not null)
+            while (actualBase.BaseModel?.DiscriminatorProperty is not null)
             {
                 actualBase = actualBase.BaseModel;
             }
@@ -126,6 +126,7 @@ namespace AutoRest.CSharp.Output.Models
                     Array.Empty<InputModelType>(),
                     "Unknown", //TODO: do we need to support extensible enum / int values?
                     null,
+                    new Dictionary<string, InputModelType>(),
                     null)
                 {
                     IsUnknownDiscriminatorModel = true

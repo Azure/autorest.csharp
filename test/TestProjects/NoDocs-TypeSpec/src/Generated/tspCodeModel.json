@@ -443,11 +443,11 @@
  "Models": [
   {
    "$id": "72",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Thing",
    "Namespace": "NoDocsTypeSpec",
-   "Description": "A model with a few properties of literal types",
    "Usage": "RoundTrip",
+   "Description": "A model with a few properties of literal types",
    "Properties": [
     {
      "$id": "73",
@@ -678,11 +678,11 @@
   },
   {
    "$id": "109",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Friend",
    "Namespace": "NoDocsTypeSpec",
-   "Description": "this is not a friendly model but with a friendly name",
    "Usage": "RoundTrip",
+   "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
     {
      "$id": "110",
@@ -700,11 +700,11 @@
   },
   {
    "$id": "112",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ProjectedModel",
    "Namespace": "NoDocsTypeSpec",
-   "Description": "this is a model with a projected name",
    "Usage": "RoundTrip",
+   "Description": "this is a model with a projected name",
    "Properties": [
     {
      "$id": "113",
@@ -722,7 +722,7 @@
   },
   {
    "$id": "115",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
    "Namespace": "NoDocsTypeSpec",
    "Usage": "Output",
@@ -730,18 +730,18 @@
   },
   {
    "$id": "116",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Extension",
    "Namespace": "NoDocsTypeSpec",
-   "Description": "extension",
    "Usage": "Input",
+   "Description": "extension",
    "BaseModel": {
     "$id": "117",
-    "Kind": "Model",
+    "Kind": "model",
     "Name": "Element",
     "Namespace": "NoDocsTypeSpec",
-    "Description": "element",
     "Usage": "Input",
+    "Description": "element",
     "Properties": [
      {
       "$id": "118",
@@ -780,11 +780,11 @@
   },
   {
    "$id": "122",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Extendible",
    "Namespace": "NoDocsTypeSpec",
-   "Description": "FHIR extendible element",
    "Usage": "Input",
+   "Description": "FHIR extendible element",
    "Properties": [
     {
      "$id": "123",
@@ -796,18 +796,18 @@
       "Kind": "array",
       "ValueType": {
        "$id": "125",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "ThereLevelExtension",
        "Namespace": "NoDocsTypeSpec",
-       "Description": "extension",
        "Usage": "Input",
+       "Description": "extension",
        "BaseModel": {
         "$id": "126",
-        "Kind": "Model",
+        "Kind": "model",
         "Name": "ThereLevelElement",
         "Namespace": "NoDocsTypeSpec",
-        "Description": "element",
         "Usage": "Input",
+        "Description": "element",
         "Properties": [
          {
           "$id": "127",
@@ -855,18 +855,18 @@
   },
   {
    "$id": "131",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ChildModel",
    "Namespace": "NoDocsTypeSpec",
-   "Description": "ChildModel",
    "Usage": "Input",
+   "Description": "ChildModel",
    "BaseModel": {
     "$id": "132",
-    "Kind": "Model",
+    "Kind": "model",
     "Name": "BaseModel",
     "Namespace": "NoDocsTypeSpec",
-    "Description": "parenetModel",
     "Usage": "Input",
+    "Description": "parenetModel",
     "Properties": [
      {
       "$id": "133",
@@ -905,11 +905,11 @@
   },
   {
    "$id": "137",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ContainSelf",
    "Namespace": "NoDocsTypeSpec",
-   "Description": "containself",
    "Usage": "Input",
+   "Description": "containself",
    "Properties": [
     {
      "$id": "138",
@@ -926,7 +926,7 @@
   },
   {
    "$id": "139",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelWithProjectedEnum",
    "Namespace": "NoDocsTypeSpec",
    "Usage": "Input",
@@ -946,7 +946,7 @@
   },
   {
    "$id": "141",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "AzureLocationModel",
    "Namespace": "NoDocsTypeSpec",
    "Usage": "Input",
@@ -968,11 +968,11 @@
   },
   {
    "$id": "144",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RoundTripModel",
    "Namespace": "NoDocsTypeSpec",
-   "Description": "this is a roundtrip model",
    "Usage": "RoundTrip",
+   "Description": "this is a roundtrip model",
    "Properties": [
     {
      "$id": "145",
@@ -1269,11 +1269,11 @@
      "Description": "this is a model with required nullable properties",
      "Type": {
       "$id": "189",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelWithRequiredNullableProperties",
       "Namespace": "NoDocsTypeSpec",
-      "Description": "A model with a few required nullable properties",
       "Usage": "RoundTrip",
+      "Description": "A model with a few required nullable properties",
       "Properties": [
        {
         "$id": "190",
@@ -1349,11 +1349,11 @@
         },
         {
          "$id": "202",
-         "Kind": "Model",
+         "Kind": "model",
          "Name": "ModelForUnion",
          "Namespace": "NoDocsTypeSpec",
-         "Description": "This is a model only used in union types, please do not use it anywhere else.",
          "Usage": "RoundTrip",
+         "Description": "This is a model only used in union types, please do not use it anywhere else.",
          "Properties": [
           {
            "$id": "203",

@@ -50,7 +50,7 @@
  "Models": [
   {
    "$id": "9",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ClientNameModel",
    "Namespace": "Client.Naming.Property",
    "Usage": "Input",
@@ -71,7 +71,7 @@
   },
   {
    "$id": "12",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "LanguageClientNameModel",
    "Namespace": "Client.Naming.Property",
    "Usage": "Input",
@@ -92,7 +92,7 @@
   },
   {
    "$id": "15",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ClientNameAndJsonEncodedNameModel",
    "Namespace": "Client.Naming.Property",
    "Usage": "Input",
@@ -113,7 +113,7 @@
   },
   {
    "$id": "18",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ClientModel",
    "Namespace": "Client.Naming.Model",
    "Usage": "Input",
@@ -134,7 +134,7 @@
   },
   {
    "$id": "21",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "CSModel",
    "Namespace": "Client.Naming.Model",
    "Usage": "Input",
