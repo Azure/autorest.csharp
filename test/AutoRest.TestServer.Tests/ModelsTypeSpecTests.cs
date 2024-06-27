@@ -425,6 +425,17 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
+        public void ReadOnlyPropertiesAreReadOnly()
+        {
+            var property = TypeAsserts.HasProperty(typeof(RoundTripReadOnlyModel), "RequiredReadonlyString", BindingFlags.Public | BindingFlags.Instance);
+            var listProperty = TypeAsserts.HasProperty(typeof(RoundTripReadOnlyModel), "RequiredReadOnlyModelList", BindingFlags.Public | BindingFlags.Instance);
+
+            Assert.Null(property.SetMethod);
+            Assert.Null(listProperty.SetMethod);
+            Assert.AreEqual(typeof(IReadOnlyList<CollectionItem>), listProperty.PropertyType);
+        }
+
+        [Test]
         public void OptionalPropertyWithNullIsAccepted()
         {
             var model = RoundTripModel.DeserializeRoundTripModel(JsonDocument.Parse("{\"RequiredReadonlyInt\":1, \"NonRequiredReadonlyInt\": 2,\"NonRequiredInt\": null}").RootElement);
