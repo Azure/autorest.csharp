@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Generation.Types
                 InputPrimitiveTypeKind.Float => new CSharpType(typeof(double)), // in typespec, float is the base type of float32 and float64, see type relation: https://typespec.io/docs/language-basics/type-relations
                 InputPrimitiveTypeKind.Numeric => new CSharpType(typeof(double)), // in typespec, numeric is the base type of number types, see type relation: https://typespec.io/docs/language-basics/type-relations
                 InputPrimitiveTypeKind.IPAddress => new CSharpType(typeof(IPAddress)),
-                InputPrimitiveTypeKind.ArmId => new CSharpType(typeof(ResourceIdentifier)),
+                InputPrimitiveTypeKind.ArmResourceIdentifier => new CSharpType(typeof(ResourceIdentifier)),
                 InputPrimitiveTypeKind.ResourceType => new CSharpType(typeof(ResourceType)),
                 InputPrimitiveTypeKind.Stream => new CSharpType(typeof(Stream)),
                 InputPrimitiveTypeKind.String => new CSharpType(typeof(string)),
