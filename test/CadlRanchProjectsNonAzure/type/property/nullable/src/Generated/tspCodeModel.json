@@ -6,11 +6,11 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "StringProperty",
    "Namespace": "Type.Property.Nullable",
-   "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "Usage": "Output",
+   "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "Properties": [
     {
      "$id": "3",
@@ -44,11 +44,11 @@
   },
   {
    "$id": "8",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "BytesProperty",
    "Namespace": "Type.Property.Nullable",
-   "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "Usage": "Output",
+   "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "Properties": [
     {
      "$id": "9",
@@ -83,11 +83,11 @@
   },
   {
    "$id": "14",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "DatetimeProperty",
    "Namespace": "Type.Property.Nullable",
-   "Description": "Model with a datetime property",
    "Usage": "Output",
+   "Description": "Model with a datetime property",
    "Properties": [
     {
      "$id": "15",
@@ -126,11 +126,11 @@
   },
   {
    "$id": "21",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "DurationProperty",
    "Namespace": "Type.Property.Nullable",
-   "Description": "Model with a duration property",
    "Usage": "Output",
+   "Description": "Model with a duration property",
    "Properties": [
     {
      "$id": "22",
@@ -169,11 +169,11 @@
   },
   {
    "$id": "28",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "CollectionsByteProperty",
    "Namespace": "Type.Property.Nullable",
-   "Description": "Model with collection bytes properties",
    "Usage": "Output",
+   "Description": "Model with collection bytes properties",
    "Properties": [
     {
      "$id": "29",
@@ -212,11 +212,11 @@
   },
   {
    "$id": "35",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "CollectionsModelProperty",
    "Namespace": "Type.Property.Nullable",
-   "Description": "Model with collection models properties",
    "Usage": "Output",
+   "Description": "Model with collection models properties",
    "Properties": [
     {
      "$id": "36",
@@ -243,11 +243,11 @@
        "Kind": "array",
        "ValueType": {
         "$id": "41",
-        "Kind": "Model",
+        "Kind": "model",
         "Name": "InnerModel",
         "Namespace": "Type.Property.Nullable",
-        "Description": "Inner model used in collections model property",
         "Usage": "Output",
+        "Description": "Inner model used in collections model property",
         "Properties": [
          {
           "$id": "42",
@@ -275,11 +275,11 @@
   },
   {
    "$id": "44",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "CollectionsStringProperty",
    "Namespace": "Type.Property.Nullable",
-   "Description": "Model with collection string properties",
    "Usage": "Output",
+   "Description": "Model with collection string properties",
    "Properties": [
     {
      "$id": "45",
