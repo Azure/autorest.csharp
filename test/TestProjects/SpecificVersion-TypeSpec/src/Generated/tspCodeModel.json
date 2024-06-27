@@ -10,6 +10,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "OperationState",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -46,7 +47,6 @@
      "Description": "The operation has been canceled by the user."
     }
    ],
-   "Namespace": "Azure.Core.Foundations",
    "Description": "Enum describing allowed operation states.",
    "IsExtensible": true,
    "Usage": "Output"
@@ -55,6 +55,7 @@
    "$id": "9",
    "Kind": "enum",
    "Name": "ApiVersions",
+   "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.ApiVersions",
    "ValueType": {
     "$id": "10",
     "Kind": "string"
@@ -71,7 +72,6 @@
      "Value": "2022-09-01"
     }
    ],
-   "Namespace": "TypeSpec.Versioning.Specific",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -79,11 +79,11 @@
  "Models": [
   {
    "$id": "13",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ResourceOperationStatusResourceExportedResourceError",
-   "Namespace": "Azure.Core",
-   "Description": "Provides status details for long running operations.",
+   "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
    "Usage": "Output",
+   "Description": "Provides status details for long running operations.",
    "Properties": [
     {
      "$id": "14",
@@ -115,11 +115,11 @@
      "Description": "Error object that describes the error when status is \"Failed\".",
      "Type": {
       "$id": "18",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "Error",
-      "Namespace": "Azure.Core.Foundations",
-      "Description": "The error object.",
+      "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error",
       "Usage": "Output",
+      "Description": "The error object.",
       "Properties": [
        {
         "$id": "19",
@@ -179,11 +179,11 @@
         "Description": "An object containing more specific information than the current object about the error.",
         "Type": {
          "$id": "28",
-         "Kind": "Model",
+         "Kind": "model",
          "Name": "InnerError",
-         "Namespace": "Azure.Core.Foundations",
-         "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+         "CrossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
          "Usage": "Output",
+         "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "Properties": [
           {
            "$id": "29",
@@ -225,9 +225,9 @@
      "Description": "The result of the operation.",
      "Type": {
       "$id": "33",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ExportedResource",
-      "Namespace": "TypeSpec.Versioning.Specific",
+      "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.ExportedResource",
       "Usage": "Output",
       "Properties": [
        {
@@ -272,11 +272,11 @@
   },
   {
    "$id": "38",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedResource",
-   "Namespace": "Azure.Core.Foundations",
-   "Description": "Paged collection of Resource items",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "Output",
+   "Description": "Paged collection of Resource items",
    "Properties": [
     {
      "$id": "39",
@@ -288,9 +288,9 @@
       "Kind": "array",
       "ValueType": {
        "$id": "41",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "Resource",
-       "Namespace": "TypeSpec.Versioning.Specific",
+       "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.Resource",
        "Usage": "RoundTrip",
        "Properties": [
         {

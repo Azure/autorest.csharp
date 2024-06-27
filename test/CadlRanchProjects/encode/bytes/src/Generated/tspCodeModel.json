@@ -6,9 +6,9 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "DefaultBytesProperty",
-   "Namespace": "Encode.Bytes",
+   "CrossLanguageDefinitionId": "Encode.Bytes.DefaultBytesProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -28,9 +28,9 @@
   },
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Base64BytesProperty",
-   "Namespace": "Encode.Bytes",
+   "CrossLanguageDefinitionId": "Encode.Bytes.Base64BytesProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -50,9 +50,9 @@
   },
   {
    "$id": "8",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Base64urlBytesProperty",
-   "Namespace": "Encode.Bytes",
+   "CrossLanguageDefinitionId": "Encode.Bytes.Base64urlBytesProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -72,9 +72,9 @@
   },
   {
    "$id": "11",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Base64urlArrayBytesProperty",
-   "Namespace": "Encode.Bytes",
+   "CrossLanguageDefinitionId": "Encode.Bytes.Base64urlArrayBytesProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {

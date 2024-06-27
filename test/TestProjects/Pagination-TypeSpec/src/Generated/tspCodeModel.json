@@ -9,6 +9,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Interval",
+   "CrossLanguageDefinitionId": "Pagination.Interval",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -45,7 +46,6 @@
      "Description": "1 hour, available only if test run duration is greater than 1 minute"
     }
    ],
-   "Namespace": "Pagination",
    "Description": "The interval",
    "IsExtensible": true,
    "Usage": "Input"
@@ -54,6 +54,7 @@
    "$id": "9",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "Pagination.Versions",
    "ValueType": {
     "$id": "10",
     "Kind": "string"
@@ -65,7 +66,6 @@
      "Value": "2022-05-13"
     }
    ],
-   "Namespace": "Pagination",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -73,11 +73,11 @@
  "Models": [
   {
    "$id": "12",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ListLedgerEntryInputBody",
-   "Namespace": "Pagination",
-   "Description": "Type for input model body",
+   "CrossLanguageDefinitionId": "Pagination.ListLedgerEntryInputBody",
    "Usage": "Input",
+   "Description": "Type for input model body",
    "Properties": [
     {
      "$id": "13",
@@ -107,11 +107,11 @@
   },
   {
    "$id": "17",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedLedgerEntries",
-   "Namespace": "Pagination",
-   "Description": "Paginated ledger entries",
+   "CrossLanguageDefinitionId": "Pagination.PagedLedgerEntries",
    "Usage": "Output",
+   "Description": "Paginated ledger entries",
    "Properties": [
     {
      "$id": "18",
@@ -123,9 +123,9 @@
       "Kind": "array",
       "ValueType": {
        "$id": "20",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "LedgerEntry",
-       "Namespace": "Pagination",
+       "CrossLanguageDefinitionId": "Pagination.LedgerEntry",
        "Usage": "Output",
        "Properties": [
         {
@@ -189,11 +189,11 @@
   },
   {
    "$id": "29",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedDimensionValueListItem",
-   "Namespace": "Azure.Core.Foundations",
-   "Description": "Paged collection of DimensionValueListItem items",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "Output",
+   "Description": "Paged collection of DimensionValueListItem items",
    "Properties": [
     {
      "$id": "30",
@@ -205,9 +205,9 @@
       "Kind": "array",
       "ValueType": {
        "$id": "32",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "DimensionValueListItem",
-       "Namespace": "Pagination",
+       "CrossLanguageDefinitionId": "Pagination.DimensionValueListItem",
        "Usage": "Output",
        "Properties": [
         {
@@ -251,11 +251,11 @@
   },
   {
    "$id": "38",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedLedgerEntry",
-   "Namespace": "Azure.Core",
-   "Description": "Paged collection of LedgerEntry items",
+   "CrossLanguageDefinitionId": "Azure.Core.Page",
    "Usage": "Output",
+   "Description": "Paged collection of LedgerEntry items",
    "Properties": [
     {
      "$id": "39",
@@ -288,11 +288,11 @@
   },
   {
    "$id": "43",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedTextBlocklist",
-   "Namespace": "Azure.Core.Foundations",
-   "Description": "Paged collection of TextBlocklist items",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "Output",
+   "Description": "Paged collection of TextBlocklist items",
    "Properties": [
     {
      "$id": "44",
@@ -304,11 +304,11 @@
       "Kind": "array",
       "ValueType": {
        "$id": "46",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "TextBlocklist",
-       "Namespace": "Pagination",
-       "Description": "Text Blocklist.",
+       "CrossLanguageDefinitionId": "Pagination.TextBlocklist",
        "Usage": "Output",
+       "Description": "Text Blocklist.",
        "Properties": [
         {
          "$id": "47",
@@ -359,11 +359,11 @@
   },
   {
    "$id": "53",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedTextBlockItem",
-   "Namespace": "Azure.Core.Foundations",
-   "Description": "Paged collection of TextBlockItem items",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "Output",
+   "Description": "Paged collection of TextBlockItem items",
    "Properties": [
     {
      "$id": "54",
@@ -375,11 +375,11 @@
       "Kind": "array",
       "ValueType": {
        "$id": "56",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "TextBlockItem",
-       "Namespace": "Pagination",
-       "Description": "Item in TextBlocklist.",
+       "CrossLanguageDefinitionId": "Pagination.TextBlockItem",
        "Usage": "Output",
+       "Description": "Item in TextBlocklist.",
        "Properties": [
         {
          "$id": "57",
@@ -442,11 +442,11 @@
   },
   {
    "$id": "65",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "BatchPoolListResult",
-   "Namespace": "Pagination",
-   "Description": "The result of listing the Pools in an Account.",
+   "CrossLanguageDefinitionId": "Pagination.BatchPoolListResult",
    "Usage": "Output",
+   "Description": "The result of listing the Pools in an Account.",
    "Properties": [
     {
      "$id": "66",
@@ -458,11 +458,11 @@
       "Kind": "array",
       "ValueType": {
        "$id": "68",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "BatchPool",
-       "Namespace": "Pagination",
-       "Description": "A Pool in the Azure Batch service.",
+       "CrossLanguageDefinitionId": "Pagination.BatchPool",
        "Usage": "Output",
+       "Description": "A Pool in the Azure Batch service.",
        "Properties": [
         {
          "$id": "69",
@@ -525,11 +525,11 @@
   },
   {
    "$id": "77",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "BatchError",
-   "Namespace": "Pagination",
-   "Description": "An error response received from the Azure Batch service.",
+   "CrossLanguageDefinitionId": "Pagination.BatchError",
    "Usage": "Output",
+   "Description": "An error response received from the Azure Batch service.",
    "Properties": [
     {
      "$id": "78",

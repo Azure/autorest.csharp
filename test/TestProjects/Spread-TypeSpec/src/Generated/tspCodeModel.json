@@ -9,6 +9,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "QueryApiVersion",
+   "CrossLanguageDefinitionId": "SpreadTypeSpec.QueryApiVersion",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -20,7 +21,6 @@
      "Value": "2022-01-01-preview"
     }
    ],
-   "Namespace": "SpreadTypeSpec",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -28,9 +28,9 @@
  "Models": [
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Thing",
-   "Namespace": "SpreadTypeSpec",
+   "CrossLanguageDefinitionId": "SpreadTypeSpec.Thing",
    "Usage": "Input",
    "Properties": [
     {
@@ -61,9 +61,9 @@
   },
   {
    "$id": "10",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadAliasRequest",
-   "Namespace": "SpreadTypeSpec",
+   "CrossLanguageDefinitionId": "SpreadTypeSpec.spreadAlias.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -94,9 +94,9 @@
   },
   {
    "$id": "15",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadMultiTargetAliasRequest",
-   "Namespace": "",
+   "CrossLanguageDefinitionId": ".anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -127,9 +127,9 @@
   },
   {
    "$id": "20",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadAliasWithSpreadAliasRequest",
-   "Namespace": "",
+   "CrossLanguageDefinitionId": ".anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -160,9 +160,9 @@
   },
   {
    "$id": "25",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadAliasWithOptionalPropsRequest",
-   "Namespace": "",
+   "CrossLanguageDefinitionId": ".anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -237,9 +237,9 @@
   },
   {
    "$id": "38",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SpreadAliasWithCollectionsRequest",
-   "Namespace": "SpreadTypeSpec",
+   "CrossLanguageDefinitionId": "SpreadTypeSpec.spreadAliasWithCollections.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {

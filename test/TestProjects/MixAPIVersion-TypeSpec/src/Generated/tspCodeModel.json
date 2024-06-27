@@ -9,6 +9,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "MixApiVersion.Versions",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -20,7 +21,6 @@
      "Value": "2022-11-30-preview"
     }
    ],
-   "Namespace": "MixApiVersion",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -28,11 +28,11 @@
  "Models": [
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Pet",
-   "Namespace": "MixApiVersion",
-   "Description": "Pet",
+   "CrossLanguageDefinitionId": "MixApiVersion.Pet",
    "Usage": "None",
+   "Description": "Pet",
    "Properties": [
     {
      "$id": "6",
@@ -74,11 +74,11 @@
   },
   {
    "$id": "12",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedToy",
-   "Namespace": "Azure.Core.Foundations",
-   "Description": "Paged collection of Toy items",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "None",
+   "Description": "Paged collection of Toy items",
    "Properties": [
     {
      "$id": "13",
@@ -90,9 +90,9 @@
       "Kind": "array",
       "ValueType": {
        "$id": "15",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "Toy",
-       "Namespace": "MixApiVersion",
+       "CrossLanguageDefinitionId": "MixApiVersion.Toy",
        "Usage": "None",
        "Properties": [
         {

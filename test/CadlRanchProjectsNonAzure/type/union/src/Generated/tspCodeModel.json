@@ -7,6 +7,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "GetResponseProp4",
+   "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -28,7 +29,6 @@
      "Value": "c"
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -36,6 +36,7 @@
    "$id": "7",
    "Kind": "enum",
    "Name": "GetResponseProp3",
+   "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "ValueType": {
     "$id": "8",
     "Kind": "string"
@@ -52,7 +53,6 @@
      "Value": "c"
     }
    ],
-   "Namespace": "",
    "IsExtensible": true,
    "Usage": "RoundTrip"
   },
@@ -60,6 +60,7 @@
    "$id": "11",
    "Kind": "enum",
    "Name": "StringExtensibleNamedUnion",
+   "CrossLanguageDefinitionId": "Type.Union.StringExtensibleNamedUnion",
    "ValueType": {
     "$id": "12",
     "Kind": "string"
@@ -76,7 +77,6 @@
      "Value": "c"
     }
    ],
-   "Namespace": "Type.Union",
    "IsExtensible": true,
    "Usage": "RoundTrip"
   },
@@ -84,6 +84,7 @@
    "$id": "15",
    "Kind": "enum",
    "Name": "GetResponseProp2",
+   "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "ValueType": {
     "$id": "16",
     "Kind": "int32"
@@ -105,7 +106,6 @@
      "Value": 3
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -113,6 +113,7 @@
    "$id": "20",
    "Kind": "enum",
    "Name": "GetResponseProp1",
+   "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "ValueType": {
     "$id": "21",
     "Kind": "float32"
@@ -134,7 +135,6 @@
      "Value": 3.3
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -142,6 +142,7 @@
    "$id": "25",
    "Kind": "enum",
    "Name": "EnumsOnlyCasesLr",
+   "CrossLanguageDefinitionId": "EnumsOnlyCases.lr.anonymous",
    "ValueType": {
     "$id": "26",
     "Kind": "string"
@@ -168,7 +169,6 @@
      "Value": "down"
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -176,6 +176,7 @@
    "$id": "31",
    "Kind": "enum",
    "Name": "EnumsOnlyCasesUd",
+   "CrossLanguageDefinitionId": "EnumsOnlyCases.ud.anonymous",
    "ValueType": {
     "$id": "32",
     "Kind": "string"
@@ -192,7 +193,6 @@
      "Value": "down"
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   }
@@ -200,9 +200,9 @@
  "Models": [
   {
    "$id": "35",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse9",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -220,9 +220,9 @@
   },
   {
    "$id": "37",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest9",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -240,9 +240,9 @@
   },
   {
    "$id": "39",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse8",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -260,9 +260,9 @@
   },
   {
    "$id": "41",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest8",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -280,9 +280,9 @@
   },
   {
    "$id": "43",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse7",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -300,9 +300,9 @@
   },
   {
    "$id": "45",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest7",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -320,9 +320,9 @@
   },
   {
    "$id": "47",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse6",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -340,9 +340,9 @@
   },
   {
    "$id": "49",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest6",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -360,9 +360,9 @@
   },
   {
    "$id": "51",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse5",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -380,9 +380,9 @@
   },
   {
    "$id": "53",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest5",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -400,9 +400,9 @@
   },
   {
    "$id": "55",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse4",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -417,9 +417,9 @@
       "VariantTypes": [
        {
         "$id": "58",
-        "Kind": "Model",
+        "Kind": "model",
         "Name": "Cat",
-        "Namespace": "Type.Union",
+        "CrossLanguageDefinitionId": "Type.Union.Cat",
         "Usage": "RoundTrip",
         "Properties": [
          {
@@ -438,9 +438,9 @@
        },
        {
         "$id": "61",
-        "Kind": "Model",
+        "Kind": "model",
         "Name": "Dog",
-        "Namespace": "Type.Union",
+        "CrossLanguageDefinitionId": "Type.Union.Dog",
         "Usage": "RoundTrip",
         "Properties": [
          {
@@ -472,9 +472,9 @@
   },
   {
    "$id": "64",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest4",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -502,9 +502,9 @@
   },
   {
    "$id": "67",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse3",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -514,9 +514,9 @@
      "Description": "",
      "Type": {
       "$id": "69",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "EnumsOnlyCases",
-      "Namespace": "Type.Union",
+      "CrossLanguageDefinitionId": "Type.Union.EnumsOnlyCases",
       "Usage": "RoundTrip",
       "Properties": [
        {
@@ -553,9 +553,9 @@
   },
   {
    "$id": "72",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest3",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -573,9 +573,9 @@
   },
   {
    "$id": "74",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse2",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -585,9 +585,9 @@
      "Description": "",
      "Type": {
       "$id": "76",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "StringAndArrayCases",
-      "Namespace": "Type.Union",
+      "CrossLanguageDefinitionId": "Type.Union.StringAndArrayCases",
       "Usage": "RoundTrip",
       "Properties": [
        {
@@ -656,9 +656,9 @@
   },
   {
    "$id": "87",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest2",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -676,9 +676,9 @@
   },
   {
    "$id": "89",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse1",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -688,9 +688,9 @@
      "Description": "",
      "Type": {
       "$id": "91",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "MixedLiteralsCases",
-      "Namespace": "Type.Union",
+      "CrossLanguageDefinitionId": "Type.Union.MixedLiteralsCases",
       "Usage": "RoundTrip",
       "Properties": [
        {
@@ -909,9 +909,9 @@
   },
   {
    "$id": "132",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest1",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -929,9 +929,9 @@
   },
   {
    "$id": "134",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -941,9 +941,9 @@
      "Description": "",
      "Type": {
       "$id": "136",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "MixedTypesCases",
-      "Namespace": "Type.Union",
+      "CrossLanguageDefinitionId": "Type.Union.MixedTypesCases",
       "Usage": "RoundTrip",
       "Properties": [
        {
@@ -1137,9 +1137,9 @@
   },
   {
    "$id": "168",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest",
-   "Namespace": "Type.Union",
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {

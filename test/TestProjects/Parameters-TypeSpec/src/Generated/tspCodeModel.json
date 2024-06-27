@@ -9,6 +9,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "ParametersCadl.Versions",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -20,7 +21,6 @@
      "Value": "2022-05-15-preview"
     }
    ],
-   "Namespace": "ParametersCadl",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -28,9 +28,9 @@
  "Models": [
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Result",
-   "Namespace": "ParametersCadl.ParameterOrders",
+   "CrossLanguageDefinitionId": "ParametersCadl.ParameterOrders.Result",
    "Usage": "Output",
    "Properties": [
     {

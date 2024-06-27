@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Types;
@@ -19,7 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             _clientPrefix = inputModel.Name;
         }
 
-        public static ResourceData Empty = new ResourceData(new InputModelType(string.Empty, null, null, null, null, InputModelTypeUsage.None, Array.Empty<InputModelProperty>(), null, Array.Empty<InputModelType>(), null, null, null));
+        public static ResourceData Empty = new ResourceData(new InputModelType(string.Empty, string.Empty, null, null, null, InputModelTypeUsage.None, Array.Empty<InputModelProperty>(), null, Array.Empty<InputModelType>(), null, null, new Dictionary<string, InputModelType>(), null));
 
         protected override bool IsResourceType => true;
 

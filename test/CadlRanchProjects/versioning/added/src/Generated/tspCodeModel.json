@@ -10,6 +10,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "Versioning.Added.Versions",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -28,7 +29,6 @@
      "Description": "The version v2."
     }
    ],
-   "Namespace": "Versioning.Added",
    "Description": "The version of the API.",
    "IsExtensible": false,
    "Usage": "None"
@@ -37,6 +37,7 @@
    "$id": "6",
    "Kind": "enum",
    "Name": "EnumV1",
+   "CrossLanguageDefinitionId": "Versioning.Added.EnumV1",
    "ValueType": {
     "$id": "7",
     "Kind": "string"
@@ -53,7 +54,6 @@
      "Value": "enumMemberV2"
     }
    ],
-   "Namespace": "Versioning.Added",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -61,6 +61,7 @@
    "$id": "10",
    "Kind": "enum",
    "Name": "EnumV2",
+   "CrossLanguageDefinitionId": "Versioning.Added.EnumV2",
    "ValueType": {
     "$id": "11",
     "Kind": "string"
@@ -72,7 +73,6 @@
      "Value": "enumMember"
     }
    ],
-   "Namespace": "Versioning.Added",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   }
@@ -80,9 +80,9 @@
  "Models": [
   {
    "$id": "13",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelV1",
-   "Namespace": "Versioning.Added",
+   "CrossLanguageDefinitionId": "Versioning.Added.ModelV1",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -135,9 +135,9 @@
   },
   {
    "$id": "21",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelV2",
-   "Namespace": "Versioning.Added",
+   "CrossLanguageDefinitionId": "Versioning.Added.ModelV2",
    "Usage": "RoundTrip",
    "Properties": [
     {

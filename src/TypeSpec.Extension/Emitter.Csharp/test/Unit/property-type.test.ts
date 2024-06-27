@@ -106,7 +106,7 @@ describe("Test GetInputType for enum", () => {
             {
                 Kind: "enum",
                 Name: "SimpleEnum",
-                Namespace: "Azure.Csharp.Testing",
+                CrossLanguageDefinitionId: "Azure.Csharp.Testing.SimpleEnum",
                 Accessibility: undefined,
                 Deprecated: undefined,
                 Description: "fixed string enum",
@@ -173,7 +173,7 @@ describe("Test GetInputType for enum", () => {
             {
                 Kind: "enum",
                 Name: "FixedIntEnum",
-                Namespace: "Azure.Csharp.Testing",
+                CrossLanguageDefinitionId: "Azure.Csharp.Testing.FixedIntEnum",
                 Accessibility: undefined,
                 Deprecated: undefined,
                 Description: "Fixed int enum",
@@ -233,7 +233,7 @@ describe("Test GetInputType for enum", () => {
             {
                 Kind: "enum",
                 Name: "FixedEnum",
-                Namespace: "Azure.Csharp.Testing",
+                CrossLanguageDefinitionId: "Azure.Csharp.Testing.FixedEnum",
                 Accessibility: undefined,
                 Deprecated: undefined,
                 Description: "Fixed enum",

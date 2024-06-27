@@ -7,6 +7,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "DogKind",
+   "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.DogKind",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -19,7 +20,6 @@
      "Description": "Species golden"
     }
    ],
-   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
    "Description": "extensible enum type for discriminator",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -28,6 +28,7 @@
    "$id": "5",
    "Kind": "enum",
    "Name": "SnakeKind",
+   "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.SnakeKind",
    "ValueType": {
     "$id": "6",
     "Kind": "string"
@@ -40,7 +41,6 @@
      "Description": "Species cobra"
     }
    ],
-   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
    "Description": "fixed enum type for discriminator",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -49,24 +49,26 @@
  "Models": [
   {
    "$id": "8",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Dog",
-   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
-   "Description": "Test extensible enum type for discriminator",
-   "DiscriminatorPropertyName": "kind",
+   "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.Dog",
    "Usage": "RoundTrip",
+   "Description": "Test extensible enum type for discriminator",
+   "DiscriminatorProperty": {
+    "$id": "9",
+    "Name": "kind",
+    "SerializedName": "kind",
+    "Description": "discriminator property",
+    "Type": {
+     "$ref": "2"
+    },
+    "IsRequired": true,
+    "IsReadOnly": false,
+    "IsDiscriminator": true
+   },
    "Properties": [
     {
-     "$id": "9",
-     "Name": "kind",
-     "SerializedName": "kind",
-     "Description": "discriminator property",
-     "Type": {
-      "$ref": "2"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": true
+     "$ref": "9"
     },
     {
      "$id": "10",
@@ -80,90 +82,142 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ]
+   ],
+   "DiscriminatedSubtypes": {
+    "$id": "12",
+    "golden": {
+     "$id": "13",
+     "Kind": "model",
+     "Name": "Golden",
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.Golden",
+     "Usage": "RoundTrip",
+     "Description": "Golden dog model",
+     "DiscriminatorValue": "golden",
+     "BaseModel": {
+      "$ref": "8"
+     },
+     "Properties": [
+      {
+       "$id": "14",
+       "Name": "kind",
+       "SerializedName": "kind",
+       "Description": "discriminator property",
+       "Type": {
+        "$id": "15",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "16",
+         "Kind": "string"
+        },
+        "Value": "golden"
+       },
+       "IsRequired": true,
+       "IsReadOnly": false,
+       "IsDiscriminator": true
+      }
+     ]
+    }
+   }
   },
   {
-   "$id": "12",
-   "Kind": "Model",
+   "$ref": "13"
+  },
+  {
+   "$id": "17",
+   "Kind": "model",
    "Name": "Snake",
-   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
-   "Description": "Test fixed enum type for discriminator",
-   "DiscriminatorPropertyName": "kind",
+   "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.Snake",
    "Usage": "RoundTrip",
+   "Description": "Test fixed enum type for discriminator",
+   "DiscriminatorProperty": {
+    "$id": "18",
+    "Name": "kind",
+    "SerializedName": "kind",
+    "Description": "discriminator property",
+    "Type": {
+     "$ref": "5"
+    },
+    "IsRequired": true,
+    "IsReadOnly": false,
+    "IsDiscriminator": true
+   },
    "Properties": [
     {
-     "$id": "13",
-     "Name": "kind",
-     "SerializedName": "kind",
-     "Description": "discriminator property",
-     "Type": {
-      "$ref": "5"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": true
+     "$ref": "18"
     },
     {
-     "$id": "14",
+     "$id": "19",
      "Name": "length",
      "SerializedName": "length",
      "Description": "Length of the snake",
      "Type": {
-      "$id": "15",
+      "$id": "20",
       "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ]
+   ],
+   "DiscriminatedSubtypes": {
+    "$id": "21",
+    "cobra": {
+     "$id": "22",
+     "Kind": "model",
+     "Name": "Cobra",
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.Cobra",
+     "Usage": "RoundTrip",
+     "Description": "Cobra model",
+     "DiscriminatorValue": "cobra",
+     "BaseModel": {
+      "$ref": "17"
+     },
+     "Properties": [
+      {
+       "$id": "23",
+       "Name": "kind",
+       "SerializedName": "kind",
+       "Description": "discriminator property",
+       "Type": {
+        "$id": "24",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "25",
+         "Kind": "string"
+        },
+        "Value": "cobra"
+       },
+       "IsRequired": true,
+       "IsReadOnly": false,
+       "IsDiscriminator": true
+      }
+     ]
+    }
+   }
   },
   {
-   "$id": "16",
-   "Kind": "Model",
-   "Name": "Golden",
-   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
-   "Description": "Golden dog model",
-   "DiscriminatorValue": "golden",
-   "Usage": "RoundTrip",
-   "BaseModel": {
-    "$ref": "8"
-   },
-   "Properties": []
-  },
-  {
-   "$id": "17",
-   "Kind": "Model",
-   "Name": "Cobra",
-   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
-   "Description": "Cobra model",
-   "DiscriminatorValue": "cobra",
-   "Usage": "RoundTrip",
-   "BaseModel": {
-    "$ref": "12"
-   },
-   "Properties": []
+   "$ref": "22"
   }
  ],
  "Clients": [
   {
-   "$id": "18",
+   "$id": "26",
    "Name": "EnumDiscriminatorClient",
    "Description": "Illustrates inheritance with enum discriminator.",
    "Operations": [
     {
-     "$id": "19",
+     "$id": "27",
      "Name": "getExtensibleModel",
      "ResourceName": "EnumDiscriminator",
      "Description": "Receive model with extensible enum discriminator type.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "20",
+       "$id": "28",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "21",
+        "$id": "29",
         "Kind": "string",
         "IsNullable": false
        },
@@ -177,9 +231,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "22",
+        "$id": "30",
         "Type": {
-         "$id": "23",
+         "$id": "31",
          "Kind": "string",
          "IsNullable": false
         },
@@ -187,11 +241,11 @@
        }
       },
       {
-       "$id": "24",
+       "$id": "32",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "25",
+        "$id": "33",
         "Kind": "string",
         "IsNullable": false
        },
@@ -205,9 +259,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "26",
+        "$id": "34",
         "Type": {
-         "$ref": "25"
+         "$ref": "33"
         },
         "Value": "application/json"
        }
@@ -215,7 +269,7 @@
      ],
      "Responses": [
       {
-       "$id": "27",
+       "$id": "35",
        "StatusCodes": [
         200
        ],
@@ -239,17 +293,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "28",
+     "$id": "36",
      "Name": "putExtensibleModel",
      "ResourceName": "EnumDiscriminator",
      "Description": "Send model with extensible enum discriminator type.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "20"
+       "$ref": "28"
       },
       {
-       "$id": "29",
+       "$id": "37",
        "Name": "input",
        "NameInRequest": "input",
        "Description": "Dog to create",
@@ -267,11 +321,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "30",
+       "$id": "38",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "31",
+        "$id": "39",
         "Kind": "string",
         "IsNullable": false
        },
@@ -285,19 +339,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "32",
+        "$id": "40",
         "Type": {
-         "$ref": "31"
+         "$ref": "39"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "33",
+       "$id": "41",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "34",
+        "$id": "42",
         "Kind": "string",
         "IsNullable": false
        },
@@ -311,9 +365,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "35",
+        "$id": "43",
         "Type": {
-         "$ref": "34"
+         "$ref": "42"
         },
         "Value": "application/json"
        }
@@ -321,7 +375,7 @@
      ],
      "Responses": [
       {
-       "$id": "36",
+       "$id": "44",
        "StatusCodes": [
         204
        ],
@@ -342,21 +396,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "37",
+     "$id": "45",
      "Name": "getExtensibleModelMissingDiscriminator",
      "ResourceName": "EnumDiscriminator",
      "Description": "Get a model omitting the discriminator.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "20"
+       "$ref": "28"
       },
       {
-       "$id": "38",
+       "$id": "46",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "39",
+        "$id": "47",
         "Kind": "string",
         "IsNullable": false
        },
@@ -370,9 +424,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "40",
+        "$id": "48",
         "Type": {
-         "$ref": "39"
+         "$ref": "47"
         },
         "Value": "application/json"
        }
@@ -380,7 +434,7 @@
      ],
      "Responses": [
       {
-       "$id": "41",
+       "$id": "49",
        "StatusCodes": [
         200
        ],
@@ -404,21 +458,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "42",
+     "$id": "50",
      "Name": "getExtensibleModelWrongDiscriminator",
      "ResourceName": "EnumDiscriminator",
      "Description": "Get a model containing discriminator value never defined.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "20"
+       "$ref": "28"
       },
       {
-       "$id": "43",
+       "$id": "51",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "44",
+        "$id": "52",
         "Kind": "string",
         "IsNullable": false
        },
@@ -432,9 +486,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "45",
+        "$id": "53",
         "Type": {
-         "$ref": "44"
+         "$ref": "52"
         },
         "Value": "application/json"
        }
@@ -442,7 +496,7 @@
      ],
      "Responses": [
       {
-       "$id": "46",
+       "$id": "54",
        "StatusCodes": [
         200
        ],
@@ -466,21 +520,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "47",
+     "$id": "55",
      "Name": "getFixedModel",
      "ResourceName": "EnumDiscriminator",
      "Description": "Receive model with fixed enum discriminator type.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "20"
+       "$ref": "28"
       },
       {
-       "$id": "48",
+       "$id": "56",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "49",
+        "$id": "57",
         "Kind": "string",
         "IsNullable": false
        },
@@ -494,9 +548,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "50",
+        "$id": "58",
         "Type": {
-         "$ref": "49"
+         "$ref": "57"
         },
         "Value": "application/json"
        }
@@ -504,12 +558,12 @@
      ],
      "Responses": [
       {
-       "$id": "51",
+       "$id": "59",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "12"
+        "$ref": "17"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -528,22 +582,22 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "52",
+     "$id": "60",
      "Name": "putFixedModel",
      "ResourceName": "EnumDiscriminator",
      "Description": "Send model with fixed enum discriminator type.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "20"
+       "$ref": "28"
       },
       {
-       "$id": "53",
+       "$id": "61",
        "Name": "input",
        "NameInRequest": "input",
        "Description": "Snake to create",
        "Type": {
-        "$ref": "12"
+        "$ref": "17"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -556,11 +610,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "54",
+       "$id": "62",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "55",
+        "$id": "63",
         "Kind": "string",
         "IsNullable": false
        },
@@ -574,19 +628,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "56",
+        "$id": "64",
         "Type": {
-         "$ref": "55"
+         "$ref": "63"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "57",
+       "$id": "65",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "58",
+        "$id": "66",
         "Kind": "string",
         "IsNullable": false
        },
@@ -600,9 +654,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "59",
+        "$id": "67",
         "Type": {
-         "$ref": "58"
+         "$ref": "66"
         },
         "Value": "application/json"
        }
@@ -610,7 +664,7 @@
      ],
      "Responses": [
       {
-       "$id": "60",
+       "$id": "68",
        "StatusCodes": [
         204
        ],
@@ -631,21 +685,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "61",
+     "$id": "69",
      "Name": "getFixedModelMissingDiscriminator",
      "ResourceName": "EnumDiscriminator",
      "Description": "Get a model omitting the discriminator.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "20"
+       "$ref": "28"
       },
       {
-       "$id": "62",
+       "$id": "70",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "63",
+        "$id": "71",
         "Kind": "string",
         "IsNullable": false
        },
@@ -659,9 +713,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "64",
+        "$id": "72",
         "Type": {
-         "$ref": "63"
+         "$ref": "71"
         },
         "Value": "application/json"
        }
@@ -669,12 +723,12 @@
      ],
      "Responses": [
       {
-       "$id": "65",
+       "$id": "73",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "12"
+        "$ref": "17"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -693,21 +747,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "66",
+     "$id": "74",
      "Name": "getFixedModelWrongDiscriminator",
      "ResourceName": "EnumDiscriminator",
      "Description": "Get a model containing discriminator value never defined.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "20"
+       "$ref": "28"
       },
       {
-       "$id": "67",
+       "$id": "75",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "68",
+        "$id": "76",
         "Kind": "string",
         "IsNullable": false
        },
@@ -721,9 +775,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "69",
+        "$id": "77",
         "Type": {
-         "$ref": "68"
+         "$ref": "76"
         },
         "Value": "application/json"
        }
@@ -731,12 +785,12 @@
      ],
      "Responses": [
       {
-       "$id": "70",
+       "$id": "78",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "12"
+        "$ref": "17"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -756,11 +810,11 @@
     }
    ],
    "Protocol": {
-    "$id": "71"
+    "$id": "79"
    },
    "Parameters": [
     {
-     "$ref": "20"
+     "$ref": "28"
     }
    ]
   }
