@@ -27,9 +27,11 @@
       "Type": {
        "$id": "5",
        "Kind": "array",
+       "Name": "ArrayExtension",
        "ValueType": {
         "$ref": "2"
-       }
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
       },
       "IsRequired": false,
       "IsReadOnly": false

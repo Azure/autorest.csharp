@@ -20,6 +20,7 @@
      "Type": {
       "$id": "4",
       "Kind": "array",
+      "Name": "ArrayUser",
       "ValueType": {
        "$id": "5",
        "Kind": "model",
@@ -41,7 +42,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false

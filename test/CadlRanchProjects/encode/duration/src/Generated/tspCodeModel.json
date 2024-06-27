@@ -149,6 +149,7 @@
      "Type": {
       "$id": "24",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "25",
        "Kind": "duration",
@@ -157,7 +158,8 @@
         "$id": "26",
         "Kind": "float32"
        }
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -618,6 +620,7 @@
        "Type": {
         "$id": "76",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "77",
          "Kind": "duration",
@@ -626,7 +629,8 @@
           "$id": "78",
           "Kind": "int32"
          }
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1533,6 +1537,7 @@
        "Type": {
         "$id": "159",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "160",
          "Kind": "duration",
@@ -1541,7 +1546,8 @@
           "$id": "161",
           "Kind": "string"
          }
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Header",
        "IsRequired": true,

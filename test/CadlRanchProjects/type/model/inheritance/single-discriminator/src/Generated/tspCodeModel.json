@@ -177,9 +177,11 @@
        "Type": {
         "$id": "25",
         "Kind": "array",
+        "Name": "ArrayBird",
         "ValueType": {
          "$ref": "2"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "IsRequired": false,
        "IsReadOnly": false

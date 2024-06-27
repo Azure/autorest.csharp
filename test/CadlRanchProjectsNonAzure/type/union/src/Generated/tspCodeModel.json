@@ -607,10 +607,12 @@
           {
            "$id": "80",
            "Kind": "array",
+           "Name": "Array",
            "ValueType": {
             "$id": "81",
             "Kind": "string"
-           }
+           },
+           "CrossLanguageDefinitionId": "TypeSpec.Array"
           }
          ]
         },
@@ -634,10 +636,12 @@
           {
            "$id": "85",
            "Kind": "array",
+           "Name": "Array",
            "ValueType": {
             "$id": "86",
             "Kind": "string"
-           }
+           },
+           "CrossLanguageDefinitionId": "TypeSpec.Array"
           }
          ]
         },
@@ -1094,6 +1098,7 @@
         "Type": {
          "$id": "162",
          "Kind": "array",
+         "Name": "Array",
          "ValueType": {
           "$id": "163",
           "Kind": "union",
@@ -1120,7 +1125,8 @@
             "Kind": "boolean"
            }
           ]
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": true,
         "IsReadOnly": false
