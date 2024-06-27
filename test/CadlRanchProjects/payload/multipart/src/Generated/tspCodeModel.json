@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "model",
    "Name": "MultiPartRequest",
-   "Namespace": "Payload.MultiPart",
+   "CrossLanguageDefinitionId": "Payload.MultiPart.MultiPartRequest",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -42,7 +42,7 @@
    "$id": "7",
    "Kind": "model",
    "Name": "ComplexPartsRequest",
-   "Namespace": "Payload.MultiPart",
+   "CrossLanguageDefinitionId": "Payload.MultiPart.ComplexPartsRequest",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -66,7 +66,7 @@
       "$id": "11",
       "Kind": "model",
       "Name": "Address",
-      "Namespace": "Payload.MultiPart",
+      "CrossLanguageDefinitionId": "Payload.MultiPart.Address",
       "Usage": "Input",
       "Properties": [
        {
@@ -140,7 +140,7 @@
    "$id": "21",
    "Kind": "model",
    "Name": "JsonPartRequest",
-   "Namespace": "Payload.MultiPart",
+   "CrossLanguageDefinitionId": "Payload.MultiPart.JsonPartRequest",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -173,7 +173,7 @@
    "$id": "25",
    "Kind": "model",
    "Name": "BinaryArrayPartsRequest",
-   "Namespace": "Payload.MultiPart",
+   "CrossLanguageDefinitionId": "Payload.MultiPart.BinaryArrayPartsRequest",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -211,7 +211,7 @@
    "$id": "31",
    "Kind": "model",
    "Name": "JsonArrayPartsRequest",
-   "Namespace": "Payload.MultiPart",
+   "CrossLanguageDefinitionId": "Payload.MultiPart.JsonArrayPartsRequest",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -248,7 +248,7 @@
    "$id": "36",
    "Kind": "model",
    "Name": "MultiBinaryPartsRequest",
-   "Namespace": "Payload.MultiPart",
+   "CrossLanguageDefinitionId": "Payload.MultiPart.MultiBinaryPartsRequest",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -283,7 +283,7 @@
    "$id": "41",
    "Kind": "model",
    "Name": "AnonymousModelRequest",
-   "Namespace": "",
+   "CrossLanguageDefinitionId": ".anonymous",
    "Usage": "Input,Multipart",
    "Properties": [
     {

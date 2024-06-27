@@ -47,9 +47,9 @@ namespace AutoRest.CSharp.Generation.Types
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType => _library.ResolveEnum(enumType),
             // TODO -- this is a temporary solution until we refactored the type replacement to use input types instead of code model schemas
-            InputModelType { Namespace: "Azure.Core.Foundations", Name: "Error" } => SystemObjectType.Create(AzureResponseErrorType, AzureResponseErrorType.Namespace!, null).Type,
+            InputModelType { CrossLanguageDefinitionId: "Azure.Core.Foundations.Error" } => SystemObjectType.Create(AzureResponseErrorType, AzureResponseErrorType.Namespace!, null).Type,
             // Handle DataFactoryElement, we are sure that the argument type is not null and contains only 1 element
-            InputModelType { Namespace: "Azure.Core.Resources", Name: "DataFactoryElement" } inputModel => new CSharpType(typeof(DataFactoryElement<>), CreateTypeForDataFactoryElement(inputModel.ArgumentTypes![0])),
+            InputModelType { CrossLanguageDefinitionId: "Azure.Core.Resources.DataFactoryElement" } inputModel => new CSharpType(typeof(DataFactoryElement<>), CreateTypeForDataFactoryElement(inputModel.ArgumentTypes![0])),
             InputModelType model => _library.ResolveModel(model),
             InputNullableType nullableType => CreateType(nullableType.Type).WithNullable(true),
             InputPrimitiveType primitiveType => primitiveType.Kind switch
@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Generation.Types
                 InputPrimitiveTypeKind.Float => new CSharpType(typeof(double)), // in typespec, float is the base type of float32 and float64, see type relation: https://typespec.io/docs/language-basics/type-relations
                 InputPrimitiveTypeKind.Numeric => new CSharpType(typeof(double)), // in typespec, numeric is the base type of number types, see type relation: https://typespec.io/docs/language-basics/type-relations
                 InputPrimitiveTypeKind.IPAddress => new CSharpType(typeof(IPAddress)),
-                InputPrimitiveTypeKind.ArmId => new CSharpType(typeof(ResourceIdentifier)),
+                InputPrimitiveTypeKind.ArmResourceIdentifier => new CSharpType(typeof(ResourceIdentifier)),
                 InputPrimitiveTypeKind.ResourceType => new CSharpType(typeof(ResourceType)),
                 InputPrimitiveTypeKind.Stream => new CSharpType(typeof(Stream)),
                 InputPrimitiveTypeKind.String => new CSharpType(typeof(string)),

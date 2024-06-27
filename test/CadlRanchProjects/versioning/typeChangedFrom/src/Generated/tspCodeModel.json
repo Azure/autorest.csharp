@@ -10,6 +10,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "Versioning.TypeChangedFrom.Versions",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -28,7 +29,6 @@
      "Description": "The version v2."
     }
    ],
-   "Namespace": "Versioning.TypeChangedFrom",
    "Description": "The version of the API.",
    "IsExtensible": false,
    "Usage": "None"
@@ -39,7 +39,7 @@
    "$id": "6",
    "Kind": "model",
    "Name": "TestModel",
-   "Namespace": "Versioning.TypeChangedFrom",
+   "CrossLanguageDefinitionId": "Versioning.TypeChangedFrom.TestModel",
    "Usage": "RoundTrip",
    "Properties": [
     {

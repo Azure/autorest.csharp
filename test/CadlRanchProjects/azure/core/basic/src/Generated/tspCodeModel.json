@@ -9,6 +9,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "ListItemInputExtensibleEnum",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.ListItemInputExtensibleEnum",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -27,7 +28,6 @@
      "Description": "The second enum value."
     }
    ],
-   "Namespace": "_Specs_.Azure.Core.Basic",
    "Description": "An extensible enum input parameter.",
    "IsExtensible": true,
    "Usage": "Input"
@@ -36,6 +36,7 @@
    "$id": "6",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.Versions",
    "ValueType": {
     "$id": "7",
     "Kind": "string"
@@ -48,7 +49,6 @@
      "Description": "The version 2022-12-01-preview."
     }
    ],
-   "Namespace": "_Specs_.Azure.Core.Basic",
    "Description": "The version of the API.",
    "IsExtensible": false,
    "Usage": "None"
@@ -59,7 +59,7 @@
    "$id": "9",
    "Kind": "model",
    "Name": "User",
-   "Namespace": "_Specs_.Azure.Core.Basic",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.User",
    "Usage": "RoundTrip",
    "Description": "Details about a user.",
    "Properties": [
@@ -99,7 +99,7 @@
        "$id": "16",
        "Kind": "model",
        "Name": "UserOrder",
-       "Namespace": "_Specs_.Azure.Core.Basic",
+       "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.UserOrder",
        "Usage": "RoundTrip",
        "Description": "UserOrder for testing list with expand.",
        "Properties": [
@@ -167,7 +167,7 @@
    "$id": "25",
    "Kind": "model",
    "Name": "PagedUser",
-   "Namespace": "Azure.Core.Foundations",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "Output",
    "Description": "Paged collection of User items",
    "Properties": [
@@ -204,7 +204,7 @@
    "$id": "30",
    "Kind": "model",
    "Name": "ListItemInputBody",
-   "Namespace": "_Specs_.Azure.Core.Basic",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.ListItemInputBody",
    "Usage": "Input",
    "Description": "The body of the input.",
    "Properties": [
@@ -226,7 +226,7 @@
    "$id": "33",
    "Kind": "model",
    "Name": "UserListResults",
-   "Namespace": "_Specs_.Azure.Core.Basic",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.CustomPageModel",
    "Usage": "Output",
    "Properties": [
     {
@@ -262,7 +262,7 @@
    "$id": "38",
    "Kind": "model",
    "Name": "PagedFirstItem",
-   "Namespace": "Azure.Core",
+   "CrossLanguageDefinitionId": "Azure.Core.Page",
    "Usage": "Output",
    "Description": "Paged collection of FirstItem items",
    "Properties": [
@@ -278,7 +278,7 @@
        "$id": "41",
        "Kind": "model",
        "Name": "FirstItem",
-       "Namespace": "_Specs_.Azure.Core.Basic",
+       "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.FirstItem",
        "Usage": "Output",
        "Description": "First item.",
        "Properties": [
@@ -321,7 +321,7 @@
    "$id": "46",
    "Kind": "model",
    "Name": "PagedSecondItem",
-   "Namespace": "Azure.Core",
+   "CrossLanguageDefinitionId": "Azure.Core.Page",
    "Usage": "Output",
    "Description": "Paged collection of SecondItem items",
    "Properties": [
@@ -337,7 +337,7 @@
        "$id": "49",
        "Kind": "model",
        "Name": "SecondItem",
-       "Namespace": "_Specs_.Azure.Core.Basic",
+       "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.SecondItem",
        "Usage": "Output",
        "Description": "Second item.",
        "Properties": [
