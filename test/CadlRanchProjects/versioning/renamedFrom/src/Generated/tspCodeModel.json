@@ -10,6 +10,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "Versioning.RenamedFrom.Versions",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -28,7 +29,6 @@
      "Description": "The version v2."
     }
    ],
-   "Namespace": "Versioning.RenamedFrom",
    "Description": "The version of the API.",
    "IsExtensible": false,
    "Usage": "None"
@@ -37,6 +37,7 @@
    "$id": "6",
    "Kind": "enum",
    "Name": "NewEnum",
+   "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewEnum",
    "ValueType": {
     "$id": "7",
     "Kind": "string"
@@ -48,7 +49,6 @@
      "Value": "newEnumMember"
     }
    ],
-   "Namespace": "Versioning.RenamedFrom",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   }
@@ -58,7 +58,7 @@
    "$id": "9",
    "Kind": "model",
    "Name": "NewModel",
-   "Namespace": "Versioning.RenamedFrom",
+   "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewModel",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -280,7 +280,6 @@
    "Protocol": {
     "$id": "32"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "19"
@@ -409,7 +408,6 @@
    "Protocol": {
     "$id": "43"
    },
-   "Creatable": false,
    "Parent": "RenamedFromClient",
    "Parameters": [
     {

@@ -9,6 +9,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "ProjectKind",
+   "CrossLanguageDefinitionId": "RenameGetList.ProjectKind",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -33,7 +34,6 @@
      "Description": "For building an extraction model to identify your domain categories using your own data."
     }
    ],
-   "Namespace": "RenameGetList",
    "Description": "Represents the project kind.",
    "IsExtensible": true,
    "Usage": "None"
@@ -42,6 +42,7 @@
    "$id": "7",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "RenameGetList.Versions",
    "ValueType": {
     "$id": "8",
     "Kind": "string"
@@ -53,7 +54,6 @@
      "Value": "2022-05-15-preview"
     }
    ],
-   "Namespace": "RenameGetList",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -63,7 +63,7 @@
    "$id": "10",
    "Kind": "model",
    "Name": "Project",
-   "Namespace": "RenameGetList",
+   "CrossLanguageDefinitionId": "RenameGetList.Project",
    "Usage": "None",
    "Properties": [
     {
@@ -110,7 +110,7 @@
       "$id": "17",
       "Kind": "model",
       "Name": "ProjectSettings",
-      "Namespace": "RenameGetList",
+      "CrossLanguageDefinitionId": "RenameGetList.ProjectSettings",
       "Usage": "None",
       "Description": "Represents the settings used to define the project behavior.",
       "AdditionalProperties": {
@@ -235,7 +235,7 @@
    "$id": "37",
    "Kind": "model",
    "Name": "PagedProject",
-   "Namespace": "Azure.Core.Foundations",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "None",
    "Description": "Paged collection of Project items",
    "Properties": [
@@ -272,7 +272,7 @@
    "$id": "42",
    "Kind": "model",
    "Name": "Deployment",
-   "Namespace": "RenameGetList",
+   "CrossLanguageDefinitionId": "RenameGetList.Deployment",
    "Usage": "None",
    "Properties": [
     {
@@ -293,7 +293,7 @@
    "$id": "45",
    "Kind": "model",
    "Name": "PagedDeployment",
-   "Namespace": "Azure.Core.Foundations",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "None",
    "Description": "Paged collection of Deployment items",
    "Properties": [
@@ -336,7 +336,6 @@
    "Protocol": {
     "$id": "51"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "52",
@@ -565,7 +564,6 @@
    "Protocol": {
     "$id": "74"
    },
-   "Creatable": false,
    "Parent": "RenameGetListClient",
    "Parameters": [
     {
@@ -809,7 +807,6 @@
    "Protocol": {
     "$id": "97"
    },
-   "Creatable": false,
    "Parent": "RenameGetListClient",
    "Parameters": [
     {

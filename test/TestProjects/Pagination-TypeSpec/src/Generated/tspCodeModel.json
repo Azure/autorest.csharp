@@ -9,6 +9,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Interval",
+   "CrossLanguageDefinitionId": "Pagination.Interval",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -45,7 +46,6 @@
      "Description": "1 hour, available only if test run duration is greater than 1 minute"
     }
    ],
-   "Namespace": "Pagination",
    "Description": "The interval",
    "IsExtensible": true,
    "Usage": "Input"
@@ -54,6 +54,7 @@
    "$id": "9",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "Pagination.Versions",
    "ValueType": {
     "$id": "10",
     "Kind": "string"
@@ -65,7 +66,6 @@
      "Value": "2022-05-13"
     }
    ],
-   "Namespace": "Pagination",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -75,7 +75,7 @@
    "$id": "12",
    "Kind": "model",
    "Name": "ListLedgerEntryInputBody",
-   "Namespace": "Pagination",
+   "CrossLanguageDefinitionId": "Pagination.ListLedgerEntryInputBody",
    "Usage": "Input",
    "Description": "Type for input model body",
    "Properties": [
@@ -109,7 +109,7 @@
    "$id": "17",
    "Kind": "model",
    "Name": "PagedLedgerEntries",
-   "Namespace": "Pagination",
+   "CrossLanguageDefinitionId": "Pagination.PagedLedgerEntries",
    "Usage": "Output",
    "Description": "Paginated ledger entries",
    "Properties": [
@@ -125,7 +125,7 @@
        "$id": "20",
        "Kind": "model",
        "Name": "LedgerEntry",
-       "Namespace": "Pagination",
+       "CrossLanguageDefinitionId": "Pagination.LedgerEntry",
        "Usage": "Output",
        "Properties": [
         {
@@ -191,7 +191,7 @@
    "$id": "29",
    "Kind": "model",
    "Name": "PagedDimensionValueListItem",
-   "Namespace": "Azure.Core.Foundations",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "Output",
    "Description": "Paged collection of DimensionValueListItem items",
    "Properties": [
@@ -207,7 +207,7 @@
        "$id": "32",
        "Kind": "model",
        "Name": "DimensionValueListItem",
-       "Namespace": "Pagination",
+       "CrossLanguageDefinitionId": "Pagination.DimensionValueListItem",
        "Usage": "Output",
        "Properties": [
         {
@@ -253,7 +253,7 @@
    "$id": "38",
    "Kind": "model",
    "Name": "PagedLedgerEntry",
-   "Namespace": "Azure.Core",
+   "CrossLanguageDefinitionId": "Azure.Core.Page",
    "Usage": "Output",
    "Description": "Paged collection of LedgerEntry items",
    "Properties": [
@@ -290,7 +290,7 @@
    "$id": "43",
    "Kind": "model",
    "Name": "PagedTextBlocklist",
-   "Namespace": "Azure.Core.Foundations",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "Output",
    "Description": "Paged collection of TextBlocklist items",
    "Properties": [
@@ -306,7 +306,7 @@
        "$id": "46",
        "Kind": "model",
        "Name": "TextBlocklist",
-       "Namespace": "Pagination",
+       "CrossLanguageDefinitionId": "Pagination.TextBlocklist",
        "Usage": "Output",
        "Description": "Text Blocklist.",
        "Properties": [
@@ -361,7 +361,7 @@
    "$id": "53",
    "Kind": "model",
    "Name": "PagedTextBlockItem",
-   "Namespace": "Azure.Core.Foundations",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "Output",
    "Description": "Paged collection of TextBlockItem items",
    "Properties": [
@@ -377,7 +377,7 @@
        "$id": "56",
        "Kind": "model",
        "Name": "TextBlockItem",
-       "Namespace": "Pagination",
+       "CrossLanguageDefinitionId": "Pagination.TextBlockItem",
        "Usage": "Output",
        "Description": "Item in TextBlocklist.",
        "Properties": [
@@ -444,7 +444,7 @@
    "$id": "65",
    "Kind": "model",
    "Name": "BatchPoolListResult",
-   "Namespace": "Pagination",
+   "CrossLanguageDefinitionId": "Pagination.BatchPoolListResult",
    "Usage": "Output",
    "Description": "The result of listing the Pools in an Account.",
    "Properties": [
@@ -460,7 +460,7 @@
        "$id": "68",
        "Kind": "model",
        "Name": "BatchPool",
-       "Namespace": "Pagination",
+       "CrossLanguageDefinitionId": "Pagination.BatchPool",
        "Usage": "Output",
        "Description": "A Pool in the Azure Batch service.",
        "Properties": [
@@ -527,7 +527,7 @@
    "$id": "77",
    "Kind": "model",
    "Name": "BatchError",
-   "Namespace": "Pagination",
+   "CrossLanguageDefinitionId": "Pagination.BatchError",
    "Usage": "Output",
    "Description": "An error response received from the Azure Batch service.",
    "Properties": [
@@ -715,7 +715,6 @@
    "Protocol": {
     "$id": "97"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "82"
@@ -934,7 +933,6 @@
    "Protocol": {
     "$id": "118"
    },
-   "Creatable": false,
    "Parent": "PaginationClient",
    "Parameters": [
     {
@@ -1040,7 +1038,6 @@
    "Protocol": {
     "$id": "128"
    },
-   "Creatable": false,
    "Parent": "PaginationClient",
    "Parameters": [
     {
@@ -1313,7 +1310,6 @@
    "Protocol": {
     "$id": "154"
    },
-   "Creatable": false,
    "Parent": "PaginationClient",
    "Parameters": [
     {
@@ -1486,7 +1482,6 @@
    "Protocol": {
     "$id": "172"
    },
-   "Creatable": false,
    "Parent": "PaginationClient",
    "Parameters": [
     {

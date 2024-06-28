@@ -7,6 +7,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "ClientExtensibleEnum",
+   "CrossLanguageDefinitionId": "Client.Naming.UnionEnum.ServerExtensibleEnum",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -18,7 +19,6 @@
      "Value": "value1"
     }
    ],
-   "Namespace": "Client.Naming.UnionEnum",
    "IsExtensible": true,
    "Usage": "Input"
   },
@@ -26,6 +26,7 @@
    "$id": "5",
    "Kind": "enum",
    "Name": "ExtensibleEnum",
+   "CrossLanguageDefinitionId": "Client.Naming.UnionEnum.ExtensibleEnum",
    "ValueType": {
     "$id": "6",
     "Kind": "string"
@@ -42,7 +43,6 @@
      "Value": "value2"
     }
    ],
-   "Namespace": "Client.Naming.UnionEnum",
    "IsExtensible": true,
    "Usage": "Input"
   }
@@ -52,7 +52,7 @@
    "$id": "9",
    "Kind": "model",
    "Name": "ClientNameModel",
-   "Namespace": "Client.Naming.Property",
+   "CrossLanguageDefinitionId": "Client.Naming.Property.ClientNameModel",
    "Usage": "Input",
    "Properties": [
     {
@@ -73,7 +73,7 @@
    "$id": "12",
    "Kind": "model",
    "Name": "LanguageClientNameModel",
-   "Namespace": "Client.Naming.Property",
+   "CrossLanguageDefinitionId": "Client.Naming.Property.LanguageClientNameModel",
    "Usage": "Input",
    "Properties": [
     {
@@ -94,7 +94,7 @@
    "$id": "15",
    "Kind": "model",
    "Name": "ClientNameAndJsonEncodedNameModel",
-   "Namespace": "Client.Naming.Property",
+   "CrossLanguageDefinitionId": "Client.Naming.Property.ClientNameAndJsonEncodedNameModel",
    "Usage": "Input",
    "Properties": [
     {
@@ -115,7 +115,7 @@
    "$id": "18",
    "Kind": "model",
    "Name": "ClientModel",
-   "Namespace": "Client.Naming.Model",
+   "CrossLanguageDefinitionId": "Client.Naming.Model.ModelWithClientClientName",
    "Usage": "Input",
    "Properties": [
     {
@@ -136,7 +136,7 @@
    "$id": "21",
    "Kind": "model",
    "Name": "CSModel",
-   "Namespace": "Client.Naming.Model",
+   "CrossLanguageDefinitionId": "Client.Naming.Model.ModelWithLanguageClientName",
    "Usage": "Input",
    "Properties": [
     {
@@ -760,7 +760,6 @@
    "Protocol": {
     "$id": "82"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "26"
@@ -978,7 +977,6 @@
    "Protocol": {
     "$id": "102"
    },
-   "Creatable": false,
    "Parent": "NamingClient",
    "Parameters": [
     {
@@ -1197,7 +1195,6 @@
    "Protocol": {
     "$id": "122"
    },
-   "Creatable": false,
    "Parent": "NamingClient",
    "Parameters": [
     {
