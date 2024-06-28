@@ -343,15 +343,6 @@ namespace ModelsTypeSpec.Models
             return new ErrorModel(message, innerError, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.SingleBase"/>. </summary>
-        /// <param name="kind"> Discriminator property for SingleBase. </param>
-        /// <param name="size"></param>
-        /// <returns> A new <see cref="Models.SingleBase"/> instance for mocking. </returns>
-        public static SingleBase SingleBase(string kind = null, int size = default)
-        {
-            return new UnknownSingleBase(kind, size, serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.Int32ValuesFacet"/>. </summary>
         /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>
         /// <param name="values"> The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher. </param>

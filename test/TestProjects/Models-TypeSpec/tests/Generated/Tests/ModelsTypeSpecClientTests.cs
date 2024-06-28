@@ -1407,46 +1407,6 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ModelsTypeSpec_GetSingleBase_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
-
-            Response response = await client.GetSingleBaseAsync(null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ModelsTypeSpec_GetSingleBase_ShortVersion_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
-
-            Response<SingleBase> response = await client.GetSingleBaseAsync();
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ModelsTypeSpec_GetSingleBase_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
-
-            Response response = await client.GetSingleBaseAsync(null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ModelsTypeSpec_GetSingleBase_AllParameters_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
-
-            Response<SingleBase> response = await client.GetSingleBaseAsync();
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ModelsTypeSpec_GenericType_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
