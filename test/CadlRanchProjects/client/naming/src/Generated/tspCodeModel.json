@@ -10,7 +10,9 @@
    "CrossLanguageDefinitionId": "Client.Naming.UnionEnum.ServerExtensibleEnum",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -29,7 +31,9 @@
    "CrossLanguageDefinitionId": "Client.Naming.UnionEnum.ExtensibleEnum",
    "ValueType": {
     "$id": "6",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -62,7 +66,9 @@
      "Description": "Pass in true",
      "Type": {
       "$id": "11",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -83,7 +89,9 @@
      "Description": "Pass in true",
      "Type": {
       "$id": "14",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -104,7 +112,9 @@
      "Description": "Pass in true",
      "Type": {
       "$id": "17",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -125,7 +135,9 @@
      "Description": "Pass in true",
      "Type": {
       "$id": "20",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -146,7 +158,9 @@
      "Description": "Pass in true",
      "Type": {
       "$id": "23",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -174,7 +188,8 @@
        "Type": {
         "$id": "27",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -190,7 +205,8 @@
         "Type": {
          "$id": "29",
          "Kind": "string",
-         "IsNullable": false
+         "Name": "string",
+         "CrossLanguageDefinitionId": ""
         },
         "Value": "http://localhost:3000"
        }
@@ -202,7 +218,8 @@
        "Type": {
         "$id": "31",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -256,7 +273,9 @@
        "NameInRequest": "defaultName",
        "Type": {
         "$id": "36",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -275,7 +294,8 @@
        "Type": {
         "$id": "38",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -347,7 +367,8 @@
        "Type": {
         "$id": "44",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -373,7 +394,8 @@
        "Type": {
         "$id": "47",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -448,7 +470,8 @@
        "Type": {
         "$id": "53",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -474,7 +497,8 @@
        "Type": {
         "$id": "56",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -549,7 +573,8 @@
        "Type": {
         "$id": "62",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -575,7 +600,8 @@
        "Type": {
         "$id": "65",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -632,7 +658,9 @@
        "NameInRequest": "default-name",
        "Type": {
         "$id": "70",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -651,7 +679,8 @@
        "Type": {
         "$id": "72",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -706,7 +735,8 @@
        "Type": {
         "$id": "77",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -741,7 +771,9 @@
          "Description": "",
          "Type": {
           "$id": "81",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         }
        ],
@@ -804,7 +836,8 @@
        "Type": {
         "$id": "87",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -830,7 +863,8 @@
        "Type": {
         "$id": "90",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -905,7 +939,8 @@
        "Type": {
         "$id": "96",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -931,7 +966,8 @@
        "Type": {
         "$id": "99",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1022,7 +1058,8 @@
        "Type": {
         "$id": "107",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1048,7 +1085,8 @@
        "Type": {
         "$id": "110",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1123,7 +1161,8 @@
        "Type": {
         "$id": "116",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1149,7 +1188,8 @@
        "Type": {
         "$id": "119",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,

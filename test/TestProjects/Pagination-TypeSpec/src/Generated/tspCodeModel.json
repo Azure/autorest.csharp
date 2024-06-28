@@ -12,7 +12,9 @@
    "CrossLanguageDefinitionId": "Pagination.Interval",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -57,7 +59,9 @@
    "CrossLanguageDefinitionId": "Pagination.Versions",
    "ValueType": {
     "$id": "10",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -86,7 +90,9 @@
      "Description": "Required string",
      "Type": {
       "$id": "14",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -98,7 +104,9 @@
      "Description": "Required int",
      "Type": {
       "$id": "16",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -135,7 +143,9 @@
          "Description": "Contents of the ledger entry.",
          "Type": {
           "$id": "22",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -147,7 +157,9 @@
          "Description": "",
          "Type": {
           "$id": "24",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": true
@@ -159,7 +171,9 @@
          "Description": "",
          "Type": {
           "$id": "26",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": true
@@ -177,7 +191,9 @@
      "Description": "Path to retrieve next page of ledger entries",
      "Type": {
       "$id": "28",
-      "Kind": "url"
+      "Kind": "url",
+      "Name": "ResourceLocation",
+      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -220,7 +236,9 @@
           "Kind": "array",
           "ValueType": {
            "$id": "35",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           }
          },
          "IsRequired": true,
@@ -239,7 +257,9 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "37",
-      "Kind": "url"
+      "Kind": "url",
+      "Name": "ResourceLocation",
+      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -279,7 +299,9 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "42",
-      "Kind": "url"
+      "Kind": "url",
+      "Name": "ResourceLocation",
+      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -317,7 +339,9 @@
          "Description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
          "Type": {
           "$id": "48",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -329,7 +353,9 @@
          "Description": "Text blocklist description.",
          "Type": {
           "$id": "50",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -347,7 +373,9 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "52",
-      "Kind": "url"
+      "Kind": "url",
+      "Name": "ResourceLocation",
+      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -388,7 +416,9 @@
          "Description": "Block Item Id. It will be uuid.",
          "Type": {
           "$id": "58",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -400,7 +430,9 @@
          "Description": "Block item description.",
          "Type": {
           "$id": "60",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -412,7 +444,9 @@
          "Description": "Block item content.",
          "Type": {
           "$id": "62",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -430,7 +464,9 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "64",
-      "Kind": "url"
+      "Kind": "url",
+      "Name": "ResourceLocation",
+      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -471,7 +507,9 @@
          "Description": "A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).",
          "Type": {
           "$id": "70",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": true
@@ -483,7 +521,9 @@
          "Description": "The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.",
          "Type": {
           "$id": "72",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": true
@@ -495,7 +535,9 @@
          "Description": "The URL of the Pool.",
          "Type": {
           "$id": "74",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": true
@@ -513,7 +555,9 @@
      "Description": "The URL to get the next set of results.",
      "Type": {
       "$id": "76",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -538,7 +582,9 @@
      "Description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
      "Type": {
       "$id": "79",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -566,8 +612,9 @@
        "NameInRequest": "pagnationUri",
        "Type": {
         "$id": "83",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -586,7 +633,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "85",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -594,7 +643,8 @@
         "Type": {
          "$id": "87",
          "Kind": "string",
-         "IsNullable": false
+         "Name": "string",
+         "CrossLanguageDefinitionId": ""
         },
         "Value": "2022-05-13"
        },
@@ -632,7 +682,8 @@
        "Type": {
         "$id": "90",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -658,7 +709,8 @@
        "Type": {
         "$id": "93",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -744,7 +796,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "101",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -766,7 +820,9 @@
        "Description": "Unique test run name as identifier",
        "Type": {
         "$id": "103",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -785,7 +841,9 @@
        "Description": "Dimension name",
        "Type": {
         "$id": "105",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -822,7 +880,9 @@
        "Description": "Metric name",
        "Type": {
         "$id": "108",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -841,7 +901,9 @@
        "Description": "Metric namespace to query metric definitions for.",
        "Type": {
         "$id": "110",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -860,7 +922,9 @@
        "Description": "The timespan of the query. It is a string with the following format\n'startDateTime_ISO/endDateTime_ISO'.",
        "Type": {
         "$id": "112",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -879,7 +943,8 @@
        "Type": {
         "$id": "114",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -962,7 +1027,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "122",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -984,7 +1051,8 @@
        "Type": {
         "$id": "124",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1068,7 +1136,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "132",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1090,7 +1160,8 @@
        "Type": {
         "$id": "134",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1158,7 +1229,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "140",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1180,7 +1253,9 @@
        "Description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
        "Type": {
         "$id": "142",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1199,7 +1274,9 @@
        "Description": "The number of result items to return.",
        "Type": {
         "$id": "144",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1218,7 +1295,9 @@
        "Description": "The number of result items to skip.",
        "Type": {
         "$id": "146",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1237,7 +1316,9 @@
        "Description": "The maximum number of result items per page.",
        "Type": {
         "$id": "148",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1256,7 +1337,8 @@
        "Type": {
         "$id": "150",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1339,7 +1421,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "158",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1361,7 +1445,9 @@
        "Description": "An OData $filter clause. For more information on constructing this filter, see\nhttps://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-pools.",
        "Type": {
         "$id": "160",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1383,7 +1469,9 @@
         "Kind": "array",
         "ValueType": {
          "$id": "163",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         }
        },
        "Location": "Query",
@@ -1407,7 +1495,9 @@
         "Kind": "array",
         "ValueType": {
          "$id": "166",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         }
        },
        "Location": "Query",
@@ -1428,7 +1518,8 @@
        "Type": {
         "$id": "168",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,

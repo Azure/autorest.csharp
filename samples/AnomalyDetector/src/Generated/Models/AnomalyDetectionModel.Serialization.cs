@@ -79,7 +79,7 @@ namespace AnomalyDetector.Models
             {
                 return null;
             }
-            Guid modelId = default;
+            string modelId = default;
             DateTimeOffset createdTime = default;
             DateTimeOffset lastUpdatedTime = default;
             ModelInfo modelInfo = default;
@@ -89,7 +89,7 @@ namespace AnomalyDetector.Models
             {
                 if (property.NameEquals("modelId"u8))
                 {
-                    modelId = property.Value.GetGuid();
+                    modelId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("createdTime"u8))

@@ -22,7 +22,8 @@
      "Type": {
       "$id": "5",
       "Kind": "string",
-      "IsNullable": false
+      "Name": "string",
+      "CrossLanguageDefinitionId": ""
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -38,7 +39,8 @@
       "Type": {
        "$id": "7",
        "Kind": "string",
-       "IsNullable": false
+       "Name": "string",
+       "CrossLanguageDefinitionId": ""
       },
       "Value": "http://localhost:3000"
      }
@@ -69,7 +71,9 @@
         "Kind": "array",
         "ValueType": {
          "$id": "12",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         }
        },
        "Location": "Query",
@@ -89,7 +93,8 @@
        "Type": {
         "$id": "14",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -147,7 +152,9 @@
         "Kind": "array",
         "ValueType": {
          "$id": "20",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         }
        },
        "Location": "Query",
@@ -168,7 +175,8 @@
        "Type": {
         "$id": "22",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -226,7 +234,9 @@
         "Kind": "array",
         "ValueType": {
          "$id": "28",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         }
        },
        "Location": "Query",
@@ -247,7 +257,8 @@
        "Type": {
         "$id": "30",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -305,7 +316,9 @@
         "Kind": "array",
         "ValueType": {
          "$id": "36",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         }
        },
        "Location": "Query",
@@ -326,7 +339,8 @@
        "Type": {
         "$id": "38",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -384,7 +398,9 @@
         "Kind": "array",
         "ValueType": {
          "$id": "44",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         }
        },
        "Location": "Query",
@@ -405,7 +421,8 @@
        "Type": {
         "$id": "46",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -479,7 +496,9 @@
         "Kind": "array",
         "ValueType": {
          "$id": "54",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         }
        },
        "Location": "Header",
@@ -500,7 +519,8 @@
        "Type": {
         "$id": "56",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,

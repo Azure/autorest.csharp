@@ -22,7 +22,8 @@
      "Type": {
       "$id": "5",
       "Kind": "string",
-      "IsNullable": false
+      "Name": "string",
+      "CrossLanguageDefinitionId": ""
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -38,7 +39,8 @@
       "Type": {
        "$id": "7",
        "Kind": "string",
-       "IsNullable": false
+       "Name": "string",
+       "CrossLanguageDefinitionId": ""
       },
       "Value": "http://localhost:3000"
      }
@@ -67,7 +69,8 @@
        "Type": {
         "$id": "11",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -95,7 +98,9 @@
        ],
        "BodyType": {
         "$id": "14",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -130,7 +135,9 @@
        "Description": "_",
        "Type": {
         "$id": "17",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -149,7 +156,8 @@
        "Type": {
         "$id": "19",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -175,7 +183,8 @@
        "Type": {
         "$id": "22",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -250,7 +259,8 @@
        "Type": {
         "$id": "29",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -278,7 +288,9 @@
        ],
        "BodyType": {
         "$id": "32",
-        "Kind": "boolean"
+        "Kind": "boolean",
+        "Name": "boolean",
+        "CrossLanguageDefinitionId": "TypeSpec.boolean"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -313,7 +325,9 @@
        "Description": "_",
        "Type": {
         "$id": "35",
-        "Kind": "boolean"
+        "Kind": "boolean",
+        "Name": "boolean",
+        "CrossLanguageDefinitionId": "TypeSpec.boolean"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -332,7 +346,8 @@
        "Type": {
         "$id": "37",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -358,7 +373,8 @@
        "Type": {
         "$id": "40",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -433,7 +449,8 @@
        "Type": {
         "$id": "47",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -461,7 +478,9 @@
        ],
        "BodyType": {
         "$id": "50",
-        "Kind": "any"
+        "Kind": "any",
+        "Name": "unknown",
+        "CrossLanguageDefinitionId": ""
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -496,7 +515,9 @@
        "Description": "_",
        "Type": {
         "$id": "53",
-        "Kind": "any"
+        "Kind": "any",
+        "Name": "unknown",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Body",
        "IsRequired": true,
@@ -515,7 +536,8 @@
        "Type": {
         "$id": "55",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -541,7 +563,8 @@
        "Type": {
         "$id": "58",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -615,7 +638,8 @@
        "Type": {
         "$id": "65",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -643,7 +667,9 @@
        ],
        "BodyType": {
         "$id": "68",
-        "Kind": "decimal"
+        "Kind": "decimal",
+        "Name": "decimal",
+        "CrossLanguageDefinitionId": "TypeSpec.decimal"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -676,7 +702,9 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "71",
-        "Kind": "decimal"
+        "Kind": "decimal",
+        "Name": "decimal",
+        "CrossLanguageDefinitionId": "TypeSpec.decimal"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -695,7 +723,8 @@
        "Type": {
         "$id": "73",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -721,7 +750,8 @@
        "Type": {
         "$id": "76",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -778,7 +808,9 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "81",
-        "Kind": "decimal"
+        "Kind": "decimal",
+        "Name": "decimal",
+        "CrossLanguageDefinitionId": "TypeSpec.decimal"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -797,7 +829,8 @@
        "Type": {
         "$id": "83",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -868,7 +901,8 @@
        "Type": {
         "$id": "90",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -896,7 +930,9 @@
        ],
        "BodyType": {
         "$id": "93",
-        "Kind": "decimal128"
+        "Kind": "decimal128",
+        "Name": "decimal128",
+        "CrossLanguageDefinitionId": "TypeSpec.decimal128"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -929,7 +965,9 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "96",
-        "Kind": "decimal128"
+        "Kind": "decimal128",
+        "Name": "decimal128",
+        "CrossLanguageDefinitionId": "TypeSpec.decimal128"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -948,7 +986,8 @@
        "Type": {
         "$id": "98",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -974,7 +1013,8 @@
        "Type": {
         "$id": "101",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1031,7 +1071,9 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "106",
-        "Kind": "decimal128"
+        "Kind": "decimal128",
+        "Name": "decimal128",
+        "CrossLanguageDefinitionId": "TypeSpec.decimal128"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1050,7 +1092,8 @@
        "Type": {
         "$id": "108",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1121,7 +1164,8 @@
        "Type": {
         "$id": "115",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1152,7 +1196,9 @@
         "Kind": "array",
         "ValueType": {
          "$id": "119",
-         "Kind": "decimal"
+         "Kind": "decimal",
+         "Name": "decimal",
+         "CrossLanguageDefinitionId": "TypeSpec.decimal"
         }
        },
        "BodyMediaType": "Json",
@@ -1186,7 +1232,9 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "122",
-        "Kind": "decimal"
+        "Kind": "decimal",
+        "Name": "decimal",
+        "CrossLanguageDefinitionId": "TypeSpec.decimal"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1205,7 +1253,8 @@
        "Type": {
         "$id": "124",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1231,7 +1280,8 @@
        "Type": {
         "$id": "127",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1305,7 +1355,8 @@
        "Type": {
         "$id": "134",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1336,7 +1387,9 @@
         "Kind": "array",
         "ValueType": {
          "$id": "138",
-         "Kind": "decimal"
+         "Kind": "decimal",
+         "Name": "decimal",
+         "CrossLanguageDefinitionId": "TypeSpec.decimal"
         }
        },
        "BodyMediaType": "Json",
@@ -1370,7 +1423,9 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "141",
-        "Kind": "decimal"
+        "Kind": "decimal",
+        "Name": "decimal",
+        "CrossLanguageDefinitionId": "TypeSpec.decimal"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1389,7 +1444,8 @@
        "Type": {
         "$id": "143",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1415,7 +1471,8 @@
        "Type": {
         "$id": "146",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,

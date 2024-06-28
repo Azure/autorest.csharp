@@ -12,7 +12,9 @@
    "CrossLanguageDefinitionId": "MixApiVersion.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -41,7 +43,9 @@
      "Description": "pet name",
      "Type": {
       "$id": "7",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -53,7 +57,9 @@
      "Description": "",
      "Type": {
       "$id": "9",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -65,7 +71,9 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -102,7 +110,9 @@
          "Description": "",
          "Type": {
           "$id": "17",
-          "Kind": "int64"
+          "Kind": "int64",
+          "Name": "int64",
+          "CrossLanguageDefinitionId": "TypeSpec.int64"
          },
          "IsRequired": true,
          "IsReadOnly": true
@@ -114,7 +124,9 @@
          "Description": "",
          "Type": {
           "$id": "19",
-          "Kind": "int64"
+          "Kind": "int64",
+          "Name": "int64",
+          "CrossLanguageDefinitionId": "TypeSpec.int64"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -126,7 +138,9 @@
          "Description": "",
          "Type": {
           "$id": "21",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -144,7 +158,9 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "23",
-      "Kind": "url"
+      "Kind": "url",
+      "Name": "ResourceLocation",
+      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -171,8 +187,9 @@
      "NameInRequest": "petStoreUrl",
      "Type": {
       "$id": "27",
-      "Kind": "uri",
-      "IsNullable": false
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": ""
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -209,7 +226,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "31",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -217,7 +236,8 @@
         "Type": {
          "$id": "33",
          "Kind": "string",
-         "IsNullable": false
+         "Name": "string",
+         "CrossLanguageDefinitionId": ""
         },
         "Value": "2022-11-30-preview"
        },
@@ -237,7 +257,9 @@
        "Description": "pet name",
        "Type": {
         "$id": "35",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -256,7 +278,8 @@
        "Type": {
         "$id": "37",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -312,7 +335,9 @@
        "Description": "The id of pet.",
        "Type": {
         "$id": "42",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -331,7 +356,8 @@
        "Type": {
         "$id": "44",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -409,7 +435,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "51",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-07-09"
        },
@@ -454,7 +482,8 @@
        "Type": {
         "$id": "55",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -480,7 +509,8 @@
        "Type": {
         "$id": "58",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -562,7 +592,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "65",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -584,7 +616,8 @@
        "Type": {
         "$id": "67",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,

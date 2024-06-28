@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetMultivariateBatchDetectionResultAsync(Guid,CancellationToken)">
+    <member name="GetMultivariateBatchDetectionResultAsync(string,CancellationToken)">
       <example>
 This sample shows how to call GetMultivariateBatchDetectionResultAsync.
 <code><![CDATA[
@@ -9,7 +9,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-Response<MultivariateDetectionResult> response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+Response<MultivariateDetectionResult> response = await client.GetMultivariateBatchDetectionResultAsync("<resultId>");
 ]]></code>
 This sample shows how to call GetMultivariateBatchDetectionResultAsync with all parameters.
 <code><![CDATA[
@@ -17,10 +17,10 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-Response<MultivariateDetectionResult> response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+Response<MultivariateDetectionResult> response = await client.GetMultivariateBatchDetectionResultAsync("<resultId>");
 ]]></code></example>
     </member>
-    <member name="GetMultivariateBatchDetectionResult(Guid,CancellationToken)">
+    <member name="GetMultivariateBatchDetectionResult(string,CancellationToken)">
       <example>
 This sample shows how to call GetMultivariateBatchDetectionResult.
 <code><![CDATA[
@@ -28,7 +28,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-Response<MultivariateDetectionResult> response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+Response<MultivariateDetectionResult> response = client.GetMultivariateBatchDetectionResult("<resultId>");
 ]]></code>
 This sample shows how to call GetMultivariateBatchDetectionResult with all parameters.
 <code><![CDATA[
@@ -36,10 +36,10 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-Response<MultivariateDetectionResult> response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+Response<MultivariateDetectionResult> response = client.GetMultivariateBatchDetectionResult("<resultId>");
 ]]></code></example>
     </member>
-    <member name="GetMultivariateBatchDetectionResultAsync(Guid,RequestContext)">
+    <member name="GetMultivariateBatchDetectionResultAsync(string,RequestContext)">
       <example>
 This sample shows how to call GetMultivariateBatchDetectionResultAsync and parse the result.
 <code><![CDATA[
@@ -47,7 +47,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-Response response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+Response response = await client.GetMultivariateBatchDetectionResultAsync("<resultId>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -64,7 +64,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-Response response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+Response response = await client.GetMultivariateBatchDetectionResultAsync("<resultId>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -91,7 +91,7 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetP
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("message").ToString());
 ]]></code></example>
     </member>
-    <member name="GetMultivariateBatchDetectionResult(Guid,RequestContext)">
+    <member name="GetMultivariateBatchDetectionResult(string,RequestContext)">
       <example>
 This sample shows how to call GetMultivariateBatchDetectionResult and parse the result.
 <code><![CDATA[
@@ -99,7 +99,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-Response response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+Response response = client.GetMultivariateBatchDetectionResult("<resultId>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -116,7 +116,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-Response response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+Response response = client.GetMultivariateBatchDetectionResult("<resultId>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("resultId").ToString());

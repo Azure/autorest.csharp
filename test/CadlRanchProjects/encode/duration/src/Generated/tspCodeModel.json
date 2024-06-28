@@ -19,11 +19,15 @@
      "Type": {
       "$id": "4",
       "Kind": "duration",
+      "Name": "duration",
       "Encode": "ISO8601",
       "WireType": {
        "$id": "5",
-       "Kind": "string"
-      }
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.duration"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -45,11 +49,15 @@
      "Type": {
       "$id": "8",
       "Kind": "duration",
+      "Name": "duration",
       "Encode": "ISO8601",
       "WireType": {
        "$id": "9",
-       "Kind": "string"
-      }
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.duration"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -71,11 +79,15 @@
      "Type": {
       "$id": "12",
       "Kind": "duration",
+      "Name": "duration",
       "Encode": "seconds",
       "WireType": {
        "$id": "13",
-       "Kind": "int32"
-      }
+       "Kind": "int32",
+       "Name": "int32",
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.duration"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -97,11 +109,15 @@
      "Type": {
       "$id": "16",
       "Kind": "duration",
+      "Name": "duration",
       "Encode": "seconds",
       "WireType": {
        "$id": "17",
-       "Kind": "float"
-      }
+       "Kind": "float",
+       "Name": "float",
+       "CrossLanguageDefinitionId": "TypeSpec.float"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.duration"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -123,11 +139,15 @@
      "Type": {
       "$id": "20",
       "Kind": "duration",
+      "Name": "duration",
       "Encode": "seconds",
       "WireType": {
        "$id": "21",
-       "Kind": "float64"
-      }
+       "Kind": "float64",
+       "Name": "float64",
+       "CrossLanguageDefinitionId": "TypeSpec.float64"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.duration"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -152,11 +172,28 @@
       "ValueType": {
        "$id": "25",
        "Kind": "duration",
+       "Name": "Float32Duration",
        "Encode": "seconds",
        "WireType": {
         "$id": "26",
-        "Kind": "float32"
-       }
+        "Kind": "float32",
+        "Name": "float32",
+        "CrossLanguageDefinitionId": "TypeSpec.float32"
+       },
+       "BaseType": {
+        "$id": "27",
+        "Kind": "duration",
+        "Name": "duration",
+        "Encode": "ISO8601",
+        "WireType": {
+         "$id": "28",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.duration"
+       },
+       "CrossLanguageDefinitionId": "Encode.Duration.Property.Float32Duration"
       }
      },
      "IsRequired": true,
@@ -167,23 +204,24 @@
  ],
  "Clients": [
   {
-   "$id": "27",
+   "$id": "29",
    "Name": "DurationClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "28"
+    "$id": "30"
    },
    "Parameters": [
     {
-     "$id": "29",
+     "$id": "31",
      "Name": "host",
      "NameInRequest": "host",
      "Description": "TestServer endpoint",
      "Type": {
-      "$id": "30",
+      "$id": "32",
       "Kind": "string",
-      "IsNullable": false
+      "Name": "string",
+      "CrossLanguageDefinitionId": ""
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -195,11 +233,12 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "31",
+      "$id": "33",
       "Type": {
-       "$id": "32",
+       "$id": "34",
        "Kind": "string",
-       "IsNullable": false
+       "Name": "string",
+       "CrossLanguageDefinitionId": ""
       },
       "Value": "http://localhost:3000"
      }
@@ -207,31 +246,35 @@
    ]
   },
   {
-   "$id": "33",
+   "$id": "35",
    "Name": "Query",
    "Description": "",
    "Operations": [
     {
-     "$id": "34",
+     "$id": "36",
      "Name": "default",
      "ResourceName": "Query",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "31"
       },
       {
-       "$id": "35",
+       "$id": "37",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$id": "36",
+        "$id": "38",
         "Kind": "duration",
+        "Name": "duration",
         "Encode": "ISO8601",
         "WireType": {
-         "$id": "37",
-         "Kind": "string"
-        }
+         "$id": "39",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.duration"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -244,13 +287,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "38",
+       "$id": "40",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "39",
+        "$id": "41",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -262,9 +306,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "40",
+        "$id": "42",
         "Type": {
-         "$ref": "39"
+         "$ref": "41"
         },
         "Value": "application/json"
        }
@@ -272,7 +316,7 @@
      ],
      "Responses": [
       {
-       "$id": "41",
+       "$id": "43",
        "StatusCodes": [
         204
        ],
@@ -290,26 +334,30 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "42",
+     "$id": "44",
      "Name": "iso8601",
      "ResourceName": "Query",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "31"
       },
       {
-       "$id": "43",
+       "$id": "45",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$id": "44",
+        "$id": "46",
         "Kind": "duration",
+        "Name": "duration",
         "Encode": "ISO8601",
         "WireType": {
-         "$id": "45",
-         "Kind": "string"
-        }
+         "$id": "47",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.duration"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -322,13 +370,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "46",
+       "$id": "48",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "47",
+        "$id": "49",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -340,9 +389,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "48",
+        "$id": "50",
         "Type": {
-         "$ref": "47"
+         "$ref": "49"
         },
         "Value": "application/json"
        }
@@ -350,7 +399,7 @@
      ],
      "Responses": [
       {
-       "$id": "49",
+       "$id": "51",
        "StatusCodes": [
         204
        ],
@@ -368,26 +417,30 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "50",
+     "$id": "52",
      "Name": "int32Seconds",
      "ResourceName": "Query",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "31"
       },
       {
-       "$id": "51",
+       "$id": "53",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$id": "52",
+        "$id": "54",
         "Kind": "duration",
+        "Name": "duration",
         "Encode": "seconds",
         "WireType": {
-         "$id": "53",
-         "Kind": "int32"
-        }
+         "$id": "55",
+         "Kind": "int32",
+         "Name": "int32",
+         "CrossLanguageDefinitionId": "TypeSpec.int32"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.duration"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -400,13 +453,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "54",
+       "$id": "56",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "55",
+        "$id": "57",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -418,9 +472,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "56",
+        "$id": "58",
         "Type": {
-         "$ref": "55"
+         "$ref": "57"
         },
         "Value": "application/json"
        }
@@ -428,7 +482,7 @@
      ],
      "Responses": [
       {
-       "$id": "57",
+       "$id": "59",
        "StatusCodes": [
         204
        ],
@@ -446,26 +500,30 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "58",
+     "$id": "60",
      "Name": "floatSeconds",
      "ResourceName": "Query",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "31"
       },
       {
-       "$id": "59",
+       "$id": "61",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$id": "60",
+        "$id": "62",
         "Kind": "duration",
+        "Name": "duration",
         "Encode": "seconds",
         "WireType": {
-         "$id": "61",
-         "Kind": "float"
-        }
+         "$id": "63",
+         "Kind": "float",
+         "Name": "float",
+         "CrossLanguageDefinitionId": "TypeSpec.float"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.duration"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -478,13 +536,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "62",
+       "$id": "64",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "63",
+        "$id": "65",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -496,9 +555,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "64",
+        "$id": "66",
         "Type": {
-         "$ref": "63"
+         "$ref": "65"
         },
         "Value": "application/json"
        }
@@ -506,7 +565,7 @@
      ],
      "Responses": [
       {
-       "$id": "65",
+       "$id": "67",
        "StatusCodes": [
         204
        ],
@@ -524,26 +583,30 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "66",
+     "$id": "68",
      "Name": "float64Seconds",
      "ResourceName": "Query",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "31"
       },
       {
-       "$id": "67",
+       "$id": "69",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$id": "68",
+        "$id": "70",
         "Kind": "duration",
+        "Name": "duration",
         "Encode": "seconds",
         "WireType": {
-         "$id": "69",
-         "Kind": "float64"
-        }
+         "$id": "71",
+         "Kind": "float64",
+         "Name": "float64",
+         "CrossLanguageDefinitionId": "TypeSpec.float64"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.duration"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -556,13 +619,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "70",
+       "$id": "72",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "71",
+        "$id": "73",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -574,9 +638,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "72",
+        "$id": "74",
         "Type": {
-         "$ref": "71"
+         "$ref": "73"
         },
         "Value": "application/json"
        }
@@ -584,7 +648,7 @@
      ],
      "Responses": [
       {
-       "$id": "73",
+       "$id": "75",
        "StatusCodes": [
         204
        ],
@@ -602,29 +666,46 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "74",
+     "$id": "76",
      "Name": "int32SecondsArray",
      "ResourceName": "Query",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "31"
       },
       {
-       "$id": "75",
+       "$id": "77",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$id": "76",
+        "$id": "78",
         "Kind": "array",
         "ValueType": {
-         "$id": "77",
+         "$id": "79",
          "Kind": "duration",
+         "Name": "Int32Duration",
          "Encode": "seconds",
          "WireType": {
-          "$id": "78",
-          "Kind": "int32"
-         }
+          "$id": "80",
+          "Kind": "int32",
+          "Name": "int32",
+          "CrossLanguageDefinitionId": "TypeSpec.int32"
+         },
+         "BaseType": {
+          "$id": "81",
+          "Kind": "duration",
+          "Name": "duration",
+          "Encode": "ISO8601",
+          "WireType": {
+           "$id": "82",
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.duration"
+         },
+         "CrossLanguageDefinitionId": "Encode.Duration.Query.Int32Duration"
         }
        },
        "Location": "Query",
@@ -639,13 +720,14 @@
        "ArraySerializationDelimiter": ","
       },
       {
-       "$id": "79",
+       "$id": "83",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "80",
+        "$id": "84",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -657,9 +739,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "81",
+        "$id": "85",
         "Type": {
-         "$ref": "80"
+         "$ref": "84"
         },
         "Value": "application/json"
        }
@@ -667,7 +749,7 @@
      ],
      "Responses": [
       {
-       "$id": "82",
+       "$id": "86",
        "StatusCodes": [
         204
        ],
@@ -686,31 +768,31 @@
     }
    ],
    "Protocol": {
-    "$id": "83"
+    "$id": "87"
    },
    "Parent": "DurationClient",
    "Parameters": [
     {
-     "$ref": "29"
+     "$ref": "31"
     }
    ]
   },
   {
-   "$id": "84",
+   "$id": "88",
    "Name": "Property",
    "Description": "",
    "Operations": [
     {
-     "$id": "85",
+     "$id": "89",
      "Name": "default",
      "ResourceName": "Property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "31"
       },
       {
-       "$id": "86",
+       "$id": "90",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -727,13 +809,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "87",
+       "$id": "91",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "88",
+        "$id": "92",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -745,21 +828,22 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "89",
+        "$id": "93",
         "Type": {
-         "$ref": "88"
+         "$ref": "92"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "90",
+       "$id": "94",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "91",
+        "$id": "95",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -771,9 +855,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "92",
+        "$id": "96",
         "Type": {
-         "$ref": "91"
+         "$ref": "95"
         },
         "Value": "application/json"
        }
@@ -781,7 +865,7 @@
      ],
      "Responses": [
       {
-       "$id": "93",
+       "$id": "97",
        "StatusCodes": [
         200
        ],
@@ -808,16 +892,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "94",
+     "$id": "98",
      "Name": "iso8601",
      "ResourceName": "Property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "31"
       },
       {
-       "$id": "95",
+       "$id": "99",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -834,13 +918,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "96",
+       "$id": "100",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "97",
+        "$id": "101",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -852,21 +937,22 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "98",
+        "$id": "102",
         "Type": {
-         "$ref": "97"
+         "$ref": "101"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "99",
+       "$id": "103",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "100",
+        "$id": "104",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -878,9 +964,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "101",
+        "$id": "105",
         "Type": {
-         "$ref": "100"
+         "$ref": "104"
         },
         "Value": "application/json"
        }
@@ -888,7 +974,7 @@
      ],
      "Responses": [
       {
-       "$id": "102",
+       "$id": "106",
        "StatusCodes": [
         200
        ],
@@ -915,16 +1001,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "103",
+     "$id": "107",
      "Name": "int32Seconds",
      "ResourceName": "Property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "31"
       },
       {
-       "$id": "104",
+       "$id": "108",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -941,13 +1027,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "105",
+       "$id": "109",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "106",
+        "$id": "110",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -959,21 +1046,22 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "107",
+        "$id": "111",
         "Type": {
-         "$ref": "106"
+         "$ref": "110"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "108",
+       "$id": "112",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "109",
+        "$id": "113",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -985,9 +1073,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "110",
+        "$id": "114",
         "Type": {
-         "$ref": "109"
+         "$ref": "113"
         },
         "Value": "application/json"
        }
@@ -995,7 +1083,7 @@
      ],
      "Responses": [
       {
-       "$id": "111",
+       "$id": "115",
        "StatusCodes": [
         200
        ],
@@ -1022,16 +1110,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "112",
+     "$id": "116",
      "Name": "floatSeconds",
      "ResourceName": "Property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "31"
       },
       {
-       "$id": "113",
+       "$id": "117",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -1048,13 +1136,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "114",
+       "$id": "118",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "115",
+        "$id": "119",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1066,21 +1155,22 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "116",
+        "$id": "120",
         "Type": {
-         "$ref": "115"
+         "$ref": "119"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "117",
+       "$id": "121",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "118",
+        "$id": "122",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1092,9 +1182,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "119",
+        "$id": "123",
         "Type": {
-         "$ref": "118"
+         "$ref": "122"
         },
         "Value": "application/json"
        }
@@ -1102,7 +1192,7 @@
      ],
      "Responses": [
       {
-       "$id": "120",
+       "$id": "124",
        "StatusCodes": [
         200
        ],
@@ -1129,16 +1219,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "121",
+     "$id": "125",
      "Name": "float64Seconds",
      "ResourceName": "Property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "31"
       },
       {
-       "$id": "122",
+       "$id": "126",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -1155,13 +1245,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "123",
+       "$id": "127",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "124",
+        "$id": "128",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1173,21 +1264,22 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "125",
+        "$id": "129",
         "Type": {
-         "$ref": "124"
+         "$ref": "128"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "126",
+       "$id": "130",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "127",
+        "$id": "131",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1199,9 +1291,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "128",
+        "$id": "132",
         "Type": {
-         "$ref": "127"
+         "$ref": "131"
         },
         "Value": "application/json"
        }
@@ -1209,7 +1301,7 @@
      ],
      "Responses": [
       {
-       "$id": "129",
+       "$id": "133",
        "StatusCodes": [
         200
        ],
@@ -1236,16 +1328,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "130",
+     "$id": "134",
      "Name": "floatSecondsArray",
      "ResourceName": "Property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "31"
       },
       {
-       "$id": "131",
+       "$id": "135",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -1262,13 +1354,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "132",
+       "$id": "136",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "133",
+        "$id": "137",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1280,21 +1373,22 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "134",
+        "$id": "138",
         "Type": {
-         "$ref": "133"
+         "$ref": "137"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "135",
+       "$id": "139",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "136",
+        "$id": "140",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1306,9 +1400,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "137",
+        "$id": "141",
         "Type": {
-         "$ref": "136"
+         "$ref": "140"
         },
         "Value": "application/json"
        }
@@ -1316,7 +1410,7 @@
      ],
      "Responses": [
       {
-       "$id": "138",
+       "$id": "142",
        "StatusCodes": [
         200
        ],
@@ -1344,41 +1438,45 @@
     }
    ],
    "Protocol": {
-    "$id": "139"
+    "$id": "143"
    },
    "Parent": "DurationClient",
    "Parameters": [
     {
-     "$ref": "29"
+     "$ref": "31"
     }
    ]
   },
   {
-   "$id": "140",
+   "$id": "144",
    "Name": "Header",
    "Description": "",
    "Operations": [
     {
-     "$id": "141",
+     "$id": "145",
      "Name": "default",
      "ResourceName": "Header",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "31"
       },
       {
-       "$id": "142",
+       "$id": "146",
        "Name": "duration",
        "NameInRequest": "duration",
        "Type": {
-        "$id": "143",
+        "$id": "147",
         "Kind": "duration",
+        "Name": "duration",
         "Encode": "ISO8601",
         "WireType": {
-         "$id": "144",
-         "Kind": "string"
-        }
+         "$id": "148",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.duration"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1391,13 +1489,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "145",
+       "$id": "149",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "146",
+        "$id": "150",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1409,9 +1508,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "147",
+        "$id": "151",
         "Type": {
-         "$ref": "146"
+         "$ref": "150"
         },
         "Value": "application/json"
        }
@@ -1419,7 +1518,7 @@
      ],
      "Responses": [
       {
-       "$id": "148",
+       "$id": "152",
        "StatusCodes": [
         204
        ],
@@ -1437,26 +1536,30 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "149",
+     "$id": "153",
      "Name": "iso8601",
      "ResourceName": "Header",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "31"
       },
       {
-       "$id": "150",
+       "$id": "154",
        "Name": "duration",
        "NameInRequest": "duration",
        "Type": {
-        "$id": "151",
+        "$id": "155",
         "Kind": "duration",
+        "Name": "duration",
         "Encode": "ISO8601",
         "WireType": {
-         "$id": "152",
-         "Kind": "string"
-        }
+         "$id": "156",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.duration"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1469,13 +1572,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "153",
+       "$id": "157",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "154",
+        "$id": "158",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1487,9 +1591,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "155",
+        "$id": "159",
         "Type": {
-         "$ref": "154"
+         "$ref": "158"
         },
         "Value": "application/json"
        }
@@ -1497,7 +1601,7 @@
      ],
      "Responses": [
       {
-       "$id": "156",
+       "$id": "160",
        "StatusCodes": [
         204
        ],
@@ -1515,29 +1619,46 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "157",
+     "$id": "161",
      "Name": "iso8601Array",
      "ResourceName": "Header",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "31"
       },
       {
-       "$id": "158",
+       "$id": "162",
        "Name": "duration",
        "NameInRequest": "duration",
        "Type": {
-        "$id": "159",
+        "$id": "163",
         "Kind": "array",
         "ValueType": {
-         "$id": "160",
+         "$id": "164",
          "Kind": "duration",
+         "Name": "Iso8601Duration",
          "Encode": "ISO8601",
          "WireType": {
-          "$id": "161",
-          "Kind": "string"
-         }
+          "$id": "165",
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
+         },
+         "BaseType": {
+          "$id": "166",
+          "Kind": "duration",
+          "Name": "duration",
+          "Encode": "ISO8601",
+          "WireType": {
+           "$id": "167",
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.duration"
+         },
+         "CrossLanguageDefinitionId": "Encode.Duration.Header.Iso8601Duration"
         }
        },
        "Location": "Header",
@@ -1552,13 +1673,14 @@
        "ArraySerializationDelimiter": ","
       },
       {
-       "$id": "162",
+       "$id": "168",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "163",
+        "$id": "169",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1570,9 +1692,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "164",
+        "$id": "170",
         "Type": {
-         "$ref": "163"
+         "$ref": "169"
         },
         "Value": "application/json"
        }
@@ -1580,7 +1702,7 @@
      ],
      "Responses": [
       {
-       "$id": "165",
+       "$id": "171",
        "StatusCodes": [
         204
        ],
@@ -1598,26 +1720,30 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "166",
+     "$id": "172",
      "Name": "int32Seconds",
      "ResourceName": "Header",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "31"
       },
       {
-       "$id": "167",
+       "$id": "173",
        "Name": "duration",
        "NameInRequest": "duration",
        "Type": {
-        "$id": "168",
+        "$id": "174",
         "Kind": "duration",
+        "Name": "duration",
         "Encode": "seconds",
         "WireType": {
-         "$id": "169",
-         "Kind": "int32"
-        }
+         "$id": "175",
+         "Kind": "int32",
+         "Name": "int32",
+         "CrossLanguageDefinitionId": "TypeSpec.int32"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.duration"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1630,13 +1756,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "170",
+       "$id": "176",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "171",
+        "$id": "177",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1648,9 +1775,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "172",
+        "$id": "178",
         "Type": {
-         "$ref": "171"
+         "$ref": "177"
         },
         "Value": "application/json"
        }
@@ -1658,7 +1785,7 @@
      ],
      "Responses": [
       {
-       "$id": "173",
+       "$id": "179",
        "StatusCodes": [
         204
        ],
@@ -1676,26 +1803,30 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "174",
+     "$id": "180",
      "Name": "floatSeconds",
      "ResourceName": "Header",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "31"
       },
       {
-       "$id": "175",
+       "$id": "181",
        "Name": "duration",
        "NameInRequest": "duration",
        "Type": {
-        "$id": "176",
+        "$id": "182",
         "Kind": "duration",
+        "Name": "duration",
         "Encode": "seconds",
         "WireType": {
-         "$id": "177",
-         "Kind": "float"
-        }
+         "$id": "183",
+         "Kind": "float",
+         "Name": "float",
+         "CrossLanguageDefinitionId": "TypeSpec.float"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.duration"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1708,13 +1839,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "178",
+       "$id": "184",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "179",
+        "$id": "185",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1726,9 +1858,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "180",
+        "$id": "186",
         "Type": {
-         "$ref": "179"
+         "$ref": "185"
         },
         "Value": "application/json"
        }
@@ -1736,7 +1868,7 @@
      ],
      "Responses": [
       {
-       "$id": "181",
+       "$id": "187",
        "StatusCodes": [
         204
        ],
@@ -1754,26 +1886,30 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "182",
+     "$id": "188",
      "Name": "float64Seconds",
      "ResourceName": "Header",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "31"
       },
       {
-       "$id": "183",
+       "$id": "189",
        "Name": "duration",
        "NameInRequest": "duration",
        "Type": {
-        "$id": "184",
+        "$id": "190",
         "Kind": "duration",
+        "Name": "duration",
         "Encode": "seconds",
         "WireType": {
-         "$id": "185",
-         "Kind": "float64"
-        }
+         "$id": "191",
+         "Kind": "float64",
+         "Name": "float64",
+         "CrossLanguageDefinitionId": "TypeSpec.float64"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.duration"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1786,13 +1922,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "186",
+       "$id": "192",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "187",
+        "$id": "193",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1804,9 +1941,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "188",
+        "$id": "194",
         "Type": {
-         "$ref": "187"
+         "$ref": "193"
         },
         "Value": "application/json"
        }
@@ -1814,7 +1951,7 @@
      ],
      "Responses": [
       {
-       "$id": "189",
+       "$id": "195",
        "StatusCodes": [
         204
        ],
@@ -1833,12 +1970,12 @@
     }
    ],
    "Protocol": {
-    "$id": "190"
+    "$id": "196"
    },
    "Parent": "DurationClient",
    "Parameters": [
     {
-     "$ref": "29"
+     "$ref": "31"
     }
    ]
   }

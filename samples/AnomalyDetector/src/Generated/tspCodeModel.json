@@ -12,7 +12,9 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.APIVersion",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -31,7 +33,9 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.TimeGranularity",
    "ValueType": {
     "$id": "6",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -91,7 +95,9 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.ImputeMode",
    "ValueType": {
     "$id": "17",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -136,7 +142,9 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionStatus",
    "ValueType": {
     "$id": "25",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -171,7 +179,9 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.DataSchema",
    "ValueType": {
     "$id": "31",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -198,7 +208,9 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AlignMode",
    "ValueType": {
     "$id": "35",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -223,7 +235,9 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.FillNAMethod",
    "ValueType": {
     "$id": "39",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -263,7 +277,9 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelStatus",
    "ValueType": {
     "$id": "46",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -298,7 +314,9 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.AnomalyDetectorErrorCodes",
    "ValueType": {
     "$id": "52",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -367,7 +385,9 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Versions",
    "ValueType": {
     "$id": "65",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -413,11 +433,15 @@
          "Type": {
           "$id": "72",
           "Kind": "utcDateTime",
+          "Name": "utcDateTime",
           "Encode": "rfc3339",
           "WireType": {
            "$id": "73",
-           "Kind": "string"
-          }
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -429,7 +453,9 @@
          "Description": "The measurement of that point, should be float.",
          "Type": {
           "$id": "75",
-          "Kind": "float32"
+          "Kind": "float32",
+          "Name": "float32",
+          "CrossLanguageDefinitionId": "TypeSpec.float32"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -458,7 +484,9 @@
      "Description": "Custom Interval is used to set non-standard time interval, for example, if the\nseries is 5 minutes, request can be set as {\"granularity\":\"minutely\",\n\"customInterval\":5}.",
      "Type": {
       "$id": "78",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -470,7 +498,9 @@
      "Description": "Optional argument, periodic value of a time series. If the value is null or\ndoes not present, the API will determine the period automatically.",
      "Type": {
       "$id": "80",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -482,7 +512,9 @@
      "Description": "Optional argument, advanced model parameter, max anomaly ratio in a time series.",
      "Type": {
       "$id": "82",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -494,7 +526,9 @@
      "Description": "Optional argument, advanced model parameter, between 0-99, the lower the value\nis, the larger the margin value will be which means less anomalies will be\naccepted.",
      "Type": {
       "$id": "84",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -517,7 +551,9 @@
      "Description": "Used to specify the value to fill, it's used when granularity is not \"none\"\nand imputeMode is \"fixed\".",
      "Type": {
       "$id": "87",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -542,7 +578,9 @@
      "Description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "Type": {
       "$id": "90",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -557,7 +595,9 @@
       "Kind": "array",
       "ValueType": {
        "$id": "93",
-       "Kind": "float32"
+       "Kind": "float32",
+       "Name": "float32",
+       "CrossLanguageDefinitionId": "TypeSpec.float32"
       }
      },
      "IsRequired": true,
@@ -573,7 +613,9 @@
       "Kind": "array",
       "ValueType": {
        "$id": "96",
-       "Kind": "float32"
+       "Kind": "float32",
+       "Name": "float32",
+       "CrossLanguageDefinitionId": "TypeSpec.float32"
       }
      },
      "IsRequired": true,
@@ -589,7 +631,9 @@
       "Kind": "array",
       "ValueType": {
        "$id": "99",
-       "Kind": "float32"
+       "Kind": "float32",
+       "Name": "float32",
+       "CrossLanguageDefinitionId": "TypeSpec.float32"
       }
      },
      "IsRequired": true,
@@ -605,7 +649,9 @@
       "Kind": "array",
       "ValueType": {
        "$id": "102",
-       "Kind": "boolean"
+       "Kind": "boolean",
+       "Name": "boolean",
+       "CrossLanguageDefinitionId": "TypeSpec.boolean"
       }
      },
      "IsRequired": true,
@@ -621,7 +667,9 @@
       "Kind": "array",
       "ValueType": {
        "$id": "105",
-       "Kind": "boolean"
+       "Kind": "boolean",
+       "Name": "boolean",
+       "CrossLanguageDefinitionId": "TypeSpec.boolean"
       }
      },
      "IsRequired": true,
@@ -637,7 +685,9 @@
       "Kind": "array",
       "ValueType": {
        "$id": "108",
-       "Kind": "boolean"
+       "Kind": "boolean",
+       "Name": "boolean",
+       "CrossLanguageDefinitionId": "TypeSpec.boolean"
       }
      },
      "IsRequired": true,
@@ -653,7 +703,9 @@
       "Kind": "array",
       "ValueType": {
        "$id": "111",
-       "Kind": "float32"
+       "Kind": "float32",
+       "Name": "float32",
+       "CrossLanguageDefinitionId": "TypeSpec.float32"
       }
      },
      "IsRequired": false,
@@ -676,7 +728,9 @@
      "Description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "Type": {
       "$id": "114",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -688,7 +742,9 @@
      "Description": "Suggested input series points needed for detecting the latest point.",
      "Type": {
       "$id": "116",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -700,7 +756,9 @@
      "Description": "Expected value of the latest point.",
      "Type": {
       "$id": "118",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -712,7 +770,9 @@
      "Description": "Upper margin of the latest point. UpperMargin is used to calculate\nupperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin.\nIf the value of latest point is between upperBoundary and lowerBoundary, it\nshould be treated as normal value. By adjusting marginScale value, anomaly\nstatus of latest point can be changed.",
      "Type": {
       "$id": "120",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -724,7 +784,9 @@
      "Description": "Lower margin of the latest point. LowerMargin is used to calculate\nlowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin.\n",
      "Type": {
       "$id": "122",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -736,7 +798,9 @@
      "Description": "Anomaly status of the latest point, true means the latest point is an anomaly\neither in negative direction or positive direction.",
      "Type": {
       "$id": "124",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -748,7 +812,9 @@
      "Description": "Anomaly status in negative direction of the latest point. True means the latest\npoint is an anomaly and its real value is smaller than the expected one.",
      "Type": {
       "$id": "126",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -760,7 +826,9 @@
      "Description": "Anomaly status in positive direction of the latest point. True means the latest\npoint is an anomaly and its real value is larger than the expected one.",
      "Type": {
       "$id": "128",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -772,7 +840,9 @@
      "Description": "The severity score for the last input point. The larger the value is, the more\nsever the anomaly is. For normal points, the \"severity\" is always 0.",
      "Type": {
       "$id": "130",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -820,7 +890,9 @@
      "Description": "Custom Interval is used to set non-standard time interval, for example, if the\nseries is 5 minutes, request can be set as {\"granularity\":\"minutely\",\n\"customInterval\":5}.",
      "Type": {
       "$id": "136",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -832,7 +904,9 @@
      "Description": "Optional argument, periodic value of a time series. If the value is null or\ndoes not present, the API will determine the period automatically.",
      "Type": {
       "$id": "138",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -844,7 +918,9 @@
      "Description": "Optional argument, advanced model parameter, a default stableTrendWindow will\nbe used in detection.",
      "Type": {
       "$id": "140",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -856,7 +932,9 @@
      "Description": "Optional argument, advanced model parameter, between 0.0-1.0, the lower the\nvalue is, the larger the trend error will be which means less change point will\nbe accepted.",
      "Type": {
       "$id": "142",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -878,7 +956,9 @@
      "Description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "Type": {
       "$id": "145",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": true
@@ -893,7 +973,9 @@
       "Kind": "array",
       "ValueType": {
        "$id": "148",
-       "Kind": "boolean"
+       "Kind": "boolean",
+       "Name": "boolean",
+       "CrossLanguageDefinitionId": "TypeSpec.boolean"
       }
      },
      "IsRequired": false,
@@ -909,7 +991,9 @@
       "Kind": "array",
       "ValueType": {
        "$id": "151",
-       "Kind": "float32"
+       "Kind": "float32",
+       "Name": "float32",
+       "CrossLanguageDefinitionId": "TypeSpec.float32"
       }
      },
      "IsRequired": false,
@@ -932,8 +1016,9 @@
      "Description": "Result identifier, which is used to fetch the results of an inference call.",
      "Type": {
       "$id": "154",
-      "Kind": "uuid",
-      "Encode": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -985,7 +1070,9 @@
             "Description": "The error code.",
             "Type": {
              "$id": "162",
-             "Kind": "string"
+             "Kind": "string",
+             "Name": "string",
+             "CrossLanguageDefinitionId": "TypeSpec.string"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -997,7 +1084,9 @@
             "Description": "The message explaining the error reported by the service.",
             "Type": {
              "$id": "164",
-             "Kind": "string"
+             "Kind": "string",
+             "Name": "string",
+             "CrossLanguageDefinitionId": "TypeSpec.string"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -1031,7 +1120,9 @@
             "Description": "Variable name in variable states.",
             "Type": {
              "$id": "169",
-             "Kind": "string"
+             "Kind": "string",
+             "Name": "string",
+             "CrossLanguageDefinitionId": "TypeSpec.string"
             },
             "IsRequired": false,
             "IsReadOnly": false
@@ -1043,7 +1134,9 @@
             "Description": "Proportion of missing values that need to be filled by fillNAMethod.",
             "Type": {
              "$id": "171",
-             "Kind": "float32"
+             "Kind": "float32",
+             "Name": "float32",
+             "CrossLanguageDefinitionId": "TypeSpec.float32"
             },
             "IsRequired": false,
             "IsReadOnly": false
@@ -1055,7 +1148,9 @@
             "Description": "Number of effective data points before applying fillNAMethod.",
             "Type": {
              "$id": "173",
-             "Kind": "int32"
+             "Kind": "int32",
+             "Name": "int32",
+             "CrossLanguageDefinitionId": "TypeSpec.int32"
             },
             "IsRequired": false,
             "IsReadOnly": false
@@ -1068,11 +1163,15 @@
             "Type": {
              "$id": "175",
              "Kind": "utcDateTime",
+             "Name": "utcDateTime",
              "Encode": "rfc3339",
              "WireType": {
               "$id": "176",
-              "Kind": "string"
-             }
+              "Kind": "string",
+              "Name": "string",
+              "CrossLanguageDefinitionId": "TypeSpec.string"
+             },
+             "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
             },
             "IsRequired": false,
             "IsReadOnly": false
@@ -1085,11 +1184,15 @@
             "Type": {
              "$id": "178",
              "Kind": "utcDateTime",
+             "Name": "utcDateTime",
              "Encode": "rfc3339",
              "WireType": {
               "$id": "179",
-              "Kind": "string"
-             }
+              "Kind": "string",
+              "Name": "string",
+              "CrossLanguageDefinitionId": "TypeSpec.string"
+             },
+             "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
             },
             "IsRequired": false,
             "IsReadOnly": false
@@ -1120,7 +1223,9 @@
            "Description": "Source link to the input data to indicate an accessible Azure storage Uri,\neither pointed to an Azure blob storage folder, or pointed to a CSV file in\nAzure blob storage based on you data schema selection. The data schema should\nbe exactly the same with those used in the training phase.",
            "Type": {
             "$id": "183",
-            "Kind": "url"
+            "Kind": "url",
+            "Name": "url",
+            "CrossLanguageDefinitionId": "TypeSpec.url"
            },
            "IsRequired": true,
            "IsReadOnly": false
@@ -1132,7 +1237,9 @@
            "Description": "An optional field, which is used to specify the number of top contributed\nvariables for one anomalous timestamp in the response. The default number is\n10.",
            "Type": {
             "$id": "185",
-            "Kind": "int32"
+            "Kind": "int32",
+            "Name": "int32",
+            "CrossLanguageDefinitionId": "TypeSpec.int32"
            },
            "IsRequired": true,
            "IsReadOnly": false
@@ -1145,11 +1252,15 @@
            "Type": {
             "$id": "187",
             "Kind": "utcDateTime",
+            "Name": "utcDateTime",
             "Encode": "rfc3339",
             "WireType": {
              "$id": "188",
-             "Kind": "string"
-            }
+             "Kind": "string",
+             "Name": "string",
+             "CrossLanguageDefinitionId": "TypeSpec.string"
+            },
+            "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
            },
            "IsRequired": true,
            "IsReadOnly": false
@@ -1162,11 +1273,15 @@
            "Type": {
             "$id": "190",
             "Kind": "utcDateTime",
+            "Name": "utcDateTime",
             "Encode": "rfc3339",
             "WireType": {
              "$id": "191",
-             "Kind": "string"
-            }
+             "Kind": "string",
+             "Name": "string",
+             "CrossLanguageDefinitionId": "TypeSpec.string"
+            },
+            "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
            },
            "IsRequired": true,
            "IsReadOnly": false
@@ -1205,11 +1320,15 @@
          "Type": {
           "$id": "196",
           "Kind": "utcDateTime",
+          "Name": "utcDateTime",
           "Encode": "rfc3339",
           "WireType": {
            "$id": "197",
-           "Kind": "string"
-          }
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -1234,7 +1353,9 @@
             "Description": "True if an anomaly is detected at the current timestamp.",
             "Type": {
              "$id": "201",
-             "Kind": "boolean"
+             "Kind": "boolean",
+             "Name": "boolean",
+             "CrossLanguageDefinitionId": "TypeSpec.boolean"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -1246,7 +1367,9 @@
             "Description": "Indicates the significance of the anomaly. The higher the severity, the more\nsignificant the anomaly is.",
             "Type": {
              "$id": "203",
-             "Kind": "float32"
+             "Kind": "float32",
+             "Name": "float32",
+             "CrossLanguageDefinitionId": "TypeSpec.float32"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -1258,7 +1381,9 @@
             "Description": "Raw anomaly score of severity, will help indicate the degree of abnormality as\nwell.",
             "Type": {
              "$id": "205",
-             "Kind": "float32"
+             "Kind": "float32",
+             "Name": "float32",
+             "CrossLanguageDefinitionId": "TypeSpec.float32"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -1286,7 +1411,9 @@
                 "Description": "Variable.",
                 "Type": {
                  "$id": "210",
-                 "Kind": "string"
+                 "Kind": "string",
+                 "Name": "string",
+                 "CrossLanguageDefinitionId": "TypeSpec.string"
                 },
                 "IsRequired": false,
                 "IsReadOnly": false
@@ -1298,7 +1425,9 @@
                 "Description": "This score shows the percentage contributing to the anomalous timestamp. A\nnumber between 0 and 1.",
                 "Type": {
                  "$id": "212",
-                 "Kind": "float32"
+                 "Kind": "float32",
+                 "Name": "float32",
+                 "CrossLanguageDefinitionId": "TypeSpec.float32"
                 },
                 "IsRequired": false,
                 "IsReadOnly": false
@@ -1326,7 +1455,9 @@
                     "Kind": "array",
                     "ValueType": {
                      "$id": "217",
-                     "Kind": "string"
+                     "Kind": "string",
+                     "Name": "string",
+                     "CrossLanguageDefinitionId": "TypeSpec.string"
                     }
                    },
                    "IsRequired": false,
@@ -1410,7 +1541,9 @@
      "Description": "Source link to the input data to indicate an accessible Azure storage Uri,\neither pointed to an Azure blob storage folder, or pointed to a CSV file in\nAzure blob storage based on you data schema selection. ",
      "Type": {
       "$id": "222",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1434,11 +1567,15 @@
      "Type": {
       "$id": "225",
       "Kind": "utcDateTime",
+      "Name": "utcDateTime",
       "Encode": "rfc3339",
       "WireType": {
        "$id": "226",
-       "Kind": "string"
-      }
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1451,11 +1588,15 @@
      "Type": {
       "$id": "228",
       "Kind": "utcDateTime",
+      "Name": "utcDateTime",
       "Encode": "rfc3339",
       "WireType": {
        "$id": "229",
-       "Kind": "string"
-      }
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1467,7 +1608,9 @@
      "Description": "An optional field. The display name of the model whose maximum length is 24\ncharacters.",
      "Type": {
       "$id": "231",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1479,7 +1622,9 @@
      "Description": "An optional field, indicating how many previous timestamps will be used to\ndetect whether the timestamp is anomaly or not. ",
      "Type": {
       "$id": "233",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1526,7 +1671,9 @@
         "Description": "An optional field. Required when fillNAMethod is Fixed.",
         "Type": {
          "$id": "239",
-         "Kind": "float32"
+         "Kind": "float32",
+         "Name": "float32",
+         "CrossLanguageDefinitionId": "TypeSpec.float32"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -1598,7 +1745,9 @@
             "Kind": "array",
             "ValueType": {
              "$id": "249",
-             "Kind": "int32"
+             "Kind": "int32",
+             "Name": "int32",
+             "CrossLanguageDefinitionId": "TypeSpec.int32"
             }
            },
            "IsRequired": false,
@@ -1614,7 +1763,9 @@
             "Kind": "array",
             "ValueType": {
              "$id": "252",
-             "Kind": "float32"
+             "Kind": "float32",
+             "Name": "float32",
+             "CrossLanguageDefinitionId": "TypeSpec.float32"
             }
            },
            "IsRequired": false,
@@ -1630,7 +1781,9 @@
             "Kind": "array",
             "ValueType": {
              "$id": "255",
-             "Kind": "float32"
+             "Kind": "float32",
+             "Name": "float32",
+             "CrossLanguageDefinitionId": "TypeSpec.float32"
             }
            },
            "IsRequired": false,
@@ -1646,7 +1799,9 @@
             "Kind": "array",
             "ValueType": {
              "$id": "258",
-             "Kind": "float32"
+             "Kind": "float32",
+             "Name": "float32",
+             "CrossLanguageDefinitionId": "TypeSpec.float32"
             }
            },
            "IsRequired": false,
@@ -1703,8 +1858,9 @@
      "Description": "Model identifier.",
      "Type": {
       "$id": "263",
-      "Kind": "uuid",
-      "Encode": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1717,11 +1873,15 @@
      "Type": {
       "$id": "265",
       "Kind": "utcDateTime",
+      "Name": "utcDateTime",
       "Encode": "rfc3339",
       "WireType": {
        "$id": "266",
-       "Kind": "string"
-      }
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1734,11 +1894,15 @@
      "Type": {
       "$id": "268",
       "Kind": "utcDateTime",
+      "Name": "utcDateTime",
       "Encode": "rfc3339",
       "WireType": {
        "$id": "269",
-       "Kind": "string"
-      }
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1786,7 +1950,9 @@
      "Description": "Number of trained multivariate models.",
      "Type": {
       "$id": "275",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1798,7 +1964,9 @@
      "Description": "Maximum number of models that can be trained for this Anomaly Detector resource.",
      "Type": {
       "$id": "277",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1810,7 +1978,9 @@
      "Description": "The link to fetch more models.",
      "Type": {
       "$id": "279",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1848,7 +2018,9 @@
          "Description": "Variable name of last detection request.",
          "Type": {
           "$id": "285",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -1863,7 +2035,9 @@
           "Kind": "array",
           "ValueType": {
            "$id": "288",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           }
          },
          "IsRequired": true,
@@ -1879,7 +2053,9 @@
           "Kind": "array",
           "ValueType": {
            "$id": "291",
-           "Kind": "float32"
+           "Kind": "float32",
+           "Name": "float32",
+           "CrossLanguageDefinitionId": "TypeSpec.float32"
           }
          },
          "IsRequired": true,
@@ -1898,7 +2074,9 @@
      "Description": "An optional field, which is used to specify the number of top contributed\nvariables for one anomalous timestamp in the response. The default number is\n10.",
      "Type": {
       "$id": "293",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1974,7 +2152,9 @@
      "Description": "A message explaining the error reported by the service.",
      "Type": {
       "$id": "302",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1999,8 +2179,9 @@
      "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
      "Type": {
       "$id": "306",
-      "Kind": "uri",
-      "IsNullable": false
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": ""
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -2034,7 +2215,8 @@
       "Type": {
        "$id": "309",
        "Kind": "string",
-       "IsNullable": false
+       "Name": "string",
+       "CrossLanguageDefinitionId": ""
       },
       "Value": "v1.1"
      }
@@ -2085,7 +2267,8 @@
        "Type": {
         "$id": "314",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2111,7 +2294,8 @@
        "Type": {
         "$id": "317",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2198,7 +2382,8 @@
        "Type": {
         "$id": "323",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2224,7 +2409,8 @@
        "Type": {
         "$id": "326",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2311,7 +2497,8 @@
        "Type": {
         "$id": "332",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2337,7 +2524,8 @@
        "Type": {
         "$id": "335",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2425,8 +2613,9 @@
        "Description": "ID of a batch detection result.",
        "Type": {
         "$id": "342",
-        "Kind": "uuid",
-        "Encode": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2445,7 +2634,8 @@
        "Type": {
         "$id": "344",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2529,7 +2719,8 @@
        "Type": {
         "$id": "350",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2555,7 +2746,8 @@
        "Type": {
         "$id": "353",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2593,7 +2785,9 @@
          "Description": "Location and ID of the model.",
          "Type": {
           "$id": "357",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         }
        ],
@@ -2635,7 +2829,9 @@
        "Description": "Skip indicates how many models will be skipped.",
        "Type": {
         "$id": "360",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -2654,7 +2850,9 @@
        "Description": "Top indicates how many models will be fetched.",
        "Type": {
         "$id": "362",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -2673,7 +2871,8 @@
        "Type": {
         "$id": "364",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2744,7 +2943,9 @@
        "Description": "Model identifier.",
        "Type": {
         "$id": "370",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2763,7 +2964,8 @@
        "Type": {
         "$id": "372",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2823,7 +3025,9 @@
        "Description": "Model identifier.",
        "Type": {
         "$id": "377",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2842,7 +3046,8 @@
        "Type": {
         "$id": "379",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2908,7 +3113,9 @@
        "Description": "Model identifier.",
        "Type": {
         "$id": "384",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2945,7 +3152,8 @@
        "Type": {
         "$id": "387",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2971,7 +3179,8 @@
        "Type": {
         "$id": "390",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3009,7 +3218,9 @@
          "Description": "Id of the detection result.",
          "Type": {
           "$id": "394",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         },
         {
@@ -3019,7 +3230,9 @@
          "Description": "Location of the detection result.",
          "Type": {
           "$id": "396",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         }
        ],
@@ -3061,7 +3274,9 @@
        "Description": "Model identifier.",
        "Type": {
         "$id": "399",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -3098,7 +3313,8 @@
        "Type": {
         "$id": "402",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3124,7 +3340,8 @@
        "Type": {
         "$id": "405",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,

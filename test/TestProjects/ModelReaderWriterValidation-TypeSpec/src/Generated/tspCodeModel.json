@@ -10,7 +10,9 @@
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPatternType",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -37,7 +39,9 @@
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPathTokenType",
    "ValueType": {
     "$id": "7",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -100,7 +104,9 @@
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPathAttributes",
    "ValueType": {
     "$id": "17",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -127,7 +133,9 @@
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasType",
    "ValueType": {
     "$id": "21",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -160,7 +168,9 @@
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderAuthorizationConsentState",
    "ValueType": {
     "$id": "26",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -209,7 +219,9 @@
      "Description": "The id property.",
      "Type": {
       "$id": "33",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -230,7 +242,9 @@
      "Description": "The name.",
      "Type": {
       "$id": "36",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -245,7 +259,9 @@
       "Kind": "array",
       "ValueType": {
        "$id": "39",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       }
      },
      "IsRequired": false,
@@ -258,7 +274,9 @@
      "Description": "The nullable property.",
      "Type": {
       "$id": "41",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -273,11 +291,15 @@
       "Kind": "dict",
       "KeyType": {
        "$id": "44",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "ValueType": {
        "$id": "45",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       }
      },
      "IsRequired": false,
@@ -290,7 +312,9 @@
      "Description": "The x property.",
      "Type": {
       "$id": "47",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -311,7 +335,9 @@
     "Description": "The kind",
     "Type": {
      "$id": "50",
-     "Kind": "string"
+     "Kind": "string",
+     "Name": "string",
+     "CrossLanguageDefinitionId": "TypeSpec.string"
     },
     "IsRequired": true,
     "IsReadOnly": false,
@@ -328,7 +354,9 @@
      "Description": "The name property.",
      "Type": {
       "$id": "52",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -358,7 +386,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "57",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "X"
        },
@@ -376,7 +406,9 @@
         "Kind": "array",
         "ValueType": {
          "$id": "60",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         }
        },
        "IsRequired": false,
@@ -389,7 +421,9 @@
        "Description": "Nullable integer.",
        "Type": {
         "$id": "62",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "IsRequired": false,
        "IsReadOnly": false
@@ -404,11 +438,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "65",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "66",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         }
        },
        "IsRequired": false,
@@ -421,7 +459,9 @@
        "Description": "The XProperty property.",
        "Type": {
         "$id": "68",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "IsRequired": true,
        "IsReadOnly": true
@@ -450,7 +490,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "72",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "Y"
        },
@@ -465,7 +507,9 @@
        "Description": "The YProperty property.",
        "Type": {
         "$id": "74",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "IsRequired": true,
        "IsReadOnly": true
@@ -502,7 +546,9 @@
       "Description": "The id property.",
       "Type": {
        "$id": "78",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "IsRequired": true,
       "IsReadOnly": true
@@ -514,7 +560,9 @@
       "Description": "The name property.",
       "Type": {
        "$id": "80",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "IsRequired": true,
       "IsReadOnly": true
@@ -526,7 +574,9 @@
       "Description": "The resource type.",
       "Type": {
        "$id": "82",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "IsRequired": true,
       "IsReadOnly": true
@@ -538,7 +588,9 @@
       "Description": "The location property.",
       "Type": {
        "$id": "84",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "IsRequired": true,
       "IsReadOnly": false
@@ -553,11 +605,15 @@
        "Kind": "dict",
        "KeyType": {
         "$id": "87",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "ValueType": {
         "$id": "88",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        }
       },
       "IsRequired": false,
@@ -585,7 +641,9 @@
         "Description": "The sku name.",
         "Type": {
          "$id": "92",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -597,7 +655,9 @@
         "Description": "Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**.",
         "Type": {
          "$id": "94",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -609,7 +669,9 @@
         "Description": "Specifies the number of virtual machines in the scale set.",
         "Type": {
          "$id": "96",
-         "Kind": "int64"
+         "Kind": "int64",
+         "Name": "int64",
+         "CrossLanguageDefinitionId": "TypeSpec.int64"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -655,7 +717,9 @@
             "Description": "The resource id",
             "Type": {
              "$id": "103",
-             "Kind": "string"
+             "Kind": "string",
+             "Name": "string",
+             "CrossLanguageDefinitionId": "TypeSpec.string"
             },
             "IsRequired": false,
             "IsReadOnly": false
@@ -673,7 +737,9 @@
         "Description": "The platform fault domain count property.",
         "Type": {
          "$id": "105",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Name": "int32",
+         "CrossLanguageDefinitionId": "TypeSpec.int32"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -685,7 +751,9 @@
         "Description": "The platform update domain count property.",
         "Type": {
          "$id": "107",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Name": "int32",
+         "CrossLanguageDefinitionId": "TypeSpec.int32"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -724,7 +792,9 @@
      "Description": "The provider ID.",
      "Type": {
       "$id": "110",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -736,7 +806,9 @@
      "Description": "The namespace of the resource provider.",
      "Type": {
       "$id": "112",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -748,7 +820,9 @@
      "Description": "The registration state of the resource provider.",
      "Type": {
       "$id": "114",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -760,7 +834,9 @@
      "Description": "The registration policy of the resource provider.",
      "Type": {
       "$id": "116",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -787,7 +863,9 @@
          "Description": "The resource type.",
          "Type": {
           "$id": "121",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -802,7 +880,9 @@
           "Kind": "array",
           "ValueType": {
            "$id": "124",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           }
          },
          "IsRequired": false,
@@ -831,7 +911,9 @@
              "Description": "The azure location.",
              "Type": {
               "$id": "129",
-              "Kind": "string"
+              "Kind": "string",
+              "Name": "string",
+              "CrossLanguageDefinitionId": "TypeSpec.string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -843,7 +925,9 @@
              "Description": "The extended location type.",
              "Type": {
               "$id": "131",
-              "Kind": "string"
+              "Kind": "string",
+              "Name": "string",
+              "CrossLanguageDefinitionId": "TypeSpec.string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -858,7 +942,9 @@
               "Kind": "array",
               "ValueType": {
                "$id": "134",
-               "Kind": "string"
+               "Kind": "string",
+               "Name": "string",
+               "CrossLanguageDefinitionId": "TypeSpec.string"
               }
              },
              "IsRequired": false,
@@ -893,7 +979,9 @@
              "Description": "The alias name.",
              "Type": {
               "$id": "139",
-              "Kind": "string"
+              "Kind": "string",
+              "Name": "string",
+              "CrossLanguageDefinitionId": "TypeSpec.string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -921,7 +1009,9 @@
                  "Description": "The path of an alias.",
                  "Type": {
                   "$id": "144",
-                  "Kind": "string"
+                  "Kind": "string",
+                  "Name": "string",
+                  "CrossLanguageDefinitionId": "TypeSpec.string"
                  },
                  "IsRequired": false,
                  "IsReadOnly": false
@@ -936,7 +1026,9 @@
                   "Kind": "array",
                   "ValueType": {
                    "$id": "147",
-                   "Kind": "string"
+                   "Kind": "string",
+                   "Name": "string",
+                   "CrossLanguageDefinitionId": "TypeSpec.string"
                   }
                  },
                  "IsRequired": false,
@@ -962,7 +1054,9 @@
                     "Description": "The alias pattern phrase.",
                     "Type": {
                      "$id": "151",
-                     "Kind": "string"
+                     "Kind": "string",
+                     "Name": "string",
+                     "CrossLanguageDefinitionId": "TypeSpec.string"
                     },
                     "IsRequired": false,
                     "IsReadOnly": false
@@ -974,7 +1068,9 @@
                     "Description": "The alias pattern variable.",
                     "Type": {
                      "$id": "153",
-                     "Kind": "string"
+                     "Kind": "string",
+                     "Name": "string",
+                     "CrossLanguageDefinitionId": "TypeSpec.string"
                     },
                     "IsRequired": false,
                     "IsReadOnly": false
@@ -1059,7 +1155,9 @@
              "Description": "The default path for an alias.",
              "Type": {
               "$id": "161",
-              "Kind": "string"
+              "Kind": "string",
+              "Name": "string",
+              "CrossLanguageDefinitionId": "TypeSpec.string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -1102,7 +1200,9 @@
           "Kind": "array",
           "ValueType": {
            "$id": "166",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           }
          },
          "IsRequired": false,
@@ -1115,7 +1215,9 @@
          "Description": "The default API version.",
          "Type": {
           "$id": "168",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1143,7 +1245,9 @@
              "Description": "The location of the zone mapping.",
              "Type": {
               "$id": "173",
-              "Kind": "string"
+              "Kind": "string",
+              "Name": "string",
+              "CrossLanguageDefinitionId": "TypeSpec.string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -1158,7 +1262,9 @@
               "Kind": "array",
               "ValueType": {
                "$id": "176",
-               "Kind": "string"
+               "Kind": "string",
+               "Name": "string",
+               "CrossLanguageDefinitionId": "TypeSpec.string"
               }
              },
              "IsRequired": false,
@@ -1192,7 +1298,9 @@
              "Description": "The profile version.",
              "Type": {
               "$id": "181",
-              "Kind": "string"
+              "Kind": "string",
+              "Name": "string",
+              "CrossLanguageDefinitionId": "TypeSpec.string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -1204,7 +1312,9 @@
              "Description": "The API version.",
              "Type": {
               "$id": "183",
-              "Kind": "string"
+              "Kind": "string",
+              "Name": "string",
+              "CrossLanguageDefinitionId": "TypeSpec.string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -1222,7 +1332,9 @@
          "Description": "The additional capabilities offered by this resource type.",
          "Type": {
           "$id": "185",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1237,11 +1349,15 @@
           "Kind": "dict",
           "KeyType": {
            "$id": "188",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           },
           "ValueType": {
            "$id": "189",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           }
          },
          "IsRequired": false,
@@ -1298,7 +1414,9 @@
    "Usage": "RoundTrip",
    "AdditionalProperties": {
     "$id": "192",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Properties": [
     {
@@ -1308,7 +1426,9 @@
      "Description": "The id property.",
      "Type": {
       "$id": "194",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1320,7 +1440,9 @@
      "Description": "The name property.",
      "Type": {
       "$id": "196",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1332,7 +1454,9 @@
      "Description": "The age property.",
      "Type": {
       "$id": "198",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1360,7 +1484,9 @@
      "Description": "The id property.",
      "Type": {
       "$id": "202",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1372,7 +1498,9 @@
      "Description": "The name property.",
      "Type": {
       "$id": "204",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1384,7 +1512,9 @@
      "Description": "The age property.",
      "Type": {
       "$id": "206",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1399,7 +1529,9 @@
    "Usage": "RoundTrip",
    "AdditionalProperties": {
     "$id": "208",
-    "Kind": "any"
+    "Kind": "any",
+    "Name": "unknown",
+    "CrossLanguageDefinitionId": ""
    },
    "Properties": [
     {
@@ -1409,7 +1541,9 @@
      "Description": "The id property.",
      "Type": {
       "$id": "210",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1421,7 +1555,9 @@
      "Description": "The name property.",
      "Type": {
       "$id": "212",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1433,7 +1569,9 @@
      "Description": "The age property.",
      "Type": {
       "$id": "214",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1459,8 +1597,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "218",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1496,7 +1635,8 @@
        "Type": {
         "$id": "221",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1522,7 +1662,8 @@
        "Type": {
         "$id": "224",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1603,7 +1744,8 @@
        "Type": {
         "$id": "230",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1629,7 +1771,8 @@
        "Type": {
         "$id": "233",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1710,7 +1853,8 @@
        "Type": {
         "$id": "239",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1736,7 +1880,8 @@
        "Type": {
         "$id": "242",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1817,7 +1962,8 @@
        "Type": {
         "$id": "248",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1843,7 +1989,8 @@
        "Type": {
         "$id": "251",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1907,7 +2054,8 @@
        "Type": {
         "$id": "256",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1985,7 +2133,8 @@
        "Type": {
         "$id": "262",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2011,7 +2160,8 @@
        "Type": {
         "$id": "265",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2092,7 +2242,8 @@
        "Type": {
         "$id": "271",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2118,7 +2269,8 @@
        "Type": {
         "$id": "274",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2199,7 +2351,8 @@
        "Type": {
         "$id": "280",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2225,7 +2378,8 @@
        "Type": {
         "$id": "283",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,

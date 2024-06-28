@@ -12,7 +12,9 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -57,7 +59,9 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.Versions",
    "ValueType": {
     "$id": "10",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -88,7 +92,9 @@
      "Description": "The name of user.",
      "Type": {
       "$id": "14",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -100,7 +106,9 @@
      "Description": "The role of user",
      "Type": {
       "$id": "16",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -122,7 +130,9 @@
      "Description": "The unique ID of the operation.",
      "Type": {
       "$id": "19",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -158,7 +168,9 @@
         "Description": "One of a server-defined set of error codes.",
         "Type": {
          "$id": "24",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -170,7 +182,9 @@
         "Description": "A human-readable representation of the error.",
         "Type": {
          "$id": "26",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -182,7 +196,9 @@
         "Description": "The target of the error.",
         "Type": {
          "$id": "28",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -222,7 +238,9 @@
            "Description": "One of a server-defined set of error codes.",
            "Type": {
             "$id": "34",
-            "Kind": "string"
+            "Kind": "string",
+            "Name": "string",
+            "CrossLanguageDefinitionId": "TypeSpec.string"
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -271,7 +289,9 @@
      "Description": "The unique ID of the operation.",
      "Type": {
       "$id": "38",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -318,7 +338,9 @@
         "Description": "The name of user.",
         "Type": {
          "$id": "44",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -330,7 +352,9 @@
         "Description": "The exported URI.",
         "Type": {
          "$id": "46",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -360,7 +384,9 @@
      "Description": "The unique ID of the operation.",
      "Type": {
       "$id": "49",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -423,7 +449,8 @@
        "Type": {
         "$id": "56",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -439,7 +466,8 @@
         "Type": {
          "$id": "58",
          "Kind": "string",
-         "IsNullable": false
+         "Name": "string",
+         "CrossLanguageDefinitionId": ""
         },
         "Value": "http://localhost:3000"
        }
@@ -451,7 +479,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "60",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -459,7 +489,8 @@
         "Type": {
          "$id": "62",
          "Kind": "string",
-         "IsNullable": false
+         "Name": "string",
+         "CrossLanguageDefinitionId": ""
         },
         "Value": "2022-12-01-preview"
        },
@@ -479,7 +510,9 @@
        "Description": "The name of user.",
        "Type": {
         "$id": "64",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -516,7 +549,8 @@
        "Type": {
         "$id": "67",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -542,7 +576,8 @@
        "Type": {
         "$id": "70",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -580,7 +615,9 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "74",
-          "Kind": "url"
+          "Kind": "url",
+          "Name": "ResourceLocation",
+          "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation"
          }
         }
        ],
@@ -606,7 +643,9 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "77",
-          "Kind": "url"
+          "Kind": "url",
+          "Name": "ResourceLocation",
+          "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation"
          }
         }
        ],
@@ -659,7 +698,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "82",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -681,7 +722,9 @@
        "Description": "The name of user.",
        "Type": {
         "$id": "84",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -700,7 +743,8 @@
        "Type": {
         "$id": "86",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -738,7 +782,9 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "90",
-          "Kind": "url"
+          "Kind": "url",
+          "Name": "ResourceLocation",
+          "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation"
          }
         }
        ],
@@ -785,7 +831,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "95",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -807,7 +855,9 @@
        "Description": "The name of user.",
        "Type": {
         "$id": "97",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -826,7 +876,9 @@
        "Description": "The format of the data.",
        "Type": {
         "$id": "99",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -845,7 +897,8 @@
        "Type": {
         "$id": "101",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -883,7 +936,9 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "105",
-          "Kind": "url"
+          "Kind": "url",
+          "Name": "ResourceLocation",
+          "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation"
          }
         }
        ],

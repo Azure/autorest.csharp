@@ -25,7 +25,8 @@
        "Type": {
         "$id": "5",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -41,7 +42,8 @@
         "Type": {
          "$id": "7",
          "Kind": "string",
-         "IsNullable": false
+         "Name": "string",
+         "CrossLanguageDefinitionId": ""
         },
         "Value": "http://localhost:3000"
        }
@@ -52,7 +54,9 @@
        "NameInRequest": "x-ms-client-request-id",
        "Type": {
         "$id": "9",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsRequired": false,
@@ -71,7 +75,8 @@
        "Type": {
         "$id": "11",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,

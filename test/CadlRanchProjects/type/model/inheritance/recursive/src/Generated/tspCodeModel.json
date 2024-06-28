@@ -44,7 +44,9 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "int8"
+      "Kind": "int8",
+      "Name": "int8",
+      "CrossLanguageDefinitionId": "TypeSpec.int8"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -75,7 +77,8 @@
        "Type": {
         "$id": "11",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -91,7 +94,8 @@
         "Type": {
          "$id": "13",
          "Kind": "string",
-         "IsNullable": false
+         "Name": "string",
+         "CrossLanguageDefinitionId": ""
         },
         "Value": "http://localhost:3000"
        }
@@ -120,7 +124,8 @@
        "Type": {
         "$id": "16",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -146,7 +151,8 @@
        "Type": {
         "$id": "19",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -204,7 +210,8 @@
        "Type": {
         "$id": "24",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,

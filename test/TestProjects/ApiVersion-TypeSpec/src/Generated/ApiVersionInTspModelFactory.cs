@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-
 namespace ApiVersionInTsp.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -15,7 +13,7 @@ namespace ApiVersionInTsp.Models
         /// <summary> Initializes a new instance of <see cref="Models.DetectionResult"/>. </summary>
         /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
         /// <returns> A new <see cref="Models.DetectionResult"/> instance for mocking. </returns>
-        public static DetectionResult DetectionResult(Guid resultId = default)
+        public static DetectionResult DetectionResult(string resultId = null)
         {
             return new DetectionResult(resultId, serializedAdditionalRawData: null);
         }

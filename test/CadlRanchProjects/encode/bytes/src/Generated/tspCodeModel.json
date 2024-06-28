@@ -19,7 +19,9 @@
      "Type": {
       "$id": "4",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Name": "bytes",
+      "Encode": "base64",
+      "CrossLanguageDefinitionId": "TypeSpec.bytes"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -41,7 +43,9 @@
      "Type": {
       "$id": "7",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Name": "bytes",
+      "Encode": "base64",
+      "CrossLanguageDefinitionId": "TypeSpec.bytes"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -63,7 +67,9 @@
      "Type": {
       "$id": "10",
       "Kind": "bytes",
-      "Encode": "base64url"
+      "Name": "bytes",
+      "Encode": "base64url",
+      "CrossLanguageDefinitionId": "TypeSpec.bytes"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -88,7 +94,9 @@
       "ValueType": {
        "$id": "14",
        "Kind": "bytes",
-       "Encode": "base64url"
+       "Name": "base64urlBytes",
+       "Encode": "base64url",
+       "CrossLanguageDefinitionId": "Encode.Bytes.base64urlBytes"
       }
      },
      "IsRequired": true,
@@ -115,7 +123,8 @@
      "Type": {
       "$id": "18",
       "Kind": "string",
-      "IsNullable": false
+      "Name": "string",
+      "CrossLanguageDefinitionId": ""
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -131,7 +140,8 @@
       "Type": {
        "$id": "20",
        "Kind": "string",
-       "IsNullable": false
+       "Name": "string",
+       "CrossLanguageDefinitionId": ""
       },
       "Value": "http://localhost:3000"
      }
@@ -159,7 +169,9 @@
        "Type": {
         "$id": "24",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -178,7 +190,8 @@
        "Type": {
         "$id": "26",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -233,7 +246,9 @@
        "Type": {
         "$id": "31",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -252,7 +267,8 @@
        "Type": {
         "$id": "33",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -307,7 +323,9 @@
        "Type": {
         "$id": "38",
         "Kind": "bytes",
-        "Encode": "base64url"
+        "Name": "bytes",
+        "Encode": "base64url",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -326,7 +344,8 @@
        "Type": {
         "$id": "40",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -384,7 +403,9 @@
         "ValueType": {
          "$id": "46",
          "Kind": "bytes",
-         "Encode": "base64url"
+         "Name": "base64urlBytes",
+         "Encode": "base64url",
+         "CrossLanguageDefinitionId": "Encode.Bytes.base64urlBytes"
         }
        },
        "Location": "Query",
@@ -405,7 +426,8 @@
        "Type": {
         "$id": "48",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -493,7 +515,8 @@
        "Type": {
         "$id": "56",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -519,7 +542,8 @@
        "Type": {
         "$id": "59",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -600,7 +624,8 @@
        "Type": {
         "$id": "65",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -626,7 +651,8 @@
        "Type": {
         "$id": "68",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -707,7 +733,8 @@
        "Type": {
         "$id": "74",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -733,7 +760,8 @@
        "Type": {
         "$id": "77",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -814,7 +842,8 @@
        "Type": {
         "$id": "83",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -840,7 +869,8 @@
        "Type": {
         "$id": "86",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -920,7 +950,9 @@
        "Type": {
         "$id": "93",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -939,7 +971,8 @@
        "Type": {
         "$id": "95",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -994,7 +1027,9 @@
        "Type": {
         "$id": "100",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1013,7 +1048,8 @@
        "Type": {
         "$id": "102",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1068,7 +1104,9 @@
        "Type": {
         "$id": "107",
         "Kind": "bytes",
-        "Encode": "base64url"
+        "Name": "bytes",
+        "Encode": "base64url",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1087,7 +1125,8 @@
        "Type": {
         "$id": "109",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1145,7 +1184,9 @@
         "ValueType": {
          "$id": "115",
          "Kind": "bytes",
-         "Encode": "base64url"
+         "Name": "base64urlBytes",
+         "Encode": "base64url",
+         "CrossLanguageDefinitionId": "Encode.Bytes.base64urlBytes"
         }
        },
        "Location": "Header",
@@ -1166,7 +1207,8 @@
        "Type": {
         "$id": "117",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1237,7 +1279,9 @@
        "Type": {
         "$id": "124",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1256,7 +1300,8 @@
        "Type": {
         "$id": "126",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1282,7 +1327,8 @@
        "Type": {
         "$id": "129",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1342,7 +1388,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "135",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/octet-stream"
        },
@@ -1370,7 +1418,9 @@
        "Type": {
         "$id": "138",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1389,7 +1439,8 @@
        "Type": {
         "$id": "140",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1449,7 +1500,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "146",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "image/png"
        },
@@ -1477,7 +1530,9 @@
        "Type": {
         "$id": "149",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1496,7 +1551,8 @@
        "Type": {
         "$id": "151",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1554,7 +1610,9 @@
        "Type": {
         "$id": "156",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1573,7 +1631,8 @@
        "Type": {
         "$id": "158",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1599,7 +1658,8 @@
        "Type": {
         "$id": "161",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1657,7 +1717,9 @@
        "Type": {
         "$id": "166",
         "Kind": "bytes",
-        "Encode": "base64url"
+        "Name": "bytes",
+        "Encode": "base64url",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1676,7 +1738,8 @@
        "Type": {
         "$id": "168",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1702,7 +1765,8 @@
        "Type": {
         "$id": "171",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1776,7 +1840,8 @@
        "Type": {
         "$id": "178",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1805,7 +1870,9 @@
        "BodyType": {
         "$id": "181",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1839,7 +1906,8 @@
        "Type": {
         "$id": "184",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1868,7 +1936,9 @@
        "BodyType": {
         "$id": "187",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1902,7 +1972,8 @@
        "Type": {
         "$id": "190",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1931,7 +2002,9 @@
        "BodyType": {
         "$id": "193",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1965,7 +2038,8 @@
        "Type": {
         "$id": "196",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1994,7 +2068,9 @@
        "BodyType": {
         "$id": "199",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2028,7 +2104,8 @@
        "Type": {
         "$id": "202",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2057,7 +2134,9 @@
        "BodyType": {
         "$id": "205",
         "Kind": "bytes",
-        "Encode": "base64url"
+        "Name": "base64urlBytes",
+        "Encode": "base64url",
+        "CrossLanguageDefinitionId": "Encode.Bytes.base64urlBytes"
        },
        "BodyMediaType": "Json",
        "Headers": [],

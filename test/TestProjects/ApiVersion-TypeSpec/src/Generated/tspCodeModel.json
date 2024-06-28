@@ -13,7 +13,9 @@
    "CrossLanguageDefinitionId": "ApiVersionInTsp.APIVersion",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -37,7 +39,9 @@
    "CrossLanguageDefinitionId": "ApiVersionInTsp.Versions",
    "ValueType": {
     "$id": "7",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -71,8 +75,9 @@
      "Description": "Result identifier, which is used to fetch the results of an inference call.",
      "Type": {
       "$id": "12",
-      "Kind": "uuid",
-      "Encode": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -101,8 +106,9 @@
        "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
        "Type": {
         "$id": "16",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -136,7 +142,8 @@
         "Type": {
          "$id": "19",
          "Kind": "string",
-         "IsNullable": false
+         "Name": "string",
+         "CrossLanguageDefinitionId": ""
         },
         "Value": "v1.2"
        }
@@ -147,8 +154,9 @@
        "NameInRequest": "resultId",
        "Type": {
         "$id": "21",
-        "Kind": "uuid",
-        "Encode": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -167,7 +175,8 @@
        "Type": {
         "$id": "23",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,

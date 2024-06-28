@@ -9,7 +9,9 @@
    "Name": "WidgetData0_kind",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -30,7 +32,9 @@
    "Name": "WidgetData1_kind",
    "ValueType": {
     "$id": "6",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -51,7 +55,9 @@
    "Name": "WidgetData2_kind",
    "ValueType": {
     "$id": "9",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -77,7 +83,9 @@
    "Description": "The model extends from Record<unknown> type.",
    "AdditionalProperties": {
     "$id": "12",
-    "Kind": "any"
+    "Kind": "any",
+    "Name": "unknown",
+    "CrossLanguageDefinitionId": ""
    },
    "Properties": [
     {
@@ -87,7 +95,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "14",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -112,7 +122,9 @@
      "Description": "The index property",
      "Type": {
       "$id": "17",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -124,7 +136,9 @@
      "Description": "The age property",
      "Type": {
       "$id": "19",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -140,7 +154,9 @@
    "Description": "The model extends from Record<unknown> with a discriminator.",
    "AdditionalProperties": {
     "$id": "21",
-    "Kind": "any"
+    "Kind": "any",
+    "Name": "unknown",
+    "CrossLanguageDefinitionId": ""
    },
    "DiscriminatorProperty": {
     "$id": "22",
@@ -149,7 +165,9 @@
     "Description": "The discriminator",
     "Type": {
      "$id": "23",
-     "Kind": "string"
+     "Kind": "string",
+     "Name": "string",
+     "CrossLanguageDefinitionId": "TypeSpec.string"
     },
     "IsRequired": true,
     "IsReadOnly": false,
@@ -163,7 +181,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "25",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -196,7 +216,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "30",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "derived"
        },
@@ -211,7 +233,9 @@
        "Description": "The index property",
        "Type": {
         "$id": "32",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "IsRequired": true,
        "IsReadOnly": false
@@ -223,7 +247,9 @@
        "Description": "The age property",
        "Type": {
         "$id": "34",
-        "Kind": "float32"
+        "Kind": "float32",
+        "Name": "float32",
+        "CrossLanguageDefinitionId": "TypeSpec.float32"
        },
        "IsRequired": false,
        "IsReadOnly": false
@@ -244,7 +270,9 @@
    "Description": "The model is from Record<unknown> type.",
    "AdditionalProperties": {
     "$id": "36",
-    "Kind": "any"
+    "Kind": "any",
+    "Name": "unknown",
+    "CrossLanguageDefinitionId": ""
    },
    "Properties": [
     {
@@ -254,7 +282,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "38",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -279,7 +309,9 @@
      "Description": "The index property",
      "Type": {
       "$id": "41",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -291,7 +323,9 @@
      "Description": "The age property",
      "Type": {
       "$id": "43",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -307,7 +341,9 @@
    "Description": "The model is Record<unknown> with a discriminator.",
    "AdditionalProperties": {
     "$id": "45",
-    "Kind": "any"
+    "Kind": "any",
+    "Name": "unknown",
+    "CrossLanguageDefinitionId": ""
    },
    "DiscriminatorProperty": {
     "$id": "46",
@@ -316,7 +352,9 @@
     "Description": "The discriminator",
     "Type": {
      "$id": "47",
-     "Kind": "string"
+     "Kind": "string",
+     "Name": "string",
+     "CrossLanguageDefinitionId": "TypeSpec.string"
     },
     "IsRequired": true,
     "IsReadOnly": false,
@@ -330,7 +368,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "49",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -363,7 +403,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "54",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "derived"
        },
@@ -378,7 +420,9 @@
        "Description": "The index property",
        "Type": {
         "$id": "56",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "IsRequired": true,
        "IsReadOnly": false
@@ -390,7 +434,9 @@
        "Description": "The age property",
        "Type": {
         "$id": "58",
-        "Kind": "float32"
+        "Kind": "float32",
+        "Name": "float32",
+        "CrossLanguageDefinitionId": "TypeSpec.float32"
        },
        "IsRequired": false,
        "IsReadOnly": false
@@ -411,7 +457,9 @@
    "Description": "The model extends from Record<string> type.",
    "AdditionalProperties": {
     "$id": "60",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Properties": [
     {
@@ -421,7 +469,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "62",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -437,7 +487,9 @@
    "Description": "The model is from Record<string> type.",
    "AdditionalProperties": {
     "$id": "64",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Properties": [
     {
@@ -447,7 +499,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "66",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -463,7 +517,9 @@
    "Description": "The model spread Record<string> with the same known property type",
    "AdditionalProperties": {
     "$id": "68",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Properties": [
     {
@@ -473,7 +529,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "70",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -489,7 +547,9 @@
    "Description": "The model extends from Record<float32> type.",
    "AdditionalProperties": {
     "$id": "72",
-    "Kind": "float32"
+    "Kind": "float32",
+    "Name": "float32",
+    "CrossLanguageDefinitionId": "TypeSpec.float32"
    },
    "Properties": [
     {
@@ -499,7 +559,9 @@
      "Description": "The id property",
      "Type": {
       "$id": "74",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -515,7 +577,9 @@
    "Description": "The model is from Record<float32> type.",
    "AdditionalProperties": {
     "$id": "76",
-    "Kind": "float32"
+    "Kind": "float32",
+    "Name": "float32",
+    "CrossLanguageDefinitionId": "TypeSpec.float32"
    },
    "Properties": [
     {
@@ -525,7 +589,9 @@
      "Description": "The id property",
      "Type": {
       "$id": "78",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -541,7 +607,9 @@
    "Description": "The model spread Record<float32> with the same known property type",
    "AdditionalProperties": {
     "$id": "80",
-    "Kind": "float32"
+    "Kind": "float32",
+    "Name": "float32",
+    "CrossLanguageDefinitionId": "TypeSpec.float32"
    },
    "Properties": [
     {
@@ -551,7 +619,9 @@
      "Description": "The id property",
      "Type": {
       "$id": "82",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -580,7 +650,9 @@
       "Description": "The state property",
       "Type": {
        "$id": "86",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "IsRequired": true,
       "IsReadOnly": false
@@ -756,7 +828,9 @@
    "Description": "The model spread Record<string> with the different known property type",
    "AdditionalProperties": {
     "$id": "105",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Properties": [
     {
@@ -766,7 +840,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "107",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -782,7 +858,9 @@
    "Description": "The model spread Record<float32> with the different known property type",
    "AdditionalProperties": {
     "$id": "109",
-    "Kind": "float32"
+    "Kind": "float32",
+    "Name": "float32",
+    "CrossLanguageDefinitionId": "TypeSpec.float32"
    },
    "Properties": [
     {
@@ -792,7 +870,9 @@
      "Description": "The id property",
      "Type": {
       "$id": "111",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -817,7 +897,9 @@
      "Description": "",
      "Type": {
       "$id": "114",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -846,7 +928,9 @@
      "Description": "",
      "Type": {
       "$id": "118",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -871,7 +955,9 @@
      "Description": "The index property",
      "Type": {
       "$id": "121",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -896,7 +982,9 @@
      "Description": "The index property",
      "Type": {
       "$id": "124",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -969,11 +1057,15 @@
     "VariantTypes": [
      {
       "$id": "132",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      {
       "$id": "133",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      }
     ]
    },
@@ -985,7 +1077,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "135",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1006,11 +1100,15 @@
     "VariantTypes": [
      {
       "$id": "138",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      {
       "$id": "139",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      }
     ]
    },
@@ -1022,7 +1120,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "141",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1071,7 +1171,9 @@
         "Description": "",
         "Type": {
          "$id": "148",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -1109,11 +1211,15 @@
         "Type": {
          "$id": "153",
          "Kind": "utcDateTime",
+         "Name": "utcDateTime",
          "Encode": "rfc3339",
          "WireType": {
           "$id": "154",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -1126,11 +1232,15 @@
         "Type": {
          "$id": "156",
          "Kind": "utcDateTime",
+         "Name": "utcDateTime",
          "Encode": "rfc3339",
          "WireType": {
           "$id": "157",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -1147,7 +1257,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "159",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1188,7 +1300,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "163",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1237,7 +1351,9 @@
         "Description": "",
         "Type": {
          "$id": "170",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -1257,7 +1373,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "172",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1299,7 +1417,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "177",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1325,7 +1445,8 @@
      "Type": {
       "$id": "181",
       "Kind": "string",
-      "IsNullable": false
+      "Name": "string",
+      "CrossLanguageDefinitionId": ""
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -1341,7 +1462,8 @@
       "Type": {
        "$id": "183",
        "Kind": "string",
-       "IsNullable": false
+       "Name": "string",
+       "CrossLanguageDefinitionId": ""
       },
       "Value": "http://localhost:3000"
      }
@@ -1370,7 +1492,8 @@
        "Type": {
         "$id": "187",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1450,7 +1573,8 @@
        "Type": {
         "$id": "193",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1476,7 +1600,8 @@
        "Type": {
         "$id": "196",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1551,7 +1676,8 @@
        "Type": {
         "$id": "203",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1631,7 +1757,8 @@
        "Type": {
         "$id": "209",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1657,7 +1784,8 @@
        "Type": {
         "$id": "212",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1732,7 +1860,8 @@
        "Type": {
         "$id": "219",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1812,7 +1941,8 @@
        "Type": {
         "$id": "225",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1838,7 +1968,8 @@
        "Type": {
         "$id": "228",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1913,7 +2044,8 @@
        "Type": {
         "$id": "235",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1993,7 +2125,8 @@
        "Type": {
         "$id": "241",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2019,7 +2152,8 @@
        "Type": {
         "$id": "244",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2094,7 +2228,8 @@
        "Type": {
         "$id": "251",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2174,7 +2309,8 @@
        "Type": {
         "$id": "257",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2200,7 +2336,8 @@
        "Type": {
         "$id": "260",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2275,7 +2412,8 @@
        "Type": {
         "$id": "267",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2355,7 +2493,8 @@
        "Type": {
         "$id": "273",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2381,7 +2520,8 @@
        "Type": {
         "$id": "276",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2456,7 +2596,8 @@
        "Type": {
         "$id": "283",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2536,7 +2677,8 @@
        "Type": {
         "$id": "289",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2562,7 +2704,8 @@
        "Type": {
         "$id": "292",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2637,7 +2780,8 @@
        "Type": {
         "$id": "299",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2717,7 +2861,8 @@
        "Type": {
         "$id": "305",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2743,7 +2888,8 @@
        "Type": {
         "$id": "308",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2818,7 +2964,8 @@
        "Type": {
         "$id": "315",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2898,7 +3045,8 @@
        "Type": {
         "$id": "321",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2924,7 +3072,8 @@
        "Type": {
         "$id": "324",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2999,7 +3148,8 @@
        "Type": {
         "$id": "331",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3079,7 +3229,8 @@
        "Type": {
         "$id": "337",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3105,7 +3256,8 @@
        "Type": {
         "$id": "340",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3180,7 +3332,8 @@
        "Type": {
         "$id": "347",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3260,7 +3413,8 @@
        "Type": {
         "$id": "353",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3286,7 +3440,8 @@
        "Type": {
         "$id": "356",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3361,7 +3516,8 @@
        "Type": {
         "$id": "363",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3441,7 +3597,8 @@
        "Type": {
         "$id": "369",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3467,7 +3624,8 @@
        "Type": {
         "$id": "372",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3542,7 +3700,8 @@
        "Type": {
         "$id": "379",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3622,7 +3781,8 @@
        "Type": {
         "$id": "385",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3648,7 +3808,8 @@
        "Type": {
         "$id": "388",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3723,7 +3884,8 @@
        "Type": {
         "$id": "395",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3803,7 +3965,8 @@
        "Type": {
         "$id": "401",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3829,7 +3992,8 @@
        "Type": {
         "$id": "404",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3904,7 +4068,8 @@
        "Type": {
         "$id": "411",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3984,7 +4149,8 @@
        "Type": {
         "$id": "417",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4010,7 +4176,8 @@
        "Type": {
         "$id": "420",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4085,7 +4252,8 @@
        "Type": {
         "$id": "427",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4165,7 +4333,8 @@
        "Type": {
         "$id": "433",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4191,7 +4360,8 @@
        "Type": {
         "$id": "436",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4266,7 +4436,8 @@
        "Type": {
         "$id": "443",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4346,7 +4517,8 @@
        "Type": {
         "$id": "449",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4372,7 +4544,8 @@
        "Type": {
         "$id": "452",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4447,7 +4620,8 @@
        "Type": {
         "$id": "459",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4527,7 +4701,8 @@
        "Type": {
         "$id": "465",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4553,7 +4728,8 @@
        "Type": {
         "$id": "468",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4628,7 +4804,8 @@
        "Type": {
         "$id": "475",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4708,7 +4885,8 @@
        "Type": {
         "$id": "481",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4734,7 +4912,8 @@
        "Type": {
         "$id": "484",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4809,7 +4988,8 @@
        "Type": {
         "$id": "491",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4889,7 +5069,8 @@
        "Type": {
         "$id": "497",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4915,7 +5096,8 @@
        "Type": {
         "$id": "500",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4990,7 +5172,8 @@
        "Type": {
         "$id": "507",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5070,7 +5253,8 @@
        "Type": {
         "$id": "513",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5096,7 +5280,8 @@
        "Type": {
         "$id": "516",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5171,7 +5356,8 @@
        "Type": {
         "$id": "523",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5251,7 +5437,8 @@
        "Type": {
         "$id": "529",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5277,7 +5464,8 @@
        "Type": {
         "$id": "532",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5352,7 +5540,8 @@
        "Type": {
         "$id": "539",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5432,7 +5621,8 @@
        "Type": {
         "$id": "545",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5458,7 +5648,8 @@
        "Type": {
         "$id": "548",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5533,7 +5724,8 @@
        "Type": {
         "$id": "555",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5613,7 +5805,8 @@
        "Type": {
         "$id": "561",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5639,7 +5832,8 @@
        "Type": {
         "$id": "564",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5714,7 +5908,8 @@
        "Type": {
         "$id": "571",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5794,7 +5989,8 @@
        "Type": {
         "$id": "577",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5820,7 +6016,8 @@
        "Type": {
         "$id": "580",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5895,7 +6092,8 @@
        "Type": {
         "$id": "587",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5975,7 +6173,8 @@
        "Type": {
         "$id": "593",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6001,7 +6200,8 @@
        "Type": {
         "$id": "596",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6076,7 +6276,8 @@
        "Type": {
         "$id": "603",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6156,7 +6357,8 @@
        "Type": {
         "$id": "609",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6182,7 +6384,8 @@
        "Type": {
         "$id": "612",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6257,7 +6460,8 @@
        "Type": {
         "$id": "619",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6337,7 +6541,8 @@
        "Type": {
         "$id": "625",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6363,7 +6568,8 @@
        "Type": {
         "$id": "628",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6438,7 +6644,8 @@
        "Type": {
         "$id": "635",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6518,7 +6725,8 @@
        "Type": {
         "$id": "641",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6544,7 +6752,8 @@
        "Type": {
         "$id": "644",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6619,7 +6828,8 @@
        "Type": {
         "$id": "651",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6699,7 +6909,8 @@
        "Type": {
         "$id": "657",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6725,7 +6936,8 @@
        "Type": {
         "$id": "660",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6800,7 +7012,8 @@
        "Type": {
         "$id": "667",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6880,7 +7093,8 @@
        "Type": {
         "$id": "673",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6906,7 +7120,8 @@
        "Type": {
         "$id": "676",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6981,7 +7196,8 @@
        "Type": {
         "$id": "683",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7061,7 +7277,8 @@
        "Type": {
         "$id": "689",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7087,7 +7304,8 @@
        "Type": {
         "$id": "692",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,

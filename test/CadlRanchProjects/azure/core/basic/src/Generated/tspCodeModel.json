@@ -12,7 +12,9 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.ListItemInputExtensibleEnum",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -39,7 +41,9 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.Versions",
    "ValueType": {
     "$id": "7",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -70,7 +74,9 @@
      "Description": "The user's id.",
      "Type": {
       "$id": "11",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -82,7 +88,9 @@
      "Description": "The user's name.",
      "Type": {
       "$id": "13",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -110,7 +118,9 @@
          "Description": "The user's id.",
          "Type": {
           "$id": "18",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Name": "int32",
+          "CrossLanguageDefinitionId": "TypeSpec.int32"
          },
          "IsRequired": true,
          "IsReadOnly": true
@@ -122,7 +132,9 @@
          "Description": "The user's id.",
          "Type": {
           "$id": "20",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Name": "int32",
+          "CrossLanguageDefinitionId": "TypeSpec.int32"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -134,7 +146,9 @@
          "Description": "The user's order detail",
          "Type": {
           "$id": "22",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -152,8 +166,9 @@
      "Description": "The entity tag for this resource.",
      "Type": {
       "$id": "24",
-      "Kind": "eTag",
-      "Encode": "string"
+      "Kind": "string",
+      "Name": "eTag",
+      "CrossLanguageDefinitionId": "Azure.Core.eTag"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -193,7 +208,9 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "29",
-      "Kind": "url"
+      "Kind": "url",
+      "Name": "ResourceLocation",
+      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -215,7 +232,9 @@
      "Description": "The name of the input.",
      "Type": {
       "$id": "32",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -251,7 +270,9 @@
      "Description": "Link to fetch more items.",
      "Type": {
       "$id": "37",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -289,7 +310,9 @@
          "Description": "The id of the item.",
          "Type": {
           "$id": "43",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Name": "int32",
+          "CrossLanguageDefinitionId": "TypeSpec.int32"
          },
          "IsRequired": true,
          "IsReadOnly": true
@@ -307,7 +330,9 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "45",
-      "Kind": "url"
+      "Kind": "url",
+      "Name": "ResourceLocation",
+      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -348,7 +373,9 @@
          "Description": "The name of the item.",
          "Type": {
           "$id": "51",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": true
@@ -366,7 +393,9 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "53",
-      "Kind": "url"
+      "Kind": "url",
+      "Name": "ResourceLocation",
+      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -399,7 +428,8 @@
        "Type": {
         "$id": "57",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -415,7 +445,8 @@
         "Type": {
          "$id": "59",
          "Kind": "string",
-         "IsNullable": false
+         "Name": "string",
+         "CrossLanguageDefinitionId": ""
         },
         "Value": "http://localhost:3000"
        }
@@ -427,7 +458,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "61",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -435,7 +468,8 @@
         "Type": {
          "$id": "63",
          "Kind": "string",
-         "IsNullable": false
+         "Name": "string",
+         "CrossLanguageDefinitionId": ""
         },
         "Value": "2022-12-01-preview"
        },
@@ -455,7 +489,9 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "65",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -477,7 +513,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "68",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -523,7 +561,8 @@
        "Type": {
         "$id": "72",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -604,7 +643,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "78",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -626,7 +667,9 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "80",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -663,7 +706,8 @@
        "Type": {
         "$id": "83",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -689,7 +733,8 @@
        "Type": {
         "$id": "86",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -770,7 +815,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "92",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -792,7 +839,9 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "94",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -811,7 +860,8 @@
        "Type": {
         "$id": "96",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -874,7 +924,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "101",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -896,7 +948,9 @@
        "Description": "The number of result items to return.",
        "Type": {
         "$id": "103",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -915,7 +969,9 @@
        "Description": "The number of result items to skip.",
        "Type": {
         "$id": "105",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -934,7 +990,9 @@
        "Description": "The maximum number of result items per page.",
        "Type": {
         "$id": "107",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -956,7 +1014,9 @@
         "Kind": "array",
         "ValueType": {
          "$id": "110",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         }
        },
        "Location": "Query",
@@ -976,7 +1036,9 @@
        "Description": "Filter the result list using the given expression.",
        "Type": {
         "$id": "112",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -998,7 +1060,9 @@
         "Kind": "array",
         "ValueType": {
          "$id": "115",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         }
        },
        "Location": "Query",
@@ -1021,7 +1085,9 @@
         "Kind": "array",
         "ValueType": {
          "$id": "118",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         }
        },
        "Location": "Query",
@@ -1041,7 +1107,8 @@
        "Type": {
         "$id": "120",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1108,7 +1175,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "126",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1130,7 +1199,8 @@
        "Type": {
         "$id": "128",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1197,7 +1267,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "134",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1255,7 +1327,8 @@
        "Type": {
         "$id": "138",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1281,7 +1354,8 @@
        "Type": {
         "$id": "141",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1351,7 +1425,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "147",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1373,7 +1449,8 @@
        "Type": {
         "$id": "149",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1441,7 +1518,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "155",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1463,7 +1542,9 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "157",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1482,7 +1563,8 @@
        "Type": {
         "$id": "159",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1539,7 +1621,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "164",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1561,7 +1645,9 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "166",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1580,7 +1666,9 @@
        "Description": "The format of the data.",
        "Type": {
         "$id": "168",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1599,7 +1687,8 @@
        "Type": {
         "$id": "170",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1676,7 +1765,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "177",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1698,7 +1789,8 @@
        "Type": {
         "$id": "179",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1765,7 +1857,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "185",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1787,7 +1881,8 @@
        "Type": {
         "$id": "187",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,

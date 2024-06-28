@@ -69,30 +69,38 @@ namespace ApiVersionInTsp
         }
 
         /// <summary> Get Multivariate Anomaly Detection Result. </summary>
-        /// <param name="resultId"> The <see cref="Guid"/> to use. </param>
+        /// <param name="resultId"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resultId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// For asynchronous inference, get multivariate anomaly detection result based on
         /// resultId returned by the BatchDetectAnomaly api.
         /// </remarks>
-        /// <include file="Docs/ApiVersionInTspClient.xml" path="doc/members/member[@name='GetBatchDetectionResultAsync(Guid,CancellationToken)']/*" />
-        public virtual async Task<Response<DetectionResult>> GetBatchDetectionResultAsync(Guid resultId, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ApiVersionInTspClient.xml" path="doc/members/member[@name='GetBatchDetectionResultAsync(string,CancellationToken)']/*" />
+        public virtual async Task<Response<DetectionResult>> GetBatchDetectionResultAsync(string resultId, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
+
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetBatchDetectionResultAsync(resultId, context).ConfigureAwait(false);
             return Response.FromValue(DetectionResult.FromResponse(response), response);
         }
 
         /// <summary> Get Multivariate Anomaly Detection Result. </summary>
-        /// <param name="resultId"> The <see cref="Guid"/> to use. </param>
+        /// <param name="resultId"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resultId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// For asynchronous inference, get multivariate anomaly detection result based on
         /// resultId returned by the BatchDetectAnomaly api.
         /// </remarks>
-        /// <include file="Docs/ApiVersionInTspClient.xml" path="doc/members/member[@name='GetBatchDetectionResult(Guid,CancellationToken)']/*" />
-        public virtual Response<DetectionResult> GetBatchDetectionResult(Guid resultId, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ApiVersionInTspClient.xml" path="doc/members/member[@name='GetBatchDetectionResult(string,CancellationToken)']/*" />
+        public virtual Response<DetectionResult> GetBatchDetectionResult(string resultId, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
+
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetBatchDetectionResult(resultId, context);
             return Response.FromValue(DetectionResult.FromResponse(response), response);
@@ -108,18 +116,22 @@ namespace ApiVersionInTsp
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetBatchDetectionResultAsync(Guid,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetBatchDetectionResultAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="resultId"> The <see cref="Guid"/> to use. </param>
+        /// <param name="resultId"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resultId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ApiVersionInTspClient.xml" path="doc/members/member[@name='GetBatchDetectionResultAsync(Guid,RequestContext)']/*" />
-        public virtual async Task<Response> GetBatchDetectionResultAsync(Guid resultId, RequestContext context)
+        /// <include file="Docs/ApiVersionInTspClient.xml" path="doc/members/member[@name='GetBatchDetectionResultAsync(string,RequestContext)']/*" />
+        public virtual async Task<Response> GetBatchDetectionResultAsync(string resultId, RequestContext context)
         {
+            Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
+
             using var scope = ClientDiagnostics.CreateScope("ApiVersionInTspClient.GetBatchDetectionResult");
             scope.Start();
             try
@@ -144,18 +156,22 @@ namespace ApiVersionInTsp
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetBatchDetectionResult(Guid,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetBatchDetectionResult(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="resultId"> The <see cref="Guid"/> to use. </param>
+        /// <param name="resultId"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resultId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ApiVersionInTspClient.xml" path="doc/members/member[@name='GetBatchDetectionResult(Guid,RequestContext)']/*" />
-        public virtual Response GetBatchDetectionResult(Guid resultId, RequestContext context)
+        /// <include file="Docs/ApiVersionInTspClient.xml" path="doc/members/member[@name='GetBatchDetectionResult(string,RequestContext)']/*" />
+        public virtual Response GetBatchDetectionResult(string resultId, RequestContext context)
         {
+            Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
+
             using var scope = ClientDiagnostics.CreateScope("ApiVersionInTspClient.GetBatchDetectionResult");
             scope.Start();
             try
@@ -170,7 +186,7 @@ namespace ApiVersionInTsp
             }
         }
 
-        internal HttpMessage CreateGetBatchDetectionResultRequest(Guid resultId, RequestContext context)
+        internal HttpMessage CreateGetBatchDetectionResultRequest(string resultId, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;

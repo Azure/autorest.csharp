@@ -10,7 +10,9 @@
    "CrossLanguageDefinitionId": "CreateTranscriptionRequest.model.anonymous",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -29,7 +31,9 @@
    "CrossLanguageDefinitionId": "CreateTranscriptionRequest.response_format.anonymous",
    "ValueType": {
     "$id": "6",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -68,7 +72,9 @@
    "CrossLanguageDefinitionId": "CreateTranslationRequest.model.anonymous",
    "ValueType": {
     "$id": "13",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -87,7 +93,9 @@
    "CrossLanguageDefinitionId": "CreateTranslationRequest.response_format.anonymous",
    "ValueType": {
     "$id": "16",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -126,7 +134,9 @@
    "CrossLanguageDefinitionId": "CreateChatCompletionRequest.model.anonymous",
    "ValueType": {
     "$id": "23",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -195,7 +205,9 @@
    "CrossLanguageDefinitionId": "ChatCompletionRequestMessage.role.anonymous",
    "ValueType": {
     "$id": "36",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -229,7 +241,9 @@
    "CrossLanguageDefinitionId": "ChatCompletionResponseMessage.role.anonymous",
    "ValueType": {
     "$id": "42",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -263,7 +277,9 @@
    "CrossLanguageDefinitionId": "CreateChatCompletionResponse.choice.finish_reason.anonymous",
    "ValueType": {
     "$id": "48",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -297,7 +313,9 @@
    "CrossLanguageDefinitionId": "CreateFineTuningJobRequest.model.anonymous",
    "ValueType": {
     "$id": "54",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -325,7 +343,9 @@
    "Name": "FineTuningJob_object",
    "ValueType": {
     "$id": "59",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -347,7 +367,9 @@
    "CrossLanguageDefinitionId": "FineTuningJob.status.anonymous",
    "ValueType": {
     "$id": "62",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -391,7 +413,9 @@
    "CrossLanguageDefinitionId": "FineTuningJobEvent.level.anonymous",
    "ValueType": {
     "$id": "70",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -420,7 +444,9 @@
    "CrossLanguageDefinitionId": "CreateCompletionRequest.model.anonymous",
    "ValueType": {
     "$id": "75",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -479,7 +505,9 @@
    "CrossLanguageDefinitionId": "CreateCompletionResponse.choice.finish_reason.anonymous",
    "ValueType": {
     "$id": "86",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -508,7 +536,9 @@
    "CrossLanguageDefinitionId": "CreateEditRequest.model.anonymous",
    "ValueType": {
     "$id": "91",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -531,7 +561,9 @@
    "Name": "CreateEditResponse_object",
    "ValueType": {
     "$id": "95",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -553,7 +585,9 @@
    "CrossLanguageDefinitionId": "CreateEditResponse.choice.finish_reason.anonymous",
    "ValueType": {
     "$id": "98",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -577,7 +611,9 @@
    "CrossLanguageDefinitionId": "CreateEmbeddingRequest.model.anonymous",
    "ValueType": {
     "$id": "102",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -595,7 +631,9 @@
    "Name": "CreateEmbeddingResponse_object",
    "ValueType": {
     "$id": "105",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -616,7 +654,9 @@
    "Name": "Embedding_object",
    "ValueType": {
     "$id": "108",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -637,7 +677,9 @@
    "Name": "OpenAIFile_object",
    "ValueType": {
     "$id": "111",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -659,7 +701,9 @@
    "CrossLanguageDefinitionId": "OpenAIFile.status.anonymous",
    "ValueType": {
     "$id": "114",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -703,7 +747,9 @@
    "CrossLanguageDefinitionId": "CreateFineTuneRequest.model.anonymous",
    "ValueType": {
     "$id": "122",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -736,7 +782,9 @@
    "Name": "FineTune_object",
    "ValueType": {
     "$id": "128",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -758,7 +806,9 @@
    "CrossLanguageDefinitionId": "FineTune.status.anonymous",
    "ValueType": {
     "$id": "131",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -796,7 +846,9 @@
    "Name": "Model_object",
    "ValueType": {
     "$id": "138",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -818,7 +870,9 @@
    "CrossLanguageDefinitionId": "CreateImageRequest.size.anonymous",
    "ValueType": {
     "$id": "141",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -847,7 +901,9 @@
    "CrossLanguageDefinitionId": "CreateImageRequest.response_format.anonymous",
    "ValueType": {
     "$id": "146",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -871,7 +927,9 @@
    "CrossLanguageDefinitionId": "CreateModerationRequest.model.anonymous",
    "ValueType": {
     "$id": "150",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -905,7 +963,9 @@
      "Type": {
       "$id": "155",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Name": "bytes",
+      "Encode": "base64",
+      "CrossLanguageDefinitionId": "TypeSpec.bytes"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -928,7 +988,9 @@
      "Description": "An optional text to guide the model's style or continue a previous audio segment. The\n[prompt](/docs/guides/speech-to-text/prompting) should match the audio language.",
      "Type": {
       "$id": "158",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -951,7 +1013,9 @@
      "Description": "The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more\nrandom, while lower values like 0.2 will make it more focused and deterministic. If set to 0,\nthe model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to\nautomatically increase the temperature until certain thresholds are hit.",
      "Type": {
       "$id": "161",
-      "Kind": "float64"
+      "Kind": "float64",
+      "Name": "float64",
+      "CrossLanguageDefinitionId": "TypeSpec.float64"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -963,7 +1027,9 @@
      "Description": "The language of the input audio. Supplying the input language in\n[ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will improve accuracy\nand latency.",
      "Type": {
       "$id": "163",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -984,7 +1050,9 @@
      "Description": "",
      "Type": {
       "$id": "166",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1006,7 +1074,9 @@
      "Type": {
       "$id": "169",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Name": "bytes",
+      "Encode": "base64",
+      "CrossLanguageDefinitionId": "TypeSpec.bytes"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1029,7 +1099,9 @@
      "Description": "An optional text to guide the model's style or continue a previous audio segment. The\n[prompt](/docs/guides/speech-to-text/prompting) should match the audio language.",
      "Type": {
       "$id": "172",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1052,7 +1124,9 @@
      "Description": "The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more\nrandom, while lower values like 0.2 will make it more focused and deterministic. If set to 0,\nthe model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to\nautomatically increase the temperature until certain thresholds are hit.",
      "Type": {
       "$id": "175",
-      "Kind": "float64"
+      "Kind": "float64",
+      "Name": "float64",
+      "CrossLanguageDefinitionId": "TypeSpec.float64"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1073,7 +1147,9 @@
      "Description": "",
      "Type": {
       "$id": "178",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1134,7 +1210,9 @@
           "Kind": "nullable",
           "Type": {
            "$id": "187",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           }
          },
          "IsRequired": true,
@@ -1147,7 +1225,9 @@
          "Description": "The name of the author of this message. `name` is required if role is `function`, and it\nshould be the name of the function whose response is in the `content`. May contain a-z,\nA-Z, 0-9, and underscores, with a maximum length of 64 characters.",
          "Type": {
           "$id": "189",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1171,7 +1251,9 @@
             "Description": "The name of the function to call.",
             "Type": {
              "$id": "193",
-             "Kind": "string"
+             "Kind": "string",
+             "Name": "string",
+             "CrossLanguageDefinitionId": "TypeSpec.string"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -1183,7 +1265,9 @@
             "Description": "The arguments to call the function with, as generated by the model in JSON format. Note that\nthe model does not always generate valid JSON, and may hallucinate parameters not defined by\nyour function schema. Validate the arguments in your code before calling your function.",
             "Type": {
              "$id": "195",
-             "Kind": "string"
+             "Kind": "string",
+             "Name": "string",
+             "CrossLanguageDefinitionId": "TypeSpec.string"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -1221,7 +1305,9 @@
          "Description": "The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and\ndashes, with a maximum length of 64.",
          "Type": {
           "$id": "200",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -1233,7 +1319,9 @@
          "Description": "A description of what the function does, used by the model to choose when and how to call the\nfunction.",
          "Type": {
           "$id": "202",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1251,7 +1339,9 @@
           "Usage": "Input",
           "AdditionalProperties": {
            "$id": "205",
-           "Kind": "any"
+           "Kind": "any",
+           "Name": "unknown",
+           "CrossLanguageDefinitionId": ""
           },
           "Properties": []
          },
@@ -1279,7 +1369,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "209",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "none"
        },
@@ -1288,7 +1380,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "211",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "auto"
        },
@@ -1306,7 +1400,9 @@
           "Description": "The name of the function to call.",
           "Type": {
            "$id": "214",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           },
           "IsRequired": true,
           "IsReadOnly": false
@@ -1328,7 +1424,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "217",
-       "Kind": "float64"
+       "Kind": "float64",
+       "Name": "Temperature",
+       "CrossLanguageDefinitionId": "OpenAI.Temperature"
       }
      },
      "IsRequired": false,
@@ -1344,7 +1442,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "220",
-       "Kind": "float64"
+       "Kind": "float64",
+       "Name": "TopP",
+       "CrossLanguageDefinitionId": "OpenAI.TopP"
       }
      },
      "IsRequired": false,
@@ -1360,7 +1460,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "223",
-       "Kind": "safeint"
+       "Kind": "safeint",
+       "Name": "N",
+       "CrossLanguageDefinitionId": "OpenAI.N"
       }
      },
      "IsRequired": false,
@@ -1376,7 +1478,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "226",
-       "Kind": "safeint"
+       "Kind": "safeint",
+       "Name": "MaxTokens",
+       "CrossLanguageDefinitionId": "OpenAI.MaxTokens"
       }
      },
      "IsRequired": false,
@@ -1397,14 +1501,18 @@
        "VariantTypes": [
         {
          "$id": "230",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         {
          "$id": "231",
          "Kind": "array",
          "ValueType": {
           "$id": "232",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         }
        ]
@@ -1423,7 +1531,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "235",
-       "Kind": "float64"
+       "Kind": "float64",
+       "Name": "Penalty",
+       "CrossLanguageDefinitionId": "OpenAI.Penalty"
       }
      },
      "IsRequired": false,
@@ -1439,7 +1549,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "238",
-       "Kind": "float64"
+       "Kind": "float64",
+       "Name": "Penalty",
+       "CrossLanguageDefinitionId": "OpenAI.Penalty"
       }
      },
      "IsRequired": false,
@@ -1458,11 +1570,15 @@
        "Kind": "dict",
        "KeyType": {
         "$id": "242",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "ValueType": {
         "$id": "243",
-        "Kind": "safeint"
+        "Kind": "safeint",
+        "Name": "safeint",
+        "CrossLanguageDefinitionId": "TypeSpec.safeint"
        }
       }
      },
@@ -1476,7 +1592,9 @@
      "Description": "A unique identifier representing your end-user, which can help OpenAI to monitor and detect\nabuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).",
      "Type": {
       "$id": "245",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "User",
+      "CrossLanguageDefinitionId": "OpenAI.User"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1491,7 +1609,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "248",
-       "Kind": "boolean"
+       "Kind": "boolean",
+       "Name": "boolean",
+       "CrossLanguageDefinitionId": "TypeSpec.boolean"
       }
      },
      "IsRequired": false,
@@ -1529,7 +1649,9 @@
      "Description": "A unique identifier for the chat completion.",
      "Type": {
       "$id": "251",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1541,7 +1663,9 @@
      "Description": "The object type, which is always `chat.completion`.",
      "Type": {
       "$id": "253",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1554,11 +1678,15 @@
      "Type": {
       "$id": "255",
       "Kind": "utcDateTime",
+      "Name": "utcDateTime",
       "Encode": "unixTimestamp",
       "WireType": {
        "$id": "256",
-       "Kind": "int32"
-      }
+       "Kind": "int32",
+       "Name": "int32",
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1570,7 +1698,9 @@
      "Description": "The model used for the chat completion.",
      "Type": {
       "$id": "258",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1597,7 +1727,9 @@
          "Description": "The index of the choice in the list of choices.",
          "Type": {
           "$id": "263",
-          "Kind": "safeint"
+          "Kind": "safeint",
+          "Name": "safeint",
+          "CrossLanguageDefinitionId": "TypeSpec.safeint"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -1635,7 +1767,9 @@
              "Kind": "nullable",
              "Type": {
               "$id": "269",
-              "Kind": "string"
+              "Kind": "string",
+              "Name": "string",
+              "CrossLanguageDefinitionId": "TypeSpec.string"
              }
             },
             "IsRequired": true,
@@ -1660,7 +1794,9 @@
                "Description": "The name of the function to call.",
                "Type": {
                 "$id": "273",
-                "Kind": "string"
+                "Kind": "string",
+                "Name": "string",
+                "CrossLanguageDefinitionId": "TypeSpec.string"
                },
                "IsRequired": true,
                "IsReadOnly": false
@@ -1672,7 +1808,9 @@
                "Description": "The arguments to call the function with, as generated by the model in JSON format. Note that\nthe model does not always generate valid JSON, and may hallucinate parameters not defined by\nyour function schema. Validate the arguments in your code before calling your function.",
                "Type": {
                 "$id": "275",
-                "Kind": "string"
+                "Kind": "string",
+                "Name": "string",
+                "CrossLanguageDefinitionId": "TypeSpec.string"
                },
                "IsRequired": true,
                "IsReadOnly": false
@@ -1724,7 +1862,9 @@
         "Description": "Number of tokens in the prompt.",
         "Type": {
          "$id": "280",
-         "Kind": "safeint"
+         "Kind": "safeint",
+         "Name": "safeint",
+         "CrossLanguageDefinitionId": "TypeSpec.safeint"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -1736,7 +1876,9 @@
         "Description": "Number of tokens in the generated completion",
         "Type": {
          "$id": "282",
-         "Kind": "safeint"
+         "Kind": "safeint",
+         "Name": "safeint",
+         "CrossLanguageDefinitionId": "TypeSpec.safeint"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -1748,7 +1890,9 @@
         "Description": "Total number of tokens used in the request (prompt + completion).",
         "Type": {
          "$id": "284",
-         "Kind": "safeint"
+         "Kind": "safeint",
+         "Name": "safeint",
+         "CrossLanguageDefinitionId": "TypeSpec.safeint"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -1786,7 +1930,9 @@
      "Description": "The ID of an uploaded file that contains training data.\n\nSee [upload file](/docs/api-reference/files/upload) for how to upload a file.\n\nYour dataset must be formatted as a JSONL file. Additionally, you must upload your file with\nthe purpose `fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/fine-tuning) for more details.",
      "Type": {
       "$id": "287",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1801,7 +1947,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "290",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       }
      },
      "IsRequired": false,
@@ -1845,13 +1993,17 @@
            "Kind": "constant",
            "ValueType": {
             "$id": "297",
-            "Kind": "string"
+            "Kind": "string",
+            "Name": "string",
+            "CrossLanguageDefinitionId": "TypeSpec.string"
            },
            "Value": "auto"
           },
           {
            "$id": "298",
-           "Kind": "safeint"
+           "Kind": "safeint",
+           "Name": "NEpochs",
+           "CrossLanguageDefinitionId": "OpenAI.NEpochs"
           }
          ]
         },
@@ -1873,7 +2025,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "301",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "SuffixString",
+       "CrossLanguageDefinitionId": "OpenAI.SuffixString"
       }
      },
      "IsRequired": false,
@@ -1898,7 +2052,9 @@
      "Description": "The object identifier, which can be referenced in the API endpoints.",
      "Type": {
       "$id": "304",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1927,11 +2083,15 @@
      "Type": {
       "$id": "308",
       "Kind": "utcDateTime",
+      "Name": "utcDateTime",
       "Encode": "unixTimestamp",
       "WireType": {
        "$id": "309",
-       "Kind": "int32"
-      }
+       "Kind": "int32",
+       "Name": "int32",
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1947,11 +2107,15 @@
       "Type": {
        "$id": "312",
        "Kind": "utcDateTime",
+       "Name": "utcDateTime",
        "Encode": "unixTimestamp",
        "WireType": {
         "$id": "313",
-        "Kind": "int32"
-       }
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
       }
      },
      "IsRequired": true,
@@ -1964,7 +2128,9 @@
      "Description": "The base model that is being fine-tuned.",
      "Type": {
       "$id": "315",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1979,7 +2145,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "318",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       }
      },
      "IsRequired": true,
@@ -1992,7 +2160,9 @@
      "Description": "The organization that owns the fine-tuning job.",
      "Type": {
       "$id": "320",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2035,13 +2205,17 @@
            "Kind": "constant",
            "ValueType": {
             "$id": "327",
-            "Kind": "string"
+            "Kind": "string",
+            "Name": "string",
+            "CrossLanguageDefinitionId": "TypeSpec.string"
            },
            "Value": "auto"
           },
           {
            "$id": "328",
-           "Kind": "safeint"
+           "Kind": "safeint",
+           "Name": "NEpochs",
+           "CrossLanguageDefinitionId": "OpenAI.NEpochs"
           }
          ]
         },
@@ -2060,7 +2234,9 @@
      "Description": "The file ID used for training. You can retrieve the training data with the\n[Files API](/docs/api-reference/files/retrieve-contents).",
      "Type": {
       "$id": "330",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2075,7 +2251,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "333",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       }
      },
      "IsRequired": true,
@@ -2091,7 +2269,9 @@
       "Kind": "array",
       "ValueType": {
        "$id": "336",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       }
      },
      "IsRequired": true,
@@ -2107,7 +2287,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "339",
-       "Kind": "safeint"
+       "Kind": "safeint",
+       "Name": "safeint",
+       "CrossLanguageDefinitionId": "TypeSpec.safeint"
       }
      },
      "IsRequired": true,
@@ -2135,7 +2317,9 @@
          "Description": "A human-readable error message.",
          "Type": {
           "$id": "344",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -2147,7 +2331,9 @@
          "Description": "A machine-readable error code.",
          "Type": {
           "$id": "346",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -2162,7 +2348,9 @@
           "Kind": "nullable",
           "Type": {
            "$id": "349",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           }
          },
          "IsRequired": false,
@@ -2196,7 +2384,9 @@
      "Description": "",
      "Type": {
       "$id": "352",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2223,7 +2413,9 @@
      "Description": "",
      "Type": {
       "$id": "356",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2244,7 +2436,9 @@
      "Description": "",
      "Type": {
       "$id": "359",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2271,7 +2465,9 @@
          "Description": "",
          "Type": {
           "$id": "364",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -2283,7 +2479,9 @@
          "Description": "",
          "Type": {
           "$id": "366",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -2296,11 +2494,15 @@
          "Type": {
           "$id": "368",
           "Kind": "utcDateTime",
+          "Name": "utcDateTime",
           "Encode": "unixTimestamp",
           "WireType": {
            "$id": "369",
-           "Kind": "int32"
-          }
+           "Kind": "int32",
+           "Name": "int32",
+           "CrossLanguageDefinitionId": "TypeSpec.int32"
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -2323,7 +2525,9 @@
          "Description": "",
          "Type": {
           "$id": "372",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -2372,14 +2576,18 @@
        "VariantTypes": [
         {
          "$id": "378",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         {
          "$id": "379",
          "Kind": "array",
          "ValueType": {
           "$id": "380",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         },
         {
@@ -2387,7 +2595,9 @@
          "Kind": "array",
          "ValueType": {
           "$id": "382",
-          "Kind": "safeint"
+          "Kind": "safeint",
+          "Name": "safeint",
+          "CrossLanguageDefinitionId": "TypeSpec.safeint"
          }
         },
         {
@@ -2398,7 +2608,9 @@
           "Kind": "array",
           "ValueType": {
            "$id": "385",
-           "Kind": "safeint"
+           "Kind": "safeint",
+           "Name": "safeint",
+           "CrossLanguageDefinitionId": "TypeSpec.safeint"
           }
          }
         }
@@ -2418,7 +2630,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "388",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       }
      },
      "IsRequired": false,
@@ -2434,7 +2648,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "391",
-       "Kind": "float64"
+       "Kind": "float64",
+       "Name": "Temperature",
+       "CrossLanguageDefinitionId": "OpenAI.Temperature"
       }
      },
      "IsRequired": false,
@@ -2450,7 +2666,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "394",
-       "Kind": "float64"
+       "Kind": "float64",
+       "Name": "TopP",
+       "CrossLanguageDefinitionId": "OpenAI.TopP"
       }
      },
      "IsRequired": false,
@@ -2466,7 +2684,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "397",
-       "Kind": "safeint"
+       "Kind": "safeint",
+       "Name": "N",
+       "CrossLanguageDefinitionId": "OpenAI.N"
       }
      },
      "IsRequired": false,
@@ -2482,7 +2702,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "400",
-       "Kind": "safeint"
+       "Kind": "safeint",
+       "Name": "MaxTokens",
+       "CrossLanguageDefinitionId": "OpenAI.MaxTokens"
       }
      },
      "IsRequired": false,
@@ -2503,14 +2725,18 @@
        "VariantTypes": [
         {
          "$id": "404",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         {
          "$id": "405",
          "Kind": "array",
          "ValueType": {
           "$id": "406",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         }
        ]
@@ -2529,7 +2755,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "409",
-       "Kind": "float64"
+       "Kind": "float64",
+       "Name": "Penalty",
+       "CrossLanguageDefinitionId": "OpenAI.Penalty"
       }
      },
      "IsRequired": false,
@@ -2545,7 +2773,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "412",
-       "Kind": "float64"
+       "Kind": "float64",
+       "Name": "Penalty",
+       "CrossLanguageDefinitionId": "OpenAI.Penalty"
       }
      },
      "IsRequired": false,
@@ -2564,11 +2794,15 @@
        "Kind": "dict",
        "KeyType": {
         "$id": "416",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "ValueType": {
         "$id": "417",
-        "Kind": "safeint"
+        "Kind": "safeint",
+        "Name": "safeint",
+        "CrossLanguageDefinitionId": "TypeSpec.safeint"
        }
       }
      },
@@ -2582,7 +2816,9 @@
      "Description": "A unique identifier representing your end-user, which can help OpenAI to monitor and detect\nabuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).",
      "Type": {
       "$id": "419",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "User",
+      "CrossLanguageDefinitionId": "OpenAI.User"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -2597,7 +2833,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "422",
-       "Kind": "boolean"
+       "Kind": "boolean",
+       "Name": "boolean",
+       "CrossLanguageDefinitionId": "TypeSpec.boolean"
       }
      },
      "IsRequired": false,
@@ -2613,7 +2851,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "425",
-       "Kind": "safeint"
+       "Kind": "safeint",
+       "Name": "safeint",
+       "CrossLanguageDefinitionId": "TypeSpec.safeint"
       }
      },
      "IsRequired": false,
@@ -2629,7 +2869,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "428",
-       "Kind": "boolean"
+       "Kind": "boolean",
+       "Name": "boolean",
+       "CrossLanguageDefinitionId": "TypeSpec.boolean"
       }
      },
      "IsRequired": false,
@@ -2645,7 +2887,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "431",
-       "Kind": "safeint"
+       "Kind": "safeint",
+       "Name": "safeint",
+       "CrossLanguageDefinitionId": "TypeSpec.safeint"
       }
      },
      "IsRequired": false,
@@ -2668,7 +2912,9 @@
      "Description": "A unique identifier for the completion.",
      "Type": {
       "$id": "434",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2680,7 +2926,9 @@
      "Description": "The object type, which is always `text_completion`.",
      "Type": {
       "$id": "436",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2693,11 +2941,15 @@
      "Type": {
       "$id": "438",
       "Kind": "utcDateTime",
+      "Name": "utcDateTime",
       "Encode": "unixTimestamp",
       "WireType": {
        "$id": "439",
-       "Kind": "int32"
-      }
+       "Kind": "int32",
+       "Name": "int32",
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2709,7 +2961,9 @@
      "Description": "The model used for the completion.",
      "Type": {
       "$id": "441",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2736,7 +2990,9 @@
          "Description": "",
          "Type": {
           "$id": "446",
-          "Kind": "safeint"
+          "Kind": "safeint",
+          "Name": "safeint",
+          "CrossLanguageDefinitionId": "TypeSpec.safeint"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -2748,7 +3004,9 @@
          "Description": "",
          "Type": {
           "$id": "448",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -2778,7 +3036,9 @@
               "Kind": "array",
               "ValueType": {
                "$id": "454",
-               "Kind": "string"
+               "Kind": "string",
+               "Name": "string",
+               "CrossLanguageDefinitionId": "TypeSpec.string"
               }
              },
              "IsRequired": true,
@@ -2794,7 +3054,9 @@
               "Kind": "array",
               "ValueType": {
                "$id": "457",
-               "Kind": "float64"
+               "Kind": "float64",
+               "Name": "float64",
+               "CrossLanguageDefinitionId": "TypeSpec.float64"
               }
              },
              "IsRequired": true,
@@ -2813,11 +3075,15 @@
                "Kind": "dict",
                "KeyType": {
                 "$id": "461",
-                "Kind": "string"
+                "Kind": "string",
+                "Name": "string",
+                "CrossLanguageDefinitionId": "TypeSpec.string"
                },
                "ValueType": {
                 "$id": "462",
-                "Kind": "safeint"
+                "Kind": "safeint",
+                "Name": "safeint",
+                "CrossLanguageDefinitionId": "TypeSpec.safeint"
                }
               }
              },
@@ -2834,7 +3100,9 @@
               "Kind": "array",
               "ValueType": {
                "$id": "465",
-               "Kind": "safeint"
+               "Kind": "safeint",
+               "Name": "safeint",
+               "CrossLanguageDefinitionId": "TypeSpec.safeint"
               }
              },
              "IsRequired": true,
@@ -2910,7 +3178,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "472",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       }
      },
      "IsRequired": false,
@@ -2923,7 +3193,9 @@
      "Description": "The instruction that tells the model how to edit the prompt.",
      "Type": {
       "$id": "474",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2938,7 +3210,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "477",
-       "Kind": "safeint"
+       "Kind": "safeint",
+       "Name": "EditN",
+       "CrossLanguageDefinitionId": "OpenAI.EditN"
       }
      },
      "IsRequired": false,
@@ -2954,7 +3228,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "480",
-       "Kind": "float64"
+       "Kind": "float64",
+       "Name": "Temperature",
+       "CrossLanguageDefinitionId": "OpenAI.Temperature"
       }
      },
      "IsRequired": false,
@@ -2970,7 +3246,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "483",
-       "Kind": "float64"
+       "Kind": "float64",
+       "Name": "TopP",
+       "CrossLanguageDefinitionId": "OpenAI.TopP"
       }
      },
      "IsRequired": false,
@@ -3010,11 +3288,15 @@
      "Type": {
       "$id": "488",
       "Kind": "utcDateTime",
+      "Name": "utcDateTime",
       "Encode": "unixTimestamp",
       "WireType": {
        "$id": "489",
-       "Kind": "int32"
-      }
+       "Kind": "int32",
+       "Name": "int32",
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -3041,7 +3323,9 @@
          "Description": "The edited result.",
          "Type": {
           "$id": "494",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -3053,7 +3337,9 @@
          "Description": "The index of the choice in the list of choices.",
          "Type": {
           "$id": "496",
-          "Kind": "safeint"
+          "Kind": "safeint",
+          "Name": "safeint",
+          "CrossLanguageDefinitionId": "TypeSpec.safeint"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -3121,14 +3407,18 @@
       "VariantTypes": [
        {
         "$id": "503",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        {
         "$id": "504",
         "Kind": "array",
         "ValueType": {
          "$id": "505",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         }
        },
        {
@@ -3136,7 +3426,9 @@
         "Kind": "array",
         "ValueType": {
          "$id": "507",
-         "Kind": "safeint"
+         "Kind": "safeint",
+         "Name": "safeint",
+         "CrossLanguageDefinitionId": "TypeSpec.safeint"
         }
        },
        {
@@ -3147,7 +3439,9 @@
          "Kind": "array",
          "ValueType": {
           "$id": "510",
-          "Kind": "safeint"
+          "Kind": "safeint",
+          "Name": "safeint",
+          "CrossLanguageDefinitionId": "TypeSpec.safeint"
          }
         }
        }
@@ -3163,7 +3457,9 @@
      "Description": "",
      "Type": {
       "$id": "512",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "User",
+      "CrossLanguageDefinitionId": "OpenAI.User"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -3200,7 +3496,9 @@
      "Description": "The name of the model used to generate the embedding.",
      "Type": {
       "$id": "517",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -3228,7 +3526,9 @@
          "Description": "The index of the embedding in the list of embeddings.",
          "Type": {
           "$id": "522",
-          "Kind": "safeint"
+          "Kind": "safeint",
+          "Name": "safeint",
+          "CrossLanguageDefinitionId": "TypeSpec.safeint"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -3259,7 +3559,9 @@
           "Kind": "array",
           "ValueType": {
            "$id": "527",
-           "Kind": "float64"
+           "Kind": "float64",
+           "Name": "float64",
+           "CrossLanguageDefinitionId": "TypeSpec.float64"
           }
          },
          "IsRequired": true,
@@ -3290,7 +3592,9 @@
         "Description": "The number of tokens used by the prompt.",
         "Type": {
          "$id": "531",
-         "Kind": "safeint"
+         "Kind": "safeint",
+         "Name": "safeint",
+         "CrossLanguageDefinitionId": "TypeSpec.safeint"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -3302,7 +3606,9 @@
         "Description": "The total number of tokens used by the request.",
         "Type": {
          "$id": "533",
-         "Kind": "safeint"
+         "Kind": "safeint",
+         "Name": "safeint",
+         "CrossLanguageDefinitionId": "TypeSpec.safeint"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -3334,7 +3640,9 @@
      "Description": "",
      "Type": {
       "$id": "536",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -3362,7 +3670,9 @@
          "Description": "The file identifier, which can be referenced in the API endpoints.",
          "Type": {
           "$id": "541",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -3390,7 +3700,9 @@
          "Description": "The size of the file in bytes.",
          "Type": {
           "$id": "545",
-          "Kind": "safeint"
+          "Kind": "safeint",
+          "Name": "safeint",
+          "CrossLanguageDefinitionId": "TypeSpec.safeint"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -3403,11 +3715,15 @@
          "Type": {
           "$id": "547",
           "Kind": "utcDateTime",
+          "Name": "utcDateTime",
           "Encode": "unixTimestamp",
           "WireType": {
            "$id": "548",
-           "Kind": "int32"
-          }
+           "Kind": "int32",
+           "Name": "int32",
+           "CrossLanguageDefinitionId": "TypeSpec.int32"
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -3419,7 +3735,9 @@
          "Description": "The name of the file.",
          "Type": {
           "$id": "550",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -3431,7 +3749,9 @@
          "Description": "The intended purpose of the file. Currently, only \"fine-tune\" is supported.",
          "Type": {
           "$id": "552",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -3457,7 +3777,9 @@
           "Kind": "nullable",
           "Type": {
            "$id": "556",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           }
          },
          "IsRequired": false,
@@ -3489,7 +3811,9 @@
      "Type": {
       "$id": "559",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Name": "bytes",
+      "Encode": "base64",
+      "CrossLanguageDefinitionId": "TypeSpec.bytes"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -3501,7 +3825,9 @@
      "Description": "The intended purpose of the uploaded documents. Use \"fine-tune\" for\n[fine-tuning](/docs/api-reference/fine-tuning). This allows us to validate the format of the\nuploaded file.",
      "Type": {
       "$id": "561",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -3522,7 +3848,9 @@
      "Description": "",
      "Type": {
       "$id": "564",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -3534,7 +3862,9 @@
      "Description": "",
      "Type": {
       "$id": "566",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -3546,7 +3876,9 @@
      "Description": "",
      "Type": {
       "$id": "568",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -3567,7 +3899,9 @@
      "Description": "The ID of an uploaded file that contains training data.\n\nSee [upload file](/docs/api-reference/files/upload) for how to upload a file.\n\nYour dataset must be formatted as a JSONL file, where each training example is a JSON object\nwith the keys \"prompt\" and \"completion\". Additionally, you must upload your file with the\npurpose `fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more\ndetails.",
      "Type": {
       "$id": "571",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -3582,7 +3916,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "574",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       }
      },
      "IsRequired": false,
@@ -3613,7 +3949,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "579",
-       "Kind": "safeint"
+       "Kind": "safeint",
+       "Name": "safeint",
+       "CrossLanguageDefinitionId": "TypeSpec.safeint"
       }
      },
      "IsRequired": false,
@@ -3629,7 +3967,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "582",
-       "Kind": "safeint"
+       "Kind": "safeint",
+       "Name": "safeint",
+       "CrossLanguageDefinitionId": "TypeSpec.safeint"
       }
      },
      "IsRequired": false,
@@ -3645,7 +3985,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "585",
-       "Kind": "float64"
+       "Kind": "float64",
+       "Name": "float64",
+       "CrossLanguageDefinitionId": "TypeSpec.float64"
       }
      },
      "IsRequired": false,
@@ -3661,7 +4003,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "588",
-       "Kind": "float64"
+       "Kind": "float64",
+       "Name": "float64",
+       "CrossLanguageDefinitionId": "TypeSpec.float64"
       }
      },
      "IsRequired": false,
@@ -3677,7 +4021,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "591",
-       "Kind": "boolean"
+       "Kind": "boolean",
+       "Name": "boolean",
+       "CrossLanguageDefinitionId": "TypeSpec.boolean"
       }
      },
      "IsRequired": false,
@@ -3693,7 +4039,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "594",
-       "Kind": "safeint"
+       "Kind": "safeint",
+       "Name": "safeint",
+       "CrossLanguageDefinitionId": "TypeSpec.safeint"
       }
      },
      "IsRequired": false,
@@ -3709,7 +4057,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "597",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       }
      },
      "IsRequired": false,
@@ -3728,7 +4078,9 @@
        "Kind": "array",
        "ValueType": {
         "$id": "601",
-        "Kind": "float64"
+        "Kind": "float64",
+        "Name": "float64",
+        "CrossLanguageDefinitionId": "TypeSpec.float64"
        }
       }
      },
@@ -3745,7 +4097,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "604",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "SuffixString",
+       "CrossLanguageDefinitionId": "OpenAI.SuffixString"
       }
      },
      "IsRequired": false,
@@ -3769,7 +4123,9 @@
      "Description": "The object identifier, which can be referenced in the API endpoints.",
      "Type": {
       "$id": "607",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -3798,11 +4154,15 @@
      "Type": {
       "$id": "611",
       "Kind": "utcDateTime",
+      "Name": "utcDateTime",
       "Encode": "unixTimestamp",
       "WireType": {
        "$id": "612",
-       "Kind": "int32"
-      }
+       "Kind": "int32",
+       "Name": "int32",
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -3815,11 +4175,15 @@
      "Type": {
       "$id": "614",
       "Kind": "utcDateTime",
+      "Name": "utcDateTime",
       "Encode": "unixTimestamp",
       "WireType": {
        "$id": "615",
-       "Kind": "int32"
-      }
+       "Kind": "int32",
+       "Name": "int32",
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -3831,7 +4195,9 @@
      "Description": "The base model that is being fine-tuned.",
      "Type": {
       "$id": "617",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -3846,7 +4212,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "620",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       }
      },
      "IsRequired": true,
@@ -3859,7 +4227,9 @@
      "Description": "The organization that owns the fine-tuning job.",
      "Type": {
       "$id": "622",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -3894,7 +4264,9 @@
         "Description": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.",
         "Type": {
          "$id": "627",
-         "Kind": "safeint"
+         "Kind": "safeint",
+         "Name": "safeint",
+         "CrossLanguageDefinitionId": "TypeSpec.safeint"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -3906,7 +4278,9 @@
         "Description": "The batch size to use for training. The batch size is the number of training examples used to\ntrain a single forward and backward pass.",
         "Type": {
          "$id": "629",
-         "Kind": "safeint"
+         "Kind": "safeint",
+         "Name": "safeint",
+         "CrossLanguageDefinitionId": "TypeSpec.safeint"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -3918,7 +4292,9 @@
         "Description": "The weight to use for loss on the prompt tokens.",
         "Type": {
          "$id": "631",
-         "Kind": "float64"
+         "Kind": "float64",
+         "Name": "float64",
+         "CrossLanguageDefinitionId": "TypeSpec.float64"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -3930,7 +4306,9 @@
         "Description": "The learning rate multiplier to use for training.",
         "Type": {
          "$id": "633",
-         "Kind": "float64"
+         "Kind": "float64",
+         "Name": "float64",
+         "CrossLanguageDefinitionId": "TypeSpec.float64"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -3942,7 +4320,9 @@
         "Description": "The classification metrics to compute using the validation dataset at the end of every epoch.",
         "Type": {
          "$id": "635",
-         "Kind": "boolean"
+         "Kind": "boolean",
+         "Name": "boolean",
+         "CrossLanguageDefinitionId": "TypeSpec.boolean"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -3954,7 +4334,9 @@
         "Description": "The positive class to use for computing classification metrics.",
         "Type": {
          "$id": "637",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -3966,7 +4348,9 @@
         "Description": "The number of classes to use for computing classification metrics.",
         "Type": {
          "$id": "639",
-         "Kind": "safeint"
+         "Kind": "safeint",
+         "Name": "safeint",
+         "CrossLanguageDefinitionId": "TypeSpec.safeint"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -4043,7 +4427,9 @@
          "Description": "",
          "Type": {
           "$id": "650",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -4056,11 +4442,15 @@
          "Type": {
           "$id": "652",
           "Kind": "utcDateTime",
+          "Name": "utcDateTime",
           "Encode": "unixTimestamp",
           "WireType": {
            "$id": "653",
-           "Kind": "int32"
-          }
+           "Kind": "int32",
+           "Name": "int32",
+           "CrossLanguageDefinitionId": "TypeSpec.int32"
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -4072,7 +4462,9 @@
          "Description": "",
          "Type": {
           "$id": "655",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -4084,7 +4476,9 @@
          "Description": "",
          "Type": {
           "$id": "657",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -4117,7 +4511,9 @@
      "Description": "",
      "Type": {
       "$id": "660",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4153,7 +4549,9 @@
      "Description": "",
      "Type": {
       "$id": "665",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4189,7 +4587,9 @@
      "Description": "",
      "Type": {
       "$id": "670",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4217,7 +4617,9 @@
          "Description": "The model identifier, which can be referenced in the API endpoints.",
          "Type": {
           "$id": "675",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -4246,11 +4648,15 @@
          "Type": {
           "$id": "679",
           "Kind": "utcDateTime",
+          "Name": "utcDateTime",
           "Encode": "unixTimestamp",
           "WireType": {
            "$id": "680",
-           "Kind": "int32"
-          }
+           "Kind": "int32",
+           "Name": "int32",
+           "CrossLanguageDefinitionId": "TypeSpec.int32"
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -4262,7 +4668,9 @@
          "Description": "The organization that owns the model.",
          "Type": {
           "$id": "682",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -4292,7 +4700,9 @@
      "Description": "",
      "Type": {
       "$id": "685",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4304,7 +4714,9 @@
      "Description": "",
      "Type": {
       "$id": "687",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4316,7 +4728,9 @@
      "Description": "",
      "Type": {
       "$id": "689",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4337,7 +4751,9 @@
      "Description": "A text description of the desired image(s). The maximum length is 1000 characters.",
      "Type": {
       "$id": "692",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4352,7 +4768,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "695",
-       "Kind": "safeint"
+       "Kind": "safeint",
+       "Name": "ImagesN",
+       "CrossLanguageDefinitionId": "OpenAI.ImagesN"
       }
      },
      "IsRequired": false,
@@ -4395,7 +4813,9 @@
      "Description": "",
      "Type": {
       "$id": "701",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "User",
+      "CrossLanguageDefinitionId": "OpenAI.User"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -4417,11 +4837,15 @@
      "Type": {
       "$id": "704",
       "Kind": "utcDateTime",
+      "Name": "utcDateTime",
       "Encode": "unixTimestamp",
       "WireType": {
        "$id": "705",
-       "Kind": "int32"
-      }
+       "Kind": "int32",
+       "Name": "int32",
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4449,7 +4873,9 @@
          "Description": "The URL of the generated image, if `response_format` is `url` (default).",
          "Type": {
           "$id": "710",
-          "Kind": "url"
+          "Kind": "url",
+          "Name": "url",
+          "CrossLanguageDefinitionId": "TypeSpec.url"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -4462,7 +4888,9 @@
          "Type": {
           "$id": "712",
           "Kind": "bytes",
-          "Encode": "base64"
+          "Name": "bytes",
+          "Encode": "base64",
+          "CrossLanguageDefinitionId": "TypeSpec.bytes"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -4492,7 +4920,9 @@
      "Description": "A text description of the desired image(s). The maximum length is 1000 characters.",
      "Type": {
       "$id": "715",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4505,7 +4935,9 @@
      "Type": {
       "$id": "717",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Name": "bytes",
+      "Encode": "base64",
+      "CrossLanguageDefinitionId": "TypeSpec.bytes"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4518,7 +4950,9 @@
      "Type": {
       "$id": "719",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Name": "bytes",
+      "Encode": "base64",
+      "CrossLanguageDefinitionId": "TypeSpec.bytes"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -4533,7 +4967,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "722",
-       "Kind": "safeint"
+       "Kind": "safeint",
+       "Name": "ImagesN",
+       "CrossLanguageDefinitionId": "OpenAI.ImagesN"
       }
      },
      "IsRequired": false,
@@ -4576,7 +5012,9 @@
      "Description": "",
      "Type": {
       "$id": "728",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "User",
+      "CrossLanguageDefinitionId": "OpenAI.User"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -4598,7 +5036,9 @@
      "Type": {
       "$id": "731",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Name": "bytes",
+      "Encode": "base64",
+      "CrossLanguageDefinitionId": "TypeSpec.bytes"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4613,7 +5053,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "734",
-       "Kind": "safeint"
+       "Kind": "safeint",
+       "Name": "ImagesN",
+       "CrossLanguageDefinitionId": "OpenAI.ImagesN"
       }
      },
      "IsRequired": false,
@@ -4656,7 +5098,9 @@
      "Description": "",
      "Type": {
       "$id": "740",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "User",
+      "CrossLanguageDefinitionId": "OpenAI.User"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -4682,14 +5126,18 @@
       "VariantTypes": [
        {
         "$id": "744",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        {
         "$id": "745",
         "Kind": "array",
         "ValueType": {
          "$id": "746",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         }
        }
       ]
@@ -4724,7 +5172,9 @@
      "Description": "The unique identifier for the moderation request.",
      "Type": {
       "$id": "750",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4736,7 +5186,9 @@
      "Description": "The model used to generate the moderation results.",
      "Type": {
       "$id": "752",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4763,7 +5215,9 @@
          "Description": "Whether the content violates [OpenAI's usage policies](/policies/usage-policies).",
          "Type": {
           "$id": "757",
-          "Kind": "boolean"
+          "Kind": "boolean",
+          "Name": "boolean",
+          "CrossLanguageDefinitionId": "TypeSpec.boolean"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -4787,7 +5241,9 @@
             "Description": "Content that expresses, incites, or promotes hate based on race, gender, ethnicity,\nreligion, nationality, sexual orientation, disability status, or caste. Hateful content\naimed at non-protected groups (e.g., chess players) is harrassment.",
             "Type": {
              "$id": "761",
-             "Kind": "boolean"
+             "Kind": "boolean",
+             "Name": "boolean",
+             "CrossLanguageDefinitionId": "TypeSpec.boolean"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -4799,7 +5255,9 @@
             "Description": "Hateful content that also includes violence or serious harm towards the targeted group\nbased on race, gender, ethnicity, religion, nationality, sexual orientation, disability\nstatus, or caste.",
             "Type": {
              "$id": "763",
-             "Kind": "boolean"
+             "Kind": "boolean",
+             "Name": "boolean",
+             "CrossLanguageDefinitionId": "TypeSpec.boolean"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -4811,7 +5269,9 @@
             "Description": "Content that expresses, incites, or promotes harassing language towards any target.",
             "Type": {
              "$id": "765",
-             "Kind": "boolean"
+             "Kind": "boolean",
+             "Name": "boolean",
+             "CrossLanguageDefinitionId": "TypeSpec.boolean"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -4823,7 +5283,9 @@
             "Description": "Harassment content that also includes violence or serious harm towards any target.",
             "Type": {
              "$id": "767",
-             "Kind": "boolean"
+             "Kind": "boolean",
+             "Name": "boolean",
+             "CrossLanguageDefinitionId": "TypeSpec.boolean"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -4835,7 +5297,9 @@
             "Description": "Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting,\nand eating disorders.",
             "Type": {
              "$id": "769",
-             "Kind": "boolean"
+             "Kind": "boolean",
+             "Name": "boolean",
+             "CrossLanguageDefinitionId": "TypeSpec.boolean"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -4847,7 +5311,9 @@
             "Description": "Content where the speaker expresses that they are engaging or intend to engage in acts of\nself-harm, such as suicide, cutting, and eating disorders.",
             "Type": {
              "$id": "771",
-             "Kind": "boolean"
+             "Kind": "boolean",
+             "Name": "boolean",
+             "CrossLanguageDefinitionId": "TypeSpec.boolean"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -4859,7 +5325,9 @@
             "Description": "Content that encourages performing acts of self-harm, such as suicide, cutting, and eating\ndisorders, or that gives instructions or advice on how to commit such acts.",
             "Type": {
              "$id": "773",
-             "Kind": "boolean"
+             "Kind": "boolean",
+             "Name": "boolean",
+             "CrossLanguageDefinitionId": "TypeSpec.boolean"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -4871,7 +5339,9 @@
             "Description": "Content meant to arouse sexual excitement, such as the description of sexual activity, or\nthat promotes sexual services (excluding sex education and wellness).",
             "Type": {
              "$id": "775",
-             "Kind": "boolean"
+             "Kind": "boolean",
+             "Name": "boolean",
+             "CrossLanguageDefinitionId": "TypeSpec.boolean"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -4883,7 +5353,9 @@
             "Description": "Sexual content that includes an individual who is under 18 years old.",
             "Type": {
              "$id": "777",
-             "Kind": "boolean"
+             "Kind": "boolean",
+             "Name": "boolean",
+             "CrossLanguageDefinitionId": "TypeSpec.boolean"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -4895,7 +5367,9 @@
             "Description": "Content that depicts death, violence, or physical injury.",
             "Type": {
              "$id": "779",
-             "Kind": "boolean"
+             "Kind": "boolean",
+             "Name": "boolean",
+             "CrossLanguageDefinitionId": "TypeSpec.boolean"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -4907,7 +5381,9 @@
             "Description": "Content that depicts death, violence, or physical injury in graphic detail.",
             "Type": {
              "$id": "781",
-             "Kind": "boolean"
+             "Kind": "boolean",
+             "Name": "boolean",
+             "CrossLanguageDefinitionId": "TypeSpec.boolean"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -4936,7 +5412,9 @@
             "Description": "The score for the category 'hate'.",
             "Type": {
              "$id": "785",
-             "Kind": "float64"
+             "Kind": "float64",
+             "Name": "float64",
+             "CrossLanguageDefinitionId": "TypeSpec.float64"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -4948,7 +5426,9 @@
             "Description": "The score for the category 'hate/threatening'.",
             "Type": {
              "$id": "787",
-             "Kind": "float64"
+             "Kind": "float64",
+             "Name": "float64",
+             "CrossLanguageDefinitionId": "TypeSpec.float64"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -4960,7 +5440,9 @@
             "Description": "The score for the category 'harassment'.",
             "Type": {
              "$id": "789",
-             "Kind": "float64"
+             "Kind": "float64",
+             "Name": "float64",
+             "CrossLanguageDefinitionId": "TypeSpec.float64"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -4972,7 +5454,9 @@
             "Description": "The score for the category 'harassment/threatening'.",
             "Type": {
              "$id": "791",
-             "Kind": "float64"
+             "Kind": "float64",
+             "Name": "float64",
+             "CrossLanguageDefinitionId": "TypeSpec.float64"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -4984,7 +5468,9 @@
             "Description": "The score for the category 'self-harm'.",
             "Type": {
              "$id": "793",
-             "Kind": "float64"
+             "Kind": "float64",
+             "Name": "float64",
+             "CrossLanguageDefinitionId": "TypeSpec.float64"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -4996,7 +5482,9 @@
             "Description": "The score for the category 'self-harm/intent'.",
             "Type": {
              "$id": "795",
-             "Kind": "float64"
+             "Kind": "float64",
+             "Name": "float64",
+             "CrossLanguageDefinitionId": "TypeSpec.float64"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -5008,7 +5496,9 @@
             "Description": "The score for the category 'self-harm/instructive'.",
             "Type": {
              "$id": "797",
-             "Kind": "float64"
+             "Kind": "float64",
+             "Name": "float64",
+             "CrossLanguageDefinitionId": "TypeSpec.float64"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -5020,7 +5510,9 @@
             "Description": "The score for the category 'sexual'.",
             "Type": {
              "$id": "799",
-             "Kind": "float64"
+             "Kind": "float64",
+             "Name": "float64",
+             "CrossLanguageDefinitionId": "TypeSpec.float64"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -5032,7 +5524,9 @@
             "Description": "The score for the category 'sexual/minors'.",
             "Type": {
              "$id": "801",
-             "Kind": "float64"
+             "Kind": "float64",
+             "Name": "float64",
+             "CrossLanguageDefinitionId": "TypeSpec.float64"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -5044,7 +5538,9 @@
             "Description": "The score for the category 'violence'.",
             "Type": {
              "$id": "803",
-             "Kind": "float64"
+             "Kind": "float64",
+             "Name": "float64",
+             "CrossLanguageDefinitionId": "TypeSpec.float64"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -5056,7 +5552,9 @@
             "Description": "The score for the category 'violence/graphic'.",
             "Type": {
              "$id": "805",
-             "Kind": "float64"
+             "Kind": "float64",
+             "Name": "float64",
+             "CrossLanguageDefinitionId": "TypeSpec.float64"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -5109,7 +5607,9 @@
         "Description": "",
         "Type": {
          "$id": "810",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -5121,7 +5621,9 @@
         "Description": "",
         "Type": {
          "$id": "812",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -5136,7 +5638,9 @@
          "Kind": "nullable",
          "Type": {
           "$id": "815",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         },
         "IsRequired": true,
@@ -5152,7 +5656,9 @@
          "Kind": "nullable",
          "Type": {
           "$id": "818",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         },
         "IsRequired": true,
@@ -5187,7 +5693,8 @@
      "Type": {
       "$id": "822",
       "Kind": "string",
-      "IsNullable": false
+      "Name": "string",
+      "CrossLanguageDefinitionId": ""
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -5203,7 +5710,8 @@
       "Type": {
        "$id": "824",
        "Kind": "string",
-       "IsNullable": false
+       "Name": "string",
+       "CrossLanguageDefinitionId": ""
       },
       "Value": "https://api.openai.com/v1"
      }
@@ -5249,7 +5757,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "831",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "multipart/form-data"
        },
@@ -5294,7 +5804,8 @@
        "Type": {
         "$id": "835",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5377,7 +5888,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "843",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "multipart/form-data"
        },
@@ -5422,7 +5935,8 @@
        "Type": {
         "$id": "847",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5534,7 +6048,8 @@
        "Type": {
         "$id": "857",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5560,7 +6075,8 @@
        "Type": {
         "$id": "860",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5673,7 +6189,8 @@
        "Type": {
         "$id": "870",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5699,7 +6216,8 @@
        "Type": {
         "$id": "873",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5763,7 +6281,9 @@
        "Description": "Identifier for the last job from the previous pagination request.",
        "Type": {
         "$id": "878",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -5782,7 +6302,9 @@
        "Description": "Number of fine-tuning jobs to retrieve.",
        "Type": {
         "$id": "880",
-        "Kind": "safeint"
+        "Kind": "safeint",
+        "Name": "safeint",
+        "CrossLanguageDefinitionId": "TypeSpec.safeint"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -5801,7 +6323,8 @@
        "Type": {
         "$id": "882",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5862,7 +6385,9 @@
        "NameInRequest": "fine_tuning_job_id",
        "Type": {
         "$id": "887",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -5881,7 +6406,8 @@
        "Type": {
         "$id": "889",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5943,7 +6469,9 @@
        "Description": "The ID of the fine-tuning job to get events for.",
        "Type": {
         "$id": "894",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -5962,7 +6490,9 @@
        "Description": "Identifier for the last event from the previous pagination request.",
        "Type": {
         "$id": "896",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -5981,7 +6511,9 @@
        "Description": "Number of events to retrieve.",
        "Type": {
         "$id": "898",
-        "Kind": "integer"
+        "Kind": "integer",
+        "Name": "integer",
+        "CrossLanguageDefinitionId": "TypeSpec.integer"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -6000,7 +6532,8 @@
        "Type": {
         "$id": "900",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6062,7 +6595,9 @@
        "Description": "The ID of the fine-tuning job to cancel.",
        "Type": {
         "$id": "905",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -6081,7 +6616,8 @@
        "Type": {
         "$id": "907",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6175,7 +6711,8 @@
        "Type": {
         "$id": "915",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6201,7 +6738,8 @@
        "Type": {
         "$id": "918",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6299,7 +6837,8 @@
        "Type": {
         "$id": "926",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6325,7 +6864,8 @@
        "Type": {
         "$id": "929",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6423,7 +6963,8 @@
        "Type": {
         "$id": "937",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6449,7 +6990,8 @@
        "Type": {
         "$id": "940",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6530,7 +7072,8 @@
        "Type": {
         "$id": "947",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6594,7 +7137,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "953",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "multipart/form-data"
        },
@@ -6639,7 +7184,8 @@
        "Type": {
         "$id": "957",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6704,7 +7250,9 @@
        "Description": "The ID of the file to use for this request.",
        "Type": {
         "$id": "962",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -6723,7 +7271,8 @@
        "Type": {
         "$id": "964",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6785,7 +7334,9 @@
        "Description": "The ID of the file to use for this request.",
        "Type": {
         "$id": "969",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -6804,7 +7355,8 @@
        "Type": {
         "$id": "971",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6866,7 +7418,9 @@
        "Description": "The ID of the file to use for this request.",
        "Type": {
         "$id": "976",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -6885,7 +7439,8 @@
        "Type": {
         "$id": "978",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6913,7 +7468,9 @@
        ],
        "BodyType": {
         "$id": "981",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -6982,7 +7539,8 @@
        "Type": {
         "$id": "987",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7008,7 +7566,8 @@
        "Type": {
         "$id": "990",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7074,7 +7633,8 @@
        "Type": {
         "$id": "995",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7137,7 +7697,9 @@
        "Description": "The ID of the fine-tune job",
        "Type": {
         "$id": "1000",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -7156,7 +7718,8 @@
        "Type": {
         "$id": "1002",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7219,7 +7782,9 @@
        "Description": "The ID of the fine-tune job to get events for.",
        "Type": {
         "$id": "1007",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -7238,7 +7803,9 @@
        "Description": "Whether to stream events for the fine-tune job. If set to true, events will be sent as\ndata-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available. The stream will terminate with a `data: [DONE]` message when the\njob is finished (succeeded, cancelled, or failed).\n\nIf set to false, only events generated so far will be returned.",
        "Type": {
         "$id": "1009",
-        "Kind": "boolean"
+        "Kind": "boolean",
+        "Name": "boolean",
+        "CrossLanguageDefinitionId": "TypeSpec.boolean"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -7257,7 +7824,8 @@
        "Type": {
         "$id": "1011",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7320,7 +7888,9 @@
        "Description": "The ID of the fine-tune job to cancel",
        "Type": {
         "$id": "1016",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -7339,7 +7909,8 @@
        "Type": {
         "$id": "1018",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7417,7 +7988,8 @@
        "Type": {
         "$id": "1025",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7479,7 +8051,9 @@
        "Description": "The ID of the model to use for this request.",
        "Type": {
         "$id": "1030",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -7498,7 +8072,8 @@
        "Type": {
         "$id": "1032",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7560,7 +8135,9 @@
        "Description": "The model to delete",
        "Type": {
         "$id": "1037",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -7579,7 +8156,8 @@
        "Type": {
         "$id": "1039",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7674,7 +8252,8 @@
        "Type": {
         "$id": "1047",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7700,7 +8279,8 @@
        "Type": {
         "$id": "1050",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7767,7 +8347,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "1056",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "multipart/form-data"
        },
@@ -7812,7 +8394,8 @@
        "Type": {
         "$id": "1060",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7879,7 +8462,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "1066",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "multipart/form-data"
        },
@@ -7924,7 +8509,8 @@
        "Type": {
         "$id": "1070",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -8022,7 +8608,8 @@
        "Type": {
         "$id": "1078",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -8048,7 +8635,8 @@
        "Type": {
         "$id": "1081",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
