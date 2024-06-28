@@ -2451,7 +2451,7 @@ new BaseModel(123)
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             using RequestContent content = null;
-            Response response = client.AzureLocationOp(default, default, content);
+            Response response = client.AzureLocationOp(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), content);
 
             Console.WriteLine(response.Status);
         }
@@ -2464,7 +2464,7 @@ new BaseModel(123)
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             using RequestContent content = null;
-            Response response = await client.AzureLocationOpAsync(default, default, content);
+            Response response = await client.AzureLocationOpAsync(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), content);
 
             Console.WriteLine(response.Status);
         }
@@ -2476,7 +2476,7 @@ new BaseModel(123)
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.AzureLocationOp(default, default);
+            Response response = client.AzureLocationOp(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"));
         }
 
         [Test]
@@ -2486,7 +2486,7 @@ new BaseModel(123)
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.AzureLocationOpAsync(default, default);
+            Response response = await client.AzureLocationOpAsync(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"));
         }
 
         [Test]
@@ -2498,9 +2498,9 @@ new BaseModel(123)
 
             using RequestContent content = RequestContent.Create(new
             {
-                location = new object(),
+                location = "<location>",
             });
-            Response response = client.AzureLocationOp(default, default, content);
+            Response response = client.AzureLocationOp(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), content);
 
             Console.WriteLine(response.Status);
         }
@@ -2514,9 +2514,9 @@ new BaseModel(123)
 
             using RequestContent content = RequestContent.Create(new
             {
-                location = new object(),
+                location = "<location>",
             });
-            Response response = await client.AzureLocationOpAsync(default, default, content);
+            Response response = await client.AzureLocationOpAsync(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), content);
 
             Console.WriteLine(response.Status);
         }
@@ -2528,8 +2528,8 @@ new BaseModel(123)
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            AzureLocationModel body = new AzureLocationModel(default);
-            Response response = client.AzureLocationOp(default, default, body: body);
+            AzureLocationModel body = new AzureLocationModel(new AzureLocation("<location>"));
+            Response response = client.AzureLocationOp(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), body: body);
         }
 
         [Test]
@@ -2539,8 +2539,8 @@ new BaseModel(123)
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            AzureLocationModel body = new AzureLocationModel(default);
-            Response response = await client.AzureLocationOpAsync(default, default, body: body);
+            AzureLocationModel body = new AzureLocationModel(new AzureLocation("<location>"));
+            Response response = await client.AzureLocationOpAsync(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), body: body);
         }
     }
 }
