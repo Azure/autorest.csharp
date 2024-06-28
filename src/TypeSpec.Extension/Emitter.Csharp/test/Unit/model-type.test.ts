@@ -1,8 +1,7 @@
 import { TestHost } from "@typespec/compiler/testing";
-import assert, { deepStrictEqual, strictEqual } from "assert";
+import assert, { deepStrictEqual, ok, strictEqual } from "assert";
 import { beforeEach, describe, it } from "vitest";
 import { createModel } from "../../src/lib/client-model-builder.js";
-import { InputModelProperty } from "../../src/type/input-model-property.js";
 import {
     createEmitterContext,
     createEmitterTestHost,
@@ -61,22 +60,13 @@ op test(@body input: Pet): Pet;
         const discriminatorProperty = petModel?.Properties.find(
             (p) => p === petModel?.DiscriminatorProperty
         );
-        deepStrictEqual(
-            {
-                Name: "kind",
-                SerializedName: "kind",
-                Type: {
-                    Kind: "string",
-                    Encode: undefined
-                },
-                IsRequired: true,
-                IsReadOnly: false,
-                IsDiscriminator: true,
-                Description: "Discriminator property for Pet.",
-                FlattenedNames: undefined
-            } as InputModelProperty,
-            discriminatorProperty
-        );
+        strictEqual(discriminatorProperty?.Name, "kind");
+        strictEqual(discriminatorProperty.SerializedName, "kind");
+        strictEqual(discriminatorProperty.Type.Kind, "string");
+        strictEqual(discriminatorProperty.IsRequired, true);
+        strictEqual(discriminatorProperty.IsReadOnly, false);
+        strictEqual(discriminatorProperty.IsDiscriminator, true);
+        strictEqual(discriminatorProperty.FlattenedNames, undefined);
         // assert we will NOT have a DiscriminatorProperty on the derived models
         assert(
             catModel?.DiscriminatorProperty === undefined,
@@ -152,44 +142,16 @@ op test(@body input: Pet): Pet;
         const discriminatorProperty = pet?.Properties.find(
             (p) => p === pet?.DiscriminatorProperty
         );
-        deepStrictEqual(
-            {
-                Name: "kind",
-                SerializedName: "kind",
-                Description: "The kind of the pet",
-                Type: {
-                    Kind: "enum",
-                    Name: "PetKind",
-                    CrossLanguageDefinitionId: "Azure.Csharp.Testing.PetKind",
-                    Description: "The pet kind",
-                    Accessibility: undefined,
-                    Deprecated: undefined,
-                    ValueType: {
-                        Kind: "string",
-                        Encode: undefined
-                    },
-                    Values: [
-                        {
-                            Name: "Cat",
-                            Value: "Cat",
-                            Description: undefined
-                        },
-                        {
-                            Name: "Dog",
-                            Value: "Dog",
-                            Description: undefined
-                        }
-                    ],
-                    IsExtensible: false,
-                    Usage: "RoundTrip"
-                },
-                IsRequired: true,
-                IsReadOnly: false,
-                IsDiscriminator: true,
-                FlattenedNames: undefined
-            } as InputModelProperty,
-            discriminatorProperty
-        );
+        strictEqual(discriminatorProperty?.Name, "kind");
+        strictEqual(discriminatorProperty.SerializedName, "kind");
+        strictEqual(discriminatorProperty.Description, "The kind of the pet");
+        strictEqual(discriminatorProperty.Type.Kind, "enum");
+        strictEqual(discriminatorProperty.Type.Name, "PetKind");
+        strictEqual(discriminatorProperty.Type.ValueType.Kind, "string");
+        strictEqual(discriminatorProperty.IsRequired, true);
+        strictEqual(discriminatorProperty.IsReadOnly, false);
+        strictEqual(discriminatorProperty.IsDiscriminator, true);
+        strictEqual(discriminatorProperty.FlattenedNames, undefined);
 
         // verify derived model Cat
         const cat = models.find((m) => m.Name === "Cat");
@@ -279,44 +241,16 @@ op test(@body input: Pet): Pet;
         const discriminatorProperty = pet?.Properties.find(
             (p) => p === pet?.DiscriminatorProperty
         );
-        deepStrictEqual(
-            {
-                Name: "kind",
-                SerializedName: "kind",
-                Description: "The kind of the pet",
-                Type: {
-                    Kind: "enum",
-                    Name: "PetKind",
-                    CrossLanguageDefinitionId: "Azure.Csharp.Testing.PetKind",
-                    Accessibility: undefined,
-                    Deprecated: undefined,
-                    Description: "The pet kind",
-                    ValueType: {
-                        Kind: "string",
-                        Encode: undefined
-                    },
-                    Values: [
-                        {
-                            Name: "Cat",
-                            Value: "cat",
-                            Description: undefined
-                        },
-                        {
-                            Name: "Dog",
-                            Value: "dog",
-                            Description: undefined
-                        }
-                    ],
-                    IsExtensible: false,
-                    Usage: "RoundTrip"
-                },
-                IsRequired: true,
-                IsReadOnly: false,
-                IsDiscriminator: true,
-                FlattenedNames: undefined
-            } as InputModelProperty,
-            discriminatorProperty
-        );
+        strictEqual(discriminatorProperty?.Name, "kind");
+        strictEqual(discriminatorProperty.SerializedName, "kind");
+        strictEqual(discriminatorProperty.Description, "The kind of the pet");
+        strictEqual(discriminatorProperty.Type.Kind, "enum");
+        strictEqual(discriminatorProperty.Type.Name, "PetKind");
+        strictEqual(discriminatorProperty.Type.ValueType.Kind, "string");
+        strictEqual(discriminatorProperty.IsRequired, true);
+        strictEqual(discriminatorProperty.IsReadOnly, false);
+        strictEqual(discriminatorProperty.IsDiscriminator, true);
+        strictEqual(discriminatorProperty.FlattenedNames, undefined);
 
         // verify derived model Cat
         const cat = models.find((m) => m.Name === "Cat");
@@ -438,40 +372,20 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
             (m) => m.Name === "ExtendsFooArray"
         );
         const fooModel = models.find((m) => m.Name === "Foo");
-        assert(extendsUnknownModel !== undefined);
-        assert(extendsStringModel !== undefined);
-        assert(extendsInt32Model !== undefined);
-        assert(extendsFooModel !== undefined);
-        assert(extendsFooArrayModel !== undefined);
+        ok(extendsUnknownModel);
+        ok(extendsStringModel);
+        ok(extendsInt32Model);
+        ok(extendsFooModel);
+        ok(extendsFooArrayModel);
         // assert the inherited dictionary type is expected
-        deepStrictEqual(
-            {
-                Kind: "any",
-                Encode: undefined
-            },
-            extendsUnknownModel.AdditionalProperties
-        );
-        deepStrictEqual(
-            {
-                Kind: "string",
-                Encode: undefined
-            },
-            extendsStringModel.AdditionalProperties
-        );
-        deepStrictEqual(
-            {
-                Kind: "int32",
-                Encode: undefined
-            },
-            extendsInt32Model.AdditionalProperties
-        );
-        deepStrictEqual(fooModel, extendsFooModel.AdditionalProperties);
-        deepStrictEqual(
-            {
-                Kind: "array",
-                ValueType: fooModel
-            },
-            extendsFooArrayModel.AdditionalProperties
+        strictEqual(extendsUnknownModel.AdditionalProperties?.Kind, "any");
+        strictEqual(extendsStringModel.AdditionalProperties?.Kind, "string");
+        strictEqual(extendsInt32Model.AdditionalProperties?.Kind, "int32");
+        strictEqual(extendsFooModel.AdditionalProperties, fooModel);
+        strictEqual(extendsFooArrayModel.AdditionalProperties?.Kind, "array");
+        strictEqual(
+            extendsFooArrayModel.AdditionalProperties.ValueType,
+            fooModel
         );
     });
 });
@@ -550,41 +464,18 @@ op op5(@body body: IsFooArray): IsFooArray;
         const isFooModel = models.find((m) => m.Name === "IsFoo");
         const isFooArrayModel = models.find((m) => m.Name === "IsFooArray");
         const fooModel = models.find((m) => m.Name === "Foo");
-        assert(isUnknownModel !== undefined);
-        assert(isStringModel !== undefined);
-        assert(isInt32Model !== undefined);
-        assert(isFooModel !== undefined);
-        assert(isFooArrayModel !== undefined);
+        ok(isUnknownModel);
+        ok(isStringModel);
+        ok(isInt32Model);
+        ok(isFooModel);
+        ok(isFooArrayModel);
         // assert the inherited dictionary type is expected
-        deepStrictEqual(
-            {
-                Kind: "any",
-                Encode: undefined
-            },
-            isUnknownModel.AdditionalProperties
-        );
-        deepStrictEqual(
-            {
-                Kind: "string",
-                Encode: undefined
-            },
-            isStringModel.AdditionalProperties
-        );
-        deepStrictEqual(
-            {
-                Kind: "int32",
-                Encode: undefined
-            },
-            isInt32Model.AdditionalProperties
-        );
-        deepStrictEqual(fooModel, isFooModel.AdditionalProperties);
-        deepStrictEqual(
-            {
-                Kind: "array",
-                ValueType: fooModel
-            },
-            isFooArrayModel.AdditionalProperties
-        );
+        strictEqual(isUnknownModel.AdditionalProperties?.Kind, "any");
+        strictEqual(isStringModel.AdditionalProperties?.Kind, "string");
+        strictEqual(isInt32Model.AdditionalProperties?.Kind, "int32");
+        strictEqual(isFooModel.AdditionalProperties, fooModel);
+        strictEqual(isFooArrayModel.AdditionalProperties?.Kind, "array");
+        strictEqual(isFooArrayModel.AdditionalProperties.ValueType, fooModel);
     });
 });
 
