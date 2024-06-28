@@ -8,7 +8,6 @@ namespace AutoRest.CSharp.Common.Input
         public static void Transform(InputNamespace input)
         {
             InputClientTransformer.Transform(input);
-            InputSubscriptionIdTransformer.Transform(input);
             InputPluralEnumTransformer.Transform(input);
         }
     }

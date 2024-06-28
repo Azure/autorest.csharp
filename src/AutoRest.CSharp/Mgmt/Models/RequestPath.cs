@@ -189,12 +189,19 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
             return false;
         for (int i = 0; i < Count; i++)
         {
+            // TODO: Since type of subscriptionId is different in different versions of common-types, we only compare the name here
+            // Ideally, we should get the parent resource from typespec directly to get rid of this parent check.
+            const string subScriptionId = "subscriptionId";
+            if (this[i].IsReference && other[i].IsReference && this[i].ReferenceName == subScriptionId && other[i].ReferenceName == subScriptionId)
+            {
+                return true;
+            }
             // we need the segment to be identical when strict is true (which is the default value)
             // when strict is false, we also need the segment to be identical if it is constant.
             // but if it is a reference, we only require they have the same type, do not require they have the same variable name.
             // This case happens a lot during the management group parent detection - different RP calls this different things
             if (!this[i].Equals(other[i]))
-                return false;
+            return false;
         }
         return true;
     }
