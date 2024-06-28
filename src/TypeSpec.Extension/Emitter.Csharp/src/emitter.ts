@@ -49,23 +49,23 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     const emitFunction = entrypoint.esmExports.$onEmit;
     try {
         context.options.skipSDKGeneration = true;
-        context.options.emitterName = "@azure-tools/typespec-csharp";
+        if (
+            context.emitterOutputDir &&
+            path.basename(context.emitterOutputDir) === "src"
+        ) {
+            context.emitterOutputDir = path.dirname(context.emitterOutputDir);
+        }
         await emitFunction(context);
     } catch (error: unknown) {
         throw new Error("emitter error");
     }
 
     const outputFolder = resolveOutputFolder(context);
-    const generatedFolder = outputFolder.endsWith("src")
+    const isSrcFolder = path.basename(outputFolder) === "src";
+    const generatedFolder = isSrcFolder
         ? resolvePath(outputFolder, "Generated")
         : resolvePath(outputFolder, "src", "Generated");
     if (options.skipSDKGeneration !== true) {
-        /*
-        const configurationFilePath = resolvePath(
-            generatedFolder,
-            configurationFileName
-        );
-        */
         const configurationFilePath = resolvePath(
             outputFolder,
             configurationFileName
@@ -88,24 +88,12 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
         }
         configurations["shared-source-folders"] = resolvedSharedFolders ?? [];
         await program.host.writeFile(
-            resolvePath(generatedFolder, configurationFileName),
+            resolvePath(outputFolder, configurationFileName),
             prettierOutput(JSON.stringify(configurations, null, 2))
         );
 
-        /* copy tspConfiguration.json to the generated folder. */
-        fs.renameSync(
-            resolvePath(outputFolder, tspOutputFileName),
-            resolvePath(generatedFolder, tspOutputFileName)
-        );
-        Logger.getInstance().info(
-            `${tspOutputFileName} was copied to ${generatedFolder}`
-        );
-        /* clean up */
-        deleteFile(resolvePath(outputFolder, configurationFileName));
         const csProjFile = resolvePath(
-            outputFolder.endsWith("src")
-                ? outputFolder
-                : resolvePath(outputFolder, "src"),
+            isSrcFolder ? outputFolder : resolvePath(outputFolder, "src"),
             `${configurations["library-name"]}.csproj`
         );
         Logger.getInstance().info(`Checking if ${csProjFile} exists`);
@@ -135,8 +123,8 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
         }
         if (!options["save-inputs"]) {
             // delete
-            deleteFile(resolvePath(generatedFolder, tspOutputFileName));
-            deleteFile(resolvePath(generatedFolder, configurationFileName));
+            deleteFile(resolvePath(outputFolder, tspOutputFileName));
+            deleteFile(resolvePath(outputFolder, configurationFileName));
         }
     }
 }
