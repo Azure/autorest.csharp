@@ -36,11 +36,7 @@ import { InputConstant } from "../type/input-constant.js";
 import { InputOperation } from "../type/input-operation.js";
 import { InputOperationParameterKind } from "../type/input-operation-parameter-kind.js";
 import { InputParameter } from "../type/input-parameter.js";
-import {
-    InputEnumType,
-    InputModelType,
-    InputPrimitiveType
-} from "../type/input-type.js";
+import { InputEnumType, InputModelType } from "../type/input-type.js";
 import { RequestLocation } from "../type/request-location.js";
 import { Usage } from "../type/usage.js";
 import { reportDiagnostic } from "./lib.js";
@@ -48,7 +44,7 @@ import { Logger } from "./logger.js";
 import { getUsages, navigateModels } from "./model.js";
 import { loadOperation } from "./operation.js";
 import { processServiceAuthentication } from "./service-authentication.js";
-import { resolveServers } from "./typespecServer.js";
+import { resolveServers } from "./typespec-server.js";
 import { createContentTypeOrAcceptParameter } from "./utils.js";
 
 export function createModel(
@@ -109,8 +105,9 @@ export function createModelForService(
             ? {
                   Type: {
                       Kind: "string",
-                      IsNullable: false
-                  } as InputPrimitiveType,
+                      Name: "string",
+                      CrossLanguageDefinitionId: ""
+                  },
                   Value: defaultApiVersion
               }
             : undefined;

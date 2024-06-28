@@ -263,33 +263,47 @@ export function fromSdkEnumType(
 function fromSdkDateTimeType(dateTimeType: SdkDateTimeType): InputDateTimeType {
     return {
         Kind: dateTimeType.kind,
+        Name: dateTimeType.name,
         Encode: dateTimeType.encode,
-        WireType: fromSdkBuiltInType(dateTimeType.wireType)
+        WireType: fromSdkBuiltInType(dateTimeType.wireType),
+        BaseType: dateTimeType.baseType
+            ? fromSdkDateTimeType(dateTimeType.baseType)
+            : undefined,
+        CrossLanguageDefinitionId: dateTimeType.crossLanguageDefinitionId
     };
 }
 
 function fromSdkDurationType(durationType: SdkDurationType): InputDurationType {
     return {
         Kind: durationType.kind,
+        Name: durationType.name,
         Encode: durationType.encode,
-        WireType: fromSdkBuiltInType(durationType.wireType)
+        WireType: fromSdkBuiltInType(durationType.wireType),
+        BaseType: durationType.baseType
+            ? fromSdkDurationType(durationType.baseType)
+            : undefined,
+        CrossLanguageDefinitionId: durationType.crossLanguageDefinitionId
     };
 }
 
 // TODO: tuple is not officially supported
 function fromTupleType(): InputPrimitiveType {
     return {
-        Kind: "any"
+        Kind: "any",
+        Name: "tuple",
+        CrossLanguageDefinitionId: ""
     };
 }
 
 function fromSdkBuiltInType(builtInType: SdkBuiltInType): InputPrimitiveType {
     return {
         Kind: builtInType.kind,
+        Name: builtInType.name,
         Encode:
             builtInType.encode !== builtInType.kind
                 ? builtInType.encode
-                : undefined // In TCGC this is required, and when there is no encoding, it just has the same value as kind, we could remove this when TCGC decides to simplify
+                : undefined, // In TCGC this is required, and when there is no encoding, it just has the same value as kind, we could remove this when TCGC decides to simplify
+        CrossLanguageDefinitionId: builtInType.crossLanguageDefinitionId
     };
 }
 

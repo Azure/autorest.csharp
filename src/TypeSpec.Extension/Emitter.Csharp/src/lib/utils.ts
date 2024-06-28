@@ -12,7 +12,7 @@ import {
     getSdkModel
 } from "@azure-tools/typespec-client-generator-core";
 import { InputParameter } from "../type/input-parameter.js";
-import { InputPrimitiveType, InputType } from "../type/input-type.js";
+import { InputPrimitiveType } from "../type/input-type.js";
 import { RequestLocation } from "../type/request-location.js";
 import { InputOperationParameterKind } from "../type/input-operation-parameter-kind.js";
 import { InputConstant } from "../type/input-constant.js";
@@ -60,10 +60,11 @@ export function createContentTypeOrAcceptParameter(
 ): InputParameter {
     const isContentType: boolean =
         nameInRequest.toLowerCase() === "content-type";
-    const inputType: InputType = {
+    const inputType: InputPrimitiveType = {
         Kind: "string",
-        IsNullable: false
-    } as InputPrimitiveType;
+        Name: "string",
+        CrossLanguageDefinitionId: ""
+    };
     return {
         Name: name,
         NameInRequest: nameInRequest,
