@@ -106,6 +106,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -133,6 +134,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -222,6 +224,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -249,6 +252,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -353,6 +357,7 @@ namespace FirstTestTypeSpec.Samples
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = client.PatchAction(content);
 
@@ -372,6 +377,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -404,6 +410,7 @@ namespace FirstTestTypeSpec.Samples
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = await client.PatchActionAsync(content);
 
@@ -423,6 +430,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -549,6 +557,7 @@ namespace FirstTestTypeSpec.Samples
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = client.AnonymousBody(content);
 
@@ -568,6 +577,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -600,6 +610,7 @@ namespace FirstTestTypeSpec.Samples
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = await client.AnonymousBodyAsync(content);
 
@@ -619,6 +630,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -636,6 +648,7 @@ namespace FirstTestTypeSpec.Samples
                 OptionalLiteralBool = true,
                 OptionalNullableList = { 1234 },
                 OptionalFloatProperty = (double)default,
+                OptionalResourceId = null,
             };
             Response<Thing> response = client.AnonymousBody(thing);
         }
@@ -655,6 +668,7 @@ namespace FirstTestTypeSpec.Samples
                 OptionalLiteralBool = true,
                 OptionalNullableList = { 1234 },
                 OptionalFloatProperty = (double)default,
+                OptionalResourceId = null,
             };
             Response<Thing> response = await client.AnonymousBodyAsync(thing);
         }

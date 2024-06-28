@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "model",
    "Name": "and",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.and",
    "Usage": "Input",
    "Properties": [
     {
@@ -29,7 +29,7 @@
    "$id": "5",
    "Kind": "model",
    "Name": "as",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.as",
    "Usage": "Input",
    "Properties": [
     {
@@ -50,7 +50,7 @@
    "$id": "8",
    "Kind": "model",
    "Name": "assert",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.assert",
    "Usage": "Input",
    "Properties": [
     {
@@ -71,7 +71,7 @@
    "$id": "11",
    "Kind": "model",
    "Name": "async",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.async",
    "Usage": "Input",
    "Properties": [
     {
@@ -92,7 +92,7 @@
    "$id": "14",
    "Kind": "model",
    "Name": "await",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.await",
    "Usage": "Input",
    "Properties": [
     {
@@ -113,7 +113,7 @@
    "$id": "17",
    "Kind": "model",
    "Name": "break",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.break",
    "Usage": "Input",
    "Properties": [
     {
@@ -134,7 +134,7 @@
    "$id": "20",
    "Kind": "model",
    "Name": "class",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.class",
    "Usage": "Input",
    "Properties": [
     {
@@ -155,7 +155,7 @@
    "$id": "23",
    "Kind": "model",
    "Name": "constructor",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.constructor",
    "Usage": "Input",
    "Properties": [
     {
@@ -176,7 +176,7 @@
    "$id": "26",
    "Kind": "model",
    "Name": "continue",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.continue",
    "Usage": "Input",
    "Properties": [
     {
@@ -197,7 +197,7 @@
    "$id": "29",
    "Kind": "model",
    "Name": "def",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.def",
    "Usage": "Input",
    "Properties": [
     {
@@ -218,7 +218,7 @@
    "$id": "32",
    "Kind": "model",
    "Name": "del",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.del",
    "Usage": "Input",
    "Properties": [
     {
@@ -239,7 +239,7 @@
    "$id": "35",
    "Kind": "model",
    "Name": "elif",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.elif",
    "Usage": "Input",
    "Properties": [
     {
@@ -260,7 +260,7 @@
    "$id": "38",
    "Kind": "model",
    "Name": "else",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.else",
    "Usage": "Input",
    "Properties": [
     {
@@ -281,7 +281,7 @@
    "$id": "41",
    "Kind": "model",
    "Name": "except",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.except",
    "Usage": "Input",
    "Properties": [
     {
@@ -302,7 +302,7 @@
    "$id": "44",
    "Kind": "model",
    "Name": "exec",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.exec",
    "Usage": "Input",
    "Properties": [
     {
@@ -323,7 +323,7 @@
    "$id": "47",
    "Kind": "model",
    "Name": "finally",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.finally",
    "Usage": "Input",
    "Properties": [
     {
@@ -344,7 +344,7 @@
    "$id": "50",
    "Kind": "model",
    "Name": "for",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.for",
    "Usage": "Input",
    "Properties": [
     {
@@ -365,7 +365,7 @@
    "$id": "53",
    "Kind": "model",
    "Name": "from",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.from",
    "Usage": "Input",
    "Properties": [
     {
@@ -386,7 +386,7 @@
    "$id": "56",
    "Kind": "model",
    "Name": "global",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.global",
    "Usage": "Input",
    "Properties": [
     {
@@ -407,7 +407,7 @@
    "$id": "59",
    "Kind": "model",
    "Name": "if",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.if",
    "Usage": "Input",
    "Properties": [
     {
@@ -428,7 +428,7 @@
    "$id": "62",
    "Kind": "model",
    "Name": "import",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.import",
    "Usage": "Input",
    "Properties": [
     {
@@ -449,7 +449,7 @@
    "$id": "65",
    "Kind": "model",
    "Name": "in",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.in",
    "Usage": "Input",
    "Properties": [
     {
@@ -470,7 +470,7 @@
    "$id": "68",
    "Kind": "model",
    "Name": "is",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.is",
    "Usage": "Input",
    "Properties": [
     {
@@ -491,7 +491,7 @@
    "$id": "71",
    "Kind": "model",
    "Name": "lambda",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.lambda",
    "Usage": "Input",
    "Properties": [
     {
@@ -512,7 +512,7 @@
    "$id": "74",
    "Kind": "model",
    "Name": "not",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.not",
    "Usage": "Input",
    "Properties": [
     {
@@ -533,7 +533,7 @@
    "$id": "77",
    "Kind": "model",
    "Name": "or",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.or",
    "Usage": "Input",
    "Properties": [
     {
@@ -554,7 +554,7 @@
    "$id": "80",
    "Kind": "model",
    "Name": "pass",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.pass",
    "Usage": "Input",
    "Properties": [
     {
@@ -575,7 +575,7 @@
    "$id": "83",
    "Kind": "model",
    "Name": "raise",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.raise",
    "Usage": "Input",
    "Properties": [
     {
@@ -596,7 +596,7 @@
    "$id": "86",
    "Kind": "model",
    "Name": "return",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.return",
    "Usage": "Input",
    "Properties": [
     {
@@ -617,7 +617,7 @@
    "$id": "89",
    "Kind": "model",
    "Name": "try",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.try",
    "Usage": "Input",
    "Properties": [
     {
@@ -638,7 +638,7 @@
    "$id": "92",
    "Kind": "model",
    "Name": "while",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.while",
    "Usage": "Input",
    "Properties": [
     {
@@ -659,7 +659,7 @@
    "$id": "95",
    "Kind": "model",
    "Name": "with",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.with",
    "Usage": "Input",
    "Properties": [
     {
@@ -680,7 +680,7 @@
    "$id": "98",
    "Kind": "model",
    "Name": "yield",
-   "Namespace": "SpecialWords.Models",
+   "CrossLanguageDefinitionId": "SpecialWords.Models.yield",
    "Usage": "Input",
    "Properties": [
     {
@@ -701,7 +701,7 @@
    "$id": "101",
    "Kind": "model",
    "Name": "SameAsModel",
-   "Namespace": "SpecialWords.ModelProperties",
+   "CrossLanguageDefinitionId": "SpecialWords.ModelProperties.SameAsModel",
    "Usage": "Input",
    "Properties": [
     {
@@ -728,7 +728,6 @@
    "Protocol": {
     "$id": "105"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "106",
@@ -4103,7 +4102,6 @@
    "Protocol": {
     "$id": "408"
    },
-   "Creatable": false,
    "Parent": "SpecialWordsClient",
    "Parameters": [
     {
@@ -4221,7 +4219,6 @@
    "Protocol": {
     "$id": "419"
    },
-   "Creatable": false,
    "Parent": "SpecialWordsClient",
    "Parameters": [
     {
@@ -6053,7 +6050,6 @@
    "Protocol": {
     "$id": "586"
    },
-   "Creatable": false,
    "Parent": "SpecialWordsClient",
    "Parameters": [
     {
@@ -8552,7 +8548,6 @@
    "Protocol": {
     "$id": "826"
    },
-   "Creatable": false,
    "Parent": "SpecialWordsClient",
    "Parameters": [
     {

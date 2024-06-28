@@ -19,7 +19,7 @@
      "Description": "hello"
     }
    ],
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "",
    "Description": "The StringLiteralProperty_property",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -40,7 +40,7 @@
      "Description": "1"
     }
    ],
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "",
    "Description": "The IntLiteralProperty_property",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -61,7 +61,7 @@
      "Description": "1.25"
     }
    ],
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "",
    "Description": "The FloatLiteralProperty_property",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -70,6 +70,7 @@
    "$id": "11",
    "Kind": "enum",
    "Name": "UnionStringLiteralPropertyProperty",
+   "CrossLanguageDefinitionId": "UnionStringLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "12",
     "Kind": "string"
@@ -86,7 +87,6 @@
      "Value": "world"
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -94,6 +94,7 @@
    "$id": "15",
    "Kind": "enum",
    "Name": "UnionIntLiteralPropertyProperty",
+   "CrossLanguageDefinitionId": "UnionIntLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "16",
     "Kind": "int32"
@@ -110,7 +111,6 @@
      "Value": 2
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -118,6 +118,7 @@
    "$id": "19",
    "Kind": "enum",
    "Name": "UnionFloatLiteralPropertyProperty",
+   "CrossLanguageDefinitionId": "UnionFloatLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "20",
     "Kind": "float32"
@@ -134,7 +135,6 @@
      "Value": 2.375
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   }
@@ -144,7 +144,7 @@
    "$id": "23",
    "Kind": "model",
    "Name": "StringProperty",
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "Type.Property.Optional.StringProperty",
    "Usage": "RoundTrip",
    "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "Properties": [
@@ -166,7 +166,7 @@
    "$id": "26",
    "Kind": "model",
    "Name": "BytesProperty",
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "Type.Property.Optional.BytesProperty",
    "Usage": "RoundTrip",
    "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "Properties": [
@@ -189,7 +189,7 @@
    "$id": "29",
    "Kind": "model",
    "Name": "DatetimeProperty",
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "Type.Property.Optional.DatetimeProperty",
    "Usage": "RoundTrip",
    "Description": "Model with a datetime property",
    "Properties": [
@@ -216,7 +216,7 @@
    "$id": "33",
    "Kind": "model",
    "Name": "DurationProperty",
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "Type.Property.Optional.DurationProperty",
    "Usage": "RoundTrip",
    "Description": "Model with a duration property",
    "Properties": [
@@ -243,7 +243,7 @@
    "$id": "37",
    "Kind": "model",
    "Name": "CollectionsByteProperty",
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsByteProperty",
    "Usage": "RoundTrip",
    "Description": "Model with collection bytes properties",
    "Properties": [
@@ -270,7 +270,7 @@
    "$id": "41",
    "Kind": "model",
    "Name": "CollectionsModelProperty",
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsModelProperty",
    "Usage": "RoundTrip",
    "Description": "Model with collection models properties",
    "Properties": [
@@ -295,7 +295,7 @@
    "$id": "44",
    "Kind": "model",
    "Name": "StringLiteralProperty",
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "Type.Property.Optional.StringLiteralProperty",
    "Usage": "RoundTrip",
    "Description": "Model with string literal property",
    "Properties": [
@@ -321,7 +321,7 @@
    "$id": "47",
    "Kind": "model",
    "Name": "IntLiteralProperty",
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "Type.Property.Optional.IntLiteralProperty",
    "Usage": "RoundTrip",
    "Description": "Model with int literal property",
    "Properties": [
@@ -347,7 +347,7 @@
    "$id": "50",
    "Kind": "model",
    "Name": "FloatLiteralProperty",
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "Type.Property.Optional.FloatLiteralProperty",
    "Usage": "RoundTrip",
    "Description": "Model with float literal property",
    "Properties": [
@@ -373,7 +373,7 @@
    "$id": "53",
    "Kind": "model",
    "Name": "BooleanLiteralProperty",
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "Type.Property.Optional.BooleanLiteralProperty",
    "Usage": "RoundTrip",
    "Description": "Model with boolean literal property",
    "Properties": [
@@ -400,7 +400,7 @@
    "$id": "57",
    "Kind": "model",
    "Name": "UnionStringLiteralProperty",
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "Type.Property.Optional.UnionStringLiteralProperty",
    "Usage": "RoundTrip",
    "Description": "Model with union of string literal property",
    "Properties": [
@@ -421,7 +421,7 @@
    "$id": "59",
    "Kind": "model",
    "Name": "UnionIntLiteralProperty",
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "Type.Property.Optional.UnionIntLiteralProperty",
    "Usage": "RoundTrip",
    "Description": "Model with union of int literal property",
    "Properties": [
@@ -442,7 +442,7 @@
    "$id": "61",
    "Kind": "model",
    "Name": "UnionFloatLiteralProperty",
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "Type.Property.Optional.UnionFloatLiteralProperty",
    "Usage": "RoundTrip",
    "Description": "Model with union of float literal property",
    "Properties": [
@@ -463,7 +463,7 @@
    "$id": "63",
    "Kind": "model",
    "Name": "RequiredAndOptionalProperty",
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "Type.Property.Optional.RequiredAndOptionalProperty",
    "Usage": "RoundTrip",
    "Description": "Model with required and optional properties",
    "Properties": [
@@ -503,7 +503,6 @@
    "Protocol": {
     "$id": "69"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "70",
@@ -873,7 +872,6 @@
    "Protocol": {
     "$id": "103"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -1218,7 +1216,6 @@
    "Protocol": {
     "$id": "133"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -1563,7 +1560,6 @@
    "Protocol": {
     "$id": "163"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -1908,7 +1904,6 @@
    "Protocol": {
     "$id": "193"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -2253,7 +2248,6 @@
    "Protocol": {
     "$id": "223"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -2598,7 +2592,6 @@
    "Protocol": {
     "$id": "253"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -2943,7 +2936,6 @@
    "Protocol": {
     "$id": "283"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -3288,7 +3280,6 @@
    "Protocol": {
     "$id": "313"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -3633,7 +3624,6 @@
    "Protocol": {
     "$id": "343"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -3978,7 +3968,6 @@
    "Protocol": {
     "$id": "373"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -4323,7 +4312,6 @@
    "Protocol": {
     "$id": "403"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -4668,7 +4656,6 @@
    "Protocol": {
     "$id": "433"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -5013,7 +5000,6 @@
    "Protocol": {
     "$id": "463"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -5358,7 +5344,6 @@
    "Protocol": {
     "$id": "493"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {

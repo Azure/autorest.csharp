@@ -350,7 +350,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 //create the "Unknown" version
                 var unknownDerivedType = new InputModelType(
                     defaultDerivedName,
-                    actualBase.Namespace,
+                    string.Empty,
                     "internal",
                     null,
                     // [TODO]: Condition is added to minimize change
@@ -501,7 +501,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         public Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
-            => _input.Enums.ToDictionary(e => e, e => new EnumType(e, MgmtContext.Context), InputEnumType.IgnoreNullabilityComparer);
+            => _input.Enums.ToDictionary(e => e, e => new EnumType(e, MgmtContext.Context));
 
         private IEnumerable<TypeProvider>? _models;
         public IEnumerable<TypeProvider> Models => _models ??= SchemaMap.Value.Values.Where(m => m is not SystemObjectType);

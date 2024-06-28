@@ -7,6 +7,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "OneBinaryBodyTwoContentTypesRequestContentType",
+   "CrossLanguageDefinitionId": "oneBinaryBodyTwoContentTypes.RequestContentType.anonymous",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -23,7 +24,6 @@
      "Value": "application/octet-stream"
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
    "Usage": "Input"
   },
@@ -31,6 +31,7 @@
    "$id": "6",
    "Kind": "enum",
    "Name": "OneStringBodyThreeContentTypesRequestContentType",
+   "CrossLanguageDefinitionId": "oneStringBodyThreeContentTypes.RequestContentType.anonymous",
    "ValueType": {
     "$id": "7",
     "Kind": "string"
@@ -52,7 +53,6 @@
      "Value": "text/plain"
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
    "Usage": "Input"
   }
@@ -62,7 +62,7 @@
    "$id": "11",
    "Kind": "model",
    "Name": "Body",
-   "Namespace": "MultipleMediaTypes",
+   "CrossLanguageDefinitionId": "MultipleMediaTypes.Body",
    "Usage": "Input",
    "Properties": [
     {
@@ -401,7 +401,6 @@
    "Protocol": {
     "$id": "43"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "16"

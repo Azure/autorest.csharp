@@ -8,14 +8,14 @@
    "$id": "2",
    "Kind": "model",
    "Name": "Extension",
-   "Namespace": "Type.Model.Inheritance.Recursive",
+   "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Extension",
    "Usage": "RoundTrip",
    "Description": "extension",
    "BaseModel": {
     "$id": "3",
     "Kind": "model",
     "Name": "Element",
-    "Namespace": "Type.Model.Inheritance.Recursive",
+    "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Element",
     "Usage": "RoundTrip",
     "Description": "element",
     "Properties": [
@@ -253,7 +253,6 @@
    "Protocol": {
     "$id": "27"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "10"

@@ -19,7 +19,7 @@
      "Description": "accept"
     }
    ],
-   "Namespace": "UnbrandedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -40,7 +40,7 @@
      "Description": "123"
     }
    ],
-   "Namespace": "UnbrandedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -61,7 +61,7 @@
      "Description": "1.23"
     }
    ],
-   "Namespace": "UnbrandedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -82,7 +82,7 @@
      "Description": "reject"
     }
    ],
-   "Namespace": "UnbrandedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -103,7 +103,7 @@
      "Description": "456"
     }
    ],
-   "Namespace": "UnbrandedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -124,7 +124,7 @@
      "Description": "4.56"
     }
    ],
-   "Namespace": "UnbrandedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -133,6 +133,7 @@
    "$id": "20",
    "Kind": "enum",
    "Name": "StringFixedEnum",
+   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.StringFixedEnum",
    "ValueType": {
     "$id": "21",
     "Kind": "string"
@@ -154,7 +155,6 @@
      "Value": "4"
     }
    ],
-   "Namespace": "UnbrandedTypeSpec",
    "Description": "Simple enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -163,6 +163,7 @@
    "$id": "25",
    "Kind": "enum",
    "Name": "StringExtensibleEnum",
+   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.StringExtensibleEnum",
    "ValueType": {
     "$id": "26",
     "Kind": "string"
@@ -184,7 +185,6 @@
      "Value": "4"
     }
    ],
-   "Namespace": "UnbrandedTypeSpec",
    "Description": "Extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -193,6 +193,7 @@
    "$id": "30",
    "Kind": "enum",
    "Name": "IntExtensibleEnum",
+   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.IntExtensibleEnum",
    "ValueType": {
     "$id": "31",
     "Kind": "int32"
@@ -214,7 +215,6 @@
      "Value": 4
     }
    ],
-   "Namespace": "UnbrandedTypeSpec",
    "Description": "Int based extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -223,6 +223,7 @@
    "$id": "35",
    "Kind": "enum",
    "Name": "FloatExtensibleEnum",
+   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.FloatExtensibleEnum",
    "ValueType": {
     "$id": "36",
     "Kind": "float32"
@@ -244,7 +245,6 @@
      "Value": 4
     }
    ],
-   "Namespace": "UnbrandedTypeSpec",
    "Description": "Float based extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -253,6 +253,7 @@
    "$id": "40",
    "Kind": "enum",
    "Name": "FloatFixedEnum",
+   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.FloatFixedEnum",
    "ValueType": {
     "$id": "41",
     "Kind": "float32"
@@ -274,7 +275,6 @@
      "Value": 4.4
     }
    ],
-   "Namespace": "UnbrandedTypeSpec",
    "Description": "float fixed enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -283,6 +283,7 @@
    "$id": "45",
    "Kind": "enum",
    "Name": "IntFixedEnum",
+   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.IntFixedEnum",
    "ValueType": {
     "$id": "46",
     "Kind": "int32"
@@ -304,7 +305,6 @@
      "Value": 4
     }
    ],
-   "Namespace": "UnbrandedTypeSpec",
    "Description": "int fixed enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -313,6 +313,7 @@
    "$id": "50",
    "Kind": "enum",
    "Name": "DaysOfWeekExtensibleEnum",
+   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.DaysOfWeekExtensibleEnum",
    "ValueType": {
     "$id": "51",
     "Kind": "string"
@@ -354,7 +355,6 @@
      "Value": "Sunday"
     }
    ],
-   "Namespace": "UnbrandedTypeSpec",
    "IsExtensible": true,
    "Usage": "None"
   }
@@ -364,7 +364,7 @@
    "$id": "59",
    "Kind": "model",
    "Name": "Thing",
-   "Namespace": "UnbrandedTypeSpec",
+   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.Thing",
    "Usage": "RoundTrip",
    "Description": "A model with a few properties of literal types",
    "Properties": [
@@ -599,7 +599,7 @@
    "$id": "96",
    "Kind": "model",
    "Name": "RoundTripModel",
-   "Namespace": "UnbrandedTypeSpec",
+   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.RoundTripModel",
    "Usage": "RoundTrip",
    "Description": "this is a roundtrip model",
    "Properties": [
@@ -900,7 +900,7 @@
       "$id": "141",
       "Kind": "model",
       "Name": "ModelWithRequiredNullableProperties",
-      "Namespace": "UnbrandedTypeSpec",
+      "CrossLanguageDefinitionId": "UnbrandedTypeSpec.ModelWithRequiredNullableProperties",
       "Usage": "RoundTrip",
       "Description": "A model with a few required nullable properties",
       "Properties": [
@@ -964,7 +964,7 @@
    "$id": "149",
    "Kind": "model",
    "Name": "Friend",
-   "Namespace": "UnbrandedTypeSpec",
+   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.NotFriend",
    "Usage": "RoundTrip",
    "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
@@ -986,7 +986,7 @@
    "$id": "152",
    "Kind": "model",
    "Name": "ProjectedModel",
-   "Namespace": "UnbrandedTypeSpec",
+   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.ModelWithProjectedName",
    "Usage": "RoundTrip",
    "Description": "this is a model with a projected name",
    "Properties": [
@@ -1008,7 +1008,7 @@
    "$id": "155",
    "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
-   "Namespace": "UnbrandedTypeSpec",
+   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.returnsAnonymousModel.Response.anonymous",
    "Usage": "Output",
    "Properties": []
   }
@@ -2949,7 +2949,6 @@
    "Protocol": {
     "$id": "333"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "158"

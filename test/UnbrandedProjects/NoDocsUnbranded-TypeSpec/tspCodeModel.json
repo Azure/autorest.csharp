@@ -19,7 +19,7 @@
      "Description": "accept"
     }
    ],
-   "Namespace": "NoDocsUnbrandedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
    "Usage": "Output"
@@ -40,7 +40,7 @@
      "Description": "123"
     }
    ],
-   "Namespace": "NoDocsUnbrandedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
    "Usage": "Output"
@@ -61,7 +61,7 @@
      "Description": "1.23"
     }
    ],
-   "Namespace": "NoDocsUnbrandedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
    "Usage": "Output"
@@ -82,7 +82,7 @@
      "Description": "reject"
     }
    ],
-   "Namespace": "NoDocsUnbrandedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
    "Usage": "Output"
@@ -103,7 +103,7 @@
      "Description": "456"
     }
    ],
-   "Namespace": "NoDocsUnbrandedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
    "Usage": "Output"
@@ -124,7 +124,7 @@
      "Description": "4.56"
     }
    ],
-   "Namespace": "NoDocsUnbrandedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
    "Usage": "Output"
@@ -135,7 +135,7 @@
    "$id": "20",
    "Kind": "model",
    "Name": "Thing",
-   "Namespace": "NoDocsUnbrandedTypeSpec",
+   "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing",
    "Usage": "Output",
    "Description": "A model with a few properties of literal types",
    "Properties": [
@@ -509,7 +509,6 @@
    "Protocol": {
     "$id": "71"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "59"

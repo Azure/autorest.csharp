@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "model",
    "Name": "BodyParameter",
-   "Namespace": "Parameters.Spread.Model",
+   "CrossLanguageDefinitionId": "Parameters.Spread.Model.BodyParameter",
    "Usage": "Input",
    "Description": "This is a simple model.",
    "Properties": [
@@ -30,7 +30,7 @@
    "$id": "5",
    "Kind": "model",
    "Name": "CompositeRequestMix",
-   "Namespace": "Parameters.Spread.Model",
+   "CrossLanguageDefinitionId": "Parameters.Spread.Model.CompositeRequestMix",
    "Usage": "Input",
    "Description": "This is a model with non-body http request decorator.",
    "Properties": [
@@ -52,7 +52,7 @@
    "$id": "8",
    "Kind": "model",
    "Name": "SpreadAsRequestBodyRequest",
-   "Namespace": "Parameters.Spread.Alias",
+   "CrossLanguageDefinitionId": "Parameters.Spread.Alias.spreadAsRequestBody.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -73,7 +73,7 @@
    "$id": "11",
    "Kind": "model",
    "Name": "SpreadAsRequestParameterRequest",
-   "Namespace": "",
+   "CrossLanguageDefinitionId": ".anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -94,7 +94,7 @@
    "$id": "14",
    "Kind": "model",
    "Name": "SpreadWithMultipleParametersRequest",
-   "Namespace": "",
+   "CrossLanguageDefinitionId": ".anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -181,7 +181,6 @@
    "Protocol": {
     "$id": "28"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "29",
@@ -792,7 +791,6 @@
    "Protocol": {
     "$id": "87"
    },
-   "Creatable": false,
    "Parent": "SpreadClient",
    "Parameters": [
     {
@@ -1184,7 +1182,6 @@
    "Protocol": {
     "$id": "124"
    },
-   "Creatable": false,
    "Parent": "SpreadClient",
    "Parameters": [
     {
