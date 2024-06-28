@@ -68,7 +68,7 @@ internal static class SchemaExtensions
             switch (property.SerializedName)
             {
                 case "id":
-                    if (property.Type.GetImplementType() is InputPrimitiveType { Kind: InputPrimitiveTypeKind.String or InputPrimitiveTypeKind.ArmResourceIdentifier } inputPrimitiveType)
+                    if (property.Type.GetImplementType() is InputPrimitiveType { Kind: InputPrimitiveTypeKind.String or InputPrimitiveTypeKind.ArmId } inputPrimitiveType)
                         idPropertyFound = true;
                     continue;
                 case "type":
