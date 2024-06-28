@@ -87,6 +87,11 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             );
         }
         configurations["shared-source-folders"] = resolvedSharedFolders ?? [];
+        configurations["flavor"] =
+            options["flavor"] ??
+            (configurations.namespace.toLowerCase().startsWith("azure.")
+                ? "azure"
+                : undefined);
         await program.host.writeFile(
             resolvePath(outputFolder, configurationFileName),
             prettierOutput(JSON.stringify(configurations, null, 2))
