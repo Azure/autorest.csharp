@@ -469,7 +469,6 @@
    "Protocol": {
     "$id": "53"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "31"
@@ -598,7 +597,6 @@
    "Protocol": {
     "$id": "64"
    },
-   "Creatable": false,
    "Parent": "AddedClient",
    "Parameters": [
     {

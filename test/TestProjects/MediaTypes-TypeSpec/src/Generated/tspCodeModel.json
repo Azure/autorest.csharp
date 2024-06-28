@@ -401,7 +401,6 @@
    "Protocol": {
     "$id": "43"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "16"

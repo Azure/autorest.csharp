@@ -383,8 +383,7 @@
    "Operations": [],
    "Protocol": {
     "$id": "54"
-   },
-   "Creatable": true
+   }
   },
   {
    "$id": "55",
@@ -394,7 +393,6 @@
    "Protocol": {
     "$id": "56"
    },
-   "Creatable": false,
    "Parent": "LatestClient"
   },
   {
@@ -918,7 +916,6 @@
    "Protocol": {
     "$id": "112"
    },
-   "Creatable": false,
    "Parent": "LatestClient"
   }
  ]

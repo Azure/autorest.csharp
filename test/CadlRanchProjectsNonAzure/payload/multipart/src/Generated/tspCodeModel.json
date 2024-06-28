@@ -319,7 +319,6 @@
    "Protocol": {
     "$id": "45"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "46",
@@ -1209,7 +1208,6 @@
    "Protocol": {
     "$id": "131"
    },
-   "Creatable": false,
    "Parent": "MultiPartClient",
    "Parameters": [
     {

@@ -65,8 +65,7 @@
    ],
    "Protocol": {
     "$id": "8"
-   },
-   "Creatable": true
+   }
   }
  ]
 }

@@ -3441,7 +3441,6 @@
    "Protocol": {
     "$id": "391"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "210"
@@ -3456,7 +3455,6 @@
    "Protocol": {
     "$id": "393"
    },
-   "Creatable": false,
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {
@@ -3589,7 +3587,6 @@
    "Protocol": {
     "$id": "406"
    },
-   "Creatable": false,
    "Parent": "Hello",
    "Parameters": [
     {
@@ -4220,7 +4217,6 @@
    "Protocol": {
     "$id": "466"
    },
-   "Creatable": false,
    "Parent": "Hello",
    "Parameters": [
     {
@@ -4339,7 +4335,6 @@
    "Protocol": {
     "$id": "477"
    },
-   "Creatable": false,
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {
@@ -4520,7 +4515,6 @@
    "Protocol": {
     "$id": "493"
    },
-   "Creatable": false,
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {
@@ -4617,7 +4611,6 @@
    "Protocol": {
     "$id": "502"
    },
-   "Creatable": false,
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {
@@ -4732,7 +4725,6 @@
    "Protocol": {
     "$id": "513"
    },
-   "Creatable": false,
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {

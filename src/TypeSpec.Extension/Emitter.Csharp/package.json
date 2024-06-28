@@ -47,7 +47,8 @@
         "@typespec/http": ">=0.50.0 <1.0.0",
         "@typespec/openapi": ">=0.50.0 <1.0.0",
         "@typespec/rest": ">=0.50.0 <1.0.0",
-        "@typespec/versioning": ">=0.50.0 <1.0.0"
+        "@typespec/versioning": ">=0.50.0 <1.0.0",
+        "@typespec/xml": ">=0.50.0 <1.0.0"
     },
     "devDependencies": {
         "@azure-tools/typespec-azure-core": "0.43.0",
@@ -67,6 +68,7 @@
         "@typespec/openapi": "0.57.0",
         "@typespec/rest": "0.57.0",
         "@typespec/versioning": "0.57.0",
+        "@typespec/xml": "0.57.0",
         "c8": "~7.11.0",
         "eslint": "^8.57.0",
         "globals": "^15.2.0",

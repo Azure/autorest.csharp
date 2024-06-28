@@ -5250,7 +5250,6 @@
    "Protocol": {
     "$id": "820"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "821",
@@ -5291,7 +5290,6 @@
    "Protocol": {
     "$id": "826"
    },
-   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -5420,7 +5418,6 @@
    "Protocol": {
     "$id": "838"
    },
-   "Creatable": false,
    "Parent": "Audio",
    "Parameters": [
     {
@@ -5549,7 +5546,6 @@
    "Protocol": {
     "$id": "850"
    },
-   "Creatable": false,
    "Parent": "Audio",
    "Parameters": [
     {
@@ -5565,7 +5561,6 @@
    "Protocol": {
     "$id": "852"
    },
-   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -5689,7 +5684,6 @@
    "Protocol": {
     "$id": "863"
    },
-   "Creatable": false,
    "Parent": "Chat",
    "Parameters": [
     {
@@ -5705,7 +5699,6 @@
    "Protocol": {
     "$id": "865"
    },
-   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -6209,7 +6202,6 @@
    "Protocol": {
     "$id": "910"
    },
-   "Creatable": false,
    "Parent": "FineTuning",
    "Parameters": [
     {
@@ -6333,7 +6325,6 @@
    "Protocol": {
     "$id": "921"
    },
-   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -6458,7 +6449,6 @@
    "Protocol": {
     "$id": "932"
    },
-   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -6583,7 +6573,6 @@
    "Protocol": {
     "$id": "943"
    },
-   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -7018,7 +7007,6 @@
    "Protocol": {
     "$id": "982"
    },
-   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -7472,7 +7460,6 @@
    "Protocol": {
     "$id": "1021"
    },
-   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -7713,7 +7700,6 @@
    "Protocol": {
     "$id": "1042"
    },
-   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -8062,7 +8048,6 @@
    "Protocol": {
     "$id": "1073"
    },
-   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -8187,7 +8172,6 @@
    "Protocol": {
     "$id": "1084"
    },
-   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {

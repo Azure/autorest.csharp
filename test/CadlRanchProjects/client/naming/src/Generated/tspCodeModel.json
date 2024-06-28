@@ -760,7 +760,6 @@
    "Protocol": {
     "$id": "82"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "26"
@@ -978,7 +977,6 @@
    "Protocol": {
     "$id": "102"
    },
-   "Creatable": false,
    "Parent": "NamingClient",
    "Parameters": [
     {
@@ -1197,7 +1195,6 @@
    "Protocol": {
     "$id": "122"
    },
-   "Creatable": false,
    "Parent": "NamingClient",
    "Parameters": [
     {

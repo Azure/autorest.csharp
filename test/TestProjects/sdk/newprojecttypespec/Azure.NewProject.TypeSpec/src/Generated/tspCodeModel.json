@@ -1465,7 +1465,6 @@
    "Protocol": {
     "$id": "186"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "137"
@@ -1480,7 +1479,6 @@
    "Protocol": {
     "$id": "188"
    },
-   "Creatable": false,
    "Parent": "NewProjectTypeSpecClient",
    "Parameters": [
     {
@@ -1613,7 +1611,6 @@
    "Protocol": {
     "$id": "201"
    },
-   "Creatable": false,
    "Parent": "Hello",
    "Parameters": [
     {
@@ -2182,7 +2179,6 @@
    "Protocol": {
     "$id": "256"
    },
-   "Creatable": false,
    "Parent": "Hello",
    "Parameters": [
     {
@@ -2301,7 +2297,6 @@
    "Protocol": {
     "$id": "267"
    },
-   "Creatable": false,
    "Parent": "NewProjectTypeSpecClient",
    "Parameters": [
     {
@@ -2482,7 +2477,6 @@
    "Protocol": {
     "$id": "283"
    },
-   "Creatable": false,
    "Parent": "NewProjectTypeSpecClient",
    "Parameters": [
     {
