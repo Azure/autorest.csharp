@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "model",
    "Name": "FlattenModel",
-   "Namespace": "Type.Model.Flatten",
+   "CrossLanguageDefinitionId": "Type.Model.Flatten.FlattenModel",
    "Usage": "RoundTrip",
    "Description": "This is the model with one level of flattening.",
    "Properties": [
@@ -62,7 +62,7 @@
    "$id": "9",
    "Kind": "model",
    "Name": "NestedFlattenModel",
-   "Namespace": "Type.Model.Flatten",
+   "CrossLanguageDefinitionId": "Type.Model.Flatten.NestedFlattenModel",
    "Usage": "RoundTrip",
    "Description": "This is the model with two levels of flattening.",
    "Properties": [
@@ -134,7 +134,7 @@
    "$id": "18",
    "Kind": "model",
    "Name": "ChildModel",
-   "Namespace": "Type.Model.Flatten",
+   "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildModel",
    "Usage": "RoundTrip",
    "Description": "This is the child model to be flattened.",
    "Properties": [
@@ -168,7 +168,7 @@
    "$id": "23",
    "Kind": "model",
    "Name": "ChildFlattenModel",
-   "Namespace": "Type.Model.Flatten",
+   "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildFlattenModel",
    "Usage": "RoundTrip",
    "Description": "This is the child model to be flattened. And it has flattened property as well.",
    "Properties": [
@@ -469,7 +469,6 @@
    "Protocol": {
     "$id": "53"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "32"

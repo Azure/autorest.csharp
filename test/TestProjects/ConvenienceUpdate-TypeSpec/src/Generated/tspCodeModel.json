@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "model",
    "Name": "Model",
-   "Namespace": "ConvenienceInCadl",
+   "CrossLanguageDefinitionId": "ConvenienceInCadl.Model",
    "Usage": "RoundTrip",
    "Description": "A model.",
    "Properties": [
@@ -1826,8 +1826,7 @@
    ],
    "Protocol": {
     "$id": "168"
-   },
-   "Creatable": true
+   }
   }
  ]
 }

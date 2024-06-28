@@ -27,7 +27,7 @@ internal record InputPrimitiveType(InputPrimitiveTypeKind Kind) : InputType(Kind
     public static InputPrimitiveType Int32 { get; } = new(InputPrimitiveTypeKind.Int32);
     public static InputPrimitiveType Int64 { get; } = new(InputPrimitiveTypeKind.Int64);
     public static InputPrimitiveType IPAddress { get; } = new(InputPrimitiveTypeKind.IPAddress);
-    public static InputPrimitiveType ResourceIdentifier { get; } = new(InputPrimitiveTypeKind.ArmId);
+    public static InputPrimitiveType ResourceIdentifier { get; } = new(InputPrimitiveTypeKind.ArmResourceIdentifier);
     public static InputPrimitiveType ResourceType { get; } = new(InputPrimitiveTypeKind.ResourceType);
     public static InputPrimitiveType Stream { get; } = new(InputPrimitiveTypeKind.Stream);
     public static InputPrimitiveType String { get; } = new(InputPrimitiveTypeKind.String);
