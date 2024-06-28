@@ -3008,60 +3008,18 @@
   {
    "$id": "425",
    "Kind": "model",
-   "Name": "SingleBase",
-   "CrossLanguageDefinitionId": "ModelsTypeSpec.SingleBase",
-   "Usage": "Output",
-   "Description": "Single base model without any child model.",
-   "DiscriminatorProperty": {
-    "$id": "426",
-    "Name": "kind",
-    "SerializedName": "kind",
-    "Description": "Discriminator property for SingleBase.",
-    "Type": {
-     "$id": "427",
-     "Kind": "string",
-     "Name": "string",
-     "CrossLanguageDefinitionId": "TypeSpec.string"
-    },
-    "IsRequired": true,
-    "IsReadOnly": false,
-    "IsDiscriminator": true
-   },
-   "Properties": [
-    {
-     "$ref": "426"
-    },
-    {
-     "$id": "428",
-     "Name": "size",
-     "SerializedName": "size",
-     "Description": "",
-     "Type": {
-      "$id": "429",
-      "Kind": "int32",
-      "Name": "int32",
-      "CrossLanguageDefinitionId": "TypeSpec.int32"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "430",
-   "Kind": "model",
    "Name": "Int32ValuesFacet",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.Int32ValuesFacet",
    "Usage": "Input",
    "Description": "Facets an int32 field by the specified value ranges.",
    "BaseModel": {
-    "$id": "431",
+    "$id": "426",
     "Kind": "model",
     "Name": "NumericValuesFacet",
     "CrossLanguageDefinitionId": "ModelsTypeSpec.NumericValuesFacet",
     "Usage": "Input",
     "BaseModel": {
-     "$id": "432",
+     "$id": "427",
      "Kind": "model",
      "Name": "Facet",
      "CrossLanguageDefinitionId": "ModelsTypeSpec.Facet",
@@ -3069,12 +3027,12 @@
      "Description": "Facet",
      "Properties": [
       {
-       "$id": "433",
+       "$id": "428",
        "Name": "field",
        "SerializedName": "field",
        "Description": "A field to facet by, where the field is attributed as 'facetable'",
        "Type": {
-        "$id": "434",
+        "$id": "429",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3086,15 +3044,15 @@
     },
     "Properties": [
      {
-      "$id": "435",
+      "$id": "430",
       "Name": "values",
       "SerializedName": "values",
       "Description": "The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher.",
       "Type": {
-       "$id": "436",
+       "$id": "431",
        "Kind": "array",
        "ValueType": {
-        "$id": "437",
+        "$id": "432",
         "Kind": "int32",
         "Name": "int32",
         "CrossLanguageDefinitionId": "TypeSpec.int32"
@@ -3104,12 +3062,12 @@
       "IsReadOnly": false
      },
      {
-      "$id": "438",
+      "$id": "433",
       "Name": "value",
       "SerializedName": "value",
       "Description": "",
       "Type": {
-       "$id": "439",
+       "$id": "434",
        "Kind": "int32",
        "Name": "int32",
        "CrossLanguageDefinitionId": "TypeSpec.int32"
@@ -3121,12 +3079,12 @@
    },
    "Properties": [
     {
-     "$id": "440",
+     "$id": "435",
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "The facet type.",
      "Type": {
-      "$id": "441",
+      "$id": "436",
       "Kind": "constant",
       "ValueType": {
        "$ref": "27"
@@ -3139,30 +3097,30 @@
    ]
   },
   {
-   "$ref": "431"
+   "$ref": "426"
   },
   {
-   "$ref": "432"
+   "$ref": "427"
   }
  ],
  "Clients": [
   {
-   "$id": "442",
+   "$id": "437",
    "Name": "ModelsTypeSpecClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
-     "$id": "443",
+     "$id": "438",
      "Name": "putBaseModelWithDiscriminatorDefinedOnBase",
      "ResourceName": "ModelsTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "444",
+       "$id": "439",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Type": {
-        "$id": "445",
+        "$id": "440",
         "Kind": "url",
         "Name": "url",
         "CrossLanguageDefinitionId": ""
@@ -3178,7 +3136,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "446",
+       "$id": "441",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -3195,11 +3153,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "447",
+       "$id": "442",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "448",
+        "$id": "443",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -3214,19 +3172,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "449",
+        "$id": "444",
         "Type": {
-         "$ref": "448"
+         "$ref": "443"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "450",
+       "$id": "445",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "451",
+        "$id": "446",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -3241,9 +3199,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "452",
+        "$id": "447",
         "Type": {
-         "$ref": "451"
+         "$ref": "446"
         },
         "Value": "application/json"
        }
@@ -3251,7 +3209,7 @@
      ],
      "Responses": [
       {
-       "$id": "453",
+       "$id": "448",
        "StatusCodes": [
         200
        ],
@@ -3278,20 +3236,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "454",
+     "$id": "449",
      "Name": "getOutputDiscriminatorModel",
      "ResourceName": "ModelsTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "444"
+       "$ref": "439"
       },
       {
-       "$id": "455",
+       "$id": "450",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "456",
+        "$id": "451",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -3306,9 +3264,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "457",
+        "$id": "452",
         "Type": {
-         "$ref": "456"
+         "$ref": "451"
         },
         "Value": "application/json"
        }
@@ -3316,7 +3274,7 @@
      ],
      "Responses": [
       {
-       "$id": "458",
+       "$id": "453",
        "StatusCodes": [
         200
        ],
@@ -3340,17 +3298,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "459",
+     "$id": "454",
      "Name": "inputToRoundTrip",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input model that has property of its own type",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "444"
+       "$ref": "439"
       },
       {
-       "$id": "460",
+       "$id": "455",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -3367,11 +3325,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "461",
+       "$id": "456",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "462",
+        "$id": "457",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -3386,19 +3344,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "463",
+        "$id": "458",
         "Type": {
-         "$ref": "462"
+         "$ref": "457"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "464",
+       "$id": "459",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "465",
+        "$id": "460",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -3413,9 +3371,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "466",
+        "$id": "461",
         "Type": {
-         "$ref": "465"
+         "$ref": "460"
         },
         "Value": "application/json"
        }
@@ -3423,7 +3381,7 @@
      ],
      "Responses": [
       {
-       "$id": "467",
+       "$id": "462",
        "StatusCodes": [
         200
        ],
@@ -3450,17 +3408,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "468",
+     "$id": "463",
      "Name": "inputToRoundTripPrimitive",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input to RoundTripPrimitive",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "444"
+       "$ref": "439"
       },
       {
-       "$id": "469",
+       "$id": "464",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -3477,11 +3435,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "470",
+       "$id": "465",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "471",
+        "$id": "466",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -3496,19 +3454,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "472",
+        "$id": "467",
         "Type": {
-         "$ref": "471"
+         "$ref": "466"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "473",
+       "$id": "468",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "474",
+        "$id": "469",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -3523,9 +3481,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "475",
+        "$id": "470",
         "Type": {
-         "$ref": "474"
+         "$ref": "469"
         },
         "Value": "application/json"
        }
@@ -3533,7 +3491,7 @@
      ],
      "Responses": [
       {
-       "$id": "476",
+       "$id": "471",
        "StatusCodes": [
         200
        ],
@@ -3560,17 +3518,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "477",
+     "$id": "472",
      "Name": "inputToRoundTripOptional",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input to RoundTripOptional",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "444"
+       "$ref": "439"
       },
       {
-       "$id": "478",
+       "$id": "473",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -3587,11 +3545,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "479",
+       "$id": "474",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "480",
+        "$id": "475",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -3606,19 +3564,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "481",
+        "$id": "476",
         "Type": {
-         "$ref": "480"
+         "$ref": "475"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "482",
+       "$id": "477",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "483",
+        "$id": "478",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -3633,9 +3591,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "484",
+        "$id": "479",
         "Type": {
-         "$ref": "483"
+         "$ref": "478"
         },
         "Value": "application/json"
        }
@@ -3643,7 +3601,7 @@
      ],
      "Responses": [
       {
-       "$id": "485",
+       "$id": "480",
        "StatusCodes": [
         200
        ],
@@ -3670,7 +3628,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "486",
+     "$id": "481",
      "Name": "inputToRoundTripReadOnly",
      "ResourceName": "ModelsTypeSpec",
      "Deprecated": "deprecated for test",
@@ -3678,10 +3636,10 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "444"
+       "$ref": "439"
       },
       {
-       "$id": "487",
+       "$id": "482",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -3698,11 +3656,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "488",
+       "$id": "483",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "489",
+        "$id": "484",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -3717,19 +3675,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "490",
+        "$id": "485",
         "Type": {
-         "$ref": "489"
+         "$ref": "484"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "491",
+       "$id": "486",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "492",
+        "$id": "487",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -3744,9 +3702,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "493",
+        "$id": "488",
         "Type": {
-         "$ref": "492"
+         "$ref": "487"
         },
         "Value": "application/json"
        }
@@ -3754,7 +3712,7 @@
      ],
      "Responses": [
       {
-       "$id": "494",
+       "$id": "489",
        "StatusCodes": [
         200
        ],
@@ -3781,17 +3739,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "495",
+     "$id": "490",
      "Name": "roundTripToOutput",
      "ResourceName": "ModelsTypeSpec",
      "Description": "RoundTrip to Output",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "444"
+       "$ref": "439"
       },
       {
-       "$id": "496",
+       "$id": "491",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -3808,11 +3766,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "497",
+       "$id": "492",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "498",
+        "$id": "493",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -3827,19 +3785,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "499",
+        "$id": "494",
         "Type": {
-         "$ref": "498"
+         "$ref": "493"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "500",
+       "$id": "495",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "501",
+        "$id": "496",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -3854,9 +3812,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "502",
+        "$id": "497",
         "Type": {
-         "$ref": "501"
+         "$ref": "496"
         },
         "Value": "application/json"
        }
@@ -3864,7 +3822,7 @@
      ],
      "Responses": [
       {
-       "$id": "503",
+       "$id": "498",
        "StatusCodes": [
         200
        ],
@@ -3891,17 +3849,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "504",
+     "$id": "499",
      "Name": "InputRecursive",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input recursive model",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "444"
+       "$ref": "439"
       },
       {
-       "$id": "505",
+       "$id": "500",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -3918,11 +3876,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "506",
+       "$id": "501",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "507",
+        "$id": "502",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -3937,19 +3895,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "508",
+        "$id": "503",
         "Type": {
-         "$ref": "507"
+         "$ref": "502"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "509",
+       "$id": "504",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "510",
+        "$id": "505",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -3964,9 +3922,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "511",
+        "$id": "506",
         "Type": {
-         "$ref": "510"
+         "$ref": "505"
         },
         "Value": "application/json"
        }
@@ -3974,7 +3932,7 @@
      ],
      "Responses": [
       {
-       "$id": "512",
+       "$id": "507",
        "StatusCodes": [
         200
        ],
@@ -3995,17 +3953,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "513",
+     "$id": "508",
      "Name": "roundTripRecursive",
      "ResourceName": "ModelsTypeSpec",
      "Description": "RoundTrip recursive model",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "444"
+       "$ref": "439"
       },
       {
-       "$id": "514",
+       "$id": "509",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -4022,11 +3980,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "515",
+       "$id": "510",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "516",
+        "$id": "511",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -4041,19 +3999,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "517",
+        "$id": "512",
         "Type": {
-         "$ref": "516"
+         "$ref": "511"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "518",
+       "$id": "513",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "519",
+        "$id": "514",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -4068,9 +4026,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "520",
+        "$id": "515",
         "Type": {
-         "$ref": "519"
+         "$ref": "514"
         },
         "Value": "application/json"
        }
@@ -4078,7 +4036,7 @@
      ],
      "Responses": [
       {
-       "$id": "521",
+       "$id": "516",
        "StatusCodes": [
         200
        ],
@@ -4105,21 +4063,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "522",
+     "$id": "517",
      "Name": "selfReference",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Returns model that has property of its own type",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "444"
+       "$ref": "439"
       },
       {
-       "$id": "523",
+       "$id": "518",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "524",
+        "$id": "519",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -4134,9 +4092,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "525",
+        "$id": "520",
         "Type": {
-         "$ref": "524"
+         "$ref": "519"
         },
         "Value": "application/json"
        }
@@ -4144,7 +4102,7 @@
      ],
      "Responses": [
       {
-       "$id": "526",
+       "$id": "521",
        "StatusCodes": [
         200
        ],
@@ -4168,17 +4126,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "527",
+     "$id": "522",
      "Name": "fixedFloatEnum",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Returns model that has property of its own type",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "444"
+       "$ref": "439"
       },
       {
-       "$id": "528",
+       "$id": "523",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -4195,11 +4153,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "529",
+       "$id": "524",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "530",
+        "$id": "525",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -4214,9 +4172,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "531",
+        "$id": "526",
         "Type": {
-         "$ref": "530"
+         "$ref": "525"
         },
         "Value": "application/json"
        }
@@ -4224,7 +4182,7 @@
      ],
      "Responses": [
       {
-       "$id": "532",
+       "$id": "527",
        "StatusCodes": [
         200
        ],
@@ -4248,17 +4206,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "533",
+     "$id": "528",
      "Name": "extenisbleIntEnum",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Returns model that has property of its own type",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "444"
+       "$ref": "439"
       },
       {
-       "$id": "534",
+       "$id": "529",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -4275,11 +4233,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "535",
+       "$id": "530",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "536",
+        "$id": "531",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -4294,9 +4252,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "537",
+        "$id": "532",
         "Type": {
-         "$ref": "536"
+         "$ref": "531"
         },
         "Value": "application/json"
        }
@@ -4304,7 +4262,7 @@
      ],
      "Responses": [
       {
-       "$id": "538",
+       "$id": "533",
        "StatusCodes": [
         200
        ],
@@ -4328,17 +4286,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "539",
+     "$id": "534",
      "Name": "roundTripToOutputWithNoUseBase",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Returns RoundTripOnNoUse",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "444"
+       "$ref": "439"
       },
       {
-       "$id": "540",
+       "$id": "535",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -4355,11 +4313,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "541",
+       "$id": "536",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "542",
+        "$id": "537",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -4374,19 +4332,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "543",
+        "$id": "538",
         "Type": {
-         "$ref": "542"
+         "$ref": "537"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "544",
+       "$id": "539",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "545",
+        "$id": "540",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -4401,9 +4359,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "546",
+        "$id": "541",
         "Type": {
-         "$ref": "545"
+         "$ref": "540"
         },
         "Value": "application/json"
        }
@@ -4411,7 +4369,7 @@
      ],
      "Responses": [
       {
-       "$id": "547",
+       "$id": "542",
        "StatusCodes": [
         200
        ],
@@ -4438,31 +4396,31 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "548",
+     "$id": "543",
      "Name": "analyzeConversation",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Resource collection action operation template.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "444"
+       "$ref": "439"
       },
       {
-       "$id": "549",
+       "$id": "544",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "550",
+        "$id": "545",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "551",
+        "$id": "546",
         "Type": {
-         "$id": "552",
+         "$id": "547",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": ""
@@ -4479,11 +4437,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "553",
+       "$id": "548",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "554",
+        "$id": "549",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -4498,9 +4456,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "555",
+        "$id": "550",
         "Type": {
-         "$ref": "554"
+         "$ref": "549"
         },
         "Value": "application/json"
        }
@@ -4508,7 +4466,7 @@
      ],
      "Responses": [
       {
-       "$id": "556",
+       "$id": "551",
        "StatusCodes": [
         200
        ],
@@ -4532,82 +4490,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "557",
-     "Name": "getSingleBase",
-     "ResourceName": "ModelsTypeSpec",
-     "Accessibility": "public",
-     "Parameters": [
-      {
-       "$ref": "444"
-      },
-      {
-       "$id": "558",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "559",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": ""
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "560",
-        "Type": {
-         "$ref": "559"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "561",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "425"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
-     "Path": "/single",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "562",
+     "$id": "552",
      "Name": "genericType",
      "ResourceName": "ModelsTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "444"
+       "$ref": "439"
       },
       {
-       "$id": "563",
+       "$id": "553",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "430"
+        "$ref": "425"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4620,11 +4516,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "564",
+       "$id": "554",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "565",
+        "$id": "555",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -4639,19 +4535,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "566",
+        "$id": "556",
         "Type": {
-         "$ref": "565"
+         "$ref": "555"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "567",
+       "$id": "557",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "568",
+        "$id": "558",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -4666,9 +4562,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "569",
+        "$id": "559",
         "Type": {
-         "$ref": "568"
+         "$ref": "558"
         },
         "Value": "application/json"
        }
@@ -4676,7 +4572,7 @@
      ],
      "Responses": [
       {
-       "$id": "570",
+       "$id": "560",
        "StatusCodes": [
         204
        ],
@@ -4698,11 +4594,11 @@
     }
    ],
    "Protocol": {
-    "$id": "571"
+    "$id": "561"
    },
    "Parameters": [
     {
-     "$ref": "444"
+     "$ref": "439"
     }
    ]
   }
