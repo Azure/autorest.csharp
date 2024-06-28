@@ -107,7 +107,8 @@ namespace AutoRest.CSharp.Generation.Types
             [InputPrimitiveType.ResourceTypeId] = typeof(ResourceType),
             [InputPrimitiveType.CharId] = typeof(char),
             [InputPrimitiveType.ObjectId] = typeof(object),
-            [InputPrimitiveType.RequestMethodId] = typeof(RequestMethod)
+            [InputPrimitiveType.RequestMethodId] = typeof(RequestMethod),
+            [InputPrimitiveType.IPAddressId] = typeof(IPAddress),
         };
 
         /// <summary>
