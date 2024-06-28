@@ -12,7 +12,9 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -42,8 +44,9 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "azureLocation",
-      "Encode": "string"
+      "Kind": "string",
+      "Name": "azureLocation",
+      "CrossLanguageDefinitionId": "Azure.Core.azureLocation"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -69,7 +72,8 @@
      "Type": {
       "$id": "11",
       "Kind": "string",
-      "IsNullable": false
+      "Name": "string",
+      "CrossLanguageDefinitionId": ""
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -85,7 +89,8 @@
       "Type": {
        "$id": "13",
        "Kind": "string",
-       "IsNullable": false
+       "Name": "string",
+       "CrossLanguageDefinitionId": ""
       },
       "Value": "http://localhost:3000"
      }
@@ -114,7 +119,8 @@
        "Type": {
         "$id": "17",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -142,8 +148,9 @@
        ],
        "BodyType": {
         "$id": "20",
-        "Kind": "azureLocation",
-        "Encode": "string"
+        "Kind": "string",
+        "Name": "azureLocation",
+        "CrossLanguageDefinitionId": "Azure.Core.azureLocation"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -178,8 +185,9 @@
        "Description": "_",
        "Type": {
         "$id": "23",
-        "Kind": "azureLocation",
-        "Encode": "string"
+        "Kind": "string",
+        "Name": "azureLocation",
+        "CrossLanguageDefinitionId": "Azure.Core.azureLocation"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -198,7 +206,8 @@
        "Type": {
         "$id": "25",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -224,7 +233,8 @@
        "Type": {
         "$id": "28",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -301,7 +311,8 @@
        "Type": {
         "$id": "34",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -327,7 +338,8 @@
        "Type": {
         "$id": "37",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -392,8 +404,9 @@
        "Description": "_",
        "Type": {
         "$id": "42",
-        "Kind": "azureLocation",
-        "Encode": "string"
+        "Kind": "string",
+        "Name": "azureLocation",
+        "CrossLanguageDefinitionId": "Azure.Core.azureLocation"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -412,7 +425,8 @@
        "Type": {
         "$id": "44",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -468,8 +482,9 @@
        "Description": "_",
        "Type": {
         "$id": "49",
-        "Kind": "azureLocation",
-        "Encode": "string"
+        "Kind": "string",
+        "Name": "azureLocation",
+        "CrossLanguageDefinitionId": "Azure.Core.azureLocation"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -488,7 +503,8 @@
        "Type": {
         "$id": "51",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
