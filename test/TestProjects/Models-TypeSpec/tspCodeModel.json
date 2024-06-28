@@ -9,7 +9,6 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "FixedStringEnum",
-   "CrossLanguageDefinitionId": "ModelsTypeSpec.FixedStringEnum",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -31,6 +30,7 @@
      "Value": "4"
     }
    ],
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.FixedStringEnum",
    "Description": "Fixed string enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -39,7 +39,6 @@
    "$id": "7",
    "Kind": "enum",
    "Name": "FixedIntEnum",
-   "CrossLanguageDefinitionId": "ModelsTypeSpec.FixedIntEnum",
    "ValueType": {
     "$id": "8",
     "Kind": "int32"
@@ -61,6 +60,7 @@
      "Value": 4
     }
    ],
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.FixedIntEnum",
    "Deprecated": "deprecated for test",
    "Description": "Fixed int enum",
    "IsExtensible": false,
@@ -70,7 +70,6 @@
    "$id": "12",
    "Kind": "enum",
    "Name": "ExtensibleEnum",
-   "CrossLanguageDefinitionId": "ModelsTypeSpec.ExtensibleEnum",
    "ValueType": {
     "$id": "13",
     "Kind": "string"
@@ -92,6 +91,7 @@
      "Value": "4"
     }
    ],
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.ExtensibleEnum",
    "Deprecated": "deprecated for test",
    "Description": "Extensible enum",
    "IsExtensible": true,
@@ -101,7 +101,6 @@
    "$id": "17",
    "Kind": "enum",
    "Name": "FixedFloatEnum",
-   "CrossLanguageDefinitionId": "ModelsTypeSpec.FixedFloatEnum",
    "ValueType": {
     "$id": "18",
     "Kind": "float32"
@@ -123,6 +122,7 @@
      "Value": 4
     }
    ],
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.FixedFloatEnum",
    "Deprecated": "should be replaced by cadl-ranch",
    "Description": "Fixed float enum",
    "IsExtensible": false,
@@ -132,7 +132,6 @@
    "$id": "22",
    "Kind": "enum",
    "Name": "ExtensibleIntEnum",
-   "CrossLanguageDefinitionId": "ModelsTypeSpec.ExtensibleIntEnum",
    "ValueType": {
     "$id": "23",
     "Kind": "int32"
@@ -154,6 +153,7 @@
      "Value": 4
     }
    ],
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.ExtensibleIntEnum",
    "Deprecated": "should be replaced by cadl-ranch",
    "Description": "Extensible int enum",
    "IsExtensible": true,
@@ -184,7 +184,6 @@
    "$id": "30",
    "Kind": "enum",
    "Name": "Versions",
-   "CrossLanguageDefinitionId": "ModelsTypeSpec.Versions",
    "ValueType": {
     "$id": "31",
     "Kind": "string"
@@ -196,6 +195,7 @@
      "Value": "0.1.0"
     }
    ],
+   "CrossLanguageDefinitionId": "ModelsTypeSpec.Versions",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -4402,6 +4402,7 @@
    "Protocol": {
     "$id": "571"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$ref": "444"

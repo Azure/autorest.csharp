@@ -10,7 +10,6 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Versions",
-   "CrossLanguageDefinitionId": "Versioning.Added.Versions",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -29,6 +28,7 @@
      "Description": "The version v2."
     }
    ],
+   "CrossLanguageDefinitionId": "Versioning.Added.Versions",
    "Description": "The version of the API.",
    "IsExtensible": false,
    "Usage": "None"
@@ -37,7 +37,6 @@
    "$id": "6",
    "Kind": "enum",
    "Name": "EnumV1",
-   "CrossLanguageDefinitionId": "Versioning.Added.EnumV1",
    "ValueType": {
     "$id": "7",
     "Kind": "string"
@@ -54,6 +53,7 @@
      "Value": "enumMemberV2"
     }
    ],
+   "CrossLanguageDefinitionId": "Versioning.Added.EnumV1",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -61,7 +61,6 @@
    "$id": "10",
    "Kind": "enum",
    "Name": "EnumV2",
-   "CrossLanguageDefinitionId": "Versioning.Added.EnumV2",
    "ValueType": {
     "$id": "11",
     "Kind": "string"
@@ -73,6 +72,7 @@
      "Value": "enumMember"
     }
    ],
+   "CrossLanguageDefinitionId": "Versioning.Added.EnumV2",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   }
@@ -469,6 +469,7 @@
    "Protocol": {
     "$id": "53"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$ref": "31"
@@ -597,6 +598,7 @@
    "Protocol": {
     "$id": "64"
    },
+   "Creatable": false,
    "Parent": "AddedClient",
    "Parameters": [
     {

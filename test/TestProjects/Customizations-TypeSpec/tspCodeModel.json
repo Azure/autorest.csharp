@@ -7,7 +7,6 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "ExtensibleEnumWithOperator",
-   "CrossLanguageDefinitionId": "CustomizationsInTsp.ExtensibleEnumWithOperator",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -26,6 +25,7 @@
      "Description": "Tuesday."
     }
    ],
+   "CrossLanguageDefinitionId": "CustomizationsInTsp.ExtensibleEnumWithOperator",
    "Description": "Extensible enum to customize operator",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -34,7 +34,6 @@
    "$id": "6",
    "Kind": "enum",
    "Name": "EnumToRename",
-   "CrossLanguageDefinitionId": "CustomizationsInTsp.EnumToRename",
    "ValueType": {
     "$id": "7",
     "Kind": "string"
@@ -56,6 +55,7 @@
      "Value": "3"
     }
    ],
+   "CrossLanguageDefinitionId": "CustomizationsInTsp.EnumToRename",
    "Description": "Renamed enum (original name: EnumToRename)",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -64,7 +64,6 @@
    "$id": "11",
    "Kind": "enum",
    "Name": "EnumWithValueToRename",
-   "CrossLanguageDefinitionId": "CustomizationsInTsp.EnumWithValueToRename",
    "ValueType": {
     "$id": "12",
     "Kind": "string"
@@ -86,6 +85,7 @@
      "Value": "3"
     }
    ],
+   "CrossLanguageDefinitionId": "CustomizationsInTsp.EnumWithValueToRename",
    "Description": "Enum with renamed value (original name: ValueToRename)",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -94,7 +94,6 @@
    "$id": "16",
    "Kind": "enum",
    "Name": "EnumToBeMadeExtensible",
-   "CrossLanguageDefinitionId": "CustomizationsInTsp.EnumToBeMadeExtensible",
    "ValueType": {
     "$id": "17",
     "Kind": "string"
@@ -116,6 +115,7 @@
      "Value": "3"
     }
    ],
+   "CrossLanguageDefinitionId": "CustomizationsInTsp.EnumToBeMadeExtensible",
    "Description": "Extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -124,7 +124,6 @@
    "$id": "21",
    "Kind": "enum",
    "Name": "NormalEnum",
-   "CrossLanguageDefinitionId": "CustomizationsInTsp.NormalEnum",
    "ValueType": {
     "$id": "22",
     "Kind": "string"
@@ -141,6 +140,7 @@
      "Value": "b"
     }
    ],
+   "CrossLanguageDefinitionId": "CustomizationsInTsp.NormalEnum",
    "Description": "A normal enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -1088,7 +1088,8 @@
    ],
    "Protocol": {
     "$id": "148"
-   }
+   },
+   "Creatable": true
   }
  ]
 }

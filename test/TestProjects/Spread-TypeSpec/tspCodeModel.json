@@ -9,7 +9,6 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "QueryApiVersion",
-   "CrossLanguageDefinitionId": "SpreadTypeSpec.QueryApiVersion",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -21,6 +20,7 @@
      "Value": "2022-01-01-preview"
     }
    ],
+   "CrossLanguageDefinitionId": "SpreadTypeSpec.QueryApiVersion",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -1161,6 +1161,7 @@
    "Protocol": {
     "$id": "127"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$ref": "47"

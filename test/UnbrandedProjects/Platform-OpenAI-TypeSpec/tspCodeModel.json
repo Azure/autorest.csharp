@@ -7,7 +7,6 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "CreateTranscriptionRequestModel",
-   "CrossLanguageDefinitionId": "CreateTranscriptionRequest.model.anonymous",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -19,6 +18,7 @@
      "Value": "whisper-1"
     }
    ],
+   "CrossLanguageDefinitionId": "CreateTranscriptionRequest.model.anonymous",
    "IsExtensible": true,
    "Usage": "Input"
   },
@@ -26,7 +26,6 @@
    "$id": "5",
    "Kind": "enum",
    "Name": "CreateTranscriptionRequestResponseFormat",
-   "CrossLanguageDefinitionId": "CreateTranscriptionRequest.response_format.anonymous",
    "ValueType": {
     "$id": "6",
     "Kind": "string"
@@ -58,6 +57,7 @@
      "Value": "vtt"
     }
    ],
+   "CrossLanguageDefinitionId": "CreateTranscriptionRequest.response_format.anonymous",
    "IsExtensible": false,
    "Usage": "Input"
   },
@@ -65,7 +65,6 @@
    "$id": "12",
    "Kind": "enum",
    "Name": "CreateTranslationRequestModel",
-   "CrossLanguageDefinitionId": "CreateTranslationRequest.model.anonymous",
    "ValueType": {
     "$id": "13",
     "Kind": "string"
@@ -77,6 +76,7 @@
      "Value": "whisper-1"
     }
    ],
+   "CrossLanguageDefinitionId": "CreateTranslationRequest.model.anonymous",
    "IsExtensible": true,
    "Usage": "Input"
   },
@@ -84,7 +84,6 @@
    "$id": "15",
    "Kind": "enum",
    "Name": "CreateTranslationRequestResponseFormat",
-   "CrossLanguageDefinitionId": "CreateTranslationRequest.response_format.anonymous",
    "ValueType": {
     "$id": "16",
     "Kind": "string"
@@ -116,6 +115,7 @@
      "Value": "vtt"
     }
    ],
+   "CrossLanguageDefinitionId": "CreateTranslationRequest.response_format.anonymous",
    "IsExtensible": false,
    "Usage": "Input"
   },
@@ -123,7 +123,6 @@
    "$id": "22",
    "Kind": "enum",
    "Name": "CreateChatCompletionRequestModel",
-   "CrossLanguageDefinitionId": "CreateChatCompletionRequest.model.anonymous",
    "ValueType": {
     "$id": "23",
     "Kind": "string"
@@ -185,6 +184,7 @@
      "Value": "gpt-3.5-turbo-16k-0613"
     }
    ],
+   "CrossLanguageDefinitionId": "CreateChatCompletionRequest.model.anonymous",
    "IsExtensible": true,
    "Usage": "Input"
   },
@@ -192,7 +192,6 @@
    "$id": "35",
    "Kind": "enum",
    "Name": "ChatCompletionRequestMessageRole",
-   "CrossLanguageDefinitionId": "ChatCompletionRequestMessage.role.anonymous",
    "ValueType": {
     "$id": "36",
     "Kind": "string"
@@ -219,6 +218,7 @@
      "Value": "function"
     }
    ],
+   "CrossLanguageDefinitionId": "ChatCompletionRequestMessage.role.anonymous",
    "IsExtensible": false,
    "Usage": "Input"
   },
@@ -226,7 +226,6 @@
    "$id": "41",
    "Kind": "enum",
    "Name": "ChatCompletionResponseMessageRole",
-   "CrossLanguageDefinitionId": "ChatCompletionResponseMessage.role.anonymous",
    "ValueType": {
     "$id": "42",
     "Kind": "string"
@@ -253,6 +252,7 @@
      "Value": "function"
     }
    ],
+   "CrossLanguageDefinitionId": "ChatCompletionResponseMessage.role.anonymous",
    "IsExtensible": false,
    "Usage": "Output"
   },
@@ -260,7 +260,6 @@
    "$id": "47",
    "Kind": "enum",
    "Name": "CreateChatCompletionResponseChoiceFinishReason",
-   "CrossLanguageDefinitionId": "CreateChatCompletionResponse.choice.finish_reason.anonymous",
    "ValueType": {
     "$id": "48",
     "Kind": "string"
@@ -287,6 +286,7 @@
      "Value": "content_filter"
     }
    ],
+   "CrossLanguageDefinitionId": "CreateChatCompletionResponse.choice.finish_reason.anonymous",
    "IsExtensible": false,
    "Usage": "Output"
   },
@@ -294,7 +294,6 @@
    "$id": "53",
    "Kind": "enum",
    "Name": "CreateFineTuningJobRequestModel",
-   "CrossLanguageDefinitionId": "CreateFineTuningJobRequest.model.anonymous",
    "ValueType": {
     "$id": "54",
     "Kind": "string"
@@ -316,6 +315,7 @@
      "Value": "gpt-3.5-turbo"
     }
    ],
+   "CrossLanguageDefinitionId": "CreateFineTuningJobRequest.model.anonymous",
    "IsExtensible": true,
    "Usage": "Input"
   },
@@ -344,7 +344,6 @@
    "$id": "61",
    "Kind": "enum",
    "Name": "FineTuningJobStatus",
-   "CrossLanguageDefinitionId": "FineTuningJob.status.anonymous",
    "ValueType": {
     "$id": "62",
     "Kind": "string"
@@ -381,6 +380,7 @@
      "Value": "cancelled"
     }
    ],
+   "CrossLanguageDefinitionId": "FineTuningJob.status.anonymous",
    "IsExtensible": false,
    "Usage": "Output"
   },
@@ -388,7 +388,6 @@
    "$id": "69",
    "Kind": "enum",
    "Name": "FineTuningJobEventLevel",
-   "CrossLanguageDefinitionId": "FineTuningJobEvent.level.anonymous",
    "ValueType": {
     "$id": "70",
     "Kind": "string"
@@ -410,6 +409,7 @@
      "Value": "error"
     }
    ],
+   "CrossLanguageDefinitionId": "FineTuningJobEvent.level.anonymous",
    "IsExtensible": false,
    "Usage": "Output"
   },
@@ -417,7 +417,6 @@
    "$id": "74",
    "Kind": "enum",
    "Name": "CreateCompletionRequestModel",
-   "CrossLanguageDefinitionId": "CreateCompletionRequest.model.anonymous",
    "ValueType": {
     "$id": "75",
     "Kind": "string"
@@ -469,6 +468,7 @@
      "Value": "text-ada-001"
     }
    ],
+   "CrossLanguageDefinitionId": "CreateCompletionRequest.model.anonymous",
    "IsExtensible": true,
    "Usage": "Input"
   },
@@ -476,7 +476,6 @@
    "$id": "85",
    "Kind": "enum",
    "Name": "CreateCompletionResponseChoiceFinishReason",
-   "CrossLanguageDefinitionId": "CreateCompletionResponse.choice.finish_reason.anonymous",
    "ValueType": {
     "$id": "86",
     "Kind": "string"
@@ -498,6 +497,7 @@
      "Value": "content_filter"
     }
    ],
+   "CrossLanguageDefinitionId": "CreateCompletionResponse.choice.finish_reason.anonymous",
    "IsExtensible": false,
    "Usage": "Output"
   },
@@ -505,7 +505,6 @@
    "$id": "90",
    "Kind": "enum",
    "Name": "CreateEditRequestModel",
-   "CrossLanguageDefinitionId": "CreateEditRequest.model.anonymous",
    "ValueType": {
     "$id": "91",
     "Kind": "string"
@@ -522,6 +521,7 @@
      "Value": "code-davinci-edit-001"
     }
    ],
+   "CrossLanguageDefinitionId": "CreateEditRequest.model.anonymous",
    "IsExtensible": true,
    "Usage": "Input"
   },
@@ -550,7 +550,6 @@
    "$id": "97",
    "Kind": "enum",
    "Name": "CreateEditResponseChoiceFinishReason",
-   "CrossLanguageDefinitionId": "CreateEditResponse.choice.finish_reason.anonymous",
    "ValueType": {
     "$id": "98",
     "Kind": "string"
@@ -567,6 +566,7 @@
      "Value": "length"
     }
    ],
+   "CrossLanguageDefinitionId": "CreateEditResponse.choice.finish_reason.anonymous",
    "IsExtensible": false,
    "Usage": "Output"
   },
@@ -574,7 +574,6 @@
    "$id": "101",
    "Kind": "enum",
    "Name": "CreateEmbeddingRequestModel",
-   "CrossLanguageDefinitionId": "CreateEmbeddingRequest.model.anonymous",
    "ValueType": {
     "$id": "102",
     "Kind": "string"
@@ -586,6 +585,7 @@
      "Value": "text-embedding-ada-002"
     }
    ],
+   "CrossLanguageDefinitionId": "CreateEmbeddingRequest.model.anonymous",
    "IsExtensible": true,
    "Usage": "Input"
   },
@@ -656,7 +656,6 @@
    "$id": "113",
    "Kind": "enum",
    "Name": "OpenAIFileStatus",
-   "CrossLanguageDefinitionId": "OpenAIFile.status.anonymous",
    "ValueType": {
     "$id": "114",
     "Kind": "string"
@@ -693,6 +692,7 @@
      "Value": "deleted"
     }
    ],
+   "CrossLanguageDefinitionId": "OpenAIFile.status.anonymous",
    "IsExtensible": false,
    "Usage": "Output"
   },
@@ -700,7 +700,6 @@
    "$id": "121",
    "Kind": "enum",
    "Name": "CreateFineTuneRequestModel",
-   "CrossLanguageDefinitionId": "CreateFineTuneRequest.model.anonymous",
    "ValueType": {
     "$id": "122",
     "Kind": "string"
@@ -727,6 +726,7 @@
      "Value": "davinci"
     }
    ],
+   "CrossLanguageDefinitionId": "CreateFineTuneRequest.model.anonymous",
    "IsExtensible": true,
    "Usage": "Input"
   },
@@ -755,7 +755,6 @@
    "$id": "130",
    "Kind": "enum",
    "Name": "FineTuneStatus",
-   "CrossLanguageDefinitionId": "FineTune.status.anonymous",
    "ValueType": {
     "$id": "131",
     "Kind": "string"
@@ -787,6 +786,7 @@
      "Value": "cancelled"
     }
    ],
+   "CrossLanguageDefinitionId": "FineTune.status.anonymous",
    "IsExtensible": false,
    "Usage": "Output"
   },
@@ -815,7 +815,6 @@
    "$id": "140",
    "Kind": "enum",
    "Name": "CreateImageRequestSize",
-   "CrossLanguageDefinitionId": "CreateImageRequest.size.anonymous",
    "ValueType": {
     "$id": "141",
     "Kind": "string"
@@ -837,6 +836,7 @@
      "Value": "1024x1024"
     }
    ],
+   "CrossLanguageDefinitionId": "CreateImageRequest.size.anonymous",
    "IsExtensible": false,
    "Usage": "Input"
   },
@@ -844,7 +844,6 @@
    "$id": "145",
    "Kind": "enum",
    "Name": "CreateImageRequestResponseFormat",
-   "CrossLanguageDefinitionId": "CreateImageRequest.response_format.anonymous",
    "ValueType": {
     "$id": "146",
     "Kind": "string"
@@ -861,6 +860,7 @@
      "Value": "b64_json"
     }
    ],
+   "CrossLanguageDefinitionId": "CreateImageRequest.response_format.anonymous",
    "IsExtensible": false,
    "Usage": "Input"
   },
@@ -868,7 +868,6 @@
    "$id": "149",
    "Kind": "enum",
    "Name": "CreateModerationRequestModel",
-   "CrossLanguageDefinitionId": "CreateModerationRequest.model.anonymous",
    "ValueType": {
     "$id": "150",
     "Kind": "string"
@@ -885,6 +884,7 @@
      "Value": "text-moderation-stable"
     }
    ],
+   "CrossLanguageDefinitionId": "CreateModerationRequest.model.anonymous",
    "IsExtensible": true,
    "Usage": "Input"
   }
@@ -5178,6 +5178,7 @@
    "Protocol": {
     "$id": "820"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$id": "821",
@@ -5218,6 +5219,7 @@
    "Protocol": {
     "$id": "826"
    },
+   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -5346,6 +5348,7 @@
    "Protocol": {
     "$id": "838"
    },
+   "Creatable": false,
    "Parent": "Audio",
    "Parameters": [
     {
@@ -5474,6 +5477,7 @@
    "Protocol": {
     "$id": "850"
    },
+   "Creatable": false,
    "Parent": "Audio",
    "Parameters": [
     {
@@ -5489,6 +5493,7 @@
    "Protocol": {
     "$id": "852"
    },
+   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -5612,6 +5617,7 @@
    "Protocol": {
     "$id": "863"
    },
+   "Creatable": false,
    "Parent": "Chat",
    "Parameters": [
     {
@@ -5627,6 +5633,7 @@
    "Protocol": {
     "$id": "865"
    },
+   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -6130,6 +6137,7 @@
    "Protocol": {
     "$id": "910"
    },
+   "Creatable": false,
    "Parent": "FineTuning",
    "Parameters": [
     {
@@ -6253,6 +6261,7 @@
    "Protocol": {
     "$id": "921"
    },
+   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -6377,6 +6386,7 @@
    "Protocol": {
     "$id": "932"
    },
+   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -6501,6 +6511,7 @@
    "Protocol": {
     "$id": "943"
    },
+   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -6935,6 +6946,7 @@
    "Protocol": {
     "$id": "982"
    },
+   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -7388,6 +7400,7 @@
    "Protocol": {
     "$id": "1021"
    },
+   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -7628,6 +7641,7 @@
    "Protocol": {
     "$id": "1042"
    },
+   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -7976,6 +7990,7 @@
    "Protocol": {
     "$id": "1073"
    },
+   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {
@@ -8100,6 +8115,7 @@
    "Protocol": {
     "$id": "1084"
    },
+   "Creatable": false,
    "Parent": "OpenAIClient",
    "Parameters": [
     {

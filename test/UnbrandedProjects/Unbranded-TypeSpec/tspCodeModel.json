@@ -133,7 +133,6 @@
    "$id": "20",
    "Kind": "enum",
    "Name": "StringFixedEnum",
-   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.StringFixedEnum",
    "ValueType": {
     "$id": "21",
     "Kind": "string"
@@ -155,6 +154,7 @@
      "Value": "4"
     }
    ],
+   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.StringFixedEnum",
    "Description": "Simple enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -163,7 +163,6 @@
    "$id": "25",
    "Kind": "enum",
    "Name": "StringExtensibleEnum",
-   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.StringExtensibleEnum",
    "ValueType": {
     "$id": "26",
     "Kind": "string"
@@ -185,6 +184,7 @@
      "Value": "4"
     }
    ],
+   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.StringExtensibleEnum",
    "Description": "Extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -193,7 +193,6 @@
    "$id": "30",
    "Kind": "enum",
    "Name": "IntExtensibleEnum",
-   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.IntExtensibleEnum",
    "ValueType": {
     "$id": "31",
     "Kind": "int32"
@@ -215,6 +214,7 @@
      "Value": 4
     }
    ],
+   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.IntExtensibleEnum",
    "Description": "Int based extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -223,7 +223,6 @@
    "$id": "35",
    "Kind": "enum",
    "Name": "FloatExtensibleEnum",
-   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.FloatExtensibleEnum",
    "ValueType": {
     "$id": "36",
     "Kind": "float32"
@@ -245,6 +244,7 @@
      "Value": 4
     }
    ],
+   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.FloatExtensibleEnum",
    "Description": "Float based extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -253,7 +253,6 @@
    "$id": "40",
    "Kind": "enum",
    "Name": "FloatFixedEnum",
-   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.FloatFixedEnum",
    "ValueType": {
     "$id": "41",
     "Kind": "float32"
@@ -275,6 +274,7 @@
      "Value": 4.4
     }
    ],
+   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.FloatFixedEnum",
    "Description": "float fixed enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -283,7 +283,6 @@
    "$id": "45",
    "Kind": "enum",
    "Name": "IntFixedEnum",
-   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.IntFixedEnum",
    "ValueType": {
     "$id": "46",
     "Kind": "int32"
@@ -305,6 +304,7 @@
      "Value": 4
     }
    ],
+   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.IntFixedEnum",
    "Description": "int fixed enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -313,7 +313,6 @@
    "$id": "50",
    "Kind": "enum",
    "Name": "DaysOfWeekExtensibleEnum",
-   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.DaysOfWeekExtensibleEnum",
    "ValueType": {
     "$id": "51",
     "Kind": "string"
@@ -355,6 +354,7 @@
      "Value": "Sunday"
     }
    ],
+   "CrossLanguageDefinitionId": "UnbrandedTypeSpec.DaysOfWeekExtensibleEnum",
    "IsExtensible": true,
    "Usage": "None"
   }
@@ -2949,6 +2949,7 @@
    "Protocol": {
     "$id": "333"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$ref": "158"

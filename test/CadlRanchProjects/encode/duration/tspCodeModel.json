@@ -174,6 +174,7 @@
    "Protocol": {
     "$id": "28"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$id": "29",
@@ -688,6 +689,7 @@
    "Protocol": {
     "$id": "83"
    },
+   "Creatable": false,
    "Parent": "DurationClient",
    "Parameters": [
     {
@@ -1346,6 +1348,7 @@
    "Protocol": {
     "$id": "139"
    },
+   "Creatable": false,
    "Parent": "DurationClient",
    "Parameters": [
     {
@@ -1835,6 +1838,7 @@
    "Protocol": {
     "$id": "190"
    },
+   "Creatable": false,
    "Parent": "DurationClient",
    "Parameters": [
     {

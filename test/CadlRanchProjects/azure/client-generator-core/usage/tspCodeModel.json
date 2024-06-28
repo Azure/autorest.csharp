@@ -122,6 +122,7 @@
    "Protocol": {
     "$id": "17"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$id": "18",
@@ -435,6 +436,7 @@
    "Protocol": {
     "$id": "46"
    },
+   "Creatable": false,
    "Parent": "UsageClient",
    "Parameters": [
     {

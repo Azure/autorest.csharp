@@ -135,7 +135,6 @@
    "$id": "20",
    "Kind": "enum",
    "Name": "CsProjectedEnum",
-   "CrossLanguageDefinitionId": "NoDocsTypeSpec.ProjectedEnum",
    "ValueType": {
     "$id": "21",
     "Kind": "float32"
@@ -157,6 +156,7 @@
      "Value": 4.4
     }
    ],
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.ProjectedEnum",
    "Description": "enum with projected name",
    "IsExtensible": false,
    "Usage": "Input"
@@ -165,7 +165,6 @@
    "$id": "25",
    "Kind": "enum",
    "Name": "CsProjectedEnumInModel",
-   "CrossLanguageDefinitionId": "NoDocsTypeSpec.ProjectedEnumInModel",
    "ValueType": {
     "$id": "26",
     "Kind": "float32"
@@ -187,6 +186,7 @@
      "Value": 4.4
     }
    ],
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.ProjectedEnumInModel",
    "Description": "enum with projected name used in a model",
    "IsExtensible": false,
    "Usage": "Input"
@@ -195,7 +195,6 @@
    "$id": "30",
    "Kind": "enum",
    "Name": "StringFixedEnum",
-   "CrossLanguageDefinitionId": "NoDocsTypeSpec.StringFixedEnum",
    "ValueType": {
     "$id": "31",
     "Kind": "string"
@@ -217,6 +216,7 @@
      "Value": "4"
     }
    ],
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.StringFixedEnum",
    "Description": "Simple enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -225,7 +225,6 @@
    "$id": "35",
    "Kind": "enum",
    "Name": "StringExtensibleEnum",
-   "CrossLanguageDefinitionId": "NoDocsTypeSpec.StringExtensibleEnum",
    "ValueType": {
     "$id": "36",
     "Kind": "string"
@@ -247,6 +246,7 @@
      "Value": "4"
     }
    ],
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.StringExtensibleEnum",
    "Description": "Extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -255,7 +255,6 @@
    "$id": "40",
    "Kind": "enum",
    "Name": "IntExtensibleEnum",
-   "CrossLanguageDefinitionId": "NoDocsTypeSpec.IntExtensibleEnum",
    "ValueType": {
     "$id": "41",
     "Kind": "int32"
@@ -277,6 +276,7 @@
      "Value": 4
     }
    ],
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.IntExtensibleEnum",
    "Description": "Int based extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -285,7 +285,6 @@
    "$id": "45",
    "Kind": "enum",
    "Name": "FloatExtensibleEnum",
-   "CrossLanguageDefinitionId": "NoDocsTypeSpec.FloatExtensibleEnum",
    "ValueType": {
     "$id": "46",
     "Kind": "float32"
@@ -307,6 +306,7 @@
      "Value": 4
     }
    ],
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.FloatExtensibleEnum",
    "Description": "Float based extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -315,7 +315,6 @@
    "$id": "50",
    "Kind": "enum",
    "Name": "FloatFixedEnum",
-   "CrossLanguageDefinitionId": "NoDocsTypeSpec.FloatFixedEnum",
    "ValueType": {
     "$id": "51",
     "Kind": "float32"
@@ -337,6 +336,7 @@
      "Value": 4.4
     }
    ],
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.FloatFixedEnum",
    "Description": "float fixed enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -345,7 +345,6 @@
    "$id": "55",
    "Kind": "enum",
    "Name": "IntFixedEnum",
-   "CrossLanguageDefinitionId": "NoDocsTypeSpec.IntFixedEnum",
    "ValueType": {
     "$id": "56",
     "Kind": "int32"
@@ -367,6 +366,7 @@
      "Value": 4
     }
    ],
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.IntFixedEnum",
    "Description": "int fixed enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -375,7 +375,6 @@
    "$id": "60",
    "Kind": "enum",
    "Name": "DaysOfWeekExtensibleEnum",
-   "CrossLanguageDefinitionId": "NoDocsTypeSpec.DaysOfWeekExtensibleEnum",
    "ValueType": {
     "$id": "61",
     "Kind": "string"
@@ -417,6 +416,7 @@
      "Value": "Sunday"
     }
    ],
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.DaysOfWeekExtensibleEnum",
    "IsExtensible": true,
    "Usage": "None"
   },
@@ -424,7 +424,6 @@
    "$id": "69",
    "Kind": "enum",
    "Name": "Versions",
-   "CrossLanguageDefinitionId": "NoDocsTypeSpec.Versions",
    "ValueType": {
     "$id": "70",
     "Kind": "string"
@@ -436,6 +435,7 @@
      "Value": "2022-05-15-preview"
     }
    ],
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.Versions",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -3413,6 +3413,7 @@
    "Protocol": {
     "$id": "391"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$ref": "210"
@@ -3427,6 +3428,7 @@
    "Protocol": {
     "$id": "393"
    },
+   "Creatable": false,
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {
@@ -3559,6 +3561,7 @@
    "Protocol": {
     "$id": "406"
    },
+   "Creatable": false,
    "Parent": "Hello",
    "Parameters": [
     {
@@ -4189,6 +4192,7 @@
    "Protocol": {
     "$id": "466"
    },
+   "Creatable": false,
    "Parent": "Hello",
    "Parameters": [
     {
@@ -4307,6 +4311,7 @@
    "Protocol": {
     "$id": "477"
    },
+   "Creatable": false,
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {
@@ -4487,6 +4492,7 @@
    "Protocol": {
     "$id": "493"
    },
+   "Creatable": false,
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {
@@ -4583,6 +4589,7 @@
    "Protocol": {
     "$id": "502"
    },
+   "Creatable": false,
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {
@@ -4697,6 +4704,7 @@
    "Protocol": {
     "$id": "513"
    },
+   "Creatable": false,
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {

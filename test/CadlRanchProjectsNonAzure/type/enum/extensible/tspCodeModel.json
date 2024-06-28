@@ -7,7 +7,6 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "DaysOfWeekExtensibleEnum",
-   "CrossLanguageDefinitionId": "Type.Enum.Extensible.DaysOfWeekExtensibleEnum",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -56,6 +55,7 @@
      "Description": "Sunday."
     }
    ],
+   "CrossLanguageDefinitionId": "Type.Enum.Extensible.DaysOfWeekExtensibleEnum",
    "Description": "Days of the week",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -71,6 +71,7 @@
    "Protocol": {
     "$id": "12"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$id": "13",
@@ -436,6 +437,7 @@
    "Protocol": {
     "$id": "46"
    },
+   "Creatable": false,
    "Parent": "ExtensibleClient",
    "Parameters": [
     {

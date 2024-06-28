@@ -7,7 +7,6 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "ImmediateSuccessResponseRepeatabilityResult",
-   "CrossLanguageDefinitionId": "immediateSuccess.ResponseRepeatabilityResult.anonymous",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -24,6 +23,7 @@
      "Value": "rejected"
     }
    ],
+   "CrossLanguageDefinitionId": "immediateSuccess.ResponseRepeatabilityResult.anonymous",
    "IsExtensible": false,
    "Usage": "Output"
   }
@@ -172,6 +172,7 @@
    "Protocol": {
     "$id": "22"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$ref": "8"

@@ -9,7 +9,6 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Versions",
-   "CrossLanguageDefinitionId": "MixApiVersion.Versions",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -21,6 +20,7 @@
      "Value": "2022-11-30-preview"
     }
    ],
+   "CrossLanguageDefinitionId": "MixApiVersion.Versions",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -164,6 +164,7 @@
    "Protocol": {
     "$id": "25"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$id": "26",
@@ -532,6 +533,7 @@
    "Protocol": {
     "$id": "61"
    },
+   "Creatable": false,
    "Parent": "MixApiVersionClient",
    "Parameters": [
     {
@@ -638,6 +640,7 @@
    "Protocol": {
     "$id": "71"
    },
+   "Creatable": false,
    "Parent": "MixApiVersionClient",
    "Parameters": [
     {

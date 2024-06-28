@@ -7,7 +7,6 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "GetResponseProp4",
-   "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -29,6 +28,7 @@
      "Value": "c"
     }
    ],
+   "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -36,7 +36,6 @@
    "$id": "7",
    "Kind": "enum",
    "Name": "GetResponseProp3",
-   "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "ValueType": {
     "$id": "8",
     "Kind": "string"
@@ -53,6 +52,7 @@
      "Value": "c"
     }
    ],
+   "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "IsExtensible": true,
    "Usage": "RoundTrip"
   },
@@ -60,7 +60,6 @@
    "$id": "11",
    "Kind": "enum",
    "Name": "StringExtensibleNamedUnion",
-   "CrossLanguageDefinitionId": "Type.Union.StringExtensibleNamedUnion",
    "ValueType": {
     "$id": "12",
     "Kind": "string"
@@ -77,6 +76,7 @@
      "Value": "c"
     }
    ],
+   "CrossLanguageDefinitionId": "Type.Union.StringExtensibleNamedUnion",
    "IsExtensible": true,
    "Usage": "RoundTrip"
   },
@@ -84,7 +84,6 @@
    "$id": "15",
    "Kind": "enum",
    "Name": "GetResponseProp2",
-   "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "ValueType": {
     "$id": "16",
     "Kind": "int32"
@@ -106,6 +105,7 @@
      "Value": 3
     }
    ],
+   "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -113,7 +113,6 @@
    "$id": "20",
    "Kind": "enum",
    "Name": "GetResponseProp1",
-   "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "ValueType": {
     "$id": "21",
     "Kind": "float32"
@@ -135,6 +134,7 @@
      "Value": 3.3
     }
    ],
+   "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -142,7 +142,6 @@
    "$id": "25",
    "Kind": "enum",
    "Name": "EnumsOnlyCasesLr",
-   "CrossLanguageDefinitionId": "EnumsOnlyCases.lr.anonymous",
    "ValueType": {
     "$id": "26",
     "Kind": "string"
@@ -169,6 +168,7 @@
      "Value": "down"
     }
    ],
+   "CrossLanguageDefinitionId": "EnumsOnlyCases.lr.anonymous",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -176,7 +176,6 @@
    "$id": "31",
    "Kind": "enum",
    "Name": "EnumsOnlyCasesUd",
-   "CrossLanguageDefinitionId": "EnumsOnlyCases.ud.anonymous",
    "ValueType": {
     "$id": "32",
     "Kind": "string"
@@ -193,6 +192,7 @@
      "Value": "down"
     }
    ],
+   "CrossLanguageDefinitionId": "EnumsOnlyCases.ud.anonymous",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   }
@@ -1165,6 +1165,7 @@
    "Protocol": {
     "$id": "171"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$id": "172",
@@ -1368,6 +1369,7 @@
    "Protocol": {
     "$id": "191"
    },
+   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {
@@ -1546,6 +1548,7 @@
    "Protocol": {
     "$id": "207"
    },
+   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {
@@ -1724,6 +1727,7 @@
    "Protocol": {
     "$id": "223"
    },
+   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {
@@ -1902,6 +1906,7 @@
    "Protocol": {
     "$id": "239"
    },
+   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {
@@ -2080,6 +2085,7 @@
    "Protocol": {
     "$id": "255"
    },
+   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {
@@ -2258,6 +2264,7 @@
    "Protocol": {
     "$id": "271"
    },
+   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {
@@ -2436,6 +2443,7 @@
    "Protocol": {
     "$id": "287"
    },
+   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {
@@ -2614,6 +2622,7 @@
    "Protocol": {
     "$id": "303"
    },
+   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {
@@ -2792,6 +2801,7 @@
    "Protocol": {
     "$id": "319"
    },
+   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {
@@ -2970,6 +2980,7 @@
    "Protocol": {
     "$id": "335"
    },
+   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {

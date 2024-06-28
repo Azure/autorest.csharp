@@ -135,7 +135,6 @@
    "$id": "20",
    "Kind": "enum",
    "Name": "CsProjectedEnum",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.ProjectedEnum",
    "ValueType": {
     "$id": "21",
     "Kind": "float32"
@@ -157,6 +156,7 @@
      "Value": 4.4
     }
    ],
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.ProjectedEnum",
    "Description": "enum with projected name",
    "IsExtensible": false,
    "Usage": "Input"
@@ -165,7 +165,6 @@
    "$id": "25",
    "Kind": "enum",
    "Name": "CsProjectedEnumInModel",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.ProjectedEnumInModel",
    "ValueType": {
     "$id": "26",
     "Kind": "float32"
@@ -187,6 +186,7 @@
      "Value": 4.4
     }
    ],
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.ProjectedEnumInModel",
    "Description": "enum with projected name used in a model",
    "IsExtensible": false,
    "Usage": "Input"
@@ -195,7 +195,6 @@
    "$id": "30",
    "Kind": "enum",
    "Name": "StringFixedEnum",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.StringFixedEnum",
    "ValueType": {
     "$id": "31",
     "Kind": "string"
@@ -217,6 +216,7 @@
      "Value": "4"
     }
    ],
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.StringFixedEnum",
    "Description": "Simple enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -225,7 +225,6 @@
    "$id": "35",
    "Kind": "enum",
    "Name": "StringExtensibleEnum",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.StringExtensibleEnum",
    "ValueType": {
     "$id": "36",
     "Kind": "string"
@@ -247,6 +246,7 @@
      "Value": "4"
     }
    ],
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.StringExtensibleEnum",
    "Description": "Extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -255,7 +255,6 @@
    "$id": "40",
    "Kind": "enum",
    "Name": "IntExtensibleEnum",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.IntExtensibleEnum",
    "ValueType": {
     "$id": "41",
     "Kind": "int32"
@@ -277,6 +276,7 @@
      "Value": 4
     }
    ],
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.IntExtensibleEnum",
    "Description": "Int based extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -285,7 +285,6 @@
    "$id": "45",
    "Kind": "enum",
    "Name": "FloatExtensibleEnum",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.FloatExtensibleEnum",
    "ValueType": {
     "$id": "46",
     "Kind": "float32"
@@ -307,6 +306,7 @@
      "Value": 4
     }
    ],
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.FloatExtensibleEnum",
    "Description": "Float based extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -315,7 +315,6 @@
    "$id": "50",
    "Kind": "enum",
    "Name": "FloatFixedEnum",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.FloatFixedEnum",
    "ValueType": {
     "$id": "51",
     "Kind": "float32"
@@ -337,6 +336,7 @@
      "Value": 4.4
     }
    ],
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.FloatFixedEnum",
    "Description": "float fixed enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -345,7 +345,6 @@
    "$id": "55",
    "Kind": "enum",
    "Name": "IntFixedEnum",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.IntFixedEnum",
    "ValueType": {
     "$id": "56",
     "Kind": "int32"
@@ -367,6 +366,7 @@
      "Value": 4
     }
    ],
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.IntFixedEnum",
    "Description": "int fixed enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -375,7 +375,6 @@
    "$id": "60",
    "Kind": "enum",
    "Name": "DaysOfWeekExtensibleEnum",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.DaysOfWeekExtensibleEnum",
    "ValueType": {
     "$id": "61",
     "Kind": "string"
@@ -417,6 +416,7 @@
      "Value": "Sunday"
     }
    ],
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.DaysOfWeekExtensibleEnum",
    "IsExtensible": true,
    "Usage": "None"
   },
@@ -424,7 +424,6 @@
    "$id": "69",
    "Kind": "enum",
    "Name": "Versions",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.Versions",
    "ValueType": {
     "$id": "70",
     "Kind": "string"
@@ -436,6 +435,7 @@
      "Value": "2022-05-15-preview"
     }
    ],
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.Versions",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -3690,6 +3690,7 @@
    "Protocol": {
     "$id": "421"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$ref": "221"
@@ -3704,6 +3705,7 @@
    "Protocol": {
     "$id": "423"
    },
+   "Creatable": false,
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {
@@ -3836,6 +3838,7 @@
    "Protocol": {
     "$id": "436"
    },
+   "Creatable": false,
    "Parent": "Hello",
    "Parameters": [
     {
@@ -4466,6 +4469,7 @@
    "Protocol": {
     "$id": "496"
    },
+   "Creatable": false,
    "Parent": "Hello",
    "Parameters": [
     {
@@ -4584,6 +4588,7 @@
    "Protocol": {
     "$id": "507"
    },
+   "Creatable": false,
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {
@@ -4764,6 +4769,7 @@
    "Protocol": {
     "$id": "523"
    },
+   "Creatable": false,
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {
@@ -4860,6 +4866,7 @@
    "Protocol": {
     "$id": "532"
    },
+   "Creatable": false,
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {
@@ -4974,6 +4981,7 @@
    "Protocol": {
     "$id": "543"
    },
+   "Creatable": false,
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {

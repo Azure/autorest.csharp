@@ -9,7 +9,6 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "ProjectKind",
-   "CrossLanguageDefinitionId": "RenameGetList.ProjectKind",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -34,6 +33,7 @@
      "Description": "For building an extraction model to identify your domain categories using your own data."
     }
    ],
+   "CrossLanguageDefinitionId": "RenameGetList.ProjectKind",
    "Description": "Represents the project kind.",
    "IsExtensible": true,
    "Usage": "None"
@@ -42,7 +42,6 @@
    "$id": "7",
    "Kind": "enum",
    "Name": "Versions",
-   "CrossLanguageDefinitionId": "RenameGetList.Versions",
    "ValueType": {
     "$id": "8",
     "Kind": "string"
@@ -54,6 +53,7 @@
      "Value": "2022-05-15-preview"
     }
    ],
+   "CrossLanguageDefinitionId": "RenameGetList.Versions",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -336,6 +336,7 @@
    "Protocol": {
     "$id": "51"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$id": "52",
@@ -564,6 +565,7 @@
    "Protocol": {
     "$id": "74"
    },
+   "Creatable": false,
    "Parent": "RenameGetListClient",
    "Parameters": [
     {
@@ -807,6 +809,7 @@
    "Protocol": {
     "$id": "97"
    },
+   "Creatable": false,
    "Parent": "RenameGetListClient",
    "Parameters": [
     {

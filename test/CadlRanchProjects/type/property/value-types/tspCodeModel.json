@@ -7,7 +7,6 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "FixedInnerEnum",
-   "CrossLanguageDefinitionId": "Type.Property.ValueTypes.FixedInnerEnum",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -26,6 +25,7 @@
      "Description": "Second value."
     }
    ],
+   "CrossLanguageDefinitionId": "Type.Property.ValueTypes.FixedInnerEnum",
    "Description": "Enum that will be used as a property for model EnumProperty. Non-extensible.",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -34,7 +34,6 @@
    "$id": "6",
    "Kind": "enum",
    "Name": "InnerEnum",
-   "CrossLanguageDefinitionId": "Type.Property.ValueTypes.InnerEnum",
    "ValueType": {
     "$id": "7",
     "Kind": "string"
@@ -53,6 +52,7 @@
      "Description": "Second value."
     }
    ],
+   "CrossLanguageDefinitionId": "Type.Property.ValueTypes.InnerEnum",
    "Description": "Enum that will be used as a property for model EnumProperty. Extensible.",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -124,7 +124,6 @@
    "$id": "19",
    "Kind": "enum",
    "Name": "UnionStringLiteralPropertyProperty",
-   "CrossLanguageDefinitionId": "UnionStringLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "20",
     "Kind": "string"
@@ -141,6 +140,7 @@
      "Value": "world"
     }
    ],
+   "CrossLanguageDefinitionId": "UnionStringLiteralProperty.property.anonymous",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -148,7 +148,6 @@
    "$id": "23",
    "Kind": "enum",
    "Name": "UnionIntLiteralPropertyProperty",
-   "CrossLanguageDefinitionId": "UnionIntLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "24",
     "Kind": "int32"
@@ -165,6 +164,7 @@
      "Value": 43
     }
    ],
+   "CrossLanguageDefinitionId": "UnionIntLiteralProperty.property.anonymous",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -172,7 +172,6 @@
    "$id": "27",
    "Kind": "enum",
    "Name": "UnionFloatLiteralPropertyProperty",
-   "CrossLanguageDefinitionId": "UnionFloatLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "28",
     "Kind": "float32"
@@ -189,6 +188,7 @@
      "Value": 46.875
     }
    ],
+   "CrossLanguageDefinitionId": "UnionFloatLiteralProperty.property.anonymous",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -196,7 +196,6 @@
    "$id": "31",
    "Kind": "enum",
    "Name": "ExtendedEnum",
-   "CrossLanguageDefinitionId": "Type.Property.ValueTypes.ExtendedEnum",
    "ValueType": {
     "$id": "32",
     "Kind": "string"
@@ -208,6 +207,7 @@
      "Value": "value2"
     }
    ],
+   "CrossLanguageDefinitionId": "Type.Property.ValueTypes.ExtendedEnum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
   }
@@ -915,6 +915,7 @@
    "Protocol": {
     "$id": "124"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$id": "125",
@@ -1121,6 +1122,7 @@
    "Protocol": {
     "$id": "144"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -1302,6 +1304,7 @@
    "Protocol": {
     "$id": "160"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -1483,6 +1486,7 @@
    "Protocol": {
     "$id": "176"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -1664,6 +1668,7 @@
    "Protocol": {
     "$id": "192"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -1845,6 +1850,7 @@
    "Protocol": {
     "$id": "208"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -2026,6 +2032,7 @@
    "Protocol": {
     "$id": "224"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -2207,6 +2214,7 @@
    "Protocol": {
     "$id": "240"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -2388,6 +2396,7 @@
    "Protocol": {
     "$id": "256"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -2569,6 +2578,7 @@
    "Protocol": {
     "$id": "272"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -2750,6 +2760,7 @@
    "Protocol": {
     "$id": "288"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -2931,6 +2942,7 @@
    "Protocol": {
     "$id": "304"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -3112,6 +3124,7 @@
    "Protocol": {
     "$id": "320"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -3293,6 +3306,7 @@
    "Protocol": {
     "$id": "336"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -3474,6 +3488,7 @@
    "Protocol": {
     "$id": "352"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -3655,6 +3670,7 @@
    "Protocol": {
     "$id": "368"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -3836,6 +3852,7 @@
    "Protocol": {
     "$id": "384"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -4017,6 +4034,7 @@
    "Protocol": {
     "$id": "400"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -4198,6 +4216,7 @@
    "Protocol": {
     "$id": "416"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -4379,6 +4398,7 @@
    "Protocol": {
     "$id": "432"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -4560,6 +4580,7 @@
    "Protocol": {
     "$id": "448"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -4741,6 +4762,7 @@
    "Protocol": {
     "$id": "464"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -4922,6 +4944,7 @@
    "Protocol": {
     "$id": "480"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -5103,6 +5126,7 @@
    "Protocol": {
     "$id": "496"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -5284,6 +5308,7 @@
    "Protocol": {
     "$id": "512"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -5465,6 +5490,7 @@
    "Protocol": {
     "$id": "528"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -5646,6 +5672,7 @@
    "Protocol": {
     "$id": "544"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -5827,6 +5854,7 @@
    "Protocol": {
     "$id": "560"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -6008,6 +6036,7 @@
    "Protocol": {
     "$id": "576"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {
@@ -6189,6 +6218,7 @@
    "Protocol": {
     "$id": "592"
    },
+   "Creatable": false,
    "Parent": "ValueTypesClient",
    "Parameters": [
     {

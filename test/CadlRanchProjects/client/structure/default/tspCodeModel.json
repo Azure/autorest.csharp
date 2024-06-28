@@ -7,7 +7,6 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "ClientType",
-   "CrossLanguageDefinitionId": "Client.Structure.Service.ClientType",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -34,6 +33,7 @@
      "Value": "two-operation-group"
     }
    ],
+   "CrossLanguageDefinitionId": "Client.Structure.Service.ClientType",
    "IsExtensible": false,
    "Usage": "Input"
   }
@@ -197,6 +197,7 @@
    "Protocol": {
     "$id": "22"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$ref": "10"
@@ -214,6 +215,7 @@
    "Protocol": {
     "$id": "24"
    },
+   "Creatable": false,
    "Parent": "ServiceClient",
    "Parameters": [
     {
@@ -291,6 +293,7 @@
    "Protocol": {
     "$id": "31"
    },
+   "Creatable": false,
    "Parent": "Baz",
    "Parameters": [
     {
@@ -368,6 +371,7 @@
    "Protocol": {
     "$id": "38"
    },
+   "Creatable": false,
    "Parent": "ServiceClient",
    "Parameters": [
     {
@@ -445,6 +449,7 @@
    "Protocol": {
     "$id": "45"
    },
+   "Creatable": false,
    "Parent": "Qux",
    "Parameters": [
     {
@@ -580,6 +585,7 @@
    "Protocol": {
     "$id": "57"
    },
+   "Creatable": false,
    "Parent": "ServiceClient",
    "Parameters": [
     {
@@ -715,6 +721,7 @@
    "Protocol": {
     "$id": "69"
    },
+   "Creatable": false,
    "Parent": "ServiceClient",
    "Parameters": [
     {

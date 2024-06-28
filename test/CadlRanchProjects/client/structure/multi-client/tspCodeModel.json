@@ -7,7 +7,6 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "ClientType",
-   "CrossLanguageDefinitionId": "Client.Structure.Service.ClientType",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -34,6 +33,7 @@
      "Value": "two-operation-group"
     }
    ],
+   "CrossLanguageDefinitionId": "Client.Structure.Service.ClientType",
    "IsExtensible": false,
    "Usage": "Input"
   }
@@ -255,6 +255,7 @@
    "Protocol": {
     "$id": "27"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$ref": "10"
@@ -447,6 +448,7 @@
    "Protocol": {
     "$id": "44"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$ref": "10"

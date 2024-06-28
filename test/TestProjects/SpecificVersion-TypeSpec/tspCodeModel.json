@@ -10,7 +10,6 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "OperationState",
-   "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -47,6 +46,7 @@
      "Description": "The operation has been canceled by the user."
     }
    ],
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
    "Description": "Enum describing allowed operation states.",
    "IsExtensible": true,
    "Usage": "Output"
@@ -55,7 +55,6 @@
    "$id": "9",
    "Kind": "enum",
    "Name": "ApiVersions",
-   "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.ApiVersions",
    "ValueType": {
     "$id": "10",
     "Kind": "string"
@@ -72,6 +71,7 @@
      "Value": "2022-09-01"
     }
    ],
+   "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.ApiVersions",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -361,7 +361,8 @@
    "Operations": [],
    "Protocol": {
     "$id": "51"
-   }
+   },
+   "Creatable": true
   },
   {
    "$id": "52",
@@ -371,6 +372,7 @@
    "Protocol": {
     "$id": "53"
    },
+   "Creatable": false,
    "Parent": "SpecificClient"
   },
   {
@@ -819,6 +821,7 @@
    "Protocol": {
     "$id": "99"
    },
+   "Creatable": false,
    "Parent": "SpecificClient"
   }
  ]

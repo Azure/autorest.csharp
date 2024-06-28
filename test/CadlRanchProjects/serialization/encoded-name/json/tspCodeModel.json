@@ -35,6 +35,7 @@
    "Protocol": {
     "$id": "6"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$id": "7",
@@ -238,6 +239,7 @@
    "Protocol": {
     "$id": "26"
    },
+   "Creatable": false,
    "Parent": "JsonClient",
    "Parameters": [
     {

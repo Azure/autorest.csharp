@@ -13,6 +13,7 @@
    "Protocol": {
     "$id": "3"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$id": "4",
@@ -448,6 +449,7 @@
    "Protocol": {
     "$id": "49"
    },
+   "Creatable": false,
    "Parent": "CollectionFormatClient",
    "Parameters": [
     {
@@ -543,6 +545,7 @@
    "Protocol": {
     "$id": "59"
    },
+   "Creatable": false,
    "Parent": "CollectionFormatClient",
    "Parameters": [
     {

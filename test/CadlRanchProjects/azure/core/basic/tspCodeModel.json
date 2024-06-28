@@ -9,7 +9,6 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "ListItemInputExtensibleEnum",
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.ListItemInputExtensibleEnum",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -28,6 +27,7 @@
      "Description": "The second enum value."
     }
    ],
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.ListItemInputExtensibleEnum",
    "Description": "An extensible enum input parameter.",
    "IsExtensible": true,
    "Usage": "Input"
@@ -36,7 +36,6 @@
    "$id": "6",
    "Kind": "enum",
    "Name": "Versions",
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.Versions",
    "ValueType": {
     "$id": "7",
     "Kind": "string"
@@ -49,6 +48,7 @@
      "Description": "The version 2022-12-01-preview."
     }
    ],
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.Versions",
    "Description": "The version of the API.",
    "IsExtensible": false,
    "Usage": "None"
@@ -1648,6 +1648,7 @@
    "Protocol": {
     "$id": "173"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$ref": "56"
@@ -1841,6 +1842,7 @@
    "Protocol": {
     "$id": "191"
    },
+   "Creatable": false,
    "Parent": "BasicClient",
    "Parameters": [
     {

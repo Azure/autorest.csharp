@@ -325,6 +325,7 @@
    "Protocol": {
     "$id": "52"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$id": "53",
@@ -704,6 +705,7 @@
    "Protocol": {
     "$id": "88"
    },
+   "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {
@@ -1058,6 +1060,7 @@
    "Protocol": {
     "$id": "120"
    },
+   "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {
@@ -1412,6 +1415,7 @@
    "Protocol": {
     "$id": "152"
    },
+   "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {
@@ -1766,6 +1770,7 @@
    "Protocol": {
     "$id": "184"
    },
+   "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {
@@ -2120,6 +2125,7 @@
    "Protocol": {
     "$id": "216"
    },
+   "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {
@@ -2474,6 +2480,7 @@
    "Protocol": {
     "$id": "248"
    },
+   "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {
@@ -2828,6 +2835,7 @@
    "Protocol": {
     "$id": "280"
    },
+   "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {

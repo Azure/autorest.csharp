@@ -106,6 +106,7 @@
    "Protocol": {
     "$id": "16"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$id": "17",
@@ -448,6 +449,7 @@
    "Protocol": {
     "$id": "51"
    },
+   "Creatable": false,
    "Parent": "BytesClient",
    "Parameters": [
     {
@@ -892,6 +894,7 @@
    "Protocol": {
     "$id": "89"
    },
+   "Creatable": false,
    "Parent": "BytesClient",
    "Parameters": [
     {
@@ -1209,6 +1212,7 @@
    "Protocol": {
     "$id": "120"
    },
+   "Creatable": false,
    "Parent": "BytesClient",
    "Parameters": [
     {
@@ -1748,6 +1752,7 @@
    "Protocol": {
     "$id": "174"
    },
+   "Creatable": false,
    "Parent": "BytesClient",
    "Parameters": [
     {
@@ -2079,6 +2084,7 @@
    "Protocol": {
     "$id": "206"
    },
+   "Creatable": false,
    "Parent": "BytesClient",
    "Parameters": [
     {

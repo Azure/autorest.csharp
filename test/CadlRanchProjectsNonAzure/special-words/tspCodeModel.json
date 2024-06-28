@@ -728,6 +728,7 @@
    "Protocol": {
     "$id": "105"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$id": "106",
@@ -4102,6 +4103,7 @@
    "Protocol": {
     "$id": "408"
    },
+   "Creatable": false,
    "Parent": "SpecialWordsClient",
    "Parameters": [
     {
@@ -4219,6 +4221,7 @@
    "Protocol": {
     "$id": "419"
    },
+   "Creatable": false,
    "Parent": "SpecialWordsClient",
    "Parameters": [
     {
@@ -6050,6 +6053,7 @@
    "Protocol": {
     "$id": "586"
    },
+   "Creatable": false,
    "Parent": "SpecialWordsClient",
    "Parameters": [
     {
@@ -8548,6 +8552,7 @@
    "Protocol": {
     "$id": "826"
    },
+   "Creatable": false,
    "Parent": "SpecialWordsClient",
    "Parameters": [
     {

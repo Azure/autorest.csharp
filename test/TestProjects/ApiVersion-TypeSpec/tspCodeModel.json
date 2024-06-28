@@ -10,7 +10,6 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "APIVersion",
-   "CrossLanguageDefinitionId": "ApiVersionInTsp.APIVersion",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -27,6 +26,7 @@
      "Value": "v1.2"
     }
    ],
+   "CrossLanguageDefinitionId": "ApiVersionInTsp.APIVersion",
    "IsExtensible": true,
    "Usage": "None"
   },
@@ -34,7 +34,6 @@
    "$id": "6",
    "Kind": "enum",
    "Name": "Versions",
-   "CrossLanguageDefinitionId": "ApiVersionInTsp.Versions",
    "ValueType": {
     "$id": "7",
     "Kind": "string"
@@ -51,6 +50,7 @@
      "Value": "v1.2"
     }
    ],
+   "CrossLanguageDefinitionId": "ApiVersionInTsp.Versions",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -216,6 +216,7 @@
    "Protocol": {
     "$id": "26"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$ref": "15"

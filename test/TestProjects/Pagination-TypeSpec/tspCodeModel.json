@@ -9,7 +9,6 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Interval",
-   "CrossLanguageDefinitionId": "Pagination.Interval",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -46,6 +45,7 @@
      "Description": "1 hour, available only if test run duration is greater than 1 minute"
     }
    ],
+   "CrossLanguageDefinitionId": "Pagination.Interval",
    "Description": "The interval",
    "IsExtensible": true,
    "Usage": "Input"
@@ -54,7 +54,6 @@
    "$id": "9",
    "Kind": "enum",
    "Name": "Versions",
-   "CrossLanguageDefinitionId": "Pagination.Versions",
    "ValueType": {
     "$id": "10",
     "Kind": "string"
@@ -66,6 +65,7 @@
      "Value": "2022-05-13"
     }
    ],
+   "CrossLanguageDefinitionId": "Pagination.Versions",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -715,6 +715,7 @@
    "Protocol": {
     "$id": "97"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$ref": "82"
@@ -933,6 +934,7 @@
    "Protocol": {
     "$id": "118"
    },
+   "Creatable": false,
    "Parent": "PaginationClient",
    "Parameters": [
     {
@@ -1038,6 +1040,7 @@
    "Protocol": {
     "$id": "128"
    },
+   "Creatable": false,
    "Parent": "PaginationClient",
    "Parameters": [
     {
@@ -1310,6 +1313,7 @@
    "Protocol": {
     "$id": "154"
    },
+   "Creatable": false,
    "Parent": "PaginationClient",
    "Parameters": [
     {
@@ -1482,6 +1486,7 @@
    "Protocol": {
     "$id": "172"
    },
+   "Creatable": false,
    "Parent": "PaginationClient",
    "Parameters": [
     {

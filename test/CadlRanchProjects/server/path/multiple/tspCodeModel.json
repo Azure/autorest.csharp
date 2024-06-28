@@ -9,7 +9,6 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Versions",
-   "CrossLanguageDefinitionId": "Server.Path.Multiple.Versions",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -22,6 +21,7 @@
      "Description": "Version 1.0"
     }
    ],
+   "CrossLanguageDefinitionId": "Server.Path.Multiple.Versions",
    "Description": "Service versions",
    "IsExtensible": false,
    "Usage": "None"
@@ -213,6 +213,7 @@
    "Protocol": {
     "$id": "23"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$ref": "7"

@@ -135,7 +135,6 @@
    "$id": "20",
    "Kind": "enum",
    "Name": "Versions",
-   "CrossLanguageDefinitionId": "CustomizedTypeSpec.Versions",
    "ValueType": {
     "$id": "21",
     "Kind": "string"
@@ -147,6 +146,7 @@
      "Value": "2022-05-15-preview"
     }
    ],
+   "CrossLanguageDefinitionId": "CustomizedTypeSpec.Versions",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -2310,6 +2310,7 @@
    "Protocol": {
     "$id": "241"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$ref": "82"

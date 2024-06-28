@@ -70,7 +70,6 @@
    "$id": "11",
    "Kind": "enum",
    "Name": "UnionStringLiteralPropertyProperty",
-   "CrossLanguageDefinitionId": "UnionStringLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "12",
     "Kind": "string"
@@ -87,6 +86,7 @@
      "Value": "world"
     }
    ],
+   "CrossLanguageDefinitionId": "UnionStringLiteralProperty.property.anonymous",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -94,7 +94,6 @@
    "$id": "15",
    "Kind": "enum",
    "Name": "UnionIntLiteralPropertyProperty",
-   "CrossLanguageDefinitionId": "UnionIntLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "16",
     "Kind": "int32"
@@ -111,6 +110,7 @@
      "Value": 2
     }
    ],
+   "CrossLanguageDefinitionId": "UnionIntLiteralProperty.property.anonymous",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -118,7 +118,6 @@
    "$id": "19",
    "Kind": "enum",
    "Name": "UnionFloatLiteralPropertyProperty",
-   "CrossLanguageDefinitionId": "UnionFloatLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "20",
     "Kind": "float32"
@@ -135,6 +134,7 @@
      "Value": 2.375
     }
    ],
+   "CrossLanguageDefinitionId": "UnionFloatLiteralProperty.property.anonymous",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   }
@@ -503,6 +503,7 @@
    "Protocol": {
     "$id": "69"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$id": "70",
@@ -872,6 +873,7 @@
    "Protocol": {
     "$id": "103"
    },
+   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -1216,6 +1218,7 @@
    "Protocol": {
     "$id": "133"
    },
+   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -1560,6 +1563,7 @@
    "Protocol": {
     "$id": "163"
    },
+   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -1904,6 +1908,7 @@
    "Protocol": {
     "$id": "193"
    },
+   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -2248,6 +2253,7 @@
    "Protocol": {
     "$id": "223"
    },
+   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -2592,6 +2598,7 @@
    "Protocol": {
     "$id": "253"
    },
+   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -2936,6 +2943,7 @@
    "Protocol": {
     "$id": "283"
    },
+   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -3280,6 +3288,7 @@
    "Protocol": {
     "$id": "313"
    },
+   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -3624,6 +3633,7 @@
    "Protocol": {
     "$id": "343"
    },
+   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -3968,6 +3978,7 @@
    "Protocol": {
     "$id": "373"
    },
+   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -4312,6 +4323,7 @@
    "Protocol": {
     "$id": "403"
    },
+   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -4656,6 +4668,7 @@
    "Protocol": {
     "$id": "433"
    },
+   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -5000,6 +5013,7 @@
    "Protocol": {
     "$id": "463"
    },
+   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -5344,6 +5358,7 @@
    "Protocol": {
     "$id": "493"
    },
+   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {

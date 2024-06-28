@@ -55,6 +55,7 @@
    "Protocol": {
     "$id": "9"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$id": "10",
@@ -276,6 +277,7 @@
    "Protocol": {
     "$id": "35"
    },
+   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -472,6 +474,7 @@
    "Protocol": {
     "$id": "57"
    },
+   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -668,6 +671,7 @@
    "Protocol": {
     "$id": "79"
    },
+   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -864,6 +868,7 @@
    "Protocol": {
     "$id": "101"
    },
+   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -1060,6 +1065,7 @@
    "Protocol": {
     "$id": "123"
    },
+   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -1266,6 +1272,7 @@
    "Protocol": {
     "$id": "147"
    },
+   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -1472,6 +1479,7 @@
    "Protocol": {
     "$id": "171"
    },
+   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -1668,6 +1676,7 @@
    "Protocol": {
     "$id": "193"
    },
+   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -1862,6 +1871,7 @@
    "Protocol": {
     "$id": "213"
    },
+   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -2056,6 +2066,7 @@
    "Protocol": {
     "$id": "233"
    },
+   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -2260,6 +2271,7 @@
    "Protocol": {
     "$id": "257"
    },
+   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
