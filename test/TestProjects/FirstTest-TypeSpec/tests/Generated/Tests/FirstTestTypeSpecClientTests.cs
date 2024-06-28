@@ -145,6 +145,7 @@ namespace FirstTestTypeSpec.Tests
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = await client.PatchActionAsync(content);
         }
@@ -218,6 +219,7 @@ namespace FirstTestTypeSpec.Tests
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = await client.AnonymousBodyAsync(content);
         }
@@ -238,6 +240,7 @@ namespace FirstTestTypeSpec.Tests
                 OptionalLiteralBool = true,
                 OptionalNullableList = { 1234 },
                 OptionalFloatProperty = (double)default,
+                OptionalResourceId = null,
             };
             Response<Thing> response = await client.AnonymousBodyAsync(thing);
         }
