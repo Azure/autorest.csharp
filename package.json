@@ -4,7 +4,7 @@
   "description": "package.json intended for in-repo use only, package.json used for publishing is located in src/AutoRest.CSharp/package.json",
   "devDependencies": {
     "@azure-tools/cadl-ranch-mockapis": "file:test/CadlRanchMockApis",
-    "@azure-tools/typespec-client-generator-core": "0.43.1",
+    "@azure-tools/typespec-client-generator-core": "https://artprodcus3.artifacts.visualstudio.com/A0fb41ef4-5012-48a9-bf39-4ee3de03ee35/29ec6040-b234-4e31-b139-33dc4287b756/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL2F6dXJlLXNkay9wcm9qZWN0SWQvMjllYzYwNDAtYjIzNC00ZTMxLWIxMzktMzNkYzQyODdiNzU2L2J1aWxkSWQvMzkxODQ0MC9hcnRpZmFjdE5hbWUvcGFja2FnZXM1/content?format=file&subPath=%2Fazure-tools-typespec-client-generator-core-0.44.0-pr-1015.20240627.14.tgz",
     "@azure-tools/typespec-csharp": "file:src/TypeSpec.Extension/Emitter.Csharp",
     "@azure-tools/unbranded-tests": "file:test/UnbrandedProjects",
     "@microsoft.azure/autorest.testserver": "3.3.48",

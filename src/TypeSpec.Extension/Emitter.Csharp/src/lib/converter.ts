@@ -7,7 +7,7 @@ import {
     SdkBuiltInType,
     SdkConstantType,
     SdkContext,
-    SdkDatetimeType,
+    SdkDateTimeType,
     SdkDictionaryType,
     SdkDurationType,
     SdkEnumType,
@@ -260,7 +260,7 @@ export function fromSdkEnumType(
     return inputEnumType;
 }
 
-function fromSdkDateTimeType(dateTimeType: SdkDatetimeType): InputDateTimeType {
+function fromSdkDateTimeType(dateTimeType: SdkDateTimeType): InputDateTimeType {
     return {
         Kind: dateTimeType.kind,
         Encode: dateTimeType.encode,
