@@ -708,16 +708,6 @@ op analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollecti
   BaseModelWithDiscriminator
 >;
 
-@doc("Single base model without any child model.")
-@discriminator("kind")
-model SingleBase {
-    size: int32;
-}
-
-@route("/single")
-@get
-@convenientAPI(true)
-op getSingleBase(): SingleBase;
 @doc("Facet")
 model Facet {
    @doc("A field to facet by, where the field is attributed as 'facetable'")

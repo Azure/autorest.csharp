@@ -3,12 +3,14 @@ import "@typespec/http";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/versioning";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
+using Azure.ResourceManager;
 
 @versioned(Versions)
 @service({
@@ -134,6 +136,9 @@ model Thing {
 
     @doc("optional embedding vector")
     embeddingVector?: EmbeddingVector<int32>;
+    
+    @doc("optional arm id.")
+    optionalResourceId?: Azure.Core.armResourceIdentifier<[]>;
 }
 
 @doc("A model with a few required nullable properties")

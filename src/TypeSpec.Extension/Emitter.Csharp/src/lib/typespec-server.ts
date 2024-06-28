@@ -43,9 +43,8 @@ export function resolveServers(
             const value = prop.default ? getDefaultValue(prop.default) : "";
             const inputType: InputType = isEndpoint
                 ? ({
-                      Kind: "uri",
-                      IsNullable: false
-                  } as InputPrimitiveType)
+                      Kind: "url"
+                  })
                 : getInputType(context, prop, models, enums);
 
             if (value) {
@@ -86,9 +85,8 @@ export function resolveServers(
                 NameInRequest: "host",
                 Description: server.description,
                 Type: {
-                    Kind: "string",
-                    IsNullable: false
-                } as InputPrimitiveType,
+                    Kind: "string"
+                },
                 Location: RequestLocation.Uri,
                 IsApiVersion: false,
                 IsResourceParameter: false,
@@ -100,9 +98,8 @@ export function resolveServers(
                 Kind: InputOperationParameterKind.Client,
                 DefaultValue: {
                     Type: {
-                        Kind: "string",
-                        IsNullable: false
-                    } as InputPrimitiveType,
+                        Kind: "string"
+                    },
                     Value: server.url
                 } as InputConstant
             };

@@ -587,13 +587,15 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> paramete has string format. </summary>
-        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormatAsync(Guid,ModelWithFormat,CancellationToken)']/*" />
-        public virtual async Task<Response> StringFormatAsync(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="body"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormatAsync(string,ModelWithFormat,CancellationToken)']/*" />
+        public virtual async Task<Response> StringFormatAsync(string subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNull(body, nameof(body));
 
             using RequestContent content = body.ToRequestContent();
@@ -603,13 +605,15 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> paramete has string format. </summary>
-        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormat(Guid,ModelWithFormat,CancellationToken)']/*" />
-        public virtual Response StringFormat(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="body"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormat(string,ModelWithFormat,CancellationToken)']/*" />
+        public virtual Response StringFormat(string subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNull(body, nameof(body));
 
             using RequestContent content = body.ToRequestContent();
@@ -628,20 +632,22 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="StringFormatAsync(Guid,ModelWithFormat,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="StringFormatAsync(string,ModelWithFormat,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormatAsync(Guid,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> StringFormatAsync(Guid subscriptionId, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormatAsync(string,RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> StringFormatAsync(string subscriptionId, RequestContent content, RequestContext context = null)
         {
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.StringFormat");
@@ -668,20 +674,22 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="StringFormat(Guid,ModelWithFormat,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="StringFormat(string,ModelWithFormat,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormat(Guid,RequestContent,RequestContext)']/*" />
-        public virtual Response StringFormat(Guid subscriptionId, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormat(string,RequestContent,RequestContext)']/*" />
+        public virtual Response StringFormat(string subscriptionId, RequestContent content, RequestContext context = null)
         {
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.StringFormat");
@@ -2193,13 +2201,17 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> test optional dictionary. </summary>
-        /// <param name="location"> The <see cref="AzureLocation"/> to use. </param>
-        /// <param name="regenLocation"> The <see cref="AzureLocation"/> to use. </param>
+        /// <param name="location"> The <see cref="string"/> to use. </param>
+        /// <param name="regenLocation"> The <see cref="string"/> to use. </param>
         /// <param name="body"> The <see cref="AzureLocationModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOpAsync(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)']/*" />
-        public virtual async Task<Response> AzureLocationOpAsync(AzureLocation location, AzureLocation regenLocation, AzureLocationModel body = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="regenLocation"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOpAsync(string,string,AzureLocationModel,CancellationToken)']/*" />
+        public virtual async Task<Response> AzureLocationOpAsync(string location, string regenLocation, AzureLocationModel body = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(location, nameof(location));
+            Argument.AssertNotNull(regenLocation, nameof(regenLocation));
+
             using RequestContent content = body?.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await AzureLocationOpAsync(location, regenLocation, content, context).ConfigureAwait(false);
@@ -2207,13 +2219,17 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> test optional dictionary. </summary>
-        /// <param name="location"> The <see cref="AzureLocation"/> to use. </param>
-        /// <param name="regenLocation"> The <see cref="AzureLocation"/> to use. </param>
+        /// <param name="location"> The <see cref="string"/> to use. </param>
+        /// <param name="regenLocation"> The <see cref="string"/> to use. </param>
         /// <param name="body"> The <see cref="AzureLocationModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOp(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)']/*" />
-        public virtual Response AzureLocationOp(AzureLocation location, AzureLocation regenLocation, AzureLocationModel body = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="regenLocation"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOp(string,string,AzureLocationModel,CancellationToken)']/*" />
+        public virtual Response AzureLocationOp(string location, string regenLocation, AzureLocationModel body = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(location, nameof(location));
+            Argument.AssertNotNull(regenLocation, nameof(regenLocation));
+
             using RequestContent content = body?.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = AzureLocationOp(location, regenLocation, content, context);
@@ -2230,20 +2246,24 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AzureLocationOpAsync(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AzureLocationOpAsync(string,string,AzureLocationModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="location"> The <see cref="AzureLocation"/> to use. </param>
-        /// <param name="regenLocation"> The <see cref="AzureLocation"/> to use. </param>
+        /// <param name="location"> The <see cref="string"/> to use. </param>
+        /// <param name="regenLocation"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="regenLocation"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOpAsync(AzureLocation,AzureLocation,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> AzureLocationOpAsync(AzureLocation location, AzureLocation regenLocation, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOpAsync(string,string,RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> AzureLocationOpAsync(string location, string regenLocation, RequestContent content, RequestContext context = null)
         {
+            Argument.AssertNotNull(location, nameof(location));
+            Argument.AssertNotNull(regenLocation, nameof(regenLocation));
+
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.AzureLocationOp");
             scope.Start();
             try
@@ -2268,20 +2288,24 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AzureLocationOp(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AzureLocationOp(string,string,AzureLocationModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="location"> The <see cref="AzureLocation"/> to use. </param>
-        /// <param name="regenLocation"> The <see cref="AzureLocation"/> to use. </param>
+        /// <param name="location"> The <see cref="string"/> to use. </param>
+        /// <param name="regenLocation"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="regenLocation"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOp(AzureLocation,AzureLocation,RequestContent,RequestContext)']/*" />
-        public virtual Response AzureLocationOp(AzureLocation location, AzureLocation regenLocation, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOp(string,string,RequestContent,RequestContext)']/*" />
+        public virtual Response AzureLocationOp(string location, string regenLocation, RequestContent content, RequestContext context = null)
         {
+            Argument.AssertNotNull(location, nameof(location));
+            Argument.AssertNotNull(regenLocation, nameof(regenLocation));
+
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.AzureLocationOp");
             scope.Start();
             try
@@ -2418,7 +2442,7 @@ namespace FirstTestTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateStringFormatRequest(Guid subscriptionId, RequestContent content, RequestContext context)
+        internal HttpMessage CreateStringFormatRequest(string subscriptionId, RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
@@ -2651,7 +2675,7 @@ namespace FirstTestTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateAzureLocationOpRequest(AzureLocation location, AzureLocation regenLocation, RequestContent content, RequestContext context)
+        internal HttpMessage CreateAzureLocationOpRequest(string location, string regenLocation, RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;

@@ -107,6 +107,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -135,6 +136,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -225,6 +227,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -253,6 +256,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -361,6 +365,7 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
+                optionalResourceId = "<optionalResourceId>",
             });
             Response response = client.PatchAction(content);
 
@@ -381,6 +386,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -417,6 +423,7 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
+                optionalResourceId = "<optionalResourceId>",
             });
             Response response = await client.PatchActionAsync(content);
 
@@ -437,6 +444,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -567,6 +575,7 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
+                optionalResourceId = "<optionalResourceId>",
             });
             Response response = client.AnonymousBody(content);
 
@@ -587,6 +596,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -623,6 +633,7 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
+                optionalResourceId = "<optionalResourceId>",
             });
             Response response = await client.AnonymousBodyAsync(content);
 
@@ -643,6 +654,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -661,6 +673,7 @@ namespace FirstTestTypeSpec.Samples
                 OptionalNullableList = { 1234 },
                 OptionalFloatProperty = (double)default,
                 EmbeddingVector = new int[] { 1234 },
+                OptionalResourceId = "<optionalResourceId>",
             };
             Response<Thing> response = client.AnonymousBody(thing);
         }
@@ -681,6 +694,7 @@ namespace FirstTestTypeSpec.Samples
                 OptionalNullableList = { 1234 },
                 OptionalFloatProperty = (double)default,
                 EmbeddingVector = new int[] { 1234 },
+                OptionalResourceId = "<optionalResourceId>",
             };
             Response<Thing> response = await client.AnonymousBodyAsync(thing);
         }
@@ -855,9 +869,9 @@ namespace FirstTestTypeSpec.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 sourceUrl = "http://localhost:3000",
-                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+                guid = "<guid>",
             });
-            Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+            Response response = client.StringFormat("<subscriptionId>", content);
 
             Console.WriteLine(response.Status);
         }
@@ -872,9 +886,9 @@ namespace FirstTestTypeSpec.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 sourceUrl = "http://localhost:3000",
-                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+                guid = "<guid>",
             });
-            Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+            Response response = await client.StringFormatAsync("<subscriptionId>", content);
 
             Console.WriteLine(response.Status);
         }
@@ -886,8 +900,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-            Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
+            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), "<guid>");
+            Response response = client.StringFormat("<subscriptionId>", body);
         }
 
         [Test]
@@ -897,8 +911,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-            Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
+            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), "<guid>");
+            Response response = await client.StringFormatAsync("<subscriptionId>", body);
         }
 
         [Test]
@@ -911,9 +925,9 @@ namespace FirstTestTypeSpec.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 sourceUrl = "http://localhost:3000",
-                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+                guid = "<guid>",
             });
-            Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+            Response response = client.StringFormat("<subscriptionId>", content);
 
             Console.WriteLine(response.Status);
         }
@@ -928,9 +942,9 @@ namespace FirstTestTypeSpec.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 sourceUrl = "http://localhost:3000",
-                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+                guid = "<guid>",
             });
-            Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+            Response response = await client.StringFormatAsync("<subscriptionId>", content);
 
             Console.WriteLine(response.Status);
         }
@@ -942,8 +956,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-            Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
+            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), "<guid>");
+            Response response = client.StringFormat("<subscriptionId>", body);
         }
 
         [Test]
@@ -953,8 +967,8 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-            Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
+            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), "<guid>");
+            Response response = await client.StringFormatAsync("<subscriptionId>", body);
         }
 
         [Test]
@@ -2477,7 +2491,7 @@ new BaseModel(123)
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             using RequestContent content = null;
-            Response response = client.AzureLocationOp(default, default, content);
+            Response response = client.AzureLocationOp("<location>", "<regenLocation>", content);
 
             Console.WriteLine(response.Status);
         }
@@ -2490,7 +2504,7 @@ new BaseModel(123)
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             using RequestContent content = null;
-            Response response = await client.AzureLocationOpAsync(default, default, content);
+            Response response = await client.AzureLocationOpAsync("<location>", "<regenLocation>", content);
 
             Console.WriteLine(response.Status);
         }
@@ -2502,7 +2516,7 @@ new BaseModel(123)
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.AzureLocationOp(default, default);
+            Response response = client.AzureLocationOp("<location>", "<regenLocation>");
         }
 
         [Test]
@@ -2512,7 +2526,7 @@ new BaseModel(123)
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.AzureLocationOpAsync(default, default);
+            Response response = await client.AzureLocationOpAsync("<location>", "<regenLocation>");
         }
 
         [Test]
@@ -2524,9 +2538,9 @@ new BaseModel(123)
 
             using RequestContent content = RequestContent.Create(new
             {
-                location = new object(),
+                location = "<location>",
             });
-            Response response = client.AzureLocationOp(default, default, content);
+            Response response = client.AzureLocationOp("<location>", "<regenLocation>", content);
 
             Console.WriteLine(response.Status);
         }
@@ -2540,9 +2554,9 @@ new BaseModel(123)
 
             using RequestContent content = RequestContent.Create(new
             {
-                location = new object(),
+                location = "<location>",
             });
-            Response response = await client.AzureLocationOpAsync(default, default, content);
+            Response response = await client.AzureLocationOpAsync("<location>", "<regenLocation>", content);
 
             Console.WriteLine(response.Status);
         }
@@ -2554,8 +2568,8 @@ new BaseModel(123)
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            AzureLocationModel body = new AzureLocationModel(default);
-            Response response = client.AzureLocationOp(default, default, body: body);
+            AzureLocationModel body = new AzureLocationModel("<location>");
+            Response response = client.AzureLocationOp("<location>", "<regenLocation>", body: body);
         }
 
         [Test]
@@ -2565,8 +2579,8 @@ new BaseModel(123)
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            AzureLocationModel body = new AzureLocationModel(default);
-            Response response = await client.AzureLocationOpAsync(default, default, body: body);
+            AzureLocationModel body = new AzureLocationModel("<location>");
+            Response response = await client.AzureLocationOpAsync("<location>", "<regenLocation>", body: body);
         }
     }
 }

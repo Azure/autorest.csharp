@@ -149,6 +149,7 @@ namespace FirstTestTypeSpec.Tests
             {
 1234
             },
+                optionalResourceId = "<optionalResourceId>",
             });
             Response response = await client.PatchActionAsync(content);
         }
@@ -226,6 +227,7 @@ namespace FirstTestTypeSpec.Tests
             {
 1234
             },
+                optionalResourceId = "<optionalResourceId>",
             });
             Response response = await client.AnonymousBodyAsync(content);
         }
@@ -247,6 +249,7 @@ namespace FirstTestTypeSpec.Tests
                 OptionalNullableList = { 1234 },
                 OptionalFloatProperty = (double)default,
                 EmbeddingVector = new int[] { 1234 },
+                OptionalResourceId = "<optionalResourceId>",
             };
             Response<Thing> response = await client.AnonymousBodyAsync(thing);
         }
@@ -338,9 +341,9 @@ namespace FirstTestTypeSpec.Tests
             using RequestContent content = RequestContent.Create(new
             {
                 sourceUrl = "http://localhost:3000",
-                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+                guid = "<guid>",
             });
-            Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+            Response response = await client.StringFormatAsync("<subscriptionId>", content);
         }
 
         [Test]
@@ -351,8 +354,8 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-            Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
+            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), "<guid>");
+            Response response = await client.StringFormatAsync("<subscriptionId>", body);
         }
 
         [Test]
@@ -366,9 +369,9 @@ namespace FirstTestTypeSpec.Tests
             using RequestContent content = RequestContent.Create(new
             {
                 sourceUrl = "http://localhost:3000",
-                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+                guid = "<guid>",
             });
-            Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+            Response response = await client.StringFormatAsync("<subscriptionId>", content);
         }
 
         [Test]
@@ -379,8 +382,8 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-            Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
+            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), "<guid>");
+            Response response = await client.StringFormatAsync("<subscriptionId>", body);
         }
 
         [Test]
@@ -1138,7 +1141,7 @@ new BaseModel(123)
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = null;
-            Response response = await client.AzureLocationOpAsync(default, default, content);
+            Response response = await client.AzureLocationOpAsync("<location>", "<regenLocation>", content);
         }
 
         [Test]
@@ -1149,7 +1152,7 @@ new BaseModel(123)
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response response = await client.AzureLocationOpAsync(default, default);
+            Response response = await client.AzureLocationOpAsync("<location>", "<regenLocation>");
         }
 
         [Test]
@@ -1162,9 +1165,9 @@ new BaseModel(123)
 
             using RequestContent content = RequestContent.Create(new
             {
-                location = new object(),
+                location = "<location>",
             });
-            Response response = await client.AzureLocationOpAsync(default, default, content);
+            Response response = await client.AzureLocationOpAsync("<location>", "<regenLocation>", content);
         }
 
         [Test]
@@ -1175,8 +1178,8 @@ new BaseModel(123)
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            AzureLocationModel body = new AzureLocationModel(default);
-            Response response = await client.AzureLocationOpAsync(default, default, body: body);
+            AzureLocationModel body = new AzureLocationModel("<location>");
+            Response response = await client.AzureLocationOpAsync("<location>", "<regenLocation>", body: body);
         }
     }
 }

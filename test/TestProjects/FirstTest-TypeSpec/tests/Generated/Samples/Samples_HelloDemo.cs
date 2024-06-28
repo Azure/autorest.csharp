@@ -84,6 +84,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -112,6 +113,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
     }
 }

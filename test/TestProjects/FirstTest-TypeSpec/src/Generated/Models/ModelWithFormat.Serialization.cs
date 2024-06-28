@@ -70,7 +70,7 @@ namespace FirstTestTypeSpec.Models
                 return null;
             }
             Uri sourceUrl = default;
-            Guid guid = default;
+            string guid = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -82,7 +82,7 @@ namespace FirstTestTypeSpec.Models
                 }
                 if (property.NameEquals("guid"u8))
                 {
-                    guid = property.Value.GetGuid();
+                    guid = property.Value.GetString();
                     continue;
                 }
                 if (options.Format != "W")

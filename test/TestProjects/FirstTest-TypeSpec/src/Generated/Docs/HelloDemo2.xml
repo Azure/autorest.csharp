@@ -51,6 +51,7 @@ new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBa
     OptionalNullableList = { 1234 },
     OptionalFloatProperty = (double)default,
     EmbeddingVector = new int[] { 1234 },
+    OptionalResourceId = "<optionalResourceId>",
 },
 BinaryData.FromObjectAsJson(new object()),
 new Dictionary<string, BinaryData>
@@ -131,6 +132,7 @@ new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBa
     OptionalNullableList = { 1234 },
     OptionalFloatProperty = (double)default,
     EmbeddingVector = new int[] { 1234 },
+    OptionalResourceId = "<optionalResourceId>",
 },
 BinaryData.FromObjectAsJson(new object()),
 new Dictionary<string, BinaryData>
@@ -279,6 +281,7 @@ using RequestContent content = RequestContent.Create(new
         {
             1234
         },
+        optionalResourceId = "<optionalResourceId>",
     },
     intExtensibleEnum = 1,
     intExtensibleEnumCollection = new object[]
@@ -345,6 +348,7 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNulla
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("embeddingVector")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalResourceId").ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -484,6 +488,7 @@ using RequestContent content = RequestContent.Create(new
         {
             1234
         },
+        optionalResourceId = "<optionalResourceId>",
     },
     intExtensibleEnum = 1,
     intExtensibleEnumCollection = new object[]
@@ -550,6 +555,7 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNulla
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("embeddingVector")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalResourceId").ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -689,6 +695,7 @@ using RequestContent content = RequestContent.Create(new
         {
             1234
         },
+        optionalResourceId = "<optionalResourceId>",
     },
     intExtensibleEnum = 1,
     intExtensibleEnumCollection = new object[]
@@ -755,6 +762,7 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNulla
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("embeddingVector")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalResourceId").ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -894,6 +902,7 @@ using RequestContent content = RequestContent.Create(new
         {
             1234
         },
+        optionalResourceId = "<optionalResourceId>",
     },
     intExtensibleEnum = 1,
     intExtensibleEnumCollection = new object[]
@@ -960,6 +969,7 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNulla
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("embeddingVector")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalResourceId").ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -1059,6 +1069,7 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
 ]]></code></example>
     </member>
     <member name="HelloDemoAgain(RequestContext)">
@@ -1105,6 +1116,7 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
 ]]></code></example>
     </member>
     <member name="CreateLiteralAsync(Thing,CancellationToken)">
@@ -1131,6 +1143,7 @@ Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"),
     OptionalNullableList = { 1234 },
     OptionalFloatProperty = (double)default,
     EmbeddingVector = new int[] { 1234 },
+    OptionalResourceId = "<optionalResourceId>",
 };
 Response<Thing> response = await client.CreateLiteralAsync(body);
 ]]></code></example>
@@ -1159,6 +1172,7 @@ Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"),
     OptionalNullableList = { 1234 },
     OptionalFloatProperty = (double)default,
     EmbeddingVector = new int[] { 1234 },
+    OptionalResourceId = "<optionalResourceId>",
 };
 Response<Thing> response = client.CreateLiteral(body);
 ]]></code></example>
@@ -1230,6 +1244,7 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
+    optionalResourceId = "<optionalResourceId>",
 });
 Response response = await client.CreateLiteralAsync(content);
 
@@ -1250,6 +1265,7 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
 ]]></code></example>
     </member>
     <member name="CreateLiteral(RequestContent,RequestContext)">
@@ -1319,6 +1335,7 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
+    optionalResourceId = "<optionalResourceId>",
 });
 Response response = client.CreateLiteral(content);
 
@@ -1339,6 +1356,7 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
 ]]></code></example>
     </member>
     <member name="HelloLiteralAsync(CancellationToken)">
@@ -1419,6 +1437,7 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
 ]]></code></example>
     </member>
     <member name="HelloLiteral(RequestContext)">
@@ -1465,6 +1484,7 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
 ]]></code></example>
     </member>
   </members>
