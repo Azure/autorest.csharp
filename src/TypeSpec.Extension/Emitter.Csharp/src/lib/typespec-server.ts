@@ -9,7 +9,6 @@ import { InputParameter } from "../type/input-parameter.js";
 import {
     InputEnumType,
     InputModelType,
-    InputPrimitiveType,
     InputType
 } from "../type/input-type.js";
 import { RequestLocation } from "../type/request-location.js";
