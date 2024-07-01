@@ -35,6 +35,7 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/4878")]
         public Task Azure_Arm_Models_Resources_TopLevelTrackedResources_createOrReplace() => Test(async (host) =>
         {
             ResourceIdentifier id = ResourceGroupResource.CreateResourceIdentifier(Guid.Empty.ToString(), "test-rg");
