@@ -45,30 +45,30 @@ namespace Serialization.EncodedName.Json
         }
 
         /// <summary> Send. </summary>
-        /// <param name="jsonEncodedNameModel"> The <see cref="JsonEncodedNameModel"/> to use. </param>
+        /// <param name="body"> The <see cref="JsonEncodedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="jsonEncodedNameModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='SendAsync(JsonEncodedNameModel,CancellationToken)']/*" />
-        public virtual async Task<Response> SendAsync(JsonEncodedNameModel jsonEncodedNameModel, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> SendAsync(JsonEncodedNameModel body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(jsonEncodedNameModel, nameof(jsonEncodedNameModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = jsonEncodedNameModel.ToRequestContent();
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SendAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Send. </summary>
-        /// <param name="jsonEncodedNameModel"> The <see cref="JsonEncodedNameModel"/> to use. </param>
+        /// <param name="body"> The <see cref="JsonEncodedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="jsonEncodedNameModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Send(JsonEncodedNameModel,CancellationToken)']/*" />
-        public virtual Response Send(JsonEncodedNameModel jsonEncodedNameModel, CancellationToken cancellationToken = default)
+        public virtual Response Send(JsonEncodedNameModel body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(jsonEncodedNameModel, nameof(jsonEncodedNameModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = jsonEncodedNameModel.ToRequestContent();
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Send(content, context);
             return response;
