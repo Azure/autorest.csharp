@@ -45,30 +45,30 @@ namespace Client.Naming
         }
 
         /// <summary> Client. </summary>
-        /// <param name="clientModel"> The <see cref="Models.ClientModel"/> to use. </param>
+        /// <param name="body"> The <see cref="Models.ClientModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='ClientAsync(ClientModel,CancellationToken)']/*" />
-        public virtual async Task<Response> ClientAsync(Models.ClientModel clientModel, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ClientAsync(Models.ClientModel body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(clientModel, nameof(clientModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = clientModel.ToRequestContent();
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await ClientAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Client. </summary>
-        /// <param name="clientModel"> The <see cref="Models.ClientModel"/> to use. </param>
+        /// <param name="body"> The <see cref="Models.ClientModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='Client(ClientModel,CancellationToken)']/*" />
-        public virtual Response Client(Models.ClientModel clientModel, CancellationToken cancellationToken = default)
+        public virtual Response Client(Models.ClientModel body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(clientModel, nameof(clientModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = clientModel.ToRequestContent();
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Client(content, context);
             return response;
@@ -153,30 +153,30 @@ namespace Client.Naming
         }
 
         /// <summary> Language. </summary>
-        /// <param name="csModel"> The <see cref="CSModel"/> to use. </param>
+        /// <param name="body"> The <see cref="CSModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="csModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='LanguageAsync(CSModel,CancellationToken)']/*" />
-        public virtual async Task<Response> LanguageAsync(CSModel csModel, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> LanguageAsync(CSModel body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(csModel, nameof(csModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = csModel.ToRequestContent();
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await LanguageAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Language. </summary>
-        /// <param name="csModel"> The <see cref="CSModel"/> to use. </param>
+        /// <param name="body"> The <see cref="CSModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="csModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='Language(CSModel,CancellationToken)']/*" />
-        public virtual Response Language(CSModel csModel, CancellationToken cancellationToken = default)
+        public virtual Response Language(CSModel body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(csModel, nameof(csModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = csModel.ToRequestContent();
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Language(content, context);
             return response;
