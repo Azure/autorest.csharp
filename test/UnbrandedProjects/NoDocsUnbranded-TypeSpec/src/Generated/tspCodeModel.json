@@ -392,8 +392,7 @@
        "NameInRequest": "noTestTypeSpecUrl",
        "Type": {
         "$id": "60",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,

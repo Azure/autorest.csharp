@@ -48,11 +48,10 @@ namespace FirstTestTypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="ModelWithFormat"/>. </summary>
         /// <param name="sourceUrl"> url format. </param>
         /// <param name="guid"> uuid format. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="sourceUrl"/> or <paramref name="guid"/> is null. </exception>
-        public ModelWithFormat(Uri sourceUrl, string guid)
+        /// <exception cref="ArgumentNullException"> <paramref name="sourceUrl"/> is null. </exception>
+        public ModelWithFormat(Uri sourceUrl, Guid guid)
         {
             Argument.AssertNotNull(sourceUrl, nameof(sourceUrl));
-            Argument.AssertNotNull(guid, nameof(guid));
 
             SourceUrl = sourceUrl;
             Guid = guid;
@@ -62,7 +61,7 @@ namespace FirstTestTypeSpec.Models
         /// <param name="sourceUrl"> url format. </param>
         /// <param name="guid"> uuid format. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithFormat(Uri sourceUrl, string guid, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ModelWithFormat(Uri sourceUrl, Guid guid, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             SourceUrl = sourceUrl;
             Guid = guid;
@@ -77,6 +76,6 @@ namespace FirstTestTypeSpec.Models
         /// <summary> url format. </summary>
         public Uri SourceUrl { get; }
         /// <summary> uuid format. </summary>
-        public string Guid { get; }
+        public Guid Guid { get; }
     }
 }

@@ -304,8 +304,7 @@
        "NameInRequest": "spreadUrl",
        "Type": {
         "$id": "48",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,

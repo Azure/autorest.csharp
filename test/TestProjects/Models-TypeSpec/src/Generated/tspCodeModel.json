@@ -2943,8 +2943,7 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "440",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,

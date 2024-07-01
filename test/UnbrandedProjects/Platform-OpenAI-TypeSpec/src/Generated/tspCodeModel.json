@@ -5258,8 +5258,7 @@
      "Description": "OpenAI Endpoint",
      "Type": {
       "$id": "822",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -5274,8 +5273,7 @@
       "$id": "823",
       "Type": {
        "$id": "824",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "https://api.openai.com/v1"
      }

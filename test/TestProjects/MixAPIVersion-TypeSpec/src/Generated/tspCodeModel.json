@@ -173,8 +173,7 @@
      "NameInRequest": "petStoreUrl",
      "Type": {
       "$id": "27",
-      "Kind": "uri",
-      "IsNullable": false
+      "Kind": "url"
      },
      "Location": "Uri",
      "IsApiVersion": false,

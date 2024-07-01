@@ -153,7 +153,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1234
             },
-                    optionalResourceId = "<optionalResourceId>",
+                    optionalResourceId = new object(),
                 },
                 intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new object[]
@@ -225,7 +225,7 @@ BinaryData.FromObjectAsJson("<unionList>")
                     OptionalNullableList = { 1234 },
                     OptionalFloatProperty = (double)default,
                     EmbeddingVector = new int[] { 1234 },
-                    OptionalResourceId = "<optionalResourceId>",
+                    OptionalResourceId = null,
                 },
                 BinaryData.FromObjectAsJson(new object()),
                 new Dictionary<string, BinaryData>
@@ -357,7 +357,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1234
             },
-                    optionalResourceId = "<optionalResourceId>",
+                    optionalResourceId = new object(),
                 },
                 intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new object[]
@@ -521,7 +521,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1234
             },
-                optionalResourceId = "<optionalResourceId>",
+                optionalResourceId = new object(),
             });
             Response response = await client.CreateLiteralAsync(content);
         }
@@ -543,7 +543,7 @@ BinaryData.FromObjectAsJson("<unionList>")
                 OptionalNullableList = { 1234 },
                 OptionalFloatProperty = (double)default,
                 EmbeddingVector = new int[] { 1234 },
-                OptionalResourceId = "<optionalResourceId>",
+                OptionalResourceId = null,
             };
             Response<Thing> response = await client.CreateLiteralAsync(body);
         }

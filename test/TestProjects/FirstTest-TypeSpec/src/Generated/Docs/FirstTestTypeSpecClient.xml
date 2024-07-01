@@ -290,7 +290,7 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    optionalResourceId = "<optionalResourceId>",
+    optionalResourceId = new object(),
 });
 Response response = await client.PatchActionAsync(content);
 
@@ -381,7 +381,7 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    optionalResourceId = "<optionalResourceId>",
+    optionalResourceId = new object(),
 });
 Response response = client.PatchAction(content);
 
@@ -429,7 +429,7 @@ Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>")
     OptionalNullableList = { 1234 },
     OptionalFloatProperty = (double)default,
     EmbeddingVector = new int[] { 1234 },
-    OptionalResourceId = "<optionalResourceId>",
+    OptionalResourceId = null,
 };
 Response<Thing> response = await client.AnonymousBodyAsync(thing);
 ]]></code></example>
@@ -458,7 +458,7 @@ Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>")
     OptionalNullableList = { 1234 },
     OptionalFloatProperty = (double)default,
     EmbeddingVector = new int[] { 1234 },
-    OptionalResourceId = "<optionalResourceId>",
+    OptionalResourceId = null,
 };
 Response<Thing> response = client.AnonymousBody(thing);
 ]]></code></example>
@@ -530,7 +530,7 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    optionalResourceId = "<optionalResourceId>",
+    optionalResourceId = new object(),
 });
 Response response = await client.AnonymousBodyAsync(content);
 
@@ -621,7 +621,7 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    optionalResourceId = "<optionalResourceId>",
+    optionalResourceId = new object(),
 });
 Response response = client.AnonymousBody(content);
 
@@ -787,45 +787,45 @@ Response response = client.AddTimeHeader();
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="StringFormatAsync(string,ModelWithFormat,CancellationToken)">
+    <member name="StringFormatAsync(Guid,ModelWithFormat,CancellationToken)">
       <example>
 This sample shows how to call StringFormatAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), "<guid>");
-Response response = await client.StringFormatAsync("<subscriptionId>", body);
+ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
 ]]></code>
 This sample shows how to call StringFormatAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), "<guid>");
-Response response = await client.StringFormatAsync("<subscriptionId>", body);
+ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
 ]]></code></example>
     </member>
-    <member name="StringFormat(string,ModelWithFormat,CancellationToken)">
+    <member name="StringFormat(Guid,ModelWithFormat,CancellationToken)">
       <example>
 This sample shows how to call StringFormat.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), "<guid>");
-Response response = client.StringFormat("<subscriptionId>", body);
+ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
 ]]></code>
 This sample shows how to call StringFormat with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), "<guid>");
-Response response = client.StringFormat("<subscriptionId>", body);
+ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
 ]]></code></example>
     </member>
-    <member name="StringFormatAsync(string,RequestContent,RequestContext)">
+    <member name="StringFormatAsync(Guid,RequestContent,RequestContext)">
       <example>
 This sample shows how to call StringFormatAsync.
 <code><![CDATA[
@@ -835,9 +835,9 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 using RequestContent content = RequestContent.Create(new
 {
     sourceUrl = "http://localhost:3000",
-    guid = "<guid>",
+    guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
 });
-Response response = await client.StringFormatAsync("<subscriptionId>", content);
+Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -849,14 +849,14 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 using RequestContent content = RequestContent.Create(new
 {
     sourceUrl = "http://localhost:3000",
-    guid = "<guid>",
+    guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
 });
-Response response = await client.StringFormatAsync("<subscriptionId>", content);
+Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
 
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="StringFormat(string,RequestContent,RequestContext)">
+    <member name="StringFormat(Guid,RequestContent,RequestContext)">
       <example>
 This sample shows how to call StringFormat.
 <code><![CDATA[
@@ -866,9 +866,9 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 using RequestContent content = RequestContent.Create(new
 {
     sourceUrl = "http://localhost:3000",
-    guid = "<guid>",
+    guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
 });
-Response response = client.StringFormat("<subscriptionId>", content);
+Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -880,9 +880,9 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 using RequestContent content = RequestContent.Create(new
 {
     sourceUrl = "http://localhost:3000",
-    guid = "<guid>",
+    guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
 });
-Response response = client.StringFormat("<subscriptionId>", content);
+Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -2225,43 +2225,43 @@ Response response = client.OptionalDictionary(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="AzureLocationOpAsync(string,string,AzureLocationModel,CancellationToken)">
+    <member name="AzureLocationOpAsync(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)">
       <example>
 This sample shows how to call AzureLocationOpAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.AzureLocationOpAsync("<location>", "<regenLocation>");
+Response response = await client.AzureLocationOpAsync(default, default);
 ]]></code>
 This sample shows how to call AzureLocationOpAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-AzureLocationModel body = new AzureLocationModel("<location>");
-Response response = await client.AzureLocationOpAsync("<location>", "<regenLocation>", body: body);
+AzureLocationModel body = new AzureLocationModel(default);
+Response response = await client.AzureLocationOpAsync(default, default, body: body);
 ]]></code></example>
     </member>
-    <member name="AzureLocationOp(string,string,AzureLocationModel,CancellationToken)">
+    <member name="AzureLocationOp(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)">
       <example>
 This sample shows how to call AzureLocationOp.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = client.AzureLocationOp("<location>", "<regenLocation>");
+Response response = client.AzureLocationOp(default, default);
 ]]></code>
 This sample shows how to call AzureLocationOp with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-AzureLocationModel body = new AzureLocationModel("<location>");
-Response response = client.AzureLocationOp("<location>", "<regenLocation>", body: body);
+AzureLocationModel body = new AzureLocationModel(default);
+Response response = client.AzureLocationOp(default, default, body: body);
 ]]></code></example>
     </member>
-    <member name="AzureLocationOpAsync(string,string,RequestContent,RequestContext)">
+    <member name="AzureLocationOpAsync(AzureLocation,AzureLocation,RequestContent,RequestContext)">
       <example>
 This sample shows how to call AzureLocationOpAsync.
 <code><![CDATA[
@@ -2269,7 +2269,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 using RequestContent content = null;
-Response response = await client.AzureLocationOpAsync("<location>", "<regenLocation>", content);
+Response response = await client.AzureLocationOpAsync(default, default, content);
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -2280,14 +2280,14 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
-    location = "<location>",
+    location = new object(),
 });
-Response response = await client.AzureLocationOpAsync("<location>", "<regenLocation>", content);
+Response response = await client.AzureLocationOpAsync(default, default, content);
 
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="AzureLocationOp(string,string,RequestContent,RequestContext)">
+    <member name="AzureLocationOp(AzureLocation,AzureLocation,RequestContent,RequestContext)">
       <example>
 This sample shows how to call AzureLocationOp.
 <code><![CDATA[
@@ -2295,7 +2295,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 using RequestContent content = null;
-Response response = client.AzureLocationOp("<location>", "<regenLocation>", content);
+Response response = client.AzureLocationOp(default, default, content);
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -2306,9 +2306,9 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
-    location = "<location>",
+    location = new object(),
 });
-Response response = client.AzureLocationOp("<location>", "<regenLocation>", content);
+Response response = client.AzureLocationOp(default, default, content);
 
 Console.WriteLine(response.Status);
 ]]></code></example>

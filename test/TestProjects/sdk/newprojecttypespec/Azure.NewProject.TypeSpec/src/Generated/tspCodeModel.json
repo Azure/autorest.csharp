@@ -907,8 +907,7 @@
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
         "$id": "138",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,

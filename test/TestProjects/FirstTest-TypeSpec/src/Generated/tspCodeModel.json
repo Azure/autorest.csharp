@@ -729,7 +729,8 @@
      "Description": "optional arm id.",
      "Type": {
       "$id": "117",
-      "Kind": "string"
+      "Kind": "armId",
+      "Encode": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -784,7 +785,8 @@
      "Description": "uuid format",
      "Type": {
       "$id": "125",
-      "Kind": "string"
+      "Kind": "uuid",
+      "Encode": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1059,7 +1061,8 @@
      "Description": "",
      "Type": {
       "$id": "157",
-      "Kind": "string"
+      "Kind": "azureLocation",
+      "Encode": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2105,7 +2108,8 @@
        "NameInRequest": "subscriptionId",
        "Type": {
         "$id": "275",
-        "Kind": "string"
+        "Kind": "uuid",
+        "Encode": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -3603,7 +3607,8 @@
        "NameInRequest": "location",
        "Type": {
         "$id": "413",
-        "Kind": "string"
+        "Kind": "azureLocation",
+        "Encode": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -3621,7 +3626,8 @@
        "NameInRequest": "regen-location",
        "Type": {
         "$id": "415",
-        "Kind": "string"
+        "Kind": "azureLocation",
+        "Encode": "string"
        },
        "Location": "Header",
        "IsRequired": true,
