@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.Utilities
         public static string ToVariableName(this string name) => Configuration.AzureArm ? name.ToMgmtVariableName() : ToCleanName(name, isCamelCase: false);
 
         [return: NotNullIfNotNull("name")]
-        public static string ToMgmtVariableName(this string name)
+        private static string ToMgmtVariableName(this string name)
         {
             string? tempName = name;
             var newName = NameTransformer.Instance.EnsureNameCase(name, (applyStep) =>

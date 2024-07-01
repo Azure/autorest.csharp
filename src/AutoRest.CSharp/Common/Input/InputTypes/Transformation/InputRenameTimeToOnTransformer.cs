@@ -9,12 +9,28 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal class InputRenameTimeToOnTransformer
     {
-        private static readonly Dictionary<string, string> _nounToVerbDicts = new()
+        private const string _onSuffix = "On";
+        private static readonly Dictionary<string, string> _nounToVerbMapping = new()
         {
             {"Creation", "Created"},
             {"Deletion", "Deleted"},
             {"Expiration", "Expire"},
             {"Modification", "Modified"},
+        };
+
+        private static string[] _wordsToSkip = new string[]
+        {
+            "From",
+            "To",
+            "PointInTime",
+        };
+
+        private static string[] _wordsToCut = new string[]
+        {
+            "DateTime",
+            "Time",
+            "Date",
+            "At",
         };
 
         public static void Update(InputNamespace inputNamespace)
@@ -29,36 +45,33 @@ namespace AutoRest.CSharp.Common.Input
                     var propertyType = property.Type.GetImplementType();
                     if ((propertyType is InputPrimitiveType inputPrimitiveType && inputPrimitiveType.Kind == InputPrimitiveTypeKind.PlainDate) || propertyType is InputDateTimeType)
                     {
-                        var propName = property.CSharpName();
+                        var propName = property.CSharpName().AsSpan();
 
-                        if (propName.StartsWith("From", StringComparison.Ordinal) ||
-                            propName.StartsWith("To", StringComparison.Ordinal) ||
-                            propName.EndsWith("PointInTime", StringComparison.Ordinal))
-                            continue;
+                        foreach (var word in _wordsToSkip)
+                        {
+                            if (propName.StartsWith(word, StringComparison.Ordinal))
+                            {
+                                continue;
+                            }
+                        }
 
                         var lengthToCut = 0;
-                        if (propName.Length > 8 &&
-                            propName.EndsWith("DateTime", StringComparison.Ordinal))
+                        foreach (var word in _wordsToCut)
                         {
-                            lengthToCut = 8;
-                        }
-                        else if (propName.Length > 4 &&
-                            propName.EndsWith("Time", StringComparison.Ordinal) ||
-                            propName.EndsWith("Date", StringComparison.Ordinal))
-                        {
-                            lengthToCut = 4;
-                        }
-                        else if (propName.Length > 2 &&
-                            propName.EndsWith("At", StringComparison.Ordinal))
-                        {
-                            lengthToCut = 2;
-                        }
+                            {
+                                if (propName.EndsWith(word, StringComparison.Ordinal))
+                                {
+                                    lengthToCut = word.Length;
+                                    break;
+                                }
+                            }
 
-                        if (lengthToCut > 0)
-                        {
-                            var prefix = propName.Substring(0, propName.Length - lengthToCut);
-                            var newName = (_nounToVerbDicts.TryGetValue(prefix, out var verb) ? verb : prefix) + "On";
-                            property.Name = newName;
+                            if (lengthToCut > 0 && lengthToCut < propName.Length)
+                            {
+                                var prefix = propName.Slice(0, propName.Length - lengthToCut).ToString();
+                                var newName = (_nounToVerbMapping.TryGetValue(prefix, out var verb) ? verb : prefix) + _onSuffix;
+                                property.Name = newName;
+                            }
                         }
                     }
                 }

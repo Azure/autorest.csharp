@@ -16,15 +16,15 @@ namespace AutoRest.CSharp.Common.Input
                 if (model is not InputModelType inputModel)
                     continue;
 
-                var schemaName = model.Name;
+                var schemaName = model.Name.AsSpan();
                 if (schemaName.EndsWith("Url", StringComparison.Ordinal))
-                    model.Name = schemaName.Substring(0, schemaName.Length - 1) + LowerCaseI;
+                    model.Name = schemaName.Slice(0, schemaName.Length - 1).ToString() + LowerCaseI;
 
                 foreach (var property in inputModel.Properties)
                 {
-                    var propertyName = property.Name;
+                    var propertyName = property.Name.AsSpan();
                     if (propertyName.EndsWith("Url", StringComparison.Ordinal))
-                        property.Name = propertyName.Substring(0, propertyName.Length - 1) + LowerCaseI;
+                        property.Name = propertyName.Slice(0, propertyName.Length - 1).ToString() + LowerCaseI;
                 }
             }
         }
