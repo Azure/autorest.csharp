@@ -8,6 +8,7 @@ namespace AutoRest.CSharp.Common.Input
     internal class InputUrlToUriTransformer
     {
         private static readonly char LowerCaseI = 'i';
+        private const string UrlSuffix = "Url";
 
         public static void UpdateSuffix(InputNamespace input)
         {
@@ -16,15 +17,21 @@ namespace AutoRest.CSharp.Common.Input
                 if (model is not InputModelType inputModel)
                     continue;
 
-                var schemaName = model.Name.AsSpan();
-                if (schemaName.EndsWith("Url", StringComparison.Ordinal))
-                    model.Name = schemaName.Slice(0, schemaName.Length - 1).ToString() + LowerCaseI;
+                if (model.Name.AsSpan().EndsWith(UrlSuffix, StringComparison.Ordinal))
+                {
+                    var newName = model.Name.ToCharArray().AsSpan();
+                    newName[^1] = LowerCaseI;
+                    model.Name = newName.ToString();
+                }
 
                 foreach (var property in inputModel.Properties)
                 {
-                    var propertyName = property.Name.AsSpan();
-                    if (propertyName.EndsWith("Url", StringComparison.Ordinal))
-                        property.Name = propertyName.Slice(0, propertyName.Length - 1).ToString() + LowerCaseI;
+                    if (property.Name.AsSpan().EndsWith(UrlSuffix, StringComparison.Ordinal))
+                    {
+                        var newName = model.Name.ToCharArray().AsSpan();
+                        newName[^1] = LowerCaseI;
+                        property.Name = newName.ToString();
+                    }
                 }
             }
         }
