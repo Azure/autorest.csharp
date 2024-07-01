@@ -58,20 +58,18 @@ namespace AutoRest.CSharp.Common.Input
                         var lengthToCut = 0;
                         foreach (var word in _wordsToCut)
                         {
+                            if (propName.EndsWith(word, StringComparison.Ordinal))
                             {
-                                if (propName.EndsWith(word, StringComparison.Ordinal))
-                                {
-                                    lengthToCut = word.Length;
-                                    break;
-                                }
+                                lengthToCut = word.Length;
+                                break;
                             }
+                        }
 
-                            if (lengthToCut > 0 && lengthToCut < propName.Length)
-                            {
-                                var prefix = propName.Slice(0, propName.Length - lengthToCut).ToString();
-                                var newName = (_nounToVerbMapping.TryGetValue(prefix, out var verb) ? verb : prefix) + _onSuffix;
-                                property.Name = newName;
-                            }
+                        if (lengthToCut > 0 && lengthToCut < propName.Length)
+                        {
+                            var prefix = propName.Slice(0, propName.Length - lengthToCut).ToString();
+                            var newName = (_nounToVerbMapping.TryGetValue(prefix, out var verb) ? verb : prefix) + _onSuffix;
+                            property.Name = newName;
                         }
                     }
                 }
