@@ -318,6 +318,7 @@ ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidati
 
 using RequestContent content = RequestContent.Create(new
 {
+    kind = "X",
     fields = new object[]
     {
         "<fields>"
@@ -327,7 +328,6 @@ using RequestContent content = RequestContent.Create(new
     {
         key = "<keyValuePairs>",
     },
-    kind = "X",
     name = "<name>",
 });
 Response response = await client.Op3Async(content);
@@ -360,6 +360,7 @@ ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidati
 
 using RequestContent content = RequestContent.Create(new
 {
+    kind = "X",
     fields = new object[]
     {
         "<fields>"
@@ -369,7 +370,6 @@ using RequestContent content = RequestContent.Create(new
     {
         key = "<keyValuePairs>",
     },
-    kind = "X",
     name = "<name>",
 });
 Response response = client.Op3(content);

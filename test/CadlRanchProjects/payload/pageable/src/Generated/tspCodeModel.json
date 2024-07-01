@@ -6,11 +6,11 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedUser",
-   "Namespace": "Azure.Core",
-   "Description": "Paged collection of User items",
+   "CrossLanguageDefinitionId": "Azure.Core.Page",
    "Usage": "Output",
+   "Description": "Paged collection of User items",
    "Properties": [
     {
      "$id": "3",
@@ -22,11 +22,11 @@
       "Kind": "array",
       "ValueType": {
        "$id": "5",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "User",
-       "Namespace": "Payload.Pageable",
-       "Description": "User model",
+       "CrossLanguageDefinitionId": "Payload.Pageable.User",
        "Usage": "Output",
+       "Description": "User model",
        "Properties": [
         {
          "$id": "6",
@@ -186,7 +186,6 @@
    "Protocol": {
     "$id": "23"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "12"

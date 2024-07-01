@@ -186,10 +186,9 @@ namespace AutoRest.CSharp.Mgmt.Models
             var finalSchema = Operation.LongRunning?.FinalResponse.BodyType;
             if (finalSchema is null)
                 return null;
-            (InputType finalType, bool isNullable) = finalSchema is InputNullableType nullableType ? (nullableType.Type, true) : (finalSchema, false);
             try
             {
-                return finalType is InputModelType inputModel ? MgmtContext.Library.ResolveModel(inputModel).WithNullable(isNullable) : MgmtContext.TypeFactory.CreateType(finalSchema);
+                return MgmtContext.TypeFactory.CreateType(finalSchema);
             }
             catch (Exception ex)
             {

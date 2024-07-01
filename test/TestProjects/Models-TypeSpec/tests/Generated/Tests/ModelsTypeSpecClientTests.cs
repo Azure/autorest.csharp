@@ -31,8 +31,8 @@ namespace ModelsTypeSpec.Tests
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredString = "<requiredString>",
                 kind = "A",
+                requiredString = "<requiredString>",
             });
             Response response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(content);
         }
@@ -60,9 +60,9 @@ namespace ModelsTypeSpec.Tests
 
             using RequestContent content = RequestContent.Create(new
             {
+                kind = "A",
                 requiredString = "<requiredString>",
                 optionalInt = 1234,
-                kind = "A",
                 optionalString = "<optionalString>",
             });
             Response response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(content);
@@ -772,8 +772,8 @@ default
                 requiredNullableString = "<requiredNullableString>",
                 requiredModel = new
                 {
-                    requiredString = "<requiredString>",
                     discriminatorProperty = "A",
+                    requiredString = "<requiredString>",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
@@ -892,8 +892,8 @@ default
                 nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new
                 {
-                    requiredString = "<requiredString>",
                     discriminatorProperty = "A",
+                    requiredString = "<requiredString>",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
                 },
@@ -961,6 +961,13 @@ null
             {
 "<nonRequiredNullableStringList>"
             },
+                optionalModel = new
+                {
+                    kind = "A",
+                    requiredString = "<requiredString>",
+                    optionalInt = 1234,
+                    optionalString = "<optionalString>",
+                },
             });
             Response response = await client.RoundTripToOutputAsync(content);
         }
@@ -1023,6 +1030,11 @@ default
                 OptionalInt8Array = { 123 },
                 NonRequiredNullableIntList = { 1234 },
                 NonRequiredNullableStringList = { "<nonRequiredNullableStringList>" },
+                OptionalModel = new DerivedWithDiscriminatorFromIsKeyword("<requiredString>")
+                {
+                    OptionalInt = 1234,
+                    OptionalString = "<optionalString>",
+                },
             };
             Response<OutputModel> response = await client.RoundTripToOutputAsync(input);
         }
@@ -1391,46 +1403,6 @@ default
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
             Response<BaseModelWithDiscriminator> response = await client.AnalyzeConversationAsync();
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ModelsTypeSpec_GetSingleBase_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
-
-            Response response = await client.GetSingleBaseAsync(null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ModelsTypeSpec_GetSingleBase_ShortVersion_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
-
-            Response<SingleBase> response = await client.GetSingleBaseAsync();
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ModelsTypeSpec_GetSingleBase_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
-
-            Response response = await client.GetSingleBaseAsync(null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ModelsTypeSpec_GetSingleBase_AllParameters_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
-
-            Response<SingleBase> response = await client.GetSingleBaseAsync();
         }
 
         [Test]

@@ -6,11 +6,11 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "InputModel",
-   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
-   "Description": "Usage override to roundtrip.",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.InputModel",
    "Usage": "RoundTrip",
+   "Description": "Usage override to roundtrip.",
    "Properties": [
     {
      "$id": "3",
@@ -28,11 +28,11 @@
   },
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "OutputModel",
-   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
-   "Description": "Usage override to roundtrip.",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.OutputModel",
    "Usage": "RoundTrip",
+   "Description": "Usage override to roundtrip.",
    "Properties": [
     {
      "$id": "6",
@@ -50,9 +50,9 @@
   },
   {
    "$id": "8",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RoundTripModel",
-   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.RoundTripModel",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -62,9 +62,9 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ResultModel",
-      "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
+      "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.ResultModel",
       "Usage": "Output",
       "Properties": [
        {
@@ -91,12 +91,12 @@
   },
   {
    "$id": "13",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "OrphanModel",
-   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage",
-   "Accessibility": "public",
-   "Description": "Not used anywhere, but access is override to public so still need to be generated and exported with serialization.",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.OrphanModel",
+   "Access": "public",
    "Usage": "Input",
+   "Description": "Not used anywhere, but access is override to public so still need to be generated and exported with serialization.",
    "Properties": [
     {
      "$id": "14",
@@ -122,7 +122,6 @@
    "Protocol": {
     "$id": "17"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "18",
@@ -436,7 +435,6 @@
    "Protocol": {
     "$id": "46"
    },
-   "Creatable": false,
    "Parent": "UsageClient",
    "Parameters": [
     {

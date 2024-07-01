@@ -6,9 +6,9 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "MultiPartRequest",
-   "Namespace": "Payload.MultiPart",
+   "CrossLanguageDefinitionId": "Payload.MultiPart.MultiPartRequest",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -40,9 +40,9 @@
   },
   {
    "$id": "7",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ComplexPartsRequest",
-   "Namespace": "Payload.MultiPart",
+   "CrossLanguageDefinitionId": "Payload.MultiPart.ComplexPartsRequest",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -64,9 +64,9 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "Address",
-      "Namespace": "Payload.MultiPart",
+      "CrossLanguageDefinitionId": "Payload.MultiPart.Address",
       "Usage": "Input",
       "Properties": [
        {
@@ -138,9 +138,9 @@
   },
   {
    "$id": "21",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "JsonPartRequest",
-   "Namespace": "Payload.MultiPart",
+   "CrossLanguageDefinitionId": "Payload.MultiPart.JsonPartRequest",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -171,9 +171,9 @@
   },
   {
    "$id": "25",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "BinaryArrayPartsRequest",
-   "Namespace": "Payload.MultiPart",
+   "CrossLanguageDefinitionId": "Payload.MultiPart.BinaryArrayPartsRequest",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -209,9 +209,9 @@
   },
   {
    "$id": "31",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "JsonArrayPartsRequest",
-   "Namespace": "Payload.MultiPart",
+   "CrossLanguageDefinitionId": "Payload.MultiPart.JsonArrayPartsRequest",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -246,9 +246,9 @@
   },
   {
    "$id": "36",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "MultiBinaryPartsRequest",
-   "Namespace": "Payload.MultiPart",
+   "CrossLanguageDefinitionId": "Payload.MultiPart.MultiBinaryPartsRequest",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -281,9 +281,9 @@
   },
   {
    "$id": "41",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "AnonymousModelRequest",
-   "Namespace": "",
+   "CrossLanguageDefinitionId": ".anonymous",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -311,7 +311,6 @@
    "Protocol": {
     "$id": "45"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "46",
@@ -1201,7 +1200,6 @@
    "Protocol": {
     "$id": "131"
    },
-   "Creatable": false,
    "Parent": "MultiPartClient",
    "Parameters": [
     {

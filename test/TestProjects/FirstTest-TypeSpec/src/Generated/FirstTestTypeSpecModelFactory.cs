@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 
 namespace FirstTestTypeSpec.Models
 {
@@ -30,8 +31,9 @@ namespace FirstTestTypeSpec.Models
         /// <param name="requiredNullableList"> required nullable collection. </param>
         /// <param name="requiredFloatProperty"> required float property. </param>
         /// <param name="optionalFloatProperty"> optional float property. </param>
+        /// <param name="optionalResourceId"> optional arm id. </param>
         /// <returns> A new <see cref="Models.Thing"/> instance for mocking. </returns>
-        public static Thing Thing(string name = null, BinaryData requiredUnion = null, ThingRequiredLiteralString requiredLiteralString = default, ThingRequiredLiteralInt requiredLiteralInt = default, ThingRequiredLiteralFloat requiredLiteralFloat = default, bool requiredLiteralBool = default, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, string requiredBadDescription = null, IEnumerable<int> optionalNullableList = null, IEnumerable<int> requiredNullableList = null, double requiredFloatProperty = default, double? optionalFloatProperty = null)
+        public static Thing Thing(string name = null, BinaryData requiredUnion = null, ThingRequiredLiteralString requiredLiteralString = default, ThingRequiredLiteralInt requiredLiteralInt = default, ThingRequiredLiteralFloat requiredLiteralFloat = default, bool requiredLiteralBool = default, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, string requiredBadDescription = null, IEnumerable<int> optionalNullableList = null, IEnumerable<int> requiredNullableList = null, double requiredFloatProperty = default, double? optionalFloatProperty = null, ResourceIdentifier optionalResourceId = null)
         {
             optionalNullableList ??= new List<int>();
             requiredNullableList ??= new List<int>();
@@ -52,6 +54,7 @@ namespace FirstTestTypeSpec.Models
                 requiredNullableList?.ToList(),
                 requiredFloatProperty,
                 optionalFloatProperty,
+                optionalResourceId,
                 serializedAdditionalRawData: null);
         }
 

@@ -10,8 +10,12 @@ using System.Collections.Generic;
 
 namespace ModelsTypeSpec.Models
 {
-    /// <summary> Single base model without any child model. </summary>
-    public abstract partial class SingleBase
+    /// <summary>
+    /// A base model in the discriminated set but its discriminator propery comes with the is keyword
+    /// Please note <see cref="BaseModelWithDiscriminatorFromIsKeyword"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+    /// The available derived classes include <see cref="DerivedWithDiscriminatorFromIsKeyword"/>.
+    /// </summary>
+    public abstract partial class BaseModelWithDiscriminatorFromIsKeyword
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -45,32 +49,25 @@ namespace ModelsTypeSpec.Models
         /// </summary>
         private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="SingleBase"/>. </summary>
-        /// <param name="size"></param>
-        protected SingleBase(int size)
+        /// <summary> Initializes a new instance of <see cref="BaseModelWithDiscriminatorFromIsKeyword"/>. </summary>
+        protected BaseModelWithDiscriminatorFromIsKeyword()
         {
-            Size = size;
         }
 
-        /// <summary> Initializes a new instance of <see cref="SingleBase"/>. </summary>
-        /// <param name="kind"> Discriminator property for SingleBase. </param>
-        /// <param name="size"></param>
+        /// <summary> Initializes a new instance of <see cref="BaseModelWithDiscriminatorFromIsKeyword"/>. </summary>
+        /// <param name="kind"> Required kind. </param>
+        /// <param name="optionalString"> Optional string. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SingleBase(string kind, int size, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal BaseModelWithDiscriminatorFromIsKeyword(string kind, string optionalString, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Kind = kind;
-            Size = size;
+            OptionalString = optionalString;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="SingleBase"/> for deserialization. </summary>
-        internal SingleBase()
-        {
-        }
-
-        /// <summary> Discriminator property for SingleBase. </summary>
+        /// <summary> Required kind. </summary>
         internal string Kind { get; set; }
-        /// <summary> Gets the size. </summary>
-        public int Size { get; }
+        /// <summary> Optional string. </summary>
+        public string OptionalString { get; set; }
     }
 }
