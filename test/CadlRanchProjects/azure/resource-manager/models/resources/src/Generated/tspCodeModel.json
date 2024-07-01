@@ -8,7 +8,8 @@
   {
    "$id": "2",
    "Kind": "enum",
-   "Name": "createdByType",
+   "Name": "ProvisioningState",
+   "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.ProvisioningState",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -16,83 +17,82 @@
    "Values": [
     {
      "$id": "4",
-     "Name": "User",
-     "Value": "User",
-     "Description": "The entity was created by a user."
-    },
-    {
-     "$id": "5",
-     "Name": "Application",
-     "Value": "Application",
-     "Description": "The entity was created by an application."
-    },
-    {
-     "$id": "6",
-     "Name": "ManagedIdentity",
-     "Value": "ManagedIdentity",
-     "Description": "The entity was created by a managed identity."
-    },
-    {
-     "$id": "7",
-     "Name": "Key",
-     "Value": "Key",
-     "Description": "The entity was created by a key."
-    }
-   ],
-   "Namespace": "Azure.ResourceManager.CommonTypes",
-   "Description": "The kind of entity that created the resource.",
-   "IsExtensible": true,
-   "Usage": "Output"
-  },
-  {
-   "$id": "8",
-   "Kind": "enum",
-   "Name": "ProvisioningState",
-   "ValueType": {
-    "$id": "9",
-    "Kind": "string"
-   },
-   "Values": [
-    {
-     "$id": "10",
      "Name": "Succeeded",
      "Value": "Succeeded",
      "Description": "Resource has been created."
     },
     {
-     "$id": "11",
+     "$id": "5",
      "Name": "Failed",
      "Value": "Failed",
      "Description": "Resource creation failed."
     },
     {
-     "$id": "12",
+     "$id": "6",
      "Name": "Canceled",
      "Value": "Canceled",
      "Description": "Resource creation was canceled."
     },
     {
-     "$id": "13",
+     "$id": "7",
      "Name": "Provisioning",
      "Value": "Provisioning"
     },
     {
-     "$id": "14",
+     "$id": "8",
      "Name": "Updating",
      "Value": "Updating"
     },
     {
-     "$id": "15",
+     "$id": "9",
      "Name": "Deleting",
      "Value": "Deleting"
     },
     {
-     "$id": "16",
+     "$id": "10",
      "Name": "Accepted",
      "Value": "Accepted"
     }
    ],
-   "Namespace": "Azure.ResourceManager.Models.Resources",
+   "IsExtensible": true,
+   "Usage": "Output"
+  },
+  {
+   "$id": "11",
+   "Kind": "enum",
+   "Name": "createdByType",
+   "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.createdByType",
+   "ValueType": {
+    "$id": "12",
+    "Kind": "string"
+   },
+   "Values": [
+    {
+     "$id": "13",
+     "Name": "User",
+     "Value": "User",
+     "Description": "The entity was created by a user."
+    },
+    {
+     "$id": "14",
+     "Name": "Application",
+     "Value": "Application",
+     "Description": "The entity was created by an application."
+    },
+    {
+     "$id": "15",
+     "Name": "ManagedIdentity",
+     "Value": "ManagedIdentity",
+     "Description": "The entity was created by a managed identity."
+    },
+    {
+     "$id": "16",
+     "Name": "Key",
+     "Value": "Key",
+     "Description": "The entity was created by a key."
+    }
+   ],
+   "Description": "The kind of entity that created the resource.",
    "IsExtensible": true,
    "Usage": "Output"
   },
@@ -100,6 +100,7 @@
    "$id": "17",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.Versions",
    "ValueType": {
     "$id": "18",
     "Kind": "string"
@@ -112,7 +113,6 @@
      "Description": "Preview API version 2023-12-01-preview."
     }
    ],
-   "Namespace": "Azure.ResourceManager.Models.Resources",
    "Description": "Azure API versions.",
    "IsExtensible": false,
    "Usage": "None"
@@ -121,25 +121,25 @@
  "Models": [
   {
    "$id": "20",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "TopLevelTrackedResource",
-   "Namespace": "Azure.ResourceManager.Models.Resources",
-   "Description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+   "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResource",
    "Usage": "RoundTrip",
+   "Description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
    "BaseModel": {
     "$id": "21",
-    "Kind": "Model",
+    "Kind": "model",
     "Name": "TrackedResource",
-    "Namespace": "Azure.ResourceManager.CommonTypes",
-    "Description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+    "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource",
     "Usage": "RoundTrip",
+    "Description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
     "BaseModel": {
      "$id": "22",
-     "Kind": "Model",
+     "Kind": "model",
      "Name": "Resource",
-     "Namespace": "Azure.ResourceManager.CommonTypes",
-     "Description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource",
      "Usage": "RoundTrip",
+     "Description": "Common fields that are returned in the response for all Azure Resource Manager resources",
      "Properties": [
       {
        "$id": "23",
@@ -148,7 +148,8 @@
        "Description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
        "Type": {
         "$id": "24",
-        "Kind": "string"
+        "Kind": "armId",
+        "Encode": "string"
        },
        "IsRequired": false,
        "IsReadOnly": true
@@ -184,11 +185,11 @@
        "Description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
        "Type": {
         "$id": "30",
-        "Kind": "Model",
+        "Kind": "model",
         "Name": "SystemData",
-        "Namespace": "Azure.ResourceManager.CommonTypes",
-        "Description": "Metadata pertaining to creation and last modification of the resource.",
+        "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData",
         "Usage": "Output",
+        "Description": "Metadata pertaining to creation and last modification of the resource.",
         "Properties": [
          {
           "$id": "31",
@@ -208,7 +209,7 @@
           "SerializedName": "createdByType",
           "Description": "The type of identity that created the resource.",
           "Type": {
-           "$ref": "2"
+           "$ref": "11"
           },
           "IsRequired": false,
           "IsReadOnly": false
@@ -248,7 +249,7 @@
           "SerializedName": "lastModifiedByType",
           "Description": "The type of identity that last modified the resource.",
           "Type": {
-           "$ref": "2"
+           "$ref": "11"
           },
           "IsRequired": false,
           "IsReadOnly": false
@@ -320,11 +321,11 @@
      "Description": "The resource-specific properties for this resource.",
      "Type": {
       "$id": "50",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "TopLevelTrackedResourceProperties",
-      "Namespace": "Azure.ResourceManager.Models.Resources",
-      "Description": "Top Level Arm Resource Properties.",
+      "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResourceProperties",
       "Usage": "RoundTrip",
+      "Description": "Top Level Arm Resource Properties.",
       "Properties": [
        {
         "$id": "51",
@@ -332,7 +333,7 @@
         "SerializedName": "provisioningState",
         "Description": "The status of the last operation.",
         "Type": {
-         "$ref": "8"
+         "$ref": "2"
         },
         "IsRequired": false,
         "IsReadOnly": true
@@ -357,6 +358,9 @@
    ]
   },
   {
+   "$ref": "50"
+  },
+  {
    "$ref": "21"
   },
   {
@@ -366,15 +370,12 @@
    "$ref": "30"
   },
   {
-   "$ref": "50"
-  },
-  {
    "$id": "54",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "TopLevelTrackedResourceUpdate",
-   "Namespace": "Azure.ResourceManager.Foundations",
-   "Description": "The type used for update operations of the TopLevelTrackedResource.",
+   "CrossLanguageDefinitionId": "Azure.ResourceManager.Foundations.ResourceUpdateModel",
    "Usage": "Input",
+   "Description": "The type used for update operations of the TopLevelTrackedResource.",
    "Properties": [
     {
      "$id": "55",
@@ -403,11 +404,11 @@
      "Description": "",
      "Type": {
       "$id": "60",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "TopLevelTrackedResourceUpdateProperties",
-      "Namespace": "Azure.ResourceManager.Foundations",
-      "Description": "The updatable properties of the TopLevelTrackedResource.",
+      "CrossLanguageDefinitionId": "Azure.ResourceManager.Foundations.ResourceUpdateModelProperties",
       "Usage": "Input",
+      "Description": "The updatable properties of the TopLevelTrackedResource.",
       "Properties": [
        {
         "$id": "61",
@@ -433,11 +434,11 @@
   },
   {
    "$id": "63",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "TopLevelTrackedResourceListResult",
-   "Namespace": "Azure.ResourceManager",
-   "Description": "The response of a TopLevelTrackedResource list operation.",
+   "CrossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "Usage": "Output",
+   "Description": "The response of a TopLevelTrackedResource list operation.",
    "Properties": [
     {
      "$id": "64",
@@ -470,18 +471,18 @@
   },
   {
    "$id": "68",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "NestedProxyResource",
-   "Namespace": "Azure.ResourceManager.Models.Resources",
-   "Description": "Nested child of Top Level Tracked Resource.",
+   "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NestedProxyResource",
    "Usage": "RoundTrip",
+   "Description": "Nested child of Top Level Tracked Resource.",
    "BaseModel": {
     "$id": "69",
-    "Kind": "Model",
+    "Kind": "model",
     "Name": "ProxyResource",
-    "Namespace": "Azure.ResourceManager.CommonTypes",
-    "Description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
+    "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ProxyResource",
     "Usage": "RoundTrip",
+    "Description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
     "BaseModel": {
      "$ref": "22"
     },
@@ -495,11 +496,11 @@
      "Description": "The resource-specific properties for this resource.",
      "Type": {
       "$id": "71",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "NestedProxyResourceProperties",
-      "Namespace": "Azure.ResourceManager.Models.Resources",
-      "Description": "Nested Proxy Resource Properties.",
+      "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NestedProxyResourceProperties",
       "Usage": "RoundTrip",
+      "Description": "Nested Proxy Resource Properties.",
       "Properties": [
        {
         "$id": "72",
@@ -507,7 +508,7 @@
         "SerializedName": "provisioningState",
         "Description": "Provisioning State of the nested child Resource",
         "Type": {
-         "$ref": "8"
+         "$ref": "2"
         },
         "IsRequired": false,
         "IsReadOnly": true
@@ -532,18 +533,18 @@
    ]
   },
   {
-   "$ref": "69"
-  },
-  {
    "$ref": "71"
   },
   {
+   "$ref": "69"
+  },
+  {
    "$id": "75",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "NestedProxyResourceUpdate",
-   "Namespace": "Azure.ResourceManager.Foundations",
-   "Description": "The type used for update operations of the NestedProxyResource.",
+   "CrossLanguageDefinitionId": "Azure.ResourceManager.Foundations.ResourceUpdateModel",
    "Usage": "Input",
+   "Description": "The type used for update operations of the NestedProxyResource.",
    "Properties": [
     {
      "$id": "76",
@@ -552,11 +553,11 @@
      "Description": "",
      "Type": {
       "$id": "77",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "NestedProxyResourceUpdateProperties",
-      "Namespace": "Azure.ResourceManager.Foundations",
-      "Description": "The updatable properties of the NestedProxyResource.",
+      "CrossLanguageDefinitionId": "Azure.ResourceManager.Foundations.ResourceUpdateModelProperties",
       "Usage": "Input",
+      "Description": "The updatable properties of the NestedProxyResource.",
       "Properties": [
        {
         "$id": "78",
@@ -582,11 +583,11 @@
   },
   {
    "$id": "80",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "NestedProxyResourceListResult",
-   "Namespace": "Azure.ResourceManager",
-   "Description": "The response of a NestedProxyResource list operation.",
+   "CrossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "Usage": "Output",
+   "Description": "The response of a NestedProxyResource list operation.",
    "Properties": [
     {
      "$id": "81",
@@ -619,11 +620,11 @@
   },
   {
    "$id": "85",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ErrorResponse",
-   "Namespace": "Azure.ResourceManager.CommonTypes",
-   "Description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+   "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
    "Usage": "Output",
+   "Description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
    "Properties": [
     {
      "$id": "86",
@@ -632,11 +633,11 @@
      "Description": "The error object.",
      "Type": {
       "$id": "87",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ErrorDetail",
-      "Namespace": "Azure.ResourceManager.CommonTypes",
-      "Description": "The error detail.",
+      "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail",
       "Usage": "Output",
+      "Description": "The error detail.",
       "Properties": [
        {
         "$id": "88",
@@ -699,11 +700,11 @@
          "Kind": "array",
          "ValueType": {
           "$id": "98",
-          "Kind": "Model",
+          "Kind": "model",
           "Name": "ErrorAdditionalInfo",
-          "Namespace": "Azure.ResourceManager.CommonTypes",
-          "Description": "The resource management error additional info.",
+          "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo",
           "Usage": "Output",
+          "Description": "The resource management error additional info.",
           "Properties": [
            {
             "$id": "99",
@@ -724,9 +725,9 @@
             "Description": "The additional info.",
             "Type": {
              "$id": "102",
-             "Kind": "Model",
+             "Kind": "model",
              "Name": "ErrorAdditionalInfoInfo",
-             "Namespace": "Azure.ResourceManager.CommonTypes",
+             "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info.anonymous",
              "Usage": "Output",
              "Properties": []
             },
@@ -765,7 +766,6 @@
    "Protocol": {
     "$id": "104"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "105",
@@ -848,7 +848,8 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "116",
-        "Kind": "string"
+        "Kind": "uuid",
+        "Encode": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -989,7 +990,8 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "129",
-        "Kind": "string"
+        "Kind": "uuid",
+        "Encode": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1227,7 +1229,8 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "153",
-        "Kind": "string"
+        "Kind": "uuid",
+        "Encode": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1459,7 +1462,8 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "177",
-        "Kind": "string"
+        "Kind": "uuid",
+        "Encode": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1635,7 +1639,8 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "197",
-        "Kind": "string"
+        "Kind": "uuid",
+        "Encode": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1762,7 +1767,8 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "209",
-        "Kind": "string"
+        "Kind": "uuid",
+        "Encode": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1835,7 +1841,6 @@
    "Protocol": {
     "$id": "215"
    },
-   "Creatable": false,
    "Parent": "ResourcesClient",
    "Parameters": [
     {
@@ -1887,7 +1892,8 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "221",
-        "Kind": "string"
+        "Kind": "uuid",
+        "Encode": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2047,7 +2053,8 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "236",
-        "Kind": "string"
+        "Kind": "uuid",
+        "Encode": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2304,7 +2311,8 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "262",
-        "Kind": "string"
+        "Kind": "uuid",
+        "Encode": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2555,7 +2563,8 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "288",
-        "Kind": "string"
+        "Kind": "uuid",
+        "Encode": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2750,7 +2759,8 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "310",
-        "Kind": "string"
+        "Kind": "uuid",
+        "Encode": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2861,7 +2871,6 @@
    "Protocol": {
     "$id": "320"
    },
-   "Creatable": false,
    "Parent": "ResourcesClient",
    "Parameters": [
     {

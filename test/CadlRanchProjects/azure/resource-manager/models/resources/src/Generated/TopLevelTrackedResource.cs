@@ -108,7 +108,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>NestedProxyResources_get</description>
+        /// <description>NestedProxyResources_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -139,7 +139,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>NestedProxyResources_get</description>
+        /// <description>NestedProxyResources_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -170,7 +170,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>TopLevelTrackedResources_get</description>
+        /// <description>TopLevelTrackedResources_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -210,7 +210,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>TopLevelTrackedResources_get</description>
+        /// <description>TopLevelTrackedResources_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -250,7 +250,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>TopLevelTrackedResources_delete</description>
+        /// <description>TopLevelTrackedResources_Delete</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -292,7 +292,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>TopLevelTrackedResources_delete</description>
+        /// <description>TopLevelTrackedResources_Delete</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -334,7 +334,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>TopLevelTrackedResources_update</description>
+        /// <description>TopLevelTrackedResources_Update</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -380,7 +380,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>TopLevelTrackedResources_update</description>
+        /// <description>TopLevelTrackedResources_Update</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -426,7 +426,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>TopLevelTrackedResources_get</description>
+        /// <description>TopLevelTrackedResources_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -488,7 +488,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>TopLevelTrackedResources_get</description>
+        /// <description>TopLevelTrackedResources_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -550,7 +550,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>TopLevelTrackedResources_get</description>
+        /// <description>TopLevelTrackedResources_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -607,7 +607,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>TopLevelTrackedResources_get</description>
+        /// <description>TopLevelTrackedResources_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -664,7 +664,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>TopLevelTrackedResources_get</description>
+        /// <description>TopLevelTrackedResources_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -724,7 +724,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>TopLevelTrackedResources_get</description>
+        /// <description>TopLevelTrackedResources_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
