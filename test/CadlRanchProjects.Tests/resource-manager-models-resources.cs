@@ -2,15 +2,12 @@
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.Core;
-using Azure.ResourceManager;
 using NUnit.Framework;
 using _Azure.ResourceManager.Models.Resources;
-using static CadlRanchProjects.Tests.OAuth2TestHelper;
 using Azure.ResourceManager.Models;
 using _Azure.ResourceManager.Models.Resources.Models;
 using Azure.ResourceManager.Resources;
 using Azure;
-using Microsoft.CodeAnalysis;
 
 namespace CadlRanchProjects.Tests
 {
