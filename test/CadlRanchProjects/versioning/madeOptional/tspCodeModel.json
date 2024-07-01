@@ -10,6 +10,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "Versioning.MadeOptional.Versions",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -28,7 +29,6 @@
      "Description": "The version v2."
     }
    ],
-   "CrossLanguageDefinitionId": "Versioning.MadeOptional.Versions",
    "Description": "The version of the API.",
    "IsExtensible": false,
    "Usage": "None"

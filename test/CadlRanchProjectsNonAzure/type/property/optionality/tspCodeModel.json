@@ -70,6 +70,7 @@
    "$id": "11",
    "Kind": "enum",
    "Name": "UnionStringLiteralPropertyProperty",
+   "CrossLanguageDefinitionId": "UnionStringLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "12",
     "Kind": "string"
@@ -86,7 +87,6 @@
      "Value": "world"
     }
    ],
-   "CrossLanguageDefinitionId": "UnionStringLiteralProperty.property.anonymous",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -94,6 +94,7 @@
    "$id": "15",
    "Kind": "enum",
    "Name": "UnionIntLiteralPropertyProperty",
+   "CrossLanguageDefinitionId": "UnionIntLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "16",
     "Kind": "int32"
@@ -110,7 +111,6 @@
      "Value": 2
     }
    ],
-   "CrossLanguageDefinitionId": "UnionIntLiteralProperty.property.anonymous",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -118,6 +118,7 @@
    "$id": "19",
    "Kind": "enum",
    "Name": "UnionFloatLiteralPropertyProperty",
+   "CrossLanguageDefinitionId": "UnionFloatLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "20",
     "Kind": "float32"
@@ -134,7 +135,6 @@
      "Value": 2.375
     }
    ],
-   "CrossLanguageDefinitionId": "UnionFloatLiteralProperty.property.anonymous",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   }

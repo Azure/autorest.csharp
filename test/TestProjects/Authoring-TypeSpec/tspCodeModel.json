@@ -9,6 +9,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "ProjectKind",
+   "CrossLanguageDefinitionId": "AuthoringTypeSpec.ProjectKind",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -33,7 +34,6 @@
      "Description": "For building an extraction model to identify your domain categories using your own data."
     }
    ],
-   "CrossLanguageDefinitionId": "AuthoringTypeSpec.ProjectKind",
    "Description": "Represents the project kind.",
    "IsExtensible": true,
    "Usage": "None"
@@ -42,6 +42,7 @@
    "$id": "7",
    "Kind": "enum",
    "Name": "OperationState",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
    "ValueType": {
     "$id": "8",
     "Kind": "string"
@@ -78,7 +79,6 @@
      "Description": "The operation has been canceled by the user."
     }
    ],
-   "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
    "Description": "Enum describing allowed operation states.",
    "IsExtensible": true,
    "Usage": "None"
@@ -87,6 +87,7 @@
    "$id": "14",
    "Kind": "enum",
    "Name": "JobStatus",
+   "CrossLanguageDefinitionId": "AuthoringTypeSpec.JobStatus",
    "ValueType": {
     "$id": "15",
     "Kind": "string"
@@ -128,7 +129,6 @@
      "Value": "partiallyCompleted"
     }
    ],
-   "CrossLanguageDefinitionId": "AuthoringTypeSpec.JobStatus",
    "Description": "Represents the job status values.",
    "IsExtensible": true,
    "Usage": "Output"
@@ -137,6 +137,7 @@
    "$id": "23",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "AuthoringTypeSpec.Versions",
    "ValueType": {
     "$id": "24",
     "Kind": "string"
@@ -148,7 +149,6 @@
      "Value": "2022-05-15-preview"
     }
    ],
-   "CrossLanguageDefinitionId": "AuthoringTypeSpec.Versions",
    "IsExtensible": false,
    "Usage": "None"
   }

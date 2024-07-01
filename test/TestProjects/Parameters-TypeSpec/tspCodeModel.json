@@ -9,6 +9,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "ParametersCadl.Versions",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -20,7 +21,6 @@
      "Value": "2022-05-15-preview"
     }
    ],
-   "CrossLanguageDefinitionId": "ParametersCadl.Versions",
    "IsExtensible": false,
    "Usage": "None"
   }

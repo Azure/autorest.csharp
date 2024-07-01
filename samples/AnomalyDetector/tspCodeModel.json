@@ -9,6 +9,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "APIVersion",
+   "CrossLanguageDefinitionId": "AnomalyDetector.APIVersion",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -20,7 +21,6 @@
      "Value": "v1.1"
     }
    ],
-   "CrossLanguageDefinitionId": "AnomalyDetector.APIVersion",
    "IsExtensible": true,
    "Usage": "None"
   },
@@ -28,6 +28,7 @@
    "$id": "5",
    "Kind": "enum",
    "Name": "TimeGranularity",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.TimeGranularity",
    "ValueType": {
     "$id": "6",
     "Kind": "string"
@@ -79,7 +80,6 @@
      "Value": "none"
     }
    ],
-   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.TimeGranularity",
    "Description": "the time granularity of the data points.",
    "IsExtensible": false,
    "Usage": "Input"
@@ -88,6 +88,7 @@
    "$id": "16",
    "Kind": "enum",
    "Name": "ImputeMode",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.ImputeMode",
    "ValueType": {
     "$id": "17",
     "Kind": "string"
@@ -124,7 +125,6 @@
      "Value": "notFill"
     }
    ],
-   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.ImputeMode",
    "Description": "The impute mode.",
    "IsExtensible": true,
    "Usage": "Input"
@@ -133,6 +133,7 @@
    "$id": "24",
    "Kind": "enum",
    "Name": "MultivariateBatchDetectionStatus",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionStatus",
    "ValueType": {
     "$id": "25",
     "Kind": "string"
@@ -159,7 +160,6 @@
      "Value": "FAILED"
     }
    ],
-   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionStatus",
    "Description": "The batch detection status.",
    "IsExtensible": false,
    "Usage": "Output"
@@ -168,6 +168,7 @@
    "$id": "30",
    "Kind": "enum",
    "Name": "DataSchema",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.DataSchema",
    "ValueType": {
     "$id": "31",
     "Kind": "string"
@@ -186,7 +187,6 @@
      "Description": "MultiTable means that your input data are separated in multiple CSV files, in each file containing one 'timestamp' column and one 'variable' column, and the CSV file name should indicate the name of the variable. The default DataSchema is OneTable."
     }
    ],
-   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.DataSchema",
    "Description": "Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -195,6 +195,7 @@
    "$id": "34",
    "Kind": "enum",
    "Name": "AlignMode",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AlignMode",
    "ValueType": {
     "$id": "35",
     "Kind": "string"
@@ -211,7 +212,6 @@
      "Value": "Outer"
     }
    ],
-   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AlignMode",
    "Description": "The alignment mode.",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -220,6 +220,7 @@
    "$id": "38",
    "Kind": "enum",
    "Name": "FillNAMethod",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.FillNAMethod",
    "ValueType": {
     "$id": "39",
     "Kind": "string"
@@ -251,7 +252,6 @@
      "Value": "Fixed"
     }
    ],
-   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.FillNAMethod",
    "Description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -260,6 +260,7 @@
    "$id": "45",
    "Kind": "enum",
    "Name": "ModelStatus",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelStatus",
    "ValueType": {
     "$id": "46",
     "Kind": "string"
@@ -286,7 +287,6 @@
      "Value": "FAILED"
     }
    ],
-   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelStatus",
    "Description": "the model status.",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -295,6 +295,7 @@
    "$id": "51",
    "Kind": "enum",
    "Name": "AnomalyDetectorErrorCodes",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.AnomalyDetectorErrorCodes",
    "ValueType": {
     "$id": "52",
     "Kind": "string"
@@ -356,7 +357,6 @@
      "Value": "InvalidImputeFixedValue"
     }
    ],
-   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.AnomalyDetectorErrorCodes",
    "IsExtensible": false,
    "Usage": "Output"
   },
@@ -364,6 +364,7 @@
    "$id": "64",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Versions",
    "ValueType": {
     "$id": "65",
     "Kind": "string"
@@ -375,7 +376,6 @@
      "Value": "v1.1"
     }
    ],
-   "CrossLanguageDefinitionId": "AnomalyDetector.Versions",
    "IsExtensible": false,
    "Usage": "None"
   }

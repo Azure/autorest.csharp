@@ -7,6 +7,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "ResourceTypeAliasPatternType",
+   "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPatternType",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -25,7 +26,6 @@
      "Description": "Extract is the only allowed value."
     }
    ],
-   "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPatternType",
    "Description": "The type of alias pattern.",
    "IsExtensible": false,
    "Usage": "Output"
@@ -34,6 +34,7 @@
    "$id": "6",
    "Kind": "enum",
    "Name": "ResourceTypeAliasPathTokenType",
+   "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPathTokenType",
    "ValueType": {
     "$id": "7",
     "Kind": "string"
@@ -88,7 +89,6 @@
      "Description": "The token type is boolean."
     }
    ],
-   "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPathTokenType",
    "Description": "The type of the token that the alias path is referring to.",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -97,6 +97,7 @@
    "$id": "16",
    "Kind": "enum",
    "Name": "ResourceTypeAliasPathAttributes",
+   "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPathAttributes",
    "ValueType": {
     "$id": "17",
     "Kind": "string"
@@ -115,7 +116,6 @@
      "Description": "The token that the alias path is referring to is modifiable by policies with 'modify' effect."
     }
    ],
-   "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPathAttributes",
    "Description": "The attributes of the token that the alias path is referring to.",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -124,6 +124,7 @@
    "$id": "20",
    "Kind": "enum",
    "Name": "ResourceTypeAliasType",
+   "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasType",
    "ValueType": {
     "$id": "21",
     "Kind": "string"
@@ -148,7 +149,6 @@
      "Description": "Alias value is secret."
     }
    ],
-   "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasType",
    "Description": "The type of the alias.",
    "IsExtensible": false,
    "Usage": "Output"
@@ -157,6 +157,7 @@
    "$id": "25",
    "Kind": "enum",
    "Name": "ProviderAuthorizationConsentState",
+   "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderAuthorizationConsentState",
    "ValueType": {
     "$id": "26",
     "Kind": "string"
@@ -187,7 +188,6 @@
      "Description": "The provider authorization consent state is consented."
     }
    ],
-   "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderAuthorizationConsentState",
    "Description": "The provider authorization consent state.",
    "IsExtensible": true,
    "Usage": "Output"

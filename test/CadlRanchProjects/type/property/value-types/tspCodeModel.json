@@ -7,6 +7,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "FixedInnerEnum",
+   "CrossLanguageDefinitionId": "Type.Property.ValueTypes.FixedInnerEnum",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -25,7 +26,6 @@
      "Description": "Second value."
     }
    ],
-   "CrossLanguageDefinitionId": "Type.Property.ValueTypes.FixedInnerEnum",
    "Description": "Enum that will be used as a property for model EnumProperty. Non-extensible.",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -34,6 +34,7 @@
    "$id": "6",
    "Kind": "enum",
    "Name": "InnerEnum",
+   "CrossLanguageDefinitionId": "Type.Property.ValueTypes.InnerEnum",
    "ValueType": {
     "$id": "7",
     "Kind": "string"
@@ -52,7 +53,6 @@
      "Description": "Second value."
     }
    ],
-   "CrossLanguageDefinitionId": "Type.Property.ValueTypes.InnerEnum",
    "Description": "Enum that will be used as a property for model EnumProperty. Extensible.",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -124,6 +124,7 @@
    "$id": "19",
    "Kind": "enum",
    "Name": "UnionStringLiteralPropertyProperty",
+   "CrossLanguageDefinitionId": "UnionStringLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "20",
     "Kind": "string"
@@ -140,7 +141,6 @@
      "Value": "world"
     }
    ],
-   "CrossLanguageDefinitionId": "UnionStringLiteralProperty.property.anonymous",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -148,6 +148,7 @@
    "$id": "23",
    "Kind": "enum",
    "Name": "UnionIntLiteralPropertyProperty",
+   "CrossLanguageDefinitionId": "UnionIntLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "24",
     "Kind": "int32"
@@ -164,7 +165,6 @@
      "Value": 43
     }
    ],
-   "CrossLanguageDefinitionId": "UnionIntLiteralProperty.property.anonymous",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -172,6 +172,7 @@
    "$id": "27",
    "Kind": "enum",
    "Name": "UnionFloatLiteralPropertyProperty",
+   "CrossLanguageDefinitionId": "UnionFloatLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "28",
     "Kind": "float32"
@@ -188,7 +189,6 @@
      "Value": 46.875
     }
    ],
-   "CrossLanguageDefinitionId": "UnionFloatLiteralProperty.property.anonymous",
    "IsExtensible": false,
    "Usage": "RoundTrip"
   },
@@ -196,6 +196,7 @@
    "$id": "31",
    "Kind": "enum",
    "Name": "ExtendedEnum",
+   "CrossLanguageDefinitionId": "Type.Property.ValueTypes.ExtendedEnum",
    "ValueType": {
     "$id": "32",
     "Kind": "string"
@@ -207,7 +208,6 @@
      "Value": "value2"
     }
    ],
-   "CrossLanguageDefinitionId": "Type.Property.ValueTypes.ExtendedEnum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
   }

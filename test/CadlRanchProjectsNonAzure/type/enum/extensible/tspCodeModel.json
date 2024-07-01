@@ -7,6 +7,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "DaysOfWeekExtensibleEnum",
+   "CrossLanguageDefinitionId": "Type.Enum.Extensible.DaysOfWeekExtensibleEnum",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -55,7 +56,6 @@
      "Description": "Sunday."
     }
    ],
-   "CrossLanguageDefinitionId": "Type.Enum.Extensible.DaysOfWeekExtensibleEnum",
    "Description": "Days of the week",
    "IsExtensible": true,
    "Usage": "RoundTrip"

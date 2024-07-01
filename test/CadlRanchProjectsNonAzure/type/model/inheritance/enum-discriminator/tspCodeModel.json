@@ -7,6 +7,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "DogKind",
+   "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.DogKind",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -19,7 +20,6 @@
      "Description": "Species golden"
     }
    ],
-   "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.DogKind",
    "Description": "extensible enum type for discriminator",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -28,6 +28,7 @@
    "$id": "5",
    "Kind": "enum",
    "Name": "SnakeKind",
+   "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.SnakeKind",
    "ValueType": {
     "$id": "6",
     "Kind": "string"
@@ -40,7 +41,6 @@
      "Description": "Species cobra"
     }
    ],
-   "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.SnakeKind",
    "Description": "fixed enum type for discriminator",
    "IsExtensible": false,
    "Usage": "RoundTrip"

@@ -9,6 +9,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "ProjectKind",
+   "CrossLanguageDefinitionId": "RenameGetList.ProjectKind",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -33,7 +34,6 @@
      "Description": "For building an extraction model to identify your domain categories using your own data."
     }
    ],
-   "CrossLanguageDefinitionId": "RenameGetList.ProjectKind",
    "Description": "Represents the project kind.",
    "IsExtensible": true,
    "Usage": "None"
@@ -42,6 +42,7 @@
    "$id": "7",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "RenameGetList.Versions",
    "ValueType": {
     "$id": "8",
     "Kind": "string"
@@ -53,7 +54,6 @@
      "Value": "2022-05-15-preview"
     }
    ],
-   "CrossLanguageDefinitionId": "RenameGetList.Versions",
    "IsExtensible": false,
    "Usage": "None"
   }

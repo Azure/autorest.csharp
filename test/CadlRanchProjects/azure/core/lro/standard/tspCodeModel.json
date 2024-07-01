@@ -9,6 +9,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "OperationState",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -45,7 +46,6 @@
      "Description": "The operation has been canceled by the user."
     }
    ],
-   "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
    "Description": "Enum describing allowed operation states.",
    "IsExtensible": true,
    "Usage": "Output"
@@ -54,6 +54,7 @@
    "$id": "9",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.Versions",
    "ValueType": {
     "$id": "10",
     "Kind": "string"
@@ -66,7 +67,6 @@
      "Description": "The 2022-12-01-preview version."
     }
    ],
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.Versions",
    "Description": "The API version.",
    "IsExtensible": false,
    "Usage": "None"

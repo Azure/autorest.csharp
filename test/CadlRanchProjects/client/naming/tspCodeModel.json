@@ -7,6 +7,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "ClientExtensibleEnum",
+   "CrossLanguageDefinitionId": "Client.Naming.UnionEnum.ServerExtensibleEnum",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -18,7 +19,6 @@
      "Value": "value1"
     }
    ],
-   "CrossLanguageDefinitionId": "Client.Naming.UnionEnum.ServerExtensibleEnum",
    "IsExtensible": true,
    "Usage": "Input"
   },
@@ -26,6 +26,7 @@
    "$id": "5",
    "Kind": "enum",
    "Name": "ExtensibleEnum",
+   "CrossLanguageDefinitionId": "Client.Naming.UnionEnum.ExtensibleEnum",
    "ValueType": {
     "$id": "6",
     "Kind": "string"
@@ -42,7 +43,6 @@
      "Value": "value2"
     }
    ],
-   "CrossLanguageDefinitionId": "Client.Naming.UnionEnum.ExtensibleEnum",
    "IsExtensible": true,
    "Usage": "Input"
   }
