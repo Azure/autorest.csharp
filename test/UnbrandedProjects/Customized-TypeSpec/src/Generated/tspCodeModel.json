@@ -21,7 +21,7 @@
      "Description": "accept"
     }
    ],
-   "Namespace": "CustomizedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -42,7 +42,7 @@
      "Description": "123"
     }
    ],
-   "Namespace": "CustomizedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -63,7 +63,7 @@
      "Description": "1.23"
     }
    ],
-   "Namespace": "CustomizedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -84,7 +84,7 @@
      "Description": "reject"
     }
    ],
-   "Namespace": "CustomizedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -105,7 +105,7 @@
      "Description": "456"
     }
    ],
-   "Namespace": "CustomizedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -126,7 +126,7 @@
      "Description": "4.56"
     }
    ],
-   "Namespace": "CustomizedTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -135,6 +135,7 @@
    "$id": "20",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "CustomizedTypeSpec.Versions",
    "ValueType": {
     "$id": "21",
     "Kind": "string"
@@ -146,7 +147,6 @@
      "Value": "2022-05-15-preview"
     }
    ],
-   "Namespace": "CustomizedTypeSpec",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -154,11 +154,11 @@
  "Models": [
   {
    "$id": "23",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Thing",
-   "Namespace": "CustomizedTypeSpec",
-   "Description": "A model with a few properties of literal types",
+   "CrossLanguageDefinitionId": "CustomizedTypeSpec.Thing",
    "Usage": "RoundTrip",
+   "Description": "A model with a few properties of literal types",
    "Properties": [
     {
      "$id": "24",
@@ -389,11 +389,11 @@
   },
   {
    "$id": "60",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RoundTripModel",
-   "Namespace": "CustomizedTypeSpec",
-   "Description": "this is a roundtrip model",
+   "CrossLanguageDefinitionId": "CustomizedTypeSpec.RoundTripModel",
    "Usage": "RoundTrip",
+   "Description": "this is a roundtrip model",
    "Properties": [
     {
      "$id": "61",
@@ -435,11 +435,11 @@
   },
   {
    "$id": "67",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Friend",
-   "Namespace": "CustomizedTypeSpec",
-   "Description": "this is not a friendly model but with a friendly name",
+   "CrossLanguageDefinitionId": "CustomizedTypeSpec.NotFriend",
    "Usage": "RoundTrip",
+   "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
     {
      "$id": "68",
@@ -460,9 +460,9 @@
      "Description": "",
      "Type": {
       "$id": "71",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelWithFormat",
-      "Namespace": "CustomizedTypeSpec",
+      "CrossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithFormat",
       "Usage": "RoundTrip",
       "Properties": [
        {
@@ -502,11 +502,11 @@
   },
   {
    "$id": "76",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ProjectedModel",
-   "Namespace": "CustomizedTypeSpec",
-   "Description": "this is a model with a projected name",
+   "CrossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithProjectedName",
    "Usage": "RoundTrip",
+   "Description": "this is a model with a projected name",
    "Properties": [
     {
      "$id": "77",
@@ -524,9 +524,9 @@
   },
   {
    "$id": "79",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
-   "Namespace": "CustomizedTypeSpec",
+   "CrossLanguageDefinitionId": "CustomizedTypeSpec.returnsAnonymousModel.Response.anonymous",
    "Usage": "Output",
    "Properties": []
   }
@@ -2310,7 +2310,6 @@
    "Protocol": {
     "$id": "241"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "82"

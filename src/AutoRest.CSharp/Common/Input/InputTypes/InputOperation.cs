@@ -146,7 +146,7 @@ internal record InputOperation
     public string? OperationName { get; }
     public string? OperationVersion { get; }
     public string? OperationType { get; }
-    public string OperationId => ResourceName is null ? Name : $"{ResourceName}_{Name}";
+    public string OperationId => ResourceName is null ? Name : $"{ResourceName}_{Name.FirstCharToUpperCase()}";
     //TODO: Remove this until the SDK nullable is enabled, traking in https://github.com/Azure/autorest.csharp/issues/4780
     internal string SpecName { get; init; }
 }

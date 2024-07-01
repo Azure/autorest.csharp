@@ -6,9 +6,9 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "JsonEncodedNameModel",
-   "Namespace": "Serialization.EncodedName.Json.Property",
+   "CrossLanguageDefinitionId": "Serialization.EncodedName.Json.Property.JsonEncodedNameModel",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -35,7 +35,6 @@
    "Protocol": {
     "$id": "6"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "7",
@@ -239,7 +238,6 @@
    "Protocol": {
     "$id": "26"
    },
-   "Creatable": false,
    "Parent": "JsonClient",
    "Parameters": [
     {

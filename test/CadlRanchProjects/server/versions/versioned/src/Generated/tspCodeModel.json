@@ -10,6 +10,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "Server.Versions.Versioned.Versions",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -28,7 +29,6 @@
      "Description": "The version 2022-12-01-preview."
     }
    ],
-   "Namespace": "Server.Versions.Versioned",
    "Description": "The version of the API.",
    "IsExtensible": false,
    "Usage": "None"
@@ -351,7 +351,6 @@
    "Protocol": {
     "$id": "37"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "8"

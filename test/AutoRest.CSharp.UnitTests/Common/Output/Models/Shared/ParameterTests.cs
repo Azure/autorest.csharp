@@ -35,17 +35,18 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
             var derivedModels = new List<InputModelType>();
             InputModelType inputModel = new InputModelType(
                 Name: "testInputModel",
-                Namespace: "ns",
-                Accessibility: "accessibility",
-                Deprecated: "test",
+                CrossLanguageDefinitionId: "ns.testInputModel",
+                Access: "accessibility",
+                Deprecation: "test",
                 Description: "sample",
                 DiscriminatorValue: null,
-                DiscriminatorPropertyName: null,
+                DiscriminatorProperty: null,
+                DiscriminatedSubtypes: null,
                 Usage: new InputModelTypeUsage(),
                 Properties: modelProps,
                 BaseModel: null,
                 DerivedModels: derivedModels,
-                InheritedDictionaryType: null);
+                AdditionalProperties: null);
             InputParameter opParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",
@@ -67,7 +68,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 HeaderCollectionPrefix: null);
             // mock the type
             var type = new Mock<CSharpType>(typeProvider.Object, null, true);
-            type.Setup(t => t.Namespace).Returns(inputModel.Namespace);
+            type.Setup(t => t.Namespace).Returns("ns");
             type.Setup(t => t.Name).Returns(inputModel.Name);
             type.Setup(t => t.WithNullable(It.IsAny<bool>())).Returns(type.Object);
 
@@ -90,17 +91,18 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
             var derivedModels = new List<InputModelType>();
             InputModelType inputModel = new InputModelType(
                 Name: "testInputModel",
-                Namespace: "ns",
-                Accessibility: "accessibility",
-                Deprecated: "test",
+                CrossLanguageDefinitionId: "ns.testInputModel",
+                Access: "accessibility",
+                Deprecation: "test",
                 Description: "sample",
                 DiscriminatorValue: null,
-                DiscriminatorPropertyName: null,
+                DiscriminatorProperty: null,
+                DiscriminatedSubtypes: null,
                 Usage: new InputModelTypeUsage(),
                 Properties: modelProps,
                 BaseModel: null,
                 DerivedModels: derivedModels,
-                InheritedDictionaryType: null);
+                AdditionalProperties: null);
             InputNullableType nullableInputModel = new InputNullableType(inputModel);
             InputParameter opParam = new InputParameter(
                 Name: "testParam",
@@ -123,7 +125,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 HeaderCollectionPrefix: null);
             // mock the type
             var type = new Mock<CSharpType>(typeProvider.Object, null, true);
-            type.Setup(t => t.Namespace).Returns(inputModel.Namespace);
+            type.Setup(t => t.Namespace).Returns("ns");
             type.Setup(t => t.Name).Returns(inputModel.Name);
             // because `WithNullable` returns a new instance of CSharpType when nullability is different, we have to mock it so that we always use this instance
             type.Setup(t => t.WithNullable(It.IsAny<bool>())).Returns(type.Object);
@@ -187,17 +189,18 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
             var derivedModels = new List<InputModelType>();
             InputModelType inputModel = new InputModelType(
                 Name: "testInputModel",
-                Namespace: "ns",
-                Accessibility: "accessibility",
-                Deprecated: "test",
+                CrossLanguageDefinitionId: "ns.testInputModel",
+                Access: "accessibility",
+                Deprecation: "test",
                 Description: "sample",
                 DiscriminatorValue: null,
-                DiscriminatorPropertyName: null,
+                DiscriminatorProperty: null,
+                DiscriminatedSubtypes: null,
                 Usage: new InputModelTypeUsage(),
                 Properties: modelProps,
                 BaseModel: null,
                 DerivedModels: derivedModels,
-                InheritedDictionaryType: null);
+                AdditionalProperties: null);
             InputNullableType nullableInputModel = new InputNullableType(inputModel);
             InputParameter inputParam = new InputParameter(
                 Name: "testParam",
@@ -220,7 +223,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 HeaderCollectionPrefix: null);
             // mock the type
             var type = new Mock<CSharpType>(typeProvider.Object, null, true);
-            type.Setup(t => t.Namespace).Returns(inputModel.Namespace);
+            type.Setup(t => t.Namespace).Returns("ns");
             type.Setup(t => t.Name).Returns(inputModel.Name);
             type.Setup(t => t.WithNullable(It.IsAny<bool>())).Returns(type.Object);
 

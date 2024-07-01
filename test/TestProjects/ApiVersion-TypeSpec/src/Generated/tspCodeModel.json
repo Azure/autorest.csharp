@@ -10,6 +10,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "APIVersion",
+   "CrossLanguageDefinitionId": "ApiVersionInTsp.APIVersion",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -26,7 +27,6 @@
      "Value": "v1.2"
     }
    ],
-   "Namespace": "ApiVersionInTsp",
    "IsExtensible": true,
    "Usage": "None"
   },
@@ -34,6 +34,7 @@
    "$id": "6",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "ApiVersionInTsp.Versions",
    "ValueType": {
     "$id": "7",
     "Kind": "string"
@@ -50,7 +51,6 @@
      "Value": "v1.2"
     }
    ],
-   "Namespace": "ApiVersionInTsp",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -58,11 +58,11 @@
  "Models": [
   {
    "$id": "10",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "DetectionResult",
-   "Namespace": "ApiVersionInTsp",
-   "Description": "Detection results for the given resultId.",
+   "CrossLanguageDefinitionId": "ApiVersionInTsp.DetectionResult",
    "Usage": "Output",
+   "Description": "Detection results for the given resultId.",
    "Properties": [
     {
      "$id": "11",
@@ -216,7 +216,6 @@
    "Protocol": {
     "$id": "26"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "15"

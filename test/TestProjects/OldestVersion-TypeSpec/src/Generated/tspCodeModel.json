@@ -9,6 +9,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "OperationState",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -45,7 +46,6 @@
      "Description": "The operation has been canceled by the user."
     }
    ],
-   "Namespace": "Azure.Core.Foundations",
    "Description": "Enum describing allowed operation states.",
    "IsExtensible": true,
    "Usage": "Output"
@@ -54,6 +54,7 @@
    "$id": "9",
    "Kind": "enum",
    "Name": "ApiVersions",
+   "CrossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.ApiVersions",
    "ValueType": {
     "$id": "10",
     "Kind": "string"
@@ -65,7 +66,6 @@
      "Value": "2022-06-01-preview"
     }
    ],
-   "Namespace": "TypeSpec.Versioning.Oldest",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -73,11 +73,11 @@
  "Models": [
   {
    "$id": "12",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ResourceOperationStatusResourceExportedResourceError",
-   "Namespace": "Azure.Core",
-   "Description": "Provides status details for long running operations.",
+   "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
    "Usage": "Output",
+   "Description": "Provides status details for long running operations.",
    "Properties": [
     {
      "$id": "13",
@@ -109,11 +109,11 @@
      "Description": "Error object that describes the error when status is \"Failed\".",
      "Type": {
       "$id": "17",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "Error",
-      "Namespace": "Azure.Core.Foundations",
-      "Description": "The error object.",
+      "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error",
       "Usage": "Output",
+      "Description": "The error object.",
       "Properties": [
        {
         "$id": "18",
@@ -173,11 +173,11 @@
         "Description": "An object containing more specific information than the current object about the error.",
         "Type": {
          "$id": "27",
-         "Kind": "Model",
+         "Kind": "model",
          "Name": "InnerError",
-         "Namespace": "Azure.Core.Foundations",
-         "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+         "CrossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
          "Usage": "Output",
+         "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "Properties": [
           {
            "$id": "28",
@@ -219,9 +219,9 @@
      "Description": "The result of the operation.",
      "Type": {
       "$id": "32",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ExportedResource",
-      "Namespace": "TypeSpec.Versioning.Oldest",
+      "CrossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.ExportedResource",
       "Usage": "Output",
       "Properties": [
        {
@@ -290,11 +290,11 @@
   },
   {
    "$id": "41",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedResource",
-   "Namespace": "Azure.Core.Foundations",
-   "Description": "Paged collection of Resource items",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "Output",
+   "Description": "Paged collection of Resource items",
    "Properties": [
     {
      "$id": "42",
@@ -306,9 +306,9 @@
       "Kind": "array",
       "ValueType": {
        "$id": "44",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "Resource",
-       "Namespace": "TypeSpec.Versioning.Oldest",
+       "CrossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.Resource",
        "Usage": "RoundTrip",
        "Properties": [
         {
@@ -379,8 +379,7 @@
    "Operations": [],
    "Protocol": {
     "$id": "54"
-   },
-   "Creatable": true
+   }
   },
   {
    "$id": "55",
@@ -390,7 +389,6 @@
    "Protocol": {
     "$id": "56"
    },
-   "Creatable": false,
    "Parent": "OldestClient"
   },
   {
@@ -875,7 +873,6 @@
    "Protocol": {
     "$id": "106"
    },
-   "Creatable": false,
    "Parent": "OldestClient"
   }
  ]

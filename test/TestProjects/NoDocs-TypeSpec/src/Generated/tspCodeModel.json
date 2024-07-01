@@ -21,7 +21,7 @@
      "Description": "accept"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -42,7 +42,7 @@
      "Description": "123"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -63,7 +63,7 @@
      "Description": "1.23"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -84,7 +84,7 @@
      "Description": "reject"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -105,7 +105,7 @@
      "Description": "456"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -126,7 +126,7 @@
      "Description": "4.56"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -135,6 +135,7 @@
    "$id": "20",
    "Kind": "enum",
    "Name": "CsProjectedEnum",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.ProjectedEnum",
    "ValueType": {
     "$id": "21",
     "Kind": "float32"
@@ -156,7 +157,6 @@
      "Value": 4.4
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "Description": "enum with projected name",
    "IsExtensible": false,
    "Usage": "Input"
@@ -165,6 +165,7 @@
    "$id": "25",
    "Kind": "enum",
    "Name": "CsProjectedEnumInModel",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.ProjectedEnumInModel",
    "ValueType": {
     "$id": "26",
     "Kind": "float32"
@@ -186,7 +187,6 @@
      "Value": 4.4
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "Description": "enum with projected name used in a model",
    "IsExtensible": false,
    "Usage": "Input"
@@ -195,6 +195,7 @@
    "$id": "30",
    "Kind": "enum",
    "Name": "StringFixedEnum",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.StringFixedEnum",
    "ValueType": {
     "$id": "31",
     "Kind": "string"
@@ -216,7 +217,6 @@
      "Value": "4"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "Description": "Simple enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -225,6 +225,7 @@
    "$id": "35",
    "Kind": "enum",
    "Name": "StringExtensibleEnum",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.StringExtensibleEnum",
    "ValueType": {
     "$id": "36",
     "Kind": "string"
@@ -246,7 +247,6 @@
      "Value": "4"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "Description": "Extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -255,6 +255,7 @@
    "$id": "40",
    "Kind": "enum",
    "Name": "IntExtensibleEnum",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.IntExtensibleEnum",
    "ValueType": {
     "$id": "41",
     "Kind": "int32"
@@ -276,7 +277,6 @@
      "Value": 4
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "Description": "Int based extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -285,6 +285,7 @@
    "$id": "45",
    "Kind": "enum",
    "Name": "FloatExtensibleEnum",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.FloatExtensibleEnum",
    "ValueType": {
     "$id": "46",
     "Kind": "float32"
@@ -306,7 +307,6 @@
      "Value": 4
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "Description": "Float based extensible enum",
    "IsExtensible": true,
    "Usage": "RoundTrip"
@@ -315,6 +315,7 @@
    "$id": "50",
    "Kind": "enum",
    "Name": "FloatFixedEnum",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.FloatFixedEnum",
    "ValueType": {
     "$id": "51",
     "Kind": "float32"
@@ -336,7 +337,6 @@
      "Value": 4.4
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "Description": "float fixed enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -345,6 +345,7 @@
    "$id": "55",
    "Kind": "enum",
    "Name": "IntFixedEnum",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.IntFixedEnum",
    "ValueType": {
     "$id": "56",
     "Kind": "int32"
@@ -366,7 +367,6 @@
      "Value": 4
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "Description": "int fixed enum",
    "IsExtensible": false,
    "Usage": "RoundTrip"
@@ -375,6 +375,7 @@
    "$id": "60",
    "Kind": "enum",
    "Name": "DaysOfWeekExtensibleEnum",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.DaysOfWeekExtensibleEnum",
    "ValueType": {
     "$id": "61",
     "Kind": "string"
@@ -416,7 +417,6 @@
      "Value": "Sunday"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "IsExtensible": true,
    "Usage": "None"
   },
@@ -424,6 +424,7 @@
    "$id": "69",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.Versions",
    "ValueType": {
     "$id": "70",
     "Kind": "string"
@@ -435,7 +436,6 @@
      "Value": "2022-05-15-preview"
     }
    ],
-   "Namespace": "NoDocsTypeSpec",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -443,11 +443,11 @@
  "Models": [
   {
    "$id": "72",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Thing",
-   "Namespace": "NoDocsTypeSpec",
-   "Description": "A model with a few properties of literal types",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.Thing",
    "Usage": "RoundTrip",
+   "Description": "A model with a few properties of literal types",
    "Properties": [
     {
      "$id": "73",
@@ -678,11 +678,11 @@
   },
   {
    "$id": "109",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Friend",
-   "Namespace": "NoDocsTypeSpec",
-   "Description": "this is not a friendly model but with a friendly name",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.NotFriend",
    "Usage": "RoundTrip",
+   "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
     {
      "$id": "110",
@@ -700,11 +700,11 @@
   },
   {
    "$id": "112",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ProjectedModel",
-   "Namespace": "NoDocsTypeSpec",
-   "Description": "this is a model with a projected name",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithProjectedName",
    "Usage": "RoundTrip",
+   "Description": "this is a model with a projected name",
    "Properties": [
     {
      "$id": "113",
@@ -722,26 +722,26 @@
   },
   {
    "$id": "115",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.returnsAnonymousModel.Response.anonymous",
    "Usage": "Output",
    "Properties": []
   },
   {
    "$id": "116",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Extension",
-   "Namespace": "NoDocsTypeSpec",
-   "Description": "extension",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.Extension",
    "Usage": "Input",
+   "Description": "extension",
    "BaseModel": {
     "$id": "117",
-    "Kind": "Model",
+    "Kind": "model",
     "Name": "Element",
-    "Namespace": "NoDocsTypeSpec",
-    "Description": "element",
+    "CrossLanguageDefinitionId": "NoDocsTypeSpec.Element",
     "Usage": "Input",
+    "Description": "element",
     "Properties": [
      {
       "$id": "118",
@@ -780,11 +780,11 @@
   },
   {
    "$id": "122",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Extendible",
-   "Namespace": "NoDocsTypeSpec",
-   "Description": "FHIR extendible element",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.Extendible",
    "Usage": "Input",
+   "Description": "FHIR extendible element",
    "Properties": [
     {
      "$id": "123",
@@ -796,18 +796,18 @@
       "Kind": "array",
       "ValueType": {
        "$id": "125",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "ThereLevelExtension",
-       "Namespace": "NoDocsTypeSpec",
-       "Description": "extension",
+       "CrossLanguageDefinitionId": "NoDocsTypeSpec.ThereLevelExtension",
        "Usage": "Input",
+       "Description": "extension",
        "BaseModel": {
         "$id": "126",
-        "Kind": "Model",
+        "Kind": "model",
         "Name": "ThereLevelElement",
-        "Namespace": "NoDocsTypeSpec",
-        "Description": "element",
+        "CrossLanguageDefinitionId": "NoDocsTypeSpec.ThereLevelElement",
         "Usage": "Input",
+        "Description": "element",
         "Properties": [
          {
           "$id": "127",
@@ -855,18 +855,18 @@
   },
   {
    "$id": "131",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ChildModel",
-   "Namespace": "NoDocsTypeSpec",
-   "Description": "ChildModel",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.ChildModel",
    "Usage": "Input",
+   "Description": "ChildModel",
    "BaseModel": {
     "$id": "132",
-    "Kind": "Model",
+    "Kind": "model",
     "Name": "BaseModel",
-    "Namespace": "NoDocsTypeSpec",
-    "Description": "parenetModel",
+    "CrossLanguageDefinitionId": "NoDocsTypeSpec.BaseModel",
     "Usage": "Input",
+    "Description": "parenetModel",
     "Properties": [
      {
       "$id": "133",
@@ -905,11 +905,11 @@
   },
   {
    "$id": "137",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ContainSelf",
-   "Namespace": "NoDocsTypeSpec",
-   "Description": "containself",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.ContainSelf",
    "Usage": "Input",
+   "Description": "containself",
    "Properties": [
     {
      "$id": "138",
@@ -926,9 +926,9 @@
   },
   {
    "$id": "139",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelWithProjectedEnum",
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithProjectedEnum",
    "Usage": "Input",
    "Properties": [
     {
@@ -946,9 +946,9 @@
   },
   {
    "$id": "141",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "AzureLocationModel",
-   "Namespace": "NoDocsTypeSpec",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.AzureLocationModel",
    "Usage": "Input",
    "Properties": [
     {
@@ -968,11 +968,11 @@
   },
   {
    "$id": "144",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RoundTripModel",
-   "Namespace": "NoDocsTypeSpec",
-   "Description": "this is a roundtrip model",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel",
    "Usage": "RoundTrip",
+   "Description": "this is a roundtrip model",
    "Properties": [
     {
      "$id": "145",
@@ -1269,11 +1269,11 @@
      "Description": "this is a model with required nullable properties",
      "Type": {
       "$id": "189",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ModelWithRequiredNullableProperties",
-      "Namespace": "NoDocsTypeSpec",
-      "Description": "A model with a few required nullable properties",
+      "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithRequiredNullableProperties",
       "Usage": "RoundTrip",
+      "Description": "A model with a few required nullable properties",
       "Properties": [
        {
         "$id": "190",
@@ -1349,11 +1349,11 @@
         },
         {
          "$id": "202",
-         "Kind": "Model",
+         "Kind": "model",
          "Name": "ModelForUnion",
-         "Namespace": "NoDocsTypeSpec",
-         "Description": "This is a model only used in union types, please do not use it anywhere else.",
+         "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelForUnion",
          "Usage": "RoundTrip",
+         "Description": "This is a model only used in union types, please do not use it anywhere else.",
          "Properties": [
           {
            "$id": "203",
@@ -3413,7 +3413,6 @@
    "Protocol": {
     "$id": "391"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "210"
@@ -3428,7 +3427,6 @@
    "Protocol": {
     "$id": "393"
    },
-   "Creatable": false,
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {
@@ -3561,7 +3559,6 @@
    "Protocol": {
     "$id": "406"
    },
-   "Creatable": false,
    "Parent": "Hello",
    "Parameters": [
     {
@@ -4192,7 +4189,6 @@
    "Protocol": {
     "$id": "466"
    },
-   "Creatable": false,
    "Parent": "Hello",
    "Parameters": [
     {
@@ -4311,7 +4307,6 @@
    "Protocol": {
     "$id": "477"
    },
-   "Creatable": false,
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {
@@ -4492,7 +4487,6 @@
    "Protocol": {
     "$id": "493"
    },
-   "Creatable": false,
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {
@@ -4589,7 +4583,6 @@
    "Protocol": {
     "$id": "502"
    },
-   "Creatable": false,
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {
@@ -4704,7 +4697,6 @@
    "Protocol": {
     "$id": "513"
    },
-   "Creatable": false,
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {

@@ -9,6 +9,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "RepeatabilityResult",
+   "CrossLanguageDefinitionId": "Azure.Core.RepeatabilityResult",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -27,7 +28,6 @@
      "Description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
     }
    ],
-   "Namespace": "Azure.Core",
    "Description": "Repeatability Result header options",
    "IsExtensible": false,
    "Usage": "Output"
@@ -36,6 +36,7 @@
    "$id": "6",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.Versions",
    "ValueType": {
     "$id": "7",
     "Kind": "string"
@@ -48,7 +49,6 @@
      "Description": "2022-12-01-preview"
     }
    ],
-   "Namespace": "_Specs_.Azure.Core.Traits",
    "Description": "Service versions",
    "IsExtensible": false,
    "Usage": "None"
@@ -57,11 +57,11 @@
  "Models": [
   {
    "$id": "9",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "User",
-   "Namespace": "_Specs_.Azure.Core.Traits",
-   "Description": "Sample Model",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User",
    "Usage": "Output",
+   "Description": "Sample Model",
    "Properties": [
     {
      "$id": "10",
@@ -91,11 +91,11 @@
   },
   {
    "$id": "14",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UserActionParam",
-   "Namespace": "_Specs_.Azure.Core.Traits",
-   "Description": "User action param",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionParam",
    "Usage": "Input",
+   "Description": "User action param",
    "Properties": [
     {
      "$id": "15",
@@ -113,11 +113,11 @@
   },
   {
    "$id": "17",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UserActionResponse",
-   "Namespace": "_Specs_.Azure.Core.Traits",
-   "Description": "User action response",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionResponse",
    "Usage": "Output",
+   "Description": "User action response",
    "Properties": [
     {
      "$id": "18",
@@ -639,7 +639,6 @@
    "Protocol": {
     "$id": "75"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "22"

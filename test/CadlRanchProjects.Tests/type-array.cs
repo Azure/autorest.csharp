@@ -161,5 +161,64 @@ namespace CadlRanchProjects.Tests
             var response = await new ArrayClient(host, null).GetNullableFloatValueClient().PutAsync(new List<float?> { 1.25f, null, 3.0f });
             Assert.AreEqual(204, response.Status);
         });
+
+        [Test]
+        public Task Type_Array_NullableInt32Value_get() => Test(async (host) =>
+        {
+            var response = await new ArrayClient(host, null).GetNullableInt32ValueClient().GetNullableInt32ValueAsync();
+            CollectionAssert.AreEqual(new Int32?[] { 1, null, 3 }, response.Value);
+        });
+
+        [Test]
+        public Task Type_Array_NullableInt32Value_put() => Test(async (host) =>
+        {
+            var response = await new ArrayClient(host, null).GetNullableInt32ValueClient().PutAsync(new List<Int32?> { 1, null, 3 });
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Array_NullableBooleanValue_get() => Test(async (host) =>
+        {
+            var response = await new ArrayClient(host, null).GetNullableBooleanValueClient().GetNullableBooleanValueAsync();
+            CollectionAssert.AreEqual(new Boolean?[] { true, null, false }, response.Value);
+        });
+
+        [Test]
+        public Task Type_Array_NullableBooleanValue_put() => Test(async (host) =>
+        {
+            var response = await new ArrayClient(host, null).GetNullableBooleanValueClient().PutAsync(new Boolean?[] { true, null, false });
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Array_NullableStringValue_get() => Test(async (host) =>
+        {
+            var response = await new ArrayClient(host, null).GetNullableStringValueClient().GetNullableStringValueAsync();
+            CollectionAssert.AreEqual(new String?[] { "hello", null, "world" }, response.Value);
+        });
+
+        [Test]
+        public Task Type_Array_NullableStringValue_put() => Test(async (host) =>
+        {
+            var response = await new ArrayClient(host, null).GetNullableStringValueClient().PutAsync(new String?[] { "hello", null, "world" });
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Array_NullableModelValue_get() => Test(async (host) =>
+        {
+            var response = await new ArrayClient(host, null).GetNullableModelValueClient().GetNullableModelValueAsync();
+            Assert.AreEqual(3, response.Value.Count);
+            Assert.AreEqual("hello", response.Value[0].Property);
+            Assert.IsNull(response.Value[1]);
+            Assert.AreEqual("world", response.Value[2].Property);
+        });
+
+        [Test]
+        public Task Type_Array_NullableModelValue_put() => Test(async (host) =>
+        {
+            var response = await new ArrayClient(host, null).GetNullableModelValueClient().PutAsync(new List<InnerModel> { new InnerModel("hello"), null, new InnerModel("world") });
+            Assert.AreEqual(204, response.Status);
+        });
     }
 }
