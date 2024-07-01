@@ -42,9 +42,9 @@ export function resolveServers(
             let defaultValue = undefined;
             const value = prop.default ? getDefaultValue(prop.default) : "";
             const inputType: InputType = isEndpoint
-                ? ({
+                ? {
                       Kind: "url"
-                  })
+                  }
                 : getInputType(context, prop, models, enums);
 
             if (value) {
