@@ -14,8 +14,7 @@ import {
     resolveOptions,
     resolveOutputFolder
 } from "./options.js";
-import { loadLibrary } from "./lib/load-module.js";
-import * as url from "url";
+import { $onEmit as $OnMGCEmit } from "@typespec/http-client-csharp";
 
 export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     const program: Program = context.program;
@@ -23,43 +22,15 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     /* set the loglevel. */
     Logger.initialize(program, options.logLevel ?? LoggerLevel.INFO);
 
-    /* load microsft csharp emitter. */
-    const basedir = url.fileURLToPath(new URL(".", import.meta.url));
-    Logger.getInstance().info(`basedir: ${basedir}.`);
-    const emitterNameOrPath = "@typespec/http-client-csharp";
-    const library = await loadLibrary(
-        basedir,
-        emitterNameOrPath,
-        context.program
-    );
-
-    if (library === undefined) {
-        Logger.getInstance().error(`Cannot load emitter ${emitterNameOrPath}`);
-        throw new Error(`Cannot load emitter ${emitterNameOrPath}`);
+    context.options.skipSDKGeneration = true;
+    if (
+        context.emitterOutputDir &&
+        path.basename(context.emitterOutputDir) === "src"
+    ) {
+        context.emitterOutputDir = path.dirname(context.emitterOutputDir);
     }
-
-    const { entrypoint } = library;
-    if (entrypoint === undefined) {
-        Logger.getInstance().error(
-            `Invalid emitter ${emitterNameOrPath}. No entrypoint.`
-        );
-        throw new Error(`Invalid emitter ${emitterNameOrPath}. No entrypoint.`);
-    }
-
-    const emitFunction = entrypoint.esmExports.$onEmit;
-    try {
-        context.options.skipSDKGeneration = true;
-        if (
-            context.emitterOutputDir &&
-            path.basename(context.emitterOutputDir) === "src"
-        ) {
-            context.emitterOutputDir = path.dirname(context.emitterOutputDir);
-        }
-        await emitFunction(context);
-    } catch (error: unknown) {
-        throw new Error("emitter error");
-    }
-
+    Logger.getInstance().info("Starting Microsoft Generator Csharp emitter.");
+    await $OnMGCEmit(context);
     const outputFolder = resolveOutputFolder(context);
     const isSrcFolder = path.basename(outputFolder) === "src";
     const generatedFolder = isSrcFolder
