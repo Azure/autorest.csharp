@@ -21,7 +21,7 @@ using Azure.ResourceManager;
     "{firstTestTypeSpecUrl}",
     "Endpoint Service",
     {
-        firstTestTypeSpecUrl: string = "https://example.com",
+        firstTestTypeSpecUrl: string,
     }
 )
 @useAuth(
