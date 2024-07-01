@@ -154,7 +154,6 @@
    "Protocol": {
     "$id": "17"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "4"
@@ -294,7 +293,6 @@
    "Protocol": {
     "$id": "31"
    },
-   "Creatable": false,
    "Parent": "ClientAndOperationGroupClient",
    "Parameters": [
     {
@@ -435,7 +433,6 @@
    "Protocol": {
     "$id": "45"
    },
-   "Creatable": false,
    "Parent": "ClientAndOperationGroupClient",
    "Parameters": [
     {

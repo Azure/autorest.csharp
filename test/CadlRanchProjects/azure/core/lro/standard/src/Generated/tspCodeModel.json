@@ -9,6 +9,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "OperationState",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -45,7 +46,6 @@
      "Description": "The operation has been canceled by the user."
     }
    ],
-   "Namespace": "Azure.Core.Foundations",
    "Description": "Enum describing allowed operation states.",
    "IsExtensible": true,
    "Usage": "Output"
@@ -54,6 +54,7 @@
    "$id": "9",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.Versions",
    "ValueType": {
     "$id": "10",
     "Kind": "string"
@@ -66,7 +67,6 @@
      "Description": "The 2022-12-01-preview version."
     }
    ],
-   "Namespace": "_Specs_.Azure.Core.Lro.Standard",
    "Description": "The API version.",
    "IsExtensible": false,
    "Usage": "None"
@@ -75,11 +75,11 @@
  "Models": [
   {
    "$id": "12",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "User",
-   "Namespace": "_Specs_.Azure.Core.Lro.Standard",
-   "Description": "Details about a user.",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.User",
    "Usage": "RoundTrip",
+   "Description": "Details about a user.",
    "Properties": [
     {
      "$id": "13",
@@ -109,11 +109,11 @@
   },
   {
    "$id": "17",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "OperationStatusError",
-   "Namespace": "Azure.Core.Foundations",
-   "Description": "Provides status details for long running operations.",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus",
    "Usage": "Output",
+   "Description": "Provides status details for long running operations.",
    "Properties": [
     {
      "$id": "18",
@@ -145,11 +145,11 @@
      "Description": "Error object that describes the error when status is \"Failed\".",
      "Type": {
       "$id": "22",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "Error",
-      "Namespace": "Azure.Core.Foundations",
-      "Description": "The error object.",
+      "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error",
       "Usage": "Output",
+      "Description": "The error object.",
       "Properties": [
        {
         "$id": "23",
@@ -194,9 +194,8 @@
         "Description": "An array of details about specific errors that led to this reported error.",
         "Type": {
          "$id": "30",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "ValueType": {
           "$ref": "22"
          }
         },
@@ -210,11 +209,11 @@
         "Description": "An object containing more specific information than the current object about the error.",
         "Type": {
          "$id": "32",
-         "Kind": "Model",
+         "Kind": "model",
          "Name": "InnerError",
-         "Namespace": "Azure.Core.Foundations",
-         "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+         "CrossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
          "Usage": "Output",
+         "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "Properties": [
           {
            "$id": "33",
@@ -259,11 +258,11 @@
   },
   {
    "$id": "36",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ResourceOperationStatusUserExportedUserError",
-   "Namespace": "Azure.Core",
-   "Description": "Provides status details for long running operations.",
+   "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
    "Usage": "Output",
+   "Description": "Provides status details for long running operations.",
    "Properties": [
     {
      "$id": "37",
@@ -306,11 +305,11 @@
      "Description": "The result of the operation.",
      "Type": {
       "$id": "42",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "ExportedUser",
-      "Namespace": "_Specs_.Azure.Core.Lro.Standard",
-      "Description": "The exported user data.",
+      "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.ExportedUser",
       "Usage": "Output",
+      "Description": "The exported user data.",
       "Properties": [
        {
         "$id": "43",
@@ -348,11 +347,11 @@
   },
   {
    "$id": "47",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "OperationStatusExportedUserError",
-   "Namespace": "Azure.Core.Foundations",
-   "Description": "Provides status details for long running operations.",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus",
    "Usage": "Output",
+   "Description": "Provides status details for long running operations.",
    "Properties": [
     {
      "$id": "48",
@@ -921,7 +920,6 @@
    "Protocol": {
     "$id": "108"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "55"

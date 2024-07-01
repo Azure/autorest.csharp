@@ -6,9 +6,9 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "DefaultDurationProperty",
-   "Namespace": "Encode.Duration.Property",
+   "CrossLanguageDefinitionId": "Encode.Duration.Property.DefaultDurationProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -32,9 +32,9 @@
   },
   {
    "$id": "6",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ISO8601DurationProperty",
-   "Namespace": "Encode.Duration.Property",
+   "CrossLanguageDefinitionId": "Encode.Duration.Property.ISO8601DurationProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -58,9 +58,9 @@
   },
   {
    "$id": "10",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Int32SecondsDurationProperty",
-   "Namespace": "Encode.Duration.Property",
+   "CrossLanguageDefinitionId": "Encode.Duration.Property.Int32SecondsDurationProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -84,9 +84,9 @@
   },
   {
    "$id": "14",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "FloatSecondsDurationProperty",
-   "Namespace": "Encode.Duration.Property",
+   "CrossLanguageDefinitionId": "Encode.Duration.Property.FloatSecondsDurationProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -110,9 +110,9 @@
   },
   {
    "$id": "18",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Float64SecondsDurationProperty",
-   "Namespace": "Encode.Duration.Property",
+   "CrossLanguageDefinitionId": "Encode.Duration.Property.Float64SecondsDurationProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -136,9 +136,9 @@
   },
   {
    "$id": "22",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "FloatSecondsDurationArrayProperty",
-   "Namespace": "Encode.Duration.Property",
+   "CrossLanguageDefinitionId": "Encode.Duration.Property.FloatSecondsDurationArrayProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -148,9 +148,8 @@
      "Description": "",
      "Type": {
       "$id": "24",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "25",
        "Kind": "duration",
        "Encode": "seconds",
@@ -175,7 +174,6 @@
    "Protocol": {
     "$id": "28"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "29",
@@ -618,9 +616,8 @@
        "NameInRequest": "input",
        "Type": {
         "$id": "76",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "77",
          "Kind": "duration",
          "Encode": "seconds",
@@ -691,7 +688,6 @@
    "Protocol": {
     "$id": "83"
    },
-   "Creatable": false,
    "Parent": "DurationClient",
    "Parameters": [
     {
@@ -1350,7 +1346,6 @@
    "Protocol": {
     "$id": "139"
    },
-   "Creatable": false,
    "Parent": "DurationClient",
    "Parameters": [
     {
@@ -1534,9 +1529,8 @@
        "NameInRequest": "duration",
        "Type": {
         "$id": "159",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "160",
          "Kind": "duration",
          "Encode": "ISO8601",
@@ -1841,7 +1835,6 @@
    "Protocol": {
     "$id": "190"
    },
-   "Creatable": false,
    "Parent": "DurationClient",
    "Parameters": [
     {

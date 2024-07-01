@@ -13,7 +13,6 @@
    "Protocol": {
     "$id": "3"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "4",
@@ -67,9 +66,8 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "11",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "12",
          "Kind": "string"
         }
@@ -146,9 +144,8 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "19",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "20",
          "Kind": "string"
         }
@@ -226,9 +223,8 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "27",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "28",
          "Kind": "string"
         }
@@ -306,9 +302,8 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "35",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "36",
          "Kind": "string"
         }
@@ -386,9 +381,8 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "43",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "44",
          "Kind": "string"
         }
@@ -454,7 +448,6 @@
    "Protocol": {
     "$id": "49"
    },
-   "Creatable": false,
    "Parent": "CollectionFormatClient",
    "Parameters": [
     {
@@ -483,9 +476,8 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "53",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "54",
          "Kind": "string"
         }
@@ -551,7 +543,6 @@
    "Protocol": {
     "$id": "59"
    },
-   "Creatable": false,
    "Parent": "CollectionFormatClient",
    "Parameters": [
     {

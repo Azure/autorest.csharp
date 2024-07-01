@@ -269,6 +269,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             },
                     requiredFloatProperty = new object(),
                     optionalFloatProperty = new object(),
+                    optionalResourceId = new object(),
                 },
                 intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new object[]
@@ -334,6 +335,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalResourceId").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
             Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -397,6 +399,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             },
                     requiredFloatProperty = new object(),
                     optionalFloatProperty = new object(),
+                    optionalResourceId = new object(),
                 },
                 intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new object[]
@@ -462,6 +465,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalResourceId").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
             Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -506,6 +510,7 @@ BinaryData.FromObjectAsJson("<unionList>")
                     OptionalLiteralBool = true,
                     OptionalNullableList = { 1234 },
                     OptionalFloatProperty = (double)default,
+                    OptionalResourceId = null,
                 },
                 BinaryData.FromObjectAsJson(new object()),
                 new Dictionary<string, BinaryData>
@@ -559,6 +564,7 @@ BinaryData.FromObjectAsJson("<unionList>")
                     OptionalLiteralBool = true,
                     OptionalNullableList = { 1234 },
                     OptionalFloatProperty = (double)default,
+                    OptionalResourceId = null,
                 },
                 BinaryData.FromObjectAsJson(new object()),
                 new Dictionary<string, BinaryData>
@@ -781,6 +787,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             },
                     requiredFloatProperty = new object(),
                     optionalFloatProperty = new object(),
+                    optionalResourceId = new object(),
                 },
                 intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new object[]
@@ -846,6 +853,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalResourceId").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
             Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -909,6 +917,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             },
                     requiredFloatProperty = new object(),
                     optionalFloatProperty = new object(),
+                    optionalResourceId = new object(),
                 },
                 intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new object[]
@@ -974,6 +983,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalResourceId").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
             Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -1082,6 +1092,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -1109,6 +1120,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -1255,6 +1267,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = client.CreateLiteral(content);
 
@@ -1274,6 +1287,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -1306,6 +1320,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = await client.CreateLiteralAsync(content);
 
@@ -1325,6 +1340,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -1342,6 +1358,7 @@ BinaryData.FromObjectAsJson("<unionList>")
                 OptionalLiteralBool = true,
                 OptionalNullableList = { 1234 },
                 OptionalFloatProperty = (double)default,
+                OptionalResourceId = null,
             };
             Response<Thing> response = client.CreateLiteral(body);
         }
@@ -1361,6 +1378,7 @@ BinaryData.FromObjectAsJson("<unionList>")
                 OptionalLiteralBool = true,
                 OptionalNullableList = { 1234 },
                 OptionalFloatProperty = (double)default,
+                OptionalResourceId = null,
             };
             Response<Thing> response = await client.CreateLiteralAsync(body);
         }
@@ -1452,6 +1470,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -1479,6 +1498,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]

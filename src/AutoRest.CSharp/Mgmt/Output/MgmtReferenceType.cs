@@ -39,26 +39,16 @@ namespace AutoRest.CSharp.Mgmt.Output
         };
 
         public static bool IsPropertyReferenceType(InputModelType schema)
-            => PropertyReferenceTypeModels.Contains($"{GetNamespace(schema)}.{schema.Name}");
+            => PropertyReferenceTypeModels.Contains(schema.CrossLanguageDefinitionId);
 
         public static bool IsTypeReferenceType(InputModelType schema)
-            => TypeReferenceTypeModels.Contains($"{GetNamespace(schema)}.{schema.Name}");
+            => TypeReferenceTypeModels.Contains(schema.CrossLanguageDefinitionId);
 
         public static bool IsReferenceType(ObjectType schema)
             => ReferenceTypeModels.Contains($"{schema.Declaration.Namespace}.{schema.Declaration.Name}");
 
         public static bool IsReferenceType(InputModelType schema)
-            => ReferenceTypeModels.Contains($"{GetNamespace(schema)}.{schema.Name}");
-
-        private static string GetNamespace(InputModelType schema)
-        {
-            if (!string.IsNullOrEmpty(schema.Namespace))
-            {
-                return schema.Namespace;
-            }
-
-            return $"{Configuration.Namespace}.Models";
-        }
+            => ReferenceTypeModels.Contains(schema.CrossLanguageDefinitionId);
 
         public MgmtReferenceType(InputModelType inputModel) : base(inputModel)
         {

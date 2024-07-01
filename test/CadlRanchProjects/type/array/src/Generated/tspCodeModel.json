@@ -6,11 +6,11 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "InnerModel",
-   "Namespace": "Type.Array",
-   "Description": "Array inner model",
+   "CrossLanguageDefinitionId": "Type.Array.InnerModel",
    "Usage": "RoundTrip",
+   "Description": "Array inner model",
    "Properties": [
     {
      "$id": "3",
@@ -31,9 +31,8 @@
      "Description": "",
      "Type": {
       "$id": "6",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "2"
       }
      },
@@ -52,7 +51,6 @@
    "Protocol": {
     "$id": "8"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "9",
@@ -134,9 +132,8 @@
        ],
        "BodyType": {
         "$id": "19",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "20",
          "Kind": "int32"
         }
@@ -172,9 +169,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "23",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "24",
          "Kind": "int32"
         }
@@ -268,7 +264,6 @@
    "Protocol": {
     "$id": "32"
    },
-   "Creatable": false,
    "Parent": "ArrayClient",
    "Parameters": [
     {
@@ -325,9 +320,8 @@
        ],
        "BodyType": {
         "$id": "39",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "40",
          "Kind": "int64"
         }
@@ -363,9 +357,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "43",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "44",
          "Kind": "int64"
         }
@@ -459,7 +452,6 @@
    "Protocol": {
     "$id": "52"
    },
-   "Creatable": false,
    "Parent": "ArrayClient",
    "Parameters": [
     {
@@ -516,9 +508,8 @@
        ],
        "BodyType": {
         "$id": "59",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "60",
          "Kind": "boolean"
         }
@@ -554,9 +545,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "63",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "64",
          "Kind": "boolean"
         }
@@ -650,7 +640,6 @@
    "Protocol": {
     "$id": "72"
    },
-   "Creatable": false,
    "Parent": "ArrayClient",
    "Parameters": [
     {
@@ -707,9 +696,8 @@
        ],
        "BodyType": {
         "$id": "79",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "80",
          "Kind": "string"
         }
@@ -745,9 +733,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "83",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "84",
          "Kind": "string"
         }
@@ -841,7 +828,6 @@
    "Protocol": {
     "$id": "92"
    },
-   "Creatable": false,
    "Parent": "ArrayClient",
    "Parameters": [
     {
@@ -898,9 +884,8 @@
        ],
        "BodyType": {
         "$id": "99",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "100",
          "Kind": "float32"
         }
@@ -936,9 +921,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "103",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "104",
          "Kind": "float32"
         }
@@ -1032,7 +1016,6 @@
    "Protocol": {
     "$id": "112"
    },
-   "Creatable": false,
    "Parent": "ArrayClient",
    "Parameters": [
     {
@@ -1089,9 +1072,8 @@
        ],
        "BodyType": {
         "$id": "119",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "120",
          "Kind": "utcDateTime",
          "Encode": "rfc3339",
@@ -1132,9 +1114,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "124",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "125",
          "Kind": "utcDateTime",
          "Encode": "rfc3339",
@@ -1233,7 +1214,6 @@
    "Protocol": {
     "$id": "134"
    },
-   "Creatable": false,
    "Parent": "ArrayClient",
    "Parameters": [
     {
@@ -1290,9 +1270,8 @@
        ],
        "BodyType": {
         "$id": "141",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "142",
          "Kind": "duration",
          "Encode": "ISO8601",
@@ -1333,9 +1312,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "146",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "147",
          "Kind": "duration",
          "Encode": "ISO8601",
@@ -1434,7 +1412,6 @@
    "Protocol": {
     "$id": "156"
    },
-   "Creatable": false,
    "Parent": "ArrayClient",
    "Parameters": [
     {
@@ -1491,9 +1468,8 @@
        ],
        "BodyType": {
         "$id": "163",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "164",
          "Kind": "any"
         }
@@ -1529,9 +1505,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "167",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "168",
          "Kind": "any"
         }
@@ -1625,7 +1600,6 @@
    "Protocol": {
     "$id": "176"
    },
-   "Creatable": false,
    "Parent": "ArrayClient",
    "Parameters": [
     {
@@ -1682,9 +1656,8 @@
        ],
        "BodyType": {
         "$id": "183",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$ref": "2"
         }
        },
@@ -1719,9 +1692,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "186",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$ref": "2"
         }
        },
@@ -1814,7 +1786,6 @@
    "Protocol": {
     "$id": "194"
    },
-   "Creatable": false,
    "Parent": "ArrayClient",
    "Parameters": [
     {
@@ -1871,9 +1842,8 @@
        ],
        "BodyType": {
         "$id": "201",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "202",
          "Kind": "nullable",
          "Type": {
@@ -1913,9 +1883,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "206",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "207",
          "Kind": "nullable",
          "Type": {
@@ -2013,7 +1982,6 @@
    "Protocol": {
     "$id": "216"
    },
-   "Creatable": false,
    "Parent": "ArrayClient",
    "Parameters": [
     {
@@ -2070,9 +2038,8 @@
        ],
        "BodyType": {
         "$id": "223",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "224",
          "Kind": "nullable",
          "Type": {
@@ -2112,9 +2079,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "228",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "229",
          "Kind": "nullable",
          "Type": {
@@ -2212,7 +2178,6 @@
    "Protocol": {
     "$id": "238"
    },
-   "Creatable": false,
    "Parent": "ArrayClient",
    "Parameters": [
     {
@@ -2269,9 +2234,8 @@
        ],
        "BodyType": {
         "$id": "245",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "246",
          "Kind": "nullable",
          "Type": {
@@ -2311,9 +2275,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "250",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "251",
          "Kind": "nullable",
          "Type": {
@@ -2411,7 +2374,6 @@
    "Protocol": {
     "$id": "260"
    },
-   "Creatable": false,
    "Parent": "ArrayClient",
    "Parameters": [
     {
@@ -2468,9 +2430,8 @@
        ],
        "BodyType": {
         "$id": "267",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "268",
          "Kind": "nullable",
          "Type": {
@@ -2510,9 +2471,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "272",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "273",
          "Kind": "nullable",
          "Type": {
@@ -2610,7 +2570,6 @@
    "Protocol": {
     "$id": "282"
    },
-   "Creatable": false,
    "Parent": "ArrayClient",
    "Parameters": [
     {
@@ -2667,9 +2626,8 @@
        ],
        "BodyType": {
         "$id": "289",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "290",
          "Kind": "nullable",
          "Type": {
@@ -2708,9 +2666,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "293",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "294",
          "Kind": "nullable",
          "Type": {
@@ -2807,7 +2764,6 @@
    "Protocol": {
     "$id": "302"
    },
-   "Creatable": false,
    "Parent": "ArrayClient",
    "Parameters": [
     {

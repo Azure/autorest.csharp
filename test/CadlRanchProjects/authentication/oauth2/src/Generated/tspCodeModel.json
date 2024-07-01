@@ -6,9 +6,9 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "InvalidAuth",
-   "Namespace": "Authentication.OAuth2",
+   "CrossLanguageDefinitionId": "Authentication.OAuth2.InvalidAuth",
    "Usage": "Output",
    "Properties": [
     {
@@ -189,7 +189,6 @@
    "Protocol": {
     "$id": "21"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "7"

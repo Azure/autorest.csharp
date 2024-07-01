@@ -2,8 +2,7 @@ import { TestHost } from "@typespec/compiler/testing";
 import assert, { deepStrictEqual } from "assert";
 import { beforeEach, describe, it } from "vitest";
 import { createModel } from "../../src/lib/client-model-builder.js";
-import { InputTypeKind } from "../../src/type/input-type-kind.js";
-import { InputEnumType, InputListType } from "../../src/type/input-type.js";
+import { InputEnumType, InputArrayType } from "../../src/type/input-type.js";
 import {
     createEmitterContext,
     createEmitterTestHost,
@@ -31,17 +30,16 @@ describe("Test GetInputType for array", () => {
         const root = createModel(sdkContext);
         deepStrictEqual(
             root.Clients[0].Operations[0].Parameters[0].Type.Kind,
-            InputTypeKind.Array
+            "array"
         );
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Array,
-                Name: InputTypeKind.Array,
-                ElementType: {
+                Kind: "array",
+                ValueType: {
                     Kind: "string",
                     Encode: undefined
                 }
-            } as InputListType,
+            } as InputArrayType,
             root.Clients[0].Operations[0].Parameters[0].Type
         );
     });
@@ -58,17 +56,16 @@ describe("Test GetInputType for array", () => {
         const root = createModel(sdkContext);
         deepStrictEqual(
             root.Clients[0].Operations[0].Responses[0].BodyType?.Kind,
-            InputTypeKind.Array
+            "array"
         );
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Array,
-                Name: InputTypeKind.Array,
-                ElementType: {
+                Kind: "array",
+                ValueType: {
                     Kind: "string",
                     Encode: undefined
                 }
-            } as InputListType,
+            } as InputArrayType,
             root.Clients[0].Operations[0].Responses[0].BodyType
         );
     });
@@ -109,7 +106,7 @@ describe("Test GetInputType for enum", () => {
             {
                 Kind: "enum",
                 Name: "SimpleEnum",
-                Namespace: "Azure.Csharp.Testing",
+                CrossLanguageDefinitionId: "Azure.Csharp.Testing.SimpleEnum",
                 Accessibility: undefined,
                 Deprecated: undefined,
                 Description: "fixed string enum",
@@ -176,7 +173,7 @@ describe("Test GetInputType for enum", () => {
             {
                 Kind: "enum",
                 Name: "FixedIntEnum",
-                Namespace: "Azure.Csharp.Testing",
+                CrossLanguageDefinitionId: "Azure.Csharp.Testing.FixedIntEnum",
                 Accessibility: undefined,
                 Deprecated: undefined,
                 Description: "Fixed int enum",
@@ -236,7 +233,7 @@ describe("Test GetInputType for enum", () => {
             {
                 Kind: "enum",
                 Name: "FixedEnum",
-                Namespace: "Azure.Csharp.Testing",
+                CrossLanguageDefinitionId: "Azure.Csharp.Testing.FixedEnum",
                 Accessibility: undefined,
                 Deprecated: undefined,
                 Description: "Fixed enum",

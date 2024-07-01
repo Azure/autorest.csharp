@@ -8,10 +8,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace ModelsTypeSpec.Models
+namespace _Azure.ResourceManager.Models.Resources.Models
 {
-    /// <summary> Single base model without any child model. </summary>
-    public abstract partial class SingleBase
+    /// <summary> Nested Proxy Resource Properties. </summary>
+    public partial class NestedProxyResourceProperties
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -43,34 +43,27 @@ namespace ModelsTypeSpec.Models
         /// </list>
         /// </para>
         /// </summary>
-        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="SingleBase"/>. </summary>
-        /// <param name="size"></param>
-        protected SingleBase(int size)
+        /// <summary> Initializes a new instance of <see cref="NestedProxyResourceProperties"/>. </summary>
+        public NestedProxyResourceProperties()
         {
-            Size = size;
         }
 
-        /// <summary> Initializes a new instance of <see cref="SingleBase"/>. </summary>
-        /// <param name="kind"> Discriminator property for SingleBase. </param>
-        /// <param name="size"></param>
+        /// <summary> Initializes a new instance of <see cref="NestedProxyResourceProperties"/>. </summary>
+        /// <param name="provisioningState"> Provisioning State of the nested child Resource. </param>
+        /// <param name="description"> Nested resource description. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SingleBase(string kind, int size, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal NestedProxyResourceProperties(ProvisioningState? provisioningState, string description, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Kind = kind;
-            Size = size;
+            ProvisioningState = provisioningState;
+            Description = description;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="SingleBase"/> for deserialization. </summary>
-        internal SingleBase()
-        {
-        }
-
-        /// <summary> Discriminator property for SingleBase. </summary>
-        internal string Kind { get; set; }
-        /// <summary> Gets the size. </summary>
-        public int Size { get; }
+        /// <summary> Provisioning State of the nested child Resource. </summary>
+        public ProvisioningState? ProvisioningState { get; }
+        /// <summary> Nested resource description. </summary>
+        public string Description { get; set; }
     }
 }

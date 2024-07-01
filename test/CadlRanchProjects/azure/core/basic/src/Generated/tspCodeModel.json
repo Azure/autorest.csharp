@@ -9,6 +9,7 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "ListItemInputExtensibleEnum",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.ListItemInputExtensibleEnum",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -27,7 +28,6 @@
      "Description": "The second enum value."
     }
    ],
-   "Namespace": "_Specs_.Azure.Core.Basic",
    "Description": "An extensible enum input parameter.",
    "IsExtensible": true,
    "Usage": "Input"
@@ -36,6 +36,7 @@
    "$id": "6",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.Versions",
    "ValueType": {
     "$id": "7",
     "Kind": "string"
@@ -48,7 +49,6 @@
      "Description": "The version 2022-12-01-preview."
     }
    ],
-   "Namespace": "_Specs_.Azure.Core.Basic",
    "Description": "The version of the API.",
    "IsExtensible": false,
    "Usage": "None"
@@ -57,11 +57,11 @@
  "Models": [
   {
    "$id": "9",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "User",
-   "Namespace": "_Specs_.Azure.Core.Basic",
-   "Description": "Details about a user.",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.User",
    "Usage": "RoundTrip",
+   "Description": "Details about a user.",
    "Properties": [
     {
      "$id": "10",
@@ -94,15 +94,14 @@
      "Description": "The user's order list",
      "Type": {
       "$id": "15",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "16",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "UserOrder",
-       "Namespace": "_Specs_.Azure.Core.Basic",
-       "Description": "UserOrder for testing list with expand.",
+       "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.UserOrder",
        "Usage": "RoundTrip",
+       "Description": "UserOrder for testing list with expand.",
        "Properties": [
         {
          "$id": "17",
@@ -166,11 +165,11 @@
   },
   {
    "$id": "25",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedUser",
-   "Namespace": "Azure.Core.Foundations",
-   "Description": "Paged collection of User items",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "Output",
+   "Description": "Paged collection of User items",
    "Properties": [
     {
      "$id": "26",
@@ -179,9 +178,8 @@
      "Description": "The User items on this page",
      "Type": {
       "$id": "27",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "9"
       }
      },
@@ -204,11 +202,11 @@
   },
   {
    "$id": "30",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ListItemInputBody",
-   "Namespace": "_Specs_.Azure.Core.Basic",
-   "Description": "The body of the input.",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.ListItemInputBody",
    "Usage": "Input",
+   "Description": "The body of the input.",
    "Properties": [
     {
      "$id": "31",
@@ -226,9 +224,9 @@
   },
   {
    "$id": "33",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UserListResults",
-   "Namespace": "_Specs_.Azure.Core.Basic",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.CustomPageModel",
    "Usage": "Output",
    "Properties": [
     {
@@ -238,9 +236,8 @@
      "Description": "List of items.",
      "Type": {
       "$id": "35",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$ref": "9"
       }
      },
@@ -263,11 +260,11 @@
   },
   {
    "$id": "38",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedFirstItem",
-   "Namespace": "Azure.Core",
-   "Description": "Paged collection of FirstItem items",
+   "CrossLanguageDefinitionId": "Azure.Core.Page",
    "Usage": "Output",
+   "Description": "Paged collection of FirstItem items",
    "Properties": [
     {
      "$id": "39",
@@ -276,15 +273,14 @@
      "Description": "The FirstItem items on this page",
      "Type": {
       "$id": "40",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "41",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "FirstItem",
-       "Namespace": "_Specs_.Azure.Core.Basic",
-       "Description": "First item.",
+       "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.FirstItem",
        "Usage": "Output",
+       "Description": "First item.",
        "Properties": [
         {
          "$id": "42",
@@ -323,11 +319,11 @@
   },
   {
    "$id": "46",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedSecondItem",
-   "Namespace": "Azure.Core",
-   "Description": "Paged collection of SecondItem items",
+   "CrossLanguageDefinitionId": "Azure.Core.Page",
    "Usage": "Output",
+   "Description": "Paged collection of SecondItem items",
    "Properties": [
     {
      "$id": "47",
@@ -336,15 +332,14 @@
      "Description": "The SecondItem items on this page",
      "Type": {
       "$id": "48",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "49",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "SecondItem",
-       "Namespace": "_Specs_.Azure.Core.Basic",
-       "Description": "Second item.",
+       "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.SecondItem",
        "Usage": "Output",
+       "Description": "Second item.",
        "Properties": [
         {
          "$id": "50",
@@ -958,9 +953,8 @@
        "Description": "Expressions that specify the order of returned results.",
        "Type": {
         "$id": "109",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "110",
          "Kind": "string"
         }
@@ -1001,9 +995,8 @@
        "Description": "Select the specified fields to be included in the response.",
        "Type": {
         "$id": "114",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "115",
          "Kind": "string"
         }
@@ -1025,9 +1018,8 @@
        "Description": "Expand the indicated resources into the response.",
        "Type": {
         "$id": "117",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "118",
          "Kind": "string"
         }
@@ -1656,7 +1648,6 @@
    "Protocol": {
     "$id": "173"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "56"
@@ -1850,7 +1841,6 @@
    "Protocol": {
     "$id": "191"
    },
-   "Creatable": false,
    "Parent": "BasicClient",
    "Parameters": [
     {

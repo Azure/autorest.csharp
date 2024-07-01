@@ -23,7 +23,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Encode_Duration_Header_Float64Seconds() => Test(async (host) =>
         {
-            var input = TimeSpan.FromSeconds(35.621);
+            var input = TimeSpan.FromSeconds(35.625);
             var response = await new DurationClient(host, null).GetHeaderClient().Float64SecondsAsync(input);
             Assert.AreEqual(204, response.Status);
         });
@@ -31,7 +31,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Encode_Duration_Header_FloatSeconds() => Test(async (host) =>
         {
-            var input = TimeSpan.FromSeconds(35.621);
+            var input = TimeSpan.FromSeconds(35.625);
             var response = await new DurationClient(host, null).GetHeaderClient().FloatSecondsAsync(input);
             Assert.AreEqual(204, response.Status);
         });
@@ -126,17 +126,17 @@ namespace CadlRanchProjects.Tests
         {
             var data = new
             {
-                value = 35.621,
+                value = 35.625,
             };
             Response response = await new DurationClient(host, null).GetPropertyClient().FloatSecondsAsync(RequestContent.Create(data));
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Assert.AreEqual("35.621", result.GetProperty("value").ToString());
+            Assert.AreEqual("35.625", result.GetProperty("value").ToString());
         });
 
         [Test]
         public Task Encode_Duration_Property_FloatSeconds_Convenience() => Test(async (host) =>
         {
-            var body = new FloatSecondsDurationProperty(TimeSpan.FromSeconds(35.621));
+            var body = new FloatSecondsDurationProperty(TimeSpan.FromSeconds(35.625));
             Response<FloatSecondsDurationProperty> response = await new DurationClient(host, null).GetPropertyClient().FloatSecondsAsync(body);
             Assert.AreEqual(body.Value, response.Value.Value);
         });
@@ -146,17 +146,17 @@ namespace CadlRanchProjects.Tests
         {
             var data = new
             {
-                value = 35.621,
+                value = 35.625,
             };
             Response response = await new DurationClient(host, null).GetPropertyClient().FloatSecondsAsync(RequestContent.Create(data));
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Assert.AreEqual("35.621", result.GetProperty("value").ToString());
+            Assert.AreEqual("35.625", result.GetProperty("value").ToString());
         });
 
         [Test]
         public Task Encode_Duration_Property_Float64Seconds_Convenience() => Test(async (host) =>
         {
-            var body = new Float64SecondsDurationProperty(TimeSpan.FromSeconds(35.621));
+            var body = new Float64SecondsDurationProperty(TimeSpan.FromSeconds(35.625));
             Response<Float64SecondsDurationProperty> response = await new DurationClient(host, null).GetPropertyClient().Float64SecondsAsync(body);
             Assert.AreEqual(body.Value, response.Value.Value);
         });
@@ -166,19 +166,19 @@ namespace CadlRanchProjects.Tests
         {
             var data = new
             {
-                value = new[] { 35.621, 46.781 }
+                value = new[] { 35.625, 46.75 }
             };
             Response response = await new DurationClient(host, null).GetPropertyClient().FloatSecondsArrayAsync(RequestContent.Create(data));
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Assert.AreEqual("35.621", result.GetProperty("value")[0].ToString());
-            Assert.AreEqual("46.781", result.GetProperty("value")[1].ToString());
+            Assert.AreEqual("35.625", result.GetProperty("value")[0].ToString());
+            Assert.AreEqual("46.75", result.GetProperty("value")[1].ToString());
         });
 
         [Test]
         public Task Encode_Duration_Property_FloatSecondsArray_Convenience() => Test(async (host) =>
         {
-            var data1 = TimeSpan.FromSeconds(35.621);
-            var data2 = TimeSpan.FromSeconds(46.781);
+            var data1 = TimeSpan.FromSeconds(35.625);
+            var data2 = TimeSpan.FromSeconds(46.75);
             var body = new FloatSecondsDurationArrayProperty(new[] { data1, data2});
             Response<FloatSecondsDurationArrayProperty> response = await new DurationClient(host, null).GetPropertyClient().FloatSecondsArrayAsync(body);
             Assert.AreEqual(body.Value, response.Value.Value);
@@ -211,7 +211,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Encode_Duration_Query_FloatSeconds() => Test(async (host) =>
         {
-            var input = TimeSpan.FromSeconds(35.621);
+            var input = TimeSpan.FromSeconds(35.625);
             var response = await new DurationClient(host, null).GetQueryClient().FloatSecondsAsync(input);
             Assert.AreEqual(204, response.Status);
         });
@@ -219,7 +219,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Encode_Duration_Query_Float64Seconds() => Test(async (host) =>
         {
-            var input = TimeSpan.FromSeconds(35.621);
+            var input = TimeSpan.FromSeconds(35.625);
             var response = await new DurationClient(host, null).GetQueryClient().Float64SecondsAsync(input);
             Assert.AreEqual(204, response.Status);
         });

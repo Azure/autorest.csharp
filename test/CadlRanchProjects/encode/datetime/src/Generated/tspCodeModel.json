@@ -6,9 +6,9 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "DefaultDatetimeProperty",
-   "Namespace": "Encode.Datetime",
+   "CrossLanguageDefinitionId": "Encode.Datetime.DefaultDatetimeProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -32,9 +32,9 @@
   },
   {
    "$id": "6",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Rfc3339DatetimeProperty",
-   "Namespace": "Encode.Datetime",
+   "CrossLanguageDefinitionId": "Encode.Datetime.Rfc3339DatetimeProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -58,9 +58,9 @@
   },
   {
    "$id": "10",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Rfc7231DatetimeProperty",
-   "Namespace": "Encode.Datetime",
+   "CrossLanguageDefinitionId": "Encode.Datetime.Rfc7231DatetimeProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -84,9 +84,9 @@
   },
   {
    "$id": "14",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnixTimestampDatetimeProperty",
-   "Namespace": "Encode.Datetime",
+   "CrossLanguageDefinitionId": "Encode.Datetime.UnixTimestampDatetimeProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -110,9 +110,9 @@
   },
   {
    "$id": "18",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnixTimestampArrayDatetimeProperty",
-   "Namespace": "Encode.Datetime",
+   "CrossLanguageDefinitionId": "Encode.Datetime.UnixTimestampArrayDatetimeProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -122,9 +122,8 @@
      "Description": "",
      "Type": {
       "$id": "20",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "ValueType": {
        "$id": "21",
        "Kind": "utcDateTime",
        "Encode": "unixTimestamp",
@@ -149,7 +148,6 @@
    "Protocol": {
     "$id": "24"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "25",
@@ -514,9 +512,8 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "64",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "65",
          "Kind": "utcDateTime",
          "Encode": "unixTimestamp",
@@ -587,7 +584,6 @@
    "Protocol": {
     "$id": "71"
    },
-   "Creatable": false,
    "Parent": "DatetimeClient",
    "Parameters": [
     {
@@ -1139,7 +1135,6 @@
    "Protocol": {
     "$id": "118"
    },
-   "Creatable": false,
    "Parent": "DatetimeClient",
    "Parameters": [
     {
@@ -1479,9 +1474,8 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "154",
-        "Kind": "Array",
-        "Name": "Array",
-        "ElementType": {
+        "Kind": "array",
+        "ValueType": {
          "$id": "155",
          "Kind": "utcDateTime",
          "Encode": "unixTimestamp",
@@ -1552,7 +1546,6 @@
    "Protocol": {
     "$id": "161"
    },
-   "Creatable": false,
    "Parent": "DatetimeClient",
    "Parameters": [
     {
@@ -1853,7 +1846,6 @@
    "Protocol": {
     "$id": "195"
    },
-   "Creatable": false,
    "Parent": "DatetimeClient",
    "Parameters": [
     {
