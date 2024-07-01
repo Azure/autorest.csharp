@@ -35,7 +35,6 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
-        /// <remarks> Get all. </remarks>
         public virtual async Task<ClientResult<RequiredAndOptionalProperty>> GetAllAsync()
         {
             ClientResult result = await GetAllAsync(null).ConfigureAwait(false);
@@ -43,7 +42,6 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
-        /// <remarks> Get all. </remarks>
         public virtual ClientResult<RequiredAndOptionalProperty> GetAll()
         {
             ClientResult result = GetAll(null);
@@ -99,7 +97,6 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Get models that will return only the required properties. </summary>
-        /// <remarks> Get required only. </remarks>
         public virtual async Task<ClientResult<RequiredAndOptionalProperty>> GetRequiredOnlyAsync()
         {
             ClientResult result = await GetRequiredOnlyAsync(null).ConfigureAwait(false);
@@ -107,7 +104,6 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Get models that will return only the required properties. </summary>
-        /// <remarks> Get required only. </remarks>
         public virtual ClientResult<RequiredAndOptionalProperty> GetRequiredOnly()
         {
             ClientResult result = GetRequiredOnly(null);
@@ -165,7 +161,6 @@ namespace Scm._Type.Property.Optionality
         /// <summary> Put a body with all properties present. </summary>
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put all. </remarks>
         public virtual async Task<ClientResult> PutAllAsync(RequiredAndOptionalProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -178,7 +173,6 @@ namespace Scm._Type.Property.Optionality
         /// <summary> Put a body with all properties present. </summary>
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put all. </remarks>
         public virtual ClientResult PutAll(RequiredAndOptionalProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -247,7 +241,6 @@ namespace Scm._Type.Property.Optionality
         /// <summary> Put a body with only required properties. </summary>
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put required only. </remarks>
         public virtual async Task<ClientResult> PutRequiredOnlyAsync(RequiredAndOptionalProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -260,7 +253,6 @@ namespace Scm._Type.Property.Optionality
         /// <summary> Put a body with only required properties. </summary>
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put required only. </remarks>
         public virtual ClientResult PutRequiredOnly(RequiredAndOptionalProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));

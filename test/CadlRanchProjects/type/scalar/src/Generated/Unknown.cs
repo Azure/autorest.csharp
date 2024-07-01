@@ -45,7 +45,6 @@ namespace _Type.Scalar
 
         /// <summary> get unknown value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/Unknown.xml" path="doc/members/member[@name='GetUnknownAsync(CancellationToken)']/*" />
         public virtual async Task<Response<BinaryData>> GetUnknownAsync(CancellationToken cancellationToken = default)
         {
@@ -56,7 +55,6 @@ namespace _Type.Scalar
 
         /// <summary> get unknown value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/Unknown.xml" path="doc/members/member[@name='GetUnknown(CancellationToken)']/*" />
         public virtual Response<BinaryData> GetUnknown(CancellationToken cancellationToken = default)
         {
@@ -139,7 +137,6 @@ namespace _Type.Scalar
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/Unknown.xml" path="doc/members/member[@name='PutAsync(BinaryData,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(BinaryData body, CancellationToken cancellationToken = default)
         {
@@ -155,7 +152,6 @@ namespace _Type.Scalar
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/Unknown.xml" path="doc/members/member[@name='Put(BinaryData,CancellationToken)']/*" />
         public virtual Response Put(BinaryData body, CancellationToken cancellationToken = default)
         {

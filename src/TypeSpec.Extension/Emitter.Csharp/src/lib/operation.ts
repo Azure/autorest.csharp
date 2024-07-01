@@ -62,9 +62,8 @@ export function fromSdkServiceMethod(
                 method.operation,
                 sdkContext.experimental_sdkPackage.rootNamespace
             ),
-        Summary: method.description,
         Deprecated: getDeprecated(sdkContext.program, method.__raw!),
-        Description: method.details,
+        Description: method.description,
         Accessibility: method.access,
         Parameters: getMethodParameters(
             method,

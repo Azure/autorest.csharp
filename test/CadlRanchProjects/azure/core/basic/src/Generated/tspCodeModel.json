@@ -387,8 +387,7 @@
      "$id": "55",
      "Name": "createOrUpdate",
      "ResourceName": "User",
-     "Summary": "Adds a user or updates a user's fields.",
-     "Description": "Creates or updates a User",
+     "Description": "Adds a user or updates a user's fields.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -567,8 +566,7 @@
      "$id": "75",
      "Name": "createOrReplace",
      "ResourceName": "User",
-     "Summary": "Adds a user or replaces a user's fields.",
-     "Description": "Creates or replaces a User",
+     "Description": "Adds a user or replaces a user's fields.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -723,8 +721,7 @@
      "$id": "91",
      "Name": "get",
      "ResourceName": "User",
-     "Summary": "Gets a user.",
-     "Description": "Gets a User",
+     "Description": "Gets a user.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -823,8 +820,7 @@
      "$id": "102",
      "Name": "list",
      "ResourceName": "User",
-     "Summary": "Lists all users.",
-     "Description": "Lists all Users",
+     "Description": "Lists all users.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1042,7 +1038,7 @@
      "$id": "129",
      "Name": "listWithPage",
      "ResourceName": "Basic",
-     "Summary": "List with Azure.Core.Page<>.",
+     "Description": "List with Azure.Core.Page<>.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1129,7 +1125,7 @@
      "$id": "139",
      "Name": "listWithParameters",
      "ResourceName": "Basic",
-     "Summary": "List with extensible enum parameter Azure.Core.Page<>.",
+     "Description": "List with extensible enum parameter Azure.Core.Page<>.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1273,7 +1269,7 @@
      "$id": "154",
      "Name": "listWithCustomPageModel",
      "ResourceName": "Basic",
-     "Summary": "List with custom page model.",
+     "Description": "List with custom page model.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1360,8 +1356,7 @@
      "$id": "164",
      "Name": "delete",
      "ResourceName": "User",
-     "Summary": "Deletes a user.",
-     "Description": "Deletes a User",
+     "Description": "Deletes a user.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1454,8 +1449,7 @@
      "$id": "175",
      "Name": "export",
      "ResourceName": "Basic",
-     "Summary": "Exports a user.",
-     "Description": "Exports a User",
+     "Description": "Exports a user.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1585,7 +1579,7 @@
      "$id": "190",
      "Name": "listFirstItem",
      "ResourceName": "TwoModelsAsPageItem",
-     "Summary": "Two operations with two different page item types should be successfully generated. Should generate model for FirstItem.",
+     "Description": "Two operations with two different page item types should be successfully generated. Should generate model for FirstItem.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1696,7 +1690,7 @@
      "$id": "204",
      "Name": "listSecondItem",
      "ResourceName": "TwoModelsAsPageItem",
-     "Summary": "Two operations with two different page item types should be successfully generated. Should generate model for SecondItem.",
+     "Description": "Two operations with two different page item types should be successfully generated. Should generate model for SecondItem.",
      "Accessibility": "public",
      "Parameters": [
       {

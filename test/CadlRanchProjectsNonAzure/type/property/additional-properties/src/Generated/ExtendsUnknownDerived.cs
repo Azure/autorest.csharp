@@ -35,7 +35,6 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary> Get call. </summary>
-        /// <remarks> Get. </remarks>
         public virtual async Task<ClientResult<ExtendsUnknownAdditionalPropertiesDerived>> GetExtendsUnknownDerivedAsync()
         {
             ClientResult result = await GetExtendsUnknownDerivedAsync(null).ConfigureAwait(false);
@@ -43,7 +42,6 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary> Get call. </summary>
-        /// <remarks> Get. </remarks>
         public virtual ClientResult<ExtendsUnknownAdditionalPropertiesDerived> GetExtendsUnknownDerived()
         {
             ClientResult result = GetExtendsUnknownDerived(null);
@@ -101,7 +99,6 @@ namespace Scm._Type.Property.AdditionalProperties
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(ExtendsUnknownAdditionalPropertiesDerived body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -114,7 +111,6 @@ namespace Scm._Type.Property.AdditionalProperties
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(ExtendsUnknownAdditionalPropertiesDerived body)
         {
             Argument.AssertNotNull(body, nameof(body));

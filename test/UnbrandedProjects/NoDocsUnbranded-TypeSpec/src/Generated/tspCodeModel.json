@@ -377,7 +377,7 @@
      "$id": "58",
      "Name": "sayHi",
      "ResourceName": "NoDocsUnbrandedTypeSpec",
-     "Summary": "Return hi",
+     "Description": "Return hi",
      "Accessibility": "public",
      "Parameters": [
       {

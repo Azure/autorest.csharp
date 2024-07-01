@@ -91,7 +91,6 @@ namespace FirstTestTypeSpec
         /// <summary> top level method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Top action. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
@@ -103,7 +102,6 @@ namespace FirstTestTypeSpec
         /// <summary> top level method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Top action. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,CancellationToken)']/*" />
         public virtual Response<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
@@ -316,7 +314,6 @@ namespace FirstTestTypeSpec
         /// <param name="thing"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <remarks> Anonymous body. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(Thing,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
         {
@@ -332,7 +329,6 @@ namespace FirstTestTypeSpec
         /// <param name="thing"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <remarks> Anonymous body. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(Thing,CancellationToken)']/*" />
         public virtual Response<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
         {
@@ -426,7 +422,6 @@ namespace FirstTestTypeSpec
         /// <param name="friend"> The <see cref="Friend"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
-        /// <remarks> Friendly model. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(Friend,CancellationToken)']/*" />
         public virtual async Task<Response<Friend>> FriendlyModelAsync(Friend friend, CancellationToken cancellationToken = default)
         {
@@ -442,7 +437,6 @@ namespace FirstTestTypeSpec
         /// <param name="friend"> The <see cref="Friend"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
-        /// <remarks> Friendly model. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(Friend,CancellationToken)']/*" />
         public virtual Response<Friend> FriendlyModel(Friend friend, CancellationToken cancellationToken = default)
         {
@@ -597,7 +591,6 @@ namespace FirstTestTypeSpec
         /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> String format. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormatAsync(Guid,ModelWithFormat,CancellationToken)']/*" />
         public virtual async Task<Response> StringFormatAsync(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
@@ -614,7 +607,6 @@ namespace FirstTestTypeSpec
         /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> String format. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormat(Guid,ModelWithFormat,CancellationToken)']/*" />
         public virtual Response StringFormat(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
@@ -710,7 +702,6 @@ namespace FirstTestTypeSpec
         /// <param name="projectedModel"> The <see cref="ProjectedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
-        /// <remarks> Projected name model. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModelAsync(ProjectedModel,CancellationToken)']/*" />
         public virtual async Task<Response<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
@@ -726,7 +717,6 @@ namespace FirstTestTypeSpec
         /// <param name="projectedModel"> The <see cref="ProjectedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
-        /// <remarks> Projected name model. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModel(ProjectedModel,CancellationToken)']/*" />
         public virtual Response<ProjectedModel> ProjectedNameModel(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
@@ -818,7 +808,6 @@ namespace FirstTestTypeSpec
 
         /// <summary> return anonymous model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Returns anonymous model. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<ReturnsAnonymousModelResponse>> ReturnsAnonymousModelAsync(CancellationToken cancellationToken = default)
         {
@@ -829,7 +818,6 @@ namespace FirstTestTypeSpec
 
         /// <summary> return anonymous model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Returns anonymous model. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModel(CancellationToken)']/*" />
         public virtual Response<ReturnsAnonymousModelResponse> ReturnsAnonymousModel(CancellationToken cancellationToken = default)
         {
@@ -985,7 +973,6 @@ namespace FirstTestTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> String body. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringBodyAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response> StringBodyAsync(string body, CancellationToken cancellationToken = default)
         {
@@ -1002,7 +989,6 @@ namespace FirstTestTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> String body. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringBody(string,CancellationToken)']/*" />
         public virtual Response StringBody(string body, CancellationToken cancellationToken = default)
         {
@@ -1095,7 +1081,6 @@ namespace FirstTestTypeSpec
         /// <summary> The body parameter type is bool. </summary>
         /// <param name="body"> The <see cref="bool"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Bool body. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBodyAsync(bool,CancellationToken)']/*" />
         public virtual async Task<Response> BoolBodyAsync(bool body, CancellationToken cancellationToken = default)
         {
@@ -1108,7 +1093,6 @@ namespace FirstTestTypeSpec
         /// <summary> The body parameter type is bool. </summary>
         /// <param name="body"> The <see cref="bool"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Bool body. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBody(bool,CancellationToken)']/*" />
         public virtual Response BoolBody(bool body, CancellationToken cancellationToken = default)
         {
@@ -1199,7 +1183,6 @@ namespace FirstTestTypeSpec
         /// <summary> The body parameter type is datetime. </summary>
         /// <param name="body"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Date time body. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBodyAsync(DateTimeOffset,CancellationToken)']/*" />
         public virtual async Task<Response> DateTimeBodyAsync(DateTimeOffset body, CancellationToken cancellationToken = default)
         {
@@ -1212,7 +1195,6 @@ namespace FirstTestTypeSpec
         /// <summary> The body parameter type is datetime. </summary>
         /// <param name="body"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Date time body. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBody(DateTimeOffset,CancellationToken)']/*" />
         public virtual Response DateTimeBody(DateTimeOffset body, CancellationToken cancellationToken = default)
         {
@@ -1302,7 +1284,6 @@ namespace FirstTestTypeSpec
 
         /// <summary> The return type is datetime. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Return string. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnStringAsync(CancellationToken)']/*" />
         public virtual async Task<Response<string>> ReturnStringAsync(CancellationToken cancellationToken = default)
         {
@@ -1313,7 +1294,6 @@ namespace FirstTestTypeSpec
 
         /// <summary> The return type is datetime. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Return string. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnString(CancellationToken)']/*" />
         public virtual Response<string> ReturnString(CancellationToken cancellationToken = default)
         {
@@ -1486,7 +1466,6 @@ namespace FirstTestTypeSpec
         /// <param name="input"> The <see cref="Extension"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Recursive extension. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveExtensionAsync(Extension,CancellationToken)']/*" />
         public virtual async Task<Response> RecursiveExtensionAsync(Extension input, CancellationToken cancellationToken = default)
         {
@@ -1502,7 +1481,6 @@ namespace FirstTestTypeSpec
         /// <param name="input"> The <see cref="Extension"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Recursive extension. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveExtension(Extension,CancellationToken)']/*" />
         public virtual Response RecursiveExtension(Extension input, CancellationToken cancellationToken = default)
         {
@@ -1596,7 +1574,6 @@ namespace FirstTestTypeSpec
         /// <param name="input"> The <see cref="Extendible"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Three level recursive. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursiveAsync(Extendible,CancellationToken)']/*" />
         public virtual async Task<Response> ThreeLevelRecursiveAsync(Extendible input, CancellationToken cancellationToken = default)
         {
@@ -1612,7 +1589,6 @@ namespace FirstTestTypeSpec
         /// <param name="input"> The <see cref="Extendible"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Three level recursive. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursive(Extendible,CancellationToken)']/*" />
         public virtual Response ThreeLevelRecursive(Extendible input, CancellationToken cancellationToken = default)
         {
@@ -1706,7 +1682,6 @@ namespace FirstTestTypeSpec
         /// <param name="input"> The <see cref="ChildModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Recursive models. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveModelsAsync(ChildModel,CancellationToken)']/*" />
         public virtual async Task<Response> RecursiveModelsAsync(ChildModel input, CancellationToken cancellationToken = default)
         {
@@ -1722,7 +1697,6 @@ namespace FirstTestTypeSpec
         /// <param name="input"> The <see cref="ChildModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Recursive models. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveModels(ChildModel,CancellationToken)']/*" />
         public virtual Response RecursiveModels(ChildModel input, CancellationToken cancellationToken = default)
         {
@@ -1816,7 +1790,6 @@ namespace FirstTestTypeSpec
         /// <param name="input"> The <see cref="ContainSelf"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Contain self models. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ContainSelfModelsAsync(ContainSelf,CancellationToken)']/*" />
         public virtual async Task<Response> ContainSelfModelsAsync(ContainSelf input, CancellationToken cancellationToken = default)
         {
@@ -1832,7 +1805,6 @@ namespace FirstTestTypeSpec
         /// <param name="input"> The <see cref="ContainSelf"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Contain self models. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ContainSelfModels(ContainSelf,CancellationToken)']/*" />
         public virtual Response ContainSelfModels(ContainSelf input, CancellationToken cancellationToken = default)
         {
@@ -1925,7 +1897,6 @@ namespace FirstTestTypeSpec
         /// <summary> test enum parameter. </summary>
         /// <param name="p1"> The <see cref="CsProjectedEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Enum parameter. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='EnumParameterAsync(CsProjectedEnum,CancellationToken)']/*" />
         public virtual async Task<Response> EnumParameterAsync(CsProjectedEnum p1, CancellationToken cancellationToken = default)
         {
@@ -1937,7 +1908,6 @@ namespace FirstTestTypeSpec
         /// <summary> test enum parameter. </summary>
         /// <param name="p1"> The <see cref="CsProjectedEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Enum parameter. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='EnumParameter(CsProjectedEnum,CancellationToken)']/*" />
         public virtual Response EnumParameter(CsProjectedEnum p1, CancellationToken cancellationToken = default)
         {
@@ -2022,7 +1992,6 @@ namespace FirstTestTypeSpec
         /// <param name="body"> The <see cref="ModelWithProjectedEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Body is model with projected enum. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BodyIsModelWithProjectedEnumAsync(ModelWithProjectedEnum,CancellationToken)']/*" />
         public virtual async Task<Response> BodyIsModelWithProjectedEnumAsync(ModelWithProjectedEnum body, CancellationToken cancellationToken = default)
         {
@@ -2038,7 +2007,6 @@ namespace FirstTestTypeSpec
         /// <param name="body"> The <see cref="ModelWithProjectedEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Body is model with projected enum. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BodyIsModelWithProjectedEnum(ModelWithProjectedEnum,CancellationToken)']/*" />
         public virtual Response BodyIsModelWithProjectedEnum(ModelWithProjectedEnum body, CancellationToken cancellationToken = default)
         {
@@ -2131,7 +2099,6 @@ namespace FirstTestTypeSpec
         /// <summary> test optional dictionary. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Optional dictionary. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='OptionalDictionaryAsync(IDictionary{string,int},CancellationToken)']/*" />
         public virtual async Task<Response> OptionalDictionaryAsync(IDictionary<string, int> body = null, CancellationToken cancellationToken = default)
         {
@@ -2144,7 +2111,6 @@ namespace FirstTestTypeSpec
         /// <summary> test optional dictionary. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Optional dictionary. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='OptionalDictionary(IDictionary{string,int},CancellationToken)']/*" />
         public virtual Response OptionalDictionary(IDictionary<string, int> body = null, CancellationToken cancellationToken = default)
         {
@@ -2231,7 +2197,6 @@ namespace FirstTestTypeSpec
         /// <param name="regenLocation"> The <see cref="AzureLocation"/> to use. </param>
         /// <param name="body"> The <see cref="AzureLocationModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Azure location op. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOpAsync(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)']/*" />
         public virtual async Task<Response> AzureLocationOpAsync(AzureLocation location, AzureLocation regenLocation, AzureLocationModel body = null, CancellationToken cancellationToken = default)
         {
@@ -2246,7 +2211,6 @@ namespace FirstTestTypeSpec
         /// <param name="regenLocation"> The <see cref="AzureLocation"/> to use. </param>
         /// <param name="body"> The <see cref="AzureLocationModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Azure location op. </remarks>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOp(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)']/*" />
         public virtual Response AzureLocationOp(AzureLocation location, AzureLocation regenLocation, AzureLocationModel body = null, CancellationToken cancellationToken = default)
         {

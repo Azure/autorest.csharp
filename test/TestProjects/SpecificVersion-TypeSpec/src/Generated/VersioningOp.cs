@@ -56,7 +56,6 @@ namespace TypeSpec.Versioning.Specific
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="resource"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Create. </remarks>
         /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='CreateAsync(string,Resource,CancellationToken)']/*" />
         public virtual async Task<Response<Models.Resource>> CreateAsync(string name, Models.Resource resource, CancellationToken cancellationToken = default)
         {
@@ -75,7 +74,6 @@ namespace TypeSpec.Versioning.Specific
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="resource"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Create. </remarks>
         /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='Create(string,Resource,CancellationToken)']/*" />
         public virtual Response<Models.Resource> Create(string name, Models.Resource resource, CancellationToken cancellationToken = default)
         {
@@ -176,7 +174,6 @@ namespace TypeSpec.Versioning.Specific
         /// <param name="select"> Select the specified fields to be included in the response. </param>
         /// <param name="expand"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> List. </remarks>
         /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='GetResourcesAsync(IEnumerable{string},string,CancellationToken)']/*" />
         public virtual AsyncPageable<Models.Resource> GetResourcesAsync(IEnumerable<string> select = null, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -190,7 +187,6 @@ namespace TypeSpec.Versioning.Specific
         /// <param name="select"> Select the specified fields to be included in the response. </param>
         /// <param name="expand"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> List. </remarks>
         /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='GetResources(IEnumerable{string},string,CancellationToken)']/*" />
         public virtual Pageable<Models.Resource> GetResources(IEnumerable<string> select = null, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -263,7 +259,6 @@ namespace TypeSpec.Versioning.Specific
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Export. </remarks>
         /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='ExportAsync(WaitUntil,string,string,CancellationToken)']/*" />
         public virtual async Task<Operation<ExportedResource>> ExportAsync(WaitUntil waitUntil, string name, string projectFileVersion = null, CancellationToken cancellationToken = default)
         {
@@ -281,7 +276,6 @@ namespace TypeSpec.Versioning.Specific
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Export. </remarks>
         /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='Export(WaitUntil,string,string,CancellationToken)']/*" />
         public virtual Operation<ExportedResource> Export(WaitUntil waitUntil, string name, string projectFileVersion = null, CancellationToken cancellationToken = default)
         {

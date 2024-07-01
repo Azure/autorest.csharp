@@ -90,8 +90,7 @@
      "$id": "14",
      "Name": "GetBatchDetectionResult",
      "ResourceName": "ApiVersionInTsp",
-     "Summary": "Get Multivariate Anomaly Detection Result",
-     "Description": "For asynchronous inference, get multivariate anomaly detection result based on\nresultId returned by the BatchDetectAnomaly api.",
+     "Description": "Get Multivariate Anomaly Detection Result",
      "Accessibility": "public",
      "Parameters": [
       {

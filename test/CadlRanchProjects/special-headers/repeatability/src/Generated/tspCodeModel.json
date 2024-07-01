@@ -39,7 +39,7 @@
      "$id": "7",
      "Name": "immediateSuccess",
      "ResourceName": "Repeatability",
-     "Summary": "Check we recognize Repeatability-Request-ID and Repeatability-First-Sent.",
+     "Description": "Check we recognize Repeatability-Request-ID and Repeatability-First-Sent.",
      "Accessibility": "public",
      "Parameters": [
       {

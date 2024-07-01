@@ -54,7 +54,6 @@ namespace TypeSpec.Versioning.Latest
         /// <param name="select"> Select the specified fields to be included in the response. </param>
         /// <param name="filter"> Filter the result list using the given expression. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> List. </remarks>
         /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='GetResourcesAsync(IEnumerable{string},string,CancellationToken)']/*" />
         public virtual AsyncPageable<Models.Resource> GetResourcesAsync(IEnumerable<string> select = null, string filter = null, CancellationToken cancellationToken = default)
         {
@@ -68,7 +67,6 @@ namespace TypeSpec.Versioning.Latest
         /// <param name="select"> Select the specified fields to be included in the response. </param>
         /// <param name="filter"> Filter the result list using the given expression. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> List. </remarks>
         /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='GetResources(IEnumerable{string},string,CancellationToken)']/*" />
         public virtual Pageable<Models.Resource> GetResources(IEnumerable<string> select = null, string filter = null, CancellationToken cancellationToken = default)
         {
@@ -143,7 +141,6 @@ namespace TypeSpec.Versioning.Latest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Export. </remarks>
         /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='ExportAsync(WaitUntil,string,string,string,int?,CancellationToken)']/*" />
         public virtual async Task<Operation<ExportedResource>> ExportAsync(WaitUntil waitUntil, string name, string projectFileVersion = null, string projectedFileFormat = null, int? maxLines = null, CancellationToken cancellationToken = default)
         {
@@ -163,7 +160,6 @@ namespace TypeSpec.Versioning.Latest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Export. </remarks>
         /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='Export(WaitUntil,string,string,string,int?,CancellationToken)']/*" />
         public virtual Operation<ExportedResource> Export(WaitUntil waitUntil, string name, string projectFileVersion = null, string projectedFileFormat = null, int? maxLines = null, CancellationToken cancellationToken = default)
         {
@@ -269,7 +265,6 @@ namespace TypeSpec.Versioning.Latest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="resource"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Create long running. </remarks>
         /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='CreateLongRunningAsync(WaitUntil,string,Resource,CancellationToken)']/*" />
         public virtual async Task<Operation<Models.Resource>> CreateLongRunningAsync(WaitUntil waitUntil, string name, Models.Resource resource, CancellationToken cancellationToken = default)
         {
@@ -289,7 +284,6 @@ namespace TypeSpec.Versioning.Latest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="resource"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Create long running. </remarks>
         /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='CreateLongRunning(WaitUntil,string,Resource,CancellationToken)']/*" />
         public virtual Operation<Models.Resource> CreateLongRunning(WaitUntil waitUntil, string name, Models.Resource resource, CancellationToken cancellationToken = default)
         {

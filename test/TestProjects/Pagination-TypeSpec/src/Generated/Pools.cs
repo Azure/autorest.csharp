@@ -60,7 +60,6 @@ namespace Pagination
         /// <param name="select"> An OData $select clause. </param>
         /// <param name="expand"> An OData $expand clause. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> List pools. </remarks>
         /// <include file="Docs/Pools.xml" path="doc/members/member[@name='GetPoolsAsync(string,IEnumerable{string},IEnumerable{string},CancellationToken)']/*" />
         public virtual AsyncPageable<BatchPool> GetPoolsAsync(string filter = null, IEnumerable<string> select = null, IEnumerable<string> expand = null, CancellationToken cancellationToken = default)
         {
@@ -78,7 +77,6 @@ namespace Pagination
         /// <param name="select"> An OData $select clause. </param>
         /// <param name="expand"> An OData $expand clause. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> List pools. </remarks>
         /// <include file="Docs/Pools.xml" path="doc/members/member[@name='GetPools(string,IEnumerable{string},IEnumerable{string},CancellationToken)']/*" />
         public virtual Pageable<BatchPool> GetPools(string filter = null, IEnumerable<string> select = null, IEnumerable<string> expand = null, CancellationToken cancellationToken = default)
         {

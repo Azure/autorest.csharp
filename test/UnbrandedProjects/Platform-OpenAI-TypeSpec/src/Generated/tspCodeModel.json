@@ -5254,7 +5254,7 @@
      "$id": "832",
      "Name": "create",
      "ResourceName": "Transcriptions",
-     "Summary": "Transcribes audio into the input language.",
+     "Description": "Transcribes audio into the input language.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -5389,7 +5389,7 @@
      "$id": "847",
      "Name": "create",
      "ResourceName": "Translations",
-     "Summary": "Transcribes audio into the input language.",
+     "Description": "Transcribes audio into the input language.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -5735,7 +5735,7 @@
      "$id": "889",
      "Name": "create",
      "ResourceName": "Jobs",
-     "Summary": "Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the\nfine-tuned models once complete.\n\n[Learn more about fine-tuning](/docs/guides/fine-tuning)",
+     "Description": "Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the\nfine-tuned models once complete.\n\n[Learn more about fine-tuning](/docs/guides/fine-tuning)",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -5946,7 +5946,7 @@
      "$id": "911",
      "Name": "retrieve",
      "ResourceName": "Jobs",
-     "Summary": "Get info about a fine-tuning job.\n\n[Learn more about fine-tuning](/docs/guides/fine-tuning)",
+     "Description": "Get info about a fine-tuning job.\n\n[Learn more about fine-tuning](/docs/guides/fine-tuning)",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -6019,7 +6019,7 @@
      "$id": "918",
      "Name": "listEvents",
      "ResourceName": "Jobs",
-     "Summary": "Get status updates for a fine-tuning job.",
+     "Description": "Get status updates for a fine-tuning job.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -6127,7 +6127,7 @@
      "$id": "929",
      "Name": "cancel",
      "ResourceName": "Jobs",
-     "Summary": "Immediately cancel a fine-tune job.",
+     "Description": "Immediately cancel a fine-tune job.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -6487,7 +6487,7 @@
      "$id": "968",
      "Name": "create",
      "ResourceName": "Embeddings",
-     "Summary": "Creates an embedding vector representing the input text.",
+     "Description": "Creates an embedding vector representing the input text.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -6623,7 +6623,7 @@
      "$id": "983",
      "Name": "list",
      "ResourceName": "Files",
-     "Summary": "Returns a list of files that belong to the user's organization.",
+     "Description": "Returns a list of files that belong to the user's organization.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -6704,7 +6704,7 @@
      "$id": "992",
      "Name": "create",
      "ResourceName": "Files",
-     "Summary": "Returns a list of files that belong to the user's organization.",
+     "Description": "Returns a list of files that belong to the user's organization.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -6800,7 +6800,7 @@
      "$id": "1001",
      "Name": "retrieve",
      "ResourceName": "Files",
-     "Summary": "Returns information about a specific file.",
+     "Description": "Returns information about a specific file.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -6874,7 +6874,7 @@
      "$id": "1008",
      "Name": "delete",
      "ResourceName": "Files",
-     "Summary": "Delete a file",
+     "Description": "Delete a file",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -6948,7 +6948,7 @@
      "$id": "1015",
      "Name": "download",
      "ResourceName": "Files",
-     "Summary": "Returns the contents of the specified file.",
+     "Description": "Returns the contents of the specified file.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -7038,8 +7038,8 @@
      "$id": "1025",
      "Name": "create",
      "ResourceName": "FineTunes",
-     "Summary": "Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the fine-tuned models once complete.\n\n[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)",
      "Deprecated": "deprecated",
+     "Description": "Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the fine-tuned models once complete.\n\n[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -7160,8 +7160,8 @@
      "$id": "1038",
      "Name": "list",
      "ResourceName": "FineTunes",
-     "Summary": "List your organization's fine-tuning jobs",
      "Deprecated": "deprecated",
+     "Description": "List your organization's fine-tuning jobs",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -7218,8 +7218,8 @@
      "$id": "1043",
      "Name": "retrieve",
      "ResourceName": "FineTunes",
-     "Summary": "Gets info about the fine-tune job.\n\n[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)",
      "Deprecated": "deprecated",
+     "Description": "Gets info about the fine-tune job.\n\n[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -7293,8 +7293,8 @@
      "$id": "1050",
      "Name": "listEvents",
      "ResourceName": "FineTunes",
-     "Summary": "Get fine-grained status updates for a fine-tune job.",
      "Deprecated": "deprecated",
+     "Description": "Get fine-grained status updates for a fine-tune job.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -7385,8 +7385,8 @@
      "$id": "1059",
      "Name": "cancel",
      "ResourceName": "FineTunes",
-     "Summary": "Immediately cancel a fine-tune job.",
      "Deprecated": "deprecated",
+     "Description": "Immediately cancel a fine-tune job.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -7475,7 +7475,7 @@
      "$id": "1068",
      "Name": "list",
      "ResourceName": "Models",
-     "Summary": "Lists the currently available models, and provides basic information about each one such as the\nowner and availability.",
+     "Description": "Lists the currently available models, and provides basic information about each one such as the\nowner and availability.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -7556,7 +7556,7 @@
      "$id": "1077",
      "Name": "retrieve",
      "ResourceName": "Models",
-     "Summary": "Retrieves a model instance, providing basic information about the model such as the owner and\npermissioning.",
+     "Description": "Retrieves a model instance, providing basic information about the model such as the owner and\npermissioning.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -7630,7 +7630,7 @@
      "$id": "1084",
      "Name": "delete",
      "ResourceName": "Models",
-     "Summary": "Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.",
+     "Description": "Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -7719,7 +7719,7 @@
      "$id": "1093",
      "Name": "create",
      "ResourceName": "Images",
-     "Summary": "Creates an image given a prompt",
+     "Description": "Creates an image given a prompt",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -7840,7 +7840,7 @@
      "$id": "1106",
      "Name": "createEdit",
      "ResourceName": "Images",
-     "Summary": "Creates an edited or extended image given an original image and a prompt.",
+     "Description": "Creates an edited or extended image given an original image and a prompt.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -7936,7 +7936,7 @@
      "$id": "1115",
      "Name": "createVariation",
      "ResourceName": "Images",
-     "Summary": "Creates an edited or extended image given an original image and a prompt.",
+     "Description": "Creates an edited or extended image given an original image and a prompt.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -8047,7 +8047,7 @@
      "$id": "1126",
      "Name": "create",
      "ResourceName": "Moderations",
-     "Summary": "Classifies if text violates OpenAI's Content Policy",
+     "Description": "Classifies if text violates OpenAI's Content Policy",
      "Accessibility": "public",
      "Parameters": [
       {

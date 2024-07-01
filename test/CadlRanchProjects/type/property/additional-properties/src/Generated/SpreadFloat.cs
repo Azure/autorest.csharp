@@ -46,7 +46,6 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/SpreadFloat.xml" path="doc/members/member[@name='GetSpreadFloatAsync(CancellationToken)']/*" />
         public virtual async Task<Response<SpreadFloatRecord>> GetSpreadFloatAsync(CancellationToken cancellationToken = default)
         {
@@ -57,7 +56,6 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/SpreadFloat.xml" path="doc/members/member[@name='GetSpreadFloat(CancellationToken)']/*" />
         public virtual Response<SpreadFloatRecord> GetSpreadFloat(CancellationToken cancellationToken = default)
         {
@@ -140,7 +138,6 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/SpreadFloat.xml" path="doc/members/member[@name='PutAsync(SpreadFloatRecord,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(SpreadFloatRecord body, CancellationToken cancellationToken = default)
         {
@@ -156,7 +153,6 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/SpreadFloat.xml" path="doc/members/member[@name='Put(SpreadFloatRecord,CancellationToken)']/*" />
         public virtual Response Put(SpreadFloatRecord body, CancellationToken cancellationToken = default)
         {

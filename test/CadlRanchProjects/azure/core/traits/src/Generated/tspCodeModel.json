@@ -144,7 +144,7 @@
      "$id": "21",
      "Name": "smokeTest",
      "ResourceName": "User",
-     "Summary": "Get a resource, sending and receiving headers.",
+     "Description": "Get a resource, sending and receiving headers.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -411,7 +411,7 @@
      "$id": "56",
      "Name": "repeatableAction",
      "ResourceName": "Traits",
-     "Summary": "Test for repeatable requests",
+     "Description": "Test for repeatable requests",
      "Accessibility": "public",
      "Parameters": [
       {

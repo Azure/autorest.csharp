@@ -35,7 +35,6 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary> Get call. </summary>
-        /// <remarks> Get. </remarks>
         public virtual async Task<ClientResult<ExtendsModelArrayAdditionalProperties>> GetExtendsModelArrayAsync()
         {
             ClientResult result = await GetExtendsModelArrayAsync(null).ConfigureAwait(false);
@@ -43,7 +42,6 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary> Get call. </summary>
-        /// <remarks> Get. </remarks>
         public virtual ClientResult<ExtendsModelArrayAdditionalProperties> GetExtendsModelArray()
         {
             ClientResult result = GetExtendsModelArray(null);
@@ -101,7 +99,6 @@ namespace Scm._Type.Property.AdditionalProperties
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(ExtendsModelArrayAdditionalProperties body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -114,7 +111,6 @@ namespace Scm._Type.Property.AdditionalProperties
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(ExtendsModelArrayAdditionalProperties body)
         {
             Argument.AssertNotNull(body, nameof(body));

@@ -35,7 +35,6 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary> Get call. </summary>
-        /// <remarks> Get. </remarks>
         public virtual async Task<ClientResult<DifferentSpreadModelRecord>> GetSpreadDifferentModelAsync()
         {
             ClientResult result = await GetSpreadDifferentModelAsync(null).ConfigureAwait(false);
@@ -43,7 +42,6 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary> Get call. </summary>
-        /// <remarks> Get. </remarks>
         public virtual ClientResult<DifferentSpreadModelRecord> GetSpreadDifferentModel()
         {
             ClientResult result = GetSpreadDifferentModel(null);
@@ -101,7 +99,6 @@ namespace Scm._Type.Property.AdditionalProperties
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(DifferentSpreadModelRecord body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -114,7 +111,6 @@ namespace Scm._Type.Property.AdditionalProperties
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(DifferentSpreadModelRecord body)
         {
             Argument.AssertNotNull(body, nameof(body));

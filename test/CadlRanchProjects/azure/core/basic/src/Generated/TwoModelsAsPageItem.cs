@@ -49,7 +49,6 @@ namespace _Specs_.Azure.Core.Basic
 
         /// <summary> Two operations with two different page item types should be successfully generated. Should generate model for FirstItem. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> List first item. </remarks>
         /// <include file="Docs/TwoModelsAsPageItem.xml" path="doc/members/member[@name='GetFirstItemsAsync(CancellationToken)']/*" />
         public virtual AsyncPageable<FirstItem> GetFirstItemsAsync(CancellationToken cancellationToken = default)
         {
@@ -61,7 +60,6 @@ namespace _Specs_.Azure.Core.Basic
 
         /// <summary> Two operations with two different page item types should be successfully generated. Should generate model for FirstItem. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> List first item. </remarks>
         /// <include file="Docs/TwoModelsAsPageItem.xml" path="doc/members/member[@name='GetFirstItems(CancellationToken)']/*" />
         public virtual Pageable<FirstItem> GetFirstItems(CancellationToken cancellationToken = default)
         {
@@ -125,7 +123,6 @@ namespace _Specs_.Azure.Core.Basic
 
         /// <summary> Two operations with two different page item types should be successfully generated. Should generate model for SecondItem. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> List second item. </remarks>
         /// <include file="Docs/TwoModelsAsPageItem.xml" path="doc/members/member[@name='GetSecondItemsAsync(CancellationToken)']/*" />
         public virtual AsyncPageable<SecondItem> GetSecondItemsAsync(CancellationToken cancellationToken = default)
         {
@@ -137,7 +134,6 @@ namespace _Specs_.Azure.Core.Basic
 
         /// <summary> Two operations with two different page item types should be successfully generated. Should generate model for SecondItem. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> List second item. </remarks>
         /// <include file="Docs/TwoModelsAsPageItem.xml" path="doc/members/member[@name='GetSecondItems(CancellationToken)']/*" />
         public virtual Pageable<SecondItem> GetSecondItems(CancellationToken cancellationToken = default)
         {

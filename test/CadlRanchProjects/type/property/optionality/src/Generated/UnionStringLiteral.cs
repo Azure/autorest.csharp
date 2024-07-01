@@ -46,7 +46,6 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get all. </remarks>
         /// <include file="Docs/UnionStringLiteral.xml" path="doc/members/member[@name='GetAllAsync(CancellationToken)']/*" />
         public virtual async Task<Response<UnionStringLiteralProperty>> GetAllAsync(CancellationToken cancellationToken = default)
         {
@@ -57,7 +56,6 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get all. </remarks>
         /// <include file="Docs/UnionStringLiteral.xml" path="doc/members/member[@name='GetAll(CancellationToken)']/*" />
         public virtual Response<UnionStringLiteralProperty> GetAll(CancellationToken cancellationToken = default)
         {
@@ -138,7 +136,6 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get default. </remarks>
         /// <include file="Docs/UnionStringLiteral.xml" path="doc/members/member[@name='GetDefaultAsync(CancellationToken)']/*" />
         public virtual async Task<Response<UnionStringLiteralProperty>> GetDefaultAsync(CancellationToken cancellationToken = default)
         {
@@ -149,7 +146,6 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get default. </remarks>
         /// <include file="Docs/UnionStringLiteral.xml" path="doc/members/member[@name='GetDefault(CancellationToken)']/*" />
         public virtual Response<UnionStringLiteralProperty> GetDefault(CancellationToken cancellationToken = default)
         {
@@ -232,7 +228,6 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="UnionStringLiteralProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put all. </remarks>
         /// <include file="Docs/UnionStringLiteral.xml" path="doc/members/member[@name='PutAllAsync(UnionStringLiteralProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAllAsync(UnionStringLiteralProperty body, CancellationToken cancellationToken = default)
         {
@@ -248,7 +243,6 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="UnionStringLiteralProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put all. </remarks>
         /// <include file="Docs/UnionStringLiteral.xml" path="doc/members/member[@name='PutAll(UnionStringLiteralProperty,CancellationToken)']/*" />
         public virtual Response PutAll(UnionStringLiteralProperty body, CancellationToken cancellationToken = default)
         {
@@ -342,7 +336,6 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="UnionStringLiteralProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put default. </remarks>
         /// <include file="Docs/UnionStringLiteral.xml" path="doc/members/member[@name='PutDefaultAsync(UnionStringLiteralProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutDefaultAsync(UnionStringLiteralProperty body, CancellationToken cancellationToken = default)
         {
@@ -358,7 +351,6 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="UnionStringLiteralProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put default. </remarks>
         /// <include file="Docs/UnionStringLiteral.xml" path="doc/members/member[@name='PutDefault(UnionStringLiteralProperty,CancellationToken)']/*" />
         public virtual Response PutDefault(UnionStringLiteralProperty body, CancellationToken cancellationToken = default)
         {

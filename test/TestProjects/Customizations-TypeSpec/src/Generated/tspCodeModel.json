@@ -773,7 +773,7 @@
      "$id": "121",
      "Name": "roundTrip",
      "ResourceName": "CustomizationsInTsp",
-     "Summary": "RoundTrip operation to make RootModel round-trip",
+     "Description": "RoundTrip operation to make RootModel round-trip",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -886,7 +886,7 @@
      "$id": "132",
      "Name": "foo",
      "ResourceName": "CustomizationsInTsp",
-     "Summary": "Sample operation with request body of a renamed model",
+     "Description": "Sample operation with request body of a renamed model",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -983,7 +983,7 @@
      "$id": "141",
      "Name": "bar",
      "ResourceName": "CustomizationsInTsp",
-     "Summary": "Sample operation with request body using a model parameter with a spread operator.",
+     "Description": "Sample operation with request body using a model parameter with a spread operator.",
      "Accessibility": "public",
      "Parameters": [
       {

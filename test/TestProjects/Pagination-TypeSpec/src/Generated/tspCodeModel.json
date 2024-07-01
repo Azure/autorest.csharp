@@ -555,8 +555,7 @@
      "$id": "81",
      "Name": "ListPaginationLedgerEntries",
      "ResourceName": "LedgerEntry",
-     "Summary": "Gets ledger entries from a collection corresponding to a range.",
-     "Description": "A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.",
+     "Description": "Gets ledger entries from a collection corresponding to a range.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -714,7 +713,6 @@
      "$id": "99",
      "Name": "ListMetricDimensionValues",
      "ResourceName": "DimensionValueListItem",
-     "Summary": "List the dimension values for the given metric dimension name.",
      "Description": "List the dimension values for the given metric dimension name.",
      "Accessibility": "public",
      "Parameters": [
@@ -934,7 +932,7 @@
      "$id": "124",
      "Name": "list",
      "ResourceName": "LedgerEntry",
-     "Summary": "List upload detail for the discovery resource.",
+     "Description": "List upload detail for the discovery resource.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1052,8 +1050,7 @@
      "$id": "138",
      "Name": "listTextBlocklists",
      "ResourceName": "TextBlocklist",
-     "Summary": "Get All Text Blocklists",
-     "Description": "Get all text blocklists details.",
+     "Description": "Get All Text Blocklists",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1156,8 +1153,7 @@
      "$id": "150",
      "Name": "listTextBlocklistItems",
      "ResourceName": "TextBlockItem",
-     "Summary": "Get All BlockItems By blocklistName",
-     "Description": "Get all blockItems in a text blocklist",
+     "Description": "Get All BlockItems By blocklistName",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1327,7 +1323,7 @@
      "$id": "170",
      "Name": "listPools",
      "ResourceName": "Pools",
-     "Summary": "Lists all of the Pools in the specified Account.",
+     "Description": "Lists all of the Pools in the specified Account.",
      "Accessibility": "public",
      "Parameters": [
       {

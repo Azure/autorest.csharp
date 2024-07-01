@@ -258,7 +258,6 @@ namespace ModelsTypeSpec
         /// <param name="input"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Input to round trip. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripAsync(InputModel,CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripModel>> InputToRoundTripAsync(InputModel input, CancellationToken cancellationToken = default)
         {
@@ -274,7 +273,6 @@ namespace ModelsTypeSpec
         /// <param name="input"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Input to round trip. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTrip(InputModel,CancellationToken)']/*" />
         public virtual Response<RoundTripModel> InputToRoundTrip(InputModel input, CancellationToken cancellationToken = default)
         {
@@ -368,7 +366,6 @@ namespace ModelsTypeSpec
         /// <param name="input"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Input to round trip primitive. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripPrimitiveAsync(InputModel,CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripPrimitiveModel>> InputToRoundTripPrimitiveAsync(InputModel input, CancellationToken cancellationToken = default)
         {
@@ -384,7 +381,6 @@ namespace ModelsTypeSpec
         /// <param name="input"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Input to round trip primitive. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripPrimitive(InputModel,CancellationToken)']/*" />
         public virtual Response<RoundTripPrimitiveModel> InputToRoundTripPrimitive(InputModel input, CancellationToken cancellationToken = default)
         {
@@ -478,7 +474,6 @@ namespace ModelsTypeSpec
         /// <param name="input"> The <see cref="RoundTripOptionalModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Input to round trip optional. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripOptionalAsync(RoundTripOptionalModel,CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripOptionalModel>> InputToRoundTripOptionalAsync(RoundTripOptionalModel input, CancellationToken cancellationToken = default)
         {
@@ -494,7 +489,6 @@ namespace ModelsTypeSpec
         /// <param name="input"> The <see cref="RoundTripOptionalModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Input to round trip optional. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripOptional(RoundTripOptionalModel,CancellationToken)']/*" />
         public virtual Response<RoundTripOptionalModel> InputToRoundTripOptional(RoundTripOptionalModel input, CancellationToken cancellationToken = default)
         {
@@ -588,7 +582,6 @@ namespace ModelsTypeSpec
         /// <param name="input"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Input to round trip read only. </remarks>
         [Obsolete("deprecated for test")]
         public virtual async Task<Response<RoundTripReadOnlyModel>> InputToRoundTripReadOnlyAsync(InputModel input, CancellationToken cancellationToken = default)
         {
@@ -604,7 +597,6 @@ namespace ModelsTypeSpec
         /// <param name="input"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Input to round trip read only. </remarks>
         [Obsolete("deprecated for test")]
         public virtual Response<RoundTripReadOnlyModel> InputToRoundTripReadOnly(InputModel input, CancellationToken cancellationToken = default)
         {
@@ -698,7 +690,6 @@ namespace ModelsTypeSpec
         /// <param name="input"> The <see cref="RoundTripModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Round trip to output. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripToOutputAsync(RoundTripModel,CancellationToken)']/*" />
         public virtual async Task<Response<OutputModel>> RoundTripToOutputAsync(RoundTripModel input, CancellationToken cancellationToken = default)
         {
@@ -714,7 +705,6 @@ namespace ModelsTypeSpec
         /// <param name="input"> The <see cref="RoundTripModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Round trip to output. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripToOutput(RoundTripModel,CancellationToken)']/*" />
         public virtual Response<OutputModel> RoundTripToOutput(RoundTripModel input, CancellationToken cancellationToken = default)
         {
@@ -808,7 +798,6 @@ namespace ModelsTypeSpec
         /// <param name="input"> The <see cref="InputRecursiveModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Input recursive. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputRecursiveAsync(InputRecursiveModel,CancellationToken)']/*" />
         public virtual async Task<Response<ErrorModel>> InputRecursiveAsync(InputRecursiveModel input, CancellationToken cancellationToken = default)
         {
@@ -824,7 +813,6 @@ namespace ModelsTypeSpec
         /// <param name="input"> The <see cref="InputRecursiveModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Input recursive. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputRecursive(InputRecursiveModel,CancellationToken)']/*" />
         public virtual Response<ErrorModel> InputRecursive(InputRecursiveModel input, CancellationToken cancellationToken = default)
         {
@@ -918,7 +906,6 @@ namespace ModelsTypeSpec
         /// <param name="input"> The <see cref="RoundTripRecursiveModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Round trip recursive. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripRecursiveAsync(RoundTripRecursiveModel,CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripRecursiveModel>> RoundTripRecursiveAsync(RoundTripRecursiveModel input, CancellationToken cancellationToken = default)
         {
@@ -934,7 +921,6 @@ namespace ModelsTypeSpec
         /// <param name="input"> The <see cref="RoundTripRecursiveModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Round trip recursive. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripRecursive(RoundTripRecursiveModel,CancellationToken)']/*" />
         public virtual Response<RoundTripRecursiveModel> RoundTripRecursive(RoundTripRecursiveModel input, CancellationToken cancellationToken = default)
         {
@@ -1026,7 +1012,6 @@ namespace ModelsTypeSpec
 
         /// <summary> Returns model that has property of its own type. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Self reference. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='SelfReferenceAsync(CancellationToken)']/*" />
         public virtual async Task<Response<ErrorModel>> SelfReferenceAsync(CancellationToken cancellationToken = default)
         {
@@ -1037,7 +1022,6 @@ namespace ModelsTypeSpec
 
         /// <summary> Returns model that has property of its own type. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Self reference. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='SelfReference(CancellationToken)']/*" />
         public virtual Response<ErrorModel> SelfReference(CancellationToken cancellationToken = default)
         {
@@ -1119,7 +1103,6 @@ namespace ModelsTypeSpec
         /// <summary> Returns model that has property of its own type. </summary>
         /// <param name="input"> The <see cref="Models.FixedFloatEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Fixed float enum. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='FixedFloatEnumAsync(FixedFloatEnum,CancellationToken)']/*" />
         public virtual async Task<Response<OutputModel>> FixedFloatEnumAsync(FixedFloatEnum input, CancellationToken cancellationToken = default)
         {
@@ -1131,7 +1114,6 @@ namespace ModelsTypeSpec
         /// <summary> Returns model that has property of its own type. </summary>
         /// <param name="input"> The <see cref="Models.FixedFloatEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Fixed float enum. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='FixedFloatEnum(FixedFloatEnum,CancellationToken)']/*" />
         public virtual Response<OutputModel> FixedFloatEnum(FixedFloatEnum input, CancellationToken cancellationToken = default)
         {
@@ -1215,7 +1197,6 @@ namespace ModelsTypeSpec
         /// <summary> Returns model that has property of its own type. </summary>
         /// <param name="input"> The <see cref="ExtensibleIntEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Extenisble int enum. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='ExtenisbleIntEnumAsync(ExtensibleIntEnum,CancellationToken)']/*" />
         public virtual async Task<Response<OutputModel>> ExtenisbleIntEnumAsync(ExtensibleIntEnum input, CancellationToken cancellationToken = default)
         {
@@ -1227,7 +1208,6 @@ namespace ModelsTypeSpec
         /// <summary> Returns model that has property of its own type. </summary>
         /// <param name="input"> The <see cref="ExtensibleIntEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Extenisble int enum. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='ExtenisbleIntEnum(ExtensibleIntEnum,CancellationToken)']/*" />
         public virtual Response<OutputModel> ExtenisbleIntEnum(ExtensibleIntEnum input, CancellationToken cancellationToken = default)
         {
@@ -1312,7 +1292,6 @@ namespace ModelsTypeSpec
         /// <param name="input"> The <see cref="RoundTripOnNoUse"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Round trip to output with no use base. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripToOutputWithNoUseBaseAsync(RoundTripOnNoUse,CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripOnNoUse>> RoundTripToOutputWithNoUseBaseAsync(RoundTripOnNoUse input, CancellationToken cancellationToken = default)
         {
@@ -1328,7 +1307,6 @@ namespace ModelsTypeSpec
         /// <param name="input"> The <see cref="RoundTripOnNoUse"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Round trip to output with no use base. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripToOutputWithNoUseBase(RoundTripOnNoUse,CancellationToken)']/*" />
         public virtual Response<RoundTripOnNoUse> RoundTripToOutputWithNoUseBase(RoundTripOnNoUse input, CancellationToken cancellationToken = default)
         {
@@ -1420,7 +1398,6 @@ namespace ModelsTypeSpec
 
         /// <summary> Resource collection action operation template. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Analyze conversation. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='AnalyzeConversationAsync(CancellationToken)']/*" />
         public virtual async Task<Response<BaseModelWithDiscriminator>> AnalyzeConversationAsync(CancellationToken cancellationToken = default)
         {
@@ -1431,7 +1408,6 @@ namespace ModelsTypeSpec
 
         /// <summary> Resource collection action operation template. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Analyze conversation. </remarks>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='AnalyzeConversation(CancellationToken)']/*" />
         public virtual Response<BaseModelWithDiscriminator> AnalyzeConversation(CancellationToken cancellationToken = default)
         {

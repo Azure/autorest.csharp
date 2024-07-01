@@ -34,7 +34,6 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary> get unknown value. </summary>
-        /// <remarks> Get. </remarks>
         public virtual async Task<ClientResult<BinaryData>> GetUnknownAsync()
         {
             ClientResult result = await GetUnknownAsync(null).ConfigureAwait(false);
@@ -42,7 +41,6 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary> get unknown value. </summary>
-        /// <remarks> Get. </remarks>
         public virtual ClientResult<BinaryData> GetUnknown()
         {
             ClientResult result = GetUnknown(null);
@@ -100,7 +98,6 @@ namespace Scm._Type.Scalar
         /// <summary> put unknown value. </summary>
         /// <param name="body"> _. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(BinaryData body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -113,7 +110,6 @@ namespace Scm._Type.Scalar
         /// <summary> put unknown value. </summary>
         /// <param name="body"> _. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(BinaryData body)
         {
             Argument.AssertNotNull(body, nameof(body));

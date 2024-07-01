@@ -89,7 +89,6 @@ namespace Azure.NewProject.TypeSpec
         /// <summary> top level method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Top action. </remarks>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
@@ -101,7 +100,6 @@ namespace Azure.NewProject.TypeSpec
         /// <summary> top level method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Top action. </remarks>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,CancellationToken)']/*" />
         public virtual Response<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
@@ -314,7 +312,6 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="thing"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <remarks> Anonymous body. </remarks>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(Thing,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
         {
@@ -330,7 +327,6 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="thing"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <remarks> Anonymous body. </remarks>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(Thing,CancellationToken)']/*" />
         public virtual Response<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
         {
@@ -424,7 +420,6 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="friend"> The <see cref="Friend"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
-        /// <remarks> Friendly model. </remarks>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(Friend,CancellationToken)']/*" />
         public virtual async Task<Response<Friend>> FriendlyModelAsync(Friend friend, CancellationToken cancellationToken = default)
         {
@@ -440,7 +435,6 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="friend"> The <see cref="Friend"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
-        /// <remarks> Friendly model. </remarks>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(Friend,CancellationToken)']/*" />
         public virtual Response<Friend> FriendlyModel(Friend friend, CancellationToken cancellationToken = default)
         {

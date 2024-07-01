@@ -53,7 +53,6 @@ namespace Pagination
 
         /// <summary> Get All Text Blocklists. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get all text blocklists details. </remarks>
         /// <include file="Docs/TwoTypesItem.xml" path="doc/members/member[@name='GetTextBlocklistsAsync(CancellationToken)']/*" />
         public virtual AsyncPageable<TextBlocklist> GetTextBlocklistsAsync(CancellationToken cancellationToken = default)
         {
@@ -65,7 +64,6 @@ namespace Pagination
 
         /// <summary> Get All Text Blocklists. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get all text blocklists details. </remarks>
         /// <include file="Docs/TwoTypesItem.xml" path="doc/members/member[@name='GetTextBlocklists(CancellationToken)']/*" />
         public virtual Pageable<TextBlocklist> GetTextBlocklists(CancellationToken cancellationToken = default)
         {
@@ -135,7 +133,6 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="blocklistName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="blocklistName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Get all blockItems in a text blocklist. </remarks>
         /// <include file="Docs/TwoTypesItem.xml" path="doc/members/member[@name='GetTextBlocklistItemsAsync(string,int?,int?,int?,CancellationToken)']/*" />
         public virtual AsyncPageable<TextBlockItem> GetTextBlocklistItemsAsync(string blocklistName, int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
@@ -155,7 +152,6 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="blocklistName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="blocklistName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Get all blockItems in a text blocklist. </remarks>
         /// <include file="Docs/TwoTypesItem.xml" path="doc/members/member[@name='GetTextBlocklistItems(string,int?,int?,int?,CancellationToken)']/*" />
         public virtual Pageable<TextBlockItem> GetTextBlocklistItems(string blocklistName, int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
         {

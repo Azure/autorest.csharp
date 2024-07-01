@@ -58,7 +58,6 @@ namespace CustomizationsInTsp
         /// <param name="input"> The <see cref="RootModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Round trip. </remarks>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='RoundTripAsync(RootModel,CancellationToken)']/*" />
         public virtual async Task<Response<RootModel>> RoundTripAsync(RootModel input, CancellationToken cancellationToken = default)
         {
@@ -74,7 +73,6 @@ namespace CustomizationsInTsp
         /// <param name="input"> The <see cref="RootModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Round trip. </remarks>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='RoundTrip(RootModel,CancellationToken)']/*" />
         public virtual Response<RootModel> RoundTrip(RootModel input, CancellationToken cancellationToken = default)
         {
@@ -168,7 +166,6 @@ namespace CustomizationsInTsp
         /// <param name="input"> The <see cref="RenamedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Foo. </remarks>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='FooAsync(RenamedModel,CancellationToken)']/*" />
         public virtual async Task<Response<RenamedModel>> FooAsync(RenamedModel input, CancellationToken cancellationToken = default)
         {
@@ -184,7 +181,6 @@ namespace CustomizationsInTsp
         /// <param name="input"> The <see cref="RenamedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <remarks> Foo. </remarks>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='Foo(RenamedModel,CancellationToken)']/*" />
         public virtual Response<RenamedModel> Foo(RenamedModel input, CancellationToken cancellationToken = default)
         {
@@ -278,7 +274,6 @@ namespace CustomizationsInTsp
         /// <param name="modelToRename"> The <see cref="RenamedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelToRename"/> is null. </exception>
-        /// <remarks> Bar. </remarks>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='BarAsync(RenamedModel,CancellationToken)']/*" />
         public virtual async Task<Response<RenamedModel>> BarAsync(RenamedModel modelToRename, CancellationToken cancellationToken = default)
         {
@@ -294,7 +289,6 @@ namespace CustomizationsInTsp
         /// <param name="modelToRename"> The <see cref="RenamedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelToRename"/> is null. </exception>
-        /// <remarks> Bar. </remarks>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='Bar(RenamedModel,CancellationToken)']/*" />
         public virtual Response<RenamedModel> Bar(RenamedModel modelToRename, CancellationToken cancellationToken = default)
         {

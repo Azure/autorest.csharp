@@ -349,7 +349,7 @@
      "$id": "51",
      "Name": "basic",
      "ResourceName": "FormData",
-     "Summary": "Test content-type: multipart/form-data",
+     "Description": "Test content-type: multipart/form-data",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -442,7 +442,7 @@
      "$id": "61",
      "Name": "complex",
      "ResourceName": "FormData",
-     "Summary": "Test content-type: multipart/form-data for mixed scenarios",
+     "Description": "Test content-type: multipart/form-data for mixed scenarios",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -511,7 +511,7 @@
      "$id": "67",
      "Name": "jsonPart",
      "ResourceName": "FormData",
-     "Summary": "Test content-type: multipart/form-data for scenario contains json part and binary part ",
+     "Description": "Test content-type: multipart/form-data for scenario contains json part and binary part ",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -580,7 +580,7 @@
      "$id": "73",
      "Name": "binaryArrayParts",
      "ResourceName": "FormData",
-     "Summary": "Test content-type: multipart/form-data for scenario contains multi binary parts",
+     "Description": "Test content-type: multipart/form-data for scenario contains multi binary parts",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -649,7 +649,7 @@
      "$id": "79",
      "Name": "jsonArrayParts",
      "ResourceName": "FormData",
-     "Summary": "Test content-type: multipart/form-data for scenario contains multi json parts",
+     "Description": "Test content-type: multipart/form-data for scenario contains multi json parts",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -718,7 +718,7 @@
      "$id": "85",
      "Name": "multiBinaryParts",
      "ResourceName": "FormData",
-     "Summary": "Test content-type: multipart/form-data for scenario contains multi binary parts",
+     "Description": "Test content-type: multipart/form-data for scenario contains multi binary parts",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -787,7 +787,7 @@
      "$id": "91",
      "Name": "checkFileNameAndContentType",
      "ResourceName": "FormData",
-     "Summary": "Test content-type: multipart/form-data",
+     "Description": "Test content-type: multipart/form-data",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -856,7 +856,7 @@
      "$id": "97",
      "Name": "anonymousModel",
      "ResourceName": "FormData",
-     "Summary": "Test content-type: multipart/form-data",
+     "Description": "Test content-type: multipart/form-data",
      "Accessibility": "public",
      "Parameters": [
       {

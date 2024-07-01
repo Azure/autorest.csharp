@@ -42,7 +42,6 @@ namespace OpenAI
         /// <summary> Transcribes audio into the input language. </summary>
         /// <param name="audio"> The <see cref="CreateTranscriptionRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="audio"/> is null. </exception>
-        /// <remarks> Create. </remarks>
         public virtual async Task<ClientResult<CreateTranscriptionResponse>> CreateAsync(CreateTranscriptionRequest audio)
         {
             Argument.AssertNotNull(audio, nameof(audio));
@@ -55,7 +54,6 @@ namespace OpenAI
         /// <summary> Transcribes audio into the input language. </summary>
         /// <param name="audio"> The <see cref="CreateTranscriptionRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="audio"/> is null. </exception>
-        /// <remarks> Create. </remarks>
         public virtual ClientResult<CreateTranscriptionResponse> Create(CreateTranscriptionRequest audio)
         {
             Argument.AssertNotNull(audio, nameof(audio));

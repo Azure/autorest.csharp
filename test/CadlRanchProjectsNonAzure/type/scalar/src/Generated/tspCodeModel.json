@@ -50,7 +50,7 @@
      "$id": "9",
      "Name": "get",
      "ResourceName": "String",
-     "Summary": "get string value",
+     "Description": "get string value",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -132,7 +132,7 @@
      "$id": "19",
      "Name": "put",
      "ResourceName": "String",
-     "Summary": "put string value",
+     "Description": "put string value",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -219,7 +219,7 @@
      "$id": "28",
      "Name": "get",
      "ResourceName": "Boolean",
-     "Summary": "get boolean value",
+     "Description": "get boolean value",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -301,7 +301,7 @@
      "$id": "38",
      "Name": "put",
      "ResourceName": "Boolean",
-     "Summary": "put boolean value",
+     "Description": "put boolean value",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -388,7 +388,7 @@
      "$id": "47",
      "Name": "get",
      "ResourceName": "Unknown",
-     "Summary": "get unknown value",
+     "Description": "get unknown value",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -470,7 +470,7 @@
      "$id": "57",
      "Name": "put",
      "ResourceName": "Unknown",
-     "Summary": "put unknown value",
+     "Description": "put unknown value",
      "Accessibility": "public",
      "Parameters": [
       {

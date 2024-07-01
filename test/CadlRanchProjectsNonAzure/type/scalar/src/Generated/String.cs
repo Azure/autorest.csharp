@@ -34,7 +34,6 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary> get string value. </summary>
-        /// <remarks> Get. </remarks>
         public virtual async Task<ClientResult<string>> GetStringAsync()
         {
             ClientResult result = await GetStringAsync(null).ConfigureAwait(false);
@@ -42,7 +41,6 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary> get string value. </summary>
-        /// <remarks> Get. </remarks>
         public virtual ClientResult<string> GetString()
         {
             ClientResult result = GetString(null);
@@ -101,7 +99,6 @@ namespace Scm._Type.Scalar
         /// <param name="body"> _. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(string body)
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));
@@ -115,7 +112,6 @@ namespace Scm._Type.Scalar
         /// <param name="body"> _. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(string body)
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));

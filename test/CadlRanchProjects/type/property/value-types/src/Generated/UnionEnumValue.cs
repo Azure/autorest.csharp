@@ -46,7 +46,6 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/UnionEnumValue.xml" path="doc/members/member[@name='GetUnionEnumValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<UnionEnumValueProperty>> GetUnionEnumValueAsync(CancellationToken cancellationToken = default)
         {
@@ -57,7 +56,6 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/UnionEnumValue.xml" path="doc/members/member[@name='GetUnionEnumValue(CancellationToken)']/*" />
         public virtual Response<UnionEnumValueProperty> GetUnionEnumValue(CancellationToken cancellationToken = default)
         {
@@ -140,7 +138,6 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/UnionEnumValue.xml" path="doc/members/member[@name='PutAsync(UnionEnumValueProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(UnionEnumValueProperty body, CancellationToken cancellationToken = default)
         {
@@ -156,7 +153,6 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/UnionEnumValue.xml" path="doc/members/member[@name='Put(UnionEnumValueProperty,CancellationToken)']/*" />
         public virtual Response Put(UnionEnumValueProperty body, CancellationToken cancellationToken = default)
         {

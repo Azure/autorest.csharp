@@ -46,7 +46,6 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/StringLiteral.xml" path="doc/members/member[@name='GetStringLiteralAsync(CancellationToken)']/*" />
         public virtual async Task<Response<StringLiteralProperty>> GetStringLiteralAsync(CancellationToken cancellationToken = default)
         {
@@ -57,7 +56,6 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/StringLiteral.xml" path="doc/members/member[@name='GetStringLiteral(CancellationToken)']/*" />
         public virtual Response<StringLiteralProperty> GetStringLiteral(CancellationToken cancellationToken = default)
         {
@@ -140,7 +138,6 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/StringLiteral.xml" path="doc/members/member[@name='PutAsync(StringLiteralProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(StringLiteralProperty body, CancellationToken cancellationToken = default)
         {
@@ -156,7 +153,6 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/StringLiteral.xml" path="doc/members/member[@name='Put(StringLiteralProperty,CancellationToken)']/*" />
         public virtual Response Put(StringLiteralProperty body, CancellationToken cancellationToken = default)
         {

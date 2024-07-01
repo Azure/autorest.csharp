@@ -57,7 +57,6 @@ namespace _Azure.Lro.Standard
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="resource"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Creates or replaces a User. </remarks>
         /// <include file="Docs/StandardClient.xml" path="doc/members/member[@name='CreateOrReplaceAsync(WaitUntil,string,User,CancellationToken)']/*" />
         public virtual async Task<Operation<User>> CreateOrReplaceAsync(WaitUntil waitUntil, string name, User resource, CancellationToken cancellationToken = default)
         {
@@ -77,7 +76,6 @@ namespace _Azure.Lro.Standard
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="resource"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Creates or replaces a User. </remarks>
         /// <include file="Docs/StandardClient.xml" path="doc/members/member[@name='CreateOrReplace(WaitUntil,string,User,CancellationToken)']/*" />
         public virtual Operation<User> CreateOrReplace(WaitUntil waitUntil, string name, User resource, CancellationToken cancellationToken = default)
         {
@@ -257,7 +255,6 @@ namespace _Azure.Lro.Standard
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="format"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Exports a User. </remarks>
         /// <include file="Docs/StandardClient.xml" path="doc/members/member[@name='ExportAsync(WaitUntil,string,string,CancellationToken)']/*" />
         public virtual async Task<Operation<ExportedUser>> ExportAsync(WaitUntil waitUntil, string name, string format, CancellationToken cancellationToken = default)
         {
@@ -276,7 +273,6 @@ namespace _Azure.Lro.Standard
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="format"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Exports a User. </remarks>
         /// <include file="Docs/StandardClient.xml" path="doc/members/member[@name='Export(WaitUntil,string,string,CancellationToken)']/*" />
         public virtual Operation<ExportedUser> Export(WaitUntil waitUntil, string name, string format, CancellationToken cancellationToken = default)
         {

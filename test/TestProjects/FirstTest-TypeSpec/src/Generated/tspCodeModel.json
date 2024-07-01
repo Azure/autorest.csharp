@@ -1484,7 +1484,7 @@
      "$id": "220",
      "Name": "topAction",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "top level method",
+     "Description": "top level method",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1578,7 +1578,7 @@
      "$id": "230",
      "Name": "topAction2",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "top level method2",
+     "Description": "top level method2",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1635,7 +1635,7 @@
      "$id": "235",
      "Name": "patchAction",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "top level patch",
+     "Description": "top level patch",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1732,7 +1732,7 @@
      "$id": "244",
      "Name": "anonymousBody",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "body parameter without body decorator",
+     "Description": "body parameter without body decorator",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1829,7 +1829,7 @@
      "$id": "253",
      "Name": "friendlyModel",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "Model can have its friendly name",
+     "Description": "Model can have its friendly name",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1976,7 +1976,7 @@
      "$id": "267",
      "Name": "stringFormat",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "paramete has string format.",
+     "Description": "paramete has string format.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2063,7 +2063,7 @@
      "$id": "275",
      "Name": "projectedNameModel",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "Model can have its projected name",
+     "Description": "Model can have its projected name",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2160,7 +2160,7 @@
      "$id": "284",
      "Name": "returnsAnonymousModel",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "return anonymous model",
+     "Description": "return anonymous model",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2217,7 +2217,7 @@
      "$id": "289",
      "Name": "headAsBoolean",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "head as boolean.",
+     "Description": "head as boolean.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2263,7 +2263,7 @@
      "$id": "293",
      "Name": "stringBody",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "The body parameter type is string.",
+     "Description": "The body parameter type is string.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2334,7 +2334,7 @@
      "$id": "300",
      "Name": "boolBody",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "The body parameter type is bool.",
+     "Description": "The body parameter type is bool.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2405,7 +2405,7 @@
      "$id": "307",
      "Name": "dateTimeBody",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "The body parameter type is datetime.",
+     "Description": "The body parameter type is datetime.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2481,7 +2481,7 @@
      "$id": "315",
      "Name": "returnString",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "The return type is datetime.",
+     "Description": "The return type is datetime.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2596,7 +2596,7 @@
      "$id": "327",
      "Name": "recursiveExtension",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "test parent reference child",
+     "Description": "test parent reference child",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2666,7 +2666,7 @@
      "$id": "333",
      "Name": "threeLevelRecursive",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "test three level recursive extension",
+     "Description": "test three level recursive extension",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2736,7 +2736,7 @@
      "$id": "339",
      "Name": "recursiveModels",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "test child reference parent",
+     "Description": "test child reference parent",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2806,7 +2806,7 @@
      "$id": "345",
      "Name": "ContainSelfModels",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "test contain self models",
+     "Description": "test contain self models",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2876,7 +2876,7 @@
      "$id": "351",
      "Name": "enumParameter",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "test enum parameter.",
+     "Description": "test enum parameter.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2921,7 +2921,7 @@
      "$id": "354",
      "Name": "bodyIsModelWithProjectedEnum",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "test enum parameter.",
+     "Description": "test enum parameter.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2991,7 +2991,7 @@
      "$id": "360",
      "Name": "optionalDictionary",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "test optional dictionary.",
+     "Description": "test optional dictionary.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3070,7 +3070,7 @@
      "$id": "369",
      "Name": "azureLocationOp",
      "ResourceName": "FirstTestTypeSpec",
-     "Summary": "test optional dictionary.",
+     "Description": "test optional dictionary.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3219,7 +3219,7 @@
      "$id": "385",
      "Name": "sayHi",
      "ResourceName": "Demo",
-     "Summary": "Return hi",
+     "Description": "Return hi",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3355,7 +3355,7 @@
      "$id": "400",
      "Name": "helloAgain",
      "ResourceName": "Demo2",
-     "Summary": "Return hi again",
+     "Description": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3499,7 +3499,7 @@
      "$id": "415",
      "Name": "noContentType",
      "ResourceName": "Demo2",
-     "Summary": "Return hi again",
+     "Description": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3628,7 +3628,7 @@
      "$id": "428",
      "Name": "helloDemoAgain",
      "ResourceName": "Demo2",
-     "Summary": "Return hi in demo2",
+     "Description": "Return hi in demo2",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3685,7 +3685,7 @@
      "$id": "433",
      "Name": "createLiteral",
      "ResourceName": "Demo2",
-     "Summary": "Create with literal value",
+     "Description": "Create with literal value",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3782,7 +3782,7 @@
      "$id": "442",
      "Name": "helloLiteral",
      "ResourceName": "Demo2",
-     "Summary": "Send literal parameters",
+     "Description": "Send literal parameters",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3917,7 +3917,7 @@
      "$id": "458",
      "Name": "createUnknownValue",
      "ResourceName": "EnumTest",
-     "Summary": "get extensible enum",
+     "Description": "get extensible enum",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4018,7 +4018,7 @@
      "$id": "468",
      "Name": "internalProtocol",
      "ResourceName": "ProtocolAndConvenient",
-     "Summary": "When set protocol false and convenient true, then the protocol method should be internal",
+     "Description": "When set protocol false and convenient true, then the protocol method should be internal",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4131,7 +4131,7 @@
      "$id": "479",
      "Name": "stillConvenient",
      "ResourceName": "ProtocolAndConvenient",
-     "Summary": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
+     "Description": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4176,7 +4176,7 @@
      "$id": "483",
      "Name": "doSomething",
      "ResourceName": "Entity",
-     "Summary": "doSomething for entity",
+     "Description": "doSomething for entity",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4280,7 +4280,7 @@
      "$id": "494",
      "Name": "doSomething",
      "ResourceName": "Glossary",
-     "Summary": "doSomething for glossary",
+     "Description": "doSomething for glossary",
      "Accessibility": "public",
      "Parameters": [
       {

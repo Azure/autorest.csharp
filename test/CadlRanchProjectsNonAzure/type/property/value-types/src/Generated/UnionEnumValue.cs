@@ -35,7 +35,6 @@ namespace Scm._Type.Property.ValueTypes
         }
 
         /// <summary> Get call. </summary>
-        /// <remarks> Get. </remarks>
         public virtual async Task<ClientResult<UnionEnumValueProperty>> GetUnionEnumValueAsync()
         {
             ClientResult result = await GetUnionEnumValueAsync(null).ConfigureAwait(false);
@@ -43,7 +42,6 @@ namespace Scm._Type.Property.ValueTypes
         }
 
         /// <summary> Get call. </summary>
-        /// <remarks> Get. </remarks>
         public virtual ClientResult<UnionEnumValueProperty> GetUnionEnumValue()
         {
             ClientResult result = GetUnionEnumValue(null);
@@ -101,7 +99,6 @@ namespace Scm._Type.Property.ValueTypes
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(UnionEnumValueProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -114,7 +111,6 @@ namespace Scm._Type.Property.ValueTypes
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(UnionEnumValueProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));

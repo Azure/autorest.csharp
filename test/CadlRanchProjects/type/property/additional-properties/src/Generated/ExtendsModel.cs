@@ -46,7 +46,6 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/ExtendsModel.xml" path="doc/members/member[@name='GetExtendsModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<ExtendsModelAdditionalProperties>> GetExtendsModelAsync(CancellationToken cancellationToken = default)
         {
@@ -57,7 +56,6 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/ExtendsModel.xml" path="doc/members/member[@name='GetExtendsModel(CancellationToken)']/*" />
         public virtual Response<ExtendsModelAdditionalProperties> GetExtendsModel(CancellationToken cancellationToken = default)
         {
@@ -140,7 +138,6 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/ExtendsModel.xml" path="doc/members/member[@name='PutAsync(ExtendsModelAdditionalProperties,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(ExtendsModelAdditionalProperties body, CancellationToken cancellationToken = default)
         {
@@ -156,7 +153,6 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/ExtendsModel.xml" path="doc/members/member[@name='Put(ExtendsModelAdditionalProperties,CancellationToken)']/*" />
         public virtual Response Put(ExtendsModelAdditionalProperties body, CancellationToken cancellationToken = default)
         {

@@ -36,7 +36,7 @@
      "$id": "6",
      "Name": "valid",
      "ResourceName": "OAuth2",
-     "Summary": "Check whether client is authenticated",
+     "Description": "Check whether client is authenticated",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -90,7 +90,7 @@
      "$id": "12",
      "Name": "invalid",
      "ResourceName": "OAuth2",
-     "Summary": "Check whether client is authenticated. Will return an invalid bearer error.",
+     "Description": "Check whether client is authenticated. Will return an invalid bearer error.",
      "Accessibility": "public",
      "Parameters": [
       {

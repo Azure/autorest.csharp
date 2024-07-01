@@ -39,7 +39,6 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="body"> The <see cref="MultiPartRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Basic. </remarks>
         public virtual async Task<ClientResult> BasicAsync(MultiPartRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -52,7 +51,6 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="body"> The <see cref="MultiPartRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Basic. </remarks>
         public virtual ClientResult Basic(MultiPartRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -123,7 +121,6 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for mixed scenarios. </summary>
         /// <param name="body"> The <see cref="ComplexPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Complex. </remarks>
         public virtual async Task<ClientResult> ComplexAsync(ComplexPartsRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -136,7 +133,6 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for mixed scenarios. </summary>
         /// <param name="body"> The <see cref="ComplexPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Complex. </remarks>
         public virtual ClientResult Complex(ComplexPartsRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -207,7 +203,6 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for scenario contains json part and binary part. </summary>
         /// <param name="body"> The <see cref="JsonPartRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Json part. </remarks>
         public virtual async Task<ClientResult> JsonPartAsync(JsonPartRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -220,7 +215,6 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for scenario contains json part and binary part. </summary>
         /// <param name="body"> The <see cref="JsonPartRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Json part. </remarks>
         public virtual ClientResult JsonPart(JsonPartRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -291,7 +285,6 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
         /// <param name="body"> The <see cref="BinaryArrayPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Binary array parts. </remarks>
         public virtual async Task<ClientResult> BinaryArrayPartsAsync(BinaryArrayPartsRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -304,7 +297,6 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
         /// <param name="body"> The <see cref="BinaryArrayPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Binary array parts. </remarks>
         public virtual ClientResult BinaryArrayParts(BinaryArrayPartsRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -375,7 +367,6 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for scenario contains multi json parts. </summary>
         /// <param name="body"> The <see cref="JsonArrayPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Json array parts. </remarks>
         public virtual async Task<ClientResult> JsonArrayPartsAsync(JsonArrayPartsRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -388,7 +379,6 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for scenario contains multi json parts. </summary>
         /// <param name="body"> The <see cref="JsonArrayPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Json array parts. </remarks>
         public virtual ClientResult JsonArrayParts(JsonArrayPartsRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -459,7 +449,6 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
         /// <param name="body"> The <see cref="MultiBinaryPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Multi binary parts. </remarks>
         public virtual async Task<ClientResult> MultiBinaryPartsAsync(MultiBinaryPartsRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -472,7 +461,6 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
         /// <param name="body"> The <see cref="MultiBinaryPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Multi binary parts. </remarks>
         public virtual ClientResult MultiBinaryParts(MultiBinaryPartsRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -543,7 +531,6 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="body"> The <see cref="MultiPartRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Check file name and content type. </remarks>
         public virtual async Task<ClientResult> CheckFileNameAndContentTypeAsync(MultiPartRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -556,7 +543,6 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="body"> The <see cref="MultiPartRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Check file name and content type. </remarks>
         public virtual ClientResult CheckFileNameAndContentType(MultiPartRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -627,7 +613,6 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="profileImage"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> is null. </exception>
-        /// <remarks> Anonymous model. </remarks>
         public virtual async Task<ClientResult> AnonymousModelAsync(Stream profileImage)
         {
             Argument.AssertNotNull(profileImage, nameof(profileImage));
@@ -641,7 +626,6 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="profileImage"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> is null. </exception>
-        /// <remarks> Anonymous model. </remarks>
         public virtual ClientResult AnonymousModel(Stream profileImage)
         {
             Argument.AssertNotNull(profileImage, nameof(profileImage));

@@ -1082,7 +1082,7 @@
      "$id": "159",
      "Name": "createOrUpdate",
      "ResourceName": "Project",
-     "Summary": "Creates a new project or updates an existing one.",
+     "Description": "Creates a new project or updates an existing one.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1288,7 +1288,7 @@
      "$id": "183",
      "Name": "get",
      "ResourceName": "Project",
-     "Summary": "Gets the details of a project.",
+     "Description": "Gets the details of a project.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1386,7 +1386,7 @@
      "$id": "194",
      "Name": "delete",
      "ResourceName": "Project",
-     "Summary": "Deletes a project.",
+     "Description": "Deletes a project.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1506,7 +1506,7 @@
      "$id": "209",
      "Name": "list",
      "ResourceName": "Project",
-     "Summary": "Lists the existing projects.",
+     "Description": "Lists the existing projects.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1593,7 +1593,7 @@
      "$id": "219",
      "Name": "export",
      "ResourceName": "Projects",
-     "Summary": "Triggers a job to export a project's data.",
+     "Description": "Triggers a job to export a project's data.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1723,7 +1723,7 @@
      "$id": "236",
      "Name": "importx",
      "ResourceName": "Projects",
-     "Summary": "Triggers a job to export a project's data.",
+     "Description": "Triggers a job to export a project's data.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1837,7 +1837,7 @@
      "$id": "251",
      "Name": "train",
      "ResourceName": "Projects",
-     "Summary": "Triggers a training job for a project.",
+     "Description": "Triggers a training job for a project.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2006,7 +2006,7 @@
      "$id": "272",
      "Name": "getDeployment",
      "ResourceName": "Deployment",
-     "Summary": "Gets the details of a deployment.",
+     "Description": "Gets the details of a deployment.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2136,7 +2136,7 @@
      "$id": "287",
      "Name": "deployProject",
      "ResourceName": "Deployment",
-     "Summary": "Creates a new deployment or replaces an existing one.",
+     "Description": "Creates a new deployment or replaces an existing one.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2342,7 +2342,7 @@
      "$id": "311",
      "Name": "deleteDeployment",
      "ResourceName": "Deployment",
-     "Summary": "Deletes a project deployment.",
+     "Description": "Deletes a project deployment.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2478,7 +2478,7 @@
      "$id": "328",
      "Name": "list",
      "ResourceName": "Deployment",
-     "Summary": "Lists the existing deployments.",
+     "Description": "Lists the existing deployments.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2581,7 +2581,7 @@
      "$id": "340",
      "Name": "swapDeployments",
      "ResourceName": "Deployments",
-     "Summary": "Swaps two existing deployments with each other.",
+     "Description": "Swaps two existing deployments with each other.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2751,7 +2751,7 @@
      "$id": "361",
      "Name": "getDeploymentStatus",
      "ResourceName": "DeploymentJob",
-     "Summary": "Gets the status of an existing deployment job.",
+     "Description": "Gets the status of an existing deployment job.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2897,7 +2897,7 @@
      "$id": "378",
      "Name": "getSwapDeploymentsStatus",
      "ResourceName": "SwapDeploymentsJob",
-     "Summary": "Gets the status of an existing swap deployment job.",
+     "Description": "Gets the status of an existing swap deployment job.",
      "Accessibility": "public",
      "Parameters": [
       {

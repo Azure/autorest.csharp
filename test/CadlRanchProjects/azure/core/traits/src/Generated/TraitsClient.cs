@@ -55,7 +55,6 @@ namespace _Specs_.Azure.Core.Traits
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="foo"/> is null. </exception>
-        /// <remarks> Smoke test. </remarks>
         /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='SmokeTestAsync(int,string,RequestConditions,CancellationToken)']/*" />
         public virtual async Task<Response<User>> SmokeTestAsync(int id, string foo, RequestConditions requestConditions = null, CancellationToken cancellationToken = default)
         {
@@ -72,7 +71,6 @@ namespace _Specs_.Azure.Core.Traits
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="foo"/> is null. </exception>
-        /// <remarks> Smoke test. </remarks>
         /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='SmokeTest(int,string,RequestConditions,CancellationToken)']/*" />
         public virtual Response<User> SmokeTest(int id, string foo, RequestConditions requestConditions = null, CancellationToken cancellationToken = default)
         {
@@ -170,7 +168,6 @@ namespace _Specs_.Azure.Core.Traits
         /// <param name="userActionParam"> The <see cref="UserActionParam"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="userActionParam"/> is null. </exception>
-        /// <remarks> Repeatable action. </remarks>
         /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableActionAsync(int,UserActionParam,CancellationToken)']/*" />
         public virtual async Task<Response<UserActionResponse>> RepeatableActionAsync(int id, UserActionParam userActionParam, CancellationToken cancellationToken = default)
         {
@@ -187,7 +184,6 @@ namespace _Specs_.Azure.Core.Traits
         /// <param name="userActionParam"> The <see cref="UserActionParam"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="userActionParam"/> is null. </exception>
-        /// <remarks> Repeatable action. </remarks>
         /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableAction(int,UserActionParam,CancellationToken)']/*" />
         public virtual Response<UserActionResponse> RepeatableAction(int id, UserActionParam userActionParam, CancellationToken cancellationToken = default)
         {

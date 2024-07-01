@@ -46,7 +46,6 @@ namespace _Specs_.Azure.Core.Scalar
 
         /// <summary> get azureLocation value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='GetAzureLocationScalarAsync(CancellationToken)']/*" />
         public virtual async Task<Response<AzureLocation>> GetAzureLocationScalarAsync(CancellationToken cancellationToken = default)
         {
@@ -57,7 +56,6 @@ namespace _Specs_.Azure.Core.Scalar
 
         /// <summary> get azureLocation value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='GetAzureLocationScalar(CancellationToken)']/*" />
         public virtual Response<AzureLocation> GetAzureLocationScalar(CancellationToken cancellationToken = default)
         {
@@ -139,7 +137,6 @@ namespace _Specs_.Azure.Core.Scalar
         /// <summary> put azureLocation value. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='PutAsync(AzureLocation,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(AzureLocation body, CancellationToken cancellationToken = default)
         {
@@ -152,7 +149,6 @@ namespace _Specs_.Azure.Core.Scalar
         /// <summary> put azureLocation value. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='Put(AzureLocation,CancellationToken)']/*" />
         public virtual Response Put(AzureLocation body, CancellationToken cancellationToken = default)
         {
@@ -244,7 +240,6 @@ namespace _Specs_.Azure.Core.Scalar
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Post. </remarks>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='PostAsync(AzureLocationModel,CancellationToken)']/*" />
         public virtual async Task<Response<AzureLocationModel>> PostAsync(AzureLocationModel body, CancellationToken cancellationToken = default)
         {
@@ -260,7 +255,6 @@ namespace _Specs_.Azure.Core.Scalar
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Post. </remarks>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='Post(AzureLocationModel,CancellationToken)']/*" />
         public virtual Response<AzureLocationModel> Post(AzureLocationModel body, CancellationToken cancellationToken = default)
         {

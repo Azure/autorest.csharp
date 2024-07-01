@@ -3017,7 +3017,7 @@
      "$id": "454",
      "Name": "inputToRoundTrip",
      "ResourceName": "ModelsTypeSpec",
-     "Summary": "Input model that has property of its own type",
+     "Description": "Input model that has property of its own type",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3114,7 +3114,7 @@
      "$id": "463",
      "Name": "inputToRoundTripPrimitive",
      "ResourceName": "ModelsTypeSpec",
-     "Summary": "Input to RoundTripPrimitive",
+     "Description": "Input to RoundTripPrimitive",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3211,7 +3211,7 @@
      "$id": "472",
      "Name": "inputToRoundTripOptional",
      "ResourceName": "ModelsTypeSpec",
-     "Summary": "Input to RoundTripOptional",
+     "Description": "Input to RoundTripOptional",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3308,8 +3308,8 @@
      "$id": "481",
      "Name": "inputToRoundTripReadOnly",
      "ResourceName": "ModelsTypeSpec",
-     "Summary": "Input to RoundTripReadOnly",
      "Deprecated": "deprecated for test",
+     "Description": "Input to RoundTripReadOnly",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3406,7 +3406,7 @@
      "$id": "490",
      "Name": "roundTripToOutput",
      "ResourceName": "ModelsTypeSpec",
-     "Summary": "RoundTrip to Output",
+     "Description": "RoundTrip to Output",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3503,7 +3503,7 @@
      "$id": "499",
      "Name": "InputRecursive",
      "ResourceName": "ModelsTypeSpec",
-     "Summary": "Input recursive model",
+     "Description": "Input recursive model",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3600,7 +3600,7 @@
      "$id": "508",
      "Name": "roundTripRecursive",
      "ResourceName": "ModelsTypeSpec",
-     "Summary": "RoundTrip recursive model",
+     "Description": "RoundTrip recursive model",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3697,7 +3697,7 @@
      "$id": "517",
      "Name": "selfReference",
      "ResourceName": "ModelsTypeSpec",
-     "Summary": "Returns model that has property of its own type",
+     "Description": "Returns model that has property of its own type",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3754,7 +3754,7 @@
      "$id": "522",
      "Name": "fixedFloatEnum",
      "ResourceName": "ModelsTypeSpec",
-     "Summary": "Returns model that has property of its own type",
+     "Description": "Returns model that has property of its own type",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3826,7 +3826,7 @@
      "$id": "528",
      "Name": "extenisbleIntEnum",
      "ResourceName": "ModelsTypeSpec",
-     "Summary": "Returns model that has property of its own type",
+     "Description": "Returns model that has property of its own type",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3898,7 +3898,7 @@
      "$id": "534",
      "Name": "roundTripToOutputWithNoUseBase",
      "ResourceName": "ModelsTypeSpec",
-     "Summary": "Returns RoundTripOnNoUse",
+     "Description": "Returns RoundTripOnNoUse",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3995,7 +3995,7 @@
      "$id": "543",
      "Name": "analyzeConversation",
      "ResourceName": "ModelsTypeSpec",
-     "Summary": "Resource collection action operation template.",
+     "Description": "Resource collection action operation template.",
      "Accessibility": "public",
      "Parameters": [
       {

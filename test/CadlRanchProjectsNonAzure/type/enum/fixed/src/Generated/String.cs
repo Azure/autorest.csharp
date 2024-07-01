@@ -35,7 +35,6 @@ namespace Scm._Type._Enum.Fixed
         }
 
         /// <summary> getKnownValue. </summary>
-        /// <remarks> Get known value. </remarks>
         public virtual async Task<ClientResult<DaysOfWeekEnum>> GetKnownValueAsync()
         {
             ClientResult result = await GetKnownValueAsync(null).ConfigureAwait(false);
@@ -43,7 +42,6 @@ namespace Scm._Type._Enum.Fixed
         }
 
         /// <summary> getKnownValue. </summary>
-        /// <remarks> Get known value. </remarks>
         public virtual ClientResult<DaysOfWeekEnum> GetKnownValue()
         {
             ClientResult result = GetKnownValue(null);
@@ -100,7 +98,6 @@ namespace Scm._Type._Enum.Fixed
 
         /// <summary> putKnownValue. </summary>
         /// <param name="body"> _. </param>
-        /// <remarks> Put known value. </remarks>
         public virtual async Task<ClientResult> PutKnownValueAsync(DaysOfWeekEnum body)
         {
             using BinaryContent content = BinaryContent.Create(BinaryData.FromObjectAsJson(body.ToSerialString()));
@@ -110,7 +107,6 @@ namespace Scm._Type._Enum.Fixed
 
         /// <summary> putKnownValue. </summary>
         /// <param name="body"> _. </param>
-        /// <remarks> Put known value. </remarks>
         public virtual ClientResult PutKnownValue(DaysOfWeekEnum body)
         {
             using BinaryContent content = BinaryContent.Create(BinaryData.FromObjectAsJson(body.ToSerialString()));
@@ -176,7 +172,6 @@ namespace Scm._Type._Enum.Fixed
 
         /// <summary> putUnknownValue. </summary>
         /// <param name="body"> _. </param>
-        /// <remarks> Put unknown value. </remarks>
         public virtual async Task<ClientResult> PutUnknownValueAsync(DaysOfWeekEnum body)
         {
             using BinaryContent content = BinaryContent.Create(BinaryData.FromObjectAsJson(body.ToSerialString()));
@@ -186,7 +181,6 @@ namespace Scm._Type._Enum.Fixed
 
         /// <summary> putUnknownValue. </summary>
         /// <param name="body"> _. </param>
-        /// <remarks> Put unknown value. </remarks>
         public virtual ClientResult PutUnknownValue(DaysOfWeekEnum body)
         {
             using BinaryContent content = BinaryContent.Create(BinaryData.FromObjectAsJson(body.ToSerialString()));

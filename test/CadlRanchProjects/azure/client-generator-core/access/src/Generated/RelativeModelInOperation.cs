@@ -60,7 +60,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <remarks> Operation. </remarks>
         internal virtual async Task<Response<OuterModel>> OperationAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -86,7 +85,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <remarks> Operation. </remarks>
         internal virtual Response<OuterModel> Operation(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -205,7 +203,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="kind"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
-        /// <remarks> Discriminator. </remarks>
         internal virtual async Task<Response<AbstractModel>> DiscriminatorAsync(string kind, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(kind, nameof(kind));
@@ -228,7 +225,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="kind"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
-        /// <remarks> Discriminator. </remarks>
         internal virtual Response<AbstractModel> Discriminator(string kind, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(kind, nameof(kind));

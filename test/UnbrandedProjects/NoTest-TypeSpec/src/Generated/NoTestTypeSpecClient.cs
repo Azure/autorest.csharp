@@ -56,7 +56,6 @@ namespace NoTestTypeSpec
         /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
         /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
-        /// <remarks> Say hi. </remarks>
         public virtual async Task<ClientResult<Thing>> SayHiAsync(string headParameter, string queryParameter, string optionalQuery = null)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
@@ -71,7 +70,6 @@ namespace NoTestTypeSpec
         /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
         /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
-        /// <remarks> Say hi. </remarks>
         public virtual ClientResult<Thing> SayHi(string headParameter, string queryParameter, string optionalQuery = null)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));

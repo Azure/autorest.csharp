@@ -421,7 +421,7 @@
      "$id": "59",
      "Name": "export",
      "ResourceName": "VersioningOp",
-     "Summary": "Long-running resource action operation template.",
+     "Description": "Long-running resource action operation template.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -577,7 +577,7 @@
      "$id": "78",
      "Name": "list",
      "ResourceName": "Resource",
-     "Summary": "Resource list operation template.",
+     "Description": "Resource list operation template.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -701,7 +701,7 @@
      "$id": "93",
      "Name": "create",
      "ResourceName": "Resource",
-     "Summary": "Create or replace operation template.",
+     "Description": "Create or replace operation template.",
      "Accessibility": "public",
      "Parameters": [
       {

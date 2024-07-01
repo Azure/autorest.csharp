@@ -365,7 +365,7 @@
      "$id": "55",
      "Name": "get",
      "ResourceName": "Project",
-     "Summary": "Gets the details of a project.",
+     "Description": "Gets the details of a project.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -479,7 +479,7 @@
      "$id": "68",
      "Name": "list",
      "ResourceName": "Project",
-     "Summary": "Lists the existing projects.",
+     "Description": "Lists the existing projects.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -581,7 +581,7 @@
      "$id": "80",
      "Name": "get",
      "ResourceName": "Deployment",
-     "Summary": "Gets the details of a deployment.",
+     "Description": "Gets the details of a deployment.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -711,7 +711,7 @@
      "$id": "95",
      "Name": "list",
      "ResourceName": "Deployment",
-     "Summary": "Lists the existing deployments.",
+     "Description": "Lists the existing deployments.",
      "Accessibility": "public",
      "Parameters": [
       {

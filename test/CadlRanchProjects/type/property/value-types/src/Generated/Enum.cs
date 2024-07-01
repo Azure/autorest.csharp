@@ -46,7 +46,6 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/Enum.xml" path="doc/members/member[@name='GetEnumAsync(CancellationToken)']/*" />
         public virtual async Task<Response<EnumProperty>> GetEnumAsync(CancellationToken cancellationToken = default)
         {
@@ -57,7 +56,6 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get. </remarks>
         /// <include file="Docs/Enum.xml" path="doc/members/member[@name='GetEnum(CancellationToken)']/*" />
         public virtual Response<EnumProperty> GetEnum(CancellationToken cancellationToken = default)
         {
@@ -140,7 +138,6 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/Enum.xml" path="doc/members/member[@name='PutAsync(EnumProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(EnumProperty body, CancellationToken cancellationToken = default)
         {
@@ -156,7 +153,6 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Put. </remarks>
         /// <include file="Docs/Enum.xml" path="doc/members/member[@name='Put(EnumProperty,CancellationToken)']/*" />
         public virtual Response Put(EnumProperty body, CancellationToken cancellationToken = default)
         {

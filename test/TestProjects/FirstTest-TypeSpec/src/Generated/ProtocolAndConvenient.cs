@@ -56,7 +56,6 @@ namespace FirstTestTypeSpec
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Internal protocol. </remarks>
         public virtual async Task<Response<Thing>> InternalProtocolAsync(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -71,7 +70,6 @@ namespace FirstTestTypeSpec
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Internal protocol. </remarks>
         public virtual Response<Thing> InternalProtocol(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -150,7 +148,6 @@ namespace FirstTestTypeSpec
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Still convenient. </remarks>
         public virtual async Task<Response> StillConvenientValueAsync(CancellationToken cancellationToken = default)
         {
             using var scope = ClientDiagnostics.CreateScope("ProtocolAndConvenient.StillConvenientValue");
@@ -170,7 +167,6 @@ namespace FirstTestTypeSpec
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Still convenient. </remarks>
         public virtual Response StillConvenientValue(CancellationToken cancellationToken = default)
         {
             using var scope = ClientDiagnostics.CreateScope("ProtocolAndConvenient.StillConvenientValue");
