@@ -35,25 +35,25 @@ namespace Scm.Serialization.EncodedName.Json
         }
 
         /// <summary> Send. </summary>
-        /// <param name="jsonEncodedNameModel"> The <see cref="JsonEncodedNameModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="jsonEncodedNameModel"/> is null. </exception>
-        public virtual async Task<ClientResult> SendAsync(JsonEncodedNameModel jsonEncodedNameModel)
+        /// <param name="body"> The <see cref="JsonEncodedNameModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<ClientResult> SendAsync(JsonEncodedNameModel body)
         {
-            Argument.AssertNotNull(jsonEncodedNameModel, nameof(jsonEncodedNameModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = jsonEncodedNameModel.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await SendAsync(content, null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Send. </summary>
-        /// <param name="jsonEncodedNameModel"> The <see cref="JsonEncodedNameModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="jsonEncodedNameModel"/> is null. </exception>
-        public virtual ClientResult Send(JsonEncodedNameModel jsonEncodedNameModel)
+        /// <param name="body"> The <see cref="JsonEncodedNameModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual ClientResult Send(JsonEncodedNameModel body)
         {
-            Argument.AssertNotNull(jsonEncodedNameModel, nameof(jsonEncodedNameModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = jsonEncodedNameModel.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = Send(content, null);
             return result;
         }
