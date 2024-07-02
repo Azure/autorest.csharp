@@ -15,6 +15,7 @@ import {
     resolveOutputFolder
 } from "./options.js";
 import { $onEmit as $OnMGCEmit } from "@typespec/http-client-csharp";
+import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 
 export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     const program: Program = context.program;
@@ -63,6 +64,13 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             (configurations.namespace.toLowerCase().startsWith("azure.")
                 ? "azure"
                 : undefined);
+        /* set azure-arm */
+        const sdkContext = createSdkContext(
+            context,
+            "@azure-tools/typespec-csharp"
+        );
+        configurations["azure-arm"] =
+            sdkContext.arm === false ? undefined : sdkContext.arm;
         await program.host.writeFile(
             resolvePath(outputFolder, configurationFileName),
             prettierOutput(JSON.stringify(configurations, null, 2))

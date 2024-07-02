@@ -766,6 +766,7 @@
    "Protocol": {
     "$id": "104"
    },
+   "Creatable": true,
    "Parameters": [
     {
      "$id": "105",
@@ -1841,6 +1842,7 @@
    "Protocol": {
     "$id": "215"
    },
+   "Creatable": false,
    "Parent": "ResourcesClient",
    "Parameters": [
     {
@@ -2871,6 +2873,7 @@
    "Protocol": {
     "$id": "320"
    },
+   "Creatable": false,
    "Parent": "ResourcesClient",
    "Parameters": [
     {
