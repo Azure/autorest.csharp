@@ -388,7 +388,7 @@ namespace AutoRest.CSharp.Common.Input
                 AdditionalProperties: dictionarySchema is not null ? GetOrCreateType(dictionarySchema.ElementType, false) : null)
             {
                 Serialization = GetSerialization(schema, usage),
-                SpecName = schema.Language.Default.SerializedName
+                SpecName = schema.Language.Default.SerializedName ?? schema.Language.Default.Name
             };
 
             _modelsCache[schema] = model;
