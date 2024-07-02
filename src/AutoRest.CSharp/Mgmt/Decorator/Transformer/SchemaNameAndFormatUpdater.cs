@@ -386,7 +386,7 @@ internal static class SchemaNameAndFormatUpdater
             var tempName = originalName;
             var result = NameTransformer.Instance.EnsureNameCase(originalName, (applyStep) =>
             {
-                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, schema.GetFullSerializedName(choiceValue),
+                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue!, schema.GetFullSerializedName(choiceValue),
                     "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
                 tempName = applyStep.NewName.Name;
             });
@@ -400,7 +400,7 @@ internal static class SchemaNameAndFormatUpdater
         var tempName = originalName;
         var result = NameTransformer.Instance.EnsureNameCase(originalName, (applyStep) =>
         {
-            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, targetFullSerializedName,
+            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue!, targetFullSerializedName,
                 "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
             tempName = applyStep.NewName.Name;
         });
@@ -455,7 +455,7 @@ internal static class SchemaNameAndFormatUpdater
         var tempName = originalName;
         var result = NameTransformer.Instance.EnsureNameCase(originalName, (applyStep) =>
         {
-            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, targetFullSerializedName,
+            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue!, targetFullSerializedName,
                 "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
             tempName = applyStep.NewName.Name;
         });

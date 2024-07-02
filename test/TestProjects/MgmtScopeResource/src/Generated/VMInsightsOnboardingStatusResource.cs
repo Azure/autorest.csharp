@@ -32,8 +32,8 @@ namespace MgmtScopeResource
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _vmInsightsOnboardingStatusVMInsightsClientDiagnostics;
-        private readonly VMInsightsRestOperations _vmInsightsOnboardingStatusVMInsightsRestClient;
+        private readonly ClientDiagnostics _vmInsightsOnboardingStatusVmInsightsClientDiagnostics;
+        private readonly VMInsightsRestOperations _vmInsightsOnboardingStatusVmInsightsRestClient;
         private readonly VMInsightsOnboardingStatusData _data;
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -58,9 +58,9 @@ namespace MgmtScopeResource
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal VMInsightsOnboardingStatusResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _vmInsightsOnboardingStatusVMInsightsClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ResourceType.Namespace, Diagnostics);
-            TryGetApiVersion(ResourceType, out string vmInsightsOnboardingStatusVMInsightsApiVersion);
-            _vmInsightsOnboardingStatusVMInsightsRestClient = new VMInsightsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, vmInsightsOnboardingStatusVMInsightsApiVersion);
+            _vmInsightsOnboardingStatusVmInsightsClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(ResourceType, out string vmInsightsOnboardingStatusVmInsightsApiVersion);
+            _vmInsightsOnboardingStatusVmInsightsRestClient = new VMInsightsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, vmInsightsOnboardingStatusVmInsightsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -111,11 +111,11 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<VMInsightsOnboardingStatusResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _vmInsightsOnboardingStatusVMInsightsClientDiagnostics.CreateScope("VMInsightsOnboardingStatusResource.Get");
+            using var scope = _vmInsightsOnboardingStatusVmInsightsClientDiagnostics.CreateScope("VMInsightsOnboardingStatusResource.Get");
             scope.Start();
             try
             {
-                var response = await _vmInsightsOnboardingStatusVMInsightsRestClient.GetOnboardingStatusAsync(Id.Parent, cancellationToken).ConfigureAwait(false);
+                var response = await _vmInsightsOnboardingStatusVmInsightsRestClient.GetOnboardingStatusAsync(Id.Parent, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VMInsightsOnboardingStatusResource(Client, response.Value), response.GetRawResponse());
@@ -151,11 +151,11 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<VMInsightsOnboardingStatusResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _vmInsightsOnboardingStatusVMInsightsClientDiagnostics.CreateScope("VMInsightsOnboardingStatusResource.Get");
+            using var scope = _vmInsightsOnboardingStatusVmInsightsClientDiagnostics.CreateScope("VMInsightsOnboardingStatusResource.Get");
             scope.Start();
             try
             {
-                var response = _vmInsightsOnboardingStatusVMInsightsRestClient.GetOnboardingStatus(Id.Parent, cancellationToken);
+                var response = _vmInsightsOnboardingStatusVmInsightsRestClient.GetOnboardingStatus(Id.Parent, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VMInsightsOnboardingStatusResource(Client, response.Value), response.GetRawResponse());
