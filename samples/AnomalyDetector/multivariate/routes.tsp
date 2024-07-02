@@ -5,7 +5,10 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
+using Azure.Core;
 
+@versioned(Versions)
 namespace AnomalyDetector.Multivariate;
 
 @get
@@ -17,9 +20,8 @@ resultId returned by the BatchDetectAnomaly api.
 """)
 // To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op GetMultivariateBatchDetectionResult(
-  @format("uuid")
   @doc("ID of a batch detection result.")
-  @path resultId: string,
+  @path resultId: uuid,
 ): MultivariateDetectionResult | ResponseError;
 
 

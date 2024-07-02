@@ -2,12 +2,14 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 @versioned(Versions)
 @service({title: "Anomaly Detector"})
@@ -31,6 +33,7 @@ namespace ApiVersionInTsp;
 
 enum Versions {
   v1_1: "v1.1",
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v1_2: "v1.2"
 }
 
@@ -42,8 +45,7 @@ scalar APIVersion extends string;
 model DetectionResult {
   @doc("Result identifier, which is used to fetch the results of an inference call.")
   @key
-  @format("uuid")
-  resultId: string;
+  resultId: uuid;
 }
 
 @get

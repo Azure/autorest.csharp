@@ -1017,8 +1017,8 @@
      "Type": {
       "$id": "154",
       "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "Name": "uuid",
+      "CrossLanguageDefinitionId": "Azure.Core.uuid"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1859,8 +1859,8 @@
      "Type": {
       "$id": "263",
       "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "Name": "uuid",
+      "CrossLanguageDefinitionId": "Azure.Core.uuid"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -2614,8 +2614,8 @@
        "Type": {
         "$id": "342",
         "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Name": "uuid",
+        "CrossLanguageDefinitionId": "Azure.Core.uuid"
        },
        "Location": "Path",
        "IsRequired": true,

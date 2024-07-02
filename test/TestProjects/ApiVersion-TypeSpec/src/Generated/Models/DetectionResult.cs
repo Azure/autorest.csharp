@@ -47,18 +47,15 @@ namespace ApiVersionInTsp.Models
 
         /// <summary> Initializes a new instance of <see cref="DetectionResult"/>. </summary>
         /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> is null. </exception>
-        internal DetectionResult(string resultId)
+        internal DetectionResult(Guid resultId)
         {
-            Argument.AssertNotNull(resultId, nameof(resultId));
-
             ResultId = resultId;
         }
 
         /// <summary> Initializes a new instance of <see cref="DetectionResult"/>. </summary>
         /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal DetectionResult(string resultId, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal DetectionResult(Guid resultId, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ResultId = resultId;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -70,6 +67,6 @@ namespace ApiVersionInTsp.Models
         }
 
         /// <summary> Result identifier, which is used to fetch the results of an inference call. </summary>
-        public string ResultId { get; }
+        public Guid ResultId { get; }
     }
 }

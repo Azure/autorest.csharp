@@ -64,7 +64,7 @@ namespace AnomalyDetector.Models
         /// <param name="summary"> Multivariate anomaly detection status. </param>
         /// <param name="results"> Detection result for each timestamp. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal MultivariateDetectionResult(string resultId, MultivariateBatchDetectionResultSummary summary, IReadOnlyList<AnomalyState> results, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal MultivariateDetectionResult(Guid resultId, MultivariateBatchDetectionResultSummary summary, IReadOnlyList<AnomalyState> results, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ResultId = resultId;
             Summary = summary;
@@ -78,7 +78,7 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> Result identifier, which is used to fetch the results of an inference call. </summary>
-        public string ResultId { get; }
+        public Guid ResultId { get; }
         /// <summary> Multivariate anomaly detection status. </summary>
         public MultivariateBatchDetectionResultSummary Summary { get; }
         /// <summary> Detection result for each timestamp. </summary>

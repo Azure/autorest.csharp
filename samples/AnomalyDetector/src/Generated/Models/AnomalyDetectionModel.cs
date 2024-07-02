@@ -63,7 +63,7 @@ namespace AnomalyDetector.Models
         /// information.
         /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal AnomalyDetectionModel(string modelId, DateTimeOffset createdTime, DateTimeOffset lastUpdatedTime, ModelInfo modelInfo, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal AnomalyDetectionModel(Guid modelId, DateTimeOffset createdTime, DateTimeOffset lastUpdatedTime, ModelInfo modelInfo, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ModelId = modelId;
             CreatedTime = createdTime;
@@ -78,7 +78,7 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> Model identifier. </summary>
-        public string ModelId { get; }
+        public Guid ModelId { get; }
         /// <summary> Date and time (UTC) when the model was created. </summary>
         public DateTimeOffset CreatedTime { get; }
         /// <summary> Date and time (UTC) when the model was last updated. </summary>

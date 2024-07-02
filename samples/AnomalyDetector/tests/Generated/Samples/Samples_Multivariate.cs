@@ -26,7 +26,7 @@ namespace AnomalyDetector.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-            Response response = client.GetMultivariateBatchDetectionResult("<resultId>", null);
+            Response response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -46,7 +46,7 @@ namespace AnomalyDetector.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-            Response response = await client.GetMultivariateBatchDetectionResultAsync("<resultId>", null);
+            Response response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -66,7 +66,7 @@ namespace AnomalyDetector.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-            Response<MultivariateDetectionResult> response = client.GetMultivariateBatchDetectionResult("<resultId>");
+            Response<MultivariateDetectionResult> response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
         }
 
         [Test]
@@ -77,7 +77,7 @@ namespace AnomalyDetector.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-            Response<MultivariateDetectionResult> response = await client.GetMultivariateBatchDetectionResultAsync("<resultId>");
+            Response<MultivariateDetectionResult> response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
         }
 
         [Test]
@@ -88,7 +88,7 @@ namespace AnomalyDetector.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-            Response response = client.GetMultivariateBatchDetectionResult("<resultId>", null);
+            Response response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -123,7 +123,7 @@ namespace AnomalyDetector.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-            Response response = await client.GetMultivariateBatchDetectionResultAsync("<resultId>", null);
+            Response response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -158,7 +158,7 @@ namespace AnomalyDetector.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-            Response<MultivariateDetectionResult> response = client.GetMultivariateBatchDetectionResult("<resultId>");
+            Response<MultivariateDetectionResult> response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
         }
 
         [Test]
@@ -169,7 +169,7 @@ namespace AnomalyDetector.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-            Response<MultivariateDetectionResult> response = await client.GetMultivariateBatchDetectionResultAsync("<resultId>");
+            Response<MultivariateDetectionResult> response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
         }
 
         [Test]

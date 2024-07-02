@@ -47,6 +47,7 @@ discover incidents and establish a logic flow for root cause analysis.
 namespace AnomalyDetector;
 
 enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v1_1: "v1.1",
 }
 

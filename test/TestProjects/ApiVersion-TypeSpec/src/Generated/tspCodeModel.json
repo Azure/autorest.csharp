@@ -76,8 +76,8 @@
      "Type": {
       "$id": "12",
       "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "Name": "uuid",
+      "CrossLanguageDefinitionId": "Azure.Core.uuid"
      },
      "IsRequired": true,
      "IsReadOnly": false

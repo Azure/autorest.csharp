@@ -79,7 +79,7 @@ namespace AnomalyDetector.Models
             {
                 return null;
             }
-            string resultId = default;
+            Guid resultId = default;
             MultivariateBatchDetectionResultSummary summary = default;
             IReadOnlyList<AnomalyState> results = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -88,7 +88,7 @@ namespace AnomalyDetector.Models
             {
                 if (property.NameEquals("resultId"u8))
                 {
-                    resultId = property.Value.GetString();
+                    resultId = property.Value.GetGuid();
                     continue;
                 }
                 if (property.NameEquals("summary"u8))

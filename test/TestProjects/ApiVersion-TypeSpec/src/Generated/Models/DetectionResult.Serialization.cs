@@ -67,14 +67,14 @@ namespace ApiVersionInTsp.Models
             {
                 return null;
             }
-            string resultId = default;
+            Guid resultId = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("resultId"u8))
                 {
-                    resultId = property.Value.GetString();
+                    resultId = property.Value.GetGuid();
                     continue;
                 }
                 if (options.Format != "W")
