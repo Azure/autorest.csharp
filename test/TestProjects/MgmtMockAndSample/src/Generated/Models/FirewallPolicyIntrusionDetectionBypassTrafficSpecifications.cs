@@ -29,9 +29,9 @@ namespace MgmtMockAndSample.Models
         /// <param name="sourceAddresses"> List of source IP addresses or ranges for this rule. </param>
         /// <param name="destinationAddresses"> List of destination IP addresses or ranges for this rule. </param>
         /// <param name="destinationPorts"> List of destination ports or ranges. </param>
-        /// <param name="sourceIpGroups"> List of source IpGroups for this rule. </param>
-        /// <param name="destinationIpGroups"> List of destination IpGroups for this rule. </param>
-        internal FirewallPolicyIntrusionDetectionBypassTrafficSpecifications(string name, string description, FirewallPolicyIntrusionDetectionProtocol? protocol, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<string> destinationPorts, IList<string> sourceIpGroups, IList<string> destinationIpGroups)
+        /// <param name="sourceIPGroups"> List of source IpGroups for this rule. </param>
+        /// <param name="destinationIPGroups"> List of destination IpGroups for this rule. </param>
+        internal FirewallPolicyIntrusionDetectionBypassTrafficSpecifications(string name, string description, FirewallPolicyIntrusionDetectionProtocol? protocol, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<string> destinationPorts, IList<string> sourceIPGroups, IList<string> destinationIPGroups)
         {
             Name = name;
             Description = description;
@@ -39,8 +39,8 @@ namespace MgmtMockAndSample.Models
             SourceAddresses = sourceAddresses;
             DestinationAddresses = destinationAddresses;
             DestinationPorts = destinationPorts;
-            SourceIpGroups = sourceIpGroups;
-            DestinationIpGroups = destinationIpGroups;
+            SourceIpGroups = sourceIPGroups;
+            DestinationIpGroups = destinationIPGroups;
         }
 
         /// <summary> Name of the bypass traffic rule. </summary>
