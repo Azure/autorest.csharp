@@ -526,9 +526,9 @@
       },
       {
        "$id": "66",
-       "Name": "UserActionParam",
-       "NameInRequest": "UserActionParam",
-       "Description": "User action param",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Description": "The body parameter.",
        "Type": {
         "$ref": "14"
        },
