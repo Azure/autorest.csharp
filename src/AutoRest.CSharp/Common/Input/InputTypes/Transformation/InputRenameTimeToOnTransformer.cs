@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Common.Input
             "At",
         };
 
-        public static void Update(InputNamespace inputNamespace)
+        public static void Transform(InputNamespace inputNamespace)
         {
             foreach (var model in inputNamespace.Models)
             {

@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.Common.Input
         private static readonly char LowerCaseI = 'i';
         private const string UrlSuffix = "Url";
 
-        public static void UpdateSuffix(InputNamespace input)
+        public static void Transform(InputNamespace input)
         {
             foreach (var model in input.Models)
             {

@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal class InputAcronymTransformer
     {
-        public static void UpdateAcronyms(InputNamespace input)
+        public static void Transform(InputNamespace input)
         {
             UpdateAcronyms(input.Models);
             UpdateAcronyms(input.Enums);
