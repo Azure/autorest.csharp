@@ -35,25 +35,25 @@ namespace Scm.Client.Naming
         }
 
         /// <summary> Client. </summary>
-        /// <param name="clientModel"> The <see cref="Models.ClientModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientModel"/> is null. </exception>
-        public virtual async Task<ClientResult> ClientAsync(Models.ClientModel clientModel)
+        /// <param name="body"> The <see cref="Models.ClientModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<ClientResult> ClientAsync(Models.ClientModel body)
         {
-            Argument.AssertNotNull(clientModel, nameof(clientModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = clientModel.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await ClientAsync(content, null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Client. </summary>
-        /// <param name="clientModel"> The <see cref="Models.ClientModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientModel"/> is null. </exception>
-        public virtual ClientResult Client(Models.ClientModel clientModel)
+        /// <param name="body"> The <see cref="Models.ClientModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual ClientResult Client(Models.ClientModel body)
         {
-            Argument.AssertNotNull(clientModel, nameof(clientModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = clientModel.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = Client(content, null);
             return result;
         }
@@ -115,25 +115,25 @@ namespace Scm.Client.Naming
         }
 
         /// <summary> Language. </summary>
-        /// <param name="csModel"> The <see cref="CSModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="csModel"/> is null. </exception>
-        public virtual async Task<ClientResult> LanguageAsync(CSModel csModel)
+        /// <param name="body"> The <see cref="CSModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<ClientResult> LanguageAsync(CSModel body)
         {
-            Argument.AssertNotNull(csModel, nameof(csModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = csModel.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await LanguageAsync(content, null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Language. </summary>
-        /// <param name="csModel"> The <see cref="CSModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="csModel"/> is null. </exception>
-        public virtual ClientResult Language(CSModel csModel)
+        /// <param name="body"> The <see cref="CSModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual ClientResult Language(CSModel body)
         {
-            Argument.AssertNotNull(csModel, nameof(csModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = csModel.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = Language(content, null);
             return result;
         }

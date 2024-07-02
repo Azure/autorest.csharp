@@ -814,8 +814,8 @@
       },
       {
        "$id": "85",
-       "Name": "ClientModel",
-       "NameInRequest": "ModelWithClientClientName",
+       "Name": "body",
+       "NameInRequest": "body",
        "Type": {
         "$ref": "18"
        },
@@ -917,8 +917,8 @@
       },
       {
        "$id": "94",
-       "Name": "CSModel",
-       "NameInRequest": "ModelWithLanguageClientName",
+       "Name": "body",
+       "NameInRequest": "body",
        "Type": {
         "$ref": "21"
        },
