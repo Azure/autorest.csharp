@@ -106,7 +106,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
-            Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
             Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
@@ -135,7 +134,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
-            Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
             Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
@@ -226,7 +224,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
-            Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
             Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
@@ -255,7 +252,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
-            Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
             Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
@@ -361,10 +357,6 @@ namespace FirstTestTypeSpec.Samples
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
-                embeddingVector = new object[]
-            {
-1234
-            },
                 optionalResourceId = new object(),
             });
             Response response = client.PatchAction(content);
@@ -385,7 +377,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
-            Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
             Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
@@ -419,10 +410,6 @@ namespace FirstTestTypeSpec.Samples
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
-                embeddingVector = new object[]
-            {
-1234
-            },
                 optionalResourceId = new object(),
             });
             Response response = await client.PatchActionAsync(content);
@@ -443,7 +430,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
-            Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
             Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
@@ -571,10 +557,6 @@ namespace FirstTestTypeSpec.Samples
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
-                embeddingVector = new object[]
-            {
-1234
-            },
                 optionalResourceId = new object(),
             });
             Response response = client.AnonymousBody(content);
@@ -595,7 +577,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
-            Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
             Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
@@ -629,10 +610,6 @@ namespace FirstTestTypeSpec.Samples
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
-                embeddingVector = new object[]
-            {
-1234
-            },
                 optionalResourceId = new object(),
             });
             Response response = await client.AnonymousBodyAsync(content);
@@ -653,7 +630,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
-            Console.WriteLine(result.GetProperty("embeddingVector")[0].ToString());
             Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
@@ -672,7 +648,6 @@ namespace FirstTestTypeSpec.Samples
                 OptionalLiteralBool = true,
                 OptionalNullableList = { 1234 },
                 OptionalFloatProperty = (double)default,
-                EmbeddingVector = new int[] { 1234 },
                 OptionalResourceId = null,
             };
             Response<Thing> response = client.AnonymousBody(thing);
@@ -693,7 +668,6 @@ namespace FirstTestTypeSpec.Samples
                 OptionalLiteralBool = true,
                 OptionalNullableList = { 1234 },
                 OptionalFloatProperty = (double)default,
-                EmbeddingVector = new int[] { 1234 },
                 OptionalResourceId = null,
             };
             Response<Thing> response = await client.AnonymousBodyAsync(thing);

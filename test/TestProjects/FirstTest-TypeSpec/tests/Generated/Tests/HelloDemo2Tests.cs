@@ -149,10 +149,6 @@ BinaryData.FromObjectAsJson("<unionList>")
             },
                     requiredFloatProperty = new object(),
                     optionalFloatProperty = new object(),
-                    embeddingVector = new object[]
-            {
-1234
-            },
                     optionalResourceId = new object(),
                 },
                 intExtensibleEnum = 1,
@@ -224,7 +220,6 @@ BinaryData.FromObjectAsJson("<unionList>")
                     OptionalLiteralBool = true,
                     OptionalNullableList = { 1234 },
                     OptionalFloatProperty = (double)default,
-                    EmbeddingVector = new int[] { 1234 },
                     OptionalResourceId = null,
                 },
                 BinaryData.FromObjectAsJson(new object()),
@@ -353,10 +348,6 @@ BinaryData.FromObjectAsJson("<unionList>")
             },
                     requiredFloatProperty = new object(),
                     optionalFloatProperty = new object(),
-                    embeddingVector = new object[]
-            {
-1234
-            },
                     optionalResourceId = new object(),
                 },
                 intExtensibleEnum = 1,
@@ -517,10 +508,6 @@ BinaryData.FromObjectAsJson("<unionList>")
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
-                embeddingVector = new object[]
-            {
-1234
-            },
                 optionalResourceId = new object(),
             });
             Response response = await client.CreateLiteralAsync(content);
@@ -542,7 +529,6 @@ BinaryData.FromObjectAsJson("<unionList>")
                 OptionalLiteralBool = true,
                 OptionalNullableList = { 1234 },
                 OptionalFloatProperty = (double)default,
-                EmbeddingVector = new int[] { 1234 },
                 OptionalResourceId = null,
             };
             Response<Thing> response = await client.CreateLiteralAsync(body);

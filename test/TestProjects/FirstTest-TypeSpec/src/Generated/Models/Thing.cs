@@ -66,7 +66,6 @@ namespace FirstTestTypeSpec.Models
             OptionalNullableList = new ChangeTrackingList<int>();
             RequiredNullableList = requiredNullableList?.ToList();
             RequiredFloatProperty = requiredFloatProperty;
-            EmbeddingVector = ReadOnlyMemory<int>.Empty;
         }
 
         /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>
@@ -85,10 +84,9 @@ namespace FirstTestTypeSpec.Models
         /// <param name="requiredNullableList"> required nullable collection. </param>
         /// <param name="requiredFloatProperty"> required float property. </param>
         /// <param name="optionalFloatProperty"> optional float property. </param>
-        /// <param name="embeddingVector"> optional embedding vector. </param>
         /// <param name="optionalResourceId"> optional arm id. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal Thing(string name, BinaryData requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IList<int> optionalNullableList, IList<int> requiredNullableList, double requiredFloatProperty, double? optionalFloatProperty, ReadOnlyMemory<int> embeddingVector, ResourceIdentifier optionalResourceId, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal Thing(string name, BinaryData requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IList<int> optionalNullableList, IList<int> requiredNullableList, double requiredFloatProperty, double? optionalFloatProperty, ResourceIdentifier optionalResourceId, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             RequiredUnion = requiredUnion;
@@ -105,7 +103,6 @@ namespace FirstTestTypeSpec.Models
             RequiredNullableList = requiredNullableList;
             RequiredFloatProperty = requiredFloatProperty;
             OptionalFloatProperty = optionalFloatProperty;
-            EmbeddingVector = embeddingVector;
             OptionalResourceId = optionalResourceId;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
@@ -192,8 +189,6 @@ namespace FirstTestTypeSpec.Models
         public double RequiredFloatProperty { get; set; }
         /// <summary> optional float property. </summary>
         public double? OptionalFloatProperty { get; set; }
-        /// <summary> optional embedding vector. </summary>
-        public ReadOnlyMemory<int> EmbeddingVector { get; set; }
         /// <summary> optional arm id. </summary>
         public ResourceIdentifier OptionalResourceId { get; set; }
     }

@@ -134,9 +134,6 @@ model Thing {
     @doc("optional float property")
     optionalFloatProperty?: float;
 
-    @doc("optional embedding vector")
-    embeddingVector?: EmbeddingVector<int32>;
-    
     @doc("optional arm id.")
     optionalResourceId?: Azure.Core.armResourceIdentifier<[]>;
 }

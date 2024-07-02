@@ -106,13 +106,6 @@ namespace FirstTestTypeSpec.Models
                 writer.WritePropertyName("optionalFloatProperty"u8);
                 writer.WriteNumberValue(OptionalFloatProperty.Value);
             }
-            writer.WritePropertyName("embeddingVector"u8);
-            writer.WriteStartArray();
-            foreach (var item in EmbeddingVector.Span)
-            {
-                writer.WriteNumberValue(item);
-            }
-            writer.WriteEndArray();
             if (Optional.IsDefined(OptionalResourceId))
             {
                 writer.WritePropertyName("optionalResourceId"u8);
@@ -171,7 +164,6 @@ namespace FirstTestTypeSpec.Models
             IList<int> requiredNullableList = default;
             double requiredFloatProperty = default;
             double? optionalFloatProperty = default;
-            ReadOnlyMemory<int> embeddingVector = default;
             ResourceIdentifier optionalResourceId = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
@@ -292,22 +284,6 @@ namespace FirstTestTypeSpec.Models
                     optionalFloatProperty = property.Value.GetDouble();
                     continue;
                 }
-                if (property.NameEquals("embeddingVector"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    int index = 0;
-                    int[] array = new int[property.Value.GetArrayLength()];
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array[index] = item.GetInt32();
-                        index++;
-                    }
-                    embeddingVector = new ReadOnlyMemory<int>(array);
-                    continue;
-                }
                 if (property.NameEquals("optionalResourceId"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -339,7 +315,6 @@ namespace FirstTestTypeSpec.Models
                 requiredNullableList,
                 requiredFloatProperty,
                 optionalFloatProperty,
-                embeddingVector,
                 optionalResourceId,
                 serializedAdditionalRawData);
         }
