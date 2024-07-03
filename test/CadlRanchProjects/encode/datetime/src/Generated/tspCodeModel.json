@@ -123,6 +123,7 @@
      "Type": {
       "$id": "20",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "21",
        "Kind": "utcDateTime",
@@ -131,7 +132,8 @@
         "$id": "22",
         "Kind": "int64"
        }
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -156,8 +158,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "26",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -172,8 +173,7 @@
       "$id": "27",
       "Type": {
        "$id": "28",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -513,6 +513,7 @@
        "Type": {
         "$id": "64",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "65",
          "Kind": "utcDateTime",
@@ -521,7 +522,8 @@
           "$id": "66",
           "Kind": "int64"
          }
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1475,6 +1477,7 @@
        "Type": {
         "$id": "154",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "155",
          "Kind": "utcDateTime",
@@ -1483,7 +1486,8 @@
           "$id": "156",
           "Kind": "int64"
          }
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Header",
        "IsRequired": true,

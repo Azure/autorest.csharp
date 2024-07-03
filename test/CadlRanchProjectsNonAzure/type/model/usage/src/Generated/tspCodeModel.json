@@ -90,8 +90,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "14",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -106,8 +105,7 @@
         "$id": "15",
         "Type": {
          "$id": "16",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }

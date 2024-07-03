@@ -48,7 +48,7 @@ import { Logger } from "./logger.js";
 import { getUsages, navigateModels } from "./model.js";
 import { loadOperation } from "./operation.js";
 import { processServiceAuthentication } from "./service-authentication.js";
-import { resolveServers } from "./typespecServer.js";
+import { resolveServers } from "./typespec-server.js";
 import { createContentTypeOrAcceptParameter } from "./utils.js";
 
 export function createModel(
