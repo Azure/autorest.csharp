@@ -142,8 +142,8 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             TraitsClient client = new TraitsClient();
 
-            UserActionParam userActionParam = new UserActionParam("<userActionValue>");
-            Response<UserActionResponse> response = client.RepeatableAction(1234, userActionParam);
+            UserActionParam body = new UserActionParam("<userActionValue>");
+            Response<UserActionResponse> response = client.RepeatableAction(1234, body);
         }
 
         [Test]
@@ -152,8 +152,8 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             TraitsClient client = new TraitsClient();
 
-            UserActionParam userActionParam = new UserActionParam("<userActionValue>");
-            Response<UserActionResponse> response = await client.RepeatableActionAsync(1234, userActionParam);
+            UserActionParam body = new UserActionParam("<userActionValue>");
+            Response<UserActionResponse> response = await client.RepeatableActionAsync(1234, body);
         }
 
         [Test]
@@ -194,8 +194,8 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             TraitsClient client = new TraitsClient();
 
-            UserActionParam userActionParam = new UserActionParam("<userActionValue>");
-            Response<UserActionResponse> response = client.RepeatableAction(1234, userActionParam);
+            UserActionParam body = new UserActionParam("<userActionValue>");
+            Response<UserActionResponse> response = client.RepeatableAction(1234, body);
         }
 
         [Test]
@@ -204,8 +204,8 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             TraitsClient client = new TraitsClient();
 
-            UserActionParam userActionParam = new UserActionParam("<userActionValue>");
-            Response<UserActionResponse> response = await client.RepeatableActionAsync(1234, userActionParam);
+            UserActionParam body = new UserActionParam("<userActionValue>");
+            Response<UserActionResponse> response = await client.RepeatableActionAsync(1234, body);
         }
     }
 }
