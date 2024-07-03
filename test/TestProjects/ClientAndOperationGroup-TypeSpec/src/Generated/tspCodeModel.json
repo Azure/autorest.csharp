@@ -22,8 +22,7 @@
        "NameInRequest": "operationGroupServiceUrl",
        "Type": {
         "$id": "5",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,

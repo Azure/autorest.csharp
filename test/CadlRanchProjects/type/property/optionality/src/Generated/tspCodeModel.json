@@ -255,11 +255,13 @@
      "Type": {
       "$id": "39",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "40",
        "Kind": "bytes",
        "Encode": "base64"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -282,9 +284,11 @@
      "Type": {
       "$id": "43",
       "Kind": "array",
+      "Name": "ArrayStringProperty",
       "ValueType": {
        "$ref": "23"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -511,8 +515,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "71",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -527,8 +530,7 @@
       "$id": "72",
       "Type": {
        "$id": "73",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }

@@ -523,10 +523,12 @@
      "Type": {
       "$id": "74",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "75",
        "Kind": "string"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -549,10 +551,12 @@
      "Type": {
       "$id": "78",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "79",
        "Kind": "int32"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -575,9 +579,11 @@
      "Type": {
       "$id": "82",
       "Kind": "array",
+      "Name": "ArrayInnerModel",
       "ValueType": {
        "$ref": "69"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -923,8 +929,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "126",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -939,8 +944,7 @@
       "$id": "127",
       "Type": {
        "$id": "128",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }

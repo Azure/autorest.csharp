@@ -21,8 +21,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "5",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -37,8 +36,7 @@
       "$id": "6",
       "Type": {
        "$id": "7",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -67,10 +65,12 @@
        "Type": {
         "$id": "11",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "12",
          "Kind": "string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -145,10 +145,12 @@
        "Type": {
         "$id": "19",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "20",
          "Kind": "string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -224,10 +226,12 @@
        "Type": {
         "$id": "27",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "28",
          "Kind": "string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -303,10 +307,12 @@
        "Type": {
         "$id": "35",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "36",
          "Kind": "string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -382,10 +388,12 @@
        "Type": {
         "$id": "43",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "44",
          "Kind": "string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -477,10 +485,12 @@
        "Type": {
         "$id": "53",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "54",
          "Kind": "string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Header",
        "IsRequired": true,
