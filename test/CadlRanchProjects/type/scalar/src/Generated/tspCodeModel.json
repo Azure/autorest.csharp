@@ -21,8 +21,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "5",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -37,8 +36,7 @@
       "$id": "6",
       "Type": {
        "$id": "7",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -1150,10 +1148,12 @@
        "BodyType": {
         "$id": "118",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "119",
          "Kind": "decimal"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1334,10 +1334,12 @@
        "BodyType": {
         "$id": "137",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "138",
          "Kind": "decimal"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],

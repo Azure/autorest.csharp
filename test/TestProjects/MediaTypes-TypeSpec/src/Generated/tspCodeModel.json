@@ -98,8 +98,7 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "17",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,

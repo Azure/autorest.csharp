@@ -20,6 +20,7 @@
      "Type": {
       "$id": "4",
       "Kind": "array",
+      "Name": "ArrayUser",
       "ValueType": {
        "$id": "5",
        "Kind": "model",
@@ -41,7 +42,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -84,8 +86,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "13",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -100,8 +101,7 @@
         "$id": "14",
         "Type": {
          "$id": "15",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
