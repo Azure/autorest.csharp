@@ -475,13 +475,6 @@ op op5(@body body: IsFooArray): IsFooArray;
         ok(isFooArrayModel);
         // assert the inherited dictionary type is expected
         strictEqual(isUnknownModel.AdditionalProperties?.Kind, "any");
-<<<<<<< HEAD
-        strictEqual(isStringModel.AdditionalProperties?.Kind, "string");
-        strictEqual(isInt32Model.AdditionalProperties?.Kind, "int32");
-        strictEqual(isFooModel.AdditionalProperties, fooModel);
-        strictEqual(isFooArrayModel.AdditionalProperties?.Kind, "array");
-        strictEqual(isFooArrayModel.AdditionalProperties.ValueType, fooModel);
-=======
 
         strictEqual(isStringModel.AdditionalProperties?.Kind, "string");
 
@@ -494,7 +487,6 @@ op op5(@body body: IsFooArray): IsFooArray;
             isFooArrayModel.AdditionalProperties.ValueType,
             fooModel
         );
->>>>>>> origin/feature/v3
     });
 });
 
