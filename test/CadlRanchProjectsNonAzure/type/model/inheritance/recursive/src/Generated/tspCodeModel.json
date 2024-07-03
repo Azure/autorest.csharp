@@ -27,9 +27,11 @@
       "Type": {
        "$id": "5",
        "Kind": "array",
+       "Name": "ArrayExtension",
        "ValueType": {
         "$ref": "2"
-       }
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
       },
       "IsRequired": false,
       "IsReadOnly": false
@@ -78,7 +80,7 @@
         "$id": "11",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": ""
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -95,7 +97,7 @@
          "$id": "13",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": ""
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }

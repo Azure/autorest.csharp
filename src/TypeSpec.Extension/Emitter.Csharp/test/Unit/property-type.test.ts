@@ -29,6 +29,7 @@ describe("Test GetInputType for array", () => {
         const root = createModel(sdkContext);
         const type = root.Clients[0].Operations[0].Parameters[0].Type;
         strictEqual(type.Kind, "array");
+        strictEqual(type.CrossLanguageDefinitionId, "TypeSpec.Array");
         strictEqual(type.ValueType.Kind, "string");
         strictEqual(
             type.ValueType.CrossLanguageDefinitionId,
@@ -48,6 +49,7 @@ describe("Test GetInputType for array", () => {
         const root = createModel(sdkContext);
         const bodyType = root.Clients[0].Operations[0].Responses[0].BodyType;
         strictEqual(bodyType?.Kind, "array");
+        strictEqual(bodyType.CrossLanguageDefinitionId, "TypeSpec.Array");
         strictEqual(bodyType.ValueType.Kind, "string");
         strictEqual(
             bodyType.ValueType.CrossLanguageDefinitionId,
@@ -90,16 +92,14 @@ describe("Test GetInputType for enum", () => {
         const type = root.Clients[0].Operations[0].Parameters[0].Type;
         strictEqual(type.Kind, "enum");
         strictEqual(type.Name, "SimpleEnum");
+        strictEqual(type.IsExtensible, false);
+        strictEqual(type.Description, "fixed string enum");
         strictEqual(
             type.CrossLanguageDefinitionId,
             "Azure.Csharp.Testing.SimpleEnum"
         );
         strictEqual(type.Accessibility, undefined);
         strictEqual(type.ValueType.Kind, "string");
-        strictEqual(
-            type.ValueType.CrossLanguageDefinitionId,
-            "TypeSpec.string"
-        );
         strictEqual(type.Values.length, 3);
         strictEqual(type.Values[0].Name, "One");
         strictEqual(type.Values[0].Value, "1");
@@ -107,9 +107,9 @@ describe("Test GetInputType for enum", () => {
         strictEqual(type.Values[1].Value, "2");
         strictEqual(type.Values[2].Name, "Four");
         strictEqual(type.Values[2].Value, "4");
-        strictEqual(type.IsExtensible, false);
         strictEqual(type.Usage, "Input");
     });
+
     it("Fixed int enum", async () => {
         const program = await typeSpecCompile(
             `

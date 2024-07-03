@@ -140,7 +140,7 @@
       "$id": "19",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": ""
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -157,7 +157,7 @@
        "$id": "21",
        "Kind": "string",
        "Name": "string",
-       "CrossLanguageDefinitionId": ""
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }

@@ -141,7 +141,7 @@
         "$id": "20",
         "Kind": "url",
         "Name": "url",
-        "CrossLanguageDefinitionId": ""
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,

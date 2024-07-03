@@ -417,6 +417,7 @@
      "Type": {
       "$id": "69",
       "Kind": "array",
+      "Name": "ArrayTimeSeriesPoint",
       "ValueType": {
        "$id": "70",
        "Kind": "model",
@@ -461,7 +462,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -593,12 +595,19 @@
      "Type": {
       "$id": "92",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "93",
+<<<<<<< HEAD
        "Kind": "float32",
        "Name": "float32",
        "CrossLanguageDefinitionId": "TypeSpec.float32"
       }
+=======
+       "Kind": "float32"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+>>>>>>> origin/feature/v3
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -611,12 +620,19 @@
      "Type": {
       "$id": "95",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "96",
+<<<<<<< HEAD
        "Kind": "float32",
        "Name": "float32",
        "CrossLanguageDefinitionId": "TypeSpec.float32"
       }
+=======
+       "Kind": "float32"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+>>>>>>> origin/feature/v3
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -629,12 +645,19 @@
      "Type": {
       "$id": "98",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "99",
+<<<<<<< HEAD
        "Kind": "float32",
        "Name": "float32",
        "CrossLanguageDefinitionId": "TypeSpec.float32"
       }
+=======
+       "Kind": "float32"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+>>>>>>> origin/feature/v3
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -647,12 +670,19 @@
      "Type": {
       "$id": "101",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "102",
+<<<<<<< HEAD
        "Kind": "boolean",
        "Name": "boolean",
        "CrossLanguageDefinitionId": "TypeSpec.boolean"
       }
+=======
+       "Kind": "boolean"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+>>>>>>> origin/feature/v3
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -665,12 +695,19 @@
      "Type": {
       "$id": "104",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "105",
+<<<<<<< HEAD
        "Kind": "boolean",
        "Name": "boolean",
        "CrossLanguageDefinitionId": "TypeSpec.boolean"
       }
+=======
+       "Kind": "boolean"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+>>>>>>> origin/feature/v3
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -683,12 +720,19 @@
      "Type": {
       "$id": "107",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "108",
+<<<<<<< HEAD
        "Kind": "boolean",
        "Name": "boolean",
        "CrossLanguageDefinitionId": "TypeSpec.boolean"
       }
+=======
+       "Kind": "boolean"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+>>>>>>> origin/feature/v3
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -701,12 +745,19 @@
      "Type": {
       "$id": "110",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "111",
+<<<<<<< HEAD
        "Kind": "float32",
        "Name": "float32",
        "CrossLanguageDefinitionId": "TypeSpec.float32"
       }
+=======
+       "Kind": "float32"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+>>>>>>> origin/feature/v3
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -865,9 +916,11 @@
      "Type": {
       "$id": "133",
       "Kind": "array",
+      "Name": "ArrayTimeSeriesPoint",
       "ValueType": {
        "$ref": "70"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -971,12 +1024,19 @@
      "Type": {
       "$id": "147",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "148",
+<<<<<<< HEAD
        "Kind": "boolean",
        "Name": "boolean",
        "CrossLanguageDefinitionId": "TypeSpec.boolean"
       }
+=======
+       "Kind": "boolean"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+>>>>>>> origin/feature/v3
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -989,12 +1049,19 @@
      "Type": {
       "$id": "150",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "151",
+<<<<<<< HEAD
        "Kind": "float32",
        "Name": "float32",
        "CrossLanguageDefinitionId": "TypeSpec.float32"
       }
+=======
+       "Kind": "float32"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+>>>>>>> origin/feature/v3
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1055,6 +1122,7 @@
         "Type": {
          "$id": "159",
          "Kind": "array",
+         "Name": "ArrayErrorResponse",
          "ValueType": {
           "$id": "160",
           "Kind": "model",
@@ -1092,7 +1160,8 @@
             "IsReadOnly": false
            }
           ]
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -1105,6 +1174,7 @@
         "Type": {
          "$id": "166",
          "Kind": "array",
+         "Name": "ArrayVariableState",
          "ValueType": {
           "$id": "167",
           "Kind": "model",
@@ -1198,7 +1268,8 @@
             "IsReadOnly": false
            }
           ]
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -1304,6 +1375,7 @@
      "Type": {
       "$id": "193",
       "Kind": "array",
+      "Name": "ArrayAnomalyState",
       "ValueType": {
        "$id": "194",
        "Kind": "model",
@@ -1396,6 +1468,7 @@
             "Type": {
              "$id": "207",
              "Kind": "array",
+             "Name": "ArrayAnomalyInterpretation",
              "ValueType": {
               "$id": "208",
               "Kind": "model",
@@ -1453,12 +1526,19 @@
                    "Type": {
                     "$id": "216",
                     "Kind": "array",
+                    "Name": "Array",
                     "ValueType": {
                      "$id": "217",
+<<<<<<< HEAD
                      "Kind": "string",
                      "Name": "string",
                      "CrossLanguageDefinitionId": "TypeSpec.string"
                     }
+=======
+                     "Kind": "string"
+                    },
+                    "CrossLanguageDefinitionId": "TypeSpec.Array"
+>>>>>>> origin/feature/v3
                    },
                    "IsRequired": false,
                    "IsReadOnly": false
@@ -1469,7 +1549,8 @@
                 "IsReadOnly": false
                }
               ]
-             }
+             },
+             "CrossLanguageDefinitionId": "TypeSpec.Array"
             },
             "IsRequired": false,
             "IsReadOnly": false
@@ -1487,15 +1568,18 @@
          "Type": {
           "$id": "219",
           "Kind": "array",
+          "Name": "ArrayErrorResponse",
           "ValueType": {
            "$ref": "160"
-          }
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          },
          "IsRequired": false,
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1702,9 +1786,11 @@
      "Type": {
       "$id": "242",
       "Kind": "array",
+      "Name": "ArrayErrorResponse",
       "ValueType": {
        "$ref": "160"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": true
@@ -1743,12 +1829,19 @@
            "Type": {
             "$id": "248",
             "Kind": "array",
+            "Name": "Array",
             "ValueType": {
              "$id": "249",
+<<<<<<< HEAD
              "Kind": "int32",
              "Name": "int32",
              "CrossLanguageDefinitionId": "TypeSpec.int32"
             }
+=======
+             "Kind": "int32"
+            },
+            "CrossLanguageDefinitionId": "TypeSpec.Array"
+>>>>>>> origin/feature/v3
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -1761,12 +1854,19 @@
            "Type": {
             "$id": "251",
             "Kind": "array",
+            "Name": "Array",
             "ValueType": {
              "$id": "252",
+<<<<<<< HEAD
              "Kind": "float32",
              "Name": "float32",
              "CrossLanguageDefinitionId": "TypeSpec.float32"
             }
+=======
+             "Kind": "float32"
+            },
+            "CrossLanguageDefinitionId": "TypeSpec.Array"
+>>>>>>> origin/feature/v3
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -1779,12 +1879,19 @@
            "Type": {
             "$id": "254",
             "Kind": "array",
+            "Name": "Array",
             "ValueType": {
              "$id": "255",
+<<<<<<< HEAD
              "Kind": "float32",
              "Name": "float32",
              "CrossLanguageDefinitionId": "TypeSpec.float32"
             }
+=======
+             "Kind": "float32"
+            },
+            "CrossLanguageDefinitionId": "TypeSpec.Array"
+>>>>>>> origin/feature/v3
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -1797,12 +1904,19 @@
            "Type": {
             "$id": "257",
             "Kind": "array",
+            "Name": "Array",
             "ValueType": {
              "$id": "258",
+<<<<<<< HEAD
              "Kind": "float32",
              "Name": "float32",
              "CrossLanguageDefinitionId": "TypeSpec.float32"
             }
+=======
+             "Kind": "float32"
+            },
+            "CrossLanguageDefinitionId": "TypeSpec.Array"
+>>>>>>> origin/feature/v3
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -1820,9 +1934,11 @@
         "Type": {
          "$id": "260",
          "Kind": "array",
+         "Name": "ArrayVariableState",
          "ValueType": {
           "$ref": "167"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -1936,9 +2052,11 @@
      "Type": {
       "$id": "273",
       "Kind": "array",
+      "Name": "ArrayAnomalyDetectionModel",
       "ValueType": {
        "$ref": "261"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2003,6 +2121,7 @@
      "Type": {
       "$id": "282",
       "Kind": "array",
+      "Name": "ArrayVariableValues",
       "ValueType": {
        "$id": "283",
        "Kind": "model",
@@ -2033,12 +2152,19 @@
          "Type": {
           "$id": "287",
           "Kind": "array",
+          "Name": "Array",
           "ValueType": {
            "$id": "288",
+<<<<<<< HEAD
            "Kind": "string",
            "Name": "string",
            "CrossLanguageDefinitionId": "TypeSpec.string"
           }
+=======
+           "Kind": "string"
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
+>>>>>>> origin/feature/v3
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -2051,18 +2177,26 @@
          "Type": {
           "$id": "290",
           "Kind": "array",
+          "Name": "Array",
           "ValueType": {
            "$id": "291",
+<<<<<<< HEAD
            "Kind": "float32",
            "Name": "float32",
            "CrossLanguageDefinitionId": "TypeSpec.float32"
           }
+=======
+           "Kind": "float32"
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
+>>>>>>> origin/feature/v3
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2102,9 +2236,11 @@
      "Type": {
       "$id": "296",
       "Kind": "array",
+      "Name": "ArrayVariableState",
       "ValueType": {
        "$ref": "167"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -2117,9 +2253,11 @@
      "Type": {
       "$id": "298",
       "Kind": "array",
+      "Name": "ArrayAnomalyState",
       "ValueType": {
        "$ref": "194"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -2179,9 +2317,13 @@
      "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
      "Type": {
       "$id": "306",
+<<<<<<< HEAD
       "Kind": "url",
       "Name": "url",
       "CrossLanguageDefinitionId": ""
+=======
+      "Kind": "url"
+>>>>>>> origin/feature/v3
      },
      "Location": "Uri",
      "IsApiVersion": false,

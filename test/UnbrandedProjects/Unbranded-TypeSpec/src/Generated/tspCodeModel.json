@@ -427,12 +427,14 @@
        {
         "$id": "65",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "66",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        {
         "$id": "67",
@@ -604,12 +606,14 @@
       "Type": {
        "$id": "90",
        "Kind": "array",
+       "Name": "Array",
        "ValueType": {
         "$id": "91",
         "Kind": "int32",
         "Name": "int32",
         "CrossLanguageDefinitionId": "TypeSpec.int32"
-       }
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
      },
      "IsRequired": false,
@@ -626,12 +630,14 @@
       "Type": {
        "$id": "94",
        "Kind": "array",
+       "Name": "Array",
        "ValueType": {
         "$id": "95",
         "Kind": "int32",
         "Name": "int32",
         "CrossLanguageDefinitionId": "TypeSpec.int32"
-       }
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
      },
      "IsRequired": true,
@@ -683,9 +689,11 @@
      "Type": {
       "$id": "102",
       "Kind": "array",
+      "Name": "ArrayStringFixedEnum",
       "ValueType": {
        "$ref": "20"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -741,9 +749,11 @@
      "Type": {
       "$id": "109",
       "Kind": "array",
+      "Name": "ArrayIntExtensibleEnum",
       "ValueType": {
        "$ref": "30"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -767,9 +777,11 @@
      "Type": {
       "$id": "112",
       "Kind": "array",
+      "Name": "ArrayFloatExtensibleEnum",
       "ValueType": {
        "$ref": "35"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -793,9 +805,11 @@
      "Type": {
       "$id": "115",
       "Kind": "array",
+      "Name": "ArrayFloatFixedEnum",
       "ValueType": {
        "$ref": "40"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -819,9 +833,11 @@
      "Type": {
       "$id": "118",
       "Kind": "array",
+      "Name": "ArrayIntFixedEnum",
       "ValueType": {
        "$ref": "45"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1110,7 +1126,7 @@
         "$id": "159",
         "Kind": "url",
         "Name": "url",
-        "CrossLanguageDefinitionId": ""
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2979,12 +2995,14 @@
        "Type": {
         "$id": "322",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "323",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3060,12 +3078,14 @@
        "BodyType": {
         "$id": "331",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "332",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],

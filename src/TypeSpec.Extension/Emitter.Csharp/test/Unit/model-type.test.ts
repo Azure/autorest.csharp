@@ -379,11 +379,15 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
         ok(extendsFooArrayModel);
         // assert the inherited dictionary type is expected
         strictEqual(extendsUnknownModel.AdditionalProperties?.Kind, "any");
+
         strictEqual(extendsStringModel.AdditionalProperties?.Kind, "string");
+
         strictEqual(extendsInt32Model.AdditionalProperties?.Kind, "int32");
-        strictEqual(extendsFooModel.AdditionalProperties, fooModel);
+
+        deepStrictEqual(extendsFooModel.AdditionalProperties, fooModel);
+
         strictEqual(extendsFooArrayModel.AdditionalProperties?.Kind, "array");
-        strictEqual(
+        deepStrictEqual(
             extendsFooArrayModel.AdditionalProperties.ValueType,
             fooModel
         );
@@ -471,11 +475,26 @@ op op5(@body body: IsFooArray): IsFooArray;
         ok(isFooArrayModel);
         // assert the inherited dictionary type is expected
         strictEqual(isUnknownModel.AdditionalProperties?.Kind, "any");
+<<<<<<< HEAD
         strictEqual(isStringModel.AdditionalProperties?.Kind, "string");
         strictEqual(isInt32Model.AdditionalProperties?.Kind, "int32");
         strictEqual(isFooModel.AdditionalProperties, fooModel);
         strictEqual(isFooArrayModel.AdditionalProperties?.Kind, "array");
         strictEqual(isFooArrayModel.AdditionalProperties.ValueType, fooModel);
+=======
+
+        strictEqual(isStringModel.AdditionalProperties?.Kind, "string");
+
+        strictEqual(isInt32Model.AdditionalProperties?.Kind, "int32");
+
+        deepStrictEqual(isFooModel.AdditionalProperties, fooModel);
+
+        strictEqual(isFooArrayModel.AdditionalProperties?.Kind, "array");
+        deepStrictEqual(
+            isFooArrayModel.AdditionalProperties.ValueType,
+            fooModel
+        );
+>>>>>>> origin/feature/v3
     });
 });
 
@@ -507,7 +526,6 @@ op op1(): void;
         const root = createModel(sdkContext);
         const models = root.Models;
         const isEmptyModel = models.find((m) => m.Name === "Empty");
-        assert(isEmptyModel !== undefined);
-        // assert the inherited dictionary type is expected
+        ok(isEmptyModel);
     });
 });

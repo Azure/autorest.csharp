@@ -427,12 +427,14 @@
        {
         "$id": "65",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "66",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        {
         "$id": "67",
@@ -663,9 +665,11 @@
      "Type": {
       "$id": "97",
       "Kind": "array",
+      "Name": "ArrayStringFixedEnum",
       "ValueType": {
        "$ref": "20"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -721,9 +725,11 @@
      "Type": {
       "$id": "104",
       "Kind": "array",
+      "Name": "ArrayIntExtensibleEnum",
       "ValueType": {
        "$ref": "30"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -747,9 +753,11 @@
      "Type": {
       "$id": "107",
       "Kind": "array",
+      "Name": "ArrayFloatExtensibleEnum",
       "ValueType": {
        "$ref": "35"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -773,9 +781,11 @@
      "Type": {
       "$id": "110",
       "Kind": "array",
+      "Name": "ArrayFloatFixedEnum",
       "ValueType": {
        "$ref": "40"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -799,9 +809,11 @@
      "Type": {
       "$id": "113",
       "Kind": "array",
+      "Name": "ArrayIntFixedEnum",
       "ValueType": {
        "$ref": "45"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -965,7 +977,7 @@
         "$id": "138",
         "Kind": "url",
         "Name": "url",
-        "CrossLanguageDefinitionId": ""
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,

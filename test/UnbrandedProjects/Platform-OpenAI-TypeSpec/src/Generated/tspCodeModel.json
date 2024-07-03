@@ -1182,6 +1182,7 @@
      "Type": {
       "$id": "182",
       "Kind": "array",
+      "Name": "ArrayChatCompletionRequestMessage",
       "ValueType": {
        "$id": "183",
        "Kind": "model",
@@ -1278,7 +1279,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1291,6 +1293,7 @@
      "Type": {
       "$id": "197",
       "Kind": "array",
+      "Name": "ArrayChatCompletionFunctions",
       "ValueType": {
        "$id": "198",
        "Kind": "model",
@@ -1349,7 +1352,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1508,12 +1512,14 @@
         {
          "$id": "231",
          "Kind": "array",
+         "Name": "StopSequences",
          "ValueType": {
           "$id": "232",
           "Kind": "string",
           "Name": "string",
           "CrossLanguageDefinitionId": "TypeSpec.string"
-         }
+         },
+         "CrossLanguageDefinitionId": "OpenAI.StopSequences"
         }
        ]
       }
@@ -1713,6 +1719,7 @@
      "Type": {
       "$id": "260",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "261",
        "Kind": "model",
@@ -1837,7 +1844,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2267,12 +2275,14 @@
      "Type": {
       "$id": "335",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "336",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2399,9 +2409,11 @@
      "Type": {
       "$id": "354",
       "Kind": "array",
+      "Name": "ArrayFineTuningJob",
       "ValueType": {
        "$ref": "302"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2451,6 +2463,7 @@
      "Type": {
       "$id": "361",
       "Kind": "array",
+      "Name": "ArrayFineTuningJobEvent",
       "ValueType": {
        "$id": "362",
        "Kind": "model",
@@ -2533,7 +2546,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2583,36 +2597,44 @@
         {
          "$id": "379",
          "Kind": "array",
+         "Name": "Array",
          "ValueType": {
           "$id": "380",
           "Kind": "string",
           "Name": "string",
           "CrossLanguageDefinitionId": "TypeSpec.string"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         {
          "$id": "381",
          "Kind": "array",
+         "Name": "TokenArray",
          "ValueType": {
           "$id": "382",
           "Kind": "safeint",
           "Name": "safeint",
           "CrossLanguageDefinitionId": "TypeSpec.safeint"
-         }
+         },
+         "CrossLanguageDefinitionId": "OpenAI.TokenArray"
         },
         {
          "$id": "383",
          "Kind": "array",
+         "Name": "TokenArrayArray",
          "ValueType": {
           "$id": "384",
           "Kind": "array",
+          "Name": "TokenArray",
           "ValueType": {
            "$id": "385",
            "Kind": "safeint",
            "Name": "safeint",
            "CrossLanguageDefinitionId": "TypeSpec.safeint"
-          }
-         }
+          },
+          "CrossLanguageDefinitionId": "OpenAI.TokenArray"
+         },
+         "CrossLanguageDefinitionId": "OpenAI.TokenArrayArray"
         }
        ]
       }
@@ -2732,12 +2754,14 @@
         {
          "$id": "405",
          "Kind": "array",
+         "Name": "StopSequences",
          "ValueType": {
           "$id": "406",
           "Kind": "string",
           "Name": "string",
           "CrossLanguageDefinitionId": "TypeSpec.string"
-         }
+         },
+         "CrossLanguageDefinitionId": "OpenAI.StopSequences"
         }
        ]
       }
@@ -2976,6 +3000,7 @@
      "Type": {
       "$id": "443",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "444",
        "Kind": "model",
@@ -3034,12 +3059,14 @@
              "Type": {
               "$id": "453",
               "Kind": "array",
+              "Name": "Array",
               "ValueType": {
                "$id": "454",
                "Kind": "string",
                "Name": "string",
                "CrossLanguageDefinitionId": "TypeSpec.string"
-              }
+              },
+              "CrossLanguageDefinitionId": "TypeSpec.Array"
              },
              "IsRequired": true,
              "IsReadOnly": false
@@ -3052,12 +3079,14 @@
              "Type": {
               "$id": "456",
               "Kind": "array",
+              "Name": "Array",
               "ValueType": {
                "$id": "457",
                "Kind": "float64",
                "Name": "float64",
                "CrossLanguageDefinitionId": "TypeSpec.float64"
-              }
+              },
+              "CrossLanguageDefinitionId": "TypeSpec.Array"
              },
              "IsRequired": true,
              "IsReadOnly": false
@@ -3070,6 +3099,7 @@
              "Type": {
               "$id": "459",
               "Kind": "array",
+              "Name": "ArrayRecord",
               "ValueType": {
                "$id": "460",
                "Kind": "dict",
@@ -3085,7 +3115,8 @@
                 "Name": "safeint",
                 "CrossLanguageDefinitionId": "TypeSpec.safeint"
                }
-              }
+              },
+              "CrossLanguageDefinitionId": "TypeSpec.Array"
              },
              "IsRequired": true,
              "IsReadOnly": false
@@ -3098,12 +3129,14 @@
              "Type": {
               "$id": "464",
               "Kind": "array",
+              "Name": "Array",
               "ValueType": {
                "$id": "465",
                "Kind": "safeint",
                "Name": "safeint",
                "CrossLanguageDefinitionId": "TypeSpec.safeint"
-              }
+              },
+              "CrossLanguageDefinitionId": "TypeSpec.Array"
              },
              "IsRequired": true,
              "IsReadOnly": false
@@ -3126,7 +3159,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -3309,6 +3343,7 @@
      "Type": {
       "$id": "491",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "492",
        "Kind": "model",
@@ -3356,7 +3391,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -3414,36 +3450,44 @@
        {
         "$id": "504",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "505",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        {
         "$id": "506",
         "Kind": "array",
+        "Name": "TokenArray",
         "ValueType": {
          "$id": "507",
          "Kind": "safeint",
          "Name": "safeint",
          "CrossLanguageDefinitionId": "TypeSpec.safeint"
-        }
+        },
+        "CrossLanguageDefinitionId": "OpenAI.TokenArray"
        },
        {
         "$id": "508",
         "Kind": "array",
+        "Name": "TokenArrayArray",
         "ValueType": {
          "$id": "509",
          "Kind": "array",
+         "Name": "TokenArray",
          "ValueType": {
           "$id": "510",
           "Kind": "safeint",
           "Name": "safeint",
           "CrossLanguageDefinitionId": "TypeSpec.safeint"
-         }
-        }
+         },
+         "CrossLanguageDefinitionId": "OpenAI.TokenArray"
+        },
+        "CrossLanguageDefinitionId": "OpenAI.TokenArrayArray"
        }
       ]
      },
@@ -3511,6 +3555,7 @@
      "Type": {
       "$id": "519",
       "Kind": "array",
+      "Name": "ArrayEmbedding",
       "ValueType": {
        "$id": "520",
        "Kind": "model",
@@ -3557,18 +3602,21 @@
          "Type": {
           "$id": "526",
           "Kind": "array",
+          "Name": "Array",
           "ValueType": {
            "$id": "527",
            "Kind": "float64",
            "Name": "float64",
            "CrossLanguageDefinitionId": "TypeSpec.float64"
-          }
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -3655,6 +3703,7 @@
      "Type": {
       "$id": "538",
       "Kind": "array",
+      "Name": "ArrayOpenAiFile",
       "ValueType": {
        "$id": "539",
        "Kind": "model",
@@ -3786,7 +3835,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4076,12 +4126,14 @@
       "Type": {
        "$id": "600",
        "Kind": "array",
+       "Name": "Array",
        "ValueType": {
         "$id": "601",
         "Kind": "float64",
         "Name": "float64",
         "CrossLanguageDefinitionId": "TypeSpec.float64"
-       }
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
      },
      "IsRequired": false,
@@ -4368,9 +4420,11 @@
      "Type": {
       "$id": "641",
       "Kind": "array",
+      "Name": "ArrayOpenAiFile",
       "ValueType": {
        "$ref": "539"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4383,9 +4437,11 @@
      "Type": {
       "$id": "643",
       "Kind": "array",
+      "Name": "ArrayOpenAiFile",
       "ValueType": {
        "$ref": "539"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4398,9 +4454,11 @@
      "Type": {
       "$id": "645",
       "Kind": "array",
+      "Name": "ArrayOpenAiFile",
       "ValueType": {
        "$ref": "539"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4413,6 +4471,7 @@
      "Type": {
       "$id": "647",
       "Kind": "array",
+      "Name": "ArrayFineTuneEvent",
       "ValueType": {
        "$id": "648",
        "Kind": "model",
@@ -4484,7 +4543,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -4526,9 +4586,11 @@
      "Type": {
       "$id": "662",
       "Kind": "array",
+      "Name": "ArrayFineTune",
       "ValueType": {
        "$ref": "605"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4564,9 +4626,11 @@
      "Type": {
       "$id": "667",
       "Kind": "array",
+      "Name": "ArrayFineTuneEvent",
       "ValueType": {
        "$ref": "648"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4602,6 +4666,7 @@
      "Type": {
       "$id": "672",
       "Kind": "array",
+      "Name": "ArrayModel",
       "ValueType": {
        "$id": "673",
        "Kind": "model",
@@ -4676,7 +4741,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -4858,6 +4924,7 @@
      "Type": {
       "$id": "707",
       "Kind": "array",
+      "Name": "ArrayImage",
       "ValueType": {
        "$id": "708",
        "Kind": "model",
@@ -4896,7 +4963,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -5133,12 +5201,14 @@
        {
         "$id": "745",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "746",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        }
       ]
      },
@@ -5201,6 +5271,7 @@
      "Type": {
       "$id": "754",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "755",
        "Kind": "model",
@@ -5565,7 +5636,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -5694,7 +5766,7 @@
       "$id": "822",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": ""
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -5711,7 +5783,7 @@
        "$id": "824",
        "Kind": "string",
        "Name": "string",
-       "CrossLanguageDefinitionId": ""
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "https://api.openai.com/v1"
      }

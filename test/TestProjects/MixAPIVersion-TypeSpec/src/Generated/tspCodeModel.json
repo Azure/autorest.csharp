@@ -96,6 +96,7 @@
      "Type": {
       "$id": "14",
       "Kind": "array",
+      "Name": "ArrayToy",
       "ValueType": {
        "$id": "15",
        "Kind": "model",
@@ -146,7 +147,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -189,7 +191,7 @@
       "$id": "27",
       "Kind": "url",
       "Name": "url",
-      "CrossLanguageDefinitionId": ""
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,

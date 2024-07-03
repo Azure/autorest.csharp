@@ -220,13 +220,15 @@
       "Type": {
        "$id": "33",
        "Kind": "array",
+       "Name": "Array",
        "ValueType": {
         "$id": "34",
         "Kind": "bytes",
         "Name": "bytes",
         "Encode": "base64",
         "CrossLanguageDefinitionId": "TypeSpec.bytes"
-       }
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
      },
      "IsRequired": true,
@@ -267,6 +269,7 @@
       "Type": {
        "$id": "40",
        "Kind": "array",
+       "Name": "ArrayInnerModel",
        "ValueType": {
         "$id": "41",
         "Kind": "model",
@@ -290,7 +293,8 @@
           "IsReadOnly": false
          }
         ]
-       }
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
      },
      "IsRequired": true,
@@ -334,12 +338,14 @@
       "Type": {
        "$id": "49",
        "Kind": "array",
+       "Name": "Array",
        "ValueType": {
         "$id": "50",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
-       }
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
      },
      "IsRequired": true,
@@ -367,7 +373,7 @@
       "$id": "54",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": ""
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -384,7 +390,7 @@
        "$id": "56",
        "Kind": "string",
        "Name": "string",
-       "CrossLanguageDefinitionId": ""
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }

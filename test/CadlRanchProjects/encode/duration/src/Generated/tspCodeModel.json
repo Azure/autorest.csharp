@@ -169,6 +169,7 @@
      "Type": {
       "$id": "24",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "25",
        "Kind": "duration",
@@ -194,7 +195,8 @@
         "CrossLanguageDefinitionId": "TypeSpec.duration"
        },
        "CrossLanguageDefinitionId": "Encode.Duration.Property.Float32Duration"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -221,7 +223,7 @@
       "$id": "32",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": ""
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -238,7 +240,7 @@
        "$id": "34",
        "Kind": "string",
        "Name": "string",
-       "CrossLanguageDefinitionId": ""
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
@@ -681,6 +683,7 @@
        "Type": {
         "$id": "78",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "79",
          "Kind": "duration",
@@ -706,7 +709,8 @@
           "CrossLanguageDefinitionId": "TypeSpec.duration"
          },
          "CrossLanguageDefinitionId": "Encode.Duration.Query.Int32Duration"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1634,6 +1638,7 @@
        "Type": {
         "$id": "163",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "164",
          "Kind": "duration",
@@ -1659,7 +1664,8 @@
           "CrossLanguageDefinitionId": "TypeSpec.duration"
          },
          "CrossLanguageDefinitionId": "Encode.Duration.Header.Iso8601Duration"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Header",
        "IsRequired": true,

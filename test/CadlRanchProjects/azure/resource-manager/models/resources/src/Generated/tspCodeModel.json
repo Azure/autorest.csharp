@@ -12,7 +12,9 @@
    "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.ProvisioningState",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -64,7 +66,9 @@
    "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.createdByType",
    "ValueType": {
     "$id": "12",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -103,7 +107,9 @@
    "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.Versions",
    "ValueType": {
     "$id": "18",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -148,8 +154,9 @@
        "Description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
        "Type": {
         "$id": "24",
-        "Kind": "armId",
-        "Encode": "string"
+        "Kind": "string",
+        "Name": "armResourceIdentifier",
+        "CrossLanguageDefinitionId": "Azure.Core.armResourceIdentifier"
        },
        "IsRequired": false,
        "IsReadOnly": true
@@ -161,7 +168,9 @@
        "Description": "The name of the resource",
        "Type": {
         "$id": "26",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "IsRequired": false,
        "IsReadOnly": true
@@ -173,7 +182,9 @@
        "Description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
        "Type": {
         "$id": "28",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "IsRequired": false,
        "IsReadOnly": true
@@ -198,7 +209,9 @@
           "Description": "The identity that created the resource.",
           "Type": {
            "$id": "32",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           },
           "IsRequired": false,
           "IsReadOnly": false
@@ -222,11 +235,15 @@
           "Type": {
            "$id": "35",
            "Kind": "utcDateTime",
+           "Name": "utcDateTime",
            "Encode": "rfc3339",
            "WireType": {
             "$id": "36",
-            "Kind": "string"
-           }
+            "Kind": "string",
+            "Name": "string",
+            "CrossLanguageDefinitionId": "TypeSpec.string"
+           },
+           "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
           },
           "IsRequired": false,
           "IsReadOnly": false
@@ -238,7 +255,9 @@
           "Description": "The identity that last modified the resource.",
           "Type": {
            "$id": "38",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           },
           "IsRequired": false,
           "IsReadOnly": false
@@ -262,11 +281,15 @@
           "Type": {
            "$id": "41",
            "Kind": "utcDateTime",
+           "Name": "utcDateTime",
            "Encode": "rfc3339",
            "WireType": {
             "$id": "42",
-            "Kind": "string"
-           }
+            "Kind": "string",
+            "Name": "string",
+            "CrossLanguageDefinitionId": "TypeSpec.string"
+           },
+           "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
           },
           "IsRequired": false,
           "IsReadOnly": false
@@ -289,11 +312,15 @@
        "Kind": "dict",
        "KeyType": {
         "$id": "45",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "ValueType": {
         "$id": "46",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        }
       },
       "IsRequired": false,
@@ -306,7 +333,9 @@
       "Description": "The geo-location where the resource lives",
       "Type": {
        "$id": "48",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "IsRequired": true,
       "IsReadOnly": false
@@ -345,7 +374,9 @@
         "Description": "The description of the resource.",
         "Type": {
          "$id": "53",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -387,11 +418,15 @@
       "Kind": "dict",
       "KeyType": {
        "$id": "57",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "ValueType": {
        "$id": "58",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       }
      },
      "IsRequired": false,
@@ -417,7 +452,9 @@
         "Description": "The description of the resource.",
         "Type": {
          "$id": "62",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -448,9 +485,11 @@
      "Type": {
       "$id": "65",
       "Kind": "array",
+      "Name": "ArrayTopLevelTrackedResource",
       "ValueType": {
        "$ref": "20"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -462,7 +501,9 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "67",
-      "Kind": "url"
+      "Kind": "url",
+      "Name": "ResourceLocation",
+      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -520,7 +561,9 @@
         "Description": "Nested resource description.",
         "Type": {
          "$id": "74",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -566,7 +609,9 @@
         "Description": "Nested resource description.",
         "Type": {
          "$id": "79",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -597,9 +642,11 @@
      "Type": {
       "$id": "82",
       "Kind": "array",
+      "Name": "ArrayNestedProxyResource",
       "ValueType": {
        "$ref": "68"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -611,7 +658,9 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "84",
-      "Kind": "url"
+      "Kind": "url",
+      "Name": "ResourceLocation",
+      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -646,7 +695,9 @@
         "Description": "The error code.",
         "Type": {
          "$id": "89",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": false,
         "IsReadOnly": true
@@ -658,7 +709,9 @@
         "Description": "The error message.",
         "Type": {
          "$id": "91",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": false,
         "IsReadOnly": true
@@ -670,7 +723,9 @@
         "Description": "The error target.",
         "Type": {
          "$id": "93",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": false,
         "IsReadOnly": true
@@ -683,9 +738,11 @@
         "Type": {
          "$id": "95",
          "Kind": "array",
+         "Name": "ArrayErrorDetail",
          "ValueType": {
           "$ref": "87"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": true
@@ -698,6 +755,7 @@
         "Type": {
          "$id": "97",
          "Kind": "array",
+         "Name": "ArrayErrorAdditionalInfo",
          "ValueType": {
           "$id": "98",
           "Kind": "model",
@@ -713,7 +771,9 @@
             "Description": "The additional info type.",
             "Type": {
              "$id": "100",
-             "Kind": "string"
+             "Kind": "string",
+             "Name": "string",
+             "CrossLanguageDefinitionId": "TypeSpec.string"
             },
             "IsRequired": false,
             "IsReadOnly": true
@@ -735,7 +795,8 @@
             "IsReadOnly": true
            }
           ]
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": true
@@ -775,7 +836,8 @@
      "Type": {
       "$id": "106",
       "Kind": "string",
-      "IsNullable": false
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -791,7 +853,8 @@
       "Type": {
        "$id": "108",
        "Kind": "string",
-       "IsNullable": false
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "https://management.azure.com"
      }
@@ -820,7 +883,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "112",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -828,7 +893,8 @@
         "Type": {
          "$id": "114",
          "Kind": "string",
-         "IsNullable": false
+         "Name": "string",
+         "CrossLanguageDefinitionId": ""
         },
         "Value": "2023-12-01-preview"
        },
@@ -848,8 +914,9 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "116",
-        "Kind": "uuid",
-        "Encode": "string"
+        "Kind": "string",
+        "Name": "uuid",
+        "CrossLanguageDefinitionId": "Azure.Core.uuid"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -868,7 +935,9 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "118",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -887,7 +956,9 @@
        "Description": "arm resource name for path",
        "Type": {
         "$id": "120",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -906,7 +977,8 @@
        "Type": {
         "$id": "122",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -968,7 +1040,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "127",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -990,8 +1064,9 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "129",
-        "Kind": "uuid",
-        "Encode": "string"
+        "Kind": "string",
+        "Name": "uuid",
+        "CrossLanguageDefinitionId": "Azure.Core.uuid"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1010,7 +1085,9 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "131",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1029,7 +1106,9 @@
        "Description": "arm resource name for path",
        "Type": {
         "$id": "133",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1066,7 +1145,8 @@
        "Type": {
         "$id": "136",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1092,7 +1172,8 @@
        "Type": {
         "$id": "139",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1145,7 +1226,9 @@
          "Description": "A link to the status monitor",
          "Type": {
           "$id": "144",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         },
         {
@@ -1155,7 +1238,9 @@
          "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "146",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Name": "int32",
+          "CrossLanguageDefinitionId": "TypeSpec.int32"
          }
         }
        ],
@@ -1207,7 +1292,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "151",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1229,8 +1316,9 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "153",
-        "Kind": "uuid",
-        "Encode": "string"
+        "Kind": "string",
+        "Name": "uuid",
+        "CrossLanguageDefinitionId": "Azure.Core.uuid"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1249,7 +1337,9 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "155",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1268,7 +1358,9 @@
        "Description": "arm resource name for path",
        "Type": {
         "$id": "157",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1305,7 +1397,8 @@
        "Type": {
         "$id": "160",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1331,7 +1424,8 @@
        "Type": {
         "$id": "163",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1381,7 +1475,9 @@
          "Description": "The Location header contains the URL where the status of the long running operation can be checked.",
          "Type": {
           "$id": "168",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         },
         {
@@ -1391,7 +1487,9 @@
          "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "170",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Name": "int32",
+          "CrossLanguageDefinitionId": "TypeSpec.int32"
          }
         }
        ],
@@ -1440,7 +1538,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "175",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1462,8 +1562,9 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "177",
-        "Kind": "uuid",
-        "Encode": "string"
+        "Kind": "string",
+        "Name": "uuid",
+        "CrossLanguageDefinitionId": "Azure.Core.uuid"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1482,7 +1583,9 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "179",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1501,7 +1604,9 @@
        "Description": "arm resource name for path",
        "Type": {
         "$id": "181",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1520,7 +1625,8 @@
        "Type": {
         "$id": "183",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1555,7 +1661,9 @@
          "Description": "The Location header contains the URL where the status of the long running operation can be checked.",
          "Type": {
           "$id": "187",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         },
         {
@@ -1565,7 +1673,9 @@
          "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "189",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Name": "int32",
+          "CrossLanguageDefinitionId": "TypeSpec.int32"
          }
         }
        ],
@@ -1617,7 +1727,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "195",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1639,8 +1751,9 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "197",
-        "Kind": "uuid",
-        "Encode": "string"
+        "Kind": "string",
+        "Name": "uuid",
+        "CrossLanguageDefinitionId": "Azure.Core.uuid"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1659,7 +1772,9 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "199",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1678,7 +1793,8 @@
        "Type": {
         "$id": "201",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1745,7 +1861,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "207",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1767,8 +1885,9 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "209",
-        "Kind": "uuid",
-        "Encode": "string"
+        "Kind": "string",
+        "Name": "uuid",
+        "CrossLanguageDefinitionId": "Azure.Core.uuid"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1787,7 +1906,8 @@
        "Type": {
         "$id": "211",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1870,7 +1990,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "219",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1892,8 +2014,9 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "221",
-        "Kind": "uuid",
-        "Encode": "string"
+        "Kind": "string",
+        "Name": "uuid",
+        "CrossLanguageDefinitionId": "Azure.Core.uuid"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1912,7 +2035,9 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "223",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1931,7 +2056,9 @@
        "Description": "arm resource name for path",
        "Type": {
         "$id": "225",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1950,7 +2077,9 @@
        "Description": "Name of the nested resource.",
        "Type": {
         "$id": "227",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1969,7 +2098,8 @@
        "Type": {
         "$id": "229",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2031,7 +2161,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "234",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -2053,8 +2185,9 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "236",
-        "Kind": "uuid",
-        "Encode": "string"
+        "Kind": "string",
+        "Name": "uuid",
+        "CrossLanguageDefinitionId": "Azure.Core.uuid"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2073,7 +2206,9 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "238",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2092,7 +2227,9 @@
        "Description": "arm resource name for path",
        "Type": {
         "$id": "240",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2111,7 +2248,9 @@
        "Description": "Name of the nested resource.",
        "Type": {
         "$id": "242",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2148,7 +2287,8 @@
        "Type": {
         "$id": "245",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2174,7 +2314,8 @@
        "Type": {
         "$id": "248",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2227,7 +2368,9 @@
          "Description": "A link to the status monitor",
          "Type": {
           "$id": "253",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         },
         {
@@ -2237,7 +2380,9 @@
          "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "255",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Name": "int32",
+          "CrossLanguageDefinitionId": "TypeSpec.int32"
          }
         }
        ],
@@ -2289,7 +2434,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "260",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -2311,8 +2458,9 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "262",
-        "Kind": "uuid",
-        "Encode": "string"
+        "Kind": "string",
+        "Name": "uuid",
+        "CrossLanguageDefinitionId": "Azure.Core.uuid"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2331,7 +2479,9 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "264",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2350,7 +2500,9 @@
        "Description": "arm resource name for path",
        "Type": {
         "$id": "266",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2369,7 +2521,9 @@
        "Description": "Name of the nested resource.",
        "Type": {
         "$id": "268",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2406,7 +2560,8 @@
        "Type": {
         "$id": "271",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2432,7 +2587,8 @@
        "Type": {
         "$id": "274",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2482,7 +2638,9 @@
          "Description": "The Location header contains the URL where the status of the long running operation can be checked.",
          "Type": {
           "$id": "279",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         },
         {
@@ -2492,7 +2650,9 @@
          "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "281",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Name": "int32",
+          "CrossLanguageDefinitionId": "TypeSpec.int32"
          }
         }
        ],
@@ -2541,7 +2701,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "286",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -2563,8 +2725,9 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "288",
-        "Kind": "uuid",
-        "Encode": "string"
+        "Kind": "string",
+        "Name": "uuid",
+        "CrossLanguageDefinitionId": "Azure.Core.uuid"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2583,7 +2746,9 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "290",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2602,7 +2767,9 @@
        "Description": "arm resource name for path",
        "Type": {
         "$id": "292",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2621,7 +2788,9 @@
        "Description": "Name of the nested resource.",
        "Type": {
         "$id": "294",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2640,7 +2809,8 @@
        "Type": {
         "$id": "296",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2675,7 +2845,9 @@
          "Description": "The Location header contains the URL where the status of the long running operation can be checked.",
          "Type": {
           "$id": "300",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         },
         {
@@ -2685,7 +2857,9 @@
          "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "302",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Name": "int32",
+          "CrossLanguageDefinitionId": "TypeSpec.int32"
          }
         }
        ],
@@ -2737,7 +2911,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "308",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -2759,8 +2935,9 @@
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "310",
-        "Kind": "uuid",
-        "Encode": "string"
+        "Kind": "string",
+        "Name": "uuid",
+        "CrossLanguageDefinitionId": "Azure.Core.uuid"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2779,7 +2956,9 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "312",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2798,7 +2977,9 @@
        "Description": "arm resource name for path",
        "Type": {
         "$id": "314",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2817,7 +2998,8 @@
        "Type": {
         "$id": "316",
         "Kind": "string",
-        "IsNullable": false
+        "Name": "string",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Header",
        "IsApiVersion": false,

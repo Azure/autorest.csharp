@@ -189,9 +189,11 @@
        "Type": {
         "$id": "25",
         "Kind": "array",
+        "Name": "ArrayBird",
         "ValueType": {
          "$ref": "2"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "IsRequired": false,
        "IsReadOnly": false
@@ -348,7 +350,7 @@
         "$id": "43",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": ""
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -365,7 +367,7 @@
          "$id": "45",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": ""
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }

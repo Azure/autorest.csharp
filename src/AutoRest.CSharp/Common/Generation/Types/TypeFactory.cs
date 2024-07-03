@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Generation.Types
         {
             InputLiteralType literalType => CSharpType.FromLiteral(CreateType(literalType.ValueType), literalType.Value),
             InputUnionType unionType => CSharpType.FromUnion(unionType.VariantTypes.Select(CreateType).ToArray()),
-            InputListType { IsEmbeddingsVector: true } listType => new CSharpType(typeof(ReadOnlyMemory<>), CreateType(listType.ValueType)),
+            InputListType { CrossLanguageDefinitionId: "Azure.Core.EmbeddingVector" } listType => new CSharpType(typeof(ReadOnlyMemory<>), CreateType(listType.ValueType)),
             InputListType listType => new CSharpType(typeof(IList<>), CreateType(listType.ValueType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType => _library.ResolveEnum(enumType),

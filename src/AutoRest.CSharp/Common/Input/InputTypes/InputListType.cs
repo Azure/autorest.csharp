@@ -3,12 +3,4 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputListType(string Name, InputType ValueType) : InputType(Name)
-{
-    public InputListType(string name, InputType valueType, bool isEmbeddingsVector) : this(name, valueType)
-    {
-        IsEmbeddingsVector = isEmbeddingsVector;
-    }
-
-    public bool IsEmbeddingsVector { get; }
-}
+internal record InputListType(string Name, string CrossLanguageDefinitionId, InputType ValueType) : InputType(Name);

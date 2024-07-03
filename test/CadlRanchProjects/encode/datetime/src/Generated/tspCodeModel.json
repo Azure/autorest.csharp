@@ -139,6 +139,7 @@
      "Type": {
       "$id": "20",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "21",
        "Kind": "utcDateTime",
@@ -164,7 +165,8 @@
         "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
        },
        "CrossLanguageDefinitionId": "Encode.Datetime.unixTimestampDatetime"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -191,7 +193,7 @@
       "$id": "28",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": ""
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -208,7 +210,7 @@
        "$id": "30",
        "Kind": "string",
        "Name": "string",
-       "CrossLanguageDefinitionId": ""
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
@@ -568,6 +570,7 @@
        "Type": {
         "$id": "66",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "67",
          "Kind": "utcDateTime",
@@ -593,7 +596,8 @@
           "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
          },
          "CrossLanguageDefinitionId": "Encode.Datetime.unixTimestampDatetime"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1578,6 +1582,7 @@
        "Type": {
         "$id": "158",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "159",
          "Kind": "utcDateTime",
@@ -1603,7 +1608,8 @@
           "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
          },
          "CrossLanguageDefinitionId": "Encode.Datetime.unixTimestampDatetime"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Header",
        "IsRequired": true,

@@ -34,9 +34,11 @@
      "Type": {
       "$id": "6",
       "Kind": "array",
+      "Name": "ArrayInnerModel",
       "ValueType": {
        "$ref": "2"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -63,7 +65,7 @@
       "$id": "10",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": ""
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -80,7 +82,7 @@
        "$id": "12",
        "Kind": "string",
        "Name": "string",
-       "CrossLanguageDefinitionId": ""
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
@@ -138,12 +140,14 @@
        "BodyType": {
         "$id": "19",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "20",
          "Kind": "int32",
          "Name": "int32",
          "CrossLanguageDefinitionId": "TypeSpec.int32"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -177,12 +181,14 @@
        "Type": {
         "$id": "23",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "24",
          "Kind": "int32",
          "Name": "int32",
          "CrossLanguageDefinitionId": "TypeSpec.int32"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -333,12 +339,14 @@
        "BodyType": {
         "$id": "39",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "40",
          "Kind": "int64",
          "Name": "int64",
          "CrossLanguageDefinitionId": "TypeSpec.int64"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -372,12 +380,14 @@
        "Type": {
         "$id": "43",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "44",
          "Kind": "int64",
          "Name": "int64",
          "CrossLanguageDefinitionId": "TypeSpec.int64"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -528,12 +538,14 @@
        "BodyType": {
         "$id": "59",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "60",
          "Kind": "boolean",
          "Name": "boolean",
          "CrossLanguageDefinitionId": "TypeSpec.boolean"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -567,12 +579,14 @@
        "Type": {
         "$id": "63",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "64",
          "Kind": "boolean",
          "Name": "boolean",
          "CrossLanguageDefinitionId": "TypeSpec.boolean"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -723,12 +737,14 @@
        "BodyType": {
         "$id": "79",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "80",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -762,12 +778,14 @@
        "Type": {
         "$id": "83",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "84",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -918,12 +936,14 @@
        "BodyType": {
         "$id": "99",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "100",
          "Kind": "float32",
          "Name": "float32",
          "CrossLanguageDefinitionId": "TypeSpec.float32"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -957,12 +977,14 @@
        "Type": {
         "$id": "103",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "104",
          "Kind": "float32",
          "Name": "float32",
          "CrossLanguageDefinitionId": "TypeSpec.float32"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1113,6 +1135,7 @@
        "BodyType": {
         "$id": "119",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "120",
          "Kind": "utcDateTime",
@@ -1125,7 +1148,8 @@
           "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1159,6 +1183,7 @@
        "Type": {
         "$id": "124",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "125",
          "Kind": "utcDateTime",
@@ -1171,7 +1196,8 @@
           "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1322,6 +1348,7 @@
        "BodyType": {
         "$id": "141",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "142",
          "Kind": "duration",
@@ -1334,7 +1361,8 @@
           "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "CrossLanguageDefinitionId": "TypeSpec.duration"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1368,6 +1396,7 @@
        "Type": {
         "$id": "146",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "147",
          "Kind": "duration",
@@ -1380,7 +1409,8 @@
           "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "CrossLanguageDefinitionId": "TypeSpec.duration"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1531,12 +1561,14 @@
        "BodyType": {
         "$id": "163",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "164",
          "Kind": "any",
          "Name": "unknown",
          "CrossLanguageDefinitionId": ""
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1570,12 +1602,14 @@
        "Type": {
         "$id": "167",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "168",
          "Kind": "any",
          "Name": "unknown",
          "CrossLanguageDefinitionId": ""
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1726,9 +1760,11 @@
        "BodyType": {
         "$id": "183",
         "Kind": "array",
+        "Name": "ArrayInnerModel",
         "ValueType": {
          "$ref": "2"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1762,9 +1798,11 @@
        "Type": {
         "$id": "186",
         "Kind": "array",
+        "Name": "ArrayInnerModel",
         "ValueType": {
          "$ref": "2"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1915,6 +1953,7 @@
        "BodyType": {
         "$id": "201",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "202",
          "Kind": "nullable",
@@ -1924,7 +1963,8 @@
           "Name": "float32",
           "CrossLanguageDefinitionId": "TypeSpec.float32"
          }
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1958,6 +1998,7 @@
        "Type": {
         "$id": "206",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "207",
          "Kind": "nullable",
@@ -1967,7 +2008,8 @@
           "Name": "float32",
           "CrossLanguageDefinitionId": "TypeSpec.float32"
          }
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2118,6 +2160,7 @@
        "BodyType": {
         "$id": "223",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "224",
          "Kind": "nullable",
@@ -2127,7 +2170,8 @@
           "Name": "int32",
           "CrossLanguageDefinitionId": "TypeSpec.int32"
          }
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2161,6 +2205,7 @@
        "Type": {
         "$id": "228",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "229",
          "Kind": "nullable",
@@ -2170,7 +2215,8 @@
           "Name": "int32",
           "CrossLanguageDefinitionId": "TypeSpec.int32"
          }
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2321,6 +2367,7 @@
        "BodyType": {
         "$id": "245",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "246",
          "Kind": "nullable",
@@ -2330,7 +2377,8 @@
           "Name": "boolean",
           "CrossLanguageDefinitionId": "TypeSpec.boolean"
          }
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2364,6 +2412,7 @@
        "Type": {
         "$id": "250",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "251",
          "Kind": "nullable",
@@ -2373,7 +2422,8 @@
           "Name": "boolean",
           "CrossLanguageDefinitionId": "TypeSpec.boolean"
          }
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2524,6 +2574,7 @@
        "BodyType": {
         "$id": "267",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "268",
          "Kind": "nullable",
@@ -2533,7 +2584,8 @@
           "Name": "string",
           "CrossLanguageDefinitionId": "TypeSpec.string"
          }
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2567,6 +2619,7 @@
        "Type": {
         "$id": "272",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "273",
          "Kind": "nullable",
@@ -2576,7 +2629,8 @@
           "Name": "string",
           "CrossLanguageDefinitionId": "TypeSpec.string"
          }
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2727,13 +2781,15 @@
        "BodyType": {
         "$id": "289",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "290",
          "Kind": "nullable",
          "Type": {
           "$ref": "2"
          }
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2767,13 +2823,15 @@
        "Type": {
         "$id": "293",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "294",
          "Kind": "nullable",
          "Type": {
           "$ref": "2"
          }
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Body",
        "IsRequired": true,

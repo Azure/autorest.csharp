@@ -126,7 +126,9 @@ export function isInputEnumType(type: InputType): type is InputEnumType {
 
 export interface InputArrayType extends InputTypeBase {
     Kind: "array";
+    Name: string;
     ValueType: InputType;
+    CrossLanguageDefinitionId: string;
 }
 
 export function isInputArrayType(type: InputType): type is InputArrayType {

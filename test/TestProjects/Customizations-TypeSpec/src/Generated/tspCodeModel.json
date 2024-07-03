@@ -426,12 +426,14 @@
         "Type": {
          "$id": "61",
          "Kind": "array",
+         "Name": "Array",
          "ValueType": {
           "$id": "62",
           "Kind": "string",
           "Name": "string",
           "CrossLanguageDefinitionId": "TypeSpec.string"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -468,16 +470,20 @@
         "Type": {
          "$id": "68",
          "Kind": "array",
+         "Name": "ArrayArray",
          "ValueType": {
           "$id": "69",
           "Kind": "array",
+          "Name": "Array",
           "ValueType": {
            "$id": "70",
            "Kind": "string",
            "Name": "string",
            "CrossLanguageDefinitionId": "TypeSpec.string"
-          }
-         }
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -490,6 +496,7 @@
         "Type": {
          "$id": "72",
          "Kind": "array",
+         "Name": "ArrayRecord",
          "ValueType": {
           "$id": "73",
           "Kind": "dict",
@@ -505,7 +512,8 @@
            "Name": "string",
            "CrossLanguageDefinitionId": "TypeSpec.string"
           }
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -518,12 +526,14 @@
         "Type": {
          "$id": "77",
          "Kind": "array",
+         "Name": "Array",
          "ValueType": {
           "$id": "78",
           "Kind": "float32",
           "Name": "float32",
           "CrossLanguageDefinitionId": "TypeSpec.float32"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -536,12 +546,14 @@
         "Type": {
          "$id": "80",
          "Kind": "array",
+         "Name": "Array",
          "ValueType": {
           "$id": "81",
           "Kind": "float32",
           "Name": "float32",
           "CrossLanguageDefinitionId": "TypeSpec.float32"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -557,12 +569,14 @@
          "Type": {
           "$id": "84",
           "Kind": "array",
+          "Name": "Array",
           "ValueType": {
            "$id": "85",
            "Kind": "float32",
            "Name": "float32",
            "CrossLanguageDefinitionId": "TypeSpec.float32"
-          }
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          }
         },
         "IsRequired": true,
@@ -579,12 +593,14 @@
          "Type": {
           "$id": "88",
           "Kind": "array",
+          "Name": "Array",
           "ValueType": {
            "$id": "89",
            "Kind": "float32",
            "Name": "float32",
            "CrossLanguageDefinitionId": "TypeSpec.float32"
-          }
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          }
         },
         "IsRequired": false,
@@ -598,12 +614,14 @@
         "Type": {
          "$id": "91",
          "Kind": "array",
+         "Name": "Array",
          "ValueType": {
           "$id": "92",
           "Kind": "float32",
           "Name": "float32",
           "CrossLanguageDefinitionId": "TypeSpec.float32"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": true,
         "IsReadOnly": true
@@ -616,12 +634,14 @@
         "Type": {
          "$id": "94",
          "Kind": "array",
+         "Name": "Array",
          "ValueType": {
           "$id": "95",
           "Kind": "float32",
           "Name": "float32",
           "CrossLanguageDefinitionId": "TypeSpec.float32"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": true
@@ -637,12 +657,14 @@
          "Type": {
           "$id": "98",
           "Kind": "array",
+          "Name": "Array",
           "ValueType": {
            "$id": "99",
            "Kind": "float32",
            "Name": "float32",
            "CrossLanguageDefinitionId": "TypeSpec.float32"
-          }
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          }
         },
         "IsRequired": true,
@@ -659,12 +681,14 @@
          "Type": {
           "$id": "102",
           "Kind": "array",
+          "Name": "Array",
           "ValueType": {
            "$id": "103",
            "Kind": "float32",
            "Name": "float32",
            "CrossLanguageDefinitionId": "TypeSpec.float32"
-          }
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          }
         },
         "IsRequired": false,

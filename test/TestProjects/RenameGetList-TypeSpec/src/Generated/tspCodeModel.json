@@ -279,9 +279,11 @@
      "Type": {
       "$id": "39",
       "Kind": "array",
+      "Name": "ArrayProject",
       "ValueType": {
        "$ref": "10"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -341,9 +343,11 @@
      "Type": {
       "$id": "47",
       "Kind": "array",
+      "Name": "ArrayDeployment",
       "ValueType": {
        "$ref": "42"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -383,7 +387,7 @@
       "$id": "53",
       "Kind": "url",
       "Name": "url",
-      "CrossLanguageDefinitionId": ""
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
