@@ -660,6 +660,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\traits\\src\\Generated -n"
     },
+    "typespec-azure/resource-manager/models/common-types/managed-identity": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\resource-manager\\models\\common-types\\managed-identity\\src\\Generated -n"
+    },
     "typespec-azure/special-headers/client-request-id": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\special-headers\\client-request-id\\src\\Generated -n"
