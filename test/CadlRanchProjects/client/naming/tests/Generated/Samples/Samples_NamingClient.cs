@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using Client.Naming.Models;
 using NUnit.Framework;
 
 namespace Client.Naming.Samples
@@ -140,7 +141,8 @@ namespace Client.Naming.Samples
         {
             NamingClient client = new NamingClient();
 
-            Response response = client.Client(true);
+            ClientNameModel body = new ClientNameModel(true);
+            Response response = client.Client(body);
         }
 
         [Test]
@@ -149,7 +151,8 @@ namespace Client.Naming.Samples
         {
             NamingClient client = new NamingClient();
 
-            Response response = await client.ClientAsync(true);
+            ClientNameModel body = new ClientNameModel(true);
+            Response response = await client.ClientAsync(body);
         }
 
         [Test]
@@ -188,7 +191,8 @@ namespace Client.Naming.Samples
         {
             NamingClient client = new NamingClient();
 
-            Response response = client.Client(true);
+            ClientNameModel body = new ClientNameModel(true);
+            Response response = client.Client(body);
         }
 
         [Test]
@@ -197,7 +201,8 @@ namespace Client.Naming.Samples
         {
             NamingClient client = new NamingClient();
 
-            Response response = await client.ClientAsync(true);
+            ClientNameModel body = new ClientNameModel(true);
+            Response response = await client.ClientAsync(body);
         }
 
         [Test]
@@ -236,7 +241,8 @@ namespace Client.Naming.Samples
         {
             NamingClient client = new NamingClient();
 
-            Response response = client.Language(true);
+            LanguageClientNameModel body = new LanguageClientNameModel(true);
+            Response response = client.Language(body);
         }
 
         [Test]
@@ -245,7 +251,8 @@ namespace Client.Naming.Samples
         {
             NamingClient client = new NamingClient();
 
-            Response response = await client.LanguageAsync(true);
+            LanguageClientNameModel body = new LanguageClientNameModel(true);
+            Response response = await client.LanguageAsync(body);
         }
 
         [Test]
@@ -284,7 +291,8 @@ namespace Client.Naming.Samples
         {
             NamingClient client = new NamingClient();
 
-            Response response = client.Language(true);
+            LanguageClientNameModel body = new LanguageClientNameModel(true);
+            Response response = client.Language(body);
         }
 
         [Test]
@@ -293,7 +301,8 @@ namespace Client.Naming.Samples
         {
             NamingClient client = new NamingClient();
 
-            Response response = await client.LanguageAsync(true);
+            LanguageClientNameModel body = new LanguageClientNameModel(true);
+            Response response = await client.LanguageAsync(body);
         }
 
         [Test]
@@ -332,7 +341,8 @@ namespace Client.Naming.Samples
         {
             NamingClient client = new NamingClient();
 
-            Response response = client.CompatibleWithEncodedName(true);
+            ClientNameAndJsonEncodedNameModel body = new ClientNameAndJsonEncodedNameModel(true);
+            Response response = client.CompatibleWithEncodedName(body);
         }
 
         [Test]
@@ -341,7 +351,8 @@ namespace Client.Naming.Samples
         {
             NamingClient client = new NamingClient();
 
-            Response response = await client.CompatibleWithEncodedNameAsync(true);
+            ClientNameAndJsonEncodedNameModel body = new ClientNameAndJsonEncodedNameModel(true);
+            Response response = await client.CompatibleWithEncodedNameAsync(body);
         }
 
         [Test]
@@ -380,7 +391,8 @@ namespace Client.Naming.Samples
         {
             NamingClient client = new NamingClient();
 
-            Response response = client.CompatibleWithEncodedName(true);
+            ClientNameAndJsonEncodedNameModel body = new ClientNameAndJsonEncodedNameModel(true);
+            Response response = client.CompatibleWithEncodedName(body);
         }
 
         [Test]
@@ -389,7 +401,8 @@ namespace Client.Naming.Samples
         {
             NamingClient client = new NamingClient();
 
-            Response response = await client.CompatibleWithEncodedNameAsync(true);
+            ClientNameAndJsonEncodedNameModel body = new ClientNameAndJsonEncodedNameModel(true);
+            Response response = await client.CompatibleWithEncodedNameAsync(body);
         }
 
         [Test]

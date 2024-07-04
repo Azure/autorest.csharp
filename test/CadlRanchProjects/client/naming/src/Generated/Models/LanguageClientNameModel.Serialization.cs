@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace Client.Naming.Models
 {
-    internal partial class LanguageClientNameModel : IUtf8JsonSerializable, IJsonModel<LanguageClientNameModel>
+    public partial class LanguageClientNameModel : IUtf8JsonSerializable, IJsonModel<LanguageClientNameModel>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LanguageClientNameModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 

@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace Client.Naming.Models
 {
-    internal partial class ClientNameAndJsonEncodedNameModel : IUtf8JsonSerializable, IJsonModel<ClientNameAndJsonEncodedNameModel>
+    public partial class ClientNameAndJsonEncodedNameModel : IUtf8JsonSerializable, IJsonModel<ClientNameAndJsonEncodedNameModel>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ClientNameAndJsonEncodedNameModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 

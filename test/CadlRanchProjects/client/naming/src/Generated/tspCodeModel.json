@@ -323,8 +323,8 @@
       },
       {
        "$id": "42",
-       "Name": "ClientNameModel",
-       "NameInRequest": "ClientNameModel",
+       "Name": "body",
+       "NameInRequest": "body",
        "Type": {
         "$ref": "9"
        },
@@ -336,7 +336,7 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Spread"
+       "Kind": "Method"
       },
       {
        "$id": "43",
@@ -424,8 +424,8 @@
       },
       {
        "$id": "51",
-       "Name": "LanguageClientNameModel",
-       "NameInRequest": "LanguageClientNameModel",
+       "Name": "body",
+       "NameInRequest": "body",
        "Type": {
         "$ref": "12"
        },
@@ -437,7 +437,7 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Spread"
+       "Kind": "Method"
       },
       {
        "$id": "52",
@@ -525,8 +525,8 @@
       },
       {
        "$id": "60",
-       "Name": "ClientNameAndJsonEncodedNameModel",
-       "NameInRequest": "ClientNameAndJsonEncodedNameModel",
+       "Name": "body",
+       "NameInRequest": "body",
        "Type": {
         "$ref": "15"
        },
@@ -538,7 +538,7 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Spread"
+       "Kind": "Method"
       },
       {
        "$id": "61",
