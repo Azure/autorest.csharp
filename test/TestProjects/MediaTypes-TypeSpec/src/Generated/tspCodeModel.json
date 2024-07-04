@@ -1,28 +1,78 @@
 {
  "$id": "1",
  "Name": "MultipleMediaTypes",
- "Description": "Play with produces/consumes and media-types in general.",
  "ApiVersions": [],
- "Enums": [],
- "Models": [
+ "Enums": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "enum",
+   "Name": "OneBinaryBodyTwoContentTypesRequestContentType",
+   "CrossLanguageDefinitionId": "oneBinaryBodyTwoContentTypes.RequestContentType.anonymous",
+   "ValueType": {
+    "$id": "3",
+    "Kind": "string"
+   },
+   "Values": [
+    {
+     "$id": "4",
+     "Name": "application/json; serialization=Avro",
+     "Value": "application/json; serialization=Avro"
+    },
+    {
+     "$id": "5",
+     "Name": "application/octet-stream",
+     "Value": "application/octet-stream"
+    }
+   ],
+   "IsExtensible": false,
+   "Usage": "Input"
+  },
+  {
+   "$id": "6",
+   "Kind": "enum",
+   "Name": "OneStringBodyThreeContentTypesRequestContentType",
+   "CrossLanguageDefinitionId": "oneStringBodyThreeContentTypes.RequestContentType.anonymous",
+   "ValueType": {
+    "$id": "7",
+    "Kind": "string"
+   },
+   "Values": [
+    {
+     "$id": "8",
+     "Name": "application/json",
+     "Value": "application/json"
+    },
+    {
+     "$id": "9",
+     "Name": "application/octet-stream",
+     "Value": "application/octet-stream"
+    },
+    {
+     "$id": "10",
+     "Name": "text/plain",
+     "Value": "text/plain"
+    }
+   ],
+   "IsExtensible": false,
+   "Usage": "Input"
+  }
+ ],
+ "Models": [
+  {
+   "$id": "11",
+   "Kind": "model",
    "Name": "Body",
-   "Namespace": "MultipleMediaTypes",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "MultipleMediaTypes.Body",
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "3",
+     "$id": "12",
      "Name": "id",
      "SerializedName": "id",
      "Description": "",
      "Type": {
-      "$id": "4",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "$id": "13",
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -32,24 +82,23 @@
  ],
  "Clients": [
   {
-   "$id": "5",
+   "$id": "14",
    "Name": "MultipleMediaTypesClient",
    "Description": "Play with produces/consumes and media-types in general.",
    "Operations": [
     {
-     "$id": "6",
+     "$id": "15",
      "Name": "oneBinaryBodyTwoContentTypes",
      "ResourceName": "MultipleMediaTypes",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "7",
+       "$id": "16",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Type": {
-        "$id": "8",
-        "Kind": "Primitive",
-        "Name": "Uri",
-        "IsNullable": false
+        "$id": "17",
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -62,42 +111,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "9",
+       "$id": "18",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "10",
-        "Kind": "Union",
-        "Name": "Union",
-        "UnionItemTypes": [
-         {
-          "$id": "11",
-          "Kind": "Literal",
-          "Name": "Literal",
-          "LiteralValueType": {
-           "$id": "12",
-           "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
-          },
-          "Value": "application/json; serialization=Avro",
-          "IsNullable": false
-         },
-         {
-          "$id": "13",
-          "Kind": "Literal",
-          "Name": "Literal",
-          "LiteralValueType": {
-           "$id": "14",
-           "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
-          },
-          "Value": "application/octet-stream",
-          "IsNullable": false
-         }
-        ],
-        "IsNullable": false
+        "$ref": "2"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -110,14 +128,13 @@
        "Kind": "Constant"
       },
       {
-       "$id": "15",
+       "$id": "19",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "16",
-        "Kind": "Primitive",
-        "Name": "Bytes",
-        "IsNullable": false
+        "$id": "20",
+        "Kind": "bytes",
+        "Encode": "base64"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -130,13 +147,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "17",
+       "$id": "21",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "18",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "22",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -149,9 +165,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "19",
+        "$id": "23",
         "Type": {
-         "$ref": "18"
+         "$ref": "22"
         },
         "Value": "application/json"
        }
@@ -159,7 +175,7 @@
      ],
      "Responses": [
       {
-       "$id": "20",
+       "$id": "24",
        "StatusCodes": [
         204
        ],
@@ -181,63 +197,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "21",
+     "$id": "25",
      "Name": "oneStringBodyThreeContentTypes",
      "ResourceName": "MultipleMediaTypes",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "7"
+       "$ref": "16"
       },
       {
-       "$id": "22",
+       "$id": "26",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "23",
-        "Kind": "Union",
-        "Name": "Union",
-        "UnionItemTypes": [
-         {
-          "$id": "24",
-          "Kind": "Literal",
-          "Name": "Literal",
-          "LiteralValueType": {
-           "$id": "25",
-           "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
-          },
-          "Value": "application/json",
-          "IsNullable": false
-         },
-         {
-          "$id": "26",
-          "Kind": "Literal",
-          "Name": "Literal",
-          "LiteralValueType": {
-           "$id": "27",
-           "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
-          },
-          "Value": "application/octet-stream",
-          "IsNullable": false
-         },
-         {
-          "$id": "28",
-          "Kind": "Literal",
-          "Name": "Literal",
-          "LiteralValueType": {
-           "$id": "29",
-           "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
-          },
-          "Value": "text/plain",
-          "IsNullable": false
-         }
-        ],
-        "IsNullable": false
+        "$ref": "6"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -250,14 +223,12 @@
        "Kind": "Constant"
       },
       {
-       "$id": "30",
+       "$id": "27",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "31",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "$id": "28",
+        "Kind": "string"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -270,13 +241,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "32",
+       "$id": "29",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "33",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "30",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -289,9 +259,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "34",
+        "$id": "31",
         "Type": {
-         "$ref": "33"
+         "$ref": "30"
         },
         "Value": "application/json"
        }
@@ -299,7 +269,7 @@
      ],
      "Responses": [
       {
-       "$id": "35",
+       "$id": "32",
        "StatusCodes": [
         204
        ],
@@ -322,35 +292,32 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "36",
+     "$id": "33",
      "Name": "oneModelBodyOneContentType",
      "ResourceName": "MultipleMediaTypes",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "7"
+       "$ref": "16"
       },
       {
-       "$id": "37",
+       "$id": "34",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "38",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "39",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+        "$id": "35",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "36",
+         "Kind": "string"
         },
-        "Value": "application/json",
-        "IsNullable": false
+        "Value": "application/json"
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "40",
+        "$id": "37",
         "Type": {
-         "$ref": "38"
+         "$ref": "35"
         },
         "Value": "application/json"
        },
@@ -364,11 +331,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "41",
+       "$id": "38",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "2"
+        "$ref": "11"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -381,13 +348,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "42",
+       "$id": "39",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "43",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "40",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -400,9 +366,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "44",
+        "$id": "41",
         "Type": {
-         "$ref": "43"
+         "$ref": "40"
         },
         "Value": "application/json"
        }
@@ -410,7 +376,7 @@
      ],
      "Responses": [
       {
-       "$id": "45",
+       "$id": "42",
        "StatusCodes": [
         204
        ],
@@ -432,9 +398,13 @@
     }
    ],
    "Protocol": {
-    "$id": "46"
+    "$id": "43"
    },
-   "Creatable": true
+   "Parameters": [
+    {
+     "$ref": "16"
+    }
+   ]
   }
  ]
 }

@@ -18,7 +18,7 @@ namespace MgmtDiscriminator.Models
 {
     public partial class QueryStringMatchConditionParameters : IUtf8JsonSerializable, IJsonModel<QueryStringMatchConditionParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<QueryStringMatchConditionParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<QueryStringMatchConditionParameters>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<QueryStringMatchConditionParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -90,7 +90,7 @@ namespace MgmtDiscriminator.Models
 
         internal static QueryStringMatchConditionParameters DeserializeQueryStringMatchConditionParameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -102,7 +102,7 @@ namespace MgmtDiscriminator.Models
             IList<string> matchValues = default;
             IList<Transform> transforms = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("typeName"u8))
@@ -154,10 +154,10 @@ namespace MgmtDiscriminator.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new QueryStringMatchConditionParameters(
                 typeName,
                 @operator,
@@ -179,54 +179,58 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
-            builder.Append("  typeName: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.Append("  typeName: ");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
+                builder.Append("  typeName: ");
                 builder.AppendLine($"'{TypeName.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Operator), out propertyOverride);
-            builder.Append("  operator: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.Append("  operator: ");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
+                builder.Append("  operator: ");
                 builder.AppendLine($"'{Operator.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NegateCondition), out propertyOverride);
-            if (Optional.IsDefined(NegateCondition) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  negateCondition: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(NegateCondition))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  negateCondition: ");
                     var boolValue = NegateCondition.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(MatchValues), out propertyOverride);
-            if (Optional.IsCollectionDefined(MatchValues) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (MatchValues.Any() || hasPropertyOverride)
+                builder.Append("  matchValues: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(MatchValues))
                 {
-                    builder.Append("  matchValues: ");
-                    if (hasPropertyOverride)
+                    if (MatchValues.Any())
                     {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
+                        builder.Append("  matchValues: ");
                         builder.AppendLine("[");
                         foreach (var item in MatchValues)
                         {
@@ -251,17 +255,18 @@ namespace MgmtDiscriminator.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Transforms), out propertyOverride);
-            if (Optional.IsCollectionDefined(Transforms) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (Transforms.Any() || hasPropertyOverride)
+                builder.Append("  transforms: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(Transforms))
                 {
-                    builder.Append("  transforms: ");
-                    if (hasPropertyOverride)
+                    if (Transforms.Any())
                     {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
+                        builder.Append("  transforms: ");
                         builder.AppendLine("[");
                         foreach (var item in Transforms)
                         {

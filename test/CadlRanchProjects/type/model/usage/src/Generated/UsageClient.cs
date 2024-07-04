@@ -47,6 +47,7 @@ namespace _Type.Model.Usage
             _endpoint = endpoint;
         }
 
+        /// <summary> Input. </summary>
         /// <param name="input"> The <see cref="InputRecord"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -55,12 +56,13 @@ namespace _Type.Model.Usage
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await InputAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Input. </summary>
         /// <param name="input"> The <see cref="InputRecord"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -69,14 +71,14 @@ namespace _Type.Model.Usage
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Input(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Input.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -115,7 +117,7 @@ namespace _Type.Model.Usage
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Input.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -153,6 +155,7 @@ namespace _Type.Model.Usage
             }
         }
 
+        /// <summary> Output. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='OutputAsync(CancellationToken)']/*" />
         public virtual async Task<Response<OutputRecord>> OutputAsync(CancellationToken cancellationToken = default)
@@ -162,6 +165,7 @@ namespace _Type.Model.Usage
             return Response.FromValue(OutputRecord.FromResponse(response), response);
         }
 
+        /// <summary> Output. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='Output(CancellationToken)']/*" />
         public virtual Response<OutputRecord> Output(CancellationToken cancellationToken = default)
@@ -172,7 +176,7 @@ namespace _Type.Model.Usage
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Output.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -207,7 +211,7 @@ namespace _Type.Model.Usage
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Output.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -241,6 +245,7 @@ namespace _Type.Model.Usage
             }
         }
 
+        /// <summary> Input and output. </summary>
         /// <param name="body"> The <see cref="InputOutputRecord"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -249,12 +254,13 @@ namespace _Type.Model.Usage
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await InputAndOutputAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(InputOutputRecord.FromResponse(response), response);
         }
 
+        /// <summary> Input and output. </summary>
         /// <param name="body"> The <see cref="InputOutputRecord"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -263,14 +269,14 @@ namespace _Type.Model.Usage
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = InputAndOutput(content, context);
             return Response.FromValue(InputOutputRecord.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Input and output.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -309,7 +315,7 @@ namespace _Type.Model.Usage
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Input and output.
         /// <list type="bullet">
         /// <item>
         /// <description>

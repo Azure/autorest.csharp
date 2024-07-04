@@ -17,7 +17,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 {
     public partial class DiskEncryptionSettings : IUtf8JsonSerializable, IJsonModel<DiskEncryptionSettings>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DiskEncryptionSettings>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DiskEncryptionSettings>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<DiskEncryptionSettings>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -31,12 +31,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(DiskEncryptionKey))
             {
                 writer.WritePropertyName("diskEncryptionKey"u8);
-                writer.WriteObjectValue<KeyVaultSecretReference>(DiskEncryptionKey, options);
+                writer.WriteObjectValue(DiskEncryptionKey, options);
             }
             if (Optional.IsDefined(KeyEncryptionKey))
             {
                 writer.WritePropertyName("keyEncryptionKey"u8);
-                writer.WriteObjectValue<KeyVaultKeyReference>(KeyEncryptionKey, options);
+                writer.WriteObjectValue(KeyEncryptionKey, options);
             }
             if (Optional.IsDefined(Enabled))
             {
@@ -75,7 +75,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 
         internal static DiskEncryptionSettings DeserializeDiskEncryptionSettings(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -85,7 +85,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             KeyVaultKeyReference keyEncryptionKey = default;
             bool? enabled = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("diskEncryptionKey"u8))
@@ -117,10 +117,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new DiskEncryptionSettings(diskEncryptionKey, keyEncryptionKey, enabled, serializedAdditionalRawData);
         }
 
@@ -136,43 +136,46 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DiskEncryptionKey), out propertyOverride);
-            if (Optional.IsDefined(DiskEncryptionKey) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  diskEncryptionKey: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(DiskEncryptionKey))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  diskEncryptionKey: ");
                     BicepSerializationHelpers.AppendChildObject(builder, DiskEncryptionKey, options, 2, false, "  diskEncryptionKey: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(KeyEncryptionKey), out propertyOverride);
-            if (Optional.IsDefined(KeyEncryptionKey) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  keyEncryptionKey: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(KeyEncryptionKey))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  keyEncryptionKey: ");
                     BicepSerializationHelpers.AppendChildObject(builder, KeyEncryptionKey, options, 2, false, "  keyEncryptionKey: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Enabled), out propertyOverride);
-            if (Optional.IsDefined(Enabled) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  enabled: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Enabled))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  enabled: ");
                     var boolValue = Enabled.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }

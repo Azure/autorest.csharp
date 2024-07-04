@@ -10,7 +10,6 @@ using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
@@ -32,14 +31,12 @@ namespace AutoRest.CSharp.Output.Models.Types.System
         private readonly FieldDeclaration _uriBuilderField = new(FieldModifiers.Private, typeof(UriBuilder), "_uriBuilder");
         private readonly FieldDeclaration _pathBuilderField = new(FieldModifiers.Private, typeof(StringBuilder), "_pathBuilder");
         private readonly FieldDeclaration _queryBuilderField = new(FieldModifiers.Private, typeof(StringBuilder), "_queryBuilder");
-        private readonly FieldDeclaration _pathSeparatorField = new(FieldModifiers.Private | FieldModifiers.Const, typeof(char), "PathSeparator", Literal('/'), SerializationFormat.Default);
 
         protected override IEnumerable<FieldDeclaration> BuildFields()
         {
             yield return _uriBuilderField;
             yield return _pathBuilderField;
             yield return _queryBuilderField;
-            yield return _pathSeparatorField;
         }
 
         private PropertyDeclaration? _uriBuilderProperty;
@@ -156,9 +153,9 @@ namespace AutoRest.CSharp.Output.Models.Types.System
                     Assign(value, new InvokeStaticMethodExpression(typeof(Uri), nameof(Uri.EscapeDataString), new[]{ value }))
                 },
                 EmptyLine,
-                new IfStatement(Equal(new IndexerExpression(value, Literal(0)), _pathSeparatorField))
+                new IfStatement(And(And(GreaterThan(pathBuilder.Length, Int(0)), Equal(new IndexerExpression(pathBuilder, pathBuilder.Length - Int(1)), Literal('/'))), Equal(new IndexerExpression(value, Int(0)), Literal('/'))))
                 {
-                    Assign(value, value.Substring(Literal(1)))
+                    pathBuilder.Remove(pathBuilder.Length - Int(1), Int(1))
                 },
                 EmptyLine,
                 pathBuilder.Append(value),
@@ -225,9 +222,10 @@ namespace AutoRest.CSharp.Output.Models.Types.System
                 Argument.AssertNotNullOrWhiteSpace(name),
                 Argument.AssertNotNullOrWhiteSpace(value),
                 EmptyLine,
-                new IfElseStatement(Equal(queryBuilder.Length, Int(0)),
-                    queryBuilder.Append(Literal('?')),
-                    queryBuilder.Append(Literal('&'))),
+                new IfStatement(GreaterThan(queryBuilder.Length, Int(0)))
+                {
+                    queryBuilder.Append(Literal('&'))
+                },
                 EmptyLine,
                 new IfStatement(escape)
                 {
@@ -273,7 +271,7 @@ namespace AutoRest.CSharp.Output.Models.Types.System
             // TODO -- this is temporary, in the future, TypeFormatters will be a standalone static class, but now it is a nested type inside ModelSerializationExtensions
             var typeFormattersProvider = (TypeFormattersProvider)ModelSerializationExtensionsProvider.Instance.NestedTypes[0];
             var convertToStringExpression = typeFormattersProvider.ConvertToString(valueParameter, hasFormat ? (ValueExpression)formatParameter : null);
-            var body = new InvokeInstanceMethodStatement(null, _appendQueryMethodName, new ValueExpression[] { nameParameter, convertToStringExpression, escapeParameter });
+            var body = new InvokeInstanceMethodStatement(null, _appendQueryMethodName, nameParameter, convertToStringExpression, escapeParameter);
 
             return new(signature, body);
         }
@@ -314,15 +312,10 @@ namespace AutoRest.CSharp.Output.Models.Types.System
 
             var typeFormattersProvider = (TypeFormattersProvider)ModelSerializationExtensionsProvider.Instance.NestedTypes[0];
             var v = new VariableReference(_t, "v");
-            var body = new MethodBodyStatement[]
+            var body = new[]
             {
                 Var("stringValues", value.Select(new TypedFuncExpression(new[] {v.Declaration}, typeFormattersProvider.ConvertToString(v, format))), out var stringValues),
-                new InvokeInstanceMethodStatement(null, _appendQueryMethodName, new ValueExpression[]
-                {
-                    name,
-                    StringExpression.Join(delimiter, stringValues),
-                    escape
-                })
+                new InvokeInstanceMethodStatement(null, _appendQueryMethodName, name, StringExpression.Join(delimiter, stringValues), escape)
             };
 
             return new(signature, body);

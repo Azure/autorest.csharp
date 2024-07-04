@@ -9,13 +9,14 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace AdditionalPropertiesEx.Models
 {
     public partial struct InputAdditionalPropertiesModelStruct : IUtf8JsonSerializable, IJsonModel<InputAdditionalPropertiesModelStruct>, IJsonModel<object>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InputAdditionalPropertiesModelStruct>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InputAdditionalPropertiesModelStruct>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<InputAdditionalPropertiesModelStruct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -54,7 +55,7 @@ namespace AdditionalPropertiesEx.Models
 
         internal static InputAdditionalPropertiesModelStruct DeserializeInputAdditionalPropertiesModelStruct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             int id = default;
             IDictionary<string, object> additionalProperties = default;
@@ -108,5 +109,21 @@ namespace AdditionalPropertiesEx.Models
         object IPersistableModel<object>.Create(BinaryData data, ModelReaderWriterOptions options) => ((IPersistableModel<InputAdditionalPropertiesModelStruct>)this).Create(data, options);
 
         string IPersistableModel<object>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<InputAdditionalPropertiesModelStruct>)this).GetFormatFromOptions(options);
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static InputAdditionalPropertiesModelStruct FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeInputAdditionalPropertiesModelStruct(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            return content;
+        }
     }
 }

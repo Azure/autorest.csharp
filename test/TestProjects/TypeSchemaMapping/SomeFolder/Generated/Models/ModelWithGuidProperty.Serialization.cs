@@ -28,11 +28,11 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndElement();
         }
 
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, ModelSerializationExtensions.WireOptions);
 
         internal static ModelWithGuidProperty DeserializeModelWithGuidProperty(XElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             Guid? modelProperty = default;
             if (element.Element("ModelProperty") is XElement modelPropertyElement)

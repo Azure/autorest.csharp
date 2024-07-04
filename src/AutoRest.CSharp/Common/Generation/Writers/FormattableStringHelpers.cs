@@ -84,9 +84,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 return null;
             }
 
-            if (TypeFactory.IsCollectionType(parameterType) && (defaultValue == null || TypeFactory.IsCollectionType(defaultValue.Value.Type)))
+            if (parameterType.IsCollection && (defaultValue == null || defaultValue.Value.Type.IsCollection))
             {
-                defaultValue = Constant.NewInstanceOf(TypeFactory.GetImplementationType(parameterType).WithNullable(false));
+                defaultValue = Constant.NewInstanceOf(parameterType.InitializationType.WithNullable(false));
             }
 
             if (defaultValue == null)
@@ -116,6 +116,15 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
                         }
+                    case { IsFrameworkType: false, Implementation: ModelTypeProvider }:
+                        {
+                            BodyMediaType? mediaType = contentType == null ? null : ToMediaType(contentType);
+                            if (mediaType == BodyMediaType.Multipart)
+                            {
+                                return $"{parameter.Name:I}.{Configuration.ApiTypes.ToMultipartRequestContentName}()";
+                            }
+                            break;
+                        }
                 }
             }
 
@@ -135,7 +144,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static FormattableString GetConversionFromFrameworkToRequestContent(this Parameter parameter, string? contentType)
         {
-            if (TypeFactory.IsReadWriteDictionary(parameter.Type))
+            if (parameter.Type.IsReadWriteDictionary)
             {
                 var dictionary = (ValueExpression)parameter;
                 var expression = RequestContentHelperProvider.Instance.FromDictionary(dictionary);
@@ -146,7 +155,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"{expression}";
             }
 
-            if (TypeFactory.IsList(parameter.Type))
+            if (parameter.Type.IsList)
             {
                 var enumerable = (ValueExpression)parameter;
                 var expression = RequestContentHelperProvider.Instance.FromEnumerable(enumerable);

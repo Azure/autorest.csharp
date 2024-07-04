@@ -16,7 +16,7 @@ namespace _Type.Union.Models
 {
     internal partial class SendRequest6 : IUtf8JsonSerializable, IJsonModel<SendRequest6>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SendRequest6>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SendRequest6>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<SendRequest6>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -28,7 +28,7 @@ namespace _Type.Union.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("prop"u8);
-            writer.WriteObjectValue<EnumsOnlyCases>(Prop, options);
+            writer.WriteNumberValue((int)Prop);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -61,28 +61,28 @@ namespace _Type.Union.Models
 
         internal static SendRequest6 DeserializeSendRequest6(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            EnumsOnlyCases prop = default;
+            GetResponseProp2 prop = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("prop"u8))
                 {
-                    prop = EnumsOnlyCases.DeserializeEnumsOnlyCases(property.Value, options);
+                    prop = property.Value.GetInt32().ToGetResponseProp2();
                     continue;
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new SendRequest6(prop, serializedAdditionalRawData);
         }
 
@@ -125,11 +125,11 @@ namespace _Type.Union.Models
             return DeserializeSendRequest6(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<SendRequest6>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

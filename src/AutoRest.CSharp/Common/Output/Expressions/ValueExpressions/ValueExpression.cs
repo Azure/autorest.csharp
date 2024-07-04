@@ -17,6 +17,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     internal record ValueExpression
     {
+        public virtual void Write(CodeWriter writer) { }
+
         public static implicit operator ValueExpression(Type type) => new TypeReference(type);
         public static implicit operator ValueExpression(CSharpType type) => new TypeReference(type);
         public static implicit operator ValueExpression(Parameter parameter) => new ParameterReference(parameter);
@@ -61,7 +63,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
         private string GetDebuggerDisplay()
         {
             using var writer = new DebuggerCodeWriter();
-            writer.WriteValueExpression(this);
+            Write(writer);
             return writer.ToString();
         }
     }

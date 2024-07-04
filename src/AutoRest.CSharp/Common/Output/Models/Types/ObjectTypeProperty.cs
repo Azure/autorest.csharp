@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -24,7 +24,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             : this(declaration: new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type),
                   parameterDescription: field.Description?.ToString() ?? string.Empty,
                   isReadOnly: field.Modifiers.HasFlag(FieldModifiers.ReadOnly),
-                  schemaProperty: null,
                   isRequired: field.IsRequired,
                   valueType: field.ValueType,
                   inputModelProperty: inputModelProperty,
@@ -36,15 +35,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             InitializationValue = field.InitializationValue;
         }
 
-        public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
-            : this(declaration, parameterDescription, isReadOnly, schemaProperty, schemaProperty?.IsRequired ?? false, valueType: valueType, optionalViaNullability: optionalViaNullability)
+        public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, InputModelProperty? inputModelProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
+            : this(declaration, parameterDescription, isReadOnly, inputModelProperty, inputModelProperty?.IsRequired ?? false, valueType: valueType, optionalViaNullability: optionalViaNullability)
         {
         }
 
-        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SerializationFormat serializationFormat = SerializationFormat.Default)
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, InputModelProperty? inputModelProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SerializationFormat serializationFormat = SerializationFormat.Default)
         {
             IsReadOnly = isReadOnly;
-            SchemaProperty = schemaProperty;
             OptionalViaNullability = optionalViaNullability;
             ValueType = valueType ?? declaration.Type;
             Declaration = declaration;
@@ -67,11 +65,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 newDeclaration,
                 _baseParameterDescription,
                 IsReadOnly,
-                SchemaProperty,
+                InputModelProperty,
                 IsRequired,
                 valueType: ValueType,
                 optionalViaNullability: OptionalViaNullability,
-                inputModelProperty: InputModelProperty,
                 isFlattenedProperty: true);
         }
 
@@ -79,7 +76,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ValueExpression? InitializationValue { get; }
 
-        public virtual string SerializedName => SchemaProperty?.SerializedName ?? InputModelProperty?.SerializedName ?? Declaration.Name;
+        public virtual string SerializedName => InputModelProperty?.SerializedName ?? InputModelProperty?.SerializedName ?? Declaration.Name;
 
         private bool IsFlattenedProperty { get; }
 
@@ -126,7 +123,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return stack;
         }
 
-        public virtual IEnumerable<string>? FlattenedNames => SchemaProperty?.FlattenedNames;
+        public virtual IEnumerable<string>? FlattenedNames => InputModelProperty?.FlattenedNames;
 
         public string GetWirePath()
         {
@@ -154,7 +151,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public FormattableString FormattedDescription { get; }
         private FormattableString? _propertyDescription;
         public FormattableString PropertyDescription => _propertyDescription ??= $"{FormattedDescription}{CreateExtraPropertyDiscriminatorSummary(ValueType)}";
-        public Property? SchemaProperty { get; }
         public InputModelProperty? InputModelProperty { get; }
         private FormattableString? _parameterDescription;
         private string _baseParameterDescription; // inherited type "FlattenedObjectTypeProperty" need to pass this value into the base constructor so that some appended information will not be appended again in the flattened property
@@ -184,7 +180,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         /// <param name="unionItems">the list of union type items.</param>
         /// <returns>A list of FormattableString representing the description of each union item.
         /// </returns>
-        public static IReadOnlyList<FormattableString> GetUnionTypesDescriptions(IReadOnlyList<CSharpType> unionItems)
+        internal static IReadOnlyList<FormattableString> GetUnionTypesDescriptions(IReadOnlyList<CSharpType> unionItems)
         {
             var values = new List<FormattableString>();
 
@@ -238,12 +234,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 typeDescription = $"<see cref=\"{input}\"/>";
             }
 
-            if (TypeFactory.IsList(input) || TypeFactory.IsArray(input))
+            if (input.IsList || input.IsArray)
             {
-                elementType = TypeFactory.GetElementType(input);
+                elementType = input.ElementType;
                 typeDescription = $"{itemName}";
             }
-            else if (TypeFactory.IsDictionary(input))
+            else if (input.IsDictionary)
             {
                 typeDescription = $"{itemName}{{TKey, TValue}}";
             }
@@ -265,23 +261,15 @@ namespace AutoRest.CSharp.Output.Models.Types
         internal string CreateExtraDescriptionWithManagedServiceIdentity()
         {
             var extraDescription = string.Empty;
-            var originalObjSchema = SchemaProperty?.Schema as ObjectSchema;
-            var identityTypeSchema = originalObjSchema?.GetAllProperties()!.FirstOrDefault(p => p.SerializedName == "type")!.Schema;
-            if (identityTypeSchema != null)
+            var originalModelType = (InputModelProperty?.Type.GetImplementType()) as InputModelType;
+            var identityType = originalModelType?.GetAllProperties()!.FirstOrDefault(p => p.SerializedName == "type")!.Type;
+            if (identityType != null)
             {
                 var supportedTypesToShow = new List<string>();
                 var commonMsiSupportedTypeCount = typeof(ManagedServiceIdentityType).GetProperties().Length;
-                // unwrap constant schema if it is
-                if (identityTypeSchema is ConstantSchema constantIdentitySchema && constantIdentitySchema.ValueType is ChoiceSchema identityTypeChoiceSchema)
-                    identityTypeSchema = identityTypeChoiceSchema;
-
-                if (identityTypeSchema is ChoiceSchema choiceSchema && choiceSchema.Choices.Count < commonMsiSupportedTypeCount)
+                if (identityType.GetImplementType() is InputEnumType enumType && enumType.Values.Count < commonMsiSupportedTypeCount)
                 {
-                    supportedTypesToShow = choiceSchema.Choices.Select(c => c.Value).ToList();
-                }
-                else if (identityTypeSchema is SealedChoiceSchema sealedChoiceSchema && sealedChoiceSchema.Choices.Count < commonMsiSupportedTypeCount)
-                {
-                    supportedTypesToShow = sealedChoiceSchema.Choices.Select(c => c.Value).ToList();
+                    supportedTypesToShow = enumType.Values.Select(c => c.GetValueString()).ToList();
                 }
                 if (supportedTypesToShow.Count > 0)
                 {
@@ -297,7 +285,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         /// <param name="parameterDescription">The parameter description.</param>
         /// <param name="isPropReadOnly">Flag to determine if a property is read only.</param>
         /// <returns>The formatted property description string.</returns>
-        internal FormattableString CreatePropertyDescription(string parameterDescription, bool isPropReadOnly)
+        private FormattableString CreatePropertyDescription(string parameterDescription, bool isPropReadOnly)
         {
             FormattableString description;
             if (string.IsNullOrEmpty(parameterDescription))
@@ -326,17 +314,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (type.IsFrameworkType)
             {
+                // TODO -- need to fix this so that we could have the reference of unioned models.
                 string typeSpecificDesc;
+                var unionTypes = GetUnionTypes(type);
                 IReadOnlyList<FormattableString> unionTypeDescriptions = Array.Empty<FormattableString>();
-                if (type.IsUnion || ValueType is { IsUnion: true })
+                if (unionTypes.Count > 0)
                 {
-                    // get the union types, if any
-                    var items = type.IsUnion ? type.UnionItemTypes : ValueType.UnionItemTypes;
-
-                    if (items is { Count: > 0 })
-                    {
-                        unionTypeDescriptions = GetUnionTypesDescriptions(items);
-                    }
+                    unionTypeDescriptions = GetUnionTypesDescriptions(unionTypes);
                 }
 
                 if (type.FrameworkType == typeof(BinaryData))
@@ -344,22 +328,44 @@ namespace AutoRest.CSharp.Output.Models.Types
                     typeSpecificDesc = "this property";
                     return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
                 }
-                if (TypeFactory.IsList(type) &&
-                    type.Arguments[0].IsFrameworkType &&
-                    type.Arguments[0].FrameworkType == typeof(BinaryData))
+                if (type.IsList && HasBinaryData(type.ElementType))
                 {
                     typeSpecificDesc = "the element of this property";
                     return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
                 }
-                if (TypeFactory.IsDictionary(type) &&
-                    type.Arguments[1].IsFrameworkType &&
-                    type.Arguments[1].FrameworkType == typeof(BinaryData))
+                if (type.IsDictionary && HasBinaryData(type.ElementType))
                 {
                     typeSpecificDesc = "the value of this property";
                     return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
                 }
             }
-            return $"";
+            return FormattableStringHelpers.Empty;
+
+            // recursively get the union types if any.
+            static IReadOnlyList<CSharpType> GetUnionTypes(CSharpType type)
+            {
+                if (type.IsCollection)
+                {
+                    return GetUnionTypes(type.ElementType);
+                }
+                else if (type.IsUnion)
+                {
+                    return type.UnionItemTypes;
+                }
+
+                return Array.Empty<CSharpType>();
+            }
+
+            // recursively get if any element or argument of this type is BinaryData
+            static bool HasBinaryData(CSharpType type)
+            {
+                if (type.IsCollection)
+                {
+                    return HasBinaryData(type.ElementType);
+                }
+
+                return type.IsFrameworkType && type.FrameworkType == typeof(BinaryData);
+            }
         }
 
         private FormattableString ConstructBinaryDataDescription(string typeSpecificDesc, SerializationFormat serializationFormat, IReadOnlyList<FormattableString> unionTypeDescriptions)
@@ -431,14 +437,14 @@ Examples:
             FormattableString? updatedDescription = null;
             if (valueType.IsFrameworkType)
             {
-                if (TypeFactory.IsList(valueType))
+                if (valueType.IsList)
                 {
                     if (!valueType.Arguments.First().IsFrameworkType && valueType.Arguments.First().Implementation is ObjectType objectType)
                     {
                         updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
                     }
                 }
-                else if (TypeFactory.IsDictionary(valueType))
+                else if (valueType.IsDictionary)
                 {
                     var objectTypes = valueType.Arguments.Where(arg => arg is { IsFrameworkType: false, Implementation: ObjectType }).ToList();
                     if (objectTypes.Any())

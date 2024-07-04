@@ -17,7 +17,7 @@ namespace MgmtDiscriminator.Models
 {
     internal partial class Sku2 : IUtf8JsonSerializable, IJsonModel<Sku2>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Sku2>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Sku2>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<Sku2>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -28,11 +28,8 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(NestedName))
-            {
-                writer.WritePropertyName("nestedName"u8);
-                writer.WriteStringValue(NestedName);
-            }
+            writer.WritePropertyName("nestedName"u8);
+            writer.WriteStringValue(NestedName);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -65,7 +62,7 @@ namespace MgmtDiscriminator.Models
 
         internal static Sku2 DeserializeSku2(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -73,7 +70,7 @@ namespace MgmtDiscriminator.Models
             }
             string nestedName = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("nestedName"u8))
@@ -83,10 +80,10 @@ namespace MgmtDiscriminator.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new Sku2(nestedName, serializedAdditionalRawData);
         }
 
@@ -102,15 +99,16 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NestedName), out propertyOverride);
-            if (Optional.IsDefined(NestedName) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  nestedName: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(NestedName))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  nestedName: ");
                     if (NestedName.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");

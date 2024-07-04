@@ -18,7 +18,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 {
     public partial class OSProfile : IUtf8JsonSerializable, IJsonModel<OSProfile>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OSProfile>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OSProfile>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<OSProfile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -52,12 +52,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(WindowsConfiguration))
             {
                 writer.WritePropertyName("windowsConfiguration"u8);
-                writer.WriteObjectValue<WindowsConfiguration>(WindowsConfiguration, options);
+                writer.WriteObjectValue(WindowsConfiguration, options);
             }
             if (Optional.IsDefined(LinuxConfiguration))
             {
                 writer.WritePropertyName("linuxConfiguration"u8);
-                writer.WriteObjectValue<LinuxConfiguration>(LinuxConfiguration, options);
+                writer.WriteObjectValue(LinuxConfiguration, options);
             }
             if (Optional.IsCollectionDefined(Secrets))
             {
@@ -65,7 +65,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Secrets)
                 {
-                    writer.WriteObjectValue<VaultSecretGroup>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -111,7 +111,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 
         internal static OSProfile DeserializeOSProfile(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -127,7 +127,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             bool? allowExtensionOperations = default;
             bool? requireGuestProvisionSignal = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("computerName"u8))
@@ -202,10 +202,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new OSProfile(
                 computerName,
                 adminUsername,
@@ -231,15 +231,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ComputerName), out propertyOverride);
-            if (Optional.IsDefined(ComputerName) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  computerName: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(ComputerName))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  computerName: ");
                     if (ComputerName.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -253,15 +254,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AdminUsername), out propertyOverride);
-            if (Optional.IsDefined(AdminUsername) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  adminUsername: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(AdminUsername))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  adminUsername: ");
                     if (AdminUsername.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -275,15 +277,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AdminPassword), out propertyOverride);
-            if (Optional.IsDefined(AdminPassword) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  adminPassword: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(AdminPassword))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  adminPassword: ");
                     if (AdminPassword.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -297,15 +300,16 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomData), out propertyOverride);
-            if (Optional.IsDefined(CustomData) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  customData: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(CustomData))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  customData: ");
                     if (CustomData.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
@@ -319,45 +323,48 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(WindowsConfiguration), out propertyOverride);
-            if (Optional.IsDefined(WindowsConfiguration) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  windowsConfiguration: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(WindowsConfiguration))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  windowsConfiguration: ");
                     BicepSerializationHelpers.AppendChildObject(builder, WindowsConfiguration, options, 2, false, "  windowsConfiguration: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(LinuxConfiguration), out propertyOverride);
-            if (Optional.IsDefined(LinuxConfiguration) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  linuxConfiguration: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(LinuxConfiguration))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  linuxConfiguration: ");
                     BicepSerializationHelpers.AppendChildObject(builder, LinuxConfiguration, options, 2, false, "  linuxConfiguration: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Secrets), out propertyOverride);
-            if (Optional.IsCollectionDefined(Secrets) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (Secrets.Any() || hasPropertyOverride)
+                builder.Append("  secrets: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(Secrets))
                 {
-                    builder.Append("  secrets: ");
-                    if (hasPropertyOverride)
+                    if (Secrets.Any())
                     {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
+                        builder.Append("  secrets: ");
                         builder.AppendLine("[");
                         foreach (var item in Secrets)
                         {
@@ -369,30 +376,32 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AllowExtensionOperations), out propertyOverride);
-            if (Optional.IsDefined(AllowExtensionOperations) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  allowExtensionOperations: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(AllowExtensionOperations))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  allowExtensionOperations: ");
                     var boolValue = AllowExtensionOperations.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RequireGuestProvisionSignal), out propertyOverride);
-            if (Optional.IsDefined(RequireGuestProvisionSignal) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  requireGuestProvisionSignal: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(RequireGuestProvisionSignal))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  requireGuestProvisionSignal: ");
                     var boolValue = RequireGuestProvisionSignal.Value == true ? "true" : "false";
                     builder.AppendLine($"{boolValue}");
                 }

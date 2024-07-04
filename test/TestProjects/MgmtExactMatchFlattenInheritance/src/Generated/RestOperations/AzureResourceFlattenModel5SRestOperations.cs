@@ -37,6 +37,19 @@ namespace MgmtExactMatchFlattenInheritance
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
+        internal RequestUriBuilder CreateListRequestUri(string subscriptionId, string resourceGroupName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/azureResourceFlattenModel5s", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -110,6 +123,20 @@ namespace MgmtExactMatchFlattenInheritance
             }
         }
 
+        internal RequestUriBuilder CreatePutRequestUri(string subscriptionId, string resourceGroupName, string name, int? foo)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/azureResourceFlattenModel5s/", false);
+            uri.AppendPath(name, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string name, int? foo)
         {
             var message = _pipeline.CreateMessage();
@@ -132,7 +159,7 @@ namespace MgmtExactMatchFlattenInheritance
                 Foo = foo
             };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<AzureResourceFlattenModel5>(model);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -196,6 +223,20 @@ namespace MgmtExactMatchFlattenInheritance
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetRequestUri(string subscriptionId, string resourceGroupName, string name)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/azureResourceFlattenModel5s/", false);
+            uri.AppendPath(name, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string name)

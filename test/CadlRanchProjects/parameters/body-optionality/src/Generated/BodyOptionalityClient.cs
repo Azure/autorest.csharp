@@ -47,6 +47,7 @@ namespace Parameters.BodyOptionality
             _endpoint = endpoint;
         }
 
+        /// <summary> Required explicit. </summary>
         /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -55,12 +56,13 @@ namespace Parameters.BodyOptionality
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await RequiredExplicitAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Required explicit. </summary>
         /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -69,14 +71,14 @@ namespace Parameters.BodyOptionality
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = RequiredExplicit(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Required explicit.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -115,7 +117,7 @@ namespace Parameters.BodyOptionality
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Required explicit.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -153,6 +155,7 @@ namespace Parameters.BodyOptionality
             }
         }
 
+        /// <summary> Required implicit. </summary>
         /// <param name="bodyModel"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyModel"/> is null. </exception>
@@ -161,12 +164,13 @@ namespace Parameters.BodyOptionality
         {
             Argument.AssertNotNull(bodyModel, nameof(bodyModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = bodyModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await RequiredImplicitAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Required implicit. </summary>
         /// <param name="bodyModel"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyModel"/> is null. </exception>
@@ -175,14 +179,14 @@ namespace Parameters.BodyOptionality
         {
             Argument.AssertNotNull(bodyModel, nameof(bodyModel));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = bodyModel.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = RequiredImplicit(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Required implicit.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -221,7 +225,7 @@ namespace Parameters.BodyOptionality
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Required implicit.
         /// <list type="bullet">
         /// <item>
         /// <description>

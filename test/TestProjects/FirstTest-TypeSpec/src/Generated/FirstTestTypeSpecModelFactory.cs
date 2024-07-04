@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 
 namespace FirstTestTypeSpec.Models
 {
@@ -28,8 +29,11 @@ namespace FirstTestTypeSpec.Models
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
         /// <param name="optionalNullableList"> optional nullable collection. </param>
         /// <param name="requiredNullableList"> required nullable collection. </param>
+        /// <param name="requiredFloatProperty"> required float property. </param>
+        /// <param name="optionalFloatProperty"> optional float property. </param>
+        /// <param name="optionalResourceId"> optional arm id. </param>
         /// <returns> A new <see cref="Models.Thing"/> instance for mocking. </returns>
-        public static Thing Thing(string name = null, BinaryData requiredUnion = null, ThingRequiredLiteralString requiredLiteralString = default, ThingRequiredLiteralInt requiredLiteralInt = default, ThingRequiredLiteralFloat requiredLiteralFloat = default, bool requiredLiteralBool = default, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, string requiredBadDescription = null, IEnumerable<int> optionalNullableList = null, IEnumerable<int> requiredNullableList = null)
+        public static Thing Thing(string name = null, BinaryData requiredUnion = null, ThingRequiredLiteralString requiredLiteralString = default, ThingRequiredLiteralInt requiredLiteralInt = default, ThingRequiredLiteralFloat requiredLiteralFloat = default, bool requiredLiteralBool = default, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, string requiredBadDescription = null, IEnumerable<int> optionalNullableList = null, IEnumerable<int> requiredNullableList = null, double requiredFloatProperty = default, double? optionalFloatProperty = null, ResourceIdentifier optionalResourceId = null)
         {
             optionalNullableList ??= new List<int>();
             requiredNullableList ??= new List<int>();
@@ -48,17 +52,10 @@ namespace FirstTestTypeSpec.Models
                 requiredBadDescription,
                 optionalNullableList?.ToList(),
                 requiredNullableList?.ToList(),
+                requiredFloatProperty,
+                optionalFloatProperty,
+                optionalResourceId,
                 serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.Element"/>. </summary>
-        /// <param name="extension"></param>
-        /// <returns> A new <see cref="Models.Element"/> instance for mocking. </returns>
-        public static Element Element(IEnumerable<Extension> extension = null)
-        {
-            extension ??= new List<Extension>();
-
-            return new Element(extension?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Extension"/>. </summary>
@@ -70,16 +67,6 @@ namespace FirstTestTypeSpec.Models
             extension ??= new List<Extension>();
 
             return new Extension(extension?.ToList(), serializedAdditionalRawData: null, level);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.ThereLevelElement"/>. </summary>
-        /// <param name="extension"></param>
-        /// <returns> A new <see cref="Models.ThereLevelElement"/> instance for mocking. </returns>
-        public static ThereLevelElement ThereLevelElement(IEnumerable<ThereLevelExtension> extension = null)
-        {
-            extension ??= new List<ThereLevelExtension>();
-
-            return new ThereLevelElement(extension?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ThereLevelExtension"/>. </summary>
@@ -115,11 +102,12 @@ namespace FirstTestTypeSpec.Models
         /// <param name="readOnlyRequiredRecordUnknown"> required readonly record of unknown. </param>
         /// <param name="readOnlyOptionalRecordUnknown"> optional readonly record of unknown. </param>
         /// <param name="modelWithRequiredNullable"> this is a model with required nullable properties. </param>
+        /// <param name="unionList"> this is a list of union types. </param>
         /// <returns> A new <see cref="Models.RoundTripModel"/> instance for mocking. </returns>
-        public static RoundTripModel RoundTripModel(string requiredString = null, int requiredInt = default, IEnumerable<StringFixedEnum?> requiredCollection = null, IDictionary<string, StringExtensibleEnum?> requiredDictionary = null, Thing requiredModel = null, IntExtensibleEnum? intExtensibleEnum = null, IEnumerable<IntExtensibleEnum> intExtensibleEnumCollection = null, FloatExtensibleEnum? floatExtensibleEnum = null, IEnumerable<FloatExtensibleEnum> floatExtensibleEnumCollection = null, FloatFixedEnum? floatFixedEnum = null, IEnumerable<FloatFixedEnum> floatFixedEnumCollection = null, IntFixedEnum? intFixedEnum = null, IEnumerable<IntFixedEnum> intFixedEnumCollection = null, StringFixedEnum? stringFixedEnum = null, BinaryData requiredUnknown = null, BinaryData optionalUnknown = null, IDictionary<string, BinaryData> requiredRecordUnknown = null, IDictionary<string, BinaryData> optionalRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown = null, ModelWithRequiredNullableProperties modelWithRequiredNullable = null)
+        public static RoundTripModel RoundTripModel(string requiredString = null, int requiredInt = default, IEnumerable<StringFixedEnum> requiredCollection = null, IDictionary<string, StringExtensibleEnum> requiredDictionary = null, Thing requiredModel = null, IntExtensibleEnum? intExtensibleEnum = null, IEnumerable<IntExtensibleEnum> intExtensibleEnumCollection = null, FloatExtensibleEnum? floatExtensibleEnum = null, IEnumerable<FloatExtensibleEnum> floatExtensibleEnumCollection = null, FloatFixedEnum? floatFixedEnum = null, IEnumerable<FloatFixedEnum> floatFixedEnumCollection = null, IntFixedEnum? intFixedEnum = null, IEnumerable<IntFixedEnum> intFixedEnumCollection = null, StringFixedEnum? stringFixedEnum = null, BinaryData requiredUnknown = null, BinaryData optionalUnknown = null, IDictionary<string, BinaryData> requiredRecordUnknown = null, IDictionary<string, BinaryData> optionalRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown = null, ModelWithRequiredNullableProperties modelWithRequiredNullable = null, IEnumerable<BinaryData> unionList = null)
         {
-            requiredCollection ??= new List<StringFixedEnum?>();
-            requiredDictionary ??= new Dictionary<string, StringExtensibleEnum?>();
+            requiredCollection ??= new List<StringFixedEnum>();
+            requiredDictionary ??= new Dictionary<string, StringExtensibleEnum>();
             intExtensibleEnumCollection ??= new List<IntExtensibleEnum>();
             floatExtensibleEnumCollection ??= new List<FloatExtensibleEnum>();
             floatFixedEnumCollection ??= new List<FloatFixedEnum>();
@@ -128,6 +116,7 @@ namespace FirstTestTypeSpec.Models
             optionalRecordUnknown ??= new Dictionary<string, BinaryData>();
             readOnlyRequiredRecordUnknown ??= new Dictionary<string, BinaryData>();
             readOnlyOptionalRecordUnknown ??= new Dictionary<string, BinaryData>();
+            unionList ??= new List<BinaryData>();
 
             return new RoundTripModel(
                 requiredString,
@@ -151,6 +140,7 @@ namespace FirstTestTypeSpec.Models
                 readOnlyRequiredRecordUnknown,
                 readOnlyOptionalRecordUnknown,
                 modelWithRequiredNullable,
+                unionList?.ToList(),
                 serializedAdditionalRawData: null);
         }
     }

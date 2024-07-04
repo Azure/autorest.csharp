@@ -16,7 +16,7 @@ namespace _Type.Property.AdditionalProperties.Models
 {
     public partial class IsModelAdditionalProperties : IUtf8JsonSerializable, IJsonModel<IsModelAdditionalProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IsModelAdditionalProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IsModelAdditionalProperties>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<IsModelAdditionalProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -27,10 +27,19 @@ namespace _Type.Property.AdditionalProperties.Models
             }
 
             writer.WriteStartObject();
+            writer.WritePropertyName("knownProp"u8);
+            writer.WriteObjectValue(KnownProp, options);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue<ModelForRecord>(item.Value, options);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
+#endif
             }
             writer.WriteEndObject();
         }
@@ -49,20 +58,26 @@ namespace _Type.Property.AdditionalProperties.Models
 
         internal static IsModelAdditionalProperties DeserializeIsModelAdditionalProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            IDictionary<string, ModelForRecord> additionalProperties = default;
-            Dictionary<string, ModelForRecord> additionalPropertiesDictionary = new Dictionary<string, ModelForRecord>();
+            ModelForRecord knownProp = default;
+            IDictionary<string, BinaryData> additionalProperties = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                additionalPropertiesDictionary.Add(property.Name, ModelForRecord.DeserializeModelForRecord(property.Value, options));
+                if (property.NameEquals("knownProp"u8))
+                {
+                    knownProp = ModelForRecord.DeserializeModelForRecord(property.Value, options);
+                    continue;
+                }
+                additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new IsModelAdditionalProperties(additionalProperties);
+            return new IsModelAdditionalProperties(knownProp, additionalProperties);
         }
 
         BinaryData IPersistableModel<IsModelAdditionalProperties>.Write(ModelReaderWriterOptions options)
@@ -104,11 +119,11 @@ namespace _Type.Property.AdditionalProperties.Models
             return DeserializeIsModelAdditionalProperties(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<IsModelAdditionalProperties>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

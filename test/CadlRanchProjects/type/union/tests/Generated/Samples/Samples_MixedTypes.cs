@@ -32,6 +32,7 @@ namespace _Type.Union.Samples
             Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("boolean").ToString());
+            Console.WriteLine(result.GetProperty("prop").GetProperty("array")[0].ToString());
         }
 
         [Test]
@@ -47,6 +48,7 @@ namespace _Type.Union.Samples
             Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("boolean").ToString());
+            Console.WriteLine(result.GetProperty("prop").GetProperty("array")[0].ToString());
         }
 
         [Test]
@@ -55,7 +57,7 @@ namespace _Type.Union.Samples
         {
             MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-            Response<GetResponse9> response = client.GetMixedType();
+            Response<GetResponse> response = client.GetMixedType();
         }
 
         [Test]
@@ -64,7 +66,7 @@ namespace _Type.Union.Samples
         {
             MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-            Response<GetResponse9> response = await client.GetMixedTypeAsync();
+            Response<GetResponse> response = await client.GetMixedTypeAsync();
         }
 
         [Test]
@@ -80,6 +82,7 @@ namespace _Type.Union.Samples
             Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("boolean").ToString());
+            Console.WriteLine(result.GetProperty("prop").GetProperty("array")[0].ToString());
         }
 
         [Test]
@@ -95,6 +98,7 @@ namespace _Type.Union.Samples
             Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("boolean").ToString());
+            Console.WriteLine(result.GetProperty("prop").GetProperty("array")[0].ToString());
         }
 
         [Test]
@@ -103,7 +107,7 @@ namespace _Type.Union.Samples
         {
             MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-            Response<GetResponse9> response = client.GetMixedType();
+            Response<GetResponse> response = client.GetMixedType();
         }
 
         [Test]
@@ -112,7 +116,7 @@ namespace _Type.Union.Samples
         {
             MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-            Response<GetResponse9> response = await client.GetMixedTypeAsync();
+            Response<GetResponse> response = await client.GetMixedTypeAsync();
         }
 
         [Test]
@@ -131,7 +135,11 @@ namespace _Type.Union.Samples
                     },
                     ["literal"] = null,
                     ["int"] = null,
-                    ["boolean"] = null
+                    ["boolean"] = null,
+                    ["array"] = new object[]
+            {
+null
+            }
                 },
             });
             Response response = client.Send(content);
@@ -155,7 +163,11 @@ namespace _Type.Union.Samples
                     },
                     ["literal"] = null,
                     ["int"] = null,
-                    ["boolean"] = null
+                    ["boolean"] = null,
+                    ["array"] = new object[]
+            {
+null
+            }
                 },
             });
             Response response = await client.SendAsync(content);
@@ -172,7 +184,10 @@ namespace _Type.Union.Samples
             MixedTypesCases prop = new MixedTypesCases(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            }), null, null, null);
+            }), null, null, null, new BinaryData[]
+            {
+null
+            });
             Response response = client.Send(prop);
         }
 
@@ -185,7 +200,10 @@ namespace _Type.Union.Samples
             MixedTypesCases prop = new MixedTypesCases(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            }), null, null, null);
+            }), null, null, null, new BinaryData[]
+            {
+null
+            });
             Response response = await client.SendAsync(prop);
         }
 
@@ -205,7 +223,11 @@ namespace _Type.Union.Samples
                     },
                     ["literal"] = null,
                     ["int"] = null,
-                    ["boolean"] = null
+                    ["boolean"] = null,
+                    ["array"] = new object[]
+            {
+null
+            }
                 },
             });
             Response response = client.Send(content);
@@ -229,7 +251,11 @@ namespace _Type.Union.Samples
                     },
                     ["literal"] = null,
                     ["int"] = null,
-                    ["boolean"] = null
+                    ["boolean"] = null,
+                    ["array"] = new object[]
+            {
+null
+            }
                 },
             });
             Response response = await client.SendAsync(content);
@@ -246,7 +272,10 @@ namespace _Type.Union.Samples
             MixedTypesCases prop = new MixedTypesCases(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            }), null, null, null);
+            }), null, null, null, new BinaryData[]
+            {
+null
+            });
             Response response = client.Send(prop);
         }
 
@@ -259,7 +288,10 @@ namespace _Type.Union.Samples
             MixedTypesCases prop = new MixedTypesCases(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            }), null, null, null);
+            }), null, null, null, new BinaryData[]
+            {
+null
+            });
             Response response = await client.SendAsync(prop);
         }
     }

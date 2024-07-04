@@ -14,7 +14,10 @@ This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 RecursiveClient client = new RecursiveClient();
 
-Extension input = new Extension(123);
+Extension input = new Extension(123)
+{
+    Extension = { default },
+};
 Response response = await client.PutAsync(input);
 ]]></code></example>
     </member>
@@ -31,7 +34,10 @@ This sample shows how to call Put with all parameters.
 <code><![CDATA[
 RecursiveClient client = new RecursiveClient();
 
-Extension input = new Extension(123);
+Extension input = new Extension(123)
+{
+    Extension = { default },
+};
 Response response = client.Put(input);
 ]]></code></example>
     </member>

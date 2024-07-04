@@ -4,7 +4,6 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -25,15 +24,15 @@ namespace AutoRest.CSharp.Common.Input
 
         public static InputListType CreateListType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
-            var isFirstProperty = id == null && name == null;
-            bool isNullable = false;
-            InputType? elementType = null;
+            var isFirstProperty = id == null;
+            string? crossLanguageDefinitionId = null;
+            InputType? valueType = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputListType.Name), ref name)
-                    || reader.TryReadBoolean(nameof(InputListType.IsNullable), ref isNullable)
-                    || reader.TryReadWithConverter(nameof(InputListType.ElementType), options, ref elementType);
+                    || reader.TryReadString(nameof(InputListType.CrossLanguageDefinitionId), ref crossLanguageDefinitionId)
+                    || reader.TryReadWithConverter(nameof(InputListType.ValueType), options, ref valueType);
 
                 if (!isKnownProperty)
                 {
@@ -41,8 +40,9 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            elementType = elementType ?? throw new JsonException("List must have element type");
-            var listType = new InputListType(name ?? "List", elementType, false, isNullable);
+            name = name ?? throw new JsonException("Array must have a name");
+            valueType = valueType ?? throw new JsonException("Array must have an value type");
+            var listType = new InputListType(name, crossLanguageDefinitionId ?? string.Empty, valueType);
             if (id != null)
             {
                 resolver.AddReference(id, listType);

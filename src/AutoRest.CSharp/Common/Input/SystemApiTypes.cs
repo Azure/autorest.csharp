@@ -8,6 +8,7 @@ using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
@@ -38,12 +39,17 @@ namespace AutoRest.CSharp.Common.Input
 
         public override Type RequestContextType => typeof(RequestOptions);
 
+        public override string RequestContextName => "options";
+        public override string RequestContextDescription => "The request options, which can override default behaviors of the client pipeline on a per-call basis.";
+
         public override Type BearerAuthenticationPolicyType => typeof(BearerTokenAuthenticationPolicy);
         public override Type KeyCredentialType => typeof(ApiKeyCredential);
         public override Type HttpPipelineBuilderType => typeof(ClientPipeline);
         public override Type KeyCredentialPolicyType => typeof(ApiKeyAuthenticationPolicy);
         public override FormattableString GetHttpPipelineClassifierString(string pipelineField, string optionsVariable, FormattableString perCallPolicies, FormattableString perRetryPolicies, FormattableString beforeTransportPolicies)
             => $"{pipelineField:I} = {typeof(ClientPipeline)}.{nameof(ClientPipeline.Create)}({optionsVariable:I}, {perCallPolicies}, {perRetryPolicies}, {beforeTransportPolicies});";
+
+        public override FormattableString CredentialDescription => $"A credential used to authenticate to the service.";
 
         public override Type HttpPipelinePolicyType => typeof(PipelinePolicy);
 
@@ -62,14 +68,16 @@ namespace AutoRest.CSharp.Common.Input
         public override FormattableString GetSetUriString(string requestName, string uriName)
             => $"{requestName}.Uri = {uriName}.ToUri();";
 
-        public override Action<CodeWriter, CodeWriterDeclaration, RequestHeader, ClientFields?> WriteHeaderMethod => RequestWriterHelpers.WriteHeaderSystem;
+        public override Action<CodeWriter, CodeWriterDeclaration, RequestHeader, ClientFields> WriteHeaderMethod => RequestWriterHelpers.WriteHeaderSystem;
 
         public override FormattableString GetSetContentString(string requestName, string contentName)
             => $"{requestName}.Content = {contentName};";
 
         public override CSharpType RequestUriType => ClientUriBuilderProvider.Instance.Type;
+        public override string MultipartRequestContentTypeName => "MultipartFormDataBinaryContent";
         public override Type RequestContentType => typeof(BinaryContent);
-        public override string ToRequestContentName => "ToBinaryBody";
+        public override string ToRequestContentName => "ToBinaryContent";
+        public override string ToMultipartRequestContentName => "ToMultipartBinaryBody";
         public override string RequestContentCreateName => nameof(BinaryContent.Create);
 
         public override Type IXmlSerializableType => throw new NotSupportedException("Xml serialization is not supported in non-branded libraries yet");
@@ -80,7 +88,7 @@ namespace AutoRest.CSharp.Common.Input
         public override Type StatusCodeClassifierType => typeof(PipelineMessageClassifier);
 
         public override ValueExpression GetCreateFromStreamSampleExpression(ValueExpression freeFormObjectExpression)
-            => new InvokeStaticMethodExpression(Configuration.ApiTypes.RequestContentType, Configuration.ApiTypes.RequestContentCreateName, new[]{ BinaryDataExpression.FromObjectAsJson(freeFormObjectExpression).ToStream() });
+            => new InvokeStaticMethodExpression(Configuration.ApiTypes.RequestContentType, Configuration.ApiTypes.RequestContentCreateName, new[] { BinaryDataExpression.FromObjectAsJson(freeFormObjectExpression).ToStream() });
 
         public override string EndPointSampleValue => "https://my-service.com";
 

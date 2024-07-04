@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
 
@@ -81,7 +82,7 @@ namespace Inheritance.Models
             if (Optional.IsDefined(SomeProperty))
             {
                 writer.WritePropertyName("SomeProperty"u8);
-                writer.WriteStringValue(SomeProperty);
+                SerializationMethodHook(writer);
             }
             if (Optional.IsDefined(SomeOtherProperty))
             {
@@ -243,6 +244,22 @@ namespace Inheritance.Models
                 dfeDateTime,
                 dfeDuration,
                 dfeUri);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static new ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

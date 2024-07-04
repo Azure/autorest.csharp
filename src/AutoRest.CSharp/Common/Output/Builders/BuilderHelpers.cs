@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Security;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
@@ -178,6 +177,9 @@ namespace AutoRest.CSharp.Output.Builders
             return isMatch;
         }
 
+        // TODO: Clean up these helper methods in https://github.com/Azure/autorest.csharp/issues/4767
+        public static string CSharpName(this InputParameter parameter) => parameter.Name.ToVariableName();
+
         public static string CSharpName(this RequestParameter parameter) => parameter.Language.Default.Name.ToVariableName();
 
         public static string CSharpName(this ChoiceValue choice) => choice.Language.Default.Name.ToCleanName();
@@ -185,8 +187,14 @@ namespace AutoRest.CSharp.Output.Builders
         public static string CSharpName(this Property property) =>
             (property.Language.Default.Name == null || property.Language.Default.Name == "null") ? "NullProperty" : property.Language.Default.Name.ToCleanName();
 
-        public static string CSharpName(this Operation operation) =>
-            operation.Language.Default.Name.ToCleanName();
+        public static string CSharpName(this InputModelProperty property) =>
+            (property.Name == null || property.Name == "null") ? "NullProperty" : property.Name.ToCleanName();
+
+        public static string CSharpName(this InputOperation operation) =>
+            operation.Name.ToCleanName();
+
+        public static string CSharpName(this InputType inputType) =>
+            inputType.Name.ToCleanName();
 
         public static string CSharpName(this Schema operation) =>
             operation.Language.Default.Name.ToCleanName();
@@ -259,8 +267,8 @@ namespace AutoRest.CSharp.Output.Builders
                 return newType.WithNullable(defaultType.IsNullable);
             }
 
-            if ((TypeFactory.IsList(newType) && TypeFactory.IsList(defaultType)) ||
-                (TypeFactory.IsDictionary(newType) && TypeFactory.IsDictionary(defaultType)))
+            if ((newType.IsList && defaultType.IsList) ||
+                (newType.IsDictionary && defaultType.IsDictionary))
             {
                 var arguments = new CSharpType[newType.Arguments.Count];
                 for (var i = 0; i < newType.Arguments.Count; i++)
@@ -276,9 +284,9 @@ namespace AutoRest.CSharp.Output.Builders
 
         public static FormattableString CreateDerivedTypesDescription(CSharpType type)
         {
-            if (TypeFactory.IsCollectionType(type))
+            if (type.IsCollection)
             {
-                type = TypeFactory.GetElementType(type);
+                type = type.ElementType;
             }
 
             if (type is { IsFrameworkType: false, Implementation: ObjectType objectType })
@@ -290,13 +298,9 @@ namespace AutoRest.CSharp.Output.Builders
         }
 
         public static string CreateDescription(this Schema schema)
-        {
-            return string.IsNullOrWhiteSpace(schema.Language.Default.Description) ?
-                $"The {schema.Name}." :
-                EscapeXmlDocDescription(schema.Language.Default.Description);
-        }
+            => EscapeXmlDocDescription(schema.Language.Default.Description);
 
-        public static string DisambiguateName(string typeName, string name, string suffix = "Value")
+        public static string DisambiguateName(string typeName, string name, string suffix)
         {
             if (name == typeName || name is nameof(GetHashCode) or nameof(Equals) or nameof(ToString))
             {
@@ -358,5 +362,66 @@ namespace AutoRest.CSharp.Output.Builders
             }
             return modifiers;
         }
+
+        public static CSharpType CreateAdditionalPropertiesPropertyType(CSharpType originalType, CSharpType unknownType)
+        {
+            // TODO -- we only construct additional properties when the type is verifiable, because we always need the property to fall into the bucket of serialized additional raw data field when it does not fit the additional properties.
+            var arguments = originalType.Arguments;
+            var keyType = arguments[0];
+            var valueType = arguments[1];
+
+            return originalType.MakeGenericType(new[] { ReplaceUnverifiableType(keyType, unknownType), ReplaceUnverifiableType(valueType, unknownType) });
+        }
+
+        private static CSharpType ReplaceUnverifiableType(CSharpType type, CSharpType unknownType)
+        {
+            // when the type is System.Object Or BinaryData
+            if (type.EqualsIgnoreNullable(unknownType))
+            {
+                return type;
+            }
+
+            // when the type is a verifiable type
+            if (IsVerifiableType(type))
+            {
+                return type;
+            }
+
+            // when the type is a union
+            if (type.IsUnion)
+            {
+                return type;
+            }
+
+            // otherwise the type is not a verifiable type
+            // replace for list
+            if (type.IsList)
+            {
+                return type.MakeGenericType(new[] { ReplaceUnverifiableType(type.Arguments[0], unknownType) });
+            }
+            // replace for dictionary
+            if (type.IsDictionary)
+            {
+                return type.MakeGenericType(new[] { ReplaceUnverifiableType(type.Arguments[0], unknownType), ReplaceUnverifiableType(type.Arguments[1], unknownType) });
+            }
+            // for the other cases, wrap them in a union
+            return CSharpType.FromUnion(new[] { type });
+        }
+
+        private static readonly HashSet<Type> _verifiableTypes = new HashSet<Type>
+        {
+            // The following types are constructed by the `TryGetXXX` methods on `JsonElement`.
+            typeof(byte), typeof(byte[]), typeof(sbyte),
+            typeof(DateTime), typeof(DateTimeOffset),
+            typeof(decimal), typeof(double), typeof(short), typeof(int), typeof(long), typeof(float),
+            typeof(ushort), typeof(uint), typeof(ulong),
+            typeof(Guid),
+            // The following types have a firm JsonValueKind to verify
+            typeof(string), typeof(bool)
+        };
+
+        public static bool IsVerifiableType(Type type) => _verifiableTypes.Contains(type);
+
+        public static bool IsVerifiableType(CSharpType type) => type is { IsFrameworkType: true, FrameworkType: { } frameworkType } && IsVerifiableType(frameworkType);
     }
 }

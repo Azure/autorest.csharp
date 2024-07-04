@@ -25,7 +25,6 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 
 @doc("float fixed enum")
-@fixed
 enum FloatFixedEnum {
     One: 1.1,
     Two: 2.2,
@@ -33,7 +32,6 @@ enum FloatFixedEnum {
 }
 
 @doc("int fixed enum")
-@fixed
 enum IntFixedEnum {
     One: 1,
     Two: 2,
@@ -41,7 +39,6 @@ enum IntFixedEnum {
 }
 
 @doc("Simple enum")
-@fixed
 enum StringFixedEnum {
     One: "1",
     Two: "2",
@@ -134,7 +131,7 @@ model NotFriend {
 }
 
 @doc("this is a model with a projected name")
-@projectedName("client", "ProjectedModel")
+@clientName("ProjectedModel")
 model ModelWithProjectedName {
     @doc("name of the ModelWithProjectedName")
     name: string;
@@ -219,16 +216,6 @@ union DaysOfWeekExtensibleEnum {
     Sunday: "Sunday",
 }
 
-model ModelWithFormat {
-    @doc("url format")
-    @format("Uri")
-    sourceUrl: string;
-
-    @doc("uuid format")
-    @format("uuid")
-    guid: string;
-}
-
 @route("/hello")
 @doc("Return hi")
 @get
@@ -281,7 +268,7 @@ op helloLiteral(@header p1: "test", @path p2: 123, @query p3: true): Thing;
 @doc("top level method")
 @get
 @convenientAPI(true)
-op topAction(@path @format("date") action: string): Thing;
+op topAction(@path action: utcDateTime): Thing;
 
 @route("/top2")
 @doc("top level method2")
@@ -311,13 +298,6 @@ op addTimeHeader(
     @header("Repeatability-First-Sent") repeatabilityFirstSent?: utcDateTime 
 ): void;
 
-@route("/stringFormat")
-@doc("parameter has string format.")
-@post
-@convenientAPI(true)
-op stringFormat(@path @format("uuid") subscriptionId: string, @body body: ModelWithFormat): void;
-
-
 @route("/projectedName")
 @doc("Model can have its projected name")
 @post
@@ -328,12 +308,13 @@ op projectedNameModel(...ModelWithProjectedName): ModelWithProjectedName;
 @doc("return anonymous model")
 @post
 @convenientAPI(true)
-op returnsAnonymousModel(): {};
+op returnsAnonymousModel(): {@body body:{}};
 
-@get
+// TODO: https://github.com/Azure/typespec-azure/issues/509
+@put
 @route("/unknown-value")
-@doc("get extensible enum")
-op getUnknownValue(): DaysOfWeekExtensibleEnum;
+@doc("create extensible enum")
+op createUnknownValue(@body input: DaysOfWeekExtensibleEnum): void;
 
 @doc("When set protocol false and convenient true, then the protocol method should be internal")
 @route("internalProtocol")
@@ -354,3 +335,9 @@ op stillConvenient(): void;
 @head
 @convenientAPI(true)
 op headAsBoolean(@path id: string): void;
+
+@route("/headAsBoolean")
+@doc("head as boolean.")
+@put
+@convenientAPI(true)
+op handleArray(@body body: string[]): string[];

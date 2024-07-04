@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -19,7 +19,6 @@ using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure;
 using Azure.Core;
 using Request = AutoRest.CSharp.Output.Models.Requests.Request;
 using Response = AutoRest.CSharp.Output.Models.Responses.Response;
@@ -39,7 +38,6 @@ namespace AutoRest.CSharp.Output.Models
         private readonly OutputLibrary? _library;
         private readonly TypeFactory _typeFactory;
         private readonly Dictionary<string, Parameter> _parameters;
-
 
         public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory)
         {
@@ -63,22 +61,16 @@ namespace AutoRest.CSharp.Output.Models
             return OrderParametersByRequired(_parameters.Values);
         }
 
-        public static IEnumerable<InputParameter> GetParametersFromOperations(IEnumerable<InputOperation> operations) =>
-            operations
-                .SelectMany(op => op.Parameters)
-                .Where(p => p.Kind == InputOperationParameterKind.Client)
-                .Distinct()
-                .ToList();
-
-        private static string GetRequestParameterName(RequestParameter requestParameter)
+        public static IEnumerable<InputParameter> GetParametersFromClient(InputClient client)
         {
-            var language = requestParameter.Language.Default;
-            return language.SerializedName ?? language.Name;
+            return client.Parameters
+                .Concat(client.Operations.SelectMany(op => op.Parameters).Where(p => p.Kind == InputOperationParameterKind.Client))
+                .Distinct();
         }
 
         public static RestClientMethod BuildRequestMethod(InputOperation operation, Parameter[] parameters, IReadOnlyCollection<RequestPartSource> requestParts, Parameter? bodyParameter, TypeFactory typeFactory)
         {
-            Request request = BuildRequest(operation, requestParts, bodyParameter);
+            Request request = BuildRequest(operation, requestParts, bodyParameter, typeFactory);
             Response[] responses = BuildResponses(operation, typeFactory, out var responseType);
 
             return new RestClientMethod(
@@ -110,7 +102,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Select(kvp => new RequestPartSource(kvp.Key.NameInRequest, (InputParameter?)kvp.Key, CreateReference(kvp.Key, kvp.Value), SerializationBuilder.GetSerializationFormat(kvp.Key.Type)))
                 .ToList();
 
-            var request = BuildRequest(operation, requestParts, null, _library);
+            var request = BuildRequest(operation, requestParts, null, _typeFactory, _library);
             Response[] responses = BuildResponses(operation, _typeFactory, out var responseType);
 
             return new RestClientMethod(
@@ -171,7 +163,7 @@ namespace AutoRest.CSharp.Output.Models
             return clientResponse.ToArray();
         }
 
-        private static Request BuildRequest(InputOperation operation, IReadOnlyCollection<RequestPartSource> requestParts, Parameter? bodyParameter, OutputLibrary? library = null)
+        private static Request BuildRequest(InputOperation operation, IReadOnlyCollection<RequestPartSource> requestParts, Parameter? bodyParameter, TypeFactory typeFactory, OutputLibrary? library = null)
         {
             var uriParametersMap = new Dictionary<string, PathSegment>();
             var pathParametersMap = new Dictionary<string, PathSegment>();
@@ -212,7 +204,7 @@ namespace AutoRest.CSharp.Output.Models
             var body = bodyParameter != null
                 ? new RequestContentRequestBody(bodyParameter)
                 : operation.RequestBodyMediaType != BodyMediaType.None
-                    ? BuildRequestBody(requestParts, operation.RequestBodyMediaType, library)
+                    ? BuildRequestBody(requestParts, operation.RequestBodyMediaType, library, typeFactory)
                     : null;
 
             return new Request(
@@ -239,7 +231,7 @@ namespace AutoRest.CSharp.Output.Models
             return OrderParametersByRequired(methodParameters);
         }
 
-        private static RequestBody? BuildRequestBody(IReadOnlyCollection<RequestPartSource> allParameters, BodyMediaType bodyMediaType, OutputLibrary? library)
+        private static RequestBody? BuildRequestBody(IReadOnlyCollection<RequestPartSource> allParameters, BodyMediaType bodyMediaType, OutputLibrary? library, TypeFactory typeFactory)
         {
             RequestBody? body = null;
 
@@ -276,7 +268,7 @@ namespace AutoRest.CSharp.Output.Models
                         {
                             requestBody = new BinaryRequestBody(reference);
                         }
-                        else if (TypeFactory.IsList(type))
+                        else if (type.IsList)
                         {
                             requestBody = new BinaryCollectionRequestBody(reference);
                         }
@@ -306,7 +298,7 @@ namespace AutoRest.CSharp.Output.Models
                     var (bodyRequestParameter, bodyParameterValue) = bodyParameters[0];
                     if (bodyMediaType == BodyMediaType.Binary ||
                         // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/360
-                        bodyRequestParameter.Type is InputPrimitiveType { Kind: InputTypeKind.Stream })
+                        bodyRequestParameter.Type is InputPrimitiveType { Kind: InputPrimitiveTypeKind.Stream })
                     {
                         body = new BinaryRequestBody(bodyParameterValue);
                     }
@@ -325,10 +317,10 @@ namespace AutoRest.CSharp.Output.Models
                         // This method has a flattened body
                         if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened && library != null)
                         {
-                            var objectType = bodyRequestParameter.Type switch
+                            (InputType inputType, bool isNullable) = bodyRequestParameter.Type is InputNullableType nullableType ? (nullableType.Type, true) : (bodyRequestParameter.Type, false);
+                            var objectType = inputType switch
                             {
-                                InputModelType inputModelType => library.ResolveModel(inputModelType).Implementation as SerializableObjectType,
-                                CodeModelType codeModelType => throw new InvalidOperationException("Expecting model"),
+                                InputModelType inputModelType => typeFactory.CreateType(inputModelType).Implementation as SerializableObjectType,
                                 _ => null
                             };
 
@@ -368,7 +360,7 @@ namespace AutoRest.CSharp.Output.Models
                 return (ReferenceOrConstant)_parameters[operationParameter.Name];
             }
 
-            if (operationParameter is { Kind:InputOperationParameterKind.Constant } && parameter.DefaultValue is not null)
+            if (operationParameter is { Kind: InputOperationParameterKind.Constant } && parameter.DefaultValue is not null)
             {
                 return (ReferenceOrConstant)parameter.DefaultValue;
             }
@@ -403,12 +395,12 @@ namespace AutoRest.CSharp.Output.Models
                 return new StringResponseBody();
             }
 
-            if (bodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
+            if (bodyType is InputPrimitiveType { Kind: InputPrimitiveTypeKind.Stream })
             {
                 return new StreamResponseBody();
             }
 
-            CSharpType responseType = TypeFactory.GetOutputType(typeFactory.CreateType(bodyType));
+            CSharpType responseType = typeFactory.CreateType(bodyType).OutputType;
             ObjectSerialization serialization = SerializationBuilder.Build(response.BodyMediaType, bodyType, responseType, null);
 
             return new ObjectResponseBody(responseType, serialization);
@@ -489,7 +481,7 @@ namespace AutoRest.CSharp.Output.Models
             var location = parameter.RequestLocation;
 
             return defaultValue != null
-                ? KnownParameters.Endpoint with { Description = description, RequestLocation = location, DefaultValue = Constant.Default(new CSharpType(typeof(Uri), true)), Initializer = $"new {typeof(Uri)}({defaultValue.Value.GetConstantFormattable()})"}
+                ? KnownParameters.Endpoint with { Description = description, RequestLocation = location, DefaultValue = Constant.Default(new CSharpType(typeof(Uri), true)), Initializer = $"new {typeof(Uri)}({defaultValue.Value.GetConstantFormattable()})" }
                 : KnownParameters.Endpoint with { Description = description, RequestLocation = location, Validation = parameter.Validation };
         }
 
@@ -498,7 +490,9 @@ namespace AutoRest.CSharp.Output.Models
 
         private Parameter BuildParameter(in InputParameter operationParameter, Type? typeOverride = null)
         {
-            CSharpType type = typeOverride != null ? new CSharpType(typeOverride, operationParameter.Type.IsNullable) : _typeFactory.CreateType(operationParameter.Type);
+            CSharpType type = typeOverride != null ? new CSharpType(typeOverride, operationParameter.Type is InputNullableType) :
+                // for apiVersion, we still convert enum type to enum value type
+                operationParameter is { IsApiVersion: true, Type: InputEnumType enumType } ? _typeFactory.CreateType(enumType.ValueType) : _typeFactory.CreateType(operationParameter.Type);
             return Parameter.FromInputParameter(operationParameter, type, _typeFactory);
         }
 
@@ -569,7 +563,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 var credentialParam = new Parameter(
                     "credential",
-                    $"A credential used to authenticate to an Azure Service.",
+                    Configuration.ApiTypes.CredentialDescription,
                     credentialType,
                     null,
                     ValidationType.AssertNotNull,

@@ -77,11 +77,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (frameworkType == typeof(TimeSpan))
             {
-                if (format == SerializationFormat.Duration_Seconds)
+                if (format is SerializationFormat.Duration_Seconds)
                 {
                     return $"{typeof(TimeSpan)}.FromSeconds({element}.GetInt32())";
                 }
-                else if (format == SerializationFormat.Duration_Seconds_Float)
+                else if (format is SerializationFormat.Duration_Seconds_Float or SerializationFormat.Duration_Seconds_Double)
                 {
                     return $"{typeof(TimeSpan)}.FromSeconds({element}.GetDouble())";
                 }
@@ -168,7 +168,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 case Resource { ResourceData: SerializableObjectType { Serialization.Json: { }, IncludeDeserializer: true } resourceDataType } resource:
                     return $"new {resource.Type}(Client, {resourceDataType.Type}.Deserialize{resourceDataType.Declaration.Name}({element}))";
 
-                case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema):
+                case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.InputModel):
                     return $"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Deserialize)}<{implementation.Type}>({element}.GetRawText())";
 
                 case SerializableObjectType { Serialization.Json: { }, IncludeDeserializer: true } type:

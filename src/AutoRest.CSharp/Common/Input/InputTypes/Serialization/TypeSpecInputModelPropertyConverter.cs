@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Output.Builders;
@@ -33,6 +34,7 @@ namespace AutoRest.CSharp.Common.Input
             bool isReadOnly = false;
             bool isRequired = false;
             bool isDiscriminator = false;
+            IReadOnlyList<string>? flattenedNames = null;
 
             while (reader.TokenType != JsonTokenType.EndObject)
             {
@@ -43,7 +45,8 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadWithConverter(nameof(InputModelProperty.Type), options, ref propertyType)
                     || reader.TryReadBoolean(nameof(InputModelProperty.IsReadOnly), ref isReadOnly)
                     || reader.TryReadBoolean(nameof(InputModelProperty.IsRequired), ref isRequired)
-                    || reader.TryReadBoolean(nameof(InputModelProperty.IsDiscriminator), ref isDiscriminator);
+                    || reader.TryReadBoolean(nameof(InputModelProperty.IsDiscriminator), ref isDiscriminator)
+                    || reader.TryReadStringArray(nameof(InputModelProperty.FlattenedNames), ref flattenedNames);
 
                 if (!isKnownProperty)
                 {
@@ -58,11 +61,11 @@ namespace AutoRest.CSharp.Common.Input
 
             if (propertyType is InputLiteralType lt)
             {
-                defaultValue = new InputConstant(lt.Value, lt.LiteralValueType);
-                propertyType = lt.LiteralValueType;
+                defaultValue = new InputConstant(lt.Value, lt.ValueType);
+                propertyType = lt.ValueType;
             }
 
-            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, defaultValue, isRequired, isReadOnly, isDiscriminator);
+            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, defaultValue, isRequired, isReadOnly, isDiscriminator, flattenedNames);
             if (id != null)
             {
                 resolver.AddReference(id, property);

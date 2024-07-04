@@ -2,53 +2,43 @@
 
 #nullable disable
 
-using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Scm.Authentication.Http.Custom
 {
     internal static class ClientPipelineExtensions
     {
-        public static async ValueTask<PipelineResponse> ProcessMessageAsync(this ClientPipeline pipeline, PipelineMessage message, RequestOptions requestContext, CancellationToken cancellationToken = default)
+        public static async ValueTask<PipelineResponse> ProcessMessageAsync(this ClientPipeline pipeline, PipelineMessage message, RequestOptions options)
         {
             await pipeline.SendAsync(message).ConfigureAwait(false);
 
-            if (message.Response == null)
+            if (message.Response.IsError && (options?.ErrorOptions & ClientErrorBehaviors.NoThrow) != ClientErrorBehaviors.NoThrow)
             {
-                throw new InvalidOperationException("Failed to receive Result.");
+                throw await ClientResultException.CreateAsync(message.Response).ConfigureAwait(false);
             }
 
-            if (!message.Response.IsError || requestContext?.ErrorOptions == ClientErrorBehaviors.NoThrow)
-            {
-                return message.Response;
-            }
-
-            throw new ClientResultException(message.Response);
+            PipelineResponse response = message.BufferResponse ? message.Response : message.ExtractResponse();
+            return response;
         }
 
-        public static PipelineResponse ProcessMessage(this ClientPipeline pipeline, PipelineMessage message, RequestOptions requestContext, CancellationToken cancellationToken = default)
+        public static PipelineResponse ProcessMessage(this ClientPipeline pipeline, PipelineMessage message, RequestOptions options)
         {
             pipeline.Send(message);
 
-            if (message.Response == null)
+            if (message.Response.IsError && (options?.ErrorOptions & ClientErrorBehaviors.NoThrow) != ClientErrorBehaviors.NoThrow)
             {
-                throw new InvalidOperationException("Failed to receive Result.");
+                throw new ClientResultException(message.Response);
             }
 
-            if (!message.Response.IsError || requestContext?.ErrorOptions == ClientErrorBehaviors.NoThrow)
-            {
-                return message.Response;
-            }
-
-            throw new ClientResultException(message.Response);
+            PipelineResponse response = message.BufferResponse ? message.Response : message.ExtractResponse();
+            return response;
         }
 
-        public static async ValueTask<ClientResult<bool>> ProcessHeadAsBoolMessageAsync(this ClientPipeline pipeline, PipelineMessage message, RequestOptions requestContext)
+        public static async ValueTask<ClientResult<bool>> ProcessHeadAsBoolMessageAsync(this ClientPipeline pipeline, PipelineMessage message, RequestOptions options)
         {
-            PipelineResponse response = await pipeline.ProcessMessageAsync(message, requestContext).ConfigureAwait(false);
+            PipelineResponse response = await pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false);
             switch (response.Status)
             {
                 case >= 200 and < 300:
@@ -60,9 +50,9 @@ namespace Scm.Authentication.Http.Custom
             }
         }
 
-        public static ClientResult<bool> ProcessHeadAsBoolMessage(this ClientPipeline pipeline, PipelineMessage message, RequestOptions requestContext)
+        public static ClientResult<bool> ProcessHeadAsBoolMessage(this ClientPipeline pipeline, PipelineMessage message, RequestOptions options)
         {
-            PipelineResponse response = pipeline.ProcessMessage(message, requestContext);
+            PipelineResponse response = pipeline.ProcessMessage(message, options);
             switch (response.Status)
             {
                 case >= 200 and < 300:

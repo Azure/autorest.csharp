@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "Payload.MediaType",
- "Description": "Test the payload with different media types and different types of the payload itself.",
  "ApiVersions": [],
  "Enums": [],
  "Models": [],
@@ -14,65 +13,62 @@
    "Protocol": {
     "$id": "3"
    },
-   "Creatable": true
+   "Parameters": [
+    {
+     "$id": "4",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
+     "Type": {
+      "$id": "5",
+      "Kind": "string"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "6",
+      "Type": {
+       "$id": "7",
+       "Kind": "string"
+      },
+      "Value": "http://localhost:3000"
+     }
+    }
+   ]
   },
   {
-   "$id": "4",
+   "$id": "8",
    "Name": "StringBody",
    "Description": "",
    "Operations": [
     {
-     "$id": "5",
+     "$id": "9",
      "Name": "sendAsText",
      "ResourceName": "StringBody",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "6",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
-       "Type": {
-        "$id": "7",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "8",
-        "Type": {
-         "$id": "9",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "$ref": "4"
       },
       {
        "$id": "10",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "11",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "12",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "text/plain",
-        "IsNullable": false
+        "Value": "text/plain"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -97,9 +93,7 @@
        "NameInRequest": "text",
        "Type": {
         "$id": "15",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -117,8 +111,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "17",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -165,9 +158,10 @@
      "$id": "20",
      "Name": "getAsText",
      "ResourceName": "StringBody",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "21",
@@ -175,8 +169,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "22",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -205,9 +198,7 @@
        ],
        "BodyType": {
         "$id": "25",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Kind": "string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -229,26 +220,23 @@
      "$id": "26",
      "Name": "sendAsJson",
      "ResourceName": "StringBody",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "27",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "28",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "29",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "application/json",
-        "IsNullable": false
+        "Value": "application/json"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -273,9 +261,7 @@
        "NameInRequest": "text",
        "Type": {
         "$id": "32",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -293,8 +279,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "34",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -341,9 +326,10 @@
      "$id": "37",
      "Name": "getAsJson",
      "ResourceName": "StringBody",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "4"
       },
       {
        "$id": "38",
@@ -351,8 +337,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "39",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -381,9 +366,7 @@
        ],
        "BodyType": {
         "$id": "42",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Kind": "string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -405,8 +388,12 @@
    "Protocol": {
     "$id": "43"
    },
-   "Creatable": false,
-   "Parent": "MediaTypeClient"
+   "Parent": "MediaTypeClient",
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   }
  ]
 }

@@ -45,6 +45,7 @@ namespace _Type.Scalar
             _endpoint = endpoint;
         }
 
+        /// <summary> Prepare verify. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/DecimalVerify.xml" path="doc/members/member[@name='PrepareVerifyAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyList<decimal>>> PrepareVerifyAsync(CancellationToken cancellationToken = default)
@@ -62,6 +63,7 @@ namespace _Type.Scalar
             return Response.FromValue(value, response);
         }
 
+        /// <summary> Prepare verify. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/DecimalVerify.xml" path="doc/members/member[@name='PrepareVerify(CancellationToken)']/*" />
         public virtual Response<IReadOnlyList<decimal>> PrepareVerify(CancellationToken cancellationToken = default)
@@ -80,7 +82,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Prepare verify.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -115,7 +117,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Prepare verify.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -149,30 +151,32 @@ namespace _Type.Scalar
             }
         }
 
+        /// <summary> Verify. </summary>
         /// <param name="body"> The <see cref="decimal"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/DecimalVerify.xml" path="doc/members/member[@name='VerifyAsync(decimal,CancellationToken)']/*" />
         public virtual async Task<Response> VerifyAsync(decimal body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await VerifyAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Verify. </summary>
         /// <param name="body"> The <see cref="decimal"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/DecimalVerify.xml" path="doc/members/member[@name='Verify(decimal,CancellationToken)']/*" />
         public virtual Response Verify(decimal body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Verify(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Verify.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -211,7 +215,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Verify.
         /// <list type="bullet">
         /// <item>
         /// <description>

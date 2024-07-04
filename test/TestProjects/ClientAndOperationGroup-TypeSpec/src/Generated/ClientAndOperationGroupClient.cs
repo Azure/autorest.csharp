@@ -54,7 +54,7 @@ namespace ClientAndOperationGroup
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Zero.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -84,7 +84,7 @@ namespace ClientAndOperationGroup
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Zero.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -114,7 +114,7 @@ namespace ClientAndOperationGroup
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] One.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -144,7 +144,7 @@ namespace ClientAndOperationGroup
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] One.
         /// <list type="bullet">
         /// <item>
         /// <description>

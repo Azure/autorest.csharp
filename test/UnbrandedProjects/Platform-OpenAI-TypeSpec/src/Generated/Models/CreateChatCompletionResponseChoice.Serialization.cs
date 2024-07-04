@@ -24,9 +24,9 @@ namespace OpenAI.Models
             writer.WritePropertyName("index"u8);
             writer.WriteNumberValue(Index);
             writer.WritePropertyName("message"u8);
-            writer.WriteObjectValue<ChatCompletionResponseMessage>(Message, options);
+            writer.WriteObjectValue(Message, options);
             writer.WritePropertyName("finish_reason"u8);
-            writer.WriteStringValue(FinishReason.ToString());
+            writer.WriteStringValue(FinishReason.ToSerialString());
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -59,7 +59,7 @@ namespace OpenAI.Models
 
         internal static CreateChatCompletionResponseChoice DeserializeCreateChatCompletionResponseChoice(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -69,7 +69,7 @@ namespace OpenAI.Models
             ChatCompletionResponseMessage message = default;
             CreateChatCompletionResponseChoiceFinishReason finishReason = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("index"u8))
@@ -84,15 +84,15 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("finish_reason"u8))
                 {
-                    finishReason = new CreateChatCompletionResponseChoiceFinishReason(property.Value.GetString());
+                    finishReason = property.Value.GetString().ToCreateChatCompletionResponseChoiceFinishReason();
                     continue;
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new CreateChatCompletionResponseChoice(index, message, finishReason, serializedAdditionalRawData);
         }
 
@@ -135,10 +135,10 @@ namespace OpenAI.Models
             return DeserializeCreateChatCompletionResponseChoice(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual BinaryContent ToBinaryBody()
+        /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>
+        internal virtual BinaryContent ToBinaryContent()
         {
-            return BinaryContent.Create(this, new ModelReaderWriterOptions("W"));
+            return BinaryContent.Create(this, ModelSerializationExtensions.WireOptions);
         }
     }
 }

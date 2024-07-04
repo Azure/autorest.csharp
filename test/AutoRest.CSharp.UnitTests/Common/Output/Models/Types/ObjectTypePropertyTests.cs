@@ -23,9 +23,8 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
         [Test]
         public void TestConstructDetailsForListType_PrimitiveType()
         {
-            bool isNullable = false;
             bool isBaseElement = true;
-            InputPrimitiveType type = new InputPrimitiveType(InputTypeKind.Boolean, isNullable);
+            InputPrimitiveType type = new InputPrimitiveType(InputPrimitiveTypeKind.Boolean);
             CSharpType cSharpType = typeFactory.CreateType(type);
 
             FormattableString result = ObjectTypeProperty.ConstructDetailsForListType(cSharpType, isBaseElement);
@@ -41,10 +40,9 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
         [Test]
         public void TestConstructDetailsForListType_ListType()
         {
-            bool isNullable = false;
             bool isBaseElement = true;
-            InputType elementType = new InputPrimitiveType(InputTypeKind.Boolean, isNullable);
-            InputListType type = new InputListType("InputListType", elementType, false, isNullable);
+            InputType elementType = new InputPrimitiveType(InputPrimitiveTypeKind.Boolean);
+            InputListType type = new InputListType("InputListType", "TypeSpec.Array", elementType);
 
             CSharpType cSharpType = typeFactory.CreateType(type);
 
@@ -58,11 +56,10 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
         [Test]
         public void TestConstructDetailsForListType_NestedListType()
         {
-            bool isNullable = false;
             bool isBaseElement = true;
-            InputType elementType = new InputPrimitiveType(InputTypeKind.Boolean, isNullable);
-            InputType listElementType = new InputListType("InputListType1", elementType, false, isNullable);
-            InputListType type = new InputListType("InputListType2", listElementType, false, isNullable);
+            InputType elementType = new InputPrimitiveType(InputPrimitiveTypeKind.Boolean);
+            InputType listElementType = new InputListType("InputListType1", "TypeSpec.Array", elementType);
+            InputListType type = new InputListType("InputListType2", "TypeSpec.Array", listElementType);
 
             CSharpType cSharpType = typeFactory.CreateType(type);
 
@@ -76,12 +73,11 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
         [Test]
         public void TestConstructDetailsForListType_ListOfDictType()
         {
-            bool isNullable = false;
             bool isBaseElement = true;
-            InputType keyType = new InputPrimitiveType(InputTypeKind.String, isNullable);
-            InputType valueType = new InputPrimitiveType(InputTypeKind.Int32, isNullable);
-            InputDictionaryType dictionaryType = new InputDictionaryType("InputDictionaryType", keyType, valueType, isNullable);
-            InputType listElementType = new InputListType("InputListType1", dictionaryType, false, isNullable);
+            InputType keyType = new InputPrimitiveType(InputPrimitiveTypeKind.String);
+            InputType valueType = new InputPrimitiveType(InputPrimitiveTypeKind.Int32);
+            InputDictionaryType dictionaryType = new InputDictionaryType("InputDictionaryType", keyType, valueType);
+            InputType listElementType = new InputListType("InputListType1", "TypeSpec.Array", dictionaryType);
 
             CSharpType cSharpType = typeFactory.CreateType(listElementType);
 
@@ -95,41 +91,34 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
         [Test]
         public void TestGetUnionTypesDescriptions()
         {
-            bool isNullable = false;
-
             // dictionary type
-            InputType keyType = new InputPrimitiveType(InputTypeKind.String, isNullable);
-            InputType valueType = new InputPrimitiveType(InputTypeKind.Int32, isNullable);
-            InputType dictionaryType = new InputDictionaryType("InputDictionaryType", keyType, valueType, isNullable);
+            InputType keyType = new InputPrimitiveType(InputPrimitiveTypeKind.String);
+            InputType valueType = new InputPrimitiveType(InputPrimitiveTypeKind.Int32);
+            InputType dictionaryType = new InputDictionaryType("InputDictionaryType", keyType, valueType);
 
             // literal types
-            InputType literalValueType = new InputPrimitiveType(InputTypeKind.Int32, isNullable);
-            InputLiteralType literalType = new InputLiteralType("InputLiteralType", literalValueType, 21, isNullable);
+            InputType literalValueType = new InputPrimitiveType(InputPrimitiveTypeKind.Int32);
+            InputLiteralType literalType = new InputLiteralType(literalValueType, 21);
 
-            InputType stringLiteralValueType = new InputPrimitiveType(InputTypeKind.String, isNullable);
-            InputLiteralType stringLiteralType = new InputLiteralType("InputLiteralType", stringLiteralValueType, "test", isNullable);
+            InputType stringLiteralValueType = new InputPrimitiveType(InputPrimitiveTypeKind.String);
+            InputLiteralType stringLiteralType = new InputLiteralType(stringLiteralValueType, "test");
 
-            InputType boolLiteralValueType = new InputPrimitiveType(InputTypeKind.Boolean, isNullable);
-            InputLiteralType boolLiteralType = new InputLiteralType("InputLiteralType", boolLiteralValueType, true, isNullable);
-
-            InputType dateTimeLiteralValueType = new InputPrimitiveType(InputTypeKind.DateTime, isNullable);
-            var dateTime = new DateTimeOffset(1,2,3,4,5,6, TimeSpan.Zero);
-            InputLiteralType dateTimeLiteralType = new InputLiteralType("InputLiteralType", dateTimeLiteralValueType, dateTime, isNullable);
+            InputType boolLiteralValueType = new InputPrimitiveType(InputPrimitiveTypeKind.Boolean);
+            InputLiteralType boolLiteralType = new InputLiteralType(boolLiteralValueType, true);
 
             var unionItems = new List<CSharpType>
             {
-                typeFactory.CreateType(new InputPrimitiveType(InputTypeKind.Boolean, false)),
-                typeFactory.CreateType(new InputPrimitiveType(InputTypeKind.Int32, false)),
+                typeFactory.CreateType(new InputPrimitiveType(InputPrimitiveTypeKind.Boolean)),
+                typeFactory.CreateType(new InputPrimitiveType(InputPrimitiveTypeKind.Int32)),
                 typeFactory.CreateType(dictionaryType),
                 typeFactory.CreateType(literalType),
                 typeFactory.CreateType(stringLiteralType),
                 typeFactory.CreateType(boolLiteralType),
-                typeFactory.CreateType(dateTimeLiteralType),
             };
 
             IReadOnlyList<FormattableString> descriptions = ObjectTypeProperty.GetUnionTypesDescriptions(unionItems);
 
-            Assert.AreEqual(7, descriptions.Count);
+            Assert.AreEqual(6, descriptions.Count);
 
             var codeWriter = new CodeWriter();
             codeWriter.AppendXmlDocumentation($"<test>", $"</test>", descriptions.ToList().Join(Environment.NewLine));
@@ -143,7 +132,6 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
                 "/// <description>21</description>",
                 "/// <description>\"test\"</description>",
                 "/// <description>True</description>",
-                $"/// <description>{dateTime}</description>",
                 "/// </test>") + Environment.NewLine;
 
             Assert.AreEqual(expected, actual);

@@ -44,36 +44,38 @@ namespace Serialization.EncodedName.Json
             _endpoint = endpoint;
         }
 
-        /// <param name="jsonEncodedNameModel"> The <see cref="JsonEncodedNameModel"/> to use. </param>
+        /// <summary> Send. </summary>
+        /// <param name="body"> The <see cref="JsonEncodedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="jsonEncodedNameModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='SendAsync(JsonEncodedNameModel,CancellationToken)']/*" />
-        public virtual async Task<Response> SendAsync(JsonEncodedNameModel jsonEncodedNameModel, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> SendAsync(JsonEncodedNameModel body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(jsonEncodedNameModel, nameof(jsonEncodedNameModel));
+            Argument.AssertNotNull(body, nameof(body));
 
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = jsonEncodedNameModel.ToRequestContent();
             Response response = await SendAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="jsonEncodedNameModel"> The <see cref="JsonEncodedNameModel"/> to use. </param>
+        /// <summary> Send. </summary>
+        /// <param name="body"> The <see cref="JsonEncodedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="jsonEncodedNameModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Send(JsonEncodedNameModel,CancellationToken)']/*" />
-        public virtual Response Send(JsonEncodedNameModel jsonEncodedNameModel, CancellationToken cancellationToken = default)
+        public virtual Response Send(JsonEncodedNameModel body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(jsonEncodedNameModel, nameof(jsonEncodedNameModel));
+            Argument.AssertNotNull(body, nameof(body));
 
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = jsonEncodedNameModel.ToRequestContent();
             Response response = Send(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Send.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -112,7 +114,7 @@ namespace Serialization.EncodedName.Json
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Send.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -150,6 +152,7 @@ namespace Serialization.EncodedName.Json
             }
         }
 
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='GetPropertyAsync(CancellationToken)']/*" />
         public virtual async Task<Response<JsonEncodedNameModel>> GetPropertyAsync(CancellationToken cancellationToken = default)
@@ -159,6 +162,7 @@ namespace Serialization.EncodedName.Json
             return Response.FromValue(JsonEncodedNameModel.FromResponse(response), response);
         }
 
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='GetProperty(CancellationToken)']/*" />
         public virtual Response<JsonEncodedNameModel> GetProperty(CancellationToken cancellationToken = default)
@@ -169,7 +173,7 @@ namespace Serialization.EncodedName.Json
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -204,7 +208,7 @@ namespace Serialization.EncodedName.Json
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>

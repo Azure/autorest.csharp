@@ -45,6 +45,7 @@ namespace _Type._Dictionary
             _endpoint = endpoint;
         }
 
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Float32Value.xml" path="doc/members/member[@name='GetFloat32ValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyDictionary<string, float>>> GetFloat32ValueAsync(CancellationToken cancellationToken = default)
@@ -62,6 +63,7 @@ namespace _Type._Dictionary
             return Response.FromValue(value, response);
         }
 
+        /// <summary> Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Float32Value.xml" path="doc/members/member[@name='GetFloat32Value(CancellationToken)']/*" />
         public virtual Response<IReadOnlyDictionary<string, float>> GetFloat32Value(CancellationToken cancellationToken = default)
@@ -80,7 +82,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -115,7 +117,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -149,6 +151,7 @@ namespace _Type._Dictionary
             }
         }
 
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="float"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -157,12 +160,13 @@ namespace _Type._Dictionary
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromDictionary(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PutAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Put. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="float"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -171,14 +175,14 @@ namespace _Type._Dictionary
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromDictionary(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Put(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -217,7 +221,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>

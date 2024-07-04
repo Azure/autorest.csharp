@@ -110,6 +110,7 @@ namespace NamedTypeSymbolExtensionsTests
                 mgmtConfiguration: null,
                 mgmtTestConfiguration: null,
                 flavor: "azure",
+                disableXmlDocs: false,
                 generateSampleProject: true,
                 generateTestProject: true,
                 helperNamespace: "");
@@ -158,12 +159,12 @@ namespace NamedTypeSymbolExtensionsTests
         public void IsSameType_ModelTypes()
         {
             // Different namespace
-            var input = new InputModelType("MetadataModel", "", null, null, null, InputModelTypeUsage.RoundTrip, null, null, Array.Empty<InputModelType>(), null, null, null, false);
+            var input = new InputModelType("MetadataModel", "", null, null, null, InputModelTypeUsage.RoundTrip, null, null, Array.Empty<InputModelType>(), null, null, null, null);
             CSharpType modelType = new CSharpType(new ModelTypeProvider(input, "", null, null));
             Assert.IsFalse(_modelSymbol.IsSameType(modelType));
 
             // Same namespace
-            input = new InputModelType("MetadataModel", "NamedTypeSymbolExtensionsTests", null, null, null, InputModelTypeUsage.RoundTrip, null, null, Array.Empty<InputModelType>(), null, null, null, false);
+            input = new InputModelType("MetadataModel", "NamedTypeSymbolExtensionsTests", null, null, null, InputModelTypeUsage.RoundTrip, null, null, Array.Empty<InputModelType>(), null, null, null, null);
             modelType = new CSharpType(new ModelTypeProvider(input, "NamedTypeSymbolExtensionsTests", null, null));
             Assert.IsTrue(_modelSymbol.IsSameType(modelType));
         }

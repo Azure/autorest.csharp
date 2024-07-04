@@ -20,14 +20,14 @@ namespace AutoRest.CSharp.Common.Output.Models
 {
     internal static partial class Snippets
     {
-        public static DeclarationStatement DeclareFirstPageRequestLocalFunction(ValueExpression? restClient, string methodName, IEnumerable<ValueExpression> arguments, out CodeWriterDeclaration localFunctionName)
+        public static MethodBodyStatement DeclareFirstPageRequestLocalFunction(ValueExpression? restClient, string methodName, IEnumerable<ValueExpression> arguments, out CodeWriterDeclaration localFunctionName)
         {
             var requestMethodCall = new InvokeInstanceMethodExpression(restClient, methodName, arguments.ToList(), null, false);
             localFunctionName = new CodeWriterDeclaration("FirstPageRequest");
             return new DeclareLocalFunctionStatement(localFunctionName, new[]{KnownParameters.PageSizeHint}, typeof(HttpMessage), requestMethodCall);
         }
 
-        public static DeclarationStatement DeclareNextPageRequestLocalFunction(ValueExpression? restClient, string methodName, IEnumerable<ValueExpression> arguments, out CodeWriterDeclaration localFunctionName)
+        public static MethodBodyStatement DeclareNextPageRequestLocalFunction(ValueExpression? restClient, string methodName, IEnumerable<ValueExpression> arguments, out CodeWriterDeclaration localFunctionName)
         {
             var requestMethodCall = new InvokeInstanceMethodExpression(restClient, methodName, arguments.ToList(), null, false);
             localFunctionName = new CodeWriterDeclaration("NextPageRequest");

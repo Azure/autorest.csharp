@@ -15,7 +15,7 @@ namespace Azure.NewProject.TypeSpec.Models
 {
     public partial class RoundTripModel : IUtf8JsonSerializable, IJsonModel<RoundTripModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<RoundTripModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -46,7 +46,7 @@ namespace Azure.NewProject.TypeSpec.Models
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
-            writer.WriteObjectValue<Thing>(RequiredModel, options);
+            writer.WriteObjectValue(RequiredModel, options);
             if (Optional.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
@@ -65,7 +65,7 @@ namespace Azure.NewProject.TypeSpec.Models
             if (Optional.IsDefined(FloatExtensibleEnum))
             {
                 writer.WritePropertyName("floatExtensibleEnum"u8);
-                writer.WriteNumberValue(FloatExtensibleEnum.Value.ToSerialInt32());
+                writer.WriteNumberValue(FloatExtensibleEnum.Value.ToSerialSingle());
             }
             if (Optional.IsCollectionDefined(FloatExtensibleEnumCollection))
             {
@@ -73,7 +73,7 @@ namespace Azure.NewProject.TypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in FloatExtensibleEnumCollection)
                 {
-                    writer.WriteNumberValue(item.ToSerialInt32());
+                    writer.WriteNumberValue(item.ToSerialSingle());
                 }
                 writer.WriteEndArray();
             }
@@ -254,7 +254,7 @@ namespace Azure.NewProject.TypeSpec.Models
 
         internal static RoundTripModel DeserializeRoundTripModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -281,7 +281,7 @@ namespace Azure.NewProject.TypeSpec.Models
             IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = default;
             IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"u8))
@@ -348,7 +348,7 @@ namespace Azure.NewProject.TypeSpec.Models
                     {
                         continue;
                     }
-                    floatExtensibleEnum = new FloatExtensibleEnum(property.Value.GetInt32());
+                    floatExtensibleEnum = new FloatExtensibleEnum(property.Value.GetSingle());
                     continue;
                 }
                 if (property.NameEquals("floatExtensibleEnumCollection"u8))
@@ -360,7 +360,7 @@ namespace Azure.NewProject.TypeSpec.Models
                     List<FloatExtensibleEnum> array = new List<FloatExtensibleEnum>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(new FloatExtensibleEnum(item.GetInt32()));
+                        array.Add(new FloatExtensibleEnum(item.GetSingle()));
                     }
                     floatExtensibleEnumCollection = array;
                     continue;
@@ -512,10 +512,10 @@ namespace Azure.NewProject.TypeSpec.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new RoundTripModel(
                 requiredString,
                 requiredInt,
@@ -579,11 +579,11 @@ namespace Azure.NewProject.TypeSpec.Models
             return DeserializeRoundTripModel(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<RoundTripModel>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

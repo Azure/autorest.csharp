@@ -30,7 +30,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
+            Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
+            Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
         }
 
         [Test]
@@ -63,7 +63,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
         }
 
         [Test]
@@ -109,6 +109,7 @@ namespace FirstTestTypeSpec.Tests
             {
 1234
             },
+                requiredFloatProperty = new object(),
             });
             Response response = await client.PatchActionAsync(content);
         }
@@ -142,6 +143,9 @@ namespace FirstTestTypeSpec.Tests
             {
 1234
             },
+                requiredFloatProperty = new object(),
+                optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = await client.PatchActionAsync(content);
         }
@@ -167,6 +171,7 @@ namespace FirstTestTypeSpec.Tests
             {
 1234
             },
+                requiredFloatProperty = new object(),
             });
             Response response = await client.AnonymousBodyAsync(content);
         }
@@ -179,7 +184,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
             Response<Thing> response = await client.AnonymousBodyAsync(thing);
         }
 
@@ -212,6 +217,9 @@ namespace FirstTestTypeSpec.Tests
             {
 1234
             },
+                requiredFloatProperty = new object(),
+                optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = await client.AnonymousBodyAsync(content);
         }
@@ -224,13 +232,15 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
             {
                 OptionalLiteralString = ThingOptionalLiteralString.Reject,
                 OptionalLiteralInt = ThingOptionalLiteralInt._456,
                 OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                 OptionalLiteralBool = true,
                 OptionalNullableList = { 1234 },
+                OptionalFloatProperty = (double)default,
+                OptionalResourceId = null,
             };
             Response<Thing> response = await client.AnonymousBodyAsync(thing);
         }
@@ -767,7 +777,10 @@ null
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Extension input = new Extension(123);
+            Extension input = new Extension(123)
+            {
+                Extension = { default },
+            };
             Response response = await client.RecursiveExtensionAsync(input);
         }
 
@@ -830,7 +843,10 @@ null
 
             Extendible input = new Extendible
             {
-                Extension = { new ThereLevelExtension(123) },
+                Extension = {new ThereLevelExtension(123)
+{
+Extension = {default},
+}},
             };
             Response response = await client.ThreeLevelRecursiveAsync(input);
         }

@@ -6,6 +6,7 @@ using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 
 namespace OpenAI.Models
@@ -22,7 +23,14 @@ namespace OpenAI.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("file"u8);
-            writer.WriteBase64StringValue(File.ToArray(), "D");
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(global::System.BinaryData.FromStream(File));
+#else
+            using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(File)))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
+#endif
             writer.WritePropertyName("model"u8);
             writer.WriteStringValue(Model.ToString());
             if (Optional.IsDefined(Prompt))
@@ -33,7 +41,7 @@ namespace OpenAI.Models
             if (Optional.IsDefined(ResponseFormat))
             {
                 writer.WritePropertyName("response_format"u8);
-                writer.WriteStringValue(ResponseFormat.Value.ToString());
+                writer.WriteStringValue(ResponseFormat.Value.ToSerialString());
             }
             if (Optional.IsDefined(Temperature))
             {
@@ -77,25 +85,25 @@ namespace OpenAI.Models
 
         internal static CreateTranscriptionRequest DeserializeCreateTranscriptionRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            BinaryData file = default;
+            Stream file = default;
             CreateTranscriptionRequestModel model = default;
             string prompt = default;
             CreateTranscriptionRequestResponseFormat? responseFormat = default;
             double? temperature = default;
             string language = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("file"u8))
                 {
-                    file = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
+                    file = BinaryData.FromString(property.Value.GetRawText()).ToStream();
                     continue;
                 }
                 if (property.NameEquals("model"u8))
@@ -114,7 +122,7 @@ namespace OpenAI.Models
                     {
                         continue;
                     }
-                    responseFormat = new CreateTranscriptionRequestResponseFormat(property.Value.GetString());
+                    responseFormat = property.Value.GetString().ToCreateTranscriptionRequestResponseFormat();
                     continue;
                 }
                 if (property.NameEquals("temperature"u8))
@@ -133,10 +141,10 @@ namespace OpenAI.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new CreateTranscriptionRequest(
                 file,
                 model,
@@ -147,6 +155,45 @@ namespace OpenAI.Models
                 serializedAdditionalRawData);
         }
 
+        private BinaryData SerializeMultipart(ModelReaderWriterOptions options)
+        {
+            using MultipartFormDataBinaryContent content = ToMultipartBinaryBody();
+            using MemoryStream stream = new MemoryStream();
+            content.WriteTo(stream);
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        internal virtual MultipartFormDataBinaryContent ToMultipartBinaryBody()
+        {
+            MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
+            content.Add(File, "file", "file", "application/octet-stream");
+            content.Add(Model.ToString(), "model");
+            if (Optional.IsDefined(Prompt))
+            {
+                content.Add(Prompt, "prompt");
+            }
+            if (Optional.IsDefined(ResponseFormat))
+            {
+                content.Add(ResponseFormat.Value.ToSerialString(), "response_format");
+            }
+            if (Optional.IsDefined(Temperature))
+            {
+                content.Add(Temperature.Value, "temperature");
+            }
+            if (Optional.IsDefined(Language))
+            {
+                content.Add(Language, "language");
+            }
+            return content;
+        }
+
         BinaryData IPersistableModel<CreateTranscriptionRequest>.Write(ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<CreateTranscriptionRequest>)this).GetFormatFromOptions(options) : options.Format;
@@ -155,6 +202,8 @@ namespace OpenAI.Models
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
+                case "MFD":
+                    return SerializeMultipart(options);
                 default:
                     throw new FormatException($"The model {nameof(CreateTranscriptionRequest)} does not support writing '{options.Format}' format.");
             }
@@ -176,7 +225,7 @@ namespace OpenAI.Models
             }
         }
 
-        string IPersistableModel<CreateTranscriptionRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<CreateTranscriptionRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "MFD";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
@@ -186,10 +235,10 @@ namespace OpenAI.Models
             return DeserializeCreateTranscriptionRequest(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual BinaryContent ToBinaryBody()
+        /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>
+        internal virtual BinaryContent ToBinaryContent()
         {
-            return BinaryContent.Create(this, new ModelReaderWriterOptions("W"));
+            return BinaryContent.Create(this, ModelSerializationExtensions.WireOptions);
         }
     }
 }

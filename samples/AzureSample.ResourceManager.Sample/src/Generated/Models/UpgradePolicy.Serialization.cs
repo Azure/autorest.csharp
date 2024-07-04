@@ -17,7 +17,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 {
     public partial class UpgradePolicy : IUtf8JsonSerializable, IJsonModel<UpgradePolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UpgradePolicy>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UpgradePolicy>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<UpgradePolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -36,12 +36,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(RollingUpgradePolicy))
             {
                 writer.WritePropertyName("rollingUpgradePolicy"u8);
-                writer.WriteObjectValue<RollingUpgradePolicy>(RollingUpgradePolicy, options);
+                writer.WriteObjectValue(RollingUpgradePolicy, options);
             }
             if (Optional.IsDefined(AutomaticOSUpgradePolicy))
             {
                 writer.WritePropertyName("automaticOSUpgradePolicy"u8);
-                writer.WriteObjectValue<AutomaticOSUpgradePolicy>(AutomaticOSUpgradePolicy, options);
+                writer.WriteObjectValue(AutomaticOSUpgradePolicy, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -75,7 +75,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 
         internal static UpgradePolicy DeserializeUpgradePolicy(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -85,7 +85,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             RollingUpgradePolicy rollingUpgradePolicy = default;
             AutomaticOSUpgradePolicy automaticOSUpgradePolicy = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("mode"u8))
@@ -117,10 +117,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new UpgradePolicy(mode, rollingUpgradePolicy, automaticOSUpgradePolicy, serializedAdditionalRawData);
         }
 
@@ -136,43 +136,46 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Mode), out propertyOverride);
-            if (Optional.IsDefined(Mode) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  mode: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Mode))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  mode: ");
                     builder.AppendLine($"'{Mode.Value.ToSerialString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RollingUpgradePolicy), out propertyOverride);
-            if (Optional.IsDefined(RollingUpgradePolicy) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  rollingUpgradePolicy: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(RollingUpgradePolicy))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  rollingUpgradePolicy: ");
                     BicepSerializationHelpers.AppendChildObject(builder, RollingUpgradePolicy, options, 2, false, "  rollingUpgradePolicy: ");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AutomaticOSUpgradePolicy), out propertyOverride);
-            if (Optional.IsDefined(AutomaticOSUpgradePolicy) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  automaticOSUpgradePolicy: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(AutomaticOSUpgradePolicy))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  automaticOSUpgradePolicy: ");
                     BicepSerializationHelpers.AppendChildObject(builder, AutomaticOSUpgradePolicy, options, 2, false, "  automaticOSUpgradePolicy: ");
                 }
             }

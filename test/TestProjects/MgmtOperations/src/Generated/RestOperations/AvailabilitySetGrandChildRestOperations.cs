@@ -37,6 +37,23 @@ namespace MgmtOperations
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
+        internal RequestUriBuilder CreateListRequestUri(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/availabilitySets/", false);
+            uri.AppendPath(availabilitySetName, true);
+            uri.AppendPath("/availabilitySetChildren/", false);
+            uri.AppendPath(availabilitySetChildName, true);
+            uri.AppendPath("/availabilitySetGrandChildren", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName)
         {
             var message = _pipeline.CreateMessage();
@@ -120,6 +137,24 @@ namespace MgmtOperations
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetRequestUri(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/availabilitySets/", false);
+            uri.AppendPath(availabilitySetName, true);
+            uri.AppendPath("/availabilitySetChildren/", false);
+            uri.AppendPath(availabilitySetChildName, true);
+            uri.AppendPath("/availabilitySetGrandChildren/", false);
+            uri.AppendPath(availabilitySetGrandChildName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName)
@@ -216,6 +251,24 @@ namespace MgmtOperations
             }
         }
 
+        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName, AvailabilitySetGrandChildData data)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/availabilitySets/", false);
+            uri.AppendPath(availabilitySetName, true);
+            uri.AppendPath("/availabilitySetChildren/", false);
+            uri.AppendPath(availabilitySetChildName, true);
+            uri.AppendPath("/availabilitySetGrandChildren/", false);
+            uri.AppendPath(availabilitySetGrandChildName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName, AvailabilitySetGrandChildData data)
         {
             var message = _pipeline.CreateMessage();
@@ -238,7 +291,7 @@ namespace MgmtOperations
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<AvailabilitySetGrandChildData>(data);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;

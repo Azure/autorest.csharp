@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace OpenAI.Models
 {
@@ -54,7 +55,7 @@ namespace OpenAI.Models
         /// uploaded file.
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="file"/> or <paramref name="purpose"/> is null. </exception>
-        public CreateFileRequest(BinaryData file, string purpose)
+        public CreateFileRequest(Stream file, string purpose)
         {
             Argument.AssertNotNull(file, nameof(file));
             Argument.AssertNotNull(purpose, nameof(purpose));
@@ -75,7 +76,7 @@ namespace OpenAI.Models
         /// uploaded file.
         /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CreateFileRequest(BinaryData file, string purpose, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal CreateFileRequest(Stream file, string purpose, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             File = file;
             Purpose = purpose;
@@ -91,21 +92,8 @@ namespace OpenAI.Models
         /// Name of the [JSON Lines](https://jsonlines.readthedocs.io/en/latest/) file to be uploaded.
         ///
         /// If the `purpose` is set to "fine-tune", the file will be used for fine-tuning.
-        /// <para>
-        /// To assign a byte[] to this property use <see cref="BinaryData.FromBytes(byte[])"/>.
-        /// The byte[] will be serialized to a Base64 encoded string.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromBytes(new byte[] { 1, 2, 3 })</term>
-        /// <description>Creates a payload of "AQID".</description>
-        /// </item>
-        /// </list>
-        /// </para>
         /// </summary>
-        public BinaryData File { get; }
+        public Stream File { get; }
         /// <summary>
         /// The intended purpose of the uploaded documents. Use "fine-tune" for
         /// [fine-tuning](/docs/api-reference/fine-tuning). This allows us to validate the format of the

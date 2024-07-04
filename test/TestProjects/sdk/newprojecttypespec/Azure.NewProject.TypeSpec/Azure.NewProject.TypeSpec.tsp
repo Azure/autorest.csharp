@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 
 @service({
     title: "hello world",
-    version: "0.1.0",
+    version: "1.0.0"
 })
 @doc("This is a sample typespec project.")
 @server(
@@ -18,6 +18,7 @@ import "@azure-tools/typespec-azure-core";
 @useAuth(
     OAuth2Auth<[AuthFlow]> | ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">
 )
+@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 namespace NewProjectTypeSpec;
 
 @doc("The auth flow model")
@@ -30,10 +31,10 @@ model AuthFlow {
 
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 @doc("float fixed enum")
-@fixed
 enum FloatFixedEnum {
     One: 1.1,
     Two: 2.2,
@@ -41,7 +42,6 @@ enum FloatFixedEnum {
 }
 
 @doc("int fixed enum")
-@fixed
 enum IntFixedEnum {
     One: 1,
     Two: 2,
@@ -49,7 +49,6 @@ enum IntFixedEnum {
 }
 
 @doc("Simple enum")
-@fixed
 enum StringFixedEnum {
     One: "1",
     Two: "2",
@@ -199,16 +198,6 @@ union DaysOfWeekExtensibleEnum {
     Sunday: "Sunday",
 }
 
-model ModelWithFormat {
-    @doc("url format")
-    @format("Uri")
-    sourceUrl: string;
-
-    @doc("uuid format")
-    @format("uuid")
-    guid: string;
-}
-
 @doc("Hello world service")
 @route("/hello")
 namespace Hello.Demo {
@@ -260,7 +249,7 @@ namespace Hello.Demo2 {
 @doc("top level method")
 @get
 @convenientAPI(true)
-op topAction(@path @format("date") action: string): Thing;
+op topAction(@path action: utcDateTime): Thing;
 
 @route("/top2")
 @doc("top level method2")
@@ -290,17 +279,12 @@ op addTimeHeader(
     @header("Repeatability-First-Sent") repeatabilityFirstSent?: utcDateTime 
 ): void;
 
-@route("/stringFormat")
-@doc("paramete has string format.")
-@post
-@convenientAPI(true)
-op stringFormat(@path @format("uuid") subscriptionId: string, @body body: ModelWithFormat): void;
-
+// TODO: https://github.com/Azure/typespec-azure/issues/509
 namespace EnumTest {
-    @get
+    @put
     @route("/unknown-value")
-    @doc("get extensible enum")
-    op getUnknownValue(): DaysOfWeekExtensibleEnum;
+    @doc("create extensible enum")
+    op getUnknownValue(@body input: DaysOfWeekExtensibleEnum): void;
 }
 
 namespace ProtocolAndConvenient {

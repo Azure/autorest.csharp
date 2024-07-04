@@ -54,6 +54,7 @@ namespace MgmtDiscriminator
         /// <summary> Initializes a new instance of <see cref="DeliveryRuleData"/>. </summary>
         public DeliveryRuleData()
         {
+            AdditionalProperties = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of <see cref="DeliveryRuleData"/>. </summary>
@@ -69,10 +70,12 @@ namespace MgmtDiscriminator
         /// <param name="number"> A number property to verify bicep generation. </param>
         /// <param name="uri"> A number property to verify bicep generation. </param>
         /// <param name="shellProperty"> A shell property to verify bicep generation for empty objects. </param>
-        /// <param name="sku"> A model that will be safe flattened. </param>
+        /// <param name="sku"> The top level sku property. </param>
+        /// <param name="unflattened"> The unflattened property. </param>
         /// <param name="properties"> The properties. </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeliveryRuleData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, bool? boolProperty, AzureLocation? location, AzureLocation? locationWithCustomSerialization, DateTimeOffset? dateTimeProperty, TimeSpan? duration, int? number, Uri uri, Shell shellProperty, Sku1 sku, DeliveryRuleProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
+        internal DeliveryRuleData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, bool? boolProperty, AzureLocation? location, AzureLocation? locationWithCustomSerialization, DateTimeOffset? dateTimeProperty, TimeSpan? duration, int? number, Uri uri, Shell shellProperty, Sku1 sku, Unflattened unflattened, DeliveryRuleProperties properties, IDictionary<string, string> additionalProperties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             BoolProperty = boolProperty;
             Location = location;
@@ -83,7 +86,9 @@ namespace MgmtDiscriminator
             Uri = uri;
             ShellProperty = shellProperty;
             Sku = sku;
+            Unflattened = unflattened;
             Properties = properties;
+            AdditionalProperties = additionalProperties;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -111,10 +116,10 @@ namespace MgmtDiscriminator
         /// <summary> A shell property to verify bicep generation for empty objects. </summary>
         [WirePath("shellProperty")]
         public Shell ShellProperty { get; set; }
-        /// <summary> A model that will be safe flattened. </summary>
+        /// <summary> The top level sku property. </summary>
         internal Sku1 Sku { get; set; }
-        /// <summary> The name of the sku. </summary>
-        [WirePath("sku.name.nestedName")]
+        /// <summary> The childmost sku property. </summary>
+        [WirePath("sku.name1.nestedName")]
         public string NestedName
         {
             get => Sku is null ? default : Sku.NestedName;
@@ -126,8 +131,14 @@ namespace MgmtDiscriminator
             }
         }
 
+        /// <summary> The unflattened property. </summary>
+        [WirePath("unflattened")]
+        public Unflattened Unflattened { get; set; }
         /// <summary> The properties. </summary>
         [WirePath("properties")]
         public DeliveryRuleProperties Properties { get; set; }
+        /// <summary> Additional Properties. </summary>
+        [WirePath("AdditionalProperties")]
+        public IDictionary<string, string> AdditionalProperties { get; }
     }
 }

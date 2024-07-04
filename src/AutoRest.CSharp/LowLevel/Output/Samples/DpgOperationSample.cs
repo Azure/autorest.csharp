@@ -344,7 +344,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
         {
             // we have a request body type
             if (_method.RequestBodyType == null)
-                return InputExampleValue.Null(InputPrimitiveType.Object);
+                return InputExampleValue.Null(InputPrimitiveType.Any);
 
             //if (Method.RequestBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
             //    return InputExampleValue.Stream(Method.RequestBodyType, "<filePath>");
@@ -371,7 +371,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             => parameter.Name == knownParameter.Name && parameter.Type.EqualsIgnoreNullable(knownParameter.Type);
 
         public bool HasResponseBody => _method.ResponseBodyType != null;
-        public bool IsResponseStream => _method.ResponseBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream };
+        public bool IsResponseStream => _method.ResponseBodyType is InputPrimitiveType { Kind: InputPrimitiveTypeKind.Stream };
 
         private InputType? _resultType;
         public InputType? ResultType => _resultType ??= GetEffectiveResponseType();
@@ -391,7 +391,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             var pagingItemName = _method.PagingInfo.ItemName;
             var listResultType = responseType as InputModelType;
             var itemsArrayProperty = listResultType?.Properties.FirstOrDefault(p => p.SerializedName == pagingItemName && p.Type is InputListType);
-            return (itemsArrayProperty?.Type as InputListType)?.ElementType;
+            return (itemsArrayProperty?.Type as InputListType)?.ValueType;
         }
 
         // TODO -- this needs a refactor when we consolidate things around customization code https://github.com/Azure/autorest.csharp/issues/3370
@@ -400,6 +400,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             if (method.ConvenienceMethod is not null)
             {
                 if (method.ConvenienceMethod.Signature.Parameters.Count == method.ProtocolMethodSignature.Parameters.Count - 1 &&
+                    method.ConvenienceMethod.Signature.Parameters.Count > 0 &&
                     !method.ConvenienceMethod.Signature.Parameters.Last().Type.Equals(typeof(CancellationToken)))
                 {
                     bool allEqual = true;

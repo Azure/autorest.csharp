@@ -23,7 +23,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Configuration))
             {
                 writer.WritePropertyName("configuration"u8);
-                writer.WriteObjectValue<FirewallPolicyIntrusionDetectionConfiguration>(Configuration);
+                writer.WriteObjectValue(Configuration);
             }
             writer.WriteEndObject();
         }

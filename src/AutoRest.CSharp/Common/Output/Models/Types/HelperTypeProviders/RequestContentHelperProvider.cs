@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
@@ -25,19 +26,19 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly MethodSignatureModifiers _methodModifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Static;
         private RequestContentHelperProvider() : base(Configuration.HelperNamespace, null)
         {
+            DefaultName = $"{Configuration.ApiTypes.RequestContentType.Name}Helper";
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
             _requestBodyType = Configuration.ApiTypes.RequestContentType;
             _utf8JsonRequestBodyType = Utf8JsonRequestContentProvider.Instance.Type;
         }
 
-        protected override string DefaultName => "RequestContentHelper";
-
-        protected override string DefaultAccessibility { get; } = "internal";
+        protected override string DefaultName { get; }
 
         protected override IEnumerable<Method> BuildMethods()
         {
             yield return BuildFromEnumerableTMethod();
             yield return BuildFromEnumerableBinaryDataMethod();
+            yield return BuildFromReadOnlySpanMethod();
 
             yield return BuildFromDictionaryTMethod();
             yield return BuildFromDictionaryBinaryDataMethod();
@@ -114,6 +115,45 @@ namespace AutoRest.CSharp.Output.Models.Types
                         Equal(item, Null),
                         writer.WriteNullValue(),
                         writer.WriteBinaryData(item))
+                },
+                writer.WriteEndArray(),
+                EmptyLine,
+                Return(content)
+            });
+
+            return new Method(signature, body);
+        }
+
+        private Method BuildFromReadOnlySpanMethod()
+        {
+            var spanType = typeof(ReadOnlySpan<>);
+            CSharpType tType = spanType.GetGenericArguments()[0];
+            var spanParameter = new Parameter("span", null, spanType, null, ValidationType.None, null);
+            var signature = new MethodSignature(
+                Name: _fromEnumerableName,
+                Modifiers: _methodModifiers,
+                Parameters: new[] { spanParameter },
+                ReturnType: _requestBodyType,
+                GenericArguments: new[] { tType },
+                GenericParameterConstraints: new[]
+                {
+                    Where.NotNull(tType)
+                },
+                Summary: null, Description: null, ReturnDescription: null);
+
+            var span = (ValueExpression)spanParameter;
+            var body = new List<MethodBodyStatement>
+            {
+                Declare(_utf8JsonRequestBodyType, "content", New.Instance(_utf8JsonRequestBodyType), out var content)
+            };
+            var writer = Utf8JsonRequestContentProvider.Instance.JsonWriterProperty(content);
+            var i = new VariableReference(typeof(int), "i");
+            body.Add(new MethodBodyStatement[]
+            {
+                writer.WriteStartArray(),
+                new ForStatement(new AssignmentExpression(i, Int(0)), LessThan(i, span.Property(nameof(ReadOnlySpan<byte>.Length))), new UnaryOperatorExpression("++", i, true))
+                {
+                    writer.WriteObjectValue(new TypedValueExpression(tType, new IndexerExpression(span, i)), ModelReaderWriterOptionsExpression.Wire)
                 },
                 writer.WriteEndArray(),
                 EmptyLine,
@@ -217,17 +257,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 ReturnType: _requestBodyType,
                 Summary: null, Description: null, ReturnDescription: null);
 
-            var body = new List<MethodBodyStatement>
+            var body = new MethodBodyStatement[]
             {
-                Declare(_utf8JsonRequestBodyType, "content", New.Instance(_utf8JsonRequestBodyType), out var content)
-            };
-            var writer = Utf8JsonRequestContentProvider.Instance.JsonWriterProperty(content);
-            var value = (TypedValueExpression)valueParameter;
-            body.Add(new MethodBodyStatement[]
-            {
-                writer.WriteObjectValue(value, ModelReaderWriterOptionsExpression.Wire),
+                Declare(_utf8JsonRequestBodyType, "content", New.Instance(_utf8JsonRequestBodyType), out var content),
+                Utf8JsonRequestContentProvider.Instance.JsonWriterProperty(content).WriteObjectValue(valueParameter, ModelReaderWriterOptionsExpression.Wire),
                 Return(content)
-            });
+            };
 
             return new Method(signature, body);
         }

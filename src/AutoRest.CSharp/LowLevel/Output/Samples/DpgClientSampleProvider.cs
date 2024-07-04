@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -131,7 +132,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 streamVar = responseVar.Invoke(nameof(BinaryData.ToStream));
             else if (responseType.EqualsIgnoreNullable(Configuration.ApiTypes.ResponseType))
                 streamVar = responseVar.Property(Configuration.ApiTypes.ContentStreamName);
-            else if (TypeFactory.IsResponseOfT(responseType))
+            else if (responseType.IsResponseOfT)
                 streamVar = responseVar.Invoke(Configuration.ApiTypes.GetRawResponseName);
             else
                 yield break;
@@ -150,9 +151,9 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             {
                 // if there is not a schema for us to show, just print status code
                 ValueExpression statusVar = responseVar;
-                if (TypeFactory.IsResponseOfT(responseType))
+                if (responseType.IsResponseOfT)
                     statusVar = responseVar.Invoke(Configuration.ApiTypes.GetRawResponseName);
-                if (TypeFactory.IsResponseOfT(responseType) || TypeFactory.IsResponse(responseType))
+                if (responseType.IsResponseOfT || responseType.IsResponse)
                     yield return InvokeConsoleWriteLine(statusVar.Property(Configuration.ApiTypes.StatusName));
             }
         }
@@ -162,11 +163,11 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             switch (type)
             {
                 case InputListType listType:
-                    if (visitedTypes.Contains(listType.ElementType))
+                    if (visitedTypes.Contains(listType.ValueType))
                         return;
                     // <invocation>[0]
                     invocation = new IndexerExpression(invocation, Literal(0));
-                    BuildResponseParseStatements(useAllProperties, listType.ElementType, invocation, statements, visitedTypes);
+                    BuildResponseParseStatements(useAllProperties, listType.ValueType, invocation, statements, visitedTypes);
                     return;
                 case InputDictionaryType dictionaryType:
                     if (visitedTypes.Contains(dictionaryType.ValueType))
@@ -174,6 +175,11 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                     // <invocation>.GetProperty("<key>")
                     invocation = invocation.Invoke("GetProperty", Literal("<key>"));
                     BuildResponseParseStatements(useAllProperties, dictionaryType.ValueType, invocation, statements, visitedTypes);
+                    return;
+                case InputNullableType nullableType:
+                    if (visitedTypes.Contains(nullableType.Type))
+                        return;
+                    BuildResponseParseStatements(useAllProperties, nullableType.Type, invocation, statements, visitedTypes);
                     return;
                 case InputModelType modelType:
                     BuildResponseParseStatementsForModelType(useAllProperties, modelType, invocation, statements, visitedTypes);
@@ -203,10 +209,11 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 if (!visitedTypes.Contains(property.Type))
                 {
                     // <invocation>.GetProperty("<propertyName>");
-                    visitedTypes.Add(property.Type);
+                    InputType type = property.Type.GetImplementType();
+                    visitedTypes.Add(type);
                     var next = invocation.Invoke("GetProperty", Literal(property.SerializedName));
-                    BuildResponseParseStatements(useAllProperties, property.Type, next, statements, visitedTypes);
-                    visitedTypes.Remove(property.Type);
+                    BuildResponseParseStatements(useAllProperties, type, next, statements, visitedTypes);
+                    visitedTypes.Remove(type);
                 }
             }
         }

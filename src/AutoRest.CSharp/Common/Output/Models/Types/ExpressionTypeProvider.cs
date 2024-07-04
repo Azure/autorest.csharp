@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Types.HelperTypeProviders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Types.System;
@@ -21,8 +22,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             yield return ChangeTrackingListProvider.Instance;
             yield return OptionalTypeProvider.Instance;
-            yield return RequestContentHelperProvider.Instance;
-            yield return Utf8JsonRequestContentProvider.Instance;
             yield return ArgumentProvider.Instance;
             yield return ChangeTrackingDictionaryProvider.Instance;
             yield return ModelSerializationExtensionsProvider.Instance;
@@ -32,6 +31,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return ClientPipelineExtensionsProvider.Instance;
                 yield return ClientUriBuilderProvider.Instance;
             }
+            yield return MultipartFormDataRequestContentProvider.Instance;
+            yield return RequestContentHelperProvider.Instance;
+            yield return Utf8JsonRequestContentProvider.Instance;
             if (Configuration.EnableBicepSerialization)
             {
                 yield return BicepSerializationTypeProvider.Instance;
@@ -44,7 +46,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             DeclarationModifiers = TypeSignatureModifiers.Partial | TypeSignatureModifiers.Public;
         }
 
-        public bool IsEnum => TypeKind is TypeKind.Enum;
+        public override bool IsEnum => TypeKind is TypeKind.Enum;
 
         public bool IsStruct => TypeKind is TypeKind.Struct;
 

@@ -139,8 +139,8 @@ namespace _Type.Scalar
         /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='PutAsync(bool,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(bool body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PutAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -151,8 +151,8 @@ namespace _Type.Scalar
         /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='Put(bool,CancellationToken)']/*" />
         public virtual Response Put(bool body, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Put(content, context);
             return response;
         }

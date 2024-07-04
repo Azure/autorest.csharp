@@ -7,8 +7,7 @@ import {
     shouldGenerateConvenient,
     shouldGenerateProtocol,
     SdkContext,
-    getAccess,
-    isInternal
+    getAccess
 } from "@azure-tools/typespec-client-generator-core";
 import {
     getDeprecated,
@@ -19,7 +18,7 @@ import {
     ModelProperty,
     Namespace,
     Operation,
-    Program
+    Type
 } from "@typespec/compiler";
 import { getResourceOperation } from "@typespec/rest";
 import {
@@ -28,40 +27,40 @@ import {
     HttpOperationResponse
 } from "@typespec/http";
 import { NetEmitterOptions } from "../options.js";
-import { BodyMediaType, typeToBodyMediaType } from "../type/bodyMediaType.js";
-import { collectionFormatToDelimMap } from "../type/collectionFormat.js";
-import { HttpResponseHeader } from "../type/httpResponseHeader.js";
-import { InputConstant } from "../type/inputConstant.js";
-import { InputOperation } from "../type/inputOperation.js";
-import { InputOperationParameterKind } from "../type/inputOperationParameterKind.js";
-import { InputParameter } from "../type/inputParameter.js";
+import { BodyMediaType, typeToBodyMediaType } from "../type/body-media-type.js";
+import { collectionFormatToDelimMap } from "../type/collection-format.js";
+import { HttpResponseHeader } from "../type/http-response-header.js";
+import { InputConstant } from "../type/input-constant.js";
+import { InputOperation } from "../type/input-operation.js";
+import { InputOperationParameterKind } from "../type/input-operation-parameter-kind.js";
+import { InputParameter } from "../type/input-parameter.js";
 import {
     InputEnumType,
-    InputListType,
+    InputArrayType,
     InputModelType,
     InputType,
+    isInputEnumType,
     isInputLiteralType,
     isInputModelType,
     isInputUnionType
-} from "../type/inputType.js";
-import { convertLroFinalStateVia } from "../type/operationFinalStateVia.js";
-import { OperationLongRunning } from "../type/operationLongRunning.js";
-import { OperationPaging } from "../type/operationPaging.js";
-import { OperationResponse } from "../type/operationResponse.js";
+} from "../type/input-type.js";
+import { convertLroFinalStateVia } from "../type/operation-final-state-via.js";
+import { OperationLongRunning } from "../type/operation-long-running.js";
+import { OperationPaging } from "../type/operation-paging.js";
+import { OperationResponse } from "../type/operation-response.js";
 import {
     RequestLocation,
     requestLocationMap
-} from "../type/requestLocation.js";
+} from "../type/request-location.js";
 import {
     parseHttpRequestMethod,
     RequestMethod
-} from "../type/requestMethod.js";
+} from "../type/request-method.js";
 import { getExternalDocs, getOperationId, hasDecorator } from "./decorators.js";
-import { logger } from "./logger.js";
+import { Logger } from "./logger.js";
 import {
     getDefaultValue,
     getEffectiveSchemaType,
-    getFormattedType,
     getInputType
 } from "./model.js";
 import {
@@ -70,7 +69,7 @@ import {
     getTypeName
 } from "./utils.js";
 import { Usage } from "../type/usage.js";
-import { InputTypeKind } from "../type/inputTypeKind.js";
+import { getExtensions } from "@typespec/openapi";
 
 export function loadOperation(
     sdkContext: SdkContext<NetEmitterOptions>,
@@ -88,7 +87,7 @@ export function loadOperation(
         parameters: typespecParameters
     } = operation;
     const program = sdkContext.program;
-    logger.info(`load operation: ${op.name}, path:${fullPath} `);
+    Logger.getInstance().info(`load operation: ${op.name}, path:${fullPath} `);
     const resourceOperation = getResourceOperation(program, op);
     const desc = getDoc(program, op);
     const summary = getSummary(program, op);
@@ -104,17 +103,23 @@ export function loadOperation(
         parameters.push(loadOperationParameter(sdkContext, p));
     }
 
-    if (typespecParameters.body?.parameter) {
+    if (
+        typespecParameters.body?.property &&
+        !isVoidType(typespecParameters.body.type)
+    ) {
         parameters.push(
-            loadBodyParameter(sdkContext, typespecParameters.body?.parameter)
+            loadBodyParameter(sdkContext, typespecParameters.body?.property)
         );
-    } else if (typespecParameters.body?.type) {
+    } else if (
+        typespecParameters.body?.type &&
+        !isVoidType(typespecParameters.body.type)
+    ) {
         const effectiveBodyType = getEffectiveSchemaType(
             sdkContext,
             typespecParameters.body.type
         );
         if (effectiveBodyType.kind === "Model") {
-            let bodyParameter = loadBodyParameter(
+            const bodyParameter = loadBodyParameter(
                 sdkContext,
                 effectiveBodyType
             );
@@ -129,7 +134,7 @@ export function loadOperation(
             ) {
                 // give body type a name
                 bodyParameter.Type.Name = `${capitalize(op.name)}Request`;
-                var bodyModelType = bodyParameter.Type as InputModelType;
+                const bodyModelType = bodyParameter.Type as InputModelType;
                 bodyModelType.Usage = Usage.Input;
                 // update models cache
                 models.delete("");
@@ -176,10 +181,17 @@ export function loadOperation(
         if (isInputLiteralType(contentTypeParameter.Type)) {
             mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
         } else if (isInputUnionType(contentTypeParameter.Type)) {
-            const mediaTypeValues =
-                contentTypeParameter.Type.UnionItemTypes.map((item) =>
-                    isInputLiteralType(item) ? item.Value : undefined
-                );
+            for (const unionItem of contentTypeParameter.Type.VariantTypes) {
+                if (isInputLiteralType(unionItem)) {
+                    mediaTypes.push(unionItem.Value as string);
+                } else {
+                    throw "Media type of content type should be string.";
+                }
+            }
+        } else if (isInputEnumType(contentTypeParameter.Type)) {
+            const mediaTypeValues = contentTypeParameter.Type.Values.map(
+                (value) => value.Value
+            );
             if (mediaTypeValues.some((item) => item === undefined)) {
                 throw "Media type of content type should be string.";
             }
@@ -226,9 +238,7 @@ export function loadOperation(
         Summary: summary,
         Deprecated: getDeprecated(program, op),
         Description: desc,
-        Accessibility: isInternal(sdkContext, op)
-            ? "internal"
-            : getAccess(sdkContext, op),
+        Accessibility: getAccess(sdkContext, op),
         Parameters: parameters,
         Responses: responses,
         HttpMethod: requestMethod,
@@ -246,8 +256,12 @@ export function loadOperation(
         GenerateConvenienceMethod: generateConvenience
     } as InputOperation;
 
+    function isVoidType(type: Type): boolean {
+        return type.kind === "Intrinsic" && type.name === "void";
+    }
+
     function loadOperationParameter(
-        context: SdkContext,
+        context: SdkContext<NetEmitterOptions>,
         parameter: HttpOperationParameter
     ): InputParameter {
         const { type: location, name, param } = parameter;
@@ -255,17 +269,18 @@ export function loadOperation(
         const typespecType = param.type;
         const inputType: InputType = getInputType(
             context,
-            getFormattedType(program, param),
+            param,
             models,
-            enums
+            enums,
+            operation.operation
         );
-        let defaultValue = undefined;
+        let defaultValue: InputConstant | undefined = undefined;
         const value = getDefaultValue(typespecType);
         if (value) {
             defaultValue = {
                 Type: inputType,
                 Value: value
-            } as InputConstant;
+            };
         }
         const requestLocation = requestLocationMap[location];
         const isApiVer: boolean = isApiVersion(sdkContext, parameter);
@@ -273,7 +288,7 @@ export function loadOperation(
             requestLocation === RequestLocation.Header &&
             name.toLowerCase() === "content-type";
         const kind: InputOperationParameterKind =
-            isContentType || inputType.Kind === InputTypeKind.Literal
+            isContentType || inputType.Kind === "constant"
                 ? InputOperationParameterKind.Constant
                 : isApiVer
                 ? defaultValue
@@ -292,9 +307,12 @@ export function loadOperation(
             IsResourceParameter: false,
             IsContentType: isContentType,
             IsEndpoint: false,
-            SkipUrlEncoding: false, //TODO: retrieve out value from extension
+            SkipUrlEncoding:
+                // TODO: update this when https://github.com/Azure/typespec-azure/issues/1022 is resolved
+                getExtensions(program, param).get("x-ms-skip-url-encoding") ===
+                true,
             Explode:
-                (inputType as InputListType).ElementType && format === "multi"
+                (inputType as InputArrayType).ValueType && format === "multi"
                     ? true
                     : false,
             Kind: kind,
@@ -305,14 +323,15 @@ export function loadOperation(
     }
 
     function loadBodyParameter(
-        context: SdkContext,
+        context: SdkContext<NetEmitterOptions>,
         body: ModelProperty | Model
     ): InputParameter {
         const inputType: InputType = getInputType(
             context,
-            getFormattedType(program, body),
+            body,
             models,
-            enums
+            enums,
+            operation.operation
         );
         const requestLocation = RequestLocation.Body;
         const kind: InputOperationParameterKind =
@@ -335,7 +354,7 @@ export function loadOperation(
     }
 
     function loadOperationResponse(
-        context: SdkContext,
+        context: SdkContext<NetEmitterOptions>,
         response: HttpOperationResponse
     ): OperationResponse | undefined {
         if (!response.statusCode || response.statusCode === "*") {
@@ -351,9 +370,10 @@ export function loadOperation(
             const typespecType = getEffectiveSchemaType(context, body.type);
             const inputType: InputType = getInputType(
                 context,
-                getFormattedType(program, typespecType),
+                typespecType,
                 models,
-                enums
+                enums,
+                operation.operation
             );
             type = inputType;
         }
@@ -368,9 +388,10 @@ export function loadOperation(
                     Description: getDoc(program, headers[key]) ?? "",
                     Type: getInputType(
                         context,
-                        getFormattedType(program, headers[key].type),
+                        headers[key].type,
                         models,
-                        enums
+                        enums,
+                        operation.operation
                     )
                 } as HttpResponseHeader);
             }
@@ -387,7 +408,7 @@ export function loadOperation(
     }
 
     function loadLongRunningOperation(
-        context: SdkContext,
+        context: SdkContext<NetEmitterOptions>,
         op: HttpOperation
     ): OperationLongRunning | undefined {
         const metadata = getLroMetadata(program, op.operation);
@@ -395,17 +416,19 @@ export function loadOperation(
             return undefined;
         }
 
-        var bodyType = undefined;
+        let bodyType = undefined;
         if (
             op.verb !== "delete" &&
             metadata.finalResult !== undefined &&
             metadata.finalResult !== "void"
         ) {
-            const formattedType = getFormattedType(
-                program,
-                metadata.finalEnvelopeResult as Model
+            bodyType = getInputType(
+                context,
+                metadata.finalEnvelopeResult as Model,
+                models,
+                enums,
+                op.operation
             );
-            bodyType = getInputType(context, formattedType, models, enums);
         }
 
         return {

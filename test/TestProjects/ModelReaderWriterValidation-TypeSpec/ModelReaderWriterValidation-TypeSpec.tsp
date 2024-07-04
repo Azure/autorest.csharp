@@ -106,7 +106,7 @@ model TrackedResourceData {
 
     @doc("The resource type.")
     @visibility("read")
-    @projectedName("csharp", "resourceType")
+    @clientName("resourceType")
     type: string;
 
     @doc("The location property.")
@@ -236,7 +236,7 @@ model ProviderExtendedLocation {
     location?: string; // TODO -- find if there is a way for azure-location
 
     @doc("The extended location type.")
-    @projectedName("csharp", "providerExtendedLocationType")
+    @clientName("providerExtendedLocationType")
     type?: string;
 
     @doc("The extended locations for the azure location.")
@@ -297,7 +297,6 @@ model ResourceTypeAliasPath {
 }
 
 @doc("The type of the alias.")
-@fixed
 enum ResourceTypeAliasType {
     @doc("Alias type is unknown (same as not providing alias type).")
     NotSpecified,
@@ -331,7 +330,6 @@ model ResourceTypeAliasPathMetadata {
 }
 
 @doc("The type of alias pattern.")
-@fixed
 enum ResourceTypeAliasPatternType {
     @doc("NotSpecified is not allowed.")
     NotSpecified,
@@ -373,3 +371,57 @@ union ResourceTypeAliasPathAttributes {
 @route("/api/ResourceProvider")
 @convenientAPI(true)
 op op5(): ResourceProviderData;
+
+model ModelWithStringAdditionalProperties {
+    @doc("The id property.")
+    @visibility("read")
+    id: string;
+
+    @doc("The name property.")
+    name: string;
+
+    @doc("The age property.")
+    age?: int32;
+
+    ...Record<string>;
+}
+
+@route("/api/AdditionalProperties/string")
+@convenientAPI(true)
+op op6(@body body: ModelWithStringAdditionalProperties): ModelWithStringAdditionalProperties;
+
+model ModelWithArrayAdditionalProperties {
+    @doc("The id property.")
+    @visibility("read")
+    id: string;
+
+    @doc("The name property.")
+    name: string;
+
+    @doc("The age property.")
+    age?: int32;
+
+    ...Record<ResourceTypeAliasPathMetadata[]>;
+}
+
+@route("/api/AdditionalProperties/array")
+@convenientAPI(true)
+op op7(@body body: ModelWithArrayAdditionalProperties): ModelWithArrayAdditionalProperties;
+
+model ModelWithUnknownAdditionalProperties {
+    @doc("The id property.")
+    @visibility("read")
+    id: string;
+
+    @doc("The name property.")
+    name: string;
+
+    @doc("The age property.")
+    age?: int32;
+
+    ...Record<unknown>;
+}
+
+@route("/api/AdditionalProperties/unknown")
+@convenientAPI(true)
+op op8(@body body: ModelWithUnknownAdditionalProperties): ModelWithUnknownAdditionalProperties;

@@ -45,7 +45,7 @@ namespace Encode.Bytes
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -80,7 +80,7 @@ namespace Encode.Bytes
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -115,7 +115,7 @@ namespace Encode.Bytes
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -150,7 +150,7 @@ namespace Encode.Bytes
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -185,7 +185,7 @@ namespace Encode.Bytes
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64url.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -220,7 +220,7 @@ namespace Encode.Bytes
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64url.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -255,7 +255,7 @@ namespace Encode.Bytes
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64url array.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -290,7 +290,7 @@ namespace Encode.Bytes
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64url array.
         /// <list type="bullet">
         /// <item>
         /// <description>

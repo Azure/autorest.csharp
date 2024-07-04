@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure;
 
 namespace _Specs_.Azure.Core.Basic.Models
 {
@@ -62,7 +63,7 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// <param name="orders"> The user's order list. </param>
         /// <param name="etag"> The entity tag for this resource. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal User(int id, string name, IList<UserOrder> orders, string etag, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal User(int id, string name, IList<UserOrder> orders, ETag etag, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
@@ -83,6 +84,6 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// <summary> The user's order list. </summary>
         public IList<UserOrder> Orders { get; }
         /// <summary> The entity tag for this resource. </summary>
-        public string Etag { get; }
+        public ETag Etag { get; }
     }
 }

@@ -63,15 +63,15 @@ namespace MgmtPartialResource.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="publicIpAddressName"> The name of the public IP address. </param>
+        /// <param name="publicIPAddressName"> The name of the public IP address. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="publicIPAddressName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="publicIPAddressName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
-        public virtual async Task<Response<PublicIPAddressResource>> GetPublicIPAddressAsync(string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<PublicIPAddressResource>> GetPublicIPAddressAsync(string publicIPAddressName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await GetPublicIPAddresses().GetAsync(publicIpAddressName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetPublicIPAddresses().GetAsync(publicIPAddressName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -95,15 +95,15 @@ namespace MgmtPartialResource.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="publicIpAddressName"> The name of the public IP address. </param>
+        /// <param name="publicIPAddressName"> The name of the public IP address. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="publicIPAddressName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="publicIPAddressName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
-        public virtual Response<PublicIPAddressResource> GetPublicIPAddress(string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<PublicIPAddressResource> GetPublicIPAddress(string publicIPAddressName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetPublicIPAddresses().Get(publicIpAddressName, expand, cancellationToken);
+            return GetPublicIPAddresses().Get(publicIPAddressName, expand, cancellationToken);
         }
     }
 }

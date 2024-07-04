@@ -5,7 +5,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -31,7 +33,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public int Count => _fields.Count;
         public FieldDeclaration? AdditionalProperties { get; }
 
-        public ModelTypeProviderFields(IReadOnlyList<InputModelProperty> properties, string modelName, InputModelTypeUsage inputModelUsage, TypeFactory typeFactory, ModelTypeMapping? modelTypeMapping, ObjectType? baseModel, InputDictionaryType? additionalPropertiesType, bool isStruct, bool isPropertyBag)
+        public ModelTypeProviderFields(IReadOnlyList<InputModelProperty> properties, string modelName, InputModelTypeUsage inputModelUsage, TypeFactory typeFactory, ModelTypeMapping? modelTypeMapping, InputType? additionalPropertiesValueType, bool isStruct, bool isPropertyBag)
         {
             var fields = new List<FieldDeclaration>();
             var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
@@ -40,20 +42,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             var parametersToFields = new Dictionary<string, FieldDeclaration>();
 
             var visitedMembers = new HashSet<ISymbol>(SymbolEqualityComparer.Default);
-
             foreach (var inputModelProperty in properties)
             {
-                // [TODO]: Resolve differences in HLC and DPG for ambiguous property names
-                var originalFieldName = Configuration.Generation1ConvenienceClient
-                    ? inputModelProperty.Name == "null" ? "NullProperty" : BuilderHelpers.DisambiguateName(modelName, inputModelProperty.Name.ToCleanName())
-                    : BuilderHelpers.DisambiguateName(modelName, inputModelProperty.Name.ToCleanName(), "Property");
-
+                var originalFieldName = BuilderHelpers.DisambiguateName(modelName, inputModelProperty.Name.ToCleanName(), "Property");
                 var propertyType = GetPropertyDefaultType(inputModelUsage, inputModelProperty, typeFactory);
 
                 // We represent property being optional by making it nullable (when it is a value type)
                 // Except in the case of collection where there is a special handling
-                var optionalViaNullability = inputModelProperty is { IsRequired: false, Type.IsNullable: false } &&
-                                             !TypeFactory.IsCollectionType(propertyType);
+                var optionalViaNullability = inputModelProperty is { IsRequired: false} && inputModelProperty.Type is not InputNullableType &&
+                                             !propertyType.IsCollection;
 
                 var existingMember = modelTypeMapping?.GetMemberByOriginalName(originalFieldName);
                 var serializationFormat = SerializationBuilder.GetSerializationFormat(inputModelProperty.Type);
@@ -89,22 +86,22 @@ namespace AutoRest.CSharp.Output.Models.Types
                     // [TODO]: Provide a flag to add read/write properties to the public model constructor
                     if (Configuration.Generation1ConvenienceClient || !inputModelProperty.IsReadOnly)
                     {
-                        publicParameters.Add(parameter with { Type = TypeFactory.GetInputType(parameter.Type) });
+                        publicParameters.Add(parameter with { Type = parameter.Type.InputType });
                     }
                 }
             }
 
-            if (additionalPropertiesType is not null)
+            if (additionalPropertiesValueType is not null)
             {
                 // We use a $ prefix here as AdditionalProperties comes from a swagger concept
                 // and not a swagger model/operation name to disambiguate from a possible property with
                 // the same name.
                 var existingMember = modelTypeMapping?.GetMemberByOriginalName("$AdditionalProperties");
 
-                var type = typeFactory.CreateType(additionalPropertiesType);
+                var type = CreateAdditionalPropertiesPropertyType(typeFactory, additionalPropertiesValueType);
                 if (!inputModelUsage.HasFlag(InputModelTypeUsage.Input))
                 {
-                    type = TypeFactory.GetOutputType(type);
+                    type = type.OutputType;
                 }
 
                 var name = existingMember is null ? "AdditionalProperties" : existingMember.Name;
@@ -113,7 +110,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 var accessModifiers = existingMember is null ? Public : GetAccessModifiers(existingMember);
 
-                var additionalPropertiesField = new FieldDeclaration($"Additional Properties", accessModifiers | ReadOnly, type, type, declaration, null, false, Serialization.SerializationFormat.Default, true);
+                var additionalPropertiesField = new FieldDeclaration($"Additional Properties", accessModifiers | ReadOnly, type, type, declaration, null, false, SerializationFormat.Default, true);
                 var additionalPropertiesParameter = new Parameter(name.ToVariableName(), $"Additional Properties", type, null, ValidationType.None, null);
 
                 // we intentionally do not add this field into the field list to avoid cyclic references
@@ -156,6 +153,15 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             PublicConstructorParameters = publicParameters;
             SerializationParameters = serializationParameters;
+        }
+
+        // TODO -- when we consolidate the schemas into input types, we should remove this method and move it into BuilderHelpers
+        private static CSharpType CreateAdditionalPropertiesPropertyType(TypeFactory typeFactory, InputType additionalPropertiesValueType)
+        {
+            var valueType = typeFactory.CreateType(additionalPropertiesValueType);
+            var originalType = new CSharpType(typeof(IDictionary<,>), typeof(string), valueType);
+
+            return BuilderHelpers.CreateAdditionalPropertiesPropertyType(originalType, typeFactory.UnknownType);
         }
 
         private static ValidationType GetParameterValidation(FieldDeclaration field, InputModelProperty inputModelProperty)
@@ -225,11 +231,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return true;
             }
 
-            if (TypeFactory.IsCollectionType(type) && !TypeFactory.IsReadOnlyMemory(type))
+            if (type.IsCollection && !type.IsReadOnlyMemory)
             {
                 // nullable collection should be settable
                 // one exception is in the property bag, we never let them to be settable.
-                return !property.Type.IsNullable || isPropertyBag;
+                return property.Type is not InputNullableType || isPropertyBag;
             }
 
             // In mixed models required properties are not readonly
@@ -328,10 +334,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var propertyType = typeFactory.CreateType(property.Type);
 
-            if (!usage.HasFlag(InputModelTypeUsage.Input) ||
-                property.IsReadOnly)
+            if (!usage.HasFlag(InputModelTypeUsage.Input) || property.IsReadOnly)
             {
-                propertyType = TypeFactory.GetOutputType(propertyType);
+                propertyType = propertyType.OutputType;
             }
 
             return propertyType;

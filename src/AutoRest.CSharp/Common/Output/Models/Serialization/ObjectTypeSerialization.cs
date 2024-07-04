@@ -3,6 +3,7 @@
 
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Serialization.Bicep;
@@ -12,15 +13,16 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models.Serialization
 {
-    internal record ObjectTypeSerialization
+    internal class ObjectTypeSerialization
     {
-        public ObjectTypeSerialization(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep)
+        public ObjectTypeSerialization(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep, MultipartObjectSerialization? multipart)
         {
             Json = json;
             Xml = xml;
             Bicep = bicep;
+            Multipart = multipart;
 
-            WireFormat = Xml != null ? Serializations.XmlFormat : Serializations.JsonFormat;
+            WireFormat = Xml != null ? Serializations.XmlFormat : Multipart != null ? Serializations.MultipartFormat : Serializations.JsonFormat;
 
             // select interface model type here
             var modelType = model.IsUnknownDerivedType && model.Inherits is { IsFrameworkType: false, Implementation: { } baseModel } ? baseModel.Type : model.Type;
@@ -37,6 +39,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization
         public XmlObjectSerialization? Xml { get; }
 
         public BicepObjectSerialization? Bicep { get; }
+        public MultipartObjectSerialization? Multipart { get; }
 
         public bool HasSerializations => Json != null || Xml != null || Bicep != null;
 

@@ -37,7 +37,7 @@ namespace AzureSample.ResourceManager.Storage
                 writer.WriteStartArray();
                 foreach (var item in Rules)
                 {
-                    writer.WriteObjectValue<ObjectReplicationPolicyRule>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

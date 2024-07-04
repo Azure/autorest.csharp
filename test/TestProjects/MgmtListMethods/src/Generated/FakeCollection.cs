@@ -91,7 +91,9 @@ namespace MgmtListMethods
             try
             {
                 var response = await _fakeRestClient.CreateOrUpdateAsync(Id.SubscriptionId, fakeName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtListMethodsArmOperation<FakeResource>(Response.FromValue(new FakeResource(Client, response), response.GetRawResponse()));
+                var uri = _fakeRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, fakeName, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtListMethodsArmOperation<FakeResource>(Response.FromValue(new FakeResource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -140,7 +142,9 @@ namespace MgmtListMethods
             try
             {
                 var response = _fakeRestClient.CreateOrUpdate(Id.SubscriptionId, fakeName, data, cancellationToken);
-                var operation = new MgmtListMethodsArmOperation<FakeResource>(Response.FromValue(new FakeResource(Client, response), response.GetRawResponse()));
+                var uri = _fakeRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, fakeName, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtListMethodsArmOperation<FakeResource>(Response.FromValue(new FakeResource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

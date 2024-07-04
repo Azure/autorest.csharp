@@ -16,7 +16,7 @@ namespace _Type.Union.Models
 {
     public partial class MixedTypesCases : IUtf8JsonSerializable, IJsonModel<MixedTypesCases>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MixedTypesCases>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MixedTypesCases>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<MixedTypesCases>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -63,6 +63,25 @@ namespace _Type.Union.Models
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
 #endif
+            writer.WritePropertyName("array"u8);
+            writer.WriteStartArray();
+            foreach (var item in Array)
+            {
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item);
+#else
+                using (JsonDocument document = JsonDocument.Parse(item))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
+#endif
+            }
+            writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -95,7 +114,7 @@ namespace _Type.Union.Models
 
         internal static MixedTypesCases DeserializeMixedTypesCases(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -105,8 +124,9 @@ namespace _Type.Union.Models
             BinaryData literal = default;
             BinaryData @int = default;
             BinaryData boolean = default;
+            IList<BinaryData> array = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("model"u8))
@@ -129,13 +149,36 @@ namespace _Type.Union.Models
                     boolean = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
+                if (property.NameEquals("array"u8))
+                {
+                    List<BinaryData> array0 = new List<BinaryData>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array0.Add(null);
+                        }
+                        else
+                        {
+                            array0.Add(BinaryData.FromString(item.GetRawText()));
+                        }
+                    }
+                    array = array0;
+                    continue;
+                }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new MixedTypesCases(model, literal, @int, boolean, serializedAdditionalRawData);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new MixedTypesCases(
+                model,
+                literal,
+                @int,
+                boolean,
+                array,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<MixedTypesCases>.Write(ModelReaderWriterOptions options)
@@ -177,11 +220,11 @@ namespace _Type.Union.Models
             return DeserializeMixedTypesCases(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<MixedTypesCases>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

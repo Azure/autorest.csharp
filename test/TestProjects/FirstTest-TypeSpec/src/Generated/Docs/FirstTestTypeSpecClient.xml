@@ -8,14 +8,14 @@ This sample shows how to call TopActionAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 ]]></code>
 This sample shows how to call TopActionAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 ]]></code></example>
     </member>
     <member name="TopAction(DateTimeOffset,CancellationToken)">
@@ -25,14 +25,14 @@ This sample shows how to call TopAction.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 ]]></code>
 This sample shows how to call TopAction with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 ]]></code></example>
     </member>
     <member name="TopActionAsync(DateTimeOffset,RequestContext)">
@@ -42,7 +42,7 @@ This sample shows how to call TopActionAsync and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
+Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -53,13 +53,14 @@ Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 ]]></code>
 This sample shows how to call TopActionAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
+Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -75,6 +76,9 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
 ]]></code></example>
     </member>
     <member name="TopAction(DateTimeOffset,RequestContext)">
@@ -84,7 +88,7 @@ This sample shows how to call TopAction and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
+Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -95,13 +99,14 @@ Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 ]]></code>
 This sample shows how to call TopAction with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
+Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -117,6 +122,9 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
 ]]></code></example>
     </member>
     <member name="TopAction2Async(RequestContext)">
@@ -137,6 +145,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 ]]></code>
 This sample shows how to call TopAction2Async with all parameters and parse the result.
 <code><![CDATA[
@@ -159,6 +168,9 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
 ]]></code></example>
     </member>
     <member name="TopAction2(RequestContext)">
@@ -179,6 +191,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 ]]></code>
 This sample shows how to call TopAction2 with all parameters and parse the result.
 <code><![CDATA[
@@ -201,6 +214,9 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
 ]]></code></example>
     </member>
     <member name="PatchActionAsync(RequestContent,RequestContext)">
@@ -223,6 +239,7 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
+    requiredFloatProperty = new object(),
 });
 Response response = await client.PatchActionAsync(content);
 
@@ -235,6 +252,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 ]]></code>
 This sample shows how to call PatchActionAsync with all request content and parse the result.
 <code><![CDATA[
@@ -262,6 +280,9 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
+    requiredFloatProperty = new object(),
+    optionalFloatProperty = new object(),
+    optionalResourceId = new object(),
 });
 Response response = await client.PatchActionAsync(content);
 
@@ -279,6 +300,9 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
 ]]></code></example>
     </member>
     <member name="PatchAction(RequestContent,RequestContext)">
@@ -301,6 +325,7 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
+    requiredFloatProperty = new object(),
 });
 Response response = client.PatchAction(content);
 
@@ -313,6 +338,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 ]]></code>
 This sample shows how to call PatchAction with all request content and parse the result.
 <code><![CDATA[
@@ -340,6 +366,9 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
+    requiredFloatProperty = new object(),
+    optionalFloatProperty = new object(),
+    optionalResourceId = new object(),
 });
 Response response = client.PatchAction(content);
 
@@ -357,6 +386,9 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
 ]]></code></example>
     </member>
     <member name="AnonymousBodyAsync(Thing,CancellationToken)">
@@ -366,7 +398,7 @@ This sample shows how to call AnonymousBodyAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
+Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
 Response<Thing> response = await client.AnonymousBodyAsync(thing);
 ]]></code>
 This sample shows how to call AnonymousBodyAsync with all parameters.
@@ -374,13 +406,15 @@ This sample shows how to call AnonymousBodyAsync with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
     OptionalNullableList = { 1234 },
+    OptionalFloatProperty = (double)default,
+    OptionalResourceId = null,
 };
 Response<Thing> response = await client.AnonymousBodyAsync(thing);
 ]]></code></example>
@@ -392,7 +426,7 @@ This sample shows how to call AnonymousBody.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
+Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
 Response<Thing> response = client.AnonymousBody(thing);
 ]]></code>
 This sample shows how to call AnonymousBody with all parameters.
@@ -400,13 +434,15 @@ This sample shows how to call AnonymousBody with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
     OptionalNullableList = { 1234 },
+    OptionalFloatProperty = (double)default,
+    OptionalResourceId = null,
 };
 Response<Thing> response = client.AnonymousBody(thing);
 ]]></code></example>
@@ -431,6 +467,7 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
+    requiredFloatProperty = new object(),
 });
 Response response = await client.AnonymousBodyAsync(content);
 
@@ -443,6 +480,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 ]]></code>
 This sample shows how to call AnonymousBodyAsync with all request content and parse the result.
 <code><![CDATA[
@@ -470,6 +508,9 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
+    requiredFloatProperty = new object(),
+    optionalFloatProperty = new object(),
+    optionalResourceId = new object(),
 });
 Response response = await client.AnonymousBodyAsync(content);
 
@@ -487,6 +528,9 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
 ]]></code></example>
     </member>
     <member name="AnonymousBody(RequestContent,RequestContext)">
@@ -509,6 +553,7 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
+    requiredFloatProperty = new object(),
 });
 Response response = client.AnonymousBody(content);
 
@@ -521,6 +566,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 ]]></code>
 This sample shows how to call AnonymousBody with all request content and parse the result.
 <code><![CDATA[
@@ -548,6 +594,9 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
+    requiredFloatProperty = new object(),
+    optionalFloatProperty = new object(),
+    optionalResourceId = new object(),
 });
 Response response = client.AnonymousBody(content);
 
@@ -565,6 +614,9 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
 ]]></code></example>
     </member>
     <member name="FriendlyModelAsync(Friend,CancellationToken)">
@@ -1446,7 +1498,10 @@ This sample shows how to call RecursiveExtensionAsync with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Extension input = new Extension(123);
+Extension input = new Extension(123)
+{
+    Extension = { default },
+};
 Response response = await client.RecursiveExtensionAsync(input);
 ]]></code></example>
     </member>
@@ -1465,7 +1520,10 @@ This sample shows how to call RecursiveExtension with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Extension input = new Extension(123);
+Extension input = new Extension(123)
+{
+    Extension = { default },
+};
 Response response = client.RecursiveExtension(input);
 ]]></code></example>
     </member>
@@ -1552,7 +1610,10 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Extendible input = new Extendible
 {
-    Extension = { new ThereLevelExtension(123) },
+    Extension = {new ThereLevelExtension(123)
+    {
+        Extension = {default},
+    }},
 };
 Response response = await client.ThreeLevelRecursiveAsync(input);
 ]]></code></example>
@@ -1574,7 +1635,10 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Extendible input = new Extendible
 {
-    Extension = { new ThereLevelExtension(123) },
+    Extension = {new ThereLevelExtension(123)
+    {
+        Extension = {default},
+    }},
 };
 Response response = client.ThreeLevelRecursive(input);
 ]]></code></example>

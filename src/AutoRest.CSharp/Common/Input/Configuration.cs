@@ -61,6 +61,7 @@ namespace AutoRest.CSharp.Common.Input
             // It is only respected if UseModelReaderWriter is true.
             public const string EnableBicepSerialization = "enable-bicep-serialization";
             public const string HelperNamespace = "helper-namespace";
+            public const string DisableXmlDocs = "disable-xml-docs";
         }
 
         public enum UnreferencedTypesHandlingOption
@@ -106,6 +107,7 @@ namespace AutoRest.CSharp.Common.Input
             MgmtConfiguration mgmtConfiguration,
             MgmtTestConfiguration? mgmtTestConfiguration,
             string? flavor,
+            bool disableXmlDocs,
             bool generateSampleProject,
             bool generateTestProject,
             string? helperNamespace)
@@ -174,9 +176,10 @@ namespace AutoRest.CSharp.Common.Input
             _modelsToTreatEmptyStringAsNull = new HashSet<string>(modelsToTreatEmptyStringAsNull);
             _intrinsicTypesToTreatEmptyStringAsNull.UnionWith(additionalIntrinsicTypesToTreatEmptyStringAsNull);
             _methodsToKeepClientDefaultValue = methodsToKeepClientDefaultValue ?? Array.Empty<string>();
-            _apiTypes =  "azure".Equals(flavor, StringComparison.InvariantCultureIgnoreCase) ? new AzureApiTypes() : new SystemApiTypes();
+            _apiTypes = "azure".Equals(flavor, StringComparison.InvariantCultureIgnoreCase) ? new AzureApiTypes() : new SystemApiTypes();
             Flavor = flavor;
-            GenerateSampleProject = generateSampleProject;
+            DisableXmlDocs = disableXmlDocs;
+            GenerateSampleProject = DisableXmlDocs ? false : generateSampleProject; // turn off the samples if all xml docs are explicitly disabled
             GenerateTestProject = generateTestProject;
             _helperNamespace = helperNamespace ?? Namespace;
         }
@@ -235,6 +238,8 @@ namespace AutoRest.CSharp.Common.Input
 
         private static string? _helperNamespace;
         public static string HelperNamespace => _helperNamespace ?? throw new InvalidOperationException("Configuration has not been initialized");
+
+        public static bool DisableXmlDocs { get; private set; }
 
         public static bool GenerateSampleProject { get; private set; }
 
@@ -371,7 +376,8 @@ namespace AutoRest.CSharp.Common.Input
                 flavor: autoRest.GetValue<string?>(Options.Flavor).GetAwaiter().GetResult() ?? "azure", // for autorest input, always branded
                 generateSampleProject: GetOptionBoolValue(autoRest, Options.GenerateSampleProject),
                 generateTestProject: GetOptionBoolValue(autoRest, Options.GenerateTestProject),
-                helperNamespace: autoRest.GetValue<string?>(Options.HelperNamespace).GetAwaiter().GetResult()
+                helperNamespace: autoRest.GetValue<string?>(Options.HelperNamespace).GetAwaiter().GetResult(),
+                disableXmlDocs: GetOptionBoolValue(autoRest, Options.DisableXmlDocs)
             );
         }
 
@@ -448,6 +454,8 @@ namespace AutoRest.CSharp.Common.Input
                     return false;
                 case Options.EnableBicepSerialization:
                     return false;
+                case Options.DisableXmlDocs:
+                    return false;
                 default:
                     return null;
             }
@@ -506,40 +514,41 @@ namespace AutoRest.CSharp.Common.Input
                 root.GetProperty(Options.LibraryName).GetString()!,
                 sharedSourceFolders.ToArray(),
                 saveInputs: false,
-                ReadOption(root, Options.AzureArm),
-                ReadOption(root, Options.PublicClients),
-                ReadOption(root, Options.ModelNamespace),
-                ReadOption(root, Options.HeadAsBoolean),
-                ReadOption(root, Options.SkipCSProj),
-                ReadOption(root, Options.SkipCSProjPackageReference),
-                ReadOption(root, Options.Generation1ConvenienceClient),
-                ReadOption(root, Options.SingleTopLevelClient),
-                ReadOption(root, Options.SkipSerializationFormatXml),
-                ReadOption(root, Options.DisablePaginationTopRenaming),
-                ReadOption(root, Options.GenerateModelFactory),
-                ReadOption(root, Options.PublicDiscriminatorProperty),
-                ReadOption(root, Options.DeserializeNullCollectionAsNullValue),
-                ReadOption(root, Options.UseCoreDataFactoryReplacements),
-                ReadOption(root, Options.UseModelReaderWriter),
-                ReadOption(root, Options.EnableBicepSerialization),
-                oldModelFactoryEntries,
-                ReadEnumOption<UnreferencedTypesHandlingOption>(root, Options.UnreferencedTypesHandling),
-                ReadOption(root, Options.KeepNonOverloadableProtocolSignature),
-                projectPath ?? ReadStringOption(root, Options.ProjectFolder),
-                existingProjectFolder,
-                protocolMethods,
-                suppressAbstractBaseClasses,
-                modelsToTreatEmptyStringAsNull,
-                intrinsicTypesToTreatEmptyStringAsNull,
-                ReadOption(root, Options.ShouldTreatBase64AsBinaryData),
-                methodsToKeepClientDefaultValue,
-                MgmtConfiguration.LoadConfiguration(root),
-                MgmtTestConfiguration.LoadConfiguration(root),
-                ReadStringOption(root, Options.Flavor),
-                ReadOption(root, Options.GenerateSampleProject),
-                ReadOption(root, Options.GenerateTestProject),
-                ReadStringOption(root, Options.HelperNamespace)
-            );
+                azureArm: ReadOption(root, Options.AzureArm),
+                publicClients: ReadOption(root, Options.PublicClients),
+                modelNamespace: ReadOption(root, Options.ModelNamespace),
+                headAsBoolean: ReadOption(root, Options.HeadAsBoolean),
+                skipCSProj: ReadOption(root, Options.SkipCSProj),
+                skipCSProjPackageReference: ReadOption(root, Options.SkipCSProjPackageReference),
+                generation1ConvenienceClient: ReadOption(root, Options.Generation1ConvenienceClient),
+                singleTopLevelClient: ReadOption(root, Options.SingleTopLevelClient),
+                skipSerializationFormatXml: ReadOption(root, Options.SkipSerializationFormatXml),
+                disablePaginationTopRenaming: ReadOption(root, Options.DisablePaginationTopRenaming),
+                generateModelFactory: ReadOption(root, Options.GenerateModelFactory),
+                publicDiscriminatorProperty: ReadOption(root, Options.PublicDiscriminatorProperty),
+                deserializeNullCollectionAsNullValue: ReadOption(root, Options.DeserializeNullCollectionAsNullValue),
+                useCoreDataFactoryReplacements: ReadOption(root, Options.UseCoreDataFactoryReplacements),
+                useModelReaderWriter: ReadOption(root, Options.UseModelReaderWriter),
+                enableBicepSerialization: ReadOption(root, Options.EnableBicepSerialization),
+                modelFactoryForHlc: oldModelFactoryEntries,
+                unreferencedTypesHandling: ReadEnumOption<UnreferencedTypesHandlingOption>(root, Options.UnreferencedTypesHandling),
+                keepNonOverloadableProtocolSignature: ReadOption(root, Options.KeepNonOverloadableProtocolSignature),
+                projectFolder: projectPath ?? ReadStringOption(root, Options.ProjectFolder),
+                existingProjectFolder: existingProjectFolder,
+                protocolMethodList: protocolMethods,
+                suppressAbstractBaseClasses: suppressAbstractBaseClasses,
+                modelsToTreatEmptyStringAsNull: modelsToTreatEmptyStringAsNull,
+                additionalIntrinsicTypesToTreatEmptyStringAsNull: intrinsicTypesToTreatEmptyStringAsNull,
+                shouldTreatBase64AsBinaryData: ReadOption(root, Options.ShouldTreatBase64AsBinaryData),
+                methodsToKeepClientDefaultValue: methodsToKeepClientDefaultValue,
+                mgmtConfiguration: MgmtConfiguration.LoadConfiguration(root),
+                mgmtTestConfiguration: MgmtTestConfiguration.LoadConfiguration(root),
+                flavor: ReadStringOption(root, Options.Flavor),
+                disableXmlDocs: ReadOption(root, Options.DisableXmlDocs)
+,
+                generateSampleProject: ReadOption(root, Options.GenerateSampleProject),
+                generateTestProject: ReadOption(root, Options.GenerateTestProject),
+                helperNamespace: ReadStringOption(root, Options.HelperNamespace));
         }
 
         internal static string SaveConfiguration()
@@ -607,6 +616,7 @@ namespace AutoRest.CSharp.Common.Input
             WriteIfNotDefault(writer, Options.GenerateSampleProject, GenerateSampleProject);
             WriteIfNotDefault(writer, Options.GenerateTestProject, GenerateTestProject);
             WriteIfNotDefault(writer, Options.HelperNamespace, HelperNamespace);
+            WriteIfNotDefault(writer, Options.DisableXmlDocs, DisableXmlDocs);
 
             writer.WriteEndObject();
         }

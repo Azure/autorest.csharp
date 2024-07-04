@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace Inheritance.Models
@@ -18,7 +19,7 @@ namespace Inheritance.Models
             if (Optional.IsDefined(SomeProperty))
             {
                 writer.WritePropertyName("SomeProperty"u8);
-                writer.WriteStringValue(SomeProperty);
+                SerializationMethodHook(writer);
             }
             if (Optional.IsDefined(SomeOtherProperty))
             {
@@ -50,6 +51,22 @@ namespace Inheritance.Models
                 }
             }
             return new SomeProperties(someProperty, someOtherProperty);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static SomeProperties FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeSomeProperties(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

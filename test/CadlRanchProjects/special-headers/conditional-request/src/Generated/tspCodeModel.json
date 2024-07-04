@@ -1,7 +1,6 @@
 {
  "$id": "1",
  "Name": "SpecialHeaders.ConditionalRequest",
- "Description": "Illustrates conditional request headers",
  "ApiVersions": [],
  "Enums": [],
  "Models": [],
@@ -16,6 +15,7 @@
      "Name": "postIfMatch",
      "ResourceName": "ConditionalRequest",
      "Description": "Check when only If-Match in header is defined.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "4",
@@ -24,9 +24,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "5",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -41,9 +39,7 @@
         "$id": "6",
         "Type": {
          "$id": "7",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
@@ -55,9 +51,7 @@
        "Description": "The request should only proceed if an entity matches this string.",
        "Type": {
         "$id": "9",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsRequired": false,
@@ -75,8 +69,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "11",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -121,6 +114,7 @@
      "Name": "postIfNoneMatch",
      "ResourceName": "ConditionalRequest",
      "Description": "Check when only If-None-Match in header is defined.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -132,9 +126,7 @@
        "Description": "The request should only proceed if no entity matches this string.",
        "Type": {
         "$id": "16",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsRequired": false,
@@ -152,8 +144,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "18",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -197,7 +188,11 @@
    "Protocol": {
     "$id": "21"
    },
-   "Creatable": true
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   }
  ]
 }

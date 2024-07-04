@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -34,24 +35,35 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.TrackedResourceData"/>. </summary>
-        /// <param name="id"> The id property. </param>
+        /// <summary> Initializes a new instance of <see cref="Models.ModelX"/>. </summary>
         /// <param name="name"> The name property. </param>
-        /// <param name="resourceType"> The resource type. </param>
-        /// <param name="location"> The location property. </param>
-        /// <param name="tags"> The tags property. </param>
-        /// <returns> A new <see cref="Models.TrackedResourceData"/> instance for mocking. </returns>
-        public static TrackedResourceData TrackedResourceData(string id = null, string name = null, string resourceType = null, string location = null, IReadOnlyDictionary<string, string> tags = null)
+        /// <param name="fields"> Optional list. </param>
+        /// <param name="nullProperty"> Nullable integer. </param>
+        /// <param name="keyValuePairs"> Optional dictionary. </param>
+        /// <param name="xProperty"> The XProperty property. </param>
+        /// <returns> A new <see cref="Models.ModelX"/> instance for mocking. </returns>
+        public static ModelX ModelX(string name = null, IEnumerable<string> fields = null, int? nullProperty = null, IDictionary<string, string> keyValuePairs = null, int xProperty = default)
         {
-            tags ??= new Dictionary<string, string>();
+            fields ??= new List<string>();
+            keyValuePairs ??= new Dictionary<string, string>();
 
-            return new TrackedResourceData(
-                id,
+            return new ModelX(
+                "X",
                 name,
-                resourceType,
-                location,
-                tags,
-                serializedAdditionalRawData: null);
+                serializedAdditionalRawData: null,
+                fields?.ToList(),
+                nullProperty,
+                keyValuePairs,
+                xProperty);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ModelY"/>. </summary>
+        /// <param name="name"> The name property. </param>
+        /// <param name="yProperty"> The YProperty property. </param>
+        /// <returns> A new <see cref="Models.ModelY"/> instance for mocking. </returns>
+        public static ModelY ModelY(string name = null, string yProperty = null)
+        {
+            return new ModelY("Y", name, serializedAdditionalRawData: null, yProperty);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AvailabilitySetData"/>. </summary>
@@ -63,7 +75,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         /// <param name="sku"> The sku. </param>
         /// <param name="properties"> The properties property. </param>
         /// <returns> A new <see cref="Models.AvailabilitySetData"/> instance for mocking. </returns>
-        public static AvailabilitySetData AvailabilitySetData(string id = null, string name = null, string resourceType = null, string location = null, IReadOnlyDictionary<string, string> tags = null, ComputeSku sku = null, AvailabilitySetProperties properties = null)
+        public static AvailabilitySetData AvailabilitySetData(string id = null, string name = null, string resourceType = null, string location = null, IDictionary<string, string> tags = null, ComputeSku sku = null, AvailabilitySetProperties properties = null)
         {
             tags ??= new Dictionary<string, string>();
 
@@ -76,6 +88,26 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 serializedAdditionalRawData: null,
                 sku,
                 properties);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.TrackedResourceData"/>. </summary>
+        /// <param name="id"> The id property. </param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="resourceType"> The resource type. </param>
+        /// <param name="location"> The location property. </param>
+        /// <param name="tags"> The tags property. </param>
+        /// <returns> A new <see cref="Models.TrackedResourceData"/> instance for mocking. </returns>
+        public static TrackedResourceData TrackedResourceData(string id = null, string name = null, string resourceType = null, string location = null, IDictionary<string, string> tags = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new TrackedResourceData(
+                id,
+                name,
+                resourceType,
+                location,
+                tags,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ResourceProviderData"/>. </summary>
@@ -193,15 +225,6 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             return new ResourceTypeAliasPattern(phrase, variable, patternType, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.ResourceTypeAliasPathMetadata"/>. </summary>
-        /// <param name="tokenType"> The type of the token that the alias path is referring to. </param>
-        /// <param name="attributes"> The attributes of the token that the alias path is referring to. </param>
-        /// <returns> A new <see cref="Models.ResourceTypeAliasPathMetadata"/> instance for mocking. </returns>
-        public static ResourceTypeAliasPathMetadata ResourceTypeAliasPathMetadata(ResourceTypeAliasPathTokenType? tokenType = null, ResourceTypeAliasPathAttributes? attributes = null)
-        {
-            return new ResourceTypeAliasPathMetadata(tokenType, attributes, serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.ZoneMapping"/>. </summary>
         /// <param name="location"> The location of the zone mapping. </param>
         /// <param name="zones"> The zones. </param>
@@ -222,35 +245,43 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             return new ApiProfile(profileVersion, apiVersion, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.ModelX"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ModelWithStringAdditionalProperties"/>. </summary>
+        /// <param name="id"> The id property. </param>
         /// <param name="name"> The name property. </param>
-        /// <param name="fields"> Optional list. </param>
-        /// <param name="nullProperty"> Nullable integer. </param>
-        /// <param name="keyValuePairs"> Optional dictionary. </param>
-        /// <param name="xProperty"> The XProperty property. </param>
-        /// <returns> A new <see cref="Models.ModelX"/> instance for mocking. </returns>
-        public static ModelX ModelX(string name = null, IEnumerable<string> fields = null, int? nullProperty = null, IDictionary<string, string> keyValuePairs = null, int xProperty = default)
+        /// <param name="age"> The age property. </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
+        /// <returns> A new <see cref="Models.ModelWithStringAdditionalProperties"/> instance for mocking. </returns>
+        public static ModelWithStringAdditionalProperties ModelWithStringAdditionalProperties(string id = null, string name = null, int? age = null, IDictionary<string, string> additionalProperties = null)
         {
-            fields ??= new List<string>();
-            keyValuePairs ??= new Dictionary<string, string>();
+            additionalProperties ??= new Dictionary<string, string>();
 
-            return new ModelX(
-                "X",
-                name,
-                serializedAdditionalRawData: null,
-                fields?.ToList(),
-                nullProperty,
-                keyValuePairs,
-                xProperty);
+            return new ModelWithStringAdditionalProperties(id, name, age, additionalProperties, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.ModelY"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ModelWithArrayAdditionalProperties"/>. </summary>
+        /// <param name="id"> The id property. </param>
         /// <param name="name"> The name property. </param>
-        /// <param name="yProperty"> The YProperty property. </param>
-        /// <returns> A new <see cref="Models.ModelY"/> instance for mocking. </returns>
-        public static ModelY ModelY(string name = null, string yProperty = null)
+        /// <param name="age"> The age property. </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
+        /// <returns> A new <see cref="Models.ModelWithArrayAdditionalProperties"/> instance for mocking. </returns>
+        public static ModelWithArrayAdditionalProperties ModelWithArrayAdditionalProperties(string id = null, string name = null, int? age = null, IDictionary<string, IList<BinaryData>> additionalProperties = null)
         {
-            return new ModelY("Y", name, serializedAdditionalRawData: null, yProperty);
+            additionalProperties ??= new Dictionary<string, IList<BinaryData>>();
+
+            return new ModelWithArrayAdditionalProperties(id, name, age, additionalProperties, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ModelWithUnknownAdditionalProperties"/>. </summary>
+        /// <param name="id"> The id property. </param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="age"> The age property. </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
+        /// <returns> A new <see cref="Models.ModelWithUnknownAdditionalProperties"/> instance for mocking. </returns>
+        public static ModelWithUnknownAdditionalProperties ModelWithUnknownAdditionalProperties(string id = null, string name = null, int? age = null, IDictionary<string, BinaryData> additionalProperties = null)
+        {
+            additionalProperties ??= new Dictionary<string, BinaryData>();
+
+            return new ModelWithUnknownAdditionalProperties(id, name, age, additionalProperties);
         }
     }
 }

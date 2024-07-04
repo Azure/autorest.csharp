@@ -244,7 +244,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             return new Parameter(
                 "credential",
-                $"A credential used to authenticate to an Azure Service.",
+                Configuration.ApiTypes.CredentialDescription,
                 type,
                 null,
                 ValidationType.AssertNotNull,
@@ -314,9 +314,9 @@ namespace AutoRest.CSharp.Output.Models
 
             if (ExistingType is not null)
             {
-                //    [CodeGenSuppress("ConfidentialLedgerCertificateClient", typeof(Uri), typeof(TokenCredential), typeof(ConfidentialLedgerClientOptions))]
-                //remove suppressed ctors from the candidates
-                foreach (var attribute in ExistingType.GetAttributes().Where(a => a.AttributeClass is not null && a.AttributeClass.Name == "CodeGenSuppressAttribute"))
+                // [CodeGenSuppress("ConfidentialLedgerCertificateClient", typeof(Uri), typeof(TokenCredential), typeof(ConfidentialLedgerClientOptions))]
+                // remove suppressed ctors from the candidates
+                foreach (var attribute in ExistingType.GetAttributes().Where(a => a.AttributeClass is not null && a.AttributeClass.Name == CodeGenAttributes.CodeGenSuppressAttributeName))
                 {
                     if (attribute.ConstructorArguments.Length != 2)
                         continue;

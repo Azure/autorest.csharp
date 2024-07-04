@@ -29,8 +29,6 @@ pool:
   name: azsdk-pool-mms-win-2022-general
   vmImage: windows-2022
 
-name: $(Date:yyyyMMdd).$(Rev:r).x
-
 extends:
   template: eng/pipelines/templates/stages/archetype-autorest-preview.yml@azure-sdk-tools
   parameters:
@@ -70,6 +68,11 @@ extends:
         $newContent | Set-Content $path -NoNewline
       displayName: 'Update Packages.Data.props'
       workingDirectory: $(sdkRepositoryPath)
+    AutorestInitializationSteps:
+    - ${{ if eq(parameters.UseTypeSpecNext, 'true') }}:
+      - pwsh: |
+          echo "##vso[build.addbuildtag]typespec_next"
+        displayName: 'Apply typespec next tag'
     TestMatrix:
       ${{ if eq(parameters.RunUnitTests, true) }}:
         Unit:

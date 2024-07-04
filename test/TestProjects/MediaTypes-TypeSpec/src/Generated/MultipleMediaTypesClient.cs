@@ -54,6 +54,7 @@ namespace MultipleMediaTypes
             _endpoint = endpoint;
         }
 
+        /// <summary> One binary body two content types. </summary>
         /// <param name="body"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json; serialization=Avro" | "application/octet-stream". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -63,12 +64,13 @@ namespace MultipleMediaTypes
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body;
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await OneBinaryBodyTwoContentTypesAsync(content, contentType, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> One binary body two content types. </summary>
         /// <param name="body"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json; serialization=Avro" | "application/octet-stream". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -78,14 +80,14 @@ namespace MultipleMediaTypes
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body;
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = OneBinaryBodyTwoContentTypes(content, contentType, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] One binary body two content types.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -125,7 +127,7 @@ namespace MultipleMediaTypes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] One binary body two content types.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -164,6 +166,7 @@ namespace MultipleMediaTypes
             }
         }
 
+        /// <summary> One string body three content types. </summary>
         /// <param name="body"> The <see cref="string"/> to use. </param>
         /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json" | "application/octet-stream" | "text/plain". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -174,12 +177,13 @@ namespace MultipleMediaTypes
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await OneStringBodyThreeContentTypesAsync(content, contentType, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> One string body three content types. </summary>
         /// <param name="body"> The <see cref="string"/> to use. </param>
         /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json" | "application/octet-stream" | "text/plain". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -190,14 +194,14 @@ namespace MultipleMediaTypes
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = OneStringBodyThreeContentTypes(content, contentType, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] One string body three content types.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -237,7 +241,7 @@ namespace MultipleMediaTypes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] One string body three content types.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -276,6 +280,7 @@ namespace MultipleMediaTypes
             }
         }
 
+        /// <summary> One model body one content type. </summary>
         /// <param name="body"> The <see cref="Body"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -284,12 +289,13 @@ namespace MultipleMediaTypes
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await OneModelBodyOneContentTypeAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> One model body one content type. </summary>
         /// <param name="body"> The <see cref="Body"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -298,14 +304,14 @@ namespace MultipleMediaTypes
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = OneModelBodyOneContentType(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] One model body one content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -344,7 +350,7 @@ namespace MultipleMediaTypes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] One model body one content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -392,7 +398,7 @@ namespace MultipleMediaTypes
             uri.AppendPath("/oneBinaryBodyTwoContentTypes", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("content-type", contentType.ToString());
+            request.Headers.Add("Content-Type", contentType.ToString());
             request.Content = content;
             return message;
         }
@@ -407,7 +413,7 @@ namespace MultipleMediaTypes
             uri.AppendPath("/oneStringBodyThreeContentTypes", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("content-type", contentType.ToString());
+            request.Headers.Add("Content-Type", contentType.ToString());
             request.Content = content;
             return message;
         }
@@ -422,7 +428,7 @@ namespace MultipleMediaTypes
             uri.AppendPath("/oneModelBodyOneContentType", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("content-type", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
         }

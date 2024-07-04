@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override string SerializedName => GetSerializedName();
 
-        public override IEnumerable<string>? FlattenedNames => UnderlyingProperty.SchemaProperty?.FlattenedNames;
+        public override IEnumerable<string>? FlattenedNames => UnderlyingProperty.InputModelProperty?.FlattenedNames;
 
         private string GetSerializedName()
         {
@@ -85,7 +85,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return (true, null, false);
         }
 
-        private static bool HasDefaultPublicCtor(CSharpType type)
+        internal static bool HasDefaultPublicCtor(CSharpType type)
         {
             if (type is not { IsFrameworkType: false, Implementation: ObjectType objType })
                 return true;

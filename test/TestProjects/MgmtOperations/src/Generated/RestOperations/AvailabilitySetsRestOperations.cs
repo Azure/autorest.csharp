@@ -37,6 +37,20 @@ namespace MgmtOperations
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
+        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string subscriptionId, string resourceGroupName, string availabilitySetName, AvailabilitySetData data)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/availabilitySets/", false);
+            uri.AppendPath(availabilitySetName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, AvailabilitySetData data)
         {
             var message = _pipeline.CreateMessage();
@@ -55,7 +69,7 @@ namespace MgmtOperations
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<AvailabilitySetData>(data);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -123,6 +137,20 @@ namespace MgmtOperations
             }
         }
 
+        internal RequestUriBuilder CreateUpdateRequestUri(string subscriptionId, string resourceGroupName, string availabilitySetName, AvailabilitySetUpdate availabilitySetUpdate)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/availabilitySets/", false);
+            uri.AppendPath(availabilitySetName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, AvailabilitySetUpdate availabilitySetUpdate)
         {
             var message = _pipeline.CreateMessage();
@@ -141,7 +169,7 @@ namespace MgmtOperations
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<AvailabilitySetUpdate>(availabilitySetUpdate);
+            content.JsonWriter.WriteObjectValue(availabilitySetUpdate);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -207,6 +235,20 @@ namespace MgmtOperations
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateDeleteRequestUri(string subscriptionId, string resourceGroupName, string availabilitySetName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/availabilitySets/", false);
+            uri.AppendPath(availabilitySetName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string availabilitySetName)
@@ -276,6 +318,24 @@ namespace MgmtOperations
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetRequestUri(string subscriptionId, string resourceGroupName, string availabilitySetName, string expand)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/availabilitySets/", false);
+            uri.AppendPath(availabilitySetName, true);
+            if (expand != null)
+            {
+                uri.AppendQuery("$expand", expand, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, string expand)
@@ -366,6 +426,21 @@ namespace MgmtOperations
             }
         }
 
+        internal RequestUriBuilder CreateTestSetSharedKeyRequestUri(string subscriptionId, string resourceGroupName, string availabilitySetName, ConnectionSharedKey connectionSharedKey)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/availabilitySets/", false);
+            uri.AppendPath(availabilitySetName, true);
+            uri.AppendPath("/sharedkey", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateTestSetSharedKeyRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, ConnectionSharedKey connectionSharedKey)
         {
             var message = _pipeline.CreateMessage();
@@ -385,7 +460,7 @@ namespace MgmtOperations
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<ConnectionSharedKey>(connectionSharedKey);
+            content.JsonWriter.WriteObjectValue(connectionSharedKey);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -441,6 +516,23 @@ namespace MgmtOperations
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListRequestUri(string subscriptionId, string resourceGroupName, string expand)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/availabilitySets", false);
+            if (expand != null)
+            {
+                uri.AppendQuery("$expand", expand, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string expand)
@@ -522,6 +614,19 @@ namespace MgmtOperations
             }
         }
 
+        internal RequestUriBuilder CreateTestLROMethodRequestUri(string subscriptionId, string resourceGroupName, AvailabilitySetUpdate availabilitySetUpdate)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/patchAvailabilitySets", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateTestLROMethodRequest(string subscriptionId, string resourceGroupName, AvailabilitySetUpdate availabilitySetUpdate)
         {
             var message = _pipeline.CreateMessage();
@@ -539,7 +644,7 @@ namespace MgmtOperations
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<AvailabilitySetUpdate>(availabilitySetUpdate);
+            content.JsonWriter.WriteObjectValue(availabilitySetUpdate);
             request.Content = content;
             _userAgent.Apply(message);
             return message;

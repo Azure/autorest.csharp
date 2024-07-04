@@ -211,7 +211,7 @@ namespace AutoRest.TestServer.Tests
             var result = await new PrimitiveClient(ClientDiagnostics, pipeline, host).GetStringAsync();
             Assert.AreEqual("goodrequest", result.Value.Field);
             Assert.AreEqual(string.Empty, result.Value.Empty);
-            Assert.AreEqual(null, result.Value.NullProperty);
+            Assert.AreEqual(null, result.Value.Null);
         });
 
         [Test]
@@ -221,7 +221,7 @@ namespace AutoRest.TestServer.Tests
             {
                 Field = "goodrequest",
                 Empty = string.Empty,
-                NullProperty = null
+                Null = null
             };
             return await new PrimitiveClient(ClientDiagnostics, pipeline, host).PutStringAsync( value);
         });

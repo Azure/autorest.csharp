@@ -22,6 +22,7 @@ using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Configuration = AutoRest.CSharp.Common.Input.Configuration;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using AutoRest.CSharp.Common.Input.InputTypes;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -96,12 +97,15 @@ namespace AutoRest.CSharp.Output.Models
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), Literal(deprecated)) }
                 : Array.Empty<CSharpAttribute>();
 
-            var shouldRequestContextOptional = ShouldRequestContextOptional();
-            var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => p != KnownParameters.RequestContentNullable && !shouldRequestContextOptional ? p.ToRequired() : p).ToArray();
+            var isRequestContextOptional = _orderedParameters.Any(p => p.Protocol == KnownParameters.RequestContext);
+            // because request context is always the last parameter, when request context is changed to required by some reason, all parameters before it (which means all parameters) should be required
+            var protocolMethodParameters = isRequestContextOptional
+                ? _orderedParameters.Select(p => p.Protocol).WhereNotNull().ToArray()
+                : _orderedParameters.Select(p => p.Protocol?.ToRequired()).WhereNotNull().ToArray();
             var protocolMethodModifiers = (Operation.GenerateProtocolMethod ? _restClientMethod.Accessibility : Internal) | Virtual;
             var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, FormattableStringHelpers.FromString(_restClientMethod.Summary), FormattableStringHelpers.FromString(_restClientMethod.Description), protocolMethodModifiers, _returnType.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
             var convenienceMethodInfo = ShouldGenerateConvenienceMethod();
-            var convenienceMethod = BuildConvenienceMethod(shouldRequestContextOptional, convenienceMethodInfo);
+            var convenienceMethod = BuildConvenienceMethod(isRequestContextOptional, convenienceMethodInfo);
 
             var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
 
@@ -202,7 +206,7 @@ namespace AutoRest.CSharp.Output.Models
         // If all the corresponding parameters and return types of convenience method and protocol method have the same type, it does not make sense to generate the convenience method.
         private bool IsConvenienceMethodMeaningful()
         {
-            return _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).Any(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
+            return _orderedParameters.Where(parameter => parameter.Protocol != KnownParameters.RequestContext && parameter.Protocol != KnownParameters.RequestContextRequired).Any(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
                 || !_returnType.Convenience.Equals(_returnType.Protocol);
         }
 
@@ -261,17 +265,16 @@ namespace AutoRest.CSharp.Output.Models
                 if (responseType is { IsFrameworkType: false, Implementation: ModelTypeProvider modelType })
                 {
                     var property = modelType.GetPropertyBySerializedName(Operation.Paging.ItemName ?? "value");
-                    var propertyType = property.ValueType.WithNullable(false);
-                    if (!TypeFactory.IsList(propertyType))
+                    if (!property.ValueType.IsList)
                     {
                         throw new InvalidOperationException($"'{modelType.Declaration.Name}.{property.Declaration.Name}' property must be a collection of items");
                     }
 
-                    responseType = TypeFactory.GetElementType(property.ValueType);
+                    responseType = property.ValueType.ElementType;
                 }
-                else if (TypeFactory.IsList(responseType))
+                else if (responseType.IsList)
                 {
-                    responseType = TypeFactory.GetElementType(responseType);
+                    responseType = responseType.ElementType;
                 }
 
                 if (Operation.LongRunning != null)
@@ -312,7 +315,7 @@ namespace AutoRest.CSharp.Output.Models
             var inputType = GetReturnedResponseInputType();
             if (inputType != null)
             {
-                return TypeFactory.GetOutputType(_typeFactory.CreateType(inputType));
+                return _typeFactory.CreateType(inputType).OutputType;
             }
             return null;
         }
@@ -366,14 +369,14 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         if (convenienceParameter.Type is { IsFrameworkType: false, Implementation: ModelTypeProvider model })
                         {
-                            var parameters = BuildSpreadParameters(model).OrderBy(p => p.DefaultValue == null ? 0 : 1);
+                            var parameters = BuildSpreadParameters(model).OrderBy(p => p.DefaultValue == null ? 0 : 1).ToArray();
 
                             parameterList.AddRange(parameters);
                             protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter!, convenienceParameter, new ConvenienceParameterSpread(model, parameters)));
                         }
                         else
                         {
-                            throw new InvalidOperationException($"The parameter {convenienceParameter.Name} is marked as Spread but its type is not ModelTypeProvider (got {convenienceParameter.Type})");
+                            throw new InvalidOperationException($"The parameter {convenienceParameter.Name} in method {_client?.Declaration.FullName}.{name} is marked as Spread but its type is not ModelTypeProvider (got {convenienceParameter.Type})");
                         }
                     }
                     else
@@ -382,6 +385,11 @@ namespace AutoRest.CSharp.Output.Models
                         if (protocolParameter != null)
                             protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter, convenienceParameter, null));
                     }
+                }
+                else if (protocolParameter != null)
+                {
+                    // convenience parameter is null - such as CancellationToken in non-azure library
+                    protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter, convenienceParameter, null));
                 }
             }
             var accessibility = _restClientMethod.Accessibility | Virtual;
@@ -419,7 +427,7 @@ namespace AutoRest.CSharp.Output.Models
 
                 if (inputProperty.IsRequired && inputProperty.Type is InputLiteralType)
                     continue;
-                var inputType = TypeFactory.GetInputType(parameter.Type).WithNullable(!inputProperty.IsRequired);
+                var inputType = parameter.Type.InputType.WithNullable(!inputProperty.IsRequired);
                 Constant? defaultValue = null;
                 if (!inputProperty.IsRequired)
                     defaultValue = Constant.Default(inputType);
@@ -543,7 +551,6 @@ namespace AutoRest.CSharp.Output.Models
             {
                 return;
             }
-
             _protocolBodyParameter = bodyParameter.IsRequired
                 ? KnownParameters.RequestContent
                 : KnownParameters.RequestContentNullable;
@@ -551,7 +558,7 @@ namespace AutoRest.CSharp.Output.Models
 
             if (contentTypeRequestParameter != null)
             {
-                if (Operation.RequestMediaTypes?.Count > 1)
+                if (Operation.RequestMediaTypes != null && (Operation.RequestMediaTypes.Count > 1 || Operation.RequestMediaTypes.Contains("multipart/form-data")))
                 {
                     AddContentTypeRequestParameter(contentTypeRequestParameter, Operation.RequestMediaTypes);
                 }
@@ -591,7 +598,7 @@ namespace AutoRest.CSharp.Output.Models
         public void AddRequestContext()
         {
             _orderedParameters.Add(new ParameterChain(
-                KnownParameters.CancellationTokenParameter,
+                Configuration.IsBranded ? KnownParameters.CancellationTokenParameter : null, // in non-azure libraries, convenience method no longer takes a `CancellationToken` parameter.
                 ShouldRequestContextOptional() ? KnownParameters.RequestContext : KnownParameters.RequestContextRequired,
                 KnownParameters.RequestContext));
         }
@@ -599,11 +606,22 @@ namespace AutoRest.CSharp.Output.Models
         private void AddContentTypeRequestParameter(InputParameter operationParameter, IReadOnlyList<string> requestMediaTypes)
         {
             var name = operationParameter.Name.ToVariableName();
-            var description = Parameter.CreateDescription(operationParameter, typeof(ContentType), requestMediaTypes);
-            var parameter = new Parameter(name, description, typeof(ContentType), null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
-            _orderedParameters.Add(new ParameterChain(parameter, parameter, parameter));
+            if (requestMediaTypes.Count == 1 && requestMediaTypes.Contains("multipart/form-data"))
+            {
+                var description = Parameter.CreateDescription(operationParameter, typeof(string), requestMediaTypes);
+                var parameter = new Parameter(name, description, typeof(string), null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
+                _orderedParameters.Add(new ParameterChain(null, parameter, parameter));
+                AddReference(operationParameter.NameInRequest, operationParameter, parameter, SerializationFormat.Default);
+                return;
+            }
+            else
+            {
+                var description = Parameter.CreateDescription(operationParameter, typeof(ContentType), requestMediaTypes);
+                var parameter = new Parameter(name, description, typeof(ContentType), null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
+                _orderedParameters.Add(new ParameterChain(parameter, parameter, parameter));
 
-            AddReference(operationParameter.NameInRequest, operationParameter, parameter, SerializationFormat.Default);
+                AddReference(operationParameter.NameInRequest, operationParameter, parameter, SerializationFormat.Default);
+            }
         }
 
         private void AddParameter(InputParameter operationParameter, CSharpType? frameworkParameterType = null)
@@ -636,7 +654,7 @@ namespace AutoRest.CSharp.Output.Models
         private Parameter BuildParameter(in InputParameter operationParameter, CSharpType? typeOverride = null)
         {
             var type = typeOverride != null
-                ? typeOverride.WithNullable(operationParameter.Type.IsNullable)
+                ? typeOverride.WithNullable(operationParameter.Type is InputNullableType)
                 : _typeFactory.CreateType(operationParameter.Type);
 
             return Parameter.FromInputParameter(operationParameter, type, _typeFactory, Operation.KeepClientDefaultValue);
@@ -652,10 +670,10 @@ namespace AutoRest.CSharp.Output.Models
         {
             if (operationParameter.Kind == InputOperationParameterKind.Client)
             {
-                var field = operationParameter.IsEndpoint ? _fields.EndpointField : _fields.GetFieldByParameter(parameter);
+                var field = operationParameter.IsEndpoint ? _fields.EndpointField : _fields.GetFieldByName(parameter.Name);
                 if (field == null)
                 {
-                    throw new InvalidOperationException($"Parameter {parameter.Name} should have matching field");
+                    throw new InvalidOperationException($"Parameter '{parameter.Name}' should have matching field");
                 }
 
                 return new Reference(field.Name, field.Type);
@@ -671,8 +689,13 @@ namespace AutoRest.CSharp.Output.Models
 
         private CSharpType? ChangeTypeForProtocolMethod(InputType type) => type switch
         {
-            InputEnumType enumType => _typeFactory.CreateType(enumType.EnumValueType).WithNullable(enumType.IsNullable),
-            InputModelType modelType => new CSharpType(typeof(object), modelType.IsNullable),
+            InputEnumType enumType => _typeFactory.CreateType(enumType.ValueType),
+            InputModelType modelType => new CSharpType(typeof(object)),
+            InputNullableType nullableType => ChangeTypeForProtocolMethod(nullableType.Type) switch
+            {
+                null => null,
+                { } protocolType => protocolType.WithNullable(true),
+            },
             _ => null
         };
 

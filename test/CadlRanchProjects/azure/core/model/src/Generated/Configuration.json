@@ -1,0 +1,11 @@
+{
+  "output-folder": ".",
+  "namespace": "_Specs_.Azure.Core.Model",
+  "library-name": "_Specs_.Azure.Core.Model",
+  "shared-source-folders": [
+    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net7.0/Generator.Shared",
+    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net7.0/Azure.Core.Shared"
+  ],
+  "flavor": "azure",
+  "use-model-reader-writer": true
+}

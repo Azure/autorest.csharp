@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly Lazy<INamedTypeSymbol?> _existingType;
 
-        protected string? _deprecated;
+        protected string? _deprecation;
 
         private TypeDeclarationOptions? _type;
         protected readonly SourceInputModel? _sourceInputModel;
@@ -32,19 +32,22 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected TypeProvider(BuildContext context) : this(context.DefaultNamespace, context.SourceInputModel) { }
 
-        public CSharpType Type => new(this, isValueType: TypeKind is TypeKind.Struct or TypeKind.Enum, isEnum: this is EnumType, arguments: TypeArguments);
+        public CSharpType Type => new(this, TypeArguments);
         public TypeDeclarationOptions Declaration => _type ??= BuildType();
 
         protected abstract string DefaultName { get; }
         protected virtual string DefaultNamespace { get; }
         protected abstract string DefaultAccessibility { get; }
 
+        public bool IsValueType => TypeKind is TypeKind.Struct or TypeKind.Enum;
+        public virtual bool IsEnum { get; protected init; } = false;
+
         private IReadOnlyList<CSharpType>? _typeArguments;
         protected IReadOnlyList<CSharpType> TypeArguments => _typeArguments ??= BuildTypeArguments().ToArray();
 
         public TypeProvider? DeclaringTypeProvider { get; protected init; }
 
-        public string? Deprecated => _deprecated;
+        public string? Deprecated => _deprecation;
         protected virtual TypeKind TypeKind { get; } = TypeKind.Class;
         protected virtual bool IsAbstract { get; } = false;
         protected INamedTypeSymbol? ExistingType => _existingType.Value;

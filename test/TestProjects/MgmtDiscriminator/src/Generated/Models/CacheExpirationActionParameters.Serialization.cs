@@ -17,7 +17,7 @@ namespace MgmtDiscriminator.Models
 {
     public partial class CacheExpirationActionParameters : IUtf8JsonSerializable, IJsonModel<CacheExpirationActionParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CacheExpirationActionParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CacheExpirationActionParameters>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<CacheExpirationActionParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -78,7 +78,7 @@ namespace MgmtDiscriminator.Models
 
         internal static CacheExpirationActionParameters DeserializeCacheExpirationActionParameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -89,7 +89,7 @@ namespace MgmtDiscriminator.Models
             CacheType cacheType = default;
             TimeSpan? cacheDuration = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("typeName"u8))
@@ -119,10 +119,10 @@ namespace MgmtDiscriminator.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new CacheExpirationActionParameters(typeName, cacheBehavior, cacheType, cacheDuration, serializedAdditionalRawData);
         }
 
@@ -138,48 +138,52 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
-            builder.Append("  typeName: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.Append("  typeName: ");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
+                builder.Append("  typeName: ");
                 builder.AppendLine($"'{TypeName.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CacheBehavior), out propertyOverride);
-            builder.Append("  cacheBehavior: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.Append("  cacheBehavior: ");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
+                builder.Append("  cacheBehavior: ");
                 builder.AppendLine($"'{CacheBehavior.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CacheType), out propertyOverride);
-            builder.Append("  cacheType: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.Append("  cacheType: ");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
+                builder.Append("  cacheType: ");
                 builder.AppendLine($"'{CacheType.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CacheDuration), out propertyOverride);
-            if (Optional.IsDefined(CacheDuration) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  cacheDuration: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(CacheDuration))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  cacheDuration: ");
                     var formattedTimeSpan = TypeFormatters.ToString(CacheDuration.Value, "P");
                     builder.AppendLine($"'{formattedTimeSpan}'");
                 }

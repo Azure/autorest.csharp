@@ -28,13 +28,19 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class RequestWriterHelpers
     {
-        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields? fields, string? responseClassifierType, bool writeSDKUserAgent, IReadOnlyList<Parameter>? clientParameters = null)
+        public static void WriteRequestAndUriCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields fields, string? responseClassifierType, bool writeSDKUserAgent, IReadOnlyList<Parameter>? clientParameters = null)
+        {
+            WriteUriCreation(writer, clientMethod, methodAccessibility, fields, clientParameters);
+            WriteRequestCreation(writer, clientMethod, fields, responseClassifierType, writeSDKUserAgent, clientParameters);
+        }
+
+        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, ClientFields fields, string? responseClassifierType, bool writeSDKUserAgent, IReadOnlyList<Parameter>? clientParameters = null)
         {
             using var methodScope = writer.AmbientScope();
             var parameters = clientMethod.Parameters;
 
             var methodName = CreateRequestMethodName(clientMethod.Name);
-            writer.Append($"{methodAccessibility} {Configuration.ApiTypes.HttpMessageType} {methodName}(");
+            writer.Append($"internal {Configuration.ApiTypes.HttpMessageType} {methodName}(");
             foreach (Parameter clientParameter in parameters)
             {
                 writer.Append($"{clientParameter.Type} {clientParameter.Name:D},");
@@ -66,13 +72,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 else
                 {
                     writer.Line($"var {message:D} = _pipeline.CreateMessage();");
-                    if (clientMethod.Parameters.Contains(KnownParameters.RequestContext))
-                    {
-                        using (writer.Scope($"if ({KnownParameters.RequestContext.Name} != null)"))
-                        {
-                            writer.Line($"{message}.Apply({KnownParameters.RequestContext.Name:I});");
-                        }
-                    }
                     writer.Line($"{message}.ResponseClassifier = {responseClassifierType};");
                 }
 
@@ -231,7 +230,57 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"_userAgent.Apply({message});");
                 }
 
+                // we need to apply the RequestOptions in non-branded case as a last step
+                if (!Configuration.IsBranded && clientMethod.Parameters.Contains(KnownParameters.RequestContext))
+                {
+                    writer.Line($"{message}.Apply({KnownParameters.RequestContext.Name:I});");
+                }
+
                 writer.Line($"return {message};");
+            }
+            writer.Line();
+        }
+
+        private static void WriteUriCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields? fields, IReadOnlyList<Parameter>? clientParameters = null)
+        {
+            using var methodScope = writer.AmbientScope();
+            var methodName = CreateRequestUriMethodName($"{clientMethod.Name}");
+            writer.Append($"{methodAccessibility} {typeof(RequestUriBuilder)} {methodName}(");
+            foreach (Parameter clientParameter in clientMethod.Parameters)
+            {
+                writer.Append($"{clientParameter.Type} {clientParameter.Name:D},");
+            }
+            writer.RemoveTrailingComma();
+            writer.Line($")");
+            using (writer.Scope())
+            {
+                var uri = new CodeWriterDeclaration("uri");
+                writer.Line($"var {uri:D} = new RawRequestUriBuilder();");
+                foreach (var segment in clientMethod.Request.PathSegments)
+                {
+                    var value = GetFieldReference(fields, segment.Value);
+                    if (value.Type.IsFrameworkType && value.Type.FrameworkType == typeof(Uri))
+                    {
+                        writer.Append($"{uri}.Reset(");
+                        WriteConstantOrParameter(writer, value, enumAsString: !segment.IsRaw);
+                        writer.Line($");");
+                    }
+                    else if (!value.IsConstant && value.Reference.Name == "nextLink")
+                    {
+                        WritePathSegment(writer, uri, segment, value, "AppendRawNextLink");
+                    }
+                    else
+                    {
+                        WritePathSegment(writer, uri, segment, value);
+                    }
+                }
+
+                //TODO: Duplicate code between query and header parameter processing logic
+                foreach (var queryParameter in clientMethod.Request.Query)
+                {
+                    WriteQueryParameter(writer, uri, queryParameter, fields, clientParameters);
+                }
+                writer.Line($"return {uri};");
             }
             writer.Line();
         }
@@ -252,7 +301,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return fields.GetFieldByParameter(value.Reference.Name, value.Reference.Type) ?? value;
         }
 
-        public static void WriteHeaders(CodeWriter writer, RestClientMethod clientMethod, CodeWriterDeclaration request, bool content, ClientFields? fields)
+        public static void WriteHeaders(CodeWriter writer, RestClientMethod clientMethod, CodeWriterDeclaration request, bool content, ClientFields fields)
         {
             foreach (var header in clientMethod.Request.Headers)
             {
@@ -265,10 +314,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static string CreateRequestMethodName(RestClientMethod method) => CreateRequestMethodName(method.Name);
         public static string CreateRequestMethodName(string name) => $"Create{name}Request";
+        public static string CreateRequestUriMethodName(string name) => $"Create{name}RequestUri";
 
         private static void WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration request, ObjectSerialization bodySerialization, FormattableString value)
         {
-            writer.WriteMethodBodyStatement(GetRequestContentForSerialization(request, bodySerialization, value));
+            GetRequestContentForSerialization(request, bodySerialization, value).Write(writer);
         }
 
         private static MethodBodyStatement GetRequestContentForSerialization(CodeWriterDeclaration request, ObjectSerialization serialization, FormattableString value)
@@ -296,7 +346,7 @@ namespace AutoRest.CSharp.Generation.Writers
             };
         }
 
-        internal static void WriteHeader(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header, ClientFields? fields)
+        internal static void WriteHeader(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header, ClientFields fields)
         {
             string? delimiter = header.Delimiter;
             string method = delimiter != null
@@ -333,10 +383,8 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        internal static void WriteHeaderSystem(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header, ClientFields? fields)
+        internal static void WriteHeaderSystem(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header, ClientFields fields)
         {
-            string? delimiter = header.Delimiter;
-
             var value = GetFieldReference(fields, header.Value);
             using (WriteValueNullCheck(writer, value))
             {
@@ -355,7 +403,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             methodName ??= segment.IsRaw ? "AppendRaw" : "AppendPath";
             writer.Append($"{uri}.{methodName}(");
-            WriteConstantOrParameter(writer, value, enumAsString: !segment.IsRaw || TypeFactory.IsExtendableEnum(value.Type));
+            WriteConstantOrParameter(writer, value, enumAsString: !segment.IsRaw || value.Type is { IsFrameworkType: false, Implementation: EnumType });
             if (!Configuration.IsBranded)
             {
                 if (value.Type.IsFrameworkType && value.Type.FrameworkType != typeof(string))
@@ -478,14 +526,14 @@ namespace AutoRest.CSharp.Generation.Writers
             string valueStr = GetValueExpression(writer, value);
             ValueExpression valueExpression = new FormattableStringToExpression($"{valueStr}");
             CodeWriterDeclaration changeTrackingList = new CodeWriterDeclaration("changeTrackingList");
-            if (checkUndefinedCollection && TypeFactory.IsCollectionType(type))
+            if (checkUndefinedCollection && type.IsCollection)
             {
                 writer.Append($"if (");
 
-                writer.WriteValueExpression(valueExpression);
+                valueExpression.Write(writer);
 
                 writer.Append($" != null && !(");
-                writer.WriteValueExpression(valueExpression);
+                valueExpression.Write(writer);
                 writer.Append($" is {ChangeTrackingListProvider.Instance.Type.MakeGenericType(type.Arguments)} {changeTrackingList:D} && {changeTrackingList}.IsUndefined)");
 
                 return writer.LineRaw(")").Scope();
@@ -494,7 +542,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.Append($"if (");
 
-                writer.WriteValueExpression(valueExpression);
+                valueExpression.Write(writer);
 
                 return writer.Line($" != null)").Scope();
             }

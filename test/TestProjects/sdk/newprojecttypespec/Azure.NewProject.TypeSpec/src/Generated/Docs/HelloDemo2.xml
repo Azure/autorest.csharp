@@ -230,10 +230,10 @@ using RequestContent content = RequestContent.Create(new
     {
         1
     },
-    floatExtensibleEnum = 1,
+    floatExtensibleEnum = 1F,
     floatExtensibleEnumCollection = new object[]
     {
-        1
+        1F
     },
     floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new object[]
@@ -383,10 +383,10 @@ using RequestContent content = RequestContent.Create(new
     {
         1
     },
-    floatExtensibleEnum = 1,
+    floatExtensibleEnum = 1F,
     floatExtensibleEnumCollection = new object[]
     {
-        1
+        1F
     },
     floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new object[]
@@ -536,10 +536,10 @@ using RequestContent content = RequestContent.Create(new
     {
         1
     },
-    floatExtensibleEnum = 1,
+    floatExtensibleEnum = 1F,
     floatExtensibleEnumCollection = new object[]
     {
-        1
+        1F
     },
     floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new object[]
@@ -689,10 +689,10 @@ using RequestContent content = RequestContent.Create(new
     {
         1
     },
-    floatExtensibleEnum = 1,
+    floatExtensibleEnum = 1F,
     floatExtensibleEnumCollection = new object[]
     {
-        1
+        1F
     },
     floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new object[]

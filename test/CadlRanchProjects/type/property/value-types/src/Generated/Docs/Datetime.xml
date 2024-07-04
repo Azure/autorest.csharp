@@ -79,14 +79,14 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 Datetime client = new ValueTypesClient().GetDatetimeClient();
 
-DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 Datetime client = new ValueTypesClient().GetDatetimeClient();
 
-DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 Response response = await client.PutAsync(body);
 ]]></code></example>
     </member>
@@ -96,14 +96,14 @@ This sample shows how to call Put.
 <code><![CDATA[
 Datetime client = new ValueTypesClient().GetDatetimeClient();
 
-DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 Datetime client = new ValueTypesClient().GetDatetimeClient();
 
-DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
 Response response = client.Put(body);
 ]]></code></example>
     </member>
@@ -115,7 +115,7 @@ Datetime client = new ValueTypesClient().GetDatetimeClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = await client.PutAsync(content);
 
@@ -127,7 +127,7 @@ Datetime client = new ValueTypesClient().GetDatetimeClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = await client.PutAsync(content);
 
@@ -142,7 +142,7 @@ Datetime client = new ValueTypesClient().GetDatetimeClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = client.Put(content);
 
@@ -154,7 +154,7 @@ Datetime client = new ValueTypesClient().GetDatetimeClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = client.Put(content);
 

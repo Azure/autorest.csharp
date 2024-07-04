@@ -44,30 +44,32 @@ namespace Client.Naming
             _endpoint = endpoint;
         }
 
+        /// <summary> Union enum name. </summary>
         /// <param name="body"> The <see cref="ClientExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/UnionEnum.xml" path="doc/members/member[@name='UnionEnumNameAsync(ClientExtensibleEnum,CancellationToken)']/*" />
         public virtual async Task<Response> UnionEnumNameAsync(ClientExtensibleEnum body, CancellationToken cancellationToken = default)
         {
+            using RequestContent content = RequestContent.Create(BinaryData.FromObjectAsJson(body.ToString()));
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = BinaryData.FromObjectAsJson(body.ToString());
             Response response = await UnionEnumNameAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Union enum name. </summary>
         /// <param name="body"> The <see cref="ClientExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/UnionEnum.xml" path="doc/members/member[@name='UnionEnumName(ClientExtensibleEnum,CancellationToken)']/*" />
         public virtual Response UnionEnumName(ClientExtensibleEnum body, CancellationToken cancellationToken = default)
         {
+            using RequestContent content = RequestContent.Create(BinaryData.FromObjectAsJson(body.ToString()));
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = BinaryData.FromObjectAsJson(body.ToString());
             Response response = UnionEnumName(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Union enum name.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -106,7 +108,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Union enum name.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -144,30 +146,32 @@ namespace Client.Naming
             }
         }
 
+        /// <summary> Union enum member name. </summary>
         /// <param name="body"> The <see cref="ExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/UnionEnum.xml" path="doc/members/member[@name='UnionEnumMemberNameAsync(ExtensibleEnum,CancellationToken)']/*" />
         public virtual async Task<Response> UnionEnumMemberNameAsync(ExtensibleEnum body, CancellationToken cancellationToken = default)
         {
+            using RequestContent content = RequestContent.Create(BinaryData.FromObjectAsJson(body.ToString()));
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = BinaryData.FromObjectAsJson(body.ToString());
             Response response = await UnionEnumMemberNameAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Union enum member name. </summary>
         /// <param name="body"> The <see cref="ExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/UnionEnum.xml" path="doc/members/member[@name='UnionEnumMemberName(ExtensibleEnum,CancellationToken)']/*" />
         public virtual Response UnionEnumMemberName(ExtensibleEnum body, CancellationToken cancellationToken = default)
         {
+            using RequestContent content = RequestContent.Create(BinaryData.FromObjectAsJson(body.ToString()));
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = BinaryData.FromObjectAsJson(body.ToString());
             Response response = UnionEnumMemberName(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Union enum member name.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -206,7 +210,7 @@ namespace Client.Naming
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Union enum member name.
         /// <list type="bullet">
         /// <item>
         /// <description>

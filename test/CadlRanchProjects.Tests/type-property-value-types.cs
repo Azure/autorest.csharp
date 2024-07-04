@@ -75,7 +75,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_ValueTypes_Bytes_get() => Test(async (host) =>
         {
             var response = await new ValueTypesClient(host, null).GetBytesClient().GetByteAsync();
-            Assert.AreEqual(BinaryData.FromString("hello, world!").ToString(), response.Value.Property.ToString());
+            BinaryDataAssert.AreEqual(BinaryData.FromString("hello, world!"), response.Value.Property);
         });
 
         [Test]
@@ -245,6 +245,7 @@ namespace CadlRanchProjects.Tests
             var result = response.Value;
             Assert.AreEqual("hello", result.Property[0].Property);
             Assert.AreEqual("world", result.Property[1].Property);
+            Assert.AreEqual(2, result.Property.Count);
         });
 
         [Test]
@@ -261,6 +262,7 @@ namespace CadlRanchProjects.Tests
             var result = response.Value;
             Assert.AreEqual("hello", result.Property["k1"]);
             Assert.AreEqual("world", result.Property["k2"]);
+            Assert.AreEqual(2, result.Property.Count);
         });
 
         [Test]
@@ -321,6 +323,7 @@ namespace CadlRanchProjects.Tests
             Assert.IsNotNull(result);
             Assert.AreEqual("hello", result["k1"]);
             Assert.AreEqual(42, result["k2"]);
+            Assert.AreEqual(2, result.Count);
         });
 
         [Test]
@@ -344,6 +347,7 @@ namespace CadlRanchProjects.Tests
             Assert.IsNotNull(result);
             Assert.AreEqual("hello", result[0]);
             Assert.AreEqual("world", result[1]);
+            Assert.AreEqual(2, result.Length);
         });
 
         [Test]
@@ -385,7 +389,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_ValueTypes_UnionEnumValue_get() => Test(async (host) =>
         {
             var response = await new ValueTypesClient(host, null).GetUnionEnumValueClient().GetUnionEnumValueAsync();
-            Assert.AreEqual(UnionEnumValuePropertyProperty.Value2, response.Value.Property);
+            Assert.AreEqual(ExtendedEnum.EnumValue2, response.Value.Property);
         });
 
         [Test]
@@ -399,15 +403,14 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_ValueTypes_UnionFloatLiteral_get() => Test(async (host) =>
         {
             var response = await new ValueTypesClient(host, null).GetUnionFloatLiteralClient().GetUnionFloatLiteralAsync();
-            var expected = BinaryData.FromObjectAsJson(46.875);
             var actual = response.Value.Property;
-            BinaryData.Equals(expected, actual);
+            Assert.AreEqual(UnionFloatLiteralPropertyProperty._46875, actual);
         });
 
         [Test]
         public Task Type_Property_ValueTypes_UnionFloatLiteral_put() => Test(async (host) =>
         {
-            var response = await new ValueTypesClient(host, null).GetUnionFloatLiteralClient().PutAsync(new UnionFloatLiteralProperty(BinaryData.FromString("46.875")));
+            var response = await new ValueTypesClient(host, null).GetUnionFloatLiteralClient().PutAsync(new UnionFloatLiteralProperty(UnionFloatLiteralPropertyProperty._46875));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -415,13 +418,13 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_ValueTypes_UnionIntLiteral_get() => Test(async (host) =>
         {
             var response = await new ValueTypesClient(host, null).GetUnionIntLiteralClient().GetUnionIntLiteralAsync();
-            BinaryData.Equals(BinaryData.FromString("42"), response.Value.Property);
+            Assert.AreEqual(UnionIntLiteralPropertyProperty._42, response.Value.Property);
         });
 
         [Test]
         public Task Type_Property_ValueTypes_UnionIntLiteral_put() => Test(async (host) =>
         {
-            var response = await new ValueTypesClient(host, null).GetUnionIntLiteralClient().PutAsync(new UnionIntLiteralProperty(BinaryData.FromString("42")));
+            var response = await new ValueTypesClient(host, null).GetUnionIntLiteralClient().PutAsync(new UnionIntLiteralProperty(UnionIntLiteralPropertyProperty._42));
             Assert.AreEqual(204, response.Status);
         });
         [Test]
@@ -434,7 +437,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_UnionStringLiteral_put() => Test(async (host) =>
         {
-            var response = await new ValueTypesClient(host, null).GetUnionStringLiteralClient().PutAsync(new UnionStringLiteralProperty(new UnionStringLiteralPropertyProperty("world")));
+            var response = await new ValueTypesClient(host, null).GetUnionStringLiteralClient().PutAsync(new UnionStringLiteralProperty(UnionStringLiteralPropertyProperty.World));
             Assert.AreEqual(204, response.Status);
         });
     }

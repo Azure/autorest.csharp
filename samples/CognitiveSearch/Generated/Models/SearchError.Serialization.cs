@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 
 namespace CognitiveSearch.Models
 {
@@ -49,6 +50,14 @@ namespace CognitiveSearch.Models
                 }
             }
             return new SearchError(code, message, details ?? new ChangeTrackingList<SearchError>());
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static SearchError FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeSearchError(document.RootElement);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace MgmtDiscriminator.Models
 {
     public partial class RouteConfigurationOverrideActionParameters : IUtf8JsonSerializable, IJsonModel<RouteConfigurationOverrideActionParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RouteConfigurationOverrideActionParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RouteConfigurationOverrideActionParameters>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<RouteConfigurationOverrideActionParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -33,7 +33,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(OriginGroupOverride))
             {
                 writer.WritePropertyName("originGroupOverride"u8);
-                writer.WriteObjectValue<OriginGroupOverride>(OriginGroupOverride, options);
+                writer.WriteObjectValue(OriginGroupOverride, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -67,7 +67,7 @@ namespace MgmtDiscriminator.Models
 
         internal static RouteConfigurationOverrideActionParameters DeserializeRouteConfigurationOverrideActionParameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -76,7 +76,7 @@ namespace MgmtDiscriminator.Models
             RouteConfigurationOverrideActionParametersTypeName typeName = default;
             OriginGroupOverride originGroupOverride = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("typeName"u8))
@@ -95,10 +95,10 @@ namespace MgmtDiscriminator.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new RouteConfigurationOverrideActionParameters(typeName, originGroupOverride, serializedAdditionalRawData);
         }
 
@@ -114,26 +114,28 @@ namespace MgmtDiscriminator.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
-            builder.Append("  typeName: ");
             if (hasPropertyOverride)
             {
-                builder.AppendLine($"{propertyOverride}");
+                builder.Append("  typeName: ");
+                builder.AppendLine(propertyOverride);
             }
             else
             {
+                builder.Append("  typeName: ");
                 builder.AppendLine($"'{TypeName.ToString()}'");
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OriginGroupOverride), out propertyOverride);
-            if (Optional.IsDefined(OriginGroupOverride) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
                 builder.Append("  originGroupOverride: ");
-                if (hasPropertyOverride)
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(OriginGroupOverride))
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
+                    builder.Append("  originGroupOverride: ");
                     BicepSerializationHelpers.AppendChildObject(builder, OriginGroupOverride, options, 2, false, "  originGroupOverride: ");
                 }
             }

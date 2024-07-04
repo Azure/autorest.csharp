@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace OpenAI.Models
 {
@@ -49,7 +50,7 @@ namespace OpenAI.Models
         /// provided, image must have transparency, which will be used as the mask.
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="prompt"/> or <paramref name="image"/> is null. </exception>
-        public CreateImageEditRequest(string prompt, BinaryData image)
+        public CreateImageEditRequest(string prompt, Stream image)
         {
             Argument.AssertNotNull(prompt, nameof(prompt));
             Argument.AssertNotNull(image, nameof(image));
@@ -74,7 +75,7 @@ namespace OpenAI.Models
         /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
         /// <param name="user"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CreateImageEditRequest(string prompt, BinaryData image, BinaryData mask, long? n, CreateImageEditRequestSize? size, CreateImageEditRequestResponseFormat? responseFormat, string user, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal CreateImageEditRequest(string prompt, Stream image, Stream mask, long? n, CreateImageRequestSize? size, CreateImageRequestResponseFormat? responseFormat, string user, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Prompt = prompt;
             Image = image;
@@ -96,46 +97,20 @@ namespace OpenAI.Models
         /// <summary>
         /// The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not
         /// provided, image must have transparency, which will be used as the mask.
-        /// <para>
-        /// To assign a byte[] to this property use <see cref="BinaryData.FromBytes(byte[])"/>.
-        /// The byte[] will be serialized to a Base64 encoded string.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromBytes(new byte[] { 1, 2, 3 })</term>
-        /// <description>Creates a payload of "AQID".</description>
-        /// </item>
-        /// </list>
-        /// </para>
         /// </summary>
-        public BinaryData Image { get; }
+        public Stream Image { get; }
         /// <summary>
         /// An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where
         /// `image` should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions
         /// as `image`.
-        /// <para>
-        /// To assign a byte[] to this property use <see cref="BinaryData.FromBytes(byte[])"/>.
-        /// The byte[] will be serialized to a Base64 encoded string.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromBytes(new byte[] { 1, 2, 3 })</term>
-        /// <description>Creates a payload of "AQID".</description>
-        /// </item>
-        /// </list>
-        /// </para>
         /// </summary>
-        public BinaryData Mask { get; set; }
+        public Stream Mask { get; set; }
         /// <summary> The number of images to generate. Must be between 1 and 10. </summary>
         public long? N { get; set; }
         /// <summary> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </summary>
-        public CreateImageEditRequestSize? Size { get; set; }
+        public CreateImageRequestSize? Size { get; set; }
         /// <summary> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </summary>
-        public CreateImageEditRequestResponseFormat? ResponseFormat { get; set; }
+        public CreateImageRequestResponseFormat? ResponseFormat { get; set; }
         /// <summary> Gets or sets the user. </summary>
         public string User { get; set; }
     }

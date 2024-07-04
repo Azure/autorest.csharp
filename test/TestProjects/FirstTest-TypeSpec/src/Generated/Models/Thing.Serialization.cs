@@ -16,7 +16,7 @@ namespace FirstTestTypeSpec.Models
 {
     public partial class Thing : IUtf8JsonSerializable, IJsonModel<Thing>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Thing>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Thing>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<Thing>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -99,6 +99,18 @@ namespace FirstTestTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableList");
             }
+            writer.WritePropertyName("requiredFloatProperty"u8);
+            writer.WriteNumberValue(RequiredFloatProperty);
+            if (Optional.IsDefined(OptionalFloatProperty))
+            {
+                writer.WritePropertyName("optionalFloatProperty"u8);
+                writer.WriteNumberValue(OptionalFloatProperty.Value);
+            }
+            if (Optional.IsDefined(OptionalResourceId))
+            {
+                writer.WritePropertyName("optionalResourceId"u8);
+                writer.WriteStringValue(OptionalResourceId);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -131,7 +143,7 @@ namespace FirstTestTypeSpec.Models
 
         internal static Thing DeserializeThing(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -150,8 +162,11 @@ namespace FirstTestTypeSpec.Models
             string requiredBadDescription = default;
             IList<int> optionalNullableList = default;
             IList<int> requiredNullableList = default;
+            double requiredFloatProperty = default;
+            double? optionalFloatProperty = default;
+            ResourceIdentifier optionalResourceId = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -255,12 +270,35 @@ namespace FirstTestTypeSpec.Models
                     requiredNullableList = array;
                     continue;
                 }
+                if (property.NameEquals("requiredFloatProperty"u8))
+                {
+                    requiredFloatProperty = property.Value.GetDouble();
+                    continue;
+                }
+                if (property.NameEquals("optionalFloatProperty"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalFloatProperty = property.Value.GetDouble();
+                    continue;
+                }
+                if (property.NameEquals("optionalResourceId"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalResourceId = new ResourceIdentifier(property.Value.GetString());
+                    continue;
+                }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new Thing(
                 name,
                 requiredUnion,
@@ -275,6 +313,9 @@ namespace FirstTestTypeSpec.Models
                 requiredBadDescription,
                 optionalNullableList ?? new ChangeTrackingList<int>(),
                 requiredNullableList,
+                requiredFloatProperty,
+                optionalFloatProperty,
+                optionalResourceId,
                 serializedAdditionalRawData);
         }
 
@@ -317,11 +358,11 @@ namespace FirstTestTypeSpec.Models
             return DeserializeThing(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Thing>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

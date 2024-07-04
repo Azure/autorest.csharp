@@ -9,7 +9,6 @@ using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -49,7 +48,7 @@ namespace AutoRest.CSharp.Output.Models
 
             SetRequestsToClients(clientInfosByName.Values);
 
-            var enums = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
+            var enums = new Dictionary<InputEnumType, EnumType>();
             var models = new Dictionary<InputModelType, ModelTypeProvider>();
             var clients = new List<LowLevelClient>();
 
@@ -70,42 +69,20 @@ namespace AutoRest.CSharp.Output.Models
             foreach (var inputEnum in inputEnums)
             {
                 // [TODO]: Consolidate default namespace choice between HLC and DPG
-                var ns = Configuration.Generation1ConvenienceClient ? inputEnum.Namespace : null;
+                var ns = ExtractNamespace(inputEnum.CrossLanguageDefinitionId);
                 enums.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(ns, Configuration.Namespace), "public", typeFactory, sourceInputModel));
             }
+        }
 
-            List<(InputModelType, InputModelProperty, InputEnumType)> enumsToReplace = new List<(InputModelType, InputModelProperty, InputEnumType)>();
-            foreach (var model in models.Keys)
+        private static string? ExtractNamespace(string crossLanguageDefinitionId)
+        {
+            if (Configuration.Generation1ConvenienceClient)
             {
-                foreach (var property in model.Properties)
-                {
-                    if (property.Type is not InputUnionType union)
-                        continue;
-
-                    if (union.IsAllLiteralString() || union.IsAllLiteralStringPlusString())
-                    {
-                        string modelName = models[model].Type.Name;
-                        InputEnumType inputEnum = new InputEnumType(
-                            $"{modelName}{GetNameWithCorrectPluralization(union, property.Name)}",
-                            model.Namespace,
-                            model.Accessibility,
-                            null,
-                            $"Enum for {property.Name} in {modelName}",
-                            model.Usage,
-                            InputPrimitiveType.String,
-                            union.GetEnum(),
-                            true,
-                            union.IsNullable);
-                        enumsToReplace.Add((model, property, inputEnum));
-                        enums.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, Configuration.Namespace), "public", typeFactory, sourceInputModel));
-                    }
-                }
+                var index = crossLanguageDefinitionId.LastIndexOf(".");
+                return index >= 0 ? crossLanguageDefinitionId[..index] : null;
             }
 
-            foreach (var (containingModel, property, enumType) in enumsToReplace)
-            {
-                models[containingModel] = models[containingModel].ReplaceProperty(property, enumType);
-            }
+            return null;
         }
 
         public static void CreateModels(IReadOnlyList<InputModelType> inputModels, IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
@@ -115,44 +92,16 @@ namespace AutoRest.CSharp.Output.Models
             {
                 ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, defaultDerivedTypes, sourceInputModel);
                 // [TODO]: Consolidate default namespace choice between HLC and DPG
-                var ns = Configuration.Generation1ConvenienceClient ? model.Namespace : null;
+                var ns = ExtractNamespace(model.CrossLanguageDefinitionId);
                 var typeProvider = new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(ns, Configuration.Namespace), sourceInputModel, typeFactory, defaultDerivedType);
                 models.Add(model, typeProvider);
-            }
-        }
-
-        public static IReadOnlyDictionary<InputModelType, ModelTypeProvider> CreateModels(IReadOnlyList<InputModelType> inputModels, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
-        {
-            var models = new Dictionary<InputModelType, ModelTypeProvider>();
-            CreateModels(inputModels, models, typeFactory, sourceInputModel);
-            return models;
-        }
-
-        public static IReadOnlyDictionary<InputEnumType, EnumType> CreateEnums(IReadOnlyList<InputEnumType> inputEnums, IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
-        {
-            var enums = new Dictionary<InputEnumType, EnumType>();
-            CreateEnums(inputEnums, enums, models, typeFactory, sourceInputModel);
-            return enums;
-        }
-
-        private static string GetNameWithCorrectPluralization(InputType type, string name)
-        {
-            //TODO: Probably needs special casing for ipThing to become IPThing
-            string result = name.FirstCharToUpperCase();
-            switch (type)
-            {
-                case InputListType:
-                case InputDictionaryType:
-                    return result.ToSingular();
-                default:
-                    return result;
             }
         }
 
         private static ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, Dictionary<string, ModelTypeProvider> defaultDerivedTypes, SourceInputModel? sourceInputModel)
         {
             //only want to create one instance of the default derived per polymorphic set
-            bool isBasePolyType = model.DiscriminatorPropertyName is not null;
+            bool isBasePolyType = model.DiscriminatorProperty is not null;
             bool isChildPolyType = model.DiscriminatorValue is not null;
             if (!isBasePolyType && !isChildPolyType)
             {
@@ -160,7 +109,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             var actualBase = model;
-            while (actualBase.BaseModel?.DiscriminatorPropertyName is not null)
+            while (actualBase.BaseModel?.DiscriminatorProperty is not null)
             {
                 actualBase = actualBase.BaseModel;
             }
@@ -178,7 +127,7 @@ namespace AutoRest.CSharp.Output.Models
                 //create the "Unknown" version
                 var unknownDerivedType = new InputModelType(
                     defaultDerivedName,
-                    actualBase.Namespace,
+                    string.Empty,
                     "internal",
                     null,
                     $"Unknown version of {actualBase.Name}",
@@ -188,8 +137,8 @@ namespace AutoRest.CSharp.Output.Models
                     Array.Empty<InputModelType>(),
                     "Unknown", //TODO: do we need to support extensible enum / int values?
                     null,
-                    null,
-                    false)
+                    new Dictionary<string, InputModelType>(),
+                    null)
                 {
                     IsUnknownDiscriminatorModel = true
                 };
@@ -236,7 +185,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     Uri = $"{{{KnownParameters.Endpoint.Name}}}",
                     Parameters = operation.Parameters
-                        .Append(new InputParameter(KnownParameters.Endpoint.Name, KnownParameters.Endpoint.Name, $"{KnownParameters.Endpoint.Description}", new InputPrimitiveType(InputTypeKind.Uri, false), RequestLocation.Uri, null, null, null, InputOperationParameterKind.Client, true, false, false, false, true, false, false, null, null))
+                        .Append(new InputParameter(KnownParameters.Endpoint.Name, KnownParameters.Endpoint.Name, $"{KnownParameters.Endpoint.Description}", new InputPrimitiveType(InputPrimitiveTypeKind.Uri), RequestLocation.Uri, null, null, null, InputOperationParameterKind.Client, true, false, false, false, true, false, false, null, null))
                         .ToList()
                 };
             }
@@ -307,7 +256,7 @@ namespace AutoRest.CSharp.Output.Models
             var clientNamespace = Configuration.Namespace;
             var clientDescription = ns.Description;
             var operations = ns.Operations;
-            var clientParameters = RestClientBuilder.GetParametersFromOperations(operations).ToList();
+            var clientParameters = RestClientBuilder.GetParametersFromClient(ns).ToList();
             var resourceParameters = clientParameters.Where(cp => cp.IsResourceParameter).ToHashSet();
             var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(ns.Name) || resourceParameters.Any() || !string.IsNullOrEmpty(ns.Parent);
             var clientName = isSubClient ? clientNamePrefix : clientNamePrefix + ClientBuilder.GetClientSuffix();
@@ -346,7 +295,7 @@ namespace AutoRest.CSharp.Output.Models
                 var clientNamespace = Configuration.Namespace;
                 var infoForEndpoint = topLevelClients.FirstOrDefault(c => c.ClientParameters.Any(p => p.IsEndpoint));
                 var endpointParameter = infoForEndpoint?.ClientParameters.FirstOrDefault(p => p.IsEndpoint);
-                var clientParameters = endpointParameter != null ? new[] { endpointParameter } : Array.Empty<InputParameter>();
+                var clientParameters = topLevelClients.SelectMany(c => c.ClientParameters.Where(p => !p.IsRequired || p.IsApiVersion || p.IsEndpoint)).Distinct().ToArray();
                 var clientExamples = infoForEndpoint?.Examples ?? new Dictionary<string, InputClientExample>();
 
                 topLevelClientInfo = new ClientInfo(clientName, clientNamespace, clientParameters, clientExamples);
@@ -389,7 +338,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        //Assgin parent according to the customized inputModel
+        //Assign parent according to the customized inputModel
         private static void AssignParents(in ClientInfo clientInfo, IReadOnlyDictionary<string, ClientInfo> clientInfosByName, SourceInputModel sourceInputModel)
         {
             var child = clientInfo;

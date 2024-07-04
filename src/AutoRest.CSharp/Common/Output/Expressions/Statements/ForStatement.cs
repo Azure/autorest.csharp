@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.Statements
 {
@@ -16,5 +17,27 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
         public void Add(MethodBodyStatement statement) => _body.Add(statement);
         public IEnumerator<MethodBodyStatement> GetEnumerator() => _body.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_body).GetEnumerator();
+
+        public sealed override void Write(CodeWriter writer)
+        {
+            using (writer.AmbientScope())
+            {
+                writer.AppendRaw("for (");
+                IndexerAssignment?.Write(writer);
+                writer.AppendRaw("; ");
+                Condition?.Write(writer);
+                writer.AppendRaw("; ");
+                IncrementExpression?.Write(writer);
+                writer.LineRaw(")");
+
+                writer.LineRaw("{");
+                writer.LineRaw("");
+                foreach (var bodyStatement in Body)
+                {
+                    bodyStatement.Write(writer);
+                }
+                writer.LineRaw("}");
+            }
+        }
     }
 }

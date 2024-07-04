@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -50,7 +49,7 @@ namespace lro
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue<Product>(product, new ModelReaderWriterOptions("W"));
+                content.JsonWriter.WriteObjectValue(product, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;
@@ -104,7 +103,7 @@ namespace lro
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue<Product>(product, new ModelReaderWriterOptions("W"));
+                content.JsonWriter.WriteObjectValue(product, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;
@@ -158,7 +157,7 @@ namespace lro
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue<Product>(product, new ModelReaderWriterOptions("W"));
+                content.JsonWriter.WriteObjectValue(product, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;
@@ -212,7 +211,7 @@ namespace lro
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue<Product>(product, new ModelReaderWriterOptions("W"));
+                content.JsonWriter.WriteObjectValue(product, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;

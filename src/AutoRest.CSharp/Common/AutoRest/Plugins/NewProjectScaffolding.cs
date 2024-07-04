@@ -110,7 +110,6 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo(""{0}.Tests{1}"")]
 {2}";
             const string azureResourceProvider = @"
-
 // Replace Microsoft.Test with the correct resource provider namepace for your service and uncomment.
 // See https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers
 // for the list of possible values.
@@ -138,6 +137,28 @@ using System.Runtime.CompilerServices;
 
         private string GetReadme()
         {
+            const string multipleApiVersionContent = @"
+
+### Service API versions
+
+The client library targets the latest service API version by default. A client instance accepts an optional service API version parameter from its options to specify which API version service to communicate.
+
+#### Select a service API version
+
+You have the flexibility to explicitly select a supported service API version when instantiating a client by configuring its associated options. This ensures that the client can communicate with services using the specified API version.
+
+For example,
+
+```C# Snippet:Create<YourService>ClientForSpecificApiVersion
+Uri endpoint = new Uri(""<your endpoint>"");
+DefaultAzureCredential credential = new DefaultAzureCredential();
+<YourService>ClientOptions options = new <YourService>ClientOptions(<YourService>ClientOptions.ServiceVersion.<API Version>)
+var client = new <YourService>Client(endpoint, credential, options);
+```
+
+When selecting an API version, it's important to verify that there are no breaking changes compared to the latest API version. If there are significant differences, API calls may fail due to incompatibility.
+
+Always ensure that the chosen API version is fully supported and operational for your specific use case and that it aligns with the service's versioning policy.";
             const string readmeContent = @"# {0} client library for .NET
 
 {0} is a managed service that helps developers get secret simply and securely.
@@ -174,7 +195,7 @@ Include a section after the install command that details any requirements that m
 
 If your library requires authentication for use, such as for Azure services, include instructions and example code needed for initializing and authenticating.
 
-For example, include details on obtaining an account key and endpoint URI, setting environment variables for each, and initializing the client object.
+For example, include details on obtaining an account key and endpoint URI, setting environment variables for each, and initializing the client object.{2}
 
 ## Key concepts
 
@@ -225,7 +246,7 @@ This is a template, but your SDK readme should include details on how to contrib
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net/sdk/{1}/{0}/README.png)
 ";
-            return string.Format(readmeContent, Configuration.Namespace, _serviceDirectoryName);
+            return string.Format(readmeContent, Configuration.Namespace, _serviceDirectoryName, (Configuration.AzureArm || Configuration.Generation1ConvenienceClient) ? "" : multipleApiVersionContent);
         }
 
         private string GetCiYml()
@@ -343,7 +364,7 @@ extends:
         };
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _unbrandedDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
-            new("System.ClientModel", "1.1.0-beta.2"),
+            new("System.ClientModel", "1.1.0-beta.3"),
             new("System.Text.Json", "4.7.2")
         };
 

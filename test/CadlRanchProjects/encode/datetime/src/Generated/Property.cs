@@ -44,6 +44,7 @@ namespace Encode.Datetime
             _endpoint = endpoint;
         }
 
+        /// <summary> Default. </summary>
         /// <param name="body"> The <see cref="DefaultDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -52,12 +53,13 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await DefaultAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(DefaultDatetimeProperty.FromResponse(response), response);
         }
 
+        /// <summary> Default. </summary>
         /// <param name="body"> The <see cref="DefaultDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -66,14 +68,14 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Default(content, context);
             return Response.FromValue(DefaultDatetimeProperty.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -112,7 +114,7 @@ namespace Encode.Datetime
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -150,6 +152,7 @@ namespace Encode.Datetime
             }
         }
 
+        /// <summary> Rfc 3339. </summary>
         /// <param name="body"> The <see cref="Rfc3339DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -158,12 +161,13 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await Rfc3339Async(content, context).ConfigureAwait(false);
             return Response.FromValue(Rfc3339DatetimeProperty.FromResponse(response), response);
         }
 
+        /// <summary> Rfc 3339. </summary>
         /// <param name="body"> The <see cref="Rfc3339DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -172,14 +176,14 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Rfc3339(content, context);
             return Response.FromValue(Rfc3339DatetimeProperty.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Rfc 3339.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -218,7 +222,7 @@ namespace Encode.Datetime
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Rfc 3339.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -256,6 +260,7 @@ namespace Encode.Datetime
             }
         }
 
+        /// <summary> Rfc 7231. </summary>
         /// <param name="body"> The <see cref="Rfc7231DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -264,12 +269,13 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await Rfc7231Async(content, context).ConfigureAwait(false);
             return Response.FromValue(Rfc7231DatetimeProperty.FromResponse(response), response);
         }
 
+        /// <summary> Rfc 7231. </summary>
         /// <param name="body"> The <see cref="Rfc7231DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -278,14 +284,14 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Rfc7231(content, context);
             return Response.FromValue(Rfc7231DatetimeProperty.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Rfc 7231.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -324,7 +330,7 @@ namespace Encode.Datetime
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Rfc 7231.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -362,6 +368,7 @@ namespace Encode.Datetime
             }
         }
 
+        /// <summary> Unix timestamp. </summary>
         /// <param name="body"> The <see cref="UnixTimestampDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -370,12 +377,13 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await UnixTimestampAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(UnixTimestampDatetimeProperty.FromResponse(response), response);
         }
 
+        /// <summary> Unix timestamp. </summary>
         /// <param name="body"> The <see cref="UnixTimestampDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -384,14 +392,14 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = UnixTimestamp(content, context);
             return Response.FromValue(UnixTimestampDatetimeProperty.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Unix timestamp.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -430,7 +438,7 @@ namespace Encode.Datetime
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Unix timestamp.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -468,6 +476,7 @@ namespace Encode.Datetime
             }
         }
 
+        /// <summary> Unix timestamp array. </summary>
         /// <param name="body"> The <see cref="UnixTimestampArrayDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -476,12 +485,13 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await UnixTimestampArrayAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(UnixTimestampArrayDatetimeProperty.FromResponse(response), response);
         }
 
+        /// <summary> Unix timestamp array. </summary>
         /// <param name="body"> The <see cref="UnixTimestampArrayDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -490,14 +500,14 @@ namespace Encode.Datetime
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = UnixTimestampArray(content, context);
             return Response.FromValue(UnixTimestampArrayDatetimeProperty.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Unix timestamp array.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -536,7 +546,7 @@ namespace Encode.Datetime
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Unix timestamp array.
         /// <list type="bullet">
         /// <item>
         /// <description>

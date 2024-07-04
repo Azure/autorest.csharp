@@ -22,7 +22,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in PublicKeys)
                 {
-                    writer.WriteObjectValue<SshPublicKeyInfo>(item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

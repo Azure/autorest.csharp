@@ -15,23 +15,32 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             if (objectType is not SchemaObjectType schema)
                 return;
-            var extensions = schema.ObjectSchema.Extensions;
-            if (extensions != null)
+
+            if (MgmtReferenceType.IsPropertyReferenceType(schema.InputModel))
             {
                 if (Configuration.IsBranded)
+                {
                     writer.UseNamespace("Azure.Core");
-                if (extensions.MgmtReferenceType)
-                {
-                    writer.Line($"[{ReferenceClassFinder.ReferenceTypeAttribute}]");
                 }
-                else if (extensions.MgmtPropertyReferenceType)
+                writer.Line($"[{ReferenceClassFinder.PropertyReferenceTypeAttribute}]");
+            }
+            else if (MgmtReferenceType.IsTypeReferenceType(schema.InputModel))
+            {
+                if (Configuration.IsBranded)
                 {
-                    writer.Line($"[{ReferenceClassFinder.PropertyReferenceTypeAttribute}]");
+                    writer.UseNamespace("Azure.Core");
                 }
-                else if (extensions.MgmtTypeReferenceType)
+                writer.Line($"[{ReferenceClassFinder.TypeReferenceTypeAttribute}]");
+            }
+            else if (MgmtReferenceType.IsReferenceType(schema.InputModel))
+            {
+                if (Configuration.IsBranded)
                 {
-                    writer.Line($"[{ReferenceClassFinder.TypeReferenceTypeAttribute}]");
+                    writer.UseNamespace("Azure.Core");
                 }
+
+                // The hard-coded string input is needed for ReferenceTypeAttribute to work, and this only applies to ResourceData and TrackedResourceData now.
+                writer.Line($"[{ReferenceClassFinder.ReferenceTypeAttribute}(new string[]{{\"SystemData\"}})]");
             }
         }
 

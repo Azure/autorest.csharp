@@ -48,7 +48,7 @@ namespace _Type.Union.Samples
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
-            Response<GetResponse4> response = client.GetFloatsOnly();
+            Response<GetResponse5> response = client.GetFloatsOnly();
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace _Type.Union.Samples
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
-            Response<GetResponse4> response = await client.GetFloatsOnlyAsync();
+            Response<GetResponse5> response = await client.GetFloatsOnlyAsync();
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace _Type.Union.Samples
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
-            Response<GetResponse4> response = client.GetFloatsOnly();
+            Response<GetResponse5> response = client.GetFloatsOnly();
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace _Type.Union.Samples
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
-            Response<GetResponse4> response = await client.GetFloatsOnlyAsync();
+            Response<GetResponse5> response = await client.GetFloatsOnlyAsync();
         }
 
         [Test]
@@ -110,7 +110,7 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = 1.1,
+                prop = 1.1F,
             });
             Response response = client.Send(content);
 
@@ -125,7 +125,7 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = 1.1,
+                prop = 1.1F,
             });
             Response response = await client.SendAsync(content);
 
@@ -138,7 +138,7 @@ namespace _Type.Union.Samples
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
-            Response response = client.Send(BinaryData.FromObjectAsJson(1.1));
+            Response response = client.Send(GetResponseProp1._11);
         }
 
         [Test]
@@ -147,7 +147,7 @@ namespace _Type.Union.Samples
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
-            Response response = await client.SendAsync(BinaryData.FromObjectAsJson(1.1));
+            Response response = await client.SendAsync(GetResponseProp1._11);
         }
 
         [Test]
@@ -158,7 +158,7 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = 1.1,
+                prop = 1.1F,
             });
             Response response = client.Send(content);
 
@@ -173,7 +173,7 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = 1.1,
+                prop = 1.1F,
             });
             Response response = await client.SendAsync(content);
 
@@ -186,7 +186,7 @@ namespace _Type.Union.Samples
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
-            Response response = client.Send(BinaryData.FromObjectAsJson(1.1));
+            Response response = client.Send(GetResponseProp1._11);
         }
 
         [Test]
@@ -195,7 +195,7 @@ namespace _Type.Union.Samples
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
-            Response response = await client.SendAsync(BinaryData.FromObjectAsJson(1.1));
+            Response response = await client.SendAsync(GetResponseProp1._11);
         }
     }
 }

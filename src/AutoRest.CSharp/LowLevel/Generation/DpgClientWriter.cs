@@ -4,19 +4,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Threading;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
-using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Responses;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -99,7 +94,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteRequestCreationMethod(_writer, method, _client.Fields);
                     }
 
-                    if (_client.ClientMethods.Any(cm => cm.ConvenienceMethod is not null))
+                    // since the non-azure libraries do not have cancellationToken parameters on their convenience methods, we do not need to add the method to convert the cancellationToken to RequestContext
+                    if (Configuration.IsBranded && _client.ClientMethods.Any(cm => cm.ConvenienceMethod is not null))
                     {
                         WriteCancellationTokenToRequestContextMethod();
                     }
@@ -158,9 +154,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     break;
                 case { longRunning: null, pagingInfo: not null }:
                     WriteConveniencePageableMethod(clientMethod, convenienceMethod, pagingInfo, _client.Fields, async);
-                    break;
-                case { longRunning: not null, pagingInfo: null }:
-                    WriteConvenienceLroMethod(clientMethod, convenienceMethod, _client.Fields, async);
                     break;
                 default:
                     WriteConvenienceMethod(clientMethod, convenienceMethod, _client.Fields, async);
@@ -301,97 +294,12 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
             {
-                var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
+                // This method now builds statements for normal operation and lro operations
+                MethodBodyStatement statement = convenienceMethod.GetConvertStatements(clientMethod, async, fields.ClientDiagnosticsProperty).ToArray();
 
-                var (parameterValues, converter) = convenienceMethod.GetParameterValues(contextVariable);
-
-                // write whatever we need to convert the parameters
-                converter(_writer);
-
-                var response = new VariableReference(clientMethod.ProtocolMethodSignature.ReturnType!, Configuration.ApiTypes.ResponseParameterName);
-                _writer
-                    .Append($"{response.Type} {response.Declaration:D} = ")
-                    .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
-                    .LineRaw(";");
-
-                var responseType = convenienceMethod.ResponseType;
-                if (responseType is null)
-                {
-                    _writer.WriteMethodBodyStatement(Return(response));
-                }
-                else if (responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { Serialization.Json: { } } serializableObjectType})
-                {
-                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response)));
-                }
-                else if (responseType is { IsFrameworkType: false, Implementation: EnumType enumType})
-                {
-                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromEnum(enumType, response)));
-                }
-                else if (TypeFactory.IsCollectionType(responseType))
-                {
-                    var firstResponseBodyType = clientMethod.ResponseBodyType!;
-                    var serializationFormat =  SerializationBuilder.GetSerializationFormat(firstResponseBodyType, responseType);
-                    var serialization = SerializationBuilder.BuildJsonSerialization(firstResponseBodyType, responseType, false, serializationFormat);
-                    var value = new VariableReference(responseType, "value");
-
-                    _writer.WriteMethodBodyStatement(new[]
-                    {
-                        new DeclareVariableStatement(value.Type, value.Declaration, Default),
-                        JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, Extensible.RestOperations.GetContentStream(response), false, null),
-                        Return(Extensible.RestOperations.GetTypedResponseFromValue(value, response))
-                    });
-                }
-                else if (responseType is { IsFrameworkType: true })
-                {
-                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromBinaryData(responseType.FrameworkType, response, convenienceMethod.ResponseMediaTypes?.FirstOrDefault())));
-                }
+                statement.Write(_writer);
             }
             _writer.Line();
-        }
-
-        private void WriteConvenienceLroMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
-        {
-            using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
-            {
-                var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
-
-                var (parameterValues, converter) = convenienceMethod.GetParameterValues(contextVariable);
-
-                // write whatever we need to convert the parameters
-                converter(_writer);
-
-                var responseType = convenienceMethod.ResponseType;
-                if (responseType == null)
-                {
-                    // return [await] protocolMethod(parameters...)[.ConfigureAwait(false)];
-                    _writer
-                        .Append($"return ")
-                        .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
-                        .LineRaw(";");
-                }
-                else
-                {
-                    // Operation<BinaryData> response = [await] protocolMethod(parameters...)[.ConfigureAwait(false)];
-                    var responseVariable = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
-                    _writer
-                        .Append($"{clientMethod.ProtocolMethodSignature.ReturnType} {responseVariable:D} = ")
-                        .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
-                        .LineRaw(";");
-                    // return ProtocolOperationHelpers.Convert(response, r => responseType.FromResponse(r), ClientDiagnostics, scopeName);
-                    var diagnostic = convenienceMethod.Diagnostic ?? clientMethod.ProtocolMethodDiagnostic;
-                    _writer.Line($"return {typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.Convert)}({responseVariable:I}, {GetConversionMethodStatement(clientMethod.LongRunningResultRetrievalMethod, responseType)}, {fields.ClientDiagnosticsProperty.Name}, {diagnostic.ScopeName:L});");
-                }
-            }
-            _writer.Line();
-        }
-
-        private FormattableString GetConversionMethodStatement(LongRunningResultRetrievalMethod? convertMethod, CSharpType responseType)
-        {
-            if (convertMethod is null)
-            {
-                return $"{responseType}.FromResponse";
-            }
-            return $"{convertMethod.MethodSignature.Name}";
         }
 
         private void WriteLroResultRetrievalMethod(LongRunningResultRetrievalMethod method)
@@ -459,32 +367,29 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     using (writer.WriteDiagnosticScope(clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty))
                     {
-                        writeStatements(writer, headAsBoolean, restMethod, fields, async);
+                        WriteStatements(writer, headAsBoolean, restMethod, fields, async);
                     }
                 }
                 else
                 {
-                    writeStatements(writer, headAsBoolean, restMethod, fields, async);
+                    WriteStatements(writer, headAsBoolean, restMethod, fields, async);
                 }
             }
             writer.Line();
 
-            static void writeStatements(CodeWriter writer, bool headAsBoolean, RestClientMethod restMethod, ClientFields fields, bool async)
+            static void WriteStatements(CodeWriter writer, bool headAsBoolean, RestClientMethod restMethod, ClientFields fields, bool async)
             {
                 var createMessageSignature = new MethodSignature(RequestWriterHelpers.CreateRequestMethodName(restMethod), null, null, Internal, null, null, restMethod.Parameters);
                 if (headAsBoolean)
                 {
-                    writer.WriteMethodBodyStatement(new[]
-                    {
-                            Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message),
-                            Extensible.RestOperations.InvokeServiceOperationCallAndReturnHeadAsBool(fields.PipelineField, message, fields.ClientDiagnosticsProperty, async)
-                        });
+                    Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message).Write(writer);
+                    Extensible.RestOperations.InvokeServiceOperationCallAndReturnHeadAsBool(fields.PipelineField, message, fields.ClientDiagnosticsProperty, async).Write(writer);
                 }
                 else
                 {
-                    writer.WriteMethodBodyStatement(Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message));
+                    Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message).Write(writer);
                     writer.WriteEnableHttpRedirectIfNecessary(restMethod, message);
-                    writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.InvokeServiceOperationCall(fields.PipelineField, message, async)));
+                    Return(Extensible.RestOperations.InvokeServiceOperationCall(fields.PipelineField, message, async)).Write(writer);
                 }
             }
         }
@@ -531,7 +436,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteRequestCreationMethod(CodeWriter writer, RestClientMethod restMethod, ClientFields fields)
         {
-            RequestWriterHelpers.WriteRequestCreation(writer, restMethod, "internal", fields, restMethod.ResponseClassifierType.Name, false);
+            RequestWriterHelpers.WriteRequestCreation(writer, restMethod, fields, restMethod.ResponseClassifierType.Name, false);
         }
 
         public static void WriteResponseClassifierMethod(CodeWriter writer, IEnumerable<ResponseClassifierType> responseClassifierTypes)
@@ -727,13 +632,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static FormattableString BuildProtocolMethodSummary(MethodSignature methodSignature, LowLevelClientMethod clientMethod, bool async)
         {
-            List<FormattableString> lines = new()
+            var linkForProtocol = Configuration.IsBranded
+                ? "https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md"
+                : "https://aka.ms/azsdk/net/protocol-methods";
+            List <FormattableString> lines = new()
             {
                 $"[Protocol Method] {methodSignature.SummaryText}",
                 $"<list type=\"bullet\">",
                 $"<item>",
                 $"<description>",
-                $"This <see href=\"https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md\">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.",
+                $"This <see href={linkForProtocol:L}>protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.",
                 $"</description>",
                 $"</item>"
             };

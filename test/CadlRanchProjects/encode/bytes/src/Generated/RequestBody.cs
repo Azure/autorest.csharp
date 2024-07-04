@@ -43,6 +43,7 @@ namespace Encode.Bytes
             _endpoint = endpoint;
         }
 
+        /// <summary> Default. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -51,12 +52,13 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(value);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await DefaultAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Default. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -65,14 +67,14 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(value);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Default(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -111,7 +113,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -149,6 +151,7 @@ namespace Encode.Bytes
             }
         }
 
+        /// <summary> Octet stream. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -157,12 +160,13 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = value;
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await OctetStreamAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Octet stream. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -171,14 +175,14 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = value;
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = OctetStream(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Octet stream.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -217,7 +221,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Octet stream.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -255,6 +259,7 @@ namespace Encode.Bytes
             }
         }
 
+        /// <summary> Custom content type. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -263,12 +268,13 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = value;
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await CustomContentTypeAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Custom content type. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -277,14 +283,14 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = value;
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = CustomContentType(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Custom content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -323,7 +329,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Custom content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -361,6 +367,7 @@ namespace Encode.Bytes
             }
         }
 
+        /// <summary> Base 64. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -369,12 +376,13 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(value);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await Base64Async(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Base 64. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -383,14 +391,14 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(value);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Base64(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -429,7 +437,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -467,6 +475,7 @@ namespace Encode.Bytes
             }
         }
 
+        /// <summary> Base 64url. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -475,12 +484,13 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(value);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await Base64urlAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
+        /// <summary> Base 64url. </summary>
         /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -489,14 +499,14 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(value);
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Base64url(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64url.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -535,7 +545,7 @@ namespace Encode.Bytes
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Base 64url.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -598,7 +608,7 @@ namespace Encode.Bytes
             uri.AppendPath("/encode/bytes/body/request/octet-stream", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("content-type", "application/octet-stream");
+            request.Headers.Add("Content-Type", "application/octet-stream");
             request.Content = content;
             return message;
         }
@@ -613,7 +623,7 @@ namespace Encode.Bytes
             uri.AppendPath("/encode/bytes/body/request/custom-content-type", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("content-type", "image/png");
+            request.Headers.Add("Content-Type", "image/png");
             request.Content = content;
             return message;
         }

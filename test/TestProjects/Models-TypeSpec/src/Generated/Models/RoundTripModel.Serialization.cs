@@ -16,7 +16,7 @@ namespace ModelsTypeSpec.Models
 {
     public partial class RoundTripModel : IUtf8JsonSerializable, IJsonModel<RoundTripModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<RoundTripModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -94,7 +94,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
             }
             writer.WritePropertyName("requiredModel"u8);
-            writer.WriteObjectValue<BaseModelWithDiscriminator>(RequiredModel, options);
+            writer.WriteObjectValue(RequiredModel, options);
             writer.WritePropertyName("requiredFixedStringEnum"u8);
             writer.WriteStringValue(RequiredFixedStringEnum.ToSerialString());
             writer.WritePropertyName("requiredFixedIntEnum"u8);
@@ -105,7 +105,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                writer.WriteObjectValue<CollectionItem>(item, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredIntRecord"u8);
@@ -129,7 +129,7 @@ namespace ModelsTypeSpec.Models
             foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue<RecordItem>(item.Value, options);
+                writer.WriteObjectValue(item.Value, options);
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredBytes"u8);
@@ -256,6 +256,11 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("nonRequiredNullableStringList");
                 }
             }
+            if (Optional.IsDefined(OptionalModel))
+            {
+                writer.WritePropertyName("optionalModel"u8);
+                writer.WriteObjectValue(OptionalModel, options);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -288,7 +293,7 @@ namespace ModelsTypeSpec.Models
 
         internal static RoundTripModel DeserializeRoundTripModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -324,8 +329,9 @@ namespace ModelsTypeSpec.Models
             IList<string> requiredNullableStringList = default;
             IList<int> nonRequiredNullableIntList = default;
             IList<string> nonRequiredNullableStringList = default;
+            BaseModelWithDiscriminatorFromIsKeyword optionalModel = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"u8))
@@ -600,12 +606,21 @@ namespace ModelsTypeSpec.Models
                     nonRequiredNullableStringList = array;
                     continue;
                 }
+                if (property.NameEquals("optionalModel"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalModel = BaseModelWithDiscriminatorFromIsKeyword.DeserializeBaseModelWithDiscriminatorFromIsKeyword(property.Value, options);
+                    continue;
+                }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new RoundTripModel(
                 serializedAdditionalRawData,
                 requiredString,
@@ -637,7 +652,8 @@ namespace ModelsTypeSpec.Models
                 requiredNullableIntList,
                 requiredNullableStringList,
                 nonRequiredNullableIntList ?? new ChangeTrackingList<int>(),
-                nonRequiredNullableStringList ?? new ChangeTrackingList<string>());
+                nonRequiredNullableStringList ?? new ChangeTrackingList<string>(),
+                optionalModel);
         }
 
         BinaryData IPersistableModel<RoundTripModel>.Write(ModelReaderWriterOptions options)
@@ -679,11 +695,11 @@ namespace ModelsTypeSpec.Models
             return DeserializeRoundTripModel(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<RoundTripModel>(this, new ModelReaderWriterOptions("W"));
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

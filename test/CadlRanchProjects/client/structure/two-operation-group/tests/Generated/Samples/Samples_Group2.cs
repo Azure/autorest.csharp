@@ -9,6 +9,7 @@ using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
+using Client.Structure.Service.TwoOperationGroup.Models;
 using NUnit.Framework;
 
 namespace Client.Structure.Service.TwoOperationGroup.Samples
@@ -20,7 +21,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         public void Example_Group2_Two_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
+            Group2 client = new TwoOperationGroupClient(endpoint, ClientType.Default).GetGroup2Client();
 
             Response response = client.Two();
 
@@ -32,7 +33,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         public async Task Example_Group2_Two_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
+            Group2 client = new TwoOperationGroupClient(endpoint, ClientType.Default).GetGroup2Client();
 
             Response response = await client.TwoAsync();
 
@@ -44,7 +45,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         public void Example_Group2_Two_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
+            Group2 client = new TwoOperationGroupClient(endpoint, ClientType.Default).GetGroup2Client();
 
             Response response = client.Two();
 
@@ -56,7 +57,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         public async Task Example_Group2_Two_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
+            Group2 client = new TwoOperationGroupClient(endpoint, ClientType.Default).GetGroup2Client();
 
             Response response = await client.TwoAsync();
 
@@ -68,7 +69,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         public void Example_Group2_Five_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
+            Group2 client = new TwoOperationGroupClient(endpoint, ClientType.Default).GetGroup2Client();
 
             Response response = client.Five();
 
@@ -80,7 +81,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         public async Task Example_Group2_Five_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
+            Group2 client = new TwoOperationGroupClient(endpoint, ClientType.Default).GetGroup2Client();
 
             Response response = await client.FiveAsync();
 
@@ -92,7 +93,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         public void Example_Group2_Five_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
+            Group2 client = new TwoOperationGroupClient(endpoint, ClientType.Default).GetGroup2Client();
 
             Response response = client.Five();
 
@@ -104,7 +105,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         public async Task Example_Group2_Five_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
+            Group2 client = new TwoOperationGroupClient(endpoint, ClientType.Default).GetGroup2Client();
 
             Response response = await client.FiveAsync();
 
@@ -116,7 +117,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         public void Example_Group2_Six_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
+            Group2 client = new TwoOperationGroupClient(endpoint, ClientType.Default).GetGroup2Client();
 
             Response response = client.Six();
 
@@ -128,7 +129,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         public async Task Example_Group2_Six_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
+            Group2 client = new TwoOperationGroupClient(endpoint, ClientType.Default).GetGroup2Client();
 
             Response response = await client.SixAsync();
 
@@ -140,7 +141,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         public void Example_Group2_Six_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
+            Group2 client = new TwoOperationGroupClient(endpoint, ClientType.Default).GetGroup2Client();
 
             Response response = client.Six();
 
@@ -152,7 +153,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         public async Task Example_Group2_Six_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
+            Group2 client = new TwoOperationGroupClient(endpoint, ClientType.Default).GetGroup2Client();
 
             Response response = await client.SixAsync();
 

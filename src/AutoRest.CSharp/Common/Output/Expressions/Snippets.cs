@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
@@ -12,6 +14,7 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Types;
+using static AutoRest.CSharp.Common.Input.Configuration;
 
 namespace AutoRest.CSharp.Common.Output.Models
 {
@@ -25,6 +28,8 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static ValueExpression Dash { get; } = new KeywordExpression("_", null);
         public static ValueExpression Default { get; } = new KeywordExpression("default", null);
         public static ValueExpression Null { get; } = new KeywordExpression("null", null);
+
+        public static ValueExpression DefaultOf(CSharpType type) => type is { IsValueType: true, IsNullable: false } ? Default.CastTo(type) : Null.CastTo(type);
         public static ValueExpression This { get; } = new KeywordExpression("this", null);
         public static BoolExpression True { get; } = new(new KeywordExpression("true", null));
         public static BoolExpression False { get; } = new(new KeywordExpression("false", null));
@@ -35,7 +40,7 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static ValueExpression Float(float value) => new FormattableStringToExpression($"{value}f");
         public static ValueExpression Double(double value) => new FormattableStringToExpression($"{value}d");
 
-        public static ValueExpression Nameof(ValueExpression expression) => new InvokeInstanceMethodExpression(null, "nameof", new[]{expression}, null, false);
+        public static ValueExpression Nameof(ValueExpression expression) => new InvokeInstanceMethodExpression(null, "nameof", new[] { expression }, null, false);
         public static ValueExpression ThrowExpression(ValueExpression expression) => new KeywordExpression("throw", expression);
 
         public static ValueExpression NullCoalescing(ValueExpression left, ValueExpression right) => new BinaryOperatorExpression("??", left, right);
@@ -46,8 +51,8 @@ namespace AutoRest.CSharp.Common.Output.Models
             => expression switch
             {
                 NullConditionalExpression nullConditional => RemoveAllNullConditional(nullConditional.Inner),
-                MemberExpression { Inner: {} inner } member => member with {Inner = RemoveAllNullConditional(inner)},
-                TypedValueExpression typed => typed with { Untyped = RemoveAllNullConditional(typed.Untyped)},
+                MemberExpression { Inner: { } inner } member => member with { Inner = RemoveAllNullConditional(inner) },
+                TypedValueExpression typed => typed with { Untyped = RemoveAllNullConditional(typed.Untyped) },
                 _ => expression
             };
 
@@ -86,21 +91,27 @@ namespace AutoRest.CSharp.Common.Output.Models
             => new(arrayItemType, new InvokeStaticMethodExpression(typeof(Array), nameof(Array.Empty), Array.Empty<ValueExpression>(), new[] { arrayItemType }));
 
         public static StreamExpression InvokeFileOpenRead(string filePath)
-            => new(new InvokeStaticMethodExpression(typeof(System.IO.File), nameof(System.IO.File.OpenRead), new[]{Literal(filePath)}));
+            => new(new InvokeStaticMethodExpression(typeof(System.IO.File), nameof(System.IO.File.OpenRead), new[] { Literal(filePath) }));
         public static StreamExpression InvokeFileOpenWrite(string filePath)
-            => new(new InvokeStaticMethodExpression(typeof(System.IO.File), nameof(System.IO.File.OpenWrite), new[]{Literal(filePath)}));
+            => new(new InvokeStaticMethodExpression(typeof(System.IO.File), nameof(System.IO.File.OpenWrite), new[] { Literal(filePath) }));
 
-        // Expected signature: MethodName(Utf8JsonWriter writer);
-        public static MethodBodyStatement InvokeCustomSerializationMethod(string methodName, Utf8JsonWriterExpression utf8JsonWriter)
-            => new InvokeInstanceMethodStatement(null, methodName, utf8JsonWriter);
+        // Expected signature: MethodName(Utf8JsonWriter writer, ModelReaderWriterOptions? options);
+        public static MethodBodyStatement InvokeCustomSerializationMethod(string methodName, Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression? options)
+        {
+            // If options is null, the method signature should not include the parameter
+            return options is null
+                ? new InvokeInstanceMethodStatement(null, methodName, utf8JsonWriter)
+                : new InvokeInstanceMethodStatement(null, methodName, utf8JsonWriter, options);
+        }
 
+        // TODO: https://github.com/Azure/autorest.csharp/issues/4633
         // Expected signature: MethodName(StringBuilder builder);
         public static MethodBodyStatement InvokeCustomBicepSerializationMethod(string methodName, StringBuilderExpression stringBuilder)
-            => new InvokeInstanceMethodStatement(null, methodName, stringBuilder);
+        => new InvokeInstanceMethodStatement(null, methodName, stringBuilder);
 
         // Expected signature: MethodName(JsonProperty property, ref T optional)
         public static MethodBodyStatement InvokeCustomDeserializationMethod(string methodName, JsonPropertyExpression jsonProperty, CodeWriterDeclaration variable)
-            => new InvokeStaticMethodStatement(null, methodName, new ValueExpression[]{jsonProperty, new FormattableStringToExpression($"ref {variable}")});
+            => new InvokeStaticMethodStatement(null, methodName, new ValueExpression[] { jsonProperty, new FormattableStringToExpression($"ref {variable}") });
 
         public static AssignValueIfNullStatement AssignIfNull(ValueExpression variable, ValueExpression expression) => new(variable, expression);
         public static AssignValueStatement Assign(ValueExpression variable, ValueExpression expression) => new(variable, expression);

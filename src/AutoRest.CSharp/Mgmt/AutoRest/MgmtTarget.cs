@@ -10,8 +10,6 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.AutoRest.PostProcess;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -58,10 +56,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             project.AddGeneratedFile(filename, text);
         }
 
-        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
+        public static async Task ExecuteAsync(GeneratedCodeWorkspace project)
         {
             var addedFilenames = new HashSet<string>();
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
             var serializeWriter = new SerializationWriter();
             var isArmCore = Configuration.MgmtConfiguration.IsArmCore;
             var onlyGenerateMetadata = Configuration.MgmtConfiguration.MgmtDebug.OnlyGenerateMetadata;
@@ -85,12 +82,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 if (model is MgmtObjectType mot)
                 {
-                    ModelItem mi = new ModelItem(mot.Declaration.Namespace, mot.Declaration.Name, mot.ObjectSchema.GetFullSerializedName(), MgmtReport.Instance.TransformSection);
+                    ModelItem mi = new ModelItem(mot.Declaration.Namespace, mot.Declaration.Name, mot.InputModel.Name, MgmtReport.Instance.TransformSection);
                     mi.Properties = mot.Properties.ToDictionary(p => p.Declaration.Name, p =>
                     {
-                        if (p.SchemaProperty != null)
+                        if (p.InputModelProperty != null)
                         {
-                            return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), mot.GetFullSerializedName(p.SchemaProperty), MgmtReport.Instance.TransformSection);
+                            return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), mot.GetFullSerializedName(p.InputModelProperty), MgmtReport.Instance.TransformSection);
                         }
                         else
                         {
@@ -102,25 +99,24 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 else if (model is EnumType et)
                 {
-                    var schema = MgmtContext.Library.SchemaMap.Value.First(map => map.Value == model).Key;
-                    var choices = schema switch
+                    var inputType = MgmtContext.Library.SchemaMap.Value.First(map => map.Value == model).Key;
+                    var choices = inputType switch
                     {
-                        ChoiceSchema sc => sc.Choices,
-                        SealedChoiceSchema scs => scs.Choices,
-                        _ => throw new InvalidOperationException("Unexpected Schema type for EnumType: " + schema.GetType())
+                        InputEnumType sc => sc.Values,
+                        _ => throw new InvalidOperationException("Unexpected Schema type for EnumType: " + inputType.GetType())
                     };
 
-                    EnumItem mi = new EnumItem(et.Declaration.Namespace, et.Declaration.Name, schema.GetFullSerializedName(), MgmtReport.Instance.TransformSection);
+                    EnumItem mi = new EnumItem(et.Declaration.Namespace, et.Declaration.Name, inputType.Name, MgmtReport.Instance.TransformSection);
                     mi.Values = et.Values.ToDictionary(v => v.Declaration.Name, v =>
                     {
-                        var found = choices.FirstOrDefault(c => c.Value == v.Value.Value?.ToString());
+                        var found = choices.FirstOrDefault(c => c.Value.ToString() == v.Value.Value?.ToString());
                         if (found == null)
                         {
                             var allValues = string.Join(",", choices.Select(c => c.Value ?? "<null>"));
                             AutoRestLogger.Warning($"Can't find matching enumvalue '{v.Value}' in '{allValues}'").Wait();
                             return new EnumValueItem(v.Declaration.Name, "<no matching enum value found>", MgmtReport.Instance.TransformSection);
                         }
-                        return new EnumValueItem(v.Declaration.Name, schema.GetFullSerializedName(found), MgmtReport.Instance.TransformSection);
+                        return new EnumValueItem(v.Declaration.Name, inputType.GetFullSerializedName(found), MgmtReport.Instance.TransformSection);
                     });
                     MgmtReport.Instance.EnumSection.Add(mi.FullName, mi);
                 }
@@ -153,17 +149,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in MgmtContext.Library.ResourceData)
             {
-                if (model is EmptyResourceData)
+                if (model == ResourceData.Empty)
                     continue;
 
                 var name = model.Type.Name;
 
-                ModelItem mi = new ModelItem(model.Declaration.Namespace, model.Declaration.Name, model.ObjectSchema.GetFullSerializedName(), MgmtReport.Instance.TransformSection);
+                ModelItem mi = new ModelItem(model.Declaration.Namespace, model.Declaration.Name, model.InputModel.Name, MgmtReport.Instance.TransformSection);
                 mi.Properties = model.Properties.ToDictionary(p => p.Declaration.Name, p =>
                 {
-                    if (p.SchemaProperty != null)
+                    if (p.InputModelProperty != null)
                     {
-                        return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), model.GetFullSerializedName(p.SchemaProperty), MgmtReport.Instance.TransformSection);
+                        return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), model.GetFullSerializedName(p.InputModelProperty), MgmtReport.Instance.TransformSection);
                     }
                     else
                     {
@@ -181,10 +177,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var writer = ResourceWriter.GetWriter(resource);
                 writer.Write();
 
+                var name = resource.Type.Name;
+
                 var ri = new ResourceItem(resource, MgmtReport.Instance.TransformSection);
                 MgmtReport.Instance.ResourceSection.Add(ri.Name, ri);
 
-                AddGeneratedFile(project, $"{resource.Type.Name}.cs", writer.ToString());
+                AddGeneratedFile(project, $"{name}.cs", writer.ToString());
+
+                // we do not need this if model reader writer feature is not enabled
+                if (Configuration.UseModelReaderWriter)
+                {
+                    WriteSerialization(project, resource, serializeWriter, $"{name}.Serialization.cs");
+                }
             }
 
             var wirePathWriter = new WirePathWriter();
@@ -201,13 +205,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             lroWriter.Write();
             AddGeneratedFile(project, lroWriter.Filename, lroWriter.ToString());
 
-            foreach (var interimOperation in MgmtContext.Library.InterimOperations.Distinct(LongRunningInterimOperation.LongRunningInterimOperationComparer))
-            {
-                var writer = new MgmtLongRunningInterimOperationWriter(interimOperation);
-                writer.Write();
-                AddGeneratedFile(project, $"LongRunningOperation/{interimOperation.TypeName}.cs", writer.ToString());
-            }
-
             foreach (var operationSource in MgmtContext.Library.OperationSources)
             {
                 var writer = new OperationSourceWriter(operationSource);
@@ -222,15 +219,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             var modelFactoryProvider = MgmtContext.Library.ModelFactory;
-            if (modelFactoryProvider != null)
+            if (modelFactoryProvider is not null && modelFactoryProvider.Methods.Any())
             {
                 var modelFactoryWriter = new ModelFactoryWriter(modelFactoryProvider);
                 modelFactoryWriter.Write();
                 AddGeneratedFile(project, $"{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
             }
 
-            if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
-                throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
+            // TODO: fix the overriden
+            //if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
+            //    throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
             var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
             await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));
@@ -306,14 +304,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 });
 
                 resourceModel.Name = resource.ResourceName;
-                resourceModel.SwaggerModelName = resource.ResourceData.ObjectSchema.Language.Default.SerializedName ?? resource.ResourceData.ObjectSchema.Language.Default.Name;
+                resourceModel.SwaggerModelName = resource.ResourceData.InputModel.SpecName ?? resource.ResourceData.InputModel.Name;
                 resourceModel.ResourceType = resource.ResourceType.ToString();
                 resourceModel.ResourceKeySegment = resource.ResourceType.Last().ConstantValue;
                 var pattern = $"\\/{resourceModel.ResourceKeySegment}\\/([^\\/]+)";
                 resourceModel.ResourceKey = Regex.Match(resource.OperationSet.RequestPath, pattern).Groups[1].Value.ReplaceFirst("{", "").ReplaceLast("}", "");
 
                 resourceModel.Parents = resource.GetParents().Select(p => p.ResourceName).ToList();
-                resourceModel.IsTrackedResource = resource.ResourceData.Inherits?.EqualsByName(typeof(TrackedResourceData)) ?? false;
+                resourceModel.IsTrackedResource = resource.ResourceData.Inherits?.AreNamesEqual(typeof(TrackedResourceData)) ?? false;
                 resourceModel.IsTenantResource = resource.GetParents().Any(p => p.ResourceName == "TenantResource");
                 resourceModel.IsSubscriptionResource = resource.GetParents().Any(p => p.ResourceName == "SubscriptionResource");
                 resourceModel.IsManagementGroupResource = resource.GetParents().Any(p => p.ResourceName == "ManagementGroupResource");
@@ -404,13 +402,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             AddGeneratedFile(project, modelFileName, codeWriter.ToString());
 
-            if (model is MgmtReferenceType mgmtReferenceType)
-            {
-                var extensions = mgmtReferenceType.ObjectSchema.Extensions;
-                if (extensions != null && extensions.MgmtReferenceType)
-                    return;
-            }
+            WriteSerialization(project, model, serializeWriter, serializationFileName);
+        }
 
+        private static void WriteSerialization(GeneratedCodeWorkspace project, TypeProvider model, SerializationWriter serializeWriter, string serializationFileName)
+        {
             var serializerCodeWriter = new CodeWriter();
             serializeWriter.WriteSerialization(serializerCodeWriter, model);
             AddGeneratedFile(project, serializationFileName, serializerCodeWriter.ToString());

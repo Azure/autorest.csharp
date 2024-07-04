@@ -3,12 +3,14 @@ import "@typespec/http";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/versioning";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
+using Azure.ResourceManager;
 
 @versioned(Versions)
 @service({
@@ -41,7 +43,6 @@ enum Versions {
   }
 
 @doc("float fixed enum")
-@fixed
 enum FloatFixedEnum {
     One: 1.1,
     Two: 2.2,
@@ -49,7 +50,6 @@ enum FloatFixedEnum {
 }
 
 @doc("int fixed enum")
-@fixed
 enum IntFixedEnum {
     One: 1,
     Two: 2,
@@ -57,7 +57,6 @@ enum IntFixedEnum {
 }
 
 @doc("Simple enum")
-@fixed
 enum StringFixedEnum {
     One: "1",
     Two: "2",
@@ -128,6 +127,15 @@ model Thing {
 
     @doc("required nullable collection")
     requiredNullableList: int32[] | null;
+
+    @doc("required float property")
+    requiredFloatProperty: float;
+
+    @doc("optional float property")
+    optionalFloatProperty?: float;
+
+    @doc("optional arm id.")
+    optionalResourceId?: Azure.Core.armResourceIdentifier<[]>;
 }
 
 @doc("A model with a few required nullable properties")
@@ -150,7 +158,7 @@ model NotFriend {
 }
 
 @doc("this is a model with a projected name")
-@projectedName("client", "ProjectedModel")
+@clientName("ProjectedModel")
 model ModelWithProjectedName {
     @doc("name of the ModelWithProjectedName")
     name: string;
@@ -222,6 +230,18 @@ model RoundTripModel {
 
     @doc("this is a model with required nullable properties")
     modelWithRequiredNullable: ModelWithRequiredNullableProperties;
+
+    @doc("this is a list of union types")
+    unionList: (string | int32 | ModelForUnion | ModelForUnion[])[];
+}
+
+@doc("This is a model only used in union types, please do not use it anywhere else.")
+model ModelForUnion {
+    @doc("name of the ModelForUnion")
+    name: string;
+
+    @doc("age of the ModelForUnion")
+    age?: int32;
 }
 
 union DaysOfWeekExtensibleEnum {
@@ -237,12 +257,10 @@ union DaysOfWeekExtensibleEnum {
 
 model ModelWithFormat {
     @doc("url format")
-    @format("Uri")
-    sourceUrl: string;
+    sourceUrl: url;
 
     @doc("uuid format")
-    @format("uuid")
-    guid: string;
+    guid: uuid;
 }
 
 @doc("Hello world service")
@@ -302,7 +320,7 @@ namespace Hello.Demo2 {
 @doc("top level method")
 @get
 @convenientAPI(true)
-op topAction(@path @format("date") action: string): Thing;
+op topAction(@path action: utcDateTime): Thing;
 
 @route("/top2")
 @doc("top level method2")
@@ -329,14 +347,14 @@ op anonymousBody(...Thing): Thing;
 op friendlyModel(...NotFriend): NotFriend;
 
 op addTimeHeader(
-    @header("Repeatability-First-Sent") repeatabilityFirstSent?: utcDateTime 
+    @header("Repeatability-First-Sent") repeatabilityFirstSent?: utcDateTime
 ): void;
 
 @route("/stringFormat")
 @doc("paramete has string format.")
 @post
 @convenientAPI(true)
-op stringFormat(@path @format("uuid") subscriptionId: string, @body body: ModelWithFormat): void;
+op stringFormat(@path subscriptionId: uuid, @body body: ModelWithFormat): void;
 
 
 @route("/projectedName")
@@ -349,13 +367,14 @@ op projectedNameModel(...ModelWithProjectedName): ModelWithProjectedName;
 @doc("return anonymous model")
 @post
 @convenientAPI(true)
-op returnsAnonymousModel(): {};
+op returnsAnonymousModel(): {@body body: {}};
 
+// TODO: https://github.com/Azure/typespec-azure/issues/509 
 namespace EnumTest {
-    @get
+    @put
     @route("/unknown-value")
     @doc("get extensible enum")
-    op getUnknownValue(): DaysOfWeekExtensibleEnum;
+    op createUnknownValue(@body input: DaysOfWeekExtensibleEnum): void;
 }
 
 namespace ProtocolAndConvenient {
@@ -501,10 +520,9 @@ op ContainSelfModels(@body input: ContainSelf): void;
 
 
 @doc("enum with projected name")
-@fixed
-@projectedName("csharp", "CsProjectedEnum")
+@clientName("CsProjectedEnum")
 enum ProjectedEnum {
-    @projectedName("csharp", "CsOne")
+    @clientName("CsOne")
     One: 1.1,
     Two: 2.2,
     Four: 4.4,
@@ -517,10 +535,9 @@ op enumParameter(@path p1: ProjectedEnum ): void;
 
 
 @doc("enum with projected name used in a model")
-@fixed
-@projectedName("csharp", "CsProjectedEnumInModel")
+@clientName("CsProjectedEnumInModel")
 enum ProjectedEnumInModel {
-    @projectedName("csharp", "CsOne")
+    @clientName("CsOne")
     One: 1.1,
     Two: 2.2,
     Four: 4.4,

@@ -53,7 +53,7 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new NullableClient(host, null).GetBytesClient().GetNonNullAsync();
             Assert.AreEqual("foo", response.Value.RequiredProperty);
-            Assert.AreEqual(BinaryData.FromString("hello, world!").ToString(), response.Value.NullableProperty.ToString());
+            BinaryDataAssert.AreEqual(BinaryData.FromString("hello, world!"), response.Value.NullableProperty);
         });
 
         [Test]
@@ -161,8 +161,9 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new NullableClient(host, null).GetCollectionsByteClient().GetNonNullAsync();
             Assert.AreEqual("foo", response.Value.RequiredProperty);
-            Assert.AreEqual(BinaryData.FromString("hello, world!").ToString(), response.Value.NullableProperty.First().ToString());
-            Assert.AreEqual(BinaryData.FromString("hello, world!").ToString(), response.Value.NullableProperty.Last().ToString());
+            BinaryDataAssert.AreEqual(BinaryData.FromString("hello, world!"), response.Value.NullableProperty.First());
+            BinaryDataAssert.AreEqual(BinaryData.FromString("hello, world!"), response.Value.NullableProperty.Last());
+            Assert.AreEqual(2, response.Value.NullableProperty.Count);
         });
 
         [Test]
@@ -171,8 +172,8 @@ namespace CadlRanchProjects.Tests
             var response = await new NullableClient(host, null).GetCollectionsByteClient().GetNullAsync();
             Assert.AreEqual("foo", response.Value.RequiredProperty);
             // we will never construct a null collection therefore this property is actually undefined here.
+            Assert.IsFalse(Optional.IsCollectionDefined(response.Value.NullableProperty));
             Assert.IsNotNull(response.Value.NullableProperty);
-            Assert.IsFalse(!(response.Value.NullableProperty is ChangeTrackingList<BinaryData> changeTrackingList && changeTrackingList.IsUndefined));
         });
 
         [Test]
@@ -202,6 +203,7 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual("foo", response.Value.RequiredProperty);
             Assert.AreEqual("hello", response.Value.NullableProperty.First().Property);
             Assert.AreEqual("world", response.Value.NullableProperty.Last().Property);
+            Assert.AreEqual(2, response.Value.NullableProperty.Count);
         });
 
         [Test]
@@ -210,8 +212,8 @@ namespace CadlRanchProjects.Tests
             var response = await new NullableClient(host, null).GetCollectionsModelClient().GetNullAsync();
             Assert.AreEqual("foo", response.Value.RequiredProperty);
             // we will never construct a null collection therefore this property is actually undefined here.
+            Assert.IsFalse(Optional.IsCollectionDefined(response.Value.NullableProperty));
             Assert.IsNotNull(response.Value.NullableProperty);
-            Assert.IsFalse(!(response.Value.NullableProperty is ChangeTrackingList<InnerModel> changeTrackingList && changeTrackingList.IsUndefined));
         });
 
         [Test]
@@ -241,6 +243,46 @@ namespace CadlRanchProjects.Tests
         {
             string value = "{ \"requiredProperty\": \"foo\", \"nullableProperty\": null }";
             var response = await new NullableClient(host, null).GetCollectionsModelClient().PatchNullAsync(RequestContent.Create(value));
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Nullable_CollectionsString_getNonNull() => Test(async (host) =>
+        {
+            var response = await new NullableClient(host, null).GetCollectionsStringClient().GetNonNullAsync();
+            Assert.AreEqual("foo", response.Value.RequiredProperty);
+            Assert.AreEqual("hello", response.Value.NullableProperty.First());
+            Assert.AreEqual("world", response.Value.NullableProperty.Last());
+            Assert.AreEqual(2, response.Value.NullableProperty.Count);
+        });
+
+        [Test]
+        public Task Type_Property_Nullable_CollectionsString_getNull() => Test(async (host) =>
+        {
+            var response = await new NullableClient(host, null).GetCollectionsStringClient().GetNullAsync();
+            Assert.AreEqual("foo", response.Value.RequiredProperty);
+            // we will never construct a null collection therefore this property is actually undefined here.
+            Assert.IsFalse(Optional.IsCollectionDefined(response.Value.NullableProperty));
+            Assert.IsNotNull(response.Value.NullableProperty);
+        });
+
+        [Test]
+        public Task Type_Property_Nullable_CollectionsString_patchNonNull() => Test(async (host) =>
+        {
+            var value = new
+            {
+                requiredProperty = "foo",
+                nullableProperty = new[] { "hello", "world" }
+            };
+            var response = await new NullableClient(host, null).GetCollectionsStringClient().PatchNonNullAsync(RequestContent.Create(value));
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Nullable_CollectionsString_patchNull() => Test(async (host) =>
+        {
+            string value = "{ \"requiredProperty\": \"foo\", \"nullableProperty\": null }";
+            var response = await new NullableClient(host, null).GetCollectionsStringClient().PatchNullAsync(RequestContent.Create(value));
             Assert.AreEqual(204, response.Status);
         });
     }

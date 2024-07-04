@@ -37,6 +37,33 @@ namespace AzureSample.ResourceManager.Storage
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
+        internal RequestUriBuilder CreateListRequestUri(string subscriptionId, string resourceGroupName, string accountName, int? maxpagesize, string filter, ListContainersInclude? include)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
+            uri.AppendPath(accountName, true);
+            uri.AppendPath("/blobServices/default/containers", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (maxpagesize != null)
+            {
+                uri.AppendQuery("$maxpagesize", maxpagesize.Value, true);
+            }
+            if (filter != null)
+            {
+                uri.AppendQuery("$filter", filter, true);
+            }
+            if (include != null)
+            {
+                uri.AppendQuery("$include", include.Value.ToString(), true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string accountName, int? maxpagesize, string filter, ListContainersInclude? include)
         {
             var message = _pipeline.CreateMessage();
@@ -134,6 +161,22 @@ namespace AzureSample.ResourceManager.Storage
             }
         }
 
+        internal RequestUriBuilder CreateCreateRequestUri(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerData data)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
+            uri.AppendPath(accountName, true);
+            uri.AppendPath("/blobServices/default/containers/", false);
+            uri.AppendPath(containerName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerData data)
         {
             var message = _pipeline.CreateMessage();
@@ -154,7 +197,7 @@ namespace AzureSample.ResourceManager.Storage
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<BlobContainerData>(data);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -228,6 +271,22 @@ namespace AzureSample.ResourceManager.Storage
             }
         }
 
+        internal RequestUriBuilder CreateUpdateRequestUri(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerData data)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
+            uri.AppendPath(accountName, true);
+            uri.AppendPath("/blobServices/default/containers/", false);
+            uri.AppendPath(containerName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerData data)
         {
             var message = _pipeline.CreateMessage();
@@ -248,7 +307,7 @@ namespace AzureSample.ResourceManager.Storage
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<BlobContainerData>(data);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -318,6 +377,22 @@ namespace AzureSample.ResourceManager.Storage
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetRequestUri(string subscriptionId, string resourceGroupName, string accountName, string containerName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
+            uri.AppendPath(accountName, true);
+            uri.AppendPath("/blobServices/default/containers/", false);
+            uri.AppendPath(containerName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName)
@@ -408,6 +483,22 @@ namespace AzureSample.ResourceManager.Storage
             }
         }
 
+        internal RequestUriBuilder CreateDeleteRequestUri(string subscriptionId, string resourceGroupName, string accountName, string containerName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
+            uri.AppendPath(accountName, true);
+            uri.AppendPath("/blobServices/default/containers/", false);
+            uri.AppendPath(containerName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName)
         {
             var message = _pipeline.CreateMessage();
@@ -483,6 +574,23 @@ namespace AzureSample.ResourceManager.Storage
             }
         }
 
+        internal RequestUriBuilder CreateSetLegalHoldRequestUri(string subscriptionId, string resourceGroupName, string accountName, string containerName, LegalHold legalHold)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
+            uri.AppendPath(accountName, true);
+            uri.AppendPath("/blobServices/default/containers/", false);
+            uri.AppendPath(containerName, true);
+            uri.AppendPath("/setLegalHold", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateSetLegalHoldRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName, LegalHold legalHold)
         {
             var message = _pipeline.CreateMessage();
@@ -504,7 +612,7 @@ namespace AzureSample.ResourceManager.Storage
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<LegalHold>(legalHold);
+            content.JsonWriter.WriteObjectValue(legalHold);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -576,6 +684,23 @@ namespace AzureSample.ResourceManager.Storage
             }
         }
 
+        internal RequestUriBuilder CreateClearLegalHoldRequestUri(string subscriptionId, string resourceGroupName, string accountName, string containerName, LegalHold legalHold)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
+            uri.AppendPath(accountName, true);
+            uri.AppendPath("/blobServices/default/containers/", false);
+            uri.AppendPath(containerName, true);
+            uri.AppendPath("/clearLegalHold", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateClearLegalHoldRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName, LegalHold legalHold)
         {
             var message = _pipeline.CreateMessage();
@@ -597,7 +722,7 @@ namespace AzureSample.ResourceManager.Storage
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<LegalHold>(legalHold);
+            content.JsonWriter.WriteObjectValue(legalHold);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -669,6 +794,24 @@ namespace AzureSample.ResourceManager.Storage
             }
         }
 
+        internal RequestUriBuilder CreateCreateOrUpdateImmutabilityPolicyRequestUri(string subscriptionId, string resourceGroupName, string accountName, string containerName, ImmutabilityPolicyData data, string ifMatch)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
+            uri.AppendPath(accountName, true);
+            uri.AppendPath("/blobServices/default/containers/", false);
+            uri.AppendPath(containerName, true);
+            uri.AppendPath("/immutabilityPolicies/", false);
+            uri.AppendPath("default", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateOrUpdateImmutabilityPolicyRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName, ImmutabilityPolicyData data, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
@@ -695,7 +838,7 @@ namespace AzureSample.ResourceManager.Storage
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<ImmutabilityPolicyData>(data);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -767,6 +910,24 @@ namespace AzureSample.ResourceManager.Storage
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetImmutabilityPolicyRequestUri(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
+            uri.AppendPath(accountName, true);
+            uri.AppendPath("/blobServices/default/containers/", false);
+            uri.AppendPath(containerName, true);
+            uri.AppendPath("/immutabilityPolicies/", false);
+            uri.AppendPath("default", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetImmutabilityPolicyRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch)
@@ -865,6 +1026,24 @@ namespace AzureSample.ResourceManager.Storage
             }
         }
 
+        internal RequestUriBuilder CreateDeleteImmutabilityPolicyRequestUri(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
+            uri.AppendPath(accountName, true);
+            uri.AppendPath("/blobServices/default/containers/", false);
+            uri.AppendPath(containerName, true);
+            uri.AppendPath("/immutabilityPolicies/", false);
+            uri.AppendPath("default", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteImmutabilityPolicyRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
@@ -954,6 +1133,23 @@ namespace AzureSample.ResourceManager.Storage
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateLockImmutabilityPolicyRequestUri(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
+            uri.AppendPath(accountName, true);
+            uri.AppendPath("/blobServices/default/containers/", false);
+            uri.AppendPath(containerName, true);
+            uri.AppendPath("/immutabilityPolicies/default/lock", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateLockImmutabilityPolicyRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch)
@@ -1046,6 +1242,23 @@ namespace AzureSample.ResourceManager.Storage
             }
         }
 
+        internal RequestUriBuilder CreateExtendImmutabilityPolicyRequestUri(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicyData data)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
+            uri.AppendPath(accountName, true);
+            uri.AppendPath("/blobServices/default/containers/", false);
+            uri.AppendPath(containerName, true);
+            uri.AppendPath("/immutabilityPolicies/default/extend", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateExtendImmutabilityPolicyRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicyData data)
         {
             var message = _pipeline.CreateMessage();
@@ -1070,7 +1283,7 @@ namespace AzureSample.ResourceManager.Storage
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue<ImmutabilityPolicyData>(data);
+                content.JsonWriter.WriteObjectValue(data);
                 request.Content = content;
             }
             _userAgent.Apply(message);
@@ -1145,6 +1358,23 @@ namespace AzureSample.ResourceManager.Storage
             }
         }
 
+        internal RequestUriBuilder CreateLeaseRequestUri(string subscriptionId, string resourceGroupName, string accountName, string containerName, LeaseContainerContent content)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
+            uri.AppendPath(accountName, true);
+            uri.AppendPath("/blobServices/default/containers/", false);
+            uri.AppendPath(containerName, true);
+            uri.AppendPath("/lease", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateLeaseRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName, LeaseContainerContent content)
         {
             var message = _pipeline.CreateMessage();
@@ -1168,7 +1398,7 @@ namespace AzureSample.ResourceManager.Storage
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content0 = new Utf8JsonRequestContent();
-                content0.JsonWriter.WriteObjectValue<LeaseContainerContent>(content);
+                content0.JsonWriter.WriteObjectValue(content);
                 request.Content = content0;
             }
             _userAgent.Apply(message);
@@ -1237,6 +1467,23 @@ namespace AzureSample.ResourceManager.Storage
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateObjectLevelWormRequestUri(string subscriptionId, string resourceGroupName, string accountName, string containerName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
+            uri.AppendPath(accountName, true);
+            uri.AppendPath("/blobServices/default/containers/", false);
+            uri.AppendPath(containerName, true);
+            uri.AppendPath("/migrate", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateObjectLevelWormRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName)
@@ -1314,6 +1561,14 @@ namespace AzureSample.ResourceManager.Storage
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListNextPageRequestUri(string nextLink, string subscriptionId, string resourceGroupName, string accountName, int? maxpagesize, string filter, ListContainersInclude? include)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string accountName, int? maxpagesize, string filter, ListContainersInclude? include)

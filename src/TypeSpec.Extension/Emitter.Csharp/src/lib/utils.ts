@@ -3,24 +3,19 @@ import {
     EnumMember,
     Model,
     ModelProperty,
-    Namespace,
     Operation,
-    Scalar,
-    getProjectedName
+    Scalar
 } from "@typespec/compiler";
-import { projectedNameJsonKey } from "../constants.js";
 import {
     SdkContext,
     getLibraryName,
     getSdkModel
 } from "@azure-tools/typespec-client-generator-core";
-import { InputParameter } from "../type/inputParameter.js";
-import { InputPrimitiveType, InputType } from "../type/inputType.js";
-import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
-import { RequestLocation } from "../type/requestLocation.js";
-import { InputOperationParameterKind } from "../type/inputOperationParameterKind.js";
-import { InputConstant } from "../type/inputConstant.js";
-import { InputTypeKind } from "../type/inputTypeKind.js";
+import { InputParameter } from "../type/input-parameter.js";
+import { InputPrimitiveType, InputType } from "../type/input-type.js";
+import { RequestLocation } from "../type/request-location.js";
+import { InputOperationParameterKind } from "../type/input-operation-parameter-kind.js";
+import { InputConstant } from "../type/input-constant.js";
 
 export function capitalize(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -45,33 +40,17 @@ export function getTypeName(
     context: SdkContext,
     type: Model | Enum | EnumMember | ModelProperty | Scalar | Operation
 ): string {
-    var name = getLibraryName(context, type);
+    const name = getLibraryName(context, type);
     if (type.kind !== "Model") return name;
     if (type.name === name) {
-        var templateName = getNameForTemplate(type);
+        const templateName = getNameForTemplate(type);
         if (templateName === "") {
             const sdkModel = getSdkModel(context, type as Model);
-            return sdkModel.generatedName || sdkModel.name;
+            return sdkModel.name;
         }
         return templateName;
     }
     return name;
-}
-
-export function getFullNamespaceString(
-    namespace: Namespace | undefined
-): string {
-    if (!namespace || !namespace.name) {
-        return "";
-    }
-
-    let namespaceString: string = namespace.name;
-    let current: Namespace | undefined = namespace.namespace;
-    while (current && current.name) {
-        namespaceString = `${current.name}.${namespaceString}`;
-        current = current.namespace;
-    }
-    return namespaceString;
 }
 
 export function createContentTypeOrAcceptParameter(
@@ -82,8 +61,7 @@ export function createContentTypeOrAcceptParameter(
     const isContentType: boolean =
         nameInRequest.toLowerCase() === "content-type";
     const inputType: InputType = {
-        Kind: InputTypeKind.Primitive,
-        Name: InputPrimitiveTypeKind.String,
+        Kind: "string",
         IsNullable: false
     } as InputPrimitiveType;
     return {

@@ -18,7 +18,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 {
     internal partial class DedicatedHostAvailableCapacity : IUtf8JsonSerializable, IJsonModel<DedicatedHostAvailableCapacity>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DedicatedHostAvailableCapacity>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DedicatedHostAvailableCapacity>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
         void IJsonModel<DedicatedHostAvailableCapacity>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -35,7 +35,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in AllocatableVms)
                 {
-                    writer.WriteObjectValue<DedicatedHostAllocatableVm>(item, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -71,7 +71,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 
         internal static DedicatedHostAvailableCapacity DeserializeDedicatedHostAvailableCapacity(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,7 +79,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
             IReadOnlyList<DedicatedHostAllocatableVm> allocatableVms = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("allocatableVMs"u8))
@@ -98,10 +98,10 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new DedicatedHostAvailableCapacity(allocatableVms ?? new ChangeTrackingList<DedicatedHostAllocatableVm>(), serializedAdditionalRawData);
         }
 
@@ -117,17 +117,18 @@ namespace AzureSample.ResourceManager.Sample.Models
             builder.AppendLine("{");
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AllocatableVms), out propertyOverride);
-            if (Optional.IsCollectionDefined(AllocatableVms) || hasPropertyOverride)
+            if (hasPropertyOverride)
             {
-                if (AllocatableVms.Any() || hasPropertyOverride)
+                builder.Append("  allocatableVMs: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsCollectionDefined(AllocatableVms))
                 {
-                    builder.Append("  allocatableVMs: ");
-                    if (hasPropertyOverride)
+                    if (AllocatableVms.Any())
                     {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
+                        builder.Append("  allocatableVMs: ");
                         builder.AppendLine("[");
                         foreach (var item in AllocatableVms)
                         {

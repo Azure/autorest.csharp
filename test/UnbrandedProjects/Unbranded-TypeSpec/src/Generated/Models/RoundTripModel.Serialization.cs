@@ -29,12 +29,7 @@ namespace UnbrandedTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredCollection)
             {
-                if (item == null)
-                {
-                    writer.WriteNullValue();
-                    continue;
-                }
-                writer.WriteStringValue(item.Value.ToSerialString());
+                writer.WriteStringValue(item.ToSerialString());
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredDictionary"u8);
@@ -42,16 +37,11 @@ namespace UnbrandedTypeSpec.Models
             foreach (var item in RequiredDictionary)
             {
                 writer.WritePropertyName(item.Key);
-                if (item.Value == null)
-                {
-                    writer.WriteNullValue();
-                    continue;
-                }
-                writer.WriteStringValue(item.Value.Value.ToString());
+                writer.WriteStringValue(item.Value.ToString());
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
-            writer.WriteObjectValue<Thing>(RequiredModel, options);
+            writer.WriteObjectValue(RequiredModel, options);
             if (Optional.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
@@ -70,7 +60,7 @@ namespace UnbrandedTypeSpec.Models
             if (Optional.IsDefined(FloatExtensibleEnum))
             {
                 writer.WritePropertyName("floatExtensibleEnum"u8);
-                writer.WriteNumberValue(FloatExtensibleEnum.Value.ToSerialInt32());
+                writer.WriteNumberValue(FloatExtensibleEnum.Value.ToSerialSingle());
             }
             if (Optional.IsCollectionDefined(FloatExtensibleEnumCollection))
             {
@@ -78,7 +68,7 @@ namespace UnbrandedTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in FloatExtensibleEnumCollection)
                 {
-                    writer.WriteNumberValue(item.ToSerialInt32());
+                    writer.WriteNumberValue(item.ToSerialSingle());
                 }
                 writer.WriteEndArray();
             }
@@ -114,15 +104,8 @@ namespace UnbrandedTypeSpec.Models
             }
             if (Optional.IsDefined(StringFixedEnum))
             {
-                if (StringFixedEnum != null)
-                {
-                    writer.WritePropertyName("stringFixedEnum"u8);
-                    writer.WriteStringValue(StringFixedEnum.Value.ToSerialString());
-                }
-                else
-                {
-                    writer.WriteNull("stringFixedEnum");
-                }
+                writer.WritePropertyName("stringFixedEnum"u8);
+                writer.WriteStringValue(StringFixedEnum.Value.ToSerialString());
             }
             writer.WritePropertyName("requiredUnknown"u8);
 #if NET6_0_OR_GREATER
@@ -235,7 +218,7 @@ namespace UnbrandedTypeSpec.Models
                 writer.WriteEndObject();
             }
             writer.WritePropertyName("modelWithRequiredNullable"u8);
-            writer.WriteObjectValue<ModelWithRequiredNullableProperties>(ModelWithRequiredNullable, options);
+            writer.WriteObjectValue(ModelWithRequiredNullable, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -268,7 +251,7 @@ namespace UnbrandedTypeSpec.Models
 
         internal static RoundTripModel DeserializeRoundTripModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= new ModelReaderWriterOptions("W");
+            options ??= ModelSerializationExtensions.WireOptions;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -276,8 +259,8 @@ namespace UnbrandedTypeSpec.Models
             }
             string requiredString = default;
             int requiredInt = default;
-            IList<StringFixedEnum?> requiredCollection = default;
-            IDictionary<string, StringExtensibleEnum?> requiredDictionary = default;
+            IList<StringFixedEnum> requiredCollection = default;
+            IDictionary<string, StringExtensibleEnum> requiredDictionary = default;
             Thing requiredModel = default;
             IntExtensibleEnum? intExtensibleEnum = default;
             IList<IntExtensibleEnum> intExtensibleEnumCollection = default;
@@ -296,7 +279,7 @@ namespace UnbrandedTypeSpec.Models
             IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown = default;
             ModelWithRequiredNullableProperties modelWithRequiredNullable = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"u8))
@@ -311,34 +294,20 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (property.NameEquals("requiredCollection"u8))
                 {
-                    List<StringFixedEnum?> array = new List<StringFixedEnum?>();
+                    List<StringFixedEnum> array = new List<StringFixedEnum>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString().ToStringFixedEnum());
-                        }
+                        array.Add(item.GetString().ToStringFixedEnum());
                     }
                     requiredCollection = array;
                     continue;
                 }
                 if (property.NameEquals("requiredDictionary"u8))
                 {
-                    Dictionary<string, StringExtensibleEnum?> dictionary = new Dictionary<string, StringExtensibleEnum?>();
+                    Dictionary<string, StringExtensibleEnum> dictionary = new Dictionary<string, StringExtensibleEnum>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, new StringExtensibleEnum(property0.Value.GetString()));
-                        }
+                        dictionary.Add(property0.Name, new StringExtensibleEnum(property0.Value.GetString()));
                     }
                     requiredDictionary = dictionary;
                     continue;
@@ -377,7 +346,7 @@ namespace UnbrandedTypeSpec.Models
                     {
                         continue;
                     }
-                    floatExtensibleEnum = new FloatExtensibleEnum(property.Value.GetInt32());
+                    floatExtensibleEnum = new FloatExtensibleEnum(property.Value.GetSingle());
                     continue;
                 }
                 if (property.NameEquals("floatExtensibleEnumCollection"u8))
@@ -389,7 +358,7 @@ namespace UnbrandedTypeSpec.Models
                     List<FloatExtensibleEnum> array = new List<FloatExtensibleEnum>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(new FloatExtensibleEnum(item.GetInt32()));
+                        array.Add(new FloatExtensibleEnum(item.GetSingle()));
                     }
                     floatExtensibleEnumCollection = array;
                     continue;
@@ -444,7 +413,6 @@ namespace UnbrandedTypeSpec.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        stringFixedEnum = null;
                         continue;
                     }
                     stringFixedEnum = property.Value.GetString().ToStringFixedEnum();
@@ -547,10 +515,10 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (options.Format != "W")
                 {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
+            serializedAdditionalRawData = rawDataDictionary;
             return new RoundTripModel(
                 requiredString,
                 requiredInt,
@@ -615,10 +583,10 @@ namespace UnbrandedTypeSpec.Models
             return DeserializeRoundTripModel(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual BinaryContent ToBinaryBody()
+        /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>
+        internal virtual BinaryContent ToBinaryContent()
         {
-            return BinaryContent.Create(this, new ModelReaderWriterOptions("W"));
+            return BinaryContent.Create(this, ModelSerializationExtensions.WireOptions);
         }
     }
 }

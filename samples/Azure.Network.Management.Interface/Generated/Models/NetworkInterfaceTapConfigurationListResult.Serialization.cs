@@ -44,5 +44,13 @@ namespace Azure.Network.Management.Interface.Models
             }
             return new NetworkInterfaceTapConfigurationListResult(value ?? new ChangeTrackingList<NetworkInterfaceTapConfiguration>(), nextLink);
         }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static NetworkInterfaceTapConfigurationListResult FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
+        }
     }
 }

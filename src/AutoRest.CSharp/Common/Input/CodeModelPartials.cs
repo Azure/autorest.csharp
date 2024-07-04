@@ -41,20 +41,6 @@ namespace AutoRest.CSharp.Input
             }
         }
 
-        // This is a new extension introduced by generator to control whether interim state returns are supported in lro.
-        public bool IsInterimLongRunningStateEnabled
-        {
-            get
-            {
-                var isInterimStatusEnabled = Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")?.GetValue<string>("enable-interim-state");
-                return isInterimStatusEnabled switch
-                {
-                    "true" => true,
-                    _ => false,
-                };
-            }
-        }
-
         public string? Accessibility => Extensions.GetValue<string>("x-accessibility");
 
         public ServiceResponse LongRunningInitialResponse
@@ -137,16 +123,6 @@ namespace AutoRest.CSharp.Input
         public bool? BufferResponse => TryGetValue("x-csharp-buffer-response", out object? value) && value != null ? (bool?)Convert.ToBoolean(value) : null;
 
         public bool SkipEncoding => TryGetValue("x-ms-skip-url-encoding", out var value) && Convert.ToBoolean(value);
-
-        public bool MgmtReferenceType => TryGetValue("x-ms-mgmt-referenceType", out var value) && Convert.ToBoolean(value);
-
-        public bool MgmtPropertyReferenceType => TryGetValue("x-ms-mgmt-propertyReferenceType", out var value) && Convert.ToBoolean(value);
-
-        /// <summary>
-        /// Indicate whether the definition has property <c>x-ms-mgmt-typeReferenceType</c> defined as <c>true</c>.
-        /// See: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/src/autorest.md
-        /// </summary>
-        public bool MgmtTypeReferenceType => TryGetValue("x-ms-mgmt-typeReferenceType", out var value) && Convert.ToBoolean(value);
 
         public string? Format
         {
