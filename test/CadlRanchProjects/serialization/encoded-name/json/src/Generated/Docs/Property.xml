@@ -7,13 +7,23 @@ This sample shows how to call SendAsync.
 <code><![CDATA[
 Property client = new JsonClient().GetPropertyClient();
 
+<<<<<<< HEAD
 Response response = await client.SendAsync(true);
+=======
+JsonEncodedNameModel body = new JsonEncodedNameModel(true);
+Response response = await client.SendAsync(body);
+>>>>>>> origin/feature/v3
 ]]></code>
 This sample shows how to call SendAsync with all parameters.
 <code><![CDATA[
 Property client = new JsonClient().GetPropertyClient();
 
+<<<<<<< HEAD
 Response response = await client.SendAsync(true);
+=======
+JsonEncodedNameModel body = new JsonEncodedNameModel(true);
+Response response = await client.SendAsync(body);
+>>>>>>> origin/feature/v3
 ]]></code></example>
     </member>
     <member name="Send(bool,CancellationToken)">
@@ -22,13 +32,23 @@ This sample shows how to call Send.
 <code><![CDATA[
 Property client = new JsonClient().GetPropertyClient();
 
+<<<<<<< HEAD
 Response response = client.Send(true);
+=======
+JsonEncodedNameModel body = new JsonEncodedNameModel(true);
+Response response = client.Send(body);
+>>>>>>> origin/feature/v3
 ]]></code>
 This sample shows how to call Send with all parameters.
 <code><![CDATA[
 Property client = new JsonClient().GetPropertyClient();
 
+<<<<<<< HEAD
 Response response = client.Send(true);
+=======
+JsonEncodedNameModel body = new JsonEncodedNameModel(true);
+Response response = client.Send(body);
+>>>>>>> origin/feature/v3
 ]]></code></example>
     </member>
     <member name="SendAsync(RequestContent,RequestContext)">

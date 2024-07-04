@@ -14,38 +14,28 @@ import {
     SdkEnumValueType,
     SdkModelPropertyType,
     SdkModelType,
-    SdkTupleType,
     SdkType,
     SdkUnionType,
     UsageFlags,
-    isReadOnly,
-    isSdkBuiltInKind
+    getAccessOverride,
+    isReadOnly
 } from "@azure-tools/typespec-client-generator-core";
-import {
-    DateTimeKnownEncoding,
-    DurationKnownEncoding,
-    EncodeData,
-    IntrinsicType,
-    Model
-} from "@typespec/compiler";
-import { Logger } from "./logger.js";
-import { getFullNamespaceString } from "./utils.js";
+import { Model } from "@typespec/compiler";
 import { InputEnumTypeValue } from "../type/input-enum-type-value.js";
-import { InputIntrinsicTypeKind } from "../type/input-intrinsic-type-kind.js";
 import { InputModelProperty } from "../type/input-model-property.js";
-import { InputPrimitiveTypeKind } from "../type/input-primitive-type-kind.js";
 import {
+    InputDateTimeType,
     InputDictionaryType,
+    InputDurationType,
     InputEnumType,
-    InputIntrinsicType,
-    InputListType,
+    InputArrayType,
     InputLiteralType,
     InputModelType,
+    InputNullableType,
     InputPrimitiveType,
     InputType,
     InputUnionType
 } from "../type/input-type.js";
-import { InputTypeKind } from "../type/input-type-kind.js";
 import { LiteralTypeContext } from "../type/literal-type-context.js";
 import { Usage } from "../type/usage.js";
 
@@ -56,6 +46,13 @@ export function fromSdkType(
     enums: Map<string, InputEnumType>,
     literalTypeContext?: LiteralTypeContext
 ): InputType {
+    if (sdkType.kind === "nullable") {
+        const inputType = fromSdkType(sdkType.type, context, models, enums);
+        return {
+            Kind: "nullable",
+            Type: inputType
+        } as InputNullableType;
+    }
     if (sdkType.kind === "model")
         return fromSdkModelType(sdkType, context, models, enums);
     if (sdkType.kind === "enum")
@@ -81,20 +78,19 @@ export function fromSdkType(
         );
     if (sdkType.kind === "union")
         return fromUnionType(sdkType, context, models, enums);
-    if (sdkType.kind === "utcDateTime" || sdkType.kind == "offsetDateTime")
-        return fromSdkDatetimeType(sdkType);
-    if (sdkType.kind === "duration") return fromSdkDurationType(sdkType);
-    if (sdkType.kind === "bytes") return fromBytesType(sdkType);
-    if (sdkType.kind === "string") return fromStringType(sdkType);
-    if (sdkType.kind === "tuple") return fromTupleType(sdkType);
-    // TODO -- refine the other types from TCGC
-    if (sdkType.__raw?.kind === "Scalar") return fromScalarType(sdkType);
-    // this happens for discriminator type, normally all other primitive types should be handled in scalar above
-    // TODO: can we improve the type in TCGC around discriminator
-    if (sdkType.__raw?.kind === "Intrinsic") return fromIntrinsicType(sdkType);
-    if (isSdkBuiltInKind(sdkType.kind))
-        return fromSdkBuiltInType(sdkType as SdkBuiltInType);
-    return {} as InputType;
+    if (sdkType.kind === "utcDateTime" || sdkType.kind === "offsetDateTime")
+        return fromSdkDateTimeType(sdkType);
+    if (sdkType.kind === "duration")
+        return fromSdkDurationType(sdkType as SdkDurationType);
+    if (sdkType.kind === "tuple") return fromTupleType();
+    // TODO -- only in operations we could have these types, considering we did not adopt getAllOperations from TCGC yet, this should be fine.
+    // we need to resolve these conversions when we adopt getAllOperations
+    if (sdkType.kind === "credential")
+        throw new Error("Credential type is not supported yet.");
+    if (sdkType.kind === "endpoint")
+        throw new Error("Endpoint type is not supported yet.");
+
+    return fromSdkBuiltInType(sdkType);
 }
 
 export function fromSdkModelType(
@@ -106,134 +102,124 @@ export function fromSdkModelType(
     const modelTypeName = modelType.name;
     let inputModelType = models.get(modelTypeName);
     if (!inputModelType) {
-        const baseModelHasDiscriminator = hasDiscriminator(modelType.baseModel);
         inputModelType = {
-            Kind: InputTypeKind.Model,
+            Kind: "model",
             Name: modelTypeName,
-            Namespace: getFullNamespaceString(
-                (modelType.__raw as Model).namespace
-            ),
-            Accessibility: modelType.access,
-            Deprecated: modelType.deprecation,
+            CrossLanguageDefinitionId: modelType.crossLanguageDefinitionId,
+            Access: getAccessOverride(
+                context,
+                modelType.__raw as Model
+            ) /* when tcgc provide a way to identify if the access is override or not, we can get the accessibility from the modelType.access */,
+            Usage: fromUsageFlags(modelType.usage),
+            Deprecation: modelType.deprecation,
             Description: modelType.description,
-            IsNullable: modelType.nullable,
-            DiscriminatorPropertyName: baseModelHasDiscriminator
-                ? undefined
-                : getDiscriminatorPropertyNameFromCurrentModel(modelType),
-            DiscriminatorValue: modelType.discriminatorValue,
-            Usage: fromUsageFlags(modelType.usage)
+            DiscriminatorValue: modelType.discriminatorValue
         } as InputModelType;
 
         models.set(modelTypeName, inputModelType);
+
+        inputModelType.AdditionalProperties = modelType.additionalProperties
+            ? fromSdkType(
+                  modelType.additionalProperties,
+                  context,
+                  models,
+                  enums
+              )
+            : undefined;
+
+        const propertiesDict = new Map<
+            SdkModelPropertyType,
+            InputModelProperty[]
+        >();
+        for (const property of modelType.properties) {
+            if (property.kind !== "property") {
+                continue;
+            }
+            const ourProperties = fromSdkModelProperty(
+                property,
+                {
+                    ModelName: modelTypeName
+                } as LiteralTypeContext,
+                []
+            );
+            propertiesDict.set(property, ourProperties);
+        }
+
+        inputModelType.DiscriminatorProperty = modelType.discriminatorProperty
+            ? propertiesDict.get(modelType.discriminatorProperty)![0]
+            : undefined;
 
         inputModelType.BaseModel = modelType.baseModel
             ? fromSdkModelType(modelType.baseModel, context, models, enums)
             : undefined;
 
-        inputModelType.InheritedDictionaryType = modelType.additionalProperties
-            ? ({
-                  Kind: InputTypeKind.Dictionary,
-                  Name: InputTypeKind.Dictionary,
-                  KeyType: {
-                      Kind: InputTypeKind.Primitive,
-                      Name: InputPrimitiveTypeKind.String,
-                      IsNullable: false
-                  } as InputPrimitiveType,
-                  ValueType: fromSdkType(
-                      modelType.additionalProperties,
-                      context,
-                      models,
-                      enums
-                  ),
-                  IsNullable: false
-              } as InputDictionaryType)
-            : undefined;
-        inputModelType.Properties = modelType.properties
-            .filter(
-                (p) =>
-                    !(p as SdkBodyModelPropertyType).discriminator ||
-                    !baseModelHasDiscriminator
-            )
-            .filter(
-                (p) =>
-                    p.kind !== "header" &&
-                    p.kind !== "query" &&
-                    p.kind !== "path"
-            )
-            .map((p) =>
-                fromSdkModelProperty(
-                    p,
-                    {
-                        ModelName: inputModelType?.Name,
-                        Namespace: inputModelType?.Namespace
-                    } as LiteralTypeContext,
-                    []
-                )
-            )
-            .flat();
+        inputModelType.Properties = Array.from(propertiesDict.values()).flat();
+
+        if (modelType.discriminatedSubtypes) {
+            const discriminatedSubtypes: Record<string, InputModelType> = {};
+            for (const key in modelType.discriminatedSubtypes) {
+                const subtype = modelType.discriminatedSubtypes[key];
+                discriminatedSubtypes[key] = fromSdkModelType(
+                    subtype,
+                    context,
+                    models,
+                    enums
+                );
+            }
+            inputModelType.DiscriminatedSubtypes = discriminatedSubtypes;
+        }
     }
 
     return inputModelType;
 
     function fromSdkModelProperty(
-        propertyType: SdkModelPropertyType,
+        property: SdkBodyModelPropertyType,
         literalTypeContext: LiteralTypeContext,
         flattenedNamePrefixes: string[]
     ): InputModelProperty[] {
-        if (propertyType.kind !== "property" || !propertyType.flatten) {
-            const serializedName =
-                propertyType.kind === "property"
-                    ? (propertyType as SdkBodyModelPropertyType).serializedName
-                    : "";
+        // TODO -- we should consolidate the flatten somewhere else
+        if (!property.flatten) {
+            const serializedName = property.serializedName;
             literalTypeContext.PropertyName = serializedName;
 
-            const isRequired =
-                propertyType.kind === "path" || propertyType.kind === "body"
-                    ? true
-                    : !propertyType.optional; // TO-DO: SdkBodyParameter lacks of optional
-            const isDiscriminator =
-                propertyType.kind === "property" && propertyType.discriminator
-                    ? true
-                    : false;
+            const isRequired = !property.optional;
+            const isDiscriminator = property.discriminator;
             const modelProperty: InputModelProperty = {
-                Name: propertyType.name,
+                Name: property.name,
                 SerializedName: serializedName,
                 Description:
-                    propertyType.description ??
+                    property.description ??
                     (isDiscriminator ? "Discriminator" : ""),
                 Type: fromSdkType(
-                    propertyType.type,
+                    property.type,
                     context,
                     models,
                     enums,
-                    literalTypeContext
+                    isDiscriminator ? undefined : literalTypeContext // this is a workaround because the type of discriminator property in derived models is always literal and we wrap literal into enums, which leads to a lot of extra enum types, adding this check to avoid them
                 ),
                 IsRequired: isRequired,
-                IsReadOnly:
-                    propertyType.kind === "property" &&
-                    isReadOnly(propertyType),
+                IsReadOnly: isReadOnly(property),
                 IsDiscriminator: isDiscriminator === true ? true : undefined,
                 FlattenedNames:
                     flattenedNamePrefixes.length > 0
-                        ? flattenedNamePrefixes.concat(propertyType.name)
+                        ? flattenedNamePrefixes.concat(property.name)
                         : undefined
             };
 
             return [modelProperty];
         }
 
-        let flattenedProperties: InputModelProperty[] = [];
-        const modelPropertyType = propertyType as SdkBodyModelPropertyType;
-        const childPropertiesToFlatten = (
-            modelPropertyType.type as SdkModelType
-        ).properties;
+        const flattenedProperties: InputModelProperty[] = [];
+        const childPropertiesToFlatten = (property.type as SdkModelType)
+            .properties;
         const newFlattenedNamePrefixes = flattenedNamePrefixes.concat(
-            modelPropertyType.serializedName
+            property.serializedName
         );
-        for (let index = 0; index < childPropertiesToFlatten.length; index++) {
-            flattenedProperties = flattenedProperties.concat(
-                fromSdkModelProperty(
-                    childPropertiesToFlatten[index],
+        for (const childProperty of childPropertiesToFlatten) {
+            if (childProperty.kind !== "property") continue;
+            flattenedProperties.push(
+                ...fromSdkModelProperty(
+                    childProperty,
                     literalTypeContext,
                     newFlattenedNamePrefixes
                 )
@@ -242,32 +228,6 @@ export function fromSdkModelType(
 
         return flattenedProperties;
     }
-}
-
-function getDiscriminatorPropertyNameFromCurrentModel(
-    model?: SdkModelType
-): string | undefined {
-    if (model == null) return undefined;
-
-    const discriminatorProperty = model.properties.find(
-        (p) => (p as SdkBodyModelPropertyType).discriminator
-    );
-    if (discriminatorProperty) return discriminatorProperty.name;
-
-    return undefined;
-}
-
-function hasDiscriminator(model?: SdkModelType): boolean {
-    if (model == null) return false;
-
-    if (
-        model.properties.some(
-            (p) => (p as SdkBodyModelPropertyType).discriminator
-        )
-    )
-        return true;
-
-    return hasDiscriminator(model.baseModel);
 }
 
 export function fromSdkEnumType(
@@ -280,335 +240,56 @@ export function fromSdkEnumType(
     let inputEnumType = enums.get(enumName);
     if (inputEnumType === undefined) {
         const newInputEnumType: InputEnumType = {
-            Kind: InputTypeKind.Enum,
+            Kind: "enum",
             Name: enumName,
-            EnumValueType: fromScalarType(enumType.valueType).Name,
-            AllowedValues: enumType.values.map((v) => fromSdkEnumValueType(v)),
-            Namespace: getFullNamespaceString(
-                // Enum and Union have optional namespace property
-                (enumType.__raw! as any).namespace
-            ),
-            Accessibility: enumType.access,
+            CrossLanguageDefinitionId: enumType.crossLanguageDefinitionId,
+            ValueType: fromSdkBuiltInType(enumType.valueType),
+            Values: enumType.values.map((v) => fromSdkEnumValueType(v)),
+            Accessibility: getAccessOverride(
+                context,
+                enumType.__raw as any
+            ) /* when tcgc provide a way to identify if the access is override or not, we can get the accessibility from the enumType.access,*/,
             Deprecated: enumType.deprecation,
             Description: enumType.description,
             IsExtensible: enumType.isFixed ? false : true,
-            IsNullable: enumType.nullable,
             Usage: fromUsageFlags(enumType.usage)
         };
         if (addToCollection) enums.set(enumName, newInputEnumType);
         inputEnumType = newInputEnumType;
     }
-    inputEnumType.IsNullable = enumType.nullable; // TO-DO: https://github.com/Azure/autorest.csharp/issues/4314
     return inputEnumType;
 }
 
-function fromSdkDatetimeType(
-    dateTimeType: SdkDatetimeType
-): InputPrimitiveType {
-    function fromDateTimeKnownEncoding(
-        encoding: DateTimeKnownEncoding
-    ): InputPrimitiveTypeKind {
-        switch (encoding) {
-            case "rfc3339":
-                return InputPrimitiveTypeKind.DateTimeRFC3339;
-            case "rfc7231":
-                return InputPrimitiveTypeKind.DateTimeRFC7231;
-            case "unixTimestamp":
-                return InputPrimitiveTypeKind.DateTimeUnix;
-        }
-    }
-
+function fromSdkDateTimeType(dateTimeType: SdkDatetimeType): InputDateTimeType {
     return {
-        Kind: InputTypeKind.Primitive,
-        Name: fromDateTimeKnownEncoding(dateTimeType.encode),
-        IsNullable: dateTimeType.nullable
-    } as InputPrimitiveType;
+        Kind: dateTimeType.kind,
+        Encode: dateTimeType.encode,
+        WireType: fromSdkBuiltInType(dateTimeType.wireType)
+    };
 }
 
-function fromSdkDurationType(
-    durationType: SdkDurationType
-): InputPrimitiveType {
-    function fromDurationKnownEncoding(
-        encode: DurationKnownEncoding,
-        wireType: SdkBuiltInType
-    ): InputPrimitiveTypeKind {
-        switch (encode) {
-            case "ISO8601":
-                return InputPrimitiveTypeKind.DurationISO8601;
-            case "seconds":
-                if (wireType.kind === "float" || wireType.kind === "float32") {
-                    return InputPrimitiveTypeKind.DurationSecondsFloat;
-                }
-                if (wireType.kind === "float64") {
-                    return InputPrimitiveTypeKind.DurationSecondsDouble;
-                }
-                return InputPrimitiveTypeKind.DurationSeconds;
-            default:
-                Logger.getInstance().warn(
-                    `invalid encode '${encode}' and wireType '${wireType.kind}' for duration.`
-                );
-                return InputPrimitiveTypeKind.DurationISO8601;
-        }
-    }
-
+function fromSdkDurationType(durationType: SdkDurationType): InputDurationType {
     return {
-        Kind: InputTypeKind.Primitive,
-        Name: fromDurationKnownEncoding(
-            durationType.encode,
-            durationType.wireType
-        ),
-        IsNullable: durationType.nullable
-    } as InputPrimitiveType;
+        Kind: durationType.kind,
+        Encode: durationType.encode,
+        WireType: fromSdkBuiltInType(durationType.wireType)
+    };
 }
 
 // TODO: tuple is not officially supported
-function fromTupleType(tupleType: SdkTupleType): InputIntrinsicType {
+function fromTupleType(): InputPrimitiveType {
     return {
-        Kind: InputTypeKind.Intrinsic,
-        Name: InputIntrinsicTypeKind.Unknown,
-        IsNullable: tupleType.nullable
-    } as InputIntrinsicType;
-}
-
-function fromBytesType(bytesType: SdkBuiltInType): InputPrimitiveType {
-    function fromBytesEncoding(encode: string): InputPrimitiveTypeKind {
-        switch (encode) {
-            case undefined:
-            case "base64":
-                return InputPrimitiveTypeKind.Bytes;
-            case "base64url":
-                return InputPrimitiveTypeKind.BytesBase64Url;
-            default:
-                Logger.getInstance().warn(
-                    `invalid encode ${encode} for bytes.`
-                );
-                return InputPrimitiveTypeKind.Bytes;
-        }
-    }
-
-    return {
-        Kind: InputTypeKind.Primitive,
-        Name: fromBytesEncoding(bytesType.encode),
-        IsNullable: bytesType.nullable
+        Kind: "any"
     };
 }
 
-function fromStringType(stringType: SdkType): InputPrimitiveType {
+function fromSdkBuiltInType(builtInType: SdkBuiltInType): InputPrimitiveType {
     return {
-        Kind: InputTypeKind.Primitive,
-        Name: InputPrimitiveTypeKind.String,
-        IsNullable: stringType.nullable
-    };
-}
-
-function fromSdkBuiltInType(builtInType: SdkBuiltInType): InputType {
-    const builtInKind: InputPrimitiveTypeKind =
-        mapTcgcTypeToCSharpInputTypeKind(builtInType);
-    return {
-        Kind: InputTypeKind.Primitive,
-        Name: builtInKind,
-        IsNullable: builtInType.nullable
-    } as InputPrimitiveType;
-}
-
-function mapTcgcTypeToCSharpInputTypeKind(
-    type: SdkBuiltInType
-): InputPrimitiveTypeKind {
-    switch (type.kind) {
-        case "numeric":
-            return InputPrimitiveTypeKind.Float128;
-        case "integer":
-            return InputPrimitiveTypeKind.Int64;
-        case "safeint":
-            return InputPrimitiveTypeKind.SafeInt;
-        case "int8":
-            return InputPrimitiveTypeKind.SByte;
-        case "int32":
-            return InputPrimitiveTypeKind.Int32;
-        case "int64":
-            return InputPrimitiveTypeKind.Int64;
-        case "uint8":
-            return InputPrimitiveTypeKind.Byte;
-        case "bytes":
-            switch (type.encode) {
-                case undefined:
-                case "":
-                case "base64":
-                    return InputPrimitiveTypeKind.Bytes;
-                case "base64url":
-                    return InputPrimitiveTypeKind.BytesBase64Url;
-                default:
-                    Logger.getInstance().warn(
-                        `invalid encode '${type.encode}' for bytes.`
-                    );
-                    return InputPrimitiveTypeKind.Bytes;
-            }
-        case "float":
-            return InputPrimitiveTypeKind.Float64;
-        case "float32":
-            return InputPrimitiveTypeKind.Float32;
-        case "float64":
-            return InputPrimitiveTypeKind.Float64;
-        case "decimal":
-            return InputPrimitiveTypeKind.Decimal;
-        case "decimal128":
-            return InputPrimitiveTypeKind.Decimal128;
-        case "uuid":
-            return InputPrimitiveTypeKind.Guid;
-        case "eTag":
-            return InputPrimitiveTypeKind.String;
-        case "azureLocation":
-            return InputPrimitiveTypeKind.AzureLocation;
-        case "string":
-            return InputPrimitiveTypeKind.String;
-        case "guid": // TODO: is this the same as uuid?
-            return InputPrimitiveTypeKind.Guid;
-        case "uri":
-        case "url":
-            return InputPrimitiveTypeKind.Uri;
-        case "boolean":
-            return InputPrimitiveTypeKind.Boolean;
-        case "plainDate":
-            return InputPrimitiveTypeKind.Date;
-        case "plainTime":
-            return InputPrimitiveTypeKind.Time;
-        case "any":
-            return InputPrimitiveTypeKind.Object;
-        case "int16": // TODO: add support for those types
-        case "uint16":
-        case "uint32":
-        case "uint64":
-        case "ipV4Address":
-        case "ipV6Address":
-        case "password":
-        case "armId":
-        case "ipAddress":
-        default:
-            throw new Error(`Unsupported built-in type kind '${type.kind}'`);
-    }
-}
-
-function fromScalarType(scalarType: SdkType): InputPrimitiveType {
-    return {
-        Kind: InputTypeKind.Primitive,
-        Name: getCSharpInputTypeKindByPrimitiveModelName(
-            scalarType.kind,
-            undefined // To-DO: encode not compatible
-        ),
-        IsNullable: scalarType.nullable
-    };
-
-    function getCSharpInputTypeKindByPrimitiveModelName(
-        name: string,
-        encode?: EncodeData
-    ): InputPrimitiveTypeKind {
-        switch (name) {
-            case "bytes":
-                switch (encode?.encoding) {
-                    case undefined:
-                    case "base64":
-                        return InputPrimitiveTypeKind.Bytes;
-                    case "base64url":
-                        return InputPrimitiveTypeKind.BytesBase64Url;
-                    default:
-                        Logger.getInstance().warn(
-                            `invalid encode ${encode?.encoding} for bytes.`
-                        );
-                        return InputPrimitiveTypeKind.Bytes;
-                }
-            case "int8":
-                return InputPrimitiveTypeKind.SByte;
-            case "uint8":
-                return InputPrimitiveTypeKind.Byte;
-            case "int32":
-                return InputPrimitiveTypeKind.Int32;
-            case "int64":
-                return InputPrimitiveTypeKind.Int64;
-            case "integer":
-                return InputPrimitiveTypeKind.Int64;
-            case "safeint":
-                return InputPrimitiveTypeKind.SafeInt;
-            case "float32":
-                return InputPrimitiveTypeKind.Float32;
-            case "float64":
-                return InputPrimitiveTypeKind.Float64;
-            case "decimal":
-                return InputPrimitiveTypeKind.Decimal;
-            case "decimal128":
-                return InputPrimitiveTypeKind.Decimal128;
-            case "uri":
-            case "url":
-                return InputPrimitiveTypeKind.Uri;
-            case "uuid":
-                return InputPrimitiveTypeKind.Guid;
-            case "eTag":
-                return InputPrimitiveTypeKind.String;
-            case "string":
-                return InputPrimitiveTypeKind.String;
-            case "boolean":
-                return InputPrimitiveTypeKind.Boolean;
-            case "date":
-                return InputPrimitiveTypeKind.Date;
-            case "plainDate":
-                return InputPrimitiveTypeKind.Date;
-            case "plainTime":
-                return InputPrimitiveTypeKind.Time;
-            case "datetime":
-            case "utcDateTime":
-                switch (encode?.encoding) {
-                    case undefined:
-                        return InputPrimitiveTypeKind.DateTime;
-                    case "rfc3339":
-                        return InputPrimitiveTypeKind.DateTimeRFC3339;
-                    case "rfc7231":
-                        return InputPrimitiveTypeKind.DateTimeRFC7231;
-                    case "unixTimestamp":
-                        return InputPrimitiveTypeKind.DateTimeUnix;
-                    default:
-                        Logger.getInstance().warn(
-                            `invalid encode ${encode?.encoding} for date time.`
-                        );
-                        return InputPrimitiveTypeKind.DateTime;
-                }
-            case "time":
-                return InputPrimitiveTypeKind.Time;
-            case "duration":
-                switch (encode?.encoding) {
-                    case undefined:
-                    case "ISO8601":
-                        return InputPrimitiveTypeKind.DurationISO8601;
-                    case "seconds":
-                        if (
-                            encode.type?.name === "float" ||
-                            encode.type?.name === "float32"
-                        ) {
-                            return InputPrimitiveTypeKind.DurationSecondsFloat;
-                        } else if (encode.type?.name === "float64") {
-                            return InputPrimitiveTypeKind.DurationSecondsDouble;
-                        } else {
-                            return InputPrimitiveTypeKind.DurationSeconds;
-                        }
-                    default:
-                        Logger.getInstance().warn(
-                            `invalid encode ${encode?.encoding} for duration.`
-                        );
-                        return InputPrimitiveTypeKind.DurationISO8601;
-                }
-            case "azureLocation":
-                return InputPrimitiveTypeKind.AzureLocation;
-            default:
-                return InputPrimitiveTypeKind.Object;
-        }
-    }
-}
-
-function fromIntrinsicType(scalarType: SdkType): InputIntrinsicType {
-    return {
-        Kind: InputTypeKind.Intrinsic,
-        Name: getCSharpInputTypeKindByIntrinsic(
-            scalarType.__raw! as IntrinsicType
-        ),
-        IsNullable: false
+        Kind: builtInType.kind,
+        Encode:
+            builtInType.encode !== builtInType.kind
+                ? builtInType.encode
+                : undefined // In TCGC this is required, and when there is no encoding, it just has the same value as kind, we could remove this when TCGC decides to simplify
     };
 }
 
@@ -617,21 +298,18 @@ function fromUnionType(
     context: SdkContext,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
-): InputUnionType | InputType {
-    const itemTypes: InputType[] = [];
+): InputUnionType {
+    const variantTypes: InputType[] = [];
     for (const value of union.values) {
-        const inputType = fromSdkType(value, context, models, enums);
-        itemTypes.push(inputType);
+        const variantType = fromSdkType(value, context, models, enums);
+        variantTypes.push(variantType);
     }
 
-    return itemTypes.length > 1
-        ? {
-              Kind: InputTypeKind.Union,
-              Name: InputTypeKind.Union,
-              UnionItemTypes: itemTypes,
-              IsNullable: false
-          }
-        : itemTypes[0];
+    return {
+        Kind: "union",
+        Name: union.name,
+        VariantTypes: variantTypes
+    };
 }
 
 function fromSdkConstantType(
@@ -642,9 +320,8 @@ function fromSdkConstantType(
     literalTypeContext?: LiteralTypeContext
 ): InputLiteralType {
     return {
-        Kind: InputTypeKind.Literal,
-        Name: InputTypeKind.Literal,
-        LiteralValueType:
+        Kind: constantType.kind,
+        ValueType:
             constantType.valueType.kind === "boolean" ||
             literalTypeContext === undefined
                 ? fromSdkBuiltInType(constantType.valueType)
@@ -655,8 +332,7 @@ function fromSdkConstantType(
                       enums,
                       literalTypeContext
                   ),
-        Value: constantType.value,
-        IsNullable: false
+        Value: constantType.value
     };
 
     function convertConstantToEnum(
@@ -667,14 +343,6 @@ function fromSdkConstantType(
         // otherwise we need to wrap this into an extensible enum
         // we use the model name followed by the property name as the enum name to ensure it is unique
         const enumName = `${literalTypeContext.ModelName}_${literalTypeContext.PropertyName}`;
-        const valueType = fromSdkType(
-            constantType.valueType,
-            context,
-            models,
-            enums,
-            literalTypeContext
-        ) as InputPrimitiveType;
-        const enumValueType = valueType.Name;
         const enumValueName =
             constantType.value === null
                 ? "Null"
@@ -687,16 +355,15 @@ function fromSdkConstantType(
             }
         ];
         const enumType: InputEnumType = {
-            Kind: InputTypeKind.Enum,
+            Kind: "enum",
             Name: enumName,
-            EnumValueType: enumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
-            AllowedValues: allowValues,
-            Namespace: literalTypeContext.Namespace,
+            ValueType: fromSdkBuiltInType(constantType.valueType),
+            Values: allowValues,
+            CrossLanguageDefinitionId: "",
             Accessibility: undefined,
             Deprecated: undefined,
             Description: `The ${enumName}`, // TODO -- what should we put here?
             IsExtensible: true,
-            IsNullable: false,
             Usage: "None" // will be updated later
         };
         enums.set(enumName, enumType);
@@ -711,15 +378,13 @@ function fromSdkEnumValueTypeToConstantType(
     literalTypeContext?: LiteralTypeContext
 ): InputLiteralType {
     return {
-        Kind: InputTypeKind.Literal,
-        Name: InputTypeKind.Literal,
-        LiteralValueType:
+        Kind: "constant",
+        ValueType:
             enumValueType.valueType.kind === "boolean" ||
             literalTypeContext === undefined
                 ? fromSdkBuiltInType(enumValueType.valueType as SdkBuiltInType) // TODO: TCGC fix
                 : fromSdkEnumType(enumValueType.enumType, context, enums),
-        Value: enumValueType.value,
-        IsNullable: false
+        Value: enumValueType.value
     };
 }
 
@@ -740,16 +405,9 @@ function fromSdkDictionaryType(
     enums: Map<string, InputEnumType>
 ): InputDictionaryType {
     return {
-        Kind: InputTypeKind.Dictionary,
-        Name: InputTypeKind.Dictionary,
+        Kind: "dict",
         KeyType: fromSdkType(dictionaryType.keyType, context, models, enums),
-        ValueType: fromSdkType(
-            dictionaryType.valueType,
-            context,
-            models,
-            enums
-        ),
-        IsNullable: dictionaryType.nullable
+        ValueType: fromSdkType(dictionaryType.valueType, context, models, enums)
     };
 }
 
@@ -758,12 +416,12 @@ function fromSdkArrayType(
     context: SdkContext,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
-): InputListType {
+): InputArrayType {
     return {
-        Kind: InputTypeKind.Array,
-        Name: InputTypeKind.Array,
-        ElementType: fromSdkType(arrayType.valueType, context, models, enums),
-        IsNullable: arrayType.nullable
+        Kind: "array",
+        Name: arrayType.name,
+        ValueType: fromSdkType(arrayType.valueType, context, models, enums),
+        CrossLanguageDefinitionId: arrayType.crossLanguageDefinitionId
     };
 }
 
@@ -773,23 +431,4 @@ function fromUsageFlags(usage: UsageFlags): Usage {
     else if (usage === (UsageFlags.Input | UsageFlags.Output))
         return Usage.RoundTrip;
     else return Usage.None;
-}
-
-function getCSharpInputTypeKindByIntrinsic(
-    type: IntrinsicType
-): InputIntrinsicTypeKind {
-    switch (type.name) {
-        case "ErrorType":
-            return InputIntrinsicTypeKind.Error;
-        case "void":
-            return InputIntrinsicTypeKind.Void;
-        case "never":
-            return InputIntrinsicTypeKind.Never;
-        case "unknown":
-            return InputIntrinsicTypeKind.Unknown;
-        case "null":
-            return InputIntrinsicTypeKind.Null;
-        default:
-            throw new Error(`Unsupported intrinsic type name '${type.name}'`);
-    }
 }

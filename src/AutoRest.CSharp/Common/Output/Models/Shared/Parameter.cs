@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var inputType = type.InputType;
             return new Parameter(
                 name,
-                CreateDescription(operationParameter, inputType, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.GetValueString()), keepClientDefaultValue ? null : clientDefaultValue),
+                CreateDescription(operationParameter, inputType, (operationParameter.Type.GetImplementType() as InputEnumType)?.Values.Select(c => c.GetValueString()), keepClientDefaultValue ? null : clientDefaultValue),
                 inputType,
                 defaultValue,
                 validation,
@@ -127,7 +127,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             string paramName = param.Name;
             string variableName = paramName.ToVariableName();
 
-            if (param.Type is InputModelType paramInputType)
+            if (param.Type.GetImplementType() is InputModelType paramInputType)
             {
                 var paramInputTypeName = paramInputType.Name;
 
@@ -156,86 +156,25 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return ValidationType.None;
         }
 
-        public static Parameter FromRequestParameter(in RequestParameter requestParameter, CSharpType type, TypeFactory typeFactory, bool shouldKeepClientDefaultValue = false)
+        private static FormattableString CreateDescription(InputParameter requestParameter, CSharpType type, Constant? defaultValue = null)
         {
-            var name = requestParameter.CSharpName();
-            var skipUrlEncoding = requestParameter.Extensions?.SkipEncoding ?? false;
-            var requestLocation = GetRequestLocation(requestParameter);
-
-            var clientDefaultValue = GetClientDefaultValue(requestParameter, typeFactory);
-            bool keepClientDefaultValue = shouldKeepClientDefaultValue || IsApiVersionParameter(requestParameter) || IsContentTypeParameter(requestParameter) || IsEndpointParameter(requestParameter);
-            var defaultValue = keepClientDefaultValue
-                ? clientDefaultValue ?? ParseConstant(requestParameter, typeFactory)
-                : ParseConstant(requestParameter, typeFactory);
-            var initializer = (FormattableString?)null;
-
-            if (defaultValue != null && !type.CanBeInitializedInline(defaultValue))
-            {
-                initializer = type.GetParameterInitializer(defaultValue.Value);
-                type = type.WithNullable(true);
-                defaultValue = Constant.Default(type);
-            }
-
-            if (!requestParameter.IsRequired && defaultValue == null)
-            {
-                defaultValue = Constant.Default(type);
-            }
-
-            var validation = requestParameter.IsRequired && initializer == null
-                ? GetValidation(type, requestLocation, skipUrlEncoding)
-                : ValidationType.None;
-
-            var inputType = type.InputType;
-            return new Parameter(
-                name,
-                CreateDescription(requestParameter, inputType, keepClientDefaultValue ? null : clientDefaultValue),
-                inputType,
-                defaultValue,
-                validation,
-                initializer,
-                IsApiVersionParameter: requestParameter.Origin == "modelerfour:synthesized/api-version",
-                IsEndpoint: IsEndpointParameter(requestParameter),
-                IsResourceIdentifier: requestParameter.IsResourceParameter,
-                SkipUrlEncoding: skipUrlEncoding,
-                RequestLocation: requestLocation);
-            static bool IsApiVersionParameter(RequestParameter requestParameter)
-                => requestParameter.Origin == "modelerfour:synthesized/api-version";
-            static bool IsEndpointParameter(RequestParameter requestParameter)
-                => requestParameter.Origin == "modelerfour:synthesized/host";
-            static bool IsContentTypeParameter(RequestParameter requestParameter)
-                => requestParameter.Origin == "modelerfour:synthesized/content-type";
-        }
-
-        private static RequestLocation GetRequestLocation(RequestParameter requestParameter)
-            => requestParameter.In switch
-            {
-                HttpParameterIn.Uri => RequestLocation.Uri,
-                HttpParameterIn.Path => RequestLocation.Path,
-                HttpParameterIn.Query => RequestLocation.Query,
-                HttpParameterIn.Header => RequestLocation.Header,
-                HttpParameterIn.Body => RequestLocation.Body,
-                _ => RequestLocation.None
-            };
-
-        private static FormattableString CreateDescription(RequestParameter requestParameter, CSharpType type, Constant? defaultValue = null)
-        {
-            FormattableString description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
+            FormattableString description = string.IsNullOrWhiteSpace(requestParameter.Description) ?
                 (FormattableString)$"The {type:C} to use." :
-                $"{BuilderHelpers.EscapeXmlDocDescription(requestParameter.Language.Default.Description)}";
+                $"{BuilderHelpers.EscapeXmlDocDescription(requestParameter.Description)}";
             if (defaultValue != null)
             {
                 var defaultValueString = defaultValue?.Value is string s ? $"\"{s}\"" : $"{defaultValue?.Value}";
                 description = $"{description}{(description.ToString().EndsWith(".") ? "" : ".")} The default value is {defaultValueString}";
             }
 
-            return requestParameter.Schema switch
+            return requestParameter.Type switch
             {
-                ChoiceSchema choiceSchema when type.IsFrameworkType => AddAllowedValues(description, choiceSchema.Choices),
-                SealedChoiceSchema sealedChoiceSchema when type.IsFrameworkType => AddAllowedValues(description, sealedChoiceSchema.Choices),
+                InputEnumType choiceSchema when type.IsFrameworkType => AddAllowedValues(description, choiceSchema.Values),
+                InputNullableType { Type: InputEnumType ie } => AddAllowedValues(description, ie.Values),
                 _ => description
             };
 
-            static FormattableString AddAllowedValues(FormattableString description, ICollection<ChoiceValue> choices)
+            static FormattableString AddAllowedValues(FormattableString description, IReadOnlyList<InputEnumTypeValue> choices)
             {
                 var allowedValues = choices.Select(c => (FormattableString)$"{c.Value:L}").ToArray().Join(" | ");
 
@@ -245,30 +184,33 @@ namespace AutoRest.CSharp.Output.Models.Shared
             }
         }
 
-        private static Constant? GetClientDefaultValue(RequestParameter parameter, TypeFactory typeFactory)
+        private static Constant? GetClientDefaultValue(InputParameter parameter, TypeFactory typeFactory)
         {
-            if (parameter.ClientDefaultValue != null)
+            if (parameter.DefaultValue != null)
             {
-                CSharpType constantTypeReference = typeFactory.CreateType(parameter.Schema, parameter.IsNullable);
-                return BuilderHelpers.ParseConstant(parameter.ClientDefaultValue, constantTypeReference);
+                CSharpType constantTypeReference = typeFactory.CreateType(parameter.Type);
+                return BuilderHelpers.ParseConstant(parameter.DefaultValue.Value, constantTypeReference);
             }
 
             return null;
         }
 
-        private static Constant? ParseConstant(RequestParameter parameter, TypeFactory typeFactory)
+        private static Constant? ParseConstant(InputParameter parameter, TypeFactory typeFactory)
         {
-            if (parameter.In == HttpParameterIn.Header && RequestHeader.ClientRequestIdHeaders.Contains(parameter.Language.Default.SerializedName ?? parameter.Language.Default.Name))
+            if (parameter.Location == RequestLocation.Header)
             {
-                return Constant.FromExpression($"message.{Configuration.ApiTypes.HttpMessageRequestName}.ClientRequestId", new CSharpType(typeof(string)));
+                if (RequestHeader.ClientRequestIdHeaders.Contains(parameter.NameInRequest ?? parameter.Name))
+                {
+                    return Constant.FromExpression($"message.{Configuration.ApiTypes.HttpMessageRequestName}.ClientRequestId", new CSharpType(typeof(string)));
+                }
+                else if (RequestHeader.ReturnClientRequestIdResponseHeaders.Contains(parameter.NameInRequest ?? parameter.Name))
+                {
+                    return new Constant("true", new CSharpType(typeof(string)));
+                }
             }
-            if (parameter.In == HttpParameterIn.Header && RequestHeader.ReturnClientRequestIdResponseHeaders.Contains(parameter.Language.Default.SerializedName ?? parameter.Language.Default.Name))
+            if (parameter.Kind == InputOperationParameterKind.Constant && parameter.IsRequired)
             {
-                return new Constant("true", new CSharpType(typeof(string)));
-            }
-            if (parameter.Schema is ConstantSchema constantSchema && parameter.IsRequired)
-            {
-                return BuilderHelpers.ParseConstant(constantSchema.Value.Value, typeFactory.CreateType(constantSchema.ValueType, constantSchema.Value.Value == null));
+                return GetDefaultValue(parameter, typeFactory);
             }
 
             return null;

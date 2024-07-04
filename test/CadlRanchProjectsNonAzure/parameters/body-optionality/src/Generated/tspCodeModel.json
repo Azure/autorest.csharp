@@ -6,10 +6,9 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "BodyModel",
-   "Namespace": "Parameters.BodyOptionality",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Parameters.BodyOptionality.BodyModel",
    "Usage": "Input",
    "Properties": [
     {
@@ -19,9 +18,7 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -39,6 +36,7 @@
      "$id": "6",
      "Name": "requiredExplicit",
      "ResourceName": "BodyOptionality",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "7",
@@ -47,9 +45,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "8",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -64,9 +60,7 @@
         "$id": "9",
         "Type": {
          "$id": "10",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
@@ -94,8 +88,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "13",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -121,8 +114,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "16",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -169,6 +161,7 @@
      "$id": "19",
      "Name": "requiredImplicit",
      "ResourceName": "BodyOptionality",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"
@@ -196,8 +189,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "22",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -223,8 +215,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "25",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -271,7 +262,6 @@
    "Protocol": {
     "$id": "28"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "7"
@@ -287,6 +277,7 @@
      "$id": "30",
      "Name": "set",
      "ResourceName": "OptionalExplicit",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"
@@ -314,8 +305,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "33",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -341,8 +331,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "36",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -389,6 +378,7 @@
      "$id": "39",
      "Name": "omit",
      "ResourceName": "OptionalExplicit",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"
@@ -416,8 +406,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "42",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -443,8 +432,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "45",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -491,7 +479,6 @@
    "Protocol": {
     "$id": "48"
    },
-   "Creatable": false,
    "Parent": "BodyOptionalityClient",
    "Parameters": [
     {

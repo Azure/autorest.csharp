@@ -6,10 +6,9 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "MultiPartRequest",
-   "Namespace": "Payload.MultiPart",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Payload.MultiPart.MultiPartRequest",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -19,9 +18,7 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -33,9 +30,8 @@
      "Description": "",
      "Type": {
       "$id": "6",
-      "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Kind": "bytes",
+      "Encode": "base64"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -44,10 +40,9 @@
   },
   {
    "$id": "7",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ComplexPartsRequest",
-   "Namespace": "Payload.MultiPart",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Payload.MultiPart.ComplexPartsRequest",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -57,9 +52,7 @@
      "Description": "",
      "Type": {
       "$id": "9",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -71,10 +64,9 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "Address",
-      "Namespace": "Payload.MultiPart",
-      "IsNullable": false,
+      "CrossLanguageDefinitionId": "Payload.MultiPart.Address",
       "Usage": "Input",
       "Properties": [
        {
@@ -84,9 +76,7 @@
         "Description": "",
         "Type": {
          "$id": "13",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -103,9 +93,8 @@
      "Description": "",
      "Type": {
       "$id": "15",
-      "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Kind": "bytes",
+      "Encode": "base64"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -117,12 +106,12 @@
      "Description": "",
      "Type": {
       "$id": "17",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "Name": "ArrayAddress",
+      "ValueType": {
        "$ref": "11"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -134,15 +123,14 @@
      "Description": "",
      "Type": {
       "$id": "19",
-      "Kind": "Array",
+      "Kind": "array",
       "Name": "Array",
-      "ElementType": {
+      "ValueType": {
        "$id": "20",
-       "Kind": "Primitive",
-       "Name": "Bytes",
-       "IsNullable": false
+       "Kind": "bytes",
+       "Encode": "base64"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -154,10 +142,9 @@
   },
   {
    "$id": "21",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "JsonPartRequest",
-   "Namespace": "Payload.MultiPart",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Payload.MultiPart.JsonPartRequest",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -178,9 +165,8 @@
      "Description": "",
      "Type": {
       "$id": "24",
-      "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Kind": "bytes",
+      "Encode": "base64"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -189,10 +175,9 @@
   },
   {
    "$id": "25",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "BinaryArrayPartsRequest",
-   "Namespace": "Payload.MultiPart",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Payload.MultiPart.BinaryArrayPartsRequest",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -202,9 +187,7 @@
      "Description": "",
      "Type": {
       "$id": "27",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -216,15 +199,14 @@
      "Description": "",
      "Type": {
       "$id": "29",
-      "Kind": "Array",
+      "Kind": "array",
       "Name": "Array",
-      "ElementType": {
+      "ValueType": {
        "$id": "30",
-       "Kind": "Primitive",
-       "Name": "Bytes",
-       "IsNullable": false
+       "Kind": "bytes",
+       "Encode": "base64"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -233,10 +215,9 @@
   },
   {
    "$id": "31",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "JsonArrayPartsRequest",
-   "Namespace": "Payload.MultiPart",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Payload.MultiPart.JsonArrayPartsRequest",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -246,9 +227,8 @@
      "Description": "",
      "Type": {
       "$id": "33",
-      "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Kind": "bytes",
+      "Encode": "base64"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -260,12 +240,12 @@
      "Description": "",
      "Type": {
       "$id": "35",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "Name": "ArrayAddress",
+      "ValueType": {
        "$ref": "11"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -274,10 +254,9 @@
   },
   {
    "$id": "36",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "MultiBinaryPartsRequest",
-   "Namespace": "Payload.MultiPart",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Payload.MultiPart.MultiBinaryPartsRequest",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -287,9 +266,8 @@
      "Description": "",
      "Type": {
       "$id": "38",
-      "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Kind": "bytes",
+      "Encode": "base64"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -301,9 +279,8 @@
      "Description": "",
      "Type": {
       "$id": "40",
-      "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Kind": "bytes",
+      "Encode": "base64"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -312,10 +289,9 @@
   },
   {
    "$id": "41",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "AnonymousModelRequest",
-   "Namespace": "",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": ".anonymous",
    "Usage": "Input,Multipart",
    "Properties": [
     {
@@ -325,9 +301,8 @@
      "Description": "",
      "Type": {
       "$id": "43",
-      "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
+      "Kind": "bytes",
+      "Encode": "base64"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -344,7 +319,6 @@
    "Protocol": {
     "$id": "45"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "46",
@@ -353,9 +327,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "47",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -370,9 +342,7 @@
       "$id": "48",
       "Type": {
        "$id": "49",
-       "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -389,6 +359,7 @@
      "Name": "basic",
      "ResourceName": "FormData",
      "Description": "Test content-type: multipart/form-data",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -396,19 +367,15 @@
       {
        "$id": "52",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "53",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "54",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "multipart/form-data",
-        "IsNullable": false
+        "Value": "multipart/form-data"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -450,8 +417,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "58",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -499,6 +465,7 @@
      "Name": "complex",
      "ResourceName": "FormData",
      "Description": "Test content-type: multipart/form-data for mixed scenarios",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -506,19 +473,15 @@
       {
        "$id": "62",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "63",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "64",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "multipart/form-data",
-        "IsNullable": false
+        "Value": "multipart/form-data"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -560,8 +523,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "68",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -609,6 +571,7 @@
      "Name": "jsonPart",
      "ResourceName": "FormData",
      "Description": "Test content-type: multipart/form-data for scenario contains json part and binary part ",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -616,19 +579,15 @@
       {
        "$id": "72",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "73",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "74",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "multipart/form-data",
-        "IsNullable": false
+        "Value": "multipart/form-data"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -670,8 +629,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "78",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -719,6 +677,7 @@
      "Name": "binaryArrayParts",
      "ResourceName": "FormData",
      "Description": "Test content-type: multipart/form-data for scenario contains multi binary parts",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -726,19 +685,15 @@
       {
        "$id": "82",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "83",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "84",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "multipart/form-data",
-        "IsNullable": false
+        "Value": "multipart/form-data"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -780,8 +735,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "88",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -829,6 +783,7 @@
      "Name": "jsonArrayParts",
      "ResourceName": "FormData",
      "Description": "Test content-type: multipart/form-data for scenario contains multi json parts",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -836,19 +791,15 @@
       {
        "$id": "92",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "93",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "94",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "multipart/form-data",
-        "IsNullable": false
+        "Value": "multipart/form-data"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -890,8 +841,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "98",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -939,6 +889,7 @@
      "Name": "multiBinaryParts",
      "ResourceName": "FormData",
      "Description": "Test content-type: multipart/form-data for scenario contains multi binary parts",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -946,19 +897,15 @@
       {
        "$id": "102",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "103",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "104",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "multipart/form-data",
-        "IsNullable": false
+        "Value": "multipart/form-data"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1000,8 +947,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "108",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1049,6 +995,7 @@
      "Name": "checkFileNameAndContentType",
      "ResourceName": "FormData",
      "Description": "Test content-type: multipart/form-data",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -1056,19 +1003,15 @@
       {
        "$id": "112",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "113",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "114",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "multipart/form-data",
-        "IsNullable": false
+        "Value": "multipart/form-data"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1110,8 +1053,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "118",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1159,6 +1101,7 @@
      "Name": "anonymousModel",
      "ResourceName": "FormData",
      "Description": "Test content-type: multipart/form-data",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "46"
@@ -1166,19 +1109,15 @@
       {
        "$id": "122",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "123",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
+        "Kind": "constant",
+        "ValueType": {
          "$id": "124",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "multipart/form-data",
-        "IsNullable": false
+        "Value": "multipart/form-data"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1220,8 +1159,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "128",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1268,7 +1206,6 @@
    "Protocol": {
     "$id": "131"
    },
-   "Creatable": false,
    "Parent": "MultiPartClient",
    "Parameters": [
     {

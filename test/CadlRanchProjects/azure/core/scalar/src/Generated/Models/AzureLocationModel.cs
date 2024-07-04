@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace _Specs_.Azure.Core.Scalar.Models
 {
@@ -48,15 +47,18 @@ namespace _Specs_.Azure.Core.Scalar.Models
 
         /// <summary> Initializes a new instance of <see cref="AzureLocationModel"/>. </summary>
         /// <param name="location"></param>
-        public AzureLocationModel(AzureLocation location)
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        public AzureLocationModel(string location)
         {
+            Argument.AssertNotNull(location, nameof(location));
+
             Location = location;
         }
 
         /// <summary> Initializes a new instance of <see cref="AzureLocationModel"/>. </summary>
         /// <param name="location"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal AzureLocationModel(AzureLocation location, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal AzureLocationModel(string location, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Location = location;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -68,6 +70,6 @@ namespace _Specs_.Azure.Core.Scalar.Models
         }
 
         /// <summary> Gets or sets the location. </summary>
-        public AzureLocation Location { get; set; }
+        public string Location { get; set; }
     }
 }

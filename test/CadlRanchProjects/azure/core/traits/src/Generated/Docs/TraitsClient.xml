@@ -75,34 +75,38 @@ Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
-    <member name="RepeatableActionAsync(int,string,CancellationToken)">
+    <member name="RepeatableActionAsync(int,UserActionParam,CancellationToken)">
       <example>
 This sample shows how to call RepeatableActionAsync.
 <code><![CDATA[
 TraitsClient client = new TraitsClient();
 
-Response<UserActionResponse> response = await client.RepeatableActionAsync(1234, "<userActionValue>");
+UserActionParam body = new UserActionParam("<userActionValue>");
+Response<UserActionResponse> response = await client.RepeatableActionAsync(1234, body);
 ]]></code>
 This sample shows how to call RepeatableActionAsync with all parameters.
 <code><![CDATA[
 TraitsClient client = new TraitsClient();
 
-Response<UserActionResponse> response = await client.RepeatableActionAsync(1234, "<userActionValue>");
+UserActionParam body = new UserActionParam("<userActionValue>");
+Response<UserActionResponse> response = await client.RepeatableActionAsync(1234, body);
 ]]></code></example>
     </member>
-    <member name="RepeatableAction(int,string,CancellationToken)">
+    <member name="RepeatableAction(int,UserActionParam,CancellationToken)">
       <example>
 This sample shows how to call RepeatableAction.
 <code><![CDATA[
 TraitsClient client = new TraitsClient();
 
-Response<UserActionResponse> response = client.RepeatableAction(1234, "<userActionValue>");
+UserActionParam body = new UserActionParam("<userActionValue>");
+Response<UserActionResponse> response = client.RepeatableAction(1234, body);
 ]]></code>
 This sample shows how to call RepeatableAction with all parameters.
 <code><![CDATA[
 TraitsClient client = new TraitsClient();
 
-Response<UserActionResponse> response = client.RepeatableAction(1234, "<userActionValue>");
+UserActionParam body = new UserActionParam("<userActionValue>");
+Response<UserActionResponse> response = client.RepeatableAction(1234, body);
 ]]></code></example>
     </member>
     <member name="RepeatableActionAsync(int,RequestContent,RequestContext)">

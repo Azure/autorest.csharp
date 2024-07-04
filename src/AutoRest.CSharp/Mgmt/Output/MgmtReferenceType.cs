@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Models.Types;
@@ -39,36 +38,21 @@ namespace AutoRest.CSharp.Mgmt.Output
             "Azure.ResourceManager.Models.TrackedResourceData"
         };
 
-        public static bool IsPropertyReferenceType(Schema schema)
-            => PropertyReferenceTypeModels.Contains($"{GetNamespace(schema)}.{schema.Language.Default.Name}");
+        public static bool IsPropertyReferenceType(InputModelType schema)
+            => PropertyReferenceTypeModels.Contains(schema.CrossLanguageDefinitionId);
 
-        public static bool IsTypeReferenceType(Schema schema)
-            => TypeReferenceTypeModels.Contains($"{GetNamespace(schema)}.{schema.Language.Default.Name}");
+        public static bool IsTypeReferenceType(InputModelType schema)
+            => TypeReferenceTypeModels.Contains(schema.CrossLanguageDefinitionId);
 
         public static bool IsReferenceType(ObjectType schema)
             => ReferenceTypeModels.Contains($"{schema.Declaration.Namespace}.{schema.Declaration.Name}");
 
-        public static bool IsReferenceType(Schema schema)
-            => ReferenceTypeModels.Contains($"{GetNamespace(schema)}.{schema.Language.Default.Name}");
+        public static bool IsReferenceType(InputModelType schema)
+            => ReferenceTypeModels.Contains(schema.CrossLanguageDefinitionId);
 
-        private static string GetNamespace(Schema schema)
+        public MgmtReferenceType(InputModelType inputModel) : base(inputModel)
         {
-            if (!string.IsNullOrEmpty(schema.Extensions?.Namespace))
-            {
-                return schema.Extensions.Namespace;
-            }
-
-            if (!string.IsNullOrEmpty(schema.Language.Default.Namespace))
-            {
-                return schema.Language.Default.Namespace;
-            }
-
-            return $"{Configuration.Namespace}.Models";
-        }
-
-        public MgmtReferenceType(ObjectSchema objectSchema, string? name = default, string? nameSpace = default) : base(objectSchema, name, nameSpace)
-        {
-            JsonConverter = (IsPropertyReferenceType(objectSchema) || IsTypeReferenceType(ObjectSchema))
+            JsonConverter = (IsPropertyReferenceType(inputModel) || IsTypeReferenceType(InputModel))
                 ? new JsonConverterProvider(this, _sourceInputModel)
                 : null;
         }

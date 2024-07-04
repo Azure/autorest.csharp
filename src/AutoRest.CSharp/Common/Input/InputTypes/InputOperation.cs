@@ -10,50 +10,77 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputOperation(
-    string Name,
-    string? ResourceName,
-    string? Summary,
-    string? Deprecated,
-    string Description,
-    string? Accessibility,
-    IReadOnlyList<InputParameter> Parameters,
-    IReadOnlyList<OperationResponse> Responses,
-    RequestMethod HttpMethod,
-    BodyMediaType RequestBodyMediaType,
-    string Uri,
-    string Path,
-    string? ExternalDocsUrl,
-    IReadOnlyList<string>? RequestMediaTypes,
-    bool BufferResponse,
-    OperationLongRunning? LongRunning,
-    OperationPaging? Paging,
-    bool GenerateProtocolMethod,
-    bool GenerateConvenienceMethod,
-    bool KeepClientDefaultValue)
+internal record InputOperation
 {
+    public InputOperation(
+    string name,
+    string? resourceName,
+    string? summary,
+    string? deprecated,
+    string description,
+    string? accessibility,
+    IReadOnlyList<InputParameter> parameters,
+    IReadOnlyList<OperationResponse> responses,
+    RequestMethod httpMethod,
+    BodyMediaType requestBodyMediaType,
+    string uri,
+    string path,
+    string? externalDocsUrl,
+    IReadOnlyList<string>? requestMediaTypes,
+    bool bufferResponse,
+    OperationLongRunning? longRunning,
+    OperationPaging? paging,
+    bool generateProtocolMethod,
+    bool generateConvenienceMethod,
+    bool keepClientDefaultValue)
+    {
+        Name = name;
+        SpecName = name;
+        ResourceName = resourceName;
+        Summary = summary;
+        Deprecated = deprecated;
+        Description = description;
+        Accessibility = accessibility;
+        Parameters = parameters;
+        Responses = responses;
+        HttpMethod = httpMethod;
+        RequestBodyMediaType = requestBodyMediaType;
+        Uri = uri;
+        Path = path;
+        ExternalDocsUrl = externalDocsUrl;
+        RequestMediaTypes = requestMediaTypes;
+        BufferResponse = bufferResponse;
+        LongRunning = longRunning;
+        Paging = paging;
+        GenerateProtocolMethod = generateProtocolMethod;
+        GenerateConvenienceMethod = generateConvenienceMethod;
+        KeepClientDefaultValue = keepClientDefaultValue;
+    }
+
     public InputOperation() : this(
-        Name: string.Empty,
-        ResourceName: null,
-        Summary: null,
-        Deprecated: null,
-        Description: string.Empty,
-        Accessibility: null,
-        Parameters: Array.Empty<InputParameter>(),
-        Responses: Array.Empty<OperationResponse>(),
-        HttpMethod: RequestMethod.Get,
-        RequestBodyMediaType: BodyMediaType.None,
-        Uri: string.Empty,
-        Path: string.Empty,
-        ExternalDocsUrl: null,
-        RequestMediaTypes: Array.Empty<string>(),
-        BufferResponse: false,
-        LongRunning: null,
-        Paging: null,
-        GenerateProtocolMethod: true,
-        GenerateConvenienceMethod: false,
-        KeepClientDefaultValue: false)
-    { }
+        name: string.Empty,
+        resourceName: null,
+        summary: null,
+        deprecated: null,
+        description: string.Empty,
+        accessibility: null,
+        parameters: Array.Empty<InputParameter>(),
+        responses: Array.Empty<OperationResponse>(),
+        httpMethod: RequestMethod.Get,
+        requestBodyMediaType: BodyMediaType.None,
+        uri: string.Empty,
+        path: string.Empty,
+        externalDocsUrl: null,
+        requestMediaTypes: Array.Empty<string>(),
+        bufferResponse: false,
+        longRunning: null,
+        paging: null,
+        generateProtocolMethod: true,
+        generateConvenienceMethod: false,
+        keepClientDefaultValue: false)
+    {
+        SpecName = string.Empty;
+    }
 
     public static InputOperation RemoveApiVersionParam(InputOperation operation)
     {
@@ -77,12 +104,16 @@ internal record InputOperation(
             operation.Paging,
             operation.GenerateProtocolMethod,
             operation.GenerateConvenienceMethod,
-            operation.KeepClientDefaultValue);
+            operation.KeepClientDefaultValue)
+        {
+            SpecName = operation.SpecName
+        };
     }
 
     public string CleanName => Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
     private readonly Dictionary<string, InputOperationExample> _examples = new();
     public IReadOnlyDictionary<string, InputOperationExample> Examples => _examples.Any() ? _examples : EnsureExamples(_examples);
+    public IReadOnlyList<InputOperationExample> CodeModelExamples { get; internal set; } = new List<InputOperationExample>();
 
     private IReadOnlyDictionary<string, InputOperationExample> EnsureExamples(Dictionary<string, InputOperationExample> examples)
     {
@@ -90,4 +121,32 @@ internal record InputOperation(
         examples[ExampleMockValueBuilder.MockExampleAllParameterKey] = ExampleMockValueBuilder.BuildOperationExample(this, true);
         return examples;
     }
+
+    public bool IsLongRunning => LongRunning != null;
+    public string Name { get; internal set; }
+    public string? ResourceName { get; }
+    public string? Summary { get; }
+    public string? Deprecated { get; }
+    public string Description { get; }
+    public string? Accessibility { get; }
+    public IReadOnlyList<InputParameter> Parameters { get; init; }
+    public IReadOnlyList<OperationResponse> Responses { get; }
+    public RequestMethod HttpMethod { get; }
+    public BodyMediaType RequestBodyMediaType { get; }
+    public string Uri { get; init; }
+    public string Path { get; }
+    public string? ExternalDocsUrl { get; }
+    public IReadOnlyList<string>? RequestMediaTypes { get; }
+    public bool BufferResponse { get; }
+    public OperationLongRunning? LongRunning { get; }
+    public OperationPaging? Paging { get; init; }
+    public bool GenerateProtocolMethod { get; }
+    public bool GenerateConvenienceMethod { get; }
+    public bool KeepClientDefaultValue { get; }
+    public string? OperationName { get; }
+    public string? OperationVersion { get; }
+    public string? OperationType { get; }
+    public string OperationId => ResourceName is null ? Name : $"{ResourceName}_{Name.FirstCharToUpperCase()}";
+    //TODO: Remove this until the SDK nullable is enabled, traking in https://github.com/Azure/autorest.csharp/issues/4780
+    internal string SpecName { get; init; }
 }

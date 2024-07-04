@@ -7,13 +7,13 @@ This sample shows how to call GetAzureLocationScalarAsync.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-Response<AzureLocation> response = await client.GetAzureLocationScalarAsync();
+Response<string> response = await client.GetAzureLocationScalarAsync();
 ]]></code>
 This sample shows how to call GetAzureLocationScalarAsync with all parameters.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-Response<AzureLocation> response = await client.GetAzureLocationScalarAsync();
+Response<string> response = await client.GetAzureLocationScalarAsync();
 ]]></code></example>
     </member>
     <member name="GetAzureLocationScalar(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetAzureLocationScalar.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-Response<AzureLocation> response = client.GetAzureLocationScalar();
+Response<string> response = client.GetAzureLocationScalar();
 ]]></code>
 This sample shows how to call GetAzureLocationScalar with all parameters.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-Response<AzureLocation> response = client.GetAzureLocationScalar();
+Response<string> response = client.GetAzureLocationScalar();
 ]]></code></example>
     </member>
     <member name="GetAzureLocationScalarAsync(RequestContext)">
@@ -73,34 +73,34 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
-    <member name="PutAsync(AzureLocation,CancellationToken)">
+    <member name="PutAsync(string,CancellationToken)">
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-Response response = await client.PutAsync((AzureLocation)default);
+Response response = await client.PutAsync("<body>");
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-Response response = await client.PutAsync((AzureLocation)default);
+Response response = await client.PutAsync("<body>");
 ]]></code></example>
     </member>
-    <member name="Put(AzureLocation,CancellationToken)">
+    <member name="Put(string,CancellationToken)">
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-Response response = client.Put((AzureLocation)default);
+Response response = client.Put("<body>");
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-Response response = client.Put((AzureLocation)default);
+Response response = client.Put("<body>");
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -109,7 +109,7 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create("<body>");
 Response response = await client.PutAsync(content);
 
 Console.WriteLine(response.Status);
@@ -118,7 +118,7 @@ This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create("<body>");
 Response response = await client.PutAsync(content);
 
 Console.WriteLine(response.Status);
@@ -130,7 +130,7 @@ This sample shows how to call Put.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create("<body>");
 Response response = client.Put(content);
 
 Console.WriteLine(response.Status);
@@ -139,7 +139,7 @@ This sample shows how to call Put with all request content.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create("<body>");
 Response response = client.Put(content);
 
 Console.WriteLine(response.Status);
@@ -151,14 +151,14 @@ This sample shows how to call PostAsync.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-AzureLocationModel body = new AzureLocationModel(default);
+AzureLocationModel body = new AzureLocationModel("<location>");
 Response<AzureLocationModel> response = await client.PostAsync(body);
 ]]></code>
 This sample shows how to call PostAsync with all parameters.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-AzureLocationModel body = new AzureLocationModel(default);
+AzureLocationModel body = new AzureLocationModel("<location>");
 Response<AzureLocationModel> response = await client.PostAsync(body);
 ]]></code></example>
     </member>
@@ -168,14 +168,14 @@ This sample shows how to call Post.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-AzureLocationModel body = new AzureLocationModel(default);
+AzureLocationModel body = new AzureLocationModel("<location>");
 Response<AzureLocationModel> response = client.Post(body);
 ]]></code>
 This sample shows how to call Post with all parameters.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-AzureLocationModel body = new AzureLocationModel(default);
+AzureLocationModel body = new AzureLocationModel("<location>");
 Response<AzureLocationModel> response = client.Post(body);
 ]]></code></example>
     </member>
@@ -187,7 +187,7 @@ AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    location = new object(),
+    location = "<location>",
 });
 Response response = await client.PostAsync(content);
 
@@ -200,7 +200,7 @@ AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    location = new object(),
+    location = "<location>",
 });
 Response response = await client.PostAsync(content);
 
@@ -216,7 +216,7 @@ AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    location = new object(),
+    location = "<location>",
 });
 Response response = client.Post(content);
 
@@ -229,7 +229,7 @@ AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    location = new object(),
+    location = "<location>",
 });
 Response response = client.Post(content);
 
@@ -237,13 +237,13 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("location").ToString());
 ]]></code></example>
     </member>
-    <member name="HeaderAsync(AzureLocation,RequestContext)">
+    <member name="HeaderAsync(string,RequestContext)">
       <example>
 This sample shows how to call HeaderAsync.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-Response response = await client.HeaderAsync(default);
+Response response = await client.HeaderAsync("<region>");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -251,18 +251,18 @@ This sample shows how to call HeaderAsync with all parameters.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-Response response = await client.HeaderAsync(default);
+Response response = await client.HeaderAsync("<region>");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="Header(AzureLocation,RequestContext)">
+    <member name="Header(string,RequestContext)">
       <example>
 This sample shows how to call Header.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-Response response = client.Header(default);
+Response response = client.Header("<region>");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -270,18 +270,18 @@ This sample shows how to call Header with all parameters.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-Response response = client.Header(default);
+Response response = client.Header("<region>");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="QueryAsync(AzureLocation,RequestContext)">
+    <member name="QueryAsync(string,RequestContext)">
       <example>
 This sample shows how to call QueryAsync.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-Response response = await client.QueryAsync(default);
+Response response = await client.QueryAsync("<region>");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -289,18 +289,18 @@ This sample shows how to call QueryAsync with all parameters.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-Response response = await client.QueryAsync(default);
+Response response = await client.QueryAsync("<region>");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="Query(AzureLocation,RequestContext)">
+    <member name="Query(string,RequestContext)">
       <example>
 This sample shows how to call Query.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-Response response = client.Query(default);
+Response response = client.Query("<region>");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -308,7 +308,7 @@ This sample shows how to call Query with all parameters.
 <code><![CDATA[
 AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-Response response = client.Query(default);
+Response response = client.Query("<region>");
 
 Console.WriteLine(response.Status);
 ]]></code></example>

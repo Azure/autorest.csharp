@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Generation.Types
     /// CSharpType represents the C# type of an input type.
     /// It is constructed from a <see cref="Type"/> and its properties.
     /// </summary>
-    internal class CSharpType
+    public class CSharpType
     {
         private readonly TypeProvider? _implementation;
         private readonly Type? _type;
@@ -121,6 +121,16 @@ namespace AutoRest.CSharp.Generation.Types
         {
             Debug.Assert(type.Namespace != null, "type.Namespace != null");
 
+            // handle nullable value types explicitly because they are implemented using generic type `System.Nullable<T>`
+            var underlyingValueType = Nullable.GetUnderlyingType(type);
+            if (underlyingValueType != null)
+            {
+                // in this block, we are converting input like `typeof(int?)` into the way as if they input: `typeof(int), isNullable: true`
+                type = underlyingValueType;
+                arguments = type.IsGenericType ? type.GetGenericArguments().Select(p => new CSharpType(p)).ToArray() : Array.Empty<CSharpType>();
+                isNullable = true;
+            }
+
             _type = type.IsGenericType ? type.GetGenericTypeDefinition() : type;
             ValidateArguments(_type, arguments);
 
@@ -149,7 +159,7 @@ namespace AutoRest.CSharp.Generation.Types
             }
         }
 
-        public CSharpType(TypeProvider implementation, IReadOnlyList<CSharpType>? arguments = null, bool isNullable = false)
+        internal CSharpType(TypeProvider implementation, IReadOnlyList<CSharpType>? arguments = null, bool isNullable = false)
         {
             _implementation = implementation;
             _arguments = arguments ?? Array.Empty<CSharpType>();
@@ -206,7 +216,7 @@ namespace AutoRest.CSharp.Generation.Types
         public bool IsGenericType => Arguments.Count > 0;
         public bool IsCollection => _isCollection ??= TypeIsCollection();
         public Type FrameworkType => _type ?? throw new InvalidOperationException("Not a framework type");
-        public Constant? Literal { get; private init; }
+        internal Constant? Literal { get; private init; }
         internal TypeProvider Implementation => _implementation ?? throw new InvalidOperationException($"Not implemented type: '{Namespace}.{Name}'");
         public IReadOnlyList<CSharpType> Arguments { get { return _arguments; } }
         public CSharpType InitializationType => _initializationType ??= GetImplementationType();
@@ -587,7 +597,7 @@ namespace AutoRest.CSharp.Generation.Types
         /// <param name="unionItemTypes">The list of union item types.</param>
         /// <param name="isNullable">Flag used to determine if a type is nullable.</param>
         /// <returns>A <see cref="CSharpType"/> instance representing those unioned types.</returns>
-        public static CSharpType FromUnion(IReadOnlyList<CSharpType> unionItemTypes, bool isNullable)
+        public static CSharpType FromUnion(IReadOnlyList<CSharpType> unionItemTypes, bool isNullable = false)
         {
             return new CSharpType(typeof(BinaryData), isNullable)
             {

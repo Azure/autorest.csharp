@@ -13,7 +13,6 @@
    "Protocol": {
     "$id": "3"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "4",
@@ -22,9 +21,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "5",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -39,9 +36,7 @@
       "$id": "6",
       "Type": {
        "$id": "7",
-       "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -58,6 +53,7 @@
      "Name": "get",
      "ResourceName": "String",
      "Description": "get string value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -68,8 +64,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "11",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -98,9 +93,7 @@
        ],
        "BodyType": {
         "$id": "14",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Kind": "string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -123,6 +116,7 @@
      "Name": "put",
      "ResourceName": "String",
      "Description": "put string value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -134,9 +128,7 @@
        "Description": "_",
        "Type": {
         "$id": "17",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -154,8 +146,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "19",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -181,8 +172,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "22",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -229,7 +219,6 @@
    "Protocol": {
     "$id": "25"
    },
-   "Creatable": false,
    "Parent": "ScalarClient",
    "Parameters": [
     {
@@ -247,6 +236,7 @@
      "Name": "get",
      "ResourceName": "Boolean",
      "Description": "get boolean value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -257,8 +247,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "29",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -287,9 +276,7 @@
        ],
        "BodyType": {
         "$id": "32",
-        "Kind": "Primitive",
-        "Name": "Boolean",
-        "IsNullable": false
+        "Kind": "boolean"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -312,6 +299,7 @@
      "Name": "put",
      "ResourceName": "Boolean",
      "Description": "put boolean value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -323,9 +311,7 @@
        "Description": "_",
        "Type": {
         "$id": "35",
-        "Kind": "Primitive",
-        "Name": "Boolean",
-        "IsNullable": false
+        "Kind": "boolean"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -343,8 +329,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "37",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -370,8 +355,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "40",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -418,7 +402,6 @@
    "Protocol": {
     "$id": "43"
    },
-   "Creatable": false,
    "Parent": "ScalarClient",
    "Parameters": [
     {
@@ -436,6 +419,7 @@
      "Name": "get",
      "ResourceName": "Unknown",
      "Description": "get unknown value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -446,8 +430,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "47",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -476,9 +459,7 @@
        ],
        "BodyType": {
         "$id": "50",
-        "Kind": "Intrinsic",
-        "Name": "unknown",
-        "IsNullable": false
+        "Kind": "any"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -501,6 +482,7 @@
      "Name": "put",
      "ResourceName": "Unknown",
      "Description": "put unknown value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -512,9 +494,7 @@
        "Description": "_",
        "Type": {
         "$id": "53",
-        "Kind": "Intrinsic",
-        "Name": "unknown",
-        "IsNullable": false
+        "Kind": "any"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -532,8 +512,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "55",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -559,8 +538,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "58",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -607,7 +585,6 @@
    "Protocol": {
     "$id": "61"
    },
-   "Creatable": false,
    "Parent": "ScalarClient",
    "Parameters": [
     {
@@ -624,6 +601,7 @@
      "$id": "63",
      "Name": "responseBody",
      "ResourceName": "DecimalType",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -634,8 +612,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "65",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -664,9 +641,7 @@
        ],
        "BodyType": {
         "$id": "68",
-        "Kind": "Primitive",
-        "Name": "Decimal",
-        "IsNullable": false
+        "Kind": "decimal"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -688,6 +663,7 @@
      "$id": "69",
      "Name": "requestBody",
      "ResourceName": "DecimalType",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -698,9 +674,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "71",
-        "Kind": "Primitive",
-        "Name": "Decimal",
-        "IsNullable": false
+        "Kind": "decimal"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -718,8 +692,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "73",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -745,8 +718,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "76",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -793,6 +765,7 @@
      "$id": "79",
      "Name": "requestParameter",
      "ResourceName": "DecimalType",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -803,9 +776,7 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "81",
-        "Kind": "Primitive",
-        "Name": "Decimal",
-        "IsNullable": false
+        "Kind": "decimal"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -823,8 +794,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "83",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -868,7 +838,6 @@
    "Protocol": {
     "$id": "86"
    },
-   "Creatable": false,
    "Parent": "ScalarClient",
    "Parameters": [
     {
@@ -885,6 +854,7 @@
      "$id": "88",
      "Name": "responseBody",
      "ResourceName": "Decimal128Type",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -895,8 +865,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "90",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -925,9 +894,7 @@
        ],
        "BodyType": {
         "$id": "93",
-        "Kind": "Primitive",
-        "Name": "Decimal128",
-        "IsNullable": false
+        "Kind": "decimal128"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -949,6 +916,7 @@
      "$id": "94",
      "Name": "requestBody",
      "ResourceName": "Decimal128Type",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -959,9 +927,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "96",
-        "Kind": "Primitive",
-        "Name": "Decimal128",
-        "IsNullable": false
+        "Kind": "decimal128"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -979,8 +945,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "98",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1006,8 +971,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "101",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1054,6 +1018,7 @@
      "$id": "104",
      "Name": "requestParameter",
      "ResourceName": "Decimal128Type",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -1064,9 +1029,7 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "106",
-        "Kind": "Primitive",
-        "Name": "Decimal128",
-        "IsNullable": false
+        "Kind": "decimal128"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1084,8 +1047,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "108",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1129,7 +1091,6 @@
    "Protocol": {
     "$id": "111"
    },
-   "Creatable": false,
    "Parent": "ScalarClient",
    "Parameters": [
     {
@@ -1146,6 +1107,7 @@
      "$id": "113",
      "Name": "prepareVerify",
      "ResourceName": "DecimalVerify",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -1156,8 +1118,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "115",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1186,15 +1147,13 @@
        ],
        "BodyType": {
         "$id": "118",
-        "Kind": "Array",
+        "Kind": "array",
         "Name": "Array",
-        "ElementType": {
+        "ValueType": {
          "$id": "119",
-         "Kind": "Primitive",
-         "Name": "Decimal",
-         "IsNullable": false
+         "Kind": "decimal"
         },
-        "IsNullable": false
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1216,6 +1175,7 @@
      "$id": "120",
      "Name": "verify",
      "ResourceName": "DecimalVerify",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -1226,9 +1186,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "122",
-        "Kind": "Primitive",
-        "Name": "Decimal",
-        "IsNullable": false
+        "Kind": "decimal"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1246,8 +1204,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "124",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1273,8 +1230,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "127",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1321,7 +1277,6 @@
    "Protocol": {
     "$id": "130"
    },
-   "Creatable": false,
    "Parent": "ScalarClient",
    "Parameters": [
     {
@@ -1338,6 +1293,7 @@
      "$id": "132",
      "Name": "prepareVerify",
      "ResourceName": "Decimal128Verify",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -1348,8 +1304,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "134",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1378,15 +1333,13 @@
        ],
        "BodyType": {
         "$id": "137",
-        "Kind": "Array",
+        "Kind": "array",
         "Name": "Array",
-        "ElementType": {
+        "ValueType": {
          "$id": "138",
-         "Kind": "Primitive",
-         "Name": "Decimal",
-         "IsNullable": false
+         "Kind": "decimal"
         },
-        "IsNullable": false
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1408,6 +1361,7 @@
      "$id": "139",
      "Name": "verify",
      "ResourceName": "Decimal128Verify",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -1418,9 +1372,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "141",
-        "Kind": "Primitive",
-        "Name": "Decimal",
-        "IsNullable": false
+        "Kind": "decimal"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1438,8 +1390,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "143",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1465,8 +1416,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "146",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1513,7 +1463,6 @@
    "Protocol": {
     "$id": "149"
    },
-   "Creatable": false,
    "Parent": "ScalarClient",
    "Parameters": [
     {

@@ -37,6 +37,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
         }
 
         [Test]
@@ -57,6 +58,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
         }
 
         [Test]
@@ -102,6 +104,9 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -127,6 +132,9 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -167,6 +175,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
         }
 
         [Test]
@@ -187,6 +196,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
         }
 
         [Test]
@@ -212,6 +222,9 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -237,6 +250,9 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -259,6 +275,7 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
+                requiredFloatProperty = new object(),
             });
             Response response = client.PatchAction(content);
 
@@ -271,6 +288,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
         }
 
         [Test]
@@ -293,6 +311,7 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
+                requiredFloatProperty = new object(),
             });
             Response response = await client.PatchActionAsync(content);
 
@@ -305,6 +324,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
         }
 
         [Test]
@@ -335,6 +355,9 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
+                requiredFloatProperty = new object(),
+                optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = client.PatchAction(content);
 
@@ -352,6 +375,9 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -382,6 +408,9 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
+                requiredFloatProperty = new object(),
+                optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = await client.PatchActionAsync(content);
 
@@ -399,6 +428,9 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -421,6 +453,7 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
+                requiredFloatProperty = new object(),
             });
             Response response = client.AnonymousBody(content);
 
@@ -433,6 +466,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
         }
 
         [Test]
@@ -455,6 +489,7 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
+                requiredFloatProperty = new object(),
             });
             Response response = await client.AnonymousBodyAsync(content);
 
@@ -467,6 +502,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
         }
 
         [Test]
@@ -476,7 +512,12 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
+<<<<<<< HEAD
             Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false);
+=======
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
+            Response<Thing> response = client.AnonymousBody(thing);
+>>>>>>> origin/feature/v3
         }
 
         [Test]
@@ -486,7 +527,12 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
+<<<<<<< HEAD
             Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false);
+=======
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
+            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+>>>>>>> origin/feature/v3
         }
 
         [Test]
@@ -517,6 +563,9 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
+                requiredFloatProperty = new object(),
+                optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = client.AnonymousBody(content);
 
@@ -534,6 +583,9 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -564,6 +616,9 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
+                requiredFloatProperty = new object(),
+                optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = await client.AnonymousBodyAsync(content);
 
@@ -581,6 +636,9 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -590,7 +648,21 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
+<<<<<<< HEAD
             Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false, optionalLiteralString: ThingOptionalLiteralString.Reject, optionalLiteralInt: ThingOptionalLiteralInt._456, optionalLiteralFloat: ThingOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 });
+=======
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList = { 1234 },
+                OptionalFloatProperty = (double)default,
+                OptionalResourceId = null,
+            };
+            Response<Thing> response = client.AnonymousBody(thing);
+>>>>>>> origin/feature/v3
         }
 
         [Test]
@@ -600,7 +672,21 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
+<<<<<<< HEAD
             Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false, optionalLiteralString: ThingOptionalLiteralString.Reject, optionalLiteralInt: ThingOptionalLiteralInt._456, optionalLiteralFloat: ThingOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 });
+=======
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList = { 1234 },
+                OptionalFloatProperty = (double)default,
+                OptionalResourceId = null,
+            };
+            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+>>>>>>> origin/feature/v3
         }
 
         [Test]

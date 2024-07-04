@@ -146,12 +146,12 @@ namespace AutoRest.CSharp.Mgmt.Models
 </item>";
                 }
                 FormattableString defaultApiVersion = $"";
-                if (operation.Operation.ApiVersions.Any())
+                if (operation.Operation.Parameters.Where(p => p.IsApiVersion).Any())
                 {
                     defaultApiVersion = $@"
 <item>
 <term>Default Api Version</term>
-<description>{string.Join(", ", operation.Operation.ApiVersions.Select(v => v.Version))}</description>
+<description>{string.Join(", ", operation.Operation.Parameters.Where(p => p.IsApiVersion).Select(x => x.DefaultValue?.Value))}</description>
 </item>";
                 }
                     return (FormattableString)$@"<item>

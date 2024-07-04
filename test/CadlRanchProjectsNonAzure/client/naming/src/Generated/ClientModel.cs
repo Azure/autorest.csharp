@@ -36,20 +36,42 @@ namespace Scm.Client.Naming
         }
 
         /// <summary> Client. </summary>
+<<<<<<< HEAD
         /// <param name="defaultName"> Pass in true. </param>
         public virtual async Task<ClientResult> ClientAsync(bool defaultName)
         {
             Models.ClientModel clientModel = new Models.ClientModel(defaultName, null);
             ClientResult result = await ClientAsync(clientModel.ToBinaryContent(), null).ConfigureAwait(false);
+=======
+        /// <param name="body"> The <see cref="Models.ClientModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<ClientResult> ClientAsync(Models.ClientModel body)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using BinaryContent content = body.ToBinaryContent();
+            ClientResult result = await ClientAsync(content, null).ConfigureAwait(false);
+>>>>>>> origin/feature/v3
             return result;
         }
 
         /// <summary> Client. </summary>
+<<<<<<< HEAD
         /// <param name="defaultName"> Pass in true. </param>
         public virtual ClientResult Client(bool defaultName)
         {
             Models.ClientModel clientModel = new Models.ClientModel(defaultName, null);
             ClientResult result = Client(clientModel.ToBinaryContent(), null);
+=======
+        /// <param name="body"> The <see cref="Models.ClientModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual ClientResult Client(Models.ClientModel body)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using BinaryContent content = body.ToBinaryContent();
+            ClientResult result = Client(content, null);
+>>>>>>> origin/feature/v3
             return result;
         }
 
@@ -110,20 +132,42 @@ namespace Scm.Client.Naming
         }
 
         /// <summary> Language. </summary>
+<<<<<<< HEAD
         /// <param name="defaultName"> Pass in true. </param>
         public virtual async Task<ClientResult> LanguageAsync(bool defaultName)
         {
             CSModel csModel = new CSModel(defaultName, null);
             ClientResult result = await LanguageAsync(csModel.ToBinaryContent(), null).ConfigureAwait(false);
+=======
+        /// <param name="body"> The <see cref="CSModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<ClientResult> LanguageAsync(CSModel body)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using BinaryContent content = body.ToBinaryContent();
+            ClientResult result = await LanguageAsync(content, null).ConfigureAwait(false);
+>>>>>>> origin/feature/v3
             return result;
         }
 
         /// <summary> Language. </summary>
+<<<<<<< HEAD
         /// <param name="defaultName"> Pass in true. </param>
         public virtual ClientResult Language(bool defaultName)
         {
             CSModel csModel = new CSModel(defaultName, null);
             ClientResult result = Language(csModel.ToBinaryContent(), null);
+=======
+        /// <param name="body"> The <see cref="CSModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual ClientResult Language(CSModel body)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using BinaryContent content = body.ToBinaryContent();
+            ClientResult result = Language(content, null);
+>>>>>>> origin/feature/v3
             return result;
         }
 

@@ -34,7 +34,6 @@ namespace AutoRest.LowLevel.Tests
             {
                 if (m.Name == operationBaseName || m.Name == (operationBaseName + "Async"))
                 {
-
                     var attribute = m.GetCustomAttribute(typeof(ObsoleteAttribute));
                     if (attribute is ObsoleteAttribute obsoleteAttribute)
                     {

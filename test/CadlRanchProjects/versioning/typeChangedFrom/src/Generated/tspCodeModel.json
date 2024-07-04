@@ -8,63 +8,60 @@
  "Enums": [
   {
    "$id": "2",
-   "Kind": "Enum",
+   "Kind": "enum",
    "Name": "Versions",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "CrossLanguageDefinitionId": "Versioning.TypeChangedFrom.Versions",
+   "ValueType": {
+    "$id": "3",
+    "Kind": "string"
+   },
+   "Values": [
     {
-     "$id": "3",
+     "$id": "4",
      "Name": "v1",
      "Value": "v1",
      "Description": "The version v1."
     },
     {
-     "$id": "4",
+     "$id": "5",
      "Name": "v2",
      "Value": "v2",
      "Description": "The version v2."
     }
    ],
-   "Namespace": "Versioning.TypeChangedFrom",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
  "Models": [
   {
-   "$id": "5",
-   "Kind": "Model",
+   "$id": "6",
+   "Kind": "model",
    "Name": "TestModel",
-   "Namespace": "Versioning.TypeChangedFrom",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Versioning.TypeChangedFrom.TestModel",
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "6",
+     "$id": "7",
      "Name": "prop",
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$id": "7",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "$id": "8",
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "8",
+     "$id": "9",
      "Name": "changedProp",
      "SerializedName": "changedProp",
      "Description": "",
      "Type": {
-      "$id": "9",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "$id": "10",
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -74,25 +71,24 @@
  ],
  "Clients": [
   {
-   "$id": "10",
+   "$id": "11",
    "Name": "TypeChangedFromClient",
    "Description": "Test for the `@typeChangedFrom` decorator.",
    "Operations": [
     {
-     "$id": "11",
+     "$id": "12",
      "Name": "test",
      "ResourceName": "TypeChangedFrom",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "12",
+       "$id": "13",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "13",
-        "Kind": "Primitive",
-        "Name": "Uri",
-        "IsNullable": false
+        "$id": "14",
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -105,7 +101,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "14",
+       "$id": "15",
        "Name": "version",
        "NameInRequest": "version",
        "Description": "Need to be set as 'v1' or 'v2' in client.",
@@ -123,14 +119,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "15",
+       "$id": "16",
        "Name": "param",
        "NameInRequest": "param",
        "Type": {
-        "$id": "16",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "$id": "17",
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -143,11 +137,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "17",
+       "$id": "18",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "5"
+        "$ref": "6"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -160,13 +154,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "18",
+       "$id": "19",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "19",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "20",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -179,21 +172,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "20",
+        "$id": "21",
         "Type": {
-         "$ref": "19"
+         "$ref": "20"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "21",
+       "$id": "22",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "22",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "23",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -206,9 +198,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "23",
+        "$id": "24",
         "Type": {
-         "$ref": "22"
+         "$ref": "23"
         },
         "Value": "application/json"
        }
@@ -216,12 +208,12 @@
      ],
      "Responses": [
       {
-       "$id": "24",
+       "$id": "25",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "6"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -244,15 +236,14 @@
     }
    ],
    "Protocol": {
-    "$id": "25"
+    "$id": "26"
    },
-   "Creatable": true,
    "Parameters": [
     {
-     "$ref": "12"
+     "$ref": "13"
     },
     {
-     "$ref": "14"
+     "$ref": "15"
     }
    ]
   }

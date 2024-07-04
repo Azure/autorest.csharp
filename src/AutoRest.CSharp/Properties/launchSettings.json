@@ -316,10 +316,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\lro-parameterized-endpoints\\Generated"
     },
-    "Lro-TypeSpec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Lro-TypeSpec\\src\\Generated -n"
-    },
     "media_types": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\media_types\\Generated"
@@ -556,10 +552,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ParameterSequence-LowLevel\\src\\Generated -n"
     },
-    "PetStore-TypeSpec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PetStore-TypeSpec\\src\\Generated -n"
-    },
     "Platform-OpenAI-TypeSpec": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\UnbrandedProjects\\Platform-OpenAI-TypeSpec\\src\\Generated -n"
@@ -660,6 +652,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\lro\\standard\\src\\Generated -n"
     },
+    "typespec-azure/core/model": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\model\\src\\Generated -n"
+    },
     "typespec-azure/core/scalar": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\scalar\\src\\Generated -n"
@@ -667,6 +663,10 @@
     "typespec-azure/core/traits": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\traits\\src\\Generated -n"
+    },
+    "typespec-azure/resource-manager/models/resources": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\resource-manager\\models\\resources\\src\\Generated -n"
     },
     "typespec-azure/special-headers/client-request-id": {
       "commandName": "Project",

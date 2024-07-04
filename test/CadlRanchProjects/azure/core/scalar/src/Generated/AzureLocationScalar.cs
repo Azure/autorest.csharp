@@ -47,21 +47,21 @@ namespace _Specs_.Azure.Core.Scalar
         /// <summary> get azureLocation value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='GetAzureLocationScalarAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<AzureLocation>> GetAzureLocationScalarAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<string>> GetAzureLocationScalarAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetAzureLocationScalarAsync(context).ConfigureAwait(false);
-            return Response.FromValue(new AzureLocation(response.Content.ToObjectFromJson<string>()), response);
+            return Response.FromValue(response.Content.ToObjectFromJson<string>(), response);
         }
 
         /// <summary> get azureLocation value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='GetAzureLocationScalar(CancellationToken)']/*" />
-        public virtual Response<AzureLocation> GetAzureLocationScalar(CancellationToken cancellationToken = default)
+        public virtual Response<string> GetAzureLocationScalar(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetAzureLocationScalar(context);
-            return Response.FromValue(new AzureLocation(response.Content.ToObjectFromJson<string>()), response);
+            return Response.FromValue(response.Content.ToObjectFromJson<string>(), response);
         }
 
         /// <summary>
@@ -137,10 +137,14 @@ namespace _Specs_.Azure.Core.Scalar
         /// <summary> put azureLocation value. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='PutAsync(AzureLocation,CancellationToken)']/*" />
-        public virtual async Task<Response> PutAsync(AzureLocation body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='PutAsync(string,CancellationToken)']/*" />
+        public virtual async Task<Response> PutAsync(string body, CancellationToken cancellationToken = default)
         {
-            using RequestContent content = RequestContentHelper.FromObject(body.ToString());
+            Argument.AssertNotNullOrEmpty(body, nameof(body));
+
+            using RequestContent content = RequestContentHelper.FromObject(body);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PutAsync(content, context).ConfigureAwait(false);
             return response;
@@ -149,10 +153,14 @@ namespace _Specs_.Azure.Core.Scalar
         /// <summary> put azureLocation value. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='Put(AzureLocation,CancellationToken)']/*" />
-        public virtual Response Put(AzureLocation body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='Put(string,CancellationToken)']/*" />
+        public virtual Response Put(string body, CancellationToken cancellationToken = default)
         {
-            using RequestContent content = RequestContentHelper.FromObject(body.ToString());
+            Argument.AssertNotNullOrEmpty(body, nameof(body));
+
+            using RequestContent content = RequestContentHelper.FromObject(body);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Put(content, context);
             return response;
@@ -168,7 +176,7 @@ namespace _Specs_.Azure.Core.Scalar
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutAsync(AzureLocation,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -207,7 +215,7 @@ namespace _Specs_.Azure.Core.Scalar
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Put(AzureLocation,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Put(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -357,11 +365,14 @@ namespace _Specs_.Azure.Core.Scalar
         /// </summary>
         /// <param name="region"> _. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="region"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='HeaderAsync(AzureLocation,RequestContext)']/*" />
-        public virtual async Task<Response> HeaderAsync(AzureLocation region, RequestContext context = null)
+        /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='HeaderAsync(string,RequestContext)']/*" />
+        public virtual async Task<Response> HeaderAsync(string region, RequestContext context = null)
         {
+            Argument.AssertNotNull(region, nameof(region));
+
             using var scope = ClientDiagnostics.CreateScope("AzureLocationScalar.Header");
             scope.Start();
             try
@@ -389,11 +400,14 @@ namespace _Specs_.Azure.Core.Scalar
         /// </summary>
         /// <param name="region"> _. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="region"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='Header(AzureLocation,RequestContext)']/*" />
-        public virtual Response Header(AzureLocation region, RequestContext context = null)
+        /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='Header(string,RequestContext)']/*" />
+        public virtual Response Header(string region, RequestContext context = null)
         {
+            Argument.AssertNotNull(region, nameof(region));
+
             using var scope = ClientDiagnostics.CreateScope("AzureLocationScalar.Header");
             scope.Start();
             try
@@ -421,11 +435,14 @@ namespace _Specs_.Azure.Core.Scalar
         /// </summary>
         /// <param name="region"> _. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="region"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='QueryAsync(AzureLocation,RequestContext)']/*" />
-        public virtual async Task<Response> QueryAsync(AzureLocation region, RequestContext context = null)
+        /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='QueryAsync(string,RequestContext)']/*" />
+        public virtual async Task<Response> QueryAsync(string region, RequestContext context = null)
         {
+            Argument.AssertNotNull(region, nameof(region));
+
             using var scope = ClientDiagnostics.CreateScope("AzureLocationScalar.Query");
             scope.Start();
             try
@@ -453,11 +470,14 @@ namespace _Specs_.Azure.Core.Scalar
         /// </summary>
         /// <param name="region"> _. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="region"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='Query(AzureLocation,RequestContext)']/*" />
-        public virtual Response Query(AzureLocation region, RequestContext context = null)
+        /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='Query(string,RequestContext)']/*" />
+        public virtual Response Query(string region, RequestContext context = null)
         {
+            Argument.AssertNotNull(region, nameof(region));
+
             using var scope = ClientDiagnostics.CreateScope("AzureLocationScalar.Query");
             scope.Start();
             try
@@ -515,7 +535,7 @@ namespace _Specs_.Azure.Core.Scalar
             return message;
         }
 
-        internal HttpMessage CreateHeaderRequest(AzureLocation region, RequestContext context)
+        internal HttpMessage CreateHeaderRequest(string region, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
@@ -529,7 +549,7 @@ namespace _Specs_.Azure.Core.Scalar
             return message;
         }
 
-        internal HttpMessage CreateQueryRequest(AzureLocation region, RequestContext context)
+        internal HttpMessage CreateQueryRequest(string region, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;

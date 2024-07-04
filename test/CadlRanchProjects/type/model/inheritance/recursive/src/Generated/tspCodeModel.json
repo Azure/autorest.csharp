@@ -6,20 +6,18 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Extension",
-   "Namespace": "Type.Model.Inheritance.Recursive",
-   "Description": "extension",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Extension",
    "Usage": "RoundTrip",
+   "Description": "extension",
    "BaseModel": {
     "$id": "3",
-    "Kind": "Model",
+    "Kind": "model",
     "Name": "Element",
-    "Namespace": "Type.Model.Inheritance.Recursive",
-    "Description": "element",
-    "IsNullable": false,
+    "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Element",
     "Usage": "RoundTrip",
+    "Description": "element",
     "Properties": [
      {
       "$id": "4",
@@ -28,12 +26,12 @@
       "Description": "",
       "Type": {
        "$id": "5",
-       "Kind": "Array",
-       "Name": "Array",
-       "ElementType": {
+       "Kind": "array",
+       "Name": "ArrayExtension",
+       "ValueType": {
         "$ref": "2"
        },
-       "IsNullable": false
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
       },
       "IsRequired": false,
       "IsReadOnly": false
@@ -48,9 +46,7 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "Primitive",
-      "Name": "SByte",
-      "IsNullable": false
+      "Kind": "int8"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -71,6 +67,7 @@
      "$id": "9",
      "Name": "put",
      "ResourceName": "Recursive",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "10",
@@ -79,9 +76,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "11",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -96,9 +91,7 @@
         "$id": "12",
         "Type": {
          "$id": "13",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
@@ -126,8 +119,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "16",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -153,8 +145,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "19",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -201,6 +192,7 @@
      "$id": "22",
      "Name": "get",
      "ResourceName": "Recursive",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -211,8 +203,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "24",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -262,7 +253,6 @@
    "Protocol": {
     "$id": "27"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "10"

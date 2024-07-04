@@ -6,12 +6,11 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "StringProperty",
-   "Namespace": "Type.Property.Nullable",
-   "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Property.Nullable.StringProperty",
    "Usage": "Output",
+   "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "Properties": [
     {
      "$id": "3",
@@ -20,9 +19,7 @@
      "Description": "Required property",
      "Type": {
       "$id": "4",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -34,9 +31,11 @@
      "Description": "Property",
      "Type": {
       "$id": "6",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": true
+      "Kind": "nullable",
+      "Type": {
+       "$id": "7",
+       "Kind": "string"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -44,38 +43,38 @@
    ]
   },
   {
-   "$id": "7",
-   "Kind": "Model",
+   "$id": "8",
+   "Kind": "model",
    "Name": "BytesProperty",
-   "Namespace": "Type.Property.Nullable",
-   "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Property.Nullable.BytesProperty",
    "Usage": "Output",
+   "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "Properties": [
     {
-     "$id": "8",
+     "$id": "9",
      "Name": "requiredProperty",
      "SerializedName": "requiredProperty",
      "Description": "Required property",
      "Type": {
-      "$id": "9",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "$id": "10",
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "10",
+     "$id": "11",
      "Name": "nullableProperty",
      "SerializedName": "nullableProperty",
      "Description": "Property",
      "Type": {
-      "$id": "11",
-      "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": true
+      "$id": "12",
+      "Kind": "nullable",
+      "Type": {
+       "$id": "13",
+       "Kind": "bytes",
+       "Encode": "base64"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -83,38 +82,42 @@
    ]
   },
   {
-   "$id": "12",
-   "Kind": "Model",
+   "$id": "14",
+   "Kind": "model",
    "Name": "DatetimeProperty",
-   "Namespace": "Type.Property.Nullable",
-   "Description": "Model with a datetime property",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Property.Nullable.DatetimeProperty",
    "Usage": "Output",
+   "Description": "Model with a datetime property",
    "Properties": [
-    {
-     "$id": "13",
-     "Name": "requiredProperty",
-     "SerializedName": "requiredProperty",
-     "Description": "Required property",
-     "Type": {
-      "$id": "14",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
     {
      "$id": "15",
-     "Name": "nullableProperty",
-     "SerializedName": "nullableProperty",
-     "Description": "Property",
+     "Name": "requiredProperty",
+     "SerializedName": "requiredProperty",
+     "Description": "Required property",
      "Type": {
       "$id": "16",
-      "Kind": "Primitive",
-      "Name": "DateTimeRFC3339",
-      "IsNullable": true
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "17",
+     "Name": "nullableProperty",
+     "SerializedName": "nullableProperty",
+     "Description": "Property",
+     "Type": {
+      "$id": "18",
+      "Kind": "nullable",
+      "Type": {
+       "$id": "19",
+       "Kind": "utcDateTime",
+       "Encode": "rfc3339",
+       "WireType": {
+        "$id": "20",
+        "Kind": "string"
+       }
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -122,83 +125,42 @@
    ]
   },
   {
-   "$id": "17",
-   "Kind": "Model",
+   "$id": "21",
+   "Kind": "model",
    "Name": "DurationProperty",
-   "Namespace": "Type.Property.Nullable",
+   "CrossLanguageDefinitionId": "Type.Property.Nullable.DurationProperty",
+   "Usage": "Output",
    "Description": "Model with a duration property",
-   "IsNullable": false,
-   "Usage": "Output",
    "Properties": [
     {
-     "$id": "18",
+     "$id": "22",
      "Name": "requiredProperty",
      "SerializedName": "requiredProperty",
      "Description": "Required property",
      "Type": {
-      "$id": "19",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "$id": "23",
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "20",
+     "$id": "24",
      "Name": "nullableProperty",
      "SerializedName": "nullableProperty",
      "Description": "Property",
      "Type": {
-      "$id": "21",
-      "Kind": "Primitive",
-      "Name": "DurationISO8601",
-      "IsNullable": true
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "22",
-   "Kind": "Model",
-   "Name": "CollectionsByteProperty",
-   "Namespace": "Type.Property.Nullable",
-   "Description": "Model with collection bytes properties",
-   "IsNullable": false,
-   "Usage": "Output",
-   "Properties": [
-    {
-     "$id": "23",
-     "Name": "requiredProperty",
-     "SerializedName": "requiredProperty",
-     "Description": "Required property",
-     "Type": {
-      "$id": "24",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "25",
-     "Name": "nullableProperty",
-     "SerializedName": "nullableProperty",
-     "Description": "Property",
-     "Type": {
-      "$id": "26",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "27",
-       "Kind": "Primitive",
-       "Name": "Bytes",
-       "IsNullable": false
-      },
-      "IsNullable": true
+      "$id": "25",
+      "Kind": "nullable",
+      "Type": {
+       "$id": "26",
+       "Kind": "duration",
+       "Encode": "ISO8601",
+       "WireType": {
+        "$id": "27",
+        "Kind": "string"
+       }
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -207,12 +169,11 @@
   },
   {
    "$id": "28",
-   "Kind": "Model",
-   "Name": "CollectionsModelProperty",
-   "Namespace": "Type.Property.Nullable",
-   "Description": "Model with collection models properties",
-   "IsNullable": false,
+   "Kind": "model",
+   "Name": "CollectionsByteProperty",
+   "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsByteProperty",
    "Usage": "Output",
+   "Description": "Model with collection bytes properties",
    "Properties": [
     {
      "$id": "29",
@@ -221,9 +182,7 @@
      "Description": "Required property",
      "Type": {
       "$id": "30",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -235,34 +194,18 @@
      "Description": "Property",
      "Type": {
       "$id": "32",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "nullable",
+      "Type": {
        "$id": "33",
-       "Kind": "Model",
-       "Name": "InnerModel",
-       "Namespace": "Type.Property.Nullable",
-       "Description": "Inner model used in collections model property",
-       "IsNullable": false,
-       "Usage": "Output",
-       "Properties": [
-        {
-         "$id": "34",
-         "Name": "property",
-         "SerializedName": "property",
-         "Description": "Inner model property",
-         "Type": {
-          "$id": "35",
-          "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
-         },
-         "IsRequired": true,
-         "IsReadOnly": false
-        }
-       ]
-      },
-      "IsNullable": true
+       "Kind": "array",
+       "Name": "Array",
+       "ValueType": {
+        "$id": "34",
+        "Kind": "bytes",
+        "Encode": "base64"
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -270,30 +213,133 @@
    ]
   },
   {
-   "$ref": "33"
+   "$id": "35",
+   "Kind": "model",
+   "Name": "CollectionsModelProperty",
+   "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsModelProperty",
+   "Usage": "Output",
+   "Description": "Model with collection models properties",
+   "Properties": [
+    {
+     "$id": "36",
+     "Name": "requiredProperty",
+     "SerializedName": "requiredProperty",
+     "Description": "Required property",
+     "Type": {
+      "$id": "37",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "38",
+     "Name": "nullableProperty",
+     "SerializedName": "nullableProperty",
+     "Description": "Property",
+     "Type": {
+      "$id": "39",
+      "Kind": "nullable",
+      "Type": {
+       "$id": "40",
+       "Kind": "array",
+       "Name": "ArrayInnerModel",
+       "ValueType": {
+        "$id": "41",
+        "Kind": "model",
+        "Name": "InnerModel",
+        "CrossLanguageDefinitionId": "Type.Property.Nullable.InnerModel",
+        "Usage": "Output",
+        "Description": "Inner model used in collections model property",
+        "Properties": [
+         {
+          "$id": "42",
+          "Name": "property",
+          "SerializedName": "property",
+          "Description": "Inner model property",
+          "Type": {
+           "$id": "43",
+           "Kind": "string"
+          },
+          "IsRequired": true,
+          "IsReadOnly": false
+         }
+        ]
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
+      }
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$ref": "41"
+  },
+  {
+   "$id": "44",
+   "Kind": "model",
+   "Name": "CollectionsStringProperty",
+   "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsStringProperty",
+   "Usage": "Output",
+   "Description": "Model with collection string properties",
+   "Properties": [
+    {
+     "$id": "45",
+     "Name": "requiredProperty",
+     "SerializedName": "requiredProperty",
+     "Description": "Required property",
+     "Type": {
+      "$id": "46",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "47",
+     "Name": "nullableProperty",
+     "SerializedName": "nullableProperty",
+     "Description": "Property",
+     "Type": {
+      "$id": "48",
+      "Kind": "nullable",
+      "Type": {
+       "$id": "49",
+       "Kind": "array",
+       "Name": "Array",
+       "ValueType": {
+        "$id": "50",
+        "Kind": "string"
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
+      }
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
   }
  ],
  "Clients": [
   {
-   "$id": "36",
+   "$id": "51",
    "Name": "NullableClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "37"
+    "$id": "52"
    },
-   "Creatable": true,
    "Parameters": [
     {
-     "$id": "38",
+     "$id": "53",
      "Name": "host",
      "NameInRequest": "host",
      "Description": "TestServer endpoint",
      "Type": {
-      "$id": "39",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "$id": "54",
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -305,12 +351,10 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "40",
+      "$id": "55",
       "Type": {
-       "$id": "41",
-       "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "$id": "56",
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -318,194 +362,19 @@
    ]
   },
   {
-   "$id": "42",
+   "$id": "57",
    "Name": "String",
    "Description": "",
    "Operations": [
     {
-     "$id": "43",
+     "$id": "58",
      "Name": "getNonNull",
      "ResourceName": "String",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "38"
-      },
-      {
-       "$id": "44",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "45",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "46",
-        "Type": {
-         "$ref": "45"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "47",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "2"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/type/property/nullable/string/non-null",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "48",
-     "Name": "getNull",
-     "ResourceName": "String",
-     "Description": "Get models that will return the default object",
-     "Parameters": [
-      {
-       "$ref": "38"
-      },
-      {
-       "$id": "49",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "50",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "51",
-        "Type": {
-         "$ref": "50"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "52",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "2"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/type/property/nullable/string/null",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "53",
-     "Name": "patchNonNull",
-     "ResourceName": "String",
-     "Description": "Put a body with all properties present.",
-     "Parameters": [
-      {
-       "$ref": "38"
-      },
-      {
-       "$id": "54",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "content-type is application/merge-patch+json",
-       "Type": {
-        "$id": "55",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "56",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "application/merge-patch+json",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "DefaultValue": {
-        "$id": "57",
-        "Type": {
-         "$ref": "55"
-        },
-        "Value": "application/merge-patch+json"
-       },
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "58",
-       "Name": "body",
-       "NameInRequest": "body",
-       "Type": {
-        "$ref": "2"
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
+       "$ref": "53"
       },
       {
        "$id": "59",
@@ -513,8 +382,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "60",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -539,6 +407,178 @@
       {
        "$id": "62",
        "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/nullable/string/non-null",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "63",
+     "Name": "getNull",
+     "ResourceName": "String",
+     "Description": "Get models that will return the default object",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "53"
+      },
+      {
+       "$id": "64",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "65",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "66",
+        "Type": {
+         "$ref": "65"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "67",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/nullable/string/null",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "68",
+     "Name": "patchNonNull",
+     "ResourceName": "String",
+     "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "53"
+      },
+      {
+       "$id": "69",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "content-type is application/merge-patch+json",
+       "Type": {
+        "$id": "70",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "71",
+         "Kind": "string"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "72",
+        "Type": {
+         "$ref": "70"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "73",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "74",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "75",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "76",
+        "Type": {
+         "$ref": "75"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "77",
+       "StatusCodes": [
         204
        ],
        "BodyMediaType": "Json",
@@ -558,37 +598,34 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "63",
+     "$id": "78",
      "Name": "patchNull",
      "ResourceName": "String",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "38"
+       "$ref": "53"
       },
       {
-       "$id": "64",
+       "$id": "79",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "content-type is application/merge-patch+json",
        "Type": {
-        "$id": "65",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "66",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+        "$id": "80",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "81",
+         "Kind": "string"
         },
-        "Value": "application/merge-patch+json",
-        "IsNullable": false
+        "Value": "application/merge-patch+json"
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "67",
+        "$id": "82",
         "Type": {
-         "$ref": "65"
+         "$ref": "80"
         },
         "Value": "application/merge-patch+json"
        },
@@ -602,7 +639,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "68",
+       "$id": "83",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -619,13 +656,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "69",
+       "$id": "84",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "70",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "85",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -638,9 +674,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "71",
+        "$id": "86",
         "Type": {
-         "$ref": "70"
+         "$ref": "85"
         },
         "Value": "application/json"
        }
@@ -648,7 +684,7 @@
      ],
      "Responses": [
       {
-       "$id": "72",
+       "$id": "87",
        "StatusCodes": [
         204
        ],
@@ -670,205 +706,29 @@
     }
    ],
    "Protocol": {
-    "$id": "73"
+    "$id": "88"
    },
-   "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {
-     "$ref": "38"
+     "$ref": "53"
     }
    ]
   },
   {
-   "$id": "74",
+   "$id": "89",
    "Name": "Bytes",
    "Description": "",
    "Operations": [
     {
-     "$id": "75",
+     "$id": "90",
      "Name": "getNonNull",
      "ResourceName": "Bytes",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "38"
-      },
-      {
-       "$id": "76",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "77",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "78",
-        "Type": {
-         "$ref": "77"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "79",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "7"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/type/property/nullable/bytes/non-null",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "80",
-     "Name": "getNull",
-     "ResourceName": "Bytes",
-     "Description": "Get models that will return the default object",
-     "Parameters": [
-      {
-       "$ref": "38"
-      },
-      {
-       "$id": "81",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "82",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "83",
-        "Type": {
-         "$ref": "82"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "84",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "7"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/type/property/nullable/bytes/null",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "85",
-     "Name": "patchNonNull",
-     "ResourceName": "Bytes",
-     "Description": "Put a body with all properties present.",
-     "Parameters": [
-      {
-       "$ref": "38"
-      },
-      {
-       "$id": "86",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "content-type is application/merge-patch+json",
-       "Type": {
-        "$id": "87",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "88",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "application/merge-patch+json",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "DefaultValue": {
-        "$id": "89",
-        "Type": {
-         "$ref": "87"
-        },
-        "Value": "application/merge-patch+json"
-       },
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "90",
-       "Name": "body",
-       "NameInRequest": "body",
-       "Type": {
-        "$ref": "7"
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
+       "$ref": "53"
       },
       {
        "$id": "91",
@@ -876,8 +736,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "92",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -902,6 +761,178 @@
       {
        "$id": "94",
        "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "8"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/nullable/bytes/non-null",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "95",
+     "Name": "getNull",
+     "ResourceName": "Bytes",
+     "Description": "Get models that will return the default object",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "53"
+      },
+      {
+       "$id": "96",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "97",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "98",
+        "Type": {
+         "$ref": "97"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "99",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "8"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/nullable/bytes/null",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "100",
+     "Name": "patchNonNull",
+     "ResourceName": "Bytes",
+     "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "53"
+      },
+      {
+       "$id": "101",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "content-type is application/merge-patch+json",
+       "Type": {
+        "$id": "102",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "103",
+         "Kind": "string"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "104",
+        "Type": {
+         "$ref": "102"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "105",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "8"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "106",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "107",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "108",
+        "Type": {
+         "$ref": "107"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "109",
+       "StatusCodes": [
         204
        ],
        "BodyMediaType": "Json",
@@ -921,37 +952,34 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "95",
+     "$id": "110",
      "Name": "patchNull",
      "ResourceName": "Bytes",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "38"
+       "$ref": "53"
       },
       {
-       "$id": "96",
+       "$id": "111",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "content-type is application/merge-patch+json",
        "Type": {
-        "$id": "97",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "98",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+        "$id": "112",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "113",
+         "Kind": "string"
         },
-        "Value": "application/merge-patch+json",
-        "IsNullable": false
+        "Value": "application/merge-patch+json"
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "99",
+        "$id": "114",
         "Type": {
-         "$ref": "97"
+         "$ref": "112"
         },
         "Value": "application/merge-patch+json"
        },
@@ -965,11 +993,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "100",
+       "$id": "115",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "7"
+        "$ref": "8"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -982,13 +1010,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "101",
+       "$id": "116",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "102",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "117",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1001,9 +1028,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "103",
+        "$id": "118",
         "Type": {
-         "$ref": "102"
+         "$ref": "117"
         },
         "Value": "application/json"
        }
@@ -1011,7 +1038,7 @@
      ],
      "Responses": [
       {
-       "$id": "104",
+       "$id": "119",
        "StatusCodes": [
         204
        ],
@@ -1033,205 +1060,29 @@
     }
    ],
    "Protocol": {
-    "$id": "105"
+    "$id": "120"
    },
-   "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {
-     "$ref": "38"
+     "$ref": "53"
     }
    ]
   },
   {
-   "$id": "106",
+   "$id": "121",
    "Name": "Datetime",
    "Description": "",
    "Operations": [
     {
-     "$id": "107",
+     "$id": "122",
      "Name": "getNonNull",
      "ResourceName": "Datetime",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "38"
-      },
-      {
-       "$id": "108",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "109",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "110",
-        "Type": {
-         "$ref": "109"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "111",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "12"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/type/property/nullable/datetime/non-null",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "112",
-     "Name": "getNull",
-     "ResourceName": "Datetime",
-     "Description": "Get models that will return the default object",
-     "Parameters": [
-      {
-       "$ref": "38"
-      },
-      {
-       "$id": "113",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "114",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "115",
-        "Type": {
-         "$ref": "114"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "116",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "12"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/type/property/nullable/datetime/null",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "117",
-     "Name": "patchNonNull",
-     "ResourceName": "Datetime",
-     "Description": "Put a body with all properties present.",
-     "Parameters": [
-      {
-       "$ref": "38"
-      },
-      {
-       "$id": "118",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "content-type is application/merge-patch+json",
-       "Type": {
-        "$id": "119",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "120",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "application/merge-patch+json",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "DefaultValue": {
-        "$id": "121",
-        "Type": {
-         "$ref": "119"
-        },
-        "Value": "application/merge-patch+json"
-       },
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "122",
-       "Name": "body",
-       "NameInRequest": "body",
-       "Type": {
-        "$ref": "12"
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
+       "$ref": "53"
       },
       {
        "$id": "123",
@@ -1239,8 +1090,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "124",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1265,6 +1115,178 @@
       {
        "$id": "126",
        "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "14"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/nullable/datetime/non-null",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "127",
+     "Name": "getNull",
+     "ResourceName": "Datetime",
+     "Description": "Get models that will return the default object",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "53"
+      },
+      {
+       "$id": "128",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "129",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "130",
+        "Type": {
+         "$ref": "129"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "131",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "14"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/nullable/datetime/null",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "132",
+     "Name": "patchNonNull",
+     "ResourceName": "Datetime",
+     "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "53"
+      },
+      {
+       "$id": "133",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "content-type is application/merge-patch+json",
+       "Type": {
+        "$id": "134",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "135",
+         "Kind": "string"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "136",
+        "Type": {
+         "$ref": "134"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "137",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "14"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "138",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "139",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "140",
+        "Type": {
+         "$ref": "139"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "141",
+       "StatusCodes": [
         204
        ],
        "BodyMediaType": "Json",
@@ -1284,37 +1306,34 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "127",
+     "$id": "142",
      "Name": "patchNull",
      "ResourceName": "Datetime",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "38"
+       "$ref": "53"
       },
       {
-       "$id": "128",
+       "$id": "143",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "content-type is application/merge-patch+json",
        "Type": {
-        "$id": "129",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "130",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+        "$id": "144",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "145",
+         "Kind": "string"
         },
-        "Value": "application/merge-patch+json",
-        "IsNullable": false
+        "Value": "application/merge-patch+json"
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "131",
+        "$id": "146",
         "Type": {
-         "$ref": "129"
+         "$ref": "144"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1328,11 +1347,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "132",
+       "$id": "147",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "12"
+        "$ref": "14"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1345,13 +1364,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "133",
+       "$id": "148",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "134",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "149",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1364,9 +1382,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "135",
+        "$id": "150",
         "Type": {
-         "$ref": "134"
+         "$ref": "149"
         },
         "Value": "application/json"
        }
@@ -1374,7 +1392,7 @@
      ],
      "Responses": [
       {
-       "$id": "136",
+       "$id": "151",
        "StatusCodes": [
         204
        ],
@@ -1396,205 +1414,29 @@
     }
    ],
    "Protocol": {
-    "$id": "137"
+    "$id": "152"
    },
-   "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {
-     "$ref": "38"
+     "$ref": "53"
     }
    ]
   },
   {
-   "$id": "138",
+   "$id": "153",
    "Name": "Duration",
    "Description": "",
    "Operations": [
     {
-     "$id": "139",
+     "$id": "154",
      "Name": "getNonNull",
      "ResourceName": "Duration",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "38"
-      },
-      {
-       "$id": "140",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "141",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "142",
-        "Type": {
-         "$ref": "141"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "143",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "17"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/type/property/nullable/duration/non-null",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "144",
-     "Name": "getNull",
-     "ResourceName": "Duration",
-     "Description": "Get models that will return the default object",
-     "Parameters": [
-      {
-       "$ref": "38"
-      },
-      {
-       "$id": "145",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "146",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "147",
-        "Type": {
-         "$ref": "146"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "148",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "17"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/type/property/nullable/duration/null",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "149",
-     "Name": "patchNonNull",
-     "ResourceName": "Duration",
-     "Description": "Put a body with all properties present.",
-     "Parameters": [
-      {
-       "$ref": "38"
-      },
-      {
-       "$id": "150",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "content-type is application/merge-patch+json",
-       "Type": {
-        "$id": "151",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "152",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "application/merge-patch+json",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "DefaultValue": {
-        "$id": "153",
-        "Type": {
-         "$ref": "151"
-        },
-        "Value": "application/merge-patch+json"
-       },
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "154",
-       "Name": "body",
-       "NameInRequest": "body",
-       "Type": {
-        "$ref": "17"
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
+       "$ref": "53"
       },
       {
        "$id": "155",
@@ -1602,8 +1444,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "156",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1628,6 +1469,178 @@
       {
        "$id": "158",
        "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "21"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/nullable/duration/non-null",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "159",
+     "Name": "getNull",
+     "ResourceName": "Duration",
+     "Description": "Get models that will return the default object",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "53"
+      },
+      {
+       "$id": "160",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "161",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "162",
+        "Type": {
+         "$ref": "161"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "163",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "21"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/nullable/duration/null",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "164",
+     "Name": "patchNonNull",
+     "ResourceName": "Duration",
+     "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "53"
+      },
+      {
+       "$id": "165",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "content-type is application/merge-patch+json",
+       "Type": {
+        "$id": "166",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "167",
+         "Kind": "string"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "168",
+        "Type": {
+         "$ref": "166"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "169",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "21"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "170",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "171",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "172",
+        "Type": {
+         "$ref": "171"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "173",
+       "StatusCodes": [
         204
        ],
        "BodyMediaType": "Json",
@@ -1647,37 +1660,34 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "159",
+     "$id": "174",
      "Name": "patchNull",
      "ResourceName": "Duration",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "38"
+       "$ref": "53"
       },
       {
-       "$id": "160",
+       "$id": "175",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "content-type is application/merge-patch+json",
        "Type": {
-        "$id": "161",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "162",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+        "$id": "176",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "177",
+         "Kind": "string"
         },
-        "Value": "application/merge-patch+json",
-        "IsNullable": false
+        "Value": "application/merge-patch+json"
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "163",
+        "$id": "178",
         "Type": {
-         "$ref": "161"
+         "$ref": "176"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1691,11 +1701,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "164",
+       "$id": "179",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "17"
+        "$ref": "21"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1708,13 +1718,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "165",
+       "$id": "180",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "166",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "181",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1727,9 +1736,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "167",
+        "$id": "182",
         "Type": {
-         "$ref": "166"
+         "$ref": "181"
         },
         "Value": "application/json"
        }
@@ -1737,7 +1746,7 @@
      ],
      "Responses": [
       {
-       "$id": "168",
+       "$id": "183",
        "StatusCodes": [
         204
        ],
@@ -1759,205 +1768,29 @@
     }
    ],
    "Protocol": {
-    "$id": "169"
+    "$id": "184"
    },
-   "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {
-     "$ref": "38"
+     "$ref": "53"
     }
    ]
   },
   {
-   "$id": "170",
+   "$id": "185",
    "Name": "CollectionsByte",
    "Description": "",
    "Operations": [
     {
-     "$id": "171",
+     "$id": "186",
      "Name": "getNonNull",
      "ResourceName": "CollectionsByte",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "38"
-      },
-      {
-       "$id": "172",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "173",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "174",
-        "Type": {
-         "$ref": "173"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "175",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "22"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/type/property/nullable/collections/bytes/non-null",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "176",
-     "Name": "getNull",
-     "ResourceName": "CollectionsByte",
-     "Description": "Get models that will return the default object",
-     "Parameters": [
-      {
-       "$ref": "38"
-      },
-      {
-       "$id": "177",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "178",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "179",
-        "Type": {
-         "$ref": "178"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "180",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "22"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/type/property/nullable/collections/bytes/null",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "181",
-     "Name": "patchNonNull",
-     "ResourceName": "CollectionsByte",
-     "Description": "Put a body with all properties present.",
-     "Parameters": [
-      {
-       "$ref": "38"
-      },
-      {
-       "$id": "182",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "content-type is application/merge-patch+json",
-       "Type": {
-        "$id": "183",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "184",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "application/merge-patch+json",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "DefaultValue": {
-        "$id": "185",
-        "Type": {
-         "$ref": "183"
-        },
-        "Value": "application/merge-patch+json"
-       },
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "186",
-       "Name": "body",
-       "NameInRequest": "body",
-       "Type": {
-        "$ref": "22"
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
+       "$ref": "53"
       },
       {
        "$id": "187",
@@ -1965,8 +1798,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "188",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1991,6 +1823,178 @@
       {
        "$id": "190",
        "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "28"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/nullable/collections/bytes/non-null",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "191",
+     "Name": "getNull",
+     "ResourceName": "CollectionsByte",
+     "Description": "Get models that will return the default object",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "53"
+      },
+      {
+       "$id": "192",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "193",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "194",
+        "Type": {
+         "$ref": "193"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "195",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "28"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/nullable/collections/bytes/null",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "196",
+     "Name": "patchNonNull",
+     "ResourceName": "CollectionsByte",
+     "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "53"
+      },
+      {
+       "$id": "197",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "content-type is application/merge-patch+json",
+       "Type": {
+        "$id": "198",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "199",
+         "Kind": "string"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "200",
+        "Type": {
+         "$ref": "198"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "201",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "28"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "202",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "203",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "204",
+        "Type": {
+         "$ref": "203"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "205",
+       "StatusCodes": [
         204
        ],
        "BodyMediaType": "Json",
@@ -2010,37 +2014,34 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "191",
+     "$id": "206",
      "Name": "patchNull",
      "ResourceName": "CollectionsByte",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "38"
+       "$ref": "53"
       },
       {
-       "$id": "192",
+       "$id": "207",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "content-type is application/merge-patch+json",
        "Type": {
-        "$id": "193",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "194",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+        "$id": "208",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "209",
+         "Kind": "string"
         },
-        "Value": "application/merge-patch+json",
-        "IsNullable": false
+        "Value": "application/merge-patch+json"
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "195",
+        "$id": "210",
         "Type": {
-         "$ref": "193"
+         "$ref": "208"
         },
         "Value": "application/merge-patch+json"
        },
@@ -2054,11 +2055,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "196",
+       "$id": "211",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "22"
+        "$ref": "28"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2071,13 +2072,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "197",
+       "$id": "212",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "198",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "213",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2090,9 +2090,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "199",
+        "$id": "214",
         "Type": {
-         "$ref": "198"
+         "$ref": "213"
         },
         "Value": "application/json"
        }
@@ -2100,7 +2100,7 @@
      ],
      "Responses": [
       {
-       "$id": "200",
+       "$id": "215",
        "StatusCodes": [
         204
        ],
@@ -2122,205 +2122,29 @@
     }
    ],
    "Protocol": {
-    "$id": "201"
+    "$id": "216"
    },
-   "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {
-     "$ref": "38"
+     "$ref": "53"
     }
    ]
   },
   {
-   "$id": "202",
+   "$id": "217",
    "Name": "CollectionsModel",
    "Description": "",
    "Operations": [
     {
-     "$id": "203",
+     "$id": "218",
      "Name": "getNonNull",
      "ResourceName": "CollectionsModel",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "38"
-      },
-      {
-       "$id": "204",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "205",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "206",
-        "Type": {
-         "$ref": "205"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "207",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "28"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/type/property/nullable/collections/model/non-null",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "208",
-     "Name": "getNull",
-     "ResourceName": "CollectionsModel",
-     "Description": "Get models that will return the default object",
-     "Parameters": [
-      {
-       "$ref": "38"
-      },
-      {
-       "$id": "209",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "210",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "211",
-        "Type": {
-         "$ref": "210"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "212",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "28"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/type/property/nullable/collections/model/null",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "213",
-     "Name": "patchNonNull",
-     "ResourceName": "CollectionsModel",
-     "Description": "Put a body with all properties present.",
-     "Parameters": [
-      {
-       "$ref": "38"
-      },
-      {
-       "$id": "214",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "content-type is application/merge-patch+json",
-       "Type": {
-        "$id": "215",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "216",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
-        },
-        "Value": "application/merge-patch+json",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "DefaultValue": {
-        "$id": "217",
-        "Type": {
-         "$ref": "215"
-        },
-        "Value": "application/merge-patch+json"
-       },
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "218",
-       "Name": "body",
-       "NameInRequest": "body",
-       "Type": {
-        "$ref": "28"
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
+       "$ref": "53"
       },
       {
        "$id": "219",
@@ -2328,8 +2152,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "220",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2354,6 +2177,178 @@
       {
        "$id": "222",
        "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "35"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/nullable/collections/model/non-null",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "223",
+     "Name": "getNull",
+     "ResourceName": "CollectionsModel",
+     "Description": "Get models that will return the default object",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "53"
+      },
+      {
+       "$id": "224",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "225",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "226",
+        "Type": {
+         "$ref": "225"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "227",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "35"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/nullable/collections/model/null",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "228",
+     "Name": "patchNonNull",
+     "ResourceName": "CollectionsModel",
+     "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "53"
+      },
+      {
+       "$id": "229",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "content-type is application/merge-patch+json",
+       "Type": {
+        "$id": "230",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "231",
+         "Kind": "string"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "232",
+        "Type": {
+         "$ref": "230"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "233",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "35"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "234",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "235",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "236",
+        "Type": {
+         "$ref": "235"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "237",
+       "StatusCodes": [
         204
        ],
        "BodyMediaType": "Json",
@@ -2373,37 +2368,34 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "223",
+     "$id": "238",
      "Name": "patchNull",
      "ResourceName": "CollectionsModel",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "38"
+       "$ref": "53"
       },
       {
-       "$id": "224",
+       "$id": "239",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "content-type is application/merge-patch+json",
        "Type": {
-        "$id": "225",
-        "Kind": "Literal",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "226",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+        "$id": "240",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "241",
+         "Kind": "string"
         },
-        "Value": "application/merge-patch+json",
-        "IsNullable": false
+        "Value": "application/merge-patch+json"
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "227",
+        "$id": "242",
         "Type": {
-         "$ref": "225"
+         "$ref": "240"
         },
         "Value": "application/merge-patch+json"
        },
@@ -2417,11 +2409,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "228",
+       "$id": "243",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "28"
+        "$ref": "35"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2434,13 +2426,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "229",
+       "$id": "244",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "230",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "245",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2453,9 +2444,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "231",
+        "$id": "246",
         "Type": {
-         "$ref": "230"
+         "$ref": "245"
         },
         "Value": "application/json"
        }
@@ -2463,7 +2454,7 @@
      ],
      "Responses": [
       {
-       "$id": "232",
+       "$id": "247",
        "StatusCodes": [
         204
        ],
@@ -2485,13 +2476,366 @@
     }
    ],
    "Protocol": {
-    "$id": "233"
+    "$id": "248"
    },
-   "Creatable": false,
    "Parent": "NullableClient",
    "Parameters": [
     {
-     "$ref": "38"
+     "$ref": "53"
+    }
+   ]
+  },
+  {
+   "$id": "249",
+   "Name": "CollectionsString",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "250",
+     "Name": "getNonNull",
+     "ResourceName": "CollectionsString",
+     "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "53"
+      },
+      {
+       "$id": "251",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "252",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "253",
+        "Type": {
+         "$ref": "252"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "254",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "44"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/nullable/collections/string/non-null",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "255",
+     "Name": "getNull",
+     "ResourceName": "CollectionsString",
+     "Description": "Get models that will return the default object",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "53"
+      },
+      {
+       "$id": "256",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "257",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "258",
+        "Type": {
+         "$ref": "257"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "259",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "44"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/property/nullable/collections/string/null",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "260",
+     "Name": "patchNonNull",
+     "ResourceName": "CollectionsString",
+     "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "53"
+      },
+      {
+       "$id": "261",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "content-type is application/merge-patch+json",
+       "Type": {
+        "$id": "262",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "263",
+         "Kind": "string"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "264",
+        "Type": {
+         "$ref": "262"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "265",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "44"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "266",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "267",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "268",
+        "Type": {
+         "$ref": "267"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "269",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PATCH",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/nullable/collections/string/non-null",
+     "RequestMediaTypes": [
+      "application/merge-patch+json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "270",
+     "Name": "patchNull",
+     "ResourceName": "CollectionsString",
+     "Description": "Put a body with default properties.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "53"
+      },
+      {
+       "$id": "271",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "content-type is application/merge-patch+json",
+       "Type": {
+        "$id": "272",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "273",
+         "Kind": "string"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "274",
+        "Type": {
+         "$ref": "272"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "275",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "44"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "276",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "277",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "278",
+        "Type": {
+         "$ref": "277"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "279",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PATCH",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/property/nullable/collections/string/null",
+     "RequestMediaTypes": [
+      "application/merge-patch+json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": false
+    }
+   ],
+   "Protocol": {
+    "$id": "280"
+   },
+   "Parent": "NullableClient",
+   "Parameters": [
+    {
+     "$ref": "53"
     }
    ]
   }

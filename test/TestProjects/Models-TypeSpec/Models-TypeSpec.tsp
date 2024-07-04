@@ -44,6 +44,24 @@ model BaseModelWithDiscriminatorDefinedOnBase extends BaseModelWithARequiredProp
     optionalString?: string;
 }
 
+@doc("A base model in the discriminated set but its discriminator propery comes with the is keyword")
+@discriminator("kind")
+model BaseModelWithDiscriminatorFromIsKeyword is BaseModelWithARequiredProperty {
+    @doc("Optional string.")
+    optionalString?: string;
+}
+
+@doc("A derived class in the discriminated set inheriting from a base whose discriminator property comes from is keyword")
+model DerivedWithDiscriminatorFromIsKeyword extends BaseModelWithDiscriminatorFromIsKeyword {
+  kind: "A";
+
+  @doc("Required string.")
+  requiredString: string;
+
+  @doc("Optional int")
+  optionalInt?: int32;
+}
+
 @doc("A derived class in the discriminated set inheriting from a base with the predefined discriminator property")
 model DerivedWithDiscriminatorDefinedOnBase extends BaseModelWithDiscriminatorDefinedOnBase {
     kind: "A";
@@ -253,6 +271,9 @@ model RoundTripModel extends BaseModel {
 
   @doc("Optional nullable string list")
   nonRequiredNullableStringList?: string[] | null;
+
+  @doc("optional model with discriminator")
+  optionalModel?: BaseModelWithDiscriminatorFromIsKeyword;
 }
 
 @doc("Model used both as input and output with primitive types")
@@ -687,16 +708,6 @@ op analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollecti
   BaseModelWithDiscriminator
 >;
 
-@doc("Single base model without any child model.")
-@discriminator("kind")
-model SingleBase {
-    size: int32;
-}
-
-@route("/single")
-@get
-@convenientAPI(true)
-op getSingleBase(): SingleBase;
 @doc("Facet")
 model Facet {
    @doc("A field to facet by, where the field is attributed as 'facetable'")

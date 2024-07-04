@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace _Specs_.Azure.Core.Traits.Models
 {
-    internal partial class UserActionParam : IUtf8JsonSerializable, IJsonModel<UserActionParam>
+    public partial class UserActionParam : IUtf8JsonSerializable, IJsonModel<UserActionParam>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UserActionParam>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 

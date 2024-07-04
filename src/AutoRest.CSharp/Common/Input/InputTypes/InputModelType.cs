@@ -7,8 +7,8 @@ using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, InputDictionaryType? InheritedDictionaryType, bool IsNullable)
-        : InputType(Name, IsNullable)
+    internal record InputModelType(string Name, string CrossLanguageDefinitionId, string? Access, string? Deprecation, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, InputModelProperty? DiscriminatorProperty, IReadOnlyDictionary<string, InputModelType> DiscriminatedSubtypes, InputType? AdditionalProperties, IReadOnlyList<InputType>? ArgumentTypes = null)
+        : InputType(Name)
     {
         /// <summary>
         /// Indicates if this model is the Unknown derived version of a model with discriminator
@@ -36,17 +36,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public IEnumerable<InputModelType> GetAllBaseModels() => EnumerateBase(BaseModel);
 
-        public IReadOnlyList<InputModelType> GetAllDerivedModels()
-        {
-            var list = new List<InputModelType>(DerivedModels);
-            for (var i = 0; i < list.Count; i++)
-            {
-                list.AddRange(list[i].DerivedModels);
-            }
-
-            return list;
-        }
-
         private static IEnumerable<InputModelType> EnumerateBase(InputModelType? model)
         {
             while (model != null)
@@ -54,49 +43,6 @@ namespace AutoRest.CSharp.Common.Input
                 yield return model;
                 model = model.BaseModel;
             }
-        }
-
-        internal InputModelType ReplaceProperty(InputModelProperty property, InputType inputType)
-        {
-            return new InputModelType(
-                Name,
-                Namespace,
-                Accessibility,
-                Deprecated,
-                Description,
-                Usage,
-                GetNewProperties(property, inputType),
-                BaseModel,
-                DerivedModels,
-                DiscriminatorValue,
-                DiscriminatorPropertyName,
-                InheritedDictionaryType,
-                IsNullable);
-        }
-
-        private IReadOnlyList<InputModelProperty> GetNewProperties(InputModelProperty property, InputType inputType)
-        {
-            List<InputModelProperty> properties = new List<InputModelProperty>();
-            foreach (var myProperty in Properties)
-            {
-                if (myProperty.Equals(property))
-                {
-                    properties.Add(new InputModelProperty(
-                        myProperty.Name,
-                        myProperty.SerializedName,
-                        myProperty.Description,
-                        myProperty.Type.GetCollectionEquivalent(inputType),
-                        myProperty.ConstantValue,
-                        myProperty.IsRequired,
-                        myProperty.IsReadOnly,
-                        myProperty.IsDiscriminator));
-                }
-                else
-                {
-                    properties.Add(myProperty);
-                }
-            }
-            return properties;
         }
 
         public bool Equals(InputType other, bool handleCollections)
@@ -109,7 +55,7 @@ namespace AutoRest.CSharp.Common.Input
                 case InputDictionaryType otherDictionary:
                     return Equals(otherDictionary.ValueType);
                 case InputListType otherList:
-                    return Equals(otherList.ElementType);
+                    return Equals(otherList.ValueType);
                 default:
                     return Equals(other);
             }

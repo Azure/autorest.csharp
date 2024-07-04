@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
@@ -22,7 +23,6 @@ namespace AutoRest.CSharp.Generation.Types
     internal class TypeFactory
     {
         private readonly OutputLibrary _library;
-
         public Type UnknownType { get; }
 
         public TypeFactory(OutputLibrary library, Type unknownType)
@@ -40,102 +40,69 @@ namespace AutoRest.CSharp.Generation.Types
         /// <returns>The <see cref="CSharpType"/> of the input type.</returns>
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
-            InputLiteralType literalType => CSharpType.FromLiteral(CreateType(literalType.LiteralValueType), literalType.Value),
-            InputUnionType unionType => CSharpType.FromUnion(unionType.UnionItemTypes.Select(CreateType).ToArray(), unionType.IsNullable),
-            InputListType { IsEmbeddingsVector: true } listType => new CSharpType(typeof(ReadOnlyMemory<>), listType.IsNullable, CreateType(listType.ElementType)),
-            InputListType listType => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
-            InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
-            InputEnumType enumType => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
+            InputLiteralType literalType => CSharpType.FromLiteral(CreateType(literalType.ValueType), literalType.Value),
+            InputUnionType unionType => CSharpType.FromUnion(unionType.VariantTypes.Select(CreateType).ToArray()),
+            InputListType { CrossLanguageDefinitionId: "Azure.Core.EmbeddingVector" } listType => new CSharpType(typeof(ReadOnlyMemory<>), CreateType(listType.ValueType)),
+            InputListType listType => new CSharpType(typeof(IList<>), CreateType(listType.ValueType)),
+            InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), typeof(string), CreateType(dictionaryType.ValueType)),
+            InputEnumType enumType => _library.ResolveEnum(enumType),
             // TODO -- this is a temporary solution until we refactored the type replacement to use input types instead of code model schemas
-            InputModelType { Namespace: "Azure.Core.Foundations", Name: "Error" } => SystemObjectType.Create(AzureResponseErrorType, AzureResponseErrorType.Namespace!, null).Type,
-            InputModelType model => _library.ResolveModel(model).WithNullable(inputType.IsNullable),
+            InputModelType { CrossLanguageDefinitionId: "Azure.Core.Foundations.Error" } => SystemObjectType.Create(AzureResponseErrorType, AzureResponseErrorType.Namespace!, null).Type,
+            // Handle DataFactoryElement, we are sure that the argument type is not null and contains only 1 element
+            InputModelType { CrossLanguageDefinitionId: "Azure.Core.Resources.DataFactoryElement" } inputModel => new CSharpType(typeof(DataFactoryElement<>), CreateTypeForDataFactoryElement(inputModel.ArgumentTypes![0])),
+            InputModelType model => _library.ResolveModel(model),
+            InputNullableType nullableType => CreateType(nullableType.Type).WithNullable(true),
             InputPrimitiveType primitiveType => primitiveType.Kind switch
             {
-                InputTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation), inputType.IsNullable),
-                InputTypeKind.BinaryData => new CSharpType(typeof(BinaryData), inputType.IsNullable),
-                InputTypeKind.Boolean => new CSharpType(typeof(bool), inputType.IsNullable),
-                InputTypeKind.BytesBase64Url => Configuration.ShouldTreatBase64AsBinaryData ? new CSharpType(typeof(BinaryData), inputType.IsNullable) : new CSharpType(typeof(byte[]), inputType.IsNullable),
-                InputTypeKind.Bytes => Configuration.ShouldTreatBase64AsBinaryData ? new CSharpType(typeof(BinaryData), inputType.IsNullable) : new CSharpType(typeof(byte[]), inputType.IsNullable),
-                InputTypeKind.ContentType => new CSharpType(typeof(ContentType), inputType.IsNullable),
-                InputTypeKind.Date or InputTypeKind.DateTime or InputTypeKind.DateTimeISO8601 or InputTypeKind.DateTimeRFC1123 or InputTypeKind.DateTimeRFC3339 or InputTypeKind.DateTimeRFC7231 or InputTypeKind.DateTimeUnix
-                    => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
-                InputTypeKind.Decimal => new CSharpType(typeof(decimal), inputType.IsNullable),
-                InputTypeKind.Decimal128 => new CSharpType(typeof(decimal), inputType.IsNullable),
-                InputTypeKind.DurationISO8601 or InputTypeKind.DurationSeconds or InputTypeKind.DurationSecondsFloat or InputTypeKind.DurationSecondsDouble or InputTypeKind.DurationConstant or InputTypeKind.Time
-                    => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
-                InputTypeKind.ETag => new CSharpType(typeof(ETag), inputType.IsNullable),
-                InputTypeKind.Float32 => new CSharpType(typeof(float), inputType.IsNullable),
-                InputTypeKind.Float64 => new CSharpType(typeof(double), inputType.IsNullable),
-                InputTypeKind.Float128 => new CSharpType(typeof(decimal), inputType.IsNullable),
-                InputTypeKind.Guid => new CSharpType(typeof(Guid), inputType.IsNullable),
-                InputTypeKind.SByte => new CSharpType(typeof(sbyte), inputType.IsNullable),
-                InputTypeKind.Byte => new CSharpType(typeof(byte), inputType.IsNullable),
-                InputTypeKind.Int32 => new CSharpType(typeof(int), inputType.IsNullable),
-                InputTypeKind.Int64 => new CSharpType(typeof(long), inputType.IsNullable),
-                InputTypeKind.SafeInt => new CSharpType(typeof(long), inputType.IsNullable),
-                InputTypeKind.IPAddress => new CSharpType(typeof(IPAddress), inputType.IsNullable),
-                InputTypeKind.RequestMethod => new CSharpType(typeof(RequestMethod), inputType.IsNullable),
-                InputTypeKind.ResourceIdentifier => new CSharpType(typeof(ResourceIdentifier), inputType.IsNullable),
-                InputTypeKind.ResourceType => new CSharpType(typeof(ResourceType), inputType.IsNullable),
-                InputTypeKind.Stream => new CSharpType(typeof(Stream), inputType.IsNullable),
-                InputTypeKind.String => new CSharpType(typeof(string), inputType.IsNullable),
-                InputTypeKind.Uri => new CSharpType(typeof(Uri), inputType.IsNullable),
-                InputTypeKind.Char => new CSharpType(typeof(char), inputType.IsNullable),
-                _ => new CSharpType(typeof(object), inputType.IsNullable),
+                InputPrimitiveTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation)),
+                InputPrimitiveTypeKind.Boolean => new CSharpType(typeof(bool)),
+                InputPrimitiveTypeKind.Bytes => Configuration.ShouldTreatBase64AsBinaryData ? new CSharpType(typeof(BinaryData)) : new CSharpType(typeof(byte[])),
+                InputPrimitiveTypeKind.ContentType => new CSharpType(typeof(ContentType)),
+                InputPrimitiveTypeKind.PlainDate => new CSharpType(typeof(DateTimeOffset)),
+                InputPrimitiveTypeKind.Decimal => new CSharpType(typeof(decimal)),
+                InputPrimitiveTypeKind.Decimal128 => new CSharpType(typeof(decimal)),
+                InputPrimitiveTypeKind.PlainTime => new CSharpType(typeof(TimeSpan)),
+                InputPrimitiveTypeKind.ETag => new CSharpType(typeof(ETag)),
+                InputPrimitiveTypeKind.Float32 => new CSharpType(typeof(float)),
+                InputPrimitiveTypeKind.Float64 => new CSharpType(typeof(double)),
+                InputPrimitiveTypeKind.Float128 => new CSharpType(typeof(decimal)),
+                InputPrimitiveTypeKind.Guid or InputPrimitiveTypeKind.Uuid => new CSharpType(typeof(Guid)),
+                InputPrimitiveTypeKind.Int8 => new CSharpType(typeof(sbyte)),
+                InputPrimitiveTypeKind.UInt8 => new CSharpType(typeof(byte)),
+                InputPrimitiveTypeKind.Int32 => new CSharpType(typeof(int)),
+                InputPrimitiveTypeKind.Int64 => new CSharpType(typeof(long)),
+                InputPrimitiveTypeKind.SafeInt => new CSharpType(typeof(long)),
+                InputPrimitiveTypeKind.Integer => new CSharpType(typeof(long)), // in typespec, integer is the base type of int related types, see type relation: https://typespec.io/docs/language-basics/type-relations
+                InputPrimitiveTypeKind.Float => new CSharpType(typeof(double)), // in typespec, float is the base type of float32 and float64, see type relation: https://typespec.io/docs/language-basics/type-relations
+                InputPrimitiveTypeKind.Numeric => new CSharpType(typeof(double)), // in typespec, numeric is the base type of number types, see type relation: https://typespec.io/docs/language-basics/type-relations
+                InputPrimitiveTypeKind.IPAddress => new CSharpType(typeof(IPAddress)),
+                InputPrimitiveTypeKind.ArmId => new CSharpType(typeof(ResourceIdentifier)),
+                InputPrimitiveTypeKind.ResourceType => new CSharpType(typeof(ResourceType)),
+                InputPrimitiveTypeKind.Stream => new CSharpType(typeof(Stream)),
+                InputPrimitiveTypeKind.String => new CSharpType(typeof(string)),
+                InputPrimitiveTypeKind.Uri or InputPrimitiveTypeKind.Url => new CSharpType(typeof(Uri)),
+                InputPrimitiveTypeKind.Char => new CSharpType(typeof(char)),
+                InputPrimitiveTypeKind.Any => UnknownType,
+#pragma warning disable CS0618 // Type or member is obsolete
+                InputPrimitiveTypeKind.RequestMethod => new CSharpType(typeof(RequestMethod)),
+                InputPrimitiveTypeKind.Object => new CSharpType(typeof(object)),
+#pragma warning restore CS0618 // Type or member is obsolete
+                _ => new CSharpType(typeof(object)),
             },
-            InputGenericType genericType => new CSharpType(genericType.Type, CreateType(genericType.ArgumentType)).WithNullable(inputType.IsNullable),
-            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => UnknownType,
-            CodeModelType cmt => CreateType(cmt.Schema, cmt.IsNullable),
-            _ => throw new Exception("Unknown type")
+            InputDateTimeType dateTimeType => new CSharpType(typeof(DateTimeOffset)),
+            InputDurationType durationType => new CSharpType(typeof(TimeSpan)),
+            _ => throw new InvalidOperationException($"Unknown type: {inputType}")
         };
 
-        public CSharpType CreateType(Schema schema, bool isNullable, string? formatOverride = default, Property? property = default) => CreateType(schema, formatOverride ?? schema.Extensions?.Format, isNullable, property);
-
-        // This function provide the capability to support the extensions is coming from outside, like parameter.
-        public CSharpType CreateType(Schema schema, string? format, bool isNullable, Property? property = default) => schema switch
+        /// <summary>
+        /// This method is a shimming layer for HLC specially in DFE. In DFE, we always have `BinaryData` instead of `object` therefore we need to escape the `Any` to always return `BinaryData`.
+        /// </summary>
+        /// <param name="inputType"></param>
+        /// <returns></returns>
+        private CSharpType CreateTypeForDataFactoryElement(InputType inputType) => inputType switch
         {
-            ConstantSchema constantSchema => constantSchema.ValueType is not ChoiceSchema && ToXMsFormatType(format) is Type type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
-            BinarySchema _ => new CSharpType(typeof(Stream), isNullable),
-            ByteArraySchema _ => new CSharpType(typeof(byte[]), isNullable),
-            ArraySchema array => new CSharpType(GetListType(schema), isNullable, CreateType(array.ElementType, array.NullableItems ?? false)),
-            DictionarySchema dictionary => new CSharpType(typeof(IDictionary<,>), isNullable, new CSharpType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
-            CredentialSchema credentialSchema => new CSharpType(typeof(string), isNullable),
-            NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
-            AnyObjectSchema _ when format == XMsFormat.DataFactoryElementOfListOfT => new CSharpType(
-                typeof(DataFactoryElement<>),
-                isNullable: isNullable,
-                new CSharpType(typeof(IList<>), _library.FindTypeForSchema((ObjectSchema)property!.Extensions!["x-ms-format-element-type"]))),
-            _ when ToFrameworkType(schema, format) is Type type => new CSharpType(type, isNullable),
-            _ => _library.FindTypeForSchema(schema).WithNullable(isNullable)
-        };
-
-        private Type GetListType(Schema schema)
-        {
-            return schema.Extensions is not null && schema.Extensions.IsEmbeddingsVector ? typeof(ReadOnlyMemory<>) : typeof(IList<>);
-        }
-
-        internal Type? ToFrameworkType(Schema schema) => ToFrameworkType(schema, schema.Extensions?.Format);
-
-        internal Type? ToFrameworkType(Schema schema, string? format) => schema.Type switch
-        {
-            AllSchemaTypes.Integer => typeof(int),
-            AllSchemaTypes.Boolean => typeof(bool),
-            AllSchemaTypes.ByteArray => null,
-            AllSchemaTypes.Char => typeof(char),
-            AllSchemaTypes.Date => typeof(DateTimeOffset),
-            AllSchemaTypes.DateTime => typeof(DateTimeOffset),
-            AllSchemaTypes.Duration => typeof(TimeSpan),
-            AllSchemaTypes.OdataQuery => typeof(string),
-            AllSchemaTypes.ArmId => typeof(ResourceIdentifier),
-            AllSchemaTypes.String => ToXMsFormatType(format) ?? typeof(string),
-            AllSchemaTypes.Time => typeof(TimeSpan),
-            AllSchemaTypes.Unixtime => typeof(DateTimeOffset),
-            AllSchemaTypes.Uri => typeof(Uri),
-            AllSchemaTypes.Uuid => typeof(Guid),
-            AllSchemaTypes.Any => UnknownType,
-            AllSchemaTypes.AnyObject => ToXMsFormatType(format) ?? UnknownType,
-            AllSchemaTypes.Binary => typeof(byte[]),
-            _ => null
+            InputPrimitiveType { Kind: InputPrimitiveTypeKind.Any } => typeof(BinaryData),
+            _ => CreateType(inputType)
         };
 
         internal static Type? ToXMsFormatType(string? format) => format switch
@@ -166,22 +133,6 @@ namespace AutoRest.CSharp.Generation.Types
             _ => null
         };
 
-        private static Type ToFrameworkNumericType(NumberSchema schema) => schema.Type switch
-        {
-            AllSchemaTypes.Number => schema.Precision switch
-            {
-                32 => typeof(float),
-                128 => typeof(decimal),
-                _ => typeof(double)
-            },
-            // Assumes AllSchemaTypes.Integer
-            _ => schema.Precision switch
-            {
-                64 => typeof(long),
-                _ => typeof(int)
-            }
-        };
-
         public CSharpType CreateType(ITypeSymbol symbol)
         {
             if (!TryCreateType(symbol, out var type))
@@ -208,7 +159,7 @@ namespace AutoRest.CSharp.Generation.Types
                 INamedTypeSymbol namedTypeSymbol => TryCreateTypeForINamedTypeSymbol(namedTypeSymbol, validator, out type),
 
                 // We can only handle IArrayTypeSymbol of framework type and INamedTypeSymbol for now since CSharpType can't represent other types such as IArrayTypeSymbol of user types
-                // Instead of throwing an exception, wihch causes more side effects, we just return false and let the caller handle it.
+                // Instead of throwing an exception, which causes more side effects, we just return false and let the caller handle it.
                 _ => false
             };
         }
@@ -285,9 +236,9 @@ namespace AutoRest.CSharp.Generation.Types
         {
             arguments = null;
             var result = new List<CSharpType>();
-            foreach (var typeArgtment in typeArguments)
+            foreach (var typeArgument in typeArguments)
             {
-                if (!TryCreateType(typeArgtment, validator, out CSharpType? type))
+                if (!TryCreateType(typeArgument, validator, out CSharpType? type))
                 {
                     return false;
                 }

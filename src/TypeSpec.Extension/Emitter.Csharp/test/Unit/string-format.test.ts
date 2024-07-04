@@ -3,8 +3,6 @@ import { getAllHttpServices } from "@typespec/http";
 import assert, { deepStrictEqual } from "assert";
 import { beforeEach, describe, it } from "vitest";
 import { loadOperation } from "../../src/lib/operation.js";
-import { InputPrimitiveTypeKind } from "../../src/type/input-primitive-type-kind.js";
-import { InputTypeKind } from "../../src/type/input-type-kind.js";
 import {
     InputEnumType,
     InputModelType,
@@ -48,9 +46,8 @@ describe("Test string format", () => {
         );
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Primitive,
-                Name: InputPrimitiveTypeKind.Uri,
-                IsNullable: false
+                Kind: "url",
+                Encode: undefined
             } as InputPrimitiveType,
             operation.Parameters[0].Type
         );
@@ -77,9 +74,8 @@ describe("Test string format", () => {
         assert(foo !== undefined);
         deepStrictEqual(
             {
-                Kind: InputTypeKind.Primitive,
-                Name: InputPrimitiveTypeKind.Uri,
-                IsNullable: false
+                Kind: "url",
+                Encode: undefined
             } as InputPrimitiveType,
             foo.Properties[0].Type
         );

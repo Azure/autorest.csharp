@@ -7,46 +7,47 @@
  "Enums": [
   {
    "$id": "2",
-   "Kind": "Enum",
+   "Kind": "enum",
    "Name": "Versions",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "CrossLanguageDefinitionId": "Server.Path.Multiple.Versions",
+   "ValueType": {
+    "$id": "3",
+    "Kind": "string"
+   },
+   "Values": [
     {
-     "$id": "3",
+     "$id": "4",
      "Name": "v1_0",
      "Value": "v1.0",
      "Description": "Version 1.0"
     }
    ],
-   "Namespace": "Server.Path.Multiple",
    "Description": "Service versions",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
  "Models": [],
  "Clients": [
   {
-   "$id": "4",
+   "$id": "5",
    "Name": "MultipleClient",
    "Description": "",
    "Operations": [
     {
-     "$id": "5",
+     "$id": "6",
      "Name": "noOperationParams",
      "ResourceName": "Multiple",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "6",
+       "$id": "7",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Pass in http://localhost:3000 for endpoint.",
        "Type": {
-        "$id": "7",
-        "Kind": "Primitive",
-        "Name": "Uri",
-        "IsNullable": false
+        "$id": "8",
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -59,7 +60,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "8",
+       "$id": "9",
        "Name": "apiVersion",
        "NameInRequest": "apiVersion",
        "Description": "Pass in v1.0 for API version.",
@@ -76,24 +77,22 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "9",
+        "$id": "10",
         "Type": {
-         "$id": "10",
-         "Kind": "Primitive",
-         "Name": "String",
+         "$id": "11",
+         "Kind": "string",
          "IsNullable": false
         },
         "Value": "v1.0"
        }
       },
       {
-       "$id": "11",
+       "$id": "12",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "12",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "13",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -106,9 +105,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "13",
+        "$id": "14",
         "Type": {
-         "$ref": "12"
+         "$ref": "13"
         },
         "Value": "application/json"
        }
@@ -116,7 +115,7 @@
      ],
      "Responses": [
       {
-       "$id": "14",
+       "$id": "15",
        "StatusCodes": [
         204
        ],
@@ -134,25 +133,24 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "15",
+     "$id": "16",
      "Name": "withOperationPathParam",
      "ResourceName": "Multiple",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "6"
+       "$ref": "7"
       },
       {
-       "$ref": "8"
+       "$ref": "9"
       },
       {
-       "$id": "16",
+       "$id": "17",
        "Name": "keyword",
        "NameInRequest": "keyword",
        "Type": {
-        "$id": "17",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "$id": "18",
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -165,13 +163,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "18",
+       "$id": "19",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "19",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "20",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -184,9 +181,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "20",
+        "$id": "21",
         "Type": {
-         "$ref": "19"
+         "$ref": "20"
         },
         "Value": "application/json"
        }
@@ -194,7 +191,7 @@
      ],
      "Responses": [
       {
-       "$id": "21",
+       "$id": "22",
        "StatusCodes": [
         204
        ],
@@ -213,15 +210,14 @@
     }
    ],
    "Protocol": {
-    "$id": "22"
+    "$id": "23"
    },
-   "Creatable": true,
    "Parameters": [
     {
-     "$ref": "6"
+     "$ref": "7"
     },
     {
-     "$ref": "8"
+     "$ref": "9"
     }
    ]
   }

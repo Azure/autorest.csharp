@@ -15,6 +15,7 @@
      "Name": "validKey",
      "ResourceName": "Union",
      "Description": "Check whether client is authenticated",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "4",
@@ -23,9 +24,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "5",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -40,9 +39,7 @@
         "$id": "6",
         "Type": {
          "$id": "7",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
@@ -53,8 +50,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "9",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -99,6 +95,7 @@
      "Name": "validToken",
      "ResourceName": "Union",
      "Description": "Check whether client is authenticated",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -109,8 +106,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "14",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -154,7 +150,6 @@
    "Protocol": {
     "$id": "17"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "4"

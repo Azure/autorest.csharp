@@ -7,678 +7,519 @@
  "Enums": [
   {
    "$id": "2",
-   "Kind": "Enum",
+   "Kind": "enum",
    "Name": "APIVersion",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "CrossLanguageDefinitionId": "AnomalyDetector.APIVersion",
+   "ValueType": {
+    "$id": "3",
+    "Kind": "string"
+   },
+   "Values": [
     {
-     "$id": "3",
+     "$id": "4",
      "Name": "v1_1",
      "Value": "v1.1"
     }
    ],
-   "Namespace": "AnomalyDetector",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "None"
   },
   {
-   "$id": "4",
-   "Kind": "Enum",
+   "$id": "5",
+   "Kind": "enum",
    "Name": "TimeGranularity",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.TimeGranularity",
+   "ValueType": {
+    "$id": "6",
+    "Kind": "string"
+   },
+   "Values": [
     {
-     "$id": "5",
+     "$id": "7",
      "Name": "Yearly",
      "Value": "yearly"
     },
     {
-     "$id": "6",
+     "$id": "8",
      "Name": "Monthly",
      "Value": "monthly"
     },
     {
-     "$id": "7",
+     "$id": "9",
      "Name": "Weekly",
      "Value": "weekly"
     },
     {
-     "$id": "8",
+     "$id": "10",
      "Name": "Daily",
      "Value": "daily"
     },
     {
-     "$id": "9",
+     "$id": "11",
      "Name": "Hourly",
      "Value": "hourly"
     },
     {
-     "$id": "10",
+     "$id": "12",
      "Name": "PerMinute",
      "Value": "minutely"
     },
     {
-     "$id": "11",
+     "$id": "13",
      "Name": "PerSecond",
      "Value": "secondly"
     },
     {
-     "$id": "12",
+     "$id": "14",
      "Name": "Microsecond",
      "Value": "microsecond"
     },
     {
-     "$id": "13",
+     "$id": "15",
      "Name": "None",
      "Value": "none"
     }
    ],
-   "Namespace": "AnomalyDetector.Univariate",
    "Description": "the time granularity of the data points.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input"
   },
   {
-   "$id": "14",
-   "Kind": "Enum",
+   "$id": "16",
+   "Kind": "enum",
    "Name": "ImputeMode",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.ImputeMode",
+   "ValueType": {
+    "$id": "17",
+    "Kind": "string"
+   },
+   "Values": [
     {
-     "$id": "15",
+     "$id": "18",
      "Name": "Auto",
      "Value": "auto"
     },
     {
-     "$id": "16",
+     "$id": "19",
      "Name": "Previous",
      "Value": "previous"
     },
     {
-     "$id": "17",
+     "$id": "20",
      "Name": "Linear",
      "Value": "linear"
     },
     {
-     "$id": "18",
+     "$id": "21",
      "Name": "Fixed",
      "Value": "fixed"
     },
     {
-     "$id": "19",
+     "$id": "22",
      "Name": "Zero",
      "Value": "zero"
     },
     {
-     "$id": "20",
+     "$id": "23",
      "Name": "NotFill",
      "Value": "notFill"
     }
    ],
-   "Namespace": "AnomalyDetector.Univariate",
    "Description": "The impute mode.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Input"
   },
   {
-   "$id": "21",
-   "Kind": "Enum",
+   "$id": "24",
+   "Kind": "enum",
    "Name": "MultivariateBatchDetectionStatus",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionStatus",
+   "ValueType": {
+    "$id": "25",
+    "Kind": "string"
+   },
+   "Values": [
     {
-     "$id": "22",
+     "$id": "26",
      "Name": "Created",
      "Value": "CREATED"
     },
     {
-     "$id": "23",
+     "$id": "27",
      "Name": "Running",
      "Value": "RUNNING"
     },
     {
-     "$id": "24",
+     "$id": "28",
      "Name": "Ready",
      "Value": "READY"
     },
     {
-     "$id": "25",
+     "$id": "29",
      "Name": "Failed",
      "Value": "FAILED"
     }
    ],
-   "Namespace": "AnomalyDetector.Multivariate",
    "Description": "The batch detection status.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Output"
   },
   {
-   "$id": "26",
-   "Kind": "Enum",
+   "$id": "30",
+   "Kind": "enum",
    "Name": "DataSchema",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.DataSchema",
+   "ValueType": {
+    "$id": "31",
+    "Kind": "string"
+   },
+   "Values": [
     {
-     "$id": "27",
+     "$id": "32",
      "Name": "OneTable",
      "Value": "OneTable",
      "Description": "OneTable means that your input data are all in one CSV file, which contains one 'timestamp' column and several variable columns. The default DataSchema is OneTable."
     },
     {
-     "$id": "28",
+     "$id": "33",
      "Name": "MultiTable",
      "Value": "MultiTable",
      "Description": "MultiTable means that your input data are separated in multiple CSV files, in each file containing one 'timestamp' column and one 'variable' column, and the CSV file name should indicate the name of the variable. The default DataSchema is OneTable."
     }
    ],
-   "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
-   "$id": "29",
-   "Kind": "Enum",
+   "$id": "34",
+   "Kind": "enum",
    "Name": "AlignMode",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AlignMode",
+   "ValueType": {
+    "$id": "35",
+    "Kind": "string"
+   },
+   "Values": [
     {
-     "$id": "30",
+     "$id": "36",
      "Name": "Inner",
      "Value": "Inner"
     },
     {
-     "$id": "31",
+     "$id": "37",
      "Name": "Outer",
      "Value": "Outer"
     }
    ],
-   "Namespace": "AnomalyDetector.Multivariate",
    "Description": "The alignment mode.",
    "IsExtensible": false,
-   "IsNullable": false,
-   "Usage": "RoundTrip"
-  },
-  {
-   "$id": "32",
-   "Kind": "Enum",
-   "Name": "FillNAMethod",
-   "EnumValueType": "String",
-   "AllowedValues": [
-    {
-     "$id": "33",
-     "Name": "Previous",
-     "Value": "Previous"
-    },
-    {
-     "$id": "34",
-     "Name": "Subsequent",
-     "Value": "Subsequent"
-    },
-    {
-     "$id": "35",
-     "Name": "Linear",
-     "Value": "Linear"
-    },
-    {
-     "$id": "36",
-     "Name": "Zero",
-     "Value": "Zero"
-    },
-    {
-     "$id": "37",
-     "Name": "Fixed",
-     "Value": "Fixed"
-    }
-   ],
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.",
-   "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
    "$id": "38",
-   "Kind": "Enum",
-   "Name": "ModelStatus",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "Kind": "enum",
+   "Name": "FillNAMethod",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.FillNAMethod",
+   "ValueType": {
+    "$id": "39",
+    "Kind": "string"
+   },
+   "Values": [
     {
-     "$id": "39",
+     "$id": "40",
+     "Name": "Previous",
+     "Value": "Previous"
+    },
+    {
+     "$id": "41",
+     "Name": "Subsequent",
+     "Value": "Subsequent"
+    },
+    {
+     "$id": "42",
+     "Name": "Linear",
+     "Value": "Linear"
+    },
+    {
+     "$id": "43",
+     "Name": "Zero",
+     "Value": "Zero"
+    },
+    {
+     "$id": "44",
+     "Name": "Fixed",
+     "Value": "Fixed"
+    }
+   ],
+   "Description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.",
+   "IsExtensible": true,
+   "Usage": "RoundTrip"
+  },
+  {
+   "$id": "45",
+   "Kind": "enum",
+   "Name": "ModelStatus",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelStatus",
+   "ValueType": {
+    "$id": "46",
+    "Kind": "string"
+   },
+   "Values": [
+    {
+     "$id": "47",
      "Name": "Created",
      "Value": "CREATED"
     },
     {
-     "$id": "40",
+     "$id": "48",
      "Name": "Running",
      "Value": "RUNNING"
     },
     {
-     "$id": "41",
+     "$id": "49",
      "Name": "Ready",
      "Value": "READY"
     },
     {
-     "$id": "42",
+     "$id": "50",
      "Name": "Failed",
      "Value": "FAILED"
     }
    ],
-   "Namespace": "AnomalyDetector.Multivariate",
    "Description": "the model status.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
-   "$id": "43",
-   "Kind": "Enum",
+   "$id": "51",
+   "Kind": "enum",
    "Name": "AnomalyDetectorErrorCodes",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.AnomalyDetectorErrorCodes",
+   "ValueType": {
+    "$id": "52",
+    "Kind": "string"
+   },
+   "Values": [
     {
-     "$id": "44",
+     "$id": "53",
      "Name": "InvalidCustomInterval",
      "Value": "InvalidCustomInterval"
     },
     {
-     "$id": "45",
+     "$id": "54",
      "Name": "BadArgument",
      "Value": "BadArgument"
     },
     {
-     "$id": "46",
+     "$id": "55",
      "Name": "InvalidGranularity",
      "Value": "InvalidGranularity"
     },
     {
-     "$id": "47",
+     "$id": "56",
      "Name": "InvalidPeriod",
      "Value": "InvalidPeriod"
     },
     {
-     "$id": "48",
+     "$id": "57",
      "Name": "InvalidModelArgument",
      "Value": "InvalidModelArgument"
     },
     {
-     "$id": "49",
+     "$id": "58",
      "Name": "InvalidSeries",
      "Value": "InvalidSeries"
     },
     {
-     "$id": "50",
+     "$id": "59",
      "Name": "InvalidJsonFormat",
      "Value": "InvalidJsonFormat"
     },
     {
-     "$id": "51",
+     "$id": "60",
      "Name": "RequiredGranularity",
      "Value": "RequiredGranularity"
     },
     {
-     "$id": "52",
+     "$id": "61",
      "Name": "RequiredSeries",
      "Value": "RequiredSeries"
     },
     {
-     "$id": "53",
+     "$id": "62",
      "Name": "InvalidImputeMode",
      "Value": "InvalidImputeMode"
     },
     {
-     "$id": "54",
+     "$id": "63",
      "Name": "InvalidImputeFixedValue",
      "Value": "InvalidImputeFixedValue"
     }
    ],
-   "Namespace": "AnomalyDetector.Univariate",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Output"
   },
   {
-   "$id": "55",
-   "Kind": "Enum",
+   "$id": "64",
+   "Kind": "enum",
    "Name": "Versions",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "CrossLanguageDefinitionId": "AnomalyDetector.Versions",
+   "ValueType": {
+    "$id": "65",
+    "Kind": "string"
+   },
+   "Values": [
     {
-     "$id": "56",
+     "$id": "66",
      "Name": "v1_1",
      "Value": "v1.1"
     }
    ],
-   "Namespace": "AnomalyDetector",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
  "Models": [
   {
-   "$id": "57",
-   "Kind": "Model",
+   "$id": "67",
+   "Kind": "model",
    "Name": "UnivariateDetectionOptions",
-   "Namespace": "AnomalyDetector.Univariate",
-   "Description": "The request of entire or last anomaly detection.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateDetectionOptions",
    "Usage": "Input",
+   "Description": "The request of entire or last anomaly detection.",
    "Properties": [
     {
-     "$id": "58",
+     "$id": "68",
      "Name": "series",
      "SerializedName": "series",
      "Description": "Time series data points. Points should be sorted by timestamp in ascending\norder to match the anomaly detection result. If the data is not sorted\ncorrectly or there is duplicated timestamp, the API will not work. In such\ncase, an error message will be returned.",
      "Type": {
-      "$id": "59",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "60",
-       "Kind": "Model",
+      "$id": "69",
+      "Kind": "array",
+      "Name": "ArrayTimeSeriesPoint",
+      "ValueType": {
+       "$id": "70",
+       "Kind": "model",
        "Name": "TimeSeriesPoint",
-       "Namespace": "AnomalyDetector.Univariate",
-       "Description": "The definition of input timeseries points.",
-       "IsNullable": false,
+       "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.TimeSeriesPoint",
        "Usage": "Input",
+       "Description": "The definition of input timeseries points.",
        "Properties": [
         {
-         "$id": "61",
+         "$id": "71",
          "Name": "timestamp",
          "SerializedName": "timestamp",
          "Description": "Optional argument, timestamp of a data point (ISO8601 format).",
          "Type": {
-          "$id": "62",
-          "Kind": "Primitive",
-          "Name": "DateTimeRFC3339",
-          "IsNullable": false
+          "$id": "72",
+          "Kind": "utcDateTime",
+          "Encode": "rfc3339",
+          "WireType": {
+           "$id": "73",
+           "Kind": "string"
+          }
          },
          "IsRequired": false,
          "IsReadOnly": false
         },
         {
-         "$id": "63",
+         "$id": "74",
          "Name": "value",
          "SerializedName": "value",
          "Description": "The measurement of that point, should be float.",
          "Type": {
-          "$id": "64",
-          "Kind": "Primitive",
-          "Name": "Float32",
-          "IsNullable": false
+          "$id": "75",
+          "Kind": "float32"
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "65",
+     "$id": "76",
      "Name": "granularity",
      "SerializedName": "granularity",
      "Description": "Optional argument, can be one of yearly, monthly, weekly, daily, hourly,\nminutely, secondly, microsecond or none. If granularity is not present, it will\nbe none by default. If granularity is none, the timestamp property in time\nseries point can be absent.",
      "Type": {
-      "$ref": "4"
+      "$ref": "5"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "66",
+     "$id": "77",
      "Name": "customInterval",
      "SerializedName": "customInterval",
      "Description": "Custom Interval is used to set non-standard time interval, for example, if the\nseries is 5 minutes, request can be set as {\"granularity\":\"minutely\",\n\"customInterval\":5}.",
      "Type": {
-      "$id": "67",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "$id": "78",
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "68",
+     "$id": "79",
      "Name": "period",
      "SerializedName": "period",
      "Description": "Optional argument, periodic value of a time series. If the value is null or\ndoes not present, the API will determine the period automatically.",
      "Type": {
-      "$id": "69",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "$id": "80",
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "70",
+     "$id": "81",
      "Name": "maxAnomalyRatio",
      "SerializedName": "maxAnomalyRatio",
      "Description": "Optional argument, advanced model parameter, max anomaly ratio in a time series.",
      "Type": {
-      "$id": "71",
-      "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "$id": "82",
+      "Kind": "float32"
      },
      "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "72",
-     "Name": "sensitivity",
-     "SerializedName": "sensitivity",
-     "Description": "Optional argument, advanced model parameter, between 0-99, the lower the value\nis, the larger the margin value will be which means less anomalies will be\naccepted.",
-     "Type": {
-      "$id": "73",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "74",
-     "Name": "imputeMode",
-     "SerializedName": "imputeMode",
-     "Description": "Used to specify how to deal with missing values in the input series, it's used\nwhen granularity is not \"none\".",
-     "Type": {
-      "$ref": "14"
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "75",
-     "Name": "imputeFixedValue",
-     "SerializedName": "imputeFixedValue",
-     "Description": "Used to specify the value to fill, it's used when granularity is not \"none\"\nand imputeMode is \"fixed\".",
-     "Type": {
-      "$id": "76",
-      "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$ref": "60"
-  },
-  {
-   "$id": "77",
-   "Kind": "Model",
-   "Name": "UnivariateEntireDetectionResult",
-   "Namespace": "AnomalyDetector.Univariate",
-   "Description": "The response of entire anomaly detection.",
-   "IsNullable": false,
-   "Usage": "Output",
-   "Properties": [
-    {
-     "$id": "78",
-     "Name": "period",
-     "SerializedName": "period",
-     "Description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
-     "Type": {
-      "$id": "79",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "80",
-     "Name": "expectedValues",
-     "SerializedName": "expectedValues",
-     "Description": "ExpectedValues contain expected value for each input point. The index of the\narray is consistent with the input series.",
-     "Type": {
-      "$id": "81",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "82",
-       "Kind": "Primitive",
-       "Name": "Float32",
-       "IsNullable": false
-      },
-      "IsNullable": false
-     },
-     "IsRequired": true,
      "IsReadOnly": false
     },
     {
      "$id": "83",
-     "Name": "upperMargins",
-     "SerializedName": "upperMargins",
-     "Description": "UpperMargins contain upper margin of each input point. UpperMargin is used to\ncalculate upperBoundary, which equals to expectedValue + (100 -\nmarginScale)*upperMargin. Anomalies in response can be filtered by\nupperBoundary and lowerBoundary. By adjusting marginScale value, less\nsignificant anomalies can be filtered in client side. The index of the array is\nconsistent with the input series.",
+     "Name": "sensitivity",
+     "SerializedName": "sensitivity",
+     "Description": "Optional argument, advanced model parameter, between 0-99, the lower the value\nis, the larger the margin value will be which means less anomalies will be\naccepted.",
      "Type": {
       "$id": "84",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "85",
-       "Kind": "Primitive",
-       "Name": "Float32",
-       "IsNullable": false
-      },
-      "IsNullable": false
+      "Kind": "int32"
      },
-     "IsRequired": true,
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "85",
+     "Name": "imputeMode",
+     "SerializedName": "imputeMode",
+     "Description": "Used to specify how to deal with missing values in the input series, it's used\nwhen granularity is not \"none\".",
+     "Type": {
+      "$ref": "16"
+     },
+     "IsRequired": false,
      "IsReadOnly": false
     },
     {
      "$id": "86",
-     "Name": "lowerMargins",
-     "SerializedName": "lowerMargins",
-     "Description": "LowerMargins contain lower margin of each input point. LowerMargin is used to\ncalculate lowerBoundary, which equals to expectedValue - (100 -\nmarginScale)*lowerMargin. Points between the boundary can be marked as normal\nones in client side. The index of the array is consistent with the input\nseries.",
+     "Name": "imputeFixedValue",
+     "SerializedName": "imputeFixedValue",
+     "Description": "Used to specify the value to fill, it's used when granularity is not \"none\"\nand imputeMode is \"fixed\".",
      "Type": {
       "$id": "87",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "88",
-       "Kind": "Primitive",
-       "Name": "Float32",
-       "IsNullable": false
-      },
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "89",
-     "Name": "isAnomaly",
-     "SerializedName": "isAnomaly",
-     "Description": "IsAnomaly contains anomaly properties for each input point. True means an\nanomaly either negative or positive has been detected. The index of the array\nis consistent with the input series.",
-     "Type": {
-      "$id": "90",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "91",
-       "Kind": "Primitive",
-       "Name": "Boolean",
-       "IsNullable": false
-      },
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "92",
-     "Name": "isNegativeAnomaly",
-     "SerializedName": "isNegativeAnomaly",
-     "Description": "IsNegativeAnomaly contains anomaly status in negative direction for each input\npoint. True means a negative anomaly has been detected. A negative anomaly\nmeans the point is detected as an anomaly and its real value is smaller than\nthe expected one. The index of the array is consistent with the input series.",
-     "Type": {
-      "$id": "93",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "94",
-       "Kind": "Primitive",
-       "Name": "Boolean",
-       "IsNullable": false
-      },
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "95",
-     "Name": "isPositiveAnomaly",
-     "SerializedName": "isPositiveAnomaly",
-     "Description": "IsPositiveAnomaly contain anomaly status in positive direction for each input\npoint. True means a positive anomaly has been detected. A positive anomaly\nmeans the point is detected as an anomaly and its real value is larger than the\nexpected one. The index of the array is consistent with the input series.",
-     "Type": {
-      "$id": "96",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "97",
-       "Kind": "Primitive",
-       "Name": "Boolean",
-       "IsNullable": false
-      },
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "98",
-     "Name": "severity",
-     "SerializedName": "severity",
-     "Description": "The severity score for each input point. The larger the value is, the more\nsever the anomaly is. For normal points, the \"severity\" is always 0.",
-     "Type": {
-      "$id": "99",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "100",
-       "Kind": "Primitive",
-       "Name": "Float32",
-       "IsNullable": false
-      },
-      "IsNullable": false
+      "Kind": "float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -686,136 +527,150 @@
    ]
   },
   {
-   "$id": "101",
-   "Kind": "Model",
-   "Name": "UnivariateLastDetectionResult",
-   "Namespace": "AnomalyDetector.Univariate",
-   "Description": "The response of last anomaly detection.",
-   "IsNullable": false,
+   "$ref": "70"
+  },
+  {
+   "$id": "88",
+   "Kind": "model",
+   "Name": "UnivariateEntireDetectionResult",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateEntireDetectionResult",
    "Usage": "Output",
+   "Description": "The response of entire anomaly detection.",
    "Properties": [
     {
-     "$id": "102",
+     "$id": "89",
      "Name": "period",
      "SerializedName": "period",
      "Description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "Type": {
-      "$id": "103",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "$id": "90",
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "104",
-     "Name": "suggestedWindow",
-     "SerializedName": "suggestedWindow",
-     "Description": "Suggested input series points needed for detecting the latest point.",
+     "$id": "91",
+     "Name": "expectedValues",
+     "SerializedName": "expectedValues",
+     "Description": "ExpectedValues contain expected value for each input point. The index of the\narray is consistent with the input series.",
      "Type": {
-      "$id": "105",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "$id": "92",
+      "Kind": "array",
+      "Name": "Array",
+      "ValueType": {
+       "$id": "93",
+       "Kind": "float32"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "94",
+     "Name": "upperMargins",
+     "SerializedName": "upperMargins",
+     "Description": "UpperMargins contain upper margin of each input point. UpperMargin is used to\ncalculate upperBoundary, which equals to expectedValue + (100 -\nmarginScale)*upperMargin. Anomalies in response can be filtered by\nupperBoundary and lowerBoundary. By adjusting marginScale value, less\nsignificant anomalies can be filtered in client side. The index of the array is\nconsistent with the input series.",
+     "Type": {
+      "$id": "95",
+      "Kind": "array",
+      "Name": "Array",
+      "ValueType": {
+       "$id": "96",
+       "Kind": "float32"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "97",
+     "Name": "lowerMargins",
+     "SerializedName": "lowerMargins",
+     "Description": "LowerMargins contain lower margin of each input point. LowerMargin is used to\ncalculate lowerBoundary, which equals to expectedValue - (100 -\nmarginScale)*lowerMargin. Points between the boundary can be marked as normal\nones in client side. The index of the array is consistent with the input\nseries.",
+     "Type": {
+      "$id": "98",
+      "Kind": "array",
+      "Name": "Array",
+      "ValueType": {
+       "$id": "99",
+       "Kind": "float32"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "100",
+     "Name": "isAnomaly",
+     "SerializedName": "isAnomaly",
+     "Description": "IsAnomaly contains anomaly properties for each input point. True means an\nanomaly either negative or positive has been detected. The index of the array\nis consistent with the input series.",
+     "Type": {
+      "$id": "101",
+      "Kind": "array",
+      "Name": "Array",
+      "ValueType": {
+       "$id": "102",
+       "Kind": "boolean"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "103",
+     "Name": "isNegativeAnomaly",
+     "SerializedName": "isNegativeAnomaly",
+     "Description": "IsNegativeAnomaly contains anomaly status in negative direction for each input\npoint. True means a negative anomaly has been detected. A negative anomaly\nmeans the point is detected as an anomaly and its real value is smaller than\nthe expected one. The index of the array is consistent with the input series.",
+     "Type": {
+      "$id": "104",
+      "Kind": "array",
+      "Name": "Array",
+      "ValueType": {
+       "$id": "105",
+       "Kind": "boolean"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
      "$id": "106",
-     "Name": "expectedValue",
-     "SerializedName": "expectedValue",
-     "Description": "Expected value of the latest point.",
-     "Type": {
-      "$id": "107",
-      "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "108",
-     "Name": "upperMargin",
-     "SerializedName": "upperMargin",
-     "Description": "Upper margin of the latest point. UpperMargin is used to calculate\nupperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin.\nIf the value of latest point is between upperBoundary and lowerBoundary, it\nshould be treated as normal value. By adjusting marginScale value, anomaly\nstatus of latest point can be changed.",
-     "Type": {
-      "$id": "109",
-      "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "110",
-     "Name": "lowerMargin",
-     "SerializedName": "lowerMargin",
-     "Description": "Lower margin of the latest point. LowerMargin is used to calculate\nlowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin.\n",
-     "Type": {
-      "$id": "111",
-      "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "112",
-     "Name": "isAnomaly",
-     "SerializedName": "isAnomaly",
-     "Description": "Anomaly status of the latest point, true means the latest point is an anomaly\neither in negative direction or positive direction.",
-     "Type": {
-      "$id": "113",
-      "Kind": "Primitive",
-      "Name": "Boolean",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "114",
-     "Name": "isNegativeAnomaly",
-     "SerializedName": "isNegativeAnomaly",
-     "Description": "Anomaly status in negative direction of the latest point. True means the latest\npoint is an anomaly and its real value is smaller than the expected one.",
-     "Type": {
-      "$id": "115",
-      "Kind": "Primitive",
-      "Name": "Boolean",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "116",
      "Name": "isPositiveAnomaly",
      "SerializedName": "isPositiveAnomaly",
-     "Description": "Anomaly status in positive direction of the latest point. True means the latest\npoint is an anomaly and its real value is larger than the expected one.",
+     "Description": "IsPositiveAnomaly contain anomaly status in positive direction for each input\npoint. True means a positive anomaly has been detected. A positive anomaly\nmeans the point is detected as an anomaly and its real value is larger than the\nexpected one. The index of the array is consistent with the input series.",
      "Type": {
-      "$id": "117",
-      "Kind": "Primitive",
-      "Name": "Boolean",
-      "IsNullable": false
+      "$id": "107",
+      "Kind": "array",
+      "Name": "Array",
+      "ValueType": {
+       "$id": "108",
+       "Kind": "boolean"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "118",
+     "$id": "109",
      "Name": "severity",
      "SerializedName": "severity",
-     "Description": "The severity score for the last input point. The larger the value is, the more\nsever the anomaly is. For normal points, the \"severity\" is always 0.",
+     "Description": "The severity score for each input point. The larger the value is, the more\nsever the anomaly is. For normal points, the \"severity\" is always 0.",
      "Type": {
-      "$id": "119",
-      "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "$id": "110",
+      "Kind": "array",
+      "Name": "Array",
+      "ValueType": {
+       "$id": "111",
+       "Kind": "float32"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -823,94 +678,203 @@
    ]
   },
   {
-   "$id": "120",
-   "Kind": "Model",
-   "Name": "UnivariateChangePointDetectionOptions",
-   "Namespace": "AnomalyDetector.Univariate",
-   "Description": "The request of change point detection.",
-   "IsNullable": false,
-   "Usage": "Input",
+   "$id": "112",
+   "Kind": "model",
+   "Name": "UnivariateLastDetectionResult",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateLastDetectionResult",
+   "Usage": "Output",
+   "Description": "The response of last anomaly detection.",
    "Properties": [
     {
+     "$id": "113",
+     "Name": "period",
+     "SerializedName": "period",
+     "Description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
+     "Type": {
+      "$id": "114",
+      "Kind": "int32"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "115",
+     "Name": "suggestedWindow",
+     "SerializedName": "suggestedWindow",
+     "Description": "Suggested input series points needed for detecting the latest point.",
+     "Type": {
+      "$id": "116",
+      "Kind": "int32"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "117",
+     "Name": "expectedValue",
+     "SerializedName": "expectedValue",
+     "Description": "Expected value of the latest point.",
+     "Type": {
+      "$id": "118",
+      "Kind": "float32"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "119",
+     "Name": "upperMargin",
+     "SerializedName": "upperMargin",
+     "Description": "Upper margin of the latest point. UpperMargin is used to calculate\nupperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin.\nIf the value of latest point is between upperBoundary and lowerBoundary, it\nshould be treated as normal value. By adjusting marginScale value, anomaly\nstatus of latest point can be changed.",
+     "Type": {
+      "$id": "120",
+      "Kind": "float32"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
      "$id": "121",
-     "Name": "series",
-     "SerializedName": "series",
-     "Description": "Time series data points. Points should be sorted by timestamp in ascending\norder to match the change point detection result.",
+     "Name": "lowerMargin",
+     "SerializedName": "lowerMargin",
+     "Description": "Lower margin of the latest point. LowerMargin is used to calculate\nlowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin.\n",
      "Type": {
       "$id": "122",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$ref": "60"
-      },
-      "IsNullable": false
+      "Kind": "float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
      "$id": "123",
+     "Name": "isAnomaly",
+     "SerializedName": "isAnomaly",
+     "Description": "Anomaly status of the latest point, true means the latest point is an anomaly\neither in negative direction or positive direction.",
+     "Type": {
+      "$id": "124",
+      "Kind": "boolean"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "125",
+     "Name": "isNegativeAnomaly",
+     "SerializedName": "isNegativeAnomaly",
+     "Description": "Anomaly status in negative direction of the latest point. True means the latest\npoint is an anomaly and its real value is smaller than the expected one.",
+     "Type": {
+      "$id": "126",
+      "Kind": "boolean"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "127",
+     "Name": "isPositiveAnomaly",
+     "SerializedName": "isPositiveAnomaly",
+     "Description": "Anomaly status in positive direction of the latest point. True means the latest\npoint is an anomaly and its real value is larger than the expected one.",
+     "Type": {
+      "$id": "128",
+      "Kind": "boolean"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "129",
+     "Name": "severity",
+     "SerializedName": "severity",
+     "Description": "The severity score for the last input point. The larger the value is, the more\nsever the anomaly is. For normal points, the \"severity\" is always 0.",
+     "Type": {
+      "$id": "130",
+      "Kind": "float32"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "131",
+   "Kind": "model",
+   "Name": "UnivariateChangePointDetectionOptions",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateChangePointDetectionOptions",
+   "Usage": "Input",
+   "Description": "The request of change point detection.",
+   "Properties": [
+    {
+     "$id": "132",
+     "Name": "series",
+     "SerializedName": "series",
+     "Description": "Time series data points. Points should be sorted by timestamp in ascending\norder to match the change point detection result.",
+     "Type": {
+      "$id": "133",
+      "Kind": "array",
+      "Name": "ArrayTimeSeriesPoint",
+      "ValueType": {
+       "$ref": "70"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "134",
      "Name": "granularity",
      "SerializedName": "granularity",
      "Description": "Can only be one of yearly, monthly, weekly, daily, hourly, minutely or\nsecondly. Granularity is used for verify whether input series is valid.",
      "Type": {
-      "$ref": "4"
+      "$ref": "5"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "124",
+     "$id": "135",
      "Name": "customInterval",
      "SerializedName": "customInterval",
      "Description": "Custom Interval is used to set non-standard time interval, for example, if the\nseries is 5 minutes, request can be set as {\"granularity\":\"minutely\",\n\"customInterval\":5}.",
      "Type": {
-      "$id": "125",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "$id": "136",
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "126",
+     "$id": "137",
      "Name": "period",
      "SerializedName": "period",
      "Description": "Optional argument, periodic value of a time series. If the value is null or\ndoes not present, the API will determine the period automatically.",
      "Type": {
-      "$id": "127",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "$id": "138",
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "128",
+     "$id": "139",
      "Name": "stableTrendWindow",
      "SerializedName": "stableTrendWindow",
      "Description": "Optional argument, advanced model parameter, a default stableTrendWindow will\nbe used in detection.",
      "Type": {
-      "$id": "129",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "$id": "140",
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "130",
+     "$id": "141",
      "Name": "threshold",
      "SerializedName": "threshold",
      "Description": "Optional argument, advanced model parameter, between 0.0-1.0, the lower the\nvalue is, the larger the trend error will be which means less change point will\nbe accepted.",
      "Type": {
-      "$id": "131",
-      "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
+      "$id": "142",
+      "Kind": "float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -918,64 +882,57 @@
    ]
   },
   {
-   "$id": "132",
-   "Kind": "Model",
+   "$id": "143",
+   "Kind": "model",
    "Name": "UnivariateChangePointDetectionResult",
-   "Namespace": "AnomalyDetector.Univariate",
-   "Description": "The response of change point detection.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateChangePointDetectionResult",
    "Usage": "Output",
+   "Description": "The response of change point detection.",
    "Properties": [
     {
-     "$id": "133",
+     "$id": "144",
      "Name": "period",
      "SerializedName": "period",
      "Description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "Type": {
-      "$id": "134",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "$id": "145",
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": true
     },
     {
-     "$id": "135",
+     "$id": "146",
      "Name": "isChangePoint",
      "SerializedName": "isChangePoint",
      "Description": "isChangePoint contains change point properties for each input point. True means\nan anomaly either negative or positive has been detected. The index of the\narray is consistent with the input series.",
      "Type": {
-      "$id": "136",
-      "Kind": "Array",
+      "$id": "147",
+      "Kind": "array",
       "Name": "Array",
-      "ElementType": {
-       "$id": "137",
-       "Kind": "Primitive",
-       "Name": "Boolean",
-       "IsNullable": false
+      "ValueType": {
+       "$id": "148",
+       "Kind": "boolean"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "138",
+     "$id": "149",
      "Name": "confidenceScores",
      "SerializedName": "confidenceScores",
      "Description": "the change point confidence of each point",
      "Type": {
-      "$id": "139",
-      "Kind": "Array",
+      "$id": "150",
+      "Kind": "array",
       "Name": "Array",
-      "ElementType": {
-       "$id": "140",
-       "Kind": "Primitive",
-       "Name": "Float32",
-       "IsNullable": false
+      "ValueType": {
+       "$id": "151",
+       "Kind": "float32"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -983,267 +940,259 @@
    ]
   },
   {
-   "$id": "141",
-   "Kind": "Model",
+   "$id": "152",
+   "Kind": "model",
    "Name": "MultivariateDetectionResult",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "Detection results for the given resultId.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateDetectionResult",
    "Usage": "Output",
+   "Description": "Detection results for the given resultId.",
    "Properties": [
     {
-     "$id": "142",
+     "$id": "153",
      "Name": "resultId",
      "SerializedName": "resultId",
      "Description": "Result identifier, which is used to fetch the results of an inference call.",
      "Type": {
-      "$id": "143",
-      "Kind": "Primitive",
-      "Name": "Guid",
-      "IsNullable": false
+      "$id": "154",
+      "Kind": "uuid",
+      "Encode": "string"
      },
      "IsRequired": true,
      "IsReadOnly": true
     },
     {
-     "$id": "144",
+     "$id": "155",
      "Name": "summary",
      "SerializedName": "summary",
      "Description": "Multivariate anomaly detection status.",
      "Type": {
-      "$id": "145",
-      "Kind": "Model",
+      "$id": "156",
+      "Kind": "model",
       "Name": "MultivariateBatchDetectionResultSummary",
-      "Namespace": "AnomalyDetector.Multivariate",
-      "Description": "Multivariate anomaly detection status.",
-      "IsNullable": false,
+      "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionResultSummary",
       "Usage": "Output",
+      "Description": "Multivariate anomaly detection status.",
       "Properties": [
        {
-        "$id": "146",
+        "$id": "157",
         "Name": "status",
         "SerializedName": "status",
         "Description": "Status of detection results. One of CREATED, RUNNING, READY, and FAILED.",
         "Type": {
-         "$ref": "21"
+         "$ref": "24"
         },
         "IsRequired": true,
         "IsReadOnly": false
        },
        {
-        "$id": "147",
+        "$id": "158",
         "Name": "errors",
         "SerializedName": "errors",
         "Description": "Error message when detection is failed.",
         "Type": {
-         "$id": "148",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
-          "$id": "149",
-          "Kind": "Model",
+         "$id": "159",
+         "Kind": "array",
+         "Name": "ArrayErrorResponse",
+         "ValueType": {
+          "$id": "160",
+          "Kind": "model",
           "Name": "ErrorResponse",
-          "Namespace": "AnomalyDetector.Multivariate",
+          "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ErrorResponse",
+          "Usage": "Output",
           "Description": "ErrorResponse contains code and message that shows the error information.",
-          "IsNullable": false,
-          "Usage": "RoundTrip",
           "Properties": [
            {
-            "$id": "150",
+            "$id": "161",
             "Name": "code",
             "SerializedName": "code",
             "Description": "The error code.",
             "Type": {
-             "$id": "151",
-             "Kind": "Primitive",
-             "Name": "String",
-             "IsNullable": false
-            },
-            "IsRequired": true,
-            "IsReadOnly": false
-           },
-           {
-            "$id": "152",
-            "Name": "message",
-            "SerializedName": "message",
-            "Description": "The message explaining the error reported by the service.",
-            "Type": {
-             "$id": "153",
-             "Kind": "Primitive",
-             "Name": "String",
-             "IsNullable": false
-            },
-            "IsRequired": true,
-            "IsReadOnly": false
-           }
-          ]
-         },
-         "IsNullable": false
-        },
-        "IsRequired": false,
-        "IsReadOnly": false
-       },
-       {
-        "$id": "154",
-        "Name": "variableStates",
-        "SerializedName": "variableStates",
-        "Description": "Variable Status.",
-        "Type": {
-         "$id": "155",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
-          "$id": "156",
-          "Kind": "Model",
-          "Name": "VariableState",
-          "Namespace": "AnomalyDetector.Multivariate",
-          "Description": "Variable Status.",
-          "IsNullable": false,
-          "Usage": "RoundTrip",
-          "Properties": [
-           {
-            "$id": "157",
-            "Name": "variable",
-            "SerializedName": "variable",
-            "Description": "Variable name in variable states.",
-            "Type": {
-             "$id": "158",
-             "Kind": "Primitive",
-             "Name": "String",
-             "IsNullable": false
-            },
-            "IsRequired": false,
-            "IsReadOnly": false
-           },
-           {
-            "$id": "159",
-            "Name": "filledNARatio",
-            "SerializedName": "filledNARatio",
-            "Description": "Proportion of missing values that need to be filled by fillNAMethod.",
-            "Type": {
-             "$id": "160",
-             "Kind": "Primitive",
-             "Name": "Float32",
-             "IsNullable": false
-            },
-            "IsRequired": false,
-            "IsReadOnly": false
-           },
-           {
-            "$id": "161",
-            "Name": "effectiveCount",
-            "SerializedName": "effectiveCount",
-            "Description": "Number of effective data points before applying fillNAMethod.",
-            "Type": {
              "$id": "162",
-             "Kind": "Primitive",
-             "Name": "Int32",
-             "IsNullable": false
+             "Kind": "string"
             },
-            "IsRequired": false,
+            "IsRequired": true,
             "IsReadOnly": false
            },
            {
             "$id": "163",
-            "Name": "firstTimestamp",
-            "SerializedName": "firstTimestamp",
-            "Description": "First valid timestamp with value of input data.",
+            "Name": "message",
+            "SerializedName": "message",
+            "Description": "The message explaining the error reported by the service.",
             "Type": {
              "$id": "164",
-             "Kind": "Primitive",
-             "Name": "DateTimeRFC3339",
-             "IsNullable": false
+             "Kind": "string"
+            },
+            "IsRequired": true,
+            "IsReadOnly": false
+           }
+          ]
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
+        },
+        "IsRequired": false,
+        "IsReadOnly": false
+       },
+       {
+        "$id": "165",
+        "Name": "variableStates",
+        "SerializedName": "variableStates",
+        "Description": "Variable Status.",
+        "Type": {
+         "$id": "166",
+         "Kind": "array",
+         "Name": "ArrayVariableState",
+         "ValueType": {
+          "$id": "167",
+          "Kind": "model",
+          "Name": "VariableState",
+          "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.VariableState",
+          "Usage": "RoundTrip",
+          "Description": "Variable Status.",
+          "Properties": [
+           {
+            "$id": "168",
+            "Name": "variable",
+            "SerializedName": "variable",
+            "Description": "Variable name in variable states.",
+            "Type": {
+             "$id": "169",
+             "Kind": "string"
             },
             "IsRequired": false,
             "IsReadOnly": false
            },
            {
-            "$id": "165",
+            "$id": "170",
+            "Name": "filledNARatio",
+            "SerializedName": "filledNARatio",
+            "Description": "Proportion of missing values that need to be filled by fillNAMethod.",
+            "Type": {
+             "$id": "171",
+             "Kind": "float32"
+            },
+            "IsRequired": false,
+            "IsReadOnly": false
+           },
+           {
+            "$id": "172",
+            "Name": "effectiveCount",
+            "SerializedName": "effectiveCount",
+            "Description": "Number of effective data points before applying fillNAMethod.",
+            "Type": {
+             "$id": "173",
+             "Kind": "int32"
+            },
+            "IsRequired": false,
+            "IsReadOnly": false
+           },
+           {
+            "$id": "174",
+            "Name": "firstTimestamp",
+            "SerializedName": "firstTimestamp",
+            "Description": "First valid timestamp with value of input data.",
+            "Type": {
+             "$id": "175",
+             "Kind": "utcDateTime",
+             "Encode": "rfc3339",
+             "WireType": {
+              "$id": "176",
+              "Kind": "string"
+             }
+            },
+            "IsRequired": false,
+            "IsReadOnly": false
+           },
+           {
+            "$id": "177",
             "Name": "lastTimestamp",
             "SerializedName": "lastTimestamp",
             "Description": "Last valid timestamp with value of input data.",
             "Type": {
-             "$id": "166",
-             "Kind": "Primitive",
-             "Name": "DateTimeRFC3339",
-             "IsNullable": false
+             "$id": "178",
+             "Kind": "utcDateTime",
+             "Encode": "rfc3339",
+             "WireType": {
+              "$id": "179",
+              "Kind": "string"
+             }
             },
             "IsRequired": false,
             "IsReadOnly": false
            }
           ]
          },
-         "IsNullable": false
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": false
        },
        {
-        "$id": "167",
+        "$id": "180",
         "Name": "setupInfo",
         "SerializedName": "setupInfo",
         "Description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
         "Type": {
-         "$id": "168",
-         "Kind": "Model",
+         "$id": "181",
+         "Kind": "model",
          "Name": "MultivariateBatchDetectionOptions",
-         "Namespace": "AnomalyDetector.Multivariate",
-         "Description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
-         "IsNullable": false,
+         "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionOptions",
          "Usage": "RoundTrip",
+         "Description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
          "Properties": [
           {
-           "$id": "169",
+           "$id": "182",
            "Name": "dataSource",
            "SerializedName": "dataSource",
            "Description": "Source link to the input data to indicate an accessible Azure storage Uri,\neither pointed to an Azure blob storage folder, or pointed to a CSV file in\nAzure blob storage based on you data schema selection. The data schema should\nbe exactly the same with those used in the training phase.",
            "Type": {
-            "$id": "170",
-            "Kind": "Primitive",
-            "Name": "Uri",
-            "IsNullable": false
+            "$id": "183",
+            "Kind": "url"
            },
            "IsRequired": true,
            "IsReadOnly": false
           },
           {
-           "$id": "171",
+           "$id": "184",
            "Name": "topContributorCount",
            "SerializedName": "topContributorCount",
            "Description": "An optional field, which is used to specify the number of top contributed\nvariables for one anomalous timestamp in the response. The default number is\n10.",
            "Type": {
-            "$id": "172",
-            "Kind": "Primitive",
-            "Name": "Int32",
-            "IsNullable": false
+            "$id": "185",
+            "Kind": "int32"
            },
            "IsRequired": true,
            "IsReadOnly": false
           },
           {
-           "$id": "173",
+           "$id": "186",
            "Name": "startTime",
            "SerializedName": "startTime",
            "Description": "A required field, indicating the start time of data for detection, which should\nbe date-time of ISO 8601 format.",
            "Type": {
-            "$id": "174",
-            "Kind": "Primitive",
-            "Name": "DateTimeRFC3339",
-            "IsNullable": false
+            "$id": "187",
+            "Kind": "utcDateTime",
+            "Encode": "rfc3339",
+            "WireType": {
+             "$id": "188",
+             "Kind": "string"
+            }
            },
            "IsRequired": true,
            "IsReadOnly": false
           },
           {
-           "$id": "175",
+           "$id": "189",
            "Name": "endTime",
            "SerializedName": "endTime",
            "Description": "A required field, indicating the end time of data for detection, which should\nbe date-time of ISO 8601 format.",
            "Type": {
-            "$id": "176",
-            "Kind": "Primitive",
-            "Name": "DateTimeRFC3339",
-            "IsNullable": false
+            "$id": "190",
+            "Kind": "utcDateTime",
+            "Encode": "rfc3339",
+            "WireType": {
+             "$id": "191",
+             "Kind": "string"
+            }
            },
            "IsRequired": true,
            "IsReadOnly": false
@@ -1259,169 +1208,156 @@
      "IsReadOnly": false
     },
     {
-     "$id": "177",
+     "$id": "192",
      "Name": "results",
      "SerializedName": "results",
      "Description": "Detection result for each timestamp.",
      "Type": {
-      "$id": "178",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "179",
-       "Kind": "Model",
+      "$id": "193",
+      "Kind": "array",
+      "Name": "ArrayAnomalyState",
+      "ValueType": {
+       "$id": "194",
+       "Kind": "model",
        "Name": "AnomalyState",
-       "Namespace": "AnomalyDetector.Multivariate",
-       "Description": "Anomaly status and information.",
-       "IsNullable": false,
+       "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyState",
        "Usage": "Output",
+       "Description": "Anomaly status and information.",
        "Properties": [
         {
-         "$id": "180",
+         "$id": "195",
          "Name": "timestamp",
          "SerializedName": "timestamp",
          "Description": "The timestamp for this anomaly.",
          "Type": {
-          "$id": "181",
-          "Kind": "Primitive",
-          "Name": "DateTimeRFC3339",
-          "IsNullable": false
+          "$id": "196",
+          "Kind": "utcDateTime",
+          "Encode": "rfc3339",
+          "WireType": {
+           "$id": "197",
+           "Kind": "string"
+          }
          },
          "IsRequired": true,
          "IsReadOnly": false
         },
         {
-         "$id": "182",
+         "$id": "198",
          "Name": "value",
          "SerializedName": "value",
          "Description": "The detailed value of this anomalous timestamp.",
          "Type": {
-          "$id": "183",
-          "Kind": "Model",
+          "$id": "199",
+          "Kind": "model",
           "Name": "AnomalyValue",
-          "Namespace": "AnomalyDetector.Multivariate",
-          "Description": "Detailed information of the anomalous timestamp.",
-          "IsNullable": false,
+          "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyValue",
           "Usage": "Output",
+          "Description": "Detailed information of the anomalous timestamp.",
           "Properties": [
            {
-            "$id": "184",
+            "$id": "200",
             "Name": "isAnomaly",
             "SerializedName": "isAnomaly",
             "Description": "True if an anomaly is detected at the current timestamp.",
             "Type": {
-             "$id": "185",
-             "Kind": "Primitive",
-             "Name": "Boolean",
-             "IsNullable": false
+             "$id": "201",
+             "Kind": "boolean"
             },
             "IsRequired": true,
             "IsReadOnly": false
            },
            {
-            "$id": "186",
+            "$id": "202",
             "Name": "severity",
             "SerializedName": "severity",
             "Description": "Indicates the significance of the anomaly. The higher the severity, the more\nsignificant the anomaly is.",
             "Type": {
-             "$id": "187",
-             "Kind": "Primitive",
-             "Name": "Float32",
-             "IsNullable": false
+             "$id": "203",
+             "Kind": "float32"
             },
             "IsRequired": true,
             "IsReadOnly": false
            },
            {
-            "$id": "188",
+            "$id": "204",
             "Name": "score",
             "SerializedName": "score",
             "Description": "Raw anomaly score of severity, will help indicate the degree of abnormality as\nwell.",
             "Type": {
-             "$id": "189",
-             "Kind": "Primitive",
-             "Name": "Float32",
-             "IsNullable": false
+             "$id": "205",
+             "Kind": "float32"
             },
             "IsRequired": true,
             "IsReadOnly": false
            },
            {
-            "$id": "190",
+            "$id": "206",
             "Name": "interpretation",
             "SerializedName": "interpretation",
             "Description": "Interpretation of this anomalous timestamp.",
             "Type": {
-             "$id": "191",
-             "Kind": "Array",
-             "Name": "Array",
-             "ElementType": {
-              "$id": "192",
-              "Kind": "Model",
+             "$id": "207",
+             "Kind": "array",
+             "Name": "ArrayAnomalyInterpretation",
+             "ValueType": {
+              "$id": "208",
+              "Kind": "model",
               "Name": "AnomalyInterpretation",
-              "Namespace": "AnomalyDetector.Multivariate",
-              "Description": "Interpretation of the anomalous timestamp.",
-              "IsNullable": false,
+              "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyInterpretation",
               "Usage": "Output",
+              "Description": "Interpretation of the anomalous timestamp.",
               "Properties": [
                {
-                "$id": "193",
+                "$id": "209",
                 "Name": "variable",
                 "SerializedName": "variable",
                 "Description": "Variable.",
                 "Type": {
-                 "$id": "194",
-                 "Kind": "Primitive",
-                 "Name": "String",
-                 "IsNullable": false
+                 "$id": "210",
+                 "Kind": "string"
                 },
                 "IsRequired": false,
                 "IsReadOnly": false
                },
                {
-                "$id": "195",
+                "$id": "211",
                 "Name": "contributionScore",
                 "SerializedName": "contributionScore",
                 "Description": "This score shows the percentage contributing to the anomalous timestamp. A\nnumber between 0 and 1.",
                 "Type": {
-                 "$id": "196",
-                 "Kind": "Primitive",
-                 "Name": "Float32",
-                 "IsNullable": false
+                 "$id": "212",
+                 "Kind": "float32"
                 },
                 "IsRequired": false,
                 "IsReadOnly": false
                },
                {
-                "$id": "197",
+                "$id": "213",
                 "Name": "correlationChanges",
                 "SerializedName": "correlationChanges",
                 "Description": "Correlation changes among the anomalous variables",
                 "Type": {
-                 "$id": "198",
-                 "Kind": "Model",
+                 "$id": "214",
+                 "Kind": "model",
                  "Name": "CorrelationChanges",
-                 "Namespace": "AnomalyDetector.Multivariate",
-                 "Description": "Correlation changes among the anomalous variables",
-                 "IsNullable": false,
+                 "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.CorrelationChanges",
                  "Usage": "Output",
+                 "Description": "Correlation changes among the anomalous variables",
                  "Properties": [
                   {
-                   "$id": "199",
+                   "$id": "215",
                    "Name": "changedVariables",
                    "SerializedName": "changedVariables",
                    "Description": "The correlated variables that have correlation changes under an anomaly.",
                    "Type": {
-                    "$id": "200",
-                    "Kind": "Array",
+                    "$id": "216",
+                    "Kind": "array",
                     "Name": "Array",
-                    "ElementType": {
-                     "$id": "201",
-                     "Kind": "Primitive",
-                     "Name": "String",
-                     "IsNullable": false
+                    "ValueType": {
+                     "$id": "217",
+                     "Kind": "string"
                     },
-                    "IsNullable": false
+                    "CrossLanguageDefinitionId": "TypeSpec.Array"
                    },
                    "IsRequired": false,
                    "IsReadOnly": false
@@ -1433,7 +1369,7 @@
                }
               ]
              },
-             "IsNullable": false
+             "CrossLanguageDefinitionId": "TypeSpec.Array"
             },
             "IsRequired": false,
             "IsReadOnly": false
@@ -1444,25 +1380,25 @@
          "IsReadOnly": false
         },
         {
-         "$id": "202",
+         "$id": "218",
          "Name": "errors",
          "SerializedName": "errors",
          "Description": "Error message for the current timestamp.",
          "Type": {
-          "$id": "203",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
-           "$ref": "149"
+          "$id": "219",
+          "Kind": "array",
+          "Name": "ArrayErrorResponse",
+          "ValueType": {
+           "$ref": "160"
           },
-          "IsNullable": false
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          },
          "IsRequired": false,
          "IsReadOnly": false
         }
        ]
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1470,165 +1406,161 @@
    ]
   },
   {
-   "$ref": "145"
-  },
-  {
-   "$ref": "149"
-  },
-  {
    "$ref": "156"
   },
   {
-   "$ref": "168"
+   "$ref": "160"
   },
   {
-   "$ref": "179"
+   "$ref": "167"
   },
   {
-   "$ref": "183"
+   "$ref": "181"
   },
   {
-   "$ref": "192"
+   "$ref": "194"
   },
   {
-   "$ref": "198"
+   "$ref": "199"
   },
   {
-   "$id": "204",
-   "Kind": "Model",
+   "$ref": "208"
+  },
+  {
+   "$ref": "214"
+  },
+  {
+   "$id": "220",
+   "Kind": "model",
    "Name": "ModelInfo",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "Training result of a model including its status, errors and diagnostics\ninformation.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelInfo",
    "Usage": "RoundTrip",
+   "Description": "Training result of a model including its status, errors and diagnostics\ninformation.",
    "Properties": [
     {
-     "$id": "205",
+     "$id": "221",
      "Name": "dataSource",
      "SerializedName": "dataSource",
      "Description": "Source link to the input data to indicate an accessible Azure storage Uri,\neither pointed to an Azure blob storage folder, or pointed to a CSV file in\nAzure blob storage based on you data schema selection. ",
      "Type": {
-      "$id": "206",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "$id": "222",
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "207",
+     "$id": "223",
      "Name": "dataSchema",
      "SerializedName": "dataSchema",
      "Description": "Data schema of input data source: OneTable or MultiTable. The default\nDataSchema is OneTable.",
      "Type": {
-      "$ref": "26"
+      "$ref": "30"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "208",
+     "$id": "224",
      "Name": "startTime",
      "SerializedName": "startTime",
      "Description": "A required field, indicating the start time of training data, which should be\ndate-time of ISO 8601 format.",
      "Type": {
-      "$id": "209",
-      "Kind": "Primitive",
-      "Name": "DateTimeRFC3339",
-      "IsNullable": false
+      "$id": "225",
+      "Kind": "utcDateTime",
+      "Encode": "rfc3339",
+      "WireType": {
+       "$id": "226",
+       "Kind": "string"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "210",
+     "$id": "227",
      "Name": "endTime",
      "SerializedName": "endTime",
      "Description": "A required field, indicating the end time of training data, which should be\ndate-time of ISO 8601 format.",
      "Type": {
-      "$id": "211",
-      "Kind": "Primitive",
-      "Name": "DateTimeRFC3339",
-      "IsNullable": false
+      "$id": "228",
+      "Kind": "utcDateTime",
+      "Encode": "rfc3339",
+      "WireType": {
+       "$id": "229",
+       "Kind": "string"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "212",
+     "$id": "230",
      "Name": "displayName",
      "SerializedName": "displayName",
      "Description": "An optional field. The display name of the model whose maximum length is 24\ncharacters.",
      "Type": {
-      "$id": "213",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "$id": "231",
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "214",
+     "$id": "232",
      "Name": "slidingWindow",
      "SerializedName": "slidingWindow",
      "Description": "An optional field, indicating how many previous timestamps will be used to\ndetect whether the timestamp is anomaly or not. ",
      "Type": {
-      "$id": "215",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "$id": "233",
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "216",
+     "$id": "234",
      "Name": "alignPolicy",
      "SerializedName": "alignPolicy",
      "Description": "An optional field, indicating the manner to align multiple variables.",
      "Type": {
-      "$id": "217",
-      "Kind": "Model",
+      "$id": "235",
+      "Kind": "model",
       "Name": "AlignPolicy",
-      "Namespace": "AnomalyDetector.Multivariate",
-      "Description": "An optional field, indicating the manner to align multiple variables.",
-      "IsNullable": false,
+      "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AlignPolicy",
       "Usage": "RoundTrip",
+      "Description": "An optional field, indicating the manner to align multiple variables.",
       "Properties": [
        {
-        "$id": "218",
+        "$id": "236",
         "Name": "alignMode",
         "SerializedName": "alignMode",
         "Description": "An optional field, indicating how to align different variables to the same\ntime-range. Either Inner or Outer. ",
         "Type": {
-         "$ref": "29"
+         "$ref": "34"
         },
         "IsRequired": false,
         "IsReadOnly": false
        },
        {
-        "$id": "219",
+        "$id": "237",
         "Name": "fillNAMethod",
         "SerializedName": "fillNAMethod",
         "Description": "An optional field, indicating how missing values will be filled. One of\nPrevious, Subsequent, Linear, Zero, Fixed.",
         "Type": {
-         "$ref": "32"
+         "$ref": "38"
         },
         "IsRequired": false,
         "IsReadOnly": false
        },
        {
-        "$id": "220",
+        "$id": "238",
         "Name": "paddingValue",
         "SerializedName": "paddingValue",
         "Description": "An optional field. Required when fillNAMethod is Fixed.",
         "Type": {
-         "$id": "221",
-         "Kind": "Primitive",
-         "Name": "Float32",
-         "IsNullable": false
+         "$id": "239",
+         "Kind": "float32"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -1639,137 +1571,127 @@
      "IsReadOnly": false
     },
     {
-     "$id": "222",
+     "$id": "240",
      "Name": "status",
      "SerializedName": "status",
      "Description": "Model status. One of CREATED, RUNNING, READY, and FAILED.",
      "Type": {
-      "$ref": "38"
+      "$ref": "45"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "223",
+     "$id": "241",
      "Name": "errors",
      "SerializedName": "errors",
      "Description": "Error messages when failed to create a model.",
      "Type": {
-      "$id": "224",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$ref": "149"
+      "$id": "242",
+      "Kind": "array",
+      "Name": "ArrayErrorResponse",
+      "ValueType": {
+       "$ref": "160"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": true
     },
     {
-     "$id": "225",
+     "$id": "243",
      "Name": "diagnosticsInfo",
      "SerializedName": "diagnosticsInfo",
      "Description": "Diagnostics information to help inspect the states of model or variable.",
      "Type": {
-      "$id": "226",
-      "Kind": "Model",
+      "$id": "244",
+      "Kind": "model",
       "Name": "DiagnosticsInfo",
-      "Namespace": "AnomalyDetector.Multivariate",
-      "Description": "Diagnostics information to help inspect the states of model or variable.",
-      "IsNullable": false,
+      "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.DiagnosticsInfo",
       "Usage": "RoundTrip",
+      "Description": "Diagnostics information to help inspect the states of model or variable.",
       "Properties": [
        {
-        "$id": "227",
+        "$id": "245",
         "Name": "modelState",
         "SerializedName": "modelState",
         "Description": "Model status.",
         "Type": {
-         "$id": "228",
-         "Kind": "Model",
+         "$id": "246",
+         "Kind": "model",
          "Name": "ModelState",
-         "Namespace": "AnomalyDetector.Multivariate",
-         "Description": "Model status.",
-         "IsNullable": false,
+         "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelState",
          "Usage": "RoundTrip",
+         "Description": "Model status.",
          "Properties": [
           {
-           "$id": "229",
+           "$id": "247",
            "Name": "epochIds",
            "SerializedName": "epochIds",
            "Description": "This indicates the number of passes of the entire training dataset the\nalgorithm has completed.",
            "Type": {
-            "$id": "230",
-            "Kind": "Array",
+            "$id": "248",
+            "Kind": "array",
             "Name": "Array",
-            "ElementType": {
-             "$id": "231",
-             "Kind": "Primitive",
-             "Name": "Int32",
-             "IsNullable": false
+            "ValueType": {
+             "$id": "249",
+             "Kind": "int32"
             },
-            "IsNullable": false
+            "CrossLanguageDefinitionId": "TypeSpec.Array"
            },
            "IsRequired": false,
            "IsReadOnly": false
           },
           {
-           "$id": "232",
+           "$id": "250",
            "Name": "trainLosses",
            "SerializedName": "trainLosses",
            "Description": "List of metrics used to assess how the model fits the training data for each\nepoch.",
            "Type": {
-            "$id": "233",
-            "Kind": "Array",
+            "$id": "251",
+            "Kind": "array",
             "Name": "Array",
-            "ElementType": {
-             "$id": "234",
-             "Kind": "Primitive",
-             "Name": "Float32",
-             "IsNullable": false
+            "ValueType": {
+             "$id": "252",
+             "Kind": "float32"
             },
-            "IsNullable": false
+            "CrossLanguageDefinitionId": "TypeSpec.Array"
            },
            "IsRequired": false,
            "IsReadOnly": false
           },
           {
-           "$id": "235",
+           "$id": "253",
            "Name": "validationLosses",
            "SerializedName": "validationLosses",
            "Description": "List of metrics used to assess how the model fits the validation set for each\nepoch.",
            "Type": {
-            "$id": "236",
-            "Kind": "Array",
+            "$id": "254",
+            "Kind": "array",
             "Name": "Array",
-            "ElementType": {
-             "$id": "237",
-             "Kind": "Primitive",
-             "Name": "Float32",
-             "IsNullable": false
+            "ValueType": {
+             "$id": "255",
+             "Kind": "float32"
             },
-            "IsNullable": false
+            "CrossLanguageDefinitionId": "TypeSpec.Array"
            },
            "IsRequired": false,
            "IsReadOnly": false
           },
           {
-           "$id": "238",
+           "$id": "256",
            "Name": "latenciesInSeconds",
            "SerializedName": "latenciesInSeconds",
            "Description": "Latency for each epoch. ",
            "Type": {
-            "$id": "239",
-            "Kind": "Array",
+            "$id": "257",
+            "Kind": "array",
             "Name": "Array",
-            "ElementType": {
-             "$id": "240",
-             "Kind": "Primitive",
-             "Name": "Float32",
-             "IsNullable": false
+            "ValueType": {
+             "$id": "258",
+             "Kind": "float32"
             },
-            "IsNullable": false
+            "CrossLanguageDefinitionId": "TypeSpec.Array"
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -1780,18 +1702,18 @@
         "IsReadOnly": false
        },
        {
-        "$id": "241",
+        "$id": "259",
         "Name": "variableStates",
         "SerializedName": "variableStates",
         "Description": "Variable Status.",
         "Type": {
-         "$id": "242",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
-          "$ref": "156"
+         "$id": "260",
+         "Kind": "array",
+         "Name": "ArrayVariableState",
+         "ValueType": {
+          "$ref": "167"
          },
-         "IsNullable": false
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -1804,72 +1726,76 @@
    ]
   },
   {
-   "$ref": "217"
+   "$ref": "235"
   },
   {
-   "$ref": "226"
+   "$ref": "244"
   },
   {
-   "$ref": "228"
+   "$ref": "246"
   },
   {
-   "$id": "243",
-   "Kind": "Model",
+   "$id": "261",
+   "Kind": "model",
    "Name": "AnomalyDetectionModel",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "Response of getting a model.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyDetectionModel",
    "Usage": "Output",
+   "Description": "Response of getting a model.",
    "Properties": [
     {
-     "$id": "244",
+     "$id": "262",
      "Name": "modelId",
      "SerializedName": "modelId",
      "Description": "Model identifier.",
      "Type": {
-      "$id": "245",
-      "Kind": "Primitive",
-      "Name": "Guid",
-      "IsNullable": false
+      "$id": "263",
+      "Kind": "uuid",
+      "Encode": "string"
      },
      "IsRequired": true,
      "IsReadOnly": true
     },
     {
-     "$id": "246",
+     "$id": "264",
      "Name": "createdTime",
      "SerializedName": "createdTime",
      "Description": "Date and time (UTC) when the model was created.",
      "Type": {
-      "$id": "247",
-      "Kind": "Primitive",
-      "Name": "DateTimeRFC3339",
-      "IsNullable": false
+      "$id": "265",
+      "Kind": "utcDateTime",
+      "Encode": "rfc3339",
+      "WireType": {
+       "$id": "266",
+       "Kind": "string"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "248",
+     "$id": "267",
      "Name": "lastUpdatedTime",
      "SerializedName": "lastUpdatedTime",
      "Description": "Date and time (UTC) when the model was last updated.",
      "Type": {
-      "$id": "249",
-      "Kind": "Primitive",
-      "Name": "DateTimeRFC3339",
-      "IsNullable": false
+      "$id": "268",
+      "Kind": "utcDateTime",
+      "Encode": "rfc3339",
+      "WireType": {
+       "$id": "269",
+       "Kind": "string"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "250",
+     "$id": "270",
      "Name": "modelInfo",
      "SerializedName": "modelInfo",
      "Description": "Training result of a model including its status, errors and diagnostics\ninformation.",
      "Type": {
-      "$ref": "204"
+      "$ref": "220"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1877,69 +1803,62 @@
    ]
   },
   {
-   "$id": "251",
-   "Kind": "Model",
+   "$id": "271",
+   "Kind": "model",
    "Name": "ModelList",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "Response of listing models.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelList",
    "Usage": "Output",
+   "Description": "Response of listing models.",
    "Properties": [
     {
-     "$id": "252",
+     "$id": "272",
      "Name": "models",
      "SerializedName": "models",
      "Description": "List of models.",
      "Type": {
-      "$id": "253",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$ref": "243"
+      "$id": "273",
+      "Kind": "array",
+      "Name": "ArrayAnomalyDetectionModel",
+      "ValueType": {
+       "$ref": "261"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "254",
+     "$id": "274",
      "Name": "currentCount",
      "SerializedName": "currentCount",
      "Description": "Number of trained multivariate models.",
      "Type": {
-      "$id": "255",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "$id": "275",
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "256",
+     "$id": "276",
      "Name": "maxCount",
      "SerializedName": "maxCount",
      "Description": "Maximum number of models that can be trained for this Anomaly Detector resource.",
      "Type": {
-      "$id": "257",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "$id": "277",
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "258",
+     "$id": "278",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to fetch more models.",
      "Type": {
-      "$id": "259",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "$id": "279",
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1947,103 +1866,93 @@
    ]
   },
   {
-   "$id": "260",
-   "Kind": "Model",
+   "$id": "280",
+   "Kind": "model",
    "Name": "MultivariateLastDetectionOptions",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "Request of last detection.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateLastDetectionOptions",
    "Usage": "Input",
+   "Description": "Request of last detection.",
    "Properties": [
     {
-     "$id": "261",
+     "$id": "281",
      "Name": "variables",
      "SerializedName": "variables",
      "Description": "This contains the inference data, including the name, timestamps(ISO 8601) and\nvalues of variables.",
      "Type": {
-      "$id": "262",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "263",
-       "Kind": "Model",
+      "$id": "282",
+      "Kind": "array",
+      "Name": "ArrayVariableValues",
+      "ValueType": {
+       "$id": "283",
+       "Kind": "model",
        "Name": "VariableValues",
-       "Namespace": "AnomalyDetector.Multivariate",
-       "Description": "Variable values.",
-       "IsNullable": false,
+       "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.VariableValues",
        "Usage": "Input",
+       "Description": "Variable values.",
        "Properties": [
         {
-         "$id": "264",
+         "$id": "284",
          "Name": "variable",
          "SerializedName": "variable",
          "Description": "Variable name of last detection request.",
          "Type": {
-          "$id": "265",
-          "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "$id": "285",
+          "Kind": "string"
          },
          "IsRequired": true,
          "IsReadOnly": false
         },
         {
-         "$id": "266",
+         "$id": "286",
          "Name": "timestamps",
          "SerializedName": "timestamps",
          "Description": "Timestamps of last detection request",
          "Type": {
-          "$id": "267",
-          "Kind": "Array",
+          "$id": "287",
+          "Kind": "array",
           "Name": "Array",
-          "ElementType": {
-           "$id": "268",
-           "Kind": "Primitive",
-           "Name": "String",
-           "IsNullable": false
+          "ValueType": {
+           "$id": "288",
+           "Kind": "string"
           },
-          "IsNullable": false
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          },
          "IsRequired": true,
          "IsReadOnly": false
         },
         {
-         "$id": "269",
+         "$id": "289",
          "Name": "values",
          "SerializedName": "values",
          "Description": "Values of variables.",
          "Type": {
-          "$id": "270",
-          "Kind": "Array",
+          "$id": "290",
+          "Kind": "array",
           "Name": "Array",
-          "ElementType": {
-           "$id": "271",
-           "Kind": "Primitive",
-           "Name": "Float32",
-           "IsNullable": false
+          "ValueType": {
+           "$id": "291",
+           "Kind": "float32"
           },
-          "IsNullable": false
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "272",
+     "$id": "292",
      "Name": "topContributorCount",
      "SerializedName": "topContributorCount",
      "Description": "An optional field, which is used to specify the number of top contributed\nvariables for one anomalous timestamp in the response. The default number is\n10.",
      "Type": {
-      "$id": "273",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
+      "$id": "293",
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2051,47 +1960,46 @@
    ]
   },
   {
-   "$ref": "263"
+   "$ref": "283"
   },
   {
-   "$id": "274",
-   "Kind": "Model",
+   "$id": "294",
+   "Kind": "model",
    "Name": "MultivariateLastDetectionResult",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "Results of last detection.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateLastDetectionResult",
    "Usage": "Output",
+   "Description": "Results of last detection.",
    "Properties": [
     {
-     "$id": "275",
+     "$id": "295",
      "Name": "variableStates",
      "SerializedName": "variableStates",
      "Description": "Variable Status.",
      "Type": {
-      "$id": "276",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$ref": "156"
+      "$id": "296",
+      "Kind": "array",
+      "Name": "ArrayVariableState",
+      "ValueType": {
+       "$ref": "167"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "277",
+     "$id": "297",
      "Name": "results",
      "SerializedName": "results",
      "Description": "Anomaly status and information.",
      "Type": {
-      "$id": "278",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$ref": "179"
+      "$id": "298",
+      "Kind": "array",
+      "Name": "ArrayAnomalyState",
+      "ValueType": {
+       "$ref": "194"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -2099,35 +2007,32 @@
    ]
   },
   {
-   "$id": "279",
-   "Kind": "Model",
+   "$id": "299",
+   "Kind": "model",
    "Name": "AnomalyDetectorError",
-   "Namespace": "AnomalyDetector.Univariate",
-   "Description": "Error information returned by the API.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.AnomalyDetectorError",
    "Usage": "Output",
+   "Description": "Error information returned by the API.",
    "Properties": [
     {
-     "$id": "280",
+     "$id": "300",
      "Name": "code",
      "SerializedName": "code",
      "Description": "The error code.",
      "Type": {
-      "$ref": "43"
+      "$ref": "51"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "281",
+     "$id": "301",
      "Name": "message",
      "SerializedName": "message",
      "Description": "A message explaining the error reported by the service.",
      "Type": {
-      "$id": "282",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "$id": "302",
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -2137,25 +2042,22 @@
  ],
  "Clients": [
   {
-   "$id": "283",
+   "$id": "303",
    "Name": "AnomalyDetectorClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "284"
+    "$id": "304"
    },
-   "Creatable": true,
    "Parameters": [
     {
-     "$id": "285",
+     "$id": "305",
      "Name": "Endpoint",
      "NameInRequest": "Endpoint",
      "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
      "Type": {
-      "$id": "286",
-      "Kind": "Primitive",
-      "Name": "Uri",
-      "IsNullable": false
+      "$id": "306",
+      "Kind": "url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -2168,7 +2070,7 @@
      "Kind": "Client"
     },
     {
-     "$id": "287",
+     "$id": "307",
      "Name": "ApiVersion",
      "NameInRequest": "ApiVersion",
      "Description": "Api Version",
@@ -2185,11 +2087,10 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "288",
+      "$id": "308",
       "Type": {
-       "$id": "289",
-       "Kind": "Primitive",
-       "Name": "String",
+       "$id": "309",
+       "Kind": "string",
        "IsNullable": false
       },
       "Value": "v1.1"
@@ -2198,30 +2099,31 @@
    ]
   },
   {
-   "$id": "290",
+   "$id": "310",
    "Name": "Univariate",
    "Description": "",
    "Operations": [
     {
-     "$id": "291",
+     "$id": "311",
      "Name": "DetectUnivariateEntireSeries",
      "ResourceName": "Univariate",
      "Summary": "Detect anomalies for the entire series in batch.",
      "Description": "This operation generates a model with an entire series, each point is detected\nwith the same model. With this method, points before and after a certain point\nare used to determine whether it is an anomaly. The entire detection can give\nuser an overall status of the time series.",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "285"
+       "$ref": "305"
       },
       {
-       "$ref": "287"
+       "$ref": "307"
       },
       {
-       "$id": "292",
+       "$id": "312",
        "Name": "options",
        "NameInRequest": "options",
        "Description": "Method of univariate anomaly detection.",
        "Type": {
-        "$ref": "57"
+        "$ref": "67"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2234,13 +2136,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "293",
+       "$id": "313",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "294",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "314",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2253,21 +2154,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "295",
+        "$id": "315",
         "Type": {
-         "$ref": "294"
+         "$ref": "314"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "296",
+       "$id": "316",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "297",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "317",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2280,9 +2180,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "298",
+        "$id": "318",
         "Type": {
-         "$ref": "297"
+         "$ref": "317"
         },
         "Value": "application/json"
        }
@@ -2290,12 +2190,12 @@
      ],
      "Responses": [
       {
-       "$id": "299",
+       "$id": "319",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "77"
+        "$ref": "88"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2317,25 +2217,26 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "300",
+     "$id": "320",
      "Name": "DetectUnivariateLastPoint",
      "ResourceName": "Univariate",
      "Summary": "Detect anomaly status of the latest point in time series.",
      "Description": "This operation generates a model using the points that you sent into the API,\nand based on all data to determine whether the last point is anomalous.",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "285"
+       "$ref": "305"
       },
       {
-       "$ref": "287"
+       "$ref": "307"
       },
       {
-       "$id": "301",
+       "$id": "321",
        "Name": "options",
        "NameInRequest": "options",
        "Description": "Method of univariate anomaly detection.",
        "Type": {
-        "$ref": "57"
+        "$ref": "67"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2348,13 +2249,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "302",
+       "$id": "322",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "303",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "323",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2367,21 +2267,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "304",
+        "$id": "324",
         "Type": {
-         "$ref": "303"
+         "$ref": "323"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "305",
+       "$id": "325",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "306",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "326",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2394,9 +2293,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "307",
+        "$id": "327",
         "Type": {
-         "$ref": "306"
+         "$ref": "326"
         },
         "Value": "application/json"
        }
@@ -2404,12 +2303,12 @@
      ],
      "Responses": [
       {
-       "$id": "308",
+       "$id": "328",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "101"
+        "$ref": "112"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2431,25 +2330,26 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "309",
+     "$id": "329",
      "Name": "DetectUnivariateChangePoint",
      "ResourceName": "Univariate",
      "Summary": "Detect change point for the entire series",
      "Description": "Evaluate change point score of every series point",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "285"
+       "$ref": "305"
       },
       {
-       "$ref": "287"
+       "$ref": "307"
       },
       {
-       "$id": "310",
+       "$id": "330",
        "Name": "options",
        "NameInRequest": "options",
        "Description": "Method of univariate anomaly detection.",
        "Type": {
-        "$ref": "120"
+        "$ref": "131"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2462,13 +2362,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "311",
+       "$id": "331",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "312",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "332",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2481,21 +2380,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "313",
+        "$id": "333",
         "Type": {
-         "$ref": "312"
+         "$ref": "332"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "314",
+       "$id": "334",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "315",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "335",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2508,9 +2406,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "316",
+        "$id": "336",
         "Type": {
-         "$ref": "315"
+         "$ref": "335"
         },
         "Value": "application/json"
        }
@@ -2518,12 +2416,12 @@
      ],
      "Responses": [
       {
-       "$id": "317",
+       "$id": "337",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "132"
+        "$ref": "143"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2546,285 +2444,49 @@
     }
    ],
    "Protocol": {
-    "$id": "318"
+    "$id": "338"
    },
-   "Creatable": false,
    "Parent": "AnomalyDetectorClient",
    "Parameters": [
     {
-     "$ref": "285"
+     "$ref": "305"
     },
     {
-     "$ref": "287"
+     "$ref": "307"
     }
    ]
   },
   {
-   "$id": "319",
+   "$id": "339",
    "Name": "Multivariate",
    "Description": "",
    "Operations": [
     {
-     "$id": "320",
+     "$id": "340",
      "Name": "GetMultivariateBatchDetectionResult",
      "ResourceName": "Multivariate",
      "Summary": "Get Multivariate Anomaly Detection Result",
      "Description": "For asynchronous inference, get multivariate anomaly detection result based on\nresultId returned by the BatchDetectAnomaly api.",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "285"
+       "$ref": "305"
       },
       {
-       "$ref": "287"
+       "$ref": "307"
       },
       {
-       "$id": "321",
+       "$id": "341",
        "Name": "resultId",
        "NameInRequest": "resultId",
        "Description": "ID of a batch detection result.",
        "Type": {
-        "$id": "322",
-        "Kind": "Primitive",
-        "Name": "Guid",
-        "IsNullable": false
+        "$id": "342",
+        "Kind": "uuid",
+        "Encode": "string"
        },
        "Location": "Path",
        "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "323",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "324",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "325",
-        "Type": {
-         "$ref": "324"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "326",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "141"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
-     "Path": "/multivariate/detect-batch/{resultId}",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "327",
-     "Name": "TrainMultivariateModel",
-     "ResourceName": "Multivariate",
-     "Summary": "Train a Multivariate Anomaly Detection Model",
-     "Description": "Create and train a multivariate anomaly detection model. The request must\ninclude a source parameter to indicate an externally accessible Azure blob\nstorage URI.There are two types of data input: An URI pointed to an Azure blob\nstorage folder which contains multiple CSV files, and each CSV file contains\ntwo columns, timestamp and variable. Another type of input is an URI pointed to\na CSV file in Azure blob storage, which contains all the variables and a\ntimestamp column.",
-     "Parameters": [
-      {
-       "$ref": "285"
-      },
-      {
-       "$ref": "287"
-      },
-      {
-       "$id": "328",
-       "Name": "modelInfo",
-       "NameInRequest": "modelInfo",
-       "Description": "Model information.",
-       "Type": {
-        "$ref": "204"
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "329",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "330",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "331",
-        "Type": {
-         "$ref": "330"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "332",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "333",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "334",
-        "Type": {
-         "$ref": "333"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "335",
-       "StatusCodes": [
-        201
-       ],
-       "BodyType": {
-        "$ref": "243"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [
-        {
-         "$id": "336",
-         "Name": "location",
-         "NameInResponse": "Location",
-         "Description": "Location and ID of the model.",
-         "Type": {
-          "$id": "337",
-          "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
-         }
-        }
-       ],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
-     "Path": "/multivariate/models",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "338",
-     "Name": "ListMultivariateModels",
-     "ResourceName": "Multivariate",
-     "Summary": "List Multivariate Models",
-     "Description": "List models of a resource.",
-     "Parameters": [
-      {
-       "$ref": "285"
-      },
-      {
-       "$ref": "287"
-      },
-      {
-       "$id": "339",
-       "Name": "skip",
-       "NameInRequest": "skip",
-       "Description": "Skip indicates how many models will be skipped.",
-       "Type": {
-        "$id": "340",
-        "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": false,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "341",
-       "Name": "top",
-       "NameInRequest": "top",
-       "Description": "Top indicates how many models will be fetched.",
-       "Type": {
-        "$id": "342",
-        "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": false,
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
@@ -2839,8 +2501,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "344",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2868,7 +2529,235 @@
         200
        ],
        "BodyType": {
-        "$ref": "251"
+        "$ref": "152"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
+     "Path": "/multivariate/detect-batch/{resultId}",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "347",
+     "Name": "TrainMultivariateModel",
+     "ResourceName": "Multivariate",
+     "Summary": "Train a Multivariate Anomaly Detection Model",
+     "Description": "Create and train a multivariate anomaly detection model. The request must\ninclude a source parameter to indicate an externally accessible Azure blob\nstorage URI.There are two types of data input: An URI pointed to an Azure blob\nstorage folder which contains multiple CSV files, and each CSV file contains\ntwo columns, timestamp and variable. Another type of input is an URI pointed to\na CSV file in Azure blob storage, which contains all the variables and a\ntimestamp column.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "305"
+      },
+      {
+       "$ref": "307"
+      },
+      {
+       "$id": "348",
+       "Name": "modelInfo",
+       "NameInRequest": "modelInfo",
+       "Description": "Model information.",
+       "Type": {
+        "$ref": "220"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "349",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "350",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "351",
+        "Type": {
+         "$ref": "350"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "352",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "353",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "354",
+        "Type": {
+         "$ref": "353"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "355",
+       "StatusCodes": [
+        201
+       ],
+       "BodyType": {
+        "$ref": "261"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [
+        {
+         "$id": "356",
+         "Name": "location",
+         "NameInResponse": "Location",
+         "Description": "Location and ID of the model.",
+         "Type": {
+          "$id": "357",
+          "Kind": "string"
+         }
+        }
+       ],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
+     "Path": "/multivariate/models",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "358",
+     "Name": "ListMultivariateModels",
+     "ResourceName": "Multivariate",
+     "Summary": "List Multivariate Models",
+     "Description": "List models of a resource.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "305"
+      },
+      {
+       "$ref": "307"
+      },
+      {
+       "$id": "359",
+       "Name": "skip",
+       "NameInRequest": "skip",
+       "Description": "Skip indicates how many models will be skipped.",
+       "Type": {
+        "$id": "360",
+        "Kind": "int32"
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "361",
+       "Name": "top",
+       "NameInRequest": "top",
+       "Description": "Top indicates how many models will be fetched.",
+       "Type": {
+        "$id": "362",
+        "Kind": "int32"
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "363",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "364",
+        "Kind": "string",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "365",
+        "Type": {
+         "$ref": "364"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "366",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "271"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2884,7 +2773,7 @@
      "Path": "/multivariate/models",
      "BufferResponse": true,
      "Paging": {
-      "$id": "347",
+      "$id": "367",
       "NextLinkName": "nextLink",
       "ItemName": "models"
      },
@@ -2892,28 +2781,27 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "348",
+     "$id": "368",
      "Name": "DeleteMultivariateModel",
      "ResourceName": "Multivariate",
      "Summary": "Delete Multivariate Model",
      "Description": "Delete an existing multivariate model according to the modelId",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "285"
+       "$ref": "305"
       },
       {
-       "$ref": "287"
+       "$ref": "307"
       },
       {
-       "$id": "349",
+       "$id": "369",
        "Name": "modelId",
        "NameInRequest": "modelId",
        "Description": "Model identifier.",
        "Type": {
-        "$id": "350",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "$id": "370",
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2926,13 +2814,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "351",
+       "$id": "371",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "352",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "372",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2945,9 +2832,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "353",
+        "$id": "373",
         "Type": {
-         "$ref": "352"
+         "$ref": "372"
         },
         "Value": "application/json"
        }
@@ -2955,7 +2842,7 @@
      ],
      "Responses": [
       {
-       "$id": "354",
+       "$id": "374",
        "StatusCodes": [
         204
        ],
@@ -2973,28 +2860,27 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "355",
+     "$id": "375",
      "Name": "GetMultivariateModel",
      "ResourceName": "Multivariate",
      "Summary": "Get Multivariate Model",
      "Description": "Get detailed information of multivariate model, including the training status\nand variables used in the model.",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "285"
+       "$ref": "305"
       },
       {
-       "$ref": "287"
+       "$ref": "307"
       },
       {
-       "$id": "356",
+       "$id": "376",
        "Name": "modelId",
        "NameInRequest": "modelId",
        "Description": "Model identifier.",
        "Type": {
-        "$id": "357",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "$id": "377",
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -3007,13 +2893,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "358",
+       "$id": "378",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "359",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "379",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3026,9 +2911,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "360",
+        "$id": "380",
         "Type": {
-         "$ref": "359"
+         "$ref": "379"
         },
         "Value": "application/json"
        }
@@ -3036,12 +2921,12 @@
      ],
      "Responses": [
       {
-       "$id": "361",
+       "$id": "381",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "243"
+        "$ref": "261"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3060,28 +2945,27 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "362",
+     "$id": "382",
      "Name": "DetectMultivariateBatchAnomaly",
      "ResourceName": "Multivariate",
      "Summary": "Detect Multivariate Anomaly",
      "Description": "Submit multivariate anomaly detection task with the modelId of trained model\nand inference data, the input schema should be the same with the training\nrequest. The request will complete asynchronously and return a resultId to\nquery the detection result.The request should be a source link to indicate an\nexternally accessible Azure storage Uri, either pointed to an Azure blob\nstorage folder, or pointed to a CSV file in Azure blob storage.",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "285"
+       "$ref": "305"
       },
       {
-       "$ref": "287"
+       "$ref": "307"
       },
       {
-       "$id": "363",
+       "$id": "383",
        "Name": "modelId",
        "NameInRequest": "modelId",
        "Description": "Model identifier.",
        "Type": {
-        "$id": "364",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "$id": "384",
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -3094,12 +2978,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "365",
+       "$id": "385",
        "Name": "options",
        "NameInRequest": "options",
        "Description": "Request of multivariate anomaly detection.",
        "Type": {
-        "$ref": "168"
+        "$ref": "181"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3112,13 +2996,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "366",
+       "$id": "386",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "367",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "387",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3131,21 +3014,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "368",
+        "$id": "388",
         "Type": {
-         "$ref": "367"
+         "$ref": "387"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "369",
+       "$id": "389",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "370",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "390",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3158,9 +3040,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "371",
+        "$id": "391",
         "Type": {
-         "$ref": "370"
+         "$ref": "390"
         },
         "Value": "application/json"
        }
@@ -3168,37 +3050,33 @@
      ],
      "Responses": [
       {
-       "$id": "372",
+       "$id": "392",
        "StatusCodes": [
         202
        ],
        "BodyType": {
-        "$ref": "141"
+        "$ref": "152"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "373",
+         "$id": "393",
          "Name": "operation-id",
          "NameInResponse": "Operation-Id",
          "Description": "Id of the detection result.",
          "Type": {
-          "$id": "374",
-          "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "$id": "394",
+          "Kind": "string"
          }
         },
         {
-         "$id": "375",
+         "$id": "395",
          "Name": "operation-location",
          "NameInResponse": "Operation-Location",
          "Description": "Location of the detection result.",
          "Type": {
-          "$id": "376",
-          "Kind": "Primitive",
-          "Name": "String",
-          "IsNullable": false
+          "$id": "396",
+          "Kind": "string"
          }
         }
        ],
@@ -3220,28 +3098,27 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "377",
+     "$id": "397",
      "Name": "DetectMultivariateLastAnomaly",
      "ResourceName": "Multivariate",
      "Summary": "Detect anomalies in the last point of the request body",
      "Description": "Submit multivariate anomaly detection task with the modelId of trained model\nand inference data, and the inference data should be put into request body in a\nJSON format. The request will complete synchronously and return the detection\nimmediately in the response body.",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "285"
+       "$ref": "305"
       },
       {
-       "$ref": "287"
+       "$ref": "307"
       },
       {
-       "$id": "378",
+       "$id": "398",
        "Name": "modelId",
        "NameInRequest": "modelId",
        "Description": "Model identifier.",
        "Type": {
-        "$id": "379",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "$id": "399",
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -3254,12 +3131,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "380",
+       "$id": "400",
        "Name": "options",
        "NameInRequest": "options",
        "Description": "Request of last detection.",
        "Type": {
-        "$ref": "260"
+        "$ref": "280"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3272,13 +3149,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "381",
+       "$id": "401",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "382",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "402",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3291,21 +3167,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "383",
+        "$id": "403",
         "Type": {
-         "$ref": "382"
+         "$ref": "402"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "384",
+       "$id": "404",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "385",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "405",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3318,9 +3193,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "386",
+        "$id": "406",
         "Type": {
-         "$ref": "385"
+         "$ref": "405"
         },
         "Value": "application/json"
        }
@@ -3328,12 +3203,12 @@
      ],
      "Responses": [
       {
-       "$id": "387",
+       "$id": "407",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "274"
+        "$ref": "294"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3356,24 +3231,23 @@
     }
    ],
    "Protocol": {
-    "$id": "388"
+    "$id": "408"
    },
-   "Creatable": false,
    "Parent": "AnomalyDetectorClient",
    "Parameters": [
     {
-     "$ref": "285"
+     "$ref": "305"
     },
     {
-     "$ref": "287"
+     "$ref": "307"
     }
    ]
   }
  ],
  "Auth": {
-  "$id": "389",
+  "$id": "409",
   "ApiKey": {
-   "$id": "390",
+   "$id": "410",
    "Name": "Ocp-Apim-Subscription-Key"
   }
  }

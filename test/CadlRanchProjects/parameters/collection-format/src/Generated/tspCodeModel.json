@@ -13,7 +13,6 @@
    "Protocol": {
     "$id": "3"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "4",
@@ -22,9 +21,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "5",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -39,9 +36,7 @@
       "$id": "6",
       "Type": {
        "$id": "7",
-       "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -57,6 +52,7 @@
      "$id": "9",
      "Name": "multi",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -68,15 +64,13 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "11",
-        "Kind": "Array",
+        "Kind": "array",
         "Name": "Array",
-        "ElementType": {
+        "ValueType": {
          "$id": "12",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "IsNullable": false
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -94,8 +88,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "14",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -139,6 +132,7 @@
      "$id": "17",
      "Name": "ssv",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -150,15 +144,13 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "19",
-        "Kind": "Array",
+        "Kind": "array",
         "Name": "Array",
-        "ElementType": {
+        "ValueType": {
          "$id": "20",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "IsNullable": false
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -177,8 +169,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "22",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -222,6 +213,7 @@
      "$id": "25",
      "Name": "tsv",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -233,15 +225,13 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "27",
-        "Kind": "Array",
+        "Kind": "array",
         "Name": "Array",
-        "ElementType": {
+        "ValueType": {
          "$id": "28",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "IsNullable": false
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -260,8 +250,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "30",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -305,6 +294,7 @@
      "$id": "33",
      "Name": "pipes",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -316,15 +306,13 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "35",
-        "Kind": "Array",
+        "Kind": "array",
         "Name": "Array",
-        "ElementType": {
+        "ValueType": {
          "$id": "36",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "IsNullable": false
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -343,8 +331,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "38",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -388,6 +375,7 @@
      "$id": "41",
      "Name": "csv",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -399,15 +387,13 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "43",
-        "Kind": "Array",
+        "Kind": "array",
         "Name": "Array",
-        "ElementType": {
+        "ValueType": {
          "$id": "44",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "IsNullable": false
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -426,8 +412,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "46",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -471,7 +456,6 @@
    "Protocol": {
     "$id": "49"
    },
-   "Creatable": false,
    "Parent": "CollectionFormatClient",
    "Parameters": [
     {
@@ -488,6 +472,7 @@
      "$id": "51",
      "Name": "csv",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -499,15 +484,13 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "53",
-        "Kind": "Array",
+        "Kind": "array",
         "Name": "Array",
-        "ElementType": {
+        "ValueType": {
          "$id": "54",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "IsNullable": false
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -526,8 +509,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "56",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -571,7 +553,6 @@
    "Protocol": {
     "$id": "59"
    },
-   "Creatable": false,
    "Parent": "CollectionFormatClient",
    "Parameters": [
     {

@@ -7,7 +7,6 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Output;
@@ -47,7 +46,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     implementsTypes.Add(schema.Inherits);
                 }
 
-                writer.WriteXmlDocumentationSummary($"{schema.Description}");
+                var description = string.IsNullOrEmpty(schema.Description.ToString()) ? $"The {schema.Declaration.Name}." : schema.Description;
+                writer.WriteXmlDocumentationSummary(description);
                 AddClassAttributes(writer, schema);
 
                 if (schema.IsStruct)
@@ -446,7 +446,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($"public override int GetHashCode() => ");
                     if (isString)
                     {
-                        writer.Line($"_value?.GetHashCode() ?? 0;");
+                        writer.Line($"_value != null ? {typeof(StringComparer)}.InvariantCultureIgnoreCase.GetHashCode(_value) : 0;");
                     }
                     else
                     {

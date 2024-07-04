@@ -7,43 +7,42 @@
  "Enums": [
   {
    "$id": "2",
-   "Kind": "Enum",
+   "Kind": "enum",
    "Name": "Versions",
-   "EnumValueType": "String",
-   "AllowedValues": [
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.Versions",
+   "ValueType": {
+    "$id": "3",
+    "Kind": "string"
+   },
+   "Values": [
     {
-     "$id": "3",
+     "$id": "4",
      "Name": "v2022_12_01_preview",
      "Value": "2022-12-01-preview",
      "Description": "The version 2022-12-01-preview."
     }
    ],
-   "Namespace": "_Specs_.Azure.Core.Scalar",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
  "Models": [
   {
-   "$id": "4",
-   "Kind": "Model",
+   "$id": "5",
+   "Kind": "model",
    "Name": "AzureLocationModel",
-   "Namespace": "_Specs_.Azure.Core.Scalar",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationModel",
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "5",
+     "$id": "6",
      "Name": "location",
      "SerializedName": "location",
      "Description": "",
      "Type": {
-      "$id": "6",
-      "Kind": "Primitive",
-      "Name": "AzureLocation",
-      "IsNullable": false
+      "$id": "7",
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -53,25 +52,22 @@
  ],
  "Clients": [
   {
-   "$id": "7",
+   "$id": "8",
    "Name": "ScalarClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "8"
+    "$id": "9"
    },
-   "Creatable": true,
    "Parameters": [
     {
-     "$id": "9",
+     "$id": "10",
      "Name": "host",
      "NameInRequest": "host",
      "Description": "TestServer endpoint",
      "Type": {
-      "$id": "10",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "$id": "11",
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -83,12 +79,10 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "11",
+      "$id": "12",
       "Type": {
-       "$id": "12",
-       "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
+       "$id": "13",
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -96,27 +90,27 @@
    ]
   },
   {
-   "$id": "13",
+   "$id": "14",
    "Name": "AzureLocationScalar",
    "Description": "",
    "Operations": [
     {
-     "$id": "14",
+     "$id": "15",
      "Name": "get",
      "ResourceName": "AzureLocationScalar",
      "Description": "get azureLocation value",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "9"
+       "$ref": "10"
       },
       {
-       "$id": "15",
+       "$id": "16",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "16",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "17",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -129,9 +123,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "17",
+        "$id": "18",
         "Type": {
-         "$ref": "16"
+         "$ref": "17"
         },
         "Value": "application/json"
        }
@@ -139,15 +133,13 @@
      ],
      "Responses": [
       {
-       "$id": "18",
+       "$id": "19",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "19",
-        "Kind": "Primitive",
-        "Name": "AzureLocation",
-        "IsNullable": false
+        "$id": "20",
+        "Kind": "string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -166,24 +158,23 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "20",
+     "$id": "21",
      "Name": "put",
      "ResourceName": "AzureLocationScalar",
      "Description": "put azureLocation value",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "9"
+       "$ref": "10"
       },
       {
-       "$id": "21",
+       "$id": "22",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
        "Type": {
-        "$id": "22",
-        "Kind": "Primitive",
-        "Name": "AzureLocation",
-        "IsNullable": false
+        "$id": "23",
+        "Kind": "string"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -196,13 +187,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "23",
+       "$id": "24",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "24",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "25",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -215,21 +205,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "25",
+        "$id": "26",
         "Type": {
-         "$ref": "24"
+         "$ref": "25"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "26",
+       "$id": "27",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "27",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "28",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -242,9 +231,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "28",
+        "$id": "29",
         "Type": {
-         "$ref": "27"
+         "$ref": "28"
         },
         "Value": "application/json"
        }
@@ -252,7 +241,7 @@
      ],
      "Responses": [
       {
-       "$id": "29",
+       "$id": "30",
        "StatusCodes": [
         204
        ],
@@ -273,21 +262,22 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "30",
+     "$id": "31",
      "Name": "post",
      "ResourceName": "AzureLocationScalar",
      "Description": "post a model which has azureLocation property",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "9"
+       "$ref": "10"
       },
       {
-       "$id": "31",
+       "$id": "32",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
        "Type": {
-        "$ref": "4"
+        "$ref": "5"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -300,13 +290,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "32",
+       "$id": "33",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "33",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "34",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -319,21 +308,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "34",
+        "$id": "35",
         "Type": {
-         "$ref": "33"
+         "$ref": "34"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "35",
+       "$id": "36",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "36",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "37",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -346,9 +334,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "37",
+        "$id": "38",
         "Type": {
-         "$ref": "36"
+         "$ref": "37"
         },
         "Value": "application/json"
        }
@@ -356,12 +344,12 @@
      ],
      "Responses": [
       {
-       "$id": "38",
+       "$id": "39",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "4"
+        "$ref": "5"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -383,24 +371,23 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "39",
+     "$id": "40",
      "Name": "header",
      "ResourceName": "AzureLocationScalar",
      "Description": "azureLocation value header",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "9"
+       "$ref": "10"
       },
       {
-       "$id": "40",
+       "$id": "41",
        "Name": "region",
        "NameInRequest": "region",
        "Description": "_",
        "Type": {
-        "$id": "41",
-        "Kind": "Primitive",
-        "Name": "AzureLocation",
-        "IsNullable": false
+        "$id": "42",
+        "Kind": "string"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -413,13 +400,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "42",
+       "$id": "43",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "43",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "44",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -432,9 +418,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "44",
+        "$id": "45",
         "Type": {
-         "$ref": "43"
+         "$ref": "44"
         },
         "Value": "application/json"
        }
@@ -442,7 +428,7 @@
      ],
      "Responses": [
       {
-       "$id": "45",
+       "$id": "46",
        "StatusCodes": [
         204
        ],
@@ -460,24 +446,23 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "46",
+     "$id": "47",
      "Name": "query",
      "ResourceName": "AzureLocationScalar",
      "Description": "azureLocation value query",
+     "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "9"
+       "$ref": "10"
       },
       {
-       "$id": "47",
+       "$id": "48",
        "Name": "region",
        "NameInRequest": "region",
        "Description": "_",
        "Type": {
-        "$id": "48",
-        "Kind": "Primitive",
-        "Name": "AzureLocation",
-        "IsNullable": false
+        "$id": "49",
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -490,13 +475,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "49",
+       "$id": "50",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "50",
-        "Kind": "Primitive",
-        "Name": "String",
+        "$id": "51",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -509,9 +493,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "51",
+        "$id": "52",
         "Type": {
-         "$ref": "50"
+         "$ref": "51"
         },
         "Value": "application/json"
        }
@@ -519,7 +503,7 @@
      ],
      "Responses": [
       {
-       "$id": "52",
+       "$id": "53",
        "StatusCodes": [
         204
        ],
@@ -538,13 +522,12 @@
     }
    ],
    "Protocol": {
-    "$id": "53"
+    "$id": "54"
    },
-   "Creatable": false,
    "Parent": "ScalarClient",
    "Parameters": [
     {
-     "$ref": "9"
+     "$ref": "10"
     }
    ]
   }

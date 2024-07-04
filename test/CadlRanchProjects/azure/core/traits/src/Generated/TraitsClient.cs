@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -166,33 +165,33 @@ namespace _Specs_.Azure.Core.Traits
 
         /// <summary> Test for repeatable requests. </summary>
         /// <param name="id"> The user's id. </param>
-        /// <param name="userActionValue"> User action value. </param>
+        /// <param name="body"> The body parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="userActionValue"/> is null. </exception>
-        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableActionAsync(int,string,CancellationToken)']/*" />
-        public virtual async Task<Response<UserActionResponse>> RepeatableActionAsync(int id, string userActionValue, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableActionAsync(int,UserActionParam,CancellationToken)']/*" />
+        public virtual async Task<Response<UserActionResponse>> RepeatableActionAsync(int id, UserActionParam body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(userActionValue, nameof(userActionValue));
+            Argument.AssertNotNull(body, nameof(body));
 
-            UserActionParam userActionParam = new UserActionParam(userActionValue, null);
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await RepeatableActionAsync(id, userActionParam.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await RepeatableActionAsync(id, content, context).ConfigureAwait(false);
             return Response.FromValue(UserActionResponse.FromResponse(response), response);
         }
 
         /// <summary> Test for repeatable requests. </summary>
         /// <param name="id"> The user's id. </param>
-        /// <param name="userActionValue"> User action value. </param>
+        /// <param name="body"> The body parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="userActionValue"/> is null. </exception>
-        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableAction(int,string,CancellationToken)']/*" />
-        public virtual Response<UserActionResponse> RepeatableAction(int id, string userActionValue, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableAction(int,UserActionParam,CancellationToken)']/*" />
+        public virtual Response<UserActionResponse> RepeatableAction(int id, UserActionParam body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(userActionValue, nameof(userActionValue));
+            Argument.AssertNotNull(body, nameof(body));
 
-            UserActionParam userActionParam = new UserActionParam(userActionValue, null);
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = RepeatableAction(id, userActionParam.ToRequestContent(), context);
+            Response response = RepeatableAction(id, content, context);
             return Response.FromValue(UserActionResponse.FromResponse(response), response);
         }
 
@@ -206,7 +205,7 @@ namespace _Specs_.Azure.Core.Traits
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="RepeatableActionAsync(int,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="RepeatableActionAsync(int,UserActionParam,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -246,7 +245,7 @@ namespace _Specs_.Azure.Core.Traits
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="RepeatableAction(int,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="RepeatableAction(int,UserActionParam,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

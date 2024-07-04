@@ -14,6 +14,7 @@
      "$id": "3",
      "Name": "myOp",
      "ResourceName": "Single",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "4",
@@ -22,9 +23,7 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "5",
-        "Kind": "Primitive",
-        "Name": "Uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -42,8 +41,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "7",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -87,7 +85,6 @@
    "Protocol": {
     "$id": "10"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "4"

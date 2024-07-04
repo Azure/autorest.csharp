@@ -6,32 +6,29 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "EmptyInput",
-   "Namespace": "Type.Model.Empty",
-   "Description": "Empty model used in operation parameters",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Model.Empty.EmptyInput",
    "Usage": "Input",
+   "Description": "Empty model used in operation parameters",
    "Properties": []
   },
   {
    "$id": "3",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "EmptyOutput",
-   "Namespace": "Type.Model.Empty",
-   "Description": "Empty model used in operation return type",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Model.Empty.EmptyOutput",
    "Usage": "Output",
+   "Description": "Empty model used in operation return type",
    "Properties": []
   },
   {
    "$id": "4",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "EmptyInputOutput",
-   "Namespace": "Type.Model.Empty",
-   "Description": "Empty model used in both parameter and return type",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Model.Empty.EmptyInputOutput",
    "Usage": "RoundTrip",
+   "Description": "Empty model used in both parameter and return type",
    "Properties": []
   }
  ],
@@ -45,6 +42,7 @@
      "$id": "6",
      "Name": "putEmpty",
      "ResourceName": "Empty",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "7",
@@ -53,9 +51,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "8",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -70,9 +66,7 @@
         "$id": "9",
         "Type": {
          "$id": "10",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
@@ -100,8 +94,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "13",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -127,8 +120,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "16",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -175,6 +167,7 @@
      "$id": "19",
      "Name": "getEmpty",
      "ResourceName": "Empty",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"
@@ -185,8 +178,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "21",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -236,6 +228,7 @@
      "$id": "24",
      "Name": "postRoundTripEmpty",
      "ResourceName": "Empty",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"
@@ -263,8 +256,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "27",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -290,8 +282,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "30",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -344,7 +335,6 @@
    "Protocol": {
     "$id": "33"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "7"

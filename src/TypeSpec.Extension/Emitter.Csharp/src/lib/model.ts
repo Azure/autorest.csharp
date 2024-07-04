@@ -168,7 +168,7 @@ export function getUsages(
     }
 
     for (const op of ops) {
-        if (!op.parameters.body?.parameter && op.parameters.body?.type) {
+        if (!op.parameters.body?.property && op.parameters.body?.type) {
             let effectiveBodyType = undefined;
             const affectTypes: Set<string> = new Set<string>();
             effectiveBodyType = getEffectiveSchemaType(
@@ -260,7 +260,7 @@ export function getUsages(
                 if (!isInputLiteralType(type)) continue;
                 // now type should be a literal type
                 // find its corresponding enum type
-                const literalValueType = type.LiteralValueType;
+                const literalValueType = type.ValueType;
                 if (!isInputEnumType(literalValueType)) continue;
                 // now literalValueType should be an enum type
                 // apply the usage on this model to the usagesMap

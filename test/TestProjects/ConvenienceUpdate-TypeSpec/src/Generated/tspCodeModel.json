@@ -6,12 +6,11 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Model",
-   "Namespace": "ConvenienceInCadl",
-   "Description": "A model.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "ConvenienceInCadl.Model",
    "Usage": "RoundTrip",
+   "Description": "A model.",
    "Properties": [
     {
      "$id": "3",
@@ -20,9 +19,7 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -41,6 +38,7 @@
      "Name": "updateConvenience",
      "ResourceName": "ConvenienceInCadl",
      "Description": "No initial operation methods. In the updated version, we add the protocol method and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "7",
@@ -48,8 +46,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "8",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -100,6 +97,7 @@
      "Name": "convenienceOptionalBeforeRequired",
      "ResourceName": "ConvenienceInCadl",
      "Description": "No initial operation methods. In the updated version, we add the protocol method and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "12",
@@ -107,9 +105,7 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "13",
-        "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -144,8 +140,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "16",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -171,8 +166,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "19",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -220,6 +214,7 @@
      "Name": "noConvenience",
      "ResourceName": "ConvenienceInCadl",
      "Description": "No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "23",
@@ -227,8 +222,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "24",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -279,6 +273,7 @@
      "Name": "noConvenienceRequiredBody",
      "ResourceName": "ConvenienceInCadl",
      "Description": "No convenience method. But if we add the convenientAPI decorator, there will be no ambiguity.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "28",
@@ -303,8 +298,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "30",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -330,8 +324,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "33",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -379,6 +372,7 @@
      "Name": "noConvenienceOptionalBody",
      "ResourceName": "ConvenienceInCadl",
      "Description": "No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "37",
@@ -403,8 +397,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "39",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -430,8 +423,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "42",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -479,6 +471,7 @@
      "Name": "protocol",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation only has protocol method. In the updated version, we add the convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "46",
@@ -486,8 +479,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "47",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -538,6 +530,7 @@
      "Name": "convenienceWithOptional",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with optional RequestContext and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "51",
@@ -545,8 +538,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "52",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -597,6 +589,7 @@
      "Name": "convenienceWithRequired",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with required RequestContext and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "56",
@@ -604,8 +597,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "57",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -656,6 +648,7 @@
      "Name": "convenienceShouldNotGenerate",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method marked with convenience method, but the convenience method should not be generated.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "61",
@@ -663,8 +656,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "62",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -709,6 +701,7 @@
      "Name": "protocolShouldNotGenerateConvenience",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "66",
@@ -716,8 +709,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "67",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -762,6 +754,7 @@
      "Name": "protocolOptionalQuery",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "71",
@@ -769,9 +762,7 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "72",
-        "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -789,8 +780,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "74",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -841,6 +831,7 @@
      "Name": "protocolRequiredQuery",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "78",
@@ -848,9 +839,7 @@
        "NameInRequest": "required",
        "Type": {
         "$id": "79",
-        "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -868,8 +857,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "81",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -920,6 +908,7 @@
      "Name": "protocolOptionalModel",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "85",
@@ -944,8 +933,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "87",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -971,8 +959,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "90",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1020,6 +1007,7 @@
      "Name": "protocolRequiredModel",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "94",
@@ -1044,8 +1032,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "96",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1071,8 +1058,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "99",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1120,6 +1106,7 @@
      "Name": "convenienceOptionalQueryWithOptional",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with optional query parameter and optional RequestContext and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "103",
@@ -1127,9 +1114,7 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "104",
-        "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1147,8 +1132,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "106",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1199,6 +1183,7 @@
      "Name": "convenienceRequiredQueryWithOptional",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with required query parameter and optional RequestContext and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "110",
@@ -1206,9 +1191,7 @@
        "NameInRequest": "required",
        "Type": {
         "$id": "111",
-        "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1226,8 +1209,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "113",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1278,6 +1260,7 @@
      "Name": "convenienceOptionalQueryWithRequired",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with optional query parameter and required RequestContext and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "117",
@@ -1285,9 +1268,7 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "118",
-        "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1305,8 +1286,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "120",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1357,6 +1337,7 @@
      "Name": "convenienceRequiredQueryWithRequired",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with required query parameter and required RequestContext and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "124",
@@ -1364,9 +1345,7 @@
        "NameInRequest": "required",
        "Type": {
         "$id": "125",
-        "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1384,8 +1363,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "127",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1436,6 +1414,7 @@
      "Name": "convenienceOptionalModelWithOptional",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with optional body parameter and optional RequestContext and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "131",
@@ -1460,8 +1439,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "133",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1487,8 +1465,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "136",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1536,6 +1513,7 @@
      "Name": "convenienceRequiredModelWithOptional",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with required body parameter and optional RequestContext and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "140",
@@ -1560,8 +1538,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "142",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1587,8 +1564,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "145",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1636,6 +1612,7 @@
      "Name": "convenienceOptionalModelWithRequired",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Operation has protocol method with optional body parameter and required RequestContext and convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "149",
@@ -1660,8 +1637,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "151",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1687,8 +1663,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "154",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1736,6 +1711,7 @@
      "Name": "protocolOptionalBeforeRequired",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "158",
@@ -1743,9 +1719,7 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "159",
-        "Kind": "Primitive",
-        "Name": "Int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1780,8 +1754,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "162",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1807,8 +1780,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "165",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1854,8 +1826,7 @@
    ],
    "Protocol": {
     "$id": "168"
-   },
-   "Creatable": true
+   }
   }
  ]
 }

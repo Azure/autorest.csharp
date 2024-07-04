@@ -68,6 +68,11 @@ extends:
         $newContent | Set-Content $path -NoNewline
       displayName: 'Update Packages.Data.props'
       workingDirectory: $(sdkRepositoryPath)
+    AutorestInitializationSteps:
+    - ${{ if eq(parameters.UseTypeSpecNext, 'true') }}:
+      - pwsh: |
+          echo "##vso[build.addbuildtag]typespec_next"
+        displayName: 'Apply typespec next tag'
     TestMatrix:
       ${{ if eq(parameters.RunUnitTests, true) }}:
         Unit:

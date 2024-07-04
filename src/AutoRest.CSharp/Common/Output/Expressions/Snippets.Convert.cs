@@ -106,7 +106,11 @@ namespace AutoRest.CSharp.Common.Output.Models
 
                 if (parameter.Type.IsList)
                 {
-                    var expression = RequestContentHelperProvider.Instance.FromEnumerable(parameter);
+                    var content = (ValueExpression)parameter;
+                    content = parameter.Type.IsReadOnlyMemory
+                        ? content.Property(nameof(ReadOnlyMemory<byte>.Span)) // for ReadOnlyMemory, we need to get the Span and pass it through
+                        : content;
+                    var expression = RequestContentHelperProvider.Instance.FromEnumerable(content);
                     if (parameter.IsOptionalInSignature)
                     {
                         expression = new TernaryConditionalOperator(NotEqual(parameter, Null), expression, Null);

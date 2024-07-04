@@ -14,6 +14,7 @@
      "$id": "3",
      "Name": "valid",
      "ResourceName": "NotDefined",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "4",
@@ -21,8 +22,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "5",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -65,8 +65,7 @@
    ],
    "Protocol": {
     "$id": "8"
-   },
-   "Creatable": true
+   }
   }
  ]
 }

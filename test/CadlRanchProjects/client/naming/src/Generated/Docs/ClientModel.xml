@@ -7,13 +7,23 @@ This sample shows how to call ClientAsync.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
+<<<<<<< HEAD
 Response response = await client.ClientAsync(true);
+=======
+Models.ClientModel body = new Models.ClientModel(true);
+Response response = await client.ClientAsync(body);
+>>>>>>> origin/feature/v3
 ]]></code>
 This sample shows how to call ClientAsync with all parameters.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
+<<<<<<< HEAD
 Response response = await client.ClientAsync(true);
+=======
+Models.ClientModel body = new Models.ClientModel(true);
+Response response = await client.ClientAsync(body);
+>>>>>>> origin/feature/v3
 ]]></code></example>
     </member>
     <member name="Client(bool,CancellationToken)">
@@ -22,13 +32,23 @@ This sample shows how to call Client.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
+<<<<<<< HEAD
 Response response = client.Client(true);
+=======
+Models.ClientModel body = new Models.ClientModel(true);
+Response response = client.Client(body);
+>>>>>>> origin/feature/v3
 ]]></code>
 This sample shows how to call Client with all parameters.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
+<<<<<<< HEAD
 Response response = client.Client(true);
+=======
+Models.ClientModel body = new Models.ClientModel(true);
+Response response = client.Client(body);
+>>>>>>> origin/feature/v3
 ]]></code></example>
     </member>
     <member name="ClientAsync(RequestContent,RequestContext)">
@@ -91,13 +111,23 @@ This sample shows how to call LanguageAsync.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
+<<<<<<< HEAD
 Response response = await client.LanguageAsync(true);
+=======
+CSModel body = new CSModel(true);
+Response response = await client.LanguageAsync(body);
+>>>>>>> origin/feature/v3
 ]]></code>
 This sample shows how to call LanguageAsync with all parameters.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
+<<<<<<< HEAD
 Response response = await client.LanguageAsync(true);
+=======
+CSModel body = new CSModel(true);
+Response response = await client.LanguageAsync(body);
+>>>>>>> origin/feature/v3
 ]]></code></example>
     </member>
     <member name="Language(bool,CancellationToken)">
@@ -106,13 +136,23 @@ This sample shows how to call Language.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
+<<<<<<< HEAD
 Response response = client.Language(true);
+=======
+CSModel body = new CSModel(true);
+Response response = client.Language(body);
+>>>>>>> origin/feature/v3
 ]]></code>
 This sample shows how to call Language with all parameters.
 <code><![CDATA[
 ClientModel client = new NamingClient().GetClientModelClient();
 
+<<<<<<< HEAD
 Response response = client.Language(true);
+=======
+CSModel body = new CSModel(true);
+Response response = client.Language(body);
+>>>>>>> origin/feature/v3
 ]]></code></example>
     </member>
     <member name="LanguageAsync(RequestContent,RequestContext)">

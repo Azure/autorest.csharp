@@ -6,37 +6,36 @@ using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ResourceDetection
     {
         private const string ProvidersSegment = "/providers/";
-        private static ConcurrentDictionary<string, (string Name, ObjectSchema? Schema)?> _resourceDataSchemaCache = new ConcurrentDictionary<string, (string Name, ObjectSchema? Schema)?>();
+        private static ConcurrentDictionary<string, (string Name, InputModelType? InputModel)?> _resourceDataSchemaCache = new ConcurrentDictionary<string, (string Name, InputModelType? InputModel)?>();
 
-        public static bool IsResource(this OperationSet set)
+        public static bool IsResource(this OperationSet set, InputNamespace? inputNamespace = null)
         {
-            return set.TryGetResourceDataSchema(out _, out _);
+            return set.TryGetResourceDataSchema(out _, out _, inputNamespace);
         }
 
-        private static ObjectSchema? FindObjectSchemaWithName(string name)
-            => MgmtContext.CodeModel.AllSchemas.OfType<ObjectSchema>().FirstOrDefault(objectSchema => objectSchema.GetOriginalName() == name);
+        private static InputModelType? FindObjectSchemaWithName(string name, InputNamespace? inputNamespace = null)
+            => inputNamespace?.Models.OfType<InputModelType>().FirstOrDefault(inputModel => inputModel.GetOriginalName() == name);
 
-        public static bool TryGetResourceDataSchema(this OperationSet set, [MaybeNullWhen(false)]out string resourceSchemaName, out ObjectSchema? resourceSchema)
+        public static bool TryGetResourceDataSchema(this OperationSet set, [MaybeNullWhen(false)] out string resourceSchemaName, out InputModelType? inputModel, InputNamespace? inputNamespace)
         {
             resourceSchemaName = null;
-            resourceSchema = null;
+            inputModel = null;
 
             // get the result from cache
             if (_resourceDataSchemaCache.TryGetValue(set.RequestPath, out var resourceSchemaTuple))
             {
                 resourceSchemaName = resourceSchemaTuple?.Name;
-                resourceSchema = resourceSchemaTuple?.Schema;
+                inputModel = resourceSchemaTuple?.InputModel;
                 return resourceSchemaTuple != null;
             }
 
@@ -44,19 +43,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (Configuration.MgmtConfiguration.RequestPathToResourceData.TryGetValue(set.RequestPath, out resourceSchemaName))
             {
                 // find a schema with this name
-                resourceSchema = FindObjectSchemaWithName(resourceSchemaName);
-                if (resourceSchema == null)
+                inputModel = FindObjectSchemaWithName(resourceSchemaName, inputNamespace);
+                if (inputModel == null)
                 {
                     throw new ErrorHelpers.ErrorException($"cannot find an object schema with name {resourceSchemaName} in the request-path-to-resource-data configuration");
                 }
-                _resourceDataSchemaCache.TryAdd(set.RequestPath, (resourceSchemaName, resourceSchema));
+                _resourceDataSchemaCache.TryAdd(set.RequestPath, (resourceSchemaName, inputModel));
                 return true;
             }
 
             // try to find it in the partial resource list
             if (Configuration.MgmtConfiguration.PartialResources.TryGetValue(set.RequestPath, out resourceSchemaName))
             {
-                resourceSchema = null;
+                inputModel = null;
                 return true;
             }
 
@@ -74,22 +73,22 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return false;
 
             // before we are finding any operations, we need to ensure this operation set has a GET request.
-            if (set.FindOperation(HttpMethod.Get) is null)
+            if (set.FindOperation(RequestMethod.Get) is null)
                 return false;
 
             // try put operation to get the resource name
-            if (set.TryOperationWithMethod(HttpMethod.Put, out resourceSchema))
+            if (set.TryOperationWithMethod(RequestMethod.Put, out inputModel))
             {
-                resourceSchemaName = resourceSchema.Name;
-                _resourceDataSchemaCache.TryAdd(set.RequestPath, (resourceSchemaName, resourceSchema));
+                resourceSchemaName = inputModel.Name;
+                _resourceDataSchemaCache.TryAdd(set.RequestPath, (resourceSchemaName, inputModel));
                 return true;
             }
 
             // try get operation to get the resource name
-            if (set.TryOperationWithMethod(HttpMethod.Get, out resourceSchema))
+            if (set.TryOperationWithMethod(RequestMethod.Get, out inputModel))
             {
-                resourceSchemaName = resourceSchema.Name;
-                _resourceDataSchemaCache.TryAdd(set.RequestPath, (resourceSchemaName, resourceSchema));
+                resourceSchemaName = inputModel.Name;
+                _resourceDataSchemaCache.TryAdd(set.RequestPath, (resourceSchemaName, inputModel));
                 return true;
             }
 
@@ -110,9 +109,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return segments.Length % 2 == 0;
         }
 
-        private static bool TryOperationWithMethod(this OperationSet set, HttpMethod method, [MaybeNullWhen(false)] out ObjectSchema resourceSchema)
+        private static bool TryOperationWithMethod(this OperationSet set, RequestMethod method, [MaybeNullWhen(false)] out InputModelType inputModel)
         {
-            resourceSchema = null;
+            inputModel = null;
 
             var operation = set.FindOperation(method);
             if (operation is null)
@@ -122,15 +121,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (response is null)
                 return false;
             // find the response schema
-            var schema = response.ResponseSchema as ObjectSchema;
-            if (schema is null)
+            var responseType = response.BodyType?.GetImplementType() as InputModelType;
+            if (responseType is null)
                 return false;
 
             // we need to verify this schema has ID, type and name so that this is a resource model
-            if (!schema.IsResourceModel())
+            if (!responseType.IsResourceModel())
                 return false;
 
-            resourceSchema = schema;
+            inputModel = responseType;
             return true;
         }
     }

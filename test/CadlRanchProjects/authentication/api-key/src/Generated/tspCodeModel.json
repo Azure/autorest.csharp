@@ -6,10 +6,9 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "InvalidAuth",
-   "Namespace": "Authentication.ApiKey",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Authentication.ApiKey.InvalidAuth",
    "Usage": "Output",
    "Properties": [
     {
@@ -19,9 +18,7 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -40,6 +37,7 @@
      "Name": "valid",
      "ResourceName": "ApiKey",
      "Description": "Check whether client is authenticated",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "7",
@@ -48,9 +46,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "8",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -65,9 +61,7 @@
         "$id": "9",
         "Type": {
          "$id": "10",
-         "Kind": "Primitive",
-         "Name": "String",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
@@ -78,8 +72,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "12",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -124,6 +117,7 @@
      "Name": "invalid",
      "ResourceName": "ApiKey",
      "Description": "Check whether client is authenticated.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"
@@ -134,8 +128,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "17",
-        "Kind": "Primitive",
-        "Name": "String",
+        "Kind": "string",
         "IsNullable": false
        },
        "Location": "Header",
@@ -194,7 +187,6 @@
    "Protocol": {
     "$id": "21"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "7"

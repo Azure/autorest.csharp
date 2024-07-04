@@ -51,6 +51,7 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
+                    requiredFloatProperty = new object(),
                 },
                 requiredUnknown = new object(),
                 requiredRecordUnknown = new
@@ -83,6 +84,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
@@ -124,6 +126,7 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
+                    requiredFloatProperty = new object(),
                 },
                 requiredUnknown = new object(),
                 requiredRecordUnknown = new
@@ -156,6 +159,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
@@ -175,12 +179,12 @@ namespace FirstTestTypeSpec.Samples
             RoundTripModel action = new RoundTripModel(
                 "<requiredString>",
                 1234,
-                new StringFixedEnum?[] { StringFixedEnum.One },
-                new Dictionary<string, StringExtensibleEnum?>
+                new StringFixedEnum[] { StringFixedEnum.One },
+                new Dictionary<string, StringExtensibleEnum>
                 {
                     ["key"] = StringExtensibleEnum.One
                 },
-                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }),
+                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default),
                 BinaryData.FromObjectAsJson(new object()),
                 new Dictionary<string, BinaryData>
                 {
@@ -204,12 +208,12 @@ BinaryData.FromObjectAsJson("<unionList>")
             RoundTripModel action = new RoundTripModel(
                 "<requiredString>",
                 1234,
-                new StringFixedEnum?[] { StringFixedEnum.One },
-                new Dictionary<string, StringExtensibleEnum?>
+                new StringFixedEnum[] { StringFixedEnum.One },
+                new Dictionary<string, StringExtensibleEnum>
                 {
                     ["key"] = StringExtensibleEnum.One
                 },
-                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }),
+                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default),
                 BinaryData.FromObjectAsJson(new object()),
                 new Dictionary<string, BinaryData>
                 {
@@ -263,6 +267,9 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1234
             },
+                    requiredFloatProperty = new object(),
+                    optionalFloatProperty = new object(),
+                    optionalResourceId = new object(),
                 },
                 intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new object[]
@@ -326,6 +333,9 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalResourceId").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
             Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -387,6 +397,9 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1234
             },
+                    requiredFloatProperty = new object(),
+                    optionalFloatProperty = new object(),
+                    optionalResourceId = new object(),
                 },
                 intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new object[]
@@ -450,6 +463,9 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalResourceId").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
             Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -481,18 +497,20 @@ BinaryData.FromObjectAsJson("<unionList>")
             RoundTripModel action = new RoundTripModel(
                 "<requiredString>",
                 1234,
-                new StringFixedEnum?[] { StringFixedEnum.One },
-                new Dictionary<string, StringExtensibleEnum?>
+                new StringFixedEnum[] { StringFixedEnum.One },
+                new Dictionary<string, StringExtensibleEnum>
                 {
                     ["key"] = StringExtensibleEnum.One
                 },
-                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
                 {
                     OptionalLiteralString = ThingOptionalLiteralString.Reject,
                     OptionalLiteralInt = ThingOptionalLiteralInt._456,
                     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                     OptionalLiteralBool = true,
                     OptionalNullableList = { 1234 },
+                    OptionalFloatProperty = (double)default,
+                    OptionalResourceId = null,
                 },
                 BinaryData.FromObjectAsJson(new object()),
                 new Dictionary<string, BinaryData>
@@ -533,18 +551,20 @@ BinaryData.FromObjectAsJson("<unionList>")
             RoundTripModel action = new RoundTripModel(
                 "<requiredString>",
                 1234,
-                new StringFixedEnum?[] { StringFixedEnum.One },
-                new Dictionary<string, StringExtensibleEnum?>
+                new StringFixedEnum[] { StringFixedEnum.One },
+                new Dictionary<string, StringExtensibleEnum>
                 {
                     ["key"] = StringExtensibleEnum.One
                 },
-                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
                 {
                     OptionalLiteralString = ThingOptionalLiteralString.Reject,
                     OptionalLiteralInt = ThingOptionalLiteralInt._456,
                     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                     OptionalLiteralBool = true,
                     OptionalNullableList = { 1234 },
+                    OptionalFloatProperty = (double)default,
+                    OptionalResourceId = null,
                 },
                 BinaryData.FromObjectAsJson(new object()),
                 new Dictionary<string, BinaryData>
@@ -607,6 +627,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1234
             },
+                    requiredFloatProperty = new object(),
                 },
                 requiredUnknown = new object(),
                 requiredRecordUnknown = new
@@ -639,6 +660,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
@@ -680,6 +702,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1234
             },
+                    requiredFloatProperty = new object(),
                 },
                 requiredUnknown = new object(),
                 requiredRecordUnknown = new
@@ -712,6 +735,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
@@ -761,6 +785,9 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1234
             },
+                    requiredFloatProperty = new object(),
+                    optionalFloatProperty = new object(),
+                    optionalResourceId = new object(),
                 },
                 intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new object[]
@@ -824,6 +851,9 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalResourceId").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
             Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -885,6 +915,9 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1234
             },
+                    requiredFloatProperty = new object(),
+                    optionalFloatProperty = new object(),
+                    optionalResourceId = new object(),
                 },
                 intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new object[]
@@ -948,6 +981,9 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalResourceId").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
             Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -987,6 +1023,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
         }
 
         [Test]
@@ -1007,6 +1044,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
         }
 
         [Test]
@@ -1052,6 +1090,9 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -1077,6 +1118,9 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -1119,6 +1163,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1234
             },
+                requiredFloatProperty = new object(),
             });
             Response response = client.CreateLiteral(content);
 
@@ -1131,6 +1176,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
         }
 
         [Test]
@@ -1153,6 +1199,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1234
             },
+                requiredFloatProperty = new object(),
             });
             Response response = await client.CreateLiteralAsync(content);
 
@@ -1165,6 +1212,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
         }
 
         [Test]
@@ -1174,7 +1222,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
-            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
             Response<Thing> response = client.CreateLiteral(body);
         }
 
@@ -1185,7 +1233,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
-            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
             Response<Thing> response = await client.CreateLiteralAsync(body);
         }
 
@@ -1217,6 +1265,9 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1234
             },
+                requiredFloatProperty = new object(),
+                optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = client.CreateLiteral(content);
 
@@ -1234,6 +1285,9 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -1264,6 +1318,9 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1234
             },
+                requiredFloatProperty = new object(),
+                optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = await client.CreateLiteralAsync(content);
 
@@ -1281,6 +1338,9 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -1290,13 +1350,15 @@ BinaryData.FromObjectAsJson("<unionList>")
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
-            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
             {
                 OptionalLiteralString = ThingOptionalLiteralString.Reject,
                 OptionalLiteralInt = ThingOptionalLiteralInt._456,
                 OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                 OptionalLiteralBool = true,
                 OptionalNullableList = { 1234 },
+                OptionalFloatProperty = (double)default,
+                OptionalResourceId = null,
             };
             Response<Thing> response = client.CreateLiteral(body);
         }
@@ -1308,13 +1370,15 @@ BinaryData.FromObjectAsJson("<unionList>")
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
-            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
             {
                 OptionalLiteralString = ThingOptionalLiteralString.Reject,
                 OptionalLiteralInt = ThingOptionalLiteralInt._456,
                 OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                 OptionalLiteralBool = true,
                 OptionalNullableList = { 1234 },
+                OptionalFloatProperty = (double)default,
+                OptionalResourceId = null,
             };
             Response<Thing> response = await client.CreateLiteralAsync(body);
         }
@@ -1337,6 +1401,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
         }
 
         [Test]
@@ -1357,6 +1422,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
         }
 
         [Test]
@@ -1402,6 +1468,9 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -1427,6 +1496,9 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]

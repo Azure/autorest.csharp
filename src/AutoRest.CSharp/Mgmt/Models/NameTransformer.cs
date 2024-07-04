@@ -22,7 +22,33 @@ namespace AutoRest.CSharp.Mgmt.Models
         private static NameTransformer? _instance;
         public static NameTransformer Instance => _instance ??= new NameTransformer(Configuration.MgmtConfiguration.AcronymMapping);
 
-        private IReadOnlyDictionary<string, AcronymMappingTarget> _acronymMapping;
+        private IDictionary<string, AcronymMappingTarget> _acronymMapping = new Dictionary<string, AcronymMappingTarget>
+        {
+            { "CPU", new AcronymMappingTarget("Cpu") },
+            { "CPUs", new AcronymMappingTarget("Cpus") },
+            { "Os", new AcronymMappingTarget("OS") },
+            { "Ip", new AcronymMappingTarget("IP") },
+            { "Ips", new AcronymMappingTarget("IPs", "ips") },
+            { "ID", new AcronymMappingTarget("Id") },
+            { "IDs", new AcronymMappingTarget("Ids") },
+            { "VMM", new AcronymMappingTarget("Vmm") },
+            { "VM", new AcronymMappingTarget("Vm") },
+            { "VMs", new AcronymMappingTarget("Vms") },
+            { "VMScaleSet", new AcronymMappingTarget("VmScaleSet") },
+            { "DNS", new AcronymMappingTarget("Dns") },
+            { "VPN", new AcronymMappingTarget("Vpn") },
+            { "NAT", new AcronymMappingTarget("Nat") },
+            { "WAN", new AcronymMappingTarget("Wan") },
+            { "Ipv4", new AcronymMappingTarget("IPv4", "ipv4") },
+            { "Ipv6", new AcronymMappingTarget("IPv6", "ipv6") },
+            { "Ipsec", new AcronymMappingTarget("IPsec", "ipsec") },
+            { "URI", new AcronymMappingTarget("Uri") },
+            // Need to set parameter value for ETag to "etag" as well
+            { "ETag", new AcronymMappingTarget("ETag", "etag") },
+            { "Etag", new AcronymMappingTarget("ETag", "etag") },
+            { "QoS", new AcronymMappingTarget("Qos") },
+        };
+
         private Regex _regex;
         private ConcurrentDictionary<string, AppliedCache> _wordCache;
 
@@ -32,8 +58,11 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <param name="acronymMapping"></param>
         internal NameTransformer(IReadOnlyDictionary<string, AcronymMappingTarget> acronymMapping)
         {
-            _acronymMapping = acronymMapping;
-            _regex = BuildRegex(acronymMapping.Keys);
+            foreach (var (key, value) in acronymMapping)
+            {
+                _acronymMapping[key] = value;
+            }
+            _regex = BuildRegex(_acronymMapping.Keys);
             _wordCache = new ConcurrentDictionary<string, AppliedCache>();
         }
 
@@ -56,7 +85,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public NameInfo EnsureNameCase(string name, Action<ApplyDetailStep>? onMappingApplied)
+        public NameInfo EnsureNameCase(string name, Action<ApplyDetailStep>? onMappingApplied = null)
         {
             if (_wordCache.TryGetValue(name, out var result))
             {

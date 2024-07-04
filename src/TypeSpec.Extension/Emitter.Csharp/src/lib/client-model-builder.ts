@@ -41,7 +41,6 @@ import {
     InputModelType,
     InputPrimitiveType
 } from "../type/input-type.js";
-import { InputPrimitiveTypeKind } from "../type/input-primitive-type-kind.js";
 import { RequestLocation } from "../type/request-location.js";
 import { Usage } from "../type/usage.js";
 import { reportDiagnostic } from "./lib.js";
@@ -49,9 +48,8 @@ import { Logger } from "./logger.js";
 import { getUsages, navigateModels } from "./model.js";
 import { loadOperation } from "./operation.js";
 import { processServiceAuthentication } from "./service-authentication.js";
-import { resolveServers } from "./typespecServer.js";
+import { resolveServers } from "./typespec-server.js";
 import { createContentTypeOrAcceptParameter } from "./utils.js";
-import { InputTypeKind } from "../type/input-type-kind.js";
 
 export function createModel(
     sdkContext: SdkContext<NetEmitterOptions>
@@ -110,8 +108,7 @@ export function createModelForService(
         defaultApiVersion
             ? {
                   Type: {
-                      Kind: InputTypeKind.Primitive,
-                      Name: InputPrimitiveTypeKind.String,
+                      Kind: "string",
                       IsNullable: false
                   } as InputPrimitiveType,
                   Value: defaultApiVersion
@@ -287,12 +284,11 @@ export function createModelForService(
         const inputClient = {
             Name: getClientName(client),
             Description: clientDesc,
-            Operations: [],
+            Operations: [] as InputOperation[],
             Protocol: {},
-            Creatable: client.kind === ClientKind.SdkClient,
             Parent: parent === undefined ? undefined : getClientName(parent),
             Parameters: urlParameters
-        } as InputClient;
+        };
         for (const op of operations) {
             const httpOperation = ignoreDiagnostics(
                 getHttpOperation(program, op)

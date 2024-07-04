@@ -6,6 +6,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -13,6 +15,7 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
@@ -95,31 +98,25 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
     {
         var rawSegments = rawPath.Split('/', StringSplitOptions.RemoveEmptyEntries);
 
-        var segments = rawSegments.Select(raw => GetSegmentFromString(raw));
+        var segments = rawSegments.Select(GetSegmentFromString);
 
         return new RequestPath(segments);
     }
 
     public static RequestPath FromSegments(IEnumerable<Segment> segments) => new RequestPath(segments);
 
-    public static RequestPath FromOperation(Operation operation, OperationGroup operationGroup)
+    public static RequestPath FromOperation(InputOperation operation, InputClient inputClient, TypeFactory typeFactory)
     {
-        foreach (var request in operation.Requests)
-        {
-            var httpRequest = request.Protocol.Http as HttpRequest;
-            if (httpRequest is null)
-                continue;
+        var references = new MgmtRestClientBuilder(inputClient).GetReferencesToOperationParameters(operation, operation.Parameters);
 
-            var references = new MgmtRestClientBuilder(operationGroup).GetReferencesToOperationParameters(operation, request.Parameters);
-            var segments = new List<Segment>();
-            var segmentIndex = 0;
-            CreateSegments(httpRequest.Uri, references, segments, ref segmentIndex);
-            CreateSegments(httpRequest.Path, references, segments, ref segmentIndex);
+        var segments = new List<Segment>();
+        var segmentIndex = 0;
+        CreateSegments(operation.Uri, references, segments, ref segmentIndex);
+        CreateSegments(operation.Path, references, segments, ref segmentIndex);
 
-            return new RequestPath(CheckByIdPath(segments), operation.GetHttpPath());
-        }
+        return new RequestPath(CheckByIdPath(segments), operation.GetHttpPath());
 
-        throw new ErrorHelpers.ErrorException($"We didn't find request path for {operationGroup.Key}.{operation.CSharpName()}");
+        throw new ErrorHelpers.ErrorException($"We didn't find request path for {inputClient.Key}.{operation.CleanName}");
     }
 
     private static Segment GetSegmentFromString(string str)
@@ -158,7 +155,7 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
             return segments;
 
         // this is a ById request path
-        return new List<Segment> { new Segment(first.Reference, first.Escape, true) };
+        return new List<Segment> { new(first.Reference, first.Escape, true) };
     }
 
     public bool IsById => Count == 1 && this.First().SkipUrlEncoding;
@@ -488,6 +485,35 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
                 }
             }
         }
+    }
+
+    private static ReferenceOrConstant CreateReference(InputParameter requestParameter, CSharpType type, TypeFactory typeFactory)
+    {
+        if (requestParameter.Kind != InputOperationParameterKind.Method)
+        {
+            return new Reference(requestParameter.CSharpName(), type);
+        }
+
+        if (requestParameter.Kind == InputOperationParameterKind.Constant)
+        {
+            return BuilderHelpers.ParseConstant(requestParameter.DefaultValue, typeFactory.CreateType(requestParameter.Type));
+        }
+
+        var groupedByParameter = requestParameter.GroupedBy;
+        if (groupedByParameter == null)
+        {
+            return new Reference(requestParameter.CSharpName(), type);
+        }
+
+        var groupModel = (SchemaObjectType)typeFactory.CreateType(groupedByParameter.Type).Implementation;
+        var property = groupModel.GetPropertyBySerializedName(requestParameter.NameInRequest ?? requestParameter.Name);
+
+        return new Reference($"{groupedByParameter.CSharpName()}.{property.Declaration.Name}", property.Declaration.Type);
+    }
+
+    private static string GetRequestParameterName(InputParameter requestParameter)
+    {
+        return requestParameter.NameInRequest ?? requestParameter.Name;
     }
 
     public int Count => _segments.Count;

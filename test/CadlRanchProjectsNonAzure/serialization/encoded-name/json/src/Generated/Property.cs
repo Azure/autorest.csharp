@@ -36,20 +36,42 @@ namespace Scm.Serialization.EncodedName.Json
         }
 
         /// <summary> Send. </summary>
+<<<<<<< HEAD
         /// <param name="defaultName"> Pass in true. </param>
         public virtual async Task<ClientResult> SendAsync(bool defaultName)
         {
             JsonEncodedNameModel jsonEncodedNameModel = new JsonEncodedNameModel(defaultName, null);
             ClientResult result = await SendAsync(jsonEncodedNameModel.ToBinaryContent(), null).ConfigureAwait(false);
+=======
+        /// <param name="body"> The <see cref="JsonEncodedNameModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<ClientResult> SendAsync(JsonEncodedNameModel body)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using BinaryContent content = body.ToBinaryContent();
+            ClientResult result = await SendAsync(content, null).ConfigureAwait(false);
+>>>>>>> origin/feature/v3
             return result;
         }
 
         /// <summary> Send. </summary>
+<<<<<<< HEAD
         /// <param name="defaultName"> Pass in true. </param>
         public virtual ClientResult Send(bool defaultName)
         {
             JsonEncodedNameModel jsonEncodedNameModel = new JsonEncodedNameModel(defaultName, null);
             ClientResult result = Send(jsonEncodedNameModel.ToBinaryContent(), null);
+=======
+        /// <param name="body"> The <see cref="JsonEncodedNameModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual ClientResult Send(JsonEncodedNameModel body)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using BinaryContent content = body.ToBinaryContent();
+            ClientResult result = Send(content, null);
+>>>>>>> origin/feature/v3
             return result;
         }
 

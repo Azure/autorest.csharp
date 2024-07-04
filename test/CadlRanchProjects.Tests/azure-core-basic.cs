@@ -49,7 +49,7 @@ namespace CadlRanchProjects.Tests
                 User firstUser = page.Values.First();
                 Assert.AreEqual(1, firstUser.Id);
                 Assert.AreEqual("Madge", firstUser.Name);
-                Assert.AreEqual("11bdc430-65e8-45ad-81d9-8ffa60d55b59", firstUser.Etag);
+                Assert.AreEqual("11bdc430-65e8-45ad-81d9-8ffa60d55b59", firstUser.Etag.ToString());
                 Assert.AreEqual(1, firstUser.Orders.First().Id);
                 Assert.AreEqual(1, firstUser.Orders.First().UserId);
                 Assert.AreEqual("a recorder", firstUser.Orders.First().Detail);
@@ -57,7 +57,7 @@ namespace CadlRanchProjects.Tests
                 User secondUser = page.Values.Last();
                 Assert.AreEqual(2, secondUser.Id);
                 Assert.AreEqual("John", secondUser.Name);
-                Assert.AreEqual("11bdc430-65e8-45ad-81d9-8ffa60d55b5a", secondUser.Etag);
+                Assert.AreEqual("11bdc430-65e8-45ad-81d9-8ffa60d55b5a", secondUser.Etag.ToString());
                 Assert.AreEqual(2, secondUser.Orders.First().Id);
                 Assert.AreEqual(2, secondUser.Orders.First().UserId);
                 Assert.AreEqual("a TV", secondUser.Orders.First().Detail);
@@ -109,7 +109,7 @@ namespace CadlRanchProjects.Tests
                 User firstUser = page.Values.First();
                 Assert.AreEqual(1, firstUser.Id);
                 Assert.AreEqual("Madge", firstUser.Name);
-                Assert.AreEqual("11bdc430-65e8-45ad-81d9-8ffa60d55b59", firstUser.Etag);
+                Assert.AreEqual("11bdc430-65e8-45ad-81d9-8ffa60d55b59", firstUser.Etag.ToString());
             }
         });
 
