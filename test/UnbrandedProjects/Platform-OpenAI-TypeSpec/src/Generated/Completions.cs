@@ -40,25 +40,25 @@ namespace OpenAI
         }
 
         /// <summary> Create. </summary>
-        /// <param name="createCompletionRequest"> The <see cref="CreateCompletionRequest"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="createCompletionRequest"/> is null. </exception>
-        public virtual async Task<ClientResult<CreateCompletionResponse>> CreateAsync(CreateCompletionRequest createCompletionRequest)
+        /// <param name="body"> The <see cref="CreateCompletionRequest"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<ClientResult<CreateCompletionResponse>> CreateAsync(CreateCompletionRequest body)
         {
-            Argument.AssertNotNull(createCompletionRequest, nameof(createCompletionRequest));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = createCompletionRequest.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await CreateAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(CreateCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Create. </summary>
-        /// <param name="createCompletionRequest"> The <see cref="CreateCompletionRequest"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="createCompletionRequest"/> is null. </exception>
-        public virtual ClientResult<CreateCompletionResponse> Create(CreateCompletionRequest createCompletionRequest)
+        /// <param name="body"> The <see cref="CreateCompletionRequest"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual ClientResult<CreateCompletionResponse> Create(CreateCompletionRequest body)
         {
-            Argument.AssertNotNull(createCompletionRequest, nameof(createCompletionRequest));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = createCompletionRequest.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = Create(content, null);
             return ClientResult.FromValue(CreateCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }

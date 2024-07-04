@@ -40,25 +40,25 @@ namespace OpenAI
         }
 
         /// <summary> Create. </summary>
-        /// <param name="createChatCompletionRequest"> The <see cref="CreateChatCompletionRequest"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="createChatCompletionRequest"/> is null. </exception>
-        public virtual async Task<ClientResult<CreateChatCompletionResponse>> CreateAsync(CreateChatCompletionRequest createChatCompletionRequest)
+        /// <param name="body"> The <see cref="CreateChatCompletionRequest"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<ClientResult<CreateChatCompletionResponse>> CreateAsync(CreateChatCompletionRequest body)
         {
-            Argument.AssertNotNull(createChatCompletionRequest, nameof(createChatCompletionRequest));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = createChatCompletionRequest.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await CreateAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(CreateChatCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Create. </summary>
-        /// <param name="createChatCompletionRequest"> The <see cref="CreateChatCompletionRequest"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="createChatCompletionRequest"/> is null. </exception>
-        public virtual ClientResult<CreateChatCompletionResponse> Create(CreateChatCompletionRequest createChatCompletionRequest)
+        /// <param name="body"> The <see cref="CreateChatCompletionRequest"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual ClientResult<CreateChatCompletionResponse> Create(CreateChatCompletionRequest body)
         {
-            Argument.AssertNotNull(createChatCompletionRequest, nameof(createChatCompletionRequest));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = createChatCompletionRequest.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = Create(content, null);
             return ClientResult.FromValue(CreateChatCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }

@@ -6098,8 +6098,8 @@
       },
       {
        "$id": "855",
-       "Name": "CreateChatCompletionRequest",
-       "NameInRequest": "CreateChatCompletionRequest",
+       "Name": "body",
+       "NameInRequest": "body",
        "Type": {
         "$ref": "179"
        },
@@ -6761,8 +6761,8 @@
       },
       {
        "$id": "913",
-       "Name": "CreateCompletionRequest",
-       "NameInRequest": "CreateCompletionRequest",
+       "Name": "body",
+       "NameInRequest": "body",
        "Type": {
         "$ref": "373"
        },

@@ -9,7 +9,8 @@ import {
     listOperationsInOperationGroup,
     SdkOperationGroup,
     SdkContext,
-    getLibraryName
+    getLibraryName,
+    getHttpOperationWithCache
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -278,18 +279,16 @@ export function createModelForService(
             clientDesc = getDoc(program, container) ?? "";
         }
 
-        const inputClient = {
+        const inputClient: InputClient = {
             Name: getClientName(client),
             Description: clientDesc,
-            Operations: [] as InputOperation[],
+            Operations: [],
             Protocol: {},
             Parent: parent === undefined ? undefined : getClientName(parent),
             Parameters: urlParameters
         };
         for (const op of operations) {
-            const httpOperation = ignoreDiagnostics(
-                getHttpOperation(program, op)
-            );
+            const httpOperation = getHttpOperationWithCache(sdkContext, op);
             const inputOperation: InputOperation = loadOperation(
                 sdkContext,
                 httpOperation,
