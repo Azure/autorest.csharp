@@ -154,7 +154,8 @@
      "Description": "The entity tag for this resource.",
      "Type": {
       "$id": "24",
-      "Kind": "string"
+      "Kind": "eTag",
+      "Encode": "string"
      },
      "IsRequired": true,
      "IsReadOnly": true

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace Scm.Client.Naming.Models
 {
     /// <summary> The CSModel. </summary>
-    internal partial class CSModel
+    public partial class CSModel
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.

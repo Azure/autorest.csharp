@@ -130,11 +130,8 @@ namespace OpenAI
         /// **Note:** Because this parameter generates many completions, it can quickly consume your token
         /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
         /// </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prompt"/> is null. </exception>
         public virtual async Task<ClientResult<CreateCompletionResponse>> CreateAsync(CreateCompletionRequestModel model, BinaryData prompt, string suffix = null, double? temperature = null, double? topP = null, long? n = null, long? maxTokens = null, BinaryData stop = null, double? presencePenalty = null, double? frequencyPenalty = null, IDictionary<string, long> logitBias = null, string user = null, bool? stream = null, long? logprobs = null, bool? echo = null, long? bestOf = null)
         {
-            Argument.AssertNotNull(prompt, nameof(prompt));
-
             CreateCompletionRequest createCompletionRequest = new CreateCompletionRequest(
                 model,
                 prompt,
@@ -247,11 +244,8 @@ namespace OpenAI
         /// **Note:** Because this parameter generates many completions, it can quickly consume your token
         /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
         /// </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prompt"/> is null. </exception>
         public virtual ClientResult<CreateCompletionResponse> Create(CreateCompletionRequestModel model, BinaryData prompt, string suffix = null, double? temperature = null, double? topP = null, long? n = null, long? maxTokens = null, BinaryData stop = null, double? presencePenalty = null, double? frequencyPenalty = null, IDictionary<string, long> logitBias = null, string user = null, bool? stream = null, long? logprobs = null, bool? echo = null, long? bestOf = null)
         {
-            Argument.AssertNotNull(prompt, nameof(prompt));
-
             CreateCompletionRequest createCompletionRequest = new CreateCompletionRequest(
                 model,
                 prompt,

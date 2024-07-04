@@ -391,76 +391,38 @@ Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
 ]]></code></example>
     </member>
-    <member name="AnonymousBodyAsync(string,BinaryData,string,IEnumerable{int},ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int},CancellationToken)">
+    <member name="AnonymousBodyAsync(string,BinaryData,string,IEnumerable{int},double,ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)">
       <example>
 This sample shows how to call AnonymousBodyAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-<<<<<<< HEAD
-Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false);
-=======
-Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
-Response<Thing> response = await client.AnonymousBodyAsync(thing);
->>>>>>> origin/feature/v3
+Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false);
 ]]></code>
 This sample shows how to call AnonymousBodyAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-<<<<<<< HEAD
-Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false, optionalLiteralString: ThingOptionalLiteralString.Reject, optionalLiteralInt: ThingOptionalLiteralInt._456, optionalLiteralFloat: ThingOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 });
-=======
-Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
-{
-    OptionalLiteralString = ThingOptionalLiteralString.Reject,
-    OptionalLiteralInt = ThingOptionalLiteralInt._456,
-    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-    OptionalLiteralBool = true,
-    OptionalNullableList = { 1234 },
-    OptionalFloatProperty = (double)default,
-    OptionalResourceId = null,
-};
-Response<Thing> response = await client.AnonymousBodyAsync(thing);
->>>>>>> origin/feature/v3
+Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false, optionalLiteralString: ThingOptionalLiteralString.Reject, optionalLiteralInt: ThingOptionalLiteralInt._456, optionalLiteralFloat: ThingOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: (double)default, optionalResourceId: null);
 ]]></code></example>
     </member>
-    <member name="AnonymousBody(string,BinaryData,string,IEnumerable{int},ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int},CancellationToken)">
+    <member name="AnonymousBody(string,BinaryData,string,IEnumerable{int},double,ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)">
       <example>
 This sample shows how to call AnonymousBody.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-<<<<<<< HEAD
-Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false);
-=======
-Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
-Response<Thing> response = client.AnonymousBody(thing);
->>>>>>> origin/feature/v3
+Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false);
 ]]></code>
 This sample shows how to call AnonymousBody with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-<<<<<<< HEAD
-Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false, optionalLiteralString: ThingOptionalLiteralString.Reject, optionalLiteralInt: ThingOptionalLiteralInt._456, optionalLiteralFloat: ThingOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 });
-=======
-Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
-{
-    OptionalLiteralString = ThingOptionalLiteralString.Reject,
-    OptionalLiteralInt = ThingOptionalLiteralInt._456,
-    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-    OptionalLiteralBool = true,
-    OptionalNullableList = { 1234 },
-    OptionalFloatProperty = (double)default,
-    OptionalResourceId = null,
-};
-Response<Thing> response = client.AnonymousBody(thing);
->>>>>>> origin/feature/v3
+Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false, optionalLiteralString: ThingOptionalLiteralString.Reject, optionalLiteralInt: ThingOptionalLiteralInt._456, optionalLiteralFloat: ThingOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: (double)default, optionalResourceId: null);
 ]]></code></example>
     </member>
     <member name="AnonymousBodyAsync(RequestContent,RequestContext)">

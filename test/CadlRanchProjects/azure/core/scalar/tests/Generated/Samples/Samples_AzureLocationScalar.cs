@@ -48,7 +48,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            Response<string> response = client.GetAzureLocationScalar();
+            Response<AzureLocation> response = client.GetAzureLocationScalar();
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            Response<string> response = await client.GetAzureLocationScalarAsync();
+            Response<AzureLocation> response = await client.GetAzureLocationScalarAsync();
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            Response<string> response = client.GetAzureLocationScalar();
+            Response<AzureLocation> response = client.GetAzureLocationScalar();
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            Response<string> response = await client.GetAzureLocationScalarAsync();
+            Response<AzureLocation> response = await client.GetAzureLocationScalarAsync();
         }
 
         [Test]
@@ -108,7 +108,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            using RequestContent content = RequestContent.Create("<body>");
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
 
             Console.WriteLine(response.Status);
@@ -120,7 +120,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            using RequestContent content = RequestContent.Create("<body>");
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
 
             Console.WriteLine(response.Status);
@@ -132,7 +132,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            Response response = client.Put("<body>");
+            Response response = client.Put((AzureLocation)default);
         }
 
         [Test]
@@ -141,7 +141,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            Response response = await client.PutAsync("<body>");
+            Response response = await client.PutAsync((AzureLocation)default);
         }
 
         [Test]
@@ -150,7 +150,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            using RequestContent content = RequestContent.Create("<body>");
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
 
             Console.WriteLine(response.Status);
@@ -162,7 +162,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            using RequestContent content = RequestContent.Create("<body>");
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
 
             Console.WriteLine(response.Status);
@@ -174,7 +174,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            Response response = client.Put("<body>");
+            Response response = client.Put((AzureLocation)default);
         }
 
         [Test]
@@ -183,7 +183,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            Response response = await client.PutAsync("<body>");
+            Response response = await client.PutAsync((AzureLocation)default);
         }
 
         [Test]
@@ -194,7 +194,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                location = "<location>",
+                location = new object(),
             });
             Response response = client.Post(content);
 
@@ -210,7 +210,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                location = "<location>",
+                location = new object(),
             });
             Response response = await client.PostAsync(content);
 
@@ -224,7 +224,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            AzureLocationModel body = new AzureLocationModel("<location>");
+            AzureLocationModel body = new AzureLocationModel(default);
             Response<AzureLocationModel> response = client.Post(body);
         }
 
@@ -234,7 +234,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            AzureLocationModel body = new AzureLocationModel("<location>");
+            AzureLocationModel body = new AzureLocationModel(default);
             Response<AzureLocationModel> response = await client.PostAsync(body);
         }
 
@@ -246,7 +246,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                location = "<location>",
+                location = new object(),
             });
             Response response = client.Post(content);
 
@@ -262,7 +262,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                location = "<location>",
+                location = new object(),
             });
             Response response = await client.PostAsync(content);
 
@@ -276,7 +276,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            AzureLocationModel body = new AzureLocationModel("<location>");
+            AzureLocationModel body = new AzureLocationModel(default);
             Response<AzureLocationModel> response = client.Post(body);
         }
 
@@ -286,7 +286,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            AzureLocationModel body = new AzureLocationModel("<location>");
+            AzureLocationModel body = new AzureLocationModel(default);
             Response<AzureLocationModel> response = await client.PostAsync(body);
         }
 
@@ -296,7 +296,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            Response response = client.Header("<region>");
+            Response response = client.Header(default);
 
             Console.WriteLine(response.Status);
         }
@@ -307,7 +307,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            Response response = await client.HeaderAsync("<region>");
+            Response response = await client.HeaderAsync(default);
 
             Console.WriteLine(response.Status);
         }
@@ -318,7 +318,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            Response response = client.Header("<region>");
+            Response response = client.Header(default);
 
             Console.WriteLine(response.Status);
         }
@@ -329,7 +329,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            Response response = await client.HeaderAsync("<region>");
+            Response response = await client.HeaderAsync(default);
 
             Console.WriteLine(response.Status);
         }
@@ -340,7 +340,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            Response response = client.Query("<region>");
+            Response response = client.Query(default);
 
             Console.WriteLine(response.Status);
         }
@@ -351,7 +351,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            Response response = await client.QueryAsync("<region>");
+            Response response = await client.QueryAsync(default);
 
             Console.WriteLine(response.Status);
         }
@@ -362,7 +362,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            Response response = client.Query("<region>");
+            Response response = client.Query(default);
 
             Console.WriteLine(response.Status);
         }
@@ -373,7 +373,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
         {
             AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
-            Response response = await client.QueryAsync("<region>");
+            Response response = await client.QueryAsync(default);
 
             Console.WriteLine(response.Status);
         }

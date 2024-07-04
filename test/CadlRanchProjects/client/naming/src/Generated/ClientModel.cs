@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -46,14 +45,6 @@ namespace Client.Naming
         }
 
         /// <summary> Client. </summary>
-<<<<<<< HEAD
-        /// <param name="defaultName"> Pass in true. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='ClientAsync(bool,CancellationToken)']/*" />
-        public virtual async Task<Response> ClientAsync(bool defaultName, CancellationToken cancellationToken = default)
-        {
-            Models.ClientModel clientModel = new Models.ClientModel(defaultName, null);
-=======
         /// <param name="body"> The <see cref="Models.ClientModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -63,21 +54,12 @@ namespace Client.Naming
             Argument.AssertNotNull(body, nameof(body));
 
             using RequestContent content = body.ToRequestContent();
->>>>>>> origin/feature/v3
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ClientAsync(clientModel.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await ClientAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Client. </summary>
-<<<<<<< HEAD
-        /// <param name="defaultName"> Pass in true. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='Client(bool,CancellationToken)']/*" />
-        public virtual Response Client(bool defaultName, CancellationToken cancellationToken = default)
-        {
-            Models.ClientModel clientModel = new Models.ClientModel(defaultName, null);
-=======
         /// <param name="body"> The <see cref="Models.ClientModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -87,9 +69,8 @@ namespace Client.Naming
             Argument.AssertNotNull(body, nameof(body));
 
             using RequestContent content = body.ToRequestContent();
->>>>>>> origin/feature/v3
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Client(clientModel.ToRequestContent(), context);
+            Response response = Client(content, context);
             return response;
         }
 
@@ -103,7 +84,7 @@ namespace Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ClientAsync(bool,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ClientAsync(Models.ClientModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -142,7 +123,7 @@ namespace Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Client(bool,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Client(Models.ClientModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -172,14 +153,6 @@ namespace Client.Naming
         }
 
         /// <summary> Language. </summary>
-<<<<<<< HEAD
-        /// <param name="defaultName"> Pass in true. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='LanguageAsync(bool,CancellationToken)']/*" />
-        public virtual async Task<Response> LanguageAsync(bool defaultName, CancellationToken cancellationToken = default)
-        {
-            CSModel csModel = new CSModel(defaultName, null);
-=======
         /// <param name="body"> The <see cref="CSModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -189,21 +162,12 @@ namespace Client.Naming
             Argument.AssertNotNull(body, nameof(body));
 
             using RequestContent content = body.ToRequestContent();
->>>>>>> origin/feature/v3
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await LanguageAsync(csModel.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await LanguageAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Language. </summary>
-<<<<<<< HEAD
-        /// <param name="defaultName"> Pass in true. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='Language(bool,CancellationToken)']/*" />
-        public virtual Response Language(bool defaultName, CancellationToken cancellationToken = default)
-        {
-            CSModel csModel = new CSModel(defaultName, null);
-=======
         /// <param name="body"> The <see cref="CSModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -213,9 +177,8 @@ namespace Client.Naming
             Argument.AssertNotNull(body, nameof(body));
 
             using RequestContent content = body.ToRequestContent();
->>>>>>> origin/feature/v3
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Language(csModel.ToRequestContent(), context);
+            Response response = Language(content, context);
             return response;
         }
 
@@ -229,7 +192,7 @@ namespace Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="LanguageAsync(bool,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="LanguageAsync(CSModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -268,7 +231,7 @@ namespace Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Language(bool,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Language(CSModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

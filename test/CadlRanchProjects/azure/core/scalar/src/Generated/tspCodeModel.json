@@ -42,7 +42,8 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "string"
+      "Kind": "azureLocation",
+      "Encode": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -139,7 +140,8 @@
        ],
        "BodyType": {
         "$id": "20",
-        "Kind": "string"
+        "Kind": "azureLocation",
+        "Encode": "string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -174,7 +176,8 @@
        "Description": "_",
        "Type": {
         "$id": "23",
-        "Kind": "string"
+        "Kind": "azureLocation",
+        "Encode": "string"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -387,7 +390,8 @@
        "Description": "_",
        "Type": {
         "$id": "42",
-        "Kind": "string"
+        "Kind": "azureLocation",
+        "Encode": "string"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -462,7 +466,8 @@
        "Description": "_",
        "Type": {
         "$id": "49",
-        "Kind": "string"
+        "Kind": "azureLocation",
+        "Encode": "string"
        },
        "Location": "Query",
        "IsRequired": true,

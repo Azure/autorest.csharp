@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using Client.Naming.Models;
 using NUnit.Framework;
 
 namespace Client.Naming.Samples
@@ -52,12 +53,8 @@ namespace Client.Naming.Samples
         {
             ClientModel client = new NamingClient().GetClientModelClient();
 
-<<<<<<< HEAD
-            Response response = client.Client(true);
-=======
             Models.ClientModel body = new Models.ClientModel(true);
             Response response = client.Client(body);
->>>>>>> origin/feature/v3
         }
 
         [Test]
@@ -66,12 +63,8 @@ namespace Client.Naming.Samples
         {
             ClientModel client = new NamingClient().GetClientModelClient();
 
-<<<<<<< HEAD
-            Response response = await client.ClientAsync(true);
-=======
             Models.ClientModel body = new Models.ClientModel(true);
             Response response = await client.ClientAsync(body);
->>>>>>> origin/feature/v3
         }
 
         [Test]
@@ -110,12 +103,8 @@ namespace Client.Naming.Samples
         {
             ClientModel client = new NamingClient().GetClientModelClient();
 
-<<<<<<< HEAD
-            Response response = client.Client(true);
-=======
             Models.ClientModel body = new Models.ClientModel(true);
             Response response = client.Client(body);
->>>>>>> origin/feature/v3
         }
 
         [Test]
@@ -124,12 +113,8 @@ namespace Client.Naming.Samples
         {
             ClientModel client = new NamingClient().GetClientModelClient();
 
-<<<<<<< HEAD
-            Response response = await client.ClientAsync(true);
-=======
             Models.ClientModel body = new Models.ClientModel(true);
             Response response = await client.ClientAsync(body);
->>>>>>> origin/feature/v3
         }
 
         [Test]
@@ -168,12 +153,8 @@ namespace Client.Naming.Samples
         {
             ClientModel client = new NamingClient().GetClientModelClient();
 
-<<<<<<< HEAD
-            Response response = client.Language(true);
-=======
             CSModel body = new CSModel(true);
             Response response = client.Language(body);
->>>>>>> origin/feature/v3
         }
 
         [Test]
@@ -182,12 +163,8 @@ namespace Client.Naming.Samples
         {
             ClientModel client = new NamingClient().GetClientModelClient();
 
-<<<<<<< HEAD
-            Response response = await client.LanguageAsync(true);
-=======
             CSModel body = new CSModel(true);
             Response response = await client.LanguageAsync(body);
->>>>>>> origin/feature/v3
         }
 
         [Test]
@@ -226,12 +203,8 @@ namespace Client.Naming.Samples
         {
             ClientModel client = new NamingClient().GetClientModelClient();
 
-<<<<<<< HEAD
-            Response response = client.Language(true);
-=======
             CSModel body = new CSModel(true);
             Response response = client.Language(body);
->>>>>>> origin/feature/v3
         }
 
         [Test]
@@ -240,12 +213,8 @@ namespace Client.Naming.Samples
         {
             ClientModel client = new NamingClient().GetClientModelClient();
 
-<<<<<<< HEAD
-            Response response = await client.LanguageAsync(true);
-=======
             CSModel body = new CSModel(true);
             Response response = await client.LanguageAsync(body);
->>>>>>> origin/feature/v3
         }
     }
 }
