@@ -126,6 +126,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="resource"> The resource instance. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resource"/> is null. </exception>
+        /// <remarks> Creates or replaces a User. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplaceAsync(int,User,CancellationToken)']/*" />
         public virtual async Task<Response<User>> CreateOrReplaceAsync(int id, User resource, CancellationToken cancellationToken = default)
         {
@@ -142,6 +143,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="resource"> The resource instance. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resource"/> is null. </exception>
+        /// <remarks> Creates or replaces a User. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplace(int,User,CancellationToken)']/*" />
         public virtual Response<User> CreateOrReplace(int id, User resource, CancellationToken cancellationToken = default)
         {
@@ -236,6 +238,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <summary> Gets a user. </summary>
         /// <param name="id"> The user's id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Gets a User. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUserAsync(int,CancellationToken)']/*" />
         public virtual async Task<Response<User>> GetUserAsync(int id, CancellationToken cancellationToken = default)
         {
@@ -247,6 +250,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <summary> Gets a user. </summary>
         /// <param name="id"> The user's id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Gets a User. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUser(int,CancellationToken)']/*" />
         public virtual Response<User> GetUser(int id, CancellationToken cancellationToken = default)
         {
@@ -396,6 +400,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="format"> The format of the data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
+        /// <remarks> Exports a User. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportAsync(int,string,CancellationToken)']/*" />
         public virtual async Task<Response<User>> ExportAsync(int id, string format, CancellationToken cancellationToken = default)
         {
@@ -411,6 +416,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="format"> The format of the data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
+        /// <remarks> Exports a User. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Export(int,string,CancellationToken)']/*" />
         public virtual Response<User> Export(int id, string format, CancellationToken cancellationToken = default)
         {
@@ -510,6 +516,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="select"> Select the specified fields to be included in the response. </param>
         /// <param name="expand"> Expand the indicated resources into the response. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Lists all Users. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUsersAsync(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},CancellationToken)']/*" />
         public virtual AsyncPageable<User> GetUsersAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, IEnumerable<string> orderby = null, string filter = null, IEnumerable<string> select = null, IEnumerable<string> expand = null, CancellationToken cancellationToken = default)
         {
@@ -528,6 +535,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="select"> Select the specified fields to be included in the response. </param>
         /// <param name="expand"> Expand the indicated resources into the response. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Lists all Users. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUsers(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},CancellationToken)']/*" />
         public virtual Pageable<User> GetUsers(int? maxCount = null, int? skip = null, int? maxpagesize = null, IEnumerable<string> orderby = null, string filter = null, IEnumerable<string> select = null, IEnumerable<string> expand = null, CancellationToken cancellationToken = default)
         {

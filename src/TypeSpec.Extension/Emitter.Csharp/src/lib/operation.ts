@@ -16,7 +16,7 @@ import {
     shouldGenerateConvenient,
     shouldGenerateProtocol
 } from "@azure-tools/typespec-client-generator-core";
-import { getDeprecated, isErrorModel } from "@typespec/compiler";
+import { getDeprecated, getDoc, getSummary, isErrorModel } from "@typespec/compiler";
 import { HttpStatusCodeRange } from "@typespec/http";
 import { getResourceOperation } from "@typespec/rest";
 import { NetEmitterOptions } from "../options.js";
@@ -63,7 +63,10 @@ export function fromSdkServiceMethod(
                 sdkContext.experimental_sdkPackage.rootNamespace
             ),
         Deprecated: getDeprecated(sdkContext.program, method.__raw!),
-        Description: method.description,
+        // TODO: we need to figure out how we want to handle summary and description
+        // Right now, we generate garbage <remarks> for some APIs like `Platform-OpenAI-TypeSpec`
+        Summary: getSummary(sdkContext.program, method.__raw!),
+        Description: getDoc(sdkContext.program, method.__raw!),
         Accessibility: method.access,
         Parameters: getMethodParameters(
             method,

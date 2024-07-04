@@ -71,6 +71,10 @@ namespace ApiVersionInTsp
         /// <summary> Get Multivariate Anomaly Detection Result. </summary>
         /// <param name="resultId"> The <see cref="Guid"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks>
+        /// For asynchronous inference, get multivariate anomaly detection result based on
+        /// resultId returned by the BatchDetectAnomaly api.
+        /// </remarks>
         /// <include file="Docs/ApiVersionInTspClient.xml" path="doc/members/member[@name='GetBatchDetectionResultAsync(Guid,CancellationToken)']/*" />
         public virtual async Task<Response<DetectionResult>> GetBatchDetectionResultAsync(Guid resultId, CancellationToken cancellationToken = default)
         {
@@ -82,6 +86,10 @@ namespace ApiVersionInTsp
         /// <summary> Get Multivariate Anomaly Detection Result. </summary>
         /// <param name="resultId"> The <see cref="Guid"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks>
+        /// For asynchronous inference, get multivariate anomaly detection result based on
+        /// resultId returned by the BatchDetectAnomaly api.
+        /// </remarks>
         /// <include file="Docs/ApiVersionInTspClient.xml" path="doc/members/member[@name='GetBatchDetectionResult(Guid,CancellationToken)']/*" />
         public virtual Response<DetectionResult> GetBatchDetectionResult(Guid resultId, CancellationToken cancellationToken = default)
         {

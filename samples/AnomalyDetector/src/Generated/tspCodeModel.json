@@ -2105,7 +2105,8 @@
      "$id": "311",
      "Name": "DetectUnivariateEntireSeries",
      "ResourceName": "Univariate",
-     "Description": "Detect anomalies for the entire series in batch.",
+     "Summary": "Detect anomalies for the entire series in batch.",
+     "Description": "This operation generates a model with an entire series, each point is detected\nwith the same model. With this method, points before and after a certain point\nare used to determine whether it is an anomaly. The entire detection can give\nuser an overall status of the time series.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2245,7 +2246,8 @@
      "$id": "325",
      "Name": "DetectUnivariateLastPoint",
      "ResourceName": "Univariate",
-     "Description": "Detect anomaly status of the latest point in time series.",
+     "Summary": "Detect anomaly status of the latest point in time series.",
+     "Description": "This operation generates a model using the points that you sent into the API,\nand based on all data to determine whether the last point is anomalous.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2346,7 +2348,8 @@
      "$id": "334",
      "Name": "DetectUnivariateChangePoint",
      "ResourceName": "Univariate",
-     "Description": "Detect change point for the entire series",
+     "Summary": "Detect change point for the entire series",
+     "Description": "Evaluate change point score of every series point",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2465,7 +2468,8 @@
      "$id": "345",
      "Name": "GetMultivariateBatchDetectionResult",
      "ResourceName": "Multivariate",
-     "Description": "Get Multivariate Anomaly Detection Result",
+     "Summary": "Get Multivariate Anomaly Detection Result",
+     "Description": "For asynchronous inference, get multivariate anomaly detection result based on\nresultId returned by the BatchDetectAnomaly api.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2582,7 +2586,8 @@
      "$id": "357",
      "Name": "TrainMultivariateModel",
      "ResourceName": "Multivariate",
-     "Description": "Train a Multivariate Anomaly Detection Model",
+     "Summary": "Train a Multivariate Anomaly Detection Model",
+     "Description": "Create and train a multivariate anomaly detection model. The request must\ninclude a source parameter to indicate an externally accessible Azure blob\nstorage URI.There are two types of data input: An URI pointed to an Azure blob\nstorage folder which contains multiple CSV files, and each CSV file contains\ntwo columns, timestamp and variable. Another type of input is an URI pointed to\na CSV file in Azure blob storage, which contains all the variables and a\ntimestamp column.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2694,7 +2699,8 @@
      "$id": "368",
      "Name": "ListMultivariateModels",
      "ResourceName": "Multivariate",
-     "Description": "List Multivariate Models",
+     "Summary": "List Multivariate Models",
+     "Description": "List models of a resource.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2793,7 +2799,8 @@
      "$id": "378",
      "Name": "DeleteMultivariateModel",
      "ResourceName": "Multivariate",
-     "Description": "Delete Multivariate Model",
+     "Summary": "Delete Multivariate Model",
+     "Description": "Delete an existing multivariate model according to the modelId",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2864,7 +2871,8 @@
      "$id": "385",
      "Name": "GetMultivariateModel",
      "ResourceName": "Multivariate",
-     "Description": "Get Multivariate Model",
+     "Summary": "Get Multivariate Model",
+     "Description": "Get detailed information of multivariate model, including the training status\nand variables used in the model.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2941,7 +2949,8 @@
      "$id": "392",
      "Name": "DetectMultivariateBatchAnomaly",
      "ResourceName": "Multivariate",
-     "Description": "Detect Multivariate Anomaly",
+     "Summary": "Detect Multivariate Anomaly",
+     "Description": "Submit multivariate anomaly detection task with the modelId of trained model\nand inference data, the input schema should be the same with the training\nrequest. The request will complete asynchronously and return a resultId to\nquery the detection result.The request should be a source link to indicate an\nexternally accessible Azure storage Uri, either pointed to an Azure blob\nstorage folder, or pointed to a CSV file in Azure blob storage.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3080,7 +3089,8 @@
      "$id": "407",
      "Name": "DetectMultivariateLastAnomaly",
      "ResourceName": "Multivariate",
-     "Description": "Detect anomalies in the last point of the request body",
+     "Summary": "Detect anomalies in the last point of the request body",
+     "Description": "Submit multivariate anomaly detection task with the modelId of trained model\nand inference data, and the inference data should be put into request body in a\nJSON format. The request will complete synchronously and return the detection\nimmediately in the response body.",
      "Accessibility": "public",
      "Parameters": [
       {

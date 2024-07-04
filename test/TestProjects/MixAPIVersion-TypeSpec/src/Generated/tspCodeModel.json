@@ -197,7 +197,8 @@
      "$id": "29",
      "Name": "delete",
      "ResourceName": "Pet",
-     "Description": "delete.",
+     "Summary": "delete.",
+     "Description": "Delete a pet.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -535,7 +536,8 @@
      "$id": "66",
      "Name": "listPet",
      "ResourceName": "Toy",
-     "Description": "Gets ledger entries from a collection corresponding to a range.",
+     "Summary": "Gets ledger entries from a collection corresponding to a range.",
+     "Description": "A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.",
      "Accessibility": "public",
      "Parameters": [
       {

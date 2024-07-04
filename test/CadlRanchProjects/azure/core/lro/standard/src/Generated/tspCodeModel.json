@@ -413,7 +413,8 @@
      "$id": "54",
      "Name": "createOrReplace",
      "ResourceName": "User",
-     "Description": "Adds a user or replaces a user's fields.",
+     "Summary": "Adds a user or replaces a user's fields.",
+     "Description": "Creates or replaces a User",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -628,7 +629,8 @@
      "$id": "80",
      "Name": "delete",
      "ResourceName": "User",
-     "Description": "Deletes a user.",
+     "Summary": "Deletes a user.",
+     "Description": "Deletes a User",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -749,7 +751,8 @@
      "$id": "95",
      "Name": "export",
      "ResourceName": "Standard",
-     "Description": "Exports a user.",
+     "Summary": "Exports a user.",
+     "Description": "Exports a User",
      "Accessibility": "public",
      "Parameters": [
       {

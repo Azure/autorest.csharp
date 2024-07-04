@@ -569,7 +569,8 @@
      "$id": "81",
      "Name": "ListPaginationLedgerEntries",
      "ResourceName": "LedgerEntry",
-     "Description": "Gets ledger entries from a collection corresponding to a range.",
+     "Summary": "Gets ledger entries from a collection corresponding to a range.",
+     "Description": "A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -727,6 +728,7 @@
      "$id": "99",
      "Name": "ListMetricDimensionValues",
      "ResourceName": "DimensionValueListItem",
+     "Summary": "List the dimension values for the given metric dimension name.",
      "Description": "List the dimension values for the given metric dimension name.",
      "Accessibility": "public",
      "Parameters": [
@@ -1064,7 +1066,8 @@
      "$id": "138",
      "Name": "listTextBlocklists",
      "ResourceName": "TextBlocklist",
-     "Description": "Get All Text Blocklists",
+     "Summary": "Get All Text Blocklists",
+     "Description": "Get all text blocklists details.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1167,7 +1170,8 @@
      "$id": "150",
      "Name": "listTextBlocklistItems",
      "ResourceName": "TextBlockItem",
-     "Description": "Get All BlockItems By blocklistName",
+     "Summary": "Get All BlockItems By blocklistName",
+     "Description": "Get all blockItems in a text blocklist",
      "Accessibility": "public",
      "Parameters": [
       {

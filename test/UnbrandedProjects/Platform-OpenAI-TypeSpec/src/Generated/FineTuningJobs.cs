@@ -221,6 +221,7 @@ namespace OpenAI
         /// <param name="fineTuningJobId"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Retrieve. </remarks>
         public virtual async Task<ClientResult<FineTuningJob>> RetrieveAsync(string fineTuningJobId)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
@@ -237,6 +238,7 @@ namespace OpenAI
         /// <param name="fineTuningJobId"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Retrieve. </remarks>
         public virtual ClientResult<FineTuningJob> Retrieve(string fineTuningJobId)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
@@ -313,6 +315,7 @@ namespace OpenAI
         /// <param name="limit"> Number of events to retrieve. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> List events. </remarks>
         public virtual async Task<ClientResult<ListFineTuningJobEventsResponse>> GetEventsAsync(string fineTuningJobId, string after = null, long? limit = null)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
@@ -327,6 +330,7 @@ namespace OpenAI
         /// <param name="limit"> Number of events to retrieve. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> List events. </remarks>
         public virtual ClientResult<ListFineTuningJobEventsResponse> GetEvents(string fineTuningJobId, string after = null, long? limit = null)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
@@ -401,6 +405,7 @@ namespace OpenAI
         /// <param name="fineTuningJobId"> The ID of the fine-tuning job to cancel. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Cancel. </remarks>
         public virtual async Task<ClientResult<FineTuningJob>> CancelAsync(string fineTuningJobId)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
@@ -413,6 +418,7 @@ namespace OpenAI
         /// <param name="fineTuningJobId"> The ID of the fine-tuning job to cancel. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Cancel. </remarks>
         public virtual ClientResult<FineTuningJob> Cancel(string fineTuningJobId)
         {
             Argument.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
