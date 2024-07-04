@@ -126,8 +126,8 @@
       },
       {
        "$id": "20",
-       "Name": "jsonEncodedNameModel",
-       "NameInRequest": "jsonEncodedNameModel",
+       "Name": "body",
+       "NameInRequest": "body",
        "Type": {
         "$ref": "2"
        },

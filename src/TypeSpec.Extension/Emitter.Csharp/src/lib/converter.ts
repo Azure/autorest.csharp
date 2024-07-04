@@ -419,7 +419,9 @@ function fromSdkArrayType(
 ): InputArrayType {
     return {
         Kind: "array",
-        ValueType: fromSdkType(arrayType.valueType, context, models, enums)
+        Name: arrayType.name,
+        ValueType: fromSdkType(arrayType.valueType, context, models, enums),
+        CrossLanguageDefinitionId: arrayType.crossLanguageDefinitionId
     };
 }
 

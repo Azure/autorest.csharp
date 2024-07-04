@@ -229,9 +229,11 @@
         "Type": {
          "$id": "35",
          "Kind": "array",
+         "Name": "ArrayError",
          "ValueType": {
           "$ref": "27"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": false

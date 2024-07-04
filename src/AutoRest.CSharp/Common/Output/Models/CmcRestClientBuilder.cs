@@ -337,9 +337,10 @@ namespace AutoRest.CSharp.Output.Models
                 return (ReferenceOrConstant)_parameters[requestParameter.Name];
             }
 
-            if (requestParameter.Kind == InputOperationParameterKind.Constant && requestParameter.DefaultValue is not null && requestParameter.IsRequired)
+            if (requestParameter is { Kind: InputOperationParameterKind.Constant, IsRequired: true } &&
+                (requestParameter is { Type: InputLiteralType { Value: not null } } or { DefaultValue: not null })) // TODO: we're using default value to store constant value, this should be fixed.
             {
-                return ParseConstant(requestParameter.DefaultValue);
+                return ParseConstant(requestParameter is { Type: InputLiteralType { Value: not null } } ? (InputLiteralType)requestParameter.Type : requestParameter.DefaultValue!);
             }
 
             var groupedByParameter = requestParameter.GroupedBy;

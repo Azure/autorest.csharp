@@ -620,8 +620,8 @@
       },
       {
        "$id": "71",
-       "Name": "clientModel",
-       "NameInRequest": "clientModel",
+       "Name": "body",
+       "NameInRequest": "body",
        "Type": {
         "$ref": "18"
        },
@@ -689,8 +689,8 @@
       },
       {
        "$id": "77",
-       "Name": "csModel",
-       "NameInRequest": "csModel",
+       "Name": "body",
+       "NameInRequest": "body",
        "Type": {
         "$ref": "21"
        },

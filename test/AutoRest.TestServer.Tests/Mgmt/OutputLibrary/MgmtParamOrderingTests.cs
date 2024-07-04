@@ -48,8 +48,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [TestCase(typeof(VirtualMachineScaleSetResource), "Update", true, new[]{ "patch"}, new[] { true })]
         [TestCase(typeof(VirtualMachineScaleSetResource), "Delete", true, new[]{ "forceDeletion"}, new[] { true })]
         [TestCase(typeof(VirtualMachineScaleSetResource), "Get", false, new[]{ "expand"}, new[] { false })]
-        [TestCase(typeof(VirtualMachineScaleSetResource), "Deallocate", true, new[]{ "vmInstanceIDs", "expand" }, new[] { false, false })]
-        [TestCase(typeof(VirtualMachineScaleSetResource), "DeleteInstances", true, new[]{ "vmInstanceIDs", "forceDeletion"}, new[] { true, false })]
+        [TestCase(typeof(VirtualMachineScaleSetResource), "Deallocate", true, new[]{ "vmInstanceIds", "expand" }, new[] { false, false })]
+        [TestCase(typeof(VirtualMachineScaleSetResource), "DeleteInstances", true, new[]{ "vmInstanceIds", "forceDeletion"}, new[] { true, false })]
         [TestCase(typeof(VirtualMachineScaleSetResource), "GetInstanceView", false, new[]{ "filter", "expand" }, new[] { true, false })]
         [TestCase(typeof(AvailabilitySetsRestOperations), "Update", false, new[]{ "subscriptionId", "resourceGroupName", "availabilitySetName", "patch" }, new[] { true, true, true, true })]
         public void ValidateOperationMethodParameterList(Type type, string methodName, bool isLro, string[] parameterNames, bool[] isRequiredParameters)

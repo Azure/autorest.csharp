@@ -1042,10 +1042,12 @@
        "BodyType": {
         "$id": "121",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "122",
          "Kind": "decimal"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1213,10 +1215,12 @@
        "BodyType": {
         "$id": "141",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "142",
          "Kind": "decimal"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "BodyMediaType": "Json",
        "Headers": [],

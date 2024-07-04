@@ -95,6 +95,7 @@
      "Type": {
       "$id": "15",
       "Kind": "array",
+      "Name": "ArrayUserOrder",
       "ValueType": {
        "$id": "16",
        "Kind": "model",
@@ -140,7 +141,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -200,9 +202,11 @@
      "Type": {
       "$id": "30",
       "Kind": "array",
+      "Name": "ArrayUser",
       "ValueType": {
        "$ref": "9"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -281,9 +285,11 @@
      "Type": {
       "$id": "41",
       "Kind": "array",
+      "Name": "ArrayUser",
       "ValueType": {
        "$ref": "9"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -318,9 +324,11 @@
      "Type": {
       "$id": "46",
       "Kind": "array",
+      "Name": "ArrayFirstItem",
       "ValueType": {
        "$ref": "33"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -355,9 +363,11 @@
      "Type": {
       "$id": "51",
       "Kind": "array",
+      "Name": "ArraySecondItem",
       "ValueType": {
        "$ref": "36"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -910,10 +920,12 @@
        "Type": {
         "$id": "114",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "115",
          "Kind": "string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -948,10 +960,12 @@
        "Type": {
         "$id": "119",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "120",
          "Kind": "string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -969,10 +983,12 @@
        "Type": {
         "$id": "122",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "123",
          "Kind": "string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsApiVersion": false,

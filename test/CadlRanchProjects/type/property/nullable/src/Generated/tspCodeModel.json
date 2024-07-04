@@ -35,10 +35,12 @@
       "Type": {
        "$id": "7",
        "Kind": "array",
+       "Name": "Array",
        "ValueType": {
         "$id": "8",
         "Kind": "string"
-       }
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
      },
      "IsRequired": true,
@@ -77,6 +79,7 @@
       "Type": {
        "$id": "14",
        "Kind": "array",
+       "Name": "ArrayInnerModel",
        "ValueType": {
         "$id": "15",
         "Kind": "model",
@@ -98,7 +101,8 @@
           "IsReadOnly": false
          }
         ]
-       }
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
      },
      "IsRequired": true,
@@ -140,11 +144,13 @@
       "Type": {
        "$id": "23",
        "Kind": "array",
+       "Name": "Array",
        "ValueType": {
         "$id": "24",
         "Kind": "bytes",
         "Encode": "base64"
-       }
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
      },
      "IsRequired": true,

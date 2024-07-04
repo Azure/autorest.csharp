@@ -243,6 +243,7 @@
      "Type": {
       "$id": "40",
       "Kind": "array",
+      "Name": "ArrayJobWarning",
       "ValueType": {
        "$id": "41",
        "Kind": "model",
@@ -276,7 +277,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -338,9 +340,11 @@
         "Type": {
          "$id": "55",
          "Kind": "array",
+         "Name": "ArrayError",
          "ValueType": {
           "$ref": "47"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -503,9 +507,11 @@
      "Type": {
       "$id": "77",
       "Kind": "array",
+      "Name": "ArrayJobWarning",
       "ValueType": {
        "$ref": "41"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -767,9 +773,11 @@
      "Type": {
       "$id": "115",
       "Kind": "array",
+      "Name": "ArrayProject",
       "ValueType": {
        "$ref": "81"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -847,9 +855,11 @@
      "Type": {
       "$id": "126",
       "Kind": "array",
+      "Name": "ArrayDeployment",
       "ValueType": {
        "$ref": "121"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -917,6 +927,7 @@
      "Type": {
       "$id": "136",
       "Kind": "array",
+      "Name": "ArraySupportedLanguage",
       "ValueType": {
        "$id": "137",
        "Kind": "model",
@@ -950,7 +961,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -988,6 +1000,7 @@
      "Type": {
       "$id": "146",
       "Kind": "array",
+      "Name": "ArrayTrainingConfigVersion",
       "ValueType": {
        "$id": "147",
        "Kind": "model",
@@ -1021,7 +1034,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false

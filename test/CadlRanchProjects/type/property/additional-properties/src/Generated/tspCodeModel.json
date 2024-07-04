@@ -83,6 +83,7 @@
      {
       "$id": "13",
       "Kind": "array",
+      "Name": "ArrayWidgetData2",
       "ValueType": {
        "$id": "14",
        "Kind": "model",
@@ -119,7 +120,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      {
       "$id": "19",
@@ -436,6 +438,7 @@
     "AdditionalProperties": {
      "$id": "61",
      "Kind": "array",
+     "Name": "ArrayModelForRecord",
      "ValueType": {
       "$id": "62",
       "Kind": "model",
@@ -457,7 +460,8 @@
         "IsReadOnly": false
        }
       ]
-     }
+     },
+     "CrossLanguageDefinitionId": "TypeSpec.Array"
     },
     "Properties": [
      {
@@ -483,9 +487,11 @@
      "Type": {
       "$id": "68",
       "Kind": "array",
+      "Name": "ArrayModelForRecord",
       "ValueType": {
        "$ref": "62"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -658,9 +664,11 @@
    "AdditionalProperties": {
     "$id": "89",
     "Kind": "array",
+    "Name": "ArrayModelForRecord",
     "ValueType": {
      "$ref": "62"
-    }
+    },
+    "CrossLanguageDefinitionId": "TypeSpec.Array"
    },
    "Properties": [
     {
@@ -671,9 +679,11 @@
      "Type": {
       "$id": "91",
       "Kind": "array",
+      "Name": "ArrayModelForRecord",
       "ValueType": {
        "$ref": "62"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -690,9 +700,11 @@
    "AdditionalProperties": {
     "$id": "93",
     "Kind": "array",
+    "Name": "ArrayModelForRecord",
     "ValueType": {
      "$ref": "62"
-    }
+    },
+    "CrossLanguageDefinitionId": "TypeSpec.Array"
    },
    "Properties": [
     {
@@ -703,9 +715,11 @@
      "Type": {
       "$id": "95",
       "Kind": "array",
+      "Name": "ArrayModelForRecord",
       "ValueType": {
        "$ref": "62"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -722,9 +736,11 @@
    "AdditionalProperties": {
     "$id": "97",
     "Kind": "array",
+    "Name": "ArrayModelForRecord",
     "ValueType": {
      "$ref": "62"
-    }
+    },
+    "CrossLanguageDefinitionId": "TypeSpec.Array"
    },
    "Properties": [
     {
@@ -735,9 +751,11 @@
      "Type": {
       "$id": "99",
       "Kind": "array",
+      "Name": "ArrayModelForRecord",
       "ValueType": {
        "$ref": "62"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false

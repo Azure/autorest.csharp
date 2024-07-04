@@ -85,11 +85,13 @@
      "Type": {
       "$id": "13",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "14",
        "Kind": "bytes",
        "Encode": "base64url"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -318,11 +320,13 @@
        "Type": {
         "$id": "40",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "41",
          "Kind": "bytes",
          "Encode": "base64url"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -969,11 +973,13 @@
        "Type": {
         "$id": "105",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "106",
          "Kind": "bytes",
          "Encode": "base64url"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Header",
        "IsApiVersion": false,

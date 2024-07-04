@@ -550,6 +550,7 @@
      "Type": {
       "$id": "76",
       "Kind": "array",
+      "Name": "ArrayInnerModel",
       "ValueType": {
        "$id": "77",
        "Kind": "model",
@@ -571,7 +572,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -597,10 +599,12 @@
      "Type": {
       "$id": "82",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "83",
        "Kind": "int32"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -623,10 +627,12 @@
      "Type": {
       "$id": "86",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "87",
        "Kind": "string"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false

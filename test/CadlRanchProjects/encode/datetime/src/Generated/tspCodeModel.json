@@ -123,6 +123,7 @@
      "Type": {
       "$id": "20",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "21",
        "Kind": "utcDateTime",
@@ -131,7 +132,8 @@
         "$id": "22",
         "Kind": "int64"
        }
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -422,6 +424,7 @@
        "Type": {
         "$id": "56",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "57",
          "Kind": "utcDateTime",
@@ -430,7 +433,8 @@
           "$id": "58",
           "Kind": "int64"
          }
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -1235,6 +1239,7 @@
        "Type": {
         "$id": "139",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "140",
          "Kind": "utcDateTime",
@@ -1243,7 +1248,8 @@
           "$id": "141",
           "Kind": "int64"
          }
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Header",
        "IsApiVersion": false,

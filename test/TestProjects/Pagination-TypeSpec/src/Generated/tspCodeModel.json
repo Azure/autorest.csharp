@@ -121,6 +121,7 @@
      "Type": {
       "$id": "19",
       "Kind": "array",
+      "Name": "ArrayLedgerEntry",
       "ValueType": {
        "$id": "20",
        "Kind": "model",
@@ -165,7 +166,8 @@
          "IsReadOnly": true
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -203,6 +205,7 @@
      "Type": {
       "$id": "31",
       "Kind": "array",
+      "Name": "ArrayBatchPool",
       "ValueType": {
        "$id": "32",
        "Kind": "model",
@@ -248,7 +251,8 @@
          "IsReadOnly": true
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -387,10 +391,12 @@
      "Type": {
       "$id": "58",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "59",
        "Kind": "string"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -413,9 +419,11 @@
      "Type": {
       "$id": "62",
       "Kind": "array",
+      "Name": "ArrayDimensionValueListItem",
       "ValueType": {
        "$ref": "56"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -450,9 +458,11 @@
      "Type": {
       "$id": "67",
       "Kind": "array",
+      "Name": "ArrayLedgerEntry",
       "ValueType": {
        "$ref": "20"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -487,9 +497,11 @@
      "Type": {
       "$id": "72",
       "Kind": "array",
+      "Name": "ArrayTextBlocklist",
       "ValueType": {
        "$ref": "44"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -524,9 +536,11 @@
      "Type": {
       "$id": "77",
       "Kind": "array",
+      "Name": "ArrayTextBlockItem",
       "ValueType": {
        "$ref": "49"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1395,10 +1409,12 @@
        "Type": {
         "$id": "180",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "181",
          "Kind": "string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -1417,10 +1433,12 @@
        "Type": {
         "$id": "183",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "184",
          "Kind": "string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsApiVersion": false,

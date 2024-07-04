@@ -358,6 +358,7 @@
      "Type": {
       "$id": "49",
       "Kind": "array",
+      "Name": "ArrayStringProperty",
       "ValueType": {
        "$id": "50",
        "Kind": "model",
@@ -379,7 +380,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -405,11 +407,13 @@
      "Type": {
       "$id": "55",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "56",
        "Kind": "bytes",
        "Encode": "base64"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
