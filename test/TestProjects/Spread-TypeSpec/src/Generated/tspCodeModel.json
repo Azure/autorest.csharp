@@ -106,7 +106,7 @@
    "$id": "15",
    "Kind": "model",
    "Name": "SpreadMultiTargetAliasRequest",
-   "CrossLanguageDefinitionId": ".anonymous",
+   "CrossLanguageDefinitionId": "spreadMultiTargetAlias.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -143,7 +143,7 @@
    "$id": "20",
    "Kind": "model",
    "Name": "SpreadAliasWithSpreadAliasRequest",
-   "CrossLanguageDefinitionId": ".anonymous",
+   "CrossLanguageDefinitionId": "spreadAliasWithSpreadAlias.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -180,7 +180,7 @@
    "$id": "25",
    "Kind": "model",
    "Name": "SpreadAliasWithOptionalPropsRequest",
-   "CrossLanguageDefinitionId": ".anonymous",
+   "CrossLanguageDefinitionId": "spreadAliasWithOptionalProps.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -315,27 +315,101 @@
      "IsReadOnly": false
     }
    ]
+  },
+  {
+   "$id": "45",
+   "Kind": "model",
+   "Name": "SpreadModelRequest",
+   "CrossLanguageDefinitionId": "SpreadTypeSpec.spreadModel.Request.anonymous",
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "46",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "name of the Thing",
+     "Type": {
+      "$id": "47",
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "48",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "age of the Thing",
+     "Type": {
+      "$id": "49",
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "50",
+   "Kind": "model",
+   "Name": "SpreadAliasWithModelRequest",
+   "CrossLanguageDefinitionId": "spreadAliasWithModel.Request.anonymous",
+   "Usage": "None",
+   "Properties": [
+    {
+     "$id": "51",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "name of the Thing",
+     "Type": {
+      "$id": "52",
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "53",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "age of the Thing",
+     "Type": {
+      "$id": "54",
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
   }
  ],
  "Clients": [
   {
-   "$id": "45",
+   "$id": "55",
    "Name": "SpreadTypeSpecClient",
    "Description": "This is a spread model or alias service.",
    "Operations": [
     {
-     "$id": "46",
+     "$id": "56",
      "Name": "spreadModel",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread a model as body.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "47",
+       "$id": "57",
        "Name": "spreadUrl",
        "NameInRequest": "spreadUrl",
        "Type": {
-        "$id": "48",
+        "$id": "58",
         "Kind": "url",
         "Name": "url",
         "CrossLanguageDefinitionId": "TypeSpec.url"
@@ -351,7 +425,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "49",
+       "$id": "59",
        "Name": "Thing",
        "NameInRequest": "Thing",
        "Type": {
@@ -368,11 +442,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "50",
+       "$id": "60",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "51",
+        "$id": "61",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -387,19 +461,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "52",
+        "$id": "62",
         "Type": {
-         "$ref": "51"
+         "$ref": "61"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "53",
+       "$id": "63",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "54",
+        "$id": "64",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -414,9 +488,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "55",
+        "$id": "65",
         "Type": {
-         "$ref": "54"
+         "$ref": "64"
         },
         "Value": "application/json"
        }
@@ -424,7 +498,7 @@
      ],
      "Responses": [
       {
-       "$id": "56",
+       "$id": "66",
        "StatusCodes": [
         204
        ],
@@ -445,17 +519,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "57",
+     "$id": "67",
      "Name": "spreadAlias",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias as body.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "47"
+       "$ref": "57"
       },
       {
-       "$id": "58",
+       "$id": "68",
        "Name": "SpreadAliasRequest",
        "NameInRequest": "",
        "Type": {
@@ -472,11 +546,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "59",
+       "$id": "69",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "60",
+        "$id": "70",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -491,19 +565,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "61",
+        "$id": "71",
         "Type": {
-         "$ref": "60"
+         "$ref": "70"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "62",
+       "$id": "72",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "63",
+        "$id": "73",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -518,9 +592,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "64",
+        "$id": "74",
         "Type": {
-         "$ref": "63"
+         "$ref": "73"
         },
         "Value": "application/json"
        }
@@ -528,7 +602,7 @@
      ],
      "Responses": [
       {
-       "$id": "65",
+       "$id": "75",
        "StatusCodes": [
         204
        ],
@@ -549,21 +623,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "66",
+     "$id": "76",
      "Name": "spreadMultiTargetAlias",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias which has multiple target property as body.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "47"
+       "$ref": "57"
       },
       {
-       "$id": "67",
+       "$id": "77",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "68",
+        "$id": "78",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -579,11 +653,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "69",
+       "$id": "79",
        "Name": "top",
        "NameInRequest": "top",
        "Type": {
-        "$id": "70",
+        "$id": "80",
         "Kind": "int32",
         "Name": "int32",
         "CrossLanguageDefinitionId": "TypeSpec.int32"
@@ -599,7 +673,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "71",
+       "$id": "81",
        "Name": "SpreadMultiTargetAliasRequest",
        "NameInRequest": "",
        "Type": {
@@ -616,11 +690,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "72",
+       "$id": "82",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "73",
+        "$id": "83",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -635,19 +709,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "74",
+        "$id": "84",
         "Type": {
-         "$ref": "73"
+         "$ref": "83"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "75",
+       "$id": "85",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "76",
+        "$id": "86",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -662,9 +736,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "77",
+        "$id": "87",
         "Type": {
-         "$ref": "76"
+         "$ref": "86"
         },
         "Value": "application/json"
        }
@@ -672,7 +746,7 @@
      ],
      "Responses": [
       {
-       "$id": "78",
+       "$id": "88",
        "StatusCodes": [
         204
        ],
@@ -693,21 +767,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "79",
+     "$id": "89",
      "Name": "spreadAliasWithModel",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias which contains a complex model property as body.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "47"
+       "$ref": "57"
       },
       {
-       "$id": "80",
+       "$id": "90",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "81",
+        "$id": "91",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -723,11 +797,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "82",
+       "$id": "92",
        "Name": "top",
        "NameInRequest": "top",
        "Type": {
-        "$id": "83",
+        "$id": "93",
         "Kind": "int32",
         "Name": "int32",
         "CrossLanguageDefinitionId": "TypeSpec.int32"
@@ -743,7 +817,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "84",
+       "$id": "94",
        "Name": "Thing",
        "NameInRequest": "Thing",
        "Type": {
@@ -760,11 +834,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "85",
+       "$id": "95",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "86",
+        "$id": "96",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -779,19 +853,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "87",
+        "$id": "97",
         "Type": {
-         "$ref": "86"
+         "$ref": "96"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "88",
+       "$id": "98",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "89",
+        "$id": "99",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -806,9 +880,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "90",
+        "$id": "100",
         "Type": {
-         "$ref": "89"
+         "$ref": "99"
         },
         "Value": "application/json"
        }
@@ -816,7 +890,7 @@
      ],
      "Responses": [
       {
-       "$id": "91",
+       "$id": "101",
        "StatusCodes": [
         204
        ],
@@ -837,21 +911,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "92",
+     "$id": "102",
      "Name": "spreadAliasWithSpreadAlias",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias with contains another alias property as body.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "47"
+       "$ref": "57"
       },
       {
-       "$id": "93",
+       "$id": "103",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "94",
+        "$id": "104",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -867,11 +941,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "95",
+       "$id": "105",
        "Name": "top",
        "NameInRequest": "top",
        "Type": {
-        "$id": "96",
+        "$id": "106",
         "Kind": "int32",
         "Name": "int32",
         "CrossLanguageDefinitionId": "TypeSpec.int32"
@@ -887,7 +961,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "97",
+       "$id": "107",
        "Name": "SpreadAliasWithSpreadAliasRequest",
        "NameInRequest": "",
        "Type": {
@@ -904,11 +978,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "98",
+       "$id": "108",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "99",
+        "$id": "109",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -923,19 +997,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "100",
+        "$id": "110",
         "Type": {
-         "$ref": "99"
+         "$ref": "109"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "101",
+       "$id": "111",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "102",
+        "$id": "112",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -950,9 +1024,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "103",
+        "$id": "113",
         "Type": {
-         "$ref": "102"
+         "$ref": "112"
         },
         "Value": "application/json"
        }
@@ -960,7 +1034,7 @@
      ],
      "Responses": [
       {
-       "$id": "104",
+       "$id": "114",
        "StatusCodes": [
         204
        ],
@@ -981,21 +1055,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "105",
+     "$id": "115",
      "Name": "spreadAliasWithOptionalProps",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias with contains optional properties as body.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "47"
+       "$ref": "57"
       },
       {
-       "$id": "106",
+       "$id": "116",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "107",
+        "$id": "117",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -1011,11 +1085,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "108",
+       "$id": "118",
        "Name": "top",
        "NameInRequest": "top",
        "Type": {
-        "$id": "109",
+        "$id": "119",
         "Kind": "int32",
         "Name": "int32",
         "CrossLanguageDefinitionId": "TypeSpec.int32"
@@ -1031,7 +1105,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "110",
+       "$id": "120",
        "Name": "SpreadAliasWithOptionalPropsRequest",
        "NameInRequest": "",
        "Type": {
@@ -1048,11 +1122,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "111",
+       "$id": "121",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "112",
+        "$id": "122",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -1067,19 +1141,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "113",
+        "$id": "123",
         "Type": {
-         "$ref": "112"
+         "$ref": "122"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "114",
+       "$id": "124",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "115",
+        "$id": "125",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -1094,9 +1168,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "116",
+        "$id": "126",
         "Type": {
-         "$ref": "115"
+         "$ref": "125"
         },
         "Value": "application/json"
        }
@@ -1104,7 +1178,7 @@
      ],
      "Responses": [
       {
-       "$id": "117",
+       "$id": "127",
        "StatusCodes": [
         204
        ],
@@ -1125,17 +1199,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "118",
+     "$id": "128",
      "Name": "spreadAliasWithCollections",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias with required and optional collections",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "47"
+       "$ref": "57"
       },
       {
-       "$id": "119",
+       "$id": "129",
        "Name": "SpreadAliasWithCollectionsRequest",
        "NameInRequest": "",
        "Type": {
@@ -1152,11 +1226,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "120",
+       "$id": "130",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "121",
+        "$id": "131",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -1171,19 +1245,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "122",
+        "$id": "132",
         "Type": {
-         "$ref": "121"
+         "$ref": "131"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "123",
+       "$id": "133",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "124",
+        "$id": "134",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": ""
@@ -1198,9 +1272,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "125",
+        "$id": "135",
         "Type": {
-         "$ref": "124"
+         "$ref": "134"
         },
         "Value": "application/json"
        }
@@ -1208,7 +1282,7 @@
      ],
      "Responses": [
       {
-       "$id": "126",
+       "$id": "136",
        "StatusCodes": [
         204
        ],
@@ -1230,11 +1304,11 @@
     }
    ],
    "Protocol": {
-    "$id": "127"
+    "$id": "137"
    },
    "Parameters": [
     {
-     "$ref": "47"
+     "$ref": "57"
     }
    ]
   }

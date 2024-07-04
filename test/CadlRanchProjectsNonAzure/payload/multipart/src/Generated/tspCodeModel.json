@@ -315,7 +315,7 @@
    "$id": "41",
    "Kind": "model",
    "Name": "AnonymousModelRequest",
-   "CrossLanguageDefinitionId": ".anonymous",
+   "CrossLanguageDefinitionId": "anonymousModel.Request.anonymous",
    "Usage": "Input,Multipart",
    "Properties": [
     {
