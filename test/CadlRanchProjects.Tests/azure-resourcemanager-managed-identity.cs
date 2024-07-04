@@ -32,7 +32,6 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("known issue: tags{} in data")]
         public Task Azure_Managed_Identity_ManagedIdentityTrackedResourceCollection_createWithSystemAssigned() => Test(async (host) =>
         {
             ArmClient client = MgmtTestHelper.CreateArmClientWithMockAuth(host);
