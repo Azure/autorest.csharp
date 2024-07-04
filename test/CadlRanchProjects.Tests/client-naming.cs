@@ -78,14 +78,14 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Client_Naming_Model_client() => Test(async (host) =>
         {
-            var response = await new NamingClient(host, null).GetClientModelClient().ClientAsync(true);
+            var response = await new NamingClient(host, null).GetClientModelClient().ClientAsync(new Client.Naming.Models.ClientModel(true));
             Assert.AreEqual(204, response.Status);
         });
 
         [Test]
         public Task Client_Naming_Model_language() => Test(async (host) =>
         {
-            var response = await new NamingClient(host, null).GetClientModelClient().LanguageAsync(true);
+            var response = await new NamingClient(host, null).GetClientModelClient().LanguageAsync(new CSModel(true));
             Assert.AreEqual(204, response.Status);
         });
 
