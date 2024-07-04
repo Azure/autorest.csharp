@@ -11,7 +11,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         [Test]
         public Task Parameters_Spread_Model_spreadAsRequestBody() => Test(async (host) =>
         {
-            var response = await new SpreadClient(host, null).GetModelClient().SpreadAsRequestBodyAsync(new BodyParameter("foo"));
+            var response = await new SpreadClient(host, null).GetModelClient().SpreadAsRequestBodyAsync("foo");
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 

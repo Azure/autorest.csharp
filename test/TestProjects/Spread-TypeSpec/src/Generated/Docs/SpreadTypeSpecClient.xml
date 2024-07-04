@@ -1,42 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="SpreadModelAsync(Thing,CancellationToken)">
+    <member name="SpreadModelAsync(string,int,CancellationToken)">
       <example>
 This sample shows how to call SpreadModelAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Thing thing = new Thing("<name>", 1234);
-Response response = await client.SpreadModelAsync(thing);
+Response response = await client.SpreadModelAsync("<name>", 1234);
 ]]></code>
 This sample shows how to call SpreadModelAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Thing thing = new Thing("<name>", 1234);
-Response response = await client.SpreadModelAsync(thing);
+Response response = await client.SpreadModelAsync("<name>", 1234);
 ]]></code></example>
     </member>
-    <member name="SpreadModel(Thing,CancellationToken)">
+    <member name="SpreadModel(string,int,CancellationToken)">
       <example>
 This sample shows how to call SpreadModel.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Thing thing = new Thing("<name>", 1234);
-Response response = client.SpreadModel(thing);
+Response response = client.SpreadModel("<name>", 1234);
 ]]></code>
 This sample shows how to call SpreadModel with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Thing thing = new Thing("<name>", 1234);
-Response response = client.SpreadModel(thing);
+Response response = client.SpreadModel("<name>", 1234);
 ]]></code></example>
     </member>
     <member name="SpreadModelAsync(RequestContent,RequestContext)">
@@ -293,42 +289,38 @@ Response response = client.SpreadMultiTargetAlias("<id>", 1234, content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="SpreadAliasWithModelAsync(string,int,Thing,CancellationToken)">
+    <member name="SpreadAliasWithModelAsync(string,int,string,int,CancellationToken)">
       <example>
 This sample shows how to call SpreadAliasWithModelAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Thing thing = new Thing("<name>", 1234);
-Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, thing);
+Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, "<name>", 1234);
 ]]></code>
 This sample shows how to call SpreadAliasWithModelAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Thing thing = new Thing("<name>", 1234);
-Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, thing);
+Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, "<name>", 1234);
 ]]></code></example>
     </member>
-    <member name="SpreadAliasWithModel(string,int,Thing,CancellationToken)">
+    <member name="SpreadAliasWithModel(string,int,string,int,CancellationToken)">
       <example>
 This sample shows how to call SpreadAliasWithModel.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Thing thing = new Thing("<name>", 1234);
-Response response = client.SpreadAliasWithModel("<id>", 1234, thing);
+Response response = client.SpreadAliasWithModel("<id>", 1234, "<name>", 1234);
 ]]></code>
 This sample shows how to call SpreadAliasWithModel with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Thing thing = new Thing("<name>", 1234);
-Response response = client.SpreadAliasWithModel("<id>", 1234, thing);
+Response response = client.SpreadAliasWithModel("<id>", 1234, "<name>", 1234);
 ]]></code></example>
     </member>
     <member name="SpreadAliasWithModelAsync(string,int,RequestContent,RequestContext)">

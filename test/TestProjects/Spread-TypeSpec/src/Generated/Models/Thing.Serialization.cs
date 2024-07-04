@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace SpreadTypeSpec.Models
 {
-    public partial class Thing : IUtf8JsonSerializable, IJsonModel<Thing>
+    internal partial class Thing : IUtf8JsonSerializable, IJsonModel<Thing>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Thing>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 

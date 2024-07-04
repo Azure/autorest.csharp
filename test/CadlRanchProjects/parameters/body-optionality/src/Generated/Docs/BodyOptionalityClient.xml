@@ -89,38 +89,34 @@ Response response = client.RequiredExplicit(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="RequiredImplicitAsync(BodyModel,CancellationToken)">
+    <member name="RequiredImplicitAsync(string,CancellationToken)">
       <example>
 This sample shows how to call RequiredImplicitAsync.
 <code><![CDATA[
 BodyOptionalityClient client = new BodyOptionalityClient();
 
-BodyModel bodyModel = new BodyModel("<name>");
-Response response = await client.RequiredImplicitAsync(bodyModel);
+Response response = await client.RequiredImplicitAsync("<name>");
 ]]></code>
 This sample shows how to call RequiredImplicitAsync with all parameters.
 <code><![CDATA[
 BodyOptionalityClient client = new BodyOptionalityClient();
 
-BodyModel bodyModel = new BodyModel("<name>");
-Response response = await client.RequiredImplicitAsync(bodyModel);
+Response response = await client.RequiredImplicitAsync("<name>");
 ]]></code></example>
     </member>
-    <member name="RequiredImplicit(BodyModel,CancellationToken)">
+    <member name="RequiredImplicit(string,CancellationToken)">
       <example>
 This sample shows how to call RequiredImplicit.
 <code><![CDATA[
 BodyOptionalityClient client = new BodyOptionalityClient();
 
-BodyModel bodyModel = new BodyModel("<name>");
-Response response = client.RequiredImplicit(bodyModel);
+Response response = client.RequiredImplicit("<name>");
 ]]></code>
 This sample shows how to call RequiredImplicit with all parameters.
 <code><![CDATA[
 BodyOptionalityClient client = new BodyOptionalityClient();
 
-BodyModel bodyModel = new BodyModel("<name>");
-Response response = client.RequiredImplicit(bodyModel);
+Response response = client.RequiredImplicit("<name>");
 ]]></code></example>
     </member>
     <member name="RequiredImplicitAsync(RequestContent,RequestContext)">

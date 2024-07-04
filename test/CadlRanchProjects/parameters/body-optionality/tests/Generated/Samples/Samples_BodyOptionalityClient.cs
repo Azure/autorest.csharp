@@ -153,8 +153,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            BodyModel bodyModel = new BodyModel("<name>");
-            Response response = client.RequiredImplicit(bodyModel);
+            Response response = client.RequiredImplicit("<name>");
         }
 
         [Test]
@@ -163,8 +162,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            BodyModel bodyModel = new BodyModel("<name>");
-            Response response = await client.RequiredImplicitAsync(bodyModel);
+            Response response = await client.RequiredImplicitAsync("<name>");
         }
 
         [Test]
@@ -203,8 +201,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            BodyModel bodyModel = new BodyModel("<name>");
-            Response response = client.RequiredImplicit(bodyModel);
+            Response response = client.RequiredImplicit("<name>");
         }
 
         [Test]
@@ -213,8 +210,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            BodyModel bodyModel = new BodyModel("<name>");
-            Response response = await client.RequiredImplicitAsync(bodyModel);
+            Response response = await client.RequiredImplicitAsync("<name>");
         }
     }
 }

@@ -5,6 +5,7 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Scm.Client.Naming.Models;
@@ -128,26 +129,20 @@ namespace Scm.Client.Naming
         }
 
         /// <summary> Client. </summary>
-        /// <param name="clientNameModel"> The <see cref="ClientNameModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientNameModel"/> is null. </exception>
-        public virtual async Task<ClientResult> ClientAsync(ClientNameModel clientNameModel)
+        /// <param name="clientName"> Pass in true. </param>
+        public virtual async Task<ClientResult> ClientAsync(bool clientName)
         {
-            Argument.AssertNotNull(clientNameModel, nameof(clientNameModel));
-
-            using BinaryContent content = clientNameModel.ToBinaryContent();
-            ClientResult result = await ClientAsync(content, null).ConfigureAwait(false);
+            ClientNameModel clientNameModel = new ClientNameModel(clientName, null);
+            ClientResult result = await ClientAsync(clientNameModel.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Client. </summary>
-        /// <param name="clientNameModel"> The <see cref="ClientNameModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientNameModel"/> is null. </exception>
-        public virtual ClientResult Client(ClientNameModel clientNameModel)
+        /// <param name="clientName"> Pass in true. </param>
+        public virtual ClientResult Client(bool clientName)
         {
-            Argument.AssertNotNull(clientNameModel, nameof(clientNameModel));
-
-            using BinaryContent content = clientNameModel.ToBinaryContent();
-            ClientResult result = Client(content, null);
+            ClientNameModel clientNameModel = new ClientNameModel(clientName, null);
+            ClientResult result = Client(clientNameModel.ToBinaryContent(), null);
             return result;
         }
 
@@ -161,7 +156,7 @@ namespace Scm.Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ClientAsync(ClientNameModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ClientAsync(bool)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -189,7 +184,7 @@ namespace Scm.Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Client(ClientNameModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Client(bool)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -208,26 +203,20 @@ namespace Scm.Client.Naming
         }
 
         /// <summary> Language. </summary>
-        /// <param name="languageClientNameModel"> The <see cref="LanguageClientNameModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="languageClientNameModel"/> is null. </exception>
-        public virtual async Task<ClientResult> LanguageAsync(LanguageClientNameModel languageClientNameModel)
+        /// <param name="csName"> Pass in true. </param>
+        public virtual async Task<ClientResult> LanguageAsync(bool csName)
         {
-            Argument.AssertNotNull(languageClientNameModel, nameof(languageClientNameModel));
-
-            using BinaryContent content = languageClientNameModel.ToBinaryContent();
-            ClientResult result = await LanguageAsync(content, null).ConfigureAwait(false);
+            LanguageClientNameModel languageClientNameModel = new LanguageClientNameModel(csName, null);
+            ClientResult result = await LanguageAsync(languageClientNameModel.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Language. </summary>
-        /// <param name="languageClientNameModel"> The <see cref="LanguageClientNameModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="languageClientNameModel"/> is null. </exception>
-        public virtual ClientResult Language(LanguageClientNameModel languageClientNameModel)
+        /// <param name="csName"> Pass in true. </param>
+        public virtual ClientResult Language(bool csName)
         {
-            Argument.AssertNotNull(languageClientNameModel, nameof(languageClientNameModel));
-
-            using BinaryContent content = languageClientNameModel.ToBinaryContent();
-            ClientResult result = Language(content, null);
+            LanguageClientNameModel languageClientNameModel = new LanguageClientNameModel(csName, null);
+            ClientResult result = Language(languageClientNameModel.ToBinaryContent(), null);
             return result;
         }
 
@@ -241,7 +230,7 @@ namespace Scm.Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="LanguageAsync(LanguageClientNameModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="LanguageAsync(bool)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -269,7 +258,7 @@ namespace Scm.Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Language(LanguageClientNameModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Language(bool)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -288,26 +277,20 @@ namespace Scm.Client.Naming
         }
 
         /// <summary> Compatible with encoded name. </summary>
-        /// <param name="clientNameAndJsonEncodedNameModel"> The <see cref="ClientNameAndJsonEncodedNameModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientNameAndJsonEncodedNameModel"/> is null. </exception>
-        public virtual async Task<ClientResult> CompatibleWithEncodedNameAsync(ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel)
+        /// <param name="clientName"> Pass in true. </param>
+        public virtual async Task<ClientResult> CompatibleWithEncodedNameAsync(bool clientName)
         {
-            Argument.AssertNotNull(clientNameAndJsonEncodedNameModel, nameof(clientNameAndJsonEncodedNameModel));
-
-            using BinaryContent content = clientNameAndJsonEncodedNameModel.ToBinaryContent();
-            ClientResult result = await CompatibleWithEncodedNameAsync(content, null).ConfigureAwait(false);
+            ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel = new ClientNameAndJsonEncodedNameModel(clientName, null);
+            ClientResult result = await CompatibleWithEncodedNameAsync(clientNameAndJsonEncodedNameModel.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Compatible with encoded name. </summary>
-        /// <param name="clientNameAndJsonEncodedNameModel"> The <see cref="ClientNameAndJsonEncodedNameModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientNameAndJsonEncodedNameModel"/> is null. </exception>
-        public virtual ClientResult CompatibleWithEncodedName(ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel)
+        /// <param name="clientName"> Pass in true. </param>
+        public virtual ClientResult CompatibleWithEncodedName(bool clientName)
         {
-            Argument.AssertNotNull(clientNameAndJsonEncodedNameModel, nameof(clientNameAndJsonEncodedNameModel));
-
-            using BinaryContent content = clientNameAndJsonEncodedNameModel.ToBinaryContent();
-            ClientResult result = CompatibleWithEncodedName(content, null);
+            ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel = new ClientNameAndJsonEncodedNameModel(clientName, null);
+            ClientResult result = CompatibleWithEncodedName(clientNameAndJsonEncodedNameModel.ToBinaryContent(), null);
             return result;
         }
 
@@ -321,7 +304,7 @@ namespace Scm.Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CompatibleWithEncodedNameAsync(ClientNameAndJsonEncodedNameModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CompatibleWithEncodedNameAsync(bool)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -349,7 +332,7 @@ namespace Scm.Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CompatibleWithEncodedName(ClientNameAndJsonEncodedNameModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CompatibleWithEncodedName(bool)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

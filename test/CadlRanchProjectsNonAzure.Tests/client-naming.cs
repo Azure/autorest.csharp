@@ -11,7 +11,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         [Test]
         public Task Client_Naming_Property_client() => Test(async (host) =>
         {
-            var response = await new NamingClient(host, null).ClientAsync(new ClientNameModel(true));
+            var response = await new NamingClient(host, null).ClientAsync(true);
             Assert.AreEqual(204, response.GetRawResponse().Status);
 
             Assert.NotNull(typeof(ClientNameModel).GetProperty("ClientName"));
@@ -21,7 +21,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         [Test]
         public Task Client_Naming_Property_language() => Test(async (host) =>
         {
-            var response = await new NamingClient(host, null).LanguageAsync(new LanguageClientNameModel(true));
+            var response = await new NamingClient(host, null).LanguageAsync(true);
             Assert.AreEqual(204, response.GetRawResponse().Status);
 
             Assert.NotNull(typeof(LanguageClientNameModel).GetProperty("CSName"));
@@ -31,7 +31,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         [Test]
         public Task Client_Naming_Property_compatibleWithEncodedName() => Test(async (host) =>
         {
-            var response = await new NamingClient(host, null).CompatibleWithEncodedNameAsync(new ClientNameAndJsonEncodedNameModel(true));
+            var response = await new NamingClient(host, null).CompatibleWithEncodedNameAsync(true);
             Assert.AreEqual(204, response.GetRawResponse().Status);
 
             Assert.NotNull(typeof(ClientNameModel).GetProperty("ClientName"));
@@ -78,14 +78,14 @@ namespace CadlRanchProjectsNonAzure.Tests
         [Test]
         public Task Client_Naming_Model_client() => Test(async (host) =>
         {
-            var response = await new NamingClient(host, null).GetClientModelClient().ClientAsync(new Scm.Client.Naming.Models.ClientModel(true));
+            var response = await new NamingClient(host, null).GetClientModelClient().ClientAsync(true);
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
         public Task Client_Naming_Model_language() => Test(async (host) =>
         {
-            var response = await new NamingClient(host, null).GetClientModelClient().LanguageAsync(new CSModel(true));
+            var response = await new NamingClient(host, null).GetClientModelClient().LanguageAsync(true);
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
