@@ -26,6 +26,7 @@
         "azure/core/lro/standard",
         "azure/core/scalar",
         "azure/core/traits",
+        "azure/core/model",
         "azure/client-generator-core/access",
         "azure/client-generator-core/usage",
         "azure/special-headers/client-request-id",

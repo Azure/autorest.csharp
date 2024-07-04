@@ -85,11 +85,13 @@
      "Type": {
       "$id": "13",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "14",
        "Kind": "bytes",
        "Encode": "base64url"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -114,8 +116,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "18",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -130,8 +131,7 @@
       "$id": "19",
       "Type": {
        "$id": "20",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -381,11 +381,13 @@
        "Type": {
         "$id": "45",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "46",
          "Kind": "bytes",
          "Encode": "base64url"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1142,11 +1144,13 @@
        "Type": {
         "$id": "114",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "115",
          "Kind": "bytes",
          "Encode": "base64url"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Header",
        "IsRequired": true,

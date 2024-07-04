@@ -177,9 +177,11 @@
        "Type": {
         "$id": "25",
         "Kind": "array",
+        "Name": "ArrayBird",
         "ValueType": {
          "$ref": "2"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "IsRequired": false,
        "IsReadOnly": false
@@ -326,8 +328,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "43",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -342,8 +343,7 @@
         "$id": "44",
         "Type": {
          "$id": "45",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }

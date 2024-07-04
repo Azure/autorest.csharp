@@ -607,10 +607,12 @@
           {
            "$id": "80",
            "Kind": "array",
+           "Name": "Array",
            "ValueType": {
             "$id": "81",
             "Kind": "string"
-           }
+           },
+           "CrossLanguageDefinitionId": "TypeSpec.Array"
           }
          ]
         },
@@ -634,10 +636,12 @@
           {
            "$id": "85",
            "Kind": "array",
+           "Name": "Array",
            "ValueType": {
             "$id": "86",
             "Kind": "string"
-           }
+           },
+           "CrossLanguageDefinitionId": "TypeSpec.Array"
           }
          ]
         },
@@ -1094,6 +1098,7 @@
         "Type": {
          "$id": "162",
          "Kind": "array",
+         "Name": "Array",
          "ValueType": {
           "$id": "163",
           "Kind": "union",
@@ -1120,7 +1125,8 @@
             "Kind": "boolean"
            }
           ]
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -1173,8 +1179,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "173",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -1189,8 +1194,7 @@
       "$id": "174",
       "Type": {
        "$id": "175",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
