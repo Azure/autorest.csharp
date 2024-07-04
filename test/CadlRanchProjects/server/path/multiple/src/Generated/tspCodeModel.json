@@ -47,8 +47,7 @@
        "Description": "Pass in http://localhost:3000 for endpoint.",
        "Type": {
         "$id": "8",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -213,7 +212,6 @@
    "Protocol": {
     "$id": "23"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "7"

@@ -122,7 +122,6 @@
    "Protocol": {
     "$id": "17"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "18",
@@ -131,8 +130,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "19",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -147,8 +145,7 @@
       "$id": "20",
       "Type": {
        "$id": "21",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -436,7 +433,6 @@
    "Protocol": {
     "$id": "46"
    },
-   "Creatable": false,
    "Parent": "UsageClient",
    "Parameters": [
     {

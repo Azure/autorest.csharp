@@ -107,9 +107,11 @@
      "Type": {
       "$id": "17",
       "Kind": "array",
+      "Name": "ArrayAddress",
       "ValueType": {
        "$ref": "11"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -122,11 +124,13 @@
      "Type": {
       "$id": "19",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "20",
        "Kind": "bytes",
        "Encode": "base64"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -196,11 +200,13 @@
      "Type": {
       "$id": "29",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "30",
        "Kind": "bytes",
        "Encode": "base64"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -235,9 +241,11 @@
      "Type": {
       "$id": "35",
       "Kind": "array",
+      "Name": "ArrayAddress",
       "ValueType": {
        "$ref": "11"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -311,7 +319,6 @@
    "Protocol": {
     "$id": "45"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "46",
@@ -320,8 +327,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "47",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -336,8 +342,7 @@
       "$id": "48",
       "Type": {
        "$id": "49",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -1201,7 +1206,6 @@
    "Protocol": {
     "$id": "131"
    },
-   "Creatable": false,
    "Parent": "MultiPartClient",
    "Parameters": [
     {

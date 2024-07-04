@@ -58,9 +58,10 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 null, new List<InputModelType>(), null, null, null, null);
             var collectionModelType = new InputModelType("ModelCollectionModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public", null,
                     "Simple model with model collection properties", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
-                new List<InputModelProperty>{
-                        new InputModelProperty("requiredModelCollection", "requiredModelCollection", "Required collection of models.", new InputListType("requiredModelCollection", elementModelType, false), null, true, false, false),
-                        new InputModelProperty("optionalModelCollection", "optionalModelCollection", "Optional collection of models.", new InputListType("optionalModelCollection", elementModelType, false), null, false, false, false),
+                new List<InputModelProperty>
+                {
+                    new InputModelProperty("requiredModelCollection", "requiredModelCollection", "Required collection of models.", new InputListType("requiredModelCollection", "TypeSpec.Array", elementModelType), null, true, false, false),
+                    new InputModelProperty("optionalModelCollection", "optionalModelCollection", "Optional collection of models.", new InputListType("optionalModelCollection", "TypeSpec.Array",elementModelType), null, false, false, false),
                 },
                 null, new List<InputModelType>(), null, null, null, null);
 
@@ -80,9 +81,10 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 null, new List<InputModelType>(), null, null, null, null);
             var collectionModelType = new InputModelType("ModelCollectionModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public", null,
                     "Simple model with model collection properties", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
-                new List<InputModelProperty>{
-                        new InputModelProperty("required2DCollection", "required2DCollection", "Required collection of models.", new InputListType("required2DCollection", new InputListType("requiredModelCollection", elementModelType, false), false), null, true, false, false),
-                        new InputModelProperty("optional2DCollection", "optional2DCollection", "Optional collection of models.", new InputListType("optional2DCollection", new InputListType("optionalModelCollection", elementModelType, false), false), null, false, false, false),
+                new List<InputModelProperty>
+                {
+                    new InputModelProperty("required2DCollection", "required2DCollection", "Required collection of models.", new InputListType("required2DCollection","TypeSpec.Array", new InputListType("requiredModelCollection","TypeSpec.Array", elementModelType)), null, true, false, false),
+                    new InputModelProperty("optional2DCollection", "optional2DCollection", "Optional collection of models.", new InputListType("optional2DCollection", "TypeSpec.Array", new InputListType("optionalModelCollection","TypeSpec.Array", elementModelType)), null, false, false, false),
                 },
                 null, new List<InputModelType>(), null, null, null, null);
 

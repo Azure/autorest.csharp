@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Generation.Types
         {
             InputLiteralType literalType => CSharpType.FromLiteral(CreateType(literalType.ValueType), literalType.Value),
             InputUnionType unionType => CSharpType.FromUnion(unionType.VariantTypes.Select(CreateType).ToArray()),
-            InputListType { IsEmbeddingsVector: true } listType => new CSharpType(typeof(ReadOnlyMemory<>), CreateType(listType.ValueType)),
+            InputListType { CrossLanguageDefinitionId: "Azure.Core.EmbeddingVector" } listType => new CSharpType(typeof(ReadOnlyMemory<>), CreateType(listType.ValueType)),
             InputListType listType => new CSharpType(typeof(IList<>), CreateType(listType.ValueType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType => _library.ResolveEnum(enumType),
@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Generation.Types
                 InputPrimitiveTypeKind.Float => new CSharpType(typeof(double)), // in typespec, float is the base type of float32 and float64, see type relation: https://typespec.io/docs/language-basics/type-relations
                 InputPrimitiveTypeKind.Numeric => new CSharpType(typeof(double)), // in typespec, numeric is the base type of number types, see type relation: https://typespec.io/docs/language-basics/type-relations
                 InputPrimitiveTypeKind.IPAddress => new CSharpType(typeof(IPAddress)),
-                InputPrimitiveTypeKind.ArmResourceIdentifier => new CSharpType(typeof(ResourceIdentifier)),
+                InputPrimitiveTypeKind.ArmId => new CSharpType(typeof(ResourceIdentifier)),
                 InputPrimitiveTypeKind.ResourceType => new CSharpType(typeof(ResourceType)),
                 InputPrimitiveTypeKind.Stream => new CSharpType(typeof(Stream)),
                 InputPrimitiveTypeKind.String => new CSharpType(typeof(string)),

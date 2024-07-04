@@ -48,7 +48,6 @@
    "Protocol": {
     "$id": "9"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "10",
@@ -57,8 +56,7 @@
      "Description": "Need to be set as 'http://localhost:3000' in client.",
      "Type": {
       "$id": "11",
-      "Kind": "uri",
-      "IsNullable": false
+      "Kind": "url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -273,7 +271,6 @@
    "Protocol": {
     "$id": "29"
    },
-   "Creatable": false,
    "Parent": "TwoOperationGroupClient",
    "Parameters": [
     {
@@ -467,7 +464,6 @@
    "Protocol": {
     "$id": "46"
    },
-   "Creatable": false,
    "Parent": "TwoOperationGroupClient",
    "Parameters": [
     {

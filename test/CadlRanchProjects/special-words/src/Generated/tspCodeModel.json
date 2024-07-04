@@ -728,7 +728,6 @@
    "Protocol": {
     "$id": "105"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "106",
@@ -737,8 +736,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "107",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -753,8 +751,7 @@
       "$id": "108",
       "Type": {
        "$id": "109",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -4103,7 +4100,6 @@
    "Protocol": {
     "$id": "408"
    },
-   "Creatable": false,
    "Parent": "SpecialWordsClient",
    "Parameters": [
     {
@@ -4221,7 +4217,6 @@
    "Protocol": {
     "$id": "419"
    },
-   "Creatable": false,
    "Parent": "SpecialWordsClient",
    "Parameters": [
     {
@@ -6053,7 +6048,6 @@
    "Protocol": {
     "$id": "586"
    },
-   "Creatable": false,
    "Parent": "SpecialWordsClient",
    "Parameters": [
     {
@@ -8552,7 +8546,6 @@
    "Protocol": {
     "$id": "826"
    },
-   "Creatable": false,
    "Parent": "SpecialWordsClient",
    "Parameters": [
     {

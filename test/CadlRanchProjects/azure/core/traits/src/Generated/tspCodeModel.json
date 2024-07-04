@@ -154,8 +154,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "23",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -170,8 +169,7 @@
         "$id": "24",
         "Type": {
          "$id": "25",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
@@ -528,9 +526,9 @@
       },
       {
        "$id": "66",
-       "Name": "UserActionParam",
-       "NameInRequest": "UserActionParam",
-       "Description": "User action param",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Description": "The body parameter.",
        "Type": {
         "$ref": "14"
        },
@@ -639,7 +637,6 @@
    "Protocol": {
     "$id": "75"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "22"

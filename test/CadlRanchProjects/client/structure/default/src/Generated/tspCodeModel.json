@@ -58,8 +58,7 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "11",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -197,7 +196,6 @@
    "Protocol": {
     "$id": "22"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "10"
@@ -215,7 +213,6 @@
    "Protocol": {
     "$id": "24"
    },
-   "Creatable": false,
    "Parent": "ServiceClient",
    "Parameters": [
     {
@@ -293,7 +290,6 @@
    "Protocol": {
     "$id": "31"
    },
-   "Creatable": false,
    "Parent": "Baz",
    "Parameters": [
     {
@@ -371,7 +367,6 @@
    "Protocol": {
     "$id": "38"
    },
-   "Creatable": false,
    "Parent": "ServiceClient",
    "Parameters": [
     {
@@ -449,7 +444,6 @@
    "Protocol": {
     "$id": "45"
    },
-   "Creatable": false,
    "Parent": "Qux",
    "Parameters": [
     {
@@ -585,7 +579,6 @@
    "Protocol": {
     "$id": "57"
    },
-   "Creatable": false,
    "Parent": "ServiceClient",
    "Parameters": [
     {
@@ -721,7 +714,6 @@
    "Protocol": {
     "$id": "69"
    },
-   "Creatable": false,
    "Parent": "ServiceClient",
    "Parameters": [
     {

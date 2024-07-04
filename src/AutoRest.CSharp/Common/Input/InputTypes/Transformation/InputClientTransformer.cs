@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input
@@ -12,6 +13,7 @@ namespace AutoRest.CSharp.Common.Input
             foreach (var client in input.Clients)
             {
                 RemoveInternalOperationFromInputClient(client);
+                UpdateSubscriptionId(client);
             }
         }
 
@@ -28,6 +30,20 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
             inputClient.Operations = operationsToKeep;
+        }
+
+        private static void UpdateSubscriptionId(InputClient inputClient)
+        {
+            foreach (var operation in inputClient.Operations)
+            {
+                foreach (var parameter in operation.Parameters)
+                {
+                    if (parameter.Name.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase))
+                    {
+                        parameter.Type = InputPrimitiveType.String;
+                    }
+                }
+            }
         }
     }
 }

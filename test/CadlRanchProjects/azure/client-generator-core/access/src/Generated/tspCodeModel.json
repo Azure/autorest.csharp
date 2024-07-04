@@ -293,7 +293,6 @@
    "Protocol": {
     "$id": "39"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "40",
@@ -302,8 +301,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "41",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -318,8 +316,7 @@
       "$id": "42",
       "Type": {
        "$id": "43",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -493,7 +490,6 @@
    "Protocol": {
     "$id": "59"
    },
-   "Creatable": false,
    "Parent": "AccessClient",
    "Parameters": [
     {
@@ -747,7 +743,6 @@
    "Protocol": {
     "$id": "82"
    },
-   "Creatable": false,
    "Parent": "AccessClient",
    "Parameters": [
     {
@@ -922,7 +917,6 @@
    "Protocol": {
     "$id": "98"
    },
-   "Creatable": false,
    "Parent": "AccessClient",
    "Parameters": [
     {
@@ -1099,7 +1093,6 @@
    "Protocol": {
     "$id": "114"
    },
-   "Creatable": false,
    "Parent": "AccessClient",
    "Parameters": [
     {

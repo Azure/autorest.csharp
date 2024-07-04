@@ -58,8 +58,7 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "11",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -255,7 +254,6 @@
    "Protocol": {
     "$id": "27"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "10"
@@ -448,7 +446,6 @@
    "Protocol": {
     "$id": "44"
    },
-   "Creatable": false,
    "Parent": "RenamedOperationClient",
    "Parameters": [
     {

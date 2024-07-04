@@ -173,8 +173,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "27",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -189,8 +188,7 @@
         "$id": "28",
         "Type": {
          "$id": "29",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
@@ -760,7 +758,6 @@
    "Protocol": {
     "$id": "82"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "26"
@@ -783,8 +780,8 @@
       },
       {
        "$id": "85",
-       "Name": "ClientModel",
-       "NameInRequest": "ModelWithClientClientName",
+       "Name": "body",
+       "NameInRequest": "body",
        "Type": {
         "$ref": "18"
        },
@@ -884,8 +881,8 @@
       },
       {
        "$id": "94",
-       "Name": "CSModel",
-       "NameInRequest": "ModelWithLanguageClientName",
+       "Name": "body",
+       "NameInRequest": "body",
        "Type": {
         "$ref": "21"
        },
@@ -978,7 +975,6 @@
    "Protocol": {
     "$id": "102"
    },
-   "Creatable": false,
    "Parent": "NamingClient",
    "Parameters": [
     {
@@ -1197,7 +1193,6 @@
    "Protocol": {
     "$id": "122"
    },
-   "Creatable": false,
    "Parent": "NamingClient",
    "Parameters": [
     {

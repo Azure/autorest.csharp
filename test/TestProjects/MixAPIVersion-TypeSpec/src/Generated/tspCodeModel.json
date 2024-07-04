@@ -88,6 +88,7 @@
      "Type": {
       "$id": "14",
       "Kind": "array",
+      "Name": "ArrayToy",
       "ValueType": {
        "$id": "15",
        "Kind": "model",
@@ -132,7 +133,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -164,7 +166,6 @@
    "Protocol": {
     "$id": "25"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "26",
@@ -172,8 +173,7 @@
      "NameInRequest": "petStoreUrl",
      "Type": {
       "$id": "27",
-      "Kind": "uri",
-      "IsNullable": false
+      "Kind": "url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -533,7 +533,6 @@
    "Protocol": {
     "$id": "61"
    },
-   "Creatable": false,
    "Parent": "MixApiVersionClient",
    "Parameters": [
     {
@@ -640,7 +639,6 @@
    "Protocol": {
     "$id": "71"
    },
-   "Creatable": false,
    "Parent": "MixApiVersionClient",
    "Parameters": [
     {

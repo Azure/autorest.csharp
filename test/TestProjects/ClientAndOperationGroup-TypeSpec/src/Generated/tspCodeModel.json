@@ -22,8 +22,7 @@
        "NameInRequest": "operationGroupServiceUrl",
        "Type": {
         "$id": "5",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -154,7 +153,6 @@
    "Protocol": {
     "$id": "17"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "4"
@@ -294,7 +292,6 @@
    "Protocol": {
     "$id": "31"
    },
-   "Creatable": false,
    "Parent": "ClientAndOperationGroupClient",
    "Parameters": [
     {
@@ -435,7 +432,6 @@
    "Protocol": {
     "$id": "45"
    },
-   "Creatable": false,
    "Parent": "ClientAndOperationGroupClient",
    "Parameters": [
     {

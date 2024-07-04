@@ -397,10 +397,12 @@
        {
         "$id": "65",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "66",
          "Kind": "string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        {
         "$id": "67",
@@ -617,9 +619,11 @@
      "Type": {
       "$id": "97",
       "Kind": "array",
+      "Name": "ArrayStringFixedEnum",
       "ValueType": {
        "$ref": "20"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -673,9 +677,11 @@
      "Type": {
       "$id": "104",
       "Kind": "array",
+      "Name": "ArrayIntExtensibleEnum",
       "ValueType": {
        "$ref": "30"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -699,9 +705,11 @@
      "Type": {
       "$id": "107",
       "Kind": "array",
+      "Name": "ArrayFloatExtensibleEnum",
       "ValueType": {
        "$ref": "35"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -725,9 +733,11 @@
      "Type": {
       "$id": "110",
       "Kind": "array",
+      "Name": "ArrayFloatFixedEnum",
       "ValueType": {
        "$ref": "40"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -751,9 +761,11 @@
      "Type": {
       "$id": "113",
       "Kind": "array",
+      "Name": "ArrayIntFixedEnum",
       "ValueType": {
        "$ref": "45"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -895,8 +907,7 @@
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
         "$id": "138",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1453,7 +1464,6 @@
    "Protocol": {
     "$id": "186"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "137"
@@ -1468,7 +1478,6 @@
    "Protocol": {
     "$id": "188"
    },
-   "Creatable": false,
    "Parent": "NewProjectTypeSpecClient",
    "Parameters": [
     {
@@ -1601,7 +1610,6 @@
    "Protocol": {
     "$id": "201"
    },
-   "Creatable": false,
    "Parent": "Hello",
    "Parameters": [
     {
@@ -2170,7 +2178,6 @@
    "Protocol": {
     "$id": "256"
    },
-   "Creatable": false,
    "Parent": "Hello",
    "Parameters": [
     {
@@ -2289,7 +2296,6 @@
    "Protocol": {
     "$id": "267"
    },
-   "Creatable": false,
    "Parent": "NewProjectTypeSpecClient",
    "Parameters": [
     {
@@ -2470,7 +2476,6 @@
    "Protocol": {
     "$id": "283"
    },
-   "Creatable": false,
    "Parent": "NewProjectTypeSpecClient",
    "Parameters": [
     {

@@ -159,9 +159,11 @@
         "Type": {
          "$id": "25",
          "Kind": "array",
+         "Name": "ArrayError",
          "ValueType": {
           "$ref": "17"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -304,6 +306,7 @@
      "Type": {
       "$id": "43",
       "Kind": "array",
+      "Name": "ArrayResource",
       "ValueType": {
        "$id": "44",
        "Kind": "model",
@@ -348,7 +351,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -379,8 +383,7 @@
    "Operations": [],
    "Protocol": {
     "$id": "54"
-   },
-   "Creatable": true
+   }
   },
   {
    "$id": "55",
@@ -390,7 +393,6 @@
    "Protocol": {
     "$id": "56"
    },
-   "Creatable": false,
    "Parent": "OldestClient"
   },
   {
@@ -620,10 +622,12 @@
        "Type": {
         "$id": "83",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "84",
          "Kind": "string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -875,7 +879,6 @@
    "Protocol": {
     "$id": "106"
    },
-   "Creatable": false,
    "Parent": "OldestClient"
   }
  ]

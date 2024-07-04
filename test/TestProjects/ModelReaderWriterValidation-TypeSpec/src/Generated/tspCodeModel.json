@@ -243,10 +243,12 @@
      "Type": {
       "$id": "38",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "39",
        "Kind": "string"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -374,10 +376,12 @@
        "Type": {
         "$id": "59",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "60",
          "Kind": "string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "IsRequired": false,
        "IsReadOnly": false
@@ -640,6 +644,7 @@
         "Type": {
          "$id": "100",
          "Kind": "array",
+         "Name": "ArrayWritableSubResource",
          "ValueType": {
           "$id": "101",
           "Kind": "model",
@@ -661,7 +666,8 @@
             "IsReadOnly": false
            }
           ]
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -773,6 +779,7 @@
      "Type": {
       "$id": "118",
       "Kind": "array",
+      "Name": "ArrayProviderResourceType",
       "ValueType": {
        "$id": "119",
        "Kind": "model",
@@ -800,10 +807,12 @@
          "Type": {
           "$id": "123",
           "Kind": "array",
+          "Name": "Array",
           "ValueType": {
            "$id": "124",
            "Kind": "string"
-          }
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -816,6 +825,7 @@
          "Type": {
           "$id": "126",
           "Kind": "array",
+          "Name": "ArrayProviderExtendedLocation",
           "ValueType": {
            "$id": "127",
            "Kind": "model",
@@ -856,16 +866,19 @@
              "Type": {
               "$id": "133",
               "Kind": "array",
+              "Name": "Array",
               "ValueType": {
                "$id": "134",
                "Kind": "string"
-              }
+              },
+              "CrossLanguageDefinitionId": "TypeSpec.Array"
              },
              "IsRequired": false,
              "IsReadOnly": false
             }
            ]
-          }
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -878,6 +891,7 @@
          "Type": {
           "$id": "136",
           "Kind": "array",
+          "Name": "ArrayResourceTypeAlias",
           "ValueType": {
            "$id": "137",
            "Kind": "model",
@@ -906,6 +920,7 @@
              "Type": {
               "$id": "141",
               "Kind": "array",
+              "Name": "ArrayResourceTypeAliasPath",
               "ValueType": {
                "$id": "142",
                "Kind": "model",
@@ -934,10 +949,12 @@
                  "Type": {
                   "$id": "146",
                   "Kind": "array",
+                  "Name": "Array",
                   "ValueType": {
                    "$id": "147",
                    "Kind": "string"
-                  }
+                  },
+                  "CrossLanguageDefinitionId": "TypeSpec.Array"
                  },
                  "IsRequired": false,
                  "IsReadOnly": false
@@ -1036,7 +1053,8 @@
                  "IsReadOnly": false
                 }
                ]
-              }
+              },
+              "CrossLanguageDefinitionId": "TypeSpec.Array"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -1087,7 +1105,8 @@
              "IsReadOnly": false
             }
            ]
-          }
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1100,10 +1119,12 @@
          "Type": {
           "$id": "165",
           "Kind": "array",
+          "Name": "Array",
           "ValueType": {
            "$id": "166",
            "Kind": "string"
-          }
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1128,6 +1149,7 @@
          "Type": {
           "$id": "170",
           "Kind": "array",
+          "Name": "ArrayZoneMapping",
           "ValueType": {
            "$id": "171",
            "Kind": "model",
@@ -1156,16 +1178,19 @@
              "Type": {
               "$id": "175",
               "Kind": "array",
+              "Name": "Array",
               "ValueType": {
                "$id": "176",
                "Kind": "string"
-              }
+              },
+              "CrossLanguageDefinitionId": "TypeSpec.Array"
              },
              "IsRequired": false,
              "IsReadOnly": false
             }
            ]
-          }
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1178,6 +1203,7 @@
          "Type": {
           "$id": "178",
           "Kind": "array",
+          "Name": "ArrayApiProfile",
           "ValueType": {
            "$id": "179",
            "Kind": "model",
@@ -1210,7 +1236,8 @@
              "IsReadOnly": false
             }
            ]
-          }
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1248,7 +1275,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1348,9 +1376,11 @@
    "AdditionalProperties": {
     "$id": "200",
     "Kind": "array",
+    "Name": "ArrayResourceTypeAliasPathMetadata",
     "ValueType": {
      "$ref": "156"
-    }
+    },
+    "CrossLanguageDefinitionId": "TypeSpec.Array"
    },
    "Properties": [
     {
@@ -1459,8 +1489,7 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "218",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2277,7 +2306,6 @@
    "Protocol": {
     "$id": "286"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "217"

@@ -47,7 +47,7 @@ import { Logger } from "./logger.js";
 import { navigateModels } from "./model.js";
 import { loadOperation } from "./operation.js";
 import { processServiceAuthentication } from "./service-authentication.js";
-import { resolveServers } from "./typespecServer.js";
+import { resolveServers } from "./typespec-server.js";
 import { createContentTypeOrAcceptParameter } from "./utils.js";
 
 export function createModel(
@@ -249,12 +249,11 @@ export function createModelForService(
         const inputClient = {
             Name: getClientName(client),
             Description: clientDesc,
-            Operations: [],
+            Operations: [] as InputOperation[],
             Protocol: {},
-            Creatable: client.kind === ClientKind.SdkClient,
             Parent: parent === undefined ? undefined : getClientName(parent),
             Parameters: urlParameters
-        } as InputClient;
+        };
         for (const op of operations) {
             const httpOperation = ignoreDiagnostics(
                 getHttpOperation(program, op)

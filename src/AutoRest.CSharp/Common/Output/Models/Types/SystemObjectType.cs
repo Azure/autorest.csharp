@@ -181,7 +181,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                     else if (declarationType.IsList)
                     {
-                        inputType = new InputListType(string.Empty, InputPrimitiveType.Boolean, false);
+                        inputType = new InputListType(string.Empty, string.Empty, InputPrimitiveType.Boolean);
                     }
                     inputModelProperty = new InputModelProperty(property.Name, GetSerializedName(property.Name, SystemType), GetPropertySummary(setter != null, property.Name), inputType, null, IsRequired(property, SystemType), property.IsReadOnly(), false, null);
 

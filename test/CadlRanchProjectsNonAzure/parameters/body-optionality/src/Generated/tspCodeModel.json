@@ -45,8 +45,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "8",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -61,8 +60,7 @@
         "$id": "9",
         "Type": {
          "$id": "10",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
@@ -264,7 +262,6 @@
    "Protocol": {
     "$id": "28"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "7"
@@ -482,7 +479,6 @@
    "Protocol": {
     "$id": "48"
    },
-   "Creatable": false,
    "Parent": "BodyOptionalityClient",
    "Parameters": [
     {

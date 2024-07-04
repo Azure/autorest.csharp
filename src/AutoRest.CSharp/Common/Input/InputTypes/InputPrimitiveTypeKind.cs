@@ -33,7 +33,7 @@ internal enum InputPrimitiveTypeKind
     UInt32,
     UInt64,
     IPAddress,
-    ArmResourceIdentifier,
+    ArmId,
     ResourceType,
     Stream,
     String,

@@ -54,8 +54,7 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "9",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -189,7 +188,6 @@
    "Protocol": {
     "$id": "21"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "8"

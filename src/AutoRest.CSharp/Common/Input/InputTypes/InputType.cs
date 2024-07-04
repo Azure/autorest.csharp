@@ -22,8 +22,8 @@ internal abstract record InputType
             case InputListType listType:
                 return new InputListType(
                     listType.Name,
-                    listType.ValueType.GetCollectionEquivalent(inputType),
-                    listType.IsEmbeddingsVector);
+                    listType.CrossLanguageDefinitionId,
+                    listType.ValueType.GetCollectionEquivalent(inputType));
             case InputDictionaryType dictionaryType:
                 return new InputDictionaryType(
                     dictionaryType.Name,
