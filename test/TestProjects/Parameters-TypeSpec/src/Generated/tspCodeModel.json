@@ -118,8 +118,7 @@
         "$id": "18",
         "Type": {
          "$id": "19",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "2022-05-15-preview"
        },
@@ -138,8 +137,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "21",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -232,8 +230,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "30",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
