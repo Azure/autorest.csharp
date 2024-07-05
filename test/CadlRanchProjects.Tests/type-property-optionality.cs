@@ -4,6 +4,7 @@
 using System;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Text.Json;
 using _Type.Property.Optionality;
 using _Type.Property.Optionality.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -14,6 +15,8 @@ namespace CadlRanchProjects.Tests
 {
     public class TypePropertyOptionalTests : CadlRanchTestBase
     {
+        private static readonly DateTimeOffset PlainDateData = new DateTimeOffset(2022, 12, 12, 0, 0, 0, 0, new TimeSpan());
+        private static readonly TimeSpan PlainTimeData = new TimeSpan(13, 06, 12);
         [Test]
         public Task Type_Property_Optional_BooleanLiteral_getAll() => Test(async (host) =>
         {
@@ -139,6 +142,70 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_Optional_Datetime_putDefault() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetDatetimeClient().PutDefaultAsync(new DatetimeProperty());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaindate_getAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetPlaindateClient().GetAllAsync();
+            Assert.AreEqual(DateTimeOffset.Parse("2022-12-12"), response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaindate_getDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetPlaindateClient().GetDefaultAsync();
+            Assert.AreEqual(null, response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaindate_putAll() => Test(async (host) =>
+        {
+            PlaindateProperty data = new()
+            {
+                Property = DateTimeOffset.Parse("2022-12-12")
+            };
+            var response = await new OptionalClient(host, null).GetPlaindateClient().PutAllAsync(data);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaindate_putDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetPlaindateClient().PutDefaultAsync(new PlaindateProperty());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaintime_getAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetPliantimeClient().GetAllAsync();
+            Assert.AreEqual(XmlConvert.ToTimeSpan("13:06:12"), response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaintime_getDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetPliantimeClient().GetDefaultAsync();
+            Assert.AreEqual(null, response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaintime_putAll() => Test(async (host) =>
+        {
+            PlainTimeProperty data = new()
+            {
+                Property = XmlConvert.ToTimeSpan("13:06:12")
+            };
+            var response = await new OptionalClient(host, null).GetPliantimeClient().PutAllAsync(data);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaintime_putDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetPliantimeClient().PutDefaultAsync(new PlainTimeProperty());
             Assert.AreEqual(204, response.Status);
         });
 
@@ -477,5 +544,18 @@ namespace CadlRanchProjects.Tests
             var response = await new OptionalClient(host, null).GetUnionStringLiteralClient().PutDefaultAsync(new UnionStringLiteralProperty());
             Assert.AreEqual(204, response.Status);
         });
+
+        [Test]
+        public void PlainDateTime()
+        {
+            var input = new PlaindateProperty();
+            input.Property = PlainDateData;
+
+            JsonAsserts.AssertWireSerialization("{\"property\":\"2022-12-12\"}", input);
+
+            using var document = JsonDocument.Parse("{\"property\":\"2022-12-12\"}");
+            var output = PlaindateProperty.DeserializePlaindateProperty(document.RootElement);
+            Assert.AreEqual(PlainDateData, output.Property);
+        }
     }
 }
