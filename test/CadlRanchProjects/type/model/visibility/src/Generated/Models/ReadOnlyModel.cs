@@ -49,53 +49,23 @@ namespace _Type.Model.Visibility.Models
         public ReadOnlyModel()
         {
             RequiredNullableIntList = new ChangeTrackingList<int>();
-            OptionalNullableIntList = new ChangeTrackingList<int>();
-            RequiredNullableModelList = new ChangeTrackingList<InnerModel>();
-            OptionalNullableModelList = new ChangeTrackingList<InnerModel>();
             RequiredStringRecord = new ChangeTrackingDictionary<string, string>();
-            OptionalStringRecord = new ChangeTrackingDictionary<string, string>();
-            RequiredModelRecord = new ChangeTrackingDictionary<string, InnerModel>();
-            OptionalModelRecord = new ChangeTrackingDictionary<string, InnerModel>();
         }
 
         /// <summary> Initializes a new instance of <see cref="ReadOnlyModel"/>. </summary>
         /// <param name="requiredNullableIntList"> Required readonly nullable int list. </param>
-        /// <param name="optionalNullableIntList"> Optional readonly nullable int list. </param>
-        /// <param name="requiredNullableModelList"> Required readonly nullable model list. </param>
-        /// <param name="optionalNullableModelList"> Optional readonly nullable model list. </param>
         /// <param name="requiredStringRecord"> Required readonly string dictionary. </param>
-        /// <param name="optionalStringRecord"> Optional readonly string dictionary. </param>
-        /// <param name="requiredModelRecord"> Required readonly model dictionary. </param>
-        /// <param name="optionalModelRecord"> Optional readonly model dictionary. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ReadOnlyModel(IReadOnlyList<int> requiredNullableIntList, IReadOnlyList<int> optionalNullableIntList, IReadOnlyList<InnerModel> requiredNullableModelList, IReadOnlyList<InnerModel> optionalNullableModelList, IReadOnlyDictionary<string, string> requiredStringRecord, IReadOnlyDictionary<string, string> optionalStringRecord, IReadOnlyDictionary<string, InnerModel> requiredModelRecord, IReadOnlyDictionary<string, InnerModel> optionalModelRecord, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ReadOnlyModel(IReadOnlyList<int> requiredNullableIntList, IReadOnlyDictionary<string, string> requiredStringRecord, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredNullableIntList = requiredNullableIntList;
-            OptionalNullableIntList = optionalNullableIntList;
-            RequiredNullableModelList = requiredNullableModelList;
-            OptionalNullableModelList = optionalNullableModelList;
             RequiredStringRecord = requiredStringRecord;
-            OptionalStringRecord = optionalStringRecord;
-            RequiredModelRecord = requiredModelRecord;
-            OptionalModelRecord = optionalModelRecord;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Required readonly nullable int list. </summary>
         public IReadOnlyList<int> RequiredNullableIntList { get; }
-        /// <summary> Optional readonly nullable int list. </summary>
-        public IReadOnlyList<int> OptionalNullableIntList { get; }
-        /// <summary> Required readonly nullable model list. </summary>
-        public IReadOnlyList<InnerModel> RequiredNullableModelList { get; }
-        /// <summary> Optional readonly nullable model list. </summary>
-        public IReadOnlyList<InnerModel> OptionalNullableModelList { get; }
         /// <summary> Required readonly string dictionary. </summary>
         public IReadOnlyDictionary<string, string> RequiredStringRecord { get; }
-        /// <summary> Optional readonly string dictionary. </summary>
-        public IReadOnlyDictionary<string, string> OptionalStringRecord { get; }
-        /// <summary> Required readonly model dictionary. </summary>
-        public IReadOnlyDictionary<string, InnerModel> RequiredModelRecord { get; }
-        /// <summary> Optional readonly model dictionary. </summary>
-        public IReadOnlyDictionary<string, InnerModel> OptionalModelRecord { get; }
     }
 }

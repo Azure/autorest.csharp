@@ -36,43 +36,14 @@ namespace _Type.Model.Visibility.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.ReadOnlyModel"/>. </summary>
         /// <param name="requiredNullableIntList"> Required readonly nullable int list. </param>
-        /// <param name="optionalNullableIntList"> Optional readonly nullable int list. </param>
-        /// <param name="requiredNullableModelList"> Required readonly nullable model list. </param>
-        /// <param name="optionalNullableModelList"> Optional readonly nullable model list. </param>
         /// <param name="requiredStringRecord"> Required readonly string dictionary. </param>
-        /// <param name="optionalStringRecord"> Optional readonly string dictionary. </param>
-        /// <param name="requiredModelRecord"> Required readonly model dictionary. </param>
-        /// <param name="optionalModelRecord"> Optional readonly model dictionary. </param>
         /// <returns> A new <see cref="Models.ReadOnlyModel"/> instance for mocking. </returns>
-        public static ReadOnlyModel ReadOnlyModel(IEnumerable<int> requiredNullableIntList = null, IEnumerable<int> optionalNullableIntList = null, IEnumerable<InnerModel> requiredNullableModelList = null, IEnumerable<InnerModel> optionalNullableModelList = null, IReadOnlyDictionary<string, string> requiredStringRecord = null, IReadOnlyDictionary<string, string> optionalStringRecord = null, IReadOnlyDictionary<string, InnerModel> requiredModelRecord = null, IReadOnlyDictionary<string, InnerModel> optionalModelRecord = null)
+        public static ReadOnlyModel ReadOnlyModel(IEnumerable<int> requiredNullableIntList = null, IReadOnlyDictionary<string, string> requiredStringRecord = null)
         {
             requiredNullableIntList ??= new List<int>();
-            optionalNullableIntList ??= new List<int>();
-            requiredNullableModelList ??= new List<InnerModel>();
-            optionalNullableModelList ??= new List<InnerModel>();
             requiredStringRecord ??= new Dictionary<string, string>();
-            optionalStringRecord ??= new Dictionary<string, string>();
-            requiredModelRecord ??= new Dictionary<string, InnerModel>();
-            optionalModelRecord ??= new Dictionary<string, InnerModel>();
 
-            return new ReadOnlyModel(
-                requiredNullableIntList?.ToList(),
-                optionalNullableIntList?.ToList(),
-                requiredNullableModelList?.ToList(),
-                optionalNullableModelList?.ToList(),
-                requiredStringRecord,
-                optionalStringRecord,
-                requiredModelRecord,
-                optionalModelRecord,
-                serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.InnerModel"/>. </summary>
-        /// <param name="name"></param>
-        /// <returns> A new <see cref="Models.InnerModel"/> instance for mocking. </returns>
-        public static InnerModel InnerModel(string name = null)
-        {
-            return new InnerModel(name, serializedAdditionalRawData: null);
+            return new ReadOnlyModel(requiredNullableIntList?.ToList(), requiredStringRecord, serializedAdditionalRawData: null);
         }
     }
 }

@@ -118,190 +118,46 @@
     },
     {
      "$id": "20",
-     "Name": "optionalNullableIntList",
-     "SerializedName": "optionalNullableIntList",
-     "Description": "Optional readonly nullable int list.",
-     "Type": {
-      "$id": "21",
-      "Kind": "nullable",
-      "Type": {
-       "$id": "22",
-       "Kind": "array",
-       "Name": "Array",
-       "ValueType": {
-        "$id": "23",
-        "Kind": "int32"
-       },
-       "CrossLanguageDefinitionId": "TypeSpec.Array"
-      }
-     },
-     "IsRequired": false,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "24",
-     "Name": "requiredNullableModelList",
-     "SerializedName": "requiredNullableModelList",
-     "Description": "Required readonly nullable model list.",
-     "Type": {
-      "$id": "25",
-      "Kind": "nullable",
-      "Type": {
-       "$id": "26",
-       "Kind": "array",
-       "Name": "ArrayInnerModel",
-       "ValueType": {
-        "$id": "27",
-        "Kind": "model",
-        "Name": "InnerModel",
-        "CrossLanguageDefinitionId": "Type.Model.Visibility.InnerModel",
-        "Usage": "Output",
-        "Description": "Innermodel used as a readonly property for testing.",
-        "Properties": [
-         {
-          "$id": "28",
-          "Name": "name",
-          "SerializedName": "name",
-          "Description": "",
-          "Type": {
-           "$id": "29",
-           "Kind": "string"
-          },
-          "IsRequired": true,
-          "IsReadOnly": false
-         }
-        ]
-       },
-       "CrossLanguageDefinitionId": "TypeSpec.Array"
-      }
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "30",
-     "Name": "optionalNullableModelList",
-     "SerializedName": "optionalNullableModelList",
-     "Description": "Optional readonly nullable model list.",
-     "Type": {
-      "$id": "31",
-      "Kind": "nullable",
-      "Type": {
-       "$id": "32",
-       "Kind": "array",
-       "Name": "ArrayInnerModel",
-       "ValueType": {
-        "$ref": "27"
-       },
-       "CrossLanguageDefinitionId": "TypeSpec.Array"
-      }
-     },
-     "IsRequired": false,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "33",
      "Name": "requiredStringRecord",
      "SerializedName": "requiredStringRecord",
      "Description": "Required readonly string dictionary.",
      "Type": {
-      "$id": "34",
+      "$id": "21",
       "Kind": "dict",
       "KeyType": {
-       "$id": "35",
+       "$id": "22",
        "Kind": "string"
       },
       "ValueType": {
-       "$id": "36",
+       "$id": "23",
        "Kind": "string"
       }
      },
      "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "37",
-     "Name": "optionalStringRecord",
-     "SerializedName": "optionalStringRecord",
-     "Description": "Optional readonly string dictionary.",
-     "Type": {
-      "$id": "38",
-      "Kind": "dict",
-      "KeyType": {
-       "$id": "39",
-       "Kind": "string"
-      },
-      "ValueType": {
-       "$id": "40",
-       "Kind": "string"
-      }
-     },
-     "IsRequired": false,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "41",
-     "Name": "requiredModelRecord",
-     "SerializedName": "requiredModelRecord",
-     "Description": "Required readonly model dictionary.",
-     "Type": {
-      "$id": "42",
-      "Kind": "dict",
-      "KeyType": {
-       "$id": "43",
-       "Kind": "string"
-      },
-      "ValueType": {
-       "$ref": "27"
-      }
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "44",
-     "Name": "optionalModelRecord",
-     "SerializedName": "optionalModelRecord",
-     "Description": "Optional readonly model dictionary.",
-     "Type": {
-      "$id": "45",
-      "Kind": "dict",
-      "KeyType": {
-       "$id": "46",
-       "Kind": "string"
-      },
-      "ValueType": {
-       "$ref": "27"
-      }
-     },
-     "IsRequired": false,
      "IsReadOnly": true
     }
    ]
-  },
-  {
-   "$ref": "27"
   }
  ],
  "Clients": [
   {
-   "$id": "47",
+   "$id": "24",
    "Name": "VisibilityClient",
    "Description": "Illustrates models with visibility properties.",
    "Operations": [
     {
-     "$id": "48",
+     "$id": "25",
      "Name": "getModel",
      "ResourceName": "Visibility",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "49",
+       "$id": "26",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "50",
+        "$id": "27",
         "Kind": "string"
        },
        "Location": "Uri",
@@ -314,16 +170,16 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "51",
+        "$id": "28",
         "Type": {
-         "$id": "52",
+         "$id": "29",
          "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
       },
       {
-       "$id": "53",
+       "$id": "30",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -340,11 +196,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "54",
+       "$id": "31",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "55",
+        "$id": "32",
         "Kind": "string",
         "IsNullable": false
        },
@@ -358,19 +214,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "56",
+        "$id": "33",
         "Type": {
-         "$ref": "55"
+         "$ref": "32"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "57",
+       "$id": "34",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "58",
+        "$id": "35",
         "Kind": "string",
         "IsNullable": false
        },
@@ -384,9 +240,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "59",
+        "$id": "36",
         "Type": {
-         "$ref": "58"
+         "$ref": "35"
         },
         "Value": "application/json"
        }
@@ -394,7 +250,7 @@
      ],
      "Responses": [
       {
-       "$id": "60",
+       "$id": "37",
        "StatusCodes": [
         200
        ],
@@ -421,16 +277,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "61",
+     "$id": "38",
      "Name": "headModel",
      "ResourceName": "Visibility",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "49"
+       "$ref": "26"
       },
       {
-       "$id": "62",
+       "$id": "39",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -447,11 +303,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "63",
+       "$id": "40",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "64",
+        "$id": "41",
         "Kind": "string",
         "IsNullable": false
        },
@@ -465,19 +321,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "65",
+        "$id": "42",
         "Type": {
-         "$ref": "64"
+         "$ref": "41"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "66",
+       "$id": "43",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "67",
+        "$id": "44",
         "Kind": "string",
         "IsNullable": false
        },
@@ -491,9 +347,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "68",
+        "$id": "45",
         "Type": {
-         "$ref": "67"
+         "$ref": "44"
         },
         "Value": "application/json"
        }
@@ -501,7 +357,7 @@
      ],
      "Responses": [
       {
-       "$id": "69",
+       "$id": "46",
        "StatusCodes": [
         200
        ],
@@ -522,16 +378,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "70",
+     "$id": "47",
      "Name": "putModel",
      "ResourceName": "Visibility",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "49"
+       "$ref": "26"
       },
       {
-       "$id": "71",
+       "$id": "48",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -548,11 +404,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "72",
+       "$id": "49",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "73",
+        "$id": "50",
         "Kind": "string",
         "IsNullable": false
        },
@@ -566,19 +422,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "74",
+        "$id": "51",
         "Type": {
-         "$ref": "73"
+         "$ref": "50"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "75",
+       "$id": "52",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "76",
+        "$id": "53",
         "Kind": "string",
         "IsNullable": false
        },
@@ -592,9 +448,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "77",
+        "$id": "54",
         "Type": {
-         "$ref": "76"
+         "$ref": "53"
         },
         "Value": "application/json"
        }
@@ -602,7 +458,7 @@
      ],
      "Responses": [
       {
-       "$id": "78",
+       "$id": "55",
        "StatusCodes": [
         204
        ],
@@ -623,16 +479,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "79",
+     "$id": "56",
      "Name": "patchModel",
      "ResourceName": "Visibility",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "49"
+       "$ref": "26"
       },
       {
-       "$id": "80",
+       "$id": "57",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -649,11 +505,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "81",
+       "$id": "58",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "82",
+        "$id": "59",
         "Kind": "string",
         "IsNullable": false
        },
@@ -667,19 +523,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "83",
+        "$id": "60",
         "Type": {
-         "$ref": "82"
+         "$ref": "59"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "84",
+       "$id": "61",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "85",
+        "$id": "62",
         "Kind": "string",
         "IsNullable": false
        },
@@ -693,9 +549,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "86",
+        "$id": "63",
         "Type": {
-         "$ref": "85"
+         "$ref": "62"
         },
         "Value": "application/json"
        }
@@ -703,7 +559,7 @@
      ],
      "Responses": [
       {
-       "$id": "87",
+       "$id": "64",
        "StatusCodes": [
         204
        ],
@@ -724,16 +580,16 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "88",
+     "$id": "65",
      "Name": "postModel",
      "ResourceName": "Visibility",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "49"
+       "$ref": "26"
       },
       {
-       "$id": "89",
+       "$id": "66",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -750,11 +606,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "90",
+       "$id": "67",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "91",
+        "$id": "68",
         "Kind": "string",
         "IsNullable": false
        },
@@ -768,19 +624,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "92",
+        "$id": "69",
         "Type": {
-         "$ref": "91"
+         "$ref": "68"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "93",
+       "$id": "70",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "94",
+        "$id": "71",
         "Kind": "string",
         "IsNullable": false
        },
@@ -794,9 +650,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "95",
+        "$id": "72",
         "Type": {
-         "$ref": "94"
+         "$ref": "71"
         },
         "Value": "application/json"
        }
@@ -804,7 +660,7 @@
      ],
      "Responses": [
       {
-       "$id": "96",
+       "$id": "73",
        "StatusCodes": [
         204
        ],
@@ -825,16 +681,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "97",
+     "$id": "74",
      "Name": "deleteModel",
      "ResourceName": "Visibility",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "49"
+       "$ref": "26"
       },
       {
-       "$id": "98",
+       "$id": "75",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -851,11 +707,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "99",
+       "$id": "76",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "100",
+        "$id": "77",
         "Kind": "string",
         "IsNullable": false
        },
@@ -869,19 +725,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "101",
+        "$id": "78",
         "Type": {
-         "$ref": "100"
+         "$ref": "77"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "102",
+       "$id": "79",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "103",
+        "$id": "80",
         "Kind": "string",
         "IsNullable": false
        },
@@ -895,9 +751,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "104",
+        "$id": "81",
         "Type": {
-         "$ref": "103"
+         "$ref": "80"
         },
         "Value": "application/json"
        }
@@ -905,7 +761,7 @@
      ],
      "Responses": [
       {
-       "$id": "105",
+       "$id": "82",
        "StatusCodes": [
         204
        ],
@@ -926,16 +782,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "106",
+     "$id": "83",
      "Name": "putReadOnlyModel",
      "ResourceName": "Visibility",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "49"
+       "$ref": "26"
       },
       {
-       "$id": "107",
+       "$id": "84",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -952,11 +808,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "108",
+       "$id": "85",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "109",
+        "$id": "86",
         "Kind": "string",
         "IsNullable": false
        },
@@ -970,19 +826,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "110",
+        "$id": "87",
         "Type": {
-         "$ref": "109"
+         "$ref": "86"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "111",
+       "$id": "88",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "112",
+        "$id": "89",
         "Kind": "string",
         "IsNullable": false
        },
@@ -996,9 +852,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "113",
+        "$id": "90",
         "Type": {
-         "$ref": "112"
+         "$ref": "89"
         },
         "Value": "application/json"
        }
@@ -1006,7 +862,7 @@
      ],
      "Responses": [
       {
-       "$id": "114",
+       "$id": "91",
        "StatusCodes": [
         200
        ],
@@ -1034,11 +890,11 @@
     }
    ],
    "Protocol": {
-    "$id": "115"
+    "$id": "92"
    },
    "Parameters": [
     {
-     "$ref": "49"
+     "$ref": "26"
     }
    ]
   }

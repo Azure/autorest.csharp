@@ -825,9 +825,7 @@ namespace _Type.Model.Visibility.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableModelList")[0].GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredModelRecord").GetProperty("<key>").GetProperty("name").ToString());
         }
 
         [Test]
@@ -841,9 +839,7 @@ namespace _Type.Model.Visibility.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableModelList")[0].GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredModelRecord").GetProperty("<key>").GetProperty("name").ToString());
         }
 
         [Test]
@@ -877,13 +873,7 @@ namespace _Type.Model.Visibility.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableModelList")[0].GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("optionalNullableModelList")[0].GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredModelRecord").GetProperty("<key>").GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("optionalModelRecord").GetProperty("<key>").GetProperty("name").ToString());
         }
 
         [Test]
@@ -897,13 +887,7 @@ namespace _Type.Model.Visibility.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableModelList")[0].GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("optionalNullableModelList")[0].GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredModelRecord").GetProperty("<key>").GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("optionalModelRecord").GetProperty("<key>").GetProperty("name").ToString());
         }
 
         [Test]
