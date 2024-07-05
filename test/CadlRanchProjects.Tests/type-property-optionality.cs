@@ -149,7 +149,8 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_Optional_Plaindate_getAll() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetPlaindateClient().GetAllAsync();
-            Assert.AreEqual(DateTimeOffset.Parse("2022-12-12"), response.Value.Property);
+            var expectedDate = new DateTimeOffset(2022, 12, 12, 8, 0, 0, TimeSpan.FromHours(8));
+            Assert.AreEqual(expectedDate, response.Value.Property.Value.ToOffset(TimeSpan.FromHours(8)));
         });
 
         [Test]
@@ -181,7 +182,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_Optional_Plaintime_getAll() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetPliantimeClient().GetAllAsync();
-            Assert.AreEqual(XmlConvert.ToTimeSpan("13:06:12"), response.Value.Property);
+            Assert.AreEqual(TimeSpan.Parse("13:06:12"), response.Value.Property);
         });
 
         [Test]
@@ -196,7 +197,7 @@ namespace CadlRanchProjects.Tests
         {
             PlainTimeProperty data = new()
             {
-                Property = XmlConvert.ToTimeSpan("13:06:12")
+                Property = TimeSpan.Parse("13:06:12")
             };
             var response = await new OptionalClient(host, null).GetPliantimeClient().PutAllAsync(data);
             Assert.AreEqual(204, response.Status);
@@ -556,6 +557,38 @@ namespace CadlRanchProjects.Tests
             using var document = JsonDocument.Parse("{\"property\":\"2022-12-12\"}");
             var output = PlaindateProperty.DeserializePlaindateProperty(document.RootElement);
             Assert.AreEqual(PlainDateData, output.Property);
+        }
+
+        [Test]
+        public void PlainDateTimeOmittingTime()
+        {
+            var input = new PlaindateProperty();
+            input.Property = new DateTimeOffset(2022, 12, 12, 13, 06, 0, 0, new TimeSpan());
+
+            JsonAsserts.AssertWireSerialization("{\"property\":\"2022-12-12\"}", input);
+
+            using var document = JsonDocument.Parse("{\"property\":\"2022-12-12T13:06:00\"}");
+            var output = PlaindateProperty.DeserializePlaindateProperty(document.RootElement);
+            Assert.IsNotNull(output.Property.Value);
+            Assert.AreEqual(2022, output.Property.Value.Year);
+            Assert.AreEqual(12, output.Property.Value.Month);
+            Assert.AreEqual(12, output.Property.Value.Day);
+            Assert.AreEqual(13, output.Property.Value.Hour);
+            Assert.AreEqual(06, output.Property.Value.Minute);
+            Assert.AreEqual(0, output.Property.Value.Millisecond);
+        }
+
+        [Test]
+        public void PlainTime()
+        {
+            var input = new PlainTimeProperty();
+            input.Property = PlainTimeData;
+
+            JsonAsserts.AssertWireSerialization("{\"property\":\"13:06:12\"}", input);
+
+            using var document = JsonDocument.Parse("{\"property\":\"13:06:12\"}");
+            var output = PlainTimeProperty.DeserializePlainTimeProperty(document.RootElement);
+            Assert.AreEqual(PlainTimeData, output.Property);
         }
     }
 }
