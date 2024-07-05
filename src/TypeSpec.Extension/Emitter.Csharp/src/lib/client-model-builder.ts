@@ -167,7 +167,7 @@ export function createModel(
                     // https://github.com/Azure/typespec-azure/issues/989
                     DefaultValue: {
                         Type: {
-                            Kind: "string",
+                            Kind: "string"
                         },
                         Value: p.type.serverUrl
                     }
@@ -196,7 +196,7 @@ export function createModel(
                 // TODO: we should do the magic in generator
                 Type: isEndpoint
                     ? ({
-                          Kind: "uri",
+                          Kind: "uri"
                       } as InputPrimitiveType)
                     : fromSdkType(
                           parameter.type,

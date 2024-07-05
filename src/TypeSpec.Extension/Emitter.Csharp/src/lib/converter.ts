@@ -55,8 +55,7 @@ export function fromSdkType(
     }
     if (sdkType.kind === "model")
         return fromSdkModelType(sdkType, context, models, enums);
-    if (sdkType.kind === "endpoint")
-        return fromSdkEndpointType();
+    if (sdkType.kind === "endpoint") return fromSdkEndpointType();
     if (sdkType.kind === "enum")
         return fromSdkEnumType(sdkType, context, enums);
     if (sdkType.kind === "enumvalue")
@@ -427,7 +426,7 @@ function fromSdkArrayType(
 
 function fromUsageFlags(usage: UsageFlags): string {
     const usages: string[] = [];
-    if ((usage & (UsageFlags.Input) && (usage & UsageFlags.Output)))
+    if (usage & UsageFlags.Input && usage & UsageFlags.Output)
         usages.push(Usage.RoundTrip);
     else if (usage & UsageFlags.Input) usages.push(Usage.Input);
     else if (usage & UsageFlags.Output) usages.push(Usage.Output);
@@ -439,9 +438,8 @@ function fromUsageFlags(usage: UsageFlags): string {
     return Usage.None;
 }
 
-function fromSdkEndpointType(
-): InputPrimitiveType {
+function fromSdkEndpointType(): InputPrimitiveType {
     return {
-        Kind: "string",
+        Kind: "string"
     };
 }

@@ -16,7 +16,12 @@ import {
     shouldGenerateConvenient,
     shouldGenerateProtocol
 } from "@azure-tools/typespec-client-generator-core";
-import { getDeprecated, getDoc, getSummary, isErrorModel } from "@typespec/compiler";
+import {
+    getDeprecated,
+    getDoc,
+    getSummary,
+    isErrorModel
+} from "@typespec/compiler";
 import { HttpStatusCodeRange } from "@typespec/http";
 import { getResourceOperation } from "@typespec/rest";
 import { NetEmitterOptions } from "../options.js";
@@ -118,7 +123,7 @@ export function getParameterDefaultValue(
 
     return {
         Type: {
-            Kind: getValueType(clientDefaultValue),
+            Kind: getValueType(clientDefaultValue)
         },
         Value: clientDefaultValue
     };
