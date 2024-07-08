@@ -693,25 +693,25 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="friend"> The <see cref="SuperFriend"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
-        public virtual async Task<ClientResult<SuperFriend>> FriendlyModelAsync(SuperFriend friend)
+        /// <param name="superFriend"> The <see cref="SuperFriend"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="superFriend"/> is null. </exception>
+        public virtual async Task<ClientResult<SuperFriend>> FriendlyModelAsync(SuperFriend superFriend)
         {
-            Argument.AssertNotNull(friend, nameof(friend));
+            Argument.AssertNotNull(superFriend, nameof(superFriend));
 
-            using BinaryContent content = friend.ToBinaryContent();
+            using BinaryContent content = superFriend.ToBinaryContent();
             ClientResult result = await FriendlyModelAsync(content, null).ConfigureAwait(false);
             return ClientResult.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="friend"> The <see cref="SuperFriend"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
-        public virtual ClientResult<SuperFriend> FriendlyModel(SuperFriend friend)
+        /// <param name="superFriend"> The <see cref="SuperFriend"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="superFriend"/> is null. </exception>
+        public virtual ClientResult<SuperFriend> FriendlyModel(SuperFriend superFriend)
         {
-            Argument.AssertNotNull(friend, nameof(friend));
+            Argument.AssertNotNull(superFriend, nameof(superFriend));
 
-            using BinaryContent content = friend.ToBinaryContent();
+            using BinaryContent content = superFriend.ToBinaryContent();
             ClientResult result = FriendlyModel(content, null);
             return ClientResult.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
