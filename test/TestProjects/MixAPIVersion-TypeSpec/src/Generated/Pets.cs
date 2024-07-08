@@ -282,7 +282,7 @@ namespace MixApiVersion
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/pets", false);
-            uri.AppendQuery("apiVersion", "2022-11-30-preview", true);
+            uri.AppendQuery("apiVersion", "2022-07-09", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

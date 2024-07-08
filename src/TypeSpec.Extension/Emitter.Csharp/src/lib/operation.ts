@@ -115,9 +115,14 @@ export function fromSdkServiceMethod(
 }
 
 export function getParameterDefaultValue(
-    clientDefaultValue: any
+    clientDefaultValue: any,
+    parameterType: InputType
 ): InputConstant | undefined {
-    if (clientDefaultValue === undefined) {
+    if (
+        clientDefaultValue === undefined ||
+        // a constant parameter should overwrite client default value
+        parameterType.Kind === "constant"
+    ) {
         return undefined;
     }
 
@@ -229,7 +234,10 @@ function fromHttpOperationParameter(
             isContentType,
             rootApiVersions.length > 0
         ),
-        DefaultValue: getParameterDefaultValue(p.clientDefaultValue)
+        DefaultValue: getParameterDefaultValue(
+            p.clientDefaultValue,
+            parameterType
+        )
     } as InputParameter;
 }
 

@@ -189,21 +189,17 @@ export function createModel(
         const parameters: InputParameter[] = [];
         for (const parameter of p.type.templateArguments) {
             const isEndpoint = parameter.name === endpointVariableName;
+            const parameterType = isEndpoint
+                ? ({
+                      Kind: "uri"
+                  } as InputPrimitiveType)
+                : fromSdkType(parameter.type, sdkContext, modelMap, enumMap);
             parameters.push({
                 Name: parameter.name,
                 NameInRequest: parameter.serializedName,
                 Description: parameter.description,
                 // TODO: we should do the magic in generator
-                Type: isEndpoint
-                    ? ({
-                          Kind: "uri"
-                      } as InputPrimitiveType)
-                    : fromSdkType(
-                          parameter.type,
-                          sdkContext,
-                          modelMap,
-                          enumMap
-                      ),
+                Type: parameterType,
                 Location: RequestLocation.Uri,
                 // TODO: do we have a better way to check if a parameter is api-version?
                 IsApiVersion:
@@ -217,7 +213,8 @@ export function createModel(
                 Explode: false,
                 Kind: InputOperationParameterKind.Client,
                 DefaultValue: getParameterDefaultValue(
-                    parameter.clientDefaultValue
+                    parameter.clientDefaultValue,
+                    parameterType
                 )
             });
         }

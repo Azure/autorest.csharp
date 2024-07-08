@@ -420,26 +420,18 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "54",
-        "Type": {
-         "$id": "55",
-         "Kind": "string"
-        },
-        "Value": "2022-11-30-preview"
-       }
+       "Kind": "Constant"
       },
       {
-       "$id": "56",
+       "$id": "54",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "57",
+        "$id": "55",
         "Kind": "constant",
         "ValueType": {
-         "$id": "58",
+         "$id": "56",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -453,14 +445,14 @@
        "Kind": "Constant"
       },
       {
-       "$id": "59",
+       "$id": "57",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "60",
+        "$id": "58",
         "Kind": "constant",
         "ValueType": {
-         "$id": "61",
+         "$id": "59",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -474,7 +466,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "62",
+       "$id": "60",
        "Name": "pet",
        "NameInRequest": "pet",
        "Type": {
@@ -491,7 +483,7 @@
      ],
      "Responses": [
       {
-       "$id": "63",
+       "$id": "61",
        "StatusCodes": [
         200
        ],
@@ -519,7 +511,7 @@
     }
    ],
    "Protocol": {
-    "$id": "64"
+    "$id": "62"
    },
    "Parent": "MixApiVersionClient",
    "Parameters": [
@@ -529,11 +521,11 @@
    ]
   },
   {
-   "$id": "65",
+   "$id": "63",
    "Name": "ListPetToysResponse",
    "Operations": [
     {
-     "$id": "66",
+     "$id": "64",
      "Name": "listPet",
      "ResourceName": "Toy",
      "Summary": "Gets ledger entries from a collection corresponding to a range.",
@@ -541,12 +533,12 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "67",
+       "$id": "65",
        "Name": "petStoreUrl",
        "NameInRequest": "petStoreUrl",
        "Description": "Endpoint Service",
        "Type": {
-        "$id": "68",
+        "$id": "66",
         "Kind": "uri"
        },
        "Location": "Uri",
@@ -560,12 +552,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "69",
+       "$id": "67",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "70",
+        "$id": "68",
         "Kind": "string"
        },
        "Location": "Query",
@@ -576,23 +568,23 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "71",
+        "$id": "69",
         "Type": {
-         "$id": "72",
+         "$id": "70",
          "Kind": "string"
         },
         "Value": "2022-11-30-preview"
        }
       },
       {
-       "$id": "73",
+       "$id": "71",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "74",
+        "$id": "72",
         "Kind": "constant",
         "ValueType": {
-         "$id": "75",
+         "$id": "73",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -608,7 +600,7 @@
      ],
      "Responses": [
       {
-       "$id": "76",
+       "$id": "74",
        "StatusCodes": [
         200
        ],
@@ -629,7 +621,7 @@
      "Path": "/pets/toys/Toy",
      "BufferResponse": true,
      "Paging": {
-      "$id": "77",
+      "$id": "75",
       "ItemName": "value",
       "NextLinkName": "nextLink"
      },
@@ -638,12 +630,12 @@
     }
    ],
    "Protocol": {
-    "$id": "78"
+    "$id": "76"
    },
    "Parent": "MixApiVersionClient",
    "Parameters": [
     {
-     "$ref": "67"
+     "$ref": "65"
     }
    ]
   }

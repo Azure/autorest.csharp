@@ -46,7 +46,7 @@ using RequestContent content = RequestContent.Create(new
     id = "<id>",
     profileImage = File.OpenRead("<filePath>"),
 });
-Response response = await client.BasicAsync(content, null);
+Response response = await client.BasicAsync(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -59,7 +59,7 @@ using RequestContent content = RequestContent.Create(new
     id = "<id>",
     profileImage = File.OpenRead("<filePath>"),
 });
-Response response = await client.BasicAsync(content, null);
+Response response = await client.BasicAsync(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -75,7 +75,7 @@ using RequestContent content = RequestContent.Create(new
     id = "<id>",
     profileImage = File.OpenRead("<filePath>"),
 });
-Response response = client.Basic(content, null);
+Response response = client.Basic(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -88,7 +88,7 @@ using RequestContent content = RequestContent.Create(new
     id = "<id>",
     profileImage = File.OpenRead("<filePath>"),
 });
-Response response = client.Basic(content, null);
+Response response = client.Basic(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -162,7 +162,7 @@ using RequestContent content = RequestContent.Create(new
         File.OpenRead("<filePath>")
     },
 });
-Response response = await client.ComplexAsync(content, null);
+Response response = await client.ComplexAsync(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -187,7 +187,7 @@ using RequestContent content = RequestContent.Create(new
         File.OpenRead("<filePath>")
     },
 });
-Response response = await client.ComplexAsync(content, null);
+Response response = await client.ComplexAsync(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -215,7 +215,7 @@ using RequestContent content = RequestContent.Create(new
         File.OpenRead("<filePath>")
     },
 });
-Response response = client.Complex(content, null);
+Response response = client.Complex(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -240,7 +240,7 @@ using RequestContent content = RequestContent.Create(new
         File.OpenRead("<filePath>")
     },
 });
-Response response = client.Complex(content, null);
+Response response = client.Complex(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -293,7 +293,7 @@ using RequestContent content = RequestContent.Create(new
     },
     profileImage = File.OpenRead("<filePath>"),
 });
-Response response = await client.JsonPartAsync(content, null);
+Response response = await client.JsonPartAsync(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -309,7 +309,7 @@ using RequestContent content = RequestContent.Create(new
     },
     profileImage = File.OpenRead("<filePath>"),
 });
-Response response = await client.JsonPartAsync(content, null);
+Response response = await client.JsonPartAsync(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -328,7 +328,7 @@ using RequestContent content = RequestContent.Create(new
     },
     profileImage = File.OpenRead("<filePath>"),
 });
-Response response = client.JsonPart(content, null);
+Response response = client.JsonPart(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -344,7 +344,7 @@ using RequestContent content = RequestContent.Create(new
     },
     profileImage = File.OpenRead("<filePath>"),
 });
-Response response = client.JsonPart(content, null);
+Response response = client.JsonPart(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -397,7 +397,7 @@ using RequestContent content = RequestContent.Create(new
         File.OpenRead("<filePath>")
     },
 });
-Response response = await client.BinaryArrayPartsAsync(content, null);
+Response response = await client.BinaryArrayPartsAsync(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -413,7 +413,7 @@ using RequestContent content = RequestContent.Create(new
         File.OpenRead("<filePath>")
     },
 });
-Response response = await client.BinaryArrayPartsAsync(content, null);
+Response response = await client.BinaryArrayPartsAsync(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -432,7 +432,7 @@ using RequestContent content = RequestContent.Create(new
         File.OpenRead("<filePath>")
     },
 });
-Response response = client.BinaryArrayParts(content, null);
+Response response = client.BinaryArrayParts(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -448,7 +448,7 @@ using RequestContent content = RequestContent.Create(new
         File.OpenRead("<filePath>")
     },
 });
-Response response = client.BinaryArrayParts(content, null);
+Response response = client.BinaryArrayParts(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -516,7 +516,7 @@ using RequestContent content = RequestContent.Create(new
         }
     },
 });
-Response response = await client.JsonArrayPartsAsync(content, null);
+Response response = await client.JsonArrayPartsAsync(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -535,7 +535,7 @@ using RequestContent content = RequestContent.Create(new
         }
     },
 });
-Response response = await client.JsonArrayPartsAsync(content, null);
+Response response = await client.JsonArrayPartsAsync(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -557,7 +557,7 @@ using RequestContent content = RequestContent.Create(new
         }
     },
 });
-Response response = client.JsonArrayParts(content, null);
+Response response = client.JsonArrayParts(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -576,7 +576,7 @@ using RequestContent content = RequestContent.Create(new
         }
     },
 });
-Response response = client.JsonArrayParts(content, null);
+Response response = client.JsonArrayParts(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -631,7 +631,7 @@ using RequestContent content = RequestContent.Create(new
 {
     profileImage = File.OpenRead("<filePath>"),
 });
-Response response = await client.MultiBinaryPartsAsync(content, null);
+Response response = await client.MultiBinaryPartsAsync(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -644,7 +644,7 @@ using RequestContent content = RequestContent.Create(new
     profileImage = File.OpenRead("<filePath>"),
     picture = File.OpenRead("<filePath>"),
 });
-Response response = await client.MultiBinaryPartsAsync(content, null);
+Response response = await client.MultiBinaryPartsAsync(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -659,7 +659,7 @@ using RequestContent content = RequestContent.Create(new
 {
     profileImage = File.OpenRead("<filePath>"),
 });
-Response response = client.MultiBinaryParts(content, null);
+Response response = client.MultiBinaryParts(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -672,7 +672,7 @@ using RequestContent content = RequestContent.Create(new
     profileImage = File.OpenRead("<filePath>"),
     picture = File.OpenRead("<filePath>"),
 });
-Response response = client.MultiBinaryParts(content, null);
+Response response = client.MultiBinaryParts(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -722,7 +722,7 @@ using RequestContent content = RequestContent.Create(new
     id = "<id>",
     profileImage = File.OpenRead("<filePath>"),
 });
-Response response = await client.CheckFileNameAndContentTypeAsync(content, null);
+Response response = await client.CheckFileNameAndContentTypeAsync(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -735,7 +735,7 @@ using RequestContent content = RequestContent.Create(new
     id = "<id>",
     profileImage = File.OpenRead("<filePath>"),
 });
-Response response = await client.CheckFileNameAndContentTypeAsync(content, null);
+Response response = await client.CheckFileNameAndContentTypeAsync(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -751,7 +751,7 @@ using RequestContent content = RequestContent.Create(new
     id = "<id>",
     profileImage = File.OpenRead("<filePath>"),
 });
-Response response = client.CheckFileNameAndContentType(content, null);
+Response response = client.CheckFileNameAndContentType(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -764,7 +764,7 @@ using RequestContent content = RequestContent.Create(new
     id = "<id>",
     profileImage = File.OpenRead("<filePath>"),
 });
-Response response = client.CheckFileNameAndContentType(content, null);
+Response response = client.CheckFileNameAndContentType(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -809,7 +809,7 @@ using RequestContent content = RequestContent.Create(new
 {
     profileImage = File.OpenRead("<filePath>"),
 });
-Response response = await client.AnonymousModelAsync(content, null);
+Response response = await client.AnonymousModelAsync(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -821,7 +821,7 @@ using RequestContent content = RequestContent.Create(new
 {
     profileImage = File.OpenRead("<filePath>"),
 });
-Response response = await client.AnonymousModelAsync(content, null);
+Response response = await client.AnonymousModelAsync(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -836,7 +836,7 @@ using RequestContent content = RequestContent.Create(new
 {
     profileImage = File.OpenRead("<filePath>"),
 });
-Response response = client.AnonymousModel(content, null);
+Response response = client.AnonymousModel(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -848,7 +848,7 @@ using RequestContent content = RequestContent.Create(new
 {
     profileImage = File.OpenRead("<filePath>"),
 });
-Response response = client.AnonymousModel(content, null);
+Response response = client.AnonymousModel(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>

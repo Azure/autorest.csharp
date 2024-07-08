@@ -481,6 +481,7 @@ namespace AutoRest.CSharp.Output.Models
                     case { Location: RequestLocation.Uri or RequestLocation.Path }:
                         requiredPathParameters.Add(operationParameter.NameInRequest, operationParameter);
                         break;
+                    case { IsApiVersion: true, Type: InputLiteralType { Value: not null } }:
                     case { IsApiVersion: true, DefaultValue: not null }:
                         optionalRequestParameters.Add(operationParameter);
                         break;
