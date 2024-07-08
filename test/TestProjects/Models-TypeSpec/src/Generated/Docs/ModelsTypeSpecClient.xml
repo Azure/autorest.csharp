@@ -2207,7 +2207,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
 InputRecursiveModel input = new InputRecursiveModel("<message>");
-Response<ErrorModel> response = await client.InputRecursiveAsync(input);
+Response response = await client.InputRecursiveAsync(input);
 ]]></code>
 This sample shows how to call InputRecursiveAsync with all parameters.
 <code><![CDATA[
@@ -2218,7 +2218,7 @@ InputRecursiveModel input = new InputRecursiveModel("<message>")
 {
     Inner = default,
 };
-Response<ErrorModel> response = await client.InputRecursiveAsync(input);
+Response response = await client.InputRecursiveAsync(input);
 ]]></code></example>
     </member>
     <member name="InputRecursive(InputRecursiveModel,CancellationToken)">
@@ -2229,7 +2229,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
 InputRecursiveModel input = new InputRecursiveModel("<message>");
-Response<ErrorModel> response = client.InputRecursive(input);
+Response response = client.InputRecursive(input);
 ]]></code>
 This sample shows how to call InputRecursive with all parameters.
 <code><![CDATA[
@@ -2240,12 +2240,12 @@ InputRecursiveModel input = new InputRecursiveModel("<message>")
 {
     Inner = default,
 };
-Response<ErrorModel> response = client.InputRecursive(input);
+Response response = client.InputRecursive(input);
 ]]></code></example>
     </member>
     <member name="InputRecursiveAsync(RequestContent,RequestContext)">
       <example>
-This sample shows how to call InputRecursiveAsync and parse the result.
+This sample shows how to call InputRecursiveAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2256,10 +2256,9 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.InputRecursiveAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("message").ToString());
+Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call InputRecursiveAsync with all request content and parse the result.
+This sample shows how to call InputRecursiveAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2270,14 +2269,12 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.InputRecursiveAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("message").ToString());
-Console.WriteLine(result.GetProperty("innerError").GetProperty("message").ToString());
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="InputRecursive(RequestContent,RequestContext)">
       <example>
-This sample shows how to call InputRecursive and parse the result.
+This sample shows how to call InputRecursive.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2288,10 +2285,9 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.InputRecursive(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("message").ToString());
+Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call InputRecursive with all request content and parse the result.
+This sample shows how to call InputRecursive with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2302,9 +2298,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.InputRecursive(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("message").ToString());
-Console.WriteLine(result.GetProperty("innerError").GetProperty("message").ToString());
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="RoundTripRecursiveAsync(RoundTripRecursiveModel,CancellationToken)">

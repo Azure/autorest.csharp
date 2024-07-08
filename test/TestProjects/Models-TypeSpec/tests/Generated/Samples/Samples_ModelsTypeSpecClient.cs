@@ -2302,8 +2302,7 @@ default
             });
             Response response = client.InputRecursive(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2319,8 +2318,7 @@ default
             });
             Response response = await client.InputRecursiveAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2331,7 +2329,7 @@ default
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             InputRecursiveModel input = new InputRecursiveModel("<message>");
-            Response<ErrorModel> response = client.InputRecursive(input);
+            Response response = client.InputRecursive(input);
         }
 
         [Test]
@@ -2342,7 +2340,7 @@ default
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             InputRecursiveModel input = new InputRecursiveModel("<message>");
-            Response<ErrorModel> response = await client.InputRecursiveAsync(input);
+            Response response = await client.InputRecursiveAsync(input);
         }
 
         [Test]
@@ -2358,9 +2356,7 @@ default
             });
             Response response = client.InputRecursive(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("innerError").GetProperty("message").ToString());
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2376,9 +2372,7 @@ default
             });
             Response response = await client.InputRecursiveAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("innerError").GetProperty("message").ToString());
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2392,7 +2386,7 @@ default
             {
                 Inner = default,
             };
-            Response<ErrorModel> response = client.InputRecursive(input);
+            Response response = client.InputRecursive(input);
         }
 
         [Test]
@@ -2406,7 +2400,7 @@ default
             {
                 Inner = default,
             };
-            Response<ErrorModel> response = await client.InputRecursiveAsync(input);
+            Response response = await client.InputRecursiveAsync(input);
         }
 
         [Test]

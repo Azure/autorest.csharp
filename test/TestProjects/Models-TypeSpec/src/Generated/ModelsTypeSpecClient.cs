@@ -799,14 +799,14 @@ namespace ModelsTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputRecursiveAsync(InputRecursiveModel,CancellationToken)']/*" />
-        public virtual async Task<Response<ErrorModel>> InputRecursiveAsync(InputRecursiveModel input, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> InputRecursiveAsync(InputRecursiveModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
             using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await InputRecursiveAsync(content, context).ConfigureAwait(false);
-            return Response.FromValue(ErrorModel.FromResponse(response), response);
+            return response;
         }
 
         /// <summary> Input recursive model. </summary>
@@ -814,14 +814,14 @@ namespace ModelsTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputRecursive(InputRecursiveModel,CancellationToken)']/*" />
-        public virtual Response<ErrorModel> InputRecursive(InputRecursiveModel input, CancellationToken cancellationToken = default)
+        public virtual Response InputRecursive(InputRecursiveModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
             using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = InputRecursive(content, context);
-            return Response.FromValue(ErrorModel.FromResponse(response), response);
+            return response;
         }
 
         /// <summary>
@@ -1706,7 +1706,6 @@ namespace ModelsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/inputRecursive", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

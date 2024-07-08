@@ -647,7 +647,7 @@ op roundTripToOutput(@body input: RoundTripModel): OutputModel;
 @doc("Input recursive model")
 @post
 @convenientAPI(true)
-op InputRecursive(@body input: InputRecursiveModel): Response<200>|ErrorModel;
+op InputRecursive(@body input: InputRecursiveModel): Response<200>;
 
 @route("/roundTripRecursive")
 @doc("RoundTrip recursive model")
