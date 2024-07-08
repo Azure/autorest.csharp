@@ -271,30 +271,30 @@ namespace CustomizationsInTsp
         }
 
         /// <summary> Sample operation with request body using a model parameter with a spread operator. </summary>
-        /// <param name="modelToRename"> The <see cref="RenamedModel"/> to use. </param>
+        /// <param name="renamedModel"> The <see cref="RenamedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="modelToRename"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="renamedModel"/> is null. </exception>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='BarAsync(RenamedModel,CancellationToken)']/*" />
-        public virtual async Task<Response<RenamedModel>> BarAsync(RenamedModel modelToRename, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RenamedModel>> BarAsync(RenamedModel renamedModel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(modelToRename, nameof(modelToRename));
+            Argument.AssertNotNull(renamedModel, nameof(renamedModel));
 
-            using RequestContent content = modelToRename.ToRequestContent();
+            using RequestContent content = renamedModel.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await BarAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(RenamedModel.FromResponse(response), response);
         }
 
         /// <summary> Sample operation with request body using a model parameter with a spread operator. </summary>
-        /// <param name="modelToRename"> The <see cref="RenamedModel"/> to use. </param>
+        /// <param name="renamedModel"> The <see cref="RenamedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="modelToRename"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="renamedModel"/> is null. </exception>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='Bar(RenamedModel,CancellationToken)']/*" />
-        public virtual Response<RenamedModel> Bar(RenamedModel modelToRename, CancellationToken cancellationToken = default)
+        public virtual Response<RenamedModel> Bar(RenamedModel renamedModel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(modelToRename, nameof(modelToRename));
+            Argument.AssertNotNull(renamedModel, nameof(renamedModel));
 
-            using RequestContent content = modelToRename.ToRequestContent();
+            using RequestContent content = renamedModel.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Bar(content, context);
             return Response.FromValue(RenamedModel.FromResponse(response), response);
