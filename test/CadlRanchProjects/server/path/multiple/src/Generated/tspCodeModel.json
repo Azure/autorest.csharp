@@ -80,8 +80,7 @@
         "$id": "10",
         "Type": {
          "$id": "11",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "v1.0"
        }
@@ -92,8 +91,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "13",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -168,8 +166,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "20",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
