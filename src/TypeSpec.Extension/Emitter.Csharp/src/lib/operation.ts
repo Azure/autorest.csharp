@@ -208,8 +208,7 @@ function fromHttpOperationParameter(
         p.kind === "header" || p.kind === "query"
             ? p.collectionFormat
             : undefined;
-    const serializedName =
-        p.kind === "header" || p.kind === "query" ? p.serializedName : p.name;
+    const serializedName = p.kind !== "body" ? p.serializedName : p.name;
 
     return {
         Name: p.name,
