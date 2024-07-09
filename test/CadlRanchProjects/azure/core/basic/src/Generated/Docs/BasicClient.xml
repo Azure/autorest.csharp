@@ -427,6 +427,116 @@ Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code></example>
     </member>
+    <member name="SwapUsersAsync(SwapUsersOptions,CancellationToken)">
+      <example>
+This sample shows how to call SwapUsersAsync.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+SwapUsersOptions body = new SwapUsersOptions(1234, 1234);
+Response<User> response = await client.SwapUsersAsync(body);
+]]></code>
+This sample shows how to call SwapUsersAsync with all parameters.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+SwapUsersOptions body = new SwapUsersOptions(1234, 1234);
+Response<User> response = await client.SwapUsersAsync(body);
+]]></code></example>
+    </member>
+    <member name="SwapUsers(SwapUsersOptions,CancellationToken)">
+      <example>
+This sample shows how to call SwapUsers.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+SwapUsersOptions body = new SwapUsersOptions(1234, 1234);
+Response<User> response = client.SwapUsers(body);
+]]></code>
+This sample shows how to call SwapUsers with all parameters.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+SwapUsersOptions body = new SwapUsersOptions(1234, 1234);
+Response<User> response = client.SwapUsers(body);
+]]></code></example>
+    </member>
+    <member name="SwapUsersAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call SwapUsersAsync and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    firstUserId = 1234,
+    secondUserId = 1234,
+});
+Response response = await client.SwapUsersAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code>
+This sample shows how to call SwapUsersAsync with all request content and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    firstUserId = 1234,
+    secondUserId = 1234,
+});
+Response response = await client.SwapUsersAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code></example>
+    </member>
+    <member name="SwapUsers(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call SwapUsers and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    firstUserId = 1234,
+    secondUserId = 1234,
+});
+Response response = client.SwapUsers(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code>
+This sample shows how to call SwapUsers with all request content and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    firstUserId = 1234,
+    secondUserId = 1234,
+});
+Response response = client.SwapUsers(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code></example>
+    </member>
     <member name="GetUsersAsync(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},CancellationToken)">
       <example>
 This sample shows how to call GetUsersAsync.

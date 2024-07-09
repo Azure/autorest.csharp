@@ -507,6 +507,114 @@ namespace _Specs_.Azure.Core.Basic
             }
         }
 
+        /// <summary> Swaps two existing users' information with each other. </summary>
+        /// <param name="body"> The body schema of the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='SwapUsersAsync(SwapUsersOptions,CancellationToken)']/*" />
+        public virtual async Task<Response<User>> SwapUsersAsync(SwapUsersOptions body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await SwapUsersAsync(content, context).ConfigureAwait(false);
+            return Response.FromValue(User.FromResponse(response), response);
+        }
+
+        /// <summary> Swaps two existing users' information with each other. </summary>
+        /// <param name="body"> The body schema of the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='SwapUsers(SwapUsersOptions,CancellationToken)']/*" />
+        public virtual Response<User> SwapUsers(SwapUsersOptions body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = SwapUsers(content, context);
+            return Response.FromValue(User.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method] Swaps two existing users' information with each other.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SwapUsersAsync(SwapUsersOptions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='SwapUsersAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> SwapUsersAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.SwapUsers");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSwapUsersRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Swaps two existing users' information with each other.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SwapUsers(SwapUsersOptions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='SwapUsers(RequestContent,RequestContext)']/*" />
+        public virtual Response SwapUsers(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.SwapUsers");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSwapUsersRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Lists all users. </summary>
         /// <param name="maxCount"> The number of result items to return. </param>
         /// <param name="skip"> The number of result items to skip. </param>
@@ -1040,6 +1148,22 @@ namespace _Specs_.Azure.Core.Basic
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateSwapUsersRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/azure/core/basic/users:swap", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
             return message;
         }
 

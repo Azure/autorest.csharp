@@ -101,6 +101,13 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
+        public Task Azure_Core_Basic_train() => Test(async (host) =>
+        {
+            User resopnse = await new BasicClient(host, null).SwapUsersAsync(new SwapUsersOptions(1,2));
+            Assert.AreEqual("David", resopnse.Name);
+        });
+
+        [Test]
         public Task Azure_Core_Basic_listWithParameters() => Test(async (host) =>
         {
             AsyncPageable<User> allPages = new BasicClient(host, null).GetWithParametersAsync(new ListItemInputBody("Madge"), ListItemInputExtensibleEnum.Second);

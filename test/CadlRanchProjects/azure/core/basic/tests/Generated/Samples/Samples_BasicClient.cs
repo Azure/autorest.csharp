@@ -495,6 +495,128 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_Basic_SwapUsers_ShortVersion()
+        {
+            BasicClient client = new BasicClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                firstUserId = 1234,
+                secondUserId = 1234,
+            });
+            Response response = client.SwapUsers(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Basic_SwapUsers_ShortVersion_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                firstUserId = 1234,
+                secondUserId = 1234,
+            });
+            Response response = await client.SwapUsersAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Basic_SwapUsers_ShortVersion_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            SwapUsersOptions body = new SwapUsersOptions(1234, 1234);
+            Response<User> response = client.SwapUsers(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Basic_SwapUsers_ShortVersion_Convenience_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            SwapUsersOptions body = new SwapUsersOptions(1234, 1234);
+            Response<User> response = await client.SwapUsersAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Basic_SwapUsers_AllParameters()
+        {
+            BasicClient client = new BasicClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                firstUserId = 1234,
+                secondUserId = 1234,
+            });
+            Response response = client.SwapUsers(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Basic_SwapUsers_AllParameters_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                firstUserId = 1234,
+                secondUserId = 1234,
+            });
+            Response response = await client.SwapUsersAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Basic_SwapUsers_AllParameters_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            SwapUsersOptions body = new SwapUsersOptions(1234, 1234);
+            Response<User> response = client.SwapUsers(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Basic_SwapUsers_AllParameters_Convenience_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            SwapUsersOptions body = new SwapUsersOptions(1234, 1234);
+            Response<User> response = await client.SwapUsersAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_User_GetUsers_ShortVersion()
         {
             BasicClient client = new BasicClient();
