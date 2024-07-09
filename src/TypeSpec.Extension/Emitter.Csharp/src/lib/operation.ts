@@ -179,7 +179,8 @@ export function loadOperation(
     );
     if (contentTypeParameter) {
         if (isInputLiteralType(contentTypeParameter.Type)) {
-            mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
+            if (contentTypeParameter.Type.Value as string)
+                mediaTypes.push(contentTypeParameter.Type.Value as string);
         } else if (isInputUnionType(contentTypeParameter.Type)) {
             for (const unionItem of contentTypeParameter.Type.VariantTypes) {
                 if (isInputLiteralType(unionItem)) {
