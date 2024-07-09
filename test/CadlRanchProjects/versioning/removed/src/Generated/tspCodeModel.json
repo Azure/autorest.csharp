@@ -108,27 +108,60 @@
      "IsReadOnly": false
     }
    ]
+  },
+  {
+   "$id": "17",
+   "Kind": "model",
+   "Name": "ModelV3",
+   "CrossLanguageDefinitionId": "Versioning.Removed.ModelV3",
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "18",
+     "Name": "id",
+     "SerializedName": "id",
+     "Description": "",
+     "Type": {
+      "$id": "19",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "20",
+     "Name": "type",
+     "SerializedName": "type",
+     "Description": "",
+     "Type": {
+      "$id": "21",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
   }
  ],
  "Clients": [
   {
-   "$id": "17",
+   "$id": "22",
    "Name": "RemovedClient",
    "Description": "Test for the `@removed` decorator.",
    "Operations": [
     {
-     "$id": "18",
+     "$id": "23",
      "Name": "v2",
      "ResourceName": "Removed",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "19",
+       "$id": "24",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "20",
+        "$id": "25",
         "Kind": "url"
        },
        "Location": "Uri",
@@ -142,7 +175,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "21",
+       "$id": "26",
        "Name": "version",
        "NameInRequest": "version",
        "Description": "Need to be set as 'v1' or 'v2' in client.",
@@ -160,7 +193,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "22",
+       "$id": "27",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -177,11 +210,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "23",
+       "$id": "28",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "24",
+        "$id": "29",
         "Kind": "string"
        },
        "Location": "Header",
@@ -194,19 +227,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "25",
+        "$id": "30",
         "Type": {
-         "$ref": "24"
+         "$ref": "29"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "26",
+       "$id": "31",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "27",
+        "$id": "32",
         "Kind": "string"
        },
        "Location": "Header",
@@ -219,9 +252,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "28",
+        "$id": "33",
         "Type": {
-         "$ref": "27"
+         "$ref": "32"
         },
         "Value": "application/json"
        }
@@ -229,7 +262,7 @@
      ],
      "Responses": [
       {
-       "$id": "29",
+       "$id": "34",
        "StatusCodes": [
         200
        ],
@@ -254,17 +287,126 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "35",
+     "Name": "v3",
+     "ResourceName": "Removed",
+     "Description": "This operation should not be generated with old version",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "24"
+      },
+      {
+       "$ref": "26"
+      },
+      {
+       "$id": "36",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "17"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "37",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "38",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "39",
+        "Type": {
+         "$ref": "38"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "40",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "41",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "42",
+        "Type": {
+         "$ref": "41"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "43",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "17"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{endpoint}/versioning/removed/api-version:{version}",
+     "Path": "/v3",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "30"
+    "$id": "44"
    },
    "Parameters": [
     {
-     "$ref": "19"
+     "$ref": "24"
     },
     {
-     "$ref": "21"
+     "$ref": "26"
     }
    ]
   }
