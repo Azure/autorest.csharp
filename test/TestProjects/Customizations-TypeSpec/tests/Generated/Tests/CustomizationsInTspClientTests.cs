@@ -272,8 +272,8 @@ new Dictionary<string, string>
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             CustomizationsInTspClient client = CreateCustomizationsInTspClient(endpoint);
 
-            RenamedModel renamedModel = null;
-            Response<RenamedModel> response = await client.BarAsync(renamedModel);
+            RenamedModel modelToRename = new RenamedModel(1234);
+            Response<RenamedModel> response = await client.BarAsync(modelToRename);
         }
 
         [Test]
@@ -298,8 +298,11 @@ new Dictionary<string, string>
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             CustomizationsInTspClient client = CreateCustomizationsInTspClient(endpoint);
 
-            RenamedModel renamedModel = null;
-            Response<RenamedModel> response = await client.BarAsync(renamedModel);
+            RenamedModel modelToRename = new RenamedModel(1234)
+            {
+                OptionalInt = 1234,
+            };
+            Response<RenamedModel> response = await client.BarAsync(modelToRename);
         }
     }
 }

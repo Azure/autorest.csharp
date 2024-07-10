@@ -690,6 +690,24 @@ model RoundTripOnNoUse extends NoUseBase {
 @convenientAPI(true)
 op roundTripToOutputWithNoUseBase(@body input: RoundTripOnNoUse): RoundTripOnNoUse;
 
+@doc("Model used as internal input and public output")
+model ModelInternalInput {
+  @doc("model property")
+  prop: string;
+}
+
+@route("/internalInput")
+@get
+@convenientAPI(true)
+op getInternalInput(): ModelInternalInput;
+
+@access(Access.internal)
+@route("/internalInput")
+@put
+@convenientAPI(true)
+op putInternalInput(@body body: ModelInternalInput): ModelInternalInput;
+
+
 @doc("This is a model.")
 @resource("items")
 model Foo {
