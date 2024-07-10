@@ -49,7 +49,7 @@ namespace AnomalyDetector.Models
         /// <param name="code"> The error code. </param>
         /// <param name="message"> The message explaining the error reported by the service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="code"/> or <paramref name="message"/> is null. </exception>
-        internal ErrorResponse(string code, string message)
+        public ErrorResponse(string code, string message)
         {
             Argument.AssertNotNull(code, nameof(code));
             Argument.AssertNotNull(message, nameof(message));
@@ -75,8 +75,8 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> The error code. </summary>
-        public string Code { get; }
+        public string Code { get; set; }
         /// <summary> The message explaining the error reported by the service. </summary>
-        public string Message { get; }
+        public string Message { get; set; }
     }
 }

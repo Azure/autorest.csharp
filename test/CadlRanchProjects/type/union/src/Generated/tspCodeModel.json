@@ -30,7 +30,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "None"
   },
   {
    "$id": "7",
@@ -107,7 +107,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "None"
   },
   {
    "$id": "20",
@@ -136,7 +136,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "None"
   },
   {
    "$id": "25",
@@ -170,7 +170,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "None"
   },
   {
    "$id": "31",
@@ -194,7 +194,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "None"
   }
  ],
  "Models": [

@@ -998,7 +998,7 @@
           "Kind": "model",
           "Name": "ErrorResponse",
           "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ErrorResponse",
-          "Usage": "Output",
+          "Usage": "RoundTrip",
           "Description": "ErrorResponse contains code and message that shows the error information.",
           "Properties": [
            {
