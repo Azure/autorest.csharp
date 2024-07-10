@@ -426,6 +426,7 @@ function fromSdkArrayType(
 }
 
 function fromUsageFlags(usage: UsageFlags): Usage {
+    usage = usage & (UsageFlags.Input | UsageFlags.Output); // trim off other flags
     if (usage === UsageFlags.Input) return Usage.Input;
     else if (usage === UsageFlags.Output) return Usage.Output;
     else if (usage === (UsageFlags.Input | UsageFlags.Output))
