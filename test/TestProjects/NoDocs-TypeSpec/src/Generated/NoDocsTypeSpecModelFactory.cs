@@ -35,6 +35,16 @@ namespace NoDocsTypeSpec.Models
                 serializedAdditionalRawData: null);
         }
 
+        public static Friend Friend(string name = null)
+        {
+            return new Friend(name, serializedAdditionalRawData: null);
+        }
+
+        public static ProjectedModel ProjectedModel(string name = null)
+        {
+            return new ProjectedModel(name, serializedAdditionalRawData: null);
+        }
+
         public static Extension Extension(IEnumerable<Extension> extension = null, sbyte level = default)
         {
             extension ??= new List<Extension>();

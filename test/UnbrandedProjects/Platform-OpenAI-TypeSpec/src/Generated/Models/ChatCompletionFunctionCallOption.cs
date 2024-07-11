@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace OpenAI.Models
 {
     /// <summary> The ChatCompletionFunctionCallOption. </summary>
-    public partial class ChatCompletionFunctionCallOption
+    internal partial class ChatCompletionFunctionCallOption
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
