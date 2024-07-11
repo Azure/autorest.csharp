@@ -41,7 +41,7 @@ namespace Scm._Type.Property.Optionality
         private Datetime _cachedDatetime;
         private Duration _cachedDuration;
         private Plaindate _cachedPlaindate;
-        private Pliantime _cachedPliantime;
+        private Plaintime _cachedPlaintime;
         private CollectionsByte _cachedCollectionsByte;
         private CollectionsModel _cachedCollectionsModel;
         private StringLiteral _cachedStringLiteral;
@@ -83,10 +83,10 @@ namespace Scm._Type.Property.Optionality
             return Volatile.Read(ref _cachedPlaindate) ?? Interlocked.CompareExchange(ref _cachedPlaindate, new Plaindate(_pipeline, _endpoint), null) ?? _cachedPlaindate;
         }
 
-        /// <summary> Initializes a new instance of Pliantime. </summary>
-        public virtual Pliantime GetPliantimeClient()
+        /// <summary> Initializes a new instance of Plaintime. </summary>
+        public virtual Plaintime GetPlaintimeClient()
         {
-            return Volatile.Read(ref _cachedPliantime) ?? Interlocked.CompareExchange(ref _cachedPliantime, new Pliantime(_pipeline, _endpoint), null) ?? _cachedPliantime;
+            return Volatile.Read(ref _cachedPlaintime) ?? Interlocked.CompareExchange(ref _cachedPlaintime, new Plaintime(_pipeline, _endpoint), null) ?? _cachedPlaintime;
         }
 
         /// <summary> Initializes a new instance of CollectionsByte. </summary>

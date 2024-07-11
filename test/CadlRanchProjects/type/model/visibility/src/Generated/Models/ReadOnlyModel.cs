@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Model.Visibility.Models
 {
-    /// <summary> RoundTrip model with readonly properties. </summary>
+    /// <summary> RoundTrip model with readonly optional properties. </summary>
     public partial class ReadOnlyModel
     {
         /// <summary>
@@ -48,24 +48,24 @@ namespace _Type.Model.Visibility.Models
         /// <summary> Initializes a new instance of <see cref="ReadOnlyModel"/>. </summary>
         public ReadOnlyModel()
         {
-            RequiredNullableIntList = new ChangeTrackingList<int>();
-            RequiredStringRecord = new ChangeTrackingDictionary<string, string>();
+            OptionalNullableIntList = new ChangeTrackingList<int>();
+            OptionalStringRecord = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of <see cref="ReadOnlyModel"/>. </summary>
-        /// <param name="requiredNullableIntList"> Required readonly nullable int list. </param>
-        /// <param name="requiredStringRecord"> Required readonly string dictionary. </param>
+        /// <param name="optionalNullableIntList"> Optional readonly nullable int list. </param>
+        /// <param name="optionalStringRecord"> Optional readonly string dictionary. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ReadOnlyModel(IReadOnlyList<int> requiredNullableIntList, IReadOnlyDictionary<string, string> requiredStringRecord, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ReadOnlyModel(IReadOnlyList<int> optionalNullableIntList, IReadOnlyDictionary<string, string> optionalStringRecord, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            RequiredNullableIntList = requiredNullableIntList;
-            RequiredStringRecord = requiredStringRecord;
+            OptionalNullableIntList = optionalNullableIntList;
+            OptionalStringRecord = optionalStringRecord;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Required readonly nullable int list. </summary>
-        public IReadOnlyList<int> RequiredNullableIntList { get; }
-        /// <summary> Required readonly string dictionary. </summary>
-        public IReadOnlyDictionary<string, string> RequiredStringRecord { get; }
+        /// <summary> Optional readonly nullable int list. </summary>
+        public IReadOnlyList<int> OptionalNullableIntList { get; }
+        /// <summary> Optional readonly string dictionary. </summary>
+        public IReadOnlyDictionary<string, string> OptionalStringRecord { get; }
     }
 }

@@ -181,14 +181,14 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_Optional_Plaintime_getAll() => Test(async (host) =>
         {
-            var response = await new OptionalClient(host, null).GetPliantimeClient().GetAllAsync();
+            var response = await new OptionalClient(host, null).GetPlaintimeClient().GetAllAsync();
             Assert.AreEqual(TimeSpan.Parse("13:06:12"), response.Value.Property);
         });
 
         [Test]
         public Task Type_Property_Optional_Plaintime_getDefault() => Test(async (host) =>
         {
-            var response = await new OptionalClient(host, null).GetPliantimeClient().GetDefaultAsync();
+            var response = await new OptionalClient(host, null).GetPlaintimeClient().GetDefaultAsync();
             Assert.AreEqual(null, response.Value.Property);
         });
 
@@ -199,14 +199,14 @@ namespace CadlRanchProjects.Tests
             {
                 Property = TimeSpan.Parse("13:06:12")
             };
-            var response = await new OptionalClient(host, null).GetPliantimeClient().PutAllAsync(data);
+            var response = await new OptionalClient(host, null).GetPlaintimeClient().PutAllAsync(data);
             Assert.AreEqual(204, response.Status);
         });
 
         [Test]
         public Task Type_Property_Optional_Plaintime_putDefault() => Test(async (host) =>
         {
-            var response = await new OptionalClient(host, null).GetPliantimeClient().PutDefaultAsync(new PlainTimeProperty());
+            var response = await new OptionalClient(host, null).GetPlaintimeClient().PutDefaultAsync(new PlainTimeProperty());
             Assert.AreEqual(204, response.Status);
         });
 

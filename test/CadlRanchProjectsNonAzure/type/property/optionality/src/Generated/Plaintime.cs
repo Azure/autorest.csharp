@@ -11,8 +11,8 @@ using Scm._Type.Property.Optionality.Models;
 namespace Scm._Type.Property.Optionality
 {
     // Data plane generated sub-client.
-    /// <summary> The Pliantime sub-client. </summary>
-    public partial class Pliantime
+    /// <summary> The Plaintime sub-client. </summary>
+    public partial class Plaintime
     {
         private readonly ClientPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -20,15 +20,15 @@ namespace Scm._Type.Property.Optionality
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual ClientPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of Pliantime for mocking. </summary>
-        protected Pliantime()
+        /// <summary> Initializes a new instance of Plaintime for mocking. </summary>
+        protected Plaintime()
         {
         }
 
-        /// <summary> Initializes a new instance of Pliantime. </summary>
+        /// <summary> Initializes a new instance of Plaintime. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        internal Pliantime(ClientPipeline pipeline, Uri endpoint)
+        internal Plaintime(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;

@@ -35,15 +35,15 @@ namespace _Type.Model.Visibility.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ReadOnlyModel"/>. </summary>
-        /// <param name="requiredNullableIntList"> Required readonly nullable int list. </param>
-        /// <param name="requiredStringRecord"> Required readonly string dictionary. </param>
+        /// <param name="optionalNullableIntList"> Optional readonly nullable int list. </param>
+        /// <param name="optionalStringRecord"> Optional readonly string dictionary. </param>
         /// <returns> A new <see cref="Models.ReadOnlyModel"/> instance for mocking. </returns>
-        public static ReadOnlyModel ReadOnlyModel(IEnumerable<int> requiredNullableIntList = null, IReadOnlyDictionary<string, string> requiredStringRecord = null)
+        public static ReadOnlyModel ReadOnlyModel(IEnumerable<int> optionalNullableIntList = null, IReadOnlyDictionary<string, string> optionalStringRecord = null)
         {
-            requiredNullableIntList ??= new List<int>();
-            requiredStringRecord ??= new Dictionary<string, string>();
+            optionalNullableIntList ??= new List<int>();
+            optionalStringRecord ??= new Dictionary<string, string>();
 
-            return new ReadOnlyModel(requiredNullableIntList?.ToList(), requiredStringRecord, serializedAdditionalRawData: null);
+            return new ReadOnlyModel(optionalNullableIntList?.ToList(), optionalStringRecord, serializedAdditionalRawData: null);
         }
     }
 }

@@ -92,13 +92,13 @@
    "Name": "ReadOnlyModel",
    "CrossLanguageDefinitionId": "Type.Model.Visibility.ReadOnlyModel",
    "Usage": "RoundTrip",
-   "Description": "RoundTrip model with readonly properties.",
+   "Description": "RoundTrip model with readonly optional properties.",
    "Properties": [
     {
      "$id": "16",
-     "Name": "requiredNullableIntList",
-     "SerializedName": "requiredNullableIntList",
-     "Description": "Required readonly nullable int list.",
+     "Name": "optionalNullableIntList",
+     "SerializedName": "optionalNullableIntList",
+     "Description": "Optional readonly nullable int list.",
      "Type": {
       "$id": "17",
       "Kind": "nullable",
@@ -118,9 +118,9 @@
     },
     {
      "$id": "20",
-     "Name": "requiredStringRecord",
-     "SerializedName": "requiredStringRecord",
-     "Description": "Required readonly string dictionary.",
+     "Name": "optionalStringRecord",
+     "SerializedName": "optionalStringRecord",
+     "Description": "Optional readonly string dictionary.",
      "Type": {
       "$id": "21",
       "Kind": "dict",

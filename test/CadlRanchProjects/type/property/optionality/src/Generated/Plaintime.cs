@@ -16,8 +16,8 @@ using _Type.Property.Optionality.Models;
 namespace _Type.Property.Optionality
 {
     // Data plane generated sub-client.
-    /// <summary> The Pliantime sub-client. </summary>
-    public partial class Pliantime
+    /// <summary> The Plaintime sub-client. </summary>
+    public partial class Plaintime
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -28,16 +28,16 @@ namespace _Type.Property.Optionality
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of Pliantime for mocking. </summary>
-        protected Pliantime()
+        /// <summary> Initializes a new instance of Plaintime for mocking. </summary>
+        protected Plaintime()
         {
         }
 
-        /// <summary> Initializes a new instance of Pliantime. </summary>
+        /// <summary> Initializes a new instance of Plaintime. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        internal Pliantime(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
+        internal Plaintime(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -46,7 +46,7 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/Pliantime.xml" path="doc/members/member[@name='GetAllAsync(CancellationToken)']/*" />
+        /// <include file="Docs/Plaintime.xml" path="doc/members/member[@name='GetAllAsync(CancellationToken)']/*" />
         public virtual async Task<Response<PlainTimeProperty>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -56,7 +56,7 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/Pliantime.xml" path="doc/members/member[@name='GetAll(CancellationToken)']/*" />
+        /// <include file="Docs/Plaintime.xml" path="doc/members/member[@name='GetAll(CancellationToken)']/*" />
         public virtual Response<PlainTimeProperty> GetAll(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -82,10 +82,10 @@ namespace _Type.Property.Optionality
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Pliantime.xml" path="doc/members/member[@name='GetAllAsync(RequestContext)']/*" />
+        /// <include file="Docs/Plaintime.xml" path="doc/members/member[@name='GetAllAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetAllAsync(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("Pliantime.GetAll");
+            using var scope = ClientDiagnostics.CreateScope("Plaintime.GetAll");
             scope.Start();
             try
             {
@@ -117,10 +117,10 @@ namespace _Type.Property.Optionality
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Pliantime.xml" path="doc/members/member[@name='GetAll(RequestContext)']/*" />
+        /// <include file="Docs/Plaintime.xml" path="doc/members/member[@name='GetAll(RequestContext)']/*" />
         public virtual Response GetAll(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("Pliantime.GetAll");
+            using var scope = ClientDiagnostics.CreateScope("Plaintime.GetAll");
             scope.Start();
             try
             {
@@ -136,7 +136,7 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/Pliantime.xml" path="doc/members/member[@name='GetDefaultAsync(CancellationToken)']/*" />
+        /// <include file="Docs/Plaintime.xml" path="doc/members/member[@name='GetDefaultAsync(CancellationToken)']/*" />
         public virtual async Task<Response<PlainTimeProperty>> GetDefaultAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -146,7 +146,7 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/Pliantime.xml" path="doc/members/member[@name='GetDefault(CancellationToken)']/*" />
+        /// <include file="Docs/Plaintime.xml" path="doc/members/member[@name='GetDefault(CancellationToken)']/*" />
         public virtual Response<PlainTimeProperty> GetDefault(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -172,10 +172,10 @@ namespace _Type.Property.Optionality
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Pliantime.xml" path="doc/members/member[@name='GetDefaultAsync(RequestContext)']/*" />
+        /// <include file="Docs/Plaintime.xml" path="doc/members/member[@name='GetDefaultAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDefaultAsync(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("Pliantime.GetDefault");
+            using var scope = ClientDiagnostics.CreateScope("Plaintime.GetDefault");
             scope.Start();
             try
             {
@@ -207,10 +207,10 @@ namespace _Type.Property.Optionality
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Pliantime.xml" path="doc/members/member[@name='GetDefault(RequestContext)']/*" />
+        /// <include file="Docs/Plaintime.xml" path="doc/members/member[@name='GetDefault(RequestContext)']/*" />
         public virtual Response GetDefault(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("Pliantime.GetDefault");
+            using var scope = ClientDiagnostics.CreateScope("Plaintime.GetDefault");
             scope.Start();
             try
             {
@@ -228,7 +228,7 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="PlainTimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Pliantime.xml" path="doc/members/member[@name='PutAllAsync(PlainTimeProperty,CancellationToken)']/*" />
+        /// <include file="Docs/Plaintime.xml" path="doc/members/member[@name='PutAllAsync(PlainTimeProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAllAsync(PlainTimeProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -243,7 +243,7 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="PlainTimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Pliantime.xml" path="doc/members/member[@name='PutAll(PlainTimeProperty,CancellationToken)']/*" />
+        /// <include file="Docs/Plaintime.xml" path="doc/members/member[@name='PutAll(PlainTimeProperty,CancellationToken)']/*" />
         public virtual Response PutAll(PlainTimeProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -274,12 +274,12 @@ namespace _Type.Property.Optionality
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Pliantime.xml" path="doc/members/member[@name='PutAllAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Plaintime.xml" path="doc/members/member[@name='PutAllAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAllAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Pliantime.PutAll");
+            using var scope = ClientDiagnostics.CreateScope("Plaintime.PutAll");
             scope.Start();
             try
             {
@@ -313,12 +313,12 @@ namespace _Type.Property.Optionality
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Pliantime.xml" path="doc/members/member[@name='PutAll(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Plaintime.xml" path="doc/members/member[@name='PutAll(RequestContent,RequestContext)']/*" />
         public virtual Response PutAll(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Pliantime.PutAll");
+            using var scope = ClientDiagnostics.CreateScope("Plaintime.PutAll");
             scope.Start();
             try
             {
@@ -336,7 +336,7 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="PlainTimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Pliantime.xml" path="doc/members/member[@name='PutDefaultAsync(PlainTimeProperty,CancellationToken)']/*" />
+        /// <include file="Docs/Plaintime.xml" path="doc/members/member[@name='PutDefaultAsync(PlainTimeProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutDefaultAsync(PlainTimeProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -351,7 +351,7 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="PlainTimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Pliantime.xml" path="doc/members/member[@name='PutDefault(PlainTimeProperty,CancellationToken)']/*" />
+        /// <include file="Docs/Plaintime.xml" path="doc/members/member[@name='PutDefault(PlainTimeProperty,CancellationToken)']/*" />
         public virtual Response PutDefault(PlainTimeProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -382,12 +382,12 @@ namespace _Type.Property.Optionality
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Pliantime.xml" path="doc/members/member[@name='PutDefaultAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Plaintime.xml" path="doc/members/member[@name='PutDefaultAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDefaultAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Pliantime.PutDefault");
+            using var scope = ClientDiagnostics.CreateScope("Plaintime.PutDefault");
             scope.Start();
             try
             {
@@ -421,12 +421,12 @@ namespace _Type.Property.Optionality
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Pliantime.xml" path="doc/members/member[@name='PutDefault(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Plaintime.xml" path="doc/members/member[@name='PutDefault(RequestContent,RequestContext)']/*" />
         public virtual Response PutDefault(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Pliantime.PutDefault");
+            using var scope = ClientDiagnostics.CreateScope("Plaintime.PutDefault");
             scope.Start();
             try
             {

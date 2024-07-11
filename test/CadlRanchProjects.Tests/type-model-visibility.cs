@@ -23,12 +23,12 @@ namespace CadlRanchProjects.Tests
             var response = await new VisibilityClient(host, null).PutReadOnlyModelAsync(new ReadOnlyModel()
             {
             });
-            Assert.AreEqual(3, response.Value.RequiredNullableIntList.Count);
-            Assert.AreEqual(1, response.Value.RequiredNullableIntList[0]);
-            Assert.AreEqual(2, response.Value.RequiredNullableIntList[1]);
-            Assert.AreEqual(3, response.Value.RequiredNullableIntList[2]);
-            Assert.AreEqual("value1", response.Value.RequiredStringRecord["k1"]);
-            Assert.AreEqual("value2", response.Value.RequiredStringRecord["k2"]);
+            Assert.AreEqual(3, response.Value.OptionalNullableIntList.Count);
+            Assert.AreEqual(1, response.Value.OptionalNullableIntList[0]);
+            Assert.AreEqual(2, response.Value.OptionalNullableIntList[1]);
+            Assert.AreEqual(3, response.Value.OptionalNullableIntList[2]);
+            Assert.AreEqual("value1", response.Value.OptionalStringRecord["k1"]);
+            Assert.AreEqual("value2", response.Value.OptionalStringRecord["k2"]);
         });
 
         public static PropertyInfo HasProperty(Type type, string name, BindingFlags bindingFlags)
@@ -42,7 +42,7 @@ namespace CadlRanchProjects.Tests
         public void ReadOnlyPropertiesAreReadOnly()
         {
             var property = HasProperty(typeof(VisibilityModel), "ReadProp", BindingFlags.Public | BindingFlags.Instance);
-            var listProperty = HasProperty(typeof(ReadOnlyModel), "RequiredNullableIntList", BindingFlags.Public | BindingFlags.Instance);
+            var listProperty = HasProperty(typeof(ReadOnlyModel), "OptionalNullableIntList", BindingFlags.Public | BindingFlags.Instance);
 
             Assert.Null(property.SetMethod);
             Assert.Null(listProperty.SetMethod);

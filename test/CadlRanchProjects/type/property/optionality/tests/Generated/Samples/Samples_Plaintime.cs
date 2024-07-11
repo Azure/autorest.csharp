@@ -16,13 +16,13 @@ using _Type.Property.Optionality.Models;
 
 namespace _Type.Property.Optionality.Samples
 {
-    public partial class Samples_Pliantime
+    public partial class Samples_Plaintime
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Pliantime_GetAll_ShortVersion()
+        public void Example_Plaintime_GetAll_ShortVersion()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             Response response = client.GetAll(null);
 
@@ -32,9 +32,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Pliantime_GetAll_ShortVersion_Async()
+        public async Task Example_Plaintime_GetAll_ShortVersion_Async()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             Response response = await client.GetAllAsync(null);
 
@@ -44,27 +44,27 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Pliantime_GetAll_ShortVersion_Convenience()
+        public void Example_Plaintime_GetAll_ShortVersion_Convenience()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             Response<PlainTimeProperty> response = client.GetAll();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Pliantime_GetAll_ShortVersion_Convenience_Async()
+        public async Task Example_Plaintime_GetAll_ShortVersion_Convenience_Async()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             Response<PlainTimeProperty> response = await client.GetAllAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Pliantime_GetAll_AllParameters()
+        public void Example_Plaintime_GetAll_AllParameters()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             Response response = client.GetAll(null);
 
@@ -74,9 +74,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Pliantime_GetAll_AllParameters_Async()
+        public async Task Example_Plaintime_GetAll_AllParameters_Async()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             Response response = await client.GetAllAsync(null);
 
@@ -86,27 +86,27 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Pliantime_GetAll_AllParameters_Convenience()
+        public void Example_Plaintime_GetAll_AllParameters_Convenience()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             Response<PlainTimeProperty> response = client.GetAll();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Pliantime_GetAll_AllParameters_Convenience_Async()
+        public async Task Example_Plaintime_GetAll_AllParameters_Convenience_Async()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             Response<PlainTimeProperty> response = await client.GetAllAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Pliantime_GetDefault_ShortVersion()
+        public void Example_Plaintime_GetDefault_ShortVersion()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             Response response = client.GetDefault(null);
 
@@ -116,9 +116,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Pliantime_GetDefault_ShortVersion_Async()
+        public async Task Example_Plaintime_GetDefault_ShortVersion_Async()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             Response response = await client.GetDefaultAsync(null);
 
@@ -128,27 +128,27 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Pliantime_GetDefault_ShortVersion_Convenience()
+        public void Example_Plaintime_GetDefault_ShortVersion_Convenience()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             Response<PlainTimeProperty> response = client.GetDefault();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Pliantime_GetDefault_ShortVersion_Convenience_Async()
+        public async Task Example_Plaintime_GetDefault_ShortVersion_Convenience_Async()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             Response<PlainTimeProperty> response = await client.GetDefaultAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Pliantime_GetDefault_AllParameters()
+        public void Example_Plaintime_GetDefault_AllParameters()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             Response response = client.GetDefault(null);
 
@@ -158,9 +158,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Pliantime_GetDefault_AllParameters_Async()
+        public async Task Example_Plaintime_GetDefault_AllParameters_Async()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             Response response = await client.GetDefaultAsync(null);
 
@@ -170,27 +170,27 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Pliantime_GetDefault_AllParameters_Convenience()
+        public void Example_Plaintime_GetDefault_AllParameters_Convenience()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             Response<PlainTimeProperty> response = client.GetDefault();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Pliantime_GetDefault_AllParameters_Convenience_Async()
+        public async Task Example_Plaintime_GetDefault_AllParameters_Convenience_Async()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             Response<PlainTimeProperty> response = await client.GetDefaultAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Pliantime_PutAll_ShortVersion()
+        public void Example_Plaintime_PutAll_ShortVersion()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutAll(content);
@@ -200,9 +200,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Pliantime_PutAll_ShortVersion_Async()
+        public async Task Example_Plaintime_PutAll_ShortVersion_Async()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAllAsync(content);
@@ -212,9 +212,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Pliantime_PutAll_ShortVersion_Convenience()
+        public void Example_Plaintime_PutAll_ShortVersion_Convenience()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             PlainTimeProperty body = new PlainTimeProperty();
             Response response = client.PutAll(body);
@@ -222,9 +222,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Pliantime_PutAll_ShortVersion_Convenience_Async()
+        public async Task Example_Plaintime_PutAll_ShortVersion_Convenience_Async()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             PlainTimeProperty body = new PlainTimeProperty();
             Response response = await client.PutAllAsync(body);
@@ -232,9 +232,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Pliantime_PutAll_AllParameters()
+        public void Example_Plaintime_PutAll_AllParameters()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -247,9 +247,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Pliantime_PutAll_AllParameters_Async()
+        public async Task Example_Plaintime_PutAll_AllParameters_Async()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -262,9 +262,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Pliantime_PutAll_AllParameters_Convenience()
+        public void Example_Plaintime_PutAll_AllParameters_Convenience()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             PlainTimeProperty body = new PlainTimeProperty
             {
@@ -275,9 +275,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Pliantime_PutAll_AllParameters_Convenience_Async()
+        public async Task Example_Plaintime_PutAll_AllParameters_Convenience_Async()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             PlainTimeProperty body = new PlainTimeProperty
             {
@@ -288,9 +288,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Pliantime_PutDefault_ShortVersion()
+        public void Example_Plaintime_PutDefault_ShortVersion()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDefault(content);
@@ -300,9 +300,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Pliantime_PutDefault_ShortVersion_Async()
+        public async Task Example_Plaintime_PutDefault_ShortVersion_Async()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDefaultAsync(content);
@@ -312,9 +312,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Pliantime_PutDefault_ShortVersion_Convenience()
+        public void Example_Plaintime_PutDefault_ShortVersion_Convenience()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             PlainTimeProperty body = new PlainTimeProperty();
             Response response = client.PutDefault(body);
@@ -322,9 +322,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Pliantime_PutDefault_ShortVersion_Convenience_Async()
+        public async Task Example_Plaintime_PutDefault_ShortVersion_Convenience_Async()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             PlainTimeProperty body = new PlainTimeProperty();
             Response response = await client.PutDefaultAsync(body);
@@ -332,9 +332,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Pliantime_PutDefault_AllParameters()
+        public void Example_Plaintime_PutDefault_AllParameters()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -347,9 +347,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Pliantime_PutDefault_AllParameters_Async()
+        public async Task Example_Plaintime_PutDefault_AllParameters_Async()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -362,9 +362,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Pliantime_PutDefault_AllParameters_Convenience()
+        public void Example_Plaintime_PutDefault_AllParameters_Convenience()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             PlainTimeProperty body = new PlainTimeProperty
             {
@@ -375,9 +375,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Pliantime_PutDefault_AllParameters_Convenience_Async()
+        public async Task Example_Plaintime_PutDefault_AllParameters_Convenience_Async()
         {
-            Pliantime client = new OptionalClient().GetPliantimeClient();
+            Plaintime client = new OptionalClient().GetPlaintimeClient();
 
             PlainTimeProperty body = new PlainTimeProperty
             {
