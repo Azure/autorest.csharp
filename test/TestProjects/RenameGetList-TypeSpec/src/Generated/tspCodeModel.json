@@ -390,8 +390,7 @@
         "$id": "58",
         "Type": {
          "$id": "59",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "2022-05-15-preview"
        },
@@ -428,8 +427,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "63",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -512,8 +510,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "70",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -653,8 +650,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "84",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -755,8 +751,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "93",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,

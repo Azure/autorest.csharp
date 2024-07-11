@@ -30,7 +30,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Parameters_BodyOptionality_requiredImplicit() => Test(async (host) =>
         {
-            Response response = await new BodyOptionalityClient(host, null).RequiredImplicitAsync(new BodyModel("foo"));
+            Response response = await new BodyOptionalityClient(host, null).RequiredImplicitAsync("foo");
             Assert.AreEqual(204, response.Status);
         });
     }

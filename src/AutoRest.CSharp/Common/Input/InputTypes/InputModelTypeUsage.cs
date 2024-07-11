@@ -13,5 +13,7 @@ internal enum InputModelTypeUsage
     Output = 4,
     ApiVersionEnum = 8,
     JsonMergePatch = 16,
-    MultipartFormData = 32
+    MultipartFormData = 32,
+    Spread = 64,
+    Error = 128
 }
