@@ -322,7 +322,7 @@
    "Kind": "model",
    "Name": "SpreadAliasWithModelRequest",
    "CrossLanguageDefinitionId": "spreadAliasWithModel.Request.anonymous",
-   "Usage": "None",
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "51",
