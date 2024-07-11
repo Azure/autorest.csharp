@@ -6,7 +6,7 @@ using Scm.Serialization.EncodedName.Json.Models;
 
 namespace CadlRanchProjectsNonAzure.Tests
 {
-    public class SerializationEncodedNameJsonTests: CadlRanchNonAzureTestBase
+    public class SerializationEncodedNameJsonTests : CadlRanchNonAzureTestBase
     {
         [Test]
         public Task Serialization_EncodedName_Json_Property_send() => Test(async (host) =>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -45,32 +46,32 @@ namespace Parameters.Spread
         }
 
         /// <summary> Spread as request body. </summary>
-        /// <param name="bodyParameter"> This is a simple model. </param>
+        /// <param name="name"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
-        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBodyAsync(BodyParameter,CancellationToken)']/*" />
-        public virtual async Task<Response> SpreadAsRequestBodyAsync(BodyParameter bodyParameter, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBodyAsync(string,CancellationToken)']/*" />
+        public virtual async Task<Response> SpreadAsRequestBodyAsync(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using RequestContent content = bodyParameter.ToRequestContent();
+            BodyParameter bodyParameter = new BodyParameter(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadAsRequestBodyAsync(content, context).ConfigureAwait(false);
+            Response response = await SpreadAsRequestBodyAsync(bodyParameter.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Spread as request body. </summary>
-        /// <param name="bodyParameter"> This is a simple model. </param>
+        /// <param name="name"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
-        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBody(BodyParameter,CancellationToken)']/*" />
-        public virtual Response SpreadAsRequestBody(BodyParameter bodyParameter, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBody(string,CancellationToken)']/*" />
+        public virtual Response SpreadAsRequestBody(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using RequestContent content = bodyParameter.ToRequestContent();
+            BodyParameter bodyParameter = new BodyParameter(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadAsRequestBody(content, context);
+            Response response = SpreadAsRequestBody(bodyParameter.ToRequestContent(), context);
             return response;
         }
 
@@ -84,7 +85,7 @@ namespace Parameters.Spread
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAsRequestBodyAsync(BodyParameter,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAsRequestBodyAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -123,7 +124,7 @@ namespace Parameters.Spread
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAsRequestBody(BodyParameter,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAsRequestBody(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -467,40 +468,40 @@ namespace Parameters.Spread
         /// <summary> Spread composite request mix. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="testHeader"> The <see cref="string"/> to use. </param>
-        /// <param name="compositeRequestMix"> This is a model with non-body http request decorator. </param>
+        /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="compositeRequestMix"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="prop"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequestMixAsync(string,string,CompositeRequestMix,CancellationToken)']/*" />
-        public virtual async Task<Response> SpreadCompositeRequestMixAsync(string name, string testHeader, CompositeRequestMix compositeRequestMix, CancellationToken cancellationToken = default)
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequestMixAsync(string,string,string,CancellationToken)']/*" />
+        public virtual async Task<Response> SpreadCompositeRequestMixAsync(string name, string testHeader, string prop, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(testHeader, nameof(testHeader));
-            Argument.AssertNotNull(compositeRequestMix, nameof(compositeRequestMix));
+            Argument.AssertNotNull(prop, nameof(prop));
 
-            using RequestContent content = compositeRequestMix.ToRequestContent();
+            CompositeRequestMix compositeRequestMix = new CompositeRequestMix(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadCompositeRequestMixAsync(name, testHeader, content, context).ConfigureAwait(false);
+            Response response = await SpreadCompositeRequestMixAsync(name, testHeader, compositeRequestMix.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Spread composite request mix. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="testHeader"> The <see cref="string"/> to use. </param>
-        /// <param name="compositeRequestMix"> This is a model with non-body http request decorator. </param>
+        /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="compositeRequestMix"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="prop"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequestMix(string,string,CompositeRequestMix,CancellationToken)']/*" />
-        public virtual Response SpreadCompositeRequestMix(string name, string testHeader, CompositeRequestMix compositeRequestMix, CancellationToken cancellationToken = default)
+        /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequestMix(string,string,string,CancellationToken)']/*" />
+        public virtual Response SpreadCompositeRequestMix(string name, string testHeader, string prop, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(testHeader, nameof(testHeader));
-            Argument.AssertNotNull(compositeRequestMix, nameof(compositeRequestMix));
+            Argument.AssertNotNull(prop, nameof(prop));
 
-            using RequestContent content = compositeRequestMix.ToRequestContent();
+            CompositeRequestMix compositeRequestMix = new CompositeRequestMix(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadCompositeRequestMix(name, testHeader, content, context);
+            Response response = SpreadCompositeRequestMix(name, testHeader, compositeRequestMix.ToRequestContent(), context);
             return response;
         }
 
@@ -514,7 +515,7 @@ namespace Parameters.Spread
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadCompositeRequestMixAsync(string,string,CompositeRequestMix,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadCompositeRequestMixAsync(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -558,7 +559,7 @@ namespace Parameters.Spread
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadCompositeRequestMix(string,string,CompositeRequestMix,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadCompositeRequestMix(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
