@@ -27,9 +27,9 @@ namespace _Type.Model.Visibility.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(RequiredNullableIntList))
             {
-                if (RequiredNullableIntList != null && Optional.IsCollectionDefined(RequiredNullableIntList))
+                if (RequiredNullableIntList != null)
                 {
                     writer.WritePropertyName("requiredNullableIntList"u8);
                     writer.WriteStartArray();
@@ -44,7 +44,7 @@ namespace _Type.Model.Visibility.Models
                     writer.WriteNull("requiredNullableIntList");
                 }
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(RequiredStringRecord))
             {
                 writer.WritePropertyName("requiredStringRecord"u8);
                 writer.WriteStartObject();
@@ -103,7 +103,6 @@ namespace _Type.Model.Visibility.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        requiredNullableIntList = new ChangeTrackingList<int>();
                         continue;
                     }
                     List<int> array = new List<int>();
@@ -116,6 +115,10 @@ namespace _Type.Model.Visibility.Models
                 }
                 if (property.NameEquals("requiredStringRecord"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -130,7 +133,7 @@ namespace _Type.Model.Visibility.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new ReadOnlyModel(requiredNullableIntList, requiredStringRecord, serializedAdditionalRawData);
+            return new ReadOnlyModel(requiredNullableIntList ?? new ChangeTrackingList<int>(), requiredStringRecord ?? new ChangeTrackingDictionary<string, string>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ReadOnlyModel>.Write(ModelReaderWriterOptions options)
