@@ -426,6 +426,7 @@ function fromSdkArrayType(
 }
 
 function fromUsageFlags(usage: UsageFlags): Usage {
+    if (usage & UsageFlags.JsonMergePatch) return Usage.None; // if the model is used in patch, we ignore the usage and defer to the logic of ours
     usage = usage & (UsageFlags.Input | UsageFlags.Output); // trim off other flags
     if (usage === UsageFlags.Input) return Usage.Input;
     else if (usage === UsageFlags.Output) return Usage.Output;
