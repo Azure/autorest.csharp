@@ -6,7 +6,7 @@ using Scm.Client.Naming.Models;
 
 namespace CadlRanchProjectsNonAzure.Tests
 {
-    public class ClientNamingTests: CadlRanchNonAzureTestBase
+    public class ClientNamingTests : CadlRanchNonAzureTestBase
     {
         [Test]
         public Task Client_Naming_Property_client() => Test(async (host) =>

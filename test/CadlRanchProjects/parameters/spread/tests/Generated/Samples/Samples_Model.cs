@@ -53,8 +53,7 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient();
 
-            BodyParameter bodyParameter = new BodyParameter("<name>");
-            Response response = client.SpreadAsRequestBody(bodyParameter);
+            Response response = client.SpreadAsRequestBody("<name>");
         }
 
         [Test]
@@ -63,8 +62,7 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient();
 
-            BodyParameter bodyParameter = new BodyParameter("<name>");
-            Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
+            Response response = await client.SpreadAsRequestBodyAsync("<name>");
         }
 
         [Test]
@@ -103,8 +101,7 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient();
 
-            BodyParameter bodyParameter = new BodyParameter("<name>");
-            Response response = client.SpreadAsRequestBody(bodyParameter);
+            Response response = client.SpreadAsRequestBody("<name>");
         }
 
         [Test]
@@ -113,8 +110,7 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient();
 
-            BodyParameter bodyParameter = new BodyParameter("<name>");
-            Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
+            Response response = await client.SpreadAsRequestBodyAsync("<name>");
         }
 
         [Test]
@@ -397,8 +393,7 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient();
 
-            CompositeRequestMix compositeRequestMix = new CompositeRequestMix("<prop>");
-            Response response = client.SpreadCompositeRequestMix("<name>", "<testHeader>", compositeRequestMix);
+            Response response = client.SpreadCompositeRequestMix("<name>", "<testHeader>", "<prop>");
         }
 
         [Test]
@@ -407,8 +402,7 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient();
 
-            CompositeRequestMix compositeRequestMix = new CompositeRequestMix("<prop>");
-            Response response = await client.SpreadCompositeRequestMixAsync("<name>", "<testHeader>", compositeRequestMix);
+            Response response = await client.SpreadCompositeRequestMixAsync("<name>", "<testHeader>", "<prop>");
         }
 
         [Test]
@@ -447,8 +441,7 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient();
 
-            CompositeRequestMix compositeRequestMix = new CompositeRequestMix("<prop>");
-            Response response = client.SpreadCompositeRequestMix("<name>", "<testHeader>", compositeRequestMix);
+            Response response = client.SpreadCompositeRequestMix("<name>", "<testHeader>", "<prop>");
         }
 
         [Test]
@@ -457,8 +450,7 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient();
 
-            CompositeRequestMix compositeRequestMix = new CompositeRequestMix("<prop>");
-            Response response = await client.SpreadCompositeRequestMixAsync("<name>", "<testHeader>", compositeRequestMix);
+            Response response = await client.SpreadCompositeRequestMixAsync("<name>", "<testHeader>", "<prop>");
         }
     }
 }
