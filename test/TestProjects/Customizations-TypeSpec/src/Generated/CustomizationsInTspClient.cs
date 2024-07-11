@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -271,32 +272,28 @@ namespace CustomizationsInTsp
         }
 
         /// <summary> Sample operation with request body using a model parameter with a spread operator. </summary>
-        /// <param name="renamedModel"> Renamed model (original name: ModelToRename). </param>
+        /// <param name="requiredIntOnBase"> Required int. </param>
+        /// <param name="optionalInt"> Optional int. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="renamedModel"/> is null. </exception>
-        /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='BarAsync(RenamedModel,CancellationToken)']/*" />
-        public virtual async Task<Response<RenamedModel>> BarAsync(RenamedModel renamedModel, CancellationToken cancellationToken = default)
+        /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='BarAsync(int,int?,CancellationToken)']/*" />
+        public virtual async Task<Response<RenamedModel>> BarAsync(int requiredIntOnBase, int? optionalInt = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(renamedModel, nameof(renamedModel));
-
-            using RequestContent content = renamedModel.ToRequestContent();
+            RenamedModel renamedModel = new RenamedModel(requiredIntOnBase, optionalInt, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await BarAsync(content, context).ConfigureAwait(false);
+            Response response = await BarAsync(renamedModel.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(RenamedModel.FromResponse(response), response);
         }
 
         /// <summary> Sample operation with request body using a model parameter with a spread operator. </summary>
-        /// <param name="renamedModel"> Renamed model (original name: ModelToRename). </param>
+        /// <param name="requiredIntOnBase"> Required int. </param>
+        /// <param name="optionalInt"> Optional int. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="renamedModel"/> is null. </exception>
-        /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='Bar(RenamedModel,CancellationToken)']/*" />
-        public virtual Response<RenamedModel> Bar(RenamedModel renamedModel, CancellationToken cancellationToken = default)
+        /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='Bar(int,int?,CancellationToken)']/*" />
+        public virtual Response<RenamedModel> Bar(int requiredIntOnBase, int? optionalInt = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(renamedModel, nameof(renamedModel));
-
-            using RequestContent content = renamedModel.ToRequestContent();
+            RenamedModel renamedModel = new RenamedModel(requiredIntOnBase, optionalInt, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Bar(content, context);
+            Response response = Bar(renamedModel.ToRequestContent(), context);
             return Response.FromValue(RenamedModel.FromResponse(response), response);
         }
 
@@ -310,7 +307,7 @@ namespace CustomizationsInTsp
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="BarAsync(RenamedModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="BarAsync(int,int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -349,7 +346,7 @@ namespace CustomizationsInTsp
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Bar(RenamedModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Bar(int,int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

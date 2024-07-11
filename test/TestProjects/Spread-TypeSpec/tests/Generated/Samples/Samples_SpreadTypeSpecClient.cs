@@ -11,7 +11,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using SpreadTypeSpec.Models;
 
 namespace SpreadTypeSpec.Samples
 {
@@ -58,8 +57,7 @@ namespace SpreadTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-            Thing thing = new Thing("<name>", 1234);
-            Response response = client.SpreadModel(thing);
+            Response response = client.SpreadModel("<name>", 1234);
         }
 
         [Test]
@@ -69,8 +67,7 @@ namespace SpreadTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-            Thing thing = new Thing("<name>", 1234);
-            Response response = await client.SpreadModelAsync(thing);
+            Response response = await client.SpreadModelAsync("<name>", 1234);
         }
 
         [Test]
@@ -114,8 +111,7 @@ namespace SpreadTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-            Thing thing = new Thing("<name>", 1234);
-            Response response = client.SpreadModel(thing);
+            Response response = client.SpreadModel("<name>", 1234);
         }
 
         [Test]
@@ -125,8 +121,7 @@ namespace SpreadTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-            Thing thing = new Thing("<name>", 1234);
-            Response response = await client.SpreadModelAsync(thing);
+            Response response = await client.SpreadModelAsync("<name>", 1234);
         }
 
         [Test]
@@ -386,8 +381,7 @@ namespace SpreadTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-            Thing thing = new Thing("<name>", 1234);
-            Response response = client.SpreadAliasWithModel("<id>", 1234, thing);
+            Response response = client.SpreadAliasWithModel("<id>", 1234, "<name>", 1234);
         }
 
         [Test]
@@ -397,8 +391,7 @@ namespace SpreadTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-            Thing thing = new Thing("<name>", 1234);
-            Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, thing);
+            Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, "<name>", 1234);
         }
 
         [Test]
@@ -442,8 +435,7 @@ namespace SpreadTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-            Thing thing = new Thing("<name>", 1234);
-            Response response = client.SpreadAliasWithModel("<id>", 1234, thing);
+            Response response = client.SpreadAliasWithModel("<id>", 1234, "<name>", 1234);
         }
 
         [Test]
@@ -453,8 +445,7 @@ namespace SpreadTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-            Thing thing = new Thing("<name>", 1234);
-            Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, thing);
+            Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, "<name>", 1234);
         }
 
         [Test]
