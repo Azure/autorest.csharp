@@ -36,9 +36,9 @@ namespace MgmtMockAndSample.Models
         /// <param name="destinationPorts"> List of destination ports. </param>
         /// <param name="translatedAddress"> The translated address for this NAT rule. </param>
         /// <param name="translatedPort"> The translated port for this NAT rule. </param>
-        /// <param name="sourceIpGroups"> List of source IpGroups for this rule. </param>
+        /// <param name="sourceIPGroups"> List of source IpGroups for this rule. </param>
         /// <param name="translatedFqdn"> The translated FQDN for this NAT rule. </param>
-        internal NatRule(string name, string description, FirewallPolicyRuleType ruleType, string newStringSerializeProperty, IList<string> newArraySerializedProperty, IDictionary<string, string> newDictionarySerializedProperty, IList<FirewallPolicyRuleNetworkProtocol> ipProtocols, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<string> destinationPorts, string translatedAddress, string translatedPort, IList<string> sourceIpGroups, string translatedFqdn) : base(name, description, ruleType, newStringSerializeProperty, newArraySerializedProperty, newDictionarySerializedProperty)
+        internal NatRule(string name, string description, FirewallPolicyRuleType ruleType, string newStringSerializeProperty, IList<string> newArraySerializedProperty, IDictionary<string, string> newDictionarySerializedProperty, IList<FirewallPolicyRuleNetworkProtocol> ipProtocols, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<string> destinationPorts, string translatedAddress, string translatedPort, IList<string> sourceIPGroups, string translatedFqdn) : base(name, description, ruleType, newStringSerializeProperty, newArraySerializedProperty, newDictionarySerializedProperty)
         {
             IpProtocols = ipProtocols;
             SourceAddresses = sourceAddresses;
@@ -46,7 +46,7 @@ namespace MgmtMockAndSample.Models
             DestinationPorts = destinationPorts;
             TranslatedAddress = translatedAddress;
             TranslatedPort = translatedPort;
-            SourceIpGroups = sourceIpGroups;
+            SourceIpGroups = sourceIPGroups;
             TranslatedFqdn = translatedFqdn;
             RuleType = ruleType;
         }

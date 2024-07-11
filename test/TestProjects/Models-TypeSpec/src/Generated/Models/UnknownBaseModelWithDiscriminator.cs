@@ -14,7 +14,7 @@ namespace ModelsTypeSpec.Models
     internal partial class UnknownBaseModelWithDiscriminator : BaseModelWithDiscriminator
     {
         /// <summary> Initializes a new instance of <see cref="UnknownBaseModelWithDiscriminator"/>. </summary>
-        /// <param name="discriminatorProperty"> Discriminator. </param>
+        /// <param name="discriminatorProperty"> Discriminator property for BaseModelWithDiscriminator. </param>
         /// <param name="optionalPropertyOnBase"> Optional property on base. </param>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>

@@ -125,9 +125,9 @@ IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDis
 
 using RequestContent content = RequestContent.Create(new
 {
+    kind = "derived",
     index = 1234,
     name = "<name>",
-    kind = "derived",
 });
 Response response = await client.PutAsync(content);
 
@@ -139,10 +139,10 @@ IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDis
 
 using RequestContent content = RequestContent.Create(new
 {
+    kind = "derived",
     index = 1234,
     age = 123.45F,
     name = "<name>",
-    kind = "derived",
 });
 Response response = await client.PutAsync(content);
 
@@ -157,9 +157,9 @@ IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDis
 
 using RequestContent content = RequestContent.Create(new
 {
+    kind = "derived",
     index = 1234,
     name = "<name>",
-    kind = "derived",
 });
 Response response = client.Put(content);
 
@@ -171,10 +171,10 @@ IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDis
 
 using RequestContent content = RequestContent.Create(new
 {
+    kind = "derived",
     index = 1234,
     age = 123.45F,
     name = "<name>",
-    kind = "derived",
 });
 Response response = client.Put(content);
 

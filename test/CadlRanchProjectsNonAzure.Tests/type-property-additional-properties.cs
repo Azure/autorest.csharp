@@ -265,7 +265,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             var value = response.Value;
             Assert.AreEqual("ExtendsUnknownAdditionalProperties", value.Name);
             Assert.AreEqual(314, value.Index);
-            Assert.AreEqual(2.71828f, value.Age);
+            Assert.AreEqual(2.71875f, value.Age);
             Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop1"));
             Assert.AreEqual(32, value.AdditionalProperties["prop1"].ToObjectFromJson<int>());
             Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop2"));
@@ -279,7 +279,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         {
             var value = new ExtendsUnknownAdditionalPropertiesDerived("ExtendsUnknownAdditionalProperties", 314)
             {
-                Age = 2.71828f,
+                Age = 2.71875f,
                 AdditionalProperties =
                 {
                     ["prop1"] = BinaryData.FromObjectAsJson(32),
@@ -301,7 +301,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             var derived = value as ExtendsUnknownAdditionalPropertiesDiscriminatedDerived;
             Assert.IsNotNull(derived);
             Assert.AreEqual(314, derived.Index);
-            Assert.AreEqual(2.71828f, derived.Age);
+            Assert.AreEqual(2.71875f, derived.Age);
             Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop1"));
             Assert.AreEqual(32, value.AdditionalProperties["prop1"].ToObjectFromJson<int>());
             Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop2"));
@@ -315,7 +315,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         {
             var value = new ExtendsUnknownAdditionalPropertiesDiscriminatedDerived("Derived", 314)
             {
-                Age = 2.71828f,
+                Age = 2.71875f,
                 AdditionalProperties =
                 {
                     ["prop1"] = BinaryData.FromObjectAsJson(32),
@@ -364,7 +364,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             var value = response.Value;
             Assert.AreEqual("IsUnknownAdditionalProperties", value.Name);
             Assert.AreEqual(314, value.Index);
-            Assert.AreEqual(2.71828f, value.Age);
+            Assert.AreEqual(2.71875f, value.Age);
             Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop1"));
             Assert.AreEqual(32, value.AdditionalProperties["prop1"].ToObjectFromJson<int>());
             Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop2"));
@@ -378,7 +378,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         {
             var value = new IsUnknownAdditionalPropertiesDerived("IsUnknownAdditionalProperties", 314)
             {
-                Age = 2.71828f,
+                Age = 2.71875f,
                 AdditionalProperties =
                 {
                     ["prop1"] = BinaryData.FromObjectAsJson(32),
@@ -400,7 +400,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             var derived = value as IsUnknownAdditionalPropertiesDiscriminatedDerived;
             Assert.IsNotNull(derived);
             Assert.AreEqual(314, derived.Index);
-            Assert.AreEqual(2.71828f, derived.Age);
+            Assert.AreEqual(2.71875f, derived.Age);
             Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop1"));
             Assert.AreEqual(32, value.AdditionalProperties["prop1"].ToObjectFromJson<int>());
             Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop2"));
@@ -414,7 +414,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         {
             var value = new IsUnknownAdditionalPropertiesDiscriminatedDerived("Derived", 314)
             {
-                Age = 2.71828f,
+                Age = 2.71875f,
                 AdditionalProperties =
                 {
                     ["prop1"] = BinaryData.FromObjectAsJson(32),

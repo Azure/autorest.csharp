@@ -13,7 +13,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Parameters_Spread_Model_spreadAsRequestBody() => Test(async (host) =>
         {
-            Response response = await new SpreadClient(host, null).GetModelClient().SpreadAsRequestBodyAsync(new BodyParameter("foo"));
+            Response response = await new SpreadClient(host, null).GetModelClient().SpreadAsRequestBodyAsync("foo");
             Assert.AreEqual(204, response.Status);
         });
 

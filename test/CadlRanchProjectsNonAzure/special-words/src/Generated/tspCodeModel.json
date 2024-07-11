@@ -6,10 +6,9 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "and",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.and",
    "Usage": "Input",
    "Properties": [
     {
@@ -19,8 +18,7 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -29,10 +27,9 @@
   },
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "as",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.as",
    "Usage": "Input",
    "Properties": [
     {
@@ -42,8 +39,7 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -52,10 +48,9 @@
   },
   {
    "$id": "8",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "assert",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.assert",
    "Usage": "Input",
    "Properties": [
     {
@@ -65,8 +60,7 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -75,10 +69,9 @@
   },
   {
    "$id": "11",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "async",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.async",
    "Usage": "Input",
    "Properties": [
     {
@@ -88,8 +81,7 @@
      "Description": "",
      "Type": {
       "$id": "13",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -98,10 +90,9 @@
   },
   {
    "$id": "14",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "await",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.await",
    "Usage": "Input",
    "Properties": [
     {
@@ -111,8 +102,7 @@
      "Description": "",
      "Type": {
       "$id": "16",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -121,10 +111,9 @@
   },
   {
    "$id": "17",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "break",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.break",
    "Usage": "Input",
    "Properties": [
     {
@@ -134,8 +123,7 @@
      "Description": "",
      "Type": {
       "$id": "19",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -144,10 +132,9 @@
   },
   {
    "$id": "20",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "class",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.class",
    "Usage": "Input",
    "Properties": [
     {
@@ -157,8 +144,7 @@
      "Description": "",
      "Type": {
       "$id": "22",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -167,10 +153,9 @@
   },
   {
    "$id": "23",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "constructor",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.constructor",
    "Usage": "Input",
    "Properties": [
     {
@@ -180,8 +165,7 @@
      "Description": "",
      "Type": {
       "$id": "25",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -190,10 +174,9 @@
   },
   {
    "$id": "26",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "continue",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.continue",
    "Usage": "Input",
    "Properties": [
     {
@@ -203,8 +186,7 @@
      "Description": "",
      "Type": {
       "$id": "28",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -213,10 +195,9 @@
   },
   {
    "$id": "29",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "def",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.def",
    "Usage": "Input",
    "Properties": [
     {
@@ -226,8 +207,7 @@
      "Description": "",
      "Type": {
       "$id": "31",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -236,10 +216,9 @@
   },
   {
    "$id": "32",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "del",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.del",
    "Usage": "Input",
    "Properties": [
     {
@@ -249,8 +228,7 @@
      "Description": "",
      "Type": {
       "$id": "34",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -259,10 +237,9 @@
   },
   {
    "$id": "35",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "elif",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.elif",
    "Usage": "Input",
    "Properties": [
     {
@@ -272,8 +249,7 @@
      "Description": "",
      "Type": {
       "$id": "37",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -282,10 +258,9 @@
   },
   {
    "$id": "38",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "else",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.else",
    "Usage": "Input",
    "Properties": [
     {
@@ -295,8 +270,7 @@
      "Description": "",
      "Type": {
       "$id": "40",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -305,10 +279,9 @@
   },
   {
    "$id": "41",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "except",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.except",
    "Usage": "Input",
    "Properties": [
     {
@@ -318,8 +291,7 @@
      "Description": "",
      "Type": {
       "$id": "43",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -328,10 +300,9 @@
   },
   {
    "$id": "44",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "exec",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.exec",
    "Usage": "Input",
    "Properties": [
     {
@@ -341,8 +312,7 @@
      "Description": "",
      "Type": {
       "$id": "46",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -351,10 +321,9 @@
   },
   {
    "$id": "47",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "finally",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.finally",
    "Usage": "Input",
    "Properties": [
     {
@@ -364,8 +333,7 @@
      "Description": "",
      "Type": {
       "$id": "49",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -374,10 +342,9 @@
   },
   {
    "$id": "50",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "for",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.for",
    "Usage": "Input",
    "Properties": [
     {
@@ -387,8 +354,7 @@
      "Description": "",
      "Type": {
       "$id": "52",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -397,10 +363,9 @@
   },
   {
    "$id": "53",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "from",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.from",
    "Usage": "Input",
    "Properties": [
     {
@@ -410,8 +375,7 @@
      "Description": "",
      "Type": {
       "$id": "55",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -420,10 +384,9 @@
   },
   {
    "$id": "56",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "global",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.global",
    "Usage": "Input",
    "Properties": [
     {
@@ -433,8 +396,7 @@
      "Description": "",
      "Type": {
       "$id": "58",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -443,10 +405,9 @@
   },
   {
    "$id": "59",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "if",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.if",
    "Usage": "Input",
    "Properties": [
     {
@@ -456,8 +417,7 @@
      "Description": "",
      "Type": {
       "$id": "61",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -466,10 +426,9 @@
   },
   {
    "$id": "62",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "import",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.import",
    "Usage": "Input",
    "Properties": [
     {
@@ -479,8 +438,7 @@
      "Description": "",
      "Type": {
       "$id": "64",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -489,10 +447,9 @@
   },
   {
    "$id": "65",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "in",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.in",
    "Usage": "Input",
    "Properties": [
     {
@@ -502,8 +459,7 @@
      "Description": "",
      "Type": {
       "$id": "67",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -512,10 +468,9 @@
   },
   {
    "$id": "68",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "is",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.is",
    "Usage": "Input",
    "Properties": [
     {
@@ -525,8 +480,7 @@
      "Description": "",
      "Type": {
       "$id": "70",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -535,10 +489,9 @@
   },
   {
    "$id": "71",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "lambda",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.lambda",
    "Usage": "Input",
    "Properties": [
     {
@@ -548,8 +501,7 @@
      "Description": "",
      "Type": {
       "$id": "73",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -558,10 +510,9 @@
   },
   {
    "$id": "74",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "not",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.not",
    "Usage": "Input",
    "Properties": [
     {
@@ -571,8 +522,7 @@
      "Description": "",
      "Type": {
       "$id": "76",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -581,10 +531,9 @@
   },
   {
    "$id": "77",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "or",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.or",
    "Usage": "Input",
    "Properties": [
     {
@@ -594,8 +543,7 @@
      "Description": "",
      "Type": {
       "$id": "79",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -604,10 +552,9 @@
   },
   {
    "$id": "80",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "pass",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.pass",
    "Usage": "Input",
    "Properties": [
     {
@@ -617,8 +564,7 @@
      "Description": "",
      "Type": {
       "$id": "82",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -627,10 +573,9 @@
   },
   {
    "$id": "83",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "raise",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.raise",
    "Usage": "Input",
    "Properties": [
     {
@@ -640,8 +585,7 @@
      "Description": "",
      "Type": {
       "$id": "85",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -650,10 +594,9 @@
   },
   {
    "$id": "86",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "return",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.return",
    "Usage": "Input",
    "Properties": [
     {
@@ -663,8 +606,7 @@
      "Description": "",
      "Type": {
       "$id": "88",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -673,10 +615,9 @@
   },
   {
    "$id": "89",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "try",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.try",
    "Usage": "Input",
    "Properties": [
     {
@@ -686,8 +627,7 @@
      "Description": "",
      "Type": {
       "$id": "91",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -696,10 +636,9 @@
   },
   {
    "$id": "92",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "while",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.while",
    "Usage": "Input",
    "Properties": [
     {
@@ -709,8 +648,7 @@
      "Description": "",
      "Type": {
       "$id": "94",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -719,10 +657,9 @@
   },
   {
    "$id": "95",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "with",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.with",
    "Usage": "Input",
    "Properties": [
     {
@@ -732,8 +669,7 @@
      "Description": "",
      "Type": {
       "$id": "97",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -742,10 +678,9 @@
   },
   {
    "$id": "98",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "yield",
-   "Namespace": "SpecialWords.Models",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.Models.yield",
    "Usage": "Input",
    "Properties": [
     {
@@ -755,8 +690,7 @@
      "Description": "",
      "Type": {
       "$id": "100",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -765,10 +699,9 @@
   },
   {
    "$id": "101",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SameAsModel",
-   "Namespace": "SpecialWords.ModelProperties",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "SpecialWords.ModelProperties.SameAsModel",
    "Usage": "Input",
    "Properties": [
     {
@@ -778,8 +711,7 @@
      "Description": "",
      "Type": {
       "$id": "103",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -796,7 +728,6 @@
    "Protocol": {
     "$id": "105"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "106",
@@ -805,8 +736,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "107",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -821,8 +751,7 @@
       "$id": "108",
       "Type": {
        "$id": "109",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -838,6 +767,7 @@
      "$id": "111",
      "Name": "withAnd",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -865,8 +795,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "114",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -891,8 +820,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "117",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -938,6 +866,7 @@
      "$id": "120",
      "Name": "withAs",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -965,8 +894,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "123",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -991,8 +919,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "126",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1038,6 +965,7 @@
      "$id": "129",
      "Name": "withAssert",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1065,8 +993,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "132",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1091,8 +1018,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "135",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1138,6 +1064,7 @@
      "$id": "138",
      "Name": "withAsync",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1165,8 +1092,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "141",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1191,8 +1117,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "144",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1238,6 +1163,7 @@
      "$id": "147",
      "Name": "withAwait",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1265,8 +1191,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "150",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1291,8 +1216,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "153",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1338,6 +1262,7 @@
      "$id": "156",
      "Name": "withBreak",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1365,8 +1290,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "159",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1391,8 +1315,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "162",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1438,6 +1361,7 @@
      "$id": "165",
      "Name": "withClass",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1465,8 +1389,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "168",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1491,8 +1414,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "171",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1538,6 +1460,7 @@
      "$id": "174",
      "Name": "withConstructor",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1565,8 +1488,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "177",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1591,8 +1513,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "180",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1638,6 +1559,7 @@
      "$id": "183",
      "Name": "withContinue",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1665,8 +1587,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "186",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1691,8 +1612,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "189",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1738,6 +1658,7 @@
      "$id": "192",
      "Name": "withDef",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1765,8 +1686,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "195",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1791,8 +1711,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "198",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1838,6 +1757,7 @@
      "$id": "201",
      "Name": "withDel",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1865,8 +1785,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "204",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1891,8 +1810,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "207",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1938,6 +1856,7 @@
      "$id": "210",
      "Name": "withElif",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -1965,8 +1884,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "213",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1991,8 +1909,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "216",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2038,6 +1955,7 @@
      "$id": "219",
      "Name": "withElse",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2065,8 +1983,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "222",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2091,8 +2008,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "225",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2138,6 +2054,7 @@
      "$id": "228",
      "Name": "withExcept",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2165,8 +2082,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "231",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2191,8 +2107,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "234",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2238,6 +2153,7 @@
      "$id": "237",
      "Name": "withExec",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2265,8 +2181,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "240",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2291,8 +2206,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "243",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2338,6 +2252,7 @@
      "$id": "246",
      "Name": "withFinally",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2365,8 +2280,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "249",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2391,8 +2305,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "252",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2438,6 +2351,7 @@
      "$id": "255",
      "Name": "withFor",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2465,8 +2379,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "258",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2491,8 +2404,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "261",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2538,6 +2450,7 @@
      "$id": "264",
      "Name": "withFrom",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2565,8 +2478,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "267",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2591,8 +2503,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "270",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2638,6 +2549,7 @@
      "$id": "273",
      "Name": "withGlobal",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2665,8 +2577,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "276",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2691,8 +2602,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "279",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2738,6 +2648,7 @@
      "$id": "282",
      "Name": "withIf",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2765,8 +2676,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "285",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2791,8 +2701,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "288",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2838,6 +2747,7 @@
      "$id": "291",
      "Name": "withImport",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2865,8 +2775,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "294",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2891,8 +2800,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "297",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2938,6 +2846,7 @@
      "$id": "300",
      "Name": "withIn",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -2965,8 +2874,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "303",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2991,8 +2899,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "306",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3038,6 +2945,7 @@
      "$id": "309",
      "Name": "withIs",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3065,8 +2973,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "312",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3091,8 +2998,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "315",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3138,6 +3044,7 @@
      "$id": "318",
      "Name": "withLambda",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3165,8 +3072,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "321",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3191,8 +3097,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "324",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3238,6 +3143,7 @@
      "$id": "327",
      "Name": "withNot",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3265,8 +3171,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "330",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3291,8 +3196,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "333",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3338,6 +3242,7 @@
      "$id": "336",
      "Name": "withOr",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3365,8 +3270,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "339",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3391,8 +3295,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "342",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3438,6 +3341,7 @@
      "$id": "345",
      "Name": "withPass",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3465,8 +3369,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "348",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3491,8 +3394,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "351",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3538,6 +3440,7 @@
      "$id": "354",
      "Name": "withRaise",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3565,8 +3468,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "357",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3591,8 +3493,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "360",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3638,6 +3539,7 @@
      "$id": "363",
      "Name": "withReturn",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3665,8 +3567,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "366",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3691,8 +3592,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "369",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3738,6 +3638,7 @@
      "$id": "372",
      "Name": "withTry",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3765,8 +3666,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "375",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3791,8 +3691,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "378",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3838,6 +3737,7 @@
      "$id": "381",
      "Name": "withWhile",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3865,8 +3765,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "384",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3891,8 +3790,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "387",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3938,6 +3836,7 @@
      "$id": "390",
      "Name": "withWith",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -3965,8 +3864,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "393",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3991,8 +3889,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "396",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4038,6 +3935,7 @@
      "$id": "399",
      "Name": "withYield",
      "ResourceName": "Models",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4065,8 +3963,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "402",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4091,8 +3988,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "405",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4138,7 +4034,6 @@
    "Protocol": {
     "$id": "408"
    },
-   "Creatable": false,
    "Parent": "SpecialWordsClient",
    "Parameters": [
     {
@@ -4155,6 +4050,7 @@
      "$id": "410",
      "Name": "sameAsModel",
      "ResourceName": "ModelProperties",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4182,8 +4078,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "413",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4208,8 +4103,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "416",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4255,7 +4149,6 @@
    "Protocol": {
     "$id": "419"
    },
-   "Creatable": false,
    "Parent": "SpecialWordsClient",
    "Parameters": [
     {
@@ -4272,6 +4165,7 @@
      "$id": "421",
      "Name": "and",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4282,8 +4176,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "423",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4326,6 +4219,7 @@
      "$id": "426",
      "Name": "as",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4336,8 +4230,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "428",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4380,6 +4273,7 @@
      "$id": "431",
      "Name": "assert",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4390,8 +4284,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "433",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4434,6 +4327,7 @@
      "$id": "436",
      "Name": "async",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4444,8 +4338,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "438",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4488,6 +4381,7 @@
      "$id": "441",
      "Name": "await",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4498,8 +4392,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "443",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4542,6 +4435,7 @@
      "$id": "446",
      "Name": "break",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4552,8 +4446,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "448",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4596,6 +4489,7 @@
      "$id": "451",
      "Name": "class",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4606,8 +4500,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "453",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4650,6 +4543,7 @@
      "$id": "456",
      "Name": "constructor",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4660,8 +4554,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "458",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4704,6 +4597,7 @@
      "$id": "461",
      "Name": "continue",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4714,8 +4608,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "463",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4758,6 +4651,7 @@
      "$id": "466",
      "Name": "def",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4768,8 +4662,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "468",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4812,6 +4705,7 @@
      "$id": "471",
      "Name": "del",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4822,8 +4716,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "473",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4866,6 +4759,7 @@
      "$id": "476",
      "Name": "elif",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4876,8 +4770,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "478",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4920,6 +4813,7 @@
      "$id": "481",
      "Name": "else",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4930,8 +4824,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "483",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4974,6 +4867,7 @@
      "$id": "486",
      "Name": "except",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -4984,8 +4878,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "488",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5028,6 +4921,7 @@
      "$id": "491",
      "Name": "exec",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5038,8 +4932,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "493",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5082,6 +4975,7 @@
      "$id": "496",
      "Name": "finally",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5092,8 +4986,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "498",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5136,6 +5029,7 @@
      "$id": "501",
      "Name": "for",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5146,8 +5040,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "503",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5190,6 +5083,7 @@
      "$id": "506",
      "Name": "from",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5200,8 +5094,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "508",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5244,6 +5137,7 @@
      "$id": "511",
      "Name": "global",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5254,8 +5148,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "513",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5298,6 +5191,7 @@
      "$id": "516",
      "Name": "if",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5308,8 +5202,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "518",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5352,6 +5245,7 @@
      "$id": "521",
      "Name": "import",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5362,8 +5256,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "523",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5406,6 +5299,7 @@
      "$id": "526",
      "Name": "in",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5416,8 +5310,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "528",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5460,6 +5353,7 @@
      "$id": "531",
      "Name": "is",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5470,8 +5364,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "533",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5514,6 +5407,7 @@
      "$id": "536",
      "Name": "lambda",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5524,8 +5418,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "538",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5568,6 +5461,7 @@
      "$id": "541",
      "Name": "not",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5578,8 +5472,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "543",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5622,6 +5515,7 @@
      "$id": "546",
      "Name": "or",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5632,8 +5526,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "548",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5676,6 +5569,7 @@
      "$id": "551",
      "Name": "pass",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5686,8 +5580,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "553",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5730,6 +5623,7 @@
      "$id": "556",
      "Name": "raise",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5740,8 +5634,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "558",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5784,6 +5677,7 @@
      "$id": "561",
      "Name": "return",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5794,8 +5688,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "563",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5838,6 +5731,7 @@
      "$id": "566",
      "Name": "try",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5848,8 +5742,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "568",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5892,6 +5785,7 @@
      "$id": "571",
      "Name": "while",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5902,8 +5796,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "573",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5946,6 +5839,7 @@
      "$id": "576",
      "Name": "with",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -5956,8 +5850,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "578",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6000,6 +5893,7 @@
      "$id": "581",
      "Name": "yield",
      "ResourceName": "Operations",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6010,8 +5904,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "583",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6054,7 +5947,6 @@
    "Protocol": {
     "$id": "586"
    },
-   "Creatable": false,
    "Parent": "SpecialWordsClient",
    "Parameters": [
     {
@@ -6071,6 +5963,7 @@
      "$id": "588",
      "Name": "withAnd",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6081,8 +5974,7 @@
        "NameInRequest": "and",
        "Type": {
         "$id": "590",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6100,8 +5992,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "592",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6144,6 +6035,7 @@
      "$id": "595",
      "Name": "withAs",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6154,8 +6046,7 @@
        "NameInRequest": "as",
        "Type": {
         "$id": "597",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6173,8 +6064,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "599",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6217,6 +6107,7 @@
      "$id": "602",
      "Name": "withAssert",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6227,8 +6118,7 @@
        "NameInRequest": "assert",
        "Type": {
         "$id": "604",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6246,8 +6136,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "606",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6290,6 +6179,7 @@
      "$id": "609",
      "Name": "withAsync",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6300,8 +6190,7 @@
        "NameInRequest": "async",
        "Type": {
         "$id": "611",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6319,8 +6208,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "613",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6363,6 +6251,7 @@
      "$id": "616",
      "Name": "withAwait",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6373,8 +6262,7 @@
        "NameInRequest": "await",
        "Type": {
         "$id": "618",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6392,8 +6280,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "620",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6436,6 +6323,7 @@
      "$id": "623",
      "Name": "withBreak",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6446,8 +6334,7 @@
        "NameInRequest": "break",
        "Type": {
         "$id": "625",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6465,8 +6352,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "627",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6509,6 +6395,7 @@
      "$id": "630",
      "Name": "withClass",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6519,8 +6406,7 @@
        "NameInRequest": "class",
        "Type": {
         "$id": "632",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6538,8 +6424,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "634",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6582,6 +6467,7 @@
      "$id": "637",
      "Name": "withConstructor",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6592,8 +6478,7 @@
        "NameInRequest": "constructor",
        "Type": {
         "$id": "639",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6611,8 +6496,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "641",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6655,6 +6539,7 @@
      "$id": "644",
      "Name": "withContinue",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6665,8 +6550,7 @@
        "NameInRequest": "continue",
        "Type": {
         "$id": "646",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6684,8 +6568,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "648",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6728,6 +6611,7 @@
      "$id": "651",
      "Name": "withDef",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6738,8 +6622,7 @@
        "NameInRequest": "def",
        "Type": {
         "$id": "653",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6757,8 +6640,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "655",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6801,6 +6683,7 @@
      "$id": "658",
      "Name": "withDel",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6811,8 +6694,7 @@
        "NameInRequest": "del",
        "Type": {
         "$id": "660",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6830,8 +6712,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "662",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6874,6 +6755,7 @@
      "$id": "665",
      "Name": "withElif",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6884,8 +6766,7 @@
        "NameInRequest": "elif",
        "Type": {
         "$id": "667",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6903,8 +6784,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "669",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -6947,6 +6827,7 @@
      "$id": "672",
      "Name": "withElse",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -6957,8 +6838,7 @@
        "NameInRequest": "else",
        "Type": {
         "$id": "674",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6976,8 +6856,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "676",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7020,6 +6899,7 @@
      "$id": "679",
      "Name": "withExcept",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7030,8 +6910,7 @@
        "NameInRequest": "except",
        "Type": {
         "$id": "681",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7049,8 +6928,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "683",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7093,6 +6971,7 @@
      "$id": "686",
      "Name": "withExec",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7103,8 +6982,7 @@
        "NameInRequest": "exec",
        "Type": {
         "$id": "688",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7122,8 +7000,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "690",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7166,6 +7043,7 @@
      "$id": "693",
      "Name": "withFinally",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7176,8 +7054,7 @@
        "NameInRequest": "finally",
        "Type": {
         "$id": "695",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7195,8 +7072,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "697",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7239,6 +7115,7 @@
      "$id": "700",
      "Name": "withFor",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7249,8 +7126,7 @@
        "NameInRequest": "for",
        "Type": {
         "$id": "702",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7268,8 +7144,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "704",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7312,6 +7187,7 @@
      "$id": "707",
      "Name": "withFrom",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7322,8 +7198,7 @@
        "NameInRequest": "from",
        "Type": {
         "$id": "709",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7341,8 +7216,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "711",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7385,6 +7259,7 @@
      "$id": "714",
      "Name": "withGlobal",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7395,8 +7270,7 @@
        "NameInRequest": "global",
        "Type": {
         "$id": "716",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7414,8 +7288,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "718",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7458,6 +7331,7 @@
      "$id": "721",
      "Name": "withIf",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7468,8 +7342,7 @@
        "NameInRequest": "if",
        "Type": {
         "$id": "723",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7487,8 +7360,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "725",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7531,6 +7403,7 @@
      "$id": "728",
      "Name": "withImport",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7541,8 +7414,7 @@
        "NameInRequest": "import",
        "Type": {
         "$id": "730",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7560,8 +7432,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "732",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7604,6 +7475,7 @@
      "$id": "735",
      "Name": "withIn",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7614,8 +7486,7 @@
        "NameInRequest": "in",
        "Type": {
         "$id": "737",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7633,8 +7504,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "739",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7677,6 +7547,7 @@
      "$id": "742",
      "Name": "withIs",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7687,8 +7558,7 @@
        "NameInRequest": "is",
        "Type": {
         "$id": "744",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7706,8 +7576,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "746",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7750,6 +7619,7 @@
      "$id": "749",
      "Name": "withLambda",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7760,8 +7630,7 @@
        "NameInRequest": "lambda",
        "Type": {
         "$id": "751",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7779,8 +7648,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "753",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7823,6 +7691,7 @@
      "$id": "756",
      "Name": "withNot",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7833,8 +7702,7 @@
        "NameInRequest": "not",
        "Type": {
         "$id": "758",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7852,8 +7720,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "760",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7896,6 +7763,7 @@
      "$id": "763",
      "Name": "withOr",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7906,8 +7774,7 @@
        "NameInRequest": "or",
        "Type": {
         "$id": "765",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7925,8 +7792,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "767",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -7969,6 +7835,7 @@
      "$id": "770",
      "Name": "withPass",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -7979,8 +7846,7 @@
        "NameInRequest": "pass",
        "Type": {
         "$id": "772",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7998,8 +7864,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "774",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -8042,6 +7907,7 @@
      "$id": "777",
      "Name": "withRaise",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -8052,8 +7918,7 @@
        "NameInRequest": "raise",
        "Type": {
         "$id": "779",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8071,8 +7936,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "781",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -8115,6 +7979,7 @@
      "$id": "784",
      "Name": "withReturn",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -8125,8 +7990,7 @@
        "NameInRequest": "return",
        "Type": {
         "$id": "786",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8144,8 +8008,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "788",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -8188,6 +8051,7 @@
      "$id": "791",
      "Name": "withTry",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -8198,8 +8062,7 @@
        "NameInRequest": "try",
        "Type": {
         "$id": "793",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8217,8 +8080,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "795",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -8261,6 +8123,7 @@
      "$id": "798",
      "Name": "withWhile",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -8271,8 +8134,7 @@
        "NameInRequest": "while",
        "Type": {
         "$id": "800",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8290,8 +8152,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "802",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -8334,6 +8195,7 @@
      "$id": "805",
      "Name": "withWith",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -8344,8 +8206,7 @@
        "NameInRequest": "with",
        "Type": {
         "$id": "807",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8363,8 +8224,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "809",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -8407,6 +8267,7 @@
      "$id": "812",
      "Name": "withYield",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -8417,8 +8278,7 @@
        "NameInRequest": "yield",
        "Type": {
         "$id": "814",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8436,8 +8296,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "816",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -8480,6 +8339,7 @@
      "$id": "819",
      "Name": "withCancellationToken",
      "ResourceName": "Parameters",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "106"
@@ -8490,8 +8350,7 @@
        "NameInRequest": "cancellationToken",
        "Type": {
         "$id": "821",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8509,8 +8368,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "823",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -8553,7 +8411,6 @@
    "Protocol": {
     "$id": "826"
    },
-   "Creatable": false,
    "Parent": "SpecialWordsClient",
    "Parameters": [
     {

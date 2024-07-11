@@ -6,10 +6,9 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "DefaultDurationProperty",
-   "Namespace": "Encode.Duration.Property",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Encode.Duration.Property.DefaultDurationProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -20,12 +19,10 @@
      "Type": {
       "$id": "4",
       "Kind": "duration",
-      "IsNullable": false,
       "Encode": "ISO8601",
       "WireType": {
        "$id": "5",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -35,10 +32,9 @@
   },
   {
    "$id": "6",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ISO8601DurationProperty",
-   "Namespace": "Encode.Duration.Property",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Encode.Duration.Property.ISO8601DurationProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -49,12 +45,10 @@
      "Type": {
       "$id": "8",
       "Kind": "duration",
-      "IsNullable": false,
       "Encode": "ISO8601",
       "WireType": {
        "$id": "9",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -64,10 +58,9 @@
   },
   {
    "$id": "10",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Int32SecondsDurationProperty",
-   "Namespace": "Encode.Duration.Property",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Encode.Duration.Property.Int32SecondsDurationProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -78,12 +71,10 @@
      "Type": {
       "$id": "12",
       "Kind": "duration",
-      "IsNullable": false,
       "Encode": "seconds",
       "WireType": {
        "$id": "13",
-       "Kind": "int32",
-       "IsNullable": false
+       "Kind": "int32"
       }
      },
      "IsRequired": true,
@@ -93,10 +84,9 @@
   },
   {
    "$id": "14",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "FloatSecondsDurationProperty",
-   "Namespace": "Encode.Duration.Property",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Encode.Duration.Property.FloatSecondsDurationProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -107,12 +97,10 @@
      "Type": {
       "$id": "16",
       "Kind": "duration",
-      "IsNullable": false,
       "Encode": "seconds",
       "WireType": {
        "$id": "17",
-       "Kind": "float",
-       "IsNullable": false
+       "Kind": "float"
       }
      },
      "IsRequired": true,
@@ -122,10 +110,9 @@
   },
   {
    "$id": "18",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Float64SecondsDurationProperty",
-   "Namespace": "Encode.Duration.Property",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Encode.Duration.Property.Float64SecondsDurationProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -136,12 +123,10 @@
      "Type": {
       "$id": "20",
       "Kind": "duration",
-      "IsNullable": false,
       "Encode": "seconds",
       "WireType": {
        "$id": "21",
-       "Kind": "float64",
-       "IsNullable": false
+       "Kind": "float64"
       }
      },
      "IsRequired": true,
@@ -151,10 +136,9 @@
   },
   {
    "$id": "22",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "FloatSecondsDurationArrayProperty",
-   "Namespace": "Encode.Duration.Property",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Encode.Duration.Property.FloatSecondsDurationArrayProperty",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -164,20 +148,18 @@
      "Description": "",
      "Type": {
       "$id": "24",
-      "Kind": "Array",
+      "Kind": "array",
       "Name": "Array",
-      "ElementType": {
+      "ValueType": {
        "$id": "25",
        "Kind": "duration",
-       "IsNullable": false,
        "Encode": "seconds",
        "WireType": {
         "$id": "26",
-        "Kind": "float32",
-        "IsNullable": false
+        "Kind": "float32"
        }
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -194,7 +176,6 @@
    "Protocol": {
     "$id": "28"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "29",
@@ -203,8 +184,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "30",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -219,8 +199,7 @@
       "$id": "31",
       "Type": {
        "$id": "32",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -236,6 +215,7 @@
      "$id": "34",
      "Name": "default",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -247,12 +227,10 @@
        "Type": {
         "$id": "36",
         "Kind": "duration",
-        "IsNullable": false,
         "Encode": "ISO8601",
         "WireType": {
          "$id": "37",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         }
        },
        "Location": "Query",
@@ -271,8 +249,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "39",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -315,6 +292,7 @@
      "$id": "42",
      "Name": "iso8601",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -326,12 +304,10 @@
        "Type": {
         "$id": "44",
         "Kind": "duration",
-        "IsNullable": false,
         "Encode": "ISO8601",
         "WireType": {
          "$id": "45",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         }
        },
        "Location": "Query",
@@ -350,8 +326,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "47",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -394,6 +369,7 @@
      "$id": "50",
      "Name": "int32Seconds",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -405,12 +381,10 @@
        "Type": {
         "$id": "52",
         "Kind": "duration",
-        "IsNullable": false,
         "Encode": "seconds",
         "WireType": {
          "$id": "53",
-         "Kind": "int32",
-         "IsNullable": false
+         "Kind": "int32"
         }
        },
        "Location": "Query",
@@ -429,8 +403,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "55",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -473,6 +446,7 @@
      "$id": "58",
      "Name": "floatSeconds",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -484,12 +458,10 @@
        "Type": {
         "$id": "60",
         "Kind": "duration",
-        "IsNullable": false,
         "Encode": "seconds",
         "WireType": {
          "$id": "61",
-         "Kind": "float",
-         "IsNullable": false
+         "Kind": "float"
         }
        },
        "Location": "Query",
@@ -508,8 +480,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "63",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -552,6 +523,7 @@
      "$id": "66",
      "Name": "float64Seconds",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -563,12 +535,10 @@
        "Type": {
         "$id": "68",
         "Kind": "duration",
-        "IsNullable": false,
         "Encode": "seconds",
         "WireType": {
          "$id": "69",
-         "Kind": "float64",
-         "IsNullable": false
+         "Kind": "float64"
         }
        },
        "Location": "Query",
@@ -587,8 +557,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "71",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -631,6 +600,7 @@
      "$id": "74",
      "Name": "int32SecondsArray",
      "ResourceName": "Query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -641,20 +611,18 @@
        "NameInRequest": "input",
        "Type": {
         "$id": "76",
-        "Kind": "Array",
+        "Kind": "array",
         "Name": "Array",
-        "ElementType": {
+        "ValueType": {
          "$id": "77",
          "Kind": "duration",
-         "IsNullable": false,
          "Encode": "seconds",
          "WireType": {
           "$id": "78",
-          "Kind": "int32",
-          "IsNullable": false
+          "Kind": "int32"
          }
         },
-        "IsNullable": false
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -673,8 +641,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "80",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -717,7 +684,6 @@
    "Protocol": {
     "$id": "83"
    },
-   "Creatable": false,
    "Parent": "DurationClient",
    "Parameters": [
     {
@@ -734,6 +700,7 @@
      "$id": "85",
      "Name": "default",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -761,8 +728,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "88",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -787,8 +753,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "91",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -840,6 +805,7 @@
      "$id": "94",
      "Name": "iso8601",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -867,8 +833,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "97",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -893,8 +858,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "100",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -946,6 +910,7 @@
      "$id": "103",
      "Name": "int32Seconds",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -973,8 +938,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "106",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -999,8 +963,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "109",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1052,6 +1015,7 @@
      "$id": "112",
      "Name": "floatSeconds",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -1079,8 +1043,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "115",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1105,8 +1068,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "118",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1158,6 +1120,7 @@
      "$id": "121",
      "Name": "float64Seconds",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -1185,8 +1148,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "124",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1211,8 +1173,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "127",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1264,6 +1225,7 @@
      "$id": "130",
      "Name": "floatSecondsArray",
      "ResourceName": "Property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -1291,8 +1253,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "133",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1317,8 +1278,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "136",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1370,7 +1330,6 @@
    "Protocol": {
     "$id": "139"
    },
-   "Creatable": false,
    "Parent": "DurationClient",
    "Parameters": [
     {
@@ -1387,6 +1346,7 @@
      "$id": "141",
      "Name": "default",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -1398,12 +1358,10 @@
        "Type": {
         "$id": "143",
         "Kind": "duration",
-        "IsNullable": false,
         "Encode": "ISO8601",
         "WireType": {
          "$id": "144",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         }
        },
        "Location": "Header",
@@ -1422,8 +1380,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "146",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1466,6 +1423,7 @@
      "$id": "149",
      "Name": "iso8601",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -1477,12 +1435,10 @@
        "Type": {
         "$id": "151",
         "Kind": "duration",
-        "IsNullable": false,
         "Encode": "ISO8601",
         "WireType": {
          "$id": "152",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         }
        },
        "Location": "Header",
@@ -1501,8 +1457,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "154",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1545,6 +1500,7 @@
      "$id": "157",
      "Name": "iso8601Array",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -1555,20 +1511,18 @@
        "NameInRequest": "duration",
        "Type": {
         "$id": "159",
-        "Kind": "Array",
+        "Kind": "array",
         "Name": "Array",
-        "ElementType": {
+        "ValueType": {
          "$id": "160",
          "Kind": "duration",
-         "IsNullable": false,
          "Encode": "ISO8601",
          "WireType": {
           "$id": "161",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          }
         },
-        "IsNullable": false
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1587,8 +1541,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "163",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1631,6 +1584,7 @@
      "$id": "166",
      "Name": "int32Seconds",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -1642,12 +1596,10 @@
        "Type": {
         "$id": "168",
         "Kind": "duration",
-        "IsNullable": false,
         "Encode": "seconds",
         "WireType": {
          "$id": "169",
-         "Kind": "int32",
-         "IsNullable": false
+         "Kind": "int32"
         }
        },
        "Location": "Header",
@@ -1666,8 +1618,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "171",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1710,6 +1661,7 @@
      "$id": "174",
      "Name": "floatSeconds",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -1721,12 +1673,10 @@
        "Type": {
         "$id": "176",
         "Kind": "duration",
-        "IsNullable": false,
         "Encode": "seconds",
         "WireType": {
          "$id": "177",
-         "Kind": "float",
-         "IsNullable": false
+         "Kind": "float"
         }
        },
        "Location": "Header",
@@ -1745,8 +1695,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "179",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1789,6 +1738,7 @@
      "$id": "182",
      "Name": "float64Seconds",
      "ResourceName": "Header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "29"
@@ -1800,12 +1750,10 @@
        "Type": {
         "$id": "184",
         "Kind": "duration",
-        "IsNullable": false,
         "Encode": "seconds",
         "WireType": {
          "$id": "185",
-         "Kind": "float64",
-         "IsNullable": false
+         "Kind": "float64"
         }
        },
        "Location": "Header",
@@ -1824,8 +1772,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "187",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1868,7 +1815,6 @@
    "Protocol": {
     "$id": "190"
    },
-   "Creatable": false,
    "Parent": "DurationClient",
    "Parameters": [
     {

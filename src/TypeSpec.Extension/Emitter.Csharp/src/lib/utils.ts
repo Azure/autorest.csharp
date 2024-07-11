@@ -3,7 +3,6 @@ import {
     EnumMember,
     Model,
     ModelProperty,
-    Namespace,
     Operation,
     Scalar
 } from "@typespec/compiler";
@@ -13,7 +12,7 @@ import {
     getSdkModel
 } from "@azure-tools/typespec-client-generator-core";
 import { InputParameter } from "../type/input-parameter.js";
-import { InputPrimitiveType, InputType } from "../type/input-type.js";
+import { InputType } from "../type/input-type.js";
 import { RequestLocation } from "../type/request-location.js";
 import { InputOperationParameterKind } from "../type/input-operation-parameter-kind.js";
 import { InputConstant } from "../type/input-constant.js";
@@ -54,22 +53,6 @@ export function getTypeName(
     return name;
 }
 
-export function getFullNamespaceString(
-    namespace: Namespace | undefined
-): string {
-    if (!namespace || !namespace.name) {
-        return "";
-    }
-
-    let namespaceString: string = namespace.name;
-    let current: Namespace | undefined = namespace.namespace;
-    while (current && current.name) {
-        namespaceString = `${current.name}.${namespaceString}`;
-        current = current.namespace;
-    }
-    return namespaceString;
-}
-
 export function createContentTypeOrAcceptParameter(
     mediaTypes: string[],
     name: string,
@@ -78,9 +61,8 @@ export function createContentTypeOrAcceptParameter(
     const isContentType: boolean =
         nameInRequest.toLowerCase() === "content-type";
     const inputType: InputType = {
-        Kind: "string",
-        IsNullable: false
-    } as InputPrimitiveType;
+        Kind: "string"
+    };
     return {
         Name: name,
         NameInRequest: nameInRequest,

@@ -10,7 +10,7 @@ using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class CreateCompletionRequest : IJsonModel<CreateCompletionRequest>
+    internal partial class CreateCompletionRequest : IJsonModel<CreateCompletionRequest>
     {
         void IJsonModel<CreateCompletionRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -23,15 +23,22 @@ namespace OpenAI.Models
             writer.WriteStartObject();
             writer.WritePropertyName("model"u8);
             writer.WriteStringValue(Model.ToString());
-            writer.WritePropertyName("prompt"u8);
+            if (Prompt != null)
+            {
+                writer.WritePropertyName("prompt"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Prompt);
 #else
-            using (JsonDocument document = JsonDocument.Parse(Prompt))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+                using (JsonDocument document = JsonDocument.Parse(Prompt))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
+            else
+            {
+                writer.WriteNull("prompt");
+            }
             if (Optional.IsDefined(Suffix))
             {
                 if (Suffix != null)
@@ -94,15 +101,22 @@ namespace OpenAI.Models
             }
             if (Optional.IsDefined(Stop))
             {
-                writer.WritePropertyName("stop"u8);
+                if (Stop != null)
+                {
+                    writer.WritePropertyName("stop"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Stop);
 #else
-                using (JsonDocument document = JsonDocument.Parse(Stop))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
+                    using (JsonDocument document = JsonDocument.Parse(Stop))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
+                }
+                else
+                {
+                    writer.WriteNull("stop");
+                }
             }
             if (Optional.IsDefined(PresencePenalty))
             {
@@ -264,6 +278,11 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("prompt"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        prompt = null;
+                        continue;
+                    }
                     prompt = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
@@ -321,6 +340,7 @@ namespace OpenAI.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        stop = null;
                         continue;
                     }
                     stop = BinaryData.FromString(property.Value.GetRawText());

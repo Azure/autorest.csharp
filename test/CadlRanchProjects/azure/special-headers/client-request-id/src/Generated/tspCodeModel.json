@@ -15,6 +15,7 @@
      "Name": "get",
      "ResourceName": "XmsClientRequestId",
      "Description": "Get operation with azure `x-ms-client-request-id` header.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "4",
@@ -23,8 +24,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "5",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -39,8 +39,7 @@
         "$id": "6",
         "Type": {
          "$id": "7",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
@@ -51,8 +50,7 @@
        "NameInRequest": "x-ms-client-request-id",
        "Type": {
         "$id": "9",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsRequired": false,
@@ -70,8 +68,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "11",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -114,7 +111,6 @@
    "Protocol": {
     "$id": "14"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "4"

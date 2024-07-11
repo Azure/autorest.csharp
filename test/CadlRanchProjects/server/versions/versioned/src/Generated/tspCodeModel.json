@@ -10,10 +10,10 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "Server.Versions.Versioned.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -29,10 +29,8 @@
      "Description": "The version 2022-12-01-preview."
     }
    ],
-   "Namespace": "Server.Versions.Versioned",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
@@ -47,6 +45,7 @@
      "$id": "7",
      "Name": "withoutApiVersion",
      "ResourceName": "Versioned",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "8",
@@ -55,8 +54,7 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "9",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -74,8 +72,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "11",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -118,6 +115,7 @@
      "$id": "14",
      "Name": "withQueryApiVersion",
      "ResourceName": "Versioned",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "8"
@@ -128,16 +126,14 @@
        "NameInRequest": "api-version",
        "Type": {
         "$id": "16",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
         "$id": "17",
         "Type": {
          "$id": "18",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "2022-12-01-preview"
        },
@@ -156,8 +152,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "20",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -200,6 +195,7 @@
      "$id": "23",
      "Name": "withPathApiVersion",
      "ResourceName": "Versioned",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "8"
@@ -210,8 +206,7 @@
        "NameInRequest": "apiVersion",
        "Type": {
         "$id": "25",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "DefaultValue": {
@@ -232,8 +227,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "27",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -276,6 +270,7 @@
      "$id": "30",
      "Name": "withQueryOldApiVersion",
      "ResourceName": "Versioned",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "8"
@@ -286,8 +281,7 @@
        "NameInRequest": "api-version",
        "Type": {
         "$id": "32",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
@@ -308,8 +302,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "34",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -352,7 +345,6 @@
    "Protocol": {
     "$id": "37"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "8"

@@ -4,6 +4,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input.InputTypes;
 
 namespace AutoRest.CSharp.Common.Input.Examples
 {
@@ -106,6 +107,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
             InputLiteralType literalType => InputExampleValue.Value(literalType, literalType.Value),
             InputModelType modelType => BuildModelExampleValue(modelType, useAllParameters, visitedModels),
             InputUnionType unionType => BuildExampleValue(unionType.VariantTypes[0], hint, useAllParameters, visitedModels),
+            InputNullableType nullableType => BuildExampleValue(nullableType.Type, hint, useAllParameters, visitedModels),
             InputDateTimeType dateTimeType => BuildDateTimeExampleValue(dateTimeType),
             InputDurationType durationType => BuildDurationExampleValue(durationType),
             _ => InputExampleValue.Object(type, new Dictionary<string, InputExampleValue>())
@@ -113,7 +115,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
 
         private static InputExampleValue BuildListExampleValue(InputListType listType, string? hint, bool useAllParameters, HashSet<InputModelType> visitedModels)
         {
-            var exampleElementValue = BuildExampleValue(listType.ElementType, hint, useAllParameters, visitedModels);
+            var exampleElementValue = BuildExampleValue(listType.ValueType, hint, useAllParameters, visitedModels);
 
             return InputExampleValue.List(listType, new[] { exampleElementValue });
         }
@@ -183,7 +185,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
             var result = InputExampleValue.Object(model, dict);
             visitedModels.Add(model);
             // if this model has a discriminator, we should return a derived type
-            if (model.DiscriminatorPropertyName != null)
+            if (model.DiscriminatorProperty != null)
             {
                 var derived = model.DerivedModels.FirstOrDefault();
                 if (derived is null)

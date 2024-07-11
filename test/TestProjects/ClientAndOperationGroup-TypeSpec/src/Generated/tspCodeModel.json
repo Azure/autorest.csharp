@@ -14,6 +14,7 @@
      "$id": "3",
      "Name": "zero",
      "ResourceName": "ClientAndOperationGroup",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "4",
@@ -21,8 +22,7 @@
        "NameInRequest": "operationGroupServiceUrl",
        "Type": {
         "$id": "5",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -40,8 +40,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "7",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -69,8 +68,7 @@
        ],
        "BodyType": {
         "$id": "10",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -92,6 +90,7 @@
      "$id": "11",
      "Name": "one",
      "ResourceName": "Alpha",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -102,8 +101,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "13",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -131,8 +129,7 @@
        ],
        "BodyType": {
         "$id": "16",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -154,7 +151,6 @@
    "Protocol": {
     "$id": "17"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "4"
@@ -170,6 +166,7 @@
      "$id": "19",
      "Name": "two",
      "ResourceName": "Beta",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -180,8 +177,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "21",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -209,8 +205,7 @@
        ],
        "BodyType": {
         "$id": "24",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -232,6 +227,7 @@
      "$id": "25",
      "Name": "three",
      "ResourceName": "SubBeta",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -242,8 +238,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "27",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -271,8 +266,7 @@
        ],
        "BodyType": {
         "$id": "30",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -294,7 +288,6 @@
    "Protocol": {
     "$id": "31"
    },
-   "Creatable": false,
    "Parent": "ClientAndOperationGroupClient",
    "Parameters": [
     {
@@ -311,6 +304,7 @@
      "$id": "33",
      "Name": "four",
      "ResourceName": "Gamma",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -321,8 +315,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "35",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -350,8 +343,7 @@
        ],
        "BodyType": {
         "$id": "38",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -373,6 +365,7 @@
      "$id": "39",
      "Name": "five",
      "ResourceName": "Gamma",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -383,8 +376,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "41",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -412,8 +404,7 @@
        ],
        "BodyType": {
         "$id": "44",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -435,7 +426,6 @@
    "Protocol": {
     "$id": "45"
    },
-   "Creatable": false,
    "Parent": "ClientAndOperationGroupClient",
    "Parameters": [
     {

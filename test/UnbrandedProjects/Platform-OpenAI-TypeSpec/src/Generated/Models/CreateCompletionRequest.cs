@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace OpenAI.Models
 {
     /// <summary> The CreateCompletionRequest. </summary>
-    public partial class CreateCompletionRequest
+    internal partial class CreateCompletionRequest
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -55,11 +55,8 @@ namespace OpenAI.Models
         /// Note that &lt;|endoftext|&gt; is the document separator that the model sees during training, so if a
         /// prompt is not specified the model will generate as if from the beginning of a new document.
         /// </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prompt"/> is null. </exception>
         public CreateCompletionRequest(CreateCompletionRequestModel model, BinaryData prompt)
         {
-            Argument.AssertNotNull(prompt, nameof(prompt));
-
             Model = model;
             Prompt = prompt;
             LogitBias = new ChangeTrackingDictionary<string, long>();

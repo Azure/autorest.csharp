@@ -38,6 +38,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             yield return BuildFromEnumerableTMethod();
             yield return BuildFromEnumerableBinaryDataMethod();
+            yield return BuildFromReadOnlySpanMethod();
 
             yield return BuildFromDictionaryTMethod();
             yield return BuildFromDictionaryBinaryDataMethod();
@@ -114,6 +115,45 @@ namespace AutoRest.CSharp.Output.Models.Types
                         Equal(item, Null),
                         writer.WriteNullValue(),
                         writer.WriteBinaryData(item))
+                },
+                writer.WriteEndArray(),
+                EmptyLine,
+                Return(content)
+            });
+
+            return new Method(signature, body);
+        }
+
+        private Method BuildFromReadOnlySpanMethod()
+        {
+            var spanType = typeof(ReadOnlySpan<>);
+            CSharpType tType = spanType.GetGenericArguments()[0];
+            var spanParameter = new Parameter("span", null, spanType, null, ValidationType.None, null);
+            var signature = new MethodSignature(
+                Name: _fromEnumerableName,
+                Modifiers: _methodModifiers,
+                Parameters: new[] { spanParameter },
+                ReturnType: _requestBodyType,
+                GenericArguments: new[] { tType },
+                GenericParameterConstraints: new[]
+                {
+                    Where.NotNull(tType)
+                },
+                Summary: null, Description: null, ReturnDescription: null);
+
+            var span = (ValueExpression)spanParameter;
+            var body = new List<MethodBodyStatement>
+            {
+                Declare(_utf8JsonRequestBodyType, "content", New.Instance(_utf8JsonRequestBodyType), out var content)
+            };
+            var writer = Utf8JsonRequestContentProvider.Instance.JsonWriterProperty(content);
+            var i = new VariableReference(typeof(int), "i");
+            body.Add(new MethodBodyStatement[]
+            {
+                writer.WriteStartArray(),
+                new ForStatement(new AssignmentExpression(i, Int(0)), LessThan(i, span.Property(nameof(ReadOnlySpan<byte>.Length))), new UnaryOperatorExpression("++", i, true))
+                {
+                    writer.WriteObjectValue(new TypedValueExpression(tType, new IndexerExpression(span, i)), ModelReaderWriterOptionsExpression.Wire)
                 },
                 writer.WriteEndArray(),
                 EmptyLine,

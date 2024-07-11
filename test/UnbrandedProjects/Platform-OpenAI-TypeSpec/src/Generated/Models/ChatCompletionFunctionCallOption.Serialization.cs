@@ -10,7 +10,7 @@ using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class ChatCompletionFunctionCallOption : IJsonModel<ChatCompletionFunctionCallOption>
+    internal partial class ChatCompletionFunctionCallOption : IJsonModel<ChatCompletionFunctionCallOption>
     {
         void IJsonModel<ChatCompletionFunctionCallOption>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {

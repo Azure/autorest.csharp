@@ -6,10 +6,9 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "InvalidAuth",
-   "Namespace": "Authentication.Http.Custom",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Authentication.Http.Custom.InvalidAuth",
    "Usage": "Output",
    "Properties": [
     {
@@ -19,8 +18,7 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -39,6 +37,7 @@
      "Name": "valid",
      "ResourceName": "Custom",
      "Description": "Check whether client is authenticated",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "7",
@@ -47,8 +46,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "8",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -63,8 +61,7 @@
         "$id": "9",
         "Type": {
          "$id": "10",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
@@ -75,8 +72,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "12",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -120,6 +116,7 @@
      "Name": "invalid",
      "ResourceName": "Custom",
      "Description": "Check whether client is authenticated.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"
@@ -130,8 +127,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "17",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -189,7 +185,6 @@
    "Protocol": {
     "$id": "21"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "7"

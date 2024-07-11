@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static InputModelType? FindObjectSchemaWithName(string name, InputNamespace? inputNamespace = null)
             => inputNamespace?.Models.OfType<InputModelType>().FirstOrDefault(inputModel => inputModel.GetOriginalName() == name);
 
-        public static bool TryGetResourceDataSchema(this OperationSet set, [MaybeNullWhen(false)]out string resourceSchemaName, out InputModelType? inputModel, InputNamespace? inputNamespace)
+        public static bool TryGetResourceDataSchema(this OperationSet set, [MaybeNullWhen(false)] out string resourceSchemaName, out InputModelType? inputModel, InputNamespace? inputNamespace)
         {
             resourceSchemaName = null;
             inputModel = null;
@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (response is null)
                 return false;
             // find the response schema
-            var responseType = response.BodyType as InputModelType;
+            var responseType = response.BodyType?.GetImplementType() as InputModelType;
             if (responseType is null)
                 return false;
 

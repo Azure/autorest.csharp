@@ -14,6 +14,7 @@
      "$id": "3",
      "Name": "withoutApiVersion",
      "ResourceName": "NotVersioned",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "4",
@@ -22,8 +23,7 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "5",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -41,8 +41,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "7",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -85,6 +84,7 @@
      "$id": "10",
      "Name": "withQueryApiVersion",
      "ResourceName": "NotVersioned",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -95,8 +95,7 @@
        "NameInRequest": "api-version",
        "Type": {
         "$id": "12",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -114,8 +113,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "14",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -158,6 +156,7 @@
      "$id": "17",
      "Name": "withPathApiVersion",
      "ResourceName": "NotVersioned",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "4"
@@ -168,8 +167,7 @@
        "NameInRequest": "apiVersion",
        "Type": {
         "$id": "19",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -187,8 +185,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "21",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -231,7 +228,6 @@
    "Protocol": {
     "$id": "24"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "4"

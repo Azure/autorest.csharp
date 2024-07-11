@@ -10,7 +10,7 @@ using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class CreateChatCompletionRequest : IJsonModel<CreateChatCompletionRequest>
+    internal partial class CreateChatCompletionRequest : IJsonModel<CreateChatCompletionRequest>
     {
         void IJsonModel<CreateChatCompletionRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
@@ -102,15 +102,22 @@ namespace OpenAI.Models
             }
             if (Optional.IsDefined(Stop))
             {
-                writer.WritePropertyName("stop"u8);
+                if (Stop != null)
+                {
+                    writer.WritePropertyName("stop"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Stop);
 #else
-                using (JsonDocument document = JsonDocument.Parse(Stop))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
+                    using (JsonDocument document = JsonDocument.Parse(Stop))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
+                }
+                else
+                {
+                    writer.WriteNull("stop");
+                }
             }
             if (Optional.IsDefined(PresencePenalty))
             {
@@ -309,6 +316,7 @@ namespace OpenAI.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        stop = null;
                         continue;
                     }
                     stop = BinaryData.FromString(property.Value.GetRawText());

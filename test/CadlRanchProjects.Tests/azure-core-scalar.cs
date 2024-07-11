@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using _Specs_.Azure.Core.Scalar;
 using _Specs_.Azure.Core.Scalar.Models;
 using AutoRest.TestServer.Tests.Infrastructure;

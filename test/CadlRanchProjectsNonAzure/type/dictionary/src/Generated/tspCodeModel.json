@@ -6,12 +6,11 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "InnerModel",
-   "Namespace": "Type.Dictionary",
-   "Description": "Dictionary inner model",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Dictionary.InnerModel",
    "Usage": "RoundTrip",
+   "Description": "Dictionary inner model",
    "Properties": [
     {
      "$id": "3",
@@ -20,8 +19,7 @@
      "Description": "Required string property",
      "Type": {
       "$id": "4",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -33,17 +31,14 @@
      "Description": "",
      "Type": {
       "$id": "6",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
+      "Kind": "dict",
       "KeyType": {
        "$id": "7",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "ValueType": {
        "$ref": "2"
-      },
-      "IsNullable": false
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -60,7 +55,6 @@
    "Protocol": {
     "$id": "9"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "10",
@@ -69,8 +63,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "11",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -85,8 +78,7 @@
       "$id": "12",
       "Type": {
        "$id": "13",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -102,6 +94,7 @@
      "$id": "15",
      "Name": "get",
      "ResourceName": "Int32Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -112,8 +105,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "17",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -141,19 +133,15 @@
        ],
        "BodyType": {
         "$id": "20",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "21",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$id": "22",
-         "Kind": "int32",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "int32"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -175,6 +163,7 @@
      "$id": "23",
      "Name": "put",
      "ResourceName": "Int32Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -185,19 +174,15 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "25",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "26",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$id": "27",
-         "Kind": "int32",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "int32"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -215,8 +200,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "29",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -241,8 +225,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "32",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -288,7 +271,6 @@
    "Protocol": {
     "$id": "35"
    },
-   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -305,6 +287,7 @@
      "$id": "37",
      "Name": "get",
      "ResourceName": "Int64Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -315,8 +298,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "39",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -344,19 +326,15 @@
        ],
        "BodyType": {
         "$id": "42",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "43",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$id": "44",
-         "Kind": "int64",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "int64"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -378,6 +356,7 @@
      "$id": "45",
      "Name": "put",
      "ResourceName": "Int64Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -388,19 +367,15 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "47",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "48",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$id": "49",
-         "Kind": "int64",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "int64"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -418,8 +393,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "51",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -444,8 +418,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "54",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -491,7 +464,6 @@
    "Protocol": {
     "$id": "57"
    },
-   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -508,6 +480,7 @@
      "$id": "59",
      "Name": "get",
      "ResourceName": "BooleanValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -518,8 +491,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "61",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -547,19 +519,15 @@
        ],
        "BodyType": {
         "$id": "64",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "65",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$id": "66",
-         "Kind": "boolean",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "boolean"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -581,6 +549,7 @@
      "$id": "67",
      "Name": "put",
      "ResourceName": "BooleanValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -591,19 +560,15 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "69",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "70",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$id": "71",
-         "Kind": "boolean",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "boolean"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -621,8 +586,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "73",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -647,8 +611,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "76",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -694,7 +657,6 @@
    "Protocol": {
     "$id": "79"
    },
-   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -711,6 +673,7 @@
      "$id": "81",
      "Name": "get",
      "ResourceName": "StringValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -721,8 +684,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "83",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -750,19 +712,15 @@
        ],
        "BodyType": {
         "$id": "86",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "87",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$id": "88",
-         "Kind": "string",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "string"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -784,6 +742,7 @@
      "$id": "89",
      "Name": "put",
      "ResourceName": "StringValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -794,19 +753,15 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "91",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "92",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$id": "93",
-         "Kind": "string",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "string"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -824,8 +779,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "95",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -850,8 +804,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "98",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -897,7 +850,6 @@
    "Protocol": {
     "$id": "101"
    },
-   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -914,6 +866,7 @@
      "$id": "103",
      "Name": "get",
      "ResourceName": "Float32Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -924,8 +877,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "105",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -953,19 +905,15 @@
        ],
        "BodyType": {
         "$id": "108",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "109",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$id": "110",
-         "Kind": "float32",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "float32"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -987,6 +935,7 @@
      "$id": "111",
      "Name": "put",
      "ResourceName": "Float32Value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -997,19 +946,15 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "113",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "114",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$id": "115",
-         "Kind": "float32",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "float32"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1027,8 +972,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "117",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1053,8 +997,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "120",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1100,7 +1043,6 @@
    "Protocol": {
     "$id": "123"
    },
-   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -1117,6 +1059,7 @@
      "$id": "125",
      "Name": "get",
      "ResourceName": "DatetimeValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -1127,8 +1070,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "127",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1156,25 +1098,20 @@
        ],
        "BodyType": {
         "$id": "130",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "131",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$id": "132",
          "Kind": "utcDateTime",
-         "IsNullable": false,
          "Encode": "rfc3339",
          "WireType": {
           "$id": "133",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          }
-        },
-        "IsNullable": false
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1196,6 +1133,7 @@
      "$id": "134",
      "Name": "put",
      "ResourceName": "DatetimeValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -1206,25 +1144,20 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "136",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "137",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$id": "138",
          "Kind": "utcDateTime",
-         "IsNullable": false,
          "Encode": "rfc3339",
          "WireType": {
           "$id": "139",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          }
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1242,8 +1175,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "141",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1268,8 +1200,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "144",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1315,7 +1246,6 @@
    "Protocol": {
     "$id": "147"
    },
-   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -1332,6 +1262,7 @@
      "$id": "149",
      "Name": "get",
      "ResourceName": "DurationValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -1342,8 +1273,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "151",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1371,25 +1301,20 @@
        ],
        "BodyType": {
         "$id": "154",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "155",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$id": "156",
          "Kind": "duration",
-         "IsNullable": false,
          "Encode": "ISO8601",
          "WireType": {
           "$id": "157",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          }
-        },
-        "IsNullable": false
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1411,6 +1336,7 @@
      "$id": "158",
      "Name": "put",
      "ResourceName": "DurationValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -1421,25 +1347,20 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "160",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "161",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$id": "162",
          "Kind": "duration",
-         "IsNullable": false,
          "Encode": "ISO8601",
          "WireType": {
           "$id": "163",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          }
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1457,8 +1378,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "165",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1483,8 +1403,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "168",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1530,7 +1449,6 @@
    "Protocol": {
     "$id": "171"
    },
-   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -1547,6 +1465,7 @@
      "$id": "173",
      "Name": "get",
      "ResourceName": "UnknownValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -1557,8 +1476,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "175",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1586,19 +1504,15 @@
        ],
        "BodyType": {
         "$id": "178",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "179",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$id": "180",
-         "Kind": "any",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "any"
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1620,6 +1534,7 @@
      "$id": "181",
      "Name": "put",
      "ResourceName": "UnknownValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -1630,19 +1545,15 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "183",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "184",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$id": "185",
-         "Kind": "any",
-         "IsNullable": false
-        },
-        "IsNullable": false
+         "Kind": "any"
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1660,8 +1571,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "187",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1686,8 +1596,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "190",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1733,7 +1642,6 @@
    "Protocol": {
     "$id": "193"
    },
-   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -1750,6 +1658,7 @@
      "$id": "195",
      "Name": "get",
      "ResourceName": "ModelValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -1760,8 +1669,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "197",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1789,17 +1697,14 @@
        ],
        "BodyType": {
         "$id": "200",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "201",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$ref": "2"
-        },
-        "IsNullable": false
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1821,6 +1726,7 @@
      "$id": "202",
      "Name": "put",
      "ResourceName": "ModelValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -1831,17 +1737,14 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "204",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "205",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$ref": "2"
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1859,8 +1762,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "207",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1885,8 +1787,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "210",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1932,7 +1833,6 @@
    "Protocol": {
     "$id": "213"
    },
-   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -1949,6 +1849,7 @@
      "$id": "215",
      "Name": "get",
      "ResourceName": "RecursiveModelValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -1959,8 +1860,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "217",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1988,17 +1888,14 @@
        ],
        "BodyType": {
         "$id": "220",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "221",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$ref": "2"
-        },
-        "IsNullable": false
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2020,6 +1917,7 @@
      "$id": "222",
      "Name": "put",
      "ResourceName": "RecursiveModelValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -2030,17 +1928,14 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "224",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "225",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$ref": "2"
-        },
-        "IsNullable": false
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2058,8 +1953,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "227",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2084,8 +1978,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "230",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2131,7 +2024,6 @@
    "Protocol": {
     "$id": "233"
    },
-   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {
@@ -2148,6 +2040,7 @@
      "$id": "235",
      "Name": "get",
      "ResourceName": "NullableFloatValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -2158,8 +2051,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "237",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2187,19 +2079,19 @@
        ],
        "BodyType": {
         "$id": "240",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "Kind": "dict",
         "KeyType": {
          "$id": "241",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "ValueType": {
          "$id": "242",
-         "Kind": "float32",
-         "IsNullable": true
-        },
-        "IsNullable": false
+         "Kind": "nullable",
+         "Type": {
+          "$id": "243",
+          "Kind": "float32"
+         }
+        }
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2218,32 +2110,33 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "243",
+     "$id": "244",
      "Name": "put",
      "ResourceName": "NullableFloatValue",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
       },
       {
-       "$id": "244",
+       "$id": "245",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "245",
-        "Kind": "Dictionary",
-        "Name": "Dictionary",
+        "$id": "246",
+        "Kind": "dict",
         "KeyType": {
-         "$id": "246",
-         "Kind": "string",
-         "IsNullable": false
+         "$id": "247",
+         "Kind": "string"
         },
         "ValueType": {
-         "$id": "247",
-         "Kind": "float32",
-         "IsNullable": true
-        },
-        "IsNullable": false
+         "$id": "248",
+         "Kind": "nullable",
+         "Type": {
+          "$id": "249",
+          "Kind": "float32"
+         }
+        }
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2256,13 +2149,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "248",
+       "$id": "250",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "249",
-        "Kind": "string",
-        "IsNullable": false
+        "$id": "251",
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2274,21 +2166,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "250",
+        "$id": "252",
         "Type": {
-         "$ref": "249"
+         "$ref": "251"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "251",
+       "$id": "253",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "252",
-        "Kind": "string",
-        "IsNullable": false
+        "$id": "254",
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2300,9 +2191,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "253",
+        "$id": "255",
         "Type": {
-         "$ref": "252"
+         "$ref": "254"
         },
         "Value": "application/json"
        }
@@ -2310,7 +2201,7 @@
      ],
      "Responses": [
       {
-       "$id": "254",
+       "$id": "256",
        "StatusCodes": [
         204
        ],
@@ -2332,9 +2223,8 @@
     }
    ],
    "Protocol": {
-    "$id": "255"
+    "$id": "257"
    },
-   "Creatable": false,
    "Parent": "DictionaryClient",
    "Parameters": [
     {

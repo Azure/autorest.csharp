@@ -4,6 +4,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AutoRest.CSharp.Common.Input.InputTypes.Serialization;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -46,15 +47,16 @@ namespace AutoRest.CSharp.Common.Input
                 result = CreateDerivedType(ref reader, id, kind, name, options);
             }
 
-            return result ?? throw new JsonException("cannot deserialize InputType");
+            return result ?? CreateDerivedType(ref reader, id, kind, name, options);
         }
 
         private const string LiteralKind = "constant";
         private const string UnionKind = "union";
-        private const string ModelKind = "Model";
+        private const string ModelKind = "model";
         private const string EnumKind = "enum";
-        private const string ArrayKind = "Array";
-        private const string DictionaryKind = "Dictionary";
+        private const string ArrayKind = "array";
+        private const string DictionaryKind = "dict";
+        private const string NullableKind = "nullable";
         private const string UtcDateTimeKind = "utcDateTime";
         private const string OffsetDateTimeKind = "offsetDateTime";
         private const string DurationKind = "duration";
@@ -67,7 +69,8 @@ namespace AutoRest.CSharp.Common.Input
             ModelKind => TypeSpecInputModelTypeConverter.CreateModelType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             EnumKind => TypeSpecInputEnumTypeConverter.CreateEnumType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             ArrayKind => TypeSpecInputListTypeConverter.CreateListType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
-            DictionaryKind => TypeSpecInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
+            DictionaryKind => TypeSpecInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, options, _referenceHandler.CurrentResolver),
+            NullableKind => TypeSpecInputNullableTypeConverter.CreateNullableType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             UtcDateTimeKind or OffsetDateTimeKind => TypeSpecInputDateTimeTypeConverter.CreateDateTimeType(ref reader, id, options, _referenceHandler.CurrentResolver),
             DurationKind => TypeSpecInputDurationTypeConverter.CreateDurationType(ref reader, id, options, _referenceHandler.CurrentResolver),
             _ => ReadPrimitiveType(ref reader, id, kind, _referenceHandler.CurrentResolver),
@@ -76,12 +79,10 @@ namespace AutoRest.CSharp.Common.Input
         private static InputPrimitiveType ReadPrimitiveType(ref Utf8JsonReader reader, string? id, string? kind, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null;
-            var isNullable = false;
             string? encode = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadBoolean(nameof(InputPrimitiveType.IsNullable), ref isNullable)
                     || reader.TryReadString(nameof(InputPrimitiveType.Kind), ref kind)
                     || reader.TryReadString(nameof(InputPrimitiveType.Encode), ref encode);
 
@@ -91,7 +92,7 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            var primitiveType = CreatePrimitiveType(kind, encode, isNullable);
+            var primitiveType = CreatePrimitiveType(kind, encode);
             if (id != null)
             {
                 resolver.AddReference(id, primitiveType);
@@ -100,14 +101,14 @@ namespace AutoRest.CSharp.Common.Input
             return primitiveType;
         }
 
-        public static InputPrimitiveType CreatePrimitiveType(string? primitiveKind, string? encode, bool isNullable)
+        public static InputPrimitiveType CreatePrimitiveType(string? primitiveKind, string? encode)
         {
             if (primitiveKind == null)
             {
                 throw new ArgumentNullException(nameof(primitiveKind));
             }
             return Enum.TryParse<InputPrimitiveTypeKind>(primitiveKind, ignoreCase: true, out var kind)
-                ? new InputPrimitiveType(kind, encode, isNullable)
+                ? new InputPrimitiveType(kind, encode)
                 : throw new JsonException($"{primitiveKind} type is unknown.");
         }
     }

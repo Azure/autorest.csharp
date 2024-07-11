@@ -9,10 +9,10 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -22,20 +22,17 @@
      "Description": "The version 2022-12-01-preview."
     }
    ],
-   "Namespace": "_Specs_.Azure.Core.Scalar",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
  "Models": [
   {
    "$id": "5",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "AzureLocationModel",
-   "Namespace": "_Specs_.Azure.Core.Scalar",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationModel",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -46,7 +43,6 @@
      "Type": {
       "$id": "7",
       "Kind": "azureLocation",
-      "IsNullable": false,
       "Encode": "string"
      },
      "IsRequired": true,
@@ -64,7 +60,6 @@
    "Protocol": {
     "$id": "9"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "10",
@@ -73,8 +68,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "11",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -89,8 +83,7 @@
       "$id": "12",
       "Type": {
        "$id": "13",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -107,6 +100,7 @@
      "Name": "get",
      "ResourceName": "AzureLocationScalar",
      "Description": "get azureLocation value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -117,8 +111,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "17",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -147,7 +140,6 @@
        "BodyType": {
         "$id": "20",
         "Kind": "azureLocation",
-        "IsNullable": false,
         "Encode": "string"
        },
        "BodyMediaType": "Json",
@@ -171,6 +163,7 @@
      "Name": "put",
      "ResourceName": "AzureLocationScalar",
      "Description": "put azureLocation value",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -183,7 +176,6 @@
        "Type": {
         "$id": "23",
         "Kind": "azureLocation",
-        "IsNullable": false,
         "Encode": "string"
        },
        "Location": "Body",
@@ -202,8 +194,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "25",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -228,8 +219,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "28",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -276,6 +266,7 @@
      "Name": "post",
      "ResourceName": "AzureLocationScalar",
      "Description": "post a model which has azureLocation property",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -304,8 +295,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "34",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -330,8 +320,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "37",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -384,6 +373,7 @@
      "Name": "header",
      "ResourceName": "AzureLocationScalar",
      "Description": "azureLocation value header",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -396,7 +386,6 @@
        "Type": {
         "$id": "42",
         "Kind": "azureLocation",
-        "IsNullable": false,
         "Encode": "string"
        },
        "Location": "Header",
@@ -415,8 +404,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "44",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -460,6 +448,7 @@
      "Name": "query",
      "ResourceName": "AzureLocationScalar",
      "Description": "azureLocation value query",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -472,7 +461,6 @@
        "Type": {
         "$id": "49",
         "Kind": "azureLocation",
-        "IsNullable": false,
         "Encode": "string"
        },
        "Location": "Query",
@@ -491,8 +479,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "51",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -535,7 +522,6 @@
    "Protocol": {
     "$id": "54"
    },
-   "Creatable": false,
    "Parent": "ScalarClient",
    "Parameters": [
     {

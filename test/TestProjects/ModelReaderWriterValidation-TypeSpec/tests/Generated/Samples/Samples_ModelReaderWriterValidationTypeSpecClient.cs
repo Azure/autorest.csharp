@@ -345,6 +345,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                kind = "X",
                 fields = new object[]
             {
 "<fields>"
@@ -354,7 +355,6 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
                 {
                     key = "<keyValuePairs>",
                 },
-                kind = "X",
                 name = "<name>",
             });
             Response response = client.Op3(content);
@@ -373,6 +373,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                kind = "X",
                 fields = new object[]
             {
 "<fields>"
@@ -382,7 +383,6 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
                 {
                     key = "<keyValuePairs>",
                 },
-                kind = "X",
                 name = "<name>",
             });
             Response response = await client.Op3Async(content);

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using NUnit.Framework;
@@ -32,7 +29,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                         new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, null, true, false, false),
                         new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, null, true, false, false)
                     },
-                    null, new List<InputModelType>(), null, null, null, false);
+                    null, new List<InputModelType>(), null, null, null, null);
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
@@ -48,7 +45,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                         new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, null, true, false, false),
                         new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, null, true, false, false)
                     },
-                    null, new List<InputModelType>(), null, null, null, false);
+                    null, new List<InputModelType>(), null, null, null, null);
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
@@ -64,7 +61,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                         new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, null, true, false, false),
                         new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, null, true, false, false)
                     },
-                    null, new List<InputModelType>(), null, null, null, false);
+                    null, new List<InputModelType>(), null, null, null, null);
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
@@ -107,7 +104,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                         new("Spanish", "Spanish", "Translate to Spanish"),
                         new("Mandarin", "Mandarin", "Translate to Mandarin"),
                         new("Undocumented", "Undocumented", null)
-                    }, true, false);
+                    }, true);
 
         private static readonly InputEnumType FixedEnumType = new InputEnumType("DayOfTheWeek", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Represents the days of the week using a standard, non-string enum.", InputModelTypeUsage.RoundTrip, InputPrimitiveType.String,
                     new List<InputEnumTypeValue>() {
@@ -118,7 +115,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                         new("Friday", "Friday", null),
                         new("Saturday", "Saturday", null),
                         new("Sunday", "Sunday", null)
-                    }, false, false);
+                    }, false);
 
         private static readonly object[] ExtensibleEnumCase =
         {
@@ -181,7 +178,7 @@ public bool Equals(global::Cadl.TestServer.EnumPropertiesBasic.TranslationLangua
 
 /// <inheritdoc />
 [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-public override int GetHashCode() => _value?.GetHashCode() ?? 0;
+public override int GetHashCode() => _value != null ? global::System.StringComparer.InvariantCultureIgnoreCase.GetHashCode(_value) : 0;
 /// <inheritdoc />
 public override string ToString() => _value;
 }

@@ -55,7 +55,7 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="OutputBaseModelWithDiscriminator"/>. </summary>
-        /// <param name="kind"> Discriminator. </param>
+        /// <param name="kind"> Discriminator property for OutputBaseModelWithDiscriminator. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal OutputBaseModelWithDiscriminator(string kind, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -63,7 +63,7 @@ namespace ModelsTypeSpec.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Discriminator. </summary>
+        /// <summary> Discriminator property for OutputBaseModelWithDiscriminator. </summary>
         internal string Kind { get; set; }
     }
 }
