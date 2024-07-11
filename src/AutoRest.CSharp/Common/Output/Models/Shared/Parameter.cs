@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             {
                 var paramInputTypeName = paramInputType.Name;
 
-                if (paramName.Equals(paramInputTypeName))
+                if (paramName.Equals(paramInputTypeName, StringComparison.OrdinalIgnoreCase))
                 {
                     variableName = !string.IsNullOrEmpty(type.Name) ? type.Name.ToVariableName() : variableName;
                 }
