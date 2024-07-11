@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
 {
-    public class ClientNamingTests: CadlRanchTestBase
+    public class ClientNamingTests : CadlRanchTestBase
     {
         [Test]
         public Task Client_Naming_Property_client() => Test(async (host) =>
