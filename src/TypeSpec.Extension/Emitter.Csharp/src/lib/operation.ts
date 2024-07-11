@@ -164,7 +164,8 @@ function getMethodParameters(
                 rootApiVersions,
                 sdkContext,
                 modelMap,
-                enumMap
+                enumMap,
+                method // TODO: remove this after https://github.com/Azure/typespec-azure/issues/1150
             )
         )
     );
@@ -175,7 +176,8 @@ function getMethodParameters(
                   rootApiVersions,
                   sdkContext,
                   modelMap,
-                  enumMap
+                  enumMap,
+                  method
               )
           )
         : params;
@@ -192,7 +194,8 @@ function fromHttpOperationParameter(
     rootApiVersions: string[],
     sdkContext: SdkContext<NetEmitterOptions>,
     modelMap: Map<string, InputModelType>,
-    enumMap: Map<string, InputEnumType>
+    enumMap: Map<string, InputEnumType>,
+    method: SdkServiceMethod<SdkHttpOperation>
 ): InputParameter {
     const isContentType =
         p.kind === "header" &&
@@ -211,7 +214,7 @@ function fromHttpOperationParameter(
     const serializedName = p.kind !== "body" ? p.serializedName : p.name;
 
     return {
-        Name: p.name,
+        Name: p.name !== "" ? p.name : `${method.name}Content`, // TODO: remove this after https://github.com/Azure/typespec-azure/issues/1150
         NameInRequest: serializedName,
         Description: p.description,
         Type: parameterType,

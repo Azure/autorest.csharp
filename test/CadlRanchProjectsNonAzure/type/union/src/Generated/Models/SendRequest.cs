@@ -45,7 +45,7 @@ namespace Scm._Type.Union.Models
         /// <summary> Initializes a new instance of <see cref="SendRequest"/>. </summary>
         /// <param name="prop"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
-        internal SendRequest(MixedTypesCases prop)
+        public SendRequest(MixedTypesCases prop)
         {
             Argument.AssertNotNull(prop, nameof(prop));
 

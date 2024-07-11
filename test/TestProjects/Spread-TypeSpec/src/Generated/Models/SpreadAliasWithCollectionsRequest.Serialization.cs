@@ -82,8 +82,8 @@ namespace SpreadTypeSpec.Models
             {
                 return null;
             }
-            IReadOnlyList<string> requiredStringList = default;
-            IReadOnlyList<string> optionalStringList = default;
+            IList<string> requiredStringList = default;
+            IList<string> optionalStringList = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

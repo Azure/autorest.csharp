@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -311,32 +312,100 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> body parameter without body decorator. </summary>
-        /// <param name="thing"> The <see cref="Thing"/> to use. </param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="requiredUnion"> required Union. </param>
+        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
+        /// <param name="requiredNullableList"> required nullable collection. </param>
+        /// <param name="requiredFloatProperty"> required float property. </param>
+        /// <param name="requiredLiteralString"> required literal string. </param>
+        /// <param name="requiredLiteralInt"> required literal int. </param>
+        /// <param name="requiredLiteralFloat"> required literal float. </param>
+        /// <param name="requiredLiteralBool"> required literal bool. </param>
+        /// <param name="optionalLiteralString"> optional literal string. </param>
+        /// <param name="optionalLiteralInt"> optional literal int. </param>
+        /// <param name="optionalLiteralFloat"> optional literal float. </param>
+        /// <param name="optionalLiteralBool"> optional literal bool. </param>
+        /// <param name="optionalNullableList"> optional nullable collection. </param>
+        /// <param name="optionalFloatProperty"> optional float property. </param>
+        /// <param name="optionalResourceId"> optional arm id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(Thing,CancellationToken)']/*" />
-        public virtual async Task<Response<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(string,BinaryData,string,IEnumerable{int},double,AnonymousBodyRequestRequiredLiteralString,AnonymousBodyRequestRequiredLiteralInt,AnonymousBodyRequestRequiredLiteralFloat,bool,AnonymousBodyRequestOptionalLiteralString?,AnonymousBodyRequestOptionalLiteralInt?,AnonymousBodyRequestOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)']/*" />
+        public virtual async Task<Response<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, double requiredFloatProperty, AnonymousBodyRequestRequiredLiteralString requiredLiteralString, AnonymousBodyRequestRequiredLiteralInt requiredLiteralInt, AnonymousBodyRequestRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, AnonymousBodyRequestOptionalLiteralString? optionalLiteralString = null, AnonymousBodyRequestOptionalLiteralInt? optionalLiteralInt = null, AnonymousBodyRequestOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, double? optionalFloatProperty = null, ResourceIdentifier optionalResourceId = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(thing, nameof(thing));
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
+            Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
-            using RequestContent content = thing.ToRequestContent();
+            AnonymousBodyRequest anonymousBodyRequest = new AnonymousBodyRequest(
+                name,
+                requiredUnion,
+                requiredLiteralString,
+                requiredLiteralInt,
+                requiredLiteralFloat,
+                requiredLiteralBool,
+                optionalLiteralString,
+                optionalLiteralInt,
+                optionalLiteralFloat,
+                optionalLiteralBool,
+                requiredBadDescription,
+                optionalNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
+                requiredNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
+                requiredFloatProperty,
+                optionalFloatProperty,
+                optionalResourceId,
+                null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await AnonymousBodyAsync(content, context).ConfigureAwait(false);
+            Response response = await AnonymousBodyAsync(anonymousBodyRequest.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
         /// <summary> body parameter without body decorator. </summary>
-        /// <param name="thing"> The <see cref="Thing"/> to use. </param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="requiredUnion"> required Union. </param>
+        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
+        /// <param name="requiredNullableList"> required nullable collection. </param>
+        /// <param name="requiredFloatProperty"> required float property. </param>
+        /// <param name="requiredLiteralString"> required literal string. </param>
+        /// <param name="requiredLiteralInt"> required literal int. </param>
+        /// <param name="requiredLiteralFloat"> required literal float. </param>
+        /// <param name="requiredLiteralBool"> required literal bool. </param>
+        /// <param name="optionalLiteralString"> optional literal string. </param>
+        /// <param name="optionalLiteralInt"> optional literal int. </param>
+        /// <param name="optionalLiteralFloat"> optional literal float. </param>
+        /// <param name="optionalLiteralBool"> optional literal bool. </param>
+        /// <param name="optionalNullableList"> optional nullable collection. </param>
+        /// <param name="optionalFloatProperty"> optional float property. </param>
+        /// <param name="optionalResourceId"> optional arm id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(Thing,CancellationToken)']/*" />
-        public virtual Response<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(string,BinaryData,string,IEnumerable{int},double,AnonymousBodyRequestRequiredLiteralString,AnonymousBodyRequestRequiredLiteralInt,AnonymousBodyRequestRequiredLiteralFloat,bool,AnonymousBodyRequestOptionalLiteralString?,AnonymousBodyRequestOptionalLiteralInt?,AnonymousBodyRequestOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)']/*" />
+        public virtual Response<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, double requiredFloatProperty, AnonymousBodyRequestRequiredLiteralString requiredLiteralString, AnonymousBodyRequestRequiredLiteralInt requiredLiteralInt, AnonymousBodyRequestRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, AnonymousBodyRequestOptionalLiteralString? optionalLiteralString = null, AnonymousBodyRequestOptionalLiteralInt? optionalLiteralInt = null, AnonymousBodyRequestOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, double? optionalFloatProperty = null, ResourceIdentifier optionalResourceId = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(thing, nameof(thing));
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
+            Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
-            using RequestContent content = thing.ToRequestContent();
+            AnonymousBodyRequest anonymousBodyRequest = new AnonymousBodyRequest(
+                name,
+                requiredUnion,
+                requiredLiteralString,
+                requiredLiteralInt,
+                requiredLiteralFloat,
+                requiredLiteralBool,
+                optionalLiteralString,
+                optionalLiteralInt,
+                optionalLiteralFloat,
+                optionalLiteralBool,
+                requiredBadDescription,
+                optionalNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
+                requiredNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
+                requiredFloatProperty,
+                optionalFloatProperty,
+                optionalResourceId,
+                null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = AnonymousBody(content, context);
+            Response response = AnonymousBody(anonymousBodyRequest.ToRequestContent(), context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
@@ -350,7 +419,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousBodyAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousBodyAsync(string,BinaryData,string,IEnumerable{int},double,AnonymousBodyRequestRequiredLiteralString,AnonymousBodyRequestRequiredLiteralInt,AnonymousBodyRequestRequiredLiteralFloat,bool,AnonymousBodyRequestOptionalLiteralString?,AnonymousBodyRequestOptionalLiteralInt?,AnonymousBodyRequestOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -389,7 +458,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousBody(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousBody(string,BinaryData,string,IEnumerable{int},double,AnonymousBodyRequestRequiredLiteralString,AnonymousBodyRequestRequiredLiteralInt,AnonymousBodyRequestRequiredLiteralFloat,bool,AnonymousBodyRequestOptionalLiteralString?,AnonymousBodyRequestOptionalLiteralInt?,AnonymousBodyRequestOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -419,32 +488,32 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="friend"> The <see cref="Friend"/> to use. </param>
+        /// <param name="name"> name of the NotFriend. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(Friend,CancellationToken)']/*" />
-        public virtual async Task<Response<Friend>> FriendlyModelAsync(Friend friend, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(string,CancellationToken)']/*" />
+        public virtual async Task<Response<Friend>> FriendlyModelAsync(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(friend, nameof(friend));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using RequestContent content = friend.ToRequestContent();
+            FriendlyModelRequest friendlyModelRequest = new FriendlyModelRequest(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await FriendlyModelAsync(content, context).ConfigureAwait(false);
+            Response response = await FriendlyModelAsync(friendlyModelRequest.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="friend"> The <see cref="Friend"/> to use. </param>
+        /// <param name="name"> name of the NotFriend. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="friend"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(Friend,CancellationToken)']/*" />
-        public virtual Response<Friend> FriendlyModel(Friend friend, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(string,CancellationToken)']/*" />
+        public virtual Response<Friend> FriendlyModel(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(friend, nameof(friend));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using RequestContent content = friend.ToRequestContent();
+            FriendlyModelRequest friendlyModelRequest = new FriendlyModelRequest(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = FriendlyModel(content, context);
+            Response response = FriendlyModel(friendlyModelRequest.ToRequestContent(), context);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
 
@@ -458,7 +527,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="FriendlyModelAsync(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="FriendlyModelAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -497,7 +566,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="FriendlyModel(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="FriendlyModel(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -699,32 +768,32 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> Model can have its projected name. </summary>
-        /// <param name="projectedModel"> The <see cref="ProjectedModel"/> to use. </param>
+        /// <param name="name"> name of the ModelWithProjectedName. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModelAsync(ProjectedModel,CancellationToken)']/*" />
-        public virtual async Task<Response<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModelAsync(string,CancellationToken)']/*" />
+        public virtual async Task<Response<ProjectedModel>> ProjectedNameModelAsync(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(projectedModel, nameof(projectedModel));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using RequestContent content = projectedModel.ToRequestContent();
+            ProjectedNameModelRequest projectedNameModelRequest = new ProjectedNameModelRequest(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ProjectedNameModelAsync(content, context).ConfigureAwait(false);
+            Response response = await ProjectedNameModelAsync(projectedNameModelRequest.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(ProjectedModel.FromResponse(response), response);
         }
 
         /// <summary> Model can have its projected name. </summary>
-        /// <param name="projectedModel"> The <see cref="ProjectedModel"/> to use. </param>
+        /// <param name="name"> name of the ModelWithProjectedName. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="projectedModel"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModel(ProjectedModel,CancellationToken)']/*" />
-        public virtual Response<ProjectedModel> ProjectedNameModel(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModel(string,CancellationToken)']/*" />
+        public virtual Response<ProjectedModel> ProjectedNameModel(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(projectedModel, nameof(projectedModel));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using RequestContent content = projectedModel.ToRequestContent();
+            ProjectedNameModelRequest projectedNameModelRequest = new ProjectedNameModelRequest(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ProjectedNameModel(content, context);
+            Response response = ProjectedNameModel(projectedNameModelRequest.ToRequestContent(), context);
             return Response.FromValue(ProjectedModel.FromResponse(response), response);
         }
 
@@ -738,7 +807,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ProjectedNameModelAsync(ProjectedModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ProjectedNameModelAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -777,7 +846,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ProjectedNameModel(ProjectedModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ProjectedNameModel(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

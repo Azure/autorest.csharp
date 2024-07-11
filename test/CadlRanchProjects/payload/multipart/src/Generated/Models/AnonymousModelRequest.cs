@@ -49,7 +49,7 @@ namespace Payload.MultiPart.Models
         /// <summary> Initializes a new instance of <see cref="AnonymousModelRequest"/>. </summary>
         /// <param name="profileImage"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> is null. </exception>
-        internal AnonymousModelRequest(Stream profileImage)
+        public AnonymousModelRequest(Stream profileImage)
         {
             Argument.AssertNotNull(profileImage, nameof(profileImage));
 

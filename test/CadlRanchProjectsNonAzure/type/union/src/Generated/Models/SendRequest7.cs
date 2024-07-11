@@ -44,7 +44,7 @@ namespace Scm._Type.Union.Models
 
         /// <summary> Initializes a new instance of <see cref="SendRequest7"/>. </summary>
         /// <param name="prop"></param>
-        internal SendRequest7(StringExtensibleNamedUnion prop)
+        public SendRequest7(StringExtensibleNamedUnion prop)
         {
             Prop = prop;
         }

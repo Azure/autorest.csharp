@@ -785,28 +785,61 @@
   },
   {
    "$ref": "113"
+  },
+  {
+   "$id": "120",
+   "Kind": "model",
+   "Name": "BarRequest",
+   "CrossLanguageDefinitionId": "CustomizationsInTsp.bar.Request.anonymous",
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "121",
+     "Name": "requiredIntOnBase",
+     "SerializedName": "requiredIntOnBase",
+     "Description": "Required int",
+     "Type": {
+      "$id": "122",
+      "Kind": "int32"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "123",
+     "Name": "optionalInt",
+     "SerializedName": "optionalInt",
+     "Description": "Optional int",
+     "Type": {
+      "$id": "124",
+      "Kind": "int32"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
   }
  ],
  "Clients": [
   {
-   "$id": "120",
+   "$id": "125",
    "Name": "CustomizationsInTspClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
-     "$id": "121",
+     "$id": "126",
      "Name": "roundTrip",
      "ResourceName": "CustomizationsInTsp",
      "Description": "RoundTrip operation to make RootModel round-trip",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "122",
+       "$id": "127",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Service host",
        "Type": {
-        "$id": "123",
+        "$id": "128",
         "Kind": "uri"
        },
        "Location": "Uri",
@@ -820,15 +853,15 @@
        "Kind": "Client"
       },
       {
-       "$id": "124",
+       "$id": "129",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "125",
+        "$id": "130",
         "Kind": "constant",
         "ValueType": {
-         "$id": "126",
+         "$id": "131",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -842,14 +875,14 @@
        "Kind": "Constant"
       },
       {
-       "$id": "127",
+       "$id": "132",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "128",
+        "$id": "133",
         "Kind": "constant",
         "ValueType": {
-         "$id": "129",
+         "$id": "134",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -863,7 +896,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "130",
+       "$id": "135",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -880,7 +913,7 @@
      ],
      "Responses": [
       {
-       "$id": "131",
+       "$id": "136",
        "StatusCodes": [
         200
        ],
@@ -907,25 +940,25 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "132",
+     "$id": "137",
      "Name": "foo",
      "ResourceName": "CustomizationsInTsp",
      "Description": "Sample operation with request body of a renamed model",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "122"
+       "$ref": "127"
       },
       {
-       "$id": "133",
+       "$id": "138",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "134",
+        "$id": "139",
         "Kind": "constant",
         "ValueType": {
-         "$id": "135",
+         "$id": "140",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -939,14 +972,14 @@
        "Kind": "Constant"
       },
       {
-       "$id": "136",
+       "$id": "141",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "137",
+        "$id": "142",
         "Kind": "constant",
         "ValueType": {
-         "$id": "138",
+         "$id": "143",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -960,7 +993,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "139",
+       "$id": "144",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -977,7 +1010,7 @@
      ],
      "Responses": [
       {
-       "$id": "140",
+       "$id": "145",
        "StatusCodes": [
         200
        ],
@@ -1004,25 +1037,25 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "141",
+     "$id": "146",
      "Name": "bar",
      "ResourceName": "CustomizationsInTsp",
      "Description": "Sample operation with request body using a model parameter with a spread operator.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "122"
+       "$ref": "127"
       },
       {
-       "$id": "142",
+       "$id": "147",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "143",
+        "$id": "148",
         "Kind": "constant",
         "ValueType": {
-         "$id": "144",
+         "$id": "149",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -1036,14 +1069,14 @@
        "Kind": "Constant"
       },
       {
-       "$id": "145",
+       "$id": "150",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "146",
+        "$id": "151",
         "Kind": "constant",
         "ValueType": {
-         "$id": "147",
+         "$id": "152",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -1057,11 +1090,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "148",
-       "Name": "modelToRename",
-       "NameInRequest": "modelToRename",
+       "$id": "153",
+       "Name": "barRequest",
+       "NameInRequest": "barRequest",
        "Type": {
-        "$ref": "32"
+        "$ref": "120"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -1069,12 +1102,12 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Spread"
       }
      ],
      "Responses": [
       {
-       "$id": "149",
+       "$id": "154",
        "StatusCodes": [
         200
        ],
@@ -1102,11 +1135,11 @@
     }
    ],
    "Protocol": {
-    "$id": "150"
+    "$id": "155"
    },
    "Parameters": [
     {
-     "$ref": "122"
+     "$ref": "127"
     }
    ]
   }

@@ -432,9 +432,9 @@
   {
    "$id": "72",
    "Kind": "model",
-   "Name": "GetResponse1",
-   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
-   "Usage": "Output",
+   "Name": "SendRequest",
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "73",
@@ -442,54 +442,74 @@
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$id": "74",
+      "$ref": "37"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "74",
+   "Kind": "model",
+   "Name": "GetResponse1",
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "75",
+     "Name": "prop",
+     "SerializedName": "prop",
+     "Description": "",
+     "Type": {
+      "$id": "76",
       "Kind": "model",
       "Name": "MixedLiteralsCases",
       "CrossLanguageDefinitionId": "Type.Union.MixedLiteralsCases",
       "Usage": "RoundTrip",
       "Properties": [
        {
-        "$id": "75",
+        "$id": "77",
         "Name": "stringLiteral",
         "SerializedName": "stringLiteral",
         "Description": "This should be receive/send the \"a\" variant",
         "Type": {
-         "$id": "76",
+         "$id": "78",
          "Kind": "union",
          "Name": "MixedLiteralsCasesStringLiteral1",
          "VariantTypes": [
-          {
-           "$id": "77",
-           "Kind": "constant",
-           "ValueType": {
-            "$id": "78",
-            "Kind": "string"
-           },
-           "Value": "a"
-          },
           {
            "$id": "79",
            "Kind": "constant",
            "ValueType": {
             "$id": "80",
-            "Kind": "int32"
+            "Kind": "string"
            },
-           "Value": 2
+           "Value": "a"
           },
           {
            "$id": "81",
            "Kind": "constant",
            "ValueType": {
             "$id": "82",
-            "Kind": "float32"
+            "Kind": "int32"
            },
-           "Value": 3.3
+           "Value": 2
           },
           {
            "$id": "83",
            "Kind": "constant",
            "ValueType": {
             "$id": "84",
+            "Kind": "float32"
+           },
+           "Value": 3.3
+          },
+          {
+           "$id": "85",
+           "Kind": "constant",
+           "ValueType": {
+            "$id": "86",
             "Kind": "boolean"
            },
            "Value": true
@@ -500,47 +520,47 @@
         "IsReadOnly": false
        },
        {
-        "$id": "85",
+        "$id": "87",
         "Name": "intLiteral",
         "SerializedName": "intLiteral",
         "Description": "This should be receive/send the 2 variant",
         "Type": {
-         "$id": "86",
+         "$id": "88",
          "Kind": "union",
          "Name": "MixedLiteralsCasesStringLiteral1",
          "VariantTypes": [
-          {
-           "$id": "87",
-           "Kind": "constant",
-           "ValueType": {
-            "$id": "88",
-            "Kind": "string"
-           },
-           "Value": "a"
-          },
           {
            "$id": "89",
            "Kind": "constant",
            "ValueType": {
             "$id": "90",
-            "Kind": "int32"
+            "Kind": "string"
            },
-           "Value": 2
+           "Value": "a"
           },
           {
            "$id": "91",
            "Kind": "constant",
            "ValueType": {
             "$id": "92",
-            "Kind": "float32"
+            "Kind": "int32"
            },
-           "Value": 3.3
+           "Value": 2
           },
           {
            "$id": "93",
            "Kind": "constant",
            "ValueType": {
             "$id": "94",
+            "Kind": "float32"
+           },
+           "Value": 3.3
+          },
+          {
+           "$id": "95",
+           "Kind": "constant",
+           "ValueType": {
+            "$id": "96",
             "Kind": "boolean"
            },
            "Value": true
@@ -551,47 +571,47 @@
         "IsReadOnly": false
        },
        {
-        "$id": "95",
+        "$id": "97",
         "Name": "floatLiteral",
         "SerializedName": "floatLiteral",
         "Description": "This should be receive/send the 3.3 variant",
         "Type": {
-         "$id": "96",
+         "$id": "98",
          "Kind": "union",
          "Name": "MixedLiteralsCasesStringLiteral1",
          "VariantTypes": [
-          {
-           "$id": "97",
-           "Kind": "constant",
-           "ValueType": {
-            "$id": "98",
-            "Kind": "string"
-           },
-           "Value": "a"
-          },
           {
            "$id": "99",
            "Kind": "constant",
            "ValueType": {
             "$id": "100",
-            "Kind": "int32"
+            "Kind": "string"
            },
-           "Value": 2
+           "Value": "a"
           },
           {
            "$id": "101",
            "Kind": "constant",
            "ValueType": {
             "$id": "102",
-            "Kind": "float32"
+            "Kind": "int32"
            },
-           "Value": 3.3
+           "Value": 2
           },
           {
            "$id": "103",
            "Kind": "constant",
            "ValueType": {
             "$id": "104",
+            "Kind": "float32"
+           },
+           "Value": 3.3
+          },
+          {
+           "$id": "105",
+           "Kind": "constant",
+           "ValueType": {
+            "$id": "106",
             "Kind": "boolean"
            },
            "Value": true
@@ -602,47 +622,47 @@
         "IsReadOnly": false
        },
        {
-        "$id": "105",
+        "$id": "107",
         "Name": "booleanLiteral",
         "SerializedName": "booleanLiteral",
         "Description": "This should be receive/send the true variant",
         "Type": {
-         "$id": "106",
+         "$id": "108",
          "Kind": "union",
          "Name": "MixedLiteralsCasesStringLiteral1",
          "VariantTypes": [
-          {
-           "$id": "107",
-           "Kind": "constant",
-           "ValueType": {
-            "$id": "108",
-            "Kind": "string"
-           },
-           "Value": "a"
-          },
           {
            "$id": "109",
            "Kind": "constant",
            "ValueType": {
             "$id": "110",
-            "Kind": "int32"
+            "Kind": "string"
            },
-           "Value": 2
+           "Value": "a"
           },
           {
            "$id": "111",
            "Kind": "constant",
            "ValueType": {
             "$id": "112",
-            "Kind": "float32"
+            "Kind": "int32"
            },
-           "Value": 3.3
+           "Value": 2
           },
           {
            "$id": "113",
            "Kind": "constant",
            "ValueType": {
             "$id": "114",
+            "Kind": "float32"
+           },
+           "Value": 3.3
+          },
+          {
+           "$id": "115",
+           "Kind": "constant",
+           "ValueType": {
+            "$id": "116",
             "Kind": "boolean"
            },
            "Value": true
@@ -660,47 +680,67 @@
    ]
   },
   {
-   "$ref": "74"
+   "$ref": "76"
   },
   {
-   "$id": "115",
+   "$id": "117",
+   "Kind": "model",
+   "Name": "SendRequest1",
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "118",
+     "Name": "prop",
+     "SerializedName": "prop",
+     "Description": "",
+     "Type": {
+      "$ref": "76"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "119",
    "Kind": "model",
    "Name": "GetResponse2",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "116",
+     "$id": "120",
      "Name": "prop",
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$id": "117",
+      "$id": "121",
       "Kind": "model",
       "Name": "StringAndArrayCases",
       "CrossLanguageDefinitionId": "Type.Union.StringAndArrayCases",
       "Usage": "RoundTrip",
       "Properties": [
        {
-        "$id": "118",
+        "$id": "122",
         "Name": "string",
         "SerializedName": "string",
         "Description": "This should be receive/send the string variant",
         "Type": {
-         "$id": "119",
+         "$id": "123",
          "Kind": "union",
          "Name": "StringAndArrayCasesString",
          "VariantTypes": [
           {
-           "$id": "120",
+           "$id": "124",
            "Kind": "string"
           },
           {
-           "$id": "121",
+           "$id": "125",
            "Kind": "array",
            "Name": "Array",
            "ValueType": {
-            "$id": "122",
+            "$id": "126",
             "Kind": "string"
            },
            "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -711,25 +751,25 @@
         "IsReadOnly": false
        },
        {
-        "$id": "123",
+        "$id": "127",
         "Name": "array",
         "SerializedName": "array",
         "Description": "This should be receive/send the array variant",
         "Type": {
-         "$id": "124",
+         "$id": "128",
          "Kind": "union",
          "Name": "StringAndArrayCasesArray",
          "VariantTypes": [
           {
-           "$id": "125",
+           "$id": "129",
            "Kind": "string"
           },
           {
-           "$id": "126",
+           "$id": "130",
            "Kind": "array",
            "Name": "Array",
            "ValueType": {
-            "$id": "127",
+            "$id": "131",
             "Kind": "string"
            },
            "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -747,29 +787,49 @@
    ]
   },
   {
-   "$ref": "117"
+   "$ref": "121"
   },
   {
-   "$id": "128",
+   "$id": "132",
+   "Kind": "model",
+   "Name": "SendRequest2",
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "133",
+     "Name": "prop",
+     "SerializedName": "prop",
+     "Description": "",
+     "Type": {
+      "$ref": "121"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "134",
    "Kind": "model",
    "Name": "GetResponse3",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "129",
+     "$id": "135",
      "Name": "prop",
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$id": "130",
+      "$id": "136",
       "Kind": "model",
       "Name": "EnumsOnlyCases",
       "CrossLanguageDefinitionId": "Type.Union.EnumsOnlyCases",
       "Usage": "RoundTrip",
       "Properties": [
        {
-        "$id": "131",
+        "$id": "137",
         "Name": "lr",
         "SerializedName": "lr",
         "Description": "This should be receive/send the left variant",
@@ -780,7 +840,7 @@
         "IsReadOnly": false
        },
        {
-        "$id": "132",
+        "$id": "138",
         "Name": "ud",
         "SerializedName": "ud",
         "Description": "This should be receive/send the up variant",
@@ -798,22 +858,42 @@
    ]
   },
   {
-   "$ref": "130"
+   "$ref": "136"
   },
   {
-   "$id": "133",
+   "$id": "139",
+   "Kind": "model",
+   "Name": "SendRequest3",
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "140",
+     "Name": "prop",
+     "SerializedName": "prop",
+     "Description": "",
+     "Type": {
+      "$ref": "136"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "141",
    "Kind": "model",
    "Name": "GetResponse4",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "134",
+     "$id": "142",
      "Name": "prop",
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$id": "135",
+      "$id": "143",
       "Kind": "union",
       "Name": "GetResponseProp",
       "VariantTypes": [
@@ -821,19 +901,19 @@
         "$ref": "40"
        },
        {
-        "$id": "136",
+        "$id": "144",
         "Kind": "model",
         "Name": "Dog",
         "CrossLanguageDefinitionId": "Type.Union.Dog",
         "Usage": "RoundTrip",
         "Properties": [
          {
-          "$id": "137",
+          "$id": "145",
           "Name": "bark",
           "SerializedName": "bark",
           "Description": "",
           "Type": {
-           "$id": "138",
+           "$id": "146",
            "Kind": "string"
           },
           "IsRequired": true,
@@ -849,94 +929,14 @@
    ]
   },
   {
-   "$ref": "136"
-  },
-  {
-   "$id": "139",
-   "Kind": "model",
-   "Name": "GetResponse5",
-   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
-   "Usage": "Output",
-   "Properties": [
-    {
-     "$id": "140",
-     "Name": "prop",
-     "SerializedName": "prop",
-     "Description": "",
-     "Type": {
-      "$ref": "12"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "141",
-   "Kind": "model",
-   "Name": "GetResponse6",
-   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
-   "Usage": "Output",
-   "Properties": [
-    {
-     "$id": "142",
-     "Name": "prop",
-     "SerializedName": "prop",
-     "Description": "",
-     "Type": {
-      "$ref": "17"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "143",
-   "Kind": "model",
-   "Name": "GetResponse7",
-   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
-   "Usage": "Output",
-   "Properties": [
-    {
-     "$id": "144",
-     "Name": "prop",
-     "SerializedName": "prop",
-     "Description": "",
-     "Type": {
-      "$ref": "22"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "145",
-   "Kind": "model",
-   "Name": "GetResponse8",
-   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
-   "Usage": "Output",
-   "Properties": [
-    {
-     "$id": "146",
-     "Name": "prop",
-     "SerializedName": "prop",
-     "Description": "",
-     "Type": {
-      "$ref": "26"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
+   "$ref": "144"
   },
   {
    "$id": "147",
    "Kind": "model",
-   "Name": "GetResponse9",
-   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
-   "Usage": "Output",
+   "Name": "SendRequest4",
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "148",
@@ -944,127 +944,7 @@
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$ref": "30"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "149",
-   "Kind": "model",
-   "Name": "SendRequest9",
-   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "150",
-     "Name": "prop",
-     "SerializedName": "prop",
-     "Description": "",
-     "Type": {
-      "$ref": "30"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "151",
-   "Kind": "model",
-   "Name": "SendRequest8",
-   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "152",
-     "Name": "prop",
-     "SerializedName": "prop",
-     "Description": "",
-     "Type": {
-      "$ref": "26"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "153",
-   "Kind": "model",
-   "Name": "SendRequest7",
-   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "154",
-     "Name": "prop",
-     "SerializedName": "prop",
-     "Description": "",
-     "Type": {
-      "$ref": "22"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "155",
-   "Kind": "model",
-   "Name": "SendRequest6",
-   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "156",
-     "Name": "prop",
-     "SerializedName": "prop",
-     "Description": "",
-     "Type": {
-      "$ref": "17"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "157",
-   "Kind": "model",
-   "Name": "SendRequest5",
-   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "158",
-     "Name": "prop",
-     "SerializedName": "prop",
-     "Description": "",
-     "Type": {
-      "$ref": "12"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "159",
-   "Kind": "model",
-   "Name": "SendRequest4",
-   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "160",
-     "Name": "prop",
-     "SerializedName": "prop",
-     "Description": "",
-     "Type": {
-      "$id": "161",
+      "$id": "149",
       "Kind": "union",
       "Name": "GetResponseProp",
       "VariantTypes": [
@@ -1072,7 +952,7 @@
         "$ref": "40"
        },
        {
-        "$ref": "136"
+        "$ref": "144"
        }
       ]
      },
@@ -1082,11 +962,131 @@
    ]
   },
   {
+   "$id": "150",
+   "Kind": "model",
+   "Name": "GetResponse5",
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "151",
+     "Name": "prop",
+     "SerializedName": "prop",
+     "Description": "",
+     "Type": {
+      "$ref": "12"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "152",
+   "Kind": "model",
+   "Name": "SendRequest5",
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "153",
+     "Name": "prop",
+     "SerializedName": "prop",
+     "Description": "",
+     "Type": {
+      "$ref": "12"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "154",
+   "Kind": "model",
+   "Name": "GetResponse6",
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "155",
+     "Name": "prop",
+     "SerializedName": "prop",
+     "Description": "",
+     "Type": {
+      "$ref": "17"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "156",
+   "Kind": "model",
+   "Name": "SendRequest6",
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "157",
+     "Name": "prop",
+     "SerializedName": "prop",
+     "Description": "",
+     "Type": {
+      "$ref": "17"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "158",
+   "Kind": "model",
+   "Name": "GetResponse7",
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "159",
+     "Name": "prop",
+     "SerializedName": "prop",
+     "Description": "",
+     "Type": {
+      "$ref": "22"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "160",
+   "Kind": "model",
+   "Name": "SendRequest7",
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "161",
+     "Name": "prop",
+     "SerializedName": "prop",
+     "Description": "",
+     "Type": {
+      "$ref": "22"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
    "$id": "162",
    "Kind": "model",
-   "Name": "SendRequest3",
-   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "None",
+   "Name": "GetResponse8",
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "163",
@@ -1094,7 +1094,7 @@
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$ref": "130"
+      "$ref": "26"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1104,9 +1104,9 @@
   {
    "$id": "164",
    "Kind": "model",
-   "Name": "SendRequest2",
+   "Name": "SendRequest8",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "None",
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "165",
@@ -1114,7 +1114,7 @@
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$ref": "117"
+      "$ref": "26"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1124,9 +1124,9 @@
   {
    "$id": "166",
    "Kind": "model",
-   "Name": "SendRequest1",
-   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "None",
+   "Name": "GetResponse9",
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "167",
@@ -1134,7 +1134,7 @@
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$ref": "74"
+      "$ref": "30"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1144,9 +1144,9 @@
   {
    "$id": "168",
    "Kind": "model",
-   "Name": "SendRequest",
+   "Name": "SendRequest9",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "None",
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "169",
@@ -1154,7 +1154,7 @@
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$ref": "37"
+      "$ref": "30"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1268,7 +1268,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "147"
+        "$ref": "166"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1322,7 +1322,7 @@
        "Name": "sendRequest9",
        "NameInRequest": "sendRequest9",
        "Type": {
-        "$ref": "149"
+        "$ref": "168"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -1433,7 +1433,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "145"
+        "$ref": "162"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1487,7 +1487,7 @@
        "Name": "sendRequest8",
        "NameInRequest": "sendRequest8",
        "Type": {
-        "$ref": "151"
+        "$ref": "164"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -1598,7 +1598,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "143"
+        "$ref": "158"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1652,7 +1652,7 @@
        "Name": "sendRequest7",
        "NameInRequest": "sendRequest7",
        "Type": {
-        "$ref": "153"
+        "$ref": "160"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -1763,7 +1763,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "141"
+        "$ref": "154"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1817,7 +1817,7 @@
        "Name": "sendRequest6",
        "NameInRequest": "sendRequest6",
        "Type": {
-        "$ref": "155"
+        "$ref": "156"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -1928,7 +1928,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "139"
+        "$ref": "150"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1982,7 +1982,7 @@
        "Name": "sendRequest5",
        "NameInRequest": "sendRequest5",
        "Type": {
-        "$ref": "157"
+        "$ref": "152"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -2093,7 +2093,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "133"
+        "$ref": "141"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2147,7 +2147,7 @@
        "Name": "sendRequest4",
        "NameInRequest": "sendRequest4",
        "Type": {
-        "$ref": "159"
+        "$ref": "147"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -2258,7 +2258,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "128"
+        "$ref": "134"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2312,7 +2312,7 @@
        "Name": "sendRequest3",
        "NameInRequest": "sendRequest3",
        "Type": {
-        "$ref": "162"
+        "$ref": "139"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -2423,7 +2423,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "115"
+        "$ref": "119"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2477,7 +2477,7 @@
        "Name": "sendRequest2",
        "NameInRequest": "sendRequest2",
        "Type": {
-        "$ref": "164"
+        "$ref": "132"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -2588,7 +2588,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "72"
+        "$ref": "74"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2642,7 +2642,7 @@
        "Name": "sendRequest1",
        "NameInRequest": "sendRequest1",
        "Type": {
-        "$ref": "166"
+        "$ref": "117"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -2807,7 +2807,7 @@
        "Name": "sendRequest",
        "NameInRequest": "sendRequest",
        "Type": {
-        "$ref": "168"
+        "$ref": "72"
        },
        "Location": "Body",
        "IsApiVersion": false,

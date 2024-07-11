@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -156,32 +157,32 @@ namespace Parameters.BodyOptionality
         }
 
         /// <summary> Required implicit. </summary>
-        /// <param name="bodyModel"> The <see cref="BodyModel"/> to use. </param>
+        /// <param name="name"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyModel"/> is null. </exception>
-        /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredImplicitAsync(BodyModel,CancellationToken)']/*" />
-        public virtual async Task<Response> RequiredImplicitAsync(BodyModel bodyModel, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredImplicitAsync(string,CancellationToken)']/*" />
+        public virtual async Task<Response> RequiredImplicitAsync(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(bodyModel, nameof(bodyModel));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using RequestContent content = bodyModel.ToRequestContent();
+            RequiredImplicitRequest requiredImplicitRequest = new RequiredImplicitRequest(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await RequiredImplicitAsync(content, context).ConfigureAwait(false);
+            Response response = await RequiredImplicitAsync(requiredImplicitRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Required implicit. </summary>
-        /// <param name="bodyModel"> The <see cref="BodyModel"/> to use. </param>
+        /// <param name="name"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyModel"/> is null. </exception>
-        /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredImplicit(BodyModel,CancellationToken)']/*" />
-        public virtual Response RequiredImplicit(BodyModel bodyModel, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredImplicit(string,CancellationToken)']/*" />
+        public virtual Response RequiredImplicit(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(bodyModel, nameof(bodyModel));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using RequestContent content = bodyModel.ToRequestContent();
+            RequiredImplicitRequest requiredImplicitRequest = new RequiredImplicitRequest(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = RequiredImplicit(content, context);
+            Response response = RequiredImplicit(requiredImplicitRequest.ToRequestContent(), context);
             return response;
         }
 
@@ -195,7 +196,7 @@ namespace Parameters.BodyOptionality
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="RequiredImplicitAsync(BodyModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="RequiredImplicitAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -234,7 +235,7 @@ namespace Parameters.BodyOptionality
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="RequiredImplicit(BodyModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="RequiredImplicit(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

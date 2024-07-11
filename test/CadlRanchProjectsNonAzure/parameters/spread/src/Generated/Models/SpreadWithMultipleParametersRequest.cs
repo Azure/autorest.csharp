@@ -50,7 +50,7 @@ namespace Scm.Parameters.Spread.Models
         /// <param name="prop5"></param>
         /// <param name="prop6"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="prop1"/>, <paramref name="prop2"/>, <paramref name="prop3"/>, <paramref name="prop4"/>, <paramref name="prop5"/> or <paramref name="prop6"/> is null. </exception>
-        internal SpreadWithMultipleParametersRequest(string prop1, string prop2, string prop3, string prop4, string prop5, string prop6)
+        public SpreadWithMultipleParametersRequest(string prop1, string prop2, string prop3, string prop4, string prop5, string prop6)
         {
             Argument.AssertNotNull(prop1, nameof(prop1));
             Argument.AssertNotNull(prop2, nameof(prop2));

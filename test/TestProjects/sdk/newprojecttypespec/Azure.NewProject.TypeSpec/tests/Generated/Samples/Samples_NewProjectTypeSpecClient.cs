@@ -441,8 +441,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
-            Response<Thing> response = client.AnonymousBody(thing);
+            Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false);
         }
 
         [Test]
@@ -453,8 +452,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
-            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false);
         }
 
         [Test]
@@ -541,14 +539,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-            };
-            Response<Thing> response = client.AnonymousBody(thing);
+            Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false, optionalLiteralString: AnonymousBodyRequestOptionalLiteralString.Reject, optionalLiteralInt: AnonymousBodyRequestOptionalLiteralInt._456, optionalLiteralFloat: AnonymousBodyRequestOptionalLiteralFloat._456, optionalLiteralBool: true);
         }
 
         [Test]
@@ -559,14 +550,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-            };
-            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false, optionalLiteralString: AnonymousBodyRequestOptionalLiteralString.Reject, optionalLiteralInt: AnonymousBodyRequestOptionalLiteralInt._456, optionalLiteralFloat: AnonymousBodyRequestOptionalLiteralFloat._456, optionalLiteralBool: true);
         }
 
         [Test]
@@ -613,8 +597,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Friend friend = new Friend("<name>");
-            Response<Friend> response = client.FriendlyModel(friend);
+            Response<Friend> response = client.FriendlyModel("<name>");
         }
 
         [Test]
@@ -625,8 +608,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Friend friend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(friend);
+            Response<Friend> response = await client.FriendlyModelAsync("<name>");
         }
 
         [Test]
@@ -673,8 +655,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Friend friend = new Friend("<name>");
-            Response<Friend> response = client.FriendlyModel(friend);
+            Response<Friend> response = client.FriendlyModel("<name>");
         }
 
         [Test]
@@ -685,8 +666,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Friend friend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(friend);
+            Response<Friend> response = await client.FriendlyModelAsync("<name>");
         }
 
         [Test]

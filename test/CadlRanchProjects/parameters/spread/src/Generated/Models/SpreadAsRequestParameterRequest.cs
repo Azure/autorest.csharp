@@ -48,7 +48,7 @@ namespace Parameters.Spread.Models
         /// <summary> Initializes a new instance of <see cref="SpreadAsRequestParameterRequest"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal SpreadAsRequestParameterRequest(string name)
+        public SpreadAsRequestParameterRequest(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
 

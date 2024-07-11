@@ -98,7 +98,8 @@ export function fromSdkModelType(
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputModelType {
-    const modelTypeName = modelType.name;
+    const modelTypeName =
+        modelType.name !== "" ? modelType.name : getAnonymousModelName(); // TODO: remove this after https://github.com/Azure/typespec-azure/issues/1150
     let inputModelType = models.get(modelTypeName);
     if (!inputModelType) {
         inputModelType = {
@@ -425,6 +426,8 @@ function fromSdkArrayType(
 }
 
 function fromUsageFlags(usage: UsageFlags): string {
+    if (usage & UsageFlags.JsonMergePatch) return Usage.None; // if the model is used in patch, we ignore the usage and defer to the logic of ours
+
     const usages: string[] = [];
     if (usage & UsageFlags.Input && usage & UsageFlags.Output)
         usages.push(Usage.RoundTrip);
@@ -442,4 +445,9 @@ function fromSdkEndpointType(): InputPrimitiveType {
     return {
         Kind: "string"
     };
+}
+
+let i = 0;
+function getAnonymousModelName(): string {
+    return `AnonymousModel${i++}`;
 }

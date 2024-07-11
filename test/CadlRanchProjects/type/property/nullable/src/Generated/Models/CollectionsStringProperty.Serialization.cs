@@ -82,7 +82,7 @@ namespace _Type.Property.Nullable.Models
                 return null;
             }
             string requiredProperty = default;
-            IList<string> nullableProperty = default;
+            IReadOnlyList<string> nullableProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

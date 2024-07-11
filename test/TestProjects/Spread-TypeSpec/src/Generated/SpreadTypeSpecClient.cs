@@ -57,32 +57,34 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> spread a model as body. </summary>
-        /// <param name="thing"> The <see cref="Thing"/> to use. </param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadModelAsync(Thing,CancellationToken)']/*" />
-        public virtual async Task<Response> SpreadModelAsync(Thing thing, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadModelAsync(string,int,CancellationToken)']/*" />
+        public virtual async Task<Response> SpreadModelAsync(string name, int age, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(thing, nameof(thing));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using RequestContent content = thing.ToRequestContent();
+            SpreadModelRequest spreadModelRequest = new SpreadModelRequest(name, age, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadModelAsync(content, context).ConfigureAwait(false);
+            Response response = await SpreadModelAsync(spreadModelRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> spread a model as body. </summary>
-        /// <param name="thing"> The <see cref="Thing"/> to use. </param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadModel(Thing,CancellationToken)']/*" />
-        public virtual Response SpreadModel(Thing thing, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadModel(string,int,CancellationToken)']/*" />
+        public virtual Response SpreadModel(string name, int age, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(thing, nameof(thing));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using RequestContent content = thing.ToRequestContent();
+            SpreadModelRequest spreadModelRequest = new SpreadModelRequest(name, age, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadModel(content, context);
+            Response response = SpreadModel(spreadModelRequest.ToRequestContent(), context);
             return response;
         }
 
@@ -96,7 +98,7 @@ namespace SpreadTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadModelAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadModelAsync(string,int,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -135,7 +137,7 @@ namespace SpreadTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadModel(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadModel(string,int,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -403,38 +405,40 @@ namespace SpreadTypeSpec
         /// <summary> spread an alias which contains a complex model property as body. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="top"> The <see cref="int"/> to use. </param>
-        /// <param name="thing"> The <see cref="Thing"/> to use. </param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="thing"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithModelAsync(string,int,Thing,CancellationToken)']/*" />
-        public virtual async Task<Response> SpreadAliasWithModelAsync(string id, int top, Thing thing, CancellationToken cancellationToken = default)
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithModelAsync(string,int,string,int,CancellationToken)']/*" />
+        public virtual async Task<Response> SpreadAliasWithModelAsync(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(thing, nameof(thing));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using RequestContent content = thing.ToRequestContent();
+            SpreadAliasWithModelRequest spreadAliasWithModelRequest = new SpreadAliasWithModelRequest(name, age, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadAliasWithModelAsync(id, top, content, context).ConfigureAwait(false);
+            Response response = await SpreadAliasWithModelAsync(id, top, spreadAliasWithModelRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> spread an alias which contains a complex model property as body. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="top"> The <see cref="int"/> to use. </param>
-        /// <param name="thing"> The <see cref="Thing"/> to use. </param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="thing"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithModel(string,int,Thing,CancellationToken)']/*" />
-        public virtual Response SpreadAliasWithModel(string id, int top, Thing thing, CancellationToken cancellationToken = default)
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithModel(string,int,string,int,CancellationToken)']/*" />
+        public virtual Response SpreadAliasWithModel(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(thing, nameof(thing));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using RequestContent content = thing.ToRequestContent();
+            SpreadAliasWithModelRequest spreadAliasWithModelRequest = new SpreadAliasWithModelRequest(name, age, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadAliasWithModel(id, top, content, context);
+            Response response = SpreadAliasWithModel(id, top, spreadAliasWithModelRequest.ToRequestContent(), context);
             return response;
         }
 
@@ -448,7 +452,7 @@ namespace SpreadTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAliasWithModelAsync(string,int,Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAliasWithModelAsync(string,int,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -491,7 +495,7 @@ namespace SpreadTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAliasWithModel(string,int,Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAliasWithModel(string,int,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -673,7 +677,7 @@ namespace SpreadTypeSpec
                 color,
                 age,
                 items.ToList(),
-                elements?.ToList() as IReadOnlyList<string> ?? new ChangeTrackingList<string>(),
+                elements?.ToList() as IList<string> ?? new ChangeTrackingList<string>(),
                 null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadAliasWithOptionalPropsAsync(id, top, spreadAliasWithOptionalPropsRequest.ToRequestContent(), context).ConfigureAwait(false);
@@ -703,7 +707,7 @@ namespace SpreadTypeSpec
                 color,
                 age,
                 items.ToList(),
-                elements?.ToList() as IReadOnlyList<string> ?? new ChangeTrackingList<string>(),
+                elements?.ToList() as IList<string> ?? new ChangeTrackingList<string>(),
                 null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadAliasWithOptionalProps(id, top, spreadAliasWithOptionalPropsRequest.ToRequestContent(), context);
@@ -806,7 +810,7 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
 
-            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList(), optionalStringList?.ToList() as IReadOnlyList<string> ?? new ChangeTrackingList<string>(), null);
+            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList(), optionalStringList?.ToList() as IList<string> ?? new ChangeTrackingList<string>(), null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadAliasWithCollectionsAsync(spreadAliasWithCollectionsRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
@@ -822,7 +826,7 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
 
-            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList(), optionalStringList?.ToList() as IReadOnlyList<string> ?? new ChangeTrackingList<string>(), null);
+            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList(), optionalStringList?.ToList() as IList<string> ?? new ChangeTrackingList<string>(), null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadAliasWithCollections(spreadAliasWithCollectionsRequest.ToRequestContent(), context);
             return response;

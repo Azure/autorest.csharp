@@ -50,7 +50,7 @@ namespace SpreadTypeSpec.Models
         /// <param name="name"> name of the Thing. </param>
         /// <param name="items"> required array. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="items"/> is null. </exception>
-        internal SpreadAliasWithOptionalPropsRequest(string name, IEnumerable<int> items)
+        public SpreadAliasWithOptionalPropsRequest(string name, IEnumerable<int> items)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(items, nameof(items));
@@ -67,7 +67,7 @@ namespace SpreadTypeSpec.Models
         /// <param name="items"> required array. </param>
         /// <param name="elements"> optional array. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SpreadAliasWithOptionalPropsRequest(string name, string color, int? age, IReadOnlyList<int> items, IReadOnlyList<string> elements, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal SpreadAliasWithOptionalPropsRequest(string name, string color, int? age, IList<int> items, IList<string> elements, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Color = color;
@@ -85,12 +85,12 @@ namespace SpreadTypeSpec.Models
         /// <summary> name of the Thing. </summary>
         public string Name { get; }
         /// <summary> optional property of the Thing. </summary>
-        public string Color { get; }
+        public string Color { get; set; }
         /// <summary> age of the Thing. </summary>
-        public int? Age { get; }
+        public int? Age { get; set; }
         /// <summary> required array. </summary>
-        public IReadOnlyList<int> Items { get; }
+        public IList<int> Items { get; }
         /// <summary> optional array. </summary>
-        public IReadOnlyList<string> Elements { get; }
+        public IList<string> Elements { get; }
     }
 }

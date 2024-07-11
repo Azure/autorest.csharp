@@ -292,7 +292,7 @@
    "Kind": "model",
    "Name": "AnonymousModelRequest",
    "CrossLanguageDefinitionId": "anonymousModel.Request.anonymous",
-   "Usage": "Multipart",
+   "Usage": "Input,Multipart",
    "Properties": [
     {
      "$id": "42",

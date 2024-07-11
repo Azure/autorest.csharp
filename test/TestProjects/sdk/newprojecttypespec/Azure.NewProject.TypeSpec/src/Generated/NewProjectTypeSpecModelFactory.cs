@@ -44,6 +44,14 @@ namespace Azure.NewProject.TypeSpec.Models
                 serializedAdditionalRawData: null);
         }
 
+        /// <summary> Initializes a new instance of <see cref="Models.Friend"/>. </summary>
+        /// <param name="name"> name of the NotFriend. </param>
+        /// <returns> A new <see cref="Models.Friend"/> instance for mocking. </returns>
+        public static Friend Friend(string name = null)
+        {
+            return new Friend(name, serializedAdditionalRawData: null);
+        }
+
         /// <summary> Initializes a new instance of <see cref="Models.RoundTripModel"/>. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>

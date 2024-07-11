@@ -29,8 +29,8 @@
   {
    "$id": "5",
    "Kind": "model",
-   "Name": "Thing",
-   "CrossLanguageDefinitionId": "SpreadTypeSpec.Thing",
+   "Name": "SpreadModelRequest",
+   "CrossLanguageDefinitionId": "SpreadTypeSpec.spreadModel.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -64,7 +64,7 @@
    "Kind": "model",
    "Name": "SpreadAliasRequest",
    "CrossLanguageDefinitionId": "SpreadTypeSpec.spreadAlias.Request.anonymous",
-   "Usage": "None",
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "11",
@@ -97,7 +97,7 @@
    "Kind": "model",
    "Name": "SpreadMultiTargetAliasRequest",
    "CrossLanguageDefinitionId": "spreadMultiTargetAlias.Request.anonymous",
-   "Usage": "None",
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "16",
@@ -128,9 +128,9 @@
   {
    "$id": "20",
    "Kind": "model",
-   "Name": "SpreadAliasWithSpreadAliasRequest",
-   "CrossLanguageDefinitionId": "spreadAliasWithSpreadAlias.Request.anonymous",
-   "Usage": "None",
+   "Name": "SpreadAliasWithModelRequest",
+   "CrossLanguageDefinitionId": "spreadAliasWithModel.Request.anonymous",
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "21",
@@ -161,9 +161,9 @@
   {
    "$id": "25",
    "Kind": "model",
-   "Name": "SpreadAliasWithOptionalPropsRequest",
-   "CrossLanguageDefinitionId": "spreadAliasWithOptionalProps.Request.anonymous",
-   "Usage": "None",
+   "Name": "SpreadAliasWithSpreadAliasRequest",
+   "CrossLanguageDefinitionId": "spreadAliasWithSpreadAlias.Request.anonymous",
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "26",
@@ -179,39 +179,72 @@
     },
     {
      "$id": "28",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "age of the Thing",
+     "Type": {
+      "$id": "29",
+      "Kind": "int32"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "30",
+   "Kind": "model",
+   "Name": "SpreadAliasWithOptionalPropsRequest",
+   "CrossLanguageDefinitionId": "spreadAliasWithOptionalProps.Request.anonymous",
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "31",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "name of the Thing",
+     "Type": {
+      "$id": "32",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "33",
      "Name": "color",
      "SerializedName": "color",
      "Description": "optional property of the Thing",
      "Type": {
-      "$id": "29",
+      "$id": "34",
       "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "30",
+     "$id": "35",
      "Name": "age",
      "SerializedName": "age",
      "Description": "age of the Thing",
      "Type": {
-      "$id": "31",
+      "$id": "36",
       "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "32",
+     "$id": "37",
      "Name": "items",
      "SerializedName": "items",
      "Description": "required array",
      "Type": {
-      "$id": "33",
+      "$id": "38",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "34",
+       "$id": "39",
        "Kind": "int32"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -220,16 +253,16 @@
      "IsReadOnly": false
     },
     {
-     "$id": "35",
+     "$id": "40",
      "Name": "elements",
      "SerializedName": "elements",
      "Description": "optional array",
      "Type": {
-      "$id": "36",
+      "$id": "41",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "37",
+       "$id": "42",
        "Kind": "string"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -240,23 +273,23 @@
    ]
   },
   {
-   "$id": "38",
+   "$id": "43",
    "Kind": "model",
    "Name": "SpreadAliasWithCollectionsRequest",
    "CrossLanguageDefinitionId": "SpreadTypeSpec.spreadAliasWithCollections.Request.anonymous",
-   "Usage": "None",
+   "Usage": "Input",
    "Properties": [
     {
-     "$id": "39",
+     "$id": "44",
      "Name": "requiredStringList",
      "SerializedName": "requiredStringList",
      "Description": "required list",
      "Type": {
-      "$id": "40",
+      "$id": "45",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "41",
+       "$id": "46",
        "Kind": "string"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -265,16 +298,16 @@
      "IsReadOnly": false
     },
     {
-     "$id": "42",
+     "$id": "47",
      "Name": "optionalStringList",
      "SerializedName": "optionalStringList",
      "Description": "optional list",
      "Type": {
-      "$id": "43",
+      "$id": "48",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "44",
+       "$id": "49",
        "Kind": "string"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -287,24 +320,24 @@
  ],
  "Clients": [
   {
-   "$id": "45",
+   "$id": "50",
    "Name": "SpreadTypeSpecClient",
    "Description": "This is a spread model or alias service.",
    "Operations": [
     {
-     "$id": "46",
+     "$id": "51",
      "Name": "spreadModel",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread a model as body.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "47",
+       "$id": "52",
        "Name": "spreadUrl",
        "NameInRequest": "spreadUrl",
        "Description": "Endpoint Service",
        "Type": {
-        "$id": "48",
+        "$id": "53",
         "Kind": "uri"
        },
        "Location": "Uri",
@@ -318,15 +351,15 @@
        "Kind": "Client"
       },
       {
-       "$id": "49",
+       "$id": "54",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "50",
+        "$id": "55",
         "Kind": "constant",
         "ValueType": {
-         "$id": "51",
+         "$id": "56",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -340,9 +373,9 @@
        "Kind": "Constant"
       },
       {
-       "$id": "52",
-       "Name": "thing",
-       "NameInRequest": "thing",
+       "$id": "57",
+       "Name": "spreadModelRequest",
+       "NameInRequest": "spreadModelRequest",
        "Type": {
         "$ref": "5"
        },
@@ -352,12 +385,12 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Spread"
       }
      ],
      "Responses": [
       {
-       "$id": "53",
+       "$id": "58",
        "StatusCodes": [
         204
        ],
@@ -378,25 +411,25 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "54",
+     "$id": "59",
      "Name": "spreadAlias",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias as body.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "47"
+       "$ref": "52"
       },
       {
-       "$id": "55",
+       "$id": "60",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "56",
+        "$id": "61",
         "Kind": "constant",
         "ValueType": {
-         "$id": "57",
+         "$id": "62",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -410,7 +443,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "58",
+       "$id": "63",
        "Name": "spreadAliasRequest",
        "NameInRequest": "spreadAliasRequest",
        "Type": {
@@ -427,7 +460,7 @@
      ],
      "Responses": [
       {
-       "$id": "59",
+       "$id": "64",
        "StatusCodes": [
         204
        ],
@@ -448,21 +481,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "60",
+     "$id": "65",
      "Name": "spreadMultiTargetAlias",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias which has multiple target property as body.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "47"
+       "$ref": "52"
       },
       {
-       "$id": "61",
+       "$id": "66",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "62",
+        "$id": "67",
         "Kind": "string"
        },
        "Location": "Path",
@@ -474,11 +507,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "63",
+       "$id": "68",
        "Name": "top",
        "NameInRequest": "top",
        "Type": {
-        "$id": "64",
+        "$id": "69",
         "Kind": "int32"
        },
        "Location": "Header",
@@ -490,15 +523,15 @@
        "Kind": "Method"
       },
       {
-       "$id": "65",
+       "$id": "70",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "66",
+        "$id": "71",
         "Kind": "constant",
         "ValueType": {
-         "$id": "67",
+         "$id": "72",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -512,7 +545,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "68",
+       "$id": "73",
        "Name": "spreadMultiTargetAliasRequest",
        "NameInRequest": "spreadMultiTargetAliasRequest",
        "Type": {
@@ -529,7 +562,7 @@
      ],
      "Responses": [
       {
-       "$id": "69",
+       "$id": "74",
        "StatusCodes": [
         204
        ],
@@ -550,21 +583,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "70",
+     "$id": "75",
      "Name": "spreadAliasWithModel",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias which contains a complex model property as body.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "47"
+       "$ref": "52"
       },
       {
-       "$id": "71",
+       "$id": "76",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "72",
+        "$id": "77",
         "Kind": "string"
        },
        "Location": "Path",
@@ -576,11 +609,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "73",
+       "$id": "78",
        "Name": "top",
        "NameInRequest": "top",
        "Type": {
-        "$id": "74",
+        "$id": "79",
         "Kind": "int32"
        },
        "Location": "Header",
@@ -592,15 +625,15 @@
        "Kind": "Method"
       },
       {
-       "$id": "75",
+       "$id": "80",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "76",
+        "$id": "81",
         "Kind": "constant",
         "ValueType": {
-         "$id": "77",
+         "$id": "82",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -614,11 +647,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "78",
-       "Name": "thing",
-       "NameInRequest": "thing",
+       "$id": "83",
+       "Name": "spreadAliasWithModelRequest",
+       "NameInRequest": "spreadAliasWithModelRequest",
        "Type": {
-        "$ref": "5"
+        "$ref": "20"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -626,12 +659,12 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Spread"
       }
      ],
      "Responses": [
       {
-       "$id": "79",
+       "$id": "84",
        "StatusCodes": [
         204
        ],
@@ -652,21 +685,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "80",
+     "$id": "85",
      "Name": "spreadAliasWithSpreadAlias",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias with contains another alias property as body.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "47"
+       "$ref": "52"
       },
       {
-       "$id": "81",
+       "$id": "86",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "82",
+        "$id": "87",
         "Kind": "string"
        },
        "Location": "Path",
@@ -678,11 +711,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "83",
+       "$id": "88",
        "Name": "top",
        "NameInRequest": "top",
        "Type": {
-        "$id": "84",
+        "$id": "89",
         "Kind": "int32"
        },
        "Location": "Header",
@@ -694,15 +727,15 @@
        "Kind": "Method"
       },
       {
-       "$id": "85",
+       "$id": "90",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "86",
+        "$id": "91",
         "Kind": "constant",
         "ValueType": {
-         "$id": "87",
+         "$id": "92",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -716,11 +749,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "88",
+       "$id": "93",
        "Name": "spreadAliasWithSpreadAliasRequest",
        "NameInRequest": "spreadAliasWithSpreadAliasRequest",
        "Type": {
-        "$ref": "20"
+        "$ref": "25"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -733,7 +766,7 @@
      ],
      "Responses": [
       {
-       "$id": "89",
+       "$id": "94",
        "StatusCodes": [
         204
        ],
@@ -754,21 +787,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "90",
+     "$id": "95",
      "Name": "spreadAliasWithOptionalProps",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias with contains optional properties as body.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "47"
+       "$ref": "52"
       },
       {
-       "$id": "91",
+       "$id": "96",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "92",
+        "$id": "97",
         "Kind": "string"
        },
        "Location": "Path",
@@ -780,11 +813,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "93",
+       "$id": "98",
        "Name": "top",
        "NameInRequest": "top",
        "Type": {
-        "$id": "94",
+        "$id": "99",
         "Kind": "int32"
        },
        "Location": "Header",
@@ -796,15 +829,15 @@
        "Kind": "Method"
       },
       {
-       "$id": "95",
+       "$id": "100",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "96",
+        "$id": "101",
         "Kind": "constant",
         "ValueType": {
-         "$id": "97",
+         "$id": "102",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -818,11 +851,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "98",
+       "$id": "103",
        "Name": "spreadAliasWithOptionalPropsRequest",
        "NameInRequest": "spreadAliasWithOptionalPropsRequest",
        "Type": {
-        "$ref": "25"
+        "$ref": "30"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -835,7 +868,7 @@
      ],
      "Responses": [
       {
-       "$id": "99",
+       "$id": "104",
        "StatusCodes": [
         204
        ],
@@ -856,25 +889,25 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "100",
+     "$id": "105",
      "Name": "spreadAliasWithCollections",
      "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias with required and optional collections",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "47"
+       "$ref": "52"
       },
       {
-       "$id": "101",
+       "$id": "106",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "102",
+        "$id": "107",
         "Kind": "constant",
         "ValueType": {
-         "$id": "103",
+         "$id": "108",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -888,11 +921,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "104",
+       "$id": "109",
        "Name": "spreadAliasWithCollectionsRequest",
        "NameInRequest": "spreadAliasWithCollectionsRequest",
        "Type": {
-        "$ref": "38"
+        "$ref": "43"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -905,7 +938,7 @@
      ],
      "Responses": [
       {
-       "$id": "105",
+       "$id": "110",
        "StatusCodes": [
         204
        ],
@@ -927,11 +960,11 @@
     }
    ],
    "Protocol": {
-    "$id": "106"
+    "$id": "111"
    },
    "Parameters": [
     {
-     "$ref": "47"
+     "$ref": "52"
     }
    ]
   }

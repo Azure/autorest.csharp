@@ -291,8 +291,8 @@
       },
       {
        "$id": "39",
-       "Name": "clientNameModel",
-       "NameInRequest": "clientNameModel",
+       "Name": "body",
+       "NameInRequest": "body",
        "Type": {
         "$ref": "9"
        },
@@ -360,8 +360,8 @@
       },
       {
        "$id": "45",
-       "Name": "languageClientNameModel",
-       "NameInRequest": "languageClientNameModel",
+       "Name": "body",
+       "NameInRequest": "body",
        "Type": {
         "$ref": "12"
        },
@@ -429,8 +429,8 @@
       },
       {
        "$id": "51",
-       "Name": "clientNameAndJsonEncodedNameModel",
-       "NameInRequest": "clientNameAndJsonEncodedNameModel",
+       "Name": "body",
+       "NameInRequest": "body",
        "Type": {
         "$ref": "15"
        },

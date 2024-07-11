@@ -49,7 +49,7 @@ namespace SpreadTypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="SpreadAliasWithCollectionsRequest"/>. </summary>
         /// <param name="requiredStringList"> required list. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredStringList"/> is null. </exception>
-        internal SpreadAliasWithCollectionsRequest(IEnumerable<string> requiredStringList)
+        public SpreadAliasWithCollectionsRequest(IEnumerable<string> requiredStringList)
         {
             Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
 
@@ -61,7 +61,7 @@ namespace SpreadTypeSpec.Models
         /// <param name="requiredStringList"> required list. </param>
         /// <param name="optionalStringList"> optional list. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SpreadAliasWithCollectionsRequest(IReadOnlyList<string> requiredStringList, IReadOnlyList<string> optionalStringList, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal SpreadAliasWithCollectionsRequest(IList<string> requiredStringList, IList<string> optionalStringList, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredStringList = requiredStringList;
             OptionalStringList = optionalStringList;
@@ -74,8 +74,8 @@ namespace SpreadTypeSpec.Models
         }
 
         /// <summary> required list. </summary>
-        public IReadOnlyList<string> RequiredStringList { get; }
+        public IList<string> RequiredStringList { get; }
         /// <summary> optional list. </summary>
-        public IReadOnlyList<string> OptionalStringList { get; }
+        public IList<string> OptionalStringList { get; }
     }
 }

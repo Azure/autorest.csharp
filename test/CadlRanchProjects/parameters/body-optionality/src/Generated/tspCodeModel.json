@@ -24,27 +24,48 @@
      "IsReadOnly": false
     }
    ]
+  },
+  {
+   "$id": "5",
+   "Kind": "model",
+   "Name": "RequiredImplicitRequest",
+   "CrossLanguageDefinitionId": "Parameters.BodyOptionality.requiredImplicit.Request.anonymous",
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "6",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "7",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
   }
  ],
  "Clients": [
   {
-   "$id": "5",
+   "$id": "8",
    "Name": "BodyOptionalityClient",
    "Description": "Test describing optionality of the request body.",
    "Operations": [
     {
-     "$id": "6",
+     "$id": "9",
      "Name": "requiredExplicit",
      "ResourceName": "BodyOptionality",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "7",
+       "$id": "10",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Service host",
        "Type": {
-        "$id": "8",
+        "$id": "11",
         "Kind": "string"
        },
        "Location": "Uri",
@@ -57,24 +78,24 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "9",
+        "$id": "12",
         "Type": {
-         "$id": "10",
+         "$id": "13",
          "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
       },
       {
-       "$id": "11",
+       "$id": "14",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "12",
+        "$id": "15",
         "Kind": "constant",
         "ValueType": {
-         "$id": "13",
+         "$id": "16",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -88,7 +109,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "14",
+       "$id": "17",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -105,7 +126,7 @@
      ],
      "Responses": [
       {
-       "$id": "15",
+       "$id": "18",
        "StatusCodes": [
         204
        ],
@@ -126,24 +147,24 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "16",
+     "$id": "19",
      "Name": "requiredImplicit",
      "ResourceName": "BodyOptionality",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "7"
+       "$ref": "10"
       },
       {
-       "$id": "17",
+       "$id": "20",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "18",
+        "$id": "21",
         "Kind": "constant",
         "ValueType": {
-         "$id": "19",
+         "$id": "22",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -157,11 +178,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "20",
-       "Name": "bodyModel",
-       "NameInRequest": "bodyModel",
+       "$id": "23",
+       "Name": "requiredImplicitRequest",
+       "NameInRequest": "requiredImplicitRequest",
        "Type": {
-        "$ref": "2"
+        "$ref": "5"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -169,12 +190,12 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Spread"
       }
      ],
      "Responses": [
       {
-       "$id": "21",
+       "$id": "24",
        "StatusCodes": [
         204
        ],
@@ -196,31 +217,31 @@
     }
    ],
    "Protocol": {
-    "$id": "22"
+    "$id": "25"
    },
    "Parameters": [
     {
-     "$ref": "7"
+     "$ref": "10"
     }
    ]
   },
   {
-   "$id": "23",
+   "$id": "26",
    "Name": "OptionalExplicit",
    "Operations": [
     {
-     "$id": "24",
+     "$id": "27",
      "Name": "set",
      "ResourceName": "OptionalExplicit",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "25",
+       "$id": "28",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Service host",
        "Type": {
-        "$id": "26",
+        "$id": "29",
         "Kind": "string"
        },
        "Location": "Uri",
@@ -233,24 +254,24 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "27",
+        "$id": "30",
         "Type": {
-         "$id": "28",
+         "$id": "31",
          "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
       },
       {
-       "$id": "29",
+       "$id": "32",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "30",
+        "$id": "33",
         "Kind": "constant",
         "ValueType": {
-         "$id": "31",
+         "$id": "34",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -264,7 +285,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "32",
+       "$id": "35",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -281,7 +302,7 @@
      ],
      "Responses": [
       {
-       "$id": "33",
+       "$id": "36",
        "StatusCodes": [
         204
        ],
@@ -302,24 +323,24 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "34",
+     "$id": "37",
      "Name": "omit",
      "ResourceName": "OptionalExplicit",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "25"
+       "$ref": "28"
       },
       {
-       "$id": "35",
+       "$id": "38",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "36",
+        "$id": "39",
         "Kind": "constant",
         "ValueType": {
-         "$id": "37",
+         "$id": "40",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -333,7 +354,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "38",
+       "$id": "41",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -350,7 +371,7 @@
      ],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "42",
        "StatusCodes": [
         204
        ],
@@ -372,12 +393,12 @@
     }
    ],
    "Protocol": {
-    "$id": "40"
+    "$id": "43"
    },
    "Parent": "BodyOptionalityClient",
    "Parameters": [
     {
-     "$ref": "25"
+     "$ref": "28"
     }
    ]
   }

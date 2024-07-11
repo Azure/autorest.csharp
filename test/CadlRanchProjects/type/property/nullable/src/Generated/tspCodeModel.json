@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "CollectionsStringProperty",
    "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsStringProperty",
-   "Usage": "RoundTrip",
+   "Usage": "None",
    "Description": "Model with collection string properties",
    "Properties": [
     {

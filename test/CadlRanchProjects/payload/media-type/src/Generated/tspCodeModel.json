@@ -182,7 +182,22 @@
         "Kind": "string"
        },
        "BodyMediaType": "Json",
-       "Headers": [],
+       "Headers": [
+        {
+         "$id": "26",
+         "Name": "contentType",
+         "NameInResponse": "content-type",
+         "Type": {
+          "$id": "27",
+          "Kind": "constant",
+          "ValueType": {
+           "$id": "28",
+           "Kind": "string"
+          },
+          "Value": "text/plain"
+         }
+        }
+       ],
        "IsErrorResponse": false,
        "ContentTypes": [
         "text/plain"
@@ -198,7 +213,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "26",
+     "$id": "29",
      "Name": "sendAsJson",
      "ResourceName": "StringBody",
      "Accessibility": "public",
@@ -207,14 +222,14 @@
        "$ref": "10"
       },
       {
-       "$id": "27",
+       "$id": "30",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "28",
+        "$id": "31",
         "Kind": "constant",
         "ValueType": {
-         "$id": "29",
+         "$id": "32",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -228,11 +243,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "30",
+       "$id": "33",
        "Name": "text",
        "NameInRequest": "text",
        "Type": {
-        "$id": "31",
+        "$id": "34",
         "Kind": "string"
        },
        "Location": "Body",
@@ -246,7 +261,7 @@
      ],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "35",
        "StatusCodes": [
         200
        ],
@@ -267,7 +282,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "33",
+     "$id": "36",
      "Name": "getAsJson",
      "ResourceName": "StringBody",
      "Accessibility": "public",
@@ -276,14 +291,14 @@
        "$ref": "10"
       },
       {
-       "$id": "34",
+       "$id": "37",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "35",
+        "$id": "38",
         "Kind": "constant",
         "ValueType": {
-         "$id": "36",
+         "$id": "39",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -299,16 +314,31 @@
      ],
      "Responses": [
       {
-       "$id": "37",
+       "$id": "40",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "38",
+        "$id": "41",
         "Kind": "string"
        },
        "BodyMediaType": "Json",
-       "Headers": [],
+       "Headers": [
+        {
+         "$id": "42",
+         "Name": "contentType",
+         "NameInResponse": "content-type",
+         "Type": {
+          "$id": "43",
+          "Kind": "constant",
+          "ValueType": {
+           "$id": "44",
+           "Kind": "string"
+          },
+          "Value": "application/json"
+         }
+        }
+       ],
        "IsErrorResponse": false,
        "ContentTypes": [
         "application/json"
@@ -325,7 +355,7 @@
     }
    ],
    "Protocol": {
-    "$id": "39"
+    "$id": "45"
    },
    "Parent": "MediaTypeClient",
    "Parameters": [

@@ -29,42 +29,76 @@
   {
    "$id": "5",
    "Kind": "model",
+   "Name": "Error",
+   "CrossLanguageDefinitionId": "MixApiVersion.Error",
+   "Usage": "None",
+   "Description": "Error",
+   "Properties": [
+    {
+     "$id": "6",
+     "Name": "code",
+     "SerializedName": "code",
+     "Description": "",
+     "Type": {
+      "$id": "7",
+      "Kind": "int32"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "8",
+     "Name": "message",
+     "SerializedName": "message",
+     "Description": "",
+     "Type": {
+      "$id": "9",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "10",
+   "Kind": "model",
    "Name": "Pet",
    "CrossLanguageDefinitionId": "MixApiVersion.Pet",
    "Usage": "None",
    "Description": "Pet",
    "Properties": [
     {
-     "$id": "6",
+     "$id": "11",
      "Name": "name",
      "SerializedName": "name",
      "Description": "pet name",
      "Type": {
-      "$id": "7",
+      "$id": "12",
       "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": true
     },
     {
-     "$id": "8",
+     "$id": "13",
      "Name": "tag",
      "SerializedName": "tag",
      "Description": "",
      "Type": {
-      "$id": "9",
+      "$id": "14",
       "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "10",
+     "$id": "15",
      "Name": "age",
      "SerializedName": "age",
      "Description": "",
      "Type": {
-      "$id": "11",
+      "$id": "16",
       "Kind": "int32"
      },
      "IsRequired": true,
@@ -73,7 +107,7 @@
    ]
   },
   {
-   "$id": "12",
+   "$id": "17",
    "Kind": "model",
    "Name": "PagedToy",
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
@@ -81,52 +115,52 @@
    "Description": "Paged collection of Toy items",
    "Properties": [
     {
-     "$id": "13",
+     "$id": "18",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The Toy items on this page",
      "Type": {
-      "$id": "14",
+      "$id": "19",
       "Kind": "array",
       "Name": "ArrayToy",
       "ValueType": {
-       "$id": "15",
+       "$id": "20",
        "Kind": "model",
        "Name": "Toy",
        "CrossLanguageDefinitionId": "MixApiVersion.Toy",
        "Usage": "None",
        "Properties": [
         {
-         "$id": "16",
+         "$id": "21",
          "Name": "id",
          "SerializedName": "id",
          "Description": "",
          "Type": {
-          "$id": "17",
+          "$id": "22",
           "Kind": "int64"
          },
          "IsRequired": true,
          "IsReadOnly": true
         },
         {
-         "$id": "18",
+         "$id": "23",
          "Name": "petId",
          "SerializedName": "petId",
          "Description": "",
          "Type": {
-          "$id": "19",
+          "$id": "24",
           "Kind": "int64"
          },
          "IsRequired": true,
          "IsReadOnly": false
         },
         {
-         "$id": "20",
+         "$id": "25",
          "Name": "name",
          "SerializedName": "name",
          "Description": "",
          "Type": {
-          "$id": "21",
+          "$id": "26",
           "Kind": "string"
          },
          "IsRequired": true,
@@ -140,12 +174,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "22",
+     "$id": "27",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
      "Type": {
-      "$id": "23",
+      "$id": "28",
       "Kind": "url"
      },
      "IsRequired": false,
@@ -154,26 +188,26 @@
    ]
   },
   {
-   "$ref": "15"
+   "$ref": "20"
   }
  ],
  "Clients": [
   {
-   "$id": "24",
+   "$id": "29",
    "Name": "MixApiVersionClient",
    "Description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
    "Operations": [],
    "Protocol": {
-    "$id": "25"
+    "$id": "30"
    },
    "Parameters": [
     {
-     "$id": "26",
+     "$id": "31",
      "Name": "petStoreUrl",
      "NameInRequest": "petStoreUrl",
      "Description": "Endpoint Service",
      "Type": {
-      "$id": "27",
+      "$id": "32",
       "Kind": "uri"
      },
      "Location": "Uri",
@@ -189,12 +223,12 @@
    ]
   },
   {
-   "$id": "28",
+   "$id": "33",
    "Name": "Pets",
    "Description": "Manage your pets.",
    "Operations": [
     {
-     "$id": "29",
+     "$id": "34",
      "Name": "delete",
      "ResourceName": "Pet",
      "Summary": "delete.",
@@ -202,12 +236,12 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "30",
+       "$id": "35",
        "Name": "petStoreUrl",
        "NameInRequest": "petStoreUrl",
        "Description": "Endpoint Service",
        "Type": {
-        "$id": "31",
+        "$id": "36",
         "Kind": "uri"
        },
        "Location": "Uri",
@@ -221,12 +255,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "32",
+       "$id": "37",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "33",
+        "$id": "38",
         "Kind": "string"
        },
        "Location": "Query",
@@ -237,21 +271,21 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "34",
+        "$id": "39",
         "Type": {
-         "$id": "35",
+         "$id": "40",
          "Kind": "string"
         },
         "Value": "2022-11-30-preview"
        }
       },
       {
-       "$id": "36",
+       "$id": "41",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "pet name",
        "Type": {
-        "$id": "37",
+        "$id": "42",
         "Kind": "string"
        },
        "Location": "Path",
@@ -263,14 +297,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "38",
+       "$id": "43",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "39",
+        "$id": "44",
         "Kind": "constant",
         "ValueType": {
-         "$id": "40",
+         "$id": "45",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -286,7 +320,7 @@
      ],
      "Responses": [
       {
-       "$id": "41",
+       "$id": "46",
        "StatusCodes": [
         204
        ],
@@ -304,22 +338,22 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "42",
+     "$id": "47",
      "Name": "read",
      "ResourceName": "Pets",
      "Description": "Returns a pet. Supports eTags.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "30"
+       "$ref": "35"
       },
       {
-       "$id": "43",
+       "$id": "48",
        "Name": "petId",
        "NameInRequest": "petId",
        "Description": "The id of pet.",
        "Type": {
-        "$id": "44",
+        "$id": "49",
         "Kind": "int32"
        },
        "Location": "Path",
@@ -331,14 +365,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "45",
+       "$id": "50",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "46",
+        "$id": "51",
         "Kind": "constant",
         "ValueType": {
-         "$id": "47",
+         "$id": "52",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -354,12 +388,12 @@
      ],
      "Responses": [
       {
-       "$id": "48",
+       "$id": "53",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "10"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -369,12 +403,12 @@
        ]
       },
       {
-       "$id": "49",
+       "$id": "54",
        "StatusCodes": [
         304
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "10"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -393,23 +427,23 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "50",
+     "$id": "55",
      "Name": "create",
      "ResourceName": "Pets",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "30"
+       "$ref": "35"
       },
       {
-       "$id": "51",
+       "$id": "56",
        "Name": "apiVersion",
        "NameInRequest": "apiVersion",
        "Type": {
-        "$id": "52",
+        "$id": "57",
         "Kind": "constant",
         "ValueType": {
-         "$id": "53",
+         "$id": "58",
          "Kind": "string"
         },
         "Value": "2022-07-09"
@@ -423,15 +457,15 @@
        "Kind": "Constant"
       },
       {
-       "$id": "54",
+       "$id": "59",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "55",
+        "$id": "60",
         "Kind": "constant",
         "ValueType": {
-         "$id": "56",
+         "$id": "61",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -445,14 +479,14 @@
        "Kind": "Constant"
       },
       {
-       "$id": "57",
+       "$id": "62",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "58",
+        "$id": "63",
         "Kind": "constant",
         "ValueType": {
-         "$id": "59",
+         "$id": "64",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -466,11 +500,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "60",
+       "$id": "65",
        "Name": "pet",
        "NameInRequest": "pet",
        "Type": {
-        "$ref": "5"
+        "$ref": "10"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -483,12 +517,12 @@
      ],
      "Responses": [
       {
-       "$id": "61",
+       "$id": "66",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "10"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -511,21 +545,21 @@
     }
    ],
    "Protocol": {
-    "$id": "62"
+    "$id": "67"
    },
    "Parent": "MixApiVersionClient",
    "Parameters": [
     {
-     "$ref": "30"
+     "$ref": "35"
     }
    ]
   },
   {
-   "$id": "63",
+   "$id": "68",
    "Name": "ListPetToysResponse",
    "Operations": [
     {
-     "$id": "64",
+     "$id": "69",
      "Name": "listPet",
      "ResourceName": "Toy",
      "Summary": "Gets ledger entries from a collection corresponding to a range.",
@@ -533,12 +567,12 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "65",
+       "$id": "70",
        "Name": "petStoreUrl",
        "NameInRequest": "petStoreUrl",
        "Description": "Endpoint Service",
        "Type": {
-        "$id": "66",
+        "$id": "71",
         "Kind": "uri"
        },
        "Location": "Uri",
@@ -552,12 +586,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "67",
+       "$id": "72",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "68",
+        "$id": "73",
         "Kind": "string"
        },
        "Location": "Query",
@@ -568,23 +602,23 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "69",
+        "$id": "74",
         "Type": {
-         "$id": "70",
+         "$id": "75",
          "Kind": "string"
         },
         "Value": "2022-11-30-preview"
        }
       },
       {
-       "$id": "71",
+       "$id": "76",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "72",
+        "$id": "77",
         "Kind": "constant",
         "ValueType": {
-         "$id": "73",
+         "$id": "78",
          "Kind": "string"
         },
         "Value": "application/json"
@@ -600,12 +634,12 @@
      ],
      "Responses": [
       {
-       "$id": "74",
+       "$id": "79",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "12"
+        "$ref": "17"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -621,7 +655,7 @@
      "Path": "/pets/toys/Toy",
      "BufferResponse": true,
      "Paging": {
-      "$id": "75",
+      "$id": "80",
       "ItemName": "value",
       "NextLinkName": "nextLink"
      },
@@ -630,12 +664,12 @@
     }
    ],
    "Protocol": {
-    "$id": "76"
+    "$id": "81"
    },
    "Parent": "MixApiVersionClient",
    "Parameters": [
     {
-     "$ref": "65"
+     "$ref": "70"
     }
    ]
   }

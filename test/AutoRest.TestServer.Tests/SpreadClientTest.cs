@@ -20,7 +20,8 @@ namespace AutoRest.TestServer.Tests
         {
             var expected = new[]
             {
-                (typeof(Thing), "thing", true)
+                (typeof(string), "name", true),
+                (typeof(int), "age", true)
             };
             ValidateConvenienceMethod(typeof(SpreadTypeSpecClient), "SpreadModel", expected);
         }
@@ -56,7 +57,8 @@ namespace AutoRest.TestServer.Tests
             {
                 (typeof(string), "id", true),
                 (typeof(int), "top", true),
-                (typeof(Thing), "thing", true)
+                (typeof(string), "name", true),
+                (typeof(int), "age", true)
             };
             ValidateConvenienceMethod(typeof(SpreadTypeSpecClient), "SpreadAliasWithModel", expected);
         }
