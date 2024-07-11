@@ -83,15 +83,15 @@ This sample shows how to call ClientAsync.
 <code><![CDATA[
 NamingClient client = new NamingClient();
 
-ClientNameModel clientNameModel = new ClientNameModel(true);
-Response response = await client.ClientAsync(clientNameModel);
+ClientNameModel body = new ClientNameModel(true);
+Response response = await client.ClientAsync(body);
 ]]></code>
 This sample shows how to call ClientAsync with all parameters.
 <code><![CDATA[
 NamingClient client = new NamingClient();
 
-ClientNameModel clientNameModel = new ClientNameModel(true);
-Response response = await client.ClientAsync(clientNameModel);
+ClientNameModel body = new ClientNameModel(true);
+Response response = await client.ClientAsync(body);
 ]]></code></example>
     </member>
     <member name="Client(ClientNameModel,CancellationToken)">
@@ -100,15 +100,15 @@ This sample shows how to call Client.
 <code><![CDATA[
 NamingClient client = new NamingClient();
 
-ClientNameModel clientNameModel = new ClientNameModel(true);
-Response response = client.Client(clientNameModel);
+ClientNameModel body = new ClientNameModel(true);
+Response response = client.Client(body);
 ]]></code>
 This sample shows how to call Client with all parameters.
 <code><![CDATA[
 NamingClient client = new NamingClient();
 
-ClientNameModel clientNameModel = new ClientNameModel(true);
-Response response = client.Client(clientNameModel);
+ClientNameModel body = new ClientNameModel(true);
+Response response = client.Client(body);
 ]]></code></example>
     </member>
     <member name="ClientAsync(RequestContent,RequestContext)">
@@ -171,15 +171,15 @@ This sample shows how to call LanguageAsync.
 <code><![CDATA[
 NamingClient client = new NamingClient();
 
-LanguageClientNameModel languageClientNameModel = new LanguageClientNameModel(true);
-Response response = await client.LanguageAsync(languageClientNameModel);
+LanguageClientNameModel body = new LanguageClientNameModel(true);
+Response response = await client.LanguageAsync(body);
 ]]></code>
 This sample shows how to call LanguageAsync with all parameters.
 <code><![CDATA[
 NamingClient client = new NamingClient();
 
-LanguageClientNameModel languageClientNameModel = new LanguageClientNameModel(true);
-Response response = await client.LanguageAsync(languageClientNameModel);
+LanguageClientNameModel body = new LanguageClientNameModel(true);
+Response response = await client.LanguageAsync(body);
 ]]></code></example>
     </member>
     <member name="Language(LanguageClientNameModel,CancellationToken)">
@@ -188,15 +188,15 @@ This sample shows how to call Language.
 <code><![CDATA[
 NamingClient client = new NamingClient();
 
-LanguageClientNameModel languageClientNameModel = new LanguageClientNameModel(true);
-Response response = client.Language(languageClientNameModel);
+LanguageClientNameModel body = new LanguageClientNameModel(true);
+Response response = client.Language(body);
 ]]></code>
 This sample shows how to call Language with all parameters.
 <code><![CDATA[
 NamingClient client = new NamingClient();
 
-LanguageClientNameModel languageClientNameModel = new LanguageClientNameModel(true);
-Response response = client.Language(languageClientNameModel);
+LanguageClientNameModel body = new LanguageClientNameModel(true);
+Response response = client.Language(body);
 ]]></code></example>
     </member>
     <member name="LanguageAsync(RequestContent,RequestContext)">
@@ -259,15 +259,15 @@ This sample shows how to call CompatibleWithEncodedNameAsync.
 <code><![CDATA[
 NamingClient client = new NamingClient();
 
-ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel = new ClientNameAndJsonEncodedNameModel(true);
-Response response = await client.CompatibleWithEncodedNameAsync(clientNameAndJsonEncodedNameModel);
+ClientNameAndJsonEncodedNameModel body = new ClientNameAndJsonEncodedNameModel(true);
+Response response = await client.CompatibleWithEncodedNameAsync(body);
 ]]></code>
 This sample shows how to call CompatibleWithEncodedNameAsync with all parameters.
 <code><![CDATA[
 NamingClient client = new NamingClient();
 
-ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel = new ClientNameAndJsonEncodedNameModel(true);
-Response response = await client.CompatibleWithEncodedNameAsync(clientNameAndJsonEncodedNameModel);
+ClientNameAndJsonEncodedNameModel body = new ClientNameAndJsonEncodedNameModel(true);
+Response response = await client.CompatibleWithEncodedNameAsync(body);
 ]]></code></example>
     </member>
     <member name="CompatibleWithEncodedName(ClientNameAndJsonEncodedNameModel,CancellationToken)">
@@ -276,15 +276,15 @@ This sample shows how to call CompatibleWithEncodedName.
 <code><![CDATA[
 NamingClient client = new NamingClient();
 
-ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel = new ClientNameAndJsonEncodedNameModel(true);
-Response response = client.CompatibleWithEncodedName(clientNameAndJsonEncodedNameModel);
+ClientNameAndJsonEncodedNameModel body = new ClientNameAndJsonEncodedNameModel(true);
+Response response = client.CompatibleWithEncodedName(body);
 ]]></code>
 This sample shows how to call CompatibleWithEncodedName with all parameters.
 <code><![CDATA[
 NamingClient client = new NamingClient();
 
-ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel = new ClientNameAndJsonEncodedNameModel(true);
-Response response = client.CompatibleWithEncodedName(clientNameAndJsonEncodedNameModel);
+ClientNameAndJsonEncodedNameModel body = new ClientNameAndJsonEncodedNameModel(true);
+Response response = client.CompatibleWithEncodedName(body);
 ]]></code></example>
     </member>
     <member name="CompatibleWithEncodedNameAsync(RequestContent,RequestContext)">

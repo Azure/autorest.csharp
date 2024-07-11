@@ -7,7 +7,7 @@
     "@azure-tools/typespec-client-generator-core": "0.43.1",
     "@azure-tools/typespec-csharp": "file:src/TypeSpec.Extension/Emitter.Csharp",
     "@azure-tools/unbranded-tests": "file:test/UnbrandedProjects",
-    "@microsoft.azure/autorest.testserver": "3.3.48",
+    "@microsoft.azure/autorest.testserver": "3.3.49",
     "autorest": "3.7.1"
   }
 }
