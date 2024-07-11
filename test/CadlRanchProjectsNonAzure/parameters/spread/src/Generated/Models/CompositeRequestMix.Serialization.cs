@@ -10,7 +10,7 @@ using System.Text.Json;
 
 namespace Scm.Parameters.Spread.Models
 {
-    public partial class CompositeRequestMix : IJsonModel<CompositeRequestMix>
+    internal partial class CompositeRequestMix : IJsonModel<CompositeRequestMix>
     {
         void IJsonModel<CompositeRequestMix>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
