@@ -495,6 +495,104 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_Basic_Exportx_ShortVersion()
+        {
+            BasicClient client = new BasicClient();
+
+            Response response = client.Exportx("<format>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Basic_Exportx_ShortVersion_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            Response response = await client.ExportxAsync("<format>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Basic_Exportx_ShortVersion_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            Response<User> response = client.Exportx("<format>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Basic_Exportx_ShortVersion_Convenience_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            Response<User> response = await client.ExportxAsync("<format>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Basic_Exportx_AllParameters()
+        {
+            BasicClient client = new BasicClient();
+
+            Response response = client.Exportx("<format>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Basic_Exportx_AllParameters_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            Response response = await client.ExportxAsync("<format>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Basic_Exportx_AllParameters_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            Response<User> response = client.Exportx("<format>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Basic_Exportx_AllParameters_Convenience_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            Response<User> response = await client.ExportxAsync("<format>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_User_GetUsers_ShortVersion()
         {
             BasicClient client = new BasicClient();

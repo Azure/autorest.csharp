@@ -427,6 +427,92 @@ Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code></example>
     </member>
+    <member name="ExportxAsync(string,CancellationToken)">
+      <example>
+This sample shows how to call ExportxAsync.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+Response<User> response = await client.ExportxAsync("<format>");
+]]></code>
+This sample shows how to call ExportxAsync with all parameters.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+Response<User> response = await client.ExportxAsync("<format>");
+]]></code></example>
+    </member>
+    <member name="Exportx(string,CancellationToken)">
+      <example>
+This sample shows how to call Exportx.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+Response<User> response = client.Exportx("<format>");
+]]></code>
+This sample shows how to call Exportx with all parameters.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+Response<User> response = client.Exportx("<format>");
+]]></code></example>
+    </member>
+    <member name="ExportxAsync(string,RequestContext)">
+      <example>
+This sample shows how to call ExportxAsync and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+Response response = await client.ExportxAsync("<format>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code>
+This sample shows how to call ExportxAsync with all parameters and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+Response response = await client.ExportxAsync("<format>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code></example>
+    </member>
+    <member name="Exportx(string,RequestContext)">
+      <example>
+This sample shows how to call Exportx and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+Response response = client.Exportx("<format>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code>
+This sample shows how to call Exportx with all parameters and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+Response response = client.Exportx("<format>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+Console.WriteLine(result.GetProperty("etag").ToString());
+]]></code></example>
+    </member>
     <member name="GetUsersAsync(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},CancellationToken)">
       <example>
 This sample shows how to call GetUsersAsync.

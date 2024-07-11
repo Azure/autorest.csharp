@@ -1645,39 +1645,24 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
-    }
-   ],
-   "Protocol": {
-    "$id": "173"
-   },
-   "Parameters": [
+    },
     {
-     "$ref": "56"
-    }
-   ]
-  },
-  {
-   "$id": "174",
-   "Name": "TwoModelsAsPageItem",
-   "Description": "",
-   "Operations": [
-    {
-     "$id": "175",
-     "Name": "listFirstItem",
-     "ResourceName": "TwoModelsAsPageItem",
-     "Description": "Two operations with two different page item types should be successfully generated. Should generate model for FirstItem.",
+     "$id": "173",
+     "Name": "exportx",
+     "ResourceName": "Basic",
+     "Description": "Try to use ResourceCollectionAction to implement the same export functionality.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "56"
       },
       {
-       "$id": "176",
+       "$id": "174",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "177",
+        "$id": "175",
         "Kind": "string"
        },
        "Location": "Query",
@@ -1692,6 +1677,25 @@
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Client"
+      },
+      {
+       "$id": "176",
+       "Name": "format",
+       "NameInRequest": "format",
+       "Description": "The format of the data.",
+       "Type": {
+        "$id": "177",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
       },
       {
        "$id": "178",
@@ -1726,7 +1730,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "38"
+        "$ref": "9"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1736,36 +1740,46 @@
        ]
       }
      ],
-     "HttpMethod": "GET",
+     "HttpMethod": "POST",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/azure/core/basic/first-item",
+     "Path": "/azure/core/basic/users:exportx",
      "BufferResponse": true,
-     "Paging": {
-      "$id": "182",
-      "NextLinkName": "nextLink",
-      "ItemName": "value"
-     },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
-    },
+    }
+   ],
+   "Protocol": {
+    "$id": "182"
+   },
+   "Parameters": [
     {
-     "$id": "183",
-     "Name": "listSecondItem",
+     "$ref": "56"
+    }
+   ]
+  },
+  {
+   "$id": "183",
+   "Name": "TwoModelsAsPageItem",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "184",
+     "Name": "listFirstItem",
      "ResourceName": "TwoModelsAsPageItem",
-     "Description": "Two operations with two different page item types should be successfully generated. Should generate model for SecondItem.",
+     "Description": "Two operations with two different page item types should be successfully generated. Should generate model for FirstItem.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "56"
       },
       {
-       "$id": "184",
+       "$id": "185",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "185",
+        "$id": "186",
         "Kind": "string"
        },
        "Location": "Query",
@@ -1782,11 +1796,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "186",
+       "$id": "187",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "187",
+        "$id": "188",
         "Kind": "string"
        },
        "Location": "Header",
@@ -1799,9 +1813,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "188",
+        "$id": "189",
         "Type": {
-         "$ref": "187"
+         "$ref": "188"
         },
         "Value": "application/json"
        }
@@ -1809,7 +1823,95 @@
      ],
      "Responses": [
       {
-       "$id": "189",
+       "$id": "190",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "38"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/core/basic/first-item",
+     "BufferResponse": true,
+     "Paging": {
+      "$id": "191",
+      "NextLinkName": "nextLink",
+      "ItemName": "value"
+     },
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "192",
+     "Name": "listSecondItem",
+     "ResourceName": "TwoModelsAsPageItem",
+     "Description": "Two operations with two different page item types should be successfully generated. Should generate model for SecondItem.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "56"
+      },
+      {
+       "$id": "193",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "194",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "DefaultValue": {
+        "$ref": "62"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "195",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "196",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "197",
+        "Type": {
+         "$ref": "196"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "198",
        "StatusCodes": [
         200
        ],
@@ -1830,7 +1932,7 @@
      "Path": "/azure/core/basic/second-item",
      "BufferResponse": true,
      "Paging": {
-      "$id": "190",
+      "$id": "199",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -1839,7 +1941,7 @@
     }
    ],
    "Protocol": {
-    "$id": "191"
+    "$id": "200"
    },
    "Parent": "BasicClient",
    "Parameters": [
