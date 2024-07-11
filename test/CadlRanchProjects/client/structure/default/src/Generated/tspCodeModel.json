@@ -7,10 +7,10 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "ClientType",
+   "CrossLanguageDefinitionId": "Client.Structure.Service.ClientType",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -34,9 +34,7 @@
      "Value": "two-operation-group"
     }
    ],
-   "Namespace": "Client.Structure.Service",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input"
   }
  ],
@@ -51,6 +49,7 @@
      "$id": "9",
      "Name": "one",
      "ResourceName": "Service",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "10",
@@ -59,8 +58,7 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "11",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -96,8 +94,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "14",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -140,6 +137,7 @@
      "$id": "17",
      "Name": "two",
      "ResourceName": "Service",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -153,8 +151,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "19",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -197,7 +194,6 @@
    "Protocol": {
     "$id": "22"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "10"
@@ -215,7 +211,6 @@
    "Protocol": {
     "$id": "24"
    },
-   "Creatable": false,
    "Parent": "ServiceClient",
    "Parameters": [
     {
@@ -235,6 +230,7 @@
      "$id": "26",
      "Name": "seven",
      "ResourceName": "Foo",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -248,8 +244,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "28",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -292,7 +287,6 @@
    "Protocol": {
     "$id": "31"
    },
-   "Creatable": false,
    "Parent": "Baz",
    "Parameters": [
     {
@@ -312,6 +306,7 @@
      "$id": "33",
      "Name": "eight",
      "ResourceName": "Qux",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -325,8 +320,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "35",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -369,7 +363,6 @@
    "Protocol": {
     "$id": "38"
    },
-   "Creatable": false,
    "Parent": "ServiceClient",
    "Parameters": [
     {
@@ -389,6 +382,7 @@
      "$id": "40",
      "Name": "nine",
      "ResourceName": "Bar",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -402,8 +396,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "42",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -446,7 +439,6 @@
    "Protocol": {
     "$id": "45"
    },
-   "Creatable": false,
    "Parent": "Qux",
    "Parameters": [
     {
@@ -466,6 +458,7 @@
      "$id": "47",
      "Name": "three",
      "ResourceName": "Foo",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -479,8 +472,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "49",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -523,6 +515,7 @@
      "$id": "52",
      "Name": "four",
      "ResourceName": "Foo",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -536,8 +529,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "54",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -580,7 +572,6 @@
    "Protocol": {
     "$id": "57"
    },
-   "Creatable": false,
    "Parent": "ServiceClient",
    "Parameters": [
     {
@@ -600,6 +591,7 @@
      "$id": "59",
      "Name": "five",
      "ResourceName": "Bar",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -613,8 +605,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "61",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -657,6 +648,7 @@
      "$id": "64",
      "Name": "six",
      "ResourceName": "Bar",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "10"
@@ -670,8 +662,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "66",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -714,7 +705,6 @@
    "Protocol": {
     "$id": "69"
    },
-   "Creatable": false,
    "Parent": "ServiceClient",
    "Parameters": [
     {

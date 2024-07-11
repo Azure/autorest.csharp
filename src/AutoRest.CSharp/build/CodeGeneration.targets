@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <PowerShellExe Condition="'$(PowerShellExe)' == ''">pwsh</PowerShellExe>
-    <TypeSpecProjectSyncScriptPath Condition="'$(TypeSpecProjectSyncScriptPath)' == ''">$(MSBuildProjectDirectory)/../../../../eng/common/scripts/TypeSpec-Project-Sync.ps1</TypeSpecProjectSyncScriptPath>
-    <TypeSpecProjectGenerateScriptPath Condition="'$(TypeSpecProjectGenerateScriptPath)' == ''">$(MSBuildProjectDirectory)/../../../../eng/common/scripts/TypeSpec-Project-Generate.ps1</TypeSpecProjectGenerateScriptPath>
+    <_TypeSpecProjectSyncAndGenerateCommand>npx --package=@azure-tools/typespec-client-generator-cli@0.9.0 --yes tsp-client update --no-prompt --output-dir $(MSBuildProjectDirectory)/../</_TypeSpecProjectSyncAndGenerateCommand>
+    <_TypeSpecProjectGenerateCommand>npx --package=@azure-tools/typespec-client-generator-cli@0.9.0 --yes tsp-client generate --no-prompt --output-dir $(MSBuildProjectDirectory)/../</_TypeSpecProjectGenerateCommand>
     <_DefaultInputName Condition="Exists('$(MSBuildProjectDirectory)/autorest.md')">$(MSBuildProjectDirectory)/autorest.md</_DefaultInputName>
     <TypeSpecInput Condition="Exists('$(MSBuildProjectDirectory)/../tsp-location.yaml') and $(MSBuildProjectDirectory.EndsWith('src'))">$(MSBuildProjectDirectory)/../tsp-location.yaml</TypeSpecInput>
     <AutoRestInput Condition="'$(AutoRestInput)' == ''">$(_DefaultInputName)</AutoRestInput>
@@ -32,12 +32,13 @@
     <UseDefaultNamespaceAndOutputFolder Condition="'$(UseDefaultNamespaceAndOutputFolder)' == ''">true</UseDefaultNamespaceAndOutputFolder>
     <_AutoRestCommand>npx autorest@$(AutoRestVersion) --max-memory-size=8192 --skip-csproj --skip-upgrade-check --version=$(AutoRestCoreVersion) $(AutoRestInput) $(AutoRestAdditionalParameters) --use=$(MSBuildThisFileDirectory)../tools/net7.0/any/ --clear-output-folder=true --shared-source-folders=&quot;$(AzureCoreSharedCodeDirectory);$(AutoRestSharedCodeDirectory)&quot;</_AutoRestCommand>
     <_AutoRestCommand Condition="'$(UseDefaultNamespaceAndOutputFolder)' == 'true'">$(_AutoRestCommand) --output-folder=$(MSBuildProjectDirectory)/Generated --namespace=$(RootNamespace)</_AutoRestCommand>
-    <_SaveInputs Condition="'$(SaveInputs)' == 'true'">-SaveInputs</_SaveInputs>
+    <_SaveInputs Condition="'$(SaveInputs)' == 'true'">--save-inputs</_SaveInputs>
     <!-- Here we append the generate-test-project configuration to TypespecAdditionalOptions if it is specified -->
     <TypespecAdditionalOptions Condition="'$(GenerateTestProject)' != '' AND '$(TypespecAdditionalOptions)' != ''">$(TypespecAdditionalOptions)%3Bgenerate-test-project=true</TypespecAdditionalOptions>
     <TypespecAdditionalOptions Condition="'$(GenerateTestProject)' != '' AND '$(TypespecAdditionalOptions)' == ''">generate-test-project=true</TypespecAdditionalOptions>
     <_TypespecAdditionalOptions Condition="'$(TypespecAdditionalOptions)' != ''">-TypespecAdditionalOptions "$(TypespecAdditionalOptions)"</_TypespecAdditionalOptions>
-    <_SpecRepoRoot Condition="'$(SpecRepoRoot)' != ''">"$(SpecRepoRoot)"</_SpecRepoRoot>
+    <_LocalSpecRepo Condition="'$(LocalSpecRepo)' != ''">--local-spec-repo $(LocalSpecRepo)</_LocalSpecRepo>
+    <_Debug Condition="'$(Debug)' == 'true'">"--debug"</_Debug>
   </PropertyGroup>
 
   <Target Name="GenerateCode" DependsOnTargets="_GenerateCodeForAutorest;_GenerateCodeForTypeSpec"/>
@@ -59,8 +60,9 @@
 
   <Target Name="_GenerateCodeForTypeSpec" Condition="'$(_GenerateCode)' == 'true' AND '$(TypeSpecInput)' != ''" >
     <Error Text="You used skipped sync but didn't have the TempTypeSpecFiles in your project directory.  Please run 'dotnet build /t:GenerateCode /p:SaveInputs=true' without SkipSync first at least once" Condition="'$(SkipSync)' == 'true' AND !Exists('$(MSBuildProjectDirectory)/../TempTypeSpecFiles')" />
-    <Exec Condition="'$(SkipSync)' != 'true'" Command="$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(TypeSpecProjectSyncScriptPath) $(MSBuildProjectDirectory)/.. $(_SpecRepoRoot)"/>
-    <Exec Command="$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(TypeSpecProjectGenerateScriptPath) $(MSBuildProjectDirectory)/.. $(_TypespecAdditionalOptions) $(_SaveInputs)"/>
+    <Exec Command="npm install @azure-tools/typespec-client-generator-cli@0.9.0 --no-save" />
+    <Exec Condition="'$(SkipSync)' == 'true'" Command="$(_TypeSpecProjectGenerateCommand) $(_SaveInputs) $(_Debug)"/>
+    <Exec Condition="'$(SkipSync)' != 'true'" Command="$(_TypeSpecProjectSyncAndGenerateCommand) $(_SaveInputs) $(_LocalSpecRepo) $(_Debug)"/>
   </Target>
 
   <Target Name="GenerateTests" DependsOnTargets="GenerateSamples" />

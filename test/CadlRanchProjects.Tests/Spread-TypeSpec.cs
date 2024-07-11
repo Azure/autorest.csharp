@@ -13,6 +13,20 @@ namespace CadlRanchProjects.Tests
     public class SpreadTypeSpecTests : CadlRanchMockApiTestBase
     {
         [Test]
+        public Task Spread_SpreadModel() => Test(async (host) =>
+        {
+            Response response = await new SpreadTypeSpecClient(host).SpreadModelAsync("dog", 3);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Spread_SpreadAlias() => Test(async (host) =>
+        {
+            Response response = await new SpreadTypeSpecClient(host).SpreadAliasAsync("dog", 3);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
         public Task Spread_SpreadMultiTargetAlias() => Test(async (host) =>
         {
             Response response = await new SpreadTypeSpecClient(host).SpreadMultiTargetAliasAsync("1", 1, "dog", 3);
@@ -22,8 +36,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Spread_SpreadAliasWithModel() => Test(async (host) =>
         {
-            Thing thing = new Thing("dog", 3);
-            Response response = await new SpreadTypeSpecClient(host).SpreadAliasWithModelAsync("1", 1, thing);
+            Response response = await new SpreadTypeSpecClient(host).SpreadAliasWithModelAsync("1", 1, "dog", 3);
             Assert.AreEqual(204, response.Status);
         });
 

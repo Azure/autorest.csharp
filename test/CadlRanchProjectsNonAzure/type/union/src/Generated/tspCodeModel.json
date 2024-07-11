@@ -6,11 +6,11 @@
   {
    "$id": "2",
    "Kind": "enum",
-   "Name": "GetResponseProp5",
+   "Name": "GetResponseProp4",
+   "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -29,19 +29,17 @@
      "Value": "c"
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
    "$id": "7",
    "Kind": "enum",
-   "Name": "GetResponseProp4",
+   "Name": "GetResponseProp3",
+   "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "ValueType": {
     "$id": "8",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -55,19 +53,17 @@
      "Value": "c"
     }
    ],
-   "Namespace": "",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
    "$id": "11",
    "Kind": "enum",
    "Name": "StringExtensibleNamedUnion",
+   "CrossLanguageDefinitionId": "Type.Union.StringExtensibleNamedUnion",
    "ValueType": {
     "$id": "12",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -81,19 +77,17 @@
      "Value": "c"
     }
    ],
-   "Namespace": "Type.Union",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
    "$id": "15",
    "Kind": "enum",
-   "Name": "GetResponseProp3",
+   "Name": "GetResponseProp2",
+   "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "ValueType": {
     "$id": "16",
-    "Kind": "int32",
-    "IsNullable": false
+    "Kind": "int32"
    },
    "Values": [
     {
@@ -112,19 +106,17 @@
      "Value": 3
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
    "$id": "20",
    "Kind": "enum",
    "Name": "GetResponseProp1",
+   "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "ValueType": {
     "$id": "21",
-    "Kind": "float32",
-    "IsNullable": false
+    "Kind": "float32"
    },
    "Values": [
     {
@@ -143,19 +135,17 @@
      "Value": 3.3
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
    "$id": "25",
    "Kind": "enum",
    "Name": "EnumsOnlyCasesLr",
+   "CrossLanguageDefinitionId": "EnumsOnlyCases.lr.anonymous",
    "ValueType": {
     "$id": "26",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -179,19 +169,17 @@
      "Value": "down"
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
    "$id": "31",
    "Kind": "enum",
    "Name": "EnumsOnlyCasesUd",
+   "CrossLanguageDefinitionId": "EnumsOnlyCases.ud.anonymous",
    "ValueType": {
     "$id": "32",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -205,19 +193,16 @@
      "Value": "down"
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   }
  ],
  "Models": [
   {
    "$id": "35",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse9",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -235,10 +220,9 @@
   },
   {
    "$id": "37",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest9",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -256,10 +240,9 @@
   },
   {
    "$id": "39",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse8",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -277,10 +260,9 @@
   },
   {
    "$id": "41",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest8",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -298,10 +280,9 @@
   },
   {
    "$id": "43",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse7",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -319,10 +300,9 @@
   },
   {
    "$id": "45",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest7",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -340,10 +320,9 @@
   },
   {
    "$id": "47",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse6",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -361,10 +340,9 @@
   },
   {
    "$id": "49",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest6",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -382,10 +360,9 @@
   },
   {
    "$id": "51",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse5",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -403,10 +380,9 @@
   },
   {
    "$id": "53",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest5",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -424,10 +400,9 @@
   },
   {
    "$id": "55",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse4",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -437,15 +412,14 @@
      "Description": "",
      "Type": {
       "$id": "57",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "GetResponseProp",
+      "VariantTypes": [
        {
         "$id": "58",
-        "Kind": "Model",
+        "Kind": "model",
         "Name": "Cat",
-        "Namespace": "Type.Union",
-        "IsNullable": false,
+        "CrossLanguageDefinitionId": "Type.Union.Cat",
         "Usage": "RoundTrip",
         "Properties": [
          {
@@ -455,8 +429,7 @@
           "Description": "",
           "Type": {
            "$id": "60",
-           "Kind": "string",
-           "IsNullable": false
+           "Kind": "string"
           },
           "IsRequired": true,
           "IsReadOnly": false
@@ -465,10 +438,9 @@
        },
        {
         "$id": "61",
-        "Kind": "Model",
+        "Kind": "model",
         "Name": "Dog",
-        "Namespace": "Type.Union",
-        "IsNullable": false,
+        "CrossLanguageDefinitionId": "Type.Union.Dog",
         "Usage": "RoundTrip",
         "Properties": [
          {
@@ -478,16 +450,14 @@
           "Description": "",
           "Type": {
            "$id": "63",
-           "Kind": "string",
-           "IsNullable": false
+           "Kind": "string"
           },
           "IsRequired": true,
           "IsReadOnly": false
          }
         ]
        }
-      ],
-      "IsNullable": false
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -502,10 +472,9 @@
   },
   {
    "$id": "64",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest4",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -515,17 +484,16 @@
      "Description": "",
      "Type": {
       "$id": "66",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "GetResponseProp",
+      "VariantTypes": [
        {
         "$ref": "58"
        },
        {
         "$ref": "61"
        }
-      ],
-      "IsNullable": false
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -534,10 +502,9 @@
   },
   {
    "$id": "67",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse3",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -547,10 +514,9 @@
      "Description": "",
      "Type": {
       "$id": "69",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "EnumsOnlyCases",
-      "Namespace": "Type.Union",
-      "IsNullable": false,
+      "CrossLanguageDefinitionId": "Type.Union.EnumsOnlyCases",
       "Usage": "RoundTrip",
       "Properties": [
        {
@@ -587,10 +553,9 @@
   },
   {
    "$id": "72",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest3",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -608,10 +573,9 @@
   },
   {
    "$id": "74",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse2",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -621,10 +585,9 @@
      "Description": "",
      "Type": {
       "$id": "76",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "StringAndArrayCases",
-      "Namespace": "Type.Union",
-      "IsNullable": false,
+      "CrossLanguageDefinitionId": "Type.Union.StringAndArrayCases",
       "Usage": "RoundTrip",
       "Properties": [
        {
@@ -634,27 +597,24 @@
         "Description": "This should be receive/send the string variant",
         "Type": {
          "$id": "78",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "StringAndArrayCasesString",
+         "VariantTypes": [
           {
            "$id": "79",
-           "Kind": "string",
-           "IsNullable": false
+           "Kind": "string"
           },
           {
            "$id": "80",
-           "Kind": "Array",
+           "Kind": "array",
            "Name": "Array",
-           "ElementType": {
+           "ValueType": {
             "$id": "81",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
-           "IsNullable": false
+           "CrossLanguageDefinitionId": "TypeSpec.Array"
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -666,27 +626,24 @@
         "Description": "This should be receive/send the array variant",
         "Type": {
          "$id": "83",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "StringAndArrayCasesArray",
+         "VariantTypes": [
           {
            "$id": "84",
-           "Kind": "string",
-           "IsNullable": false
+           "Kind": "string"
           },
           {
            "$id": "85",
-           "Kind": "Array",
+           "Kind": "array",
            "Name": "Array",
-           "ElementType": {
+           "ValueType": {
             "$id": "86",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
-           "IsNullable": false
+           "CrossLanguageDefinitionId": "TypeSpec.Array"
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -703,10 +660,9 @@
   },
   {
    "$id": "87",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest2",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -724,10 +680,9 @@
   },
   {
    "$id": "89",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse1",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -737,10 +692,9 @@
      "Description": "",
      "Type": {
       "$id": "91",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "MixedLiteralsCases",
-      "Namespace": "Type.Union",
-      "IsNullable": false,
+      "CrossLanguageDefinitionId": "Type.Union.MixedLiteralsCases",
       "Usage": "RoundTrip",
       "Properties": [
        {
@@ -750,55 +704,46 @@
         "Description": "This should be receive/send the \"a\" variant",
         "Type": {
          "$id": "93",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedLiteralsCasesStringLiteral1",
+         "VariantTypes": [
           {
            "$id": "94",
            "Kind": "constant",
            "ValueType": {
             "$id": "95",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
-           "Value": "a",
-           "IsNullable": false
+           "Value": "a"
           },
           {
            "$id": "96",
            "Kind": "constant",
            "ValueType": {
             "$id": "97",
-            "Kind": "int32",
-            "IsNullable": false
+            "Kind": "int32"
            },
-           "Value": 2,
-           "IsNullable": false
+           "Value": 2
           },
           {
            "$id": "98",
            "Kind": "constant",
            "ValueType": {
             "$id": "99",
-            "Kind": "float32",
-            "IsNullable": false
+            "Kind": "float32"
            },
-           "Value": 3.3,
-           "IsNullable": false
+           "Value": 3.3
           },
           {
            "$id": "100",
            "Kind": "constant",
            "ValueType": {
             "$id": "101",
-            "Kind": "boolean",
-            "IsNullable": false
+            "Kind": "boolean"
            },
-           "Value": true,
-           "IsNullable": false
+           "Value": true
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -810,55 +755,46 @@
         "Description": "This should be receive/send the 2 variant",
         "Type": {
          "$id": "103",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedLiteralsCasesStringLiteral1",
+         "VariantTypes": [
           {
            "$id": "104",
            "Kind": "constant",
            "ValueType": {
             "$id": "105",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
-           "Value": "a",
-           "IsNullable": false
+           "Value": "a"
           },
           {
            "$id": "106",
            "Kind": "constant",
            "ValueType": {
             "$id": "107",
-            "Kind": "int32",
-            "IsNullable": false
+            "Kind": "int32"
            },
-           "Value": 2,
-           "IsNullable": false
+           "Value": 2
           },
           {
            "$id": "108",
            "Kind": "constant",
            "ValueType": {
             "$id": "109",
-            "Kind": "float32",
-            "IsNullable": false
+            "Kind": "float32"
            },
-           "Value": 3.3,
-           "IsNullable": false
+           "Value": 3.3
           },
           {
            "$id": "110",
            "Kind": "constant",
            "ValueType": {
             "$id": "111",
-            "Kind": "boolean",
-            "IsNullable": false
+            "Kind": "boolean"
            },
-           "Value": true,
-           "IsNullable": false
+           "Value": true
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -870,55 +806,46 @@
         "Description": "This should be receive/send the 3.3 variant",
         "Type": {
          "$id": "113",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedLiteralsCasesStringLiteral1",
+         "VariantTypes": [
           {
            "$id": "114",
            "Kind": "constant",
            "ValueType": {
             "$id": "115",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
-           "Value": "a",
-           "IsNullable": false
+           "Value": "a"
           },
           {
            "$id": "116",
            "Kind": "constant",
            "ValueType": {
             "$id": "117",
-            "Kind": "int32",
-            "IsNullable": false
+            "Kind": "int32"
            },
-           "Value": 2,
-           "IsNullable": false
+           "Value": 2
           },
           {
            "$id": "118",
            "Kind": "constant",
            "ValueType": {
             "$id": "119",
-            "Kind": "float32",
-            "IsNullable": false
+            "Kind": "float32"
            },
-           "Value": 3.3,
-           "IsNullable": false
+           "Value": 3.3
           },
           {
            "$id": "120",
            "Kind": "constant",
            "ValueType": {
             "$id": "121",
-            "Kind": "boolean",
-            "IsNullable": false
+            "Kind": "boolean"
            },
-           "Value": true,
-           "IsNullable": false
+           "Value": true
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -930,55 +857,46 @@
         "Description": "This should be receive/send the true variant",
         "Type": {
          "$id": "123",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedLiteralsCasesStringLiteral1",
+         "VariantTypes": [
           {
            "$id": "124",
            "Kind": "constant",
            "ValueType": {
             "$id": "125",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
-           "Value": "a",
-           "IsNullable": false
+           "Value": "a"
           },
           {
            "$id": "126",
            "Kind": "constant",
            "ValueType": {
             "$id": "127",
-            "Kind": "int32",
-            "IsNullable": false
+            "Kind": "int32"
            },
-           "Value": 2,
-           "IsNullable": false
+           "Value": 2
           },
           {
            "$id": "128",
            "Kind": "constant",
            "ValueType": {
             "$id": "129",
-            "Kind": "float32",
-            "IsNullable": false
+            "Kind": "float32"
            },
-           "Value": 3.3,
-           "IsNullable": false
+           "Value": 3.3
           },
           {
            "$id": "130",
            "Kind": "constant",
            "ValueType": {
             "$id": "131",
-            "Kind": "boolean",
-            "IsNullable": false
+            "Kind": "boolean"
            },
-           "Value": true,
-           "IsNullable": false
+           "Value": true
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -995,10 +913,9 @@
   },
   {
    "$id": "132",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest1",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -1016,10 +933,9 @@
   },
   {
    "$id": "134",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "GetResponse",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output",
    "Properties": [
     {
@@ -1029,10 +945,9 @@
      "Description": "",
      "Type": {
       "$id": "136",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "MixedTypesCases",
-      "Namespace": "Type.Union",
-      "IsNullable": false,
+      "CrossLanguageDefinitionId": "Type.Union.MixedTypesCases",
       "Usage": "RoundTrip",
       "Properties": [
        {
@@ -1042,9 +957,9 @@
         "Description": "This should be receive/send the Cat variant",
         "Type": {
          "$id": "138",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedTypesCasesModel",
+         "VariantTypes": [
           {
            "$ref": "58"
           },
@@ -1053,24 +968,19 @@
            "Kind": "constant",
            "ValueType": {
             "$id": "140",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
-           "Value": "a",
-           "IsNullable": false
+           "Value": "a"
           },
           {
            "$id": "141",
-           "Kind": "int32",
-           "IsNullable": false
+           "Kind": "int32"
           },
           {
            "$id": "142",
-           "Kind": "boolean",
-           "IsNullable": false
+           "Kind": "boolean"
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -1082,9 +992,9 @@
         "Description": "This should be receive/send the \"a\" variant",
         "Type": {
          "$id": "144",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedTypesCasesModel",
+         "VariantTypes": [
           {
            "$ref": "58"
           },
@@ -1093,24 +1003,19 @@
            "Kind": "constant",
            "ValueType": {
             "$id": "146",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
-           "Value": "a",
-           "IsNullable": false
+           "Value": "a"
           },
           {
            "$id": "147",
-           "Kind": "int32",
-           "IsNullable": false
+           "Kind": "int32"
           },
           {
            "$id": "148",
-           "Kind": "boolean",
-           "IsNullable": false
+           "Kind": "boolean"
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -1122,9 +1027,9 @@
         "Description": "This should be receive/send the int variant",
         "Type": {
          "$id": "150",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedTypesCasesModel",
+         "VariantTypes": [
           {
            "$ref": "58"
           },
@@ -1133,24 +1038,19 @@
            "Kind": "constant",
            "ValueType": {
             "$id": "152",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
-           "Value": "a",
-           "IsNullable": false
+           "Value": "a"
           },
           {
            "$id": "153",
-           "Kind": "int32",
-           "IsNullable": false
+           "Kind": "int32"
           },
           {
            "$id": "154",
-           "Kind": "boolean",
-           "IsNullable": false
+           "Kind": "boolean"
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -1162,9 +1062,9 @@
         "Description": "This should be receive/send the boolean variant",
         "Type": {
          "$id": "156",
-         "Kind": "Union",
-         "Name": "Union",
-         "UnionItemTypes": [
+         "Kind": "union",
+         "Name": "MixedTypesCasesModel",
+         "VariantTypes": [
           {
            "$ref": "58"
           },
@@ -1173,24 +1073,19 @@
            "Kind": "constant",
            "ValueType": {
             "$id": "158",
-            "Kind": "string",
-            "IsNullable": false
+            "Kind": "string"
            },
-           "Value": "a",
-           "IsNullable": false
+           "Value": "a"
           },
           {
            "$id": "159",
-           "Kind": "int32",
-           "IsNullable": false
+           "Kind": "int32"
           },
           {
            "$id": "160",
-           "Kind": "boolean",
-           "IsNullable": false
+           "Kind": "boolean"
           }
-         ],
-         "IsNullable": false
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -1202,13 +1097,13 @@
         "Description": "This should be receive/send 4 element with Cat, \"a\", int, and boolean",
         "Type": {
          "$id": "162",
-         "Kind": "Array",
+         "Kind": "array",
          "Name": "Array",
-         "ElementType": {
+         "ValueType": {
           "$id": "163",
-          "Kind": "Union",
-          "Name": "Union",
-          "UnionItemTypes": [
+          "Kind": "union",
+          "Name": "MixedTypesCasesModel",
+          "VariantTypes": [
            {
             "$ref": "58"
            },
@@ -1217,26 +1112,21 @@
             "Kind": "constant",
             "ValueType": {
              "$id": "165",
-             "Kind": "string",
-             "IsNullable": false
+             "Kind": "string"
             },
-            "Value": "a",
-            "IsNullable": false
+            "Value": "a"
            },
            {
             "$id": "166",
-            "Kind": "int32",
-            "IsNullable": false
+            "Kind": "int32"
            },
            {
             "$id": "167",
-            "Kind": "boolean",
-            "IsNullable": false
+            "Kind": "boolean"
            }
-          ],
-          "IsNullable": false
+          ]
          },
-         "IsNullable": false
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -1253,10 +1143,9 @@
   },
   {
    "$id": "168",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "SendRequest",
-   "Namespace": "Type.Union",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -1282,7 +1171,6 @@
    "Protocol": {
     "$id": "171"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "172",
@@ -1291,8 +1179,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "173",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -1307,8 +1194,7 @@
       "$id": "174",
       "Type": {
        "$id": "175",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -1324,6 +1210,7 @@
      "$id": "177",
      "Name": "get",
      "ResourceName": "StringsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -1334,8 +1221,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "179",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1384,6 +1270,7 @@
      "$id": "182",
      "Name": "send",
      "ResourceName": "StringsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -1411,8 +1298,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "185",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1437,8 +1323,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "188",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1484,7 +1369,6 @@
    "Protocol": {
     "$id": "191"
    },
-   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {
@@ -1501,6 +1385,7 @@
      "$id": "193",
      "Name": "get",
      "ResourceName": "StringExtensible",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -1511,8 +1396,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "195",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1561,6 +1445,7 @@
      "$id": "198",
      "Name": "send",
      "ResourceName": "StringExtensible",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -1588,8 +1473,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "201",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1614,8 +1498,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "204",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1661,7 +1544,6 @@
    "Protocol": {
     "$id": "207"
    },
-   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {
@@ -1678,6 +1560,7 @@
      "$id": "209",
      "Name": "get",
      "ResourceName": "StringExtensibleNamed",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -1688,8 +1571,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "211",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1738,6 +1620,7 @@
      "$id": "214",
      "Name": "send",
      "ResourceName": "StringExtensibleNamed",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -1765,8 +1648,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "217",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1791,8 +1673,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "220",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1838,7 +1719,6 @@
    "Protocol": {
     "$id": "223"
    },
-   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {
@@ -1855,6 +1735,7 @@
      "$id": "225",
      "Name": "get",
      "ResourceName": "IntsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -1865,8 +1746,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "227",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1915,6 +1795,7 @@
      "$id": "230",
      "Name": "send",
      "ResourceName": "IntsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -1942,8 +1823,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "233",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1968,8 +1848,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "236",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2015,7 +1894,6 @@
    "Protocol": {
     "$id": "239"
    },
-   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {
@@ -2032,6 +1910,7 @@
      "$id": "241",
      "Name": "get",
      "ResourceName": "FloatsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2042,8 +1921,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "243",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2092,6 +1970,7 @@
      "$id": "246",
      "Name": "send",
      "ResourceName": "FloatsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2119,8 +1998,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "249",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2145,8 +2023,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "252",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2192,7 +2069,6 @@
    "Protocol": {
     "$id": "255"
    },
-   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {
@@ -2209,6 +2085,7 @@
      "$id": "257",
      "Name": "get",
      "ResourceName": "ModelsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2219,8 +2096,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "259",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2269,6 +2145,7 @@
      "$id": "262",
      "Name": "send",
      "ResourceName": "ModelsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2296,8 +2173,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "265",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2322,8 +2198,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "268",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2369,7 +2244,6 @@
    "Protocol": {
     "$id": "271"
    },
-   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {
@@ -2386,6 +2260,7 @@
      "$id": "273",
      "Name": "get",
      "ResourceName": "EnumsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2396,8 +2271,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "275",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2446,6 +2320,7 @@
      "$id": "278",
      "Name": "send",
      "ResourceName": "EnumsOnly",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2473,8 +2348,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "281",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2499,8 +2373,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "284",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2546,7 +2419,6 @@
    "Protocol": {
     "$id": "287"
    },
-   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {
@@ -2563,6 +2435,7 @@
      "$id": "289",
      "Name": "get",
      "ResourceName": "StringAndArray",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2573,8 +2446,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "291",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2623,6 +2495,7 @@
      "$id": "294",
      "Name": "send",
      "ResourceName": "StringAndArray",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2650,8 +2523,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "297",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2676,8 +2548,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "300",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2723,7 +2594,6 @@
    "Protocol": {
     "$id": "303"
    },
-   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {
@@ -2740,6 +2610,7 @@
      "$id": "305",
      "Name": "get",
      "ResourceName": "MixedLiterals",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2750,8 +2621,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "307",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2800,6 +2670,7 @@
      "$id": "310",
      "Name": "send",
      "ResourceName": "MixedLiterals",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2827,8 +2698,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "313",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2853,8 +2723,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "316",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2900,7 +2769,6 @@
    "Protocol": {
     "$id": "319"
    },
-   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {
@@ -2917,6 +2785,7 @@
      "$id": "321",
      "Name": "get",
      "ResourceName": "MixedTypes",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -2927,8 +2796,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "323",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2977,6 +2845,7 @@
      "$id": "326",
      "Name": "send",
      "ResourceName": "MixedTypes",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "172"
@@ -3004,8 +2873,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "329",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3030,8 +2898,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "332",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3077,7 +2944,6 @@
    "Protocol": {
     "$id": "335"
    },
-   "Creatable": false,
    "Parent": "UnionClient",
    "Parameters": [
     {

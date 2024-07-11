@@ -96,8 +96,8 @@ namespace MgmtMockAndSample.Models
             IList<string> sourceAddresses = default;
             IList<string> destinationAddresses = default;
             IList<string> destinationPorts = default;
-            IList<string> sourceIpGroups = default;
-            IList<string> destinationIpGroups = default;
+            IList<string> sourceIPGroups = default;
+            IList<string> destinationIPGroups = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -172,7 +172,7 @@ namespace MgmtMockAndSample.Models
                     {
                         array.Add(item.GetString());
                     }
-                    sourceIpGroups = array;
+                    sourceIPGroups = array;
                     continue;
                 }
                 if (property.NameEquals("destinationIpGroups"u8))
@@ -186,7 +186,7 @@ namespace MgmtMockAndSample.Models
                     {
                         array.Add(item.GetString());
                     }
-                    destinationIpGroups = array;
+                    destinationIPGroups = array;
                     continue;
                 }
             }
@@ -197,8 +197,8 @@ namespace MgmtMockAndSample.Models
                 sourceAddresses ?? new ChangeTrackingList<string>(),
                 destinationAddresses ?? new ChangeTrackingList<string>(),
                 destinationPorts ?? new ChangeTrackingList<string>(),
-                sourceIpGroups ?? new ChangeTrackingList<string>(),
-                destinationIpGroups ?? new ChangeTrackingList<string>());
+                sourceIPGroups ?? new ChangeTrackingList<string>(),
+                destinationIPGroups ?? new ChangeTrackingList<string>());
         }
     }
 }

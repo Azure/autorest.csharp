@@ -6,12 +6,11 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PagedUser",
-   "Namespace": "Azure.Core",
-   "Description": "Paged collection of User items",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Azure.Core.Page",
    "Usage": "Output",
+   "Description": "Paged collection of User items",
    "Properties": [
     {
      "$id": "3",
@@ -20,16 +19,15 @@
      "Description": "The User items on this page",
      "Type": {
       "$id": "4",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "Name": "ArrayUser",
+      "ValueType": {
        "$id": "5",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "User",
-       "Namespace": "Payload.Pageable",
-       "Description": "User model",
-       "IsNullable": false,
+       "CrossLanguageDefinitionId": "Payload.Pageable.User",
        "Usage": "Output",
+       "Description": "User model",
        "Properties": [
         {
          "$id": "6",
@@ -38,15 +36,14 @@
          "Description": "User name",
          "Type": {
           "$id": "7",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -58,8 +55,7 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "9",
-      "Kind": "url",
-      "IsNullable": false
+      "Kind": "url"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -81,6 +77,7 @@
      "Name": "list",
      "ResourceName": "Pageable",
      "Description": "List users",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "12",
@@ -89,8 +86,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "13",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -105,8 +101,7 @@
         "$id": "14",
         "Type": {
          "$id": "15",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
@@ -118,8 +113,7 @@
        "Description": "The maximum number of result items per page.",
        "Type": {
         "$id": "17",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -137,8 +131,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "19",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -192,7 +185,6 @@
    "Protocol": {
     "$id": "23"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "12"

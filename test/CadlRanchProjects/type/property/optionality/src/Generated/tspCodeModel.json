@@ -9,8 +9,7 @@
    "Name": "StringLiteralProperty_property",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -20,10 +19,9 @@
      "Description": "hello"
     }
    ],
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "",
    "Description": "The StringLiteralProperty_property",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -32,8 +30,7 @@
    "Name": "IntLiteralProperty_property",
    "ValueType": {
     "$id": "6",
-    "Kind": "int32",
-    "IsNullable": false
+    "Kind": "int32"
    },
    "Values": [
     {
@@ -43,10 +40,9 @@
      "Description": "1"
     }
    ],
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "",
    "Description": "The IntLiteralProperty_property",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
@@ -55,8 +51,7 @@
    "Name": "FloatLiteralProperty_property",
    "ValueType": {
     "$id": "9",
-    "Kind": "float32",
-    "IsNullable": false
+    "Kind": "float32"
    },
    "Values": [
     {
@@ -66,20 +61,19 @@
      "Description": "1.25"
     }
    ],
-   "Namespace": "Type.Property.Optional",
+   "CrossLanguageDefinitionId": "",
    "Description": "The FloatLiteralProperty_property",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
    "$id": "11",
    "Kind": "enum",
    "Name": "UnionStringLiteralPropertyProperty",
+   "CrossLanguageDefinitionId": "UnionStringLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "12",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -93,19 +87,17 @@
      "Value": "world"
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
    "$id": "15",
    "Kind": "enum",
    "Name": "UnionIntLiteralPropertyProperty",
+   "CrossLanguageDefinitionId": "UnionIntLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "16",
-    "Kind": "int32",
-    "IsNullable": false
+    "Kind": "int32"
    },
    "Values": [
     {
@@ -119,19 +111,17 @@
      "Value": 2
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
    "$id": "19",
    "Kind": "enum",
    "Name": "UnionFloatLiteralPropertyProperty",
+   "CrossLanguageDefinitionId": "UnionFloatLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "20",
-    "Kind": "float32",
-    "IsNullable": false
+    "Kind": "float32"
    },
    "Values": [
     {
@@ -145,21 +135,18 @@
      "Value": 2.375
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   }
  ],
  "Models": [
   {
    "$id": "23",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "StringProperty",
-   "Namespace": "Type.Property.Optional",
-   "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Property.Optional.StringProperty",
    "Usage": "RoundTrip",
+   "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "Properties": [
     {
      "$id": "24",
@@ -168,8 +155,7 @@
      "Description": "Property",
      "Type": {
       "$id": "25",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -178,12 +164,11 @@
   },
   {
    "$id": "26",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "BytesProperty",
-   "Namespace": "Type.Property.Optional",
-   "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Property.Optional.BytesProperty",
    "Usage": "RoundTrip",
+   "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "Properties": [
     {
      "$id": "27",
@@ -193,7 +178,6 @@
      "Type": {
       "$id": "28",
       "Kind": "bytes",
-      "IsNullable": false,
       "Encode": "base64"
      },
      "IsRequired": false,
@@ -203,12 +187,11 @@
   },
   {
    "$id": "29",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "DatetimeProperty",
-   "Namespace": "Type.Property.Optional",
-   "Description": "Model with a datetime property",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Property.Optional.DatetimeProperty",
    "Usage": "RoundTrip",
+   "Description": "Model with a datetime property",
    "Properties": [
     {
      "$id": "30",
@@ -218,12 +201,10 @@
      "Type": {
       "$id": "31",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "32",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": false,
@@ -233,12 +214,11 @@
   },
   {
    "$id": "33",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "DurationProperty",
-   "Namespace": "Type.Property.Optional",
-   "Description": "Model with a duration property",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Property.Optional.DurationProperty",
    "Usage": "RoundTrip",
+   "Description": "Model with a duration property",
    "Properties": [
     {
      "$id": "34",
@@ -248,12 +228,10 @@
      "Type": {
       "$id": "35",
       "Kind": "duration",
-      "IsNullable": false,
       "Encode": "ISO8601",
       "WireType": {
        "$id": "36",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": false,
@@ -263,12 +241,11 @@
   },
   {
    "$id": "37",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "CollectionsByteProperty",
-   "Namespace": "Type.Property.Optional",
-   "Description": "Model with collection bytes properties",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsByteProperty",
    "Usage": "RoundTrip",
+   "Description": "Model with collection bytes properties",
    "Properties": [
     {
      "$id": "38",
@@ -277,15 +254,14 @@
      "Description": "Property",
      "Type": {
       "$id": "39",
-      "Kind": "Array",
+      "Kind": "array",
       "Name": "Array",
-      "ElementType": {
+      "ValueType": {
        "$id": "40",
        "Kind": "bytes",
-       "IsNullable": false,
        "Encode": "base64"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -294,12 +270,11 @@
   },
   {
    "$id": "41",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "CollectionsModelProperty",
-   "Namespace": "Type.Property.Optional",
-   "Description": "Model with collection models properties",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsModelProperty",
    "Usage": "RoundTrip",
+   "Description": "Model with collection models properties",
    "Properties": [
     {
      "$id": "42",
@@ -308,12 +283,12 @@
      "Description": "Property",
      "Type": {
       "$id": "43",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "Name": "ArrayStringProperty",
+      "ValueType": {
        "$ref": "23"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -322,12 +297,11 @@
   },
   {
    "$id": "44",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "StringLiteralProperty",
-   "Namespace": "Type.Property.Optional",
-   "Description": "Model with string literal property",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Property.Optional.StringLiteralProperty",
    "Usage": "RoundTrip",
+   "Description": "Model with string literal property",
    "Properties": [
     {
      "$id": "45",
@@ -340,8 +314,7 @@
       "ValueType": {
        "$ref": "2"
       },
-      "Value": "hello",
-      "IsNullable": false
+      "Value": "hello"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -350,12 +323,11 @@
   },
   {
    "$id": "47",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "IntLiteralProperty",
-   "Namespace": "Type.Property.Optional",
-   "Description": "Model with int literal property",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Property.Optional.IntLiteralProperty",
    "Usage": "RoundTrip",
+   "Description": "Model with int literal property",
    "Properties": [
     {
      "$id": "48",
@@ -368,8 +340,7 @@
       "ValueType": {
        "$ref": "5"
       },
-      "Value": 1,
-      "IsNullable": false
+      "Value": 1
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -378,12 +349,11 @@
   },
   {
    "$id": "50",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "FloatLiteralProperty",
-   "Namespace": "Type.Property.Optional",
-   "Description": "Model with float literal property",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Property.Optional.FloatLiteralProperty",
    "Usage": "RoundTrip",
+   "Description": "Model with float literal property",
    "Properties": [
     {
      "$id": "51",
@@ -396,8 +366,7 @@
       "ValueType": {
        "$ref": "8"
       },
-      "Value": 1.25,
-      "IsNullable": false
+      "Value": 1.25
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -406,12 +375,11 @@
   },
   {
    "$id": "53",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "BooleanLiteralProperty",
-   "Namespace": "Type.Property.Optional",
-   "Description": "Model with boolean literal property",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Property.Optional.BooleanLiteralProperty",
    "Usage": "RoundTrip",
+   "Description": "Model with boolean literal property",
    "Properties": [
     {
      "$id": "54",
@@ -423,11 +391,9 @@
       "Kind": "constant",
       "ValueType": {
        "$id": "56",
-       "Kind": "boolean",
-       "IsNullable": false
+       "Kind": "boolean"
       },
-      "Value": true,
-      "IsNullable": false
+      "Value": true
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -436,12 +402,11 @@
   },
   {
    "$id": "57",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnionStringLiteralProperty",
-   "Namespace": "Type.Property.Optional",
-   "Description": "Model with union of string literal property",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Property.Optional.UnionStringLiteralProperty",
    "Usage": "RoundTrip",
+   "Description": "Model with union of string literal property",
    "Properties": [
     {
      "$id": "58",
@@ -458,12 +423,11 @@
   },
   {
    "$id": "59",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnionIntLiteralProperty",
-   "Namespace": "Type.Property.Optional",
-   "Description": "Model with union of int literal property",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Property.Optional.UnionIntLiteralProperty",
    "Usage": "RoundTrip",
+   "Description": "Model with union of int literal property",
    "Properties": [
     {
      "$id": "60",
@@ -480,12 +444,11 @@
   },
   {
    "$id": "61",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnionFloatLiteralProperty",
-   "Namespace": "Type.Property.Optional",
-   "Description": "Model with union of float literal property",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Property.Optional.UnionFloatLiteralProperty",
    "Usage": "RoundTrip",
+   "Description": "Model with union of float literal property",
    "Properties": [
     {
      "$id": "62",
@@ -502,12 +465,11 @@
   },
   {
    "$id": "63",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "RequiredAndOptionalProperty",
-   "Namespace": "Type.Property.Optional",
-   "Description": "Model with required and optional properties",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Type.Property.Optional.RequiredAndOptionalProperty",
    "Usage": "RoundTrip",
+   "Description": "Model with required and optional properties",
    "Properties": [
     {
      "$id": "64",
@@ -516,8 +478,7 @@
      "Description": "optional string property",
      "Type": {
       "$id": "65",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -529,8 +490,7 @@
      "Description": "required int property",
      "Type": {
       "$id": "67",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -547,7 +507,6 @@
    "Protocol": {
     "$id": "69"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "70",
@@ -556,8 +515,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "71",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -572,8 +530,7 @@
       "$id": "72",
       "Type": {
        "$id": "73",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -590,6 +547,7 @@
      "Name": "getAll",
      "ResourceName": "String",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -600,8 +558,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "77",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -651,6 +608,7 @@
      "Name": "getDefault",
      "ResourceName": "String",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -661,8 +619,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "82",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -712,6 +669,7 @@
      "Name": "putAll",
      "ResourceName": "String",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -739,8 +697,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "88",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -765,8 +722,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "91",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -813,6 +769,7 @@
      "Name": "putDefault",
      "ResourceName": "String",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -840,8 +797,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "97",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -866,8 +822,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "100",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -913,7 +868,6 @@
    "Protocol": {
     "$id": "103"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -931,6 +885,7 @@
      "Name": "getAll",
      "ResourceName": "Bytes",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -941,8 +896,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "107",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -992,6 +946,7 @@
      "Name": "getDefault",
      "ResourceName": "Bytes",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -1002,8 +957,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "112",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1053,6 +1007,7 @@
      "Name": "putAll",
      "ResourceName": "Bytes",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -1080,8 +1035,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "118",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1106,8 +1060,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "121",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1154,6 +1107,7 @@
      "Name": "putDefault",
      "ResourceName": "Bytes",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -1181,8 +1135,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "127",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1207,8 +1160,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "130",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1254,7 +1206,6 @@
    "Protocol": {
     "$id": "133"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -1272,6 +1223,7 @@
      "Name": "getAll",
      "ResourceName": "Datetime",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -1282,8 +1234,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "137",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1333,6 +1284,7 @@
      "Name": "getDefault",
      "ResourceName": "Datetime",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -1343,8 +1295,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "142",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1394,6 +1345,7 @@
      "Name": "putAll",
      "ResourceName": "Datetime",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -1421,8 +1373,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "148",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1447,8 +1398,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "151",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1495,6 +1445,7 @@
      "Name": "putDefault",
      "ResourceName": "Datetime",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -1522,8 +1473,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "157",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1548,8 +1498,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "160",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1595,7 +1544,6 @@
    "Protocol": {
     "$id": "163"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -1613,6 +1561,7 @@
      "Name": "getAll",
      "ResourceName": "Duration",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -1623,8 +1572,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "167",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1674,6 +1622,7 @@
      "Name": "getDefault",
      "ResourceName": "Duration",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -1684,8 +1633,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "172",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1735,6 +1683,7 @@
      "Name": "putAll",
      "ResourceName": "Duration",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -1762,8 +1711,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "178",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1788,8 +1736,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "181",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1836,6 +1783,7 @@
      "Name": "putDefault",
      "ResourceName": "Duration",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -1863,8 +1811,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "187",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1889,8 +1836,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "190",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1936,7 +1882,6 @@
    "Protocol": {
     "$id": "193"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -1954,6 +1899,7 @@
      "Name": "getAll",
      "ResourceName": "CollectionsByte",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -1964,8 +1910,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "197",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2015,6 +1960,7 @@
      "Name": "getDefault",
      "ResourceName": "CollectionsByte",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -2025,8 +1971,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "202",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2076,6 +2021,7 @@
      "Name": "putAll",
      "ResourceName": "CollectionsByte",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -2103,8 +2049,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "208",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2129,8 +2074,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "211",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2177,6 +2121,7 @@
      "Name": "putDefault",
      "ResourceName": "CollectionsByte",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -2204,8 +2149,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "217",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2230,8 +2174,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "220",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2277,7 +2220,6 @@
    "Protocol": {
     "$id": "223"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -2295,6 +2237,7 @@
      "Name": "getAll",
      "ResourceName": "CollectionsModel",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -2305,8 +2248,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "227",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2356,6 +2298,7 @@
      "Name": "getDefault",
      "ResourceName": "CollectionsModel",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -2366,8 +2309,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "232",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2417,6 +2359,7 @@
      "Name": "putAll",
      "ResourceName": "CollectionsModel",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -2444,8 +2387,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "238",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2470,8 +2412,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "241",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2518,6 +2459,7 @@
      "Name": "putDefault",
      "ResourceName": "CollectionsModel",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -2545,8 +2487,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "247",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2571,8 +2512,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "250",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2618,7 +2558,6 @@
    "Protocol": {
     "$id": "253"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -2636,6 +2575,7 @@
      "Name": "getAll",
      "ResourceName": "StringLiteral",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -2646,8 +2586,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "257",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2697,6 +2636,7 @@
      "Name": "getDefault",
      "ResourceName": "StringLiteral",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -2707,8 +2647,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "262",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2758,6 +2697,7 @@
      "Name": "putAll",
      "ResourceName": "StringLiteral",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -2785,8 +2725,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "268",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2811,8 +2750,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "271",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2859,6 +2797,7 @@
      "Name": "putDefault",
      "ResourceName": "StringLiteral",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -2886,8 +2825,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "277",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2912,8 +2850,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "280",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2959,7 +2896,6 @@
    "Protocol": {
     "$id": "283"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -2977,6 +2913,7 @@
      "Name": "getAll",
      "ResourceName": "IntLiteral",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -2987,8 +2924,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "287",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3038,6 +2974,7 @@
      "Name": "getDefault",
      "ResourceName": "IntLiteral",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -3048,8 +2985,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "292",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3099,6 +3035,7 @@
      "Name": "putAll",
      "ResourceName": "IntLiteral",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -3126,8 +3063,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "298",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3152,8 +3088,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "301",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3200,6 +3135,7 @@
      "Name": "putDefault",
      "ResourceName": "IntLiteral",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -3227,8 +3163,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "307",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3253,8 +3188,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "310",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3300,7 +3234,6 @@
    "Protocol": {
     "$id": "313"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -3318,6 +3251,7 @@
      "Name": "getAll",
      "ResourceName": "FloatLiteral",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -3328,8 +3262,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "317",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3379,6 +3312,7 @@
      "Name": "getDefault",
      "ResourceName": "FloatLiteral",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -3389,8 +3323,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "322",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3440,6 +3373,7 @@
      "Name": "putAll",
      "ResourceName": "FloatLiteral",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -3467,8 +3401,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "328",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3493,8 +3426,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "331",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3541,6 +3473,7 @@
      "Name": "putDefault",
      "ResourceName": "FloatLiteral",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -3568,8 +3501,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "337",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3594,8 +3526,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "340",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3641,7 +3572,6 @@
    "Protocol": {
     "$id": "343"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -3659,6 +3589,7 @@
      "Name": "getAll",
      "ResourceName": "BooleanLiteral",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -3669,8 +3600,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "347",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3720,6 +3650,7 @@
      "Name": "getDefault",
      "ResourceName": "BooleanLiteral",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -3730,8 +3661,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "352",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3781,6 +3711,7 @@
      "Name": "putAll",
      "ResourceName": "BooleanLiteral",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -3808,8 +3739,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "358",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3834,8 +3764,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "361",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3882,6 +3811,7 @@
      "Name": "putDefault",
      "ResourceName": "BooleanLiteral",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -3909,8 +3839,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "367",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3935,8 +3864,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "370",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3982,7 +3910,6 @@
    "Protocol": {
     "$id": "373"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -4000,6 +3927,7 @@
      "Name": "getAll",
      "ResourceName": "UnionStringLiteral",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -4010,8 +3938,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "377",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4061,6 +3988,7 @@
      "Name": "getDefault",
      "ResourceName": "UnionStringLiteral",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -4071,8 +3999,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "382",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4122,6 +4049,7 @@
      "Name": "putAll",
      "ResourceName": "UnionStringLiteral",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -4149,8 +4077,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "388",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4175,8 +4102,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "391",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4223,6 +4149,7 @@
      "Name": "putDefault",
      "ResourceName": "UnionStringLiteral",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -4250,8 +4177,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "397",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4276,8 +4202,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "400",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4323,7 +4248,6 @@
    "Protocol": {
     "$id": "403"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -4341,6 +4265,7 @@
      "Name": "getAll",
      "ResourceName": "UnionIntLiteral",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -4351,8 +4276,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "407",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4402,6 +4326,7 @@
      "Name": "getDefault",
      "ResourceName": "UnionIntLiteral",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -4412,8 +4337,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "412",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4463,6 +4387,7 @@
      "Name": "putAll",
      "ResourceName": "UnionIntLiteral",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -4490,8 +4415,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "418",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4516,8 +4440,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "421",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4564,6 +4487,7 @@
      "Name": "putDefault",
      "ResourceName": "UnionIntLiteral",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -4591,8 +4515,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "427",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4617,8 +4540,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "430",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4664,7 +4586,6 @@
    "Protocol": {
     "$id": "433"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -4682,6 +4603,7 @@
      "Name": "getAll",
      "ResourceName": "UnionFloatLiteral",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -4692,8 +4614,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "437",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4743,6 +4664,7 @@
      "Name": "getDefault",
      "ResourceName": "UnionFloatLiteral",
      "Description": "Get models that will return the default object",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -4753,8 +4675,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "442",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4804,6 +4725,7 @@
      "Name": "putAll",
      "ResourceName": "UnionFloatLiteral",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -4831,8 +4753,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "448",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4857,8 +4778,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "451",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4905,6 +4825,7 @@
      "Name": "putDefault",
      "ResourceName": "UnionFloatLiteral",
      "Description": "Put a body with default properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -4932,8 +4853,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "457",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4958,8 +4878,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "460",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5005,7 +4924,6 @@
    "Protocol": {
     "$id": "463"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {
@@ -5023,6 +4941,7 @@
      "Name": "getAll",
      "ResourceName": "RequiredAndOptional",
      "Description": "Get models that will return all properties in the model",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -5033,8 +4952,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "467",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5084,6 +5002,7 @@
      "Name": "getRequiredOnly",
      "ResourceName": "RequiredAndOptional",
      "Description": "Get models that will return only the required properties",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -5094,8 +5013,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "472",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5145,6 +5063,7 @@
      "Name": "putAll",
      "ResourceName": "RequiredAndOptional",
      "Description": "Put a body with all properties present.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -5172,8 +5091,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "478",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5198,8 +5116,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "481",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5246,6 +5163,7 @@
      "Name": "putRequiredOnly",
      "ResourceName": "RequiredAndOptional",
      "Description": "Put a body with only required properties.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "70"
@@ -5273,8 +5191,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "487",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5299,8 +5216,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "490",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -5346,7 +5262,6 @@
    "Protocol": {
     "$id": "493"
    },
-   "Creatable": false,
    "Parent": "OptionalClient",
    "Parameters": [
     {

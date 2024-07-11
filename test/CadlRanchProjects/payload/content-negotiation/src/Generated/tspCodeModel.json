@@ -6,10 +6,9 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "PngImageAsJson",
-   "Namespace": "Payload.ContentNegotiation.DifferentBody",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.PngImageAsJson",
    "Usage": "Output",
    "Properties": [
     {
@@ -20,7 +19,6 @@
      "Type": {
       "$id": "4",
       "Kind": "bytes",
-      "IsNullable": false,
       "Encode": "base64"
      },
      "IsRequired": true,
@@ -38,7 +36,6 @@
    "Protocol": {
     "$id": "6"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "7",
@@ -47,8 +44,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "8",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -63,8 +59,7 @@
       "$id": "9",
       "Type": {
        "$id": "10",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -80,6 +75,7 @@
      "$id": "12",
      "Name": "getAvatarAsPng",
      "ResourceName": "SameBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"
@@ -90,8 +86,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "14",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -120,7 +115,6 @@
        "BodyType": {
         "$id": "17",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64"
        },
        "BodyMediaType": "Json",
@@ -143,6 +137,7 @@
      "$id": "18",
      "Name": "getAvatarAsJpeg",
      "ResourceName": "SameBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"
@@ -153,8 +148,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "20",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -183,7 +177,6 @@
        "BodyType": {
         "$id": "23",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64"
        },
        "BodyMediaType": "Json",
@@ -206,7 +199,6 @@
    "Protocol": {
     "$id": "24"
    },
-   "Creatable": false,
    "Parent": "ContentNegotiationClient",
    "Parameters": [
     {
@@ -223,6 +215,7 @@
      "$id": "26",
      "Name": "getAvatarAsPng",
      "ResourceName": "DifferentBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"
@@ -233,8 +226,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "28",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -263,7 +255,6 @@
        "BodyType": {
         "$id": "31",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64"
        },
        "BodyMediaType": "Json",
@@ -286,6 +277,7 @@
      "$id": "32",
      "Name": "getAvatarAsJson",
      "ResourceName": "DifferentBody",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "7"
@@ -296,8 +288,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "34",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -346,7 +337,6 @@
    "Protocol": {
     "$id": "37"
    },
-   "Creatable": false,
    "Parent": "ContentNegotiationClient",
    "Parameters": [
     {

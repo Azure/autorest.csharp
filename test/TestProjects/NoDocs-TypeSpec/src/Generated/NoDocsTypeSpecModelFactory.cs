@@ -35,6 +35,16 @@ namespace NoDocsTypeSpec.Models
                 serializedAdditionalRawData: null);
         }
 
+        public static Friend Friend(string name = null)
+        {
+            return new Friend(name, serializedAdditionalRawData: null);
+        }
+
+        public static ProjectedModel ProjectedModel(string name = null)
+        {
+            return new ProjectedModel(name, serializedAdditionalRawData: null);
+        }
+
         public static Extension Extension(IEnumerable<Extension> extension = null, sbyte level = default)
         {
             extension ??= new List<Extension>();
@@ -49,10 +59,10 @@ namespace NoDocsTypeSpec.Models
             return new ThereLevelExtension(extension?.ToList(), serializedAdditionalRawData: null, level);
         }
 
-        public static RoundTripModel RoundTripModel(string requiredString = null, int requiredInt = default, IEnumerable<StringFixedEnum?> requiredCollection = null, IDictionary<string, StringExtensibleEnum?> requiredDictionary = null, Thing requiredModel = null, IntExtensibleEnum? intExtensibleEnum = null, IEnumerable<IntExtensibleEnum> intExtensibleEnumCollection = null, FloatExtensibleEnum? floatExtensibleEnum = null, IEnumerable<FloatExtensibleEnum> floatExtensibleEnumCollection = null, FloatFixedEnum? floatFixedEnum = null, IEnumerable<FloatFixedEnum> floatFixedEnumCollection = null, IntFixedEnum? intFixedEnum = null, IEnumerable<IntFixedEnum> intFixedEnumCollection = null, StringFixedEnum? stringFixedEnum = null, BinaryData requiredUnknown = null, BinaryData optionalUnknown = null, IDictionary<string, BinaryData> requiredRecordUnknown = null, IDictionary<string, BinaryData> optionalRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown = null, ModelWithRequiredNullableProperties modelWithRequiredNullable = null, IEnumerable<BinaryData> unionList = null)
+        public static RoundTripModel RoundTripModel(string requiredString = null, int requiredInt = default, IEnumerable<StringFixedEnum> requiredCollection = null, IDictionary<string, StringExtensibleEnum> requiredDictionary = null, Thing requiredModel = null, IntExtensibleEnum? intExtensibleEnum = null, IEnumerable<IntExtensibleEnum> intExtensibleEnumCollection = null, FloatExtensibleEnum? floatExtensibleEnum = null, IEnumerable<FloatExtensibleEnum> floatExtensibleEnumCollection = null, FloatFixedEnum? floatFixedEnum = null, IEnumerable<FloatFixedEnum> floatFixedEnumCollection = null, IntFixedEnum? intFixedEnum = null, IEnumerable<IntFixedEnum> intFixedEnumCollection = null, StringFixedEnum? stringFixedEnum = null, BinaryData requiredUnknown = null, BinaryData optionalUnknown = null, IDictionary<string, BinaryData> requiredRecordUnknown = null, IDictionary<string, BinaryData> optionalRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown = null, ModelWithRequiredNullableProperties modelWithRequiredNullable = null, IEnumerable<BinaryData> unionList = null)
         {
-            requiredCollection ??= new List<StringFixedEnum?>();
-            requiredDictionary ??= new Dictionary<string, StringExtensibleEnum?>();
+            requiredCollection ??= new List<StringFixedEnum>();
+            requiredDictionary ??= new Dictionary<string, StringExtensibleEnum>();
             intExtensibleEnumCollection ??= new List<IntExtensibleEnum>();
             floatExtensibleEnumCollection ??= new List<FloatExtensibleEnum>();
             floatFixedEnumCollection ??= new List<FloatFixedEnum>();

@@ -6,11 +6,11 @@
   {
    "$id": "2",
    "Kind": "enum",
-   "Name": "OneBinaryBodyTwoContentTypesRequest",
+   "Name": "OneBinaryBodyTwoContentTypesRequestContentType",
+   "CrossLanguageDefinitionId": "oneBinaryBodyTwoContentTypes.RequestContentType.anonymous",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -24,19 +24,17 @@
      "Value": "application/octet-stream"
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input"
   },
   {
    "$id": "6",
    "Kind": "enum",
-   "Name": "OneStringBodyThreeContentTypesRequest",
+   "Name": "OneStringBodyThreeContentTypesRequestContentType",
+   "CrossLanguageDefinitionId": "oneStringBodyThreeContentTypes.RequestContentType.anonymous",
    "ValueType": {
     "$id": "7",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -55,19 +53,16 @@
      "Value": "text/plain"
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input"
   }
  ],
  "Models": [
   {
    "$id": "11",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "Body",
-   "Namespace": "MultipleMediaTypes",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "MultipleMediaTypes.Body",
    "Usage": "Input",
    "Properties": [
     {
@@ -77,8 +72,7 @@
      "Description": "",
      "Type": {
       "$id": "13",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -96,6 +90,7 @@
      "$id": "15",
      "Name": "oneBinaryBodyTwoContentTypes",
      "ResourceName": "MultipleMediaTypes",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "16",
@@ -103,8 +98,7 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "17",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -119,7 +113,7 @@
       {
        "$id": "18",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$ref": "2"
        },
@@ -140,7 +134,6 @@
        "Type": {
         "$id": "20",
         "Kind": "bytes",
-        "IsNullable": false,
         "Encode": "base64"
        },
        "Location": "Body",
@@ -159,8 +152,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "22",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -207,6 +199,7 @@
      "$id": "25",
      "Name": "oneStringBodyThreeContentTypes",
      "ResourceName": "MultipleMediaTypes",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "16"
@@ -214,7 +207,7 @@
       {
        "$id": "26",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$ref": "6"
        },
@@ -234,8 +227,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "28",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -253,8 +245,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "30",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -302,6 +293,7 @@
      "$id": "33",
      "Name": "oneModelBodyOneContentType",
      "ResourceName": "MultipleMediaTypes",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "16"
@@ -309,17 +301,15 @@
       {
        "$id": "34",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "35",
         "Kind": "constant",
         "ValueType": {
          "$id": "36",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
-        "Value": "application/json",
-        "IsNullable": false
+        "Value": "application/json"
        },
        "Location": "Header",
        "DefaultValue": {
@@ -361,8 +351,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "40",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -408,7 +397,6 @@
    "Protocol": {
     "$id": "43"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "16"

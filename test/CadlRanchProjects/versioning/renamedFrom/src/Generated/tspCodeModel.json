@@ -10,10 +10,10 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "Versioning.RenamedFrom.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -29,20 +29,18 @@
      "Description": "The version v2."
     }
    ],
-   "Namespace": "Versioning.RenamedFrom",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   },
   {
    "$id": "6",
    "Kind": "enum",
    "Name": "NewEnum",
+   "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewEnum",
    "ValueType": {
     "$id": "7",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -51,19 +49,16 @@
      "Value": "newEnumMember"
     }
    ],
-   "Namespace": "Versioning.RenamedFrom",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   }
  ],
  "Models": [
   {
    "$id": "9",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "NewModel",
-   "Namespace": "Versioning.RenamedFrom",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewModel",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -73,8 +68,7 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -97,21 +91,18 @@
      "Description": "",
      "Type": {
       "$id": "14",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "NewUnion",
+      "VariantTypes": [
        {
         "$id": "15",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        {
         "$id": "16",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        }
-      ],
-      "IsNullable": false
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -129,6 +120,7 @@
      "$id": "18",
      "Name": "newOp",
      "ResourceName": "RenamedFrom",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "19",
@@ -137,8 +129,7 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "20",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -174,8 +165,7 @@
        "NameInRequest": "newQuery",
        "Type": {
         "$id": "23",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -210,8 +200,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "26",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -236,8 +225,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "29",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -289,7 +277,6 @@
    "Protocol": {
     "$id": "32"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "19"
@@ -308,6 +295,7 @@
      "$id": "34",
      "Name": "newOpInNewInterface",
      "ResourceName": "NewInterface",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "19"
@@ -338,8 +326,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "37",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -364,8 +351,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "40",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -417,7 +403,6 @@
    "Protocol": {
     "$id": "43"
    },
-   "Creatable": false,
    "Parent": "RenamedFromClient",
    "Parameters": [
     {

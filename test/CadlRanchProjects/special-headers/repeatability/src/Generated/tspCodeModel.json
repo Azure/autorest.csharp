@@ -6,11 +6,11 @@
   {
    "$id": "2",
    "Kind": "enum",
-   "Name": "ImmediateSuccessResponse",
+   "Name": "ImmediateSuccessResponseRepeatabilityResult",
+   "CrossLanguageDefinitionId": "immediateSuccess.ResponseRepeatabilityResult.anonymous",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -24,10 +24,8 @@
      "Value": "rejected"
     }
    ],
-   "Namespace": "",
    "IsExtensible": false,
-   "IsNullable": false,
-   "Usage": "None"
+   "Usage": "Output"
   }
  ],
  "Models": [],
@@ -42,6 +40,7 @@
      "Name": "immediateSuccess",
      "ResourceName": "Repeatability",
      "Description": "Check we recognize Repeatability-Request-ID and Repeatability-First-Sent.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "8",
@@ -50,8 +49,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "9",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -66,8 +64,7 @@
         "$id": "10",
         "Type": {
          "$id": "11",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
@@ -78,8 +75,7 @@
        "NameInRequest": "Repeatability-Request-ID",
        "Type": {
         "$id": "13",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -98,12 +94,10 @@
        "Type": {
         "$id": "15",
         "Kind": "utcDateTime",
-        "IsNullable": false,
         "Encode": "rfc7231",
         "WireType": {
          "$id": "16",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         }
        },
        "Location": "Header",
@@ -122,8 +116,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "18",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -176,7 +169,6 @@
    "Protocol": {
     "$id": "22"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "8"

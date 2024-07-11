@@ -106,6 +106,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -133,6 +134,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -222,6 +224,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -249,6 +252,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -353,6 +357,7 @@ namespace FirstTestTypeSpec.Samples
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = client.PatchAction(content);
 
@@ -372,6 +377,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -404,6 +410,7 @@ namespace FirstTestTypeSpec.Samples
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = await client.PatchActionAsync(content);
 
@@ -423,6 +430,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -504,8 +512,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
-            Response<Thing> response = client.AnonymousBody(thing);
+            Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false);
         }
 
         [Test]
@@ -515,8 +522,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
-            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false);
         }
 
         [Test]
@@ -549,6 +555,7 @@ namespace FirstTestTypeSpec.Samples
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = client.AnonymousBody(content);
 
@@ -568,6 +575,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -600,6 +608,7 @@ namespace FirstTestTypeSpec.Samples
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
+                optionalResourceId = new object(),
             });
             Response response = await client.AnonymousBodyAsync(content);
 
@@ -619,6 +628,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
         }
 
         [Test]
@@ -628,16 +638,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList = { 1234 },
-                OptionalFloatProperty = (double)default,
-            };
-            Response<Thing> response = client.AnonymousBody(thing);
+            Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false, optionalLiteralString: ThingOptionalLiteralString.Reject, optionalLiteralInt: ThingOptionalLiteralInt._456, optionalLiteralFloat: ThingOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: (double)default, optionalResourceId: null);
         }
 
         [Test]
@@ -647,16 +648,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList = { 1234 },
-                OptionalFloatProperty = (double)default,
-            };
-            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false, optionalLiteralString: ThingOptionalLiteralString.Reject, optionalLiteralInt: ThingOptionalLiteralInt._456, optionalLiteralFloat: ThingOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: (double)default, optionalResourceId: null);
         }
 
         [Test]
@@ -700,8 +692,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend friend = new Friend("<name>");
-            Response<Friend> response = client.FriendlyModel(friend);
+            Response<Friend> response = client.FriendlyModel("<name>");
         }
 
         [Test]
@@ -711,8 +702,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend friend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(friend);
+            Response<Friend> response = await client.FriendlyModelAsync("<name>");
         }
 
         [Test]
@@ -756,8 +746,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend friend = new Friend("<name>");
-            Response<Friend> response = client.FriendlyModel(friend);
+            Response<Friend> response = client.FriendlyModel("<name>");
         }
 
         [Test]
@@ -767,8 +756,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend friend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(friend);
+            Response<Friend> response = await client.FriendlyModelAsync("<name>");
         }
 
         [Test]
@@ -972,8 +960,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ProjectedModel projectedModel = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = client.ProjectedNameModel(projectedModel);
+            Response<ProjectedModel> response = client.ProjectedNameModel("<name>");
         }
 
         [Test]
@@ -983,8 +970,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ProjectedModel projectedModel = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(projectedModel);
+            Response<ProjectedModel> response = await client.ProjectedNameModelAsync("<name>");
         }
 
         [Test]
@@ -1028,8 +1014,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ProjectedModel projectedModel = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = client.ProjectedNameModel(projectedModel);
+            Response<ProjectedModel> response = client.ProjectedNameModel("<name>");
         }
 
         [Test]
@@ -1039,8 +1024,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ProjectedModel projectedModel = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(projectedModel);
+            Response<ProjectedModel> response = await client.ProjectedNameModelAsync("<name>");
         }
 
         [Test]

@@ -7,12 +7,14 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
@@ -40,12 +42,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _typeFactory = typeFactory;
             DefaultName = inputModel.CSharpName();
-            DefaultNamespace = GetDefaultModelNamespace(inputModel.Namespace, defaultNamespace);
+            DefaultNamespace = GetDefaultModelNamespace(null, defaultNamespace);
             InputModel = inputModel;
             _serializationBuilder = new SerializationBuilder();
             _usage = inputModel.Usage;
 
-            DefaultAccessibility = inputModel.Accessibility ?? "public";
+            DefaultAccessibility = inputModel.Access ?? "public";
 
             // Update usage from code attribute
             if (ModelTypeMapping?.Usage != null)
@@ -58,7 +60,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             _defaultDerivedType = defaultDerivedType
                 //if I have children and parents then I am my own defaultDerivedType
-                ?? (inputModel.DerivedModels.Any() && inputModel.BaseModel is { DiscriminatorPropertyName: not null } ? this :(inputModel.IsUnknownDiscriminatorModel ? this : null));
+                ?? (inputModel.DerivedModels.Any() && inputModel.BaseModel is { DiscriminatorProperty: not null } ? this :(inputModel.IsUnknownDiscriminatorModel ? this : null));
             IsUnknownDerivedType = inputModel.IsUnknownDiscriminatorModel;
             // we skip the init ctor when there is an extension telling us to, or when this is an unknown derived type in a discriminated set
             SkipInitializerConstructor = IsUnknownDerivedType;
@@ -75,7 +77,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private SerializableObjectType? _defaultDerivedType;
 
-        protected override bool IsAbstract => MgmtReferenceType.IsReferenceType(InputModel) || (!Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && InputModel.DiscriminatorPropertyName != null && InputModel.DiscriminatorValue == null);
+        protected override bool IsAbstract => MgmtReferenceType.IsReferenceType(InputModel) || (!Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && InputModel.DiscriminatorProperty != null && InputModel.DiscriminatorValue == null);
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty
         {
@@ -147,7 +149,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (InputModel.DerivedModels.Count > 0)
                 return true;
 
-            if (InputModel.DiscriminatorPropertyName is not null)
+            if (InputModel.DiscriminatorProperty is not null)
                 return true;
 
             return false;
@@ -323,7 +325,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultParameterValue = Constant.Default(inputType);
                     }
 
-                    var validate = property.InputModelProperty?.Type.IsNullable != true && !inputType.IsValueType && property.InputModelProperty?.IsReadOnly != true ? ValidationType.AssertNotNull : ValidationType.None;
+                    var validate = property.InputModelProperty?.Type is not InputNullableType && !inputType.IsValueType && property.InputModelProperty?.IsReadOnly != true ? ValidationType.AssertNotNull : ValidationType.None;
                     var defaultCtorParameter = new Parameter(
                         property.Declaration.Name.ToVariableName(),
                         property.ParameterDescription,
@@ -395,12 +397,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override ObjectTypeDiscriminator? BuildDiscriminator()
         {
-            var discriminatorPropertyName = InputModel.DiscriminatorPropertyName;
-            if (discriminatorPropertyName is null)
+            var discriminatorProperty = InputModel.DiscriminatorProperty;
+            if (discriminatorProperty is null)
             {
-                discriminatorPropertyName = GetCombinedSchemas().FirstOrDefault(m => m.DiscriminatorPropertyName != null)?.DiscriminatorPropertyName;
+                discriminatorProperty = GetCombinedSchemas().FirstOrDefault(m => m.DiscriminatorProperty != null)?.DiscriminatorProperty;
             }
-            if (discriminatorPropertyName is null)
+            if (discriminatorProperty is null)
             {
                 return null;
             }
@@ -431,7 +433,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ObjectTypeDiscriminator(
                 property,
-                discriminatorPropertyName,
+                discriminatorProperty.SerializedName,
                 implementations,
                 value,
                 _defaultDerivedType!
@@ -464,15 +466,25 @@ namespace AutoRest.CSharp.Output.Models.Types
             var propertiesFromSpec = GetParentPropertyDeclarationNames();
             var existingProperties = GetParentPropertySerializedNames();
 
-            foreach (var property in UpdateInputModelProperties())
+            foreach (var model in InputModel.GetSelfAndBaseModels())
             {
-                if (existingProperties.Contains(property.Name))
+                foreach (var property in model.Properties)
                 {
-                    continue;
+                    if (existingProperties.Contains(property.Name))
+                    {
+                        continue;
+                    }
+                    var prop = CreateProperty(property);
+
+                    // If "Type" property is "String" and "ResourceType" exists in parents properties, skip it since they are the same.
+                    // This only applies for TypeSpec input, for swagger input we have renamed "type" property to "resourceType" in FrameworkTypeUpdater.ValidateAndUpdate
+                    if (property.CSharpName() == "Type" && prop.ValueType.Name == "String" && existingProperties.Contains("ResourceType"))
+                    {
+                        continue;
+                    }
+                    propertiesFromSpec.Add(prop.Declaration.Name);
+                    yield return prop;
                 }
-                var prop = CreateProperty(property);
-                propertiesFromSpec.Add(prop.Declaration.Name);
-                yield return prop;
             }
 
             if (AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)
@@ -500,36 +512,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        protected IReadOnlyList<InputModelProperty> UpdateInputModelProperties()
-        {
-            if (InputModel.BaseModel is not { } baseModel)
-            {
-                return InputModel.Properties;
-            }
-
-            var existingBaseType = GetSourceBaseType();
-            // If base type in custom code is different from the current base type, we need to replace the base type and handle the properties accordingly
-            if (existingBaseType is not null && existingBaseType.Name != baseModel.Name && !SymbolEqualityComparer.Default.Equals(_sourceInputModel?.FindForType(Declaration.Namespace, baseModel.Name.ToCleanName()), existingBaseType))
-            {
-                IEnumerable<InputModelProperty> properties = InputModel.Properties.ToList();
-
-                // Remove all properties in the hierarchy of current base type
-                var currentBaseModelProperties = baseModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
-                properties = properties.Except(currentBaseModelProperties);
-
-                // Add all properties in the hierarchy of existing base type
-                var existingBaseTypeModel = _typeFactory.GetLibraryTypeByName(existingBaseType.Name)?.Implementation as SchemaObjectType;
-                if (existingBaseTypeModel is not null)
-                {
-                    var existingBaseTypeProperties = existingBaseTypeModel.InputModel.GetSelfAndBaseModels().SelectMany(m => m.Properties);
-                    properties = properties.Concat(existingBaseTypeProperties);
-                }
-                return properties.ToList();
-            }
-
-            return InputModel.Properties;
-        }
-
         protected ObjectTypeProperty CreateProperty(InputModelProperty property)
         {
             var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
@@ -542,7 +524,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             // We represent property being optional by making it nullable
             // Except in the case of collection where there is a special handling
             bool optionalViaNullability = !property.IsRequired &&
-                                          !property.Type.IsNullable &&
+                                          property.Type is not InputNullableType &&
                                           !propertyType.IsCollection;
 
             if (optionalViaNullability)
@@ -574,7 +556,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (isCollection)
             {
-                propertyShouldOmitSetter |= !property.Type.IsNullable;
+                propertyShouldOmitSetter |= property.Type is not InputNullableType;
             }
             else
             {
@@ -669,12 +651,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private CSharpType? CreateInheritedDictionaryType()
         {
-            if (InputModel.InheritedDictionaryType is not null)
+            if (InputModel.AdditionalProperties is not null)
             {
                 return new CSharpType(
                         _usage.HasFlag(InputModelTypeUsage.Input) ? typeof(IDictionary<,>) : typeof(IReadOnlyDictionary<,>),
                         typeof(string),
-                        _typeFactory.CreateType(InputModel.InheritedDictionaryType.ValueType));
+                        _typeFactory.CreateType(InputModel.AdditionalProperties));
             }
 
             return null;

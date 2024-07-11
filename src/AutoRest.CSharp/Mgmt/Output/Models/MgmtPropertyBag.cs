@@ -60,8 +60,8 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 Array.Empty<InputModelType>(),
                 null,
                 null,
-                null,
-                false)
+                new Dictionary<string, InputModelType>(),
+                null)
             {
                 IsPropertyBag = true
             };

@@ -10,10 +10,10 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "Versioning.MadeOptional.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -29,20 +29,17 @@
      "Description": "The version v2."
     }
    ],
-   "Namespace": "Versioning.MadeOptional",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
  "Models": [
   {
    "$id": "6",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "TestModel",
-   "Namespace": "Versioning.MadeOptional",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Versioning.MadeOptional.TestModel",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -52,8 +49,7 @@
      "Description": "",
      "Type": {
       "$id": "8",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -65,8 +61,7 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -84,6 +79,7 @@
      "$id": "12",
      "Name": "test",
      "ResourceName": "MadeOptional",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "13",
@@ -92,8 +88,7 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "14",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -129,8 +124,7 @@
        "NameInRequest": "param",
        "Type": {
         "$id": "17",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -165,8 +159,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "20",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -191,8 +184,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "23",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -244,7 +236,6 @@
    "Protocol": {
     "$id": "26"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "13"

@@ -10,10 +10,10 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "Versioning.Added.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -29,20 +29,18 @@
      "Description": "The version v2."
     }
    ],
-   "Namespace": "Versioning.Added",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   },
   {
    "$id": "6",
    "Kind": "enum",
    "Name": "EnumV1",
+   "CrossLanguageDefinitionId": "Versioning.Added.EnumV1",
    "ValueType": {
     "$id": "7",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -56,19 +54,17 @@
      "Value": "enumMemberV2"
     }
    ],
-   "Namespace": "Versioning.Added",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
    "$id": "10",
    "Kind": "enum",
    "Name": "EnumV2",
+   "CrossLanguageDefinitionId": "Versioning.Added.EnumV2",
    "ValueType": {
     "$id": "11",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -77,19 +73,16 @@
      "Value": "enumMember"
     }
    ],
-   "Namespace": "Versioning.Added",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   }
  ],
  "Models": [
   {
    "$id": "13",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelV1",
-   "Namespace": "Versioning.Added",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Versioning.Added.ModelV1",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -99,8 +92,7 @@
      "Description": "",
      "Type": {
       "$id": "15",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -123,21 +115,18 @@
      "Description": "",
      "Type": {
       "$id": "18",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "UnionV1",
+      "VariantTypes": [
        {
         "$id": "19",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        {
         "$id": "20",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        }
-      ],
-      "IsNullable": false
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -146,10 +135,9 @@
   },
   {
    "$id": "21",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelV2",
-   "Namespace": "Versioning.Added",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Versioning.Added.ModelV2",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -159,8 +147,7 @@
      "Description": "",
      "Type": {
       "$id": "23",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -183,21 +170,18 @@
      "Description": "",
      "Type": {
       "$id": "26",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "UnionV2",
+      "VariantTypes": [
        {
         "$id": "27",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        {
         "$id": "28",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        }
-      ],
-      "IsNullable": false
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -215,6 +199,7 @@
      "$id": "30",
      "Name": "v1",
      "ResourceName": "Added",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "31",
@@ -223,8 +208,7 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "32",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -260,8 +244,7 @@
        "NameInRequest": "header-v2",
        "Type": {
         "$id": "35",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -296,8 +279,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "38",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -322,8 +304,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "41",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -375,6 +356,7 @@
      "$id": "44",
      "Name": "v2",
      "ResourceName": "Added",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "31"
@@ -405,8 +387,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "47",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -431,8 +412,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "50",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -484,7 +464,6 @@
    "Protocol": {
     "$id": "53"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "31"
@@ -503,6 +482,7 @@
      "$id": "55",
      "Name": "v2InInterface",
      "ResourceName": "InterfaceV2",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "31"
@@ -533,8 +513,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "58",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -559,8 +538,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "61",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -612,7 +590,6 @@
    "Protocol": {
     "$id": "64"
    },
-   "Creatable": false,
    "Parent": "AddedClient",
    "Parameters": [
     {

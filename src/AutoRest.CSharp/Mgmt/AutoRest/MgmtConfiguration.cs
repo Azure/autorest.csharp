@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Input
             }
         }
 
-        public record AcronymMappingTarget(string Value, string? ParameterValue, string RawValue)
+        public record AcronymMappingTarget(string Value, string? ParameterValue = null, string? RawValue = null)
         {
             internal static AcronymMappingTarget Parse(string rawValue)
             {

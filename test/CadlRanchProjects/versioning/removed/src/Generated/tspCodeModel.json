@@ -10,10 +10,10 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "Versioning.Removed.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -29,20 +29,18 @@
      "Description": "The version v2."
     }
    ],
-   "Namespace": "Versioning.Removed",
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   },
   {
    "$id": "6",
    "Kind": "enum",
    "Name": "EnumV2",
+   "CrossLanguageDefinitionId": "Versioning.Removed.EnumV2",
    "ValueType": {
     "$id": "7",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -51,19 +49,16 @@
      "Value": "enumMemberV2"
     }
    ],
-   "Namespace": "Versioning.Removed",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   }
  ],
  "Models": [
   {
    "$id": "9",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelV2",
-   "Namespace": "Versioning.Removed",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "Versioning.Removed.ModelV2",
    "Usage": "RoundTrip",
    "Properties": [
     {
@@ -73,8 +68,7 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -97,21 +91,18 @@
      "Description": "",
      "Type": {
       "$id": "14",
-      "Kind": "Union",
-      "Name": "Union",
-      "UnionItemTypes": [
+      "Kind": "union",
+      "Name": "UnionV2",
+      "VariantTypes": [
        {
         "$id": "15",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        {
         "$id": "16",
-        "Kind": "float32",
-        "IsNullable": false
+        "Kind": "float32"
        }
-      ],
-      "IsNullable": false
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -129,6 +120,7 @@
      "$id": "18",
      "Name": "v2",
      "ResourceName": "Removed",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$id": "19",
@@ -137,8 +129,7 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "20",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -191,8 +182,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "24",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -217,8 +207,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "27",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -270,7 +259,6 @@
    "Protocol": {
     "$id": "30"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "19"

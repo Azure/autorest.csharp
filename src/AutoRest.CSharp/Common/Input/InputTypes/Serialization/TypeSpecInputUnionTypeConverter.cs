@@ -3,10 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -27,58 +25,31 @@ namespace AutoRest.CSharp.Common.Input
         public static InputUnionType CreateInputUnionType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null;
-            bool isNullable = false;
-            var unionItemTypes = new List<InputType>();
+            var variantTypes = new List<InputType>();
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputUnionType.Name), ref name)
-                    || reader.TryReadBoolean(nameof(InputUnionType.IsNullable), ref isNullable);
+                    || reader.TryReadWithConverter(nameof(InputUnionType.VariantTypes), options, ref variantTypes);
 
-                if (isKnownProperty)
-                {
-                    continue;
-                }
-
-                if (reader.GetString() == nameof(InputUnionType.UnionItemTypes))
-                {
-                    reader.Read();
-                    CreateUnionItemTypes(ref reader, unionItemTypes, options);
-                }
-                else
+                if (!isKnownProperty)
                 {
                     reader.SkipProperty();
                 }
             }
 
-            name = name ?? throw new JsonException($"{nameof(InputLiteralType)} must have a name.");
-            if (unionItemTypes == null || unionItemTypes.Count == 0)
+            name = name ?? throw new JsonException($"{nameof(InputUnionType)} must have a name.");
+            if (variantTypes == null || variantTypes.Count == 0)
             {
-                throw new JsonException("Union must have a least one union type");
+                throw new JsonException("Union must have variant types.");
             }
 
-            var unionType = new InputUnionType(name, unionItemTypes, isNullable);
+            var unionType = new InputUnionType(name, variantTypes);
             if (id != null)
             {
                 resolver.AddReference(id, unionType);
             }
             return unionType;
-        }
-
-        private static void CreateUnionItemTypes(ref Utf8JsonReader reader, ICollection<InputType> itemTypes, JsonSerializerOptions options)
-        {
-            if (reader.TokenType != JsonTokenType.StartArray)
-            {
-                throw new JsonException();
-            }
-            reader.Read();
-
-            while (reader.TokenType != JsonTokenType.EndArray)
-            {
-                var type = reader.ReadWithConverter<InputType>(options);
-                itemTypes.Add(type ?? throw new JsonException($"null {nameof(InputType)} isn't allowed"));
-            }
-            reader.Read();
         }
     }
 }

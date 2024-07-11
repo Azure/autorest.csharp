@@ -9,10 +9,10 @@
    "$id": "2",
    "Kind": "enum",
    "Name": "APIVersion",
+   "CrossLanguageDefinitionId": "AnomalyDetector.APIVersion",
    "ValueType": {
     "$id": "3",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -21,19 +21,17 @@
      "Value": "v1.1"
     }
    ],
-   "Namespace": "AnomalyDetector",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "None"
   },
   {
    "$id": "5",
    "Kind": "enum",
    "Name": "TimeGranularity",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.TimeGranularity",
    "ValueType": {
     "$id": "6",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -82,20 +80,18 @@
      "Value": "none"
     }
    ],
-   "Namespace": "AnomalyDetector.Univariate",
    "Description": "the time granularity of the data points.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Input"
   },
   {
    "$id": "16",
    "Kind": "enum",
    "Name": "ImputeMode",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.ImputeMode",
    "ValueType": {
     "$id": "17",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -129,20 +125,18 @@
      "Value": "notFill"
     }
    ],
-   "Namespace": "AnomalyDetector.Univariate",
    "Description": "The impute mode.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "Input"
   },
   {
    "$id": "24",
    "Kind": "enum",
    "Name": "MultivariateBatchDetectionStatus",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionStatus",
    "ValueType": {
     "$id": "25",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -166,20 +160,18 @@
      "Value": "FAILED"
     }
    ],
-   "Namespace": "AnomalyDetector.Multivariate",
    "Description": "The batch detection status.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Output"
   },
   {
    "$id": "30",
    "Kind": "enum",
    "Name": "DataSchema",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.DataSchema",
    "ValueType": {
     "$id": "31",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -195,20 +187,18 @@
      "Description": "MultiTable means that your input data are separated in multiple CSV files, in each file containing one 'timestamp' column and one 'variable' column, and the CSV file name should indicate the name of the variable. The default DataSchema is OneTable."
     }
    ],
-   "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
    "$id": "34",
    "Kind": "enum",
    "Name": "AlignMode",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AlignMode",
    "ValueType": {
     "$id": "35",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -222,20 +212,18 @@
      "Value": "Outer"
     }
    ],
-   "Namespace": "AnomalyDetector.Multivariate",
    "Description": "The alignment mode.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
    "$id": "38",
    "Kind": "enum",
    "Name": "FillNAMethod",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.FillNAMethod",
    "ValueType": {
     "$id": "39",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -264,20 +252,18 @@
      "Value": "Fixed"
     }
    ],
-   "Namespace": "AnomalyDetector.Multivariate",
    "Description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.",
    "IsExtensible": true,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
    "$id": "45",
    "Kind": "enum",
    "Name": "ModelStatus",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelStatus",
    "ValueType": {
     "$id": "46",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -301,20 +287,18 @@
      "Value": "FAILED"
     }
    ],
-   "Namespace": "AnomalyDetector.Multivariate",
    "Description": "the model status.",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "RoundTrip"
   },
   {
    "$id": "51",
    "Kind": "enum",
    "Name": "AnomalyDetectorErrorCodes",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.AnomalyDetectorErrorCodes",
    "ValueType": {
     "$id": "52",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -373,19 +357,17 @@
      "Value": "InvalidImputeFixedValue"
     }
    ],
-   "Namespace": "AnomalyDetector.Univariate",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "Output"
   },
   {
    "$id": "64",
    "Kind": "enum",
    "Name": "Versions",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Versions",
    "ValueType": {
     "$id": "65",
-    "Kind": "string",
-    "IsNullable": false
+    "Kind": "string"
    },
    "Values": [
     {
@@ -394,21 +376,18 @@
      "Value": "v1.1"
     }
    ],
-   "Namespace": "AnomalyDetector",
    "IsExtensible": false,
-   "IsNullable": false,
    "Usage": "None"
   }
  ],
  "Models": [
   {
    "$id": "67",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnivariateDetectionOptions",
-   "Namespace": "AnomalyDetector.Univariate",
-   "Description": "The request of entire or last anomaly detection.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateDetectionOptions",
    "Usage": "Input",
+   "Description": "The request of entire or last anomaly detection.",
    "Properties": [
     {
      "$id": "68",
@@ -417,16 +396,15 @@
      "Description": "Time series data points. Points should be sorted by timestamp in ascending\norder to match the anomaly detection result. If the data is not sorted\ncorrectly or there is duplicated timestamp, the API will not work. In such\ncase, an error message will be returned.",
      "Type": {
       "$id": "69",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "Name": "ArrayTimeSeriesPoint",
+      "ValueType": {
        "$id": "70",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "TimeSeriesPoint",
-       "Namespace": "AnomalyDetector.Univariate",
-       "Description": "The definition of input timeseries points.",
-       "IsNullable": false,
+       "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.TimeSeriesPoint",
        "Usage": "Input",
+       "Description": "The definition of input timeseries points.",
        "Properties": [
         {
          "$id": "71",
@@ -436,12 +414,10 @@
          "Type": {
           "$id": "72",
           "Kind": "utcDateTime",
-          "IsNullable": false,
           "Encode": "rfc3339",
           "WireType": {
            "$id": "73",
-           "Kind": "string",
-           "IsNullable": false
+           "Kind": "string"
           }
          },
          "IsRequired": false,
@@ -454,15 +430,14 @@
          "Description": "The measurement of that point, should be float.",
          "Type": {
           "$id": "75",
-          "Kind": "float32",
-          "IsNullable": false
+          "Kind": "float32"
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -485,8 +460,7 @@
      "Description": "Custom Interval is used to set non-standard time interval, for example, if the\nseries is 5 minutes, request can be set as {\"granularity\":\"minutely\",\n\"customInterval\":5}.",
      "Type": {
       "$id": "78",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -498,8 +472,7 @@
      "Description": "Optional argument, periodic value of a time series. If the value is null or\ndoes not present, the API will determine the period automatically.",
      "Type": {
       "$id": "80",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -511,8 +484,7 @@
      "Description": "Optional argument, advanced model parameter, max anomaly ratio in a time series.",
      "Type": {
       "$id": "82",
-      "Kind": "float32",
-      "IsNullable": false
+      "Kind": "float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -524,8 +496,7 @@
      "Description": "Optional argument, advanced model parameter, between 0-99, the lower the value\nis, the larger the margin value will be which means less anomalies will be\naccepted.",
      "Type": {
       "$id": "84",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -548,8 +519,7 @@
      "Description": "Used to specify the value to fill, it's used when granularity is not \"none\"\nand imputeMode is \"fixed\".",
      "Type": {
       "$id": "87",
-      "Kind": "float32",
-      "IsNullable": false
+      "Kind": "float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -561,12 +531,11 @@
   },
   {
    "$id": "88",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnivariateEntireDetectionResult",
-   "Namespace": "AnomalyDetector.Univariate",
-   "Description": "The response of entire anomaly detection.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateEntireDetectionResult",
    "Usage": "Output",
+   "Description": "The response of entire anomaly detection.",
    "Properties": [
     {
      "$id": "89",
@@ -575,8 +544,7 @@
      "Description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "Type": {
       "$id": "90",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -588,14 +556,13 @@
      "Description": "ExpectedValues contain expected value for each input point. The index of the\narray is consistent with the input series.",
      "Type": {
       "$id": "92",
-      "Kind": "Array",
+      "Kind": "array",
       "Name": "Array",
-      "ElementType": {
+      "ValueType": {
        "$id": "93",
-       "Kind": "float32",
-       "IsNullable": false
+       "Kind": "float32"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -607,14 +574,13 @@
      "Description": "UpperMargins contain upper margin of each input point. UpperMargin is used to\ncalculate upperBoundary, which equals to expectedValue + (100 -\nmarginScale)*upperMargin. Anomalies in response can be filtered by\nupperBoundary and lowerBoundary. By adjusting marginScale value, less\nsignificant anomalies can be filtered in client side. The index of the array is\nconsistent with the input series.",
      "Type": {
       "$id": "95",
-      "Kind": "Array",
+      "Kind": "array",
       "Name": "Array",
-      "ElementType": {
+      "ValueType": {
        "$id": "96",
-       "Kind": "float32",
-       "IsNullable": false
+       "Kind": "float32"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -626,14 +592,13 @@
      "Description": "LowerMargins contain lower margin of each input point. LowerMargin is used to\ncalculate lowerBoundary, which equals to expectedValue - (100 -\nmarginScale)*lowerMargin. Points between the boundary can be marked as normal\nones in client side. The index of the array is consistent with the input\nseries.",
      "Type": {
       "$id": "98",
-      "Kind": "Array",
+      "Kind": "array",
       "Name": "Array",
-      "ElementType": {
+      "ValueType": {
        "$id": "99",
-       "Kind": "float32",
-       "IsNullable": false
+       "Kind": "float32"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -645,14 +610,13 @@
      "Description": "IsAnomaly contains anomaly properties for each input point. True means an\nanomaly either negative or positive has been detected. The index of the array\nis consistent with the input series.",
      "Type": {
       "$id": "101",
-      "Kind": "Array",
+      "Kind": "array",
       "Name": "Array",
-      "ElementType": {
+      "ValueType": {
        "$id": "102",
-       "Kind": "boolean",
-       "IsNullable": false
+       "Kind": "boolean"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -664,14 +628,13 @@
      "Description": "IsNegativeAnomaly contains anomaly status in negative direction for each input\npoint. True means a negative anomaly has been detected. A negative anomaly\nmeans the point is detected as an anomaly and its real value is smaller than\nthe expected one. The index of the array is consistent with the input series.",
      "Type": {
       "$id": "104",
-      "Kind": "Array",
+      "Kind": "array",
       "Name": "Array",
-      "ElementType": {
+      "ValueType": {
        "$id": "105",
-       "Kind": "boolean",
-       "IsNullable": false
+       "Kind": "boolean"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -683,14 +646,13 @@
      "Description": "IsPositiveAnomaly contain anomaly status in positive direction for each input\npoint. True means a positive anomaly has been detected. A positive anomaly\nmeans the point is detected as an anomaly and its real value is larger than the\nexpected one. The index of the array is consistent with the input series.",
      "Type": {
       "$id": "107",
-      "Kind": "Array",
+      "Kind": "array",
       "Name": "Array",
-      "ElementType": {
+      "ValueType": {
        "$id": "108",
-       "Kind": "boolean",
-       "IsNullable": false
+       "Kind": "boolean"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -702,14 +664,13 @@
      "Description": "The severity score for each input point. The larger the value is, the more\nsever the anomaly is. For normal points, the \"severity\" is always 0.",
      "Type": {
       "$id": "110",
-      "Kind": "Array",
+      "Kind": "array",
       "Name": "Array",
-      "ElementType": {
+      "ValueType": {
        "$id": "111",
-       "Kind": "float32",
-       "IsNullable": false
+       "Kind": "float32"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -718,12 +679,11 @@
   },
   {
    "$id": "112",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnivariateLastDetectionResult",
-   "Namespace": "AnomalyDetector.Univariate",
-   "Description": "The response of last anomaly detection.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateLastDetectionResult",
    "Usage": "Output",
+   "Description": "The response of last anomaly detection.",
    "Properties": [
     {
      "$id": "113",
@@ -732,8 +692,7 @@
      "Description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "Type": {
       "$id": "114",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -745,8 +704,7 @@
      "Description": "Suggested input series points needed for detecting the latest point.",
      "Type": {
       "$id": "116",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -758,8 +716,7 @@
      "Description": "Expected value of the latest point.",
      "Type": {
       "$id": "118",
-      "Kind": "float32",
-      "IsNullable": false
+      "Kind": "float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -771,8 +728,7 @@
      "Description": "Upper margin of the latest point. UpperMargin is used to calculate\nupperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin.\nIf the value of latest point is between upperBoundary and lowerBoundary, it\nshould be treated as normal value. By adjusting marginScale value, anomaly\nstatus of latest point can be changed.",
      "Type": {
       "$id": "120",
-      "Kind": "float32",
-      "IsNullable": false
+      "Kind": "float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -784,8 +740,7 @@
      "Description": "Lower margin of the latest point. LowerMargin is used to calculate\nlowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin.\n",
      "Type": {
       "$id": "122",
-      "Kind": "float32",
-      "IsNullable": false
+      "Kind": "float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -797,8 +752,7 @@
      "Description": "Anomaly status of the latest point, true means the latest point is an anomaly\neither in negative direction or positive direction.",
      "Type": {
       "$id": "124",
-      "Kind": "boolean",
-      "IsNullable": false
+      "Kind": "boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -810,8 +764,7 @@
      "Description": "Anomaly status in negative direction of the latest point. True means the latest\npoint is an anomaly and its real value is smaller than the expected one.",
      "Type": {
       "$id": "126",
-      "Kind": "boolean",
-      "IsNullable": false
+      "Kind": "boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -823,8 +776,7 @@
      "Description": "Anomaly status in positive direction of the latest point. True means the latest\npoint is an anomaly and its real value is larger than the expected one.",
      "Type": {
       "$id": "128",
-      "Kind": "boolean",
-      "IsNullable": false
+      "Kind": "boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -836,8 +788,7 @@
      "Description": "The severity score for the last input point. The larger the value is, the more\nsever the anomaly is. For normal points, the \"severity\" is always 0.",
      "Type": {
       "$id": "130",
-      "Kind": "float32",
-      "IsNullable": false
+      "Kind": "float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -846,12 +797,11 @@
   },
   {
    "$id": "131",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnivariateChangePointDetectionOptions",
-   "Namespace": "AnomalyDetector.Univariate",
-   "Description": "The request of change point detection.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateChangePointDetectionOptions",
    "Usage": "Input",
+   "Description": "The request of change point detection.",
    "Properties": [
     {
      "$id": "132",
@@ -860,12 +810,12 @@
      "Description": "Time series data points. Points should be sorted by timestamp in ascending\norder to match the change point detection result.",
      "Type": {
       "$id": "133",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "Name": "ArrayTimeSeriesPoint",
+      "ValueType": {
        "$ref": "70"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -888,8 +838,7 @@
      "Description": "Custom Interval is used to set non-standard time interval, for example, if the\nseries is 5 minutes, request can be set as {\"granularity\":\"minutely\",\n\"customInterval\":5}.",
      "Type": {
       "$id": "136",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -901,8 +850,7 @@
      "Description": "Optional argument, periodic value of a time series. If the value is null or\ndoes not present, the API will determine the period automatically.",
      "Type": {
       "$id": "138",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -914,8 +862,7 @@
      "Description": "Optional argument, advanced model parameter, a default stableTrendWindow will\nbe used in detection.",
      "Type": {
       "$id": "140",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -927,8 +874,7 @@
      "Description": "Optional argument, advanced model parameter, between 0.0-1.0, the lower the\nvalue is, the larger the trend error will be which means less change point will\nbe accepted.",
      "Type": {
       "$id": "142",
-      "Kind": "float32",
-      "IsNullable": false
+      "Kind": "float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -937,12 +883,11 @@
   },
   {
    "$id": "143",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "UnivariateChangePointDetectionResult",
-   "Namespace": "AnomalyDetector.Univariate",
-   "Description": "The response of change point detection.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateChangePointDetectionResult",
    "Usage": "Output",
+   "Description": "The response of change point detection.",
    "Properties": [
     {
      "$id": "144",
@@ -951,8 +896,7 @@
      "Description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "Type": {
       "$id": "145",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": true
@@ -964,14 +908,13 @@
      "Description": "isChangePoint contains change point properties for each input point. True means\nan anomaly either negative or positive has been detected. The index of the\narray is consistent with the input series.",
      "Type": {
       "$id": "147",
-      "Kind": "Array",
+      "Kind": "array",
       "Name": "Array",
-      "ElementType": {
+      "ValueType": {
        "$id": "148",
-       "Kind": "boolean",
-       "IsNullable": false
+       "Kind": "boolean"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -983,14 +926,13 @@
      "Description": "the change point confidence of each point",
      "Type": {
       "$id": "150",
-      "Kind": "Array",
+      "Kind": "array",
       "Name": "Array",
-      "ElementType": {
+      "ValueType": {
        "$id": "151",
-       "Kind": "float32",
-       "IsNullable": false
+       "Kind": "float32"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -999,12 +941,11 @@
   },
   {
    "$id": "152",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "MultivariateDetectionResult",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "Detection results for the given resultId.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateDetectionResult",
    "Usage": "Output",
+   "Description": "Detection results for the given resultId.",
    "Properties": [
     {
      "$id": "153",
@@ -1014,7 +955,6 @@
      "Type": {
       "$id": "154",
       "Kind": "uuid",
-      "IsNullable": false,
       "Encode": "string"
      },
      "IsRequired": true,
@@ -1027,12 +967,11 @@
      "Description": "Multivariate anomaly detection status.",
      "Type": {
       "$id": "156",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "MultivariateBatchDetectionResultSummary",
-      "Namespace": "AnomalyDetector.Multivariate",
-      "Description": "Multivariate anomaly detection status.",
-      "IsNullable": false,
+      "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionResultSummary",
       "Usage": "Output",
+      "Description": "Multivariate anomaly detection status.",
       "Properties": [
        {
         "$id": "157",
@@ -1052,16 +991,15 @@
         "Description": "Error message when detection is failed.",
         "Type": {
          "$id": "159",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "Name": "ArrayErrorResponse",
+         "ValueType": {
           "$id": "160",
-          "Kind": "Model",
+          "Kind": "model",
           "Name": "ErrorResponse",
-          "Namespace": "AnomalyDetector.Multivariate",
+          "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ErrorResponse",
+          "Usage": "Output",
           "Description": "ErrorResponse contains code and message that shows the error information.",
-          "IsNullable": false,
-          "Usage": "RoundTrip",
           "Properties": [
            {
             "$id": "161",
@@ -1070,8 +1008,7 @@
             "Description": "The error code.",
             "Type": {
              "$id": "162",
-             "Kind": "string",
-             "IsNullable": false
+             "Kind": "string"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -1083,15 +1020,14 @@
             "Description": "The message explaining the error reported by the service.",
             "Type": {
              "$id": "164",
-             "Kind": "string",
-             "IsNullable": false
+             "Kind": "string"
             },
             "IsRequired": true,
             "IsReadOnly": false
            }
           ]
          },
-         "IsNullable": false
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -1103,16 +1039,15 @@
         "Description": "Variable Status.",
         "Type": {
          "$id": "166",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "Name": "ArrayVariableState",
+         "ValueType": {
           "$id": "167",
-          "Kind": "Model",
+          "Kind": "model",
           "Name": "VariableState",
-          "Namespace": "AnomalyDetector.Multivariate",
-          "Description": "Variable Status.",
-          "IsNullable": false,
+          "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.VariableState",
           "Usage": "RoundTrip",
+          "Description": "Variable Status.",
           "Properties": [
            {
             "$id": "168",
@@ -1121,8 +1056,7 @@
             "Description": "Variable name in variable states.",
             "Type": {
              "$id": "169",
-             "Kind": "string",
-             "IsNullable": false
+             "Kind": "string"
             },
             "IsRequired": false,
             "IsReadOnly": false
@@ -1134,8 +1068,7 @@
             "Description": "Proportion of missing values that need to be filled by fillNAMethod.",
             "Type": {
              "$id": "171",
-             "Kind": "float32",
-             "IsNullable": false
+             "Kind": "float32"
             },
             "IsRequired": false,
             "IsReadOnly": false
@@ -1147,8 +1080,7 @@
             "Description": "Number of effective data points before applying fillNAMethod.",
             "Type": {
              "$id": "173",
-             "Kind": "int32",
-             "IsNullable": false
+             "Kind": "int32"
             },
             "IsRequired": false,
             "IsReadOnly": false
@@ -1161,12 +1093,10 @@
             "Type": {
              "$id": "175",
              "Kind": "utcDateTime",
-             "IsNullable": false,
              "Encode": "rfc3339",
              "WireType": {
               "$id": "176",
-              "Kind": "string",
-              "IsNullable": false
+              "Kind": "string"
              }
             },
             "IsRequired": false,
@@ -1180,12 +1110,10 @@
             "Type": {
              "$id": "178",
              "Kind": "utcDateTime",
-             "IsNullable": false,
              "Encode": "rfc3339",
              "WireType": {
               "$id": "179",
-              "Kind": "string",
-              "IsNullable": false
+              "Kind": "string"
              }
             },
             "IsRequired": false,
@@ -1193,7 +1121,7 @@
            }
           ]
          },
-         "IsNullable": false
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -1205,12 +1133,11 @@
         "Description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
         "Type": {
          "$id": "181",
-         "Kind": "Model",
+         "Kind": "model",
          "Name": "MultivariateBatchDetectionOptions",
-         "Namespace": "AnomalyDetector.Multivariate",
-         "Description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
-         "IsNullable": false,
+         "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionOptions",
          "Usage": "RoundTrip",
+         "Description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
          "Properties": [
           {
            "$id": "182",
@@ -1219,8 +1146,7 @@
            "Description": "Source link to the input data to indicate an accessible Azure storage Uri,\neither pointed to an Azure blob storage folder, or pointed to a CSV file in\nAzure blob storage based on you data schema selection. The data schema should\nbe exactly the same with those used in the training phase.",
            "Type": {
             "$id": "183",
-            "Kind": "url",
-            "IsNullable": false
+            "Kind": "url"
            },
            "IsRequired": true,
            "IsReadOnly": false
@@ -1232,8 +1158,7 @@
            "Description": "An optional field, which is used to specify the number of top contributed\nvariables for one anomalous timestamp in the response. The default number is\n10.",
            "Type": {
             "$id": "185",
-            "Kind": "int32",
-            "IsNullable": false
+            "Kind": "int32"
            },
            "IsRequired": true,
            "IsReadOnly": false
@@ -1246,12 +1171,10 @@
            "Type": {
             "$id": "187",
             "Kind": "utcDateTime",
-            "IsNullable": false,
             "Encode": "rfc3339",
             "WireType": {
              "$id": "188",
-             "Kind": "string",
-             "IsNullable": false
+             "Kind": "string"
             }
            },
            "IsRequired": true,
@@ -1265,12 +1188,10 @@
            "Type": {
             "$id": "190",
             "Kind": "utcDateTime",
-            "IsNullable": false,
             "Encode": "rfc3339",
             "WireType": {
              "$id": "191",
-             "Kind": "string",
-             "IsNullable": false
+             "Kind": "string"
             }
            },
            "IsRequired": true,
@@ -1293,16 +1214,15 @@
      "Description": "Detection result for each timestamp.",
      "Type": {
       "$id": "193",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "Name": "ArrayAnomalyState",
+      "ValueType": {
        "$id": "194",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "AnomalyState",
-       "Namespace": "AnomalyDetector.Multivariate",
-       "Description": "Anomaly status and information.",
-       "IsNullable": false,
+       "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyState",
        "Usage": "Output",
+       "Description": "Anomaly status and information.",
        "Properties": [
         {
          "$id": "195",
@@ -1312,12 +1232,10 @@
          "Type": {
           "$id": "196",
           "Kind": "utcDateTime",
-          "IsNullable": false,
           "Encode": "rfc3339",
           "WireType": {
            "$id": "197",
-           "Kind": "string",
-           "IsNullable": false
+           "Kind": "string"
           }
          },
          "IsRequired": true,
@@ -1330,12 +1248,11 @@
          "Description": "The detailed value of this anomalous timestamp.",
          "Type": {
           "$id": "199",
-          "Kind": "Model",
+          "Kind": "model",
           "Name": "AnomalyValue",
-          "Namespace": "AnomalyDetector.Multivariate",
-          "Description": "Detailed information of the anomalous timestamp.",
-          "IsNullable": false,
+          "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyValue",
           "Usage": "Output",
+          "Description": "Detailed information of the anomalous timestamp.",
           "Properties": [
            {
             "$id": "200",
@@ -1344,8 +1261,7 @@
             "Description": "True if an anomaly is detected at the current timestamp.",
             "Type": {
              "$id": "201",
-             "Kind": "boolean",
-             "IsNullable": false
+             "Kind": "boolean"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -1357,8 +1273,7 @@
             "Description": "Indicates the significance of the anomaly. The higher the severity, the more\nsignificant the anomaly is.",
             "Type": {
              "$id": "203",
-             "Kind": "float32",
-             "IsNullable": false
+             "Kind": "float32"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -1370,8 +1285,7 @@
             "Description": "Raw anomaly score of severity, will help indicate the degree of abnormality as\nwell.",
             "Type": {
              "$id": "205",
-             "Kind": "float32",
-             "IsNullable": false
+             "Kind": "float32"
             },
             "IsRequired": true,
             "IsReadOnly": false
@@ -1383,16 +1297,15 @@
             "Description": "Interpretation of this anomalous timestamp.",
             "Type": {
              "$id": "207",
-             "Kind": "Array",
-             "Name": "Array",
-             "ElementType": {
+             "Kind": "array",
+             "Name": "ArrayAnomalyInterpretation",
+             "ValueType": {
               "$id": "208",
-              "Kind": "Model",
+              "Kind": "model",
               "Name": "AnomalyInterpretation",
-              "Namespace": "AnomalyDetector.Multivariate",
-              "Description": "Interpretation of the anomalous timestamp.",
-              "IsNullable": false,
+              "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyInterpretation",
               "Usage": "Output",
+              "Description": "Interpretation of the anomalous timestamp.",
               "Properties": [
                {
                 "$id": "209",
@@ -1401,8 +1314,7 @@
                 "Description": "Variable.",
                 "Type": {
                  "$id": "210",
-                 "Kind": "string",
-                 "IsNullable": false
+                 "Kind": "string"
                 },
                 "IsRequired": false,
                 "IsReadOnly": false
@@ -1414,8 +1326,7 @@
                 "Description": "This score shows the percentage contributing to the anomalous timestamp. A\nnumber between 0 and 1.",
                 "Type": {
                  "$id": "212",
-                 "Kind": "float32",
-                 "IsNullable": false
+                 "Kind": "float32"
                 },
                 "IsRequired": false,
                 "IsReadOnly": false
@@ -1427,12 +1338,11 @@
                 "Description": "Correlation changes among the anomalous variables",
                 "Type": {
                  "$id": "214",
-                 "Kind": "Model",
+                 "Kind": "model",
                  "Name": "CorrelationChanges",
-                 "Namespace": "AnomalyDetector.Multivariate",
-                 "Description": "Correlation changes among the anomalous variables",
-                 "IsNullable": false,
+                 "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.CorrelationChanges",
                  "Usage": "Output",
+                 "Description": "Correlation changes among the anomalous variables",
                  "Properties": [
                   {
                    "$id": "215",
@@ -1441,14 +1351,13 @@
                    "Description": "The correlated variables that have correlation changes under an anomaly.",
                    "Type": {
                     "$id": "216",
-                    "Kind": "Array",
+                    "Kind": "array",
                     "Name": "Array",
-                    "ElementType": {
+                    "ValueType": {
                      "$id": "217",
-                     "Kind": "string",
-                     "IsNullable": false
+                     "Kind": "string"
                     },
-                    "IsNullable": false
+                    "CrossLanguageDefinitionId": "TypeSpec.Array"
                    },
                    "IsRequired": false,
                    "IsReadOnly": false
@@ -1460,7 +1369,7 @@
                }
               ]
              },
-             "IsNullable": false
+             "CrossLanguageDefinitionId": "TypeSpec.Array"
             },
             "IsRequired": false,
             "IsReadOnly": false
@@ -1477,19 +1386,19 @@
          "Description": "Error message for the current timestamp.",
          "Type": {
           "$id": "219",
-          "Kind": "Array",
-          "Name": "Array",
-          "ElementType": {
+          "Kind": "array",
+          "Name": "ArrayErrorResponse",
+          "ValueType": {
            "$ref": "160"
           },
-          "IsNullable": false
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          },
          "IsRequired": false,
          "IsReadOnly": false
         }
        ]
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1522,12 +1431,11 @@
   },
   {
    "$id": "220",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelInfo",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "Training result of a model including its status, errors and diagnostics\ninformation.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelInfo",
    "Usage": "RoundTrip",
+   "Description": "Training result of a model including its status, errors and diagnostics\ninformation.",
    "Properties": [
     {
      "$id": "221",
@@ -1536,8 +1444,7 @@
      "Description": "Source link to the input data to indicate an accessible Azure storage Uri,\neither pointed to an Azure blob storage folder, or pointed to a CSV file in\nAzure blob storage based on you data schema selection. ",
      "Type": {
       "$id": "222",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1561,12 +1468,10 @@
      "Type": {
       "$id": "225",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "226",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -1580,12 +1485,10 @@
      "Type": {
       "$id": "228",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "229",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -1598,8 +1501,7 @@
      "Description": "An optional field. The display name of the model whose maximum length is 24\ncharacters.",
      "Type": {
       "$id": "231",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1611,8 +1513,7 @@
      "Description": "An optional field, indicating how many previous timestamps will be used to\ndetect whether the timestamp is anomaly or not. ",
      "Type": {
       "$id": "233",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1624,12 +1525,11 @@
      "Description": "An optional field, indicating the manner to align multiple variables.",
      "Type": {
       "$id": "235",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "AlignPolicy",
-      "Namespace": "AnomalyDetector.Multivariate",
-      "Description": "An optional field, indicating the manner to align multiple variables.",
-      "IsNullable": false,
+      "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AlignPolicy",
       "Usage": "RoundTrip",
+      "Description": "An optional field, indicating the manner to align multiple variables.",
       "Properties": [
        {
         "$id": "236",
@@ -1660,8 +1560,7 @@
         "Description": "An optional field. Required when fillNAMethod is Fixed.",
         "Type": {
          "$id": "239",
-         "Kind": "float32",
-         "IsNullable": false
+         "Kind": "float32"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -1689,12 +1588,12 @@
      "Description": "Error messages when failed to create a model.",
      "Type": {
       "$id": "242",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "Name": "ArrayErrorResponse",
+      "ValueType": {
        "$ref": "160"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": true
@@ -1706,12 +1605,11 @@
      "Description": "Diagnostics information to help inspect the states of model or variable.",
      "Type": {
       "$id": "244",
-      "Kind": "Model",
+      "Kind": "model",
       "Name": "DiagnosticsInfo",
-      "Namespace": "AnomalyDetector.Multivariate",
-      "Description": "Diagnostics information to help inspect the states of model or variable.",
-      "IsNullable": false,
+      "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.DiagnosticsInfo",
       "Usage": "RoundTrip",
+      "Description": "Diagnostics information to help inspect the states of model or variable.",
       "Properties": [
        {
         "$id": "245",
@@ -1720,12 +1618,11 @@
         "Description": "Model status.",
         "Type": {
          "$id": "246",
-         "Kind": "Model",
+         "Kind": "model",
          "Name": "ModelState",
-         "Namespace": "AnomalyDetector.Multivariate",
-         "Description": "Model status.",
-         "IsNullable": false,
+         "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelState",
          "Usage": "RoundTrip",
+         "Description": "Model status.",
          "Properties": [
           {
            "$id": "247",
@@ -1734,14 +1631,13 @@
            "Description": "This indicates the number of passes of the entire training dataset the\nalgorithm has completed.",
            "Type": {
             "$id": "248",
-            "Kind": "Array",
+            "Kind": "array",
             "Name": "Array",
-            "ElementType": {
+            "ValueType": {
              "$id": "249",
-             "Kind": "int32",
-             "IsNullable": false
+             "Kind": "int32"
             },
-            "IsNullable": false
+            "CrossLanguageDefinitionId": "TypeSpec.Array"
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -1753,14 +1649,13 @@
            "Description": "List of metrics used to assess how the model fits the training data for each\nepoch.",
            "Type": {
             "$id": "251",
-            "Kind": "Array",
+            "Kind": "array",
             "Name": "Array",
-            "ElementType": {
+            "ValueType": {
              "$id": "252",
-             "Kind": "float32",
-             "IsNullable": false
+             "Kind": "float32"
             },
-            "IsNullable": false
+            "CrossLanguageDefinitionId": "TypeSpec.Array"
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -1772,14 +1667,13 @@
            "Description": "List of metrics used to assess how the model fits the validation set for each\nepoch.",
            "Type": {
             "$id": "254",
-            "Kind": "Array",
+            "Kind": "array",
             "Name": "Array",
-            "ElementType": {
+            "ValueType": {
              "$id": "255",
-             "Kind": "float32",
-             "IsNullable": false
+             "Kind": "float32"
             },
-            "IsNullable": false
+            "CrossLanguageDefinitionId": "TypeSpec.Array"
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -1791,14 +1685,13 @@
            "Description": "Latency for each epoch. ",
            "Type": {
             "$id": "257",
-            "Kind": "Array",
+            "Kind": "array",
             "Name": "Array",
-            "ElementType": {
+            "ValueType": {
              "$id": "258",
-             "Kind": "float32",
-             "IsNullable": false
+             "Kind": "float32"
             },
-            "IsNullable": false
+            "CrossLanguageDefinitionId": "TypeSpec.Array"
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -1815,12 +1708,12 @@
         "Description": "Variable Status.",
         "Type": {
          "$id": "260",
-         "Kind": "Array",
-         "Name": "Array",
-         "ElementType": {
+         "Kind": "array",
+         "Name": "ArrayVariableState",
+         "ValueType": {
           "$ref": "167"
          },
-         "IsNullable": false
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -1843,12 +1736,11 @@
   },
   {
    "$id": "261",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "AnomalyDetectionModel",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "Response of getting a model.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyDetectionModel",
    "Usage": "Output",
+   "Description": "Response of getting a model.",
    "Properties": [
     {
      "$id": "262",
@@ -1858,7 +1750,6 @@
      "Type": {
       "$id": "263",
       "Kind": "uuid",
-      "IsNullable": false,
       "Encode": "string"
      },
      "IsRequired": true,
@@ -1872,12 +1763,10 @@
      "Type": {
       "$id": "265",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "266",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -1891,12 +1780,10 @@
      "Type": {
       "$id": "268",
       "Kind": "utcDateTime",
-      "IsNullable": false,
       "Encode": "rfc3339",
       "WireType": {
        "$id": "269",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       }
      },
      "IsRequired": true,
@@ -1917,12 +1804,11 @@
   },
   {
    "$id": "271",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "ModelList",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "Response of listing models.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelList",
    "Usage": "Output",
+   "Description": "Response of listing models.",
    "Properties": [
     {
      "$id": "272",
@@ -1931,12 +1817,12 @@
      "Description": "List of models.",
      "Type": {
       "$id": "273",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "Name": "ArrayAnomalyDetectionModel",
+      "ValueType": {
        "$ref": "261"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1948,8 +1834,7 @@
      "Description": "Number of trained multivariate models.",
      "Type": {
       "$id": "275",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1961,8 +1846,7 @@
      "Description": "Maximum number of models that can be trained for this Anomaly Detector resource.",
      "Type": {
       "$id": "277",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1974,8 +1858,7 @@
      "Description": "The link to fetch more models.",
      "Type": {
       "$id": "279",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1984,12 +1867,11 @@
   },
   {
    "$id": "280",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "MultivariateLastDetectionOptions",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "Request of last detection.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateLastDetectionOptions",
    "Usage": "Input",
+   "Description": "Request of last detection.",
    "Properties": [
     {
      "$id": "281",
@@ -1998,16 +1880,15 @@
      "Description": "This contains the inference data, including the name, timestamps(ISO 8601) and\nvalues of variables.",
      "Type": {
       "$id": "282",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "Name": "ArrayVariableValues",
+      "ValueType": {
        "$id": "283",
-       "Kind": "Model",
+       "Kind": "model",
        "Name": "VariableValues",
-       "Namespace": "AnomalyDetector.Multivariate",
-       "Description": "Variable values.",
-       "IsNullable": false,
+       "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.VariableValues",
        "Usage": "Input",
+       "Description": "Variable values.",
        "Properties": [
         {
          "$id": "284",
@@ -2016,8 +1897,7 @@
          "Description": "Variable name of last detection request.",
          "Type": {
           "$id": "285",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -2029,14 +1909,13 @@
          "Description": "Timestamps of last detection request",
          "Type": {
           "$id": "287",
-          "Kind": "Array",
+          "Kind": "array",
           "Name": "Array",
-          "ElementType": {
+          "ValueType": {
            "$id": "288",
-           "Kind": "string",
-           "IsNullable": false
+           "Kind": "string"
           },
-          "IsNullable": false
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -2048,21 +1927,20 @@
          "Description": "Values of variables.",
          "Type": {
           "$id": "290",
-          "Kind": "Array",
+          "Kind": "array",
           "Name": "Array",
-          "ElementType": {
+          "ValueType": {
            "$id": "291",
-           "Kind": "float32",
-           "IsNullable": false
+           "Kind": "float32"
           },
-          "IsNullable": false
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2074,8 +1952,7 @@
      "Description": "An optional field, which is used to specify the number of top contributed\nvariables for one anomalous timestamp in the response. The default number is\n10.",
      "Type": {
       "$id": "293",
-      "Kind": "int32",
-      "IsNullable": false
+      "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -2087,12 +1964,11 @@
   },
   {
    "$id": "294",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "MultivariateLastDetectionResult",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "Results of last detection.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateLastDetectionResult",
    "Usage": "Output",
+   "Description": "Results of last detection.",
    "Properties": [
     {
      "$id": "295",
@@ -2101,12 +1977,12 @@
      "Description": "Variable Status.",
      "Type": {
       "$id": "296",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "Name": "ArrayVariableState",
+      "ValueType": {
        "$ref": "167"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -2118,12 +1994,12 @@
      "Description": "Anomaly status and information.",
      "Type": {
       "$id": "298",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Kind": "array",
+      "Name": "ArrayAnomalyState",
+      "ValueType": {
        "$ref": "194"
       },
-      "IsNullable": false
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -2132,12 +2008,11 @@
   },
   {
    "$id": "299",
-   "Kind": "Model",
+   "Kind": "model",
    "Name": "AnomalyDetectorError",
-   "Namespace": "AnomalyDetector.Univariate",
-   "Description": "Error information returned by the API.",
-   "IsNullable": false,
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.AnomalyDetectorError",
    "Usage": "Output",
+   "Description": "Error information returned by the API.",
    "Properties": [
     {
      "$id": "300",
@@ -2157,8 +2032,7 @@
      "Description": "A message explaining the error reported by the service.",
      "Type": {
       "$id": "302",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -2175,7 +2049,6 @@
    "Protocol": {
     "$id": "304"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "305",
@@ -2184,8 +2057,7 @@
      "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
      "Type": {
       "$id": "306",
-      "Kind": "uri",
-      "IsNullable": false
+      "Kind": "url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -2218,8 +2090,7 @@
       "$id": "308",
       "Type": {
        "$id": "309",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "v1.1"
      }
@@ -2237,6 +2108,7 @@
      "ResourceName": "Univariate",
      "Summary": "Detect anomalies for the entire series in batch.",
      "Description": "This operation generates a model with an entire series, each point is detected\nwith the same model. With this method, points before and after a certain point\nare used to determine whether it is an anomaly. The entire detection can give\nuser an overall status of the time series.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "305"
@@ -2268,8 +2140,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "314",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2294,8 +2165,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "317",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2349,6 +2219,7 @@
      "ResourceName": "Univariate",
      "Summary": "Detect anomaly status of the latest point in time series.",
      "Description": "This operation generates a model using the points that you sent into the API,\nand based on all data to determine whether the last point is anomalous.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "305"
@@ -2380,8 +2251,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "323",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2406,8 +2276,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "326",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2461,6 +2330,7 @@
      "ResourceName": "Univariate",
      "Summary": "Detect change point for the entire series",
      "Description": "Evaluate change point score of every series point",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "305"
@@ -2492,8 +2362,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "332",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2518,8 +2387,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "335",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2571,7 +2439,6 @@
    "Protocol": {
     "$id": "338"
    },
-   "Creatable": false,
    "Parent": "AnomalyDetectorClient",
    "Parameters": [
     {
@@ -2593,6 +2460,7 @@
      "ResourceName": "Multivariate",
      "Summary": "Get Multivariate Anomaly Detection Result",
      "Description": "For asynchronous inference, get multivariate anomaly detection result based on\nresultId returned by the BatchDetectAnomaly api.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "305"
@@ -2608,7 +2476,6 @@
        "Type": {
         "$id": "342",
         "Kind": "uuid",
-        "IsNullable": false,
         "Encode": "string"
        },
        "Location": "Path",
@@ -2627,8 +2494,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "344",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2679,6 +2545,7 @@
      "ResourceName": "Multivariate",
      "Summary": "Train a Multivariate Anomaly Detection Model",
      "Description": "Create and train a multivariate anomaly detection model. The request must\ninclude a source parameter to indicate an externally accessible Azure blob\nstorage URI.There are two types of data input: An URI pointed to an Azure blob\nstorage folder which contains multiple CSV files, and each CSV file contains\ntwo columns, timestamp and variable. Another type of input is an URI pointed to\na CSV file in Azure blob storage, which contains all the variables and a\ntimestamp column.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "305"
@@ -2710,8 +2577,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "350",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2736,8 +2602,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "353",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2775,8 +2640,7 @@
          "Description": "Location and ID of the model.",
          "Type": {
           "$id": "357",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          }
         }
        ],
@@ -2803,6 +2667,7 @@
      "ResourceName": "Multivariate",
      "Summary": "List Multivariate Models",
      "Description": "List models of a resource.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "305"
@@ -2817,8 +2682,7 @@
        "Description": "Skip indicates how many models will be skipped.",
        "Type": {
         "$id": "360",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -2837,8 +2701,7 @@
        "Description": "Top indicates how many models will be fetched.",
        "Type": {
         "$id": "362",
-        "Kind": "int32",
-        "IsNullable": false
+        "Kind": "int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -2856,8 +2719,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "364",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2913,6 +2775,7 @@
      "ResourceName": "Multivariate",
      "Summary": "Delete Multivariate Model",
      "Description": "Delete an existing multivariate model according to the modelId",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "305"
@@ -2927,8 +2790,7 @@
        "Description": "Model identifier.",
        "Type": {
         "$id": "370",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2946,8 +2808,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "372",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2992,6 +2853,7 @@
      "ResourceName": "Multivariate",
      "Summary": "Get Multivariate Model",
      "Description": "Get detailed information of multivariate model, including the training status\nand variables used in the model.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "305"
@@ -3006,8 +2868,7 @@
        "Description": "Model identifier.",
        "Type": {
         "$id": "377",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -3025,8 +2886,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "379",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3077,6 +2937,7 @@
      "ResourceName": "Multivariate",
      "Summary": "Detect Multivariate Anomaly",
      "Description": "Submit multivariate anomaly detection task with the modelId of trained model\nand inference data, the input schema should be the same with the training\nrequest. The request will complete asynchronously and return a resultId to\nquery the detection result.The request should be a source link to indicate an\nexternally accessible Azure storage Uri, either pointed to an Azure blob\nstorage folder, or pointed to a CSV file in Azure blob storage.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "305"
@@ -3091,8 +2952,7 @@
        "Description": "Model identifier.",
        "Type": {
         "$id": "384",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -3128,8 +2988,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "387",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3154,8 +3013,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "390",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3193,8 +3051,7 @@
          "Description": "Id of the detection result.",
          "Type": {
           "$id": "394",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          }
         },
         {
@@ -3204,8 +3061,7 @@
          "Description": "Location of the detection result.",
          "Type": {
           "$id": "396",
-          "Kind": "string",
-          "IsNullable": false
+          "Kind": "string"
          }
         }
        ],
@@ -3232,6 +3088,7 @@
      "ResourceName": "Multivariate",
      "Summary": "Detect anomalies in the last point of the request body",
      "Description": "Submit multivariate anomaly detection task with the modelId of trained model\nand inference data, and the inference data should be put into request body in a\nJSON format. The request will complete synchronously and return the detection\nimmediately in the response body.",
+     "Accessibility": "public",
      "Parameters": [
       {
        "$ref": "305"
@@ -3246,8 +3103,7 @@
        "Description": "Model identifier.",
        "Type": {
         "$id": "399",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -3283,8 +3139,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "402",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3309,8 +3164,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "405",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3362,7 +3216,6 @@
    "Protocol": {
     "$id": "408"
    },
-   "Creatable": false,
    "Parent": "AnomalyDetectorClient",
    "Parameters": [
     {

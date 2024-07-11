@@ -21,6 +21,8 @@ internal record InputClient(string Name, string Description, IReadOnlyList<Input
         init => _key = value;
     }
 
+    public IReadOnlyList<InputOperation> Operations { get; internal set; } = Operations ?? Array.Empty<InputOperation>();
+
     public InputClient() : this(string.Empty, string.Empty, Array.Empty<InputOperation>(), Array.Empty<InputParameter>(), null) { }
 
     public IReadOnlyDictionary<string, InputClientExample> Examples => EnsureExamples();
