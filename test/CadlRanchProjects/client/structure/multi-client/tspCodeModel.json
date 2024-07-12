@@ -58,8 +58,7 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "11",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -95,8 +94,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "14",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -153,8 +151,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "19",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -211,8 +208,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "24",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -255,7 +251,6 @@
    "Protocol": {
     "$id": "27"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "10"
@@ -288,8 +283,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "31",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -346,8 +340,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "36",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -404,8 +397,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "41",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -448,7 +440,6 @@
    "Protocol": {
     "$id": "44"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "10"

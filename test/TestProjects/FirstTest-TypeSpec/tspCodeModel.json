@@ -478,10 +478,12 @@
        {
         "$id": "78",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "79",
          "Kind": "string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        {
         "$id": "80",
@@ -645,10 +647,12 @@
       "Type": {
        "$id": "103",
        "Kind": "array",
+       "Name": "Array",
        "ValueType": {
         "$id": "104",
         "Kind": "int32"
-       }
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
      },
      "IsRequired": false,
@@ -665,10 +669,12 @@
       "Type": {
        "$id": "107",
        "Kind": "array",
+       "Name": "Array",
        "ValueType": {
         "$id": "108",
         "Kind": "int32"
-       }
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
      },
      "IsRequired": true,
@@ -822,9 +828,11 @@
       "Type": {
        "$id": "130",
        "Kind": "array",
+       "Name": "ArrayExtension",
        "ValueType": {
         "$ref": "127"
-       }
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
       },
       "IsRequired": false,
       "IsReadOnly": false
@@ -865,6 +873,7 @@
      "Type": {
       "$id": "135",
       "Kind": "array",
+      "Name": "ArrayThereLevelExtension",
       "ValueType": {
        "$id": "136",
        "Kind": "model",
@@ -888,9 +897,11 @@
           "Type": {
            "$id": "139",
            "Kind": "array",
+           "Name": "ArrayThereLevelExtension",
            "ValueType": {
             "$ref": "136"
-           }
+           },
+           "CrossLanguageDefinitionId": "TypeSpec.Array"
           },
           "IsRequired": false,
           "IsReadOnly": false
@@ -911,7 +922,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -962,9 +974,11 @@
      "Type": {
       "$id": "147",
       "Kind": "array",
+      "Name": "ArrayBaseModel",
       "ValueType": {
        "$ref": "143"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1077,9 +1091,11 @@
      "Type": {
       "$id": "161",
       "Kind": "array",
+      "Name": "ArrayStringFixedEnum",
       "ValueType": {
        "$ref": "30"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1133,9 +1149,11 @@
      "Type": {
       "$id": "168",
       "Kind": "array",
+      "Name": "ArrayIntExtensibleEnum",
       "ValueType": {
        "$ref": "40"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1159,9 +1177,11 @@
      "Type": {
       "$id": "171",
       "Kind": "array",
+      "Name": "ArrayFloatExtensibleEnum",
       "ValueType": {
        "$ref": "45"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1185,9 +1205,11 @@
      "Type": {
       "$id": "174",
       "Kind": "array",
+      "Name": "ArrayFloatFixedEnum",
       "ValueType": {
        "$ref": "50"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1211,9 +1233,11 @@
      "Type": {
       "$id": "177",
       "Kind": "array",
+      "Name": "ArrayIntFixedEnum",
       "ValueType": {
        "$ref": "55"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1405,6 +1429,7 @@
      "Type": {
       "$id": "209",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "210",
        "Kind": "union",
@@ -1455,12 +1480,15 @@
         {
          "$id": "218",
          "Kind": "array",
+         "Name": "ArrayModelForUnion",
          "ValueType": {
           "$ref": "213"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1493,8 +1521,7 @@
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
         "$id": "222",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1535,8 +1562,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "227",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1597,8 +1623,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "232",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1676,8 +1701,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "238",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1702,8 +1726,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "241",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1785,8 +1808,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "247",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1811,8 +1833,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "250",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1894,8 +1915,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "256",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1920,8 +1940,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "259",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2007,8 +2026,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "267",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2099,8 +2117,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "275",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2125,8 +2142,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "278",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2202,8 +2218,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "284",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2228,8 +2243,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "287",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2293,8 +2307,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "292",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2373,8 +2386,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "299",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2447,8 +2459,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "306",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2473,8 +2484,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "309",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2550,8 +2560,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "316",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2576,8 +2585,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "319",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2658,8 +2666,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "327",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2684,8 +2691,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "330",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2743,8 +2749,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "335",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2805,8 +2810,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "341",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2885,8 +2889,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "348",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2911,8 +2914,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "351",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2987,8 +2989,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "357",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3013,8 +3014,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "360",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3089,8 +3089,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "366",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3115,8 +3114,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "369",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3191,8 +3189,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "375",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3217,8 +3214,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "378",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3293,8 +3289,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "384",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3366,8 +3361,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "390",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3392,8 +3386,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "393",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3477,8 +3470,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "402",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3503,8 +3495,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "405",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3617,8 +3608,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "415",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3643,8 +3633,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "418",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3690,7 +3679,6 @@
    "Protocol": {
     "$id": "421"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "221"
@@ -3705,7 +3693,6 @@
    "Protocol": {
     "$id": "423"
    },
-   "Creatable": false,
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {
@@ -3788,8 +3775,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "433",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3838,7 +3824,6 @@
    "Protocol": {
     "$id": "436"
    },
-   "Creatable": false,
    "Parent": "Hello",
    "Parameters": [
     {
@@ -3950,8 +3935,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "449",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4068,8 +4052,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "459",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4094,8 +4077,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "462",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4159,8 +4141,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "467",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4238,8 +4219,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "473",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4264,8 +4244,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "476",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4419,8 +4398,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "493",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4469,7 +4447,6 @@
    "Protocol": {
     "$id": "496"
    },
-   "Creatable": false,
    "Parent": "Hello",
    "Parameters": [
     {
@@ -4515,8 +4492,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "501",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4541,8 +4517,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "504",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4588,7 +4563,6 @@
    "Protocol": {
     "$id": "507"
    },
-   "Creatable": false,
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {
@@ -4634,8 +4608,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "512",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4660,8 +4633,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "515",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4725,8 +4697,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "520",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4769,7 +4740,6 @@
    "Protocol": {
     "$id": "523"
    },
-   "Creatable": false,
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {
@@ -4816,8 +4786,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "529",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4866,7 +4835,6 @@
    "Protocol": {
     "$id": "532"
    },
-   "Creatable": false,
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {
@@ -4931,8 +4899,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "540",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4981,7 +4948,6 @@
    "Protocol": {
     "$id": "543"
    },
-   "Creatable": false,
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {

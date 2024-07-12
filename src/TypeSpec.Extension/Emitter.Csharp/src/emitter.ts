@@ -6,20 +6,23 @@ import { EmitContext, Program, resolvePath } from "@typespec/compiler";
 import { execSync } from "child_process";
 import fs, { existsSync } from "fs";
 import path from "node:path";
-import { configurationFileName, tspOutputFileName } from "./constants.js";
-import { LoggerLevel } from "./lib/log-level.js";
-import { Logger } from "./lib/logger.js";
 import {
-    NetEmitterOptions,
-    resolveOptions,
-    resolveOutputFolder
-} from "./options.js";
-import { $onEmit as $OnMGCEmit } from "@typespec/http-client-csharp";
+    $onEmit as $OnMGCEmit,
+    Logger,
+    LoggerLevel,
+    configurationFileName,
+    resolveOutputFolder,
+    tspOutputFileName
+} from "@typespec/http-client-csharp";
 import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
+import {
+    AzureNetEmitterOptions,
+    resolveAzureEmitterOptions
+} from "./options.js";
 
-export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
+export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
     const program: Program = context.program;
-    const options = resolveOptions(context);
+    const options = resolveAzureEmitterOptions(context);
     /* set the loglevel. */
     Logger.initialize(program, options.logLevel ?? LoggerLevel.INFO);
 
