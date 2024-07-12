@@ -72,8 +72,8 @@
   {
    "$id": "11",
    "Kind": "model",
-   "Name": "ModelInAlias",
-   "CrossLanguageDefinitionId": "Parameters.Spread.Alias.ModelInAlias",
+   "Name": "InnerModel",
+   "CrossLanguageDefinitionId": "Parameters.Spread.Alias.InnerModel",
    "Usage": "Input",
    "Properties": [
     {
@@ -216,8 +216,8 @@
   {
    "$id": "33",
    "Kind": "model",
-   "Name": "SpreadAliasWithModelRequest",
-   "CrossLanguageDefinitionId": "spreadAliasWithModel.Request.anonymous",
+   "Name": "SpreadAsInnerModelParameterRequest",
+   "CrossLanguageDefinitionId": "spreadAsInnerModelParameter.Request.anonymous",
    "Usage": "Input",
    "Properties": [
     {
@@ -1000,7 +1000,7 @@
     },
     {
      "$id": "113",
-     "Name": "spreadAliasWithModel",
+     "Name": "spreadAsInnerModelParameter",
      "ResourceName": "Alias",
      "Accessibility": "public",
      "Parameters": [
@@ -1045,8 +1045,8 @@
       },
       {
        "$id": "118",
-       "Name": "ModelInAlias",
-       "NameInRequest": "ModelInAlias",
+       "Name": "InnerModel",
+       "NameInRequest": "InnerModel",
        "Type": {
         "$ref": "11"
        },

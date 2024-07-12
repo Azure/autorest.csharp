@@ -10,14 +10,14 @@ using System.Text.Json;
 
 namespace Scm.Parameters.Spread.Models
 {
-    internal partial class ModelInAlias : IJsonModel<ModelInAlias>
+    internal partial class InnerModel : IJsonModel<InnerModel>
     {
-        void IJsonModel<ModelInAlias>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<InnerModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelInAlias>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<InnerModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelInAlias)} does not support writing '{format}' format.");
+                throw new FormatException($"The model {nameof(InnerModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -41,19 +41,19 @@ namespace Scm.Parameters.Spread.Models
             writer.WriteEndObject();
         }
 
-        ModelInAlias IJsonModel<ModelInAlias>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        InnerModel IJsonModel<InnerModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelInAlias>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<InnerModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelInAlias)} does not support reading '{format}' format.");
+                throw new FormatException($"The model {nameof(InnerModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeModelInAlias(document.RootElement, options);
+            return DeserializeInnerModel(document.RootElement, options);
         }
 
-        internal static ModelInAlias DeserializeModelInAlias(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static InnerModel DeserializeInnerModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -77,46 +77,46 @@ namespace Scm.Parameters.Spread.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new ModelInAlias(name, serializedAdditionalRawData);
+            return new InnerModel(name, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<ModelInAlias>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<InnerModel>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelInAlias>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<InnerModel>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ModelInAlias)} does not support writing '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(InnerModel)} does not support writing '{options.Format}' format.");
             }
         }
 
-        ModelInAlias IPersistableModel<ModelInAlias>.Create(BinaryData data, ModelReaderWriterOptions options)
+        InnerModel IPersistableModel<InnerModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelInAlias>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<InnerModel>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeModelInAlias(document.RootElement, options);
+                        return DeserializeInnerModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ModelInAlias)} does not support reading '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(InnerModel)} does not support reading '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<ModelInAlias>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<InnerModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
-        internal static ModelInAlias FromResponse(PipelineResponse response)
+        internal static InnerModel FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelInAlias(document.RootElement);
+            return DeserializeInnerModel(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>

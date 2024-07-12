@@ -154,48 +154,48 @@ namespace Parameters.Spread
             }
         }
 
-        /// <summary> Spread alias with model. </summary>
+        /// <summary> Spread as inner model parameter. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="name"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithModelAsync(string,string,string,CancellationToken)']/*" />
-        public virtual async Task<Response> SpreadAliasWithModelAsync(string id, string xMsTestHeader, string name, CancellationToken cancellationToken = default)
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsInnerModelParameterAsync(string,string,string,CancellationToken)']/*" />
+        public virtual async Task<Response> SpreadAsInnerModelParameterAsync(string id, string xMsTestHeader, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNull(name, nameof(name));
 
-            ModelInAlias modelInAlias = new ModelInAlias(name, null);
+            InnerModel innerModel = new InnerModel(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadAliasWithModelAsync(id, xMsTestHeader, modelInAlias.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadAsInnerModelParameterAsync(id, xMsTestHeader, innerModel.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
-        /// <summary> Spread alias with model. </summary>
+        /// <summary> Spread as inner model parameter. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="name"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithModel(string,string,string,CancellationToken)']/*" />
-        public virtual Response SpreadAliasWithModel(string id, string xMsTestHeader, string name, CancellationToken cancellationToken = default)
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsInnerModelParameter(string,string,string,CancellationToken)']/*" />
+        public virtual Response SpreadAsInnerModelParameter(string id, string xMsTestHeader, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNull(name, nameof(name));
 
-            ModelInAlias modelInAlias = new ModelInAlias(name, null);
+            InnerModel innerModel = new InnerModel(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadAliasWithModel(id, xMsTestHeader, modelInAlias.ToRequestContent(), context);
+            Response response = SpreadAsInnerModelParameter(id, xMsTestHeader, innerModel.ToRequestContent(), context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method] Spread alias with model.
+        /// [Protocol Method] Spread as inner model parameter.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -204,7 +204,7 @@ namespace Parameters.Spread
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAliasWithModelAsync(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAsInnerModelParameterAsync(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -217,18 +217,18 @@ namespace Parameters.Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithModelAsync(string,string,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> SpreadAliasWithModelAsync(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsInnerModelParameterAsync(string,string,RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> SpreadAsInnerModelParameterAsync(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Alias.SpreadAliasWithModel");
+            using var scope = ClientDiagnostics.CreateScope("Alias.SpreadAsInnerModelParameter");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateSpreadAliasWithModelRequest(id, xMsTestHeader, content, context);
+                using HttpMessage message = CreateSpreadAsInnerModelParameterRequest(id, xMsTestHeader, content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -239,7 +239,7 @@ namespace Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method] Spread alias with model.
+        /// [Protocol Method] Spread as inner model parameter.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -248,7 +248,7 @@ namespace Parameters.Spread
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAliasWithModel(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAsInnerModelParameter(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -261,18 +261,18 @@ namespace Parameters.Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithModel(string,string,RequestContent,RequestContext)']/*" />
-        public virtual Response SpreadAliasWithModel(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsInnerModelParameter(string,string,RequestContent,RequestContext)']/*" />
+        public virtual Response SpreadAsInnerModelParameter(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Alias.SpreadAliasWithModel");
+            using var scope = ClientDiagnostics.CreateScope("Alias.SpreadAsInnerModelParameter");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateSpreadAliasWithModelRequest(id, xMsTestHeader, content, context);
+                using HttpMessage message = CreateSpreadAsInnerModelParameterRequest(id, xMsTestHeader, content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -691,7 +691,7 @@ namespace Parameters.Spread
             return message;
         }
 
-        internal HttpMessage CreateSpreadAliasWithModelRequest(string id, string xMsTestHeader, RequestContent content, RequestContext context)
+        internal HttpMessage CreateSpreadAsInnerModelParameterRequest(string id, string xMsTestHeader, RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;

@@ -41,7 +41,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Parameters_Spread_Alias_spreadWithModel() => Test(async (host) =>
         {
-            Response response = await new SpreadClient(host, null).GetAliasClient().SpreadAliasWithModelAsync("1", "bar", "foo");
+            Response response = await new SpreadClient(host, null).GetAliasClient().SpreadAsInnerModelParameterAsync("1", "bar", "foo");
             Assert.AreEqual(204, response.Status);
         });
 

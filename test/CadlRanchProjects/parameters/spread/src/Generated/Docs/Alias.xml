@@ -85,39 +85,39 @@ Response response = client.SpreadAsRequestBody(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="SpreadAliasWithModelAsync(string,string,string,CancellationToken)">
+    <member name="SpreadAsInnerModelParameterAsync(string,string,string,CancellationToken)">
       <example>
-This sample shows how to call SpreadAliasWithModelAsync.
+This sample shows how to call SpreadAsInnerModelParameterAsync.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
-Response response = await client.SpreadAliasWithModelAsync("<id>", "<x-ms-test-header>", "<name>");
+Response response = await client.SpreadAsInnerModelParameterAsync("<id>", "<x-ms-test-header>", "<name>");
 ]]></code>
-This sample shows how to call SpreadAliasWithModelAsync with all parameters.
+This sample shows how to call SpreadAsInnerModelParameterAsync with all parameters.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
-Response response = await client.SpreadAliasWithModelAsync("<id>", "<x-ms-test-header>", "<name>");
+Response response = await client.SpreadAsInnerModelParameterAsync("<id>", "<x-ms-test-header>", "<name>");
 ]]></code></example>
     </member>
-    <member name="SpreadAliasWithModel(string,string,string,CancellationToken)">
+    <member name="SpreadAsInnerModelParameter(string,string,string,CancellationToken)">
       <example>
-This sample shows how to call SpreadAliasWithModel.
+This sample shows how to call SpreadAsInnerModelParameter.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
-Response response = client.SpreadAliasWithModel("<id>", "<x-ms-test-header>", "<name>");
+Response response = client.SpreadAsInnerModelParameter("<id>", "<x-ms-test-header>", "<name>");
 ]]></code>
-This sample shows how to call SpreadAliasWithModel with all parameters.
+This sample shows how to call SpreadAsInnerModelParameter with all parameters.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
-Response response = client.SpreadAliasWithModel("<id>", "<x-ms-test-header>", "<name>");
+Response response = client.SpreadAsInnerModelParameter("<id>", "<x-ms-test-header>", "<name>");
 ]]></code></example>
     </member>
-    <member name="SpreadAliasWithModelAsync(string,string,RequestContent,RequestContext)">
+    <member name="SpreadAsInnerModelParameterAsync(string,string,RequestContent,RequestContext)">
       <example>
-This sample shows how to call SpreadAliasWithModelAsync.
+This sample shows how to call SpreadAsInnerModelParameterAsync.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
@@ -125,11 +125,11 @@ using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
-Response response = await client.SpreadAliasWithModelAsync("<id>", "<x-ms-test-header>", content);
+Response response = await client.SpreadAsInnerModelParameterAsync("<id>", "<x-ms-test-header>", content);
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call SpreadAliasWithModelAsync with all parameters and request content.
+This sample shows how to call SpreadAsInnerModelParameterAsync with all parameters and request content.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
@@ -137,14 +137,14 @@ using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
-Response response = await client.SpreadAliasWithModelAsync("<id>", "<x-ms-test-header>", content);
+Response response = await client.SpreadAsInnerModelParameterAsync("<id>", "<x-ms-test-header>", content);
 
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="SpreadAliasWithModel(string,string,RequestContent,RequestContext)">
+    <member name="SpreadAsInnerModelParameter(string,string,RequestContent,RequestContext)">
       <example>
-This sample shows how to call SpreadAliasWithModel.
+This sample shows how to call SpreadAsInnerModelParameter.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
@@ -152,11 +152,11 @@ using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
-Response response = client.SpreadAliasWithModel("<id>", "<x-ms-test-header>", content);
+Response response = client.SpreadAsInnerModelParameter("<id>", "<x-ms-test-header>", content);
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call SpreadAliasWithModel with all parameters and request content.
+This sample shows how to call SpreadAsInnerModelParameter with all parameters and request content.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
@@ -164,7 +164,7 @@ using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
-Response response = client.SpreadAliasWithModel("<id>", "<x-ms-test-header>", content);
+Response response = client.SpreadAsInnerModelParameter("<id>", "<x-ms-test-header>", content);
 
 Console.WriteLine(response.Status);
 ]]></code></example>

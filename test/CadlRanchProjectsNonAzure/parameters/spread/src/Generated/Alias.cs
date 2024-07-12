@@ -116,42 +116,42 @@ namespace Scm.Parameters.Spread
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Spread alias with model. </summary>
+        /// <summary> Spread as inner model parameter. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<ClientResult> SpreadAliasWithModelAsync(string id, string xMsTestHeader, string name)
+        public virtual async Task<ClientResult> SpreadAsInnerModelParameterAsync(string id, string xMsTestHeader, string name)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNull(name, nameof(name));
 
-            ModelInAlias modelInAlias = new ModelInAlias(name, null);
-            ClientResult result = await SpreadAliasWithModelAsync(id, xMsTestHeader, modelInAlias.ToBinaryContent(), null).ConfigureAwait(false);
+            InnerModel innerModel = new InnerModel(name, null);
+            ClientResult result = await SpreadAsInnerModelParameterAsync(id, xMsTestHeader, innerModel.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
-        /// <summary> Spread alias with model. </summary>
+        /// <summary> Spread as inner model parameter. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual ClientResult SpreadAliasWithModel(string id, string xMsTestHeader, string name)
+        public virtual ClientResult SpreadAsInnerModelParameter(string id, string xMsTestHeader, string name)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNull(name, nameof(name));
 
-            ModelInAlias modelInAlias = new ModelInAlias(name, null);
-            ClientResult result = SpreadAliasWithModel(id, xMsTestHeader, modelInAlias.ToBinaryContent(), null);
+            InnerModel innerModel = new InnerModel(name, null);
+            ClientResult result = SpreadAsInnerModelParameter(id, xMsTestHeader, innerModel.ToBinaryContent(), null);
             return result;
         }
 
         /// <summary>
-        /// [Protocol Method] Spread alias with model.
+        /// [Protocol Method] Spread as inner model parameter.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -160,7 +160,7 @@ namespace Scm.Parameters.Spread
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAliasWithModelAsync(string,string,string)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAsInnerModelParameterAsync(string,string,string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -173,18 +173,18 @@ namespace Scm.Parameters.Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> SpreadAliasWithModelAsync(string id, string xMsTestHeader, BinaryContent content, RequestOptions options = null)
+        public virtual async Task<ClientResult> SpreadAsInnerModelParameterAsync(string id, string xMsTestHeader, BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateSpreadAliasWithModelRequest(id, xMsTestHeader, content, options);
+            using PipelineMessage message = CreateSpreadAsInnerModelParameterRequest(id, xMsTestHeader, content, options);
             return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
-        /// [Protocol Method] Spread alias with model.
+        /// [Protocol Method] Spread as inner model parameter.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -193,7 +193,7 @@ namespace Scm.Parameters.Spread
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAliasWithModel(string,string,string)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAsInnerModelParameter(string,string,string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -206,13 +206,13 @@ namespace Scm.Parameters.Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult SpreadAliasWithModel(string id, string xMsTestHeader, BinaryContent content, RequestOptions options = null)
+        public virtual ClientResult SpreadAsInnerModelParameter(string id, string xMsTestHeader, BinaryContent content, RequestOptions options = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateSpreadAliasWithModelRequest(id, xMsTestHeader, content, options);
+            using PipelineMessage message = CreateSpreadAsInnerModelParameterRequest(id, xMsTestHeader, content, options);
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
@@ -543,7 +543,7 @@ namespace Scm.Parameters.Spread
             return message;
         }
 
-        internal PipelineMessage CreateSpreadAliasWithModelRequest(string id, string xMsTestHeader, BinaryContent content, RequestOptions options)
+        internal PipelineMessage CreateSpreadAsInnerModelParameterRequest(string id, string xMsTestHeader, BinaryContent content, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier204;
