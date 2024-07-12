@@ -608,7 +608,7 @@ namespace Scm.Parameters.Spread
             request.Method = "POST";
             var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/parameters/spread/alias/spreadAliasWithSpreadAlias/", false);
+            uri.AppendPath("/parameters/spread/alias/request-with-spread-alias/", false);
             uri.AppendPath(id, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("x-ms-test-header", xMsTestHeader);

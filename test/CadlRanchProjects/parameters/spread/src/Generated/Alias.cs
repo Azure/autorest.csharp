@@ -749,7 +749,7 @@ namespace Parameters.Spread
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/parameters/spread/alias/spreadAliasWithSpreadAlias/", false);
+            uri.AppendPath("/parameters/spread/alias/request-with-spread-alias/", false);
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("x-ms-test-header", xMsTestHeader);

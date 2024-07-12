@@ -1531,7 +1531,7 @@
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/parameters/spread/alias/spreadAliasWithSpreadAlias/{id}",
+     "Path": "/parameters/spread/alias/request-with-spread-alias/{id}",
      "RequestMediaTypes": [
       "application/json"
      ],
