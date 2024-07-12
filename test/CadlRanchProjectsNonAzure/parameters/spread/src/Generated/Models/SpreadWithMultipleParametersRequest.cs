@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Scm.Parameters.Spread.Models
 {
@@ -43,46 +44,31 @@ namespace Scm.Parameters.Spread.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SpreadWithMultipleParametersRequest"/>. </summary>
-        /// <param name="prop1"></param>
-        /// <param name="prop2"></param>
-        /// <param name="prop3"></param>
-        /// <param name="prop4"></param>
-        /// <param name="prop5"></param>
-        /// <param name="prop6"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prop1"/>, <paramref name="prop2"/>, <paramref name="prop3"/>, <paramref name="prop4"/>, <paramref name="prop5"/> or <paramref name="prop6"/> is null. </exception>
-        public SpreadWithMultipleParametersRequest(string prop1, string prop2, string prop3, string prop4, string prop5, string prop6)
+        /// <param name="requiredString"> required string. </param>
+        /// <param name="requiredIntList"> required int. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> or <paramref name="requiredIntList"/> is null. </exception>
+        public SpreadWithMultipleParametersRequest(string requiredString, IEnumerable<int> requiredIntList)
         {
-            Argument.AssertNotNull(prop1, nameof(prop1));
-            Argument.AssertNotNull(prop2, nameof(prop2));
-            Argument.AssertNotNull(prop3, nameof(prop3));
-            Argument.AssertNotNull(prop4, nameof(prop4));
-            Argument.AssertNotNull(prop5, nameof(prop5));
-            Argument.AssertNotNull(prop6, nameof(prop6));
+            Argument.AssertNotNull(requiredString, nameof(requiredString));
+            Argument.AssertNotNull(requiredIntList, nameof(requiredIntList));
 
-            Prop1 = prop1;
-            Prop2 = prop2;
-            Prop3 = prop3;
-            Prop4 = prop4;
-            Prop5 = prop5;
-            Prop6 = prop6;
+            RequiredString = requiredString;
+            RequiredIntList = requiredIntList.ToList();
+            OptionalStringList = new ChangeTrackingList<string>();
         }
 
         /// <summary> Initializes a new instance of <see cref="SpreadWithMultipleParametersRequest"/>. </summary>
-        /// <param name="prop1"></param>
-        /// <param name="prop2"></param>
-        /// <param name="prop3"></param>
-        /// <param name="prop4"></param>
-        /// <param name="prop5"></param>
-        /// <param name="prop6"></param>
+        /// <param name="requiredString"> required string. </param>
+        /// <param name="optionalInt"> optional int. </param>
+        /// <param name="requiredIntList"> required int. </param>
+        /// <param name="optionalStringList"> optional string. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SpreadWithMultipleParametersRequest(string prop1, string prop2, string prop3, string prop4, string prop5, string prop6, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal SpreadWithMultipleParametersRequest(string requiredString, int? optionalInt, IList<int> requiredIntList, IList<string> optionalStringList, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Prop1 = prop1;
-            Prop2 = prop2;
-            Prop3 = prop3;
-            Prop4 = prop4;
-            Prop5 = prop5;
-            Prop6 = prop6;
+            RequiredString = requiredString;
+            OptionalInt = optionalInt;
+            RequiredIntList = requiredIntList;
+            OptionalStringList = optionalStringList;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -91,17 +77,13 @@ namespace Scm.Parameters.Spread.Models
         {
         }
 
-        /// <summary> Gets the prop 1. </summary>
-        public string Prop1 { get; }
-        /// <summary> Gets the prop 2. </summary>
-        public string Prop2 { get; }
-        /// <summary> Gets the prop 3. </summary>
-        public string Prop3 { get; }
-        /// <summary> Gets the prop 4. </summary>
-        public string Prop4 { get; }
-        /// <summary> Gets the prop 5. </summary>
-        public string Prop5 { get; }
-        /// <summary> Gets the prop 6. </summary>
-        public string Prop6 { get; }
+        /// <summary> required string. </summary>
+        public string RequiredString { get; }
+        /// <summary> optional int. </summary>
+        public int? OptionalInt { get; set; }
+        /// <summary> required int. </summary>
+        public IList<int> RequiredIntList { get; }
+        /// <summary> optional string. </summary>
+        public IList<string> OptionalStringList { get; }
     }
 }

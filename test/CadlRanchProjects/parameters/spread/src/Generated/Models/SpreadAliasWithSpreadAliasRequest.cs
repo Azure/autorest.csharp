@@ -7,12 +7,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Parameters.Spread.Models
 {
-    /// <summary> The SpreadAliasWithOptionalCollectionsRequest. </summary>
-    internal partial class SpreadAliasWithOptionalCollectionsRequest
+    /// <summary> The SpreadAliasWithSpreadAliasRequest. </summary>
+    internal partial class SpreadAliasWithSpreadAliasRequest
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -46,36 +45,37 @@ namespace Parameters.Spread.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithOptionalCollectionsRequest"/>. </summary>
-        /// <param name="requiredStringList"> required list. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredStringList"/> is null. </exception>
-        public SpreadAliasWithOptionalCollectionsRequest(IEnumerable<string> requiredStringList)
+        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithSpreadAliasRequest"/>. </summary>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public SpreadAliasWithSpreadAliasRequest(string name, int age)
         {
-            Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
+            Argument.AssertNotNull(name, nameof(name));
 
-            RequiredStringList = requiredStringList.ToList();
-            OptionalStringList = new ChangeTrackingList<string>();
+            Name = name;
+            Age = age;
         }
 
-        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithOptionalCollectionsRequest"/>. </summary>
-        /// <param name="requiredStringList"> required list. </param>
-        /// <param name="optionalStringList"> optional list. </param>
+        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithSpreadAliasRequest"/>. </summary>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SpreadAliasWithOptionalCollectionsRequest(IList<string> requiredStringList, IList<string> optionalStringList, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal SpreadAliasWithSpreadAliasRequest(string name, int age, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            RequiredStringList = requiredStringList;
-            OptionalStringList = optionalStringList;
+            Name = name;
+            Age = age;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithOptionalCollectionsRequest"/> for deserialization. </summary>
-        internal SpreadAliasWithOptionalCollectionsRequest()
+        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithSpreadAliasRequest"/> for deserialization. </summary>
+        internal SpreadAliasWithSpreadAliasRequest()
         {
         }
 
-        /// <summary> required list. </summary>
-        public IList<string> RequiredStringList { get; }
-        /// <summary> optional list. </summary>
-        public IList<string> OptionalStringList { get; }
+        /// <summary> name of the Thing. </summary>
+        public string Name { get; }
+        /// <summary> age of the Thing. </summary>
+        public int Age { get; }
     }
 }

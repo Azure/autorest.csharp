@@ -34,36 +34,23 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Parameters_Spread_Alias_spreadWithMultipleParameters() => Test(async (host) =>
         {
-            Response response = await new SpreadClient(host, null).GetAliasClient().SpreadWithMultipleParametersAsync("1", "bar", "foo1", "foo2", "foo3", "foo4", "foo5", "foo6");
+            Response response = await new SpreadClient(host, null).GetAliasClient().SpreadWithMultipleParametersAsync("1", "bar", "foo", new[] { 1, 2 }, 1, new[] {"foo", "bar"});
             Assert.AreEqual(204, response.Status);
         });
 
         [Test]
         public Task Parameters_Spread_Alias_spreadWithModel() => Test(async (host) =>
         {
-            Response response = await new SpreadClient(host, null).GetAliasClient().SpreadAliasWithModelAsync("1", "bar", new ModelParameter("foo"));
+            Response response = await new SpreadClient(host, null).GetAliasClient().SpreadAliasWithModelAsync("1", "bar", "foo");
             Assert.AreEqual(204, response.Status);
         });
 
         [Test]
-        public Task Parameters_Spread_Alias_spreadWithoutOptionalProps() => Test(async (host) =>
+        public Task Parameters_Spread_Alias_spreadAliasinAlias() => Test(async (host) =>
         {
-            Response response = await new SpreadClient(host, null).GetAliasClient().SpreadAliasWithOptionalPropsAsync("1", "bar", "dog", new[] { 1,2,3});
+            Response response = await new SpreadClient(host, null).GetAliasClient().SpreadAliasWithSpreadAliasAsync("1", "bar", "foo", 1);
             Assert.AreEqual(204, response.Status);
         });
 
-        [Test]
-        public Task Parameters_Spread_Alias_spreadWithOptionalProps() => Test(async (host) =>
-        {
-            Response response = await new SpreadClient(host, null).GetAliasClient().SpreadAliasWithOptionalPropsAsync("2", "bar", "dog", new[] { 1, 2, 3, 4 }, "red", 3, new[] { "a", "b" } );
-            Assert.AreEqual(204, response.Status);
-        });
-
-        [Test]
-        public Task Spread_Spread_Alias_With_RequiredAndOptionalCollections() => Test(async (host) =>
-        {
-            Response response = await new SpreadClient(host, null).GetAliasClient().SpreadAliasWithOptionalCollectionsAsync(new[] { "a", "b" }, new[] { "c", "d" });
-            Assert.AreEqual(204, response.Status);
-        });
     }
 }
