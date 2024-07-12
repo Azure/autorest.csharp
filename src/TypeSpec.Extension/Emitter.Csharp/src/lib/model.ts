@@ -98,7 +98,7 @@ export function getInputType(
 
     // TODO -- remove when https://github.com/Azure/typespec-azure/issues/1150 is resolved
     // TCGC has a bug that sometimes the name of body type constructed back from spread parameters does not have a name, here we add a name for it.
-    if (operation && sdkType.kind === "model" && sdkType.name === ""){
+    if (operation && sdkType.kind === "model" && sdkType.name === "") {
         sdkType.name = `${getOperationFullName(operation)}Request`;
     }
 
@@ -107,19 +107,18 @@ export function getInputType(
 
 function getOperationFullName(operation: Operation): string {
     let name = capitalize(operation.name);
-    if (operation.interface)
-    {
+    if (operation.interface) {
         name = `${capitalize(operation.interface.name)}${name}`;
         if (operation.interface.namespace) {
-            name = `${capitalize(getNamespaceFullName(operation.interface.namespace))}${name}`;
+            name = `${capitalize(
+                getNamespaceFullName(operation.interface.namespace)
+            )}${name}`;
         }
-    }
-    else if (operation.namespace)
-    {
+    } else if (operation.namespace) {
         const ns = getNamespaceFullName(operation.namespace);
         name = `${capitalize(ns)}${name}`;
     }
-    
+
     return name;
 }
 
