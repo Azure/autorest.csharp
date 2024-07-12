@@ -186,7 +186,7 @@
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Spread"
   },
   {
    "$id": "35",
@@ -220,7 +220,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input"
+   "Usage": "Input,Spread"
   },
   {
    "$id": "41",
@@ -470,7 +470,7 @@
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Spread"
   },
   {
    "$id": "85",
@@ -1112,7 +1112,7 @@
        "Kind": "model",
        "Name": "ChatCompletionRequestMessage",
        "CrossLanguageDefinitionId": "OpenAI.ChatCompletionRequestMessage",
-       "Usage": "Input",
+       "Usage": "Input,Spread",
        "Properties": [
         {
          "$id": "184",
@@ -1163,7 +1163,7 @@
           "Kind": "model",
           "Name": "ChatCompletionRequestMessageFunctionCall",
           "CrossLanguageDefinitionId": "OpenAI.ChatCompletionRequestMessage.function_call.anonymous",
-          "Usage": "Input",
+          "Usage": "Input,Spread",
           "Properties": [
            {
             "$id": "192",
@@ -1215,7 +1215,7 @@
        "Kind": "model",
        "Name": "ChatCompletionFunctions",
        "CrossLanguageDefinitionId": "OpenAI.ChatCompletionFunctions",
-       "Usage": "Input",
+       "Usage": "Input,Spread",
        "Properties": [
         {
          "$id": "199",
@@ -1251,7 +1251,7 @@
           "Kind": "model",
           "Name": "ChatCompletionFunctionParameters",
           "CrossLanguageDefinitionId": "OpenAI.ChatCompletionFunctionParameters",
-          "Usage": "Input",
+          "Usage": "Input,Spread",
           "AdditionalProperties": {
            "$id": "205",
            "Kind": "any"
@@ -1301,7 +1301,7 @@
         "Kind": "model",
         "Name": "ChatCompletionFunctionCallOption",
         "CrossLanguageDefinitionId": "OpenAI.ChatCompletionFunctionCallOption",
-        "Usage": "Input",
+        "Usage": "Input,Spread",
         "Properties": [
          {
           "$id": "213",
@@ -5160,7 +5160,7 @@
    "Kind": "model",
    "Name": "ErrorResponse",
    "CrossLanguageDefinitionId": "OpenAI.ErrorResponse",
-   "Usage": "Output",
+   "Usage": "Output,Error",
    "Properties": [
     {
      "$id": "807",
@@ -5245,7 +5245,7 @@
    "Kind": "model",
    "Name": "CreateRequest",
    "CrossLanguageDefinitionId": "OpenAI.create.Request.anonymous",
-   "Usage": "Input",
+   "Usage": "Input,Spread",
    "Properties": [
     {
      "$id": "820",

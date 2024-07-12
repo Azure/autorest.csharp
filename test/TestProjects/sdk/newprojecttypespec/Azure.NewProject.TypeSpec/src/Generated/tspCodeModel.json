@@ -688,11 +688,7 @@
    "Kind": "model",
    "Name": "Friend",
    "CrossLanguageDefinitionId": "NewProjectTypeSpec.NotFriend",
-<<<<<<< HEAD
    "Usage": "Input,Output",
-=======
-   "Usage": "Output",
->>>>>>> origin/feature/v3
    "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
     {
@@ -1022,7 +1018,7 @@
    "Kind": "model",
    "Name": "AnonymousBodyRequest",
    "CrossLanguageDefinitionId": "NewProjectTypeSpec.anonymousBody.Request.anonymous",
-   "Usage": "Input",
+   "Usage": "Input,Spread",
    "Properties": [
     {
      "$id": "154",
@@ -1218,7 +1214,7 @@
    "Kind": "model",
    "Name": "FriendlyModelRequest",
    "CrossLanguageDefinitionId": "NewProjectTypeSpec.friendlyModel.Request.anonymous",
-   "Usage": "Input",
+   "Usage": "Input,Spread",
    "Properties": [
     {
      "$id": "183",

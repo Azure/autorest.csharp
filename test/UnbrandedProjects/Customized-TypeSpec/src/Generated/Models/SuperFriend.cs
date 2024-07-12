@@ -45,7 +45,7 @@ namespace CustomizedTypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="SuperFriend"/>. </summary>
         /// <param name="name"> name of the NotFriend. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal SuperFriend(string name)
+        public SuperFriend(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
 
@@ -69,8 +69,8 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> name of the NotFriend. </summary>
-        public string Name { get; }
-        /// <summary> Gets the format. </summary>
-        public ModelWithFormat Format { get; }
+        public string Name { get; set; }
+        /// <summary> Gets or sets the format. </summary>
+        public ModelWithFormat Format { get; set; }
     }
 }

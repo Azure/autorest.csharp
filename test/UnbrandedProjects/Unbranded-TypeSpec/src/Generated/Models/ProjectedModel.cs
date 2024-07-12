@@ -45,7 +45,7 @@ namespace UnbrandedTypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="ProjectedModel"/>. </summary>
         /// <param name="name"> name of the ModelWithProjectedName. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal ProjectedModel(string name)
+        public ProjectedModel(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
 
@@ -67,6 +67,6 @@ namespace UnbrandedTypeSpec.Models
         }
 
         /// <summary> name of the ModelWithProjectedName. </summary>
-        public string Name { get; }
+        public string Name { get; set; }
     }
 }

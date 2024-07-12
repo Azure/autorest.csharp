@@ -791,7 +791,7 @@
    "Kind": "model",
    "Name": "BarRequest",
    "CrossLanguageDefinitionId": "CustomizationsInTsp.bar.Request.anonymous",
-   "Usage": "Input",
+   "Usage": "Input,Spread",
    "Properties": [
     {
      "$id": "121",

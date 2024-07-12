@@ -57,22 +57,5 @@ namespace CustomizedTypeSpec.Models
         {
             return new SuperRoundTripModel(requiredString, requiredSuperInt, requiredReadonlyInt, serializedAdditionalRawData: null);
         }
-
-        /// <summary> Initializes a new instance of <see cref="Models.SuperFriend"/>. </summary>
-        /// <param name="name"> name of the NotFriend. </param>
-        /// <param name="format"></param>
-        /// <returns> A new <see cref="Models.SuperFriend"/> instance for mocking. </returns>
-        public static SuperFriend SuperFriend(string name = null, ModelWithFormat format = null)
-        {
-            return new SuperFriend(name, format, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.ProjectedModel"/>. </summary>
-        /// <param name="name"> name of the ModelWithProjectedName. </param>
-        /// <returns> A new <see cref="Models.ProjectedModel"/> instance for mocking. </returns>
-        public static ProjectedModel ProjectedModel(string name = null)
-        {
-            return new ProjectedModel(name, serializedAdditionalRawData: null);
-        }
     }
 }

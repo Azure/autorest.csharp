@@ -467,118 +467,6 @@
      "SerializedName": "requiredBadDescription",
      "Description": "description with xml <|endoftext|>",
      "Type": {
-      "$id": "51",
-      "Kind": "string"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "52",
-     "Name": "optionalNullableList",
-     "SerializedName": "optionalNullableList",
-     "Description": "optional nullable collection",
-     "Type": {
-      "$id": "53",
-      "Kind": "nullable",
-      "Type": {
-       "$id": "54",
-       "Kind": "array",
-       "Name": "Array",
-       "ValueType": {
-        "$id": "55",
-        "Kind": "int32"
-       },
-       "CrossLanguageDefinitionId": "TypeSpec.Array"
-      }
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "56",
-     "Name": "requiredNullableList",
-     "SerializedName": "requiredNullableList",
-     "Description": "required nullable collection",
-     "Type": {
-      "$id": "57",
-      "Kind": "nullable",
-      "Type": {
-       "$id": "58",
-       "Kind": "array",
-       "Name": "Array",
-       "ValueType": {
-        "$id": "59",
-        "Kind": "int32"
-       },
-       "CrossLanguageDefinitionId": "TypeSpec.Array"
-      }
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "60",
-   "Kind": "model",
-   "Name": "RoundTripModel",
-   "CrossLanguageDefinitionId": "CustomizedTypeSpec.RoundTripModel",
-   "Usage": "Input,Output",
-   "Description": "this is a roundtrip model",
-   "Properties": [
-    {
-     "$id": "61",
-     "Name": "requiredString",
-     "SerializedName": "requiredString",
-     "Description": "Required string, illustrating a reference type property.",
-     "Type": {
-      "$id": "62",
-      "Kind": "string"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "63",
-     "Name": "requiredInt",
-     "SerializedName": "requiredInt",
-     "Description": "Required int, illustrating a value type property.",
-     "Type": {
-      "$id": "64",
-      "Kind": "int32"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "65",
-     "Name": "requiredReadonlyInt",
-     "SerializedName": "requiredReadonlyInt",
-     "Description": "Required readonly int",
-     "Type": {
-      "$id": "66",
-      "Kind": "int32"
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    }
-   ]
-  },
-  {
-   "$id": "67",
-   "Kind": "model",
-   "Name": "Friend",
-   "CrossLanguageDefinitionId": "CustomizedTypeSpec.NotFriend",
-   "Usage": "Input,Output",
-   "Description": "this is not a friendly model but with a friendly name",
-   "Properties": [
-    {
-     "$id": "68",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "name of the NotFriend",
-     "Type": {
       "$id": "69",
       "Kind": "string"
      },
@@ -636,7 +524,7 @@
    "Kind": "model",
    "Name": "RoundTripModel",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.RoundTripModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Description": "this is a roundtrip model",
    "Properties": [
     {
@@ -682,7 +570,7 @@
    "Kind": "model",
    "Name": "Friend",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.NotFriend",
-   "Usage": "Output",
+   "Usage": "Input,Output",
    "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
     {
@@ -707,7 +595,7 @@
       "Kind": "model",
       "Name": "ModelWithFormat",
       "CrossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithFormat",
-      "Usage": "Input,Output",
+      "Usage": "Input,Output,Spread",
       "Properties": [
        {
         "$id": "90",
@@ -779,7 +667,7 @@
    "Kind": "model",
    "Name": "AnonymousBodyRequest",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous",
-   "Usage": "Input",
+   "Usage": "Input,Spread",
    "Properties": [
     {
      "$id": "99",
@@ -1019,7 +907,7 @@
    "Kind": "model",
    "Name": "FriendlyModelRequest",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.friendlyModel.Request.anonymous",
-   "Usage": "Input",
+   "Usage": "Input,Spread",
    "Properties": [
     {
      "$id": "136",
@@ -1051,7 +939,7 @@
    "Kind": "model",
    "Name": "ProjectedNameModelRequest",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.projectedNameModel.Request.anonymous",
-   "Usage": "Input",
+   "Usage": "Input,Spread",
    "Properties": [
     {
      "$id": "140",

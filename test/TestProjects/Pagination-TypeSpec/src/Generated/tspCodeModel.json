@@ -542,7 +542,7 @@
    "Kind": "model",
    "Name": "BatchError",
    "CrossLanguageDefinitionId": "Pagination.BatchError",
-   "Usage": "Output",
+   "Usage": "Output,Error",
    "Description": "An error response received from the Azure Batch service.",
    "Properties": [
     {

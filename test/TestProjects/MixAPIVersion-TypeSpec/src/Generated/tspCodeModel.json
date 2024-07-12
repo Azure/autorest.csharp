@@ -161,7 +161,7 @@
    "Kind": "model",
    "Name": "Error",
    "CrossLanguageDefinitionId": "MixApiVersion.Error",
-   "Usage": "None",
+   "Usage": "Error",
    "Description": "Error",
    "Properties": [
     {

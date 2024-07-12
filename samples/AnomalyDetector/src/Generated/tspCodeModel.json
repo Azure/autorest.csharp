@@ -998,7 +998,7 @@
           "Kind": "model",
           "Name": "ErrorResponse",
           "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ErrorResponse",
-          "Usage": "Output",
+          "Usage": "Output,Error",
           "Description": "ErrorResponse contains code and message that shows the error information.",
           "Properties": [
            {
@@ -2011,7 +2011,7 @@
    "Kind": "model",
    "Name": "AnomalyDetectorError",
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.AnomalyDetectorError",
-   "Usage": "Output",
+   "Usage": "Output,Error",
    "Description": "Error information returned by the API.",
    "Properties": [
     {

@@ -64,7 +64,7 @@
    "Kind": "model",
    "Name": "SpreadAliasRequest",
    "CrossLanguageDefinitionId": "SpreadTypeSpec.spreadAlias.Request.anonymous",
-   "Usage": "Input",
+   "Usage": "Input,Spread",
    "Properties": [
     {
      "$id": "11",
@@ -244,7 +244,7 @@
    "Kind": "model",
    "Name": "SpreadAliasWithCollectionsRequest",
    "CrossLanguageDefinitionId": "SpreadTypeSpec.spreadAliasWithCollections.Request.anonymous",
-   "Usage": "Input",
+   "Usage": "Input,Spread",
    "Properties": [
     {
      "$id": "39",
@@ -289,7 +289,7 @@
    "Kind": "model",
    "Name": "SpreadModelRequest",
    "CrossLanguageDefinitionId": "SpreadTypeSpec.spreadModel.Request.anonymous",
-   "Usage": "Input",
+   "Usage": "Input,Spread",
    "Properties": [
     {
      "$id": "46",
@@ -322,7 +322,7 @@
    "Kind": "model",
    "Name": "SpreadAliasWithModelRequest",
    "CrossLanguageDefinitionId": "spreadAliasWithModel.Request.anonymous",
-   "Usage": "Input",
+   "Usage": "Input,Spread",
    "Properties": [
     {
      "$id": "51",

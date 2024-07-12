@@ -53,7 +53,7 @@
    "Kind": "model",
    "Name": "SpreadAsRequestBodyRequest",
    "CrossLanguageDefinitionId": "Parameters.Spread.Alias.spreadAsRequestBody.Request.anonymous",
-   "Usage": "Input",
+   "Usage": "Input,Spread",
    "Properties": [
     {
      "$id": "9",
@@ -176,7 +176,7 @@
    "Kind": "model",
    "Name": "SpreadAsRequestBodyRequest1",
    "CrossLanguageDefinitionId": "Parameters.Spread.Model.spreadAsRequestBody.Request.anonymous",
-   "Usage": "Input",
+   "Usage": "Input,Spread",
    "Properties": [
     {
      "$id": "28",
@@ -197,7 +197,7 @@
    "Kind": "model",
    "Name": "SpreadCompositeRequestMixRequest",
    "CrossLanguageDefinitionId": "spreadCompositeRequestMix.Request.anonymous",
-   "Usage": "Input",
+   "Usage": "Input,Spread",
    "Properties": [
     {
      "$id": "31",

@@ -48,7 +48,7 @@ namespace Azure.NewProject.TypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="Friend"/>. </summary>
         /// <param name="name"> name of the NotFriend. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal Friend(string name)
+        public Friend(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
 
@@ -70,6 +70,6 @@ namespace Azure.NewProject.TypeSpec.Models
         }
 
         /// <summary> name of the NotFriend. </summary>
-        public string Name { get; }
+        public string Name { get; set; }
     }
 }
