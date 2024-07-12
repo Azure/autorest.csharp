@@ -30,7 +30,7 @@
    "Kind": "model",
    "Name": "RequiredImplicitRequest",
    "CrossLanguageDefinitionId": "Parameters.BodyOptionality.requiredImplicit.Request.anonymous",
-   "Usage": "Input,Spread",
+   "Usage": "Spread",
    "Properties": [
     {
      "$id": "6",
@@ -187,10 +187,10 @@
       },
       {
        "$id": "23",
-       "Name": "BodyModel",
-       "NameInRequest": "BodyModel",
+       "Name": "RequiredImplicitRequest",
+       "NameInRequest": "",
        "Type": {
-        "$ref": "2"
+        "$ref": "5"
        },
        "Location": "Body",
        "IsRequired": true,

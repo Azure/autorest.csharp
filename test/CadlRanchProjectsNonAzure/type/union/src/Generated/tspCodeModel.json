@@ -223,7 +223,7 @@
    "Kind": "model",
    "Name": "SendRequest9",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Input,Spread",
+   "Usage": "Spread",
    "Properties": [
     {
      "$id": "38",
@@ -263,7 +263,7 @@
    "Kind": "model",
    "Name": "SendRequest8",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Input,Spread",
+   "Usage": "Spread",
    "Properties": [
     {
      "$id": "42",
@@ -303,7 +303,7 @@
    "Kind": "model",
    "Name": "SendRequest7",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Input,Spread",
+   "Usage": "Spread",
    "Properties": [
     {
      "$id": "46",
@@ -343,7 +343,7 @@
    "Kind": "model",
    "Name": "SendRequest6",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Input,Spread",
+   "Usage": "Spread",
    "Properties": [
     {
      "$id": "50",
@@ -383,7 +383,7 @@
    "Kind": "model",
    "Name": "SendRequest5",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Input,Spread",
+   "Usage": "Spread",
    "Properties": [
     {
      "$id": "54",
@@ -475,7 +475,7 @@
    "Kind": "model",
    "Name": "SendRequest4",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Input,Spread",
+   "Usage": "Spread",
    "Properties": [
     {
      "$id": "65",
@@ -556,7 +556,7 @@
    "Kind": "model",
    "Name": "SendRequest3",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Input,Spread",
+   "Usage": "Spread",
    "Properties": [
     {
      "$id": "73",
@@ -663,7 +663,7 @@
    "Kind": "model",
    "Name": "SendRequest2",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Input,Spread",
+   "Usage": "Spread",
    "Properties": [
     {
      "$id": "88",
@@ -916,7 +916,7 @@
    "Kind": "model",
    "Name": "SendRequest1",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Input,Spread",
+   "Usage": "Spread",
    "Properties": [
     {
      "$id": "133",
@@ -1146,7 +1146,7 @@
    "Kind": "model",
    "Name": "SendRequest",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Input,Spread",
+   "Usage": "Spread",
    "Properties": [
     {
      "$id": "169",

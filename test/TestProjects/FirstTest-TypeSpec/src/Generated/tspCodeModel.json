@@ -134,303 +134,14 @@
   {
    "$id": "20",
    "Kind": "enum",
-   "Name": "CsProjectedEnum",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.ProjectedEnum",
+   "Name": "AnonymousBodyRequest_requiredLiteralString",
    "ValueType": {
     "$id": "21",
-    "Kind": "float32"
+    "Kind": "string"
    },
    "Values": [
     {
      "$id": "22",
-     "Name": "CsOne",
-     "Value": 1.1
-    },
-    {
-     "$id": "23",
-     "Name": "Two",
-     "Value": 2.2
-    },
-    {
-     "$id": "24",
-     "Name": "Four",
-     "Value": 4.4
-    }
-   ],
-   "Description": "enum with projected name",
-   "IsExtensible": false,
-   "Usage": "Input"
-  },
-  {
-   "$id": "25",
-   "Kind": "enum",
-   "Name": "CsProjectedEnumInModel",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.ProjectedEnumInModel",
-   "ValueType": {
-    "$id": "26",
-    "Kind": "float32"
-   },
-   "Values": [
-    {
-     "$id": "27",
-     "Name": "CsOne",
-     "Value": 1.1
-    },
-    {
-     "$id": "28",
-     "Name": "Two",
-     "Value": 2.2
-    },
-    {
-     "$id": "29",
-     "Name": "Four",
-     "Value": 4.4
-    }
-   ],
-   "Description": "enum with projected name used in a model",
-   "IsExtensible": false,
-   "Usage": "Input"
-  },
-  {
-   "$id": "30",
-   "Kind": "enum",
-   "Name": "StringFixedEnum",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.StringFixedEnum",
-   "ValueType": {
-    "$id": "31",
-    "Kind": "string"
-   },
-   "Values": [
-    {
-     "$id": "32",
-     "Name": "One",
-     "Value": "1"
-    },
-    {
-     "$id": "33",
-     "Name": "Two",
-     "Value": "2"
-    },
-    {
-     "$id": "34",
-     "Name": "Four",
-     "Value": "4"
-    }
-   ],
-   "Description": "Simple enum",
-   "IsExtensible": false,
-   "Usage": "Input,Output"
-  },
-  {
-   "$id": "35",
-   "Kind": "enum",
-   "Name": "StringExtensibleEnum",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.StringExtensibleEnum",
-   "ValueType": {
-    "$id": "36",
-    "Kind": "string"
-   },
-   "Values": [
-    {
-     "$id": "37",
-     "Name": "One",
-     "Value": "1"
-    },
-    {
-     "$id": "38",
-     "Name": "Two",
-     "Value": "2"
-    },
-    {
-     "$id": "39",
-     "Name": "Four",
-     "Value": "4"
-    }
-   ],
-   "Description": "Extensible enum",
-   "IsExtensible": true,
-   "Usage": "Input,Output"
-  },
-  {
-   "$id": "40",
-   "Kind": "enum",
-   "Name": "IntExtensibleEnum",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.IntExtensibleEnum",
-   "ValueType": {
-    "$id": "41",
-    "Kind": "int32"
-   },
-   "Values": [
-    {
-     "$id": "42",
-     "Name": "One",
-     "Value": 1
-    },
-    {
-     "$id": "43",
-     "Name": "Two",
-     "Value": 2
-    },
-    {
-     "$id": "44",
-     "Name": "Four",
-     "Value": 4
-    }
-   ],
-   "Description": "Int based extensible enum",
-   "IsExtensible": true,
-   "Usage": "Input,Output"
-  },
-  {
-   "$id": "45",
-   "Kind": "enum",
-   "Name": "FloatExtensibleEnum",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.FloatExtensibleEnum",
-   "ValueType": {
-    "$id": "46",
-    "Kind": "float32"
-   },
-   "Values": [
-    {
-     "$id": "47",
-     "Name": "One",
-     "Value": 1
-    },
-    {
-     "$id": "48",
-     "Name": "Two",
-     "Value": 2
-    },
-    {
-     "$id": "49",
-     "Name": "Four",
-     "Value": 4
-    }
-   ],
-   "Description": "Float based extensible enum",
-   "IsExtensible": true,
-   "Usage": "Input,Output"
-  },
-  {
-   "$id": "50",
-   "Kind": "enum",
-   "Name": "FloatFixedEnum",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.FloatFixedEnum",
-   "ValueType": {
-    "$id": "51",
-    "Kind": "float32"
-   },
-   "Values": [
-    {
-     "$id": "52",
-     "Name": "One",
-     "Value": 1.1
-    },
-    {
-     "$id": "53",
-     "Name": "Two",
-     "Value": 2.2
-    },
-    {
-     "$id": "54",
-     "Name": "Four",
-     "Value": 4.4
-    }
-   ],
-   "Description": "float fixed enum",
-   "IsExtensible": false,
-   "Usage": "Input,Output"
-  },
-  {
-   "$id": "55",
-   "Kind": "enum",
-   "Name": "IntFixedEnum",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.IntFixedEnum",
-   "ValueType": {
-    "$id": "56",
-    "Kind": "int32"
-   },
-   "Values": [
-    {
-     "$id": "57",
-     "Name": "One",
-     "Value": 1
-    },
-    {
-     "$id": "58",
-     "Name": "Two",
-     "Value": 2
-    },
-    {
-     "$id": "59",
-     "Name": "Four",
-     "Value": 4
-    }
-   ],
-   "Description": "int fixed enum",
-   "IsExtensible": false,
-   "Usage": "Input,Output"
-  },
-  {
-   "$id": "60",
-   "Kind": "enum",
-   "Name": "DaysOfWeekExtensibleEnum",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.DaysOfWeekExtensibleEnum",
-   "ValueType": {
-    "$id": "61",
-    "Kind": "string"
-   },
-   "Values": [
-    {
-     "$id": "62",
-     "Name": "Monday",
-     "Value": "Monday"
-    },
-    {
-     "$id": "63",
-     "Name": "Tuesday",
-     "Value": "Tuesday"
-    },
-    {
-     "$id": "64",
-     "Name": "Wednesday",
-     "Value": "Wednesday"
-    },
-    {
-     "$id": "65",
-     "Name": "Thursday",
-     "Value": "Thursday"
-    },
-    {
-     "$id": "66",
-     "Name": "Friday",
-     "Value": "Friday"
-    },
-    {
-     "$id": "67",
-     "Name": "Saturday",
-     "Value": "Saturday"
-    },
-    {
-     "$id": "68",
-     "Name": "Sunday",
-     "Value": "Sunday"
-    }
-   ],
-   "IsExtensible": true,
-   "Usage": "None"
-  },
-  {
-   "$id": "69",
-   "Kind": "enum",
-   "Name": "AnonymousBodyRequest_requiredLiteralString",
-   "ValueType": {
-    "$id": "70",
-    "Kind": "string"
-   },
-   "Values": [
-    {
-     "$id": "71",
      "Name": "accept",
      "Value": "accept",
      "Description": "accept"
@@ -442,16 +153,16 @@
    "Usage": "Input"
   },
   {
-   "$id": "72",
+   "$id": "23",
    "Kind": "enum",
    "Name": "AnonymousBodyRequest_requiredLiteralInt",
    "ValueType": {
-    "$id": "73",
+    "$id": "24",
     "Kind": "int32"
    },
    "Values": [
     {
-     "$id": "74",
+     "$id": "25",
      "Name": "123",
      "Value": 123,
      "Description": "123"
@@ -463,16 +174,16 @@
    "Usage": "Input"
   },
   {
-   "$id": "75",
+   "$id": "26",
    "Kind": "enum",
    "Name": "AnonymousBodyRequest_requiredLiteralFloat",
    "ValueType": {
-    "$id": "76",
+    "$id": "27",
     "Kind": "float32"
    },
    "Values": [
     {
-     "$id": "77",
+     "$id": "28",
      "Name": "1.23",
      "Value": 1.23,
      "Description": "1.23"
@@ -484,16 +195,16 @@
    "Usage": "Input"
   },
   {
-   "$id": "78",
+   "$id": "29",
    "Kind": "enum",
    "Name": "AnonymousBodyRequest_optionalLiteralString",
    "ValueType": {
-    "$id": "79",
+    "$id": "30",
     "Kind": "string"
    },
    "Values": [
     {
-     "$id": "80",
+     "$id": "31",
      "Name": "reject",
      "Value": "reject",
      "Description": "reject"
@@ -505,16 +216,16 @@
    "Usage": "Input"
   },
   {
-   "$id": "81",
+   "$id": "32",
    "Kind": "enum",
    "Name": "AnonymousBodyRequest_optionalLiteralInt",
    "ValueType": {
-    "$id": "82",
+    "$id": "33",
     "Kind": "int32"
    },
    "Values": [
     {
-     "$id": "83",
+     "$id": "34",
      "Name": "456",
      "Value": 456,
      "Description": "456"
@@ -526,16 +237,16 @@
    "Usage": "Input"
   },
   {
-   "$id": "84",
+   "$id": "35",
    "Kind": "enum",
    "Name": "AnonymousBodyRequest_optionalLiteralFloat",
    "ValueType": {
-    "$id": "85",
+    "$id": "36",
     "Kind": "float32"
    },
    "Values": [
     {
-     "$id": "86",
+     "$id": "37",
      "Name": "4.56",
      "Value": 4.56,
      "Description": "4.56"
@@ -545,6 +256,295 @@
    "Description": "The AnonymousBodyRequest_optionalLiteralFloat",
    "IsExtensible": true,
    "Usage": "Input"
+  },
+  {
+   "$id": "38",
+   "Kind": "enum",
+   "Name": "CsProjectedEnum",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.ProjectedEnum",
+   "ValueType": {
+    "$id": "39",
+    "Kind": "float32"
+   },
+   "Values": [
+    {
+     "$id": "40",
+     "Name": "CsOne",
+     "Value": 1.1
+    },
+    {
+     "$id": "41",
+     "Name": "Two",
+     "Value": 2.2
+    },
+    {
+     "$id": "42",
+     "Name": "Four",
+     "Value": 4.4
+    }
+   ],
+   "Description": "enum with projected name",
+   "IsExtensible": false,
+   "Usage": "Input"
+  },
+  {
+   "$id": "43",
+   "Kind": "enum",
+   "Name": "CsProjectedEnumInModel",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.ProjectedEnumInModel",
+   "ValueType": {
+    "$id": "44",
+    "Kind": "float32"
+   },
+   "Values": [
+    {
+     "$id": "45",
+     "Name": "CsOne",
+     "Value": 1.1
+    },
+    {
+     "$id": "46",
+     "Name": "Two",
+     "Value": 2.2
+    },
+    {
+     "$id": "47",
+     "Name": "Four",
+     "Value": 4.4
+    }
+   ],
+   "Description": "enum with projected name used in a model",
+   "IsExtensible": false,
+   "Usage": "Input"
+  },
+  {
+   "$id": "48",
+   "Kind": "enum",
+   "Name": "StringFixedEnum",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.StringFixedEnum",
+   "ValueType": {
+    "$id": "49",
+    "Kind": "string"
+   },
+   "Values": [
+    {
+     "$id": "50",
+     "Name": "One",
+     "Value": "1"
+    },
+    {
+     "$id": "51",
+     "Name": "Two",
+     "Value": "2"
+    },
+    {
+     "$id": "52",
+     "Name": "Four",
+     "Value": "4"
+    }
+   ],
+   "Description": "Simple enum",
+   "IsExtensible": false,
+   "Usage": "Input,Output"
+  },
+  {
+   "$id": "53",
+   "Kind": "enum",
+   "Name": "StringExtensibleEnum",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.StringExtensibleEnum",
+   "ValueType": {
+    "$id": "54",
+    "Kind": "string"
+   },
+   "Values": [
+    {
+     "$id": "55",
+     "Name": "One",
+     "Value": "1"
+    },
+    {
+     "$id": "56",
+     "Name": "Two",
+     "Value": "2"
+    },
+    {
+     "$id": "57",
+     "Name": "Four",
+     "Value": "4"
+    }
+   ],
+   "Description": "Extensible enum",
+   "IsExtensible": true,
+   "Usage": "Input,Output"
+  },
+  {
+   "$id": "58",
+   "Kind": "enum",
+   "Name": "IntExtensibleEnum",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.IntExtensibleEnum",
+   "ValueType": {
+    "$id": "59",
+    "Kind": "int32"
+   },
+   "Values": [
+    {
+     "$id": "60",
+     "Name": "One",
+     "Value": 1
+    },
+    {
+     "$id": "61",
+     "Name": "Two",
+     "Value": 2
+    },
+    {
+     "$id": "62",
+     "Name": "Four",
+     "Value": 4
+    }
+   ],
+   "Description": "Int based extensible enum",
+   "IsExtensible": true,
+   "Usage": "Input,Output"
+  },
+  {
+   "$id": "63",
+   "Kind": "enum",
+   "Name": "FloatExtensibleEnum",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.FloatExtensibleEnum",
+   "ValueType": {
+    "$id": "64",
+    "Kind": "float32"
+   },
+   "Values": [
+    {
+     "$id": "65",
+     "Name": "One",
+     "Value": 1
+    },
+    {
+     "$id": "66",
+     "Name": "Two",
+     "Value": 2
+    },
+    {
+     "$id": "67",
+     "Name": "Four",
+     "Value": 4
+    }
+   ],
+   "Description": "Float based extensible enum",
+   "IsExtensible": true,
+   "Usage": "Input,Output"
+  },
+  {
+   "$id": "68",
+   "Kind": "enum",
+   "Name": "FloatFixedEnum",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.FloatFixedEnum",
+   "ValueType": {
+    "$id": "69",
+    "Kind": "float32"
+   },
+   "Values": [
+    {
+     "$id": "70",
+     "Name": "One",
+     "Value": 1.1
+    },
+    {
+     "$id": "71",
+     "Name": "Two",
+     "Value": 2.2
+    },
+    {
+     "$id": "72",
+     "Name": "Four",
+     "Value": 4.4
+    }
+   ],
+   "Description": "float fixed enum",
+   "IsExtensible": false,
+   "Usage": "Input,Output"
+  },
+  {
+   "$id": "73",
+   "Kind": "enum",
+   "Name": "IntFixedEnum",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.IntFixedEnum",
+   "ValueType": {
+    "$id": "74",
+    "Kind": "int32"
+   },
+   "Values": [
+    {
+     "$id": "75",
+     "Name": "One",
+     "Value": 1
+    },
+    {
+     "$id": "76",
+     "Name": "Two",
+     "Value": 2
+    },
+    {
+     "$id": "77",
+     "Name": "Four",
+     "Value": 4
+    }
+   ],
+   "Description": "int fixed enum",
+   "IsExtensible": false,
+   "Usage": "Input,Output"
+  },
+  {
+   "$id": "78",
+   "Kind": "enum",
+   "Name": "DaysOfWeekExtensibleEnum",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.DaysOfWeekExtensibleEnum",
+   "ValueType": {
+    "$id": "79",
+    "Kind": "string"
+   },
+   "Values": [
+    {
+     "$id": "80",
+     "Name": "Monday",
+     "Value": "Monday"
+    },
+    {
+     "$id": "81",
+     "Name": "Tuesday",
+     "Value": "Tuesday"
+    },
+    {
+     "$id": "82",
+     "Name": "Wednesday",
+     "Value": "Wednesday"
+    },
+    {
+     "$id": "83",
+     "Name": "Thursday",
+     "Value": "Thursday"
+    },
+    {
+     "$id": "84",
+     "Name": "Friday",
+     "Value": "Friday"
+    },
+    {
+     "$id": "85",
+     "Name": "Saturday",
+     "Value": "Saturday"
+    },
+    {
+     "$id": "86",
+     "Name": "Sunday",
+     "Value": "Sunday"
+    }
+   ],
+   "IsExtensible": true,
+   "Usage": "None"
   },
   {
    "$id": "87",
@@ -848,18 +848,294 @@
   {
    "$id": "133",
    "Kind": "model",
-   "Name": "Friend",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.NotFriend",
-   "Usage": "Input,Output",
-   "Description": "this is not a friendly model but with a friendly name",
+   "Name": "AnonymousBodyRequest",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody.Request.anonymous",
+   "Usage": "Spread",
    "Properties": [
     {
      "$id": "134",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "name of the NotFriend",
+     "Description": "name of the Thing",
      "Type": {
       "$id": "135",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "136",
+     "Name": "requiredUnion",
+     "SerializedName": "requiredUnion",
+     "Description": "required Union",
+     "Type": {
+      "$id": "137",
+      "Kind": "union",
+      "Name": "ThingRequiredUnion",
+      "VariantTypes": [
+       {
+        "$id": "138",
+        "Kind": "string"
+       },
+       {
+        "$id": "139",
+        "Kind": "array",
+        "Name": "Array",
+        "ValueType": {
+         "$id": "140",
+         "Kind": "string"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
+       },
+       {
+        "$id": "141",
+        "Kind": "int32"
+       }
+      ]
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "142",
+     "Name": "requiredLiteralString",
+     "SerializedName": "requiredLiteralString",
+     "Description": "required literal string",
+     "Type": {
+      "$id": "143",
+      "Kind": "constant",
+      "ValueType": {
+       "$ref": "20"
+      },
+      "Value": "accept"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "144",
+     "Name": "requiredLiteralInt",
+     "SerializedName": "requiredLiteralInt",
+     "Description": "required literal int",
+     "Type": {
+      "$id": "145",
+      "Kind": "constant",
+      "ValueType": {
+       "$ref": "23"
+      },
+      "Value": 123
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "146",
+     "Name": "requiredLiteralFloat",
+     "SerializedName": "requiredLiteralFloat",
+     "Description": "required literal float",
+     "Type": {
+      "$id": "147",
+      "Kind": "constant",
+      "ValueType": {
+       "$ref": "26"
+      },
+      "Value": 1.23
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "148",
+     "Name": "requiredLiteralBool",
+     "SerializedName": "requiredLiteralBool",
+     "Description": "required literal bool",
+     "Type": {
+      "$id": "149",
+      "Kind": "constant",
+      "ValueType": {
+       "$id": "150",
+       "Kind": "boolean"
+      },
+      "Value": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "151",
+     "Name": "optionalLiteralString",
+     "SerializedName": "optionalLiteralString",
+     "Description": "optional literal string",
+     "Type": {
+      "$id": "152",
+      "Kind": "constant",
+      "ValueType": {
+       "$ref": "29"
+      },
+      "Value": "reject"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "153",
+     "Name": "optionalLiteralInt",
+     "SerializedName": "optionalLiteralInt",
+     "Description": "optional literal int",
+     "Type": {
+      "$id": "154",
+      "Kind": "constant",
+      "ValueType": {
+       "$ref": "32"
+      },
+      "Value": 456
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "155",
+     "Name": "optionalLiteralFloat",
+     "SerializedName": "optionalLiteralFloat",
+     "Description": "optional literal float",
+     "Type": {
+      "$id": "156",
+      "Kind": "constant",
+      "ValueType": {
+       "$ref": "35"
+      },
+      "Value": 4.56
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "157",
+     "Name": "optionalLiteralBool",
+     "SerializedName": "optionalLiteralBool",
+     "Description": "optional literal bool",
+     "Type": {
+      "$id": "158",
+      "Kind": "constant",
+      "ValueType": {
+       "$id": "159",
+       "Kind": "boolean"
+      },
+      "Value": true
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "160",
+     "Name": "requiredBadDescription",
+     "SerializedName": "requiredBadDescription",
+     "Description": "description with xml <|endoftext|>",
+     "Type": {
+      "$id": "161",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "162",
+     "Name": "optionalNullableList",
+     "SerializedName": "optionalNullableList",
+     "Description": "optional nullable collection",
+     "Type": {
+      "$id": "163",
+      "Kind": "nullable",
+      "Type": {
+       "$id": "164",
+       "Kind": "array",
+       "Name": "Array",
+       "ValueType": {
+        "$id": "165",
+        "Kind": "int32"
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
+      }
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "166",
+     "Name": "requiredNullableList",
+     "SerializedName": "requiredNullableList",
+     "Description": "required nullable collection",
+     "Type": {
+      "$id": "167",
+      "Kind": "nullable",
+      "Type": {
+       "$id": "168",
+       "Kind": "array",
+       "Name": "Array",
+       "ValueType": {
+        "$id": "169",
+        "Kind": "int32"
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
+      }
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "170",
+     "Name": "requiredFloatProperty",
+     "SerializedName": "requiredFloatProperty",
+     "Description": "required float property",
+     "Type": {
+      "$id": "171",
+      "Kind": "float"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "172",
+     "Name": "optionalFloatProperty",
+     "SerializedName": "optionalFloatProperty",
+     "Description": "optional float property",
+     "Type": {
+      "$id": "173",
+      "Kind": "float"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "174",
+     "Name": "optionalResourceId",
+     "SerializedName": "optionalResourceId",
+     "Description": "optional arm id.",
+     "Type": {
+      "$id": "175",
+      "Kind": "armId",
+      "Encode": "string"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "176",
+   "Kind": "model",
+   "Name": "FriendlyModelRequest",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.friendlyModel.Request.anonymous",
+   "Usage": "Spread",
+   "Properties": [
+    {
+     "$id": "177",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "name of the NotFriend",
+     "Type": {
+      "$id": "178",
       "Kind": "string"
      },
      "IsRequired": true,
@@ -868,31 +1144,53 @@
    ]
   },
   {
-   "$id": "136",
+   "$id": "179",
+   "Kind": "model",
+   "Name": "Friend",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.NotFriend",
+   "Usage": "Output",
+   "Description": "this is not a friendly model but with a friendly name",
+   "Properties": [
+    {
+     "$id": "180",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "name of the NotFriend",
+     "Type": {
+      "$id": "181",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "182",
    "Kind": "model",
    "Name": "ModelWithFormat",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithFormat",
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "137",
+     "$id": "183",
      "Name": "sourceUrl",
      "SerializedName": "sourceUrl",
      "Description": "url format",
      "Type": {
-      "$id": "138",
+      "$id": "184",
       "Kind": "url"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "139",
+     "$id": "185",
      "Name": "guid",
      "SerializedName": "guid",
      "Description": "uuid format",
      "Type": {
-      "$id": "140",
+      "$id": "186",
       "Kind": "uuid",
       "Encode": "string"
      },
@@ -902,20 +1200,19 @@
    ]
   },
   {
-   "$id": "141",
+   "$id": "187",
    "Kind": "model",
-   "Name": "ProjectedModel",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithProjectedName",
-   "Usage": "Input,Output",
-   "Description": "this is a model with a projected name",
+   "Name": "ProjectedNameModelRequest",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.projectedNameModel.Request.anonymous",
+   "Usage": "Spread",
    "Properties": [
     {
-     "$id": "142",
+     "$id": "188",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the ModelWithProjectedName",
      "Type": {
-      "$id": "143",
+      "$id": "189",
       "Kind": "string"
      },
      "IsRequired": true,
@@ -924,7 +1221,29 @@
    ]
   },
   {
-   "$id": "144",
+   "$id": "190",
+   "Kind": "model",
+   "Name": "ProjectedModel",
+   "CrossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithProjectedName",
+   "Usage": "Output",
+   "Description": "this is a model with a projected name",
+   "Properties": [
+    {
+     "$id": "191",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "name of the ModelWithProjectedName",
+     "Type": {
+      "$id": "192",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "193",
    "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.returnsAnonymousModel.Response.anonymous",
@@ -932,14 +1251,14 @@
    "Properties": []
   },
   {
-   "$id": "145",
+   "$id": "194",
    "Kind": "model",
    "Name": "Extension",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.Extension",
    "Usage": "Input",
    "Description": "extension",
    "BaseModel": {
-    "$id": "146",
+    "$id": "195",
     "Kind": "model",
     "Name": "Element",
     "CrossLanguageDefinitionId": "FirstTestTypeSpec.Element",
@@ -947,16 +1266,16 @@
     "Description": "element",
     "Properties": [
      {
-      "$id": "147",
+      "$id": "196",
       "Name": "extension",
       "SerializedName": "extension",
       "Description": "",
       "Type": {
-       "$id": "148",
+       "$id": "197",
        "Kind": "array",
        "Name": "ArrayExtension",
        "ValueType": {
-        "$ref": "145"
+        "$ref": "194"
        },
        "CrossLanguageDefinitionId": "TypeSpec.Array"
       },
@@ -967,12 +1286,12 @@
    },
    "Properties": [
     {
-     "$id": "149",
+     "$id": "198",
      "Name": "level",
      "SerializedName": "level",
      "Description": "",
      "Type": {
-      "$id": "150",
+      "$id": "199",
       "Kind": "int8"
      },
      "IsRequired": true,
@@ -981,10 +1300,10 @@
    ]
   },
   {
-   "$ref": "146"
+   "$ref": "195"
   },
   {
-   "$id": "151",
+   "$id": "200",
    "Kind": "model",
    "Name": "Extendible",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.Extendible",
@@ -992,23 +1311,23 @@
    "Description": "FHIR extendible element",
    "Properties": [
     {
-     "$id": "152",
+     "$id": "201",
      "Name": "extension",
      "SerializedName": "extension",
      "Description": "Additional Content defined by implementations",
      "Type": {
-      "$id": "153",
+      "$id": "202",
       "Kind": "array",
       "Name": "ArrayThereLevelExtension",
       "ValueType": {
-       "$id": "154",
+       "$id": "203",
        "Kind": "model",
        "Name": "ThereLevelExtension",
        "CrossLanguageDefinitionId": "FirstTestTypeSpec.ThereLevelExtension",
        "Usage": "Input",
        "Description": "extension",
        "BaseModel": {
-        "$id": "155",
+        "$id": "204",
         "Kind": "model",
         "Name": "ThereLevelElement",
         "CrossLanguageDefinitionId": "FirstTestTypeSpec.ThereLevelElement",
@@ -1016,16 +1335,16 @@
         "Description": "element",
         "Properties": [
          {
-          "$id": "156",
+          "$id": "205",
           "Name": "extension",
           "SerializedName": "extension",
           "Description": "",
           "Type": {
-           "$id": "157",
+           "$id": "206",
            "Kind": "array",
            "Name": "ArrayThereLevelExtension",
            "ValueType": {
-            "$ref": "154"
+            "$ref": "203"
            },
            "CrossLanguageDefinitionId": "TypeSpec.Array"
           },
@@ -1036,12 +1355,12 @@
        },
        "Properties": [
         {
-         "$id": "158",
+         "$id": "207",
          "Name": "level",
          "SerializedName": "level",
          "Description": "",
          "Type": {
-          "$id": "159",
+          "$id": "208",
           "Kind": "int8"
          },
          "IsRequired": true,
@@ -1057,20 +1376,20 @@
    ]
   },
   {
-   "$ref": "154"
+   "$ref": "203"
   },
   {
-   "$ref": "155"
+   "$ref": "204"
   },
   {
-   "$id": "160",
+   "$id": "209",
    "Kind": "model",
    "Name": "ChildModel",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.ChildModel",
    "Usage": "Input",
    "Description": "ChildModel",
    "BaseModel": {
-    "$id": "161",
+    "$id": "210",
     "Kind": "model",
     "Name": "BaseModel",
     "CrossLanguageDefinitionId": "FirstTestTypeSpec.BaseModel",
@@ -1078,12 +1397,12 @@
     "Description": "parenetModel",
     "Properties": [
      {
-      "$id": "162",
+      "$id": "211",
       "Name": "level",
       "SerializedName": "level",
       "Description": "",
       "Type": {
-       "$id": "163",
+       "$id": "212",
        "Kind": "int8"
       },
       "IsRequired": true,
@@ -1093,16 +1412,16 @@
    },
    "Properties": [
     {
-     "$id": "164",
+     "$id": "213",
      "Name": "parent",
      "SerializedName": "parent",
      "Description": "",
      "Type": {
-      "$id": "165",
+      "$id": "214",
       "Kind": "array",
       "Name": "ArrayBaseModel",
       "ValueType": {
-       "$ref": "161"
+       "$ref": "210"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -1112,10 +1431,10 @@
    ]
   },
   {
-   "$ref": "161"
+   "$ref": "210"
   },
   {
-   "$id": "166",
+   "$id": "215",
    "Kind": "model",
    "Name": "ContainSelf",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.ContainSelf",
@@ -1123,12 +1442,12 @@
    "Description": "containself",
    "Properties": [
     {
-     "$id": "167",
+     "$id": "216",
      "Name": "self",
      "SerializedName": "self",
      "Description": "",
      "Type": {
-      "$ref": "166"
+      "$ref": "215"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1136,19 +1455,19 @@
    ]
   },
   {
-   "$id": "168",
+   "$id": "217",
    "Kind": "model",
    "Name": "ModelWithProjectedEnum",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithProjectedEnum",
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "169",
+     "$id": "218",
      "Name": "enumProperty",
      "SerializedName": "enumProperty",
      "Description": "enum with projected name used in a model",
      "Type": {
-      "$ref": "25"
+      "$ref": "43"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1156,19 +1475,19 @@
    ]
   },
   {
-   "$id": "170",
+   "$id": "219",
    "Kind": "model",
    "Name": "AzureLocationModel",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.AzureLocationModel",
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "171",
+     "$id": "220",
      "Name": "location",
      "SerializedName": "location",
      "Description": "",
      "Type": {
-      "$id": "172",
+      "$id": "221",
       "Kind": "azureLocation",
       "Encode": "string"
      },
@@ -1178,7 +1497,7 @@
    ]
   },
   {
-   "$id": "173",
+   "$id": "222",
    "Kind": "model",
    "Name": "RoundTripModel",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel",
@@ -1186,40 +1505,40 @@
    "Description": "this is a roundtrip model",
    "Properties": [
     {
-     "$id": "174",
+     "$id": "223",
      "Name": "requiredString",
      "SerializedName": "requiredString",
      "Description": "Required string, illustrating a reference type property.",
      "Type": {
-      "$id": "175",
+      "$id": "224",
       "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "176",
+     "$id": "225",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "Required int, illustrating a value type property.",
      "Type": {
-      "$id": "177",
+      "$id": "226",
       "Kind": "int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "178",
+     "$id": "227",
      "Name": "requiredCollection",
      "SerializedName": "requiredCollection",
      "Description": "Required collection of enums",
      "Type": {
-      "$id": "179",
+      "$id": "228",
       "Kind": "array",
       "Name": "ArrayStringFixedEnum",
       "ValueType": {
-       "$ref": "30"
+       "$ref": "48"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -1227,26 +1546,26 @@
      "IsReadOnly": false
     },
     {
-     "$id": "180",
+     "$id": "229",
      "Name": "requiredDictionary",
      "SerializedName": "requiredDictionary",
      "Description": "Required dictionary of enums",
      "Type": {
-      "$id": "181",
+      "$id": "230",
       "Kind": "dict",
       "KeyType": {
-       "$id": "182",
+       "$id": "231",
        "Kind": "string"
       },
       "ValueType": {
-       "$ref": "35"
+       "$ref": "53"
       }
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "183",
+     "$id": "232",
      "Name": "requiredModel",
      "SerializedName": "requiredModel",
      "Description": "Required model",
@@ -1257,27 +1576,27 @@
      "IsReadOnly": false
     },
     {
-     "$id": "184",
+     "$id": "233",
      "Name": "intExtensibleEnum",
      "SerializedName": "intExtensibleEnum",
      "Description": "this is an int based extensible enum",
      "Type": {
-      "$ref": "40"
+      "$ref": "58"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "185",
+     "$id": "234",
      "Name": "intExtensibleEnumCollection",
      "SerializedName": "intExtensibleEnumCollection",
      "Description": "this is a collection of int based extensible enum",
      "Type": {
-      "$id": "186",
+      "$id": "235",
       "Kind": "array",
       "Name": "ArrayIntExtensibleEnum",
       "ValueType": {
-       "$ref": "40"
+       "$ref": "58"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -1285,27 +1604,27 @@
      "IsReadOnly": false
     },
     {
-     "$id": "187",
+     "$id": "236",
      "Name": "floatExtensibleEnum",
      "SerializedName": "floatExtensibleEnum",
      "Description": "this is a float based extensible enum",
      "Type": {
-      "$ref": "45"
+      "$ref": "63"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "188",
+     "$id": "237",
      "Name": "floatExtensibleEnumCollection",
      "SerializedName": "floatExtensibleEnumCollection",
      "Description": "this is a collection of float based extensible enum",
      "Type": {
-      "$id": "189",
+      "$id": "238",
       "Kind": "array",
       "Name": "ArrayFloatExtensibleEnum",
       "ValueType": {
-       "$ref": "45"
+       "$ref": "63"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -1313,27 +1632,27 @@
      "IsReadOnly": false
     },
     {
-     "$id": "190",
+     "$id": "239",
      "Name": "floatFixedEnum",
      "SerializedName": "floatFixedEnum",
      "Description": "this is a float based fixed enum",
      "Type": {
-      "$ref": "50"
+      "$ref": "68"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "191",
+     "$id": "240",
      "Name": "floatFixedEnumCollection",
      "SerializedName": "floatFixedEnumCollection",
      "Description": "this is a collection of float based fixed enum",
      "Type": {
-      "$id": "192",
+      "$id": "241",
       "Kind": "array",
       "Name": "ArrayFloatFixedEnum",
       "ValueType": {
-       "$ref": "50"
+       "$ref": "68"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -1341,27 +1660,27 @@
      "IsReadOnly": false
     },
     {
-     "$id": "193",
+     "$id": "242",
      "Name": "intFixedEnum",
      "SerializedName": "intFixedEnum",
      "Description": "this is a int based fixed enum",
      "Type": {
-      "$ref": "55"
+      "$ref": "73"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "194",
+     "$id": "243",
      "Name": "intFixedEnumCollection",
      "SerializedName": "intFixedEnumCollection",
      "Description": "this is a collection of int based fixed enum",
      "Type": {
-      "$id": "195",
+      "$id": "244",
       "Kind": "array",
       "Name": "ArrayIntFixedEnum",
       "ValueType": {
-       "$ref": "55"
+       "$ref": "73"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -1369,54 +1688,54 @@
      "IsReadOnly": false
     },
     {
-     "$id": "196",
+     "$id": "245",
      "Name": "stringFixedEnum",
      "SerializedName": "stringFixedEnum",
      "Description": "this is a string based fixed enum",
      "Type": {
-      "$ref": "30"
+      "$ref": "48"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "197",
+     "$id": "246",
      "Name": "requiredUnknown",
      "SerializedName": "requiredUnknown",
      "Description": "required unknown",
      "Type": {
-      "$id": "198",
+      "$id": "247",
       "Kind": "any"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "199",
+     "$id": "248",
      "Name": "optionalUnknown",
      "SerializedName": "optionalUnknown",
      "Description": "optional unknown",
      "Type": {
-      "$id": "200",
+      "$id": "249",
       "Kind": "any"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "201",
+     "$id": "250",
      "Name": "requiredRecordUnknown",
      "SerializedName": "requiredRecordUnknown",
      "Description": "required record of unknown",
      "Type": {
-      "$id": "202",
+      "$id": "251",
       "Kind": "dict",
       "KeyType": {
-       "$id": "203",
+       "$id": "252",
        "Kind": "string"
       },
       "ValueType": {
-       "$id": "204",
+       "$id": "253",
        "Kind": "any"
       }
      },
@@ -1424,19 +1743,19 @@
      "IsReadOnly": false
     },
     {
-     "$id": "205",
+     "$id": "254",
      "Name": "optionalRecordUnknown",
      "SerializedName": "optionalRecordUnknown",
      "Description": "optional record of unknown",
      "Type": {
-      "$id": "206",
+      "$id": "255",
       "Kind": "dict",
       "KeyType": {
-       "$id": "207",
+       "$id": "256",
        "Kind": "string"
       },
       "ValueType": {
-       "$id": "208",
+       "$id": "257",
        "Kind": "any"
       }
      },
@@ -1444,19 +1763,19 @@
      "IsReadOnly": false
     },
     {
-     "$id": "209",
+     "$id": "258",
      "Name": "readOnlyRequiredRecordUnknown",
      "SerializedName": "readOnlyRequiredRecordUnknown",
      "Description": "required readonly record of unknown",
      "Type": {
-      "$id": "210",
+      "$id": "259",
       "Kind": "dict",
       "KeyType": {
-       "$id": "211",
+       "$id": "260",
        "Kind": "string"
       },
       "ValueType": {
-       "$id": "212",
+       "$id": "261",
        "Kind": "any"
       }
      },
@@ -1464,19 +1783,19 @@
      "IsReadOnly": true
     },
     {
-     "$id": "213",
+     "$id": "262",
      "Name": "readOnlyOptionalRecordUnknown",
      "SerializedName": "readOnlyOptionalRecordUnknown",
      "Description": "optional readonly record of unknown",
      "Type": {
-      "$id": "214",
+      "$id": "263",
       "Kind": "dict",
       "KeyType": {
-       "$id": "215",
+       "$id": "264",
        "Kind": "string"
       },
       "ValueType": {
-       "$id": "216",
+       "$id": "265",
        "Kind": "any"
       }
      },
@@ -1484,12 +1803,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "217",
+     "$id": "266",
      "Name": "modelWithRequiredNullable",
      "SerializedName": "modelWithRequiredNullable",
      "Description": "this is a model with required nullable properties",
      "Type": {
-      "$id": "218",
+      "$id": "267",
       "Kind": "model",
       "Name": "ModelWithRequiredNullableProperties",
       "CrossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithRequiredNullableProperties",
@@ -1497,15 +1816,15 @@
       "Description": "A model with a few required nullable properties",
       "Properties": [
        {
-        "$id": "219",
+        "$id": "268",
         "Name": "requiredNullablePrimitive",
         "SerializedName": "requiredNullablePrimitive",
         "Description": "required nullable primitive type",
         "Type": {
-         "$id": "220",
+         "$id": "269",
          "Kind": "nullable",
          "Type": {
-          "$id": "221",
+          "$id": "270",
           "Kind": "int32"
          }
         },
@@ -1513,30 +1832,30 @@
         "IsReadOnly": false
        },
        {
-        "$id": "222",
+        "$id": "271",
         "Name": "requiredExtensibleEnum",
         "SerializedName": "requiredExtensibleEnum",
         "Description": "required nullable extensible enum type",
         "Type": {
-         "$id": "223",
+         "$id": "272",
          "Kind": "nullable",
          "Type": {
-          "$ref": "35"
+          "$ref": "53"
          }
         },
         "IsRequired": true,
         "IsReadOnly": false
        },
        {
-        "$id": "224",
+        "$id": "273",
         "Name": "requiredFixedEnum",
         "SerializedName": "requiredFixedEnum",
         "Description": "required nullable fixed enum type",
         "Type": {
-         "$id": "225",
+         "$id": "274",
          "Kind": "nullable",
          "Type": {
-          "$ref": "30"
+          "$ref": "48"
          }
         },
         "IsRequired": true,
@@ -1548,29 +1867,29 @@
      "IsReadOnly": false
     },
     {
-     "$id": "226",
+     "$id": "275",
      "Name": "unionList",
      "SerializedName": "unionList",
      "Description": "this is a list of union types",
      "Type": {
-      "$id": "227",
+      "$id": "276",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "228",
+       "$id": "277",
        "Kind": "union",
        "Name": "RoundTripModelUnionList",
        "VariantTypes": [
         {
-         "$id": "229",
+         "$id": "278",
          "Kind": "string"
         },
         {
-         "$id": "230",
+         "$id": "279",
          "Kind": "int32"
         },
         {
-         "$id": "231",
+         "$id": "280",
          "Kind": "model",
          "Name": "ModelForUnion",
          "CrossLanguageDefinitionId": "FirstTestTypeSpec.ModelForUnion",
@@ -1578,24 +1897,24 @@
          "Description": "This is a model only used in union types, please do not use it anywhere else.",
          "Properties": [
           {
-           "$id": "232",
+           "$id": "281",
            "Name": "name",
            "SerializedName": "name",
            "Description": "name of the ModelForUnion",
            "Type": {
-            "$id": "233",
+            "$id": "282",
             "Kind": "string"
            },
            "IsRequired": true,
            "IsReadOnly": false
           },
           {
-           "$id": "234",
+           "$id": "283",
            "Name": "age",
            "SerializedName": "age",
            "Description": "age of the ModelForUnion",
            "Type": {
-            "$id": "235",
+            "$id": "284",
             "Kind": "int32"
            },
            "IsRequired": false,
@@ -1604,11 +1923,11 @@
          ]
         },
         {
-         "$id": "236",
+         "$id": "285",
          "Kind": "array",
          "Name": "ArrayModelForUnion",
          "ValueType": {
-          "$ref": "231"
+          "$ref": "280"
          },
          "CrossLanguageDefinitionId": "TypeSpec.Array"
         }
@@ -1622,329 +1941,10 @@
    ]
   },
   {
-   "$ref": "218"
+   "$ref": "267"
   },
   {
-   "$ref": "231"
-  },
-  {
-   "$id": "237",
-   "Kind": "model",
-   "Name": "AnonymousBodyRequest",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody.Request.anonymous",
-   "Usage": "Input,Spread",
-   "Properties": [
-    {
-     "$id": "238",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "name of the Thing",
-     "Type": {
-      "$id": "239",
-      "Kind": "string"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "240",
-     "Name": "requiredUnion",
-     "SerializedName": "requiredUnion",
-     "Description": "required Union",
-     "Type": {
-      "$id": "241",
-      "Kind": "union",
-      "Name": "ThingRequiredUnion",
-      "VariantTypes": [
-       {
-        "$id": "242",
-        "Kind": "string"
-       },
-       {
-        "$id": "243",
-        "Kind": "array",
-        "Name": "Array",
-        "ValueType": {
-         "$id": "244",
-         "Kind": "string"
-        },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
-       },
-       {
-        "$id": "245",
-        "Kind": "int32"
-       }
-      ]
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "246",
-     "Name": "requiredLiteralString",
-     "SerializedName": "requiredLiteralString",
-     "Description": "required literal string",
-     "Type": {
-      "$id": "247",
-      "Kind": "constant",
-      "ValueType": {
-       "$ref": "69"
-      },
-      "Value": "accept"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "248",
-     "Name": "requiredLiteralInt",
-     "SerializedName": "requiredLiteralInt",
-     "Description": "required literal int",
-     "Type": {
-      "$id": "249",
-      "Kind": "constant",
-      "ValueType": {
-       "$ref": "72"
-      },
-      "Value": 123
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "250",
-     "Name": "requiredLiteralFloat",
-     "SerializedName": "requiredLiteralFloat",
-     "Description": "required literal float",
-     "Type": {
-      "$id": "251",
-      "Kind": "constant",
-      "ValueType": {
-       "$ref": "75"
-      },
-      "Value": 1.23
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "252",
-     "Name": "requiredLiteralBool",
-     "SerializedName": "requiredLiteralBool",
-     "Description": "required literal bool",
-     "Type": {
-      "$id": "253",
-      "Kind": "constant",
-      "ValueType": {
-       "$id": "254",
-       "Kind": "boolean"
-      },
-      "Value": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "255",
-     "Name": "optionalLiteralString",
-     "SerializedName": "optionalLiteralString",
-     "Description": "optional literal string",
-     "Type": {
-      "$id": "256",
-      "Kind": "constant",
-      "ValueType": {
-       "$ref": "78"
-      },
-      "Value": "reject"
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "257",
-     "Name": "optionalLiteralInt",
-     "SerializedName": "optionalLiteralInt",
-     "Description": "optional literal int",
-     "Type": {
-      "$id": "258",
-      "Kind": "constant",
-      "ValueType": {
-       "$ref": "81"
-      },
-      "Value": 456
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "259",
-     "Name": "optionalLiteralFloat",
-     "SerializedName": "optionalLiteralFloat",
-     "Description": "optional literal float",
-     "Type": {
-      "$id": "260",
-      "Kind": "constant",
-      "ValueType": {
-       "$ref": "84"
-      },
-      "Value": 4.56
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "261",
-     "Name": "optionalLiteralBool",
-     "SerializedName": "optionalLiteralBool",
-     "Description": "optional literal bool",
-     "Type": {
-      "$id": "262",
-      "Kind": "constant",
-      "ValueType": {
-       "$id": "263",
-       "Kind": "boolean"
-      },
-      "Value": true
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "264",
-     "Name": "requiredBadDescription",
-     "SerializedName": "requiredBadDescription",
-     "Description": "description with xml <|endoftext|>",
-     "Type": {
-      "$id": "265",
-      "Kind": "string"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "266",
-     "Name": "optionalNullableList",
-     "SerializedName": "optionalNullableList",
-     "Description": "optional nullable collection",
-     "Type": {
-      "$id": "267",
-      "Kind": "nullable",
-      "Type": {
-       "$id": "268",
-       "Kind": "array",
-       "Name": "Array",
-       "ValueType": {
-        "$id": "269",
-        "Kind": "int32"
-       },
-       "CrossLanguageDefinitionId": "TypeSpec.Array"
-      }
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "270",
-     "Name": "requiredNullableList",
-     "SerializedName": "requiredNullableList",
-     "Description": "required nullable collection",
-     "Type": {
-      "$id": "271",
-      "Kind": "nullable",
-      "Type": {
-       "$id": "272",
-       "Kind": "array",
-       "Name": "Array",
-       "ValueType": {
-        "$id": "273",
-        "Kind": "int32"
-       },
-       "CrossLanguageDefinitionId": "TypeSpec.Array"
-      }
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "274",
-     "Name": "requiredFloatProperty",
-     "SerializedName": "requiredFloatProperty",
-     "Description": "required float property",
-     "Type": {
-      "$id": "275",
-      "Kind": "float"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "276",
-     "Name": "optionalFloatProperty",
-     "SerializedName": "optionalFloatProperty",
-     "Description": "optional float property",
-     "Type": {
-      "$id": "277",
-      "Kind": "float"
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "278",
-     "Name": "optionalResourceId",
-     "SerializedName": "optionalResourceId",
-     "Description": "optional arm id.",
-     "Type": {
-      "$id": "279",
-      "Kind": "armId",
-      "Encode": "string"
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "280",
-   "Kind": "model",
-   "Name": "FriendlyModelRequest",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.friendlyModel.Request.anonymous",
-   "Usage": "Input,Spread",
-   "Properties": [
-    {
-     "$id": "281",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "name of the NotFriend",
-     "Type": {
-      "$id": "282",
-      "Kind": "string"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "283",
-   "Kind": "model",
-   "Name": "ProjectedNameModelRequest",
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.projectedNameModel.Request.anonymous",
-   "Usage": "Input,Spread",
-   "Properties": [
-    {
-     "$id": "284",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "name of the ModelWithProjectedName",
-     "Type": {
-      "$id": "285",
-      "Kind": "string"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
+   "$ref": "280"
   }
  ],
  "Clients": [
@@ -2231,11 +2231,10 @@
       },
       {
        "$id": "312",
-       "Name": "Thing",
-       "NameInRequest": "Thing",
-       "Description": "A model with a few properties of literal types",
+       "Name": "AnonymousBodyRequest",
+       "NameInRequest": "",
        "Type": {
-        "$ref": "90"
+        "$ref": "133"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2338,11 +2337,10 @@
       },
       {
        "$id": "321",
-       "Name": "Friend",
-       "NameInRequest": "NotFriend",
-       "Description": "this is not a friendly model but with a friendly name",
+       "Name": "FriendlyModelRequest",
+       "NameInRequest": "",
        "Type": {
-        "$ref": "133"
+        "$ref": "176"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2412,7 +2410,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "133"
+        "$ref": "179"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2544,7 +2542,7 @@
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "136"
+        "$ref": "182"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2641,11 +2639,10 @@
       },
       {
        "$id": "349",
-       "Name": "ProjectedModel",
-       "NameInRequest": "ModelWithProjectedName",
-       "Description": "this is a model with a projected name",
+       "Name": "ProjectedNameModelRequest",
+       "NameInRequest": "",
        "Type": {
-        "$ref": "141"
+        "$ref": "187"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2715,7 +2712,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "141"
+        "$ref": "190"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2779,7 +2776,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "144"
+        "$ref": "193"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3316,7 +3313,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "145"
+        "$ref": "194"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3416,7 +3413,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "151"
+        "$ref": "200"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3516,7 +3513,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "160"
+        "$ref": "209"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3616,7 +3613,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "166"
+        "$ref": "215"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3716,7 +3713,7 @@
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$ref": "20"
+        "$ref": "38"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -3788,7 +3785,7 @@
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "168"
+        "$ref": "217"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4035,7 +4032,7 @@
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "170"
+        "$ref": "219"
        },
        "Location": "Body",
        "IsRequired": false,
@@ -4362,7 +4359,7 @@
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$ref": "173"
+        "$ref": "222"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4407,7 +4404,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "173"
+        "$ref": "222"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4479,7 +4476,7 @@
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$ref": "173"
+        "$ref": "222"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4549,7 +4546,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "173"
+        "$ref": "222"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4919,7 +4916,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "60"
+        "$ref": "78"
        },
        "Location": "Body",
        "IsRequired": true,

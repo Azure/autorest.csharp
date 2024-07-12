@@ -4,12 +4,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace OpenAI.Models
 {
-    /// <summary> The CreateChatCompletionRequest. </summary>
-    internal partial class CreateChatCompletionRequest
+    /// <summary> The CreateRequest. </summary>
+    internal partial class CreateRequest
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -43,43 +42,40 @@ namespace OpenAI.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="CreateChatCompletionRequest"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateRequest"/>. </summary>
         /// <param name="model">
-        /// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)
-        /// table for details on which models work with the Chat API.
+        /// ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to
+        /// see all of your available models, or see our [Model overview](/docs/models/overview) for
+        /// descriptions of them.
         /// </param>
-        /// <param name="messages">
-        /// A list of messages comprising the conversation so far.
-        /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).
+        /// <param name="prompt">
+        /// The prompt(s) to generate completions for, encoded as a string, array of strings, array of
+        /// tokens, or array of token arrays.
+        ///
+        /// Note that &lt;|endoftext|&gt; is the document separator that the model sees during training, so if a
+        /// prompt is not specified the model will generate as if from the beginning of a new document.
         /// </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="messages"/> is null. </exception>
-        public CreateChatCompletionRequest(CreateChatCompletionRequestModel model, IEnumerable<ChatCompletionRequestMessage> messages)
+        internal CreateRequest(CreateCompletionRequestModel model, BinaryData prompt)
         {
-            Argument.AssertNotNull(messages, nameof(messages));
-
             Model = model;
-            Messages = messages.ToList();
-            Functions = new ChangeTrackingList<ChatCompletionFunctions>();
+            Prompt = prompt;
             LogitBias = new ChangeTrackingDictionary<string, long>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="CreateChatCompletionRequest"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateRequest"/>. </summary>
         /// <param name="model">
-        /// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)
-        /// table for details on which models work with the Chat API.
+        /// ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to
+        /// see all of your available models, or see our [Model overview](/docs/models/overview) for
+        /// descriptions of them.
         /// </param>
-        /// <param name="messages">
-        /// A list of messages comprising the conversation so far.
-        /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).
+        /// <param name="prompt">
+        /// The prompt(s) to generate completions for, encoded as a string, array of strings, array of
+        /// tokens, or array of token arrays.
+        ///
+        /// Note that &lt;|endoftext|&gt; is the document separator that the model sees during training, so if a
+        /// prompt is not specified the model will generate as if from the beginning of a new document.
         /// </param>
-        /// <param name="functions"> A list of functions the model may generate JSON inputs for. </param>
-        /// <param name="functionCall">
-        /// Controls how the model responds to function calls. `none` means the model does not call a
-        /// function, and responds to the end-user. `auto` means the model can pick between an end-user or
-        /// calling a function.  Specifying a particular function via `{\"name":\ \"my_function\"}` forces the
-        /// model to call that function. `none` is the default when no functions are present. `auto` is the
-        /// default if functions are present.
-        /// </param>
+        /// <param name="suffix"> The suffix that comes after a completion of inserted text. </param>
         /// <param name="temperature">
         /// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
         /// more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -137,13 +133,31 @@ namespace OpenAI.Models
         /// as they become available, with the stream terminated by a `data: [DONE]` message.
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
         /// </param>
+        /// <param name="logprobs">
+        /// Include the log probabilities on the `logprobs` most likely tokens, as well the chosen tokens.
+        /// For example, if `logprobs` is 5, the API will return a list of the 5 most likely tokens. The
+        /// API will always return the `logprob` of the sampled token, so there may be up to `logprobs+1`
+        /// elements in the response.
+        ///
+        /// The maximum value for `logprobs` is 5.
+        /// </param>
+        /// <param name="echo"> Echo back the prompt in addition to the completion. </param>
+        /// <param name="bestOf">
+        /// Generates `best_of` completions server-side and returns the "best" (the one with the highest
+        /// log probability per token). Results cannot be streamed.
+        ///
+        /// When used with `n`, `best_of` controls the number of candidate completions and `n` specifies
+        /// how many to return – `best_of` must be greater than `n`.
+        ///
+        /// **Note:** Because this parameter generates many completions, it can quickly consume your token
+        /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
+        /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CreateChatCompletionRequest(CreateChatCompletionRequestModel model, IList<ChatCompletionRequestMessage> messages, IList<ChatCompletionFunctions> functions, BinaryData functionCall, double? temperature, double? topP, long? n, long? maxTokens, BinaryData stop, double? presencePenalty, double? frequencyPenalty, IDictionary<string, long> logitBias, string user, bool? stream, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal CreateRequest(CreateCompletionRequestModel model, BinaryData prompt, string suffix, double? temperature, double? topP, long? n, long? maxTokens, BinaryData stop, double? presencePenalty, double? frequencyPenalty, IReadOnlyDictionary<string, long> logitBias, string user, bool? stream, long? logprobs, bool? echo, long? bestOf, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Model = model;
-            Messages = messages;
-            Functions = functions;
-            FunctionCall = functionCall;
+            Prompt = prompt;
+            Suffix = suffix;
             Temperature = temperature;
             TopP = topP;
             N = n;
@@ -154,32 +168,29 @@ namespace OpenAI.Models
             LogitBias = logitBias;
             User = user;
             Stream = stream;
+            Logprobs = logprobs;
+            Echo = echo;
+            BestOf = bestOf;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="CreateChatCompletionRequest"/> for deserialization. </summary>
-        internal CreateChatCompletionRequest()
+        /// <summary> Initializes a new instance of <see cref="CreateRequest"/> for deserialization. </summary>
+        internal CreateRequest()
         {
         }
 
         /// <summary>
-        /// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)
-        /// table for details on which models work with the Chat API.
+        /// ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to
+        /// see all of your available models, or see our [Model overview](/docs/models/overview) for
+        /// descriptions of them.
         /// </summary>
-        public CreateChatCompletionRequestModel Model { get; }
+        public CreateCompletionRequestModel Model { get; }
         /// <summary>
-        /// A list of messages comprising the conversation so far.
-        /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).
-        /// </summary>
-        public IList<ChatCompletionRequestMessage> Messages { get; }
-        /// <summary> A list of functions the model may generate JSON inputs for. </summary>
-        public IList<ChatCompletionFunctions> Functions { get; }
-        /// <summary>
-        /// Controls how the model responds to function calls. `none` means the model does not call a
-        /// function, and responds to the end-user. `auto` means the model can pick between an end-user or
-        /// calling a function.  Specifying a particular function via `{\"name":\ \"my_function\"}` forces the
-        /// model to call that function. `none` is the default when no functions are present. `auto` is the
-        /// default if functions are present.
+        /// The prompt(s) to generate completions for, encoded as a string, array of strings, array of
+        /// tokens, or array of token arrays.
+        ///
+        /// Note that &lt;|endoftext|&gt; is the document separator that the model sees during training, so if a
+        /// prompt is not specified the model will generate as if from the beginning of a new document.
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -191,13 +202,16 @@ namespace OpenAI.Models
         /// Supported types:
         /// <list type="bullet">
         /// <item>
-        /// <description>"none"</description>
+        /// <description><see cref="string"/></description>
         /// </item>
         /// <item>
-        /// <description>"auto"</description>
+        /// <description><see cref="IList{T}"/> where <c>T</c> is of type <see cref="string"/></description>
         /// </item>
         /// <item>
-        /// <description><see cref="ChatCompletionFunctionCallOption"/></description>
+        /// <description><see cref="IList{T}"/> where <c>T</c> is of type <see cref="long"/></description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="IList{T}"/> where <c>T</c> is of type <c>IList{long}</c></description>
         /// </item>
         /// </list>
         /// </remarks>
@@ -222,14 +236,16 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        public BinaryData FunctionCall { get; set; }
+        public BinaryData Prompt { get; }
+        /// <summary> The suffix that comes after a completion of inserted text. </summary>
+        public string Suffix { get; }
         /// <summary>
         /// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
         /// more random, while lower values like 0.2 will make it more focused and deterministic.
         ///
         /// We generally recommend altering this or `top_p` but not both.
         /// </summary>
-        public double? Temperature { get; set; }
+        public double? Temperature { get; }
         /// <summary>
         /// An alternative to sampling with temperature, called nucleus sampling, where the model considers
         /// the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising
@@ -237,13 +253,13 @@ namespace OpenAI.Models
         ///
         /// We generally recommend altering this or `temperature` but not both.
         /// </summary>
-        public double? TopP { get; set; }
+        public double? TopP { get; }
         /// <summary>
         /// How many completions to generate for each prompt.
         /// **Note:** Because this parameter generates many completions, it can quickly consume your token
         /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
         /// </summary>
-        public long? N { get; set; }
+        public long? N { get; }
         /// <summary>
         /// The maximum number of [tokens](/tokenizer) to generate in the completion.
         ///
@@ -251,7 +267,7 @@ namespace OpenAI.Models
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)
         /// for counting tokens.
         /// </summary>
-        public long? MaxTokens { get; set; }
+        public long? MaxTokens { get; }
         /// <summary>
         /// Up to 4 sequences where the API will stop generating further tokens.
         /// <para>
@@ -293,14 +309,14 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        public BinaryData Stop { get; set; }
+        public BinaryData Stop { get; }
         /// <summary>
         /// Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear
         /// in the text so far, increasing the model's likelihood to talk about new topics.
         ///
         /// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
         /// </summary>
-        public double? PresencePenalty { get; set; }
+        public double? PresencePenalty { get; }
         /// <summary>
         /// Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing
         /// frequency in the text so far, decreasing the model's likelihood to repeat the same line
@@ -308,7 +324,7 @@ namespace OpenAI.Models
         ///
         /// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
         /// </summary>
-        public double? FrequencyPenalty { get; set; }
+        public double? FrequencyPenalty { get; }
         /// <summary>
         /// Modify the likelihood of specified tokens appearing in the completion.
         /// Accepts a json object that maps tokens (specified by their token ID in the tokenizer) to an
@@ -317,18 +333,40 @@ namespace OpenAI.Models
         /// between -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100
         /// should result in a ban or exclusive selection of the relevant token.
         /// </summary>
-        public IDictionary<string, long> LogitBias { get; set; }
+        public IReadOnlyDictionary<string, long> LogitBias { get; }
         /// <summary>
         /// A unique identifier representing your end-user, which can help OpenAI to monitor and detect
         /// abuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).
         /// </summary>
-        public string User { get; set; }
+        public string User { get; }
         /// <summary>
         /// If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only
         /// [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
         /// as they become available, with the stream terminated by a `data: [DONE]` message.
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
         /// </summary>
-        public bool? Stream { get; set; }
+        public bool? Stream { get; }
+        /// <summary>
+        /// Include the log probabilities on the `logprobs` most likely tokens, as well the chosen tokens.
+        /// For example, if `logprobs` is 5, the API will return a list of the 5 most likely tokens. The
+        /// API will always return the `logprob` of the sampled token, so there may be up to `logprobs+1`
+        /// elements in the response.
+        ///
+        /// The maximum value for `logprobs` is 5.
+        /// </summary>
+        public long? Logprobs { get; }
+        /// <summary> Echo back the prompt in addition to the completion. </summary>
+        public bool? Echo { get; }
+        /// <summary>
+        /// Generates `best_of` completions server-side and returns the "best" (the one with the highest
+        /// log probability per token). Results cannot be streamed.
+        ///
+        /// When used with `n`, `best_of` controls the number of candidate completions and `n` specifies
+        /// how many to return – `best_of` must be greater than `n`.
+        ///
+        /// **Note:** Because this parameter generates many completions, it can quickly consume your token
+        /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
+        /// </summary>
+        public long? BestOf { get; }
     }
 }

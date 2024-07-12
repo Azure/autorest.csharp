@@ -10,47 +10,46 @@ using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    internal partial class CreateChatCompletionRequest : IJsonModel<CreateChatCompletionRequest>
+    internal partial class CreateRequest : IJsonModel<CreateRequest>
     {
-        void IJsonModel<CreateChatCompletionRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<CreateRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CreateChatCompletionRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<CreateRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(CreateChatCompletionRequest)} does not support writing '{format}' format.");
+                throw new FormatException($"The model {nameof(CreateRequest)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
             writer.WritePropertyName("model"u8);
             writer.WriteStringValue(Model.ToString());
-            writer.WritePropertyName("messages"u8);
-            writer.WriteStartArray();
-            foreach (var item in Messages)
+            if (Prompt != null)
             {
-                writer.WriteObjectValue(item, options);
-            }
-            writer.WriteEndArray();
-            if (Optional.IsCollectionDefined(Functions))
-            {
-                writer.WritePropertyName("functions"u8);
-                writer.WriteStartArray();
-                foreach (var item in Functions)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsDefined(FunctionCall))
-            {
-                writer.WritePropertyName("function_call"u8);
+                writer.WritePropertyName("prompt"u8);
 #if NET6_0_OR_GREATER
-				writer.WriteRawValue(FunctionCall);
+				writer.WriteRawValue(Prompt);
 #else
-                using (JsonDocument document = JsonDocument.Parse(FunctionCall))
+                using (JsonDocument document = JsonDocument.Parse(Prompt))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
 #endif
+            }
+            else
+            {
+                writer.WriteNull("prompt");
+            }
+            if (Optional.IsDefined(Suffix))
+            {
+                if (Suffix != null)
+                {
+                    writer.WritePropertyName("suffix"u8);
+                    writer.WriteStringValue(Suffix);
+                }
+                else
+                {
+                    writer.WriteNull("suffix");
+                }
             }
             if (Optional.IsDefined(Temperature))
             {
@@ -178,6 +177,42 @@ namespace OpenAI.Models
                     writer.WriteNull("stream");
                 }
             }
+            if (Optional.IsDefined(Logprobs))
+            {
+                if (Logprobs != null)
+                {
+                    writer.WritePropertyName("logprobs"u8);
+                    writer.WriteNumberValue(Logprobs.Value);
+                }
+                else
+                {
+                    writer.WriteNull("logprobs");
+                }
+            }
+            if (Optional.IsDefined(Echo))
+            {
+                if (Echo != null)
+                {
+                    writer.WritePropertyName("echo"u8);
+                    writer.WriteBooleanValue(Echo.Value);
+                }
+                else
+                {
+                    writer.WriteNull("echo");
+                }
+            }
+            if (Optional.IsDefined(BestOf))
+            {
+                if (BestOf != null)
+                {
+                    writer.WritePropertyName("best_of"u8);
+                    writer.WriteNumberValue(BestOf.Value);
+                }
+                else
+                {
+                    writer.WriteNull("best_of");
+                }
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -196,19 +231,19 @@ namespace OpenAI.Models
             writer.WriteEndObject();
         }
 
-        CreateChatCompletionRequest IJsonModel<CreateChatCompletionRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CreateRequest IJsonModel<CreateRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CreateChatCompletionRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<CreateRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(CreateChatCompletionRequest)} does not support reading '{format}' format.");
+                throw new FormatException($"The model {nameof(CreateRequest)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeCreateChatCompletionRequest(document.RootElement, options);
+            return DeserializeCreateRequest(document.RootElement, options);
         }
 
-        internal static CreateChatCompletionRequest DeserializeCreateChatCompletionRequest(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static CreateRequest DeserializeCreateRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -216,10 +251,9 @@ namespace OpenAI.Models
             {
                 return null;
             }
-            CreateChatCompletionRequestModel model = default;
-            IList<ChatCompletionRequestMessage> messages = default;
-            IList<ChatCompletionFunctions> functions = default;
-            BinaryData functionCall = default;
+            CreateCompletionRequestModel model = default;
+            BinaryData prompt = default;
+            string suffix = default;
             double? temperature = default;
             double? topP = default;
             long? n = default;
@@ -227,49 +261,39 @@ namespace OpenAI.Models
             BinaryData stop = default;
             double? presencePenalty = default;
             double? frequencyPenalty = default;
-            IDictionary<string, long> logitBias = default;
+            IReadOnlyDictionary<string, long> logitBias = default;
             string user = default;
             bool? stream = default;
+            long? logprobs = default;
+            bool? echo = default;
+            long? bestOf = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("model"u8))
                 {
-                    model = new CreateChatCompletionRequestModel(property.Value.GetString());
+                    model = new CreateCompletionRequestModel(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("messages"u8))
-                {
-                    List<ChatCompletionRequestMessage> array = new List<ChatCompletionRequestMessage>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(ChatCompletionRequestMessage.DeserializeChatCompletionRequestMessage(item, options));
-                    }
-                    messages = array;
-                    continue;
-                }
-                if (property.NameEquals("functions"u8))
+                if (property.NameEquals("prompt"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        prompt = null;
                         continue;
                     }
-                    List<ChatCompletionFunctions> array = new List<ChatCompletionFunctions>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(ChatCompletionFunctions.DeserializeChatCompletionFunctions(item, options));
-                    }
-                    functions = array;
+                    prompt = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("function_call"u8))
+                if (property.NameEquals("suffix"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        suffix = null;
                         continue;
                     }
-                    functionCall = BinaryData.FromString(property.Value.GetRawText());
+                    suffix = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("temperature"u8))
@@ -371,17 +395,46 @@ namespace OpenAI.Models
                     stream = property.Value.GetBoolean();
                     continue;
                 }
+                if (property.NameEquals("logprobs"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        logprobs = null;
+                        continue;
+                    }
+                    logprobs = property.Value.GetInt64();
+                    continue;
+                }
+                if (property.NameEquals("echo"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        echo = null;
+                        continue;
+                    }
+                    echo = property.Value.GetBoolean();
+                    continue;
+                }
+                if (property.NameEquals("best_of"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        bestOf = null;
+                        continue;
+                    }
+                    bestOf = property.Value.GetInt64();
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new CreateChatCompletionRequest(
+            return new CreateRequest(
                 model,
-                messages,
-                functions ?? new ChangeTrackingList<ChatCompletionFunctions>(),
-                functionCall,
+                prompt,
+                suffix,
                 temperature,
                 topP,
                 n,
@@ -392,46 +445,49 @@ namespace OpenAI.Models
                 logitBias ?? new ChangeTrackingDictionary<string, long>(),
                 user,
                 stream,
+                logprobs,
+                echo,
+                bestOf,
                 serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<CreateChatCompletionRequest>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CreateRequest>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CreateChatCompletionRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<CreateRequest>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(CreateChatCompletionRequest)} does not support writing '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(CreateRequest)} does not support writing '{options.Format}' format.");
             }
         }
 
-        CreateChatCompletionRequest IPersistableModel<CreateChatCompletionRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
+        CreateRequest IPersistableModel<CreateRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CreateChatCompletionRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<CreateRequest>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeCreateChatCompletionRequest(document.RootElement, options);
+                        return DeserializeCreateRequest(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(CreateChatCompletionRequest)} does not support reading '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(CreateRequest)} does not support reading '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<CreateChatCompletionRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<CreateRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
-        internal static CreateChatCompletionRequest FromResponse(PipelineResponse response)
+        internal static CreateRequest FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateChatCompletionRequest(document.RootElement);
+            return DeserializeCreateRequest(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>

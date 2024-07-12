@@ -54,9 +54,9 @@ namespace Parameters.Spread
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            BodyParameter bodyParameter = new BodyParameter(name, null);
+            SpreadAsRequestBodyRequest1 spreadAsRequestBodyRequest1 = new SpreadAsRequestBodyRequest1(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadAsRequestBodyAsync(bodyParameter.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadAsRequestBodyAsync(spreadAsRequestBodyRequest1.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -69,9 +69,9 @@ namespace Parameters.Spread
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            BodyParameter bodyParameter = new BodyParameter(name, null);
+            SpreadAsRequestBodyRequest1 spreadAsRequestBodyRequest1 = new SpreadAsRequestBodyRequest1(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadAsRequestBody(bodyParameter.ToRequestContent(), context);
+            Response response = SpreadAsRequestBody(spreadAsRequestBodyRequest1.ToRequestContent(), context);
             return response;
         }
 
@@ -479,9 +479,9 @@ namespace Parameters.Spread
             Argument.AssertNotNull(testHeader, nameof(testHeader));
             Argument.AssertNotNull(prop, nameof(prop));
 
-            CompositeRequestMix compositeRequestMix = new CompositeRequestMix(prop, null);
+            SpreadCompositeRequestMixRequest spreadCompositeRequestMixRequest = new SpreadCompositeRequestMixRequest(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadCompositeRequestMixAsync(name, testHeader, compositeRequestMix.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadCompositeRequestMixAsync(name, testHeader, spreadCompositeRequestMixRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -499,9 +499,9 @@ namespace Parameters.Spread
             Argument.AssertNotNull(testHeader, nameof(testHeader));
             Argument.AssertNotNull(prop, nameof(prop));
 
-            CompositeRequestMix compositeRequestMix = new CompositeRequestMix(prop, null);
+            SpreadCompositeRequestMixRequest spreadCompositeRequestMixRequest = new SpreadCompositeRequestMixRequest(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadCompositeRequestMix(name, testHeader, compositeRequestMix.ToRequestContent(), context);
+            Response response = SpreadCompositeRequestMix(name, testHeader, spreadCompositeRequestMixRequest.ToRequestContent(), context);
             return response;
         }
 

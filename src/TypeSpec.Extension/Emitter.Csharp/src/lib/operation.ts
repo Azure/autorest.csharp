@@ -64,11 +64,7 @@ import {
     getEffectiveSchemaType,
     getInputType
 } from "./model.js";
-import {
-    capitalize,
-    createContentTypeOrAcceptParameter,
-    getTypeName
-} from "./utils.js";
+import { createContentTypeOrAcceptParameter, getTypeName } from "./utils.js";
 import { getExtensions } from "@typespec/openapi";
 
 export function loadOperation(
@@ -115,41 +111,18 @@ export function loadOperation(
         !isVoidType(typespecParameters.body.type)
     ) {
         const rawBodyType = typespecParameters.body.type;
-        if (rawBodyType.kind === "Model") {
-            const effectiveBodyType = getEffectiveSchemaType(
-                sdkContext,
-                typespecParameters.body.type
-            ) as Model;
-            const bodyParameter = loadBodyParameter(
-                sdkContext,
-                effectiveBodyType
-            );
-            if (
-                effectiveBodyType.name === "" ||
-                rawBodyType.sourceModels.some((m) => m.usage === "spread")
-            ) {
-                bodyParameter.Kind = InputOperationParameterKind.Spread;
-            }
-            // TODO: remove this after https://github.com/Azure/typespec-azure/issues/69 is resolved
-            // workaround for alias model
-            if (isInputModelType(bodyParameter.Type)) {
-                // sometimes the alias model returned by TCGC does not have usage, we set it here.
-                bodyParameter.Type.Usage |= UsageFlags.Input;
-                // sometimes it does not have a name
-                if (bodyParameter.Type.Name === "") {
-                    // give body type a name
-                    bodyParameter.Type.Name = `${capitalize(op.name)}Request`;
-                    bodyParameter.Type.Usage = UsageFlags.Input;
-                    // update models cache
-                    models.delete("");
-                    models.set(bodyParameter.Type.Name, bodyParameter.Type);
-
-                    // give body parameter a name
-                    bodyParameter.Name = `${capitalize(op.name)}Request`;
-                }
-            }
-            parameters.push(bodyParameter);
+        const bodyParameter = loadBodyParameter(
+            sdkContext,
+            rawBodyType as Model
+        );
+        const bodyType = bodyParameter.Type;
+        if (
+            bodyType.Kind === "model" &&
+            (bodyType.Usage & UsageFlags.Spread) !== 0
+        ) {
+            bodyParameter.Kind = InputOperationParameterKind.Spread;
         }
+        parameters.push(bodyParameter);
     }
 
     const responses: OperationResponse[] = [];

@@ -291,8 +291,8 @@
    "$id": "41",
    "Kind": "model",
    "Name": "AnonymousModelRequest",
-   "CrossLanguageDefinitionId": ".anonymous",
-   "Usage": "Input,MultipartFormData",
+   "CrossLanguageDefinitionId": "anonymousModel.Request.anonymous",
+   "Usage": "MultipartFormData,Spread",
    "Properties": [
     {
      "$id": "42",

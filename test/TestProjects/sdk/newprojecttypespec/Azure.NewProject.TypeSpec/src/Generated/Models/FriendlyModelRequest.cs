@@ -8,10 +8,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace SpreadTypeSpec.Models
+namespace Azure.NewProject.TypeSpec.Models
 {
-    /// <summary> The Thing. </summary>
-    internal partial class Thing
+    /// <summary> The FriendlyModelRequest. </summary>
+    internal partial class FriendlyModelRequest
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -45,37 +45,31 @@ namespace SpreadTypeSpec.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>
-        /// <param name="name"> name of the Thing. </param>
-        /// <param name="age"> age of the Thing. </param>
+        /// <summary> Initializes a new instance of <see cref="FriendlyModelRequest"/>. </summary>
+        /// <param name="name"> name of the NotFriend. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public Thing(string name, int age)
+        internal FriendlyModelRequest(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
-            Age = age;
         }
 
-        /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>
-        /// <param name="name"> name of the Thing. </param>
-        /// <param name="age"> age of the Thing. </param>
+        /// <summary> Initializes a new instance of <see cref="FriendlyModelRequest"/>. </summary>
+        /// <param name="name"> name of the NotFriend. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal Thing(string name, int age, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal FriendlyModelRequest(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
-            Age = age;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="Thing"/> for deserialization. </summary>
-        internal Thing()
+        /// <summary> Initializes a new instance of <see cref="FriendlyModelRequest"/> for deserialization. </summary>
+        internal FriendlyModelRequest()
         {
         }
 
-        /// <summary> name of the Thing. </summary>
+        /// <summary> name of the NotFriend. </summary>
         public string Name { get; }
-        /// <summary> age of the Thing. </summary>
-        public int Age { get; }
     }
 }

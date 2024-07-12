@@ -10,7 +10,8 @@ import {
     ModelProperty,
     Operation,
     Type,
-    getEffectiveModelType
+    getEffectiveModelType,
+    getNamespaceFullName
 } from "@typespec/compiler";
 import {
     getHeaderFieldName,
@@ -27,6 +28,7 @@ import {
 } from "../type/input-type.js";
 import { LiteralTypeContext } from "../type/literal-type-context.js";
 import { Logger } from "./logger.js";
+import { capitalize } from "./utils.js";
 
 /**
  * If type is an anonymous model, tries to find a named model that has the same
@@ -93,7 +95,32 @@ export function getInputType(
     Logger.getInstance().debug(`getInputType for kind: ${type.kind}`);
 
     const sdkType = getClientType(context, type, operation);
+
+    // TODO -- remove when https://github.com/Azure/typespec-azure/issues/1150 is resolved
+    // TCGC has a bug that sometimes the name of body type constructed back from spread parameters does not have a name, here we add a name for it.
+    if (operation && sdkType.kind === "model" && sdkType.name === ""){
+        sdkType.name = `${getOperationFullName(operation)}Request`;
+    }
+
     return fromSdkType(sdkType, context, models, enums, literalTypeContext);
+}
+
+function getOperationFullName(operation: Operation): string {
+    let name = capitalize(operation.name);
+    if (operation.interface)
+    {
+        name = `${capitalize(operation.interface.name)}${name}`;
+        if (operation.interface.namespace) {
+            name = `${capitalize(getNamespaceFullName(operation.interface.namespace))}${name}`;
+        }
+    }
+    else if (operation.namespace)
+    {
+        const ns = getNamespaceFullName(operation.namespace);
+        name = `${capitalize(ns)}${name}`;
+    }
+    
+    return name;
 }
 
 export function navigateModels(

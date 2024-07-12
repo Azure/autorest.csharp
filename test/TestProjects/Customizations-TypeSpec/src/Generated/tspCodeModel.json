@@ -791,7 +791,7 @@
    "Kind": "model",
    "Name": "BarRequest",
    "CrossLanguageDefinitionId": "CustomizationsInTsp.bar.Request.anonymous",
-   "Usage": "Input,Spread",
+   "Usage": "Spread",
    "Properties": [
     {
      "$id": "121",
@@ -1041,11 +1041,10 @@
      "Parameters": [
       {
        "$id": "145",
-       "Name": "ModelToRename",
-       "NameInRequest": "ModelToRename",
-       "Description": "Renamed model (original name: ModelToRename)",
+       "Name": "BarRequest",
+       "NameInRequest": "",
        "Type": {
-        "$ref": "32"
+        "$ref": "120"
        },
        "Location": "Body",
        "IsRequired": true,

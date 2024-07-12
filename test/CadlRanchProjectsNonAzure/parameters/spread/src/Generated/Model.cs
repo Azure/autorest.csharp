@@ -42,8 +42,8 @@ namespace Scm.Parameters.Spread
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            BodyParameter bodyParameter = new BodyParameter(name, null);
-            ClientResult result = await SpreadAsRequestBodyAsync(bodyParameter.ToBinaryContent(), null).ConfigureAwait(false);
+            SpreadAsRequestBodyRequest1 spreadAsRequestBodyRequest1 = new SpreadAsRequestBodyRequest1(name, null);
+            ClientResult result = await SpreadAsRequestBodyAsync(spreadAsRequestBodyRequest1.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
@@ -54,8 +54,8 @@ namespace Scm.Parameters.Spread
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            BodyParameter bodyParameter = new BodyParameter(name, null);
-            ClientResult result = SpreadAsRequestBody(bodyParameter.ToBinaryContent(), null);
+            SpreadAsRequestBodyRequest1 spreadAsRequestBodyRequest1 = new SpreadAsRequestBodyRequest1(name, null);
+            ClientResult result = SpreadAsRequestBody(spreadAsRequestBodyRequest1.ToBinaryContent(), null);
             return result;
         }
 
@@ -361,8 +361,8 @@ namespace Scm.Parameters.Spread
             Argument.AssertNotNull(testHeader, nameof(testHeader));
             Argument.AssertNotNull(prop, nameof(prop));
 
-            CompositeRequestMix compositeRequestMix = new CompositeRequestMix(prop, null);
-            ClientResult result = await SpreadCompositeRequestMixAsync(name, testHeader, compositeRequestMix.ToBinaryContent(), null).ConfigureAwait(false);
+            SpreadCompositeRequestMixRequest spreadCompositeRequestMixRequest = new SpreadCompositeRequestMixRequest(prop, null);
+            ClientResult result = await SpreadCompositeRequestMixAsync(name, testHeader, spreadCompositeRequestMixRequest.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
@@ -378,8 +378,8 @@ namespace Scm.Parameters.Spread
             Argument.AssertNotNull(testHeader, nameof(testHeader));
             Argument.AssertNotNull(prop, nameof(prop));
 
-            CompositeRequestMix compositeRequestMix = new CompositeRequestMix(prop, null);
-            ClientResult result = SpreadCompositeRequestMix(name, testHeader, compositeRequestMix.ToBinaryContent(), null);
+            SpreadCompositeRequestMixRequest spreadCompositeRequestMixRequest = new SpreadCompositeRequestMixRequest(prop, null);
+            ClientResult result = SpreadCompositeRequestMix(name, testHeader, spreadCompositeRequestMixRequest.ToBinaryContent(), null);
             return result;
         }
 

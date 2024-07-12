@@ -9,7 +9,8 @@ import {
     listOperationsInOperationGroup,
     SdkOperationGroup,
     SdkContext,
-    getLibraryName
+    getLibraryName,
+    getHttpOperationWithCache
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -17,14 +18,12 @@ import {
     Service,
     getDoc,
     getNamespaceFullName,
-    ignoreDiagnostics,
     listServices
 } from "@typespec/compiler";
 import {
     HttpOperation,
     getAllHttpServices,
     getAuthentication,
-    getHttpOperation,
     getServers
 } from "@typespec/http";
 import { getVersions } from "@typespec/versioning";
@@ -235,8 +234,9 @@ export function createModelForService(
         const operations = listOperationsInOperationGroup(sdkContext, client);
         let clientDesc = "";
         if (operations.length > 0) {
-            const container = ignoreDiagnostics(
-                getHttpOperation(program, operations[0])
+            const container = getHttpOperationWithCache(
+                sdkContext,
+                operations[0]
             ).container;
             clientDesc = getDoc(program, container) ?? "";
         }
@@ -250,9 +250,7 @@ export function createModelForService(
             Parameters: urlParameters
         };
         for (const op of operations) {
-            const httpOperation = ignoreDiagnostics(
-                getHttpOperation(program, op)
-            );
+            const httpOperation = getHttpOperationWithCache(sdkContext, op);
             const inputOperation: InputOperation = loadOperation(
                 sdkContext,
                 httpOperation,
