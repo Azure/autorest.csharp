@@ -11,7 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core;
 
-namespace ApiVersionInTsp
+namespace _Specs_.Azure.Core.Model
 {
     internal class Utf8JsonRequestContent : RequestContent
     {

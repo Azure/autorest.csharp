@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace Scm.Client.Naming.Models
 {
     /// <summary> The LanguageClientNameModel. </summary>
-    internal partial class LanguageClientNameModel
+    public partial class LanguageClientNameModel
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.

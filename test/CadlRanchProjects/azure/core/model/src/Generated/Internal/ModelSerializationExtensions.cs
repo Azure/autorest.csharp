@@ -14,7 +14,7 @@ using System.Text.Json;
 using System.Xml;
 using Azure.Core;
 
-namespace ApiVersionInTsp
+namespace _Specs_.Azure.Core.Model
 {
     internal static class ModelSerializationExtensions
     {

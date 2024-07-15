@@ -152,90 +152,27 @@
      "IsReadOnly": false
     }
    ]
-  },
-  {
-   "$id": "24",
-   "Kind": "model",
-   "Name": "ClientRequest",
-   "CrossLanguageDefinitionId": "Client.Naming.Property.client.Request.anonymous",
-   "Usage": "Input",
-   "Properties": [
-    {
-     "$id": "25",
-     "Name": "clientName",
-     "SerializedName": "defaultName",
-     "Description": "Pass in true",
-     "Type": {
-      "$id": "26",
-      "Kind": "boolean"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "27",
-   "Kind": "model",
-   "Name": "LanguageRequest",
-   "CrossLanguageDefinitionId": "Client.Naming.Property.language.Request.anonymous",
-   "Usage": "Input",
-   "Properties": [
-    {
-     "$id": "28",
-     "Name": "CSName",
-     "SerializedName": "defaultName",
-     "Description": "Pass in true",
-     "Type": {
-      "$id": "29",
-      "Kind": "boolean"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "30",
-   "Kind": "model",
-   "Name": "CompatibleWithEncodedNameRequest",
-   "CrossLanguageDefinitionId": "Client.Naming.Property.compatibleWithEncodedName.Request.anonymous",
-   "Usage": "Input",
-   "Properties": [
-    {
-     "$id": "31",
-     "Name": "clientName",
-     "SerializedName": "wireName",
-     "Description": "Pass in true",
-     "Type": {
-      "$id": "32",
-      "Kind": "boolean"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
   }
  ],
  "Clients": [
   {
-   "$id": "33",
+   "$id": "24",
    "Name": "NamingClient",
    "Description": "Describe changing names of types in a client with `@clientName`",
    "Operations": [
     {
-     "$id": "34",
+     "$id": "25",
      "Name": "clientName",
      "ResourceName": "Naming",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "35",
+       "$id": "26",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "36",
+        "$id": "27",
         "Kind": "string"
        },
        "Location": "Uri",
@@ -248,20 +185,20 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "37",
+        "$id": "28",
         "Type": {
-         "$id": "38",
+         "$id": "29",
          "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
       },
       {
-       "$id": "39",
+       "$id": "30",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "40",
+        "$id": "31",
         "Kind": "string"
        },
        "Location": "Header",
@@ -274,9 +211,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "41",
+        "$id": "32",
         "Type": {
-         "$ref": "40"
+         "$ref": "31"
         },
         "Value": "application/json"
        }
@@ -284,7 +221,7 @@
      ],
      "Responses": [
       {
-       "$id": "42",
+       "$id": "33",
        "StatusCodes": [
         204
        ],
@@ -302,20 +239,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "43",
+     "$id": "34",
      "Name": "parameter",
      "ResourceName": "Naming",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "35"
+       "$ref": "26"
       },
       {
-       "$id": "44",
+       "$id": "35",
        "Name": "clientName",
        "NameInRequest": "defaultName",
        "Type": {
-        "$id": "45",
+        "$id": "36",
         "Kind": "string"
        },
        "Location": "Query",
@@ -327,6 +264,102 @@
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$id": "37",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "38",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "39",
+        "Type": {
+         "$ref": "38"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "40",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/client/naming/parameter",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "41",
+     "Name": "client",
+     "ResourceName": "Property",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "26"
+      },
+      {
+       "$id": "42",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "9"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "43",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "44",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "45",
+        "Type": {
+         "$ref": "44"
+        },
+        "Value": "application/json"
+       }
       },
       {
        "$id": "46",
@@ -366,28 +399,31 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "None",
+     "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/client/naming/parameter",
+     "Path": "/client/naming/property/client",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
      "$id": "50",
-     "Name": "client",
+     "Name": "language",
      "ResourceName": "Property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "35"
+       "$ref": "26"
       },
       {
        "$id": "51",
-       "Name": "ClientNameModel",
-       "NameInRequest": "ClientNameModel",
+       "Name": "body",
+       "NameInRequest": "body",
        "Type": {
-        "$ref": "9"
+        "$ref": "12"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -397,7 +433,7 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Spread"
+       "Kind": "Method"
       },
       {
        "$id": "52",
@@ -464,7 +500,7 @@
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/client/naming/property/client",
+     "Path": "/client/naming/property/language",
      "RequestMediaTypes": [
       "application/json"
      ],
@@ -474,19 +510,19 @@
     },
     {
      "$id": "59",
-     "Name": "language",
+     "Name": "compatibleWithEncodedName",
      "ResourceName": "Property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "35"
+       "$ref": "26"
       },
       {
        "$id": "60",
-       "Name": "LanguageClientNameModel",
-       "NameInRequest": "LanguageClientNameModel",
+       "Name": "body",
+       "NameInRequest": "body",
        "Type": {
-        "$ref": "12"
+        "$ref": "15"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -496,7 +532,7 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Spread"
+       "Kind": "Method"
       },
       {
        "$id": "61",
@@ -563,105 +599,6 @@
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/client/naming/property/language",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "68",
-     "Name": "compatibleWithEncodedName",
-     "ResourceName": "Property",
-     "Accessibility": "public",
-     "Parameters": [
-      {
-       "$ref": "35"
-      },
-      {
-       "$id": "69",
-       "Name": "ClientNameAndJsonEncodedNameModel",
-       "NameInRequest": "ClientNameAndJsonEncodedNameModel",
-       "Type": {
-        "$ref": "15"
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Spread"
-      },
-      {
-       "$id": "70",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "71",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "72",
-        "Type": {
-         "$ref": "71"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "73",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "74",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "75",
-        "Type": {
-         "$ref": "74"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "76",
-       "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
      "Path": "/client/naming/property/compatible-with-encoded-name",
      "RequestMediaTypes": [
       "application/json"
@@ -671,20 +608,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "77",
+     "$id": "68",
      "Name": "request",
      "ResourceName": "Header",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "35"
+       "$ref": "26"
       },
       {
-       "$id": "78",
+       "$id": "69",
        "Name": "clientName",
        "NameInRequest": "default-name",
        "Type": {
-        "$id": "79",
+        "$id": "70",
         "Kind": "string"
        },
        "Location": "Header",
@@ -698,11 +635,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "80",
+       "$id": "71",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "81",
+        "$id": "72",
         "Kind": "string"
        },
        "Location": "Header",
@@ -715,9 +652,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "82",
+        "$id": "73",
         "Type": {
-         "$ref": "81"
+         "$ref": "72"
         },
         "Value": "application/json"
        }
@@ -725,7 +662,7 @@
      ],
      "Responses": [
       {
-       "$id": "83",
+       "$id": "74",
        "StatusCodes": [
         204
        ],
@@ -743,20 +680,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "84",
+     "$id": "75",
      "Name": "response",
      "ResourceName": "Header",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "35"
+       "$ref": "26"
       },
       {
-       "$id": "85",
+       "$id": "76",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "86",
+        "$id": "77",
         "Kind": "string"
        },
        "Location": "Header",
@@ -769,9 +706,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "87",
+        "$id": "78",
         "Type": {
-         "$ref": "86"
+         "$ref": "77"
         },
         "Value": "application/json"
        }
@@ -779,19 +716,19 @@
      ],
      "Responses": [
       {
-       "$id": "88",
+       "$id": "79",
        "StatusCodes": [
         204
        ],
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "89",
+         "$id": "80",
          "Name": "default-name",
          "NameInResponse": "default-name",
          "Description": "",
          "Type": {
-          "$id": "90",
+          "$id": "81",
           "Kind": "string"
          }
         }
@@ -809,34 +746,133 @@
     }
    ],
    "Protocol": {
-    "$id": "91"
+    "$id": "82"
    },
    "Parameters": [
     {
-     "$ref": "35"
+     "$ref": "26"
     }
    ]
   },
   {
-   "$id": "92",
+   "$id": "83",
    "Name": "ClientModel",
    "Description": "",
    "Operations": [
     {
-     "$id": "93",
+     "$id": "84",
      "Name": "client",
      "ResourceName": "Model",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "35"
+       "$ref": "26"
+      },
+      {
+       "$id": "85",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "18"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "86",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "87",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "88",
+        "Type": {
+         "$ref": "87"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "89",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "90",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "91",
+        "Type": {
+         "$ref": "90"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "92",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/client/naming/model/client",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "93",
+     "Name": "language",
+     "ResourceName": "Model",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "26"
       },
       {
        "$id": "94",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "18"
+        "$ref": "21"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -913,29 +949,45 @@
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/client/naming/model/client",
+     "Path": "/client/naming/model/language",
      "RequestMediaTypes": [
       "application/json"
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
-    },
+    }
+   ],
+   "Protocol": {
+    "$id": "102"
+   },
+   "Parent": "NamingClient",
+   "Parameters": [
     {
-     "$id": "102",
-     "Name": "language",
-     "ResourceName": "Model",
+     "$ref": "26"
+    }
+   ]
+  },
+  {
+   "$id": "103",
+   "Name": "UnionEnum",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "104",
+     "Name": "unionEnumName",
+     "ResourceName": "UnionEnum",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "35"
+       "$ref": "26"
       },
       {
-       "$id": "103",
+       "$id": "105",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "21"
+        "$ref": "2"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -948,11 +1000,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "104",
+       "$id": "106",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "105",
+        "$id": "107",
         "Kind": "string"
        },
        "Location": "Header",
@@ -965,19 +1017,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "106",
+        "$id": "108",
         "Type": {
-         "$ref": "105"
+         "$ref": "107"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "107",
+       "$id": "109",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "108",
+        "$id": "110",
         "Kind": "string"
        },
        "Location": "Header",
@@ -990,9 +1042,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "109",
+        "$id": "111",
         "Type": {
-         "$ref": "108"
+         "$ref": "110"
         },
         "Value": "application/json"
        }
@@ -1000,7 +1052,7 @@
      ],
      "Responses": [
       {
-       "$id": "110",
+       "$id": "112",
        "StatusCodes": [
         204
        ],
@@ -1010,47 +1062,31 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/client/naming/model/language",
+     "Path": "/client/naming/union-enum/union-enum-name",
      "RequestMediaTypes": [
       "application/json"
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
-    }
-   ],
-   "Protocol": {
-    "$id": "111"
-   },
-   "Parent": "NamingClient",
-   "Parameters": [
-    {
-     "$ref": "35"
-    }
-   ]
-  },
-  {
-   "$id": "112",
-   "Name": "UnionEnum",
-   "Description": "",
-   "Operations": [
+    },
     {
      "$id": "113",
-     "Name": "unionEnumName",
+     "Name": "unionEnumMemberName",
      "ResourceName": "UnionEnum",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "35"
+       "$ref": "26"
       },
       {
        "$id": "114",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "2"
+        "$ref": "5"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1127,105 +1163,6 @@
      "HttpMethod": "POST",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/client/naming/union-enum/union-enum-name",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "122",
-     "Name": "unionEnumMemberName",
-     "ResourceName": "UnionEnum",
-     "Accessibility": "public",
-     "Parameters": [
-      {
-       "$ref": "35"
-      },
-      {
-       "$id": "123",
-       "Name": "body",
-       "NameInRequest": "body",
-       "Type": {
-        "$ref": "5"
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "124",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "125",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "126",
-        "Type": {
-         "$ref": "125"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "127",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "128",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "129",
-        "Type": {
-         "$ref": "128"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "130",
-       "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
      "Path": "/client/naming/union-enum/union-enum-member-name",
      "RequestMediaTypes": [
       "application/json"
@@ -1236,12 +1173,12 @@
     }
    ],
    "Protocol": {
-    "$id": "131"
+    "$id": "122"
    },
    "Parent": "NamingClient",
    "Parameters": [
     {
-     "$ref": "35"
+     "$ref": "26"
     }
    ]
   }

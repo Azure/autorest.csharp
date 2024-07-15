@@ -133,7 +133,7 @@ model Thing {
 
     @doc("optional float property")
     optionalFloatProperty?: float;
-    
+
     @doc("optional arm id.")
     optionalResourceId?: Azure.Core.armResourceIdentifier<[]>;
 }

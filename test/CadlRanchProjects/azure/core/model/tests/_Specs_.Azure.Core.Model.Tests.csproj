@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\ApiVersionInTsp.csproj" />
+    <ProjectReference Include="..\src\_Specs_.Azure.Core.Model.csproj" />
   </ItemGroup>
 
   <ItemGroup>

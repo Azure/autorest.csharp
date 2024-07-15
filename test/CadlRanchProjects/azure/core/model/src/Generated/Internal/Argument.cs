@@ -9,7 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ApiVersionInTsp
+namespace _Specs_.Azure.Core.Model
 {
     internal static class Argument
     {

@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace Client.Naming.Models
 {
     /// <summary> The ClientNameAndJsonEncodedNameModel. </summary>
-    internal partial class ClientNameAndJsonEncodedNameModel
+    public partial class ClientNameAndJsonEncodedNameModel
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.

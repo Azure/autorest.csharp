@@ -8,10 +8,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace ApiVersionInTsp.Models
+namespace _Specs_.Azure.Core.Model.Models
 {
-    /// <summary> Detection results for the given resultId. </summary>
-    public partial class DetectionResult
+    /// <summary> The AzureEmbeddingModel. </summary>
+    public partial class AzureEmbeddingModel
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -45,28 +45,28 @@ namespace ApiVersionInTsp.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="DetectionResult"/>. </summary>
-        /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
-        internal DetectionResult(Guid resultId)
+        /// <summary> Initializes a new instance of <see cref="AzureEmbeddingModel"/>. </summary>
+        /// <param name="embedding"></param>
+        public AzureEmbeddingModel(ReadOnlyMemory<int> embedding)
         {
-            ResultId = resultId;
+            Embedding = embedding;
         }
 
-        /// <summary> Initializes a new instance of <see cref="DetectionResult"/>. </summary>
-        /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
+        /// <summary> Initializes a new instance of <see cref="AzureEmbeddingModel"/>. </summary>
+        /// <param name="embedding"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal DetectionResult(Guid resultId, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal AzureEmbeddingModel(ReadOnlyMemory<int> embedding, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            ResultId = resultId;
+            Embedding = embedding;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="DetectionResult"/> for deserialization. </summary>
-        internal DetectionResult()
+        /// <summary> Initializes a new instance of <see cref="AzureEmbeddingModel"/> for deserialization. </summary>
+        internal AzureEmbeddingModel()
         {
         }
 
-        /// <summary> Result identifier, which is used to fetch the results of an inference call. </summary>
-        public Guid ResultId { get; }
+        /// <summary> Gets or sets the embedding. </summary>
+        public ReadOnlyMemory<int> Embedding { get; set; }
     }
 }

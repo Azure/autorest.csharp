@@ -1,16 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>This is the ApiVersionInTsp client library for developing .NET applications with rich experience.</Description>
-    <AssemblyTitle>Azure SDK Code Generation ApiVersionInTsp for Azure Data Plane</AssemblyTitle>
+    <Description>This is the _Specs_.Azure.Core.Model client library for developing .NET applications with rich experience.</Description>
+    <AssemblyTitle>Azure SDK Code Generation _Specs_.Azure.Core.Model for Azure Data Plane</AssemblyTitle>
     <Version>1.0.0-beta.1</Version>
-    <PackageTags>ApiVersionInTsp</PackageTags>
+    <PackageTags>_Specs_.Azure.Core.Model</PackageTags>
     <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
     <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="$(AzureCoreSharedSources)AzureResourceProviderNamespaceAttribute.cs" LinkBase="Shared/Core" />
-    <Compile Include="$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs" LinkBase="Shared/Core" />
   </ItemGroup>
 
   <ItemGroup>
