@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -180,32 +181,26 @@ namespace Client.Naming
         }
 
         /// <summary> Client. </summary>
-        /// <param name="clientNameModel"> The <see cref="ClientNameModel"/> to use. </param>
+        /// <param name="clientName"> Pass in true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientNameModel"/> is null. </exception>
-        /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='ClientAsync(ClientNameModel,CancellationToken)']/*" />
-        public virtual async Task<Response> ClientAsync(ClientNameModel clientNameModel, CancellationToken cancellationToken = default)
+        /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='ClientAsync(bool,CancellationToken)']/*" />
+        public virtual async Task<Response> ClientAsync(bool clientName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(clientNameModel, nameof(clientNameModel));
-
-            using RequestContent content = clientNameModel.ToRequestContent();
+            ClientNameModel clientNameModel = new ClientNameModel(clientName, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ClientAsync(content, context).ConfigureAwait(false);
+            Response response = await ClientAsync(clientNameModel.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Client. </summary>
-        /// <param name="clientNameModel"> The <see cref="ClientNameModel"/> to use. </param>
+        /// <param name="clientName"> Pass in true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientNameModel"/> is null. </exception>
-        /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='Client(ClientNameModel,CancellationToken)']/*" />
-        public virtual Response Client(ClientNameModel clientNameModel, CancellationToken cancellationToken = default)
+        /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='Client(bool,CancellationToken)']/*" />
+        public virtual Response Client(bool clientName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(clientNameModel, nameof(clientNameModel));
-
-            using RequestContent content = clientNameModel.ToRequestContent();
+            ClientNameModel clientNameModel = new ClientNameModel(clientName, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Client(content, context);
+            Response response = Client(clientNameModel.ToRequestContent(), context);
             return response;
         }
 
@@ -219,7 +214,7 @@ namespace Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ClientAsync(ClientNameModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ClientAsync(bool,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -258,7 +253,7 @@ namespace Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Client(ClientNameModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Client(bool,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -288,32 +283,26 @@ namespace Client.Naming
         }
 
         /// <summary> Language. </summary>
-        /// <param name="languageClientNameModel"> The <see cref="LanguageClientNameModel"/> to use. </param>
+        /// <param name="csName"> Pass in true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="languageClientNameModel"/> is null. </exception>
-        /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='LanguageAsync(LanguageClientNameModel,CancellationToken)']/*" />
-        public virtual async Task<Response> LanguageAsync(LanguageClientNameModel languageClientNameModel, CancellationToken cancellationToken = default)
+        /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='LanguageAsync(bool,CancellationToken)']/*" />
+        public virtual async Task<Response> LanguageAsync(bool csName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(languageClientNameModel, nameof(languageClientNameModel));
-
-            using RequestContent content = languageClientNameModel.ToRequestContent();
+            LanguageClientNameModel languageClientNameModel = new LanguageClientNameModel(csName, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await LanguageAsync(content, context).ConfigureAwait(false);
+            Response response = await LanguageAsync(languageClientNameModel.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Language. </summary>
-        /// <param name="languageClientNameModel"> The <see cref="LanguageClientNameModel"/> to use. </param>
+        /// <param name="csName"> Pass in true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="languageClientNameModel"/> is null. </exception>
-        /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='Language(LanguageClientNameModel,CancellationToken)']/*" />
-        public virtual Response Language(LanguageClientNameModel languageClientNameModel, CancellationToken cancellationToken = default)
+        /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='Language(bool,CancellationToken)']/*" />
+        public virtual Response Language(bool csName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(languageClientNameModel, nameof(languageClientNameModel));
-
-            using RequestContent content = languageClientNameModel.ToRequestContent();
+            LanguageClientNameModel languageClientNameModel = new LanguageClientNameModel(csName, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Language(content, context);
+            Response response = Language(languageClientNameModel.ToRequestContent(), context);
             return response;
         }
 
@@ -327,7 +316,7 @@ namespace Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="LanguageAsync(LanguageClientNameModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="LanguageAsync(bool,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -366,7 +355,7 @@ namespace Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Language(LanguageClientNameModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Language(bool,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -396,32 +385,26 @@ namespace Client.Naming
         }
 
         /// <summary> Compatible with encoded name. </summary>
-        /// <param name="clientNameAndJsonEncodedNameModel"> The <see cref="ClientNameAndJsonEncodedNameModel"/> to use. </param>
+        /// <param name="clientName"> Pass in true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientNameAndJsonEncodedNameModel"/> is null. </exception>
-        /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='CompatibleWithEncodedNameAsync(ClientNameAndJsonEncodedNameModel,CancellationToken)']/*" />
-        public virtual async Task<Response> CompatibleWithEncodedNameAsync(ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel, CancellationToken cancellationToken = default)
+        /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='CompatibleWithEncodedNameAsync(bool,CancellationToken)']/*" />
+        public virtual async Task<Response> CompatibleWithEncodedNameAsync(bool clientName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(clientNameAndJsonEncodedNameModel, nameof(clientNameAndJsonEncodedNameModel));
-
-            using RequestContent content = clientNameAndJsonEncodedNameModel.ToRequestContent();
+            ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel = new ClientNameAndJsonEncodedNameModel(clientName, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await CompatibleWithEncodedNameAsync(content, context).ConfigureAwait(false);
+            Response response = await CompatibleWithEncodedNameAsync(clientNameAndJsonEncodedNameModel.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Compatible with encoded name. </summary>
-        /// <param name="clientNameAndJsonEncodedNameModel"> The <see cref="ClientNameAndJsonEncodedNameModel"/> to use. </param>
+        /// <param name="clientName"> Pass in true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientNameAndJsonEncodedNameModel"/> is null. </exception>
-        /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='CompatibleWithEncodedName(ClientNameAndJsonEncodedNameModel,CancellationToken)']/*" />
-        public virtual Response CompatibleWithEncodedName(ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel, CancellationToken cancellationToken = default)
+        /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='CompatibleWithEncodedName(bool,CancellationToken)']/*" />
+        public virtual Response CompatibleWithEncodedName(bool clientName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(clientNameAndJsonEncodedNameModel, nameof(clientNameAndJsonEncodedNameModel));
-
-            using RequestContent content = clientNameAndJsonEncodedNameModel.ToRequestContent();
+            ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel = new ClientNameAndJsonEncodedNameModel(clientName, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = CompatibleWithEncodedName(content, context);
+            Response response = CompatibleWithEncodedName(clientNameAndJsonEncodedNameModel.ToRequestContent(), context);
             return response;
         }
 
@@ -435,7 +418,7 @@ namespace Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CompatibleWithEncodedNameAsync(ClientNameAndJsonEncodedNameModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CompatibleWithEncodedNameAsync(bool,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -474,7 +457,7 @@ namespace Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CompatibleWithEncodedName(ClientNameAndJsonEncodedNameModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CompatibleWithEncodedName(bool,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

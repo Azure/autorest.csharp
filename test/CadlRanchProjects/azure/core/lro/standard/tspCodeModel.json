@@ -195,9 +195,11 @@
         "Type": {
          "$id": "30",
          "Kind": "array",
+         "Name": "ArrayError",
          "ValueType": {
           "$ref": "22"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -422,8 +424,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "56",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -438,8 +439,7 @@
         "$id": "57",
         "Type": {
          "$id": "58",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
@@ -458,8 +458,7 @@
         "$id": "61",
         "Type": {
          "$id": "62",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "2022-12-01-preview"
        },
@@ -515,8 +514,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "67",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -541,8 +539,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "70",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -699,8 +696,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "86",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -844,8 +840,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "101",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -920,7 +915,6 @@
    "Protocol": {
     "$id": "108"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "55"

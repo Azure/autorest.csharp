@@ -88,6 +88,7 @@
      "Type": {
       "$id": "14",
       "Kind": "array",
+      "Name": "ArrayToy",
       "ValueType": {
        "$id": "15",
        "Kind": "model",
@@ -132,7 +133,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -153,27 +155,59 @@
   },
   {
    "$ref": "15"
+  },
+  {
+   "$id": "24",
+   "Kind": "model",
+   "Name": "Error",
+   "CrossLanguageDefinitionId": "MixApiVersion.Error",
+   "Usage": "None",
+   "Description": "Error",
+   "Properties": [
+    {
+     "$id": "25",
+     "Name": "code",
+     "SerializedName": "code",
+     "Description": "",
+     "Type": {
+      "$id": "26",
+      "Kind": "int32"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "27",
+     "Name": "message",
+     "SerializedName": "message",
+     "Description": "",
+     "Type": {
+      "$id": "28",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
   }
  ],
  "Clients": [
   {
-   "$id": "24",
+   "$id": "29",
    "Name": "MixApiVersionClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "25"
+    "$id": "30"
    },
-   "Creatable": true,
    "Parameters": [
     {
-     "$id": "26",
+     "$id": "31",
      "Name": "petStoreUrl",
      "NameInRequest": "petStoreUrl",
      "Type": {
-      "$id": "27",
-      "Kind": "uri",
-      "IsNullable": false
+      "$id": "32",
+      "Kind": "url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -188,12 +222,12 @@
    ]
   },
   {
-   "$id": "28",
+   "$id": "33",
    "Name": "Pets",
    "Description": "Manage your pets. You can delete or get the Pet from pet store.",
    "Operations": [
     {
-     "$id": "29",
+     "$id": "34",
      "Name": "delete",
      "ResourceName": "Pet",
      "Summary": "delete.",
@@ -201,24 +235,23 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "31"
       },
       {
-       "$id": "30",
+       "$id": "35",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "31",
+        "$id": "36",
         "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "32",
+        "$id": "37",
         "Type": {
-         "$id": "33",
-         "Kind": "string",
-         "IsNullable": false
+         "$id": "38",
+         "Kind": "string"
         },
         "Value": "2022-11-30-preview"
        },
@@ -232,12 +265,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "34",
+       "$id": "39",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "pet name",
        "Type": {
-        "$id": "35",
+        "$id": "40",
         "Kind": "string"
        },
        "Location": "Path",
@@ -251,13 +284,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "36",
+       "$id": "41",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "37",
-        "Kind": "string",
-        "IsNullable": false
+        "$id": "42",
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -269,9 +301,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "38",
+        "$id": "43",
         "Type": {
-         "$ref": "37"
+         "$ref": "42"
         },
         "Value": "application/json"
        }
@@ -279,7 +311,7 @@
      ],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "44",
        "StatusCodes": [
         204
        ],
@@ -297,22 +329,22 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "40",
+     "$id": "45",
      "Name": "read",
      "ResourceName": "Pets",
      "Description": "Returns a pet. Supports eTags.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "31"
       },
       {
-       "$id": "41",
+       "$id": "46",
        "Name": "petId",
        "NameInRequest": "petId",
        "Description": "The id of pet.",
        "Type": {
-        "$id": "42",
+        "$id": "47",
         "Kind": "int32"
        },
        "Location": "Path",
@@ -326,13 +358,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "43",
+       "$id": "48",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "44",
-        "Kind": "string",
-        "IsNullable": false
+        "$id": "49",
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -344,9 +375,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "45",
+        "$id": "50",
         "Type": {
-         "$ref": "44"
+         "$ref": "49"
         },
         "Value": "application/json"
        }
@@ -354,7 +385,7 @@
      ],
      "Responses": [
       {
-       "$id": "46",
+       "$id": "51",
        "StatusCodes": [
         200
        ],
@@ -369,7 +400,7 @@
        ]
       },
       {
-       "$id": "47",
+       "$id": "52",
        "StatusCodes": [
         304
        ],
@@ -393,32 +424,32 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "48",
+     "$id": "53",
      "Name": "create",
      "ResourceName": "Pets",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "31"
       },
       {
-       "$id": "49",
+       "$id": "54",
        "Name": "apiVersion",
        "NameInRequest": "apiVersion",
        "Type": {
-        "$id": "50",
+        "$id": "55",
         "Kind": "constant",
         "ValueType": {
-         "$id": "51",
+         "$id": "56",
          "Kind": "string"
         },
         "Value": "2022-07-09"
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "52",
+        "$id": "57",
         "Type": {
-         "$ref": "50"
+         "$ref": "55"
         },
         "Value": "2022-07-09"
        },
@@ -432,7 +463,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "53",
+       "$id": "58",
        "Name": "pet",
        "NameInRequest": "pet",
        "Type": {
@@ -449,13 +480,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "54",
+       "$id": "59",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "55",
-        "Kind": "string",
-        "IsNullable": false
+        "$id": "60",
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -467,21 +497,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "56",
+        "$id": "61",
         "Type": {
-         "$ref": "55"
+         "$ref": "60"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "57",
+       "$id": "62",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "58",
-        "Kind": "string",
-        "IsNullable": false
+        "$id": "63",
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -493,9 +522,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "59",
+        "$id": "64",
         "Type": {
-         "$ref": "58"
+         "$ref": "63"
         },
         "Value": "application/json"
        }
@@ -503,7 +532,7 @@
      ],
      "Responses": [
       {
-       "$id": "60",
+       "$id": "65",
        "StatusCodes": [
         200
        ],
@@ -531,23 +560,22 @@
     }
    ],
    "Protocol": {
-    "$id": "61"
+    "$id": "66"
    },
-   "Creatable": false,
    "Parent": "MixApiVersionClient",
    "Parameters": [
     {
-     "$ref": "26"
+     "$ref": "31"
     }
    ]
   },
   {
-   "$id": "62",
+   "$id": "67",
    "Name": "ListPetToysResponse",
    "Description": "",
    "Operations": [
     {
-     "$id": "63",
+     "$id": "68",
      "Name": "listPet",
      "ResourceName": "Toy",
      "Summary": "Gets ledger entries from a collection corresponding to a range.",
@@ -555,20 +583,20 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "31"
       },
       {
-       "$id": "64",
+       "$id": "69",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "65",
+        "$id": "70",
         "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "32"
+        "$ref": "37"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -580,13 +608,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "66",
+       "$id": "71",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "67",
-        "Kind": "string",
-        "IsNullable": false
+        "$id": "72",
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -598,9 +625,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "68",
+        "$id": "73",
         "Type": {
-         "$ref": "67"
+         "$ref": "72"
         },
         "Value": "application/json"
        }
@@ -608,7 +635,7 @@
      ],
      "Responses": [
       {
-       "$id": "69",
+       "$id": "74",
        "StatusCodes": [
         200
        ],
@@ -629,7 +656,7 @@
      "Path": "/pets/toys/Toy",
      "BufferResponse": true,
      "Paging": {
-      "$id": "70",
+      "$id": "75",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -638,13 +665,12 @@
     }
    ],
    "Protocol": {
-    "$id": "71"
+    "$id": "76"
    },
-   "Creatable": false,
    "Parent": "MixApiVersionClient",
    "Parameters": [
     {
-     "$ref": "26"
+     "$ref": "31"
     }
    ]
   }

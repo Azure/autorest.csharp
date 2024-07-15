@@ -58,8 +58,7 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "11",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -95,8 +94,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "14",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -153,8 +151,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "19",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -197,7 +194,6 @@
    "Protocol": {
     "$id": "22"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "10"
@@ -215,7 +211,6 @@
    "Protocol": {
     "$id": "24"
    },
-   "Creatable": false,
    "Parent": "ServiceClient",
    "Parameters": [
     {
@@ -249,8 +244,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "28",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -293,7 +287,6 @@
    "Protocol": {
     "$id": "31"
    },
-   "Creatable": false,
    "Parent": "Baz",
    "Parameters": [
     {
@@ -327,8 +320,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "35",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -371,7 +363,6 @@
    "Protocol": {
     "$id": "38"
    },
-   "Creatable": false,
    "Parent": "ServiceClient",
    "Parameters": [
     {
@@ -405,8 +396,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "42",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -449,7 +439,6 @@
    "Protocol": {
     "$id": "45"
    },
-   "Creatable": false,
    "Parent": "Qux",
    "Parameters": [
     {
@@ -483,8 +472,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "49",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -541,8 +529,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "54",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -585,7 +572,6 @@
    "Protocol": {
     "$id": "57"
    },
-   "Creatable": false,
    "Parent": "ServiceClient",
    "Parameters": [
     {
@@ -619,8 +605,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "61",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -677,8 +662,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "66",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -721,7 +705,6 @@
    "Protocol": {
     "$id": "69"
    },
-   "Creatable": false,
    "Parent": "ServiceClient",
    "Parameters": [
     {

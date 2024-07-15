@@ -171,9 +171,11 @@
         "Type": {
          "$id": "27",
          "Kind": "array",
+         "Name": "ArrayError",
          "ValueType": {
           "$ref": "19"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -304,6 +306,7 @@
      "Type": {
       "$id": "43",
       "Kind": "array",
+      "Name": "ArrayResource",
       "ValueType": {
        "$id": "44",
        "Kind": "model",
@@ -348,7 +351,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -379,8 +383,7 @@
    "Operations": [],
    "Protocol": {
     "$id": "54"
-   },
-   "Creatable": true
+   }
   },
   {
    "$id": "55",
@@ -390,7 +393,6 @@
    "Protocol": {
     "$id": "56"
    },
-   "Creatable": false,
    "Parent": "LatestClient"
   },
   {
@@ -419,8 +421,7 @@
         "$id": "61",
         "Type": {
          "$id": "62",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "2022-12-01-preview"
        },
@@ -511,8 +512,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "72",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -620,10 +620,12 @@
        "Type": {
         "$id": "83",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "84",
          "Kind": "string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -660,8 +662,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "88",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -782,8 +783,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "99",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -808,8 +808,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "102",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -912,7 +911,6 @@
    "Protocol": {
     "$id": "112"
    },
-   "Creatable": false,
    "Parent": "LatestClient"
   }
  ]

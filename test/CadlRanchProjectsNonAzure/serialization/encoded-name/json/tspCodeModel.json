@@ -35,7 +35,6 @@
    "Protocol": {
     "$id": "6"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "7",
@@ -44,8 +43,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "8",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -60,8 +58,7 @@
       "$id": "9",
       "Type": {
        "$id": "10",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -105,8 +102,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "15",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -131,8 +127,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "18",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -189,8 +184,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "23",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -239,7 +233,6 @@
    "Protocol": {
     "$id": "26"
    },
-   "Creatable": false,
    "Parent": "JsonClient",
    "Parameters": [
     {

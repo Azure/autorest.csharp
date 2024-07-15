@@ -27,9 +27,11 @@
       "Type": {
        "$id": "5",
        "Kind": "array",
+       "Name": "ArrayExtension",
        "ValueType": {
         "$ref": "2"
-       }
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
       },
       "IsRequired": false,
       "IsReadOnly": false
@@ -74,8 +76,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "11",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -90,8 +91,7 @@
         "$id": "12",
         "Type": {
          "$id": "13",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
@@ -119,8 +119,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "16",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -145,8 +144,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "19",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -203,8 +201,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "24",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -253,7 +250,6 @@
    "Protocol": {
     "$id": "27"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "10"

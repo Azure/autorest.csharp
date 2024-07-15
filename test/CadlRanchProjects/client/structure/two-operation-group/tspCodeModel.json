@@ -48,7 +48,6 @@
    "Protocol": {
     "$id": "9"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "10",
@@ -57,8 +56,7 @@
      "Description": "Need to be set as 'http://localhost:3000' in client.",
      "Type": {
       "$id": "11",
-      "Kind": "uri",
-      "IsNullable": false
+      "Kind": "url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -113,8 +111,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "16",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -171,8 +168,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "21",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -229,8 +225,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "26",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -273,7 +268,6 @@
    "Protocol": {
     "$id": "29"
    },
-   "Creatable": false,
    "Parent": "TwoOperationGroupClient",
    "Parameters": [
     {
@@ -307,8 +301,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "33",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -365,8 +358,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "38",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -423,8 +415,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "43",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -467,7 +458,6 @@
    "Protocol": {
     "$id": "46"
    },
-   "Creatable": false,
    "Parent": "TwoOperationGroupClient",
    "Parameters": [
     {

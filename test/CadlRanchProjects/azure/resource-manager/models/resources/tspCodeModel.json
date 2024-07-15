@@ -448,9 +448,11 @@
      "Type": {
       "$id": "65",
       "Kind": "array",
+      "Name": "ArrayTopLevelTrackedResource",
       "ValueType": {
        "$ref": "20"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -597,9 +599,11 @@
      "Type": {
       "$id": "82",
       "Kind": "array",
+      "Name": "ArrayNestedProxyResource",
       "ValueType": {
        "$ref": "68"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -683,9 +687,11 @@
         "Type": {
          "$id": "95",
          "Kind": "array",
+         "Name": "ArrayErrorDetail",
          "ValueType": {
           "$ref": "87"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": true
@@ -698,6 +704,7 @@
         "Type": {
          "$id": "97",
          "Kind": "array",
+         "Name": "ArrayErrorAdditionalInfo",
          "ValueType": {
           "$id": "98",
           "Kind": "model",
@@ -735,7 +742,8 @@
             "IsReadOnly": true
            }
           ]
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": true
@@ -766,7 +774,6 @@
    "Protocol": {
     "$id": "104"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "105",
@@ -775,8 +782,7 @@
      "Description": "Azure Resource Manager url.",
      "Type": {
       "$id": "106",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -791,8 +797,7 @@
       "$id": "107",
       "Type": {
        "$id": "108",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "https://management.azure.com"
      }
@@ -828,8 +833,7 @@
         "$id": "113",
         "Type": {
          "$id": "114",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "2023-12-01-preview"
        },
@@ -906,8 +910,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "122",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1066,8 +1069,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "136",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1092,8 +1094,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "139",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1305,8 +1306,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "160",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1331,8 +1331,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "163",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1520,8 +1519,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "183",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1678,8 +1676,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "201",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1787,8 +1784,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "211",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1842,7 +1838,6 @@
    "Protocol": {
     "$id": "215"
    },
-   "Creatable": false,
    "Parent": "ResourcesClient",
    "Parameters": [
     {
@@ -1970,8 +1965,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "229",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2149,8 +2143,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "245",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2175,8 +2168,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "248",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2407,8 +2399,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "271",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2433,8 +2424,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "274",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2641,8 +2631,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "296",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2818,8 +2807,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "316",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2873,7 +2861,6 @@
    "Protocol": {
     "$id": "320"
    },
-   "Creatable": false,
    "Parent": "ResourcesClient",
    "Parameters": [
     {

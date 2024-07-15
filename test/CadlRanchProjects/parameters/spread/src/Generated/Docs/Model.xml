@@ -1,38 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="SpreadAsRequestBodyAsync(BodyParameter,CancellationToken)">
+    <member name="SpreadAsRequestBodyAsync(string,CancellationToken)">
       <example>
 This sample shows how to call SpreadAsRequestBodyAsync.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient();
 
-BodyParameter bodyParameter = new BodyParameter("<name>");
-Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
+Response response = await client.SpreadAsRequestBodyAsync("<name>");
 ]]></code>
 This sample shows how to call SpreadAsRequestBodyAsync with all parameters.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient();
 
-BodyParameter bodyParameter = new BodyParameter("<name>");
-Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
+Response response = await client.SpreadAsRequestBodyAsync("<name>");
 ]]></code></example>
     </member>
-    <member name="SpreadAsRequestBody(BodyParameter,CancellationToken)">
+    <member name="SpreadAsRequestBody(string,CancellationToken)">
       <example>
 This sample shows how to call SpreadAsRequestBody.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient();
 
-BodyParameter bodyParameter = new BodyParameter("<name>");
-Response response = client.SpreadAsRequestBody(bodyParameter);
+Response response = client.SpreadAsRequestBody("<name>");
 ]]></code>
 This sample shows how to call SpreadAsRequestBody with all parameters.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient();
 
-BodyParameter bodyParameter = new BodyParameter("<name>");
-Response response = client.SpreadAsRequestBody(bodyParameter);
+Response response = client.SpreadAsRequestBody("<name>");
 ]]></code></example>
     </member>
     <member name="SpreadAsRequestBodyAsync(RequestContent,RequestContext)">
@@ -303,38 +299,34 @@ Response response = client.SpreadCompositeRequest("<name>", "<testHeader>", cont
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="SpreadCompositeRequestMixAsync(string,string,CompositeRequestMix,CancellationToken)">
+    <member name="SpreadCompositeRequestMixAsync(string,string,string,CancellationToken)">
       <example>
 This sample shows how to call SpreadCompositeRequestMixAsync.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient();
 
-CompositeRequestMix compositeRequestMix = new CompositeRequestMix("<prop>");
-Response response = await client.SpreadCompositeRequestMixAsync("<name>", "<testHeader>", compositeRequestMix);
+Response response = await client.SpreadCompositeRequestMixAsync("<name>", "<testHeader>", "<prop>");
 ]]></code>
 This sample shows how to call SpreadCompositeRequestMixAsync with all parameters.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient();
 
-CompositeRequestMix compositeRequestMix = new CompositeRequestMix("<prop>");
-Response response = await client.SpreadCompositeRequestMixAsync("<name>", "<testHeader>", compositeRequestMix);
+Response response = await client.SpreadCompositeRequestMixAsync("<name>", "<testHeader>", "<prop>");
 ]]></code></example>
     </member>
-    <member name="SpreadCompositeRequestMix(string,string,CompositeRequestMix,CancellationToken)">
+    <member name="SpreadCompositeRequestMix(string,string,string,CancellationToken)">
       <example>
 This sample shows how to call SpreadCompositeRequestMix.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient();
 
-CompositeRequestMix compositeRequestMix = new CompositeRequestMix("<prop>");
-Response response = client.SpreadCompositeRequestMix("<name>", "<testHeader>", compositeRequestMix);
+Response response = client.SpreadCompositeRequestMix("<name>", "<testHeader>", "<prop>");
 ]]></code>
 This sample shows how to call SpreadCompositeRequestMix with all parameters.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient();
 
-CompositeRequestMix compositeRequestMix = new CompositeRequestMix("<prop>");
-Response response = client.SpreadCompositeRequestMix("<name>", "<testHeader>", compositeRequestMix);
+Response response = client.SpreadCompositeRequestMix("<name>", "<testHeader>", "<prop>");
 ]]></code></example>
     </member>
     <member name="SpreadCompositeRequestMixAsync(string,string,RequestContent,RequestContext)">

@@ -88,8 +88,7 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "14",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -160,8 +159,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "20",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -186,8 +184,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "23",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -239,7 +236,6 @@
    "Protocol": {
     "$id": "26"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "13"

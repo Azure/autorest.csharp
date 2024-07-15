@@ -390,10 +390,12 @@
         "Type": {
          "$id": "61",
          "Kind": "array",
+         "Name": "Array",
          "ValueType": {
           "$id": "62",
           "Kind": "string"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -426,14 +428,18 @@
         "Type": {
          "$id": "68",
          "Kind": "array",
+         "Name": "ArrayArray",
          "ValueType": {
           "$id": "69",
           "Kind": "array",
+          "Name": "Array",
           "ValueType": {
            "$id": "70",
            "Kind": "string"
-          }
-         }
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -446,6 +452,7 @@
         "Type": {
          "$id": "72",
          "Kind": "array",
+         "Name": "ArrayRecord",
          "ValueType": {
           "$id": "73",
           "Kind": "dict",
@@ -457,7 +464,8 @@
            "$id": "75",
            "Kind": "string"
           }
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -470,10 +478,12 @@
         "Type": {
          "$id": "77",
          "Kind": "array",
+         "Name": "Array",
          "ValueType": {
           "$id": "78",
           "Kind": "float32"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -486,10 +496,12 @@
         "Type": {
          "$id": "80",
          "Kind": "array",
+         "Name": "Array",
          "ValueType": {
           "$id": "81",
           "Kind": "float32"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -505,10 +517,12 @@
          "Type": {
           "$id": "84",
           "Kind": "array",
+          "Name": "Array",
           "ValueType": {
            "$id": "85",
            "Kind": "float32"
-          }
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          }
         },
         "IsRequired": true,
@@ -525,10 +539,12 @@
          "Type": {
           "$id": "88",
           "Kind": "array",
+          "Name": "Array",
           "ValueType": {
            "$id": "89",
            "Kind": "float32"
-          }
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          }
         },
         "IsRequired": false,
@@ -542,10 +558,12 @@
         "Type": {
          "$id": "91",
          "Kind": "array",
+         "Name": "Array",
          "ValueType": {
           "$id": "92",
           "Kind": "float32"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": true,
         "IsReadOnly": true
@@ -558,10 +576,12 @@
         "Type": {
          "$id": "94",
          "Kind": "array",
+         "Name": "Array",
          "ValueType": {
           "$id": "95",
           "Kind": "float32"
-         }
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
         "IsRequired": false,
         "IsReadOnly": true
@@ -577,10 +597,12 @@
          "Type": {
           "$id": "98",
           "Kind": "array",
+          "Name": "Array",
           "ValueType": {
            "$id": "99",
            "Kind": "float32"
-          }
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          }
         },
         "IsRequired": true,
@@ -597,10 +619,12 @@
          "Type": {
           "$id": "102",
           "Kind": "array",
+          "Name": "Array",
           "ValueType": {
            "$id": "103",
            "Kind": "float32"
-          }
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          }
         },
         "IsRequired": false,
@@ -761,23 +785,56 @@
   },
   {
    "$ref": "113"
+  },
+  {
+   "$id": "120",
+   "Kind": "model",
+   "Name": "BarRequest",
+   "CrossLanguageDefinitionId": "CustomizationsInTsp.bar.Request.anonymous",
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "121",
+     "Name": "requiredIntOnBase",
+     "SerializedName": "requiredIntOnBase",
+     "Description": "Required int",
+     "Type": {
+      "$id": "122",
+      "Kind": "int32"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "123",
+     "Name": "optionalInt",
+     "SerializedName": "optionalInt",
+     "Description": "Optional int",
+     "Type": {
+      "$id": "124",
+      "Kind": "int32"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
   }
  ],
  "Clients": [
   {
-   "$id": "120",
+   "$id": "125",
    "Name": "CustomizationsInTspClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
-     "$id": "121",
+     "$id": "126",
      "Name": "roundTrip",
      "ResourceName": "CustomizationsInTsp",
      "Description": "RoundTrip operation to make RootModel round-trip",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "122",
+       "$id": "127",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -794,13 +851,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "123",
+       "$id": "128",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "124",
-        "Kind": "string",
-        "IsNullable": false
+        "$id": "129",
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -812,21 +868,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "125",
+        "$id": "130",
         "Type": {
-         "$ref": "124"
+         "$ref": "129"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "126",
+       "$id": "131",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "127",
-        "Kind": "string",
-        "IsNullable": false
+        "$id": "132",
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -838,9 +893,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "128",
+        "$id": "133",
         "Type": {
-         "$ref": "127"
+         "$ref": "132"
         },
         "Value": "application/json"
        }
@@ -848,7 +903,7 @@
      ],
      "Responses": [
       {
-       "$id": "129",
+       "$id": "134",
        "StatusCodes": [
         200
        ],
@@ -875,14 +930,14 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "130",
+     "$id": "135",
      "Name": "foo",
      "ResourceName": "CustomizationsInTsp",
      "Description": "Sample operation with request body of a renamed model",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "131",
+       "$id": "136",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -899,13 +954,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "132",
+       "$id": "137",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "133",
-        "Kind": "string",
-        "IsNullable": false
+        "$id": "138",
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -917,21 +971,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "134",
+        "$id": "139",
         "Type": {
-         "$ref": "133"
+         "$ref": "138"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "135",
+       "$id": "140",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "136",
-        "Kind": "string",
-        "IsNullable": false
+        "$id": "141",
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -943,9 +996,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "137",
+        "$id": "142",
         "Type": {
-         "$ref": "136"
+         "$ref": "141"
         },
         "Value": "application/json"
        }
@@ -953,7 +1006,7 @@
      ],
      "Responses": [
       {
-       "$id": "138",
+       "$id": "143",
        "StatusCodes": [
         200
        ],
@@ -980,14 +1033,14 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "139",
+     "$id": "144",
      "Name": "bar",
      "ResourceName": "CustomizationsInTsp",
      "Description": "Sample operation with request body using a model parameter with a spread operator.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "140",
+       "$id": "145",
        "Name": "ModelToRename",
        "NameInRequest": "ModelToRename",
        "Description": "Renamed model (original name: ModelToRename)",
@@ -1002,16 +1055,15 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Method"
+       "Kind": "Spread"
       },
       {
-       "$id": "141",
+       "$id": "146",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "142",
-        "Kind": "string",
-        "IsNullable": false
+        "$id": "147",
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1023,21 +1075,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "143",
+        "$id": "148",
         "Type": {
-         "$ref": "142"
+         "$ref": "147"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "144",
+       "$id": "149",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "145",
-        "Kind": "string",
-        "IsNullable": false
+        "$id": "150",
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1049,9 +1100,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "146",
+        "$id": "151",
         "Type": {
-         "$ref": "145"
+         "$ref": "150"
         },
         "Value": "application/json"
        }
@@ -1059,7 +1110,7 @@
      ],
      "Responses": [
       {
-       "$id": "147",
+       "$id": "152",
        "StatusCodes": [
         200
        ],
@@ -1087,9 +1138,8 @@
     }
    ],
    "Protocol": {
-    "$id": "148"
-   },
-   "Creatable": true
+    "$id": "153"
+   }
   }
  ]
 }

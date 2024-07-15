@@ -247,9 +247,11 @@
      "Type": {
       "$id": "39",
       "Kind": "array",
+      "Name": "ArrayProject",
       "ValueType": {
        "$ref": "10"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -305,9 +307,11 @@
      "Type": {
       "$id": "47",
       "Kind": "array",
+      "Name": "ArrayDeployment",
       "ValueType": {
        "$ref": "42"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -336,7 +340,6 @@
    "Protocol": {
     "$id": "51"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "52",
@@ -344,8 +347,7 @@
      "NameInRequest": "Endpoint",
      "Type": {
       "$id": "53",
-      "Kind": "uri",
-      "IsNullable": false
+      "Kind": "url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -388,8 +390,7 @@
         "$id": "58",
         "Type": {
          "$id": "59",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "2022-05-15-preview"
        },
@@ -426,8 +427,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "63",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -510,8 +510,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "70",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -565,7 +564,6 @@
    "Protocol": {
     "$id": "74"
    },
-   "Creatable": false,
    "Parent": "RenameGetListClient",
    "Parameters": [
     {
@@ -652,8 +650,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "84",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -754,8 +751,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "93",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -809,7 +805,6 @@
    "Protocol": {
     "$id": "97"
    },
-   "Creatable": false,
    "Parent": "RenameGetListClient",
    "Parameters": [
     {

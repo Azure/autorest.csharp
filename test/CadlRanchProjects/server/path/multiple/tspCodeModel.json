@@ -47,8 +47,7 @@
        "Description": "Pass in http://localhost:3000 for endpoint.",
        "Type": {
         "$id": "8",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -81,8 +80,7 @@
         "$id": "10",
         "Type": {
          "$id": "11",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "v1.0"
        }
@@ -93,8 +91,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "13",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -169,8 +166,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "20",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -213,7 +209,6 @@
    "Protocol": {
     "$id": "23"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "7"

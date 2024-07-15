@@ -85,11 +85,13 @@
      "Type": {
       "$id": "13",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "14",
        "Kind": "bytes",
        "Encode": "base64url"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -106,7 +108,6 @@
    "Protocol": {
     "$id": "16"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "17",
@@ -115,8 +116,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "18",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -131,8 +131,7 @@
       "$id": "19",
       "Type": {
        "$id": "20",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -178,8 +177,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "26",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -252,8 +250,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "33",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -326,8 +323,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "40",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -382,11 +378,13 @@
        "Type": {
         "$id": "45",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "46",
          "Kind": "bytes",
          "Encode": "base64url"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -405,8 +403,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "48",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -449,7 +446,6 @@
    "Protocol": {
     "$id": "51"
    },
-   "Creatable": false,
    "Parent": "BytesClient",
    "Parameters": [
     {
@@ -494,8 +490,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "56",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -520,8 +515,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "59",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -601,8 +595,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "65",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -627,8 +620,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "68",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -708,8 +700,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "74",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -734,8 +725,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "77",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -815,8 +805,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "83",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -841,8 +830,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "86",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -894,7 +882,6 @@
    "Protocol": {
     "$id": "89"
    },
-   "Creatable": false,
    "Parent": "BytesClient",
    "Parameters": [
     {
@@ -941,8 +928,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "95",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1015,8 +1001,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "102",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1089,8 +1074,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "109",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1145,11 +1129,13 @@
        "Type": {
         "$id": "114",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "115",
          "Kind": "bytes",
          "Encode": "base64url"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1168,8 +1154,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "117",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1212,7 +1197,6 @@
    "Protocol": {
     "$id": "120"
    },
-   "Creatable": false,
    "Parent": "BytesClient",
    "Parameters": [
     {
@@ -1259,8 +1243,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "126",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1285,8 +1268,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "129",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1392,8 +1374,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "140",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1499,8 +1480,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "151",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1576,8 +1556,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "158",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1602,8 +1581,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "161",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1679,8 +1657,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "168",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1705,8 +1682,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "171",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1752,7 +1728,6 @@
    "Protocol": {
     "$id": "174"
    },
-   "Creatable": false,
    "Parent": "BytesClient",
    "Parameters": [
     {
@@ -1780,8 +1755,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "178",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1843,8 +1817,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "184",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1906,8 +1879,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "190",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1969,8 +1941,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "196",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2032,8 +2003,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "202",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2084,7 +2054,6 @@
    "Protocol": {
     "$id": "206"
    },
-   "Creatable": false,
    "Parent": "BytesClient",
    "Parameters": [
     {

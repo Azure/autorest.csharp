@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace Scm.Client.Naming.Models
 {
     /// <summary> The ClientNameAndJsonEncodedNameModel. </summary>
-    public partial class ClientNameAndJsonEncodedNameModel
+    internal partial class ClientNameAndJsonEncodedNameModel
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.

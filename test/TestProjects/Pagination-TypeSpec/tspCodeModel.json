@@ -121,6 +121,7 @@
      "Type": {
       "$id": "19",
       "Kind": "array",
+      "Name": "ArrayLedgerEntry",
       "ValueType": {
        "$id": "20",
        "Kind": "model",
@@ -165,7 +166,8 @@
          "IsReadOnly": true
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -203,6 +205,7 @@
      "Type": {
       "$id": "31",
       "Kind": "array",
+      "Name": "ArrayDimensionValueListItem",
       "ValueType": {
        "$id": "32",
        "Kind": "model",
@@ -218,16 +221,19 @@
          "Type": {
           "$id": "34",
           "Kind": "array",
+          "Name": "Array",
           "ValueType": {
            "$id": "35",
            "Kind": "string"
-          }
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
          },
          "IsRequired": true,
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -265,9 +271,11 @@
      "Type": {
       "$id": "40",
       "Kind": "array",
+      "Name": "ArrayLedgerEntry",
       "ValueType": {
        "$ref": "20"
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -302,6 +310,7 @@
      "Type": {
       "$id": "45",
       "Kind": "array",
+      "Name": "ArrayTextBlocklist",
       "ValueType": {
        "$id": "46",
        "Kind": "model",
@@ -335,7 +344,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -373,6 +383,7 @@
      "Type": {
       "$id": "55",
       "Kind": "array",
+      "Name": "ArrayTextBlockItem",
       "ValueType": {
        "$id": "56",
        "Kind": "model",
@@ -418,7 +429,8 @@
          "IsReadOnly": false
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -456,6 +468,7 @@
      "Type": {
       "$id": "67",
       "Kind": "array",
+      "Name": "ArrayBatchPool",
       "ValueType": {
        "$id": "68",
        "Kind": "model",
@@ -501,7 +514,8 @@
          "IsReadOnly": true
         }
        ]
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -566,8 +580,7 @@
        "NameInRequest": "pagnationUri",
        "Type": {
         "$id": "83",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -593,8 +606,7 @@
         "$id": "86",
         "Type": {
          "$id": "87",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "2022-05-13"
        },
@@ -631,8 +643,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "90",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -657,8 +668,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "93",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -715,7 +725,6 @@
    "Protocol": {
     "$id": "97"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "82"
@@ -879,8 +888,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "114",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -934,7 +942,6 @@
    "Protocol": {
     "$id": "118"
    },
-   "Creatable": false,
    "Parent": "PaginationClient",
    "Parameters": [
     {
@@ -985,8 +992,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "124",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1040,7 +1046,6 @@
    "Protocol": {
     "$id": "128"
    },
-   "Creatable": false,
    "Parent": "PaginationClient",
    "Parameters": [
     {
@@ -1092,8 +1097,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "134",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1258,8 +1262,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "150",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1313,7 +1316,6 @@
    "Protocol": {
     "$id": "154"
    },
-   "Creatable": false,
    "Parent": "PaginationClient",
    "Parameters": [
     {
@@ -1385,10 +1387,12 @@
        "Type": {
         "$id": "162",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "163",
          "Kind": "string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1409,10 +1413,12 @@
        "Type": {
         "$id": "165",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "166",
          "Kind": "string"
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1431,8 +1437,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "168",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1486,7 +1491,6 @@
    "Protocol": {
     "$id": "172"
    },
-   "Creatable": false,
    "Parent": "PaginationClient",
    "Parameters": [
     {

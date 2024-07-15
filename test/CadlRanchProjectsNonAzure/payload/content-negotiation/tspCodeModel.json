@@ -36,7 +36,6 @@
    "Protocol": {
     "$id": "6"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "7",
@@ -45,8 +44,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "8",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -61,8 +59,7 @@
       "$id": "9",
       "Type": {
        "$id": "10",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -89,8 +86,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "14",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -152,8 +148,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "20",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -204,7 +199,6 @@
    "Protocol": {
     "$id": "24"
    },
-   "Creatable": false,
    "Parent": "ContentNegotiationClient",
    "Parameters": [
     {
@@ -232,8 +226,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "28",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -295,8 +288,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "34",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -345,7 +337,6 @@
    "Protocol": {
     "$id": "37"
    },
-   "Creatable": false,
    "Parent": "ContentNegotiationClient",
    "Parameters": [
     {

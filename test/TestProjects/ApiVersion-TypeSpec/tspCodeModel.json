@@ -101,8 +101,7 @@
        "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
        "Type": {
         "$id": "16",
-        "Kind": "uri",
-        "IsNullable": false
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -135,8 +134,7 @@
         "$id": "18",
         "Type": {
          "$id": "19",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "v1.2"
        }
@@ -166,8 +164,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "23",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -216,7 +213,6 @@
    "Protocol": {
     "$id": "26"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "15"

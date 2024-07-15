@@ -123,6 +123,7 @@
      "Type": {
       "$id": "20",
       "Kind": "array",
+      "Name": "Array",
       "ValueType": {
        "$id": "21",
        "Kind": "utcDateTime",
@@ -131,7 +132,8 @@
         "$id": "22",
         "Kind": "int64"
        }
-      }
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -148,7 +150,6 @@
    "Protocol": {
     "$id": "24"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "25",
@@ -157,8 +158,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "26",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -173,8 +173,7 @@
       "$id": "27",
       "Type": {
        "$id": "28",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -224,8 +223,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "35",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -302,8 +300,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "43",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -380,8 +377,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "51",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -458,8 +454,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "59",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -514,6 +509,7 @@
        "Type": {
         "$id": "64",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "65",
          "Kind": "utcDateTime",
@@ -522,7 +518,8 @@
           "$id": "66",
           "Kind": "int64"
          }
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -541,8 +538,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "68",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -585,7 +581,6 @@
    "Protocol": {
     "$id": "71"
    },
-   "Creatable": false,
    "Parent": "DatetimeClient",
    "Parameters": [
     {
@@ -630,8 +625,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "76",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -656,8 +650,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "79",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -737,8 +730,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "85",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -763,8 +755,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "88",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -844,8 +835,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "94",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -870,8 +860,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "97",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -951,8 +940,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "103",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -977,8 +965,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "106",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1058,8 +1045,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "112",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1084,8 +1070,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "115",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1137,7 +1122,6 @@
    "Protocol": {
     "$id": "118"
    },
-   "Creatable": false,
    "Parent": "DatetimeClient",
    "Parameters": [
     {
@@ -1188,8 +1172,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "125",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1266,8 +1249,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "133",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1344,8 +1326,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "141",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1422,8 +1403,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "149",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1478,6 +1458,7 @@
        "Type": {
         "$id": "154",
         "Kind": "array",
+        "Name": "Array",
         "ValueType": {
          "$id": "155",
          "Kind": "utcDateTime",
@@ -1486,7 +1467,8 @@
           "$id": "156",
           "Kind": "int64"
          }
-        }
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1505,8 +1487,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "158",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1549,7 +1530,6 @@
    "Protocol": {
     "$id": "161"
    },
-   "Creatable": false,
    "Parent": "DatetimeClient",
    "Parameters": [
     {
@@ -1577,8 +1557,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "165",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1648,8 +1627,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "173",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1719,8 +1697,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "181",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1790,8 +1767,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "189",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1850,7 +1826,6 @@
    "Protocol": {
     "$id": "195"
    },
-   "Creatable": false,
    "Parent": "DatetimeClient",
    "Parameters": [
     {

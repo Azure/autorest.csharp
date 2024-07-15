@@ -71,7 +71,6 @@
    "Protocol": {
     "$id": "12"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$id": "13",
@@ -80,8 +79,7 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "14",
-      "Kind": "string",
-      "IsNullable": false
+      "Kind": "string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -96,8 +94,7 @@
       "$id": "15",
       "Type": {
        "$id": "16",
-       "Kind": "string",
-       "IsNullable": false
+       "Kind": "string"
       },
       "Value": "http://localhost:3000"
      }
@@ -125,8 +122,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "20",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -205,8 +201,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "26",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -231,8 +226,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "29",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -308,8 +302,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "35",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -334,8 +327,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "38",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -381,7 +373,6 @@
    "Protocol": {
     "$id": "41"
    },
-   "Creatable": false,
    "Parent": "FixedClient",
    "Parameters": [
     {

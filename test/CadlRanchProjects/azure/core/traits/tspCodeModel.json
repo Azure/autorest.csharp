@@ -154,8 +154,7 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "23",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -170,8 +169,7 @@
         "$id": "24",
         "Type": {
          "$id": "25",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
@@ -190,8 +188,7 @@
         "$id": "28",
         "Type": {
          "$id": "29",
-         "Kind": "string",
-         "IsNullable": false
+         "Kind": "string"
         },
         "Value": "2022-12-01-preview"
        },
@@ -354,8 +351,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "47",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -550,8 +546,7 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "68",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -576,8 +571,7 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "71",
-        "Kind": "string",
-        "IsNullable": false
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -639,7 +633,6 @@
    "Protocol": {
     "$id": "75"
    },
-   "Creatable": true,
    "Parameters": [
     {
      "$ref": "22"
