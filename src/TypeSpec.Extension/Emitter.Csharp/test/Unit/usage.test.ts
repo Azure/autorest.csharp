@@ -230,7 +230,7 @@ describe("Test Usage", () => {
         );
 
         ok(fooAlias);
-        strictEqual(fooAlias.Usage, UsageFlags.Input);
+        strictEqual(fooAlias.Usage, UsageFlags.Input | UsageFlags.Spread);
     });
 
     it("Test the usage of body parameter of azure core operation.", async () => {
@@ -266,7 +266,7 @@ describe("Test Usage", () => {
             }
             interface TextLists{
                 @doc("create items")
-                addItems is ResourceAction<Foo, BatchCreateFooListItemsRequest, BatchCreateTextListItemsResponse>;
+                addItems is ResourceAction<Foo, { @bodyRoot body: BatchCreateFooListItemsRequest }, BatchCreateTextListItemsResponse>;
             }
       `,
             runner,
@@ -368,7 +368,7 @@ describe("Test Usage", () => {
                 @doc("create Foo")
                 op testFoo is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
                 Foo,
-                BaseModelWithDiscriminator,
+                { @bodyRoot body: BaseModelWithDiscriminator },
                 {}
                 >;
             }
