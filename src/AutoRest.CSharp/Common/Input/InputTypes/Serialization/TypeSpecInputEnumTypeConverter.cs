@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Common.Input
             string? accessibility = null;
             string? deprecated = null;
             string? description = null;
-            string? usageString = default;
+            string? usageString = null;
             bool isExtendable = false;
             InputType? valueType = null;
             IReadOnlyList<InputEnumTypeValue>? values = null;
