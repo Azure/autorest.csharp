@@ -507,36 +507,40 @@ namespace _Specs_.Azure.Core.Basic
             }
         }
 
-        /// <summary> Try to use ResourceCollectionAction to implement the same export functionality. </summary>
-        /// <param name="format"> The format of the data. </param>
+        /// <summary> Swaps two existing dogs with each other. </summary>
+        /// <param name="id"> The user's id. </param>
+        /// <param name="body"> The body schema of the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportxAsync(string,CancellationToken)']/*" />
-        public virtual async Task<Response<User>> ExportxAsync(string format, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='SwapdogsAsync(int,SwapDogsOptions,CancellationToken)']/*" />
+        public virtual async Task<Response> SwapdogsAsync(int id, SwapDogsOptions body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(format, nameof(format));
+            Argument.AssertNotNull(body, nameof(body));
 
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ExportxAsync(format, context).ConfigureAwait(false);
-            return Response.FromValue(User.FromResponse(response), response);
+            Response response = await SwapdogsAsync(id, content, context).ConfigureAwait(false);
+            return response;
         }
 
-        /// <summary> Try to use ResourceCollectionAction to implement the same export functionality. </summary>
-        /// <param name="format"> The format of the data. </param>
+        /// <summary> Swaps two existing dogs with each other. </summary>
+        /// <param name="id"> The user's id. </param>
+        /// <param name="body"> The body schema of the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Exportx(string,CancellationToken)']/*" />
-        public virtual Response<User> Exportx(string format, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Swapdogs(int,SwapDogsOptions,CancellationToken)']/*" />
+        public virtual Response Swapdogs(int id, SwapDogsOptions body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(format, nameof(format));
+            Argument.AssertNotNull(body, nameof(body));
 
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Exportx(format, context);
-            return Response.FromValue(User.FromResponse(response), response);
+            Response response = Swapdogs(id, content, context);
+            return response;
         }
 
         /// <summary>
-        /// [Protocol Method] Try to use ResourceCollectionAction to implement the same export functionality.
+        /// [Protocol Method] Swaps two existing dogs with each other.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -545,26 +549,27 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ExportxAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SwapdogsAsync(int,SwapDogsOptions,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="format"> The format of the data. </param>
+        /// <param name="id"> The user's id. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportxAsync(string,RequestContext)']/*" />
-        public virtual async Task<Response> ExportxAsync(string format, RequestContext context)
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='SwapdogsAsync(int,RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> SwapdogsAsync(int id, RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(format, nameof(format));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("BasicClient.Exportx");
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.Swapdogs");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateExportxRequest(format, context);
+                using HttpMessage message = CreateSwapdogsRequest(id, content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -575,7 +580,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary>
-        /// [Protocol Method] Try to use ResourceCollectionAction to implement the same export functionality.
+        /// [Protocol Method] Swaps two existing dogs with each other.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -584,26 +589,27 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Exportx(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Swapdogs(int,SwapDogsOptions,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="format"> The format of the data. </param>
+        /// <param name="id"> The user's id. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Exportx(string,RequestContext)']/*" />
-        public virtual Response Exportx(string format, RequestContext context)
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Swapdogs(int,RequestContent,RequestContext)']/*" />
+        public virtual Response Swapdogs(int id, RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(format, nameof(format));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("BasicClient.Exportx");
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.Swapdogs");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateExportxRequest(format, context);
+                using HttpMessage message = CreateSwapdogsRequest(id, content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -1149,18 +1155,21 @@ namespace _Specs_.Azure.Core.Basic
             return message;
         }
 
-        internal HttpMessage CreateExportxRequest(string format, RequestContext context)
+        internal HttpMessage CreateSwapdogsRequest(int id, RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier202);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/azure/core/basic/users:exportx", false);
-            uri.AppendQuery("format", format, true);
+            uri.AppendPath("/azure/core/basic/users/", false);
+            uri.AppendPath(id, true);
+            uri.AppendPath("/dogs:swapdogs", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
             return message;
         }
 
@@ -1233,5 +1242,7 @@ namespace _Specs_.Azure.Core.Basic
         private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
         private static ResponseClassifier _responseClassifier204;
         private static ResponseClassifier ResponseClassifier204 => _responseClassifier204 ??= new StatusCodeClassifier(stackalloc ushort[] { 204 });
+        private static ResponseClassifier _responseClassifier202;
+        private static ResponseClassifier ResponseClassifier202 => _responseClassifier202 ??= new StatusCodeClassifier(stackalloc ushort[] { 202 });
     }
 }

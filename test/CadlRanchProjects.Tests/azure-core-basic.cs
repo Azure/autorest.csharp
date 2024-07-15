@@ -129,5 +129,13 @@ namespace CadlRanchProjects.Tests
                 Assert.AreEqual("Madge", firstItem.Name);
             }
         });
+
+        [Test]
+        public Task Azure_Core_basic_Swapdogs() => Test(async (host) =>
+        {
+            var input = new SwapDogsOptions("dog1", "dog2");
+            var response = await new BasicClient(host, null).SwapdogsAsync(1, input);
+            Assert.AreEqual(202, response.Status);
+        });
     }
 }

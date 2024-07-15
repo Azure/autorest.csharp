@@ -427,90 +427,96 @@ Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code></example>
     </member>
-    <member name="ExportxAsync(string,CancellationToken)">
+    <member name="SwapdogsAsync(int,SwapDogsOptions,CancellationToken)">
       <example>
-This sample shows how to call ExportxAsync.
+This sample shows how to call SwapdogsAsync.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-Response<User> response = await client.ExportxAsync("<format>");
+SwapDogsOptions body = new SwapDogsOptions("<firstDogName>", "<secondDogName>");
+Response response = await client.SwapdogsAsync(1234, body);
 ]]></code>
-This sample shows how to call ExportxAsync with all parameters.
+This sample shows how to call SwapdogsAsync with all parameters.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-Response<User> response = await client.ExportxAsync("<format>");
+SwapDogsOptions body = new SwapDogsOptions("<firstDogName>", "<secondDogName>");
+Response response = await client.SwapdogsAsync(1234, body);
 ]]></code></example>
     </member>
-    <member name="Exportx(string,CancellationToken)">
+    <member name="Swapdogs(int,SwapDogsOptions,CancellationToken)">
       <example>
-This sample shows how to call Exportx.
+This sample shows how to call Swapdogs.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-Response<User> response = client.Exportx("<format>");
+SwapDogsOptions body = new SwapDogsOptions("<firstDogName>", "<secondDogName>");
+Response response = client.Swapdogs(1234, body);
 ]]></code>
-This sample shows how to call Exportx with all parameters.
+This sample shows how to call Swapdogs with all parameters.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-Response<User> response = client.Exportx("<format>");
+SwapDogsOptions body = new SwapDogsOptions("<firstDogName>", "<secondDogName>");
+Response response = client.Swapdogs(1234, body);
 ]]></code></example>
     </member>
-    <member name="ExportxAsync(string,RequestContext)">
+    <member name="SwapdogsAsync(int,RequestContent,RequestContext)">
       <example>
-This sample shows how to call ExportxAsync and parse the result.
+This sample shows how to call SwapdogsAsync.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-Response response = await client.ExportxAsync("<format>", null);
+using RequestContent content = RequestContent.Create(new
+{
+    firstDogName = "<firstDogName>",
+    secondDogName = "<secondDogName>",
+});
+Response response = await client.SwapdogsAsync(1234, content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("etag").ToString());
+Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call ExportxAsync with all parameters and parse the result.
+This sample shows how to call SwapdogsAsync with all parameters and request content.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-Response response = await client.ExportxAsync("<format>", null);
+using RequestContent content = RequestContent.Create(new
+{
+    firstDogName = "<firstDogName>",
+    secondDogName = "<secondDogName>",
+});
+Response response = await client.SwapdogsAsync(1234, content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-Console.WriteLine(result.GetProperty("etag").ToString());
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="Exportx(string,RequestContext)">
+    <member name="Swapdogs(int,RequestContent,RequestContext)">
       <example>
-This sample shows how to call Exportx and parse the result.
+This sample shows how to call Swapdogs.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-Response response = client.Exportx("<format>", null);
+using RequestContent content = RequestContent.Create(new
+{
+    firstDogName = "<firstDogName>",
+    secondDogName = "<secondDogName>",
+});
+Response response = client.Swapdogs(1234, content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("etag").ToString());
+Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call Exportx with all parameters and parse the result.
+This sample shows how to call Swapdogs with all parameters and request content.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-Response response = client.Exportx("<format>", null);
+using RequestContent content = RequestContent.Create(new
+{
+    firstDogName = "<firstDogName>",
+    secondDogName = "<secondDogName>",
+});
+Response response = client.Swapdogs(1234, content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-Console.WriteLine(result.GetProperty("etag").ToString());
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetUsersAsync(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},CancellationToken)">

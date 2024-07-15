@@ -495,100 +495,106 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Basic_Exportx_ShortVersion()
+        public void Example_Basic_Swapdogs_ShortVersion()
         {
             BasicClient client = new BasicClient();
 
-            Response response = client.Exportx("<format>", null);
+            using RequestContent content = RequestContent.Create(new
+            {
+                firstDogName = "<firstDogName>",
+                secondDogName = "<secondDogName>",
+            });
+            Response response = client.Swapdogs(1234, content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("etag").ToString());
+            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Basic_Exportx_ShortVersion_Async()
+        public async Task Example_Basic_Swapdogs_ShortVersion_Async()
         {
             BasicClient client = new BasicClient();
 
-            Response response = await client.ExportxAsync("<format>", null);
+            using RequestContent content = RequestContent.Create(new
+            {
+                firstDogName = "<firstDogName>",
+                secondDogName = "<secondDogName>",
+            });
+            Response response = await client.SwapdogsAsync(1234, content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("etag").ToString());
+            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Basic_Exportx_ShortVersion_Convenience()
+        public void Example_Basic_Swapdogs_ShortVersion_Convenience()
         {
             BasicClient client = new BasicClient();
 
-            Response<User> response = client.Exportx("<format>");
+            SwapDogsOptions body = new SwapDogsOptions("<firstDogName>", "<secondDogName>");
+            Response response = client.Swapdogs(1234, body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Basic_Exportx_ShortVersion_Convenience_Async()
+        public async Task Example_Basic_Swapdogs_ShortVersion_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
-            Response<User> response = await client.ExportxAsync("<format>");
+            SwapDogsOptions body = new SwapDogsOptions("<firstDogName>", "<secondDogName>");
+            Response response = await client.SwapdogsAsync(1234, body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Basic_Exportx_AllParameters()
+        public void Example_Basic_Swapdogs_AllParameters()
         {
             BasicClient client = new BasicClient();
 
-            Response response = client.Exportx("<format>", null);
+            using RequestContent content = RequestContent.Create(new
+            {
+                firstDogName = "<firstDogName>",
+                secondDogName = "<secondDogName>",
+            });
+            Response response = client.Swapdogs(1234, content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-            Console.WriteLine(result.GetProperty("etag").ToString());
+            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Basic_Exportx_AllParameters_Async()
+        public async Task Example_Basic_Swapdogs_AllParameters_Async()
         {
             BasicClient client = new BasicClient();
 
-            Response response = await client.ExportxAsync("<format>", null);
+            using RequestContent content = RequestContent.Create(new
+            {
+                firstDogName = "<firstDogName>",
+                secondDogName = "<secondDogName>",
+            });
+            Response response = await client.SwapdogsAsync(1234, content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-            Console.WriteLine(result.GetProperty("etag").ToString());
+            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Basic_Exportx_AllParameters_Convenience()
+        public void Example_Basic_Swapdogs_AllParameters_Convenience()
         {
             BasicClient client = new BasicClient();
 
-            Response<User> response = client.Exportx("<format>");
+            SwapDogsOptions body = new SwapDogsOptions("<firstDogName>", "<secondDogName>");
+            Response response = client.Swapdogs(1234, body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Basic_Exportx_AllParameters_Convenience_Async()
+        public async Task Example_Basic_Swapdogs_AllParameters_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
-            Response<User> response = await client.ExportxAsync("<format>");
+            SwapDogsOptions body = new SwapDogsOptions("<firstDogName>", "<secondDogName>");
+            Response response = await client.SwapdogsAsync(1234, body);
         }
 
         [Test]
