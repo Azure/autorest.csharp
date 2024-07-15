@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using _Specs_.Azure.Core.Basic;
 using _Specs_.Azure.Core.Basic.Models;
@@ -131,17 +133,17 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        public Task Azure_Core_basic_confirmGetUserName() => Test(async (host) =>
+        public void Azure_Core_basic_RenameGetMethod()
         {
-            var method = typeof(BasicClient).GetMethod("GetUserAsync");
-            Assert.IsNotNull(method)
-        });
+            var method = typeof(BasicClient).GetMethod("GetUserAsync", new[] { typeof(int), typeof(CancellationToken) });
+            Assert.IsNotNull(method);
+        }
 
         [Test]
-        public Task Azure_Core_basic_confirmGetUsersName() => Test(async (host) =>
+        public void Azure_Core_basic_RenameListMethod()
         {
-            var method = typeof(BasicClient).GetMethod("GetUsersAsync");
-            Assert.IsNotNull(method)
-        })
+            var method = typeof(BasicClient).GetMethod("GetUsersAsync", new[] { typeof(int), typeof(CancellationToken) });
+            Assert.IsNotNull(method);
+        }
     }
 }
