@@ -196,7 +196,7 @@ export function loadOperation(
     const generateProtocol: boolean = shouldGenerateProtocol(sdkContext, op);
     let generateConvenience: boolean = shouldGenerateConvenient(sdkContext, op);
 
-    if (requestMethod === RequestMethod.PATCH && generateProtocol) {
+    if (requestMethod === RequestMethod.PATCH && generateConvenience) {
         Logger.getInstance().warn(
             `Convenience method is not supported for PATCH method, it will be automatically turned off. Please set the '@convenientAPI' to false for operation ${op.name}.`
         );
