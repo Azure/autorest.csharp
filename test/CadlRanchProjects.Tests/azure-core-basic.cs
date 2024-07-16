@@ -135,15 +135,19 @@ namespace CadlRanchProjects.Tests
         [Test]
         public void Azure_Core_basic_RenameGetMethod()
         {
-            var method = typeof(BasicClient).GetMethod("GetUserAsync", new[] { typeof(int), typeof(CancellationToken) });
-            Assert.IsNotNull(method);
+            var getUserMethod = typeof(BasicClient).GetMethod("GetUserAsync", new[] { typeof(int), typeof(CancellationToken) });
+            var getMethod  = typeof(BasicClient).GetMethod("Get", new[] { typeof(int), typeof(CancellationToken) });
+            Assert.IsNull(getMethod);
+            Assert.IsNotNull(getUserMethod);
         }
 
         [Test]
         public void Azure_Core_basic_RenameListMethod()
         {
-            var method = typeof(BasicClient).GetMethod("GetUsersAsync", new[] { typeof(int), typeof(CancellationToken) });
-            Assert.IsNotNull(method);
+            var getUsersMethod = typeof(BasicClient).GetMethod("GetUsersAsync", new[] { typeof(int), typeof(CancellationToken) });
+            var listMethod = typeof(BasicClient).GetMethod("List", new[] { typeof(int), typeof(CancellationToken) });
+            Assert.IsNull(listMethod);
+            Assert.IsNotNull(getUsersMethod);
         }
     }
 }
