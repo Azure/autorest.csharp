@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.Utilities
         public static string ToVariableName(this string name) => Configuration.AzureArm ? name.ToMgmtVariableName() : ToCleanName(name, isCamelCase: false);
 
         [return: NotNullIfNotNull("name")]
-        public static string ToMgmtVariableName(this string name)
+        private static string ToMgmtVariableName(this string name)
         {
             string? tempName = name;
             var newName = NameTransformer.Instance.EnsureNameCase(name, (applyStep) =>
@@ -108,10 +108,13 @@ namespace AutoRest.CSharp.Utilities
                 if (tempName != applyStep.NewName.VariableName)
                 {
                     var finalName = ToCleanName(applyStep.NewName.VariableName, isCamelCase: false);
-                    MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                        TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue,
-                        $"Variables.{name}",
-                        $"ApplyAcronymMappingOnVariable", tempName, $"{applyStep.NewName.VariableName}(ToCleanName={finalName})");
+                    if (applyStep.MappingValue.RawValue is not null)
+                    {
+                        MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                            TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue,
+                            $"Variables.{name}",
+                            $"ApplyAcronymMappingOnVariable", tempName, $"{applyStep.NewName.VariableName}(ToCleanName={finalName})");
+                    }
                     tempName = applyStep.NewName.VariableName;
                 }
             });

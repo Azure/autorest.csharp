@@ -14,7 +14,7 @@ namespace NoDocsTypeSpec.Models
     {
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        public ProjectedModel(string name)
+        internal ProjectedModel(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
 
@@ -31,6 +31,6 @@ namespace NoDocsTypeSpec.Models
         {
         }
 
-        public string Name { get; set; }
+        public string Name { get; }
     }
 }

@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace Parameters.Spread.Models
 {
-    public partial class CompositeRequestMix : IUtf8JsonSerializable, IJsonModel<CompositeRequestMix>
+    internal partial class CompositeRequestMix : IUtf8JsonSerializable, IJsonModel<CompositeRequestMix>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CompositeRequestMix>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 

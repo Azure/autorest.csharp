@@ -28,8 +28,8 @@ namespace ModelsTypeSpec.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredString = "<requiredString>",
                 kind = "A",
+                requiredString = "<requiredString>",
             });
             Response response = client.PutBaseModelWithDiscriminatorDefinedOnBase(content);
 
@@ -47,8 +47,8 @@ namespace ModelsTypeSpec.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredString = "<requiredString>",
                 kind = "A",
+                requiredString = "<requiredString>",
             });
             Response response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(content);
 
@@ -94,9 +94,9 @@ namespace ModelsTypeSpec.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                kind = "A",
                 requiredString = "<requiredString>",
                 optionalInt = 1234,
-                kind = "A",
                 optionalString = "<optionalString>",
             });
             Response response = client.PutBaseModelWithDiscriminatorDefinedOnBase(content);
@@ -116,9 +116,9 @@ namespace ModelsTypeSpec.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                kind = "A",
                 requiredString = "<requiredString>",
                 optionalInt = 1234,
-                kind = "A",
                 optionalString = "<optionalString>",
             });
             Response response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(content);
@@ -620,6 +620,8 @@ null
             Console.WriteLine(result.GetProperty("requiredNullableStringList")[0].ToString());
             Console.WriteLine(result.GetProperty("nonRequiredNullableIntList")[0].ToString());
             Console.WriteLine(result.GetProperty("nonRequiredNullableStringList")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalModel").GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("optionalModel").GetProperty("optionalString").ToString());
         }
 
         [Test]
@@ -741,6 +743,8 @@ null
             Console.WriteLine(result.GetProperty("requiredNullableStringList")[0].ToString());
             Console.WriteLine(result.GetProperty("nonRequiredNullableIntList")[0].ToString());
             Console.WriteLine(result.GetProperty("nonRequiredNullableStringList")[0].ToString());
+            Console.WriteLine(result.GetProperty("optionalModel").GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("optionalModel").GetProperty("optionalString").ToString());
         }
 
         [Test]
@@ -1720,8 +1724,8 @@ default
                 requiredNullableString = "<requiredNullableString>",
                 requiredModel = new
                 {
-                    requiredString = "<requiredString>",
                     discriminatorProperty = "A",
+                    requiredString = "<requiredString>",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
@@ -1793,8 +1797,8 @@ null
                 requiredNullableString = "<requiredNullableString>",
                 requiredModel = new
                 {
-                    requiredString = "<requiredString>",
                     discriminatorProperty = "A",
+                    requiredString = "<requiredString>",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
@@ -1964,8 +1968,8 @@ default
                 nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new
                 {
-                    requiredString = "<requiredString>",
                     discriminatorProperty = "A",
+                    requiredString = "<requiredString>",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
                 },
@@ -2033,6 +2037,13 @@ null
             {
 "<nonRequiredNullableStringList>"
             },
+                optionalModel = new
+                {
+                    kind = "A",
+                    requiredString = "<requiredString>",
+                    optionalInt = 1234,
+                    optionalString = "<optionalString>",
+                },
             });
             Response response = client.RoundTripToOutput(content);
 
@@ -2060,8 +2071,8 @@ null
                 nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new
                 {
-                    requiredString = "<requiredString>",
                     discriminatorProperty = "A",
+                    requiredString = "<requiredString>",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
                 },
@@ -2129,6 +2140,13 @@ null
             {
 "<nonRequiredNullableStringList>"
             },
+                optionalModel = new
+                {
+                    kind = "A",
+                    requiredString = "<requiredString>",
+                    optionalInt = 1234,
+                    optionalString = "<optionalString>",
+                },
             });
             Response response = await client.RoundTripToOutputAsync(content);
 
@@ -2195,6 +2213,11 @@ default
                 OptionalInt8Array = { 123 },
                 NonRequiredNullableIntList = { 1234 },
                 NonRequiredNullableStringList = { "<nonRequiredNullableStringList>" },
+                OptionalModel = new DerivedWithDiscriminatorFromIsKeyword("<requiredString>")
+                {
+                    OptionalInt = 1234,
+                    OptionalString = "<optionalString>",
+                },
             };
             Response<OutputModel> response = client.RoundTripToOutput(input);
         }
@@ -2257,6 +2280,11 @@ default
                 OptionalInt8Array = { 123 },
                 NonRequiredNullableIntList = { 1234 },
                 NonRequiredNullableStringList = { "<nonRequiredNullableStringList>" },
+                OptionalModel = new DerivedWithDiscriminatorFromIsKeyword("<requiredString>")
+                {
+                    OptionalInt = 1234,
+                    OptionalString = "<optionalString>",
+                },
             };
             Response<OutputModel> response = await client.RoundTripToOutputAsync(input);
         }
@@ -3089,102 +3117,6 @@ default
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response<BaseModelWithDiscriminator> response = await client.AnalyzeConversationAsync();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_ModelsTypeSpec_GetSingleBase_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
-
-            Response response = client.GetSingleBase(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_ModelsTypeSpec_GetSingleBase_ShortVersion_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
-
-            Response response = await client.GetSingleBaseAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_ModelsTypeSpec_GetSingleBase_ShortVersion_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
-
-            Response<SingleBase> response = client.GetSingleBase();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_ModelsTypeSpec_GetSingleBase_ShortVersion_Convenience_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
-
-            Response<SingleBase> response = await client.GetSingleBaseAsync();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_ModelsTypeSpec_GetSingleBase_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
-
-            Response response = client.GetSingleBase(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_ModelsTypeSpec_GetSingleBase_AllParameters_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
-
-            Response response = await client.GetSingleBaseAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_ModelsTypeSpec_GetSingleBase_AllParameters_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
-
-            Response<SingleBase> response = client.GetSingleBase();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_ModelsTypeSpec_GetSingleBase_AllParameters_Convenience_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
-
-            Response<SingleBase> response = await client.GetSingleBaseAsync();
         }
 
         [Test]

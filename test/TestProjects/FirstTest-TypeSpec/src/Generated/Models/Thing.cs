@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 
 namespace FirstTestTypeSpec.Models
 {
@@ -83,8 +84,9 @@ namespace FirstTestTypeSpec.Models
         /// <param name="requiredNullableList"> required nullable collection. </param>
         /// <param name="requiredFloatProperty"> required float property. </param>
         /// <param name="optionalFloatProperty"> optional float property. </param>
+        /// <param name="optionalResourceId"> optional arm id. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal Thing(string name, BinaryData requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IList<int> optionalNullableList, IList<int> requiredNullableList, double requiredFloatProperty, double? optionalFloatProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal Thing(string name, BinaryData requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IList<int> optionalNullableList, IList<int> requiredNullableList, double requiredFloatProperty, double? optionalFloatProperty, ResourceIdentifier optionalResourceId, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             RequiredUnion = requiredUnion;
@@ -101,6 +103,7 @@ namespace FirstTestTypeSpec.Models
             RequiredNullableList = requiredNullableList;
             RequiredFloatProperty = requiredFloatProperty;
             OptionalFloatProperty = optionalFloatProperty;
+            OptionalResourceId = optionalResourceId;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -186,5 +189,7 @@ namespace FirstTestTypeSpec.Models
         public double RequiredFloatProperty { get; set; }
         /// <summary> optional float property. </summary>
         public double? OptionalFloatProperty { get; set; }
+        /// <summary> optional arm id. </summary>
+        public ResourceIdentifier OptionalResourceId { get; set; }
     }
 }
