@@ -9,6 +9,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Threading;
 using System;
+using System.IO;
+using System.Buffers;
 
 namespace CadlRanchProjects.Tests
 {
@@ -31,6 +33,9 @@ namespace CadlRanchProjects.Tests
         public class MockBearerTokenAuthenticationPolicy : BearerTokenAuthenticationPolicy
         {
             private readonly HttpPipelineTransport _transport;
+            private readonly TimeSpan _networkTimeout = TimeSpan.FromSeconds(100);
+            // Same value as Stream.CopyTo uses by default
+            private const int DefaultCopyBufferSize = 81920;
 
             public MockBearerTokenAuthenticationPolicy(TokenCredential credential, IEnumerable<string> scopes, HttpPipelineTransport transport) : base(credential, scopes)
             {
@@ -50,11 +55,53 @@ namespace CadlRanchProjects.Tests
             protected new async ValueTask ProcessNextAsync(HttpMessage message, ReadOnlyMemory<HttpPipelinePolicy> pipeline)
             {
                 await _transport.ProcessAsync(message).ConfigureAwait(false);
+                await ResponseBodyPolicyAsync(message, pipeline).ConfigureAwait(false);
 
                 var response = message.Response;
                 Type responseType = response.GetType();
                 PropertyInfo propInfo = responseType.GetProperty("IsError", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
                 propInfo.SetValue(response, message.ResponseClassifier.IsErrorResponse(message));
+            }
+
+            private async ValueTask ResponseBodyPolicyAsync(HttpMessage message, ReadOnlyMemory<HttpPipelinePolicy> pipeline)
+            {
+                CancellationToken oldToken = message.CancellationToken;
+                using CancellationTokenSource cts = CancellationTokenSource.CreateLinkedTokenSource(oldToken);
+
+                var networkTimeout = _networkTimeout;
+
+                if (message.NetworkTimeout is TimeSpan networkTimeoutOverride)
+                {
+                    networkTimeout = networkTimeoutOverride;
+                }
+
+                Stream? responseContentStream = message.Response.ContentStream;
+                if (responseContentStream == null || responseContentStream.CanSeek)
+                {
+                    return;
+                }
+
+                if (message.BufferResponse)
+                {
+                    try
+                    {
+                        var bufferedStream = new MemoryStream();
+                        await CopyToAsync(responseContentStream, bufferedStream, cts).ConfigureAwait(false);
+
+                        responseContentStream.Dispose();
+                        bufferedStream.Position = 0;
+                        message.Response.ContentStream = bufferedStream;
+                    }
+                    // We dispose stream on timeout or user cancellation so catch and check if cancellation token was cancelled
+                    catch (Exception ex)
+                        when (ex is ObjectDisposedException
+                                  or IOException
+                                  or OperationCanceledException
+                                  or NotSupportedException)
+                    {
+                        throw;
+                    }
+                }
             }
 
             protected new void ProcessNext(HttpMessage message, ReadOnlyMemory<HttpPipelinePolicy> pipeline)
@@ -95,6 +142,29 @@ namespace CadlRanchProjects.Tests
                             ProcessNext(message, pipeline);
                         }
                     }
+                }
+            }
+
+            private async Task CopyToAsync(Stream source, Stream destination, CancellationTokenSource cancellationTokenSource)
+            {
+                byte[] buffer = ArrayPool<byte>.Shared.Rent(DefaultCopyBufferSize);
+                try
+                {
+                    while (true)
+                    {
+                        cancellationTokenSource.CancelAfter(_networkTimeout);
+#pragma warning disable CA1835 // ReadAsync(Memory<>) overload is not available in all targets
+                        int bytesRead = await source.ReadAsync(buffer, 0, buffer.Length, cancellationTokenSource.Token).ConfigureAwait(false);
+#pragma warning restore // ReadAsync(Memory<>) overload is not available in all targets
+                        if (bytesRead == 0)
+                            break;
+                        await destination.WriteAsync(new ReadOnlyMemory<byte>(buffer, 0, bytesRead), cancellationTokenSource.Token).ConfigureAwait(false);
+                    }
+                }
+                finally
+                {
+                    cancellationTokenSource.CancelAfter(Timeout.InfiniteTimeSpan);
+                    ArrayPool<byte>.Shared.Return(buffer);
                 }
             }
         }
