@@ -45,6 +45,8 @@ export function resolveAzureEmitterOptions(
         csharpGeneratorPath:
             context.options.csharpGeneratorPath ??
             defaultAzureEmitterOptions.csharpGeneratorPath,
-        "enable-internal-raw-data": context.options["enable-internal-raw-data"] ?? defaultAzureEmitterOptions["enable-internal-raw-data"]
+        "enable-internal-raw-data":
+            context.options["enable-internal-raw-data"] ??
+            defaultAzureEmitterOptions["enable-internal-raw-data"]
     };
 }
