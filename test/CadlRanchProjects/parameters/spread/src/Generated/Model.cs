@@ -154,30 +154,30 @@ namespace Parameters.Spread
         }
 
         /// <summary> Spread composite request only with body. </summary>
-        /// <param name="bodyParameter"> This is a simple model. </param>
+        /// <param name="body"> The <see cref="BodyParameter"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequestOnlyWithBodyAsync(BodyParameter,CancellationToken)']/*" />
-        public virtual async Task<Response> SpreadCompositeRequestOnlyWithBodyAsync(BodyParameter bodyParameter, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> SpreadCompositeRequestOnlyWithBodyAsync(BodyParameter body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = bodyParameter.ToRequestContent();
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadCompositeRequestOnlyWithBodyAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Spread composite request only with body. </summary>
-        /// <param name="bodyParameter"> This is a simple model. </param>
+        /// <param name="body"> The <see cref="BodyParameter"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequestOnlyWithBody(BodyParameter,CancellationToken)']/*" />
-        public virtual Response SpreadCompositeRequestOnlyWithBody(BodyParameter bodyParameter, CancellationToken cancellationToken = default)
+        public virtual Response SpreadCompositeRequestOnlyWithBody(BodyParameter body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = bodyParameter.ToRequestContent();
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadCompositeRequestOnlyWithBody(content, context);
             return response;
@@ -340,18 +340,18 @@ namespace Parameters.Spread
         /// <summary> Spread composite request. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="testHeader"> The <see cref="string"/> to use. </param>
-        /// <param name="bodyParameter"> This is a simple model. </param>
+        /// <param name="body"> The <see cref="BodyParameter"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="bodyParameter"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequestAsync(string,string,BodyParameter,CancellationToken)']/*" />
-        public virtual async Task<Response> SpreadCompositeRequestAsync(string name, string testHeader, BodyParameter bodyParameter, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> SpreadCompositeRequestAsync(string name, string testHeader, BodyParameter body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(testHeader, nameof(testHeader));
-            Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = bodyParameter.ToRequestContent();
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadCompositeRequestAsync(name, testHeader, content, context).ConfigureAwait(false);
             return response;
@@ -360,18 +360,18 @@ namespace Parameters.Spread
         /// <summary> Spread composite request. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="testHeader"> The <see cref="string"/> to use. </param>
-        /// <param name="bodyParameter"> This is a simple model. </param>
+        /// <param name="body"> The <see cref="BodyParameter"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="bodyParameter"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadCompositeRequest(string,string,BodyParameter,CancellationToken)']/*" />
-        public virtual Response SpreadCompositeRequest(string name, string testHeader, BodyParameter bodyParameter, CancellationToken cancellationToken = default)
+        public virtual Response SpreadCompositeRequest(string name, string testHeader, BodyParameter body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(testHeader, nameof(testHeader));
-            Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = bodyParameter.ToRequestContent();
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadCompositeRequest(name, testHeader, content, context);
             return response;

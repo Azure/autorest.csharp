@@ -116,25 +116,25 @@ namespace Scm.Parameters.Spread
         }
 
         /// <summary> Spread composite request only with body. </summary>
-        /// <param name="bodyParameter"> This is a simple model. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
-        public virtual async Task<ClientResult> SpreadCompositeRequestOnlyWithBodyAsync(BodyParameter bodyParameter)
+        /// <param name="body"> The <see cref="BodyParameter"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<ClientResult> SpreadCompositeRequestOnlyWithBodyAsync(BodyParameter body)
         {
-            Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = bodyParameter.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await SpreadCompositeRequestOnlyWithBodyAsync(content, null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Spread composite request only with body. </summary>
-        /// <param name="bodyParameter"> This is a simple model. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
-        public virtual ClientResult SpreadCompositeRequestOnlyWithBody(BodyParameter bodyParameter)
+        /// <param name="body"> The <see cref="BodyParameter"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual ClientResult SpreadCompositeRequestOnlyWithBody(BodyParameter body)
         {
-            Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = bodyParameter.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = SpreadCompositeRequestOnlyWithBody(content, null);
             return result;
         }
@@ -252,16 +252,16 @@ namespace Scm.Parameters.Spread
         /// <summary> Spread composite request. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="testHeader"> The <see cref="string"/> to use. </param>
-        /// <param name="bodyParameter"> This is a simple model. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="bodyParameter"/> is null. </exception>
+        /// <param name="body"> The <see cref="BodyParameter"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<ClientResult> SpreadCompositeRequestAsync(string name, string testHeader, BodyParameter bodyParameter)
+        public virtual async Task<ClientResult> SpreadCompositeRequestAsync(string name, string testHeader, BodyParameter body)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(testHeader, nameof(testHeader));
-            Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = bodyParameter.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await SpreadCompositeRequestAsync(name, testHeader, content, null).ConfigureAwait(false);
             return result;
         }
@@ -269,16 +269,16 @@ namespace Scm.Parameters.Spread
         /// <summary> Spread composite request. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="testHeader"> The <see cref="string"/> to use. </param>
-        /// <param name="bodyParameter"> This is a simple model. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="bodyParameter"/> is null. </exception>
+        /// <param name="body"> The <see cref="BodyParameter"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual ClientResult SpreadCompositeRequest(string name, string testHeader, BodyParameter bodyParameter)
+        public virtual ClientResult SpreadCompositeRequest(string name, string testHeader, BodyParameter body)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(testHeader, nameof(testHeader));
-            Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = bodyParameter.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = SpreadCompositeRequest(name, testHeader, content, null);
             return result;
         }

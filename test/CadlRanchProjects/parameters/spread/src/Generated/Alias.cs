@@ -554,16 +554,16 @@ namespace Parameters.Spread
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAliasAsync(string,string,string,int,CancellationToken)']/*" />
-        public virtual async Task<Response> SpreadAliasWithSpreadAliasAsync(string id, string xMsTestHeader, string name, int age, CancellationToken cancellationToken = default)
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsInnerAliasParameterAsync(string,string,string,int,CancellationToken)']/*" />
+        public virtual async Task<Response> SpreadAsInnerAliasParameterAsync(string id, string xMsTestHeader, string name, int age, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNull(name, nameof(name));
 
-            SpreadAliasWithSpreadAliasRequest spreadAliasWithSpreadAliasRequest = new SpreadAliasWithSpreadAliasRequest(name, age, null);
+            SpreadAsInnerAliasParameterRequest spreadAsInnerAliasParameterRequest = new SpreadAsInnerAliasParameterRequest(name, age, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadAliasWithSpreadAliasAsync(id, xMsTestHeader, spreadAliasWithSpreadAliasRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadAsInnerAliasParameterAsync(id, xMsTestHeader, spreadAsInnerAliasParameterRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -575,16 +575,16 @@ namespace Parameters.Spread
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAlias(string,string,string,int,CancellationToken)']/*" />
-        public virtual Response SpreadAliasWithSpreadAlias(string id, string xMsTestHeader, string name, int age, CancellationToken cancellationToken = default)
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsInnerAliasParameter(string,string,string,int,CancellationToken)']/*" />
+        public virtual Response SpreadAsInnerAliasParameter(string id, string xMsTestHeader, string name, int age, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNull(name, nameof(name));
 
-            SpreadAliasWithSpreadAliasRequest spreadAliasWithSpreadAliasRequest = new SpreadAliasWithSpreadAliasRequest(name, age, null);
+            SpreadAsInnerAliasParameterRequest spreadAsInnerAliasParameterRequest = new SpreadAsInnerAliasParameterRequest(name, age, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadAliasWithSpreadAlias(id, xMsTestHeader, spreadAliasWithSpreadAliasRequest.ToRequestContent(), context);
+            Response response = SpreadAsInnerAliasParameter(id, xMsTestHeader, spreadAsInnerAliasParameterRequest.ToRequestContent(), context);
             return response;
         }
 
@@ -598,7 +598,7 @@ namespace Parameters.Spread
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAliasWithSpreadAliasAsync(string,string,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAsInnerAliasParameterAsync(string,string,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -611,18 +611,18 @@ namespace Parameters.Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAliasAsync(string,string,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> SpreadAliasWithSpreadAliasAsync(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsInnerAliasParameterAsync(string,string,RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> SpreadAsInnerAliasParameterAsync(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Alias.SpreadAliasWithSpreadAlias");
+            using var scope = ClientDiagnostics.CreateScope("Alias.SpreadAsInnerAliasParameter");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateSpreadAliasWithSpreadAliasRequest(id, xMsTestHeader, content, context);
+                using HttpMessage message = CreateSpreadAsInnerAliasParameterRequest(id, xMsTestHeader, content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -642,7 +642,7 @@ namespace Parameters.Spread
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAliasWithSpreadAlias(string,string,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAsInnerAliasParameter(string,string,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -655,18 +655,18 @@ namespace Parameters.Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAlias(string,string,RequestContent,RequestContext)']/*" />
-        public virtual Response SpreadAliasWithSpreadAlias(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsInnerAliasParameter(string,string,RequestContent,RequestContext)']/*" />
+        public virtual Response SpreadAsInnerAliasParameter(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Alias.SpreadAliasWithSpreadAlias");
+            using var scope = ClientDiagnostics.CreateScope("Alias.SpreadAsInnerAliasParameter");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateSpreadAliasWithSpreadAliasRequest(id, xMsTestHeader, content, context);
+                using HttpMessage message = CreateSpreadAsInnerAliasParameterRequest(id, xMsTestHeader, content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -698,7 +698,7 @@ namespace Parameters.Spread
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/parameters/spread/alias/request-with-model/", false);
+            uri.AppendPath("/parameters/spread/alias/inner-model-parameter/", false);
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("x-ms-test-header", xMsTestHeader);
@@ -742,14 +742,14 @@ namespace Parameters.Spread
             return message;
         }
 
-        internal HttpMessage CreateSpreadAliasWithSpreadAliasRequest(string id, string xMsTestHeader, RequestContent content, RequestContext context)
+        internal HttpMessage CreateSpreadAsInnerAliasParameterRequest(string id, string xMsTestHeader, RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/parameters/spread/alias/request-with-spread-alias/", false);
+            uri.AppendPath("/parameters/spread/alias/inner-alias-parameter/", false);
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("x-ms-test-header", xMsTestHeader);

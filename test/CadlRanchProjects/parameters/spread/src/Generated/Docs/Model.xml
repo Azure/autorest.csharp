@@ -91,15 +91,15 @@ This sample shows how to call SpreadCompositeRequestOnlyWithBodyAsync.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient();
 
-BodyParameter bodyParameter = new BodyParameter("<name>");
-Response response = await client.SpreadCompositeRequestOnlyWithBodyAsync(bodyParameter);
+BodyParameter body = new BodyParameter("<name>");
+Response response = await client.SpreadCompositeRequestOnlyWithBodyAsync(body);
 ]]></code>
 This sample shows how to call SpreadCompositeRequestOnlyWithBodyAsync with all parameters.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient();
 
-BodyParameter bodyParameter = new BodyParameter("<name>");
-Response response = await client.SpreadCompositeRequestOnlyWithBodyAsync(bodyParameter);
+BodyParameter body = new BodyParameter("<name>");
+Response response = await client.SpreadCompositeRequestOnlyWithBodyAsync(body);
 ]]></code></example>
     </member>
     <member name="SpreadCompositeRequestOnlyWithBody(BodyParameter,CancellationToken)">
@@ -108,15 +108,15 @@ This sample shows how to call SpreadCompositeRequestOnlyWithBody.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient();
 
-BodyParameter bodyParameter = new BodyParameter("<name>");
-Response response = client.SpreadCompositeRequestOnlyWithBody(bodyParameter);
+BodyParameter body = new BodyParameter("<name>");
+Response response = client.SpreadCompositeRequestOnlyWithBody(body);
 ]]></code>
 This sample shows how to call SpreadCompositeRequestOnlyWithBody with all parameters.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient();
 
-BodyParameter bodyParameter = new BodyParameter("<name>");
-Response response = client.SpreadCompositeRequestOnlyWithBody(bodyParameter);
+BodyParameter body = new BodyParameter("<name>");
+Response response = client.SpreadCompositeRequestOnlyWithBody(body);
 ]]></code></example>
     </member>
     <member name="SpreadCompositeRequestOnlyWithBodyAsync(RequestContent,RequestContext)">
@@ -217,15 +217,15 @@ This sample shows how to call SpreadCompositeRequestAsync.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient();
 
-BodyParameter bodyParameter = new BodyParameter("<name>");
-Response response = await client.SpreadCompositeRequestAsync("<name>", "<testHeader>", bodyParameter);
+BodyParameter body = new BodyParameter("<name>");
+Response response = await client.SpreadCompositeRequestAsync("<name>", "<testHeader>", body);
 ]]></code>
 This sample shows how to call SpreadCompositeRequestAsync with all parameters.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient();
 
-BodyParameter bodyParameter = new BodyParameter("<name>");
-Response response = await client.SpreadCompositeRequestAsync("<name>", "<testHeader>", bodyParameter);
+BodyParameter body = new BodyParameter("<name>");
+Response response = await client.SpreadCompositeRequestAsync("<name>", "<testHeader>", body);
 ]]></code></example>
     </member>
     <member name="SpreadCompositeRequest(string,string,BodyParameter,CancellationToken)">
@@ -234,15 +234,15 @@ This sample shows how to call SpreadCompositeRequest.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient();
 
-BodyParameter bodyParameter = new BodyParameter("<name>");
-Response response = client.SpreadCompositeRequest("<name>", "<testHeader>", bodyParameter);
+BodyParameter body = new BodyParameter("<name>");
+Response response = client.SpreadCompositeRequest("<name>", "<testHeader>", body);
 ]]></code>
 This sample shows how to call SpreadCompositeRequest with all parameters.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient();
 
-BodyParameter bodyParameter = new BodyParameter("<name>");
-Response response = client.SpreadCompositeRequest("<name>", "<testHeader>", bodyParameter);
+BodyParameter body = new BodyParameter("<name>");
+Response response = client.SpreadCompositeRequest("<name>", "<testHeader>", body);
 ]]></code></example>
     </member>
     <member name="SpreadCompositeRequestAsync(string,string,RequestContent,RequestContext)">

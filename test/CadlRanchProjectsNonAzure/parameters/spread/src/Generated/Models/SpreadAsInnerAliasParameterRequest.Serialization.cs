@@ -10,14 +10,14 @@ using System.Text.Json;
 
 namespace Scm.Parameters.Spread.Models
 {
-    internal partial class SpreadAliasWithSpreadAliasRequest : IJsonModel<SpreadAliasWithSpreadAliasRequest>
+    internal partial class SpreadAsInnerAliasParameterRequest : IJsonModel<SpreadAsInnerAliasParameterRequest>
     {
-        void IJsonModel<SpreadAliasWithSpreadAliasRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<SpreadAsInnerAliasParameterRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<SpreadAliasWithSpreadAliasRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<SpreadAsInnerAliasParameterRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SpreadAliasWithSpreadAliasRequest)} does not support writing '{format}' format.");
+                throw new FormatException($"The model {nameof(SpreadAsInnerAliasParameterRequest)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -43,19 +43,19 @@ namespace Scm.Parameters.Spread.Models
             writer.WriteEndObject();
         }
 
-        SpreadAliasWithSpreadAliasRequest IJsonModel<SpreadAliasWithSpreadAliasRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SpreadAsInnerAliasParameterRequest IJsonModel<SpreadAsInnerAliasParameterRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<SpreadAliasWithSpreadAliasRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<SpreadAsInnerAliasParameterRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SpreadAliasWithSpreadAliasRequest)} does not support reading '{format}' format.");
+                throw new FormatException($"The model {nameof(SpreadAsInnerAliasParameterRequest)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeSpreadAliasWithSpreadAliasRequest(document.RootElement, options);
+            return DeserializeSpreadAsInnerAliasParameterRequest(document.RootElement, options);
         }
 
-        internal static SpreadAliasWithSpreadAliasRequest DeserializeSpreadAliasWithSpreadAliasRequest(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static SpreadAsInnerAliasParameterRequest DeserializeSpreadAsInnerAliasParameterRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -85,46 +85,46 @@ namespace Scm.Parameters.Spread.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new SpreadAliasWithSpreadAliasRequest(name, age, serializedAdditionalRawData);
+            return new SpreadAsInnerAliasParameterRequest(name, age, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<SpreadAliasWithSpreadAliasRequest>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SpreadAsInnerAliasParameterRequest>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<SpreadAliasWithSpreadAliasRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<SpreadAsInnerAliasParameterRequest>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(SpreadAliasWithSpreadAliasRequest)} does not support writing '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SpreadAsInnerAliasParameterRequest)} does not support writing '{options.Format}' format.");
             }
         }
 
-        SpreadAliasWithSpreadAliasRequest IPersistableModel<SpreadAliasWithSpreadAliasRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
+        SpreadAsInnerAliasParameterRequest IPersistableModel<SpreadAsInnerAliasParameterRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<SpreadAliasWithSpreadAliasRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<SpreadAsInnerAliasParameterRequest>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeSpreadAliasWithSpreadAliasRequest(document.RootElement, options);
+                        return DeserializeSpreadAsInnerAliasParameterRequest(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(SpreadAliasWithSpreadAliasRequest)} does not support reading '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SpreadAsInnerAliasParameterRequest)} does not support reading '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<SpreadAliasWithSpreadAliasRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SpreadAsInnerAliasParameterRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
-        internal static SpreadAliasWithSpreadAliasRequest FromResponse(PipelineResponse response)
+        internal static SpreadAsInnerAliasParameterRequest FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSpreadAliasWithSpreadAliasRequest(document.RootElement);
+            return DeserializeSpreadAsInnerAliasParameterRequest(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>

@@ -149,8 +149,8 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient();
 
-            BodyParameter bodyParameter = new BodyParameter("<name>");
-            Response response = client.SpreadCompositeRequestOnlyWithBody(bodyParameter);
+            BodyParameter body = new BodyParameter("<name>");
+            Response response = client.SpreadCompositeRequestOnlyWithBody(body);
         }
 
         [Test]
@@ -159,8 +159,8 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient();
 
-            BodyParameter bodyParameter = new BodyParameter("<name>");
-            Response response = await client.SpreadCompositeRequestOnlyWithBodyAsync(bodyParameter);
+            BodyParameter body = new BodyParameter("<name>");
+            Response response = await client.SpreadCompositeRequestOnlyWithBodyAsync(body);
         }
 
         [Test]
@@ -199,8 +199,8 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient();
 
-            BodyParameter bodyParameter = new BodyParameter("<name>");
-            Response response = client.SpreadCompositeRequestOnlyWithBody(bodyParameter);
+            BodyParameter body = new BodyParameter("<name>");
+            Response response = client.SpreadCompositeRequestOnlyWithBody(body);
         }
 
         [Test]
@@ -209,8 +209,8 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient();
 
-            BodyParameter bodyParameter = new BodyParameter("<name>");
-            Response response = await client.SpreadCompositeRequestOnlyWithBodyAsync(bodyParameter);
+            BodyParameter body = new BodyParameter("<name>");
+            Response response = await client.SpreadCompositeRequestOnlyWithBodyAsync(body);
         }
 
         [Test]
@@ -293,8 +293,8 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient();
 
-            BodyParameter bodyParameter = new BodyParameter("<name>");
-            Response response = client.SpreadCompositeRequest("<name>", "<testHeader>", bodyParameter);
+            BodyParameter body = new BodyParameter("<name>");
+            Response response = client.SpreadCompositeRequest("<name>", "<testHeader>", body);
         }
 
         [Test]
@@ -303,8 +303,8 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient();
 
-            BodyParameter bodyParameter = new BodyParameter("<name>");
-            Response response = await client.SpreadCompositeRequestAsync("<name>", "<testHeader>", bodyParameter);
+            BodyParameter body = new BodyParameter("<name>");
+            Response response = await client.SpreadCompositeRequestAsync("<name>", "<testHeader>", body);
         }
 
         [Test]
@@ -343,8 +343,8 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient();
 
-            BodyParameter bodyParameter = new BodyParameter("<name>");
-            Response response = client.SpreadCompositeRequest("<name>", "<testHeader>", bodyParameter);
+            BodyParameter body = new BodyParameter("<name>");
+            Response response = client.SpreadCompositeRequest("<name>", "<testHeader>", body);
         }
 
         [Test]
@@ -353,8 +353,8 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient();
 
-            BodyParameter bodyParameter = new BodyParameter("<name>");
-            Response response = await client.SpreadCompositeRequestAsync("<name>", "<testHeader>", bodyParameter);
+            BodyParameter body = new BodyParameter("<name>");
+            Response response = await client.SpreadCompositeRequestAsync("<name>", "<testHeader>", body);
         }
 
         [Test]
