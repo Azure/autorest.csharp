@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -144,8 +145,8 @@ namespace CadlRanchProjects.Tests
         [Test]
         public void Azure_Core_basic_RenameListMethod()
         {
-            var getUsersMethod = typeof(BasicClient).GetMethod("GetUsersAsync", new[] { typeof(int), typeof(CancellationToken) });
-            var listMethod = typeof(BasicClient).GetMethod("List", new[] { typeof(int), typeof(CancellationToken) });
+            var getUsersMethod = typeof(BasicClient).GetMethod("GetUsersAsync", new[] { typeof(int?), typeof(int?), typeof(int?), typeof(IEnumerable<string>), typeof(string), typeof(IEnumerable<string>), typeof(IEnumerable<string>), typeof(CancellationToken) });
+            var listMethod = typeof(BasicClient).GetMethod("List", new[] { typeof(int?), typeof(int?), typeof(int?), typeof(IEnumerable<string>), typeof(string), typeof(IEnumerable<string>), typeof(IEnumerable<string>), typeof(CancellationToken) });
             Assert.IsNull(listMethod);
             Assert.IsNotNull(getUsersMethod);
         }
