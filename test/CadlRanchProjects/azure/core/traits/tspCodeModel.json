@@ -30,7 +30,7 @@
    ],
    "Description": "Repeatability Result header options",
    "IsExtensible": false,
-   "Usage": "Output"
+   "Usage": "None"
   },
   {
    "$id": "6",
@@ -51,7 +51,7 @@
    ],
    "Description": "Service versions",
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [

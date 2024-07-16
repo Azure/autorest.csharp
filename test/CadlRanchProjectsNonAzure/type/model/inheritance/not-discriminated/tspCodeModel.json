@@ -9,21 +9,21 @@
    "Kind": "model",
    "Name": "Siamese",
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Siamese",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Description": "The third level model in the normal multiple levels inheritance.",
    "BaseModel": {
     "$id": "3",
     "Kind": "model",
     "Name": "Cat",
     "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Cat",
-    "Usage": "RoundTrip",
+    "Usage": "Input,Output",
     "Description": "The second level model in the normal multiple levels inheritance.",
     "BaseModel": {
      "$id": "4",
      "Kind": "model",
      "Name": "Pet",
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Pet",
-     "Usage": "RoundTrip",
+     "Usage": "Input,Output",
      "Description": "This is base model for not-discriminated normal multiple levels inheritance.",
      "Properties": [
       {

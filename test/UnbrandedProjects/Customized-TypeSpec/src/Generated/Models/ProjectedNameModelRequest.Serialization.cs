@@ -8,21 +8,21 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace Scm.Parameters.Spread.Models
+namespace CustomizedTypeSpec.Models
 {
-    internal partial class CompositeRequestMix : IJsonModel<CompositeRequestMix>
+    internal partial class ProjectedNameModelRequest : IJsonModel<ProjectedNameModelRequest>
     {
-        void IJsonModel<CompositeRequestMix>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<ProjectedNameModelRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CompositeRequestMix>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ProjectedNameModelRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(CompositeRequestMix)} does not support writing '{format}' format.");
+                throw new FormatException($"The model {nameof(ProjectedNameModelRequest)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("prop"u8);
-            writer.WriteStringValue(Prop);
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -41,19 +41,19 @@ namespace Scm.Parameters.Spread.Models
             writer.WriteEndObject();
         }
 
-        CompositeRequestMix IJsonModel<CompositeRequestMix>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ProjectedNameModelRequest IJsonModel<ProjectedNameModelRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CompositeRequestMix>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ProjectedNameModelRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(CompositeRequestMix)} does not support reading '{format}' format.");
+                throw new FormatException($"The model {nameof(ProjectedNameModelRequest)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeCompositeRequestMix(document.RootElement, options);
+            return DeserializeProjectedNameModelRequest(document.RootElement, options);
         }
 
-        internal static CompositeRequestMix DeserializeCompositeRequestMix(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static ProjectedNameModelRequest DeserializeProjectedNameModelRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -61,14 +61,14 @@ namespace Scm.Parameters.Spread.Models
             {
                 return null;
             }
-            string prop = default;
+            string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("prop"u8))
+                if (property.NameEquals("name"u8))
                 {
-                    prop = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (options.Format != "W")
@@ -77,46 +77,46 @@ namespace Scm.Parameters.Spread.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new CompositeRequestMix(prop, serializedAdditionalRawData);
+            return new ProjectedNameModelRequest(name, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<CompositeRequestMix>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ProjectedNameModelRequest>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CompositeRequestMix>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ProjectedNameModelRequest>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(CompositeRequestMix)} does not support writing '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ProjectedNameModelRequest)} does not support writing '{options.Format}' format.");
             }
         }
 
-        CompositeRequestMix IPersistableModel<CompositeRequestMix>.Create(BinaryData data, ModelReaderWriterOptions options)
+        ProjectedNameModelRequest IPersistableModel<ProjectedNameModelRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CompositeRequestMix>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ProjectedNameModelRequest>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeCompositeRequestMix(document.RootElement, options);
+                        return DeserializeProjectedNameModelRequest(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(CompositeRequestMix)} does not support reading '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ProjectedNameModelRequest)} does not support reading '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<CompositeRequestMix>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ProjectedNameModelRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
-        internal static CompositeRequestMix FromResponse(PipelineResponse response)
+        internal static ProjectedNameModelRequest FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCompositeRequestMix(document.RootElement);
+            return DeserializeProjectedNameModelRequest(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>

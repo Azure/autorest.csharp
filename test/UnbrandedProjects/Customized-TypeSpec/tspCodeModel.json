@@ -24,7 +24,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input"
   },
   {
    "$id": "5",
@@ -45,7 +45,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input"
   },
   {
    "$id": "8",
@@ -66,7 +66,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input"
   },
   {
    "$id": "11",
@@ -87,7 +87,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input"
   },
   {
    "$id": "14",
@@ -108,7 +108,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input"
   },
   {
    "$id": "17",
@@ -129,7 +129,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input"
   },
   {
    "$id": "20",
@@ -274,7 +274,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -283,7 +283,7 @@
    "Kind": "model",
    "Name": "Thing",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.Thing",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Description": "A model with a few properties of literal types",
    "Properties": [
     {
@@ -524,7 +524,7 @@
    "Kind": "model",
    "Name": "RoundTripModel",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.RoundTripModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Description": "this is a roundtrip model",
    "Properties": [
     {
@@ -568,16 +568,15 @@
   {
    "$id": "85",
    "Kind": "model",
-   "Name": "Friend",
-   "CrossLanguageDefinitionId": "CustomizedTypeSpec.NotFriend",
-   "Usage": "Output",
-   "Description": "this is not a friendly model but with a friendly name",
+   "Name": "AnonymousBodyRequest",
+   "CrossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous",
+   "Usage": "Spread",
    "Properties": [
     {
      "$id": "86",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "name of the NotFriend",
+     "Description": "name of the Thing",
      "Type": {
       "$id": "87",
       "Kind": "string"
@@ -587,35 +586,275 @@
     },
     {
      "$id": "88",
+     "Name": "requiredUnion",
+     "SerializedName": "requiredUnion",
+     "Description": "required Union",
+     "Type": {
+      "$id": "89",
+      "Kind": "union",
+      "Name": "ThingRequiredUnion",
+      "VariantTypes": [
+       {
+        "$id": "90",
+        "Kind": "string"
+       },
+       {
+        "$id": "91",
+        "Kind": "array",
+        "Name": "Array",
+        "ValueType": {
+         "$id": "92",
+         "Kind": "string"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
+       },
+       {
+        "$id": "93",
+        "Kind": "int32"
+       }
+      ]
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "94",
+     "Name": "requiredLiteralString",
+     "SerializedName": "requiredLiteralString",
+     "Description": "required literal string",
+     "Type": {
+      "$id": "95",
+      "Kind": "constant",
+      "ValueType": {
+       "$ref": "20"
+      },
+      "Value": "accept"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "96",
+     "Name": "requiredLiteralInt",
+     "SerializedName": "requiredLiteralInt",
+     "Description": "required literal int",
+     "Type": {
+      "$id": "97",
+      "Kind": "constant",
+      "ValueType": {
+       "$ref": "23"
+      },
+      "Value": 123
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "98",
+     "Name": "requiredLiteralFloat",
+     "SerializedName": "requiredLiteralFloat",
+     "Description": "required literal float",
+     "Type": {
+      "$id": "99",
+      "Kind": "constant",
+      "ValueType": {
+       "$ref": "26"
+      },
+      "Value": 1.23
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "100",
+     "Name": "requiredLiteralBool",
+     "SerializedName": "requiredLiteralBool",
+     "Description": "required literal bool",
+     "Type": {
+      "$id": "101",
+      "Kind": "constant",
+      "ValueType": {
+       "$id": "102",
+       "Kind": "boolean"
+      },
+      "Value": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "103",
+     "Name": "optionalLiteralString",
+     "SerializedName": "optionalLiteralString",
+     "Description": "optional literal string",
+     "Type": {
+      "$id": "104",
+      "Kind": "constant",
+      "ValueType": {
+       "$ref": "29"
+      },
+      "Value": "reject"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "105",
+     "Name": "optionalLiteralInt",
+     "SerializedName": "optionalLiteralInt",
+     "Description": "optional literal int",
+     "Type": {
+      "$id": "106",
+      "Kind": "constant",
+      "ValueType": {
+       "$ref": "32"
+      },
+      "Value": 456
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "107",
+     "Name": "optionalLiteralFloat",
+     "SerializedName": "optionalLiteralFloat",
+     "Description": "optional literal float",
+     "Type": {
+      "$id": "108",
+      "Kind": "constant",
+      "ValueType": {
+       "$ref": "35"
+      },
+      "Value": 4.56
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "109",
+     "Name": "optionalLiteralBool",
+     "SerializedName": "optionalLiteralBool",
+     "Description": "optional literal bool",
+     "Type": {
+      "$id": "110",
+      "Kind": "constant",
+      "ValueType": {
+       "$id": "111",
+       "Kind": "boolean"
+      },
+      "Value": true
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "112",
+     "Name": "requiredBadDescription",
+     "SerializedName": "requiredBadDescription",
+     "Description": "description with xml <|endoftext|>",
+     "Type": {
+      "$id": "113",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "114",
+     "Name": "optionalNullableList",
+     "SerializedName": "optionalNullableList",
+     "Description": "optional nullable collection",
+     "Type": {
+      "$id": "115",
+      "Kind": "nullable",
+      "Type": {
+       "$id": "116",
+       "Kind": "array",
+       "Name": "Array",
+       "ValueType": {
+        "$id": "117",
+        "Kind": "int32"
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
+      }
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "118",
+     "Name": "requiredNullableList",
+     "SerializedName": "requiredNullableList",
+     "Description": "required nullable collection",
+     "Type": {
+      "$id": "119",
+      "Kind": "nullable",
+      "Type": {
+       "$id": "120",
+       "Kind": "array",
+       "Name": "Array",
+       "ValueType": {
+        "$id": "121",
+        "Kind": "int32"
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
+      }
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "122",
+   "Kind": "model",
+   "Name": "FriendlyModelRequest",
+   "CrossLanguageDefinitionId": "CustomizedTypeSpec.friendlyModel.Request.anonymous",
+   "Usage": "Spread",
+   "Properties": [
+    {
+     "$id": "123",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "name of the NotFriend",
+     "Type": {
+      "$id": "124",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "125",
      "Name": "format",
      "SerializedName": "format",
      "Description": "",
      "Type": {
-      "$id": "89",
+      "$id": "126",
       "Kind": "model",
       "Name": "ModelWithFormat",
       "CrossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithFormat",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output,Spread",
       "Properties": [
        {
-        "$id": "90",
+        "$id": "127",
         "Name": "sourceUrl",
         "SerializedName": "sourceUrl",
         "Description": "url format",
         "Type": {
-         "$id": "91",
+         "$id": "128",
          "Kind": "url"
         },
         "IsRequired": true,
         "IsReadOnly": false
        },
        {
-        "$id": "92",
+        "$id": "129",
         "Name": "guid",
         "SerializedName": "guid",
         "Description": "uuid format",
         "Type": {
-         "$id": "93",
+         "$id": "130",
          "Kind": "uuid",
          "Encode": "string"
         },
@@ -630,274 +869,37 @@
    ]
   },
   {
-   "$ref": "89"
+   "$ref": "126"
   },
   {
-   "$id": "94",
+   "$id": "131",
    "Kind": "model",
-   "Name": "ProjectedModel",
-   "CrossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithProjectedName",
+   "Name": "Friend",
+   "CrossLanguageDefinitionId": "CustomizedTypeSpec.NotFriend",
    "Usage": "Output",
-   "Description": "this is a model with a projected name",
+   "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
     {
-     "$id": "95",
+     "$id": "132",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "name of the ModelWithProjectedName",
+     "Description": "name of the NotFriend",
      "Type": {
-      "$id": "96",
-      "Kind": "string"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "97",
-   "Kind": "model",
-   "Name": "ReturnsAnonymousModelResponse",
-   "CrossLanguageDefinitionId": "CustomizedTypeSpec.returnsAnonymousModel.Response.anonymous",
-   "Usage": "Output",
-   "Properties": []
-  },
-  {
-   "$id": "98",
-   "Kind": "model",
-   "Name": "AnonymousBodyRequest",
-   "CrossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous",
-   "Usage": "Input",
-   "Properties": [
-    {
-     "$id": "99",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "name of the Thing",
-     "Type": {
-      "$id": "100",
+      "$id": "133",
       "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "101",
-     "Name": "requiredUnion",
-     "SerializedName": "requiredUnion",
-     "Description": "required Union",
+     "$id": "134",
+     "Name": "format",
+     "SerializedName": "format",
+     "Description": "",
      "Type": {
-      "$id": "102",
-      "Kind": "union",
-      "Name": "ThingRequiredUnion",
-      "VariantTypes": [
-       {
-        "$id": "103",
-        "Kind": "string"
-       },
-       {
-        "$id": "104",
-        "Kind": "array",
-        "Name": "Array",
-        "ValueType": {
-         "$id": "105",
-         "Kind": "string"
-        },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
-       },
-       {
-        "$id": "106",
-        "Kind": "int32"
-       }
-      ]
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "107",
-     "Name": "requiredLiteralString",
-     "SerializedName": "requiredLiteralString",
-     "Description": "required literal string",
-     "Type": {
-      "$id": "108",
-      "Kind": "constant",
-      "ValueType": {
-       "$ref": "20"
-      },
-      "Value": "accept"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "109",
-     "Name": "requiredLiteralInt",
-     "SerializedName": "requiredLiteralInt",
-     "Description": "required literal int",
-     "Type": {
-      "$id": "110",
-      "Kind": "constant",
-      "ValueType": {
-       "$ref": "23"
-      },
-      "Value": 123
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "111",
-     "Name": "requiredLiteralFloat",
-     "SerializedName": "requiredLiteralFloat",
-     "Description": "required literal float",
-     "Type": {
-      "$id": "112",
-      "Kind": "constant",
-      "ValueType": {
-       "$ref": "26"
-      },
-      "Value": 1.23
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "113",
-     "Name": "requiredLiteralBool",
-     "SerializedName": "requiredLiteralBool",
-     "Description": "required literal bool",
-     "Type": {
-      "$id": "114",
-      "Kind": "constant",
-      "ValueType": {
-       "$id": "115",
-       "Kind": "boolean"
-      },
-      "Value": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "116",
-     "Name": "optionalLiteralString",
-     "SerializedName": "optionalLiteralString",
-     "Description": "optional literal string",
-     "Type": {
-      "$id": "117",
-      "Kind": "constant",
-      "ValueType": {
-       "$ref": "29"
-      },
-      "Value": "reject"
+      "$ref": "126"
      },
      "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "118",
-     "Name": "optionalLiteralInt",
-     "SerializedName": "optionalLiteralInt",
-     "Description": "optional literal int",
-     "Type": {
-      "$id": "119",
-      "Kind": "constant",
-      "ValueType": {
-       "$ref": "32"
-      },
-      "Value": 456
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "120",
-     "Name": "optionalLiteralFloat",
-     "SerializedName": "optionalLiteralFloat",
-     "Description": "optional literal float",
-     "Type": {
-      "$id": "121",
-      "Kind": "constant",
-      "ValueType": {
-       "$ref": "35"
-      },
-      "Value": 4.56
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "122",
-     "Name": "optionalLiteralBool",
-     "SerializedName": "optionalLiteralBool",
-     "Description": "optional literal bool",
-     "Type": {
-      "$id": "123",
-      "Kind": "constant",
-      "ValueType": {
-       "$id": "124",
-       "Kind": "boolean"
-      },
-      "Value": true
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "125",
-     "Name": "requiredBadDescription",
-     "SerializedName": "requiredBadDescription",
-     "Description": "description with xml <|endoftext|>",
-     "Type": {
-      "$id": "126",
-      "Kind": "string"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "127",
-     "Name": "optionalNullableList",
-     "SerializedName": "optionalNullableList",
-     "Description": "optional nullable collection",
-     "Type": {
-      "$id": "128",
-      "Kind": "nullable",
-      "Type": {
-       "$id": "129",
-       "Kind": "array",
-       "Name": "Array",
-       "ValueType": {
-        "$id": "130",
-        "Kind": "int32"
-       },
-       "CrossLanguageDefinitionId": "TypeSpec.Array"
-      }
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "131",
-     "Name": "requiredNullableList",
-     "SerializedName": "requiredNullableList",
-     "Description": "required nullable collection",
-     "Type": {
-      "$id": "132",
-      "Kind": "nullable",
-      "Type": {
-       "$id": "133",
-       "Kind": "array",
-       "Name": "Array",
-       "ValueType": {
-        "$id": "134",
-        "Kind": "int32"
-       },
-       "CrossLanguageDefinitionId": "TypeSpec.Array"
-      }
-     },
-     "IsRequired": true,
      "IsReadOnly": false
     }
    ]
@@ -905,55 +907,53 @@
   {
    "$id": "135",
    "Kind": "model",
-   "Name": "FriendlyModelRequest",
-   "CrossLanguageDefinitionId": "CustomizedTypeSpec.friendlyModel.Request.anonymous",
-   "Usage": "Input",
+   "Name": "ProjectedNameModelRequest",
+   "CrossLanguageDefinitionId": "CustomizedTypeSpec.projectedNameModel.Request.anonymous",
+   "Usage": "Spread",
    "Properties": [
     {
      "$id": "136",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "name of the NotFriend",
+     "Description": "name of the ModelWithProjectedName",
      "Type": {
       "$id": "137",
       "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
-    },
-    {
-     "$id": "138",
-     "Name": "format",
-     "SerializedName": "format",
-     "Description": "",
-     "Type": {
-      "$ref": "89"
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
     }
    ]
   },
   {
-   "$id": "139",
+   "$id": "138",
    "Kind": "model",
-   "Name": "ProjectedNameModelRequest",
-   "CrossLanguageDefinitionId": "CustomizedTypeSpec.projectedNameModel.Request.anonymous",
-   "Usage": "Input",
+   "Name": "ProjectedModel",
+   "CrossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithProjectedName",
+   "Usage": "Output",
+   "Description": "this is a model with a projected name",
    "Properties": [
     {
-     "$id": "140",
+     "$id": "139",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the ModelWithProjectedName",
      "Type": {
-      "$id": "141",
+      "$id": "140",
       "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
     }
    ]
+  },
+  {
+   "$id": "141",
+   "Kind": "model",
+   "Name": "ReturnsAnonymousModelResponse",
+   "CrossLanguageDefinitionId": "CustomizedTypeSpec.returnsAnonymousModel.Response.anonymous",
+   "Usage": "Output",
+   "Properties": []
   }
  ],
  "Clients": [
@@ -1962,11 +1962,10 @@
       },
       {
        "$id": "237",
-       "Name": "Thing",
-       "NameInRequest": "Thing",
-       "Description": "A model with a few properties of literal types",
+       "Name": "AnonymousBodyRequest",
+       "NameInRequest": "",
        "Type": {
-        "$ref": "41"
+        "$ref": "85"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2069,11 +2068,10 @@
       },
       {
        "$id": "246",
-       "Name": "Friend",
-       "NameInRequest": "NotFriend",
-       "Description": "this is not a friendly model but with a friendly name",
+       "Name": "FriendlyModelRequest",
+       "NameInRequest": "",
        "Type": {
-        "$ref": "85"
+        "$ref": "122"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2143,7 +2141,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "85"
+        "$ref": "131"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2253,11 +2251,10 @@
       },
       {
        "$id": "263",
-       "Name": "ProjectedModel",
-       "NameInRequest": "ModelWithProjectedName",
-       "Description": "this is a model with a projected name",
+       "Name": "ProjectedNameModelRequest",
+       "NameInRequest": "",
        "Type": {
-        "$ref": "94"
+        "$ref": "135"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2327,7 +2324,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "94"
+        "$ref": "138"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2391,7 +2388,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "97"
+        "$ref": "141"
        },
        "BodyMediaType": "Json",
        "Headers": [],

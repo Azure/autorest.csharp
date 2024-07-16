@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "DefaultDatetimeProperty",
    "CrossLanguageDefinitionId": "Encode.Datetime.DefaultDatetimeProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "3",
@@ -35,7 +35,7 @@
    "Kind": "model",
    "Name": "Rfc3339DatetimeProperty",
    "CrossLanguageDefinitionId": "Encode.Datetime.Rfc3339DatetimeProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "7",
@@ -61,7 +61,7 @@
    "Kind": "model",
    "Name": "Rfc7231DatetimeProperty",
    "CrossLanguageDefinitionId": "Encode.Datetime.Rfc7231DatetimeProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "11",
@@ -87,7 +87,7 @@
    "Kind": "model",
    "Name": "UnixTimestampDatetimeProperty",
    "CrossLanguageDefinitionId": "Encode.Datetime.UnixTimestampDatetimeProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "15",
@@ -113,7 +113,7 @@
    "Kind": "model",
    "Name": "UnixTimestampArrayDatetimeProperty",
    "CrossLanguageDefinitionId": "Encode.Datetime.UnixTimestampArrayDatetimeProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "19",

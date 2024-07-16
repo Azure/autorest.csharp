@@ -53,7 +53,7 @@
    "Kind": "model",
    "Name": "InputOutputRecord",
    "CrossLanguageDefinitionId": "Type.Model.Usage.InputOutputRecord",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Description": "Record used both as operation parameter and return type",
    "Properties": [
     {

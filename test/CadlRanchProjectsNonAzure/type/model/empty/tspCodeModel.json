@@ -27,7 +27,7 @@
    "Kind": "model",
    "Name": "EmptyInputOutput",
    "CrossLanguageDefinitionId": "Type.Model.Empty.EmptyInputOutput",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Description": "Empty model used in both parameter and return type",
    "Properties": []
   }

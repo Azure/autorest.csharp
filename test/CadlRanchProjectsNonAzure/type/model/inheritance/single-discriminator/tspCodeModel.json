@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "Bird",
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.Bird",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Description": "This is base model for polymorphic single level inheritance with a discriminator.",
    "DiscriminatorProperty": {
     "$id": "3",
@@ -48,7 +48,7 @@
      "Kind": "model",
      "Name": "SeaGull",
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.SeaGull",
-     "Usage": "RoundTrip",
+     "Usage": "Input,Output",
      "Description": "The second level model in polymorphic single level inheritance.",
      "DiscriminatorValue": "seagull",
      "BaseModel": {
@@ -80,7 +80,7 @@
      "Kind": "model",
      "Name": "Sparrow",
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.Sparrow",
-     "Usage": "RoundTrip",
+     "Usage": "Input,Output",
      "Description": "The second level model in polymorphic single level inheritance.",
      "DiscriminatorValue": "sparrow",
      "BaseModel": {
@@ -112,7 +112,7 @@
      "Kind": "model",
      "Name": "Goose",
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.Goose",
-     "Usage": "RoundTrip",
+     "Usage": "Input,Output",
      "Description": "The second level model in polymorphic single level inheritance.",
      "DiscriminatorValue": "goose",
      "BaseModel": {
@@ -144,7 +144,7 @@
      "Kind": "model",
      "Name": "Eagle",
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.Eagle",
-     "Usage": "RoundTrip",
+     "Usage": "Input,Output",
      "Description": "The second level model in polymorphic single levels inheritance which contains references to other polymorphic instances.",
      "DiscriminatorValue": "eagle",
      "BaseModel": {

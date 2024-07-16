@@ -189,7 +189,7 @@
    ],
    "Description": "Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output"
   },
   {
    "$id": "34",
@@ -214,7 +214,7 @@
    ],
    "Description": "The alignment mode.",
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output"
   },
   {
    "$id": "38",
@@ -254,7 +254,7 @@
    ],
    "Description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output"
   },
   {
    "$id": "45",
@@ -289,7 +289,7 @@
    ],
    "Description": "the model status.",
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output"
   },
   {
    "$id": "51",
@@ -377,7 +377,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -998,7 +998,7 @@
           "Kind": "model",
           "Name": "ErrorResponse",
           "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ErrorResponse",
-          "Usage": "Output",
+          "Usage": "Output,Error",
           "Description": "ErrorResponse contains code and message that shows the error information.",
           "Properties": [
            {
@@ -1046,7 +1046,7 @@
           "Kind": "model",
           "Name": "VariableState",
           "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.VariableState",
-          "Usage": "RoundTrip",
+          "Usage": "Input,Output",
           "Description": "Variable Status.",
           "Properties": [
            {
@@ -1136,7 +1136,7 @@
          "Kind": "model",
          "Name": "MultivariateBatchDetectionOptions",
          "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionOptions",
-         "Usage": "RoundTrip",
+         "Usage": "Input,Output",
          "Description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
          "Properties": [
           {
@@ -1434,7 +1434,7 @@
    "Kind": "model",
    "Name": "ModelInfo",
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelInfo",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Description": "Training result of a model including its status, errors and diagnostics\ninformation.",
    "Properties": [
     {
@@ -1528,7 +1528,7 @@
       "Kind": "model",
       "Name": "AlignPolicy",
       "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AlignPolicy",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output",
       "Description": "An optional field, indicating the manner to align multiple variables.",
       "Properties": [
        {
@@ -1608,7 +1608,7 @@
       "Kind": "model",
       "Name": "DiagnosticsInfo",
       "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.DiagnosticsInfo",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output",
       "Description": "Diagnostics information to help inspect the states of model or variable.",
       "Properties": [
        {
@@ -1621,7 +1621,7 @@
          "Kind": "model",
          "Name": "ModelState",
          "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelState",
-         "Usage": "RoundTrip",
+         "Usage": "Input,Output",
          "Description": "Model status.",
          "Properties": [
           {
@@ -2011,7 +2011,7 @@
    "Kind": "model",
    "Name": "AnomalyDetectorError",
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.AnomalyDetectorError",
-   "Usage": "Output",
+   "Usage": "Output,Error",
    "Description": "Error information returned by the API.",
    "Properties": [
     {

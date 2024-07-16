@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "DefaultDurationProperty",
    "CrossLanguageDefinitionId": "Encode.Duration.Property.DefaultDurationProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "3",
@@ -35,7 +35,7 @@
    "Kind": "model",
    "Name": "ISO8601DurationProperty",
    "CrossLanguageDefinitionId": "Encode.Duration.Property.ISO8601DurationProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "7",
@@ -61,7 +61,7 @@
    "Kind": "model",
    "Name": "Int32SecondsDurationProperty",
    "CrossLanguageDefinitionId": "Encode.Duration.Property.Int32SecondsDurationProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "11",
@@ -87,7 +87,7 @@
    "Kind": "model",
    "Name": "FloatSecondsDurationProperty",
    "CrossLanguageDefinitionId": "Encode.Duration.Property.FloatSecondsDurationProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "15",
@@ -113,7 +113,7 @@
    "Kind": "model",
    "Name": "Float64SecondsDurationProperty",
    "CrossLanguageDefinitionId": "Encode.Duration.Property.Float64SecondsDurationProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "19",
@@ -139,7 +139,7 @@
    "Kind": "model",
    "Name": "FloatSecondsDurationArrayProperty",
    "CrossLanguageDefinitionId": "Encode.Duration.Property.FloatSecondsDurationArrayProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "23",

@@ -22,7 +22,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
-   "Usage": "Output"
+   "Usage": "Input"
   },
   {
    "$id": "5",
@@ -43,7 +43,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
-   "Usage": "Output"
+   "Usage": "Input"
   },
   {
    "$id": "8",
@@ -64,7 +64,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Output"
+   "Usage": "Input"
   },
   {
    "$id": "11",
@@ -85,7 +85,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
-   "Usage": "Output"
+   "Usage": "Input"
   },
   {
    "$id": "14",
@@ -106,7 +106,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
-   "Usage": "Output"
+   "Usage": "Input"
   },
   {
    "$id": "17",
@@ -127,7 +127,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Output"
+   "Usage": "Input"
   }
  ],
  "Models": [

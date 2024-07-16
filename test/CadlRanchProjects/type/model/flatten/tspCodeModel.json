@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "FlattenModel",
    "CrossLanguageDefinitionId": "Type.Model.Flatten.FlattenModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Description": "This is the model with one level of flattening.",
    "Properties": [
     {
@@ -63,7 +63,7 @@
    "Kind": "model",
    "Name": "NestedFlattenModel",
    "CrossLanguageDefinitionId": "Type.Model.Flatten.NestedFlattenModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Description": "This is the model with two levels of flattening.",
    "Properties": [
     {
@@ -135,7 +135,7 @@
    "Kind": "model",
    "Name": "ChildModel",
    "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Description": "This is the child model to be flattened.",
    "Properties": [
     {
@@ -169,7 +169,7 @@
    "Kind": "model",
    "Name": "ChildFlattenModel",
    "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildFlattenModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Description": "This is the child model to be flattened. And it has flattened property as well.",
    "Properties": [
     {

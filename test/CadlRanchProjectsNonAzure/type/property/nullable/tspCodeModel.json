@@ -282,7 +282,7 @@
    "Kind": "model",
    "Name": "CollectionsStringProperty",
    "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsStringProperty",
-   "Usage": "Output",
+   "Usage": "Input,Output,JsonMergePatch",
    "Description": "Model with collection string properties",
    "Properties": [
     {

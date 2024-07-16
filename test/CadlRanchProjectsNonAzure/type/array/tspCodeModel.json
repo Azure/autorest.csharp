@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "InnerModel",
    "CrossLanguageDefinitionId": "Type.Array.InnerModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Description": "Array inner model",
    "Properties": [
     {

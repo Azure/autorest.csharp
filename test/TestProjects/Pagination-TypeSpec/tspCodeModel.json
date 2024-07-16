@@ -67,7 +67,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -194,7 +194,7 @@
    "Kind": "model",
    "Name": "PagedDimensionValueListItem",
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
-   "Usage": "Output",
+   "Usage": "None",
    "Description": "Paged collection of DimensionValueListItem items",
    "Properties": [
     {
@@ -260,7 +260,7 @@
    "Kind": "model",
    "Name": "PagedLedgerEntry",
    "CrossLanguageDefinitionId": "Azure.Core.Page",
-   "Usage": "Output",
+   "Usage": "None",
    "Description": "Paged collection of LedgerEntry items",
    "Properties": [
     {
@@ -299,7 +299,7 @@
    "Kind": "model",
    "Name": "PagedTextBlocklist",
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
-   "Usage": "Output",
+   "Usage": "None",
    "Description": "Paged collection of TextBlocklist items",
    "Properties": [
     {
@@ -372,7 +372,7 @@
    "Kind": "model",
    "Name": "PagedTextBlockItem",
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
-   "Usage": "Output",
+   "Usage": "None",
    "Description": "Paged collection of TextBlockItem items",
    "Properties": [
     {
@@ -542,7 +542,7 @@
    "Kind": "model",
    "Name": "BatchError",
    "CrossLanguageDefinitionId": "Pagination.BatchError",
-   "Usage": "Output",
+   "Usage": "Output,Error",
    "Description": "An error response received from the Azure Batch service.",
    "Properties": [
     {

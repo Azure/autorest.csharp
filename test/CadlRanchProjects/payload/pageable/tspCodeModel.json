@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "PagedUser",
    "CrossLanguageDefinitionId": "Azure.Core.Page",
-   "Usage": "Output",
+   "Usage": "None",
    "Description": "Paged collection of User items",
    "Properties": [
     {

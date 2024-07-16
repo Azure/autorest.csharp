@@ -33,7 +33,7 @@
    ],
    "Description": "Fixed string enum",
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output"
   },
   {
    "$id": "7",
@@ -64,7 +64,7 @@
    "Deprecated": "deprecated for test",
    "Description": "Fixed int enum",
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output"
   },
   {
    "$id": "12",
@@ -95,7 +95,7 @@
    "Deprecated": "deprecated for test",
    "Description": "Extensible enum",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output"
   },
   {
    "$id": "17",
@@ -197,7 +197,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -206,7 +206,7 @@
    "Kind": "model",
    "Name": "BaseModelWithDiscriminatorDefinedOnBase",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithDiscriminatorDefinedOnBase",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Description": "A base model in the discriminated set inheriting from a base with the predefined discriminator property",
    "DiscriminatorProperty": {
     "$id": "34",
@@ -226,7 +226,7 @@
     "Kind": "model",
     "Name": "BaseModelWithARequiredProperty",
     "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithARequiredProperty",
-    "Usage": "RoundTrip",
+    "Usage": "Input,Output",
     "Description": "A base model with a required property",
     "Properties": [
      {
@@ -267,7 +267,7 @@
      "Kind": "model",
      "Name": "DerivedWithDiscriminatorDefinedOnBase",
      "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedWithDiscriminatorDefinedOnBase",
-     "Usage": "RoundTrip",
+     "Usage": "Input,Output",
      "Description": "A derived class in the discriminated set inheriting from a base with the predefined discriminator property",
      "DiscriminatorValue": "A",
      "BaseModel": {
@@ -555,7 +555,7 @@
       "Kind": "model",
       "Name": "BaseModel",
       "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModel",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output",
       "Description": "Base model",
       "Properties": []
      },
@@ -623,7 +623,7 @@
        "Kind": "model",
        "Name": "CollectionItem",
        "CrossLanguageDefinitionId": "ModelsTypeSpec.CollectionItem",
-       "Usage": "RoundTrip",
+       "Usage": "Input,Output",
        "Description": "Collection item model",
        "Properties": [
         {
@@ -643,14 +643,14 @@
            "Kind": "model",
            "Name": "RecordItem",
            "CrossLanguageDefinitionId": "ModelsTypeSpec.RecordItem",
-           "Usage": "RoundTrip",
+           "Usage": "Input,Output",
            "Description": "Record item model",
            "BaseModel": {
             "$id": "99",
             "Kind": "model",
             "Name": "DerivedModel",
             "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedModel",
-            "Usage": "RoundTrip",
+            "Usage": "Input,Output",
             "Description": "Derived model",
             "BaseModel": {
              "$ref": "84"
@@ -953,7 +953,7 @@
    "Kind": "model",
    "Name": "RoundTripModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Description": "Model used both as input and output",
    "BaseModel": {
     "$ref": "84"
@@ -1105,7 +1105,7 @@
       "Kind": "model",
       "Name": "BaseModelWithDiscriminator",
       "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithDiscriminator",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output",
       "Description": "Base model with discriminator property.",
       "DiscriminatorProperty": {
        "$id": "170",
@@ -1156,7 +1156,7 @@
         "Kind": "model",
         "Name": "DerivedModelWithDiscriminatorA",
         "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedModelWithDiscriminatorA",
-        "Usage": "RoundTrip",
+        "Usage": "Input,Output",
         "Description": "Deriver model with discriminator property.",
         "DiscriminatorValue": "A",
         "BaseModel": {
@@ -1200,7 +1200,7 @@
         "Kind": "model",
         "Name": "DerivedModelWithDiscriminatorB",
         "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedModelWithDiscriminatorB",
-        "Usage": "RoundTrip",
+        "Usage": "Input,Output",
         "Description": "Deriver model with discriminator property.",
         "DiscriminatorValue": "B",
         "BaseModel": {
@@ -1573,7 +1573,7 @@
       "Kind": "model",
       "Name": "BaseModelWithDiscriminatorFromIsKeyword",
       "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithDiscriminatorFromIsKeyword",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output",
       "Description": "A base model in the discriminated set but its discriminator propery comes with the is keyword",
       "DiscriminatorProperty": {
        "$id": "243",
@@ -1612,7 +1612,7 @@
         "Kind": "model",
         "Name": "DerivedWithDiscriminatorFromIsKeyword",
         "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedWithDiscriminatorFromIsKeyword",
-        "Usage": "RoundTrip",
+        "Usage": "Input,Output",
         "Description": "A derived class in the discriminated set inheriting from a base whose discriminator property comes from is keyword",
         "DiscriminatorValue": "A",
         "BaseModel": {
@@ -1843,7 +1843,7 @@
    "Kind": "model",
    "Name": "RoundTripOptionalModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripOptionalModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Deprecation": "deprecated for test",
    "Description": "RoundTrip model with optional properties.",
    "Properties": [
@@ -1945,14 +1945,14 @@
       "Kind": "model",
       "Name": "DerivedModelWithProperties",
       "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedModelWithProperties",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output",
       "Description": "Derived model with properties",
       "BaseModel": {
        "$id": "297",
        "Kind": "model",
        "Name": "BaseModelWithProperties",
        "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithProperties",
-       "Usage": "RoundTrip",
+       "Usage": "Input,Output",
        "Description": "Base model with properties",
        "Properties": [
         {
@@ -2718,7 +2718,7 @@
    "Kind": "model",
    "Name": "RoundTripRecursiveModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripRecursiveModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Description": "Roundtrip model that has property of its own type",
    "Properties": [
     {
@@ -2784,14 +2784,14 @@
    "Kind": "model",
    "Name": "RoundTripOnNoUse",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripOnNoUse",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Description": "Derived model",
    "BaseModel": {
     "$id": "420",
     "Kind": "model",
     "Name": "NoUseBase",
     "CrossLanguageDefinitionId": "ModelsTypeSpec.NoUseBase",
-    "Usage": "RoundTrip",
+    "Usage": "Input,Output",
     "Description": "Base model",
     "Properties": [
      {

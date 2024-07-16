@@ -5,10 +5,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace Scm.Parameters.Spread.Models
+namespace CustomizedTypeSpec.Models
 {
-    /// <summary> This is a model with non-body http request decorator. </summary>
-    internal partial class CompositeRequestMix
+    /// <summary> The FriendlyModelRequest. </summary>
+    internal partial class FriendlyModelRequest
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -42,31 +42,35 @@ namespace Scm.Parameters.Spread.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="CompositeRequestMix"/>. </summary>
-        /// <param name="prop"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
-        public CompositeRequestMix(string prop)
+        /// <summary> Initializes a new instance of <see cref="FriendlyModelRequest"/>. </summary>
+        /// <param name="name"> name of the NotFriend. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        internal FriendlyModelRequest(string name)
         {
-            Argument.AssertNotNull(prop, nameof(prop));
+            Argument.AssertNotNull(name, nameof(name));
 
-            Prop = prop;
+            Name = name;
         }
 
-        /// <summary> Initializes a new instance of <see cref="CompositeRequestMix"/>. </summary>
-        /// <param name="prop"></param>
+        /// <summary> Initializes a new instance of <see cref="FriendlyModelRequest"/>. </summary>
+        /// <param name="name"> name of the NotFriend. </param>
+        /// <param name="format"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CompositeRequestMix(string prop, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal FriendlyModelRequest(string name, ModelWithFormat format, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Prop = prop;
+            Name = name;
+            Format = format;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="CompositeRequestMix"/> for deserialization. </summary>
-        internal CompositeRequestMix()
+        /// <summary> Initializes a new instance of <see cref="FriendlyModelRequest"/> for deserialization. </summary>
+        internal FriendlyModelRequest()
         {
         }
 
-        /// <summary> Gets the prop. </summary>
-        public string Prop { get; }
+        /// <summary> name of the NotFriend. </summary>
+        public string Name { get; }
+        /// <summary> Gets the format. </summary>
+        public ModelWithFormat Format { get; }
     }
 }

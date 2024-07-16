@@ -24,7 +24,7 @@
    ],
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -33,7 +33,7 @@
    "Kind": "model",
    "Name": "AzureEmbeddingModel",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Model.AzureEmbeddingModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output",
    "Properties": [
     {
      "$id": "6",
