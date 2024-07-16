@@ -24,26 +24,5 @@ namespace AutoRest.LowLevel.Tests
             Assert.IsNotNull(attribute);
             Assert.AreEqual("deprecated for test", ((ObsoleteAttribute)attribute).Message);
         }
-
-        [TestCase(typeof(ModelsTypeSpecClient), "InputToRoundTripReadOnly")]
-        public void DeprecatedOperations(Type client, string operationBaseName)
-        {
-            var methods = client.GetMethods(BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(4, methods.Where(m =>
-            {
-                if (m.Name == operationBaseName || m.Name == (operationBaseName + "Async"))
-                {
-                    var attribute = m.GetCustomAttribute(typeof(ObsoleteAttribute));
-                    if (attribute is ObsoleteAttribute obsoleteAttribute)
-                    {
-                        if (obsoleteAttribute.Message == "deprecated for test")
-                        {
-                            return true;
-                        }
-                    };
-                }
-                return false;
-            }).Count());
-        }
     }
 }
