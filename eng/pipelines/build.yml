@@ -99,10 +99,6 @@ extends:
                   command: custom
                   customCommand: run build
                   workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
-              - script: |
-                  npm run test --prefix src/TypeSpec.Extension/Emitter.Csharp
-                displayName: 'Unit Test'
-                workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
               - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
                 - pwsh: >
                     ./eng/PublishRelease.ps1

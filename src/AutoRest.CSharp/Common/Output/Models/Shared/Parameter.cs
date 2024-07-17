@@ -132,7 +132,8 @@ namespace AutoRest.CSharp.Output.Models.Shared
             {
                 var paramInputTypeName = paramInputType.Name;
 
-                if (paramName.Equals(paramInputTypeName))
+                if (paramName.Equals(paramInputTypeName) || // remove this after adoption of TCGC
+                    paramName.Equals(paramInputTypeName.ToVariableName()))
                 {
                     variableName = !string.IsNullOrEmpty(type.Name) ? type.Name.ToVariableName() : variableName;
                 }

@@ -36,12 +36,23 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 outputPath = Path.Combine(projectPath, "Generated");
             }
             generatedTestOutputPath = Path.Combine(outputPath, "..", "..", "tests", "Generated");
-
-            var configurationPath = options.ConfigurationPath ?? Path.Combine(outputPath, "Configuration.json");
+            var configurationPath = options.ConfigurationPath;
+            if (configurationPath == null)
+            {
+                configurationPath = Path.Combine(outputPath, "Configuration.json");
+                if (!File.Exists(configurationPath))
+                {
+                    configurationPath = Path.Combine(outputPath, "..", "..", "Configuration.json");
+                }
+            }
             LoadConfiguration(projectPath, outputPath, options.ExistingProjectFolder, File.ReadAllText(configurationPath));
 
             var codeModelInputPath = Path.Combine(outputPath, "CodeModel.yaml");
             var tspInputFile = Path.Combine(outputPath, "tspCodeModel.json");
+            if (!File.Exists(tspInputFile))
+            {
+                tspInputFile = Path.Combine(outputPath, "..", "..", "tspCodeModel.json");
+            }
 
             GeneratedCodeWorkspace workspace;
             if (File.Exists(tspInputFile))
