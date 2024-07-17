@@ -540,10 +540,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Parameters-LowLevel\\src\\Generated -n"
     },
-    "Parameters-TypeSpec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Parameters-TypeSpec\\src\\Generated -n"
-    },
     "ParameterSequence-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ParameterSequence-LowLevel\\src\\Generated -n"
