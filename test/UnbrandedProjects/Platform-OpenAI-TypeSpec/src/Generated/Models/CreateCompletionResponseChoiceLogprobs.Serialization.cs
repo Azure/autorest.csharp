@@ -21,7 +21,7 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            if (!SerializedAdditionalRawData.ContainsKey("tokens"))
+            if (SerializedAdditionalRawData?.ContainsKey("tokens") != true)
             {
                 writer.WritePropertyName("tokens"u8);
                 writer.WriteStartArray();
@@ -31,7 +31,7 @@ namespace OpenAI.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!SerializedAdditionalRawData.ContainsKey("token_logprobs"))
+            if (SerializedAdditionalRawData?.ContainsKey("token_logprobs") != true)
             {
                 writer.WritePropertyName("token_logprobs"u8);
                 writer.WriteStartArray();
@@ -41,7 +41,7 @@ namespace OpenAI.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!SerializedAdditionalRawData.ContainsKey("top_logprobs"))
+            if (SerializedAdditionalRawData?.ContainsKey("top_logprobs") != true)
             {
                 writer.WritePropertyName("top_logprobs"u8);
                 writer.WriteStartArray();
@@ -62,7 +62,7 @@ namespace OpenAI.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!SerializedAdditionalRawData.ContainsKey("text_offset"))
+            if (SerializedAdditionalRawData?.ContainsKey("text_offset") != true)
             {
                 writer.WritePropertyName("text_offset"u8);
                 writer.WriteStartArray();
@@ -173,6 +173,7 @@ namespace OpenAI.Models
                 }
                 if (options.Format != "W")
                 {
+                    rawDataDictionary ??= new Dictionary<string, BinaryData>();
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }

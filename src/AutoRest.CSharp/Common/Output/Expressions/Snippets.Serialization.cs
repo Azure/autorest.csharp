@@ -30,8 +30,8 @@ namespace AutoRest.CSharp.Common.Output.Models
                     return statement;
                 }
 
-                var rawDataDict = new DictionaryExpression(typeof(string), typeof(BinaryData), rawDataExpression);
-                var condition = Not(rawDataDict.ContainsKey(Literal(propertyName)));
+                var rawDataDict = new DictionaryExpression(typeof(string), typeof(BinaryData), new NullConditionalExpression(rawDataExpression));
+                var condition = NotEqual(rawDataDict.ContainsKey(Literal(propertyName)), True);
 
                 if (statement is IfStatement ifStatement)
                 {

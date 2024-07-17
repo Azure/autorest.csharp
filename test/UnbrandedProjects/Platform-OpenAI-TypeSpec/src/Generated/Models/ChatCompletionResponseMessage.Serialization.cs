@@ -21,12 +21,12 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            if (!SerializedAdditionalRawData.ContainsKey("role"))
+            if (SerializedAdditionalRawData?.ContainsKey("role") != true)
             {
                 writer.WritePropertyName("role"u8);
                 writer.WriteStringValue(Role.ToSerialString());
             }
-            if (!SerializedAdditionalRawData.ContainsKey("content"))
+            if (SerializedAdditionalRawData?.ContainsKey("content") != true)
             {
                 if (Content != null)
                 {
@@ -38,7 +38,7 @@ namespace OpenAI.Models
                     writer.WriteNull("content");
                 }
             }
-            if (!SerializedAdditionalRawData.ContainsKey("function_call") && Optional.IsDefined(FunctionCall))
+            if (SerializedAdditionalRawData?.ContainsKey("function_call") != true && Optional.IsDefined(FunctionCall))
             {
                 writer.WritePropertyName("function_call"u8);
                 writer.WriteObjectValue(FunctionCall, options);
@@ -115,6 +115,7 @@ namespace OpenAI.Models
                 }
                 if (options.Format != "W")
                 {
+                    rawDataDictionary ??= new Dictionary<string, BinaryData>();
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }

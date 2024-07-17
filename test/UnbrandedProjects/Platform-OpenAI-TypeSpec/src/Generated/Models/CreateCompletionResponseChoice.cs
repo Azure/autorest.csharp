@@ -40,7 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateCompletionResponseChoice"/>. </summary>
         /// <param name="index"></param>
         /// <param name="text"></param>
@@ -61,7 +61,6 @@ namespace OpenAI.Models
             Text = text;
             Logprobs = logprobs;
             FinishReason = finishReason;
-            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateCompletionResponseChoice"/>. </summary>

@@ -414,13 +414,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var property in Properties)
             {
                 // we do not need to add initialization for raw data field
-                // when the enable-internal-raw-field is enabled we need to initialize this as well
                 if (isInitializer && property == RawDataField)
                 {
-                    if (Configuration.EnableInternalRawData)
-                    {
-                        defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, Constant.NewInstanceOf(property.Declaration.Type.PropertyInitializationType)));
-                    }
                     continue;
                 }
 

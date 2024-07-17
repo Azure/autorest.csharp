@@ -40,7 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CompletionUsage"/>. </summary>
         /// <param name="promptTokens"> Number of tokens in the prompt. </param>
         /// <param name="completionTokens"> Number of tokens in the generated completion. </param>
@@ -50,7 +50,6 @@ namespace OpenAI.Models
             PromptTokens = promptTokens;
             CompletionTokens = completionTokens;
             TotalTokens = totalTokens;
-            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CompletionUsage"/>. </summary>

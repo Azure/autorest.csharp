@@ -41,7 +41,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateImageVariationRequest"/>. </summary>
         /// <param name="image">
         /// The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB,
@@ -53,7 +53,6 @@ namespace OpenAI.Models
             Argument.AssertNotNull(image, nameof(image));
 
             Image = image;
-            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateImageVariationRequest"/>. </summary>

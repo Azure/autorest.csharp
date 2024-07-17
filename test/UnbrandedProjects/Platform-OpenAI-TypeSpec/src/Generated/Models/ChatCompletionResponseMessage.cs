@@ -40,7 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="ChatCompletionResponseMessage"/>. </summary>
         /// <param name="role"> The role of the author of this message. </param>
         /// <param name="content"> The contents of the message. </param>
@@ -48,7 +48,6 @@ namespace OpenAI.Models
         {
             Role = role;
             Content = content;
-            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="ChatCompletionResponseMessage"/>. </summary>

@@ -21,12 +21,12 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            if (!SerializedAdditionalRawData.ContainsKey("model"))
+            if (SerializedAdditionalRawData?.ContainsKey("model") != true)
             {
                 writer.WritePropertyName("model"u8);
                 writer.WriteStringValue(Model.ToString());
             }
-            if (!SerializedAdditionalRawData.ContainsKey("input"))
+            if (SerializedAdditionalRawData?.ContainsKey("input") != true)
             {
                 writer.WritePropertyName("input"u8);
 #if NET6_0_OR_GREATER
@@ -38,7 +38,7 @@ namespace OpenAI.Models
                 }
 #endif
             }
-            if (!SerializedAdditionalRawData.ContainsKey("user") && Optional.IsDefined(User))
+            if (SerializedAdditionalRawData?.ContainsKey("user") != true && Optional.IsDefined(User))
             {
                 writer.WritePropertyName("user"u8);
                 writer.WriteStringValue(User);
@@ -106,6 +106,7 @@ namespace OpenAI.Models
                 }
                 if (options.Format != "W")
                 {
+                    rawDataDictionary ??= new Dictionary<string, BinaryData>();
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }

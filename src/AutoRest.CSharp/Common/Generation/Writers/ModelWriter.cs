@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.Generation.Writers
             if (Configuration.EnableInternalRawData)
             {
                 writer.WriteXmlDocumentationSummary($"{rawDataField.Description}");
-                writer.Append($"{rawDataField.Declaration.Accessibility} {rawDataField.Declaration.Type} {rawDataField.Declaration.Name} {{ get; }}");
+                writer.Append($"{rawDataField.Declaration.Accessibility} {rawDataField.Declaration.Type} {rawDataField.Declaration.Name} {{ get; set; }}");
             }
             else
             {

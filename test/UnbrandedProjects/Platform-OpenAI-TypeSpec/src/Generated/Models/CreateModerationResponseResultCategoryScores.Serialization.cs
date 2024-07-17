@@ -21,57 +21,57 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            if (!SerializedAdditionalRawData.ContainsKey("hate"))
+            if (SerializedAdditionalRawData?.ContainsKey("hate") != true)
             {
                 writer.WritePropertyName("hate"u8);
                 writer.WriteNumberValue(Hate);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("hate/threatening"))
+            if (SerializedAdditionalRawData?.ContainsKey("hate/threatening") != true)
             {
                 writer.WritePropertyName("hate/threatening"u8);
                 writer.WriteNumberValue(HateThreatening);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("harassment"))
+            if (SerializedAdditionalRawData?.ContainsKey("harassment") != true)
             {
                 writer.WritePropertyName("harassment"u8);
                 writer.WriteNumberValue(Harassment);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("harassment/threatening"))
+            if (SerializedAdditionalRawData?.ContainsKey("harassment/threatening") != true)
             {
                 writer.WritePropertyName("harassment/threatening"u8);
                 writer.WriteNumberValue(HarassmentThreatening);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("self-harm"))
+            if (SerializedAdditionalRawData?.ContainsKey("self-harm") != true)
             {
                 writer.WritePropertyName("self-harm"u8);
                 writer.WriteNumberValue(SelfHarm);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("self-harm/intent"))
+            if (SerializedAdditionalRawData?.ContainsKey("self-harm/intent") != true)
             {
                 writer.WritePropertyName("self-harm/intent"u8);
                 writer.WriteNumberValue(SelfHarmIntent);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("self-harm/instructive"))
+            if (SerializedAdditionalRawData?.ContainsKey("self-harm/instructive") != true)
             {
                 writer.WritePropertyName("self-harm/instructive"u8);
                 writer.WriteNumberValue(SelfHarmInstructive);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("sexual"))
+            if (SerializedAdditionalRawData?.ContainsKey("sexual") != true)
             {
                 writer.WritePropertyName("sexual"u8);
                 writer.WriteNumberValue(Sexual);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("sexual/minors"))
+            if (SerializedAdditionalRawData?.ContainsKey("sexual/minors") != true)
             {
                 writer.WritePropertyName("sexual/minors"u8);
                 writer.WriteNumberValue(SexualMinors);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("violence"))
+            if (SerializedAdditionalRawData?.ContainsKey("violence") != true)
             {
                 writer.WritePropertyName("violence"u8);
                 writer.WriteNumberValue(Violence);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("violence/graphic"))
+            if (SerializedAdditionalRawData?.ContainsKey("violence/graphic") != true)
             {
                 writer.WritePropertyName("violence/graphic"u8);
                 writer.WriteNumberValue(ViolenceGraphic);
@@ -187,6 +187,7 @@ namespace OpenAI.Models
                 }
                 if (options.Format != "W")
                 {
+                    rawDataDictionary ??= new Dictionary<string, BinaryData>();
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }

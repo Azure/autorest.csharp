@@ -40,7 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="Model"/>. </summary>
         /// <param name="id"> The model identifier, which can be referenced in the API endpoints. </param>
         /// <param name="created"> The Unix timestamp (in seconds) when the model was created. </param>
@@ -54,7 +54,6 @@ namespace OpenAI.Models
             Id = id;
             Created = created;
             OwnedBy = ownedBy;
-            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="Model"/>. </summary>

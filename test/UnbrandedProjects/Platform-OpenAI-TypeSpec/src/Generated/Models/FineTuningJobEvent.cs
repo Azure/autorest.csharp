@@ -40,7 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="FineTuningJobEvent"/>. </summary>
         /// <param name="id"></param>
         /// <param name="object"></param>
@@ -59,7 +59,6 @@ namespace OpenAI.Models
             CreatedAt = createdAt;
             Level = level;
             Message = message;
-            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="FineTuningJobEvent"/>. </summary>

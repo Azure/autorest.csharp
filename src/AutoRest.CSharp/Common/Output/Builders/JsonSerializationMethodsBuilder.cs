@@ -687,6 +687,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 yield return DeserializeValue(valueSerialization, jsonProperty.Value, options, out var value);
                 var rawDataFieldStatement = rawDataFieldDictionary.Add(jsonProperty.Name, value);
 
+                if (Configuration.EnableInternalRawData)
+                {
+                    rawDataFieldStatement = new MethodBodyStatement[]
+                    {
+                        AssignIfNull(rawDataFieldDictionary, New.Instance(rawDataField.ImplementationType)),
+                        rawDataFieldStatement
+                    };
+                }
+
                 yield return Serializations.WrapInCheckNotWire(
                     rawDataField.ShouldExcludeInWireDeserialization,
                     options?.Format,

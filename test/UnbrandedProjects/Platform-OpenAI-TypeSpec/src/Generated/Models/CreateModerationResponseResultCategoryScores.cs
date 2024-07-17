@@ -40,7 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateModerationResponseResultCategoryScores"/>. </summary>
         /// <param name="hate"> The score for the category 'hate'. </param>
         /// <param name="hateThreatening"> The score for the category 'hate/threatening'. </param>
@@ -66,7 +66,6 @@ namespace OpenAI.Models
             SexualMinors = sexualMinors;
             Violence = violence;
             ViolenceGraphic = violenceGraphic;
-            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateModerationResponseResultCategoryScores"/>. </summary>

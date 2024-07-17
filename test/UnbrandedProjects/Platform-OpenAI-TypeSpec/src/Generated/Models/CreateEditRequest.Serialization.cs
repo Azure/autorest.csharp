@@ -21,12 +21,12 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            if (!SerializedAdditionalRawData.ContainsKey("model"))
+            if (SerializedAdditionalRawData?.ContainsKey("model") != true)
             {
                 writer.WritePropertyName("model"u8);
                 writer.WriteStringValue(Model.ToString());
             }
-            if (!SerializedAdditionalRawData.ContainsKey("input") && Optional.IsDefined(Input))
+            if (SerializedAdditionalRawData?.ContainsKey("input") != true && Optional.IsDefined(Input))
             {
                 if (Input != null)
                 {
@@ -38,12 +38,12 @@ namespace OpenAI.Models
                     writer.WriteNull("input");
                 }
             }
-            if (!SerializedAdditionalRawData.ContainsKey("instruction"))
+            if (SerializedAdditionalRawData?.ContainsKey("instruction") != true)
             {
                 writer.WritePropertyName("instruction"u8);
                 writer.WriteStringValue(Instruction);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("n") && Optional.IsDefined(N))
+            if (SerializedAdditionalRawData?.ContainsKey("n") != true && Optional.IsDefined(N))
             {
                 if (N != null)
                 {
@@ -55,7 +55,7 @@ namespace OpenAI.Models
                     writer.WriteNull("n");
                 }
             }
-            if (!SerializedAdditionalRawData.ContainsKey("temperature") && Optional.IsDefined(Temperature))
+            if (SerializedAdditionalRawData?.ContainsKey("temperature") != true && Optional.IsDefined(Temperature))
             {
                 if (Temperature != null)
                 {
@@ -67,7 +67,7 @@ namespace OpenAI.Models
                     writer.WriteNull("temperature");
                 }
             }
-            if (!SerializedAdditionalRawData.ContainsKey("top_p") && Optional.IsDefined(TopP))
+            if (SerializedAdditionalRawData?.ContainsKey("top_p") != true && Optional.IsDefined(TopP))
             {
                 if (TopP != null)
                 {
@@ -180,6 +180,7 @@ namespace OpenAI.Models
                 }
                 if (options.Format != "W")
                 {
+                    rawDataDictionary ??= new Dictionary<string, BinaryData>();
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }

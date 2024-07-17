@@ -21,32 +21,32 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            if (!SerializedAdditionalRawData.ContainsKey("id"))
+            if (SerializedAdditionalRawData?.ContainsKey("id") != true)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("object"))
+            if (SerializedAdditionalRawData?.ContainsKey("object") != true)
             {
                 writer.WritePropertyName("object"u8);
                 writer.WriteStringValue(Object.ToString());
             }
-            if (!SerializedAdditionalRawData.ContainsKey("created_at"))
+            if (SerializedAdditionalRawData?.ContainsKey("created_at") != true)
             {
                 writer.WritePropertyName("created_at"u8);
                 writer.WriteNumberValue(CreatedAt, "U");
             }
-            if (!SerializedAdditionalRawData.ContainsKey("updated_at"))
+            if (SerializedAdditionalRawData?.ContainsKey("updated_at") != true)
             {
                 writer.WritePropertyName("updated_at"u8);
                 writer.WriteNumberValue(UpdatedAt, "U");
             }
-            if (!SerializedAdditionalRawData.ContainsKey("model"))
+            if (SerializedAdditionalRawData?.ContainsKey("model") != true)
             {
                 writer.WritePropertyName("model"u8);
                 writer.WriteStringValue(Model);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("fine_tuned_model"))
+            if (SerializedAdditionalRawData?.ContainsKey("fine_tuned_model") != true)
             {
                 if (FineTunedModel != null)
                 {
@@ -58,22 +58,22 @@ namespace OpenAI.Models
                     writer.WriteNull("fine_tuned_model");
                 }
             }
-            if (!SerializedAdditionalRawData.ContainsKey("organization_id"))
+            if (SerializedAdditionalRawData?.ContainsKey("organization_id") != true)
             {
                 writer.WritePropertyName("organization_id"u8);
                 writer.WriteStringValue(OrganizationId);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("status"))
+            if (SerializedAdditionalRawData?.ContainsKey("status") != true)
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.ToSerialString());
             }
-            if (!SerializedAdditionalRawData.ContainsKey("hyperparams"))
+            if (SerializedAdditionalRawData?.ContainsKey("hyperparams") != true)
             {
                 writer.WritePropertyName("hyperparams"u8);
                 writer.WriteObjectValue(Hyperparams, options);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("training_files"))
+            if (SerializedAdditionalRawData?.ContainsKey("training_files") != true)
             {
                 writer.WritePropertyName("training_files"u8);
                 writer.WriteStartArray();
@@ -83,7 +83,7 @@ namespace OpenAI.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!SerializedAdditionalRawData.ContainsKey("validation_files"))
+            if (SerializedAdditionalRawData?.ContainsKey("validation_files") != true)
             {
                 writer.WritePropertyName("validation_files"u8);
                 writer.WriteStartArray();
@@ -93,7 +93,7 @@ namespace OpenAI.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!SerializedAdditionalRawData.ContainsKey("result_files"))
+            if (SerializedAdditionalRawData?.ContainsKey("result_files") != true)
             {
                 writer.WritePropertyName("result_files"u8);
                 writer.WriteStartArray();
@@ -103,7 +103,7 @@ namespace OpenAI.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!SerializedAdditionalRawData.ContainsKey("events") && Optional.IsCollectionDefined(Events))
+            if (SerializedAdditionalRawData?.ContainsKey("events") != true && Optional.IsCollectionDefined(Events))
             {
                 writer.WritePropertyName("events"u8);
                 writer.WriteStartArray();
@@ -265,6 +265,7 @@ namespace OpenAI.Models
                 }
                 if (options.Format != "W")
                 {
+                    rawDataDictionary ??= new Dictionary<string, BinaryData>();
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }

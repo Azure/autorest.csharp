@@ -40,7 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateEditResponseChoice"/>. </summary>
         /// <param name="text"> The edited result. </param>
         /// <param name="index"> The index of the choice in the list of choices. </param>
@@ -57,7 +57,6 @@ namespace OpenAI.Models
             Text = text;
             Index = index;
             FinishReason = finishReason;
-            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateEditResponseChoice"/>. </summary>

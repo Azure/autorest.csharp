@@ -42,7 +42,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateEditResponse"/>. </summary>
         /// <param name="created"> The Unix timestamp (in seconds) of when the edit was created. </param>
         /// <param name="choices"> description: A list of edit choices. Can be more than one if `n` is greater than 1. </param>
@@ -56,7 +56,6 @@ namespace OpenAI.Models
             Created = created;
             Choices = choices.ToList();
             Usage = usage;
-            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateEditResponse"/>. </summary>

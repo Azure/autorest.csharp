@@ -40,7 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctions"/>. </summary>
         /// <param name="name">
         /// The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and
@@ -61,7 +61,6 @@ namespace OpenAI.Models
 
             Name = name;
             Parameters = parameters;
-            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctions"/>. </summary>

@@ -44,7 +44,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateCompletionResponse"/>. </summary>
         /// <param name="id"> A unique identifier for the completion. </param>
         /// <param name="object"> The object type, which is always `text_completion`. </param>
@@ -64,7 +64,6 @@ namespace OpenAI.Models
             Created = created;
             Model = model;
             Choices = choices.ToList();
-            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateCompletionResponse"/>. </summary>

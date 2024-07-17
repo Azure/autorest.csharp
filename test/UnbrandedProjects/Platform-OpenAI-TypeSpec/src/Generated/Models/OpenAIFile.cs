@@ -40,7 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="OpenAIFile"/>. </summary>
         /// <param name="id"> The file identifier, which can be referenced in the API endpoints. </param>
         /// <param name="bytes"> The size of the file in bytes. </param>
@@ -64,7 +64,6 @@ namespace OpenAI.Models
             Filename = filename;
             Purpose = purpose;
             Status = status;
-            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="OpenAIFile"/>. </summary>

@@ -21,42 +21,42 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            if (!SerializedAdditionalRawData.ContainsKey("id"))
+            if (SerializedAdditionalRawData?.ContainsKey("id") != true)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("object"))
+            if (SerializedAdditionalRawData?.ContainsKey("object") != true)
             {
                 writer.WritePropertyName("object"u8);
                 writer.WriteStringValue(Object.ToString());
             }
-            if (!SerializedAdditionalRawData.ContainsKey("bytes"))
+            if (SerializedAdditionalRawData?.ContainsKey("bytes") != true)
             {
                 writer.WritePropertyName("bytes"u8);
                 writer.WriteNumberValue(Bytes);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("createdAt"))
+            if (SerializedAdditionalRawData?.ContainsKey("createdAt") != true)
             {
                 writer.WritePropertyName("createdAt"u8);
                 writer.WriteNumberValue(CreatedAt, "U");
             }
-            if (!SerializedAdditionalRawData.ContainsKey("filename"))
+            if (SerializedAdditionalRawData?.ContainsKey("filename") != true)
             {
                 writer.WritePropertyName("filename"u8);
                 writer.WriteStringValue(Filename);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("purpose"))
+            if (SerializedAdditionalRawData?.ContainsKey("purpose") != true)
             {
                 writer.WritePropertyName("purpose"u8);
                 writer.WriteStringValue(Purpose);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("status"))
+            if (SerializedAdditionalRawData?.ContainsKey("status") != true)
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.ToSerialString());
             }
-            if (!SerializedAdditionalRawData.ContainsKey("status_details") && Optional.IsDefined(StatusDetails))
+            if (SerializedAdditionalRawData?.ContainsKey("status_details") != true && Optional.IsDefined(StatusDetails))
             {
                 if (StatusDetails != null)
                 {
@@ -166,6 +166,7 @@ namespace OpenAI.Models
                 }
                 if (options.Format != "W")
                 {
+                    rawDataDictionary ??= new Dictionary<string, BinaryData>();
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }

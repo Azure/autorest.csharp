@@ -40,7 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateModerationResponseResult"/>. </summary>
         /// <param name="flagged"> Whether the content violates [OpenAI's usage policies](/policies/usage-policies). </param>
         /// <param name="categories"> A list of the categories, and whether they are flagged or not. </param>
@@ -54,7 +54,6 @@ namespace OpenAI.Models
             Flagged = flagged;
             Categories = categories;
             CategoryScores = categoryScores;
-            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateModerationResponseResult"/>. </summary>

@@ -41,7 +41,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="ImagesResponse"/>. </summary>
         /// <param name="created"></param>
         /// <param name="data"></param>
@@ -52,7 +52,6 @@ namespace OpenAI.Models
 
             Created = created;
             Data = data.ToList();
-            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="ImagesResponse"/>. </summary>
