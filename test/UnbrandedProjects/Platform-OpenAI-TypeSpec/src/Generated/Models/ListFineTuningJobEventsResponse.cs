@@ -41,8 +41,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
         /// <summary> Initializes a new instance of <see cref="ListFineTuningJobEventsResponse"/>. </summary>
         /// <param name="object"></param>
         /// <param name="data"></param>
@@ -54,6 +53,7 @@ namespace OpenAI.Models
 
             Object = @object;
             Data = data.ToList();
+            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="ListFineTuningJobEventsResponse"/>. </summary>
@@ -64,7 +64,7 @@ namespace OpenAI.Models
         {
             Object = @object;
             Data = data;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ListFineTuningJobEventsResponse"/> for deserialization. </summary>

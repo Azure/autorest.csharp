@@ -41,8 +41,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
         /// <summary> Initializes a new instance of <see cref="CreateChatCompletionRequest"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)
@@ -61,6 +60,7 @@ namespace OpenAI.Models
             Messages = messages.ToList();
             Functions = new ChangeTrackingList<ChatCompletionFunctions>();
             LogitBias = new ChangeTrackingDictionary<string, long>();
+            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateChatCompletionRequest"/>. </summary>
@@ -154,7 +154,7 @@ namespace OpenAI.Models
             LogitBias = logitBias;
             User = user;
             Stream = stream;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateChatCompletionRequest"/> for deserialization. </summary>

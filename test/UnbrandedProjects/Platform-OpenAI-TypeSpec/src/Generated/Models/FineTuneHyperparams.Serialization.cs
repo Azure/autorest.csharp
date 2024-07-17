@@ -21,43 +21,56 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("n_epochs"u8);
-            writer.WriteNumberValue(NEpochs);
-            writer.WritePropertyName("batch_size"u8);
-            writer.WriteNumberValue(BatchSize);
-            writer.WritePropertyName("prompt_loss_weight"u8);
-            writer.WriteNumberValue(PromptLossWeight);
-            writer.WritePropertyName("learning_rate_multiplier"u8);
-            writer.WriteNumberValue(LearningRateMultiplier);
-            if (Optional.IsDefined(ComputeClassificationMetrics))
+            if (!SerializedAdditionalRawData.ContainsKey("n_epochs"))
+            {
+                writer.WritePropertyName("n_epochs"u8);
+                writer.WriteNumberValue(NEpochs);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("batch_size"))
+            {
+                writer.WritePropertyName("batch_size"u8);
+                writer.WriteNumberValue(BatchSize);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("prompt_loss_weight"))
+            {
+                writer.WritePropertyName("prompt_loss_weight"u8);
+                writer.WriteNumberValue(PromptLossWeight);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("learning_rate_multiplier"))
+            {
+                writer.WritePropertyName("learning_rate_multiplier"u8);
+                writer.WriteNumberValue(LearningRateMultiplier);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("compute_classification_metrics") && Optional.IsDefined(ComputeClassificationMetrics))
             {
                 writer.WritePropertyName("compute_classification_metrics"u8);
                 writer.WriteBooleanValue(ComputeClassificationMetrics.Value);
             }
-            if (Optional.IsDefined(ClassificationPositiveClass))
+            if (!SerializedAdditionalRawData.ContainsKey("classification_positive_class") && Optional.IsDefined(ClassificationPositiveClass))
             {
                 writer.WritePropertyName("classification_positive_class"u8);
                 writer.WriteStringValue(ClassificationPositiveClass);
             }
-            if (Optional.IsDefined(ClassificationNClasses))
+            if (!SerializedAdditionalRawData.ContainsKey("classification_n_classes") && Optional.IsDefined(ClassificationNClasses))
             {
                 writer.WritePropertyName("classification_n_classes"u8);
                 writer.WriteNumberValue(ClassificationNClasses.Value);
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            foreach (var item in SerializedAdditionalRawData)
             {
-                foreach (var item in _serializedAdditionalRawData)
+                if (ModelSerializationExtensions.IsSentinelValue(item.Value))
                 {
-                    writer.WritePropertyName(item.Key);
+                    continue;
+                }
+                writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
                 }
+#endif
             }
             writer.WriteEndObject();
         }

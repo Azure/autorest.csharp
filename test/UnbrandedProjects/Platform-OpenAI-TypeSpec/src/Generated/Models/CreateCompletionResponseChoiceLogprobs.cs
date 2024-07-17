@@ -41,8 +41,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
         /// <summary> Initializes a new instance of <see cref="CreateCompletionResponseChoiceLogprobs"/>. </summary>
         /// <param name="tokens"></param>
         /// <param name="tokenLogprobs"></param>
@@ -60,6 +59,7 @@ namespace OpenAI.Models
             TokenLogprobs = tokenLogprobs.ToList();
             TopLogprobs = topLogprobs.ToList();
             TextOffset = textOffset.ToList();
+            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateCompletionResponseChoiceLogprobs"/>. </summary>
@@ -74,7 +74,7 @@ namespace OpenAI.Models
             TokenLogprobs = tokenLogprobs;
             TopLogprobs = topLogprobs;
             TextOffset = textOffset;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateCompletionResponseChoiceLogprobs"/> for deserialization. </summary>

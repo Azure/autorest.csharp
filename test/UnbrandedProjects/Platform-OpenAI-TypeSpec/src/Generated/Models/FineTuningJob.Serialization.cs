@@ -21,88 +21,131 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("id"u8);
-            writer.WriteStringValue(Id);
-            writer.WritePropertyName("object"u8);
-            writer.WriteStringValue(Object.ToString());
-            writer.WritePropertyName("created_at"u8);
-            writer.WriteNumberValue(CreatedAt, "U");
-            if (FinishedAt != null)
+            if (!SerializedAdditionalRawData.ContainsKey("id"))
             {
-                writer.WritePropertyName("finished_at"u8);
-                writer.WriteNumberValue(FinishedAt.Value, "U");
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            else
+            if (!SerializedAdditionalRawData.ContainsKey("object"))
             {
-                writer.WriteNull("finished_at");
+                writer.WritePropertyName("object"u8);
+                writer.WriteStringValue(Object.ToString());
             }
-            writer.WritePropertyName("model"u8);
-            writer.WriteStringValue(Model);
-            if (FineTunedModel != null)
+            if (!SerializedAdditionalRawData.ContainsKey("created_at"))
             {
-                writer.WritePropertyName("fine_tuned_model"u8);
-                writer.WriteStringValue(FineTunedModel);
+                writer.WritePropertyName("created_at"u8);
+                writer.WriteNumberValue(CreatedAt, "U");
             }
-            else
+            if (!SerializedAdditionalRawData.ContainsKey("finished_at"))
             {
-                writer.WriteNull("fine_tuned_model");
-            }
-            writer.WritePropertyName("organization_id"u8);
-            writer.WriteStringValue(OrganizationId);
-            writer.WritePropertyName("status"u8);
-            writer.WriteStringValue(Status.ToSerialString());
-            writer.WritePropertyName("hyperparameters"u8);
-            writer.WriteObjectValue(Hyperparameters, options);
-            writer.WritePropertyName("training_file"u8);
-            writer.WriteStringValue(TrainingFile);
-            if (ValidationFile != null)
-            {
-                writer.WritePropertyName("validation_file"u8);
-                writer.WriteStringValue(ValidationFile);
-            }
-            else
-            {
-                writer.WriteNull("validation_file");
-            }
-            writer.WritePropertyName("result_files"u8);
-            writer.WriteStartArray();
-            foreach (var item in ResultFiles)
-            {
-                writer.WriteStringValue(item);
-            }
-            writer.WriteEndArray();
-            if (TrainedTokens != null)
-            {
-                writer.WritePropertyName("trained_tokens"u8);
-                writer.WriteNumberValue(TrainedTokens.Value);
-            }
-            else
-            {
-                writer.WriteNull("trained_tokens");
-            }
-            if (Error != null)
-            {
-                writer.WritePropertyName("error"u8);
-                writer.WriteObjectValue(Error, options);
-            }
-            else
-            {
-                writer.WriteNull("error");
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
+                if (FinishedAt != null)
                 {
-                    writer.WritePropertyName(item.Key);
+                    writer.WritePropertyName("finished_at"u8);
+                    writer.WriteNumberValue(FinishedAt.Value, "U");
+                }
+                else
+                {
+                    writer.WriteNull("finished_at");
+                }
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("model"))
+            {
+                writer.WritePropertyName("model"u8);
+                writer.WriteStringValue(Model);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("fine_tuned_model"))
+            {
+                if (FineTunedModel != null)
+                {
+                    writer.WritePropertyName("fine_tuned_model"u8);
+                    writer.WriteStringValue(FineTunedModel);
+                }
+                else
+                {
+                    writer.WriteNull("fine_tuned_model");
+                }
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("organization_id"))
+            {
+                writer.WritePropertyName("organization_id"u8);
+                writer.WriteStringValue(OrganizationId);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("status"))
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteStringValue(Status.ToSerialString());
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("hyperparameters"))
+            {
+                writer.WritePropertyName("hyperparameters"u8);
+                writer.WriteObjectValue(Hyperparameters, options);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("training_file"))
+            {
+                writer.WritePropertyName("training_file"u8);
+                writer.WriteStringValue(TrainingFile);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("validation_file"))
+            {
+                if (ValidationFile != null)
+                {
+                    writer.WritePropertyName("validation_file"u8);
+                    writer.WriteStringValue(ValidationFile);
+                }
+                else
+                {
+                    writer.WriteNull("validation_file");
+                }
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("result_files"))
+            {
+                writer.WritePropertyName("result_files"u8);
+                writer.WriteStartArray();
+                foreach (var item in ResultFiles)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("trained_tokens"))
+            {
+                if (TrainedTokens != null)
+                {
+                    writer.WritePropertyName("trained_tokens"u8);
+                    writer.WriteNumberValue(TrainedTokens.Value);
+                }
+                else
+                {
+                    writer.WriteNull("trained_tokens");
+                }
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("error"))
+            {
+                if (Error != null)
+                {
+                    writer.WritePropertyName("error"u8);
+                    writer.WriteObjectValue(Error, options);
+                }
+                else
+                {
+                    writer.WriteNull("error");
+                }
+            }
+            foreach (var item in SerializedAdditionalRawData)
+            {
+                if (ModelSerializationExtensions.IsSentinelValue(item.Value))
+                {
+                    continue;
+                }
+                writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
                 }
+#endif
             }
             writer.WriteEndObject();
         }

@@ -21,9 +21,12 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("training_file"u8);
-            writer.WriteStringValue(TrainingFile);
-            if (Optional.IsDefined(ValidationFile))
+            if (!SerializedAdditionalRawData.ContainsKey("training_file"))
+            {
+                writer.WritePropertyName("training_file"u8);
+                writer.WriteStringValue(TrainingFile);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("validation_file") && Optional.IsDefined(ValidationFile))
             {
                 if (ValidationFile != null)
                 {
@@ -35,7 +38,7 @@ namespace OpenAI.Models
                     writer.WriteNull("validation_file");
                 }
             }
-            if (Optional.IsDefined(Model))
+            if (!SerializedAdditionalRawData.ContainsKey("model") && Optional.IsDefined(Model))
             {
                 if (Model != null)
                 {
@@ -47,7 +50,7 @@ namespace OpenAI.Models
                     writer.WriteNull("model");
                 }
             }
-            if (Optional.IsDefined(NEpochs))
+            if (!SerializedAdditionalRawData.ContainsKey("n_epochs") && Optional.IsDefined(NEpochs))
             {
                 if (NEpochs != null)
                 {
@@ -59,7 +62,7 @@ namespace OpenAI.Models
                     writer.WriteNull("n_epochs");
                 }
             }
-            if (Optional.IsDefined(BatchSize))
+            if (!SerializedAdditionalRawData.ContainsKey("batch_size") && Optional.IsDefined(BatchSize))
             {
                 if (BatchSize != null)
                 {
@@ -71,7 +74,7 @@ namespace OpenAI.Models
                     writer.WriteNull("batch_size");
                 }
             }
-            if (Optional.IsDefined(LearningRateMultiplier))
+            if (!SerializedAdditionalRawData.ContainsKey("learning_rate_multiplier") && Optional.IsDefined(LearningRateMultiplier))
             {
                 if (LearningRateMultiplier != null)
                 {
@@ -83,7 +86,7 @@ namespace OpenAI.Models
                     writer.WriteNull("learning_rate_multiplier");
                 }
             }
-            if (Optional.IsDefined(PromptLossRate))
+            if (!SerializedAdditionalRawData.ContainsKey("prompt_loss_rate") && Optional.IsDefined(PromptLossRate))
             {
                 if (PromptLossRate != null)
                 {
@@ -95,7 +98,7 @@ namespace OpenAI.Models
                     writer.WriteNull("prompt_loss_rate");
                 }
             }
-            if (Optional.IsDefined(ComputeClassificationMetrics))
+            if (!SerializedAdditionalRawData.ContainsKey("compute_classification_metrics") && Optional.IsDefined(ComputeClassificationMetrics))
             {
                 if (ComputeClassificationMetrics != null)
                 {
@@ -107,7 +110,7 @@ namespace OpenAI.Models
                     writer.WriteNull("compute_classification_metrics");
                 }
             }
-            if (Optional.IsDefined(ClassificationNClasses))
+            if (!SerializedAdditionalRawData.ContainsKey("classification_n_classes") && Optional.IsDefined(ClassificationNClasses))
             {
                 if (ClassificationNClasses != null)
                 {
@@ -119,7 +122,7 @@ namespace OpenAI.Models
                     writer.WriteNull("classification_n_classes");
                 }
             }
-            if (Optional.IsDefined(ClassificationPositiveClass))
+            if (!SerializedAdditionalRawData.ContainsKey("classification_positive_class") && Optional.IsDefined(ClassificationPositiveClass))
             {
                 if (ClassificationPositiveClass != null)
                 {
@@ -131,7 +134,7 @@ namespace OpenAI.Models
                     writer.WriteNull("classification_positive_class");
                 }
             }
-            if (Optional.IsCollectionDefined(ClassificationBetas))
+            if (!SerializedAdditionalRawData.ContainsKey("classification_betas") && Optional.IsCollectionDefined(ClassificationBetas))
             {
                 if (ClassificationBetas != null)
                 {
@@ -148,7 +151,7 @@ namespace OpenAI.Models
                     writer.WriteNull("classification_betas");
                 }
             }
-            if (Optional.IsDefined(Suffix))
+            if (!SerializedAdditionalRawData.ContainsKey("suffix") && Optional.IsDefined(Suffix))
             {
                 if (Suffix != null)
                 {
@@ -160,20 +163,21 @@ namespace OpenAI.Models
                     writer.WriteNull("suffix");
                 }
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            foreach (var item in SerializedAdditionalRawData)
             {
-                foreach (var item in _serializedAdditionalRawData)
+                if (ModelSerializationExtensions.IsSentinelValue(item.Value))
                 {
-                    writer.WritePropertyName(item.Key);
+                    continue;
+                }
+                writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
                 }
+#endif
             }
             writer.WriteEndObject();
         }

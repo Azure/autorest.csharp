@@ -21,9 +21,12 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("model"u8);
-            writer.WriteStringValue(Model.ToString());
-            if (Optional.IsDefined(Input))
+            if (!SerializedAdditionalRawData.ContainsKey("model"))
+            {
+                writer.WritePropertyName("model"u8);
+                writer.WriteStringValue(Model.ToString());
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("input") && Optional.IsDefined(Input))
             {
                 if (Input != null)
                 {
@@ -35,9 +38,12 @@ namespace OpenAI.Models
                     writer.WriteNull("input");
                 }
             }
-            writer.WritePropertyName("instruction"u8);
-            writer.WriteStringValue(Instruction);
-            if (Optional.IsDefined(N))
+            if (!SerializedAdditionalRawData.ContainsKey("instruction"))
+            {
+                writer.WritePropertyName("instruction"u8);
+                writer.WriteStringValue(Instruction);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("n") && Optional.IsDefined(N))
             {
                 if (N != null)
                 {
@@ -49,7 +55,7 @@ namespace OpenAI.Models
                     writer.WriteNull("n");
                 }
             }
-            if (Optional.IsDefined(Temperature))
+            if (!SerializedAdditionalRawData.ContainsKey("temperature") && Optional.IsDefined(Temperature))
             {
                 if (Temperature != null)
                 {
@@ -61,7 +67,7 @@ namespace OpenAI.Models
                     writer.WriteNull("temperature");
                 }
             }
-            if (Optional.IsDefined(TopP))
+            if (!SerializedAdditionalRawData.ContainsKey("top_p") && Optional.IsDefined(TopP))
             {
                 if (TopP != null)
                 {
@@ -73,20 +79,21 @@ namespace OpenAI.Models
                     writer.WriteNull("top_p");
                 }
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            foreach (var item in SerializedAdditionalRawData)
             {
-                foreach (var item in _serializedAdditionalRawData)
+                if (ModelSerializationExtensions.IsSentinelValue(item.Value))
                 {
-                    writer.WritePropertyName(item.Key);
+                    continue;
+                }
+                writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
                 }
+#endif
             }
             writer.WriteEndObject();
         }

@@ -21,69 +21,48 @@ namespace NoTestTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (!SerializedAdditionalRawData.ContainsKey("name"))
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
-            if (!SerializedAdditionalRawData.ContainsKey("requiredUnion"))
-            {
-                writer.WritePropertyName("requiredUnion"u8);
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
+            writer.WritePropertyName("requiredUnion"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(RequiredUnion);
 #else
-                using (JsonDocument document = JsonDocument.Parse(RequiredUnion))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
+            using (JsonDocument document = JsonDocument.Parse(RequiredUnion))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
-            }
-            if (!SerializedAdditionalRawData.ContainsKey("requiredLiteralString"))
-            {
-                writer.WritePropertyName("requiredLiteralString"u8);
-                writer.WriteStringValue(RequiredLiteralString.ToString());
-            }
-            if (!SerializedAdditionalRawData.ContainsKey("requiredLiteralInt"))
-            {
-                writer.WritePropertyName("requiredLiteralInt"u8);
-                writer.WriteNumberValue(RequiredLiteralInt.ToSerialInt32());
-            }
-            if (!SerializedAdditionalRawData.ContainsKey("requiredLiteralFloat"))
-            {
-                writer.WritePropertyName("requiredLiteralFloat"u8);
-                writer.WriteNumberValue(RequiredLiteralFloat.ToSerialSingle());
-            }
-            if (!SerializedAdditionalRawData.ContainsKey("requiredLiteralBool"))
-            {
-                writer.WritePropertyName("requiredLiteralBool"u8);
-                writer.WriteBooleanValue(RequiredLiteralBool);
-            }
-            if (!SerializedAdditionalRawData.ContainsKey("optionalLiteralString") && Optional.IsDefined(OptionalLiteralString))
+            writer.WritePropertyName("requiredLiteralString"u8);
+            writer.WriteStringValue(RequiredLiteralString.ToString());
+            writer.WritePropertyName("requiredLiteralInt"u8);
+            writer.WriteNumberValue(RequiredLiteralInt.ToSerialInt32());
+            writer.WritePropertyName("requiredLiteralFloat"u8);
+            writer.WriteNumberValue(RequiredLiteralFloat.ToSerialSingle());
+            writer.WritePropertyName("requiredLiteralBool"u8);
+            writer.WriteBooleanValue(RequiredLiteralBool);
+            if (Optional.IsDefined(OptionalLiteralString))
             {
                 writer.WritePropertyName("optionalLiteralString"u8);
                 writer.WriteStringValue(OptionalLiteralString.Value.ToString());
             }
-            if (!SerializedAdditionalRawData.ContainsKey("optionalLiteralInt") && Optional.IsDefined(OptionalLiteralInt))
+            if (Optional.IsDefined(OptionalLiteralInt))
             {
                 writer.WritePropertyName("optionalLiteralInt"u8);
                 writer.WriteNumberValue(OptionalLiteralInt.Value.ToSerialInt32());
             }
-            if (!SerializedAdditionalRawData.ContainsKey("optionalLiteralFloat") && Optional.IsDefined(OptionalLiteralFloat))
+            if (Optional.IsDefined(OptionalLiteralFloat))
             {
                 writer.WritePropertyName("optionalLiteralFloat"u8);
                 writer.WriteNumberValue(OptionalLiteralFloat.Value.ToSerialSingle());
             }
-            if (!SerializedAdditionalRawData.ContainsKey("optionalLiteralBool") && Optional.IsDefined(OptionalLiteralBool))
+            if (Optional.IsDefined(OptionalLiteralBool))
             {
                 writer.WritePropertyName("optionalLiteralBool"u8);
                 writer.WriteBooleanValue(OptionalLiteralBool.Value);
             }
-            if (!SerializedAdditionalRawData.ContainsKey("requiredBadDescription"))
-            {
-                writer.WritePropertyName("requiredBadDescription"u8);
-                writer.WriteStringValue(RequiredBadDescription);
-            }
-            if (!SerializedAdditionalRawData.ContainsKey("optionalNullableList") && Optional.IsCollectionDefined(OptionalNullableList))
+            writer.WritePropertyName("requiredBadDescription"u8);
+            writer.WriteStringValue(RequiredBadDescription);
+            if (Optional.IsCollectionDefined(OptionalNullableList))
             {
                 if (OptionalNullableList != null)
                 {
@@ -100,38 +79,34 @@ namespace NoTestTypeSpec.Models
                     writer.WriteNull("optionalNullableList");
                 }
             }
-            if (!SerializedAdditionalRawData.ContainsKey("requiredNullableList"))
+            if (RequiredNullableList != null && Optional.IsCollectionDefined(RequiredNullableList))
             {
-                if (RequiredNullableList != null && Optional.IsCollectionDefined(RequiredNullableList))
+                writer.WritePropertyName("requiredNullableList"u8);
+                writer.WriteStartArray();
+                foreach (var item in RequiredNullableList)
                 {
-                    writer.WritePropertyName("requiredNullableList"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in RequiredNullableList)
-                    {
-                        writer.WriteNumberValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteNumberValue(item);
                 }
-                else
-                {
-                    writer.WriteNull("requiredNullableList");
-                }
+                writer.WriteEndArray();
             }
-            foreach (var item in SerializedAdditionalRawData)
+            else
             {
-                if (ModelSerializationExtensions.IsSentinelValue(item.Value))
+                writer.WriteNull("requiredNullableList");
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
                 {
-                    continue;
-                }
-                writer.WritePropertyName(item.Key);
+                    writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                using (JsonDocument document = JsonDocument.Parse(item.Value))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
+                }
             }
             writer.WriteEndObject();
         }

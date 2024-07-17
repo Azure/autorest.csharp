@@ -21,7 +21,7 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(NEpochs))
+            if (!SerializedAdditionalRawData.ContainsKey("n_epochs") && Optional.IsDefined(NEpochs))
             {
                 writer.WritePropertyName("n_epochs"u8);
 #if NET6_0_OR_GREATER
@@ -33,20 +33,21 @@ namespace OpenAI.Models
                 }
 #endif
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            foreach (var item in SerializedAdditionalRawData)
             {
-                foreach (var item in _serializedAdditionalRawData)
+                if (ModelSerializationExtensions.IsSentinelValue(item.Value))
                 {
-                    writer.WritePropertyName(item.Key);
+                    continue;
+                }
+                writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
                 }
+#endif
             }
             writer.WriteEndObject();
         }

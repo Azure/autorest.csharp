@@ -41,7 +41,8 @@ namespace NoTestTypeSpec.Models
         /// </list>
         /// </para>
         /// </summary>
-        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
+        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="requiredUnion"> required Union. </param>
@@ -59,7 +60,6 @@ namespace NoTestTypeSpec.Models
             RequiredBadDescription = requiredBadDescription;
             OptionalNullableList = new ChangeTrackingList<int>();
             RequiredNullableList = requiredNullableList?.ToList();
-            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>
@@ -92,7 +92,7 @@ namespace NoTestTypeSpec.Models
             RequiredBadDescription = requiredBadDescription;
             OptionalNullableList = optionalNullableList;
             RequiredNullableList = requiredNullableList;
-            SerializedAdditionalRawData = serializedAdditionalRawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Thing"/> for deserialization. </summary>

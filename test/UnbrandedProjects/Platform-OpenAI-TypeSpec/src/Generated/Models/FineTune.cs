@@ -42,8 +42,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
         /// <summary> Initializes a new instance of <see cref="FineTune"/>. </summary>
         /// <param name="id"> The object identifier, which can be referenced in the API endpoints. </param>
         /// <param name="createdAt"> The Unix timestamp (in seconds) for when the fine-tuning job was created. </param>
@@ -85,6 +84,7 @@ namespace OpenAI.Models
             ValidationFiles = validationFiles.ToList();
             ResultFiles = resultFiles.ToList();
             Events = new ChangeTrackingList<FineTuneEvent>();
+            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="FineTune"/>. </summary>
@@ -123,7 +123,7 @@ namespace OpenAI.Models
             ValidationFiles = validationFiles;
             ResultFiles = resultFiles;
             Events = events;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="FineTune"/> for deserialization. </summary>

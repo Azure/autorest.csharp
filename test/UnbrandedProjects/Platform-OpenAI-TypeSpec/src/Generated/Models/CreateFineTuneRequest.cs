@@ -40,8 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
         /// <summary> Initializes a new instance of <see cref="CreateFineTuneRequest"/>. </summary>
         /// <param name="trainingFile">
         /// The ID of an uploaded file that contains training data.
@@ -62,6 +61,7 @@ namespace OpenAI.Models
 
             TrainingFile = trainingFile;
             ClassificationBetas = new ChangeTrackingList<double>();
+            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateFineTuneRequest"/>. </summary>
@@ -175,7 +175,7 @@ namespace OpenAI.Models
             ClassificationPositiveClass = classificationPositiveClass;
             ClassificationBetas = classificationBetas;
             Suffix = suffix;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateFineTuneRequest"/> for deserialization. </summary>

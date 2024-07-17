@@ -21,42 +21,76 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("hate"u8);
-            writer.WriteNumberValue(Hate);
-            writer.WritePropertyName("hate/threatening"u8);
-            writer.WriteNumberValue(HateThreatening);
-            writer.WritePropertyName("harassment"u8);
-            writer.WriteNumberValue(Harassment);
-            writer.WritePropertyName("harassment/threatening"u8);
-            writer.WriteNumberValue(HarassmentThreatening);
-            writer.WritePropertyName("self-harm"u8);
-            writer.WriteNumberValue(SelfHarm);
-            writer.WritePropertyName("self-harm/intent"u8);
-            writer.WriteNumberValue(SelfHarmIntent);
-            writer.WritePropertyName("self-harm/instructive"u8);
-            writer.WriteNumberValue(SelfHarmInstructive);
-            writer.WritePropertyName("sexual"u8);
-            writer.WriteNumberValue(Sexual);
-            writer.WritePropertyName("sexual/minors"u8);
-            writer.WriteNumberValue(SexualMinors);
-            writer.WritePropertyName("violence"u8);
-            writer.WriteNumberValue(Violence);
-            writer.WritePropertyName("violence/graphic"u8);
-            writer.WriteNumberValue(ViolenceGraphic);
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            if (!SerializedAdditionalRawData.ContainsKey("hate"))
             {
-                foreach (var item in _serializedAdditionalRawData)
+                writer.WritePropertyName("hate"u8);
+                writer.WriteNumberValue(Hate);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("hate/threatening"))
+            {
+                writer.WritePropertyName("hate/threatening"u8);
+                writer.WriteNumberValue(HateThreatening);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("harassment"))
+            {
+                writer.WritePropertyName("harassment"u8);
+                writer.WriteNumberValue(Harassment);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("harassment/threatening"))
+            {
+                writer.WritePropertyName("harassment/threatening"u8);
+                writer.WriteNumberValue(HarassmentThreatening);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("self-harm"))
+            {
+                writer.WritePropertyName("self-harm"u8);
+                writer.WriteNumberValue(SelfHarm);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("self-harm/intent"))
+            {
+                writer.WritePropertyName("self-harm/intent"u8);
+                writer.WriteNumberValue(SelfHarmIntent);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("self-harm/instructive"))
+            {
+                writer.WritePropertyName("self-harm/instructive"u8);
+                writer.WriteNumberValue(SelfHarmInstructive);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("sexual"))
+            {
+                writer.WritePropertyName("sexual"u8);
+                writer.WriteNumberValue(Sexual);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("sexual/minors"))
+            {
+                writer.WritePropertyName("sexual/minors"u8);
+                writer.WriteNumberValue(SexualMinors);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("violence"))
+            {
+                writer.WritePropertyName("violence"u8);
+                writer.WriteNumberValue(Violence);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("violence/graphic"))
+            {
+                writer.WritePropertyName("violence/graphic"u8);
+                writer.WriteNumberValue(ViolenceGraphic);
+            }
+            foreach (var item in SerializedAdditionalRawData)
+            {
+                if (ModelSerializationExtensions.IsSentinelValue(item.Value))
                 {
-                    writer.WritePropertyName(item.Key);
+                    continue;
+                }
+                writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
                 }
+#endif
             }
             writer.WriteEndObject();
         }

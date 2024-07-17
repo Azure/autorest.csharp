@@ -21,41 +21,48 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("role"u8);
-            writer.WriteStringValue(Role.ToSerialString());
-            if (Content != null)
+            if (!SerializedAdditionalRawData.ContainsKey("role"))
             {
-                writer.WritePropertyName("content"u8);
-                writer.WriteStringValue(Content);
+                writer.WritePropertyName("role"u8);
+                writer.WriteStringValue(Role.ToSerialString());
             }
-            else
+            if (!SerializedAdditionalRawData.ContainsKey("content"))
             {
-                writer.WriteNull("content");
+                if (Content != null)
+                {
+                    writer.WritePropertyName("content"u8);
+                    writer.WriteStringValue(Content);
+                }
+                else
+                {
+                    writer.WriteNull("content");
+                }
             }
-            if (Optional.IsDefined(Name))
+            if (!SerializedAdditionalRawData.ContainsKey("name") && Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(FunctionCall))
+            if (!SerializedAdditionalRawData.ContainsKey("function_call") && Optional.IsDefined(FunctionCall))
             {
                 writer.WritePropertyName("function_call"u8);
                 writer.WriteObjectValue(FunctionCall, options);
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            foreach (var item in SerializedAdditionalRawData)
             {
-                foreach (var item in _serializedAdditionalRawData)
+                if (ModelSerializationExtensions.IsSentinelValue(item.Value))
                 {
-                    writer.WritePropertyName(item.Key);
+                    continue;
+                }
+                writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
                 }
+#endif
             }
             writer.WriteEndObject();
         }

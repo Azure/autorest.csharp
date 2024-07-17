@@ -21,24 +21,31 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("prompt_tokens"u8);
-            writer.WriteNumberValue(PromptTokens);
-            writer.WritePropertyName("total_tokens"u8);
-            writer.WriteNumberValue(TotalTokens);
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            if (!SerializedAdditionalRawData.ContainsKey("prompt_tokens"))
             {
-                foreach (var item in _serializedAdditionalRawData)
+                writer.WritePropertyName("prompt_tokens"u8);
+                writer.WriteNumberValue(PromptTokens);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("total_tokens"))
+            {
+                writer.WritePropertyName("total_tokens"u8);
+                writer.WriteNumberValue(TotalTokens);
+            }
+            foreach (var item in SerializedAdditionalRawData)
+            {
+                if (ModelSerializationExtensions.IsSentinelValue(item.Value))
                 {
-                    writer.WritePropertyName(item.Key);
+                    continue;
+                }
+                writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
                 }
+#endif
             }
             writer.WriteEndObject();
         }

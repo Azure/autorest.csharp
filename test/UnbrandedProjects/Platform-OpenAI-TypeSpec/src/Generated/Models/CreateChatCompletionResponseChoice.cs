@@ -40,8 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
         /// <summary> Initializes a new instance of <see cref="CreateChatCompletionResponseChoice"/>. </summary>
         /// <param name="index"> The index of the choice in the list of choices. </param>
         /// <param name="message"></param>
@@ -59,6 +58,7 @@ namespace OpenAI.Models
             Index = index;
             Message = message;
             FinishReason = finishReason;
+            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateChatCompletionResponseChoice"/>. </summary>
@@ -76,7 +76,7 @@ namespace OpenAI.Models
             Index = index;
             Message = message;
             FinishReason = finishReason;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateChatCompletionResponseChoice"/> for deserialization. </summary>

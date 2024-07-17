@@ -21,9 +21,12 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("prompt"u8);
-            writer.WriteStringValue(Prompt);
-            if (Optional.IsDefined(N))
+            if (!SerializedAdditionalRawData.ContainsKey("prompt"))
+            {
+                writer.WritePropertyName("prompt"u8);
+                writer.WriteStringValue(Prompt);
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("n") && Optional.IsDefined(N))
             {
                 if (N != null)
                 {
@@ -35,7 +38,7 @@ namespace OpenAI.Models
                     writer.WriteNull("n");
                 }
             }
-            if (Optional.IsDefined(Size))
+            if (!SerializedAdditionalRawData.ContainsKey("size") && Optional.IsDefined(Size))
             {
                 if (Size != null)
                 {
@@ -47,7 +50,7 @@ namespace OpenAI.Models
                     writer.WriteNull("size");
                 }
             }
-            if (Optional.IsDefined(ResponseFormat))
+            if (!SerializedAdditionalRawData.ContainsKey("response_format") && Optional.IsDefined(ResponseFormat))
             {
                 if (ResponseFormat != null)
                 {
@@ -59,25 +62,26 @@ namespace OpenAI.Models
                     writer.WriteNull("response_format");
                 }
             }
-            if (Optional.IsDefined(User))
+            if (!SerializedAdditionalRawData.ContainsKey("user") && Optional.IsDefined(User))
             {
                 writer.WritePropertyName("user"u8);
                 writer.WriteStringValue(User);
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            foreach (var item in SerializedAdditionalRawData)
             {
-                foreach (var item in _serializedAdditionalRawData)
+                if (ModelSerializationExtensions.IsSentinelValue(item.Value))
                 {
-                    writer.WritePropertyName(item.Key);
+                    continue;
+                }
+                writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
                 }
+#endif
             }
             writer.WriteEndObject();
         }

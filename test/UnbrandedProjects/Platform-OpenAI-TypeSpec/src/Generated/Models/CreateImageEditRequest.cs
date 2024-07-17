@@ -41,8 +41,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
         /// <summary> Initializes a new instance of <see cref="CreateImageEditRequest"/>. </summary>
         /// <param name="prompt"> A text description of the desired image(s). The maximum length is 1000 characters. </param>
         /// <param name="image">
@@ -57,6 +56,7 @@ namespace OpenAI.Models
 
             Prompt = prompt;
             Image = image;
+            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateImageEditRequest"/>. </summary>
@@ -84,7 +84,7 @@ namespace OpenAI.Models
             Size = size;
             ResponseFormat = responseFormat;
             User = user;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateImageEditRequest"/> for deserialization. </summary>

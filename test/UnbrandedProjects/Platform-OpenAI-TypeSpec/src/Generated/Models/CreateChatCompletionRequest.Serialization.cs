@@ -21,16 +21,22 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("model"u8);
-            writer.WriteStringValue(Model.ToString());
-            writer.WritePropertyName("messages"u8);
-            writer.WriteStartArray();
-            foreach (var item in Messages)
+            if (!SerializedAdditionalRawData.ContainsKey("model"))
             {
-                writer.WriteObjectValue(item, options);
+                writer.WritePropertyName("model"u8);
+                writer.WriteStringValue(Model.ToString());
             }
-            writer.WriteEndArray();
-            if (Optional.IsCollectionDefined(Functions))
+            if (!SerializedAdditionalRawData.ContainsKey("messages"))
+            {
+                writer.WritePropertyName("messages"u8);
+                writer.WriteStartArray();
+                foreach (var item in Messages)
+                {
+                    writer.WriteObjectValue(item, options);
+                }
+                writer.WriteEndArray();
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("functions") && Optional.IsCollectionDefined(Functions))
             {
                 writer.WritePropertyName("functions"u8);
                 writer.WriteStartArray();
@@ -40,7 +46,7 @@ namespace OpenAI.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(FunctionCall))
+            if (!SerializedAdditionalRawData.ContainsKey("function_call") && Optional.IsDefined(FunctionCall))
             {
                 writer.WritePropertyName("function_call"u8);
 #if NET6_0_OR_GREATER
@@ -52,7 +58,7 @@ namespace OpenAI.Models
                 }
 #endif
             }
-            if (Optional.IsDefined(Temperature))
+            if (!SerializedAdditionalRawData.ContainsKey("temperature") && Optional.IsDefined(Temperature))
             {
                 if (Temperature != null)
                 {
@@ -64,7 +70,7 @@ namespace OpenAI.Models
                     writer.WriteNull("temperature");
                 }
             }
-            if (Optional.IsDefined(TopP))
+            if (!SerializedAdditionalRawData.ContainsKey("top_p") && Optional.IsDefined(TopP))
             {
                 if (TopP != null)
                 {
@@ -76,7 +82,7 @@ namespace OpenAI.Models
                     writer.WriteNull("top_p");
                 }
             }
-            if (Optional.IsDefined(N))
+            if (!SerializedAdditionalRawData.ContainsKey("n") && Optional.IsDefined(N))
             {
                 if (N != null)
                 {
@@ -88,7 +94,7 @@ namespace OpenAI.Models
                     writer.WriteNull("n");
                 }
             }
-            if (Optional.IsDefined(MaxTokens))
+            if (!SerializedAdditionalRawData.ContainsKey("max_tokens") && Optional.IsDefined(MaxTokens))
             {
                 if (MaxTokens != null)
                 {
@@ -100,7 +106,7 @@ namespace OpenAI.Models
                     writer.WriteNull("max_tokens");
                 }
             }
-            if (Optional.IsDefined(Stop))
+            if (!SerializedAdditionalRawData.ContainsKey("stop") && Optional.IsDefined(Stop))
             {
                 if (Stop != null)
                 {
@@ -119,7 +125,7 @@ namespace OpenAI.Models
                     writer.WriteNull("stop");
                 }
             }
-            if (Optional.IsDefined(PresencePenalty))
+            if (!SerializedAdditionalRawData.ContainsKey("presence_penalty") && Optional.IsDefined(PresencePenalty))
             {
                 if (PresencePenalty != null)
                 {
@@ -131,7 +137,7 @@ namespace OpenAI.Models
                     writer.WriteNull("presence_penalty");
                 }
             }
-            if (Optional.IsDefined(FrequencyPenalty))
+            if (!SerializedAdditionalRawData.ContainsKey("frequency_penalty") && Optional.IsDefined(FrequencyPenalty))
             {
                 if (FrequencyPenalty != null)
                 {
@@ -143,7 +149,7 @@ namespace OpenAI.Models
                     writer.WriteNull("frequency_penalty");
                 }
             }
-            if (Optional.IsCollectionDefined(LogitBias))
+            if (!SerializedAdditionalRawData.ContainsKey("logit_bias") && Optional.IsCollectionDefined(LogitBias))
             {
                 if (LogitBias != null)
                 {
@@ -161,12 +167,12 @@ namespace OpenAI.Models
                     writer.WriteNull("logit_bias");
                 }
             }
-            if (Optional.IsDefined(User))
+            if (!SerializedAdditionalRawData.ContainsKey("user") && Optional.IsDefined(User))
             {
                 writer.WritePropertyName("user"u8);
                 writer.WriteStringValue(User);
             }
-            if (Optional.IsDefined(Stream))
+            if (!SerializedAdditionalRawData.ContainsKey("stream") && Optional.IsDefined(Stream))
             {
                 if (Stream != null)
                 {
@@ -178,20 +184,21 @@ namespace OpenAI.Models
                     writer.WriteNull("stream");
                 }
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            foreach (var item in SerializedAdditionalRawData)
             {
-                foreach (var item in _serializedAdditionalRawData)
+                if (ModelSerializationExtensions.IsSentinelValue(item.Value))
                 {
-                    writer.WritePropertyName(item.Key);
+                    continue;
+                }
+                writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
                 }
+#endif
             }
             writer.WriteEndObject();
         }

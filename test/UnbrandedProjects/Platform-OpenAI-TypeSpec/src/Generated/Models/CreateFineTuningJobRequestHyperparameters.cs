@@ -40,11 +40,11 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
         /// <summary> Initializes a new instance of <see cref="CreateFineTuningJobRequestHyperparameters"/>. </summary>
         public CreateFineTuningJobRequestHyperparameters()
         {
+            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateFineTuningJobRequestHyperparameters"/>. </summary>
@@ -56,7 +56,7 @@ namespace OpenAI.Models
         internal CreateFineTuningJobRequestHyperparameters(BinaryData nEpochs, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             NEpochs = nEpochs;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

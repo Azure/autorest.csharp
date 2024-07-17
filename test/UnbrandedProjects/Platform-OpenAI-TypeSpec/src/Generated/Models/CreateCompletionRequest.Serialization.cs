@@ -21,25 +21,31 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("model"u8);
-            writer.WriteStringValue(Model.ToString());
-            if (Prompt != null)
+            if (!SerializedAdditionalRawData.ContainsKey("model"))
             {
-                writer.WritePropertyName("prompt"u8);
+                writer.WritePropertyName("model"u8);
+                writer.WriteStringValue(Model.ToString());
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("prompt"))
+            {
+                if (Prompt != null)
+                {
+                    writer.WritePropertyName("prompt"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Prompt);
 #else
-                using (JsonDocument document = JsonDocument.Parse(Prompt))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
+                    using (JsonDocument document = JsonDocument.Parse(Prompt))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
+                }
+                else
+                {
+                    writer.WriteNull("prompt");
+                }
             }
-            else
-            {
-                writer.WriteNull("prompt");
-            }
-            if (Optional.IsDefined(Suffix))
+            if (!SerializedAdditionalRawData.ContainsKey("suffix") && Optional.IsDefined(Suffix))
             {
                 if (Suffix != null)
                 {
@@ -51,7 +57,7 @@ namespace OpenAI.Models
                     writer.WriteNull("suffix");
                 }
             }
-            if (Optional.IsDefined(Temperature))
+            if (!SerializedAdditionalRawData.ContainsKey("temperature") && Optional.IsDefined(Temperature))
             {
                 if (Temperature != null)
                 {
@@ -63,7 +69,7 @@ namespace OpenAI.Models
                     writer.WriteNull("temperature");
                 }
             }
-            if (Optional.IsDefined(TopP))
+            if (!SerializedAdditionalRawData.ContainsKey("top_p") && Optional.IsDefined(TopP))
             {
                 if (TopP != null)
                 {
@@ -75,7 +81,7 @@ namespace OpenAI.Models
                     writer.WriteNull("top_p");
                 }
             }
-            if (Optional.IsDefined(N))
+            if (!SerializedAdditionalRawData.ContainsKey("n") && Optional.IsDefined(N))
             {
                 if (N != null)
                 {
@@ -87,7 +93,7 @@ namespace OpenAI.Models
                     writer.WriteNull("n");
                 }
             }
-            if (Optional.IsDefined(MaxTokens))
+            if (!SerializedAdditionalRawData.ContainsKey("max_tokens") && Optional.IsDefined(MaxTokens))
             {
                 if (MaxTokens != null)
                 {
@@ -99,7 +105,7 @@ namespace OpenAI.Models
                     writer.WriteNull("max_tokens");
                 }
             }
-            if (Optional.IsDefined(Stop))
+            if (!SerializedAdditionalRawData.ContainsKey("stop") && Optional.IsDefined(Stop))
             {
                 if (Stop != null)
                 {
@@ -118,7 +124,7 @@ namespace OpenAI.Models
                     writer.WriteNull("stop");
                 }
             }
-            if (Optional.IsDefined(PresencePenalty))
+            if (!SerializedAdditionalRawData.ContainsKey("presence_penalty") && Optional.IsDefined(PresencePenalty))
             {
                 if (PresencePenalty != null)
                 {
@@ -130,7 +136,7 @@ namespace OpenAI.Models
                     writer.WriteNull("presence_penalty");
                 }
             }
-            if (Optional.IsDefined(FrequencyPenalty))
+            if (!SerializedAdditionalRawData.ContainsKey("frequency_penalty") && Optional.IsDefined(FrequencyPenalty))
             {
                 if (FrequencyPenalty != null)
                 {
@@ -142,7 +148,7 @@ namespace OpenAI.Models
                     writer.WriteNull("frequency_penalty");
                 }
             }
-            if (Optional.IsCollectionDefined(LogitBias))
+            if (!SerializedAdditionalRawData.ContainsKey("logit_bias") && Optional.IsCollectionDefined(LogitBias))
             {
                 if (LogitBias != null)
                 {
@@ -160,12 +166,12 @@ namespace OpenAI.Models
                     writer.WriteNull("logit_bias");
                 }
             }
-            if (Optional.IsDefined(User))
+            if (!SerializedAdditionalRawData.ContainsKey("user") && Optional.IsDefined(User))
             {
                 writer.WritePropertyName("user"u8);
                 writer.WriteStringValue(User);
             }
-            if (Optional.IsDefined(Stream))
+            if (!SerializedAdditionalRawData.ContainsKey("stream") && Optional.IsDefined(Stream))
             {
                 if (Stream != null)
                 {
@@ -177,7 +183,7 @@ namespace OpenAI.Models
                     writer.WriteNull("stream");
                 }
             }
-            if (Optional.IsDefined(Logprobs))
+            if (!SerializedAdditionalRawData.ContainsKey("logprobs") && Optional.IsDefined(Logprobs))
             {
                 if (Logprobs != null)
                 {
@@ -189,7 +195,7 @@ namespace OpenAI.Models
                     writer.WriteNull("logprobs");
                 }
             }
-            if (Optional.IsDefined(Echo))
+            if (!SerializedAdditionalRawData.ContainsKey("echo") && Optional.IsDefined(Echo))
             {
                 if (Echo != null)
                 {
@@ -201,7 +207,7 @@ namespace OpenAI.Models
                     writer.WriteNull("echo");
                 }
             }
-            if (Optional.IsDefined(BestOf))
+            if (!SerializedAdditionalRawData.ContainsKey("best_of") && Optional.IsDefined(BestOf))
             {
                 if (BestOf != null)
                 {
@@ -213,20 +219,21 @@ namespace OpenAI.Models
                     writer.WriteNull("best_of");
                 }
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            foreach (var item in SerializedAdditionalRawData)
             {
-                foreach (var item in _serializedAdditionalRawData)
+                if (ModelSerializationExtensions.IsSentinelValue(item.Value))
                 {
-                    writer.WritePropertyName(item.Key);
+                    continue;
+                }
+                writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
                 }
+#endif
             }
             writer.WriteEndObject();
         }

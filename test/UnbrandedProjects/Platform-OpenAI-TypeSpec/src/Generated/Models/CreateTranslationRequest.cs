@@ -41,8 +41,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
         /// <summary> Initializes a new instance of <see cref="CreateTranslationRequest"/>. </summary>
         /// <param name="file">
         /// The audio file object (not file name) to translate, in one of these formats: flac, mp3, mp4,
@@ -56,6 +55,7 @@ namespace OpenAI.Models
 
             File = file;
             Model = model;
+            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateTranslationRequest"/>. </summary>
@@ -86,7 +86,7 @@ namespace OpenAI.Models
             Prompt = prompt;
             ResponseFormat = responseFormat;
             Temperature = temperature;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateTranslationRequest"/> for deserialization. </summary>

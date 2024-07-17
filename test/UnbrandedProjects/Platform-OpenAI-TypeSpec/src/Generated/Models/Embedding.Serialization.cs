@@ -21,31 +21,41 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("index"u8);
-            writer.WriteNumberValue(Index);
-            writer.WritePropertyName("object"u8);
-            writer.WriteStringValue(Object.ToString());
-            writer.WritePropertyName("embedding"u8);
-            writer.WriteStartArray();
-            foreach (var item in EmbeddingProperty)
+            if (!SerializedAdditionalRawData.ContainsKey("index"))
             {
-                writer.WriteNumberValue(item);
+                writer.WritePropertyName("index"u8);
+                writer.WriteNumberValue(Index);
             }
-            writer.WriteEndArray();
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            if (!SerializedAdditionalRawData.ContainsKey("object"))
             {
-                foreach (var item in _serializedAdditionalRawData)
+                writer.WritePropertyName("object"u8);
+                writer.WriteStringValue(Object.ToString());
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("embedding"))
+            {
+                writer.WritePropertyName("embedding"u8);
+                writer.WriteStartArray();
+                foreach (var item in EmbeddingProperty)
                 {
-                    writer.WritePropertyName(item.Key);
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            foreach (var item in SerializedAdditionalRawData)
+            {
+                if (ModelSerializationExtensions.IsSentinelValue(item.Value))
+                {
+                    continue;
+                }
+                writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
                 }
+#endif
             }
             writer.WriteEndObject();
         }

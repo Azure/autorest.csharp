@@ -21,59 +21,72 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("tokens"u8);
-            writer.WriteStartArray();
-            foreach (var item in Tokens)
+            if (!SerializedAdditionalRawData.ContainsKey("tokens"))
             {
-                writer.WriteStringValue(item);
-            }
-            writer.WriteEndArray();
-            writer.WritePropertyName("token_logprobs"u8);
-            writer.WriteStartArray();
-            foreach (var item in TokenLogprobs)
-            {
-                writer.WriteNumberValue(item);
-            }
-            writer.WriteEndArray();
-            writer.WritePropertyName("top_logprobs"u8);
-            writer.WriteStartArray();
-            foreach (var item in TopLogprobs)
-            {
-                if (item == null)
+                writer.WritePropertyName("tokens"u8);
+                writer.WriteStartArray();
+                foreach (var item in Tokens)
                 {
-                    writer.WriteNullValue();
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("token_logprobs"))
+            {
+                writer.WritePropertyName("token_logprobs"u8);
+                writer.WriteStartArray();
+                foreach (var item in TokenLogprobs)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("top_logprobs"))
+            {
+                writer.WritePropertyName("top_logprobs"u8);
+                writer.WriteStartArray();
+                foreach (var item in TopLogprobs)
+                {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+                    writer.WriteStartObject();
+                    foreach (var item0 in item)
+                    {
+                        writer.WritePropertyName(item0.Key);
+                        writer.WriteNumberValue(item0.Value);
+                    }
+                    writer.WriteEndObject();
+                }
+                writer.WriteEndArray();
+            }
+            if (!SerializedAdditionalRawData.ContainsKey("text_offset"))
+            {
+                writer.WritePropertyName("text_offset"u8);
+                writer.WriteStartArray();
+                foreach (var item in TextOffset)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            foreach (var item in SerializedAdditionalRawData)
+            {
+                if (ModelSerializationExtensions.IsSentinelValue(item.Value))
+                {
                     continue;
                 }
-                writer.WriteStartObject();
-                foreach (var item0 in item)
-                {
-                    writer.WritePropertyName(item0.Key);
-                    writer.WriteNumberValue(item0.Value);
-                }
-                writer.WriteEndObject();
-            }
-            writer.WriteEndArray();
-            writer.WritePropertyName("text_offset"u8);
-            writer.WriteStartArray();
-            foreach (var item in TextOffset)
-            {
-                writer.WriteNumberValue(item);
-            }
-            writer.WriteEndArray();
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
+                writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
                 }
+#endif
             }
             writer.WriteEndObject();
         }

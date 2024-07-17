@@ -40,8 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; }
         /// <summary> Initializes a new instance of <see cref="DeleteFileResponse"/>. </summary>
         /// <param name="id"></param>
         /// <param name="object"></param>
@@ -55,6 +54,7 @@ namespace OpenAI.Models
             Id = id;
             Object = @object;
             Deleted = deleted;
+            SerializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="DeleteFileResponse"/>. </summary>
@@ -67,7 +67,7 @@ namespace OpenAI.Models
             Id = id;
             Object = @object;
             Deleted = deleted;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="DeleteFileResponse"/> for deserialization. </summary>
