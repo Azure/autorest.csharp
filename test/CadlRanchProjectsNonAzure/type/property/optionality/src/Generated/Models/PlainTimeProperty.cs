@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.Optionality.Models
 {
-    /// <summary> Model with a plaintime property. </summary>
+    /// <summary> Model with a plainTime property. </summary>
     public partial class PlainTimeProperty
     {
         /// <summary>

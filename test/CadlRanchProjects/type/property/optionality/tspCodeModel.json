@@ -242,10 +242,10 @@
   {
    "$id": "37",
    "Kind": "model",
-   "Name": "PlaindateProperty",
-   "CrossLanguageDefinitionId": "Type.Property.Optional.PlaindateProperty",
+   "Name": "PlainDateProperty",
+   "CrossLanguageDefinitionId": "Type.Property.Optional.PlainDateProperty",
    "Usage": "RoundTrip",
-   "Description": "Model with a plaindate property",
+   "Description": "Model with a plainDate property",
    "Properties": [
     {
      "$id": "38",
@@ -267,7 +267,7 @@
    "Name": "PlainTimeProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.PlainTimeProperty",
    "Usage": "RoundTrip",
-   "Description": "Model with a plaintime property",
+   "Description": "Model with a plainTime property",
    "Properties": [
     {
      "$id": "41",
@@ -1935,13 +1935,13 @@
   },
   {
    "$id": "200",
-   "Name": "Plaindate",
+   "Name": "PlainDate",
    "Description": "",
    "Operations": [
     {
      "$id": "201",
      "Name": "getAll",
-     "ResourceName": "Plaindate",
+     "ResourceName": "PlainDate",
      "Description": "Get models that will return all properties in the model",
      "Accessibility": "public",
      "Parameters": [
@@ -1994,7 +1994,7 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/type/property/optional/plaindate/all",
+     "Path": "/type/property/optional/plainDate/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
@@ -2002,7 +2002,7 @@
     {
      "$id": "206",
      "Name": "getDefault",
-     "ResourceName": "Plaindate",
+     "ResourceName": "PlainDate",
      "Description": "Get models that will return the default object",
      "Accessibility": "public",
      "Parameters": [
@@ -2055,7 +2055,7 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/type/property/optional/plaindate/default",
+     "Path": "/type/property/optional/plainDate/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
@@ -2063,7 +2063,7 @@
     {
      "$id": "211",
      "Name": "putAll",
-     "ResourceName": "Plaindate",
+     "ResourceName": "PlainDate",
      "Description": "Put a body with all properties present.",
      "Accessibility": "public",
      "Parameters": [
@@ -2152,7 +2152,7 @@
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/type/property/optional/plaindate/all",
+     "Path": "/type/property/optional/plainDate/all",
      "RequestMediaTypes": [
       "application/json"
      ],
@@ -2163,7 +2163,7 @@
     {
      "$id": "220",
      "Name": "putDefault",
-     "ResourceName": "Plaindate",
+     "ResourceName": "PlainDate",
      "Description": "Put a body with default properties.",
      "Accessibility": "public",
      "Parameters": [
@@ -2252,7 +2252,7 @@
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/type/property/optional/plaindate/default",
+     "Path": "/type/property/optional/plainDate/default",
      "RequestMediaTypes": [
       "application/json"
      ],
@@ -2273,13 +2273,13 @@
   },
   {
    "$id": "230",
-   "Name": "Plaintime",
+   "Name": "PlainTime",
    "Description": "",
    "Operations": [
     {
      "$id": "231",
      "Name": "getAll",
-     "ResourceName": "Plaintime",
+     "ResourceName": "PlainTime",
      "Description": "Get models that will return all properties in the model",
      "Accessibility": "public",
      "Parameters": [
@@ -2332,7 +2332,7 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/type/property/optional/plaintime/all",
+     "Path": "/type/property/optional/plainTime/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
@@ -2340,7 +2340,7 @@
     {
      "$id": "236",
      "Name": "getDefault",
-     "ResourceName": "Plaintime",
+     "ResourceName": "PlainTime",
      "Description": "Get models that will return the default object",
      "Accessibility": "public",
      "Parameters": [
@@ -2393,7 +2393,7 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/type/property/optional/plaintime/default",
+     "Path": "/type/property/optional/plainTime/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
@@ -2401,7 +2401,7 @@
     {
      "$id": "241",
      "Name": "putAll",
-     "ResourceName": "Plaintime",
+     "ResourceName": "PlainTime",
      "Description": "Put a body with all properties present.",
      "Accessibility": "public",
      "Parameters": [
@@ -2490,7 +2490,7 @@
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/type/property/optional/plaintime/all",
+     "Path": "/type/property/optional/plainTime/all",
      "RequestMediaTypes": [
       "application/json"
      ],
@@ -2501,7 +2501,7 @@
     {
      "$id": "250",
      "Name": "putDefault",
-     "ResourceName": "Plaintime",
+     "ResourceName": "PlainTime",
      "Description": "Put a body with default properties.",
      "Accessibility": "public",
      "Parameters": [
@@ -2590,7 +2590,7 @@
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/type/property/optional/plaintime/default",
+     "Path": "/type/property/optional/plainTime/default",
      "RequestMediaTypes": [
       "application/json"
      ],

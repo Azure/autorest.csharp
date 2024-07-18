@@ -16,8 +16,8 @@ using _Type.Property.Optionality.Models;
 namespace _Type.Property.Optionality
 {
     // Data plane generated sub-client.
-    /// <summary> The Plaindate sub-client. </summary>
-    public partial class Plaindate
+    /// <summary> The PlainDate sub-client. </summary>
+    public partial class PlainDate
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -28,16 +28,16 @@ namespace _Type.Property.Optionality
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of Plaindate for mocking. </summary>
-        protected Plaindate()
+        /// <summary> Initializes a new instance of PlainDate for mocking. </summary>
+        protected PlainDate()
         {
         }
 
-        /// <summary> Initializes a new instance of Plaindate. </summary>
+        /// <summary> Initializes a new instance of PlainDate. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        internal Plaindate(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
+        internal PlainDate(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -46,22 +46,22 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/Plaindate.xml" path="doc/members/member[@name='GetAllAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<PlaindateProperty>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <include file="Docs/PlainDate.xml" path="doc/members/member[@name='GetAllAsync(CancellationToken)']/*" />
+        public virtual async Task<Response<PlainDateProperty>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetAllAsync(context).ConfigureAwait(false);
-            return Response.FromValue(PlaindateProperty.FromResponse(response), response);
+            return Response.FromValue(PlainDateProperty.FromResponse(response), response);
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/Plaindate.xml" path="doc/members/member[@name='GetAll(CancellationToken)']/*" />
-        public virtual Response<PlaindateProperty> GetAll(CancellationToken cancellationToken = default)
+        /// <include file="Docs/PlainDate.xml" path="doc/members/member[@name='GetAll(CancellationToken)']/*" />
+        public virtual Response<PlainDateProperty> GetAll(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetAll(context);
-            return Response.FromValue(PlaindateProperty.FromResponse(response), response);
+            return Response.FromValue(PlainDateProperty.FromResponse(response), response);
         }
 
         /// <summary>
@@ -82,10 +82,10 @@ namespace _Type.Property.Optionality
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Plaindate.xml" path="doc/members/member[@name='GetAllAsync(RequestContext)']/*" />
+        /// <include file="Docs/PlainDate.xml" path="doc/members/member[@name='GetAllAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetAllAsync(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("Plaindate.GetAll");
+            using var scope = ClientDiagnostics.CreateScope("PlainDate.GetAll");
             scope.Start();
             try
             {
@@ -117,10 +117,10 @@ namespace _Type.Property.Optionality
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Plaindate.xml" path="doc/members/member[@name='GetAll(RequestContext)']/*" />
+        /// <include file="Docs/PlainDate.xml" path="doc/members/member[@name='GetAll(RequestContext)']/*" />
         public virtual Response GetAll(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("Plaindate.GetAll");
+            using var scope = ClientDiagnostics.CreateScope("PlainDate.GetAll");
             scope.Start();
             try
             {
@@ -136,22 +136,22 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/Plaindate.xml" path="doc/members/member[@name='GetDefaultAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<PlaindateProperty>> GetDefaultAsync(CancellationToken cancellationToken = default)
+        /// <include file="Docs/PlainDate.xml" path="doc/members/member[@name='GetDefaultAsync(CancellationToken)']/*" />
+        public virtual async Task<Response<PlainDateProperty>> GetDefaultAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetDefaultAsync(context).ConfigureAwait(false);
-            return Response.FromValue(PlaindateProperty.FromResponse(response), response);
+            return Response.FromValue(PlainDateProperty.FromResponse(response), response);
         }
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/Plaindate.xml" path="doc/members/member[@name='GetDefault(CancellationToken)']/*" />
-        public virtual Response<PlaindateProperty> GetDefault(CancellationToken cancellationToken = default)
+        /// <include file="Docs/PlainDate.xml" path="doc/members/member[@name='GetDefault(CancellationToken)']/*" />
+        public virtual Response<PlainDateProperty> GetDefault(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetDefault(context);
-            return Response.FromValue(PlaindateProperty.FromResponse(response), response);
+            return Response.FromValue(PlainDateProperty.FromResponse(response), response);
         }
 
         /// <summary>
@@ -172,10 +172,10 @@ namespace _Type.Property.Optionality
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Plaindate.xml" path="doc/members/member[@name='GetDefaultAsync(RequestContext)']/*" />
+        /// <include file="Docs/PlainDate.xml" path="doc/members/member[@name='GetDefaultAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDefaultAsync(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("Plaindate.GetDefault");
+            using var scope = ClientDiagnostics.CreateScope("PlainDate.GetDefault");
             scope.Start();
             try
             {
@@ -207,10 +207,10 @@ namespace _Type.Property.Optionality
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Plaindate.xml" path="doc/members/member[@name='GetDefault(RequestContext)']/*" />
+        /// <include file="Docs/PlainDate.xml" path="doc/members/member[@name='GetDefault(RequestContext)']/*" />
         public virtual Response GetDefault(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("Plaindate.GetDefault");
+            using var scope = ClientDiagnostics.CreateScope("PlainDate.GetDefault");
             scope.Start();
             try
             {
@@ -225,11 +225,11 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with all properties present. </summary>
-        /// <param name="body"> The <see cref="PlaindateProperty"/> to use. </param>
+        /// <param name="body"> The <see cref="PlainDateProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Plaindate.xml" path="doc/members/member[@name='PutAllAsync(PlaindateProperty,CancellationToken)']/*" />
-        public virtual async Task<Response> PutAllAsync(PlaindateProperty body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/PlainDate.xml" path="doc/members/member[@name='PutAllAsync(PlainDateProperty,CancellationToken)']/*" />
+        public virtual async Task<Response> PutAllAsync(PlainDateProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -240,11 +240,11 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with all properties present. </summary>
-        /// <param name="body"> The <see cref="PlaindateProperty"/> to use. </param>
+        /// <param name="body"> The <see cref="PlainDateProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Plaindate.xml" path="doc/members/member[@name='PutAll(PlaindateProperty,CancellationToken)']/*" />
-        public virtual Response PutAll(PlaindateProperty body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/PlainDate.xml" path="doc/members/member[@name='PutAll(PlainDateProperty,CancellationToken)']/*" />
+        public virtual Response PutAll(PlainDateProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -264,7 +264,7 @@ namespace _Type.Property.Optionality
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutAllAsync(PlaindateProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutAllAsync(PlainDateProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -274,12 +274,12 @@ namespace _Type.Property.Optionality
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Plaindate.xml" path="doc/members/member[@name='PutAllAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/PlainDate.xml" path="doc/members/member[@name='PutAllAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAllAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Plaindate.PutAll");
+            using var scope = ClientDiagnostics.CreateScope("PlainDate.PutAll");
             scope.Start();
             try
             {
@@ -303,7 +303,7 @@ namespace _Type.Property.Optionality
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutAll(PlaindateProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutAll(PlainDateProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -313,12 +313,12 @@ namespace _Type.Property.Optionality
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Plaindate.xml" path="doc/members/member[@name='PutAll(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/PlainDate.xml" path="doc/members/member[@name='PutAll(RequestContent,RequestContext)']/*" />
         public virtual Response PutAll(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Plaindate.PutAll");
+            using var scope = ClientDiagnostics.CreateScope("PlainDate.PutAll");
             scope.Start();
             try
             {
@@ -333,11 +333,11 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with default properties. </summary>
-        /// <param name="body"> The <see cref="PlaindateProperty"/> to use. </param>
+        /// <param name="body"> The <see cref="PlainDateProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Plaindate.xml" path="doc/members/member[@name='PutDefaultAsync(PlaindateProperty,CancellationToken)']/*" />
-        public virtual async Task<Response> PutDefaultAsync(PlaindateProperty body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/PlainDate.xml" path="doc/members/member[@name='PutDefaultAsync(PlainDateProperty,CancellationToken)']/*" />
+        public virtual async Task<Response> PutDefaultAsync(PlainDateProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -348,11 +348,11 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with default properties. </summary>
-        /// <param name="body"> The <see cref="PlaindateProperty"/> to use. </param>
+        /// <param name="body"> The <see cref="PlainDateProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Plaindate.xml" path="doc/members/member[@name='PutDefault(PlaindateProperty,CancellationToken)']/*" />
-        public virtual Response PutDefault(PlaindateProperty body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/PlainDate.xml" path="doc/members/member[@name='PutDefault(PlainDateProperty,CancellationToken)']/*" />
+        public virtual Response PutDefault(PlainDateProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -372,7 +372,7 @@ namespace _Type.Property.Optionality
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutDefaultAsync(PlaindateProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutDefaultAsync(PlainDateProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -382,12 +382,12 @@ namespace _Type.Property.Optionality
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Plaindate.xml" path="doc/members/member[@name='PutDefaultAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/PlainDate.xml" path="doc/members/member[@name='PutDefaultAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDefaultAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Plaindate.PutDefault");
+            using var scope = ClientDiagnostics.CreateScope("PlainDate.PutDefault");
             scope.Start();
             try
             {
@@ -411,7 +411,7 @@ namespace _Type.Property.Optionality
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutDefault(PlaindateProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutDefault(PlainDateProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -421,12 +421,12 @@ namespace _Type.Property.Optionality
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Plaindate.xml" path="doc/members/member[@name='PutDefault(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/PlainDate.xml" path="doc/members/member[@name='PutDefault(RequestContent,RequestContext)']/*" />
         public virtual Response PutDefault(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Plaindate.PutDefault");
+            using var scope = ClientDiagnostics.CreateScope("PlainDate.PutDefault");
             scope.Start();
             try
             {
@@ -447,7 +447,7 @@ namespace _Type.Property.Optionality
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/type/property/optional/plaindate/all", false);
+            uri.AppendPath("/type/property/optional/plainDate/all", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -460,7 +460,7 @@ namespace _Type.Property.Optionality
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/type/property/optional/plaindate/default", false);
+            uri.AppendPath("/type/property/optional/plainDate/default", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -473,7 +473,7 @@ namespace _Type.Property.Optionality
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/type/property/optional/plaindate/all", false);
+            uri.AppendPath("/type/property/optional/plainDate/all", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -488,7 +488,7 @@ namespace _Type.Property.Optionality
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/type/property/optional/plaindate/default", false);
+            uri.AppendPath("/type/property/optional/plainDate/default", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
