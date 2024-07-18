@@ -7,7 +7,7 @@ using System.Text.Json;
 using NoTestTypeSpec.Models;
 using NUnit.Framework;
 
-namespace NoTestTypeSpec.Tests
+namespace OpenAI.Tests
 {
     public class InternalAdditionalRawDataTests
     {
