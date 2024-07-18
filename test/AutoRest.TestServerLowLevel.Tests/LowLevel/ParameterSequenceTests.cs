@@ -4,7 +4,6 @@
 using System;
 using System.Linq;
 using Parameters_LowLevel;
-using ParametersCadl;
 using NUnit.Framework;
 using Azure.Core;
 using Azure;
