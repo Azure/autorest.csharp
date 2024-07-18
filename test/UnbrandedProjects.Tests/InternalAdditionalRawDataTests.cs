@@ -3,11 +3,12 @@
 
 using System;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using NoTestTypeSpec.Models;
 using NUnit.Framework;
 
-namespace OpenAI.Tests
+namespace NoTestTypeSpec.Tests
 {
     public class InternalAdditionalRawDataTests
     {
@@ -15,6 +16,7 @@ namespace OpenAI.Tests
         public void RawDataShouldOverrideUsualProperty()
         {
             var thing = new Thing("wrongName", BinaryData.FromObjectAsJson("union"), "something", Array.Empty<int>());
+            thing.SerializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             thing.SerializedAdditionalRawData.Add("name", BinaryData.FromObjectAsJson("correctName"));
 
             var json = ModelReaderWriter.Write(thing);
@@ -28,6 +30,7 @@ namespace OpenAI.Tests
         public void RawDataShouldOverrideUsualProperty_Derived()
         {
             var thing = new DerivedThing("wrongName", BinaryData.FromObjectAsJson("union"), "something", Array.Empty<int>());
+            thing.SerializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             thing.SerializedAdditionalRawData.Add("name", BinaryData.FromObjectAsJson("correctName"));
 
             var json = ModelReaderWriter.Write(thing);
@@ -41,6 +44,7 @@ namespace OpenAI.Tests
         public void ValuesShouldBeHiddenViaSentinelValues()
         {
             var thing = new Thing("wrongName", BinaryData.FromObjectAsJson("union"), "something", Array.Empty<int>());
+            thing.SerializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             thing.SerializedAdditionalRawData.Add("name", ModelSerializationExtensions.SentinelValue);
 
             var json = ModelReaderWriter.Write(thing);
@@ -53,6 +57,7 @@ namespace OpenAI.Tests
         public void ValuesShouldBeHiddenViaSentinelValues_Derived()
         {
             var thing = new DerivedThing("wrongName", BinaryData.FromObjectAsJson("union"), "something", Array.Empty<int>());
+            thing.SerializedAdditionalRawData ??= new Dictionary<string, BinaryData>();
             thing.SerializedAdditionalRawData.Add("name", ModelSerializationExtensions.SentinelValue);
 
             var json = ModelReaderWriter.Write(thing);
