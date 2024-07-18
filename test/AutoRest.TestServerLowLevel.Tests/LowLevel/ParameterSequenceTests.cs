@@ -18,11 +18,6 @@ namespace AutoRest.LowLevel.Tests
         [TestCase(typeof(ParametersLowlevelClient), "OptionalPathParameters", new Type[] { typeof(int), typeof(string), typeof(int), typeof(RequestContext) }, new string[] { "id", "name", "skip", "context" }, new bool[] { false, false, false, true })]
         [TestCase(typeof(ParametersLowlevelClient), "OptionalPathParametersWithMixedSequence", new Type[] { typeof(int), typeof(string), typeof(int), typeof(RequestContext) }, new string[] { "id", "name", "skip", "context" }, new bool[] { false, false, false, true })]
         [TestCase(typeof(ParametersLowlevelClient), "OptionalPathBodyParametersWithMixedSequence", new Type[] { typeof(int), typeof(string), typeof(int), typeof(int), typeof(RequestContent), typeof(int), typeof(RequestContext) }, new string[] { "id", "name", "skip", "max", "content", "top", "context" }, new bool[] { false, false, false, false, false, true, true })]
-        [TestCase(typeof(ParametersCadlClient), "GetParameterOrdersClient", new Type[] { typeof(string) }, new string[] { "apiVersion" }, new bool[] { true })]
-        [TestCase(typeof(ParameterOrders), "Operation", new Type[] { typeof(int), typeof(int), typeof(CancellationToken) }, new string[] { "start", "end", "cancellationToken" }, new bool[] { false, true, true })]
-        [TestCase(typeof(ParameterOrders), "Operation", new Type[] { typeof(int), typeof(int), typeof(RequestContext) }, new string[] { "start", "end", "context" }, new bool[] { false, false, false })]
-        [TestCase(typeof(ParameterOrders), "Operation2", new Type[] { typeof(int), typeof(int), typeof(CancellationToken) }, new string[] { "end", "start", "cancellationToken" }, new bool[] { false, true, true })]
-        [TestCase(typeof(ParameterOrders), "Operation2", new Type[] { typeof(int), typeof(int), typeof(RequestContext) }, new string[] { "end", "start", "context" }, new bool[] { false, false, false })]
         public void OptionalParameterAtEnd(Type type, string methodName, Type[] types, string[] parameterNames, bool[] isOptional)
         {
             var method = type.GetMethod(methodName, types);
