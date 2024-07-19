@@ -54,7 +54,7 @@ namespace CadlRanchProjects.Tests
             ArmClient client = MgmtTestHelper.CreateArmClientWithMockAuth(host);
             var resourceId = ManagedIdentityTrackedResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "test-rg", "identity");
             var resource = new ManagedIdentityTrackedResource(client, resourceId);
-            var patch = new ManagedIdentityTrackedResourcePatch()
+            var patch = new ManagedIdentityTrackedResourceData(AzureLocation.EastUS)
             {
                 Identity = new ManagedServiceIdentity(ManagedServiceIdentityType.SystemAndUserAssignedV3)
                 {
