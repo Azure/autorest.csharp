@@ -31,7 +31,7 @@ namespace OpenAI
         /// <summary> Initializes a new instance of Files. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> OpenAI Endpoint. </param>
         internal Files(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -465,7 +465,7 @@ namespace OpenAI
             uri.AppendPath("/files", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("content-type", contentType);
+            request.Headers.Set("Content-Type", contentType);
             request.Content = content;
             message.Apply(options);
             return message;

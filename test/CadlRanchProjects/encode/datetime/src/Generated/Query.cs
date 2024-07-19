@@ -35,7 +35,7 @@ namespace Encode.Datetime
         /// <summary> Initializes a new instance of Query. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         internal Query(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -379,6 +379,7 @@ namespace Encode.Datetime
             uri.AppendPath("/encode/datetime/query/default", false);
             uri.AppendQuery("value", value, "O", true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -392,6 +393,7 @@ namespace Encode.Datetime
             uri.AppendPath("/encode/datetime/query/rfc3339", false);
             uri.AppendQuery("value", value, "O", true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -405,6 +407,7 @@ namespace Encode.Datetime
             uri.AppendPath("/encode/datetime/query/rfc7231", false);
             uri.AppendQuery("value", value, "R", true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -418,6 +421,7 @@ namespace Encode.Datetime
             uri.AppendPath("/encode/datetime/query/unix-timestamp", false);
             uri.AppendQuery("value", value, "U", true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -434,6 +438,7 @@ namespace Encode.Datetime
                 uri.AppendQueryDelimited("value", value, ",", "U", true);
             }
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

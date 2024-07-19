@@ -36,7 +36,7 @@ namespace _Type.Property.ValueTypes
         /// <summary> Initializes a new instance of Model. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         internal Model(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -264,6 +264,7 @@ namespace _Type.Property.ValueTypes
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/value-types/model", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

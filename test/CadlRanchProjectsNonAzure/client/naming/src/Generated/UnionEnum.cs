@@ -27,7 +27,7 @@ namespace Scm.Client.Naming
 
         /// <summary> Initializes a new instance of UnionEnum. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         internal UnionEnum(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -192,6 +192,7 @@ namespace Scm.Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/union-enum/union-enum-name", false);
             request.Uri = uri.ToUri();
+            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -208,6 +209,7 @@ namespace Scm.Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/union-enum/union-enum-member-name", false);
             request.Uri = uri.ToUri();
+            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

@@ -50,7 +50,7 @@
   {
    "$id": "8",
    "Name": "DictionaryClient",
-   "Description": "Illustrates various of dictionaries.",
+   "Description": "",
    "Operations": [],
    "Protocol": {
     "$id": "9"
@@ -58,9 +58,9 @@
    "Parameters": [
     {
      "$id": "10",
-     "Name": "endpoint",
-     "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
      "Type": {
       "$id": "11",
       "Kind": "string"
@@ -97,69 +97,49 @@
      "Accessibility": "public",
      "Parameters": [
       {
+       "$ref": "10"
+      },
+      {
        "$id": "16",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "17",
         "Kind": "string"
        },
-       "Location": "Uri",
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": true,
+       "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
+       "Kind": "Constant",
        "DefaultValue": {
         "$id": "18",
         "Type": {
-         "$id": "19",
-         "Kind": "string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "20",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "21",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "22",
-         "Kind": "string"
+         "$ref": "17"
         },
         "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "23",
+       "$id": "19",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "24",
+        "$id": "20",
         "Kind": "dict",
         "KeyType": {
-         "$id": "25",
+         "$id": "21",
          "Kind": "string"
         },
         "ValueType": {
-         "$id": "26",
+         "$id": "22",
          "Kind": "int32"
         }
        },
@@ -173,71 +153,101 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/dictionary/int32",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "27",
+     "$id": "23",
      "Name": "put",
      "ResourceName": "Int32Value",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "16"
+       "$ref": "10"
+      },
+      {
+       "$id": "24",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$id": "25",
+        "Kind": "dict",
+        "KeyType": {
+         "$id": "26",
+         "Kind": "string"
+        },
+        "ValueType": {
+         "$id": "27",
+         "Kind": "int32"
+        }
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
       },
       {
        "$id": "28",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "29",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "30",
-         "Kind": "string"
-        },
-        "Value": "application/json"
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "30",
+        "Type": {
+         "$ref": "29"
+        },
+        "Value": "application/json"
+       }
       },
       {
        "$id": "31",
-       "Name": "body",
-       "NameInRequest": "body",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "32",
-        "Kind": "dict",
-        "KeyType": {
-         "$id": "33",
-         "Kind": "string"
-        },
-        "ValueType": {
-         "$id": "34",
-         "Kind": "int32"
-        }
+        "Kind": "string"
        },
-       "Location": "Body",
+       "Location": "Header",
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "33",
+        "Type": {
+         "$ref": "32"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "35",
+       "$id": "34",
        "StatusCodes": [
         204
        ],
@@ -247,8 +257,8 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
      "Path": "/type/dictionary/int32",
      "RequestMediaTypes": [
       "application/json"
@@ -259,82 +269,103 @@
     }
    ],
    "Protocol": {
-    "$id": "36"
+    "$id": "35"
    },
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "16"
+     "$ref": "10"
     }
    ]
   },
   {
-   "$id": "37",
+   "$id": "36",
    "Name": "Int64Value",
    "Description": "Dictionary of int64 values",
    "Operations": [
     {
-     "$id": "38",
+     "$id": "37",
      "Name": "get",
      "ResourceName": "Int64Value",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "39",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
+       "$ref": "10"
+      },
+      {
+       "$id": "38",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$id": "40",
+        "$id": "39",
         "Kind": "string"
        },
-       "Location": "Uri",
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": true,
+       "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
+       "Kind": "Constant",
        "DefaultValue": {
-        "$id": "41",
+        "$id": "40",
         "Type": {
-         "$id": "42",
-         "Kind": "string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "43",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "44",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "45",
-         "Kind": "string"
+         "$ref": "39"
         },
         "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "46",
+       "$id": "41",
        "StatusCodes": [
         200
        ],
        "BodyType": {
+        "$id": "42",
+        "Kind": "dict",
+        "KeyType": {
+         "$id": "43",
+         "Kind": "string"
+        },
+        "ValueType": {
+         "$id": "44",
+         "Kind": "int64"
+        }
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/dictionary/int64",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "45",
+     "Name": "put",
+     "ResourceName": "Int64Value",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "10"
+      },
+      {
+       "$id": "46",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
         "$id": "47",
         "Kind": "dict",
         "KeyType": {
@@ -346,81 +377,70 @@
          "Kind": "int64"
         }
        },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
-     "Path": "/type/dictionary/int64",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "50",
-     "Name": "put",
-     "ResourceName": "Int64Value",
-     "Accessibility": "public",
-     "Parameters": [
-      {
-       "$ref": "39"
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
       },
       {
-       "$id": "51",
+       "$id": "50",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "52",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "53",
-         "Kind": "string"
-        },
-        "Value": "application/json"
+        "$id": "51",
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "52",
+        "Type": {
+         "$ref": "51"
+        },
+        "Value": "application/json"
+       }
       },
       {
-       "$id": "54",
-       "Name": "body",
-       "NameInRequest": "body",
+       "$id": "53",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$id": "55",
-        "Kind": "dict",
-        "KeyType": {
-         "$id": "56",
-         "Kind": "string"
-        },
-        "ValueType": {
-         "$id": "57",
-         "Kind": "int64"
-        }
+        "$id": "54",
+        "Kind": "string"
        },
-       "Location": "Body",
+       "Location": "Header",
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "55",
+        "Type": {
+         "$ref": "54"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "58",
+       "$id": "56",
        "StatusCodes": [
         204
        ],
@@ -430,8 +450,8 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
      "Path": "/type/dictionary/int64",
      "RequestMediaTypes": [
       "application/json"
@@ -442,90 +462,70 @@
     }
    ],
    "Protocol": {
-    "$id": "59"
+    "$id": "57"
    },
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "39"
+     "$ref": "10"
     }
    ]
   },
   {
-   "$id": "60",
+   "$id": "58",
    "Name": "BooleanValue",
    "Description": "Dictionary of boolean values",
    "Operations": [
     {
-     "$id": "61",
+     "$id": "59",
      "Name": "get",
      "ResourceName": "BooleanValue",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "62",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
+       "$ref": "10"
+      },
+      {
+       "$id": "60",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$id": "63",
+        "$id": "61",
         "Kind": "string"
        },
-       "Location": "Uri",
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": true,
+       "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
+       "Kind": "Constant",
        "DefaultValue": {
-        "$id": "64",
+        "$id": "62",
         "Type": {
-         "$id": "65",
-         "Kind": "string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "66",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "67",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "68",
-         "Kind": "string"
+         "$ref": "61"
         },
         "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "69",
+       "$id": "63",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "70",
+        "$id": "64",
         "Kind": "dict",
         "KeyType": {
-         "$id": "71",
+         "$id": "65",
          "Kind": "string"
         },
         "ValueType": {
-         "$id": "72",
+         "$id": "66",
          "Kind": "boolean"
         }
        },
@@ -539,71 +539,101 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/dictionary/boolean",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "73",
+     "$id": "67",
      "Name": "put",
      "ResourceName": "BooleanValue",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "62"
+       "$ref": "10"
       },
       {
-       "$id": "74",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
-       "Type": {
-        "$id": "75",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "76",
-         "Kind": "string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "77",
+       "$id": "68",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "78",
+        "$id": "69",
         "Kind": "dict",
         "KeyType": {
-         "$id": "79",
+         "$id": "70",
          "Kind": "string"
         },
         "ValueType": {
-         "$id": "80",
+         "$id": "71",
          "Kind": "boolean"
         }
        },
        "Location": "Body",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "72",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "73",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "74",
+        "Type": {
+         "$ref": "73"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "75",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "76",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "77",
+        "Type": {
+         "$ref": "76"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "81",
+       "$id": "78",
        "StatusCodes": [
         204
        ],
@@ -613,8 +643,8 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
      "Path": "/type/dictionary/boolean",
      "RequestMediaTypes": [
       "application/json"
@@ -625,90 +655,70 @@
     }
    ],
    "Protocol": {
-    "$id": "82"
+    "$id": "79"
    },
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "62"
+     "$ref": "10"
     }
    ]
   },
   {
-   "$id": "83",
+   "$id": "80",
    "Name": "StringValue",
    "Description": "Dictionary of string values",
    "Operations": [
     {
-     "$id": "84",
+     "$id": "81",
      "Name": "get",
      "ResourceName": "StringValue",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "85",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
+       "$ref": "10"
+      },
+      {
+       "$id": "82",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$id": "86",
+        "$id": "83",
         "Kind": "string"
        },
-       "Location": "Uri",
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": true,
+       "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
+       "Kind": "Constant",
        "DefaultValue": {
-        "$id": "87",
+        "$id": "84",
         "Type": {
-         "$id": "88",
-         "Kind": "string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "89",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "90",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "91",
-         "Kind": "string"
+         "$ref": "83"
         },
         "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "92",
+       "$id": "85",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "93",
+        "$id": "86",
         "Kind": "dict",
         "KeyType": {
-         "$id": "94",
+         "$id": "87",
          "Kind": "string"
         },
         "ValueType": {
-         "$id": "95",
+         "$id": "88",
          "Kind": "string"
         }
        },
@@ -722,71 +732,101 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/dictionary/string",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "96",
+     "$id": "89",
      "Name": "put",
      "ResourceName": "StringValue",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "85"
+       "$ref": "10"
       },
       {
-       "$id": "97",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
-       "Type": {
-        "$id": "98",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "99",
-         "Kind": "string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "100",
+       "$id": "90",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "101",
+        "$id": "91",
         "Kind": "dict",
         "KeyType": {
-         "$id": "102",
+         "$id": "92",
          "Kind": "string"
         },
         "ValueType": {
-         "$id": "103",
+         "$id": "93",
          "Kind": "string"
         }
        },
        "Location": "Body",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "94",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "95",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "96",
+        "Type": {
+         "$ref": "95"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "97",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "98",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "99",
+        "Type": {
+         "$ref": "98"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "104",
+       "$id": "100",
        "StatusCodes": [
         204
        ],
@@ -796,8 +836,8 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
      "Path": "/type/dictionary/string",
      "RequestMediaTypes": [
       "application/json"
@@ -808,90 +848,70 @@
     }
    ],
    "Protocol": {
-    "$id": "105"
+    "$id": "101"
    },
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "85"
+     "$ref": "10"
     }
    ]
   },
   {
-   "$id": "106",
+   "$id": "102",
    "Name": "Float32Value",
    "Description": "Dictionary of float values",
    "Operations": [
     {
-     "$id": "107",
+     "$id": "103",
      "Name": "get",
      "ResourceName": "Float32Value",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "108",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
+       "$ref": "10"
+      },
+      {
+       "$id": "104",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$id": "109",
+        "$id": "105",
         "Kind": "string"
        },
-       "Location": "Uri",
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": true,
+       "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
+       "Kind": "Constant",
        "DefaultValue": {
-        "$id": "110",
+        "$id": "106",
         "Type": {
-         "$id": "111",
-         "Kind": "string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "112",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "113",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "114",
-         "Kind": "string"
+         "$ref": "105"
         },
         "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "115",
+       "$id": "107",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "116",
+        "$id": "108",
         "Kind": "dict",
         "KeyType": {
-         "$id": "117",
+         "$id": "109",
          "Kind": "string"
         },
         "ValueType": {
-         "$id": "118",
+         "$id": "110",
          "Kind": "float32"
         }
        },
@@ -905,71 +925,101 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/dictionary/float32",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "119",
+     "$id": "111",
      "Name": "put",
      "ResourceName": "Float32Value",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "108"
+       "$ref": "10"
       },
       {
-       "$id": "120",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
-       "Type": {
-        "$id": "121",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "122",
-         "Kind": "string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "123",
+       "$id": "112",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "124",
+        "$id": "113",
         "Kind": "dict",
         "KeyType": {
-         "$id": "125",
+         "$id": "114",
          "Kind": "string"
         },
         "ValueType": {
-         "$id": "126",
+         "$id": "115",
          "Kind": "float32"
         }
        },
        "Location": "Body",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "116",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "117",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "118",
+        "Type": {
+         "$ref": "117"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "119",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "120",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "121",
+        "Type": {
+         "$ref": "120"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "127",
+       "$id": "122",
        "StatusCodes": [
         204
        ],
@@ -979,8 +1029,8 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
      "Path": "/type/dictionary/float32",
      "RequestMediaTypes": [
       "application/json"
@@ -991,94 +1041,74 @@
     }
    ],
    "Protocol": {
-    "$id": "128"
+    "$id": "123"
    },
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "108"
+     "$ref": "10"
     }
    ]
   },
   {
-   "$id": "129",
+   "$id": "124",
    "Name": "DatetimeValue",
    "Description": "Dictionary of datetime values",
    "Operations": [
     {
-     "$id": "130",
+     "$id": "125",
      "Name": "get",
      "ResourceName": "DatetimeValue",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "131",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
+       "$ref": "10"
+      },
+      {
+       "$id": "126",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$id": "132",
+        "$id": "127",
         "Kind": "string"
        },
-       "Location": "Uri",
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": true,
+       "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
+       "Kind": "Constant",
        "DefaultValue": {
-        "$id": "133",
+        "$id": "128",
         "Type": {
-         "$id": "134",
-         "Kind": "string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "135",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "136",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "137",
-         "Kind": "string"
+         "$ref": "127"
         },
         "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "138",
+       "$id": "129",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "139",
+        "$id": "130",
         "Kind": "dict",
         "KeyType": {
-         "$id": "140",
+         "$id": "131",
          "Kind": "string"
         },
         "ValueType": {
-         "$id": "141",
+         "$id": "132",
          "Kind": "utcDateTime",
          "Encode": "rfc3339",
          "WireType": {
-          "$id": "142",
+          "$id": "133",
           "Kind": "string"
          }
         }
@@ -1093,76 +1123,106 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/dictionary/datetime",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "143",
+     "$id": "134",
      "Name": "put",
      "ResourceName": "DatetimeValue",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "131"
+       "$ref": "10"
       },
       {
-       "$id": "144",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
-       "Type": {
-        "$id": "145",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "146",
-         "Kind": "string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "147",
+       "$id": "135",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "148",
+        "$id": "136",
         "Kind": "dict",
         "KeyType": {
-         "$id": "149",
+         "$id": "137",
          "Kind": "string"
         },
         "ValueType": {
-         "$id": "150",
+         "$id": "138",
          "Kind": "utcDateTime",
          "Encode": "rfc3339",
          "WireType": {
-          "$id": "151",
+          "$id": "139",
           "Kind": "string"
          }
         }
        },
        "Location": "Body",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "140",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "141",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "142",
+        "Type": {
+         "$ref": "141"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "143",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "144",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "145",
+        "Type": {
+         "$ref": "144"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "152",
+       "$id": "146",
        "StatusCodes": [
         204
        ],
@@ -1172,8 +1232,8 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
      "Path": "/type/dictionary/datetime",
      "RequestMediaTypes": [
       "application/json"
@@ -1184,94 +1244,74 @@
     }
    ],
    "Protocol": {
-    "$id": "153"
+    "$id": "147"
    },
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "131"
+     "$ref": "10"
     }
    ]
   },
   {
-   "$id": "154",
+   "$id": "148",
    "Name": "DurationValue",
    "Description": "Dictionary of duration values",
    "Operations": [
     {
-     "$id": "155",
+     "$id": "149",
      "Name": "get",
      "ResourceName": "DurationValue",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "156",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
+       "$ref": "10"
+      },
+      {
+       "$id": "150",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$id": "157",
+        "$id": "151",
         "Kind": "string"
        },
-       "Location": "Uri",
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": true,
+       "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
+       "Kind": "Constant",
        "DefaultValue": {
-        "$id": "158",
+        "$id": "152",
         "Type": {
-         "$id": "159",
-         "Kind": "string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "160",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "161",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "162",
-         "Kind": "string"
+         "$ref": "151"
         },
         "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "163",
+       "$id": "153",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "164",
+        "$id": "154",
         "Kind": "dict",
         "KeyType": {
-         "$id": "165",
+         "$id": "155",
          "Kind": "string"
         },
         "ValueType": {
-         "$id": "166",
+         "$id": "156",
          "Kind": "duration",
          "Encode": "ISO8601",
          "WireType": {
-          "$id": "167",
+          "$id": "157",
           "Kind": "string"
          }
         }
@@ -1286,181 +1326,191 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/dictionary/duration",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "168",
+     "$id": "158",
      "Name": "put",
      "ResourceName": "DurationValue",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "156"
+       "$ref": "10"
       },
       {
-       "$id": "169",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
-       "Type": {
-        "$id": "170",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "171",
-         "Kind": "string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "172",
+       "$id": "159",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "173",
+        "$id": "160",
         "Kind": "dict",
         "KeyType": {
-         "$id": "174",
+         "$id": "161",
          "Kind": "string"
         },
         "ValueType": {
-         "$id": "175",
+         "$id": "162",
          "Kind": "duration",
          "Encode": "ISO8601",
          "WireType": {
-          "$id": "176",
+          "$id": "163",
           "Kind": "string"
          }
         }
        },
        "Location": "Body",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "164",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "165",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "166",
+        "Type": {
+         "$ref": "165"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "167",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "168",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "169",
+        "Type": {
+         "$ref": "168"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "170",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/dictionary/duration",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "171"
+   },
+   "Parent": "DictionaryClient",
+   "Parameters": [
+    {
+     "$ref": "10"
+    }
+   ]
+  },
+  {
+   "$id": "172",
+   "Name": "UnknownValue",
+   "Description": "Dictionary of unknown values",
+   "Operations": [
+    {
+     "$id": "173",
+     "Name": "get",
+     "ResourceName": "UnknownValue",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "10"
+      },
+      {
+       "$id": "174",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "175",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "176",
+        "Type": {
+         "$ref": "175"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
        "$id": "177",
        "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "PUT",
-     "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
-     "Path": "/type/dictionary/duration",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    }
-   ],
-   "Protocol": {
-    "$id": "178"
-   },
-   "Parent": "DictionaryClient",
-   "Parameters": [
-    {
-     "$ref": "156"
-    }
-   ]
-  },
-  {
-   "$id": "179",
-   "Name": "UnknownValue",
-   "Description": "Dictionary of unknown values",
-   "Operations": [
-    {
-     "$id": "180",
-     "Name": "get",
-     "ResourceName": "UnknownValue",
-     "Accessibility": "public",
-     "Parameters": [
-      {
-       "$id": "181",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "182",
-        "Kind": "string"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "183",
-        "Type": {
-         "$id": "184",
-         "Kind": "string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "185",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "186",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "187",
-         "Kind": "string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "188",
-       "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "189",
+        "$id": "178",
         "Kind": "dict",
         "KeyType": {
-         "$id": "190",
+         "$id": "179",
          "Kind": "string"
         },
         "ValueType": {
-         "$id": "191",
+         "$id": "180",
          "Kind": "any"
         }
        },
@@ -1474,71 +1524,101 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/dictionary/unknown",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "192",
+     "$id": "181",
      "Name": "put",
      "ResourceName": "UnknownValue",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "181"
+       "$ref": "10"
       },
       {
-       "$id": "193",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
-       "Type": {
-        "$id": "194",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "195",
-         "Kind": "string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "196",
+       "$id": "182",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "197",
+        "$id": "183",
         "Kind": "dict",
         "KeyType": {
-         "$id": "198",
+         "$id": "184",
          "Kind": "string"
         },
         "ValueType": {
-         "$id": "199",
+         "$id": "185",
          "Kind": "any"
         }
        },
        "Location": "Body",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "186",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "187",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "188",
+        "Type": {
+         "$ref": "187"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "189",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "190",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "191",
+        "Type": {
+         "$ref": "190"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "200",
+       "$id": "192",
        "StatusCodes": [
         204
        ],
@@ -1548,8 +1628,8 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
      "Path": "/type/dictionary/unknown",
      "RequestMediaTypes": [
       "application/json"
@@ -1560,86 +1640,66 @@
     }
    ],
    "Protocol": {
-    "$id": "201"
+    "$id": "193"
    },
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "181"
+     "$ref": "10"
     }
    ]
   },
   {
-   "$id": "202",
+   "$id": "194",
    "Name": "ModelValue",
    "Description": "Dictionary of model values",
    "Operations": [
     {
-     "$id": "203",
+     "$id": "195",
      "Name": "get",
      "ResourceName": "ModelValue",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "204",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
+       "$ref": "10"
+      },
+      {
+       "$id": "196",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$id": "205",
+        "$id": "197",
         "Kind": "string"
        },
-       "Location": "Uri",
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": true,
+       "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
+       "Kind": "Constant",
        "DefaultValue": {
-        "$id": "206",
+        "$id": "198",
         "Type": {
-         "$id": "207",
-         "Kind": "string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "208",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "209",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "210",
-         "Kind": "string"
+         "$ref": "197"
         },
         "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "211",
+       "$id": "199",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "212",
+        "$id": "200",
         "Kind": "dict",
         "KeyType": {
-         "$id": "213",
+         "$id": "201",
          "Kind": "string"
         },
         "ValueType": {
@@ -1656,52 +1716,30 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/dictionary/model",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "214",
+     "$id": "202",
      "Name": "put",
      "ResourceName": "ModelValue",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "204"
+       "$ref": "10"
       },
       {
-       "$id": "215",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
-       "Type": {
-        "$id": "216",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "217",
-         "Kind": "string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "218",
+       "$id": "203",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "219",
+        "$id": "204",
         "Kind": "dict",
         "KeyType": {
-         "$id": "220",
+         "$id": "205",
          "Kind": "string"
         },
         "ValueType": {
@@ -1709,17 +1747,69 @@
         }
        },
        "Location": "Body",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "206",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "207",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "208",
+        "Type": {
+         "$ref": "207"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "209",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "210",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "211",
+        "Type": {
+         "$ref": "210"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "221",
+       "$id": "212",
        "StatusCodes": [
         204
        ],
@@ -1729,8 +1819,8 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
      "Path": "/type/dictionary/model",
      "RequestMediaTypes": [
       "application/json"
@@ -1741,51 +1831,145 @@
     }
    ],
    "Protocol": {
-    "$id": "222"
+    "$id": "213"
    },
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "204"
+     "$ref": "10"
     }
    ]
   },
   {
-   "$id": "223",
+   "$id": "214",
    "Name": "RecursiveModelValue",
    "Description": "Dictionary of model values",
    "Operations": [
     {
-     "$id": "224",
+     "$id": "215",
      "Name": "get",
      "ResourceName": "RecursiveModelValue",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "225",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
+       "$ref": "10"
+      },
+      {
+       "$id": "216",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$id": "226",
+        "$id": "217",
         "Kind": "string"
        },
-       "Location": "Uri",
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": true,
+       "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
+       "Kind": "Constant",
        "DefaultValue": {
-        "$id": "227",
+        "$id": "218",
         "Type": {
-         "$id": "228",
+         "$ref": "217"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "219",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "220",
+        "Kind": "dict",
+        "KeyType": {
+         "$id": "221",
          "Kind": "string"
         },
-        "Value": "http://localhost:3000"
+        "ValueType": {
+         "$ref": "2"
+        }
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/dictionary/model/recursive",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "222",
+     "Name": "put",
+     "ResourceName": "RecursiveModelValue",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "10"
+      },
+      {
+       "$id": "223",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$id": "224",
+        "Kind": "dict",
+        "KeyType": {
+         "$id": "225",
+         "Kind": "string"
+        },
+        "ValueType": {
+         "$ref": "2"
+        }
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "226",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "227",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "228",
+        "Type": {
+         "$ref": "227"
+        },
+        "Value": "application/json"
        }
       },
       {
@@ -1794,91 +1978,106 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "230",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "231",
-         "Kind": "string"
-        },
-        "Value": "application/json"
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "231",
+        "Type": {
+         "$ref": "230"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
        "$id": "232",
        "StatusCodes": [
-        200
+        204
        ],
-       "BodyType": {
-        "$id": "233",
-        "Kind": "dict",
-        "KeyType": {
-         "$id": "234",
-         "Kind": "string"
-        },
-        "ValueType": {
-         "$ref": "2"
-        }
-       },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
+       "IsErrorResponse": false
       }
      ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
      "Path": "/type/dictionary/model/recursive",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
-    },
+    }
+   ],
+   "Protocol": {
+    "$id": "233"
+   },
+   "Parent": "DictionaryClient",
+   "Parameters": [
+    {
+     "$ref": "10"
+    }
+   ]
+  },
+  {
+   "$id": "234",
+   "Name": "NullableFloatValue",
+   "Description": "Dictionary of nullable float values",
+   "Operations": [
     {
      "$id": "235",
-     "Name": "put",
-     "ResourceName": "RecursiveModelValue",
+     "Name": "get",
+     "ResourceName": "NullableFloatValue",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "225"
+       "$ref": "10"
       },
       {
        "$id": "236",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "237",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "238",
-         "Kind": "string"
-        },
-        "Value": "application/json"
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
        "IsRequired": true,
-       "Kind": "Constant"
-      },
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "238",
+        "Type": {
+         "$ref": "237"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
       {
        "$id": "239",
-       "Name": "body",
-       "NameInRequest": "body",
-       "Type": {
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
         "$id": "240",
         "Kind": "dict",
         "KeyType": {
@@ -1886,129 +2085,10 @@
          "Kind": "string"
         },
         "ValueType": {
-         "$ref": "2"
-        }
-       },
-       "Location": "Body",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "242",
-       "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "PUT",
-     "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
-     "Path": "/type/dictionary/model/recursive",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    }
-   ],
-   "Protocol": {
-    "$id": "243"
-   },
-   "Parent": "DictionaryClient",
-   "Parameters": [
-    {
-     "$ref": "225"
-    }
-   ]
-  },
-  {
-   "$id": "244",
-   "Name": "NullableFloatValue",
-   "Description": "Dictionary of nullable float values",
-   "Operations": [
-    {
-     "$id": "245",
-     "Name": "get",
-     "ResourceName": "NullableFloatValue",
-     "Accessibility": "public",
-     "Parameters": [
-      {
-       "$id": "246",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "247",
-        "Kind": "string"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "248",
-        "Type": {
-         "$id": "249",
-         "Kind": "string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "250",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "251",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "252",
-         "Kind": "string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "253",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$id": "254",
-        "Kind": "dict",
-        "KeyType": {
-         "$id": "255",
-         "Kind": "string"
-        },
-        "ValueType": {
-         "$id": "256",
+         "$id": "242",
          "Kind": "nullable",
          "Type": {
-          "$id": "257",
+          "$id": "243",
           "Kind": "float32"
          }
         }
@@ -2023,75 +2103,105 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/dictionary/nullable-float",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "258",
+     "$id": "244",
      "Name": "put",
      "ResourceName": "NullableFloatValue",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "246"
+       "$ref": "10"
       },
       {
-       "$id": "259",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
-       "Type": {
-        "$id": "260",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "261",
-         "Kind": "string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "262",
+       "$id": "245",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "263",
+        "$id": "246",
         "Kind": "dict",
         "KeyType": {
-         "$id": "264",
+         "$id": "247",
          "Kind": "string"
         },
         "ValueType": {
-         "$id": "265",
+         "$id": "248",
          "Kind": "nullable",
          "Type": {
-          "$id": "266",
+          "$id": "249",
           "Kind": "float32"
          }
         }
        },
        "Location": "Body",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "250",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "251",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "252",
+        "Type": {
+         "$ref": "251"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "253",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "254",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "255",
+        "Type": {
+         "$ref": "254"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "267",
+       "$id": "256",
        "StatusCodes": [
         204
        ],
@@ -2101,8 +2211,8 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
      "Path": "/type/dictionary/nullable-float",
      "RequestMediaTypes": [
       "application/json"
@@ -2113,12 +2223,12 @@
     }
    ],
    "Protocol": {
-    "$id": "268"
+    "$id": "257"
    },
    "Parent": "DictionaryClient",
    "Parameters": [
     {
-     "$ref": "246"
+     "$ref": "10"
     }
    ]
   }

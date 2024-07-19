@@ -37,7 +37,7 @@ namespace Parameters.Spread
         /// <summary> Initializes a new instance of Model. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         internal Model(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -54,9 +54,9 @@ namespace Parameters.Spread
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            SpreadAsRequestBodyRequest1 spreadAsRequestBodyRequest1 = new SpreadAsRequestBodyRequest1(name, null);
+            BodyParameter bodyParameter = new BodyParameter(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadAsRequestBodyAsync(spreadAsRequestBodyRequest1.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadAsRequestBodyAsync(bodyParameter.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -69,9 +69,9 @@ namespace Parameters.Spread
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            SpreadAsRequestBodyRequest1 spreadAsRequestBodyRequest1 = new SpreadAsRequestBodyRequest1(name, null);
+            BodyParameter bodyParameter = new BodyParameter(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadAsRequestBody(spreadAsRequestBodyRequest1.ToRequestContent(), context);
+            Response response = SpreadAsRequestBody(bodyParameter.ToRequestContent(), context);
             return response;
         }
 
@@ -479,9 +479,9 @@ namespace Parameters.Spread
             Argument.AssertNotNull(testHeader, nameof(testHeader));
             Argument.AssertNotNull(prop, nameof(prop));
 
-            SpreadCompositeRequestMixRequest spreadCompositeRequestMixRequest = new SpreadCompositeRequestMixRequest(prop, null);
+            CompositeRequestMix compositeRequestMix = new CompositeRequestMix(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadCompositeRequestMixAsync(name, testHeader, spreadCompositeRequestMixRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadCompositeRequestMixAsync(name, testHeader, compositeRequestMix.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -499,9 +499,9 @@ namespace Parameters.Spread
             Argument.AssertNotNull(testHeader, nameof(testHeader));
             Argument.AssertNotNull(prop, nameof(prop));
 
-            SpreadCompositeRequestMixRequest spreadCompositeRequestMixRequest = new SpreadCompositeRequestMixRequest(prop, null);
+            CompositeRequestMix compositeRequestMix = new CompositeRequestMix(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadCompositeRequestMix(name, testHeader, spreadCompositeRequestMixRequest.ToRequestContent(), context);
+            Response response = SpreadCompositeRequestMix(name, testHeader, compositeRequestMix.ToRequestContent(), context);
             return response;
         }
 
@@ -602,6 +602,7 @@ namespace Parameters.Spread
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/spread/model/request-body", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -616,6 +617,7 @@ namespace Parameters.Spread
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/spread/model/composite-request-only-with-body", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -632,6 +634,7 @@ namespace Parameters.Spread
             uri.AppendPath(name, true);
             request.Uri = uri;
             request.Headers.Add("test-header", testHeader);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -646,6 +649,7 @@ namespace Parameters.Spread
             uri.AppendPath(name, true);
             request.Uri = uri;
             request.Headers.Add("test-header", testHeader);
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -662,6 +666,7 @@ namespace Parameters.Spread
             uri.AppendPath(name, true);
             request.Uri = uri;
             request.Headers.Add("test-header", testHeader);
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

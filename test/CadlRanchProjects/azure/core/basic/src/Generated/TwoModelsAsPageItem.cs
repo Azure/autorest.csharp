@@ -37,7 +37,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <summary> Initializes a new instance of TwoModelsAsPageItem. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="apiVersion"> The API version to use for this operation. </param>
         internal TwoModelsAsPageItem(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {

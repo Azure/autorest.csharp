@@ -27,7 +27,7 @@ namespace Scm._Type.Property.Optionality
 
         /// <summary> Initializes a new instance of UnionIntLiteral. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         internal UnionIntLiteral(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -358,6 +358,7 @@ namespace Scm._Type.Property.Optionality
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/optional/union/int/literal/all", false);
             request.Uri = uri.ToUri();
+            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -374,6 +375,7 @@ namespace Scm._Type.Property.Optionality
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/optional/union/int/literal/default", false);
             request.Uri = uri.ToUri();
+            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

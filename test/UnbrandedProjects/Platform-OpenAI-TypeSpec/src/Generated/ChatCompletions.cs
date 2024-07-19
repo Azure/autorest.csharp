@@ -33,7 +33,7 @@ namespace OpenAI
         /// <summary> Initializes a new instance of ChatCompletions. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> OpenAI Endpoint. </param>
         internal ChatCompletions(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -116,11 +116,11 @@ namespace OpenAI
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="messages"/> is null. </exception>
-        public virtual async Task<ClientResult<CreateChatCompletionResponse>> CreateAsync(CreateChatCompletionRequestModel model, IEnumerable<ChatCompletionRequestMessage> messages, IEnumerable<ChatCompletionFunctions> functions = null, BinaryData functionCall = null, double? temperature = null, double? topP = null, long? n = null, long? maxTokens = null, BinaryData stop = null, double? presencePenalty = null, double? frequencyPenalty = null, IDictionary<string, long> logitBias = null, string user = null, bool? stream = null)
+        public virtual async Task<ClientResult<CreateChatCompletionResponse>> CreateAsync(CreateRequestModel1 model, IEnumerable<ChatCompletionRequestMessage> messages, IEnumerable<ChatCompletionFunctions> functions = null, BinaryData functionCall = null, double? temperature = null, double? topP = null, long? n = null, long? maxTokens = null, BinaryData stop = null, double? presencePenalty = null, double? frequencyPenalty = null, IDictionary<string, long> logitBias = null, string user = null, bool? stream = null)
         {
             Argument.AssertNotNull(messages, nameof(messages));
 
-            AnonymousModel0 createContent = new AnonymousModel0(
+            CreateChatCompletionRequest createChatCompletionRequest = new CreateChatCompletionRequest(
                 model,
                 messages.ToList(),
                 functions?.ToList() as IList<ChatCompletionFunctions> ?? new ChangeTrackingList<ChatCompletionFunctions>(),
@@ -136,7 +136,7 @@ namespace OpenAI
                 user,
                 stream,
                 null);
-            ClientResult result = await CreateAsync(createContent.ToBinaryContent(), null).ConfigureAwait(false);
+            ClientResult result = await CreateAsync(createChatCompletionRequest.ToBinaryContent(), null).ConfigureAwait(false);
             return ClientResult.FromValue(CreateChatCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -215,11 +215,11 @@ namespace OpenAI
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="messages"/> is null. </exception>
-        public virtual ClientResult<CreateChatCompletionResponse> Create(CreateChatCompletionRequestModel model, IEnumerable<ChatCompletionRequestMessage> messages, IEnumerable<ChatCompletionFunctions> functions = null, BinaryData functionCall = null, double? temperature = null, double? topP = null, long? n = null, long? maxTokens = null, BinaryData stop = null, double? presencePenalty = null, double? frequencyPenalty = null, IDictionary<string, long> logitBias = null, string user = null, bool? stream = null)
+        public virtual ClientResult<CreateChatCompletionResponse> Create(CreateRequestModel1 model, IEnumerable<ChatCompletionRequestMessage> messages, IEnumerable<ChatCompletionFunctions> functions = null, BinaryData functionCall = null, double? temperature = null, double? topP = null, long? n = null, long? maxTokens = null, BinaryData stop = null, double? presencePenalty = null, double? frequencyPenalty = null, IDictionary<string, long> logitBias = null, string user = null, bool? stream = null)
         {
             Argument.AssertNotNull(messages, nameof(messages));
 
-            AnonymousModel0 createContent = new AnonymousModel0(
+            CreateChatCompletionRequest createChatCompletionRequest = new CreateChatCompletionRequest(
                 model,
                 messages.ToList(),
                 functions?.ToList() as IList<ChatCompletionFunctions> ?? new ChangeTrackingList<ChatCompletionFunctions>(),
@@ -235,7 +235,7 @@ namespace OpenAI
                 user,
                 stream,
                 null);
-            ClientResult result = Create(createContent.ToBinaryContent(), null);
+            ClientResult result = Create(createChatCompletionRequest.ToBinaryContent(), null);
             return ClientResult.FromValue(CreateChatCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -249,7 +249,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateAsync(CreateChatCompletionRequestModel,IEnumerable{ChatCompletionRequestMessage},IEnumerable{ChatCompletionFunctions},BinaryData,double?,double?,long?,long?,BinaryData,double?,double?,IDictionary{string,long},string,bool?)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateAsync(CreateRequestModel1,IEnumerable{ChatCompletionRequestMessage},IEnumerable{ChatCompletionFunctions},BinaryData,double?,double?,long?,long?,BinaryData,double?,double?,IDictionary{string,long},string,bool?)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -277,7 +277,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Create(CreateChatCompletionRequestModel,IEnumerable{ChatCompletionRequestMessage},IEnumerable{ChatCompletionFunctions},BinaryData,double?,double?,long?,long?,BinaryData,double?,double?,IDictionary{string,long},string,bool?)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Create(CreateRequestModel1,IEnumerable{ChatCompletionRequestMessage},IEnumerable{ChatCompletionFunctions},BinaryData,double?,double?,long?,long?,BinaryData,double?,double?,IDictionary{string,long},string,bool?)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

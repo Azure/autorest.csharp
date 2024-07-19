@@ -26,7 +26,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// <summary> Initializes a new instance of NestedProxyResourcesRestOperations. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="applicationId"> The application id to use for user agent. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> Azure Resource Manager url. </param>
         /// <param name="apiVersion"> The API version to use for this operation. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
         public NestedProxyResourcesRestOperations(HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
@@ -241,7 +241,7 @@ namespace _Azure.ResourceManager.Models.Resources
             }
         }
 
-        internal RequestUriBuilder CreateUpdateRequestUri(string subscriptionId, string resourceGroupName, string topLevelTrackedResourceName, string nextedProxyResourceName, NestedProxyResourcePatch patch)
+        internal RequestUriBuilder CreateUpdateRequestUri(string subscriptionId, string resourceGroupName, string topLevelTrackedResourceName, string nextedProxyResourceName, NestedProxyResourceData data)
         {
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
@@ -257,7 +257,7 @@ namespace _Azure.ResourceManager.Models.Resources
             return uri;
         }
 
-        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string topLevelTrackedResourceName, string nextedProxyResourceName, NestedProxyResourcePatch patch)
+        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string topLevelTrackedResourceName, string nextedProxyResourceName, NestedProxyResourceData data)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -277,7 +277,7 @@ namespace _Azure.ResourceManager.Models.Resources
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(patch, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(data, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -288,19 +288,19 @@ namespace _Azure.ResourceManager.Models.Resources
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
         /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
-        /// <param name="patch"> The resource properties to be updated. </param>
+        /// <param name="data"> The resource properties to be updated. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/>, <paramref name="nextedProxyResourceName"/> or <paramref name="patch"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/>, <paramref name="nextedProxyResourceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string topLevelTrackedResourceName, string nextedProxyResourceName, NestedProxyResourcePatch patch, CancellationToken cancellationToken = default)
+        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string topLevelTrackedResourceName, string nextedProxyResourceName, NestedProxyResourceData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(topLevelTrackedResourceName, nameof(topLevelTrackedResourceName));
             Argument.AssertNotNullOrEmpty(nextedProxyResourceName, nameof(nextedProxyResourceName));
-            Argument.AssertNotNull(patch, nameof(patch));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, patch);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -317,19 +317,19 @@ namespace _Azure.ResourceManager.Models.Resources
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
         /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
-        /// <param name="patch"> The resource properties to be updated. </param>
+        /// <param name="data"> The resource properties to be updated. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/>, <paramref name="nextedProxyResourceName"/> or <paramref name="patch"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/>, <paramref name="nextedProxyResourceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response Update(string subscriptionId, string resourceGroupName, string topLevelTrackedResourceName, string nextedProxyResourceName, NestedProxyResourcePatch patch, CancellationToken cancellationToken = default)
+        public Response Update(string subscriptionId, string resourceGroupName, string topLevelTrackedResourceName, string nextedProxyResourceName, NestedProxyResourceData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(topLevelTrackedResourceName, nameof(topLevelTrackedResourceName));
             Argument.AssertNotNullOrEmpty(nextedProxyResourceName, nameof(nextedProxyResourceName));
-            Argument.AssertNotNull(patch, nameof(patch));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, patch);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, data);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

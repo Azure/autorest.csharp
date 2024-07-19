@@ -41,7 +41,7 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="tokenCredential"> The token credential to copy. </param>
-        /// <param name="endpoint"> Endpoint Service. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal HelloDemo2(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, TokenCredential tokenCredential, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -467,7 +467,7 @@ namespace Azure.NewProject.TypeSpec
             request.Uri = uri;
             request.Headers.Add("p1", p1);
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("content-type", "text/plain");
+            request.Headers.Add("Content-Type", "text/plain");
             request.Content = content;
             return message;
         }

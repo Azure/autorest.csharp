@@ -23,7 +23,7 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "5",
-        "Kind": "uri"
+        "Kind": "url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -34,11 +34,36 @@
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Client"
+      },
+      {
+       "$id": "6",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "7",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "8",
+        "Type": {
+         "$ref": "7"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "6",
+       "$id": "9",
        "StatusCodes": [
         200
        ],
@@ -56,7 +81,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "7",
+     "$id": "10",
      "Name": "withQueryApiVersion",
      "ResourceName": "NotVersioned",
      "Accessibility": "public",
@@ -65,25 +90,52 @@
        "$ref": "4"
       },
       {
-       "$id": "8",
+       "$id": "11",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Type": {
-        "$id": "9",
+        "$id": "12",
         "Kind": "string"
        },
        "Location": "Query",
+       "IsRequired": true,
        "IsApiVersion": true,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "13",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "14",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "15",
+        "Type": {
+         "$ref": "14"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "10",
+       "$id": "16",
        "StatusCodes": [
         200
        ],
@@ -101,7 +153,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "11",
+     "$id": "17",
      "Name": "withPathApiVersion",
      "ResourceName": "NotVersioned",
      "Accessibility": "public",
@@ -110,25 +162,52 @@
        "$ref": "4"
       },
       {
-       "$id": "12",
+       "$id": "18",
        "Name": "apiVersion",
        "NameInRequest": "apiVersion",
        "Type": {
-        "$id": "13",
+        "$id": "19",
         "Kind": "string"
        },
        "Location": "Path",
+       "IsRequired": true,
        "IsApiVersion": true,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "20",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "21",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "22",
+        "Type": {
+         "$ref": "21"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "14",
+       "$id": "23",
        "StatusCodes": [
         200
        ],
@@ -147,7 +226,7 @@
     }
    ],
    "Protocol": {
-    "$id": "15"
+    "$id": "24"
    },
    "Parameters": [
     {

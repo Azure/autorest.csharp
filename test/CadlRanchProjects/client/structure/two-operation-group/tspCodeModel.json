@@ -43,6 +43,7 @@
   {
    "$id": "8",
    "Name": "TwoOperationGroupClient",
+   "Description": "",
    "Operations": [],
    "Protocol": {
     "$id": "9"
@@ -55,7 +56,7 @@
      "Description": "Need to be set as 'http://localhost:3000' in client.",
      "Type": {
       "$id": "11",
-      "Kind": "uri"
+      "Kind": "url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -90,6 +91,7 @@
   {
    "$id": "13",
    "Name": "Group1",
+   "Description": "",
    "Operations": [
     {
      "$id": "14",
@@ -98,33 +100,20 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "15",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Need to be set as 'http://localhost:3000' in client.",
-       "Type": {
-        "$id": "16",
-        "Kind": "uri"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
+       "$ref": "10"
       },
       {
-       "$id": "17",
-       "Name": "client",
-       "NameInRequest": "client",
-       "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
+       "$ref": "12"
+      },
+      {
+       "$id": "15",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$ref": "2"
+        "$id": "16",
+        "Kind": "string"
        },
-       "Location": "Uri",
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
@@ -132,7 +121,14 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client"
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "17",
+        "Type": {
+         "$ref": "16"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
@@ -161,15 +157,40 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "15"
+       "$ref": "10"
       },
       {
-       "$ref": "17"
+       "$ref": "12"
+      },
+      {
+       "$id": "20",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "21",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "22",
+        "Type": {
+         "$ref": "21"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "20",
+       "$id": "23",
        "StatusCodes": [
         204
        ],
@@ -187,21 +208,46 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "21",
+     "$id": "24",
      "Name": "four",
      "ResourceName": "Group1",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "15"
+       "$ref": "10"
       },
       {
-       "$ref": "17"
+       "$ref": "12"
+      },
+      {
+       "$id": "25",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "26",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "27",
+        "Type": {
+         "$ref": "26"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "22",
+       "$id": "28",
        "StatusCodes": [
         204
        ],
@@ -220,56 +266,44 @@
     }
    ],
    "Protocol": {
-    "$id": "23"
+    "$id": "29"
    },
    "Parent": "TwoOperationGroupClient",
    "Parameters": [
     {
-     "$ref": "15"
+     "$ref": "10"
     },
     {
-     "$ref": "17"
+     "$ref": "12"
     }
    ]
   },
   {
-   "$id": "24",
+   "$id": "30",
    "Name": "Group2",
+   "Description": "",
    "Operations": [
     {
-     "$id": "25",
+     "$id": "31",
      "Name": "two",
      "ResourceName": "Group2",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "26",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Need to be set as 'http://localhost:3000' in client.",
-       "Type": {
-        "$id": "27",
-        "Kind": "uri"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
+       "$ref": "10"
       },
       {
-       "$id": "28",
-       "Name": "client",
-       "NameInRequest": "client",
-       "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
+       "$ref": "12"
+      },
+      {
+       "$id": "32",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$ref": "2"
+        "$id": "33",
+        "Kind": "string"
        },
-       "Location": "Uri",
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
@@ -277,12 +311,19 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client"
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "34",
+        "Type": {
+         "$ref": "33"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "29",
+       "$id": "35",
        "StatusCodes": [
         204
        ],
@@ -300,21 +341,46 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "30",
+     "$id": "36",
      "Name": "five",
      "ResourceName": "Group2",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "10"
       },
       {
-       "$ref": "28"
+       "$ref": "12"
+      },
+      {
+       "$id": "37",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "38",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "39",
+        "Type": {
+         "$ref": "38"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "31",
+       "$id": "40",
        "StatusCodes": [
         204
        ],
@@ -332,21 +398,46 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "32",
+     "$id": "41",
      "Name": "six",
      "ResourceName": "Group2",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "10"
       },
       {
-       "$ref": "28"
+       "$ref": "12"
+      },
+      {
+       "$id": "42",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "43",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "44",
+        "Type": {
+         "$ref": "43"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "33",
+       "$id": "45",
        "StatusCodes": [
         204
        ],
@@ -365,15 +456,15 @@
     }
    ],
    "Protocol": {
-    "$id": "34"
+    "$id": "46"
    },
    "Parent": "TwoOperationGroupClient",
    "Parameters": [
     {
-     "$ref": "26"
+     "$ref": "10"
     },
     {
-     "$ref": "28"
+     "$ref": "12"
     }
    ]
   }

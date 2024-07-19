@@ -34,14 +34,14 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Initializes a new instance of ConvenienceInCadlClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> Service endpoint. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ConvenienceInCadlClient(Uri endpoint) : this(endpoint, new ConvenienceInCadlClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ConvenienceInCadlClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> Service endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ConvenienceInCadlClient(Uri endpoint, ConvenienceInCadlClientOptions options)
@@ -2166,6 +2166,7 @@ namespace ConvenienceInCadl
                 uri.AppendQuery("optional", optional.Value, true);
             }
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -2193,6 +2194,7 @@ namespace ConvenienceInCadl
             uri.Reset(_endpoint);
             uri.AppendPath("/noConvenienceRequiredBody", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -2207,6 +2209,7 @@ namespace ConvenienceInCadl
             uri.Reset(_endpoint);
             uri.AppendPath("/noConvenienceOptionalBody", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -2260,6 +2263,7 @@ namespace ConvenienceInCadl
             uri.Reset(_endpoint);
             uri.AppendPath("/convenienceShouldNotGenerate", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2272,6 +2276,7 @@ namespace ConvenienceInCadl
             uri.Reset(_endpoint);
             uri.AppendPath("/protocolShouldNotGenerateConvenience", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2315,6 +2320,7 @@ namespace ConvenienceInCadl
             uri.Reset(_endpoint);
             uri.AppendPath("/protocolOptionalModel", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -2329,6 +2335,7 @@ namespace ConvenienceInCadl
             uri.Reset(_endpoint);
             uri.AppendPath("/protocolRequiredModel", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -2405,6 +2412,7 @@ namespace ConvenienceInCadl
             uri.Reset(_endpoint);
             uri.AppendPath("/convenienceOptionalModelWithOptional", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -2419,6 +2427,7 @@ namespace ConvenienceInCadl
             uri.Reset(_endpoint);
             uri.AppendPath("/convenienceRequiredModelWithOptional", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -2433,6 +2442,7 @@ namespace ConvenienceInCadl
             uri.Reset(_endpoint);
             uri.AppendPath("/convenienceOptionalModelWithRequired", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -2451,6 +2461,7 @@ namespace ConvenienceInCadl
                 uri.AppendQuery("optional", optional.Value, true);
             }
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

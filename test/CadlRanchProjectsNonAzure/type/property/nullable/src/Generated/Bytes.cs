@@ -27,7 +27,7 @@ namespace Scm._Type.Property.Nullable
 
         /// <summary> Initializes a new instance of Bytes. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         internal Bytes(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -290,6 +290,7 @@ namespace Scm._Type.Property.Nullable
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/nullable/bytes/non-null", false);
             request.Uri = uri.ToUri();
+            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/merge-patch+json");
             request.Content = content;
             message.Apply(options);
@@ -306,6 +307,7 @@ namespace Scm._Type.Property.Nullable
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/nullable/bytes/null", false);
             request.Uri = uri.ToUri();
+            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/merge-patch+json");
             request.Content = content;
             message.Apply(options);

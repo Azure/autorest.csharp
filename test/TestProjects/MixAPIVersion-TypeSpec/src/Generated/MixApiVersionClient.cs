@@ -12,7 +12,7 @@ using Azure.Core.Pipeline;
 namespace MixApiVersion
 {
     // Data plane generated client.
-    /// <summary> This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters. </summary>
+    /// <summary> The MixApiVersion service client. </summary>
     public partial class MixApiVersionClient
     {
         private readonly HttpPipeline _pipeline;
@@ -30,14 +30,14 @@ namespace MixApiVersion
         }
 
         /// <summary> Initializes a new instance of MixApiVersionClient. </summary>
-        /// <param name="endpoint"> Endpoint Service. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public MixApiVersionClient(Uri endpoint) : this(endpoint, new MixApiVersionClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of MixApiVersionClient. </summary>
-        /// <param name="endpoint"> Endpoint Service. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public MixApiVersionClient(Uri endpoint, MixApiVersionClientOptions options)

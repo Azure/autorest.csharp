@@ -32,7 +32,7 @@ namespace SpecialHeaders.ConditionalRequest
         }
 
         /// <summary> Initializes a new instance of ConditionalRequestClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ConditionalRequestClient(Uri endpoint, ConditionalRequestClientOptions options)
@@ -182,6 +182,7 @@ namespace SpecialHeaders.ConditionalRequest
             uri.Reset(_endpoint);
             uri.AppendPath("/special-headers/conditional-request/if-match", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (ifMatch != null)
             {
                 request.Headers.Add("If-Match", ifMatch.Value);
@@ -198,6 +199,7 @@ namespace SpecialHeaders.ConditionalRequest
             uri.Reset(_endpoint);
             uri.AppendPath("/special-headers/conditional-request/if-none-match", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (ifNoneMatch != null)
             {
                 request.Headers.Add("If-None-Match", ifNoneMatch.Value);

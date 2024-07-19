@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 namespace Encode.Duration
 {
     // Data plane generated client.
-    /// <summary> Test for encode decorator on duration. </summary>
+    /// <summary> The Duration service client. </summary>
     public partial class DurationClient
     {
         private readonly HttpPipeline _pipeline;
@@ -31,7 +31,7 @@ namespace Encode.Duration
         }
 
         /// <summary> Initializes a new instance of DurationClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public DurationClient(Uri endpoint, DurationClientOptions options)

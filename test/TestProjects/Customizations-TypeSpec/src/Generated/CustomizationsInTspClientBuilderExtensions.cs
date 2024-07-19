@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="CustomizationsInTspClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> Service endpoint. </param>
         public static IAzureClientBuilder<CustomizationsInTspClient, CustomizationsInTspClientOptions> AddCustomizationsInTspClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {

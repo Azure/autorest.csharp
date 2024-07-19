@@ -35,7 +35,7 @@ namespace Encode.Duration
         /// <summary> Initializes a new instance of Header. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         internal Header(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -443,6 +443,7 @@ namespace Encode.Duration
             uri.AppendPath("/encode/duration/header/default", false);
             request.Uri = uri;
             request.Headers.Add("duration", duration, "P");
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -456,6 +457,7 @@ namespace Encode.Duration
             uri.AppendPath("/encode/duration/header/iso8601", false);
             request.Uri = uri;
             request.Headers.Add("duration", duration, "P");
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -469,6 +471,7 @@ namespace Encode.Duration
             uri.AppendPath("/encode/duration/header/iso8601-array", false);
             request.Uri = uri;
             request.Headers.AddDelimited("duration", duration, ",", "P");
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -482,6 +485,7 @@ namespace Encode.Duration
             uri.AppendPath("/encode/duration/header/int32-seconds", false);
             request.Uri = uri;
             request.Headers.Add("duration", duration, "%s");
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -495,6 +499,7 @@ namespace Encode.Duration
             uri.AppendPath("/encode/duration/header/float-seconds", false);
             request.Uri = uri;
             request.Headers.Add("duration", duration, "s\\.FFF");
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -508,6 +513,7 @@ namespace Encode.Duration
             uri.AppendPath("/encode/duration/header/float64-seconds", false);
             request.Uri = uri;
             request.Headers.Add("duration", duration, "s\\.FFFFFF");
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

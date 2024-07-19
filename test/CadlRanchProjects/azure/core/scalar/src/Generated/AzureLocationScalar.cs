@@ -36,7 +36,7 @@ namespace _Specs_.Azure.Core.Scalar
         /// <summary> Initializes a new instance of AzureLocationScalar. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         internal AzureLocationScalar(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -494,6 +494,7 @@ namespace _Specs_.Azure.Core.Scalar
             uri.Reset(_endpoint);
             uri.AppendPath("/azure/core/scalar/azureLocation", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -524,6 +525,7 @@ namespace _Specs_.Azure.Core.Scalar
             uri.AppendPath("/azure/core/scalar/azureLocation/header", false);
             request.Uri = uri;
             request.Headers.Add("region", region);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -537,6 +539,7 @@ namespace _Specs_.Azure.Core.Scalar
             uri.AppendPath("/azure/core/scalar/azureLocation/query", false);
             uri.AppendQuery("region", region, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

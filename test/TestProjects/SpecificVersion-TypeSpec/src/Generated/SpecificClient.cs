@@ -31,14 +31,14 @@ namespace TypeSpec.Versioning.Specific
         }
 
         /// <summary> Initializes a new instance of SpecificClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> Service endpoint. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SpecificClient(Uri endpoint) : this(endpoint, new SpecificClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of SpecificClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> Service endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SpecificClient(Uri endpoint, SpecificClientOptions options)
@@ -56,7 +56,7 @@ namespace TypeSpec.Versioning.Specific
         /// <summary> Initializes a new instance of Resource. </summary>
         public virtual Resource GetResourceClient()
         {
-            return Volatile.Read(ref _cachedResource) ?? Interlocked.CompareExchange(ref _cachedResource, new Resource(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedResource;
+            return Volatile.Read(ref _cachedResource) ?? Interlocked.CompareExchange(ref _cachedResource, new Resource(ClientDiagnostics, _pipeline), null) ?? _cachedResource;
         }
 
         /// <summary> Initializes a new instance of VersioningOp. </summary>

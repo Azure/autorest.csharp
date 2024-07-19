@@ -30,14 +30,14 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary> Initializes a new instance of AuthoringTypeSpecClient. </summary>
-        /// <param name="endpoint"> Language Service. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public AuthoringTypeSpecClient(Uri endpoint) : this(endpoint, new AuthoringTypeSpecClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of AuthoringTypeSpecClient. </summary>
-        /// <param name="endpoint"> Language Service. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public AuthoringTypeSpecClient(Uri endpoint, AuthoringTypeSpecClientOptions options)

@@ -35,7 +35,7 @@ namespace Parameters.CollectionFormat
         /// <summary> Initializes a new instance of Query. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         internal Query(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -409,6 +409,7 @@ namespace Parameters.CollectionFormat
                 }
             }
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -425,6 +426,7 @@ namespace Parameters.CollectionFormat
                 uri.AppendQueryDelimited("colors", colors, " ", true);
             }
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -441,6 +443,7 @@ namespace Parameters.CollectionFormat
                 uri.AppendQueryDelimited("colors", colors, "\t", true);
             }
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -457,6 +460,7 @@ namespace Parameters.CollectionFormat
                 uri.AppendQueryDelimited("colors", colors, "|", true);
             }
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -473,6 +477,7 @@ namespace Parameters.CollectionFormat
                 uri.AppendQueryDelimited("colors", colors, ",", true);
             }
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

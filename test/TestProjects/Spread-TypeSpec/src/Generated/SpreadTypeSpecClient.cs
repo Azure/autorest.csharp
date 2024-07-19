@@ -36,14 +36,14 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> Initializes a new instance of SpreadTypeSpecClient. </summary>
-        /// <param name="endpoint"> Endpoint Service. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SpreadTypeSpecClient(Uri endpoint) : this(endpoint, new SpreadTypeSpecClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of SpreadTypeSpecClient. </summary>
-        /// <param name="endpoint"> Endpoint Service. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SpreadTypeSpecClient(Uri endpoint, SpreadTypeSpecClientOptions options)
@@ -66,9 +66,9 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            SpreadModelRequest spreadModelRequest = new SpreadModelRequest(name, age, null);
+            Thing thing = new Thing(name, age, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadModelAsync(spreadModelRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadModelAsync(thing.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -82,9 +82,9 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            SpreadModelRequest spreadModelRequest = new SpreadModelRequest(name, age, null);
+            Thing thing = new Thing(name, age, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadModel(spreadModelRequest.ToRequestContent(), context);
+            Response response = SpreadModel(thing.ToRequestContent(), context);
             return response;
         }
 
@@ -416,9 +416,9 @@ namespace SpreadTypeSpec
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(name, nameof(name));
 
-            SpreadAliasWithModelRequest spreadAliasWithModelRequest = new SpreadAliasWithModelRequest(name, age, null);
+            Thing thing = new Thing(name, age, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadAliasWithModelAsync(id, top, spreadAliasWithModelRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadAliasWithModelAsync(id, top, thing.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -436,9 +436,9 @@ namespace SpreadTypeSpec
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(name, nameof(name));
 
-            SpreadAliasWithModelRequest spreadAliasWithModelRequest = new SpreadAliasWithModelRequest(name, age, null);
+            Thing thing = new Thing(name, age, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadAliasWithModel(id, top, spreadAliasWithModelRequest.ToRequestContent(), context);
+            Response response = SpreadAliasWithModel(id, top, thing.ToRequestContent(), context);
             return response;
         }
 
@@ -919,6 +919,7 @@ namespace SpreadTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/spreadModel", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -933,6 +934,7 @@ namespace SpreadTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/spreadAlias", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -949,6 +951,7 @@ namespace SpreadTypeSpec
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("top", top);
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -965,6 +968,7 @@ namespace SpreadTypeSpec
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("top", top);
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -981,6 +985,7 @@ namespace SpreadTypeSpec
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("top", top);
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -997,6 +1002,7 @@ namespace SpreadTypeSpec
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("top", top);
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -1011,6 +1017,7 @@ namespace SpreadTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/spreadAliasWithCollections", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

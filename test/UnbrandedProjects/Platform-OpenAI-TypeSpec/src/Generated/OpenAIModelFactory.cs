@@ -12,241 +12,599 @@ namespace OpenAI.Models
     /// <summary> Model factory for models. </summary>
     public static partial class OpenAIModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="Models.CreateModerationRequest"/>. </summary>
-        /// <param name="input"> The input text to classify. </param>
+        /// <summary> Initializes a new instance of <see cref="Models.CreateTranscriptionRequest"/>. </summary>
+        /// <param name="file">
+        /// The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4,
+        /// mpeg, mpga, m4a, ogg, wav, or webm.
+        /// </param>
+        /// <param name="model"> ID of the model to use. Only `whisper-1` is currently available. </param>
+        /// <param name="prompt">
+        /// An optional text to guide the model's style or continue a previous audio segment. The
+        /// [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
+        /// </param>
+        /// <param name="responseFormat">
+        /// The format of the transcript output, in one of these options: json, text, srt, verbose_json, or
+        /// vtt.
+        /// </param>
+        /// <param name="temperature">
+        /// The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more
+        /// random, while lower values like 0.2 will make it more focused and deterministic. If set to 0,
+        /// the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to
+        /// automatically increase the temperature until certain thresholds are hit.
+        /// </param>
+        /// <param name="language">
+        /// The language of the input audio. Supplying the input language in
+        /// [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will improve accuracy
+        /// and latency.
+        /// </param>
+        /// <returns> A new <see cref="Models.CreateTranscriptionRequest"/> instance for mocking. </returns>
+        public static CreateTranscriptionRequest CreateTranscriptionRequest(Stream file = null, CreateTranscriptionRequestModel model = default, string prompt = null, CreateTranscriptionRequestResponseFormat? responseFormat = null, double? temperature = null, string language = null)
+        {
+            return new CreateTranscriptionRequest(
+                file,
+                model,
+                prompt,
+                responseFormat,
+                temperature,
+                language,
+                serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CreateTranscriptionResponse"/>. </summary>
+        /// <param name="text"></param>
+        /// <returns> A new <see cref="Models.CreateTranscriptionResponse"/> instance for mocking. </returns>
+        public static CreateTranscriptionResponse CreateTranscriptionResponse(string text = null)
+        {
+            return new CreateTranscriptionResponse(text, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CreateTranslationRequest"/>. </summary>
+        /// <param name="file">
+        /// The audio file object (not file name) to translate, in one of these formats: flac, mp3, mp4,
+        /// mpeg, mpga, m4a, ogg, wav, or webm.
+        /// </param>
+        /// <param name="model"> ID of the model to use. Only `whisper-1` is currently available. </param>
+        /// <param name="prompt">
+        /// An optional text to guide the model's style or continue a previous audio segment. The
+        /// [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
+        /// </param>
+        /// <param name="responseFormat">
+        /// The format of the transcript output, in one of these options: json, text, srt, verbose_json, or
+        /// vtt.
+        /// </param>
+        /// <param name="temperature">
+        /// The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more
+        /// random, while lower values like 0.2 will make it more focused and deterministic. If set to 0,
+        /// the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to
+        /// automatically increase the temperature until certain thresholds are hit.
+        /// </param>
+        /// <returns> A new <see cref="Models.CreateTranslationRequest"/> instance for mocking. </returns>
+        public static CreateTranslationRequest CreateTranslationRequest(Stream file = null, CreateTranslationRequestModel model = default, string prompt = null, CreateTranslationRequestResponseFormat? responseFormat = null, double? temperature = null)
+        {
+            return new CreateTranslationRequest(
+                file,
+                model,
+                prompt,
+                responseFormat,
+                temperature,
+                serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CreateTranslationResponse"/>. </summary>
+        /// <param name="text"></param>
+        /// <returns> A new <see cref="Models.CreateTranslationResponse"/> instance for mocking. </returns>
+        public static CreateTranslationResponse CreateTranslationResponse(string text = null)
+        {
+            return new CreateTranslationResponse(text, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ChatCompletionRequestMessage"/>. </summary>
+        /// <param name="role"> The role of the messages author. One of `system`, `user`, `assistant`, or `function`. </param>
+        /// <param name="content">
+        /// The contents of the message. `content` is required for all messages, and may be null for
+        /// assistant messages with function calls.
+        /// </param>
+        /// <param name="name">
+        /// The name of the author of this message. `name` is required if role is `function`, and it
+        /// should be the name of the function whose response is in the `content`. May contain a-z,
+        /// A-Z, 0-9, and underscores, with a maximum length of 64 characters.
+        /// </param>
+        /// <param name="functionCall"> The name and arguments of a function that should be called, as generated by the model. </param>
+        /// <returns> A new <see cref="Models.ChatCompletionRequestMessage"/> instance for mocking. </returns>
+        public static ChatCompletionRequestMessage ChatCompletionRequestMessage(ChatCompletionRequestMessageRole role = default, string content = null, string name = null, ChatCompletionRequestMessageFunctionCall functionCall = null)
+        {
+            return new ChatCompletionRequestMessage(role, content, name, functionCall, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ChatCompletionFunctions"/>. </summary>
+        /// <param name="name">
+        /// The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and
+        /// dashes, with a maximum length of 64.
+        /// </param>
+        /// <param name="description">
+        /// A description of what the function does, used by the model to choose when and how to call the
+        /// function.
+        /// </param>
+        /// <param name="parameters">
+        /// The parameters the functions accepts, described as a JSON Schema object. See the
+        /// [guide](/docs/guides/gpt/function-calling) for examples, and the
+        /// [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation
+        /// about the format.\n\nTo describe a function that accepts no parameters, provide the value
+        /// `{\"type\": \"object\", \"properties\": {}}`.
+        /// </param>
+        /// <returns> A new <see cref="Models.ChatCompletionFunctions"/> instance for mocking. </returns>
+        public static ChatCompletionFunctions ChatCompletionFunctions(string name = null, string description = null, ChatCompletionFunctionParameters parameters = null)
+        {
+            return new ChatCompletionFunctions(name, description, parameters, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CreateChatCompletionResponse"/>. </summary>
+        /// <param name="id"> A unique identifier for the chat completion. </param>
+        /// <param name="object"> The object type, which is always `chat.completion`. </param>
+        /// <param name="created"> The Unix timestamp (in seconds) of when the chat completion was created. </param>
+        /// <param name="model"> The model used for the chat completion. </param>
+        /// <param name="choices"> A list of chat completion choices. Can be more than one if `n` is greater than 1. </param>
+        /// <param name="usage"></param>
+        /// <returns> A new <see cref="Models.CreateChatCompletionResponse"/> instance for mocking. </returns>
+        public static CreateChatCompletionResponse CreateChatCompletionResponse(string id = null, string @object = null, DateTimeOffset created = default, string model = null, IEnumerable<CreateChatCompletionResponseChoice> choices = null, CompletionUsage usage = null)
+        {
+            choices ??= new List<CreateChatCompletionResponseChoice>();
+
+            return new CreateChatCompletionResponse(
+                id,
+                @object,
+                created,
+                model,
+                choices?.ToList(),
+                usage,
+                serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CreateChatCompletionResponseChoice"/>. </summary>
+        /// <param name="index"> The index of the choice in the list of choices. </param>
+        /// <param name="message"></param>
+        /// <param name="finishReason">
+        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
+        /// natural stop point or a provided stop sequence, `length` if the maximum number of tokens
+        /// specified in the request was reached, `content_filter` if the content was omitted due to
+        /// a flag from our content filters, or `function_call` if the model called a function.
+        /// </param>
+        /// <returns> A new <see cref="Models.CreateChatCompletionResponseChoice"/> instance for mocking. </returns>
+        public static CreateChatCompletionResponseChoice CreateChatCompletionResponseChoice(long index = default, ChatCompletionResponseMessage message = null, CreateChatCompletionResponseChoiceFinishReason finishReason = default)
+        {
+            return new CreateChatCompletionResponseChoice(index, message, finishReason, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ChatCompletionResponseMessage"/>. </summary>
+        /// <param name="role"> The role of the author of this message. </param>
+        /// <param name="content"> The contents of the message. </param>
+        /// <param name="functionCall"> The name and arguments of a function that should be called, as generated by the model. </param>
+        /// <returns> A new <see cref="Models.ChatCompletionResponseMessage"/> instance for mocking. </returns>
+        public static ChatCompletionResponseMessage ChatCompletionResponseMessage(ChatCompletionResponseMessageRole role = default, string content = null, ChatCompletionResponseMessageFunctionCall functionCall = null)
+        {
+            return new ChatCompletionResponseMessage(role, content, functionCall, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ChatCompletionResponseMessageFunctionCall"/>. </summary>
+        /// <param name="name"> The name of the function to call. </param>
+        /// <param name="arguments">
+        /// The arguments to call the function with, as generated by the model in JSON format. Note that
+        /// the model does not always generate valid JSON, and may hallucinate parameters not defined by
+        /// your function schema. Validate the arguments in your code before calling your function.
+        /// </param>
+        /// <returns> A new <see cref="Models.ChatCompletionResponseMessageFunctionCall"/> instance for mocking. </returns>
+        public static ChatCompletionResponseMessageFunctionCall ChatCompletionResponseMessageFunctionCall(string name = null, string arguments = null)
+        {
+            return new ChatCompletionResponseMessageFunctionCall(name, arguments, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CompletionUsage"/>. </summary>
+        /// <param name="promptTokens"> Number of tokens in the prompt. </param>
+        /// <param name="completionTokens"> Number of tokens in the generated completion. </param>
+        /// <param name="totalTokens"> Total number of tokens used in the request (prompt + completion). </param>
+        /// <returns> A new <see cref="Models.CompletionUsage"/> instance for mocking. </returns>
+        public static CompletionUsage CompletionUsage(long promptTokens = default, long completionTokens = default, long totalTokens = default)
+        {
+            return new CompletionUsage(promptTokens, completionTokens, totalTokens, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CreateFineTuningJobRequest"/>. </summary>
+        /// <param name="trainingFile">
+        /// The ID of an uploaded file that contains training data.
+        ///
+        /// See [upload file](/docs/api-reference/files/upload) for how to upload a file.
+        ///
+        /// Your dataset must be formatted as a JSONL file. Additionally, you must upload your file with
+        /// the purpose `fine-tune`.
+        ///
+        /// See the [fine-tuning guide](/docs/guides/fine-tuning) for more details.
+        /// </param>
+        /// <param name="validationFile">
+        /// The ID of an uploaded file that contains validation data.
+        ///
+        /// If you provide this file, the data is used to generate validation metrics periodically during
+        /// fine-tuning. These metrics can be viewed in the fine-tuning results file. The same data should
+        /// not be present in both train and validation files.
+        ///
+        /// Your dataset must be formatted as a JSONL file. You must upload your file with the purpose
+        /// `fine-tune`.
+        ///
+        /// See the [fine-tuning guide](/docs/guides/fine-tuning) for more details.
+        /// </param>
         /// <param name="model">
-        /// Two content moderations models are available: `text-moderation-stable` and
-        /// `text-moderation-latest`. The default is `text-moderation-latest` which will be automatically
-        /// upgraded over time. This ensures you are always using our most accurate model. If you use
-        /// `text-moderation-stable`, we will provide advanced notice before updating the model. Accuracy
-        /// of `text-moderation-stable` may be slightly lower than for `text-moderation-latest`.
+        /// The name of the model to fine-tune. You can select one of the
+        /// [supported models](/docs/guides/fine-tuning/what-models-can-be-fine-tuned).
         /// </param>
-        /// <returns> A new <see cref="Models.CreateModerationRequest"/> instance for mocking. </returns>
-        public static CreateModerationRequest CreateModerationRequest(BinaryData input = null, CreateModerationRequestModel? model = null)
+        /// <param name="hyperparameters"> The hyperparameters used for the fine-tuning job. </param>
+        /// <param name="suffix">
+        /// A string of up to 18 characters that will be added to your fine-tuned model name.
+        ///
+        /// For example, a `suffix` of "custom-model-name" would produce a model name like
+        /// `ft:gpt-3.5-turbo:openai:custom-model-name:7p4lURel`.
+        /// </param>
+        /// <returns> A new <see cref="Models.CreateFineTuningJobRequest"/> instance for mocking. </returns>
+        public static CreateFineTuningJobRequest CreateFineTuningJobRequest(string trainingFile = null, string validationFile = null, CreateFineTuningJobRequestModel model = default, CreateFineTuningJobRequestHyperparameters hyperparameters = null, string suffix = null)
         {
-            return new CreateModerationRequest(input, model, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.CreateModerationResponse"/>. </summary>
-        /// <param name="id"> The unique identifier for the moderation request. </param>
-        /// <param name="model"> The model used to generate the moderation results. </param>
-        /// <param name="results"> A list of moderation objects. </param>
-        /// <returns> A new <see cref="Models.CreateModerationResponse"/> instance for mocking. </returns>
-        public static CreateModerationResponse CreateModerationResponse(string id = null, string model = null, IEnumerable<CreateModerationResponseResult> results = null)
-        {
-            results ??= new List<CreateModerationResponseResult>();
-
-            return new CreateModerationResponse(id, model, results?.ToList(), serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.CreateModerationResponseResult"/>. </summary>
-        /// <param name="flagged"> Whether the content violates [OpenAI's usage policies](/policies/usage-policies). </param>
-        /// <param name="categories"> A list of the categories, and whether they are flagged or not. </param>
-        /// <param name="categoryScores"> A list of the categories along with their scores as predicted by model. </param>
-        /// <returns> A new <see cref="Models.CreateModerationResponseResult"/> instance for mocking. </returns>
-        public static CreateModerationResponseResult CreateModerationResponseResult(bool flagged = default, CreateModerationResponseResultCategories categories = null, CreateModerationResponseResultCategoryScores categoryScores = null)
-        {
-            return new CreateModerationResponseResult(flagged, categories, categoryScores, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.CreateModerationResponseResultCategories"/>. </summary>
-        /// <param name="hate">
-        /// Content that expresses, incites, or promotes hate based on race, gender, ethnicity,
-        /// religion, nationality, sexual orientation, disability status, or caste. Hateful content
-        /// aimed at non-protected groups (e.g., chess players) is harrassment.
-        /// </param>
-        /// <param name="hateThreatening">
-        /// Hateful content that also includes violence or serious harm towards the targeted group
-        /// based on race, gender, ethnicity, religion, nationality, sexual orientation, disability
-        /// status, or caste.
-        /// </param>
-        /// <param name="harassment"> Content that expresses, incites, or promotes harassing language towards any target. </param>
-        /// <param name="harassmentThreatening"> Harassment content that also includes violence or serious harm towards any target. </param>
-        /// <param name="selfHarm">
-        /// Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting,
-        /// and eating disorders.
-        /// </param>
-        /// <param name="selfHarmIntent">
-        /// Content where the speaker expresses that they are engaging or intend to engage in acts of
-        /// self-harm, such as suicide, cutting, and eating disorders.
-        /// </param>
-        /// <param name="selfHarmInstructive">
-        /// Content that encourages performing acts of self-harm, such as suicide, cutting, and eating
-        /// disorders, or that gives instructions or advice on how to commit such acts.
-        /// </param>
-        /// <param name="sexual">
-        /// Content meant to arouse sexual excitement, such as the description of sexual activity, or
-        /// that promotes sexual services (excluding sex education and wellness).
-        /// </param>
-        /// <param name="sexualMinors"> Sexual content that includes an individual who is under 18 years old. </param>
-        /// <param name="violence"> Content that depicts death, violence, or physical injury. </param>
-        /// <param name="violenceGraphic"> Content that depicts death, violence, or physical injury in graphic detail. </param>
-        /// <returns> A new <see cref="Models.CreateModerationResponseResultCategories"/> instance for mocking. </returns>
-        public static CreateModerationResponseResultCategories CreateModerationResponseResultCategories(bool hate = default, bool hateThreatening = default, bool harassment = default, bool harassmentThreatening = default, bool selfHarm = default, bool selfHarmIntent = default, bool selfHarmInstructive = default, bool sexual = default, bool sexualMinors = default, bool violence = default, bool violenceGraphic = default)
-        {
-            return new CreateModerationResponseResultCategories(
-                hate,
-                hateThreatening,
-                harassment,
-                harassmentThreatening,
-                selfHarm,
-                selfHarmIntent,
-                selfHarmInstructive,
-                sexual,
-                sexualMinors,
-                violence,
-                violenceGraphic,
+            return new CreateFineTuningJobRequest(
+                trainingFile,
+                validationFile,
+                model,
+                hyperparameters,
+                suffix,
                 serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.CreateModerationResponseResultCategoryScores"/>. </summary>
-        /// <param name="hate"> The score for the category 'hate'. </param>
-        /// <param name="hateThreatening"> The score for the category 'hate/threatening'. </param>
-        /// <param name="harassment"> The score for the category 'harassment'. </param>
-        /// <param name="harassmentThreatening"> The score for the category 'harassment/threatening'. </param>
-        /// <param name="selfHarm"> The score for the category 'self-harm'. </param>
-        /// <param name="selfHarmIntent"> The score for the category 'self-harm/intent'. </param>
-        /// <param name="selfHarmInstructive"> The score for the category 'self-harm/instructive'. </param>
-        /// <param name="sexual"> The score for the category 'sexual'. </param>
-        /// <param name="sexualMinors"> The score for the category 'sexual/minors'. </param>
-        /// <param name="violence"> The score for the category 'violence'. </param>
-        /// <param name="violenceGraphic"> The score for the category 'violence/graphic'. </param>
-        /// <returns> A new <see cref="Models.CreateModerationResponseResultCategoryScores"/> instance for mocking. </returns>
-        public static CreateModerationResponseResultCategoryScores CreateModerationResponseResultCategoryScores(double hate = default, double hateThreatening = default, double harassment = default, double harassmentThreatening = default, double selfHarm = default, double selfHarmIntent = default, double selfHarmInstructive = default, double sexual = default, double sexualMinors = default, double violence = default, double violenceGraphic = default)
-        {
-            return new CreateModerationResponseResultCategoryScores(
-                hate,
-                hateThreatening,
-                harassment,
-                harassmentThreatening,
-                selfHarm,
-                selfHarmIntent,
-                selfHarmInstructive,
-                sexual,
-                sexualMinors,
-                violence,
-                violenceGraphic,
-                serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.CreateImageRequest"/>. </summary>
-        /// <param name="prompt"> A text description of the desired image(s). The maximum length is 1000 characters. </param>
-        /// <param name="n"> The number of images to generate. Must be between 1 and 10. </param>
-        /// <param name="size"> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </param>
-        /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
-        /// <param name="user"></param>
-        /// <returns> A new <see cref="Models.CreateImageRequest"/> instance for mocking. </returns>
-        public static CreateImageRequest CreateImageRequest(string prompt = null, long? n = null, CreateImageRequestSize? size = null, CreateImageRequestResponseFormat? responseFormat = null, string user = null)
-        {
-            return new CreateImageRequest(
-                prompt,
-                n,
-                size,
-                responseFormat,
-                user,
-                serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.ImagesResponse"/>. </summary>
-        /// <param name="created"></param>
-        /// <param name="data"></param>
-        /// <returns> A new <see cref="Models.ImagesResponse"/> instance for mocking. </returns>
-        public static ImagesResponse ImagesResponse(DateTimeOffset created = default, IEnumerable<Image> data = null)
-        {
-            data ??= new List<Image>();
-
-            return new ImagesResponse(created, data?.ToList(), serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.Image"/>. </summary>
-        /// <param name="url"> The URL of the generated image, if `response_format` is `url` (default). </param>
-        /// <param name="b64Json"> The base64-encoded JSON of the generated image, if `response_format` is `b64_json`. </param>
-        /// <returns> A new <see cref="Models.Image"/> instance for mocking. </returns>
-        public static Image Image(Uri url = null, BinaryData b64Json = null)
-        {
-            return new Image(url, b64Json, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.CreateImageEditRequest"/>. </summary>
-        /// <param name="prompt"> A text description of the desired image(s). The maximum length is 1000 characters. </param>
-        /// <param name="image">
-        /// The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not
-        /// provided, image must have transparency, which will be used as the mask.
+        /// <summary> Initializes a new instance of <see cref="Models.FineTuningJob"/>. </summary>
+        /// <param name="id"> The object identifier, which can be referenced in the API endpoints. </param>
+        /// <param name="object"> The object type, which is always "fine_tuning.job". </param>
+        /// <param name="createdAt"> The Unix timestamp (in seconds) for when the fine-tuning job was created. </param>
+        /// <param name="finishedAt">
+        /// The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be
+        /// null if the fine-tuning job is still running.
         /// </param>
-        /// <param name="mask">
-        /// An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where
-        /// `image` should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions
-        /// as `image`.
+        /// <param name="model"> The base model that is being fine-tuned. </param>
+        /// <param name="fineTunedModel">
+        /// The name of the fine-tuned model that is being created. The value will be null if the
+        /// fine-tuning job is still running.
         /// </param>
-        /// <param name="n"> The number of images to generate. Must be between 1 and 10. </param>
-        /// <param name="size"> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </param>
-        /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
-        /// <param name="user"></param>
-        /// <returns> A new <see cref="Models.CreateImageEditRequest"/> instance for mocking. </returns>
-        public static CreateImageEditRequest CreateImageEditRequest(string prompt = null, Stream image = null, Stream mask = null, long? n = null, CreateImageRequestSize? size = null, CreateImageRequestResponseFormat? responseFormat = null, string user = null)
+        /// <param name="organizationId"> The organization that owns the fine-tuning job. </param>
+        /// <param name="status">
+        /// The current status of the fine-tuning job, which can be either `created`, `pending`, `running`,
+        /// `succeeded`, `failed`, or `cancelled`.
+        /// </param>
+        /// <param name="hyperparameters">
+        /// The hyperparameters used for the fine-tuning job. See the
+        /// [fine-tuning guide](/docs/guides/fine-tuning) for more details.
+        /// </param>
+        /// <param name="trainingFile">
+        /// The file ID used for training. You can retrieve the training data with the
+        /// [Files API](/docs/api-reference/files/retrieve-contents).
+        /// </param>
+        /// <param name="validationFile">
+        /// The file ID used for validation. You can retrieve the validation results with the
+        /// [Files API](/docs/api-reference/files/retrieve-contents).
+        /// </param>
+        /// <param name="resultFiles">
+        /// The compiled results file ID(s) for the fine-tuning job. You can retrieve the results with the
+        /// [Files API](/docs/api-reference/files/retrieve-contents).
+        /// </param>
+        /// <param name="trainedTokens">
+        /// The total number of billable tokens processed by this fine tuning job. The value will be null
+        /// if the fine-tuning job is still running.
+        /// </param>
+        /// <param name="error">
+        /// For fine-tuning jobs that have `failed`, this will contain more information on the cause of the
+        /// failure.
+        /// </param>
+        /// <returns> A new <see cref="Models.FineTuningJob"/> instance for mocking. </returns>
+        public static FineTuningJob FineTuningJob(string id = null, FineTuningJobObject @object = default, DateTimeOffset createdAt = default, DateTimeOffset? finishedAt = null, string model = null, string fineTunedModel = null, string organizationId = null, FineTuningJobStatus status = default, FineTuningJobHyperparameters hyperparameters = null, string trainingFile = null, string validationFile = null, IEnumerable<string> resultFiles = null, long? trainedTokens = null, FineTuningJobError error = null)
         {
-            return new CreateImageEditRequest(
-                prompt,
-                image,
-                mask,
-                n,
-                size,
-                responseFormat,
-                user,
+            resultFiles ??= new List<string>();
+
+            return new FineTuningJob(
+                id,
+                @object,
+                createdAt,
+                finishedAt,
+                model,
+                fineTunedModel,
+                organizationId,
+                status,
+                hyperparameters,
+                trainingFile,
+                validationFile,
+                resultFiles?.ToList(),
+                trainedTokens,
+                error,
                 serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.CreateImageVariationRequest"/>. </summary>
-        /// <param name="image">
-        /// The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB,
-        /// and square.
+        /// <summary> Initializes a new instance of <see cref="Models.FineTuningJobHyperparameters"/>. </summary>
+        /// <param name="nEpochs">
+        /// The number of epochs to train the model for. An epoch refers to one full cycle through the
+        /// training dataset.
+        ///
+        /// "Auto" decides the optimal number of epochs based on the size of the dataset. If setting the
+        /// number manually, we support any number between 1 and 50 epochs.
         /// </param>
-        /// <param name="n"> The number of images to generate. Must be between 1 and 10. </param>
-        /// <param name="size"> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </param>
-        /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
-        /// <param name="user"></param>
-        /// <returns> A new <see cref="Models.CreateImageVariationRequest"/> instance for mocking. </returns>
-        public static CreateImageVariationRequest CreateImageVariationRequest(Stream image = null, long? n = null, CreateImageRequestSize? size = null, CreateImageRequestResponseFormat? responseFormat = null, string user = null)
+        /// <returns> A new <see cref="Models.FineTuningJobHyperparameters"/> instance for mocking. </returns>
+        public static FineTuningJobHyperparameters FineTuningJobHyperparameters(BinaryData nEpochs = null)
         {
-            return new CreateImageVariationRequest(
-                image,
-                n,
-                size,
-                responseFormat,
-                user,
-                serializedAdditionalRawData: null);
+            return new FineTuningJobHyperparameters(nEpochs, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.ListModelsResponse"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.FineTuningJobError"/>. </summary>
+        /// <param name="message"> A human-readable error message. </param>
+        /// <param name="code"> A machine-readable error code. </param>
+        /// <param name="param">
+        /// The parameter that was invalid, usually `training_file` or `validation_file`. This field
+        /// will be null if the failure was not parameter-specific.
+        /// </param>
+        /// <returns> A new <see cref="Models.FineTuningJobError"/> instance for mocking. </returns>
+        public static FineTuningJobError FineTuningJobError(string message = null, string code = null, string param = null)
+        {
+            return new FineTuningJobError(message, code, param, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ListPaginatedFineTuningJobsResponse"/>. </summary>
         /// <param name="object"></param>
         /// <param name="data"></param>
-        /// <returns> A new <see cref="Models.ListModelsResponse"/> instance for mocking. </returns>
-        public static ListModelsResponse ListModelsResponse(string @object = null, IEnumerable<Model> data = null)
+        /// <param name="hasMore"></param>
+        /// <returns> A new <see cref="Models.ListPaginatedFineTuningJobsResponse"/> instance for mocking. </returns>
+        public static ListPaginatedFineTuningJobsResponse ListPaginatedFineTuningJobsResponse(string @object = null, IEnumerable<FineTuningJob> data = null, bool hasMore = default)
         {
-            data ??= new List<Model>();
+            data ??= new List<FineTuningJob>();
 
-            return new ListModelsResponse(@object, data?.ToList(), serializedAdditionalRawData: null);
+            return new ListPaginatedFineTuningJobsResponse(@object, data?.ToList(), hasMore, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.Model"/>. </summary>
-        /// <param name="id"> The model identifier, which can be referenced in the API endpoints. </param>
-        /// <param name="object"> The object type, which is always "model". </param>
-        /// <param name="created"> The Unix timestamp (in seconds) when the model was created. </param>
-        /// <param name="ownedBy"> The organization that owns the model. </param>
-        /// <returns> A new <see cref="Models.Model"/> instance for mocking. </returns>
-        public static Model Model(string id = null, ModelObject @object = default, DateTimeOffset created = default, string ownedBy = null)
+        /// <summary> Initializes a new instance of <see cref="Models.ListFineTuningJobEventsResponse"/>. </summary>
+        /// <param name="object"></param>
+        /// <param name="data"></param>
+        /// <returns> A new <see cref="Models.ListFineTuningJobEventsResponse"/> instance for mocking. </returns>
+        public static ListFineTuningJobEventsResponse ListFineTuningJobEventsResponse(string @object = null, IEnumerable<FineTuningJobEvent> data = null)
         {
-            return new Model(id, @object, created, ownedBy, serializedAdditionalRawData: null);
+            data ??= new List<FineTuningJobEvent>();
+
+            return new ListFineTuningJobEventsResponse(@object, data?.ToList(), serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.DeleteModelResponse"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.FineTuningJobEvent"/>. </summary>
+        /// <param name="id"></param>
+        /// <param name="object"></param>
+        /// <param name="createdAt"></param>
+        /// <param name="level"></param>
+        /// <param name="message"></param>
+        /// <returns> A new <see cref="Models.FineTuningJobEvent"/> instance for mocking. </returns>
+        public static FineTuningJobEvent FineTuningJobEvent(string id = null, string @object = null, DateTimeOffset createdAt = default, FineTuningJobEventLevel level = default, string message = null)
+        {
+            return new FineTuningJobEvent(
+                id,
+                @object,
+                createdAt,
+                level,
+                message,
+                serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CreateCompletionResponse"/>. </summary>
+        /// <param name="id"> A unique identifier for the completion. </param>
+        /// <param name="object"> The object type, which is always `text_completion`. </param>
+        /// <param name="created"> The Unix timestamp (in seconds) of when the completion was created. </param>
+        /// <param name="model"> The model used for the completion. </param>
+        /// <param name="choices"> The list of completion choices the model generated for the input. </param>
+        /// <param name="usage"></param>
+        /// <returns> A new <see cref="Models.CreateCompletionResponse"/> instance for mocking. </returns>
+        public static CreateCompletionResponse CreateCompletionResponse(string id = null, string @object = null, DateTimeOffset created = default, string model = null, IEnumerable<CreateCompletionResponseChoice> choices = null, CompletionUsage usage = null)
+        {
+            choices ??= new List<CreateCompletionResponseChoice>();
+
+            return new CreateCompletionResponse(
+                id,
+                @object,
+                created,
+                model,
+                choices?.ToList(),
+                usage,
+                serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CreateCompletionResponseChoice"/>. </summary>
+        /// <param name="index"></param>
+        /// <param name="text"></param>
+        /// <param name="logprobs"></param>
+        /// <param name="finishReason">
+        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
+        /// natural stop point or a provided stop sequence, or `content_filter` if content was omitted
+        /// due to a flag from our content filters, `length` if the maximum number of tokens specified
+        /// in the request was reached, or `content_filter` if content was omitted due to a flag from our
+        /// content filters.
+        /// </param>
+        /// <returns> A new <see cref="Models.CreateCompletionResponseChoice"/> instance for mocking. </returns>
+        public static CreateCompletionResponseChoice CreateCompletionResponseChoice(long index = default, string text = null, CreateCompletionResponseChoiceLogprobs logprobs = null, CreateCompletionResponseChoiceFinishReason finishReason = default)
+        {
+            return new CreateCompletionResponseChoice(index, text, logprobs, finishReason, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CreateCompletionResponseChoiceLogprobs"/>. </summary>
+        /// <param name="tokens"></param>
+        /// <param name="tokenLogprobs"></param>
+        /// <param name="topLogprobs"></param>
+        /// <param name="textOffset"></param>
+        /// <returns> A new <see cref="Models.CreateCompletionResponseChoiceLogprobs"/> instance for mocking. </returns>
+        public static CreateCompletionResponseChoiceLogprobs CreateCompletionResponseChoiceLogprobs(IEnumerable<string> tokens = null, IEnumerable<double> tokenLogprobs = null, IEnumerable<IDictionary<string, long>> topLogprobs = null, IEnumerable<long> textOffset = null)
+        {
+            tokens ??= new List<string>();
+            tokenLogprobs ??= new List<double>();
+            topLogprobs ??= new List<IDictionary<string, long>>();
+            textOffset ??= new List<long>();
+
+            return new CreateCompletionResponseChoiceLogprobs(tokens?.ToList(), tokenLogprobs?.ToList(), topLogprobs?.ToList(), textOffset?.ToList(), serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CreateEditRequest"/>. </summary>
+        /// <param name="model">
+        /// ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001`
+        /// model with this endpoint.
+        /// </param>
+        /// <param name="input"> The input text to use as a starting point for the edit. </param>
+        /// <param name="instruction"> The instruction that tells the model how to edit the prompt. </param>
+        /// <param name="n"> How many edits to generate for the input and instruction. </param>
+        /// <param name="temperature">
+        /// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
+        /// more random, while lower values like 0.2 will make it more focused and deterministic.
+        ///
+        /// We generally recommend altering this or `top_p` but not both.
+        /// </param>
+        /// <param name="topP">
+        /// An alternative to sampling with temperature, called nucleus sampling, where the model considers
+        /// the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising
+        /// the top 10% probability mass are considered.
+        ///
+        /// We generally recommend altering this or `temperature` but not both.
+        /// </param>
+        /// <returns> A new <see cref="Models.CreateEditRequest"/> instance for mocking. </returns>
+        public static CreateEditRequest CreateEditRequest(CreateEditRequestModel model = default, string input = null, string instruction = null, long? n = null, double? temperature = null, double? topP = null)
+        {
+            return new CreateEditRequest(
+                model,
+                input,
+                instruction,
+                n,
+                temperature,
+                topP,
+                serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CreateEditResponse"/>. </summary>
+        /// <param name="object"> The object type, which is always `edit`. </param>
+        /// <param name="created"> The Unix timestamp (in seconds) of when the edit was created. </param>
+        /// <param name="choices"> description: A list of edit choices. Can be more than one if `n` is greater than 1. </param>
+        /// <param name="usage"></param>
+        /// <returns> A new <see cref="Models.CreateEditResponse"/> instance for mocking. </returns>
+        public static CreateEditResponse CreateEditResponse(CreateEditResponseObject @object = default, DateTimeOffset created = default, IEnumerable<CreateEditResponseChoice> choices = null, CompletionUsage usage = null)
+        {
+            choices ??= new List<CreateEditResponseChoice>();
+
+            return new CreateEditResponse(@object, created, choices?.ToList(), usage, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CreateEditResponseChoice"/>. </summary>
+        /// <param name="text"> The edited result. </param>
+        /// <param name="index"> The index of the choice in the list of choices. </param>
+        /// <param name="finishReason">
+        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
+        /// natural stop point or a provided stop sequence, or `length` if the maximum number of tokens
+        /// specified in the request was reached.
+        /// </param>
+        /// <returns> A new <see cref="Models.CreateEditResponseChoice"/> instance for mocking. </returns>
+        public static CreateEditResponseChoice CreateEditResponseChoice(string text = null, long index = default, CreateEditResponseChoiceFinishReason finishReason = default)
+        {
+            return new CreateEditResponseChoice(text, index, finishReason, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CreateEmbeddingRequest"/>. </summary>
+        /// <param name="model"> ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them. </param>
+        /// <param name="input">
+        /// Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a
+        /// single request, pass an array of strings or array of token arrays. Each input must not exceed
+        /// the max input tokens for the model (8191 tokens for `text-embedding-ada-002`) and cannot be an empty string.
+        /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)
+        /// for counting tokens.
+        /// </param>
+        /// <param name="user"></param>
+        /// <returns> A new <see cref="Models.CreateEmbeddingRequest"/> instance for mocking. </returns>
+        public static CreateEmbeddingRequest CreateEmbeddingRequest(CreateEmbeddingRequestModel model = default, BinaryData input = null, string user = null)
+        {
+            return new CreateEmbeddingRequest(model, input, user, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CreateEmbeddingResponse"/>. </summary>
+        /// <param name="object"> The object type, which is always "embedding". </param>
+        /// <param name="model"> The name of the model used to generate the embedding. </param>
+        /// <param name="data"> The list of embeddings generated by the model. </param>
+        /// <param name="usage"> The usage information for the request. </param>
+        /// <returns> A new <see cref="Models.CreateEmbeddingResponse"/> instance for mocking. </returns>
+        public static CreateEmbeddingResponse CreateEmbeddingResponse(CreateEmbeddingResponseObject @object = default, string model = null, IEnumerable<Embedding> data = null, CreateEmbeddingResponseUsage usage = null)
+        {
+            data ??= new List<Embedding>();
+
+            return new CreateEmbeddingResponse(@object, model, data?.ToList(), usage, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.Embedding"/>. </summary>
+        /// <param name="index"> The index of the embedding in the list of embeddings. </param>
+        /// <param name="object"> The object type, which is always "embedding". </param>
+        /// <param name="embeddingProperty">
+        /// The embedding vector, which is a list of floats. The length of vector depends on the model as\
+        /// listed in the [embedding guide](/docs/guides/embeddings).
+        /// </param>
+        /// <returns> A new <see cref="Models.Embedding"/> instance for mocking. </returns>
+        public static Embedding Embedding(long index = default, EmbeddingObject @object = default, IEnumerable<double> embeddingProperty = null)
+        {
+            embeddingProperty ??= new List<double>();
+
+            return new Embedding(index, @object, embeddingProperty?.ToList(), serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CreateEmbeddingResponseUsage"/>. </summary>
+        /// <param name="promptTokens"> The number of tokens used by the prompt. </param>
+        /// <param name="totalTokens"> The total number of tokens used by the request. </param>
+        /// <returns> A new <see cref="Models.CreateEmbeddingResponseUsage"/> instance for mocking. </returns>
+        public static CreateEmbeddingResponseUsage CreateEmbeddingResponseUsage(long promptTokens = default, long totalTokens = default)
+        {
+            return new CreateEmbeddingResponseUsage(promptTokens, totalTokens, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ListFilesResponse"/>. </summary>
+        /// <param name="object"></param>
+        /// <param name="data"></param>
+        /// <returns> A new <see cref="Models.ListFilesResponse"/> instance for mocking. </returns>
+        public static ListFilesResponse ListFilesResponse(string @object = null, IEnumerable<OpenAIFile> data = null)
+        {
+            data ??= new List<OpenAIFile>();
+
+            return new ListFilesResponse(@object, data?.ToList(), serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.OpenAIFile"/>. </summary>
+        /// <param name="id"> The file identifier, which can be referenced in the API endpoints. </param>
+        /// <param name="object"> The object type, which is always "file". </param>
+        /// <param name="bytes"> The size of the file in bytes. </param>
+        /// <param name="createdAt"> The Unix timestamp (in seconds) for when the file was created. </param>
+        /// <param name="filename"> The name of the file. </param>
+        /// <param name="purpose"> The intended purpose of the file. Currently, only "fine-tune" is supported. </param>
+        /// <param name="status">
+        /// The current status of the file, which can be either `uploaded`, `processed`, `pending`,
+        /// `error`, `deleting` or `deleted`.
+        /// </param>
+        /// <param name="statusDetails">
+        /// Additional details about the status of the file. If the file is in the `error` state, this will
+        /// include a message describing the error.
+        /// </param>
+        /// <returns> A new <see cref="Models.OpenAIFile"/> instance for mocking. </returns>
+        public static OpenAIFile OpenAIFile(string id = null, OpenAIFileObject @object = default, long bytes = default, DateTimeOffset createdAt = default, string filename = null, string purpose = null, OpenAIFileStatus status = default, string statusDetails = null)
+        {
+            return new OpenAIFile(
+                id,
+                @object,
+                bytes,
+                createdAt,
+                filename,
+                purpose,
+                status,
+                statusDetails,
+                serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.DeleteFileResponse"/>. </summary>
         /// <param name="id"></param>
         /// <param name="object"></param>
         /// <param name="deleted"></param>
-        /// <returns> A new <see cref="Models.DeleteModelResponse"/> instance for mocking. </returns>
-        public static DeleteModelResponse DeleteModelResponse(string id = null, string @object = null, bool deleted = default)
+        /// <returns> A new <see cref="Models.DeleteFileResponse"/> instance for mocking. </returns>
+        public static DeleteFileResponse DeleteFileResponse(string id = null, string @object = null, bool deleted = default)
         {
-            return new DeleteModelResponse(id, @object, deleted, serializedAdditionalRawData: null);
+            return new DeleteFileResponse(id, @object, deleted, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateFineTuneRequest"/>. </summary>
@@ -439,36 +797,6 @@ namespace OpenAI.Models
                 serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.OpenAIFile"/>. </summary>
-        /// <param name="id"> The file identifier, which can be referenced in the API endpoints. </param>
-        /// <param name="object"> The object type, which is always "file". </param>
-        /// <param name="bytes"> The size of the file in bytes. </param>
-        /// <param name="createdAt"> The Unix timestamp (in seconds) for when the file was created. </param>
-        /// <param name="filename"> The name of the file. </param>
-        /// <param name="purpose"> The intended purpose of the file. Currently, only "fine-tune" is supported. </param>
-        /// <param name="status">
-        /// The current status of the file, which can be either `uploaded`, `processed`, `pending`,
-        /// `error`, `deleting` or `deleted`.
-        /// </param>
-        /// <param name="statusDetails">
-        /// Additional details about the status of the file. If the file is in the `error` state, this will
-        /// include a message describing the error.
-        /// </param>
-        /// <returns> A new <see cref="Models.OpenAIFile"/> instance for mocking. </returns>
-        public static OpenAIFile OpenAIFile(string id = null, OpenAIFileObject @object = default, long bytes = default, DateTimeOffset createdAt = default, string filename = null, string purpose = null, OpenAIFileStatus status = default, string statusDetails = null)
-        {
-            return new OpenAIFile(
-                id,
-                @object,
-                bytes,
-                createdAt,
-                filename,
-                purpose,
-                status,
-                statusDetails,
-                serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.FineTuneEvent"/>. </summary>
         /// <param name="object"></param>
         /// <param name="createdAt"></param>
@@ -502,569 +830,241 @@ namespace OpenAI.Models
             return new ListFineTuneEventsResponse(@object, data?.ToList(), serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.ListFilesResponse"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ListModelsResponse"/>. </summary>
         /// <param name="object"></param>
         /// <param name="data"></param>
-        /// <returns> A new <see cref="Models.ListFilesResponse"/> instance for mocking. </returns>
-        public static ListFilesResponse ListFilesResponse(string @object = null, IEnumerable<OpenAIFile> data = null)
+        /// <returns> A new <see cref="Models.ListModelsResponse"/> instance for mocking. </returns>
+        public static ListModelsResponse ListModelsResponse(string @object = null, IEnumerable<Model> data = null)
         {
-            data ??= new List<OpenAIFile>();
+            data ??= new List<Model>();
 
-            return new ListFilesResponse(@object, data?.ToList(), serializedAdditionalRawData: null);
+            return new ListModelsResponse(@object, data?.ToList(), serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.DeleteFileResponse"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Model"/>. </summary>
+        /// <param name="id"> The model identifier, which can be referenced in the API endpoints. </param>
+        /// <param name="object"> The object type, which is always "model". </param>
+        /// <param name="created"> The Unix timestamp (in seconds) when the model was created. </param>
+        /// <param name="ownedBy"> The organization that owns the model. </param>
+        /// <returns> A new <see cref="Models.Model"/> instance for mocking. </returns>
+        public static Model Model(string id = null, ModelObject @object = default, DateTimeOffset created = default, string ownedBy = null)
+        {
+            return new Model(id, @object, created, ownedBy, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.DeleteModelResponse"/>. </summary>
         /// <param name="id"></param>
         /// <param name="object"></param>
         /// <param name="deleted"></param>
-        /// <returns> A new <see cref="Models.DeleteFileResponse"/> instance for mocking. </returns>
-        public static DeleteFileResponse DeleteFileResponse(string id = null, string @object = null, bool deleted = default)
+        /// <returns> A new <see cref="Models.DeleteModelResponse"/> instance for mocking. </returns>
+        public static DeleteModelResponse DeleteModelResponse(string id = null, string @object = null, bool deleted = default)
         {
-            return new DeleteFileResponse(id, @object, deleted, serializedAdditionalRawData: null);
+            return new DeleteModelResponse(id, @object, deleted, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.CreateEmbeddingRequest"/>. </summary>
-        /// <param name="model"> ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them. </param>
-        /// <param name="input">
-        /// Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a
-        /// single request, pass an array of strings or array of token arrays. Each input must not exceed
-        /// the max input tokens for the model (8191 tokens for `text-embedding-ada-002`) and cannot be an empty string.
-        /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)
-        /// for counting tokens.
-        /// </param>
+        /// <summary> Initializes a new instance of <see cref="Models.CreateImageRequest"/>. </summary>
+        /// <param name="prompt"> A text description of the desired image(s). The maximum length is 1000 characters. </param>
+        /// <param name="n"> The number of images to generate. Must be between 1 and 10. </param>
+        /// <param name="size"> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </param>
+        /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
         /// <param name="user"></param>
-        /// <returns> A new <see cref="Models.CreateEmbeddingRequest"/> instance for mocking. </returns>
-        public static CreateEmbeddingRequest CreateEmbeddingRequest(CreateEmbeddingRequestModel model = default, BinaryData input = null, string user = null)
+        /// <returns> A new <see cref="Models.CreateImageRequest"/> instance for mocking. </returns>
+        public static CreateImageRequest CreateImageRequest(string prompt = null, long? n = null, CreateImageRequestSize? size = null, CreateImageRequestResponseFormat? responseFormat = null, string user = null)
         {
-            return new CreateEmbeddingRequest(model, input, user, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.CreateEmbeddingResponse"/>. </summary>
-        /// <param name="object"> The object type, which is always "embedding". </param>
-        /// <param name="model"> The name of the model used to generate the embedding. </param>
-        /// <param name="data"> The list of embeddings generated by the model. </param>
-        /// <param name="usage"> The usage information for the request. </param>
-        /// <returns> A new <see cref="Models.CreateEmbeddingResponse"/> instance for mocking. </returns>
-        public static CreateEmbeddingResponse CreateEmbeddingResponse(CreateEmbeddingResponseObject @object = default, string model = null, IEnumerable<Embedding> data = null, CreateEmbeddingResponseUsage usage = null)
-        {
-            data ??= new List<Embedding>();
-
-            return new CreateEmbeddingResponse(@object, model, data?.ToList(), usage, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.Embedding"/>. </summary>
-        /// <param name="index"> The index of the embedding in the list of embeddings. </param>
-        /// <param name="object"> The object type, which is always "embedding". </param>
-        /// <param name="embeddingProperty">
-        /// The embedding vector, which is a list of floats. The length of vector depends on the model as\
-        /// listed in the [embedding guide](/docs/guides/embeddings).
-        /// </param>
-        /// <returns> A new <see cref="Models.Embedding"/> instance for mocking. </returns>
-        public static Embedding Embedding(long index = default, EmbeddingObject @object = default, IEnumerable<double> embeddingProperty = null)
-        {
-            embeddingProperty ??= new List<double>();
-
-            return new Embedding(index, @object, embeddingProperty?.ToList(), serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.CreateEmbeddingResponseUsage"/>. </summary>
-        /// <param name="promptTokens"> The number of tokens used by the prompt. </param>
-        /// <param name="totalTokens"> The total number of tokens used by the request. </param>
-        /// <returns> A new <see cref="Models.CreateEmbeddingResponseUsage"/> instance for mocking. </returns>
-        public static CreateEmbeddingResponseUsage CreateEmbeddingResponseUsage(long promptTokens = default, long totalTokens = default)
-        {
-            return new CreateEmbeddingResponseUsage(promptTokens, totalTokens, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.CreateEditRequest"/>. </summary>
-        /// <param name="model">
-        /// ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001`
-        /// model with this endpoint.
-        /// </param>
-        /// <param name="input"> The input text to use as a starting point for the edit. </param>
-        /// <param name="instruction"> The instruction that tells the model how to edit the prompt. </param>
-        /// <param name="n"> How many edits to generate for the input and instruction. </param>
-        /// <param name="temperature">
-        /// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
-        /// more random, while lower values like 0.2 will make it more focused and deterministic.
-        ///
-        /// We generally recommend altering this or `top_p` but not both.
-        /// </param>
-        /// <param name="topP">
-        /// An alternative to sampling with temperature, called nucleus sampling, where the model considers
-        /// the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising
-        /// the top 10% probability mass are considered.
-        ///
-        /// We generally recommend altering this or `temperature` but not both.
-        /// </param>
-        /// <returns> A new <see cref="Models.CreateEditRequest"/> instance for mocking. </returns>
-        public static CreateEditRequest CreateEditRequest(CreateEditRequestModel model = default, string input = null, string instruction = null, long? n = null, double? temperature = null, double? topP = null)
-        {
-            return new CreateEditRequest(
-                model,
-                input,
-                instruction,
+            return new CreateImageRequest(
+                prompt,
                 n,
-                temperature,
-                topP,
+                size,
+                responseFormat,
+                user,
                 serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.CreateEditResponse"/>. </summary>
-        /// <param name="object"> The object type, which is always `edit`. </param>
-        /// <param name="created"> The Unix timestamp (in seconds) of when the edit was created. </param>
-        /// <param name="choices"> description: A list of edit choices. Can be more than one if `n` is greater than 1. </param>
-        /// <param name="usage"></param>
-        /// <returns> A new <see cref="Models.CreateEditResponse"/> instance for mocking. </returns>
-        public static CreateEditResponse CreateEditResponse(CreateEditResponseObject @object = default, DateTimeOffset created = default, IEnumerable<CreateEditResponseChoice> choices = null, CompletionUsage usage = null)
+        /// <summary> Initializes a new instance of <see cref="Models.ImagesResponse"/>. </summary>
+        /// <param name="created"></param>
+        /// <param name="data"></param>
+        /// <returns> A new <see cref="Models.ImagesResponse"/> instance for mocking. </returns>
+        public static ImagesResponse ImagesResponse(DateTimeOffset created = default, IEnumerable<Image> data = null)
         {
-            choices ??= new List<CreateEditResponseChoice>();
+            data ??= new List<Image>();
 
-            return new CreateEditResponse(@object, created, choices?.ToList(), usage, serializedAdditionalRawData: null);
+            return new ImagesResponse(created, data?.ToList(), serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.CreateEditResponseChoice"/>. </summary>
-        /// <param name="text"> The edited result. </param>
-        /// <param name="index"> The index of the choice in the list of choices. </param>
-        /// <param name="finishReason">
-        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
-        /// natural stop point or a provided stop sequence, or `length` if the maximum number of tokens
-        /// specified in the request was reached.
+        /// <summary> Initializes a new instance of <see cref="Models.Image"/>. </summary>
+        /// <param name="url"> The URL of the generated image, if `response_format` is `url` (default). </param>
+        /// <param name="b64Json"> The base64-encoded JSON of the generated image, if `response_format` is `b64_json`. </param>
+        /// <returns> A new <see cref="Models.Image"/> instance for mocking. </returns>
+        public static Image Image(Uri url = null, BinaryData b64Json = null)
+        {
+            return new Image(url, b64Json, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CreateImageEditRequest"/>. </summary>
+        /// <param name="prompt"> A text description of the desired image(s). The maximum length is 1000 characters. </param>
+        /// <param name="image">
+        /// The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not
+        /// provided, image must have transparency, which will be used as the mask.
         /// </param>
-        /// <returns> A new <see cref="Models.CreateEditResponseChoice"/> instance for mocking. </returns>
-        public static CreateEditResponseChoice CreateEditResponseChoice(string text = null, long index = default, CreateEditResponseChoiceFinishReason finishReason = default)
+        /// <param name="mask">
+        /// An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where
+        /// `image` should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions
+        /// as `image`.
+        /// </param>
+        /// <param name="n"> The number of images to generate. Must be between 1 and 10. </param>
+        /// <param name="size"> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </param>
+        /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
+        /// <param name="user"></param>
+        /// <returns> A new <see cref="Models.CreateImageEditRequest"/> instance for mocking. </returns>
+        public static CreateImageEditRequest CreateImageEditRequest(string prompt = null, Stream image = null, Stream mask = null, long? n = null, CreateImageRequestSize? size = null, CreateImageRequestResponseFormat? responseFormat = null, string user = null)
         {
-            return new CreateEditResponseChoice(text, index, finishReason, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.CompletionUsage"/>. </summary>
-        /// <param name="promptTokens"> Number of tokens in the prompt. </param>
-        /// <param name="completionTokens"> Number of tokens in the generated completion. </param>
-        /// <param name="totalTokens"> Total number of tokens used in the request (prompt + completion). </param>
-        /// <returns> A new <see cref="Models.CompletionUsage"/> instance for mocking. </returns>
-        public static CompletionUsage CompletionUsage(long promptTokens = default, long completionTokens = default, long totalTokens = default)
-        {
-            return new CompletionUsage(promptTokens, completionTokens, totalTokens, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.CreateCompletionResponse"/>. </summary>
-        /// <param name="id"> A unique identifier for the completion. </param>
-        /// <param name="object"> The object type, which is always `text_completion`. </param>
-        /// <param name="created"> The Unix timestamp (in seconds) of when the completion was created. </param>
-        /// <param name="model"> The model used for the completion. </param>
-        /// <param name="choices"> The list of completion choices the model generated for the input. </param>
-        /// <param name="usage"></param>
-        /// <returns> A new <see cref="Models.CreateCompletionResponse"/> instance for mocking. </returns>
-        public static CreateCompletionResponse CreateCompletionResponse(string id = null, string @object = null, DateTimeOffset created = default, string model = null, IEnumerable<CreateCompletionResponseChoice> choices = null, CompletionUsage usage = null)
-        {
-            choices ??= new List<CreateCompletionResponseChoice>();
-
-            return new CreateCompletionResponse(
-                id,
-                @object,
-                created,
-                model,
-                choices?.ToList(),
-                usage,
+            return new CreateImageEditRequest(
+                prompt,
+                image,
+                mask,
+                n,
+                size,
+                responseFormat,
+                user,
                 serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.CreateCompletionResponseChoice"/>. </summary>
-        /// <param name="index"></param>
-        /// <param name="text"></param>
-        /// <param name="logprobs"></param>
-        /// <param name="finishReason">
-        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
-        /// natural stop point or a provided stop sequence, or `content_filter` if content was omitted
-        /// due to a flag from our content filters, `length` if the maximum number of tokens specified
-        /// in the request was reached, or `content_filter` if content was omitted due to a flag from our
-        /// content filters.
+        /// <summary> Initializes a new instance of <see cref="Models.CreateImageVariationRequest"/>. </summary>
+        /// <param name="image">
+        /// The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB,
+        /// and square.
         /// </param>
-        /// <returns> A new <see cref="Models.CreateCompletionResponseChoice"/> instance for mocking. </returns>
-        public static CreateCompletionResponseChoice CreateCompletionResponseChoice(long index = default, string text = null, CreateCompletionResponseChoiceLogprobs logprobs = null, CreateCompletionResponseChoiceFinishReason finishReason = default)
+        /// <param name="n"> The number of images to generate. Must be between 1 and 10. </param>
+        /// <param name="size"> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </param>
+        /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
+        /// <param name="user"></param>
+        /// <returns> A new <see cref="Models.CreateImageVariationRequest"/> instance for mocking. </returns>
+        public static CreateImageVariationRequest CreateImageVariationRequest(Stream image = null, long? n = null, CreateImageRequestSize? size = null, CreateImageRequestResponseFormat? responseFormat = null, string user = null)
         {
-            return new CreateCompletionResponseChoice(index, text, logprobs, finishReason, serializedAdditionalRawData: null);
+            return new CreateImageVariationRequest(
+                image,
+                n,
+                size,
+                responseFormat,
+                user,
+                serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.CreateCompletionResponseChoiceLogprobs"/>. </summary>
-        /// <param name="tokens"></param>
-        /// <param name="tokenLogprobs"></param>
-        /// <param name="topLogprobs"></param>
-        /// <param name="textOffset"></param>
-        /// <returns> A new <see cref="Models.CreateCompletionResponseChoiceLogprobs"/> instance for mocking. </returns>
-        public static CreateCompletionResponseChoiceLogprobs CreateCompletionResponseChoiceLogprobs(IEnumerable<string> tokens = null, IEnumerable<double> tokenLogprobs = null, IEnumerable<IDictionary<string, long>> topLogprobs = null, IEnumerable<long> textOffset = null)
-        {
-            tokens ??= new List<string>();
-            tokenLogprobs ??= new List<double>();
-            topLogprobs ??= new List<IDictionary<string, long>>();
-            textOffset ??= new List<long>();
-
-            return new CreateCompletionResponseChoiceLogprobs(tokens?.ToList(), tokenLogprobs?.ToList(), topLogprobs?.ToList(), textOffset?.ToList(), serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.CreateFineTuningJobRequest"/>. </summary>
-        /// <param name="trainingFile">
-        /// The ID of an uploaded file that contains training data.
-        ///
-        /// See [upload file](/docs/api-reference/files/upload) for how to upload a file.
-        ///
-        /// Your dataset must be formatted as a JSONL file. Additionally, you must upload your file with
-        /// the purpose `fine-tune`.
-        ///
-        /// See the [fine-tuning guide](/docs/guides/fine-tuning) for more details.
-        /// </param>
-        /// <param name="validationFile">
-        /// The ID of an uploaded file that contains validation data.
-        ///
-        /// If you provide this file, the data is used to generate validation metrics periodically during
-        /// fine-tuning. These metrics can be viewed in the fine-tuning results file. The same data should
-        /// not be present in both train and validation files.
-        ///
-        /// Your dataset must be formatted as a JSONL file. You must upload your file with the purpose
-        /// `fine-tune`.
-        ///
-        /// See the [fine-tuning guide](/docs/guides/fine-tuning) for more details.
-        /// </param>
+        /// <summary> Initializes a new instance of <see cref="Models.CreateModerationRequest"/>. </summary>
+        /// <param name="input"> The input text to classify. </param>
         /// <param name="model">
-        /// The name of the model to fine-tune. You can select one of the
-        /// [supported models](/docs/guides/fine-tuning/what-models-can-be-fine-tuned).
+        /// Two content moderations models are available: `text-moderation-stable` and
+        /// `text-moderation-latest`. The default is `text-moderation-latest` which will be automatically
+        /// upgraded over time. This ensures you are always using our most accurate model. If you use
+        /// `text-moderation-stable`, we will provide advanced notice before updating the model. Accuracy
+        /// of `text-moderation-stable` may be slightly lower than for `text-moderation-latest`.
         /// </param>
-        /// <param name="hyperparameters"> The hyperparameters used for the fine-tuning job. </param>
-        /// <param name="suffix">
-        /// A string of up to 18 characters that will be added to your fine-tuned model name.
-        ///
-        /// For example, a `suffix` of "custom-model-name" would produce a model name like
-        /// `ft:gpt-3.5-turbo:openai:custom-model-name:7p4lURel`.
-        /// </param>
-        /// <returns> A new <see cref="Models.CreateFineTuningJobRequest"/> instance for mocking. </returns>
-        public static CreateFineTuningJobRequest CreateFineTuningJobRequest(string trainingFile = null, string validationFile = null, CreateFineTuningJobRequestModel model = default, CreateFineTuningJobRequestHyperparameters hyperparameters = null, string suffix = null)
+        /// <returns> A new <see cref="Models.CreateModerationRequest"/> instance for mocking. </returns>
+        public static CreateModerationRequest CreateModerationRequest(BinaryData input = null, CreateModerationRequestModel? model = null)
         {
-            return new CreateFineTuningJobRequest(
-                trainingFile,
-                validationFile,
-                model,
-                hyperparameters,
-                suffix,
+            return new CreateModerationRequest(input, model, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CreateModerationResponse"/>. </summary>
+        /// <param name="id"> The unique identifier for the moderation request. </param>
+        /// <param name="model"> The model used to generate the moderation results. </param>
+        /// <param name="results"> A list of moderation objects. </param>
+        /// <returns> A new <see cref="Models.CreateModerationResponse"/> instance for mocking. </returns>
+        public static CreateModerationResponse CreateModerationResponse(string id = null, string model = null, IEnumerable<CreateModerationResponseResult> results = null)
+        {
+            results ??= new List<CreateModerationResponseResult>();
+
+            return new CreateModerationResponse(id, model, results?.ToList(), serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CreateModerationResponseResult"/>. </summary>
+        /// <param name="flagged"> Whether the content violates [OpenAI's usage policies](/policies/usage-policies). </param>
+        /// <param name="categories"> A list of the categories, and whether they are flagged or not. </param>
+        /// <param name="categoryScores"> A list of the categories along with their scores as predicted by model. </param>
+        /// <returns> A new <see cref="Models.CreateModerationResponseResult"/> instance for mocking. </returns>
+        public static CreateModerationResponseResult CreateModerationResponseResult(bool flagged = default, CreateModerationResponseResultCategories categories = null, CreateModerationResponseResultCategoryScores categoryScores = null)
+        {
+            return new CreateModerationResponseResult(flagged, categories, categoryScores, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CreateModerationResponseResultCategories"/>. </summary>
+        /// <param name="hate">
+        /// Content that expresses, incites, or promotes hate based on race, gender, ethnicity,
+        /// religion, nationality, sexual orientation, disability status, or caste. Hateful content
+        /// aimed at non-protected groups (e.g., chess players) is harrassment.
+        /// </param>
+        /// <param name="hateThreatening">
+        /// Hateful content that also includes violence or serious harm towards the targeted group
+        /// based on race, gender, ethnicity, religion, nationality, sexual orientation, disability
+        /// status, or caste.
+        /// </param>
+        /// <param name="harassment"> Content that expresses, incites, or promotes harassing language towards any target. </param>
+        /// <param name="harassmentThreatening"> Harassment content that also includes violence or serious harm towards any target. </param>
+        /// <param name="selfHarm">
+        /// Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting,
+        /// and eating disorders.
+        /// </param>
+        /// <param name="selfHarmIntent">
+        /// Content where the speaker expresses that they are engaging or intend to engage in acts of
+        /// self-harm, such as suicide, cutting, and eating disorders.
+        /// </param>
+        /// <param name="selfHarmInstructive">
+        /// Content that encourages performing acts of self-harm, such as suicide, cutting, and eating
+        /// disorders, or that gives instructions or advice on how to commit such acts.
+        /// </param>
+        /// <param name="sexual">
+        /// Content meant to arouse sexual excitement, such as the description of sexual activity, or
+        /// that promotes sexual services (excluding sex education and wellness).
+        /// </param>
+        /// <param name="sexualMinors"> Sexual content that includes an individual who is under 18 years old. </param>
+        /// <param name="violence"> Content that depicts death, violence, or physical injury. </param>
+        /// <param name="violenceGraphic"> Content that depicts death, violence, or physical injury in graphic detail. </param>
+        /// <returns> A new <see cref="Models.CreateModerationResponseResultCategories"/> instance for mocking. </returns>
+        public static CreateModerationResponseResultCategories CreateModerationResponseResultCategories(bool hate = default, bool hateThreatening = default, bool harassment = default, bool harassmentThreatening = default, bool selfHarm = default, bool selfHarmIntent = default, bool selfHarmInstructive = default, bool sexual = default, bool sexualMinors = default, bool violence = default, bool violenceGraphic = default)
+        {
+            return new CreateModerationResponseResultCategories(
+                hate,
+                hateThreatening,
+                harassment,
+                harassmentThreatening,
+                selfHarm,
+                selfHarmIntent,
+                selfHarmInstructive,
+                sexual,
+                sexualMinors,
+                violence,
+                violenceGraphic,
                 serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.FineTuningJob"/>. </summary>
-        /// <param name="id"> The object identifier, which can be referenced in the API endpoints. </param>
-        /// <param name="object"> The object type, which is always "fine_tuning.job". </param>
-        /// <param name="createdAt"> The Unix timestamp (in seconds) for when the fine-tuning job was created. </param>
-        /// <param name="finishedAt">
-        /// The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be
-        /// null if the fine-tuning job is still running.
-        /// </param>
-        /// <param name="model"> The base model that is being fine-tuned. </param>
-        /// <param name="fineTunedModel">
-        /// The name of the fine-tuned model that is being created. The value will be null if the
-        /// fine-tuning job is still running.
-        /// </param>
-        /// <param name="organizationId"> The organization that owns the fine-tuning job. </param>
-        /// <param name="status">
-        /// The current status of the fine-tuning job, which can be either `created`, `pending`, `running`,
-        /// `succeeded`, `failed`, or `cancelled`.
-        /// </param>
-        /// <param name="hyperparameters">
-        /// The hyperparameters used for the fine-tuning job. See the
-        /// [fine-tuning guide](/docs/guides/fine-tuning) for more details.
-        /// </param>
-        /// <param name="trainingFile">
-        /// The file ID used for training. You can retrieve the training data with the
-        /// [Files API](/docs/api-reference/files/retrieve-contents).
-        /// </param>
-        /// <param name="validationFile">
-        /// The file ID used for validation. You can retrieve the validation results with the
-        /// [Files API](/docs/api-reference/files/retrieve-contents).
-        /// </param>
-        /// <param name="resultFiles">
-        /// The compiled results file ID(s) for the fine-tuning job. You can retrieve the results with the
-        /// [Files API](/docs/api-reference/files/retrieve-contents).
-        /// </param>
-        /// <param name="trainedTokens">
-        /// The total number of billable tokens processed by this fine tuning job. The value will be null
-        /// if the fine-tuning job is still running.
-        /// </param>
-        /// <param name="error">
-        /// For fine-tuning jobs that have `failed`, this will contain more information on the cause of the
-        /// failure.
-        /// </param>
-        /// <returns> A new <see cref="Models.FineTuningJob"/> instance for mocking. </returns>
-        public static FineTuningJob FineTuningJob(string id = null, FineTuningJobObject @object = default, DateTimeOffset createdAt = default, DateTimeOffset? finishedAt = null, string model = null, string fineTunedModel = null, string organizationId = null, FineTuningJobStatus status = default, FineTuningJobHyperparameters hyperparameters = null, string trainingFile = null, string validationFile = null, IEnumerable<string> resultFiles = null, long? trainedTokens = null, FineTuningJobError error = null)
+        /// <summary> Initializes a new instance of <see cref="Models.CreateModerationResponseResultCategoryScores"/>. </summary>
+        /// <param name="hate"> The score for the category 'hate'. </param>
+        /// <param name="hateThreatening"> The score for the category 'hate/threatening'. </param>
+        /// <param name="harassment"> The score for the category 'harassment'. </param>
+        /// <param name="harassmentThreatening"> The score for the category 'harassment/threatening'. </param>
+        /// <param name="selfHarm"> The score for the category 'self-harm'. </param>
+        /// <param name="selfHarmIntent"> The score for the category 'self-harm/intent'. </param>
+        /// <param name="selfHarmInstructive"> The score for the category 'self-harm/instructive'. </param>
+        /// <param name="sexual"> The score for the category 'sexual'. </param>
+        /// <param name="sexualMinors"> The score for the category 'sexual/minors'. </param>
+        /// <param name="violence"> The score for the category 'violence'. </param>
+        /// <param name="violenceGraphic"> The score for the category 'violence/graphic'. </param>
+        /// <returns> A new <see cref="Models.CreateModerationResponseResultCategoryScores"/> instance for mocking. </returns>
+        public static CreateModerationResponseResultCategoryScores CreateModerationResponseResultCategoryScores(double hate = default, double hateThreatening = default, double harassment = default, double harassmentThreatening = default, double selfHarm = default, double selfHarmIntent = default, double selfHarmInstructive = default, double sexual = default, double sexualMinors = default, double violence = default, double violenceGraphic = default)
         {
-            resultFiles ??= new List<string>();
-
-            return new FineTuningJob(
-                id,
-                @object,
-                createdAt,
-                finishedAt,
-                model,
-                fineTunedModel,
-                organizationId,
-                status,
-                hyperparameters,
-                trainingFile,
-                validationFile,
-                resultFiles?.ToList(),
-                trainedTokens,
-                error,
+            return new CreateModerationResponseResultCategoryScores(
+                hate,
+                hateThreatening,
+                harassment,
+                harassmentThreatening,
+                selfHarm,
+                selfHarmIntent,
+                selfHarmInstructive,
+                sexual,
+                sexualMinors,
+                violence,
+                violenceGraphic,
                 serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.FineTuningJobHyperparameters"/>. </summary>
-        /// <param name="nEpochs">
-        /// The number of epochs to train the model for. An epoch refers to one full cycle through the
-        /// training dataset.
-        ///
-        /// "Auto" decides the optimal number of epochs based on the size of the dataset. If setting the
-        /// number manually, we support any number between 1 and 50 epochs.
-        /// </param>
-        /// <returns> A new <see cref="Models.FineTuningJobHyperparameters"/> instance for mocking. </returns>
-        public static FineTuningJobHyperparameters FineTuningJobHyperparameters(BinaryData nEpochs = null)
-        {
-            return new FineTuningJobHyperparameters(nEpochs, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.FineTuningJobError"/>. </summary>
-        /// <param name="message"> A human-readable error message. </param>
-        /// <param name="code"> A machine-readable error code. </param>
-        /// <param name="param">
-        /// The parameter that was invalid, usually `training_file` or `validation_file`. This field
-        /// will be null if the failure was not parameter-specific.
-        /// </param>
-        /// <returns> A new <see cref="Models.FineTuningJobError"/> instance for mocking. </returns>
-        public static FineTuningJobError FineTuningJobError(string message = null, string code = null, string param = null)
-        {
-            return new FineTuningJobError(message, code, param, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.ListPaginatedFineTuningJobsResponse"/>. </summary>
-        /// <param name="object"></param>
-        /// <param name="data"></param>
-        /// <param name="hasMore"></param>
-        /// <returns> A new <see cref="Models.ListPaginatedFineTuningJobsResponse"/> instance for mocking. </returns>
-        public static ListPaginatedFineTuningJobsResponse ListPaginatedFineTuningJobsResponse(string @object = null, IEnumerable<FineTuningJob> data = null, bool hasMore = default)
-        {
-            data ??= new List<FineTuningJob>();
-
-            return new ListPaginatedFineTuningJobsResponse(@object, data?.ToList(), hasMore, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.ListFineTuningJobEventsResponse"/>. </summary>
-        /// <param name="object"></param>
-        /// <param name="data"></param>
-        /// <returns> A new <see cref="Models.ListFineTuningJobEventsResponse"/> instance for mocking. </returns>
-        public static ListFineTuningJobEventsResponse ListFineTuningJobEventsResponse(string @object = null, IEnumerable<FineTuningJobEvent> data = null)
-        {
-            data ??= new List<FineTuningJobEvent>();
-
-            return new ListFineTuningJobEventsResponse(@object, data?.ToList(), serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.FineTuningJobEvent"/>. </summary>
-        /// <param name="id"></param>
-        /// <param name="object"></param>
-        /// <param name="createdAt"></param>
-        /// <param name="level"></param>
-        /// <param name="message"></param>
-        /// <returns> A new <see cref="Models.FineTuningJobEvent"/> instance for mocking. </returns>
-        public static FineTuningJobEvent FineTuningJobEvent(string id = null, string @object = null, DateTimeOffset createdAt = default, FineTuningJobEventLevel level = default, string message = null)
-        {
-            return new FineTuningJobEvent(
-                id,
-                @object,
-                createdAt,
-                level,
-                message,
-                serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.ChatCompletionRequestMessage"/>. </summary>
-        /// <param name="role"> The role of the messages author. One of `system`, `user`, `assistant`, or `function`. </param>
-        /// <param name="content">
-        /// The contents of the message. `content` is required for all messages, and may be null for
-        /// assistant messages with function calls.
-        /// </param>
-        /// <param name="name">
-        /// The name of the author of this message. `name` is required if role is `function`, and it
-        /// should be the name of the function whose response is in the `content`. May contain a-z,
-        /// A-Z, 0-9, and underscores, with a maximum length of 64 characters.
-        /// </param>
-        /// <param name="functionCall"> The name and arguments of a function that should be called, as generated by the model. </param>
-        /// <returns> A new <see cref="Models.ChatCompletionRequestMessage"/> instance for mocking. </returns>
-        public static ChatCompletionRequestMessage ChatCompletionRequestMessage(ChatCompletionRequestMessageRole role = default, string content = null, string name = null, ChatCompletionRequestMessageFunctionCall functionCall = null)
-        {
-            return new ChatCompletionRequestMessage(role, content, name, functionCall, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.ChatCompletionFunctions"/>. </summary>
-        /// <param name="name">
-        /// The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and
-        /// dashes, with a maximum length of 64.
-        /// </param>
-        /// <param name="description">
-        /// A description of what the function does, used by the model to choose when and how to call the
-        /// function.
-        /// </param>
-        /// <param name="parameters">
-        /// The parameters the functions accepts, described as a JSON Schema object. See the
-        /// [guide](/docs/guides/gpt/function-calling) for examples, and the
-        /// [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation
-        /// about the format.\n\nTo describe a function that accepts no parameters, provide the value
-        /// `{\"type\": \"object\", \"properties\": {}}`.
-        /// </param>
-        /// <returns> A new <see cref="Models.ChatCompletionFunctions"/> instance for mocking. </returns>
-        public static ChatCompletionFunctions ChatCompletionFunctions(string name = null, string description = null, ChatCompletionFunctionParameters parameters = null)
-        {
-            return new ChatCompletionFunctions(name, description, parameters, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.CreateChatCompletionResponse"/>. </summary>
-        /// <param name="id"> A unique identifier for the chat completion. </param>
-        /// <param name="object"> The object type, which is always `chat.completion`. </param>
-        /// <param name="created"> The Unix timestamp (in seconds) of when the chat completion was created. </param>
-        /// <param name="model"> The model used for the chat completion. </param>
-        /// <param name="choices"> A list of chat completion choices. Can be more than one if `n` is greater than 1. </param>
-        /// <param name="usage"></param>
-        /// <returns> A new <see cref="Models.CreateChatCompletionResponse"/> instance for mocking. </returns>
-        public static CreateChatCompletionResponse CreateChatCompletionResponse(string id = null, string @object = null, DateTimeOffset created = default, string model = null, IEnumerable<CreateChatCompletionResponseChoice> choices = null, CompletionUsage usage = null)
-        {
-            choices ??= new List<CreateChatCompletionResponseChoice>();
-
-            return new CreateChatCompletionResponse(
-                id,
-                @object,
-                created,
-                model,
-                choices?.ToList(),
-                usage,
-                serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.CreateChatCompletionResponseChoice"/>. </summary>
-        /// <param name="index"> The index of the choice in the list of choices. </param>
-        /// <param name="message"></param>
-        /// <param name="finishReason">
-        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
-        /// natural stop point or a provided stop sequence, `length` if the maximum number of tokens
-        /// specified in the request was reached, `content_filter` if the content was omitted due to
-        /// a flag from our content filters, or `function_call` if the model called a function.
-        /// </param>
-        /// <returns> A new <see cref="Models.CreateChatCompletionResponseChoice"/> instance for mocking. </returns>
-        public static CreateChatCompletionResponseChoice CreateChatCompletionResponseChoice(long index = default, ChatCompletionResponseMessage message = null, CreateChatCompletionResponseChoiceFinishReason finishReason = default)
-        {
-            return new CreateChatCompletionResponseChoice(index, message, finishReason, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.ChatCompletionResponseMessage"/>. </summary>
-        /// <param name="role"> The role of the author of this message. </param>
-        /// <param name="content"> The contents of the message. </param>
-        /// <param name="functionCall"> The name and arguments of a function that should be called, as generated by the model. </param>
-        /// <returns> A new <see cref="Models.ChatCompletionResponseMessage"/> instance for mocking. </returns>
-        public static ChatCompletionResponseMessage ChatCompletionResponseMessage(ChatCompletionResponseMessageRole role = default, string content = null, ChatCompletionResponseMessageFunctionCall functionCall = null)
-        {
-            return new ChatCompletionResponseMessage(role, content, functionCall, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.ChatCompletionResponseMessageFunctionCall"/>. </summary>
-        /// <param name="name"> The name of the function to call. </param>
-        /// <param name="arguments">
-        /// The arguments to call the function with, as generated by the model in JSON format. Note that
-        /// the model does not always generate valid JSON, and may hallucinate parameters not defined by
-        /// your function schema. Validate the arguments in your code before calling your function.
-        /// </param>
-        /// <returns> A new <see cref="Models.ChatCompletionResponseMessageFunctionCall"/> instance for mocking. </returns>
-        public static ChatCompletionResponseMessageFunctionCall ChatCompletionResponseMessageFunctionCall(string name = null, string arguments = null)
-        {
-            return new ChatCompletionResponseMessageFunctionCall(name, arguments, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.CreateTranslationRequest"/>. </summary>
-        /// <param name="file">
-        /// The audio file object (not file name) to translate, in one of these formats: flac, mp3, mp4,
-        /// mpeg, mpga, m4a, ogg, wav, or webm.
-        /// </param>
-        /// <param name="model"> ID of the model to use. Only `whisper-1` is currently available. </param>
-        /// <param name="prompt">
-        /// An optional text to guide the model's style or continue a previous audio segment. The
-        /// [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
-        /// </param>
-        /// <param name="responseFormat">
-        /// The format of the transcript output, in one of these options: json, text, srt, verbose_json, or
-        /// vtt.
-        /// </param>
-        /// <param name="temperature">
-        /// The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more
-        /// random, while lower values like 0.2 will make it more focused and deterministic. If set to 0,
-        /// the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to
-        /// automatically increase the temperature until certain thresholds are hit.
-        /// </param>
-        /// <returns> A new <see cref="Models.CreateTranslationRequest"/> instance for mocking. </returns>
-        public static CreateTranslationRequest CreateTranslationRequest(Stream file = null, CreateTranslationRequestModel model = default, string prompt = null, CreateTranslationRequestResponseFormat? responseFormat = null, double? temperature = null)
-        {
-            return new CreateTranslationRequest(
-                file,
-                model,
-                prompt,
-                responseFormat,
-                temperature,
-                serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.CreateTranslationResponse"/>. </summary>
-        /// <param name="text"></param>
-        /// <returns> A new <see cref="Models.CreateTranslationResponse"/> instance for mocking. </returns>
-        public static CreateTranslationResponse CreateTranslationResponse(string text = null)
-        {
-            return new CreateTranslationResponse(text, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.CreateTranscriptionRequest"/>. </summary>
-        /// <param name="file">
-        /// The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4,
-        /// mpeg, mpga, m4a, ogg, wav, or webm.
-        /// </param>
-        /// <param name="model"> ID of the model to use. Only `whisper-1` is currently available. </param>
-        /// <param name="prompt">
-        /// An optional text to guide the model's style or continue a previous audio segment. The
-        /// [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
-        /// </param>
-        /// <param name="responseFormat">
-        /// The format of the transcript output, in one of these options: json, text, srt, verbose_json, or
-        /// vtt.
-        /// </param>
-        /// <param name="temperature">
-        /// The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more
-        /// random, while lower values like 0.2 will make it more focused and deterministic. If set to 0,
-        /// the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to
-        /// automatically increase the temperature until certain thresholds are hit.
-        /// </param>
-        /// <param name="language">
-        /// The language of the input audio. Supplying the input language in
-        /// [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will improve accuracy
-        /// and latency.
-        /// </param>
-        /// <returns> A new <see cref="Models.CreateTranscriptionRequest"/> instance for mocking. </returns>
-        public static CreateTranscriptionRequest CreateTranscriptionRequest(Stream file = null, CreateTranscriptionRequestModel model = default, string prompt = null, CreateTranscriptionRequestResponseFormat? responseFormat = null, double? temperature = null, string language = null)
-        {
-            return new CreateTranscriptionRequest(
-                file,
-                model,
-                prompt,
-                responseFormat,
-                temperature,
-                language,
-                serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.CreateTranscriptionResponse"/>. </summary>
-        /// <param name="text"></param>
-        /// <returns> A new <see cref="Models.CreateTranscriptionResponse"/> instance for mocking. </returns>
-        public static CreateTranscriptionResponse CreateTranscriptionResponse(string text = null)
-        {
-            return new CreateTranscriptionResponse(text, serializedAdditionalRawData: null);
         }
     }
 }

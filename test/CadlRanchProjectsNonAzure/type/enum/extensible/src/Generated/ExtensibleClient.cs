@@ -24,7 +24,7 @@ namespace Scm._Type._Enum.Extensible
         }
 
         /// <summary> Initializes a new instance of ExtensibleClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ExtensibleClient(Uri endpoint, ExtensibleClientOptions options)

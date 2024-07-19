@@ -9,7 +9,7 @@ using System.Threading;
 namespace Payload.MultiPart
 {
     // Data plane generated client.
-    /// <summary> Test for multipart. </summary>
+    /// <summary> The MultiPart service client. </summary>
     public partial class MultiPartClient
     {
         private readonly ClientPipeline _pipeline;
@@ -24,7 +24,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary> Initializes a new instance of MultiPartClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public MultiPartClient(Uri endpoint, MultiPartClientOptions options)

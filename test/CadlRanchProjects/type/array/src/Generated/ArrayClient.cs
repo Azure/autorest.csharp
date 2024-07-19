@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 namespace _Type._Array
 {
     // Data plane generated client.
-    /// <summary> Illustrates various types of arrays. </summary>
+    /// <summary> The Array service client. </summary>
     public partial class ArrayClient
     {
         private readonly HttpPipeline _pipeline;
@@ -31,7 +31,7 @@ namespace _Type._Array
         }
 
         /// <summary> Initializes a new instance of ArrayClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ArrayClient(Uri endpoint, ArrayClientOptions options)

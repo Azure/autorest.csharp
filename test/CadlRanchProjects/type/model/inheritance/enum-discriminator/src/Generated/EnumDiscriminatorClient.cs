@@ -34,7 +34,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary> Initializes a new instance of EnumDiscriminatorClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public EnumDiscriminatorClient(Uri endpoint, EnumDiscriminatorClientOptions options)
@@ -825,6 +825,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/enum-discriminator/extensible-enum", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -878,6 +879,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/enum-discriminator/fixed-enum", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

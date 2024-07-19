@@ -26,7 +26,7 @@ namespace Scm._Type.Model.Inheritance.NotDiscriminated
         }
 
         /// <summary> Initializes a new instance of NotDiscriminatedClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NotDiscriminatedClient(Uri endpoint, NotDiscriminatedClientOptions options)
@@ -270,6 +270,7 @@ namespace Scm._Type.Model.Inheritance.NotDiscriminated
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/not-discriminated/valid", false);
             request.Uri = uri.ToUri();
+            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

@@ -243,6 +243,7 @@ namespace Client.Structure.Service.rename.operation
             uri.AppendRaw(_client.ToSerialString(), true);
             uri.AppendPath("/two", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -257,6 +258,7 @@ namespace Client.Structure.Service.rename.operation
             uri.AppendRaw(_client.ToSerialString(), true);
             uri.AppendPath("/four", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -271,6 +273,7 @@ namespace Client.Structure.Service.rename.operation
             uri.AppendRaw(_client.ToSerialString(), true);
             uri.AppendPath("/six", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

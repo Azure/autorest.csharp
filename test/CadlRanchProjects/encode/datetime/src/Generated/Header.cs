@@ -35,7 +35,7 @@ namespace Encode.Datetime
         /// <summary> Initializes a new instance of Header. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         internal Header(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -379,6 +379,7 @@ namespace Encode.Datetime
             uri.AppendPath("/encode/datetime/header/default", false);
             request.Uri = uri;
             request.Headers.Add("value", value, "R");
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -392,6 +393,7 @@ namespace Encode.Datetime
             uri.AppendPath("/encode/datetime/header/rfc3339", false);
             request.Uri = uri;
             request.Headers.Add("value", value, "O");
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -405,6 +407,7 @@ namespace Encode.Datetime
             uri.AppendPath("/encode/datetime/header/rfc7231", false);
             request.Uri = uri;
             request.Headers.Add("value", value, "R");
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -418,6 +421,7 @@ namespace Encode.Datetime
             uri.AppendPath("/encode/datetime/header/unix-timestamp", false);
             request.Uri = uri;
             request.Headers.Add("value", value, "U");
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -431,6 +435,7 @@ namespace Encode.Datetime
             uri.AppendPath("/encode/datetime/header/unix-timestamp-array", false);
             request.Uri = uri;
             request.Headers.AddDelimited("value", value, ",", "U");
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

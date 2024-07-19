@@ -199,6 +199,7 @@ namespace Server.Path.Multiple
             uri.AppendRaw(_apiVersion, true);
             uri.AppendPath("/", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -214,6 +215,7 @@ namespace Server.Path.Multiple
             uri.AppendPath("/", false);
             uri.AppendPath(keyword, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

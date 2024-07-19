@@ -24,7 +24,7 @@ namespace Scm._Type._Enum.Fixed
         }
 
         /// <summary> Initializes a new instance of FixedClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public FixedClient(Uri endpoint, FixedClientOptions options)

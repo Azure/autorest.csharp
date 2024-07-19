@@ -35,14 +35,14 @@ namespace ModelsTypeSpec
         }
 
         /// <summary> Initializes a new instance of ModelsTypeSpecClient. </summary>
-        /// <param name="endpoint"> Endpoint Service. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ModelsTypeSpecClient(Uri endpoint) : this(endpoint, new ModelsTypeSpecClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ModelsTypeSpecClient. </summary>
-        /// <param name="endpoint"> Endpoint Service. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ModelsTypeSpecClient(Uri endpoint, ModelsTypeSpecClientOptions options)
@@ -1900,6 +1900,7 @@ namespace ModelsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/inputRecursive", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -2027,6 +2028,7 @@ namespace ModelsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/genericType", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

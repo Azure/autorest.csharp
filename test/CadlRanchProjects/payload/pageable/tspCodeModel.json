@@ -7,44 +7,41 @@
   {
    "$id": "2",
    "Kind": "model",
-   "Name": "User",
-   "CrossLanguageDefinitionId": "Payload.Pageable.User",
-   "Usage": "Output",
-   "Description": "User model",
-   "Properties": [
-    {
-     "$id": "3",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "User name",
-     "Type": {
-      "$id": "4",
-      "Kind": "string"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "5",
-   "Kind": "model",
    "Name": "PagedUser",
    "CrossLanguageDefinitionId": "Azure.Core.Page",
-   "Usage": "None",
+   "Usage": "Output",
    "Description": "Paged collection of User items",
    "Properties": [
     {
-     "$id": "6",
+     "$id": "3",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The User items on this page",
      "Type": {
-      "$id": "7",
+      "$id": "4",
       "Kind": "array",
       "Name": "ArrayUser",
       "ValueType": {
-       "$ref": "2"
+       "$id": "5",
+       "Kind": "model",
+       "Name": "User",
+       "CrossLanguageDefinitionId": "Payload.Pageable.User",
+       "Usage": "Output",
+       "Description": "User model",
+       "Properties": [
+        {
+         "$id": "6",
+         "Name": "name",
+         "SerializedName": "name",
+         "Description": "User name",
+         "Type": {
+          "$id": "7",
+          "Kind": "string"
+         },
+         "IsRequired": true,
+         "IsReadOnly": false
+        }
+       ]
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -64,6 +61,9 @@
      "IsReadOnly": false
     }
    ]
+  },
+  {
+   "$ref": "5"
   }
  ],
  "Clients": [
@@ -81,9 +81,9 @@
      "Parameters": [
       {
        "$id": "12",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "TestServer endpoint",
        "Type": {
         "$id": "13",
         "Kind": "string"
@@ -116,11 +116,13 @@
         "Kind": "int32"
        },
        "Location": "Query",
+       "IsRequired": false,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": false,
        "Kind": "Method"
       },
       {
@@ -129,20 +131,24 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "19",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "20",
-         "Kind": "string"
-        },
-        "Value": "application/json"
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "20",
+        "Type": {
+         "$ref": "19"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
@@ -152,7 +158,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "2"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -164,13 +170,13 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/payload/pageable",
      "BufferResponse": true,
      "Paging": {
       "$id": "22",
-      "ItemName": "value",
-      "NextLinkName": "nextLink"
+      "NextLinkName": "nextLink",
+      "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true

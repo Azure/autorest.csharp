@@ -26,7 +26,7 @@ namespace Scm._Type.Scalar
 
         /// <summary> Initializes a new instance of Decimal128Type. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         internal Decimal128Type(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -236,6 +236,7 @@ namespace Scm._Type.Scalar
             uri.Reset(_endpoint);
             uri.AppendPath("/type/scalar/decimal128/resquest_body", false);
             request.Uri = uri.ToUri();
+            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -253,6 +254,7 @@ namespace Scm._Type.Scalar
             uri.AppendPath("/type/scalar/decimal128/request_parameter", false);
             uri.AppendQuery("value", value, true);
             request.Uri = uri.ToUri();
+            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }

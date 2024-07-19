@@ -35,14 +35,14 @@ namespace CustomizationsInTsp
         }
 
         /// <summary> Initializes a new instance of CustomizationsInTspClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> Service endpoint. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public CustomizationsInTspClient(Uri endpoint) : this(endpoint, new CustomizationsInTspClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of CustomizationsInTspClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> Service endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public CustomizationsInTspClient(Uri endpoint, CustomizationsInTspClientOptions options)
@@ -278,9 +278,9 @@ namespace CustomizationsInTsp
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='BarAsync(int,int?,CancellationToken)']/*" />
         public virtual async Task<Response<RenamedModel>> BarAsync(int requiredIntOnBase, int? optionalInt = null, CancellationToken cancellationToken = default)
         {
-            BarRequest barRequest = new BarRequest(requiredIntOnBase, optionalInt, null);
+            RenamedModel renamedModel = new RenamedModel(requiredIntOnBase, optionalInt, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await BarAsync(barRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await BarAsync(renamedModel.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(RenamedModel.FromResponse(response), response);
         }
 
@@ -291,9 +291,9 @@ namespace CustomizationsInTsp
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='Bar(int,int?,CancellationToken)']/*" />
         public virtual Response<RenamedModel> Bar(int requiredIntOnBase, int? optionalInt = null, CancellationToken cancellationToken = default)
         {
-            BarRequest barRequest = new BarRequest(requiredIntOnBase, optionalInt, null);
+            RenamedModel renamedModel = new RenamedModel(requiredIntOnBase, optionalInt, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Bar(barRequest.ToRequestContent(), context);
+            Response response = Bar(renamedModel.ToRequestContent(), context);
             return Response.FromValue(RenamedModel.FromResponse(response), response);
         }
 

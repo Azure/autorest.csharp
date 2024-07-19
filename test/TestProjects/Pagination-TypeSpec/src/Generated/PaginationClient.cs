@@ -37,7 +37,7 @@ namespace Pagination
         }
 
         /// <summary> Initializes a new instance of PaginationClient. </summary>
-        /// <param name="endpoint"> Pagination Service. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public PaginationClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new PaginationClientOptions())
@@ -45,7 +45,7 @@ namespace Pagination
         }
 
         /// <summary> Initializes a new instance of PaginationClient. </summary>
-        /// <param name="endpoint"> Pagination Service. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>

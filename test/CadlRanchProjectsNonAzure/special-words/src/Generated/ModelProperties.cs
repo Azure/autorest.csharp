@@ -27,7 +27,7 @@ namespace Scm.SpecialWords
 
         /// <summary> Initializes a new instance of ModelProperties. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         internal ModelProperties(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -124,6 +124,7 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/model-properties/same-as-model", false);
             request.Uri = uri.ToUri();
+            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

@@ -37,7 +37,7 @@ namespace _Specs_.Azure.Core.Model
         /// <summary> Initializes a new instance of AzureCoreEmbeddingVector. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         internal AzureCoreEmbeddingVector(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -387,6 +387,7 @@ namespace _Specs_.Azure.Core.Model
             uri.Reset(_endpoint);
             uri.AppendPath("/azure/core/model/embeddingVector", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

@@ -9,7 +9,7 @@ using System.Threading;
 namespace Scm._Type.Union
 {
     // Data plane generated client.
-    /// <summary> Describe scenarios for various combinations of unions. </summary>
+    /// <summary> The Union service client. </summary>
     public partial class UnionClient
     {
         private readonly ClientPipeline _pipeline;
@@ -24,7 +24,7 @@ namespace Scm._Type.Union
         }
 
         /// <summary> Initializes a new instance of UnionClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public UnionClient(Uri endpoint, UnionClientOptions options)

@@ -36,7 +36,7 @@ namespace _Type._Enum.Fixed
         /// <summary> Initializes a new instance of String. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         internal String(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -360,6 +360,7 @@ namespace _Type._Enum.Fixed
             uri.Reset(_endpoint);
             uri.AppendPath("/type/enum/fixed/string/known-value", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -374,6 +375,7 @@ namespace _Type._Enum.Fixed
             uri.Reset(_endpoint);
             uri.AppendPath("/type/enum/fixed/string/unknown-value", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

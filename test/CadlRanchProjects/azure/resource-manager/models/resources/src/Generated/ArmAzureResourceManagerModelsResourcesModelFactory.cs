@@ -17,33 +17,6 @@ namespace _Azure.ResourceManager.Models.Resources.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmAzureResourceManagerModelsResourcesModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="Resources.NestedProxyResourceData"/>. </summary>
-        /// <param name="id"> The id. </param>
-        /// <param name="name"> The name. </param>
-        /// <param name="resourceType"> The resourceType. </param>
-        /// <param name="systemData"> The systemData. </param>
-        /// <param name="properties"> The resource-specific properties for this resource. </param>
-        /// <returns> A new <see cref="Resources.NestedProxyResourceData"/> instance for mocking. </returns>
-        public static NestedProxyResourceData NestedProxyResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, NestedProxyResourceProperties properties = null)
-        {
-            return new NestedProxyResourceData(
-                id,
-                name,
-                resourceType,
-                systemData,
-                properties,
-                serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.NestedProxyResourceProperties"/>. </summary>
-        /// <param name="provisioningState"> Provisioning State of the nested child Resource. </param>
-        /// <param name="description"> Nested resource description. </param>
-        /// <returns> A new <see cref="Models.NestedProxyResourceProperties"/> instance for mocking. </returns>
-        public static NestedProxyResourceProperties NestedProxyResourceProperties(ProvisioningState? provisioningState = null, string description = null)
-        {
-            return new NestedProxyResourceProperties(provisioningState, description, serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Resources.TopLevelTrackedResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
@@ -75,6 +48,33 @@ namespace _Azure.ResourceManager.Models.Resources.Models
         public static TopLevelTrackedResourceProperties TopLevelTrackedResourceProperties(ProvisioningState? provisioningState = null, string description = null)
         {
             return new TopLevelTrackedResourceProperties(provisioningState, description, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Resources.NestedProxyResourceData"/>. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="properties"> The resource-specific properties for this resource. </param>
+        /// <returns> A new <see cref="Resources.NestedProxyResourceData"/> instance for mocking. </returns>
+        public static NestedProxyResourceData NestedProxyResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, NestedProxyResourceProperties properties = null)
+        {
+            return new NestedProxyResourceData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                properties,
+                serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.NestedProxyResourceProperties"/>. </summary>
+        /// <param name="provisioningState"> Provisioning State of the nested child Resource. </param>
+        /// <param name="description"> Nested resource description. </param>
+        /// <returns> A new <see cref="Models.NestedProxyResourceProperties"/> instance for mocking. </returns>
+        public static NestedProxyResourceProperties NestedProxyResourceProperties(ProvisioningState? provisioningState = null, string description = null)
+        {
+            return new NestedProxyResourceProperties(provisioningState, description, serializedAdditionalRawData: null);
         }
     }
 }

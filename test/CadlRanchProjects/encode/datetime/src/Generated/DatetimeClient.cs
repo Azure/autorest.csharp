@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 namespace Encode.Datetime
 {
     // Data plane generated client.
-    /// <summary> Test for encode decorator on datetime. </summary>
+    /// <summary> The Datetime service client. </summary>
     public partial class DatetimeClient
     {
         private readonly HttpPipeline _pipeline;
@@ -31,7 +31,7 @@ namespace Encode.Datetime
         }
 
         /// <summary> Initializes a new instance of DatetimeClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public DatetimeClient(Uri endpoint, DatetimeClientOptions options)

@@ -8,6 +8,7 @@
   {
    "$id": "2",
    "Name": "ScalarClient",
+   "Description": "",
    "Operations": [],
    "Protocol": {
     "$id": "3"
@@ -15,9 +16,9 @@
    "Parameters": [
     {
      "$id": "4",
-     "Name": "endpoint",
-     "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "TestServer endpoint",
      "Type": {
       "$id": "5",
       "Kind": "string"
@@ -45,6 +46,7 @@
   {
    "$id": "8",
    "Name": "String",
+   "Description": "",
    "Operations": [
     {
      "$id": "9",
@@ -54,62 +56,42 @@
      "Accessibility": "public",
      "Parameters": [
       {
+       "$ref": "4"
+      },
+      {
        "$id": "10",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "11",
         "Kind": "string"
        },
-       "Location": "Uri",
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": true,
+       "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
+       "Kind": "Constant",
        "DefaultValue": {
         "$id": "12",
         "Type": {
-         "$id": "13",
-         "Kind": "string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "14",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "15",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "16",
-         "Kind": "string"
+         "$ref": "11"
         },
         "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "17",
+       "$id": "13",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "18",
+        "$id": "14",
         "Kind": "string"
        },
        "BodyMediaType": "Json",
@@ -122,65 +104,95 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/scalar/string",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "19",
+     "$id": "15",
      "Name": "put",
      "ResourceName": "String",
      "Description": "put string value",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "4"
       },
       {
-       "$id": "20",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
-       "Type": {
-        "$id": "21",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "22",
-         "Kind": "string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "23",
+       "$id": "16",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
        "Type": {
-        "$id": "24",
+        "$id": "17",
         "Kind": "string"
        },
        "Location": "Body",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "18",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "19",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "20",
+        "Type": {
+         "$ref": "19"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "21",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "22",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "23",
+        "Type": {
+         "$ref": "22"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "25",
+       "$id": "24",
        "StatusCodes": [
         204
        ],
@@ -190,8 +202,8 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Text",
-     "Uri": "{endpoint}",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
      "Path": "/type/scalar/string",
      "RequestMediaTypes": [
       "application/json"
@@ -202,83 +214,64 @@
     }
    ],
    "Protocol": {
-    "$id": "26"
+    "$id": "25"
    },
    "Parent": "ScalarClient",
    "Parameters": [
     {
-     "$ref": "10"
+     "$ref": "4"
     }
    ]
   },
   {
-   "$id": "27",
+   "$id": "26",
    "Name": "Boolean",
+   "Description": "",
    "Operations": [
     {
-     "$id": "28",
+     "$id": "27",
      "Name": "get",
      "ResourceName": "Boolean",
      "Description": "get boolean value",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "29",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
+       "$ref": "4"
+      },
+      {
+       "$id": "28",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$id": "30",
+        "$id": "29",
         "Kind": "string"
        },
-       "Location": "Uri",
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": true,
+       "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
+       "Kind": "Constant",
        "DefaultValue": {
-        "$id": "31",
+        "$id": "30",
         "Type": {
-         "$id": "32",
-         "Kind": "string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "33",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "34",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "35",
-         "Kind": "string"
+         "$ref": "29"
         },
         "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "36",
+       "$id": "31",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "37",
+        "$id": "32",
         "Kind": "boolean"
        },
        "BodyMediaType": "Json",
@@ -291,65 +284,95 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/scalar/boolean",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "38",
+     "$id": "33",
      "Name": "put",
      "ResourceName": "Boolean",
      "Description": "put boolean value",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "4"
       },
       {
-       "$id": "39",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
-       "Type": {
-        "$id": "40",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "41",
-         "Kind": "string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "42",
+       "$id": "34",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
        "Type": {
-        "$id": "43",
+        "$id": "35",
         "Kind": "boolean"
        },
        "Location": "Body",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "36",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "37",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "38",
+        "Type": {
+         "$ref": "37"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "39",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "40",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "41",
+        "Type": {
+         "$ref": "40"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "44",
+       "$id": "42",
        "StatusCodes": [
         204
        ],
@@ -360,7 +383,7 @@
      ],
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/scalar/boolean",
      "RequestMediaTypes": [
       "application/json"
@@ -371,83 +394,64 @@
     }
    ],
    "Protocol": {
-    "$id": "45"
+    "$id": "43"
    },
    "Parent": "ScalarClient",
    "Parameters": [
     {
-     "$ref": "29"
+     "$ref": "4"
     }
    ]
   },
   {
-   "$id": "46",
+   "$id": "44",
    "Name": "Unknown",
+   "Description": "",
    "Operations": [
     {
-     "$id": "47",
+     "$id": "45",
      "Name": "get",
      "ResourceName": "Unknown",
      "Description": "get unknown value",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "48",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
+       "$ref": "4"
+      },
+      {
+       "$id": "46",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$id": "49",
+        "$id": "47",
         "Kind": "string"
        },
-       "Location": "Uri",
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": true,
+       "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
+       "Kind": "Constant",
        "DefaultValue": {
-        "$id": "50",
+        "$id": "48",
         "Type": {
-         "$id": "51",
-         "Kind": "string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "52",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "53",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "54",
-         "Kind": "string"
+         "$ref": "47"
         },
         "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "55",
+       "$id": "49",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "56",
+        "$id": "50",
         "Kind": "any"
        },
        "BodyMediaType": "Json",
@@ -460,65 +464,95 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/scalar/unknown",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "57",
+     "$id": "51",
      "Name": "put",
      "ResourceName": "Unknown",
      "Description": "put unknown value",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "4"
       },
       {
-       "$id": "58",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
-       "Type": {
-        "$id": "59",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "60",
-         "Kind": "string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "61",
+       "$id": "52",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
        "Type": {
-        "$id": "62",
+        "$id": "53",
         "Kind": "any"
        },
        "Location": "Body",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "54",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "55",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "56",
+        "Type": {
+         "$ref": "55"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "57",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "58",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "59",
+        "Type": {
+         "$ref": "58"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "63",
+       "$id": "60",
        "StatusCodes": [
         204
        ],
@@ -529,7 +563,7 @@
      ],
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/scalar/unknown",
      "RequestMediaTypes": [
       "application/json"
@@ -540,83 +574,63 @@
     }
    ],
    "Protocol": {
-    "$id": "64"
+    "$id": "61"
    },
    "Parent": "ScalarClient",
    "Parameters": [
     {
-     "$ref": "48"
+     "$ref": "4"
     }
    ]
   },
   {
-   "$id": "65",
+   "$id": "62",
    "Name": "DecimalType",
    "Description": "Decimal type",
    "Operations": [
     {
-     "$id": "66",
+     "$id": "63",
      "Name": "responseBody",
      "ResourceName": "DecimalType",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "67",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
+       "$ref": "4"
+      },
+      {
+       "$id": "64",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$id": "68",
+        "$id": "65",
         "Kind": "string"
        },
-       "Location": "Uri",
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": true,
+       "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
+       "Kind": "Constant",
        "DefaultValue": {
-        "$id": "69",
+        "$id": "66",
         "Type": {
-         "$id": "70",
-         "Kind": "string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "71",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "72",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "73",
-         "Kind": "string"
+         "$ref": "65"
         },
         "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "74",
+       "$id": "67",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "75",
+        "$id": "68",
         "Kind": "decimal"
        },
        "BodyMediaType": "Json",
@@ -629,63 +643,93 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/scalar/decimal/response_body",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "76",
+     "$id": "69",
      "Name": "requestBody",
      "ResourceName": "DecimalType",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "67"
+       "$ref": "4"
       },
       {
-       "$id": "77",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
-       "Type": {
-        "$id": "78",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "79",
-         "Kind": "string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "80",
+       "$id": "70",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "81",
+        "$id": "71",
         "Kind": "decimal"
        },
        "Location": "Body",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "72",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "73",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "74",
+        "Type": {
+         "$ref": "73"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "75",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "76",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "77",
+        "Type": {
+         "$ref": "76"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "82",
+       "$id": "78",
        "StatusCodes": [
         204
        ],
@@ -696,7 +740,7 @@
      ],
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/scalar/decimal/resquest_body",
      "RequestMediaTypes": [
       "application/json"
@@ -706,34 +750,61 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "83",
+     "$id": "79",
      "Name": "requestParameter",
      "ResourceName": "DecimalType",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "67"
+       "$ref": "4"
       },
       {
-       "$id": "84",
+       "$id": "80",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "85",
+        "$id": "81",
         "Kind": "decimal"
        },
        "Location": "Query",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "82",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "83",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "84",
+        "Type": {
+         "$ref": "83"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "86",
+       "$id": "85",
        "StatusCodes": [
         204
        ],
@@ -744,7 +815,7 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/scalar/decimal/request_parameter",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
@@ -752,83 +823,63 @@
     }
    ],
    "Protocol": {
-    "$id": "87"
+    "$id": "86"
    },
    "Parent": "ScalarClient",
    "Parameters": [
     {
-     "$ref": "67"
+     "$ref": "4"
     }
    ]
   },
   {
-   "$id": "88",
+   "$id": "87",
    "Name": "Decimal128Type",
    "Description": "Decimal128 type",
    "Operations": [
     {
-     "$id": "89",
+     "$id": "88",
      "Name": "responseBody",
      "ResourceName": "Decimal128Type",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "90",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
+       "$ref": "4"
+      },
+      {
+       "$id": "89",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$id": "91",
+        "$id": "90",
         "Kind": "string"
        },
-       "Location": "Uri",
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": true,
+       "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
+       "Kind": "Constant",
        "DefaultValue": {
-        "$id": "92",
+        "$id": "91",
         "Type": {
-         "$id": "93",
-         "Kind": "string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "94",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "95",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "96",
-         "Kind": "string"
+         "$ref": "90"
         },
         "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "97",
+       "$id": "92",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "98",
+        "$id": "93",
         "Kind": "decimal128"
        },
        "BodyMediaType": "Json",
@@ -841,63 +892,93 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/scalar/decimal128/response_body",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "99",
+     "$id": "94",
      "Name": "requestBody",
      "ResourceName": "Decimal128Type",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "90"
+       "$ref": "4"
       },
       {
-       "$id": "100",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
-       "Type": {
-        "$id": "101",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "102",
-         "Kind": "string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "103",
+       "$id": "95",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "104",
+        "$id": "96",
         "Kind": "decimal128"
        },
        "Location": "Body",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "97",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "98",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "99",
+        "Type": {
+         "$ref": "98"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "100",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "101",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "102",
+        "Type": {
+         "$ref": "101"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "105",
+       "$id": "103",
        "StatusCodes": [
         204
        ],
@@ -908,7 +989,7 @@
      ],
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/scalar/decimal128/resquest_body",
      "RequestMediaTypes": [
       "application/json"
@@ -918,34 +999,61 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "106",
+     "$id": "104",
      "Name": "requestParameter",
      "ResourceName": "Decimal128Type",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "90"
+       "$ref": "4"
       },
       {
-       "$id": "107",
+       "$id": "105",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "108",
+        "$id": "106",
         "Kind": "decimal128"
        },
        "Location": "Query",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "107",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "108",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "109",
+        "Type": {
+         "$ref": "108"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "109",
+       "$id": "110",
        "StatusCodes": [
         204
        ],
@@ -956,7 +1064,7 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/scalar/decimal128/request_parameter",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
@@ -964,87 +1072,67 @@
     }
    ],
    "Protocol": {
-    "$id": "110"
+    "$id": "111"
    },
    "Parent": "ScalarClient",
    "Parameters": [
     {
-     "$ref": "90"
+     "$ref": "4"
     }
    ]
   },
   {
-   "$id": "111",
+   "$id": "112",
    "Name": "DecimalVerify",
    "Description": "Decimal type verification",
    "Operations": [
     {
-     "$id": "112",
+     "$id": "113",
      "Name": "prepareVerify",
      "ResourceName": "DecimalVerify",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "113",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
+       "$ref": "4"
+      },
+      {
+       "$id": "114",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$id": "114",
+        "$id": "115",
         "Kind": "string"
        },
-       "Location": "Uri",
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": true,
+       "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
+       "Kind": "Constant",
        "DefaultValue": {
-        "$id": "115",
+        "$id": "116",
         "Type": {
-         "$id": "116",
-         "Kind": "string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "117",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "118",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "119",
-         "Kind": "string"
+         "$ref": "115"
         },
         "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "120",
+       "$id": "117",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "121",
+        "$id": "118",
         "Kind": "array",
         "Name": "Array",
         "ValueType": {
-         "$id": "122",
+         "$id": "119",
          "Kind": "decimal"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -1059,58 +1147,88 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/scalar/decimal/prepare_verify",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "123",
+     "$id": "120",
      "Name": "verify",
      "ResourceName": "DecimalVerify",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "113"
+       "$ref": "4"
       },
       {
-       "$id": "124",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
-       "Type": {
-        "$id": "125",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "126",
-         "Kind": "string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "127",
+       "$id": "121",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "128",
+        "$id": "122",
         "Kind": "decimal"
        },
        "Location": "Body",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "123",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "124",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "125",
+        "Type": {
+         "$ref": "124"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "126",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "127",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "128",
+        "Type": {
+         "$ref": "127"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
@@ -1126,7 +1244,7 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/scalar/decimal/verify",
      "RequestMediaTypes": [
       "application/json"
@@ -1142,7 +1260,7 @@
    "Parent": "ScalarClient",
    "Parameters": [
     {
-     "$ref": "113"
+     "$ref": "4"
     }
    ]
   },
@@ -1158,66 +1276,46 @@
      "Accessibility": "public",
      "Parameters": [
       {
+       "$ref": "4"
+      },
+      {
        "$id": "133",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "134",
         "Kind": "string"
        },
-       "Location": "Uri",
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": true,
+       "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
+       "Kind": "Constant",
        "DefaultValue": {
         "$id": "135",
         "Type": {
-         "$id": "136",
-         "Kind": "string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "137",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "138",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "139",
-         "Kind": "string"
+         "$ref": "134"
         },
         "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "140",
+       "$id": "136",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "141",
+        "$id": "137",
         "Kind": "array",
         "Name": "Array",
         "ValueType": {
-         "$id": "142",
+         "$id": "138",
          "Kind": "decimal"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -1232,63 +1330,93 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/scalar/decimal128/prepare_verify",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "143",
+     "$id": "139",
      "Name": "verify",
      "ResourceName": "Decimal128Verify",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "133"
+       "$ref": "4"
       },
       {
-       "$id": "144",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
-       "Type": {
-        "$id": "145",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "146",
-         "Kind": "string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "147",
+       "$id": "140",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "148",
+        "$id": "141",
         "Kind": "decimal"
        },
        "Location": "Body",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "142",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "143",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "144",
+        "Type": {
+         "$ref": "143"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "145",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "146",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "147",
+        "Type": {
+         "$ref": "146"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "149",
+       "$id": "148",
        "StatusCodes": [
         204
        ],
@@ -1299,7 +1427,7 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/type/scalar/decimal128/verify",
      "RequestMediaTypes": [
       "application/json"
@@ -1310,12 +1438,12 @@
     }
    ],
    "Protocol": {
-    "$id": "150"
+    "$id": "149"
    },
    "Parent": "ScalarClient",
    "Parameters": [
     {
-     "$ref": "133"
+     "$ref": "4"
     }
    ]
   }

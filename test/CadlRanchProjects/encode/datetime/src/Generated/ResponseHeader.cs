@@ -34,7 +34,7 @@ namespace Encode.Datetime
         /// <summary> Initializes a new instance of ResponseHeader. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         internal ResponseHeader(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -299,6 +299,7 @@ namespace Encode.Datetime
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/datetime/responseheader/default", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -311,6 +312,7 @@ namespace Encode.Datetime
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/datetime/responseheader/rfc3339", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -323,6 +325,7 @@ namespace Encode.Datetime
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/datetime/responseheader/rfc7231", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -335,6 +338,7 @@ namespace Encode.Datetime
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/datetime/responseheader/unix-timestamp", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

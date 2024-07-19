@@ -9,7 +9,7 @@ using System.Threading;
 namespace Scm.Parameters.Spread
 {
     // Data plane generated client.
-    /// <summary> Test for the spread operator. </summary>
+    /// <summary> The Spread service client. </summary>
     public partial class SpreadClient
     {
         private readonly ClientPipeline _pipeline;
@@ -24,7 +24,7 @@ namespace Scm.Parameters.Spread
         }
 
         /// <summary> Initializes a new instance of SpreadClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SpreadClient(Uri endpoint, SpreadClientOptions options)

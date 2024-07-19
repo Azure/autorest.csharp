@@ -8,8 +8,8 @@
   {
    "$id": "2",
    "Kind": "enum",
-   "Name": "Versions",
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.Versions",
+   "Name": "RepeatabilityResult",
+   "CrossLanguageDefinitionId": "Azure.Core.RepeatabilityResult",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -17,39 +17,39 @@
    "Values": [
     {
      "$id": "4",
-     "Name": "v2022_12_01_preview",
-     "Value": "2022-12-01-preview",
-     "Description": "2022-12-01-preview"
-    }
-   ],
-   "Description": "Service versions",
-   "IsExtensible": false,
-   "Usage": "None"
-  },
-  {
-   "$id": "5",
-   "Kind": "enum",
-   "Name": "RepeatabilityResult",
-   "CrossLanguageDefinitionId": "Azure.Core.RepeatabilityResult",
-   "ValueType": {
-    "$id": "6",
-    "Kind": "string"
-   },
-   "Values": [
-    {
-     "$id": "7",
      "Name": "accepted",
      "Value": "accepted",
      "Description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
     },
     {
-     "$id": "8",
+     "$id": "5",
      "Name": "rejected",
      "Value": "rejected",
      "Description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
     }
    ],
    "Description": "Repeatability Result header options",
+   "IsExtensible": false,
+   "Usage": "Output"
+  },
+  {
+   "$id": "6",
+   "Kind": "enum",
+   "Name": "Versions",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.Versions",
+   "ValueType": {
+    "$id": "7",
+    "Kind": "string"
+   },
+   "Values": [
+    {
+     "$id": "8",
+     "Name": "v2022_12_01_preview",
+     "Value": "2022-12-01-preview",
+     "Description": "2022-12-01-preview"
+    }
+   ],
+   "Description": "Service versions",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -149,9 +149,9 @@
      "Parameters": [
       {
        "$id": "22",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "TestServer endpoint",
        "Type": {
         "$id": "23",
         "Kind": "string"
@@ -184,12 +184,6 @@
         "Kind": "string"
        },
        "Location": "Query",
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Client",
        "DefaultValue": {
         "$id": "28",
         "Type": {
@@ -197,7 +191,15 @@
          "Kind": "string"
         },
         "Value": "2022-12-01-preview"
-       }
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
       },
       {
        "$id": "30",
@@ -209,11 +211,13 @@
         "Kind": "int32"
        },
        "Location": "Path",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
       },
       {
@@ -226,11 +230,13 @@
         "Kind": "string"
        },
        "Location": "Header",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
       },
       {
@@ -243,11 +249,13 @@
         "Kind": "string"
        },
        "Location": "Header",
+       "IsRequired": false,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": false,
        "Kind": "Method"
       },
       {
@@ -260,11 +268,13 @@
         "Kind": "string"
        },
        "Location": "Header",
+       "IsRequired": false,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": false,
        "Kind": "Method"
       },
       {
@@ -282,11 +292,13 @@
         }
        },
        "Location": "Header",
+       "IsRequired": false,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": false,
        "Kind": "Method"
       },
       {
@@ -304,11 +316,13 @@
         }
        },
        "Location": "Header",
+       "IsRequired": false,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": false,
        "Kind": "Method"
       },
       {
@@ -322,11 +336,13 @@
         "Encode": "string"
        },
        "Location": "Header",
+       "IsRequired": false,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": false,
        "Kind": "Method"
       },
       {
@@ -335,20 +351,24 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "47",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "48",
-         "Kind": "string"
-        },
-        "Value": "application/json"
+        "Kind": "string"
        },
        "Location": "Header",
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "48",
+        "Type": {
+         "$ref": "47"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
@@ -366,6 +386,7 @@
          "$id": "50",
          "Name": "bar",
          "NameInResponse": "bar",
+         "Description": "",
          "Type": {
           "$id": "51",
           "Kind": "string"
@@ -373,8 +394,8 @@
         },
         {
          "$id": "52",
-         "Name": "etagHeader",
-         "NameInResponse": "ETag",
+         "Name": "ETag",
+         "NameInResponse": "etagHeader",
          "Description": "The entity tag for the response.",
          "Type": {
           "$id": "53",
@@ -383,8 +404,8 @@
         },
         {
          "$id": "54",
-         "Name": "clientRequestId",
-         "NameInResponse": "x-ms-client-request-id",
+         "Name": "x-ms-client-request-id",
+         "NameInResponse": "clientRequestId",
          "Description": "An opaque, globally-unique, client-generated string identifier for the request.",
          "Type": {
           "$id": "55",
@@ -401,7 +422,7 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/azure/core/traits/user/{id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
@@ -427,122 +448,82 @@
         "Kind": "string"
        },
        "Location": "Query",
+       "DefaultValue": {
+        "$ref": "28"
+       },
+       "IsRequired": true,
        "IsApiVersion": true,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "59",
-        "Type": {
-         "$id": "60",
-         "Kind": "string"
-        },
-        "Value": "2022-12-01-preview"
-       }
+       "Kind": "Client"
       },
       {
-       "$id": "61",
+       "$id": "59",
        "Name": "id",
        "NameInRequest": "id",
        "Description": "The user's id.",
        "Type": {
-        "$id": "62",
+        "$id": "60",
         "Kind": "int32"
        },
        "Location": "Path",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "63",
+       "$id": "61",
        "Name": "repeatabilityRequestId",
        "NameInRequest": "Repeatability-Request-ID",
        "Description": "An opaque, globally-unique, client-generated string identifier for the request.",
        "Type": {
-        "$id": "64",
+        "$id": "62",
         "Kind": "string"
        },
        "Location": "Header",
+       "IsRequired": false,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": false,
        "Kind": "Method"
       },
       {
-       "$id": "65",
+       "$id": "63",
        "Name": "repeatabilityFirstSent",
        "NameInRequest": "Repeatability-First-Sent",
        "Description": "Specifies the date and time at which the request was first created.",
        "Type": {
-        "$id": "66",
+        "$id": "64",
         "Kind": "utcDateTime",
         "Encode": "rfc7231",
         "WireType": {
-         "$id": "67",
+         "$id": "65",
          "Kind": "string"
         }
        },
        "Location": "Header",
+       "IsRequired": false,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": false,
        "Kind": "Method"
       },
       {
-       "$id": "68",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
-       "Type": {
-        "$id": "69",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "70",
-         "Kind": "string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "71",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "72",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "73",
-         "Kind": "string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "74",
+       "$id": "66",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "The body parameter.",
@@ -550,17 +531,69 @@
         "$ref": "14"
        },
        "Location": "Body",
+       "IsRequired": true,
        "IsApiVersion": false,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "IsRequired": true,
        "Kind": "Method"
+      },
+      {
+       "$id": "67",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "68",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "69",
+        "Type": {
+         "$ref": "68"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "70",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "71",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "72",
+        "Type": {
+         "$ref": "71"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "75",
+       "$id": "73",
        "StatusCodes": [
         200
        ],
@@ -570,12 +603,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "76",
-         "Name": "repeatabilityResult",
-         "NameInResponse": "Repeatability-Result",
+         "$id": "74",
+         "Name": "Repeatability-Result",
+         "NameInResponse": "repeatabilityResult",
          "Description": "Indicates whether the repeatable request was accepted or rejected.",
          "Type": {
-          "$ref": "5"
+          "$ref": "2"
          }
         }
        ],
@@ -587,7 +620,7 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
-     "Uri": "{endpoint}",
+     "Uri": "{host}",
      "Path": "/azure/core/traits/user/{id}:repeatableAction",
      "RequestMediaTypes": [
       "application/json"
@@ -598,7 +631,7 @@
     }
    ],
    "Protocol": {
-    "$id": "77"
+    "$id": "75"
    },
    "Parameters": [
     {

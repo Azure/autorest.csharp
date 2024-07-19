@@ -34,7 +34,7 @@ namespace _Type.Model.Empty
         }
 
         /// <summary> Initializes a new instance of EmptyClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public EmptyClient(Uri endpoint, EmptyClientOptions options)
@@ -362,6 +362,7 @@ namespace _Type.Model.Empty
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/empty/alone", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

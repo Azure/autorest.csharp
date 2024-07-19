@@ -27,7 +27,7 @@ namespace Scm._Type.Property.AdditionalProperties
 
         /// <summary> Initializes a new instance of SpreadModelArray. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         internal SpreadModelArray(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -201,6 +201,7 @@ namespace Scm._Type.Property.AdditionalProperties
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/additionalProperties/spreadRecordModelArray", false);
             request.Uri = uri.ToUri();
+            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

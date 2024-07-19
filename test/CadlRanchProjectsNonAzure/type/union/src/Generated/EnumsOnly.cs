@@ -28,7 +28,7 @@ namespace Scm._Type.Union
 
         /// <summary> Initializes a new instance of EnumsOnly. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         internal EnumsOnly(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -202,6 +202,7 @@ namespace Scm._Type.Union
             uri.Reset(_endpoint);
             uri.AppendPath("/type/union/enums-only", false);
             request.Uri = uri.ToUri();
+            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

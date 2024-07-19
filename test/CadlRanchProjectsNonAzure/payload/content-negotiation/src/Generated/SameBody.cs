@@ -26,7 +26,7 @@ namespace Scm.Payload.ContentNegotiation
 
         /// <summary> Initializes a new instance of SameBody. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         internal SameBody(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -167,7 +167,7 @@ namespace Scm.Payload.ContentNegotiation
             uri.Reset(_endpoint);
             uri.AppendPath("/content-negotiation/same-body", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("accept", "image/png");
+            request.Headers.Set("Accept", "image/png");
             message.Apply(options);
             return message;
         }
@@ -182,7 +182,7 @@ namespace Scm.Payload.ContentNegotiation
             uri.Reset(_endpoint);
             uri.AppendPath("/content-negotiation/same-body", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("accept", "image/jpeg");
+            request.Headers.Set("Accept", "image/jpeg");
             message.Apply(options);
             return message;
         }

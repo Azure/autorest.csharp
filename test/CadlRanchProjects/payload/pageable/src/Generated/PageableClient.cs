@@ -34,7 +34,7 @@ namespace Payload.Pageable
         }
 
         /// <summary> Initializes a new instance of PageableClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public PageableClient(Uri endpoint, PageableClientOptions options)
