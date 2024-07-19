@@ -114,7 +114,7 @@ namespace _Azure.SpecialHeaders.XmsClientRequestId
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/azure/special-headers/x-ms-client-request-id", false);
+            uri.AppendPath("/azure/special-headers/x-ms-client-request-id/", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
