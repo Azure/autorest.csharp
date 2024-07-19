@@ -32,7 +32,7 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/4878")]
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/4876")]
         public Task Azure_Arm_Models_Resources_TopLevelTrackedResources_createOrReplace() => Test(async (host) =>
         {
             ResourceIdentifier id = ResourceGroupResource.CreateResourceIdentifier(Guid.Empty.ToString(), "test-rg");
@@ -43,7 +43,7 @@ namespace CadlRanchProjects.Tests
                     Description = "valid"
                 }
             };
-            var response = await MgmtTestHelper.CreateArmClientWithMockAuth(new Uri("http://localhost:3000")).GetResourceGroupResource(id).GetTopLevelTrackedResources().CreateOrUpdateAsync(WaitUntil.Completed, "top", data);
+            var response = await MgmtTestHelper.CreateArmClientWithMockAuth(host).GetResourceGroupResource(id).GetTopLevelTrackedResources().CreateOrUpdateAsync(WaitUntil.Completed, "top", data);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(true, response.Value.HasData);
             Assert.AreEqual("top", response.Value.Data.Name);
