@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -1487,30 +1488,30 @@ namespace ModelsTypeSpec
         }
 
         /// <summary> Put internal input. </summary>
-        /// <param name="body"> The <see cref="ModelInternalInput"/> to use. </param>
+        /// <param name="prop"> model property. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        internal virtual async Task<Response<ModelInternalInput>> PutInternalInputAsync(ModelInternalInput body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
+        internal virtual async Task<Response<ModelInternalInput>> PutInternalInputAsync(string prop, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            Argument.AssertNotNull(prop, nameof(prop));
 
-            using RequestContent content = body.ToRequestContent();
+            ModelInternalInput modelInternalInput = new ModelInternalInput(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutInternalInputAsync(content, context).ConfigureAwait(false);
+            Response response = await PutInternalInputAsync(modelInternalInput.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(ModelInternalInput.FromResponse(response), response);
         }
 
         /// <summary> Put internal input. </summary>
-        /// <param name="body"> The <see cref="ModelInternalInput"/> to use. </param>
+        /// <param name="prop"> model property. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        internal virtual Response<ModelInternalInput> PutInternalInput(ModelInternalInput body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
+        internal virtual Response<ModelInternalInput> PutInternalInput(string prop, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            Argument.AssertNotNull(prop, nameof(prop));
 
-            using RequestContent content = body.ToRequestContent();
+            ModelInternalInput modelInternalInput = new ModelInternalInput(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutInternalInput(content, context);
+            Response response = PutInternalInput(modelInternalInput.ToRequestContent(), context);
             return Response.FromValue(ModelInternalInput.FromResponse(response), response);
         }
 
@@ -1524,7 +1525,7 @@ namespace ModelsTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutInternalInputAsync(ModelInternalInput,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutInternalInputAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1562,7 +1563,7 @@ namespace ModelsTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutInternalInput(ModelInternalInput,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutInternalInput(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

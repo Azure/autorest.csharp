@@ -705,7 +705,7 @@ op getInternalInput(): ModelInternalInput;
 @route("/internalInput")
 @put
 @convenientAPI(true)
-op putInternalInput(@body body: ModelInternalInput): ModelInternalInput;
+op putInternalInput(...ModelInternalInput): ModelInternalInput;
 
 
 @doc("This is a model.")

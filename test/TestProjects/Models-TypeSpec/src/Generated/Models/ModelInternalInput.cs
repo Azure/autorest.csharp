@@ -48,7 +48,7 @@ namespace ModelsTypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="ModelInternalInput"/>. </summary>
         /// <param name="prop"> model property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
-        public ModelInternalInput(string prop)
+        internal ModelInternalInput(string prop)
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
@@ -70,6 +70,6 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> model property. </summary>
-        public string Prop { get; set; }
+        public string Prop { get; }
     }
 }
