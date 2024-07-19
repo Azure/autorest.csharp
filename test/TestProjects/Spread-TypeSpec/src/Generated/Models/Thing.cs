@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace SpreadTypeSpec.Models
 {
     /// <summary> The Thing. </summary>
-    public partial class Thing
+    internal partial class Thing
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.

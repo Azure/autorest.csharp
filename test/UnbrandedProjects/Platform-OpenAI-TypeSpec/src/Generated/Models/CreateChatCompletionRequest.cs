@@ -9,7 +9,7 @@ using System.Linq;
 namespace OpenAI.Models
 {
     /// <summary> The CreateChatCompletionRequest. </summary>
-    public partial class CreateChatCompletionRequest
+    internal partial class CreateChatCompletionRequest
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.

@@ -29,7 +29,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         [Test]
         public Task Parameters_BodyOptionality_requiredImplicit() => Test(async (host) =>
         {
-            var response = await new BodyOptionalityClient(host, null).RequiredImplicitAsync(new BodyModel("foo"));
+            var response = await new BodyOptionalityClient(host, null).RequiredImplicitAsync("foo");
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });
     }

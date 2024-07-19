@@ -10,7 +10,7 @@ using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class CreateCompletionRequest : IJsonModel<CreateCompletionRequest>
+    internal partial class CreateCompletionRequest : IJsonModel<CreateCompletionRequest>
     {
         void IJsonModel<CreateCompletionRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
