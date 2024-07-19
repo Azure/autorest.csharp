@@ -111,7 +111,6 @@ alias SharedCompletionProperties = {
   stream?: boolean | null = true;
 };
 
-@oneOf
 union Stop {
   string,
   StopSequences,
@@ -361,7 +360,6 @@ model CreateCompletionRequest {
   best_of?: safeint | null = 1;
 }
 
-@oneOf
 union Prompt {
   string,
   string[],
