@@ -1,5 +1,4 @@
 import "@typespec/http";
-import "@typespec/openapi3";
 import "@typespec/openapi";
 
 import "./audio";
