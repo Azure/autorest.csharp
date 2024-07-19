@@ -8,10 +8,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace _Azure.ResourceManager.Models.Resources.Models
+namespace _Type.Property.Optionality.Models
 {
-    /// <summary> The updatable properties of the TopLevelTrackedResource. </summary>
-    internal partial class TopLevelTrackedResourceUpdateProperties
+    /// <summary> Model with a plainDate property. </summary>
+    public partial class PlainDateProperty
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -45,21 +45,21 @@ namespace _Azure.ResourceManager.Models.Resources.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="TopLevelTrackedResourceUpdateProperties"/>. </summary>
-        public TopLevelTrackedResourceUpdateProperties()
+        /// <summary> Initializes a new instance of <see cref="PlainDateProperty"/>. </summary>
+        public PlainDateProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="TopLevelTrackedResourceUpdateProperties"/>. </summary>
-        /// <param name="description"> The description of the resource. </param>
+        /// <summary> Initializes a new instance of <see cref="PlainDateProperty"/>. </summary>
+        /// <param name="property"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal TopLevelTrackedResourceUpdateProperties(string description, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal PlainDateProperty(DateTimeOffset? property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Description = description;
+            Property = property;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> The description of the resource. </summary>
-        public string Description { get; set; }
+        /// <summary> Property. </summary>
+        public DateTimeOffset? Property { get; set; }
     }
 }

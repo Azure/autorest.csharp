@@ -8,8 +8,8 @@ using System.Linq;
 
 namespace OpenAI.Models
 {
-    /// <summary> The OpenAI.ChatCompletionsCreateRequest. </summary>
-    internal partial class OpenAIChatCompletionsCreateRequest
+    /// <summary> The CreateRequest1. </summary>
+    internal partial class CreateRequest1
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -43,7 +43,7 @@ namespace OpenAI.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="OpenAIChatCompletionsCreateRequest"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateRequest1"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)
         /// table for details on which models work with the Chat API.
@@ -53,7 +53,7 @@ namespace OpenAI.Models
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="messages"/> is null. </exception>
-        internal OpenAIChatCompletionsCreateRequest(CreateChatCompletionRequestModel model, IEnumerable<ChatCompletionRequestMessage> messages)
+        internal CreateRequest1(CreateRequestModel1 model, IEnumerable<ChatCompletionRequestMessage> messages)
         {
             Argument.AssertNotNull(messages, nameof(messages));
 
@@ -63,7 +63,7 @@ namespace OpenAI.Models
             LogitBias = new ChangeTrackingDictionary<string, long>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="OpenAIChatCompletionsCreateRequest"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateRequest1"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)
         /// table for details on which models work with the Chat API.
@@ -138,7 +138,7 @@ namespace OpenAI.Models
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
         /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal OpenAIChatCompletionsCreateRequest(CreateChatCompletionRequestModel model, IReadOnlyList<ChatCompletionRequestMessage> messages, IReadOnlyList<ChatCompletionFunctions> functions, BinaryData functionCall, double? temperature, double? topP, long? n, long? maxTokens, BinaryData stop, double? presencePenalty, double? frequencyPenalty, IReadOnlyDictionary<string, long> logitBias, string user, bool? stream, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal CreateRequest1(CreateRequestModel1 model, IReadOnlyList<ChatCompletionRequestMessage> messages, IReadOnlyList<ChatCompletionFunctions> functions, BinaryData functionCall, double? temperature, double? topP, long? n, long? maxTokens, BinaryData stop, double? presencePenalty, double? frequencyPenalty, IReadOnlyDictionary<string, long> logitBias, string user, bool? stream, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Model = model;
             Messages = messages;
@@ -157,8 +157,8 @@ namespace OpenAI.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="OpenAIChatCompletionsCreateRequest"/> for deserialization. </summary>
-        internal OpenAIChatCompletionsCreateRequest()
+        /// <summary> Initializes a new instance of <see cref="CreateRequest1"/> for deserialization. </summary>
+        internal CreateRequest1()
         {
         }
 
@@ -166,7 +166,7 @@ namespace OpenAI.Models
         /// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)
         /// table for details on which models work with the Chat API.
         /// </summary>
-        public CreateChatCompletionRequestModel Model { get; }
+        public CreateRequestModel1 Model { get; }
         /// <summary>
         /// A list of messages comprising the conversation so far.
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).

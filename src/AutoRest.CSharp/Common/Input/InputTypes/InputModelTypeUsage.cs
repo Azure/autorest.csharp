@@ -15,5 +15,6 @@ internal enum InputModelTypeUsage
     JsonMergePatch = 16,
     MultipartFormData = 32,
     Spread = 64,
-    Error = 128
+    Error = 128,
+    Json = 256
 }

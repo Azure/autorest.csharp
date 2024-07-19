@@ -316,6 +316,75 @@
      "IsReadOnly": false
     }
    ]
+<<<<<<< HEAD
+=======
+  },
+  {
+   "$id": "45",
+   "Kind": "model",
+   "Name": "SpreadModelRequest",
+   "CrossLanguageDefinitionId": "SpreadTypeSpec.spreadModel.Request.anonymous",
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "46",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "name of the Thing",
+     "Type": {
+      "$id": "47",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "48",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "age of the Thing",
+     "Type": {
+      "$id": "49",
+      "Kind": "int32"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "50",
+   "Kind": "model",
+   "Name": "SpreadAliasWithModelRequest",
+   "CrossLanguageDefinitionId": "spreadAliasWithModel.Request.anonymous",
+   "Usage": "None",
+   "Properties": [
+    {
+     "$id": "51",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "name of the Thing",
+     "Type": {
+      "$id": "52",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "53",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "age of the Thing",
+     "Type": {
+      "$id": "54",
+      "Kind": "int32"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+>>>>>>> origin/feature/v3
   }
  ],
  "Clients": [

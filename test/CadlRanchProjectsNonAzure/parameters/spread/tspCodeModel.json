@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "SpreadAsRequestBodyRequest1",
    "CrossLanguageDefinitionId": "Parameters.Spread.Model.spreadAsRequestBody.Request.anonymous",
-   "Usage": "Spread",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "3",
@@ -30,7 +30,7 @@
    "Kind": "model",
    "Name": "BodyParameter",
    "CrossLanguageDefinitionId": "Parameters.Spread.Model.BodyParameter",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Description": "This is a simple model.",
    "Properties": [
     {
@@ -52,7 +52,7 @@
    "Kind": "model",
    "Name": "SpreadCompositeRequestMixRequest",
    "CrossLanguageDefinitionId": "spreadCompositeRequestMix.Request.anonymous",
-   "Usage": "Spread",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "9",
@@ -73,7 +73,7 @@
    "Kind": "model",
    "Name": "SpreadAsRequestBodyRequest",
    "CrossLanguageDefinitionId": "Parameters.Spread.Alias.spreadAsRequestBody.Request.anonymous",
-   "Usage": "Spread",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "12",
@@ -94,7 +94,7 @@
    "Kind": "model",
    "Name": "SpreadAsRequestParameterRequest",
    "CrossLanguageDefinitionId": "spreadAsRequestParameter.Request.anonymous",
-   "Usage": "Spread",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "15",
@@ -115,7 +115,7 @@
    "Kind": "model",
    "Name": "SpreadWithMultipleParametersRequest",
    "CrossLanguageDefinitionId": "spreadWithMultipleParameters.Request.anonymous",
-   "Usage": "Spread",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "18",
