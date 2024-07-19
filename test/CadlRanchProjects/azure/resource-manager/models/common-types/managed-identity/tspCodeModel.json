@@ -460,59 +460,18 @@
   {
    "$id": "65",
    "Kind": "model",
-   "Name": "ManagedIdentityTrackedResourceUpdate",
-   "CrossLanguageDefinitionId": "Azure.ResourceManager.Foundations.ResourceUpdateModel",
-   "Usage": "Input",
-   "Description": "The type used for update operations of the ManagedIdentityTrackedResource.",
-   "Properties": [
-    {
-     "$id": "66",
-     "Name": "identity",
-     "SerializedName": "identity",
-     "Description": "The managed service identities assigned to this resource.",
-     "Type": {
-      "$ref": "51"
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "67",
-     "Name": "tags",
-     "SerializedName": "tags",
-     "Description": "Resource tags.",
-     "Type": {
-      "$id": "68",
-      "Kind": "dict",
-      "KeyType": {
-       "$id": "69",
-       "Kind": "string"
-      },
-      "ValueType": {
-       "$id": "70",
-       "Kind": "string"
-      }
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "71",
-   "Kind": "model",
    "Name": "ErrorResponse",
    "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
    "Usage": "Output",
    "Description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
    "Properties": [
     {
-     "$id": "72",
+     "$id": "66",
      "Name": "error",
      "SerializedName": "error",
      "Description": "The error object.",
      "Type": {
-      "$id": "73",
+      "$id": "67",
       "Kind": "model",
       "Name": "ErrorDetail",
       "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail",
@@ -520,52 +479,52 @@
       "Description": "The error detail.",
       "Properties": [
        {
-        "$id": "74",
+        "$id": "68",
         "Name": "code",
         "SerializedName": "code",
         "Description": "The error code.",
         "Type": {
-         "$id": "75",
+         "$id": "69",
          "Kind": "string"
         },
         "IsRequired": false,
         "IsReadOnly": true
        },
        {
-        "$id": "76",
+        "$id": "70",
         "Name": "message",
         "SerializedName": "message",
         "Description": "The error message.",
         "Type": {
-         "$id": "77",
+         "$id": "71",
          "Kind": "string"
         },
         "IsRequired": false,
         "IsReadOnly": true
        },
        {
-        "$id": "78",
+        "$id": "72",
         "Name": "target",
         "SerializedName": "target",
         "Description": "The error target.",
         "Type": {
-         "$id": "79",
+         "$id": "73",
          "Kind": "string"
         },
         "IsRequired": false,
         "IsReadOnly": true
        },
        {
-        "$id": "80",
+        "$id": "74",
         "Name": "details",
         "SerializedName": "details",
         "Description": "The error details.",
         "Type": {
-         "$id": "81",
+         "$id": "75",
          "Kind": "array",
          "Name": "ArrayErrorDetail",
          "ValueType": {
-          "$ref": "73"
+          "$ref": "67"
          },
          "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
@@ -573,16 +532,16 @@
         "IsReadOnly": true
        },
        {
-        "$id": "82",
+        "$id": "76",
         "Name": "additionalInfo",
         "SerializedName": "additionalInfo",
         "Description": "The error additional info.",
         "Type": {
-         "$id": "83",
+         "$id": "77",
          "Kind": "array",
          "Name": "ArrayErrorAdditionalInfo",
          "ValueType": {
-          "$id": "84",
+          "$id": "78",
           "Kind": "model",
           "Name": "ErrorAdditionalInfo",
           "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo",
@@ -590,24 +549,24 @@
           "Description": "The resource management error additional info.",
           "Properties": [
            {
-            "$id": "85",
+            "$id": "79",
             "Name": "type",
             "SerializedName": "type",
             "Description": "The additional info type.",
             "Type": {
-             "$id": "86",
+             "$id": "80",
              "Kind": "string"
             },
             "IsRequired": false,
             "IsReadOnly": true
            },
            {
-            "$id": "87",
+            "$id": "81",
             "Name": "info",
             "SerializedName": "info",
             "Description": "The additional info.",
             "Type": {
-             "$id": "88",
+             "$id": "82",
              "Kind": "model",
              "Name": "ErrorAdditionalInfoInfo",
              "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info.anonymous",
@@ -632,32 +591,32 @@
    ]
   },
   {
-   "$ref": "73"
+   "$ref": "67"
   },
   {
-   "$ref": "84"
+   "$ref": "78"
   },
   {
-   "$ref": "88"
+   "$ref": "82"
   }
  ],
  "Clients": [
   {
-   "$id": "89",
+   "$id": "83",
    "Name": "ManagedIdentityClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "90"
+    "$id": "84"
    },
    "Parameters": [
     {
-     "$id": "91",
+     "$id": "85",
      "Name": "host",
      "NameInRequest": "host",
      "Description": "Azure Resource Manager url.",
      "Type": {
-      "$id": "92",
+      "$id": "86",
       "Kind": "string"
      },
      "Location": "Uri",
@@ -670,9 +629,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "93",
+      "$id": "87",
       "Type": {
-       "$id": "94",
+       "$id": "88",
        "Kind": "string"
       },
       "Value": "https://management.azure.com"
@@ -681,34 +640,34 @@
    ]
   },
   {
-   "$id": "95",
+   "$id": "89",
    "Name": "ManagedIdentityTrackedResources",
    "Description": "",
    "Operations": [
     {
-     "$id": "96",
+     "$id": "90",
      "Name": "get",
      "ResourceName": "ManagedIdentityTrackedResources",
      "Description": "Get a ManagedIdentityTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "91"
+       "$ref": "85"
       },
       {
-       "$id": "97",
+       "$id": "91",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "98",
+        "$id": "92",
         "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "99",
+        "$id": "93",
         "Type": {
-         "$id": "100",
+         "$id": "94",
          "Kind": "string"
         },
         "Value": "2023-12-01-preview"
@@ -723,12 +682,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "101",
+       "$id": "95",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
-        "$id": "102",
+        "$id": "96",
         "Kind": "string"
        },
        "Location": "Path",
@@ -742,12 +701,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "103",
+       "$id": "97",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
-        "$id": "104",
+        "$id": "98",
         "Kind": "string"
        },
        "Location": "Path",
@@ -761,12 +720,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "105",
+       "$id": "99",
        "Name": "managedIdentityTrackedResourceName",
        "NameInRequest": "managedIdentityTrackedResourceName",
        "Description": "arm resource name for path",
        "Type": {
-        "$id": "106",
+        "$id": "100",
         "Kind": "string"
        },
        "Location": "Path",
@@ -780,11 +739,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "107",
+       "$id": "101",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "108",
+        "$id": "102",
         "Kind": "string"
        },
        "Location": "Header",
@@ -797,9 +756,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "109",
+        "$id": "103",
         "Type": {
-         "$ref": "108"
+         "$ref": "102"
         },
         "Value": "application/json"
        }
@@ -807,7 +766,7 @@
      ],
      "Responses": [
       {
-       "$id": "110",
+       "$id": "104",
        "StatusCodes": [
         200
        ],
@@ -831,27 +790,27 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "111",
+     "$id": "105",
      "Name": "createWithSystemAssigned",
      "ResourceName": "ManagedIdentityTrackedResources",
      "Description": "Create a ManagedIdentityTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "91"
+       "$ref": "85"
       },
       {
-       "$id": "112",
+       "$id": "106",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "113",
+        "$id": "107",
         "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "99"
+        "$ref": "93"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -863,12 +822,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "114",
+       "$id": "108",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
-        "$id": "115",
+        "$id": "109",
         "Kind": "string"
        },
        "Location": "Path",
@@ -882,12 +841,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "116",
+       "$id": "110",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
-        "$id": "117",
+        "$id": "111",
         "Kind": "string"
        },
        "Location": "Path",
@@ -901,12 +860,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "118",
+       "$id": "112",
        "Name": "managedIdentityTrackedResourceName",
        "NameInRequest": "managedIdentityTrackedResourceName",
        "Description": "arm resource name for path",
        "Type": {
-        "$id": "119",
+        "$id": "113",
         "Kind": "string"
        },
        "Location": "Path",
@@ -920,7 +879,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "120",
+       "$id": "114",
        "Name": "resource",
        "NameInRequest": "resource",
        "Description": "Resource create parameters.",
@@ -938,11 +897,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "121",
+       "$id": "115",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "122",
+        "$id": "116",
         "Kind": "string"
        },
        "Location": "Header",
@@ -955,19 +914,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "123",
+        "$id": "117",
         "Type": {
-         "$ref": "122"
+         "$ref": "116"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "124",
+       "$id": "118",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "125",
+        "$id": "119",
         "Kind": "string"
        },
        "Location": "Header",
@@ -980,9 +939,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "126",
+        "$id": "120",
         "Type": {
-         "$ref": "125"
+         "$ref": "119"
         },
         "Value": "application/json"
        }
@@ -990,7 +949,7 @@
      ],
      "Responses": [
       {
-       "$id": "127",
+       "$id": "121",
        "StatusCodes": [
         200
        ],
@@ -1005,7 +964,7 @@
        ]
       },
       {
-       "$id": "128",
+       "$id": "122",
        "StatusCodes": [
         201
        ],
@@ -1032,27 +991,27 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "129",
+     "$id": "123",
      "Name": "updateWithUserAssignedAndSystemAssigned",
      "ResourceName": "ManagedIdentityTrackedResources",
      "Description": "Update a ManagedIdentityTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "91"
+       "$ref": "85"
       },
       {
-       "$id": "130",
+       "$id": "124",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "131",
+        "$id": "125",
         "Kind": "string"
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "99"
+        "$ref": "93"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -1064,12 +1023,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "132",
+       "$id": "126",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
-        "$id": "133",
+        "$id": "127",
         "Kind": "string"
        },
        "Location": "Path",
@@ -1083,12 +1042,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "134",
+       "$id": "128",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
-        "$id": "135",
+        "$id": "129",
         "Kind": "string"
        },
        "Location": "Path",
@@ -1102,12 +1061,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "136",
+       "$id": "130",
        "Name": "managedIdentityTrackedResourceName",
        "NameInRequest": "managedIdentityTrackedResourceName",
        "Description": "arm resource name for path",
        "Type": {
-        "$id": "137",
+        "$id": "131",
         "Kind": "string"
        },
        "Location": "Path",
@@ -1121,12 +1080,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "138",
+       "$id": "132",
        "Name": "properties",
        "NameInRequest": "properties",
        "Description": "The resource properties to be updated.",
        "Type": {
-        "$ref": "65"
+        "$ref": "17"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1139,11 +1098,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "139",
+       "$id": "133",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "140",
+        "$id": "134",
         "Kind": "string"
        },
        "Location": "Header",
@@ -1156,19 +1115,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "141",
+        "$id": "135",
         "Type": {
-         "$ref": "140"
+         "$ref": "134"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "142",
+       "$id": "136",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "143",
+        "$id": "137",
         "Kind": "string"
        },
        "Location": "Header",
@@ -1181,9 +1140,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "144",
+        "$id": "138",
         "Type": {
-         "$ref": "143"
+         "$ref": "137"
         },
         "Value": "application/json"
        }
@@ -1191,7 +1150,7 @@
      ],
      "Responses": [
       {
-       "$id": "145",
+       "$id": "139",
        "StatusCodes": [
         200
        ],
@@ -1219,20 +1178,20 @@
     }
    ],
    "Protocol": {
-    "$id": "146"
+    "$id": "140"
    },
    "Parent": "ManagedIdentityClient",
    "Parameters": [
     {
-     "$ref": "91"
+     "$ref": "85"
     }
    ]
   }
  ],
  "Auth": {
-  "$id": "147",
+  "$id": "141",
   "OAuth2": {
-   "$id": "148",
+   "$id": "142",
    "Scopes": [
     "user_impersonation"
    ]

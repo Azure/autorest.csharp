@@ -11,7 +11,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Models;
 
 namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
 {
@@ -234,7 +233,7 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
             }
         }
 
-        internal RequestUriBuilder CreateUpdateWithUserAssignedAndSystemAssignedRequestUri(string subscriptionId, string resourceGroupName, string managedIdentityTrackedResourceName, ManagedIdentityTrackedResourcePatch patch)
+        internal RequestUriBuilder CreateUpdateWithUserAssignedAndSystemAssignedRequestUri(string subscriptionId, string resourceGroupName, string managedIdentityTrackedResourceName, ManagedIdentityTrackedResourceData data)
         {
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
@@ -248,7 +247,7 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
             return uri;
         }
 
-        internal HttpMessage CreateUpdateWithUserAssignedAndSystemAssignedRequest(string subscriptionId, string resourceGroupName, string managedIdentityTrackedResourceName, ManagedIdentityTrackedResourcePatch patch)
+        internal HttpMessage CreateUpdateWithUserAssignedAndSystemAssignedRequest(string subscriptionId, string resourceGroupName, string managedIdentityTrackedResourceName, ManagedIdentityTrackedResourceData data)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -266,7 +265,7 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(patch, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(data, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -276,18 +275,18 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="managedIdentityTrackedResourceName"> arm resource name for path. </param>
-        /// <param name="patch"> The resource properties to be updated. </param>
+        /// <param name="data"> The resource properties to be updated. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="managedIdentityTrackedResourceName"/> or <paramref name="patch"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="managedIdentityTrackedResourceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="managedIdentityTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ManagedIdentityTrackedResourceData>> UpdateWithUserAssignedAndSystemAssignedAsync(string subscriptionId, string resourceGroupName, string managedIdentityTrackedResourceName, ManagedIdentityTrackedResourcePatch patch, CancellationToken cancellationToken = default)
+        public async Task<Response<ManagedIdentityTrackedResourceData>> UpdateWithUserAssignedAndSystemAssignedAsync(string subscriptionId, string resourceGroupName, string managedIdentityTrackedResourceName, ManagedIdentityTrackedResourceData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(managedIdentityTrackedResourceName, nameof(managedIdentityTrackedResourceName));
-            Argument.AssertNotNull(patch, nameof(patch));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateUpdateWithUserAssignedAndSystemAssignedRequest(subscriptionId, resourceGroupName, managedIdentityTrackedResourceName, patch);
+            using var message = CreateUpdateWithUserAssignedAndSystemAssignedRequest(subscriptionId, resourceGroupName, managedIdentityTrackedResourceName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -307,18 +306,18 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="managedIdentityTrackedResourceName"> arm resource name for path. </param>
-        /// <param name="patch"> The resource properties to be updated. </param>
+        /// <param name="data"> The resource properties to be updated. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="managedIdentityTrackedResourceName"/> or <paramref name="patch"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="managedIdentityTrackedResourceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="managedIdentityTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ManagedIdentityTrackedResourceData> UpdateWithUserAssignedAndSystemAssigned(string subscriptionId, string resourceGroupName, string managedIdentityTrackedResourceName, ManagedIdentityTrackedResourcePatch patch, CancellationToken cancellationToken = default)
+        public Response<ManagedIdentityTrackedResourceData> UpdateWithUserAssignedAndSystemAssigned(string subscriptionId, string resourceGroupName, string managedIdentityTrackedResourceName, ManagedIdentityTrackedResourceData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(managedIdentityTrackedResourceName, nameof(managedIdentityTrackedResourceName));
-            Argument.AssertNotNull(patch, nameof(patch));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateUpdateWithUserAssignedAndSystemAssignedRequest(subscriptionId, resourceGroupName, managedIdentityTrackedResourceName, patch);
+            using var message = CreateUpdateWithUserAssignedAndSystemAssignedRequest(subscriptionId, resourceGroupName, managedIdentityTrackedResourceName, data);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

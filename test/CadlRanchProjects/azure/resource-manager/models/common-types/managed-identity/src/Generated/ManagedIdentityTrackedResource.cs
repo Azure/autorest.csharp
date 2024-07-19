@@ -12,7 +12,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Models;
 using Azure.ResourceManager.Resources;
 
 namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
@@ -191,18 +190,18 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="patch"> The resource properties to be updated. </param>
+        /// <param name="data"> The resource properties to be updated. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
-        public virtual async Task<Response<ManagedIdentityTrackedResource>> UpdateAsync(ManagedIdentityTrackedResourcePatch patch, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        public virtual async Task<Response<ManagedIdentityTrackedResource>> UpdateAsync(ManagedIdentityTrackedResourceData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(patch, nameof(patch));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _managedIdentityTrackedResourceClientDiagnostics.CreateScope("ManagedIdentityTrackedResource.Update");
             scope.Start();
             try
             {
-                var response = await _managedIdentityTrackedResourceRestClient.UpdateWithUserAssignedAndSystemAssignedAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, cancellationToken).ConfigureAwait(false);
+                var response = await _managedIdentityTrackedResourceRestClient.UpdateWithUserAssignedAndSystemAssignedAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ManagedIdentityTrackedResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -233,18 +232,18 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="patch"> The resource properties to be updated. </param>
+        /// <param name="data"> The resource properties to be updated. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
-        public virtual Response<ManagedIdentityTrackedResource> Update(ManagedIdentityTrackedResourcePatch patch, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        public virtual Response<ManagedIdentityTrackedResource> Update(ManagedIdentityTrackedResourceData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(patch, nameof(patch));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _managedIdentityTrackedResourceClientDiagnostics.CreateScope("ManagedIdentityTrackedResource.Update");
             scope.Start();
             try
             {
-                var response = _managedIdentityTrackedResourceRestClient.UpdateWithUserAssignedAndSystemAssigned(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, cancellationToken);
+                var response = _managedIdentityTrackedResourceRestClient.UpdateWithUserAssignedAndSystemAssigned(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
                 return Response.FromValue(new ManagedIdentityTrackedResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -299,7 +298,7 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
                 else
                 {
                     var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
-                    var patch = new ManagedIdentityTrackedResourcePatch();
+                    var patch = new ManagedIdentityTrackedResourceData(current.Location);
                     foreach (var tag in current.Tags)
                     {
                         patch.Tags.Add(tag);
@@ -361,7 +360,7 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
                 else
                 {
                     var current = Get(cancellationToken: cancellationToken).Value.Data;
-                    var patch = new ManagedIdentityTrackedResourcePatch();
+                    var patch = new ManagedIdentityTrackedResourceData(current.Location);
                     foreach (var tag in current.Tags)
                     {
                         patch.Tags.Add(tag);
@@ -422,7 +421,7 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
                 else
                 {
                     var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
-                    var patch = new ManagedIdentityTrackedResourcePatch();
+                    var patch = new ManagedIdentityTrackedResourceData(current.Location);
                     patch.Tags.ReplaceWith(tags);
                     var result = await UpdateAsync(patch, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return result;
@@ -479,7 +478,7 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
                 else
                 {
                     var current = Get(cancellationToken: cancellationToken).Value.Data;
-                    var patch = new ManagedIdentityTrackedResourcePatch();
+                    var patch = new ManagedIdentityTrackedResourceData(current.Location);
                     patch.Tags.ReplaceWith(tags);
                     var result = Update(patch, cancellationToken: cancellationToken);
                     return result;
@@ -535,7 +534,7 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
                 else
                 {
                     var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
-                    var patch = new ManagedIdentityTrackedResourcePatch();
+                    var patch = new ManagedIdentityTrackedResourceData(current.Location);
                     foreach (var tag in current.Tags)
                     {
                         patch.Tags.Add(tag);
@@ -595,7 +594,7 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
                 else
                 {
                     var current = Get(cancellationToken: cancellationToken).Value.Data;
-                    var patch = new ManagedIdentityTrackedResourcePatch();
+                    var patch = new ManagedIdentityTrackedResourceData(current.Location);
                     foreach (var tag in current.Tags)
                     {
                         patch.Tags.Add(tag);
