@@ -1,0 +1,35 @@
+# NOTE: Please refer to https://aka.ms/azsdk/engsys/ci-yaml before editing this file.
+
+trigger:
+  branches:
+    include:
+    - main
+    - hotfix/*
+    - release/*
+  paths:
+    include:
+    - sdk/common-types
+    - sdk/common-types/ci.yml
+    - sdk/common-types/Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
+
+pr:
+  branches:
+    include:
+    - main
+    - feature/*
+    - hotfix/*
+    - release/*
+  paths:
+    include:
+    - sdk/common-types
+    - sdk/common-types/ci.yml
+    - sdk/common-types/Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
+
+extends:
+  template: /eng/pipelines/templates/stages/archetype-sdk-client.yml
+  parameters:
+    ServiceDirectory: common-types
+    ArtifactName: packages
+    Artifacts:
+    - name: Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
+      safeName: AzureResourceManagerModelsCommonTypesManagedIdentity
