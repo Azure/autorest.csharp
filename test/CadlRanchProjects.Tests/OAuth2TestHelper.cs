@@ -33,9 +33,6 @@ namespace CadlRanchProjects.Tests
         public class MockBearerTokenAuthenticationPolicy : BearerTokenAuthenticationPolicy
         {
             private readonly HttpPipelineTransport _transport;
-            private readonly TimeSpan _networkTimeout = TimeSpan.FromSeconds(100);
-            // Same value as Stream.CopyTo uses by default
-            private const int DefaultCopyBufferSize = 81920;
 
             public MockBearerTokenAuthenticationPolicy(TokenCredential credential, IEnumerable<string> scopes, HttpPipelineTransport transport) : base(credential, scopes)
             {
@@ -55,7 +52,7 @@ namespace CadlRanchProjects.Tests
             protected new async ValueTask ProcessNextAsync(HttpMessage message, ReadOnlyMemory<HttpPipelinePolicy> pipeline)
             {
                 await _transport.ProcessAsync(message).ConfigureAwait(false);
-                await ResponseBodyPolicyAsync(message, pipeline).ConfigureAwait(false);
+                await ProcessResponseBodyPolicyAsync(message, pipeline).ConfigureAwait(false);
 
                 var response = message.Response;
                 Type responseType = response.GetType();
@@ -63,17 +60,12 @@ namespace CadlRanchProjects.Tests
                 propInfo.SetValue(response, message.ResponseClassifier.IsErrorResponse(message));
             }
 
-            private async ValueTask ResponseBodyPolicyAsync(HttpMessage message, ReadOnlyMemory<HttpPipelinePolicy> pipeline)
+            // To bypass the HTTPS check in real BearerTokenAuthenticationPolicy, we have to short circuit to _transport inside MockBearerTokenAuthenticationPolicy, which also bypass the ResponseBodyPolicy. This policy is crucial to read response to memory so that when we disposing response the data won't lose. However, ResponseBodyPolicy is internal, so copy the logic directly here.
+            // Reference: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/src/Pipeline/Internal/ResponseBodyPolicy.cs
+            private async ValueTask ProcessResponseBodyPolicyAsync(HttpMessage message, ReadOnlyMemory<HttpPipelinePolicy> pipeline)
             {
                 CancellationToken oldToken = message.CancellationToken;
                 using CancellationTokenSource cts = CancellationTokenSource.CreateLinkedTokenSource(oldToken);
-
-                var networkTimeout = _networkTimeout;
-
-                if (message.NetworkTimeout is TimeSpan networkTimeoutOverride)
-                {
-                    networkTimeout = networkTimeoutOverride;
-                }
 
                 Stream? responseContentStream = message.Response.ContentStream;
                 if (responseContentStream == null || responseContentStream.CanSeek)
@@ -100,6 +92,38 @@ namespace CadlRanchProjects.Tests
                                   or NotSupportedException)
                     {
                         throw;
+                    }
+                }
+
+                async Task CopyToAsync(Stream source, Stream destination, CancellationTokenSource cancellationTokenSource)
+                {
+                    // Same value as Stream.CopyTo uses by default
+                    int defaultCopyBufferSize = 81920;
+
+                    var networkTimeout = TimeSpan.FromSeconds(100);
+                    if (message.NetworkTimeout is TimeSpan networkTimeoutOverride)
+                    {
+                        networkTimeout = networkTimeoutOverride;
+                    }
+
+                    byte[] buffer = ArrayPool<byte>.Shared.Rent(defaultCopyBufferSize);
+                    try
+                    {
+                        while (true)
+                        {
+                            cancellationTokenSource.CancelAfter(networkTimeout);
+#pragma warning disable CA1835 // ReadAsync(Memory<>) overload is not available in all targets
+                            int bytesRead = await source.ReadAsync(buffer, 0, buffer.Length, cancellationTokenSource.Token).ConfigureAwait(false);
+#pragma warning restore // ReadAsync(Memory<>) overload is not available in all targets
+                            if (bytesRead == 0)
+                                break;
+                            await destination.WriteAsync(new ReadOnlyMemory<byte>(buffer, 0, bytesRead), cancellationTokenSource.Token).ConfigureAwait(false);
+                        }
+                    }
+                    finally
+                    {
+                        cancellationTokenSource.CancelAfter(Timeout.InfiniteTimeSpan);
+                        ArrayPool<byte>.Shared.Return(buffer);
                     }
                 }
             }
@@ -142,29 +166,6 @@ namespace CadlRanchProjects.Tests
                             ProcessNext(message, pipeline);
                         }
                     }
-                }
-            }
-
-            private async Task CopyToAsync(Stream source, Stream destination, CancellationTokenSource cancellationTokenSource)
-            {
-                byte[] buffer = ArrayPool<byte>.Shared.Rent(DefaultCopyBufferSize);
-                try
-                {
-                    while (true)
-                    {
-                        cancellationTokenSource.CancelAfter(_networkTimeout);
-#pragma warning disable CA1835 // ReadAsync(Memory<>) overload is not available in all targets
-                        int bytesRead = await source.ReadAsync(buffer, 0, buffer.Length, cancellationTokenSource.Token).ConfigureAwait(false);
-#pragma warning restore // ReadAsync(Memory<>) overload is not available in all targets
-                        if (bytesRead == 0)
-                            break;
-                        await destination.WriteAsync(new ReadOnlyMemory<byte>(buffer, 0, bytesRead), cancellationTokenSource.Token).ConfigureAwait(false);
-                    }
-                }
-                finally
-                {
-                    cancellationTokenSource.CancelAfter(Timeout.InfiniteTimeSpan);
-                    ArrayPool<byte>.Shared.Return(buffer);
                 }
             }
         }
