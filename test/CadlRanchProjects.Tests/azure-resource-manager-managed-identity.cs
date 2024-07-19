@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Models.CommonTypes.ManagedIdentity;
-using Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Models;
+using _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity;
+using _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Models;
 using Azure.ResourceManager.Resources;
 using NUnit.Framework;
 
