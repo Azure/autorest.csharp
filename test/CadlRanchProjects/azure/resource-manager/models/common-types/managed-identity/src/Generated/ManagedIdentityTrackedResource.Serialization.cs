@@ -9,7 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Text.Json;
 
-namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
+namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
 {
     public partial class ManagedIdentityTrackedResource : IJsonModel<ManagedIdentityTrackedResourceData>
     {

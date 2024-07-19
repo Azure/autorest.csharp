@@ -10,7 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
+namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
 {
     internal class ChangeTrackingList<T> : IList<T>, IReadOnlyList<T>
     {

@@ -9,11 +9,13 @@ using System;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 
-namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
+namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
 {
     /// <summary>
     /// A class representing a collection of <see cref="ManagedIdentityTrackedResource"/> and their operations.
@@ -35,7 +37,7 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal ManagedIdentityTrackedResourceCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _managedIdentityTrackedResourceClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Models.CommonTypes.ManagedIdentity", ManagedIdentityTrackedResource.ResourceType.Namespace, Diagnostics);
+            _managedIdentityTrackedResourceClientDiagnostics = new ClientDiagnostics("_Azure.ResourceManager.Models.CommonTypes.ManagedIdentity", ManagedIdentityTrackedResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ManagedIdentityTrackedResource.ResourceType, out string managedIdentityTrackedResourceApiVersion);
             _managedIdentityTrackedResourceRestClient = new ManagedIdentityTrackedResourcesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, managedIdentityTrackedResourceApiVersion);
 #if DEBUG

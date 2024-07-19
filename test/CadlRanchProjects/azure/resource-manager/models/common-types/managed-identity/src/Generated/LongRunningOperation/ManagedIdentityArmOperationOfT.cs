@@ -10,10 +10,12 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 
-namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
+namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
 {
 #pragma warning disable SA1649 // File name should match first type name
     internal class ManagedIdentityArmOperation<T> : ArmOperation<T>

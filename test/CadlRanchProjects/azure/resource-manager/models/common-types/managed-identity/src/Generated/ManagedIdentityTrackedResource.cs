@@ -10,11 +10,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 
-namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
+namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
 {
     /// <summary>
     /// A Class representing a ManagedIdentityTrackedResource along with the instance operations that can be performed on it.
@@ -60,7 +62,7 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ManagedIdentityTrackedResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _managedIdentityTrackedResourceClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Models.CommonTypes.ManagedIdentity", ResourceType.Namespace, Diagnostics);
+            _managedIdentityTrackedResourceClientDiagnostics = new ClientDiagnostics("_Azure.ResourceManager.Models.CommonTypes.ManagedIdentity", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string managedIdentityTrackedResourceApiVersion);
             _managedIdentityTrackedResourceRestClient = new ManagedIdentityTrackedResourcesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, managedIdentityTrackedResourceApiVersion);
 #if DEBUG

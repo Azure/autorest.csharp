@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
-  "namespace": "Azure.ResourceManager.Models.CommonTypes.ManagedIdentity",
-  "library-name": "Azure.ResourceManager.Models.CommonTypes.ManagedIdentity",
+  "namespace": "_Azure.ResourceManager.Models.CommonTypes.ManagedIdentity",
+  "library-name": "_Azure.ResourceManager.Models.CommonTypes.ManagedIdentity",
   "flavor": "azure",
   "use-model-reader-writer": true,
   "shared-source-folders": [

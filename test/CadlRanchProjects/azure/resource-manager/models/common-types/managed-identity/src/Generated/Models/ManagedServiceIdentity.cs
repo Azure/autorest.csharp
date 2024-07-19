@@ -7,8 +7,9 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.ResourceManager.Models;
 
-namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Models
+namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Models
 {
     /// <summary> Managed service identity (system assigned and/or user assigned identities). </summary>
     public partial class ManagedServiceIdentity

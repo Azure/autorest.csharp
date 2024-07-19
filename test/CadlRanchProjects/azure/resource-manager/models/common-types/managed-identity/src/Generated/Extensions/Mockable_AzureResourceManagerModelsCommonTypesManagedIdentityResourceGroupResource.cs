@@ -8,22 +8,24 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
+using Azure.ResourceManager;
 
-namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Mocking
+namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    public partial class MockableModelsCommonTypesManagedIdentityResourceGroupResource : ArmResource
+    public partial class Mockable_AzureResourceManagerModelsCommonTypesManagedIdentityResourceGroupResource : ArmResource
     {
-        /// <summary> Initializes a new instance of the <see cref="MockableModelsCommonTypesManagedIdentityResourceGroupResource"/> class for mocking. </summary>
-        protected MockableModelsCommonTypesManagedIdentityResourceGroupResource()
+        /// <summary> Initializes a new instance of the <see cref="Mockable_AzureResourceManagerModelsCommonTypesManagedIdentityResourceGroupResource"/> class for mocking. </summary>
+        protected Mockable_AzureResourceManagerModelsCommonTypesManagedIdentityResourceGroupResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="MockableModelsCommonTypesManagedIdentityResourceGroupResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="Mockable_AzureResourceManagerModelsCommonTypesManagedIdentityResourceGroupResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal MockableModelsCommonTypesManagedIdentityResourceGroupResource(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal Mockable_AzureResourceManagerModelsCommonTypesManagedIdentityResourceGroupResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 

@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Models
+namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Models
 {
     internal partial class ManagedIdentityTrackedResourceProperties : IUtf8JsonSerializable, IJsonModel<ManagedIdentityTrackedResourceProperties>
     {

@@ -7,12 +7,14 @@
 
 using System;
 using System.Collections.Generic;
+using Azure;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
-namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Models
+namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class ArmModelsCommonTypesManagedIdentityModelFactory
+    public static partial class ArmAzureResourceManagerModelsCommonTypesManagedIdentityModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="ManagedIdentity.ManagedIdentityTrackedResourceData"/>. </summary>
         /// <param name="id"> The id. </param>

@@ -10,9 +10,10 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Models;
+using Azure.ResourceManager.Models;
+using _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Models;
 
-namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
+namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
 {
     public partial class ManagedIdentityTrackedResourceData : IUtf8JsonSerializable, IJsonModel<ManagedIdentityTrackedResourceData>
     {

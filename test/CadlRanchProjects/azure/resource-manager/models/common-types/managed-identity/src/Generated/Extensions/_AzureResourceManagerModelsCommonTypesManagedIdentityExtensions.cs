@@ -8,23 +8,25 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Mocking;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Mocking;
 
-namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
+namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
 {
-    /// <summary> A class to add extension methods to Azure.ResourceManager.Models.CommonTypes.ManagedIdentity. </summary>
-    public static partial class ModelsCommonTypesManagedIdentityExtensions
+    /// <summary> A class to add extension methods to _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity. </summary>
+    public static partial class _AzureResourceManagerModelsCommonTypesManagedIdentityExtensions
     {
-        private static MockableModelsCommonTypesManagedIdentityArmClient GetMockableModelsCommonTypesManagedIdentityArmClient(ArmClient client)
+        private static Mockable_AzureResourceManagerModelsCommonTypesManagedIdentityArmClient GetMockable_AzureResourceManagerModelsCommonTypesManagedIdentityArmClient(ArmClient client)
         {
-            return client.GetCachedClient(client0 => new MockableModelsCommonTypesManagedIdentityArmClient(client0));
+            return client.GetCachedClient(client0 => new Mockable_AzureResourceManagerModelsCommonTypesManagedIdentityArmClient(client0));
         }
 
-        private static MockableModelsCommonTypesManagedIdentityResourceGroupResource GetMockableModelsCommonTypesManagedIdentityResourceGroupResource(ArmResource resource)
+        private static Mockable_AzureResourceManagerModelsCommonTypesManagedIdentityResourceGroupResource GetMockable_AzureResourceManagerModelsCommonTypesManagedIdentityResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client => new MockableModelsCommonTypesManagedIdentityResourceGroupResource(client, resource.Id));
+            return resource.GetCachedClient(client => new Mockable_AzureResourceManagerModelsCommonTypesManagedIdentityResourceGroupResource(client, resource.Id));
         }
 
         /// <summary>
@@ -32,7 +34,7 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
         /// You can use <see cref="ManagedIdentityTrackedResource.CreateResourceIdentifier" /> to create a <see cref="ManagedIdentityTrackedResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MockableModelsCommonTypesManagedIdentityArmClient.GetManagedIdentityTrackedResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="Mockable_AzureResourceManagerModelsCommonTypesManagedIdentityArmClient.GetManagedIdentityTrackedResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -43,14 +45,14 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
         {
             Argument.AssertNotNull(client, nameof(client));
 
-            return GetMockableModelsCommonTypesManagedIdentityArmClient(client).GetManagedIdentityTrackedResource(id);
+            return GetMockable_AzureResourceManagerModelsCommonTypesManagedIdentityArmClient(client).GetManagedIdentityTrackedResource(id);
         }
 
         /// <summary>
         /// Gets a collection of ManagedIdentityTrackedResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MockableModelsCommonTypesManagedIdentityResourceGroupResource.GetManagedIdentityTrackedResources()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="Mockable_AzureResourceManagerModelsCommonTypesManagedIdentityResourceGroupResource.GetManagedIdentityTrackedResources()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -60,7 +62,7 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
         {
             Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
-            return GetMockableModelsCommonTypesManagedIdentityResourceGroupResource(resourceGroupResource).GetManagedIdentityTrackedResources();
+            return GetMockable_AzureResourceManagerModelsCommonTypesManagedIdentityResourceGroupResource(resourceGroupResource).GetManagedIdentityTrackedResources();
         }
 
         /// <summary>
@@ -85,7 +87,7 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MockableModelsCommonTypesManagedIdentityResourceGroupResource.GetManagedIdentityTrackedResourceAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="Mockable_AzureResourceManagerModelsCommonTypesManagedIdentityResourceGroupResource.GetManagedIdentityTrackedResourceAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -98,7 +100,7 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
         {
             Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
-            return await GetMockableModelsCommonTypesManagedIdentityResourceGroupResource(resourceGroupResource).GetManagedIdentityTrackedResourceAsync(managedIdentityTrackedResourceName, cancellationToken).ConfigureAwait(false);
+            return await GetMockable_AzureResourceManagerModelsCommonTypesManagedIdentityResourceGroupResource(resourceGroupResource).GetManagedIdentityTrackedResourceAsync(managedIdentityTrackedResourceName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -123,7 +125,7 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MockableModelsCommonTypesManagedIdentityResourceGroupResource.GetManagedIdentityTrackedResource(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="Mockable_AzureResourceManagerModelsCommonTypesManagedIdentityResourceGroupResource.GetManagedIdentityTrackedResource(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -136,7 +138,7 @@ namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
         {
             Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
-            return GetMockableModelsCommonTypesManagedIdentityResourceGroupResource(resourceGroupResource).GetManagedIdentityTrackedResource(managedIdentityTrackedResourceName, cancellationToken);
+            return GetMockable_AzureResourceManagerModelsCommonTypesManagedIdentityResourceGroupResource(resourceGroupResource).GetManagedIdentityTrackedResource(managedIdentityTrackedResourceName, cancellationToken);
         }
     }
 }

@@ -6,25 +6,26 @@
 #nullable disable
 
 using Azure.Core;
+using Azure.ResourceManager;
 
-namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Mocking
+namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Mocking
 {
     /// <summary> A class to add extension methods to ArmClient. </summary>
-    public partial class MockableModelsCommonTypesManagedIdentityArmClient : ArmResource
+    public partial class Mockable_AzureResourceManagerModelsCommonTypesManagedIdentityArmClient : ArmResource
     {
-        /// <summary> Initializes a new instance of the <see cref="MockableModelsCommonTypesManagedIdentityArmClient"/> class for mocking. </summary>
-        protected MockableModelsCommonTypesManagedIdentityArmClient()
+        /// <summary> Initializes a new instance of the <see cref="Mockable_AzureResourceManagerModelsCommonTypesManagedIdentityArmClient"/> class for mocking. </summary>
+        protected Mockable_AzureResourceManagerModelsCommonTypesManagedIdentityArmClient()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="MockableModelsCommonTypesManagedIdentityArmClient"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="Mockable_AzureResourceManagerModelsCommonTypesManagedIdentityArmClient"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal MockableModelsCommonTypesManagedIdentityArmClient(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal Mockable_AzureResourceManagerModelsCommonTypesManagedIdentityArmClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
-        internal MockableModelsCommonTypesManagedIdentityArmClient(ArmClient client) : this(client, ResourceIdentifier.Root)
+        internal Mockable_AzureResourceManagerModelsCommonTypesManagedIdentityArmClient(ArmClient client) : this(client, ResourceIdentifier.Root)
         {
         }
 

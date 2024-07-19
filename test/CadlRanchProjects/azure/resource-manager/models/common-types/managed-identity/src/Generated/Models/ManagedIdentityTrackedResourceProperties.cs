@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Models
+namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Models
 {
     /// <summary> Managed Identity Arm Resource Properties. </summary>
     internal partial class ManagedIdentityTrackedResourceProperties

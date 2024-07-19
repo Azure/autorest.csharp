@@ -8,9 +8,10 @@
 using System;
 using System.Collections.Generic;
 using Azure.Core;
-using Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Models;
+using Azure.ResourceManager.Models;
+using _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.Models;
 
-namespace Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
+namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
 {
     /// <summary>
     /// A class representing the ManagedIdentityTrackedResource data model.

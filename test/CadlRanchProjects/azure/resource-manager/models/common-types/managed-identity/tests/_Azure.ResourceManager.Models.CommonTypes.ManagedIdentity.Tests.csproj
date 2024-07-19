@@ -6,8 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(AzureCoreTestFramework)" />
-    <ProjectReference Include="..\src\Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.csproj" />
+    <ProjectReference Include="..\src\_Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.csproj" />
   </ItemGroup>
 
   <ItemGroup>
