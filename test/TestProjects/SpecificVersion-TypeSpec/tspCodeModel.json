@@ -225,7 +225,7 @@
       "Kind": "model",
       "Name": "ExportedResource",
       "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.ExportedResource",
-      "Usage": "Output",
+      "Usage": "Output,Json",
       "Properties": [
        {
         "$id": "33",
@@ -289,7 +289,7 @@
        "Kind": "model",
        "Name": "Resource",
        "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.Resource",
-       "Usage": "Input,Output",
+       "Usage": "Input,Output,Json",
        "Properties": [
         {
          "$id": "41",

@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "PngImageAsJson",
    "CrossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.PngImageAsJson",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "3",

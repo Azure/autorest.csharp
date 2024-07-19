@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "BodyModel",
    "CrossLanguageDefinitionId": "Parameters.BodyOptionality.BodyModel",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "3",
@@ -30,7 +30,7 @@
    "Kind": "model",
    "Name": "RequiredImplicitRequest",
    "CrossLanguageDefinitionId": "Parameters.BodyOptionality.requiredImplicit.Request.anonymous",
-   "Usage": "Spread",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "6",

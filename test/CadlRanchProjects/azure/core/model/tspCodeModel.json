@@ -33,7 +33,7 @@
    "Kind": "model",
    "Name": "AzureEmbeddingModel",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Model.AzureEmbeddingModel",
-   "Usage": "Input,Output",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "6",

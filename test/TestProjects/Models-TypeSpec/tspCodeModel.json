@@ -33,7 +33,7 @@
    ],
    "Description": "Fixed string enum",
    "IsExtensible": false,
-   "Usage": "Input,Output"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "7",
@@ -64,7 +64,7 @@
    "Deprecated": "deprecated for test",
    "Description": "Fixed int enum",
    "IsExtensible": false,
-   "Usage": "Input,Output"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "12",
@@ -95,7 +95,7 @@
    "Deprecated": "deprecated for test",
    "Description": "Extensible enum",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "17",
@@ -206,7 +206,7 @@
    "Kind": "model",
    "Name": "BaseModelWithDiscriminatorDefinedOnBase",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithDiscriminatorDefinedOnBase",
-   "Usage": "Input,Output",
+   "Usage": "Input,Output,Json",
    "Description": "A base model in the discriminated set inheriting from a base with the predefined discriminator property",
    "DiscriminatorProperty": {
     "$id": "34",
@@ -226,7 +226,7 @@
     "Kind": "model",
     "Name": "BaseModelWithARequiredProperty",
     "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithARequiredProperty",
-    "Usage": "Input,Output",
+    "Usage": "Input,Output,Json",
     "Description": "A base model with a required property",
     "Properties": [
      {
@@ -267,7 +267,7 @@
      "Kind": "model",
      "Name": "DerivedWithDiscriminatorDefinedOnBase",
      "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedWithDiscriminatorDefinedOnBase",
-     "Usage": "Input,Output",
+     "Usage": "Input,Output,Json",
      "Description": "A derived class in the discriminated set inheriting from a base with the predefined discriminator property",
      "DiscriminatorValue": "A",
      "BaseModel": {
@@ -331,7 +331,7 @@
    "Kind": "model",
    "Name": "OutputBaseModelWithDiscriminator",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.OutputBaseModelWithDiscriminator",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Output model with a discriminator",
    "DiscriminatorProperty": {
     "$id": "51",
@@ -358,7 +358,7 @@
      "Kind": "model",
      "Name": "FirstDerivedOutputModel",
      "CrossLanguageDefinitionId": "ModelsTypeSpec.FirstDerivedOutputModel",
-     "Usage": "Output",
+     "Usage": "Output,Json",
      "Description": "First derived model as an output",
      "DiscriminatorValue": "first",
      "BaseModel": {
@@ -402,7 +402,7 @@
      "Kind": "model",
      "Name": "SecondDerivedOutputModel",
      "CrossLanguageDefinitionId": "ModelsTypeSpec.SecondDerivedOutputModel",
-     "Usage": "Output",
+     "Usage": "Output,Json",
      "Description": "Second derived model as an output",
      "DiscriminatorValue": "second",
      "BaseModel": {
@@ -454,7 +454,7 @@
    "Kind": "model",
    "Name": "InputModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.InputModel",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Description": "Model used only as input",
    "Properties": [
     {
@@ -555,7 +555,7 @@
       "Kind": "model",
       "Name": "BaseModel",
       "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModel",
-      "Usage": "Input,Output",
+      "Usage": "Input,Output,Json",
       "Description": "Base model",
       "Properties": []
      },
@@ -623,7 +623,7 @@
        "Kind": "model",
        "Name": "CollectionItem",
        "CrossLanguageDefinitionId": "ModelsTypeSpec.CollectionItem",
-       "Usage": "Input,Output",
+       "Usage": "Input,Output,Json",
        "Description": "Collection item model",
        "Properties": [
         {
@@ -643,14 +643,14 @@
            "Kind": "model",
            "Name": "RecordItem",
            "CrossLanguageDefinitionId": "ModelsTypeSpec.RecordItem",
-           "Usage": "Input,Output",
+           "Usage": "Input,Output,Json",
            "Description": "Record item model",
            "BaseModel": {
             "$id": "99",
             "Kind": "model",
             "Name": "DerivedModel",
             "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedModel",
-            "Usage": "Input,Output",
+            "Usage": "Input,Output,Json",
             "Description": "Derived model",
             "BaseModel": {
              "$ref": "84"
@@ -953,7 +953,7 @@
    "Kind": "model",
    "Name": "RoundTripModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripModel",
-   "Usage": "Input,Output",
+   "Usage": "Input,Output,Json",
    "Description": "Model used both as input and output",
    "BaseModel": {
     "$ref": "84"
@@ -1105,7 +1105,7 @@
       "Kind": "model",
       "Name": "BaseModelWithDiscriminator",
       "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithDiscriminator",
-      "Usage": "Input,Output",
+      "Usage": "Input,Output,Json",
       "Description": "Base model with discriminator property.",
       "DiscriminatorProperty": {
        "$id": "170",
@@ -1156,7 +1156,7 @@
         "Kind": "model",
         "Name": "DerivedModelWithDiscriminatorA",
         "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedModelWithDiscriminatorA",
-        "Usage": "Input,Output",
+        "Usage": "Input,Output,Json",
         "Description": "Deriver model with discriminator property.",
         "DiscriminatorValue": "A",
         "BaseModel": {
@@ -1200,7 +1200,7 @@
         "Kind": "model",
         "Name": "DerivedModelWithDiscriminatorB",
         "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedModelWithDiscriminatorB",
-        "Usage": "Input,Output",
+        "Usage": "Input,Output,Json",
         "Description": "Deriver model with discriminator property.",
         "DiscriminatorValue": "B",
         "BaseModel": {
@@ -1573,7 +1573,7 @@
       "Kind": "model",
       "Name": "BaseModelWithDiscriminatorFromIsKeyword",
       "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithDiscriminatorFromIsKeyword",
-      "Usage": "Input,Output",
+      "Usage": "Input,Output,Json",
       "Description": "A base model in the discriminated set but its discriminator propery comes with the is keyword",
       "DiscriminatorProperty": {
        "$id": "243",
@@ -1612,7 +1612,7 @@
         "Kind": "model",
         "Name": "DerivedWithDiscriminatorFromIsKeyword",
         "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedWithDiscriminatorFromIsKeyword",
-        "Usage": "Input,Output",
+        "Usage": "Input,Output,Json",
         "Description": "A derived class in the discriminated set inheriting from a base whose discriminator property comes from is keyword",
         "DiscriminatorValue": "A",
         "BaseModel": {
@@ -1690,7 +1690,7 @@
    "Kind": "model",
    "Name": "RoundTripPrimitiveModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripPrimitiveModel",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Model used both as input and output with primitive types",
    "BaseModel": {
     "$ref": "84"
@@ -1843,7 +1843,7 @@
    "Kind": "model",
    "Name": "RoundTripOptionalModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripOptionalModel",
-   "Usage": "Input,Output",
+   "Usage": "Input,Output,Json",
    "Deprecation": "deprecated for test",
    "Description": "RoundTrip model with optional properties.",
    "Properties": [
@@ -1945,14 +1945,14 @@
       "Kind": "model",
       "Name": "DerivedModelWithProperties",
       "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedModelWithProperties",
-      "Usage": "Input,Output",
+      "Usage": "Input,Output,Json",
       "Description": "Derived model with properties",
       "BaseModel": {
        "$id": "297",
        "Kind": "model",
        "Name": "BaseModelWithProperties",
        "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithProperties",
-       "Usage": "Input,Output",
+       "Usage": "Input,Output,Json",
        "Description": "Base model with properties",
        "Properties": [
         {
@@ -2132,7 +2132,7 @@
    "Kind": "model",
    "Name": "RoundTripReadOnlyModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripReadOnlyModel",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Output model with readonly properties.",
    "Properties": [
     {
@@ -2524,7 +2524,7 @@
    "Kind": "model",
    "Name": "OutputModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.OutputModel",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Model used only as output",
    "Properties": [
     {
@@ -2685,7 +2685,7 @@
    "Kind": "model",
    "Name": "InputRecursiveModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.InputRecursiveModel",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Description": "Input model that has property of its own type",
    "Properties": [
     {
@@ -2718,7 +2718,7 @@
    "Kind": "model",
    "Name": "RoundTripRecursiveModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripRecursiveModel",
-   "Usage": "Input,Output",
+   "Usage": "Input,Output,Json",
    "Description": "Roundtrip model that has property of its own type",
    "Properties": [
     {
@@ -2751,7 +2751,7 @@
    "Kind": "model",
    "Name": "ErrorModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.ErrorModel",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Output model that has property of its own type",
    "Properties": [
     {
@@ -2784,14 +2784,14 @@
    "Kind": "model",
    "Name": "RoundTripOnNoUse",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripOnNoUse",
-   "Usage": "Input,Output",
+   "Usage": "Input,Output,Json",
    "Description": "Derived model",
    "BaseModel": {
     "$id": "420",
     "Kind": "model",
     "Name": "NoUseBase",
     "CrossLanguageDefinitionId": "ModelsTypeSpec.NoUseBase",
-    "Usage": "Input,Output",
+    "Usage": "Input,Output,Json",
     "Description": "Base model",
     "Properties": [
      {
@@ -2836,20 +2836,20 @@
    "Kind": "model",
    "Name": "Int32ValuesFacet",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.Int32ValuesFacet",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Description": "Facets an int32 field by the specified value ranges.",
    "BaseModel": {
     "$id": "426",
     "Kind": "model",
     "Name": "NumericValuesFacet",
     "CrossLanguageDefinitionId": "ModelsTypeSpec.NumericValuesFacet",
-    "Usage": "Input",
+    "Usage": "Input,Json",
     "BaseModel": {
      "$id": "427",
      "Kind": "model",
      "Name": "Facet",
      "CrossLanguageDefinitionId": "ModelsTypeSpec.Facet",
-     "Usage": "Input",
+     "Usage": "Input,Json",
      "Description": "Facet",
      "Properties": [
       {

@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "Bird",
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.Bird",
-   "Usage": "Input,Output",
+   "Usage": "Input,Output,Json",
    "Description": "This is base model for polymorphic single level inheritance with a discriminator.",
    "DiscriminatorProperty": {
     "$id": "3",
@@ -48,7 +48,7 @@
      "Kind": "model",
      "Name": "SeaGull",
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.SeaGull",
-     "Usage": "Input,Output",
+     "Usage": "Input,Output,Json",
      "Description": "The second level model in polymorphic single level inheritance.",
      "DiscriminatorValue": "seagull",
      "BaseModel": {
@@ -80,7 +80,7 @@
      "Kind": "model",
      "Name": "Sparrow",
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.Sparrow",
-     "Usage": "Input,Output",
+     "Usage": "Input,Output,Json",
      "Description": "The second level model in polymorphic single level inheritance.",
      "DiscriminatorValue": "sparrow",
      "BaseModel": {
@@ -112,7 +112,7 @@
      "Kind": "model",
      "Name": "Goose",
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.Goose",
-     "Usage": "Input,Output",
+     "Usage": "Input,Output,Json",
      "Description": "The second level model in polymorphic single level inheritance.",
      "DiscriminatorValue": "goose",
      "BaseModel": {
@@ -144,7 +144,7 @@
      "Kind": "model",
      "Name": "Eagle",
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.Eagle",
-     "Usage": "Input,Output",
+     "Usage": "Input,Output,Json",
      "Description": "The second level model in polymorphic single levels inheritance which contains references to other polymorphic instances.",
      "DiscriminatorValue": "eagle",
      "BaseModel": {
@@ -237,7 +237,7 @@
    "Kind": "model",
    "Name": "Dinosaur",
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.Dinosaur",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Define a base class in the legacy way. Discriminator property is not explicitly defined in the model.",
    "DiscriminatorProperty": {
     "$id": "31",
@@ -276,7 +276,7 @@
      "Kind": "model",
      "Name": "TRex",
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.TRex",
-     "Usage": "Output",
+     "Usage": "Output,Json",
      "Description": "The second level legacy model in polymorphic single level inheritance.",
      "DiscriminatorValue": "t-rex",
      "BaseModel": {

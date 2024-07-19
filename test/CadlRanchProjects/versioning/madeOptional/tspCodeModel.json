@@ -40,7 +40,7 @@
    "Kind": "model",
    "Name": "TestModel",
    "CrossLanguageDefinitionId": "Versioning.MadeOptional.TestModel",
-   "Usage": "Input,Output",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "7",

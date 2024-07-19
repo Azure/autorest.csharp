@@ -283,7 +283,7 @@
    ],
    "Description": "Simple enum",
    "IsExtensible": false,
-   "Usage": "Input,Output"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "43",
@@ -313,7 +313,7 @@
    ],
    "Description": "Extensible enum",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "48",
@@ -343,7 +343,7 @@
    ],
    "Description": "Int based extensible enum",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "53",
@@ -373,7 +373,7 @@
    ],
    "Description": "Float based extensible enum",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "58",
@@ -403,7 +403,7 @@
    ],
    "Description": "float fixed enum",
    "IsExtensible": false,
-   "Usage": "Input,Output"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "63",
@@ -433,7 +433,7 @@
    ],
    "Description": "int fixed enum",
    "IsExtensible": false,
-   "Usage": "Input,Output"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "68",
@@ -491,7 +491,7 @@
    "Kind": "model",
    "Name": "Thing",
    "CrossLanguageDefinitionId": "NewProjectTypeSpec.Thing",
-   "Usage": "Input,Output",
+   "Usage": "Input,Output,Json",
    "Description": "A model with a few properties of literal types",
    "Properties": [
     {
@@ -688,7 +688,7 @@
    "Kind": "model",
    "Name": "AnonymousBodyRequest",
    "CrossLanguageDefinitionId": "NewProjectTypeSpec.anonymousBody.Request.anonymous",
-   "Usage": "Spread",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "107",
@@ -884,7 +884,7 @@
    "Kind": "model",
    "Name": "FriendlyModelRequest",
    "CrossLanguageDefinitionId": "NewProjectTypeSpec.friendlyModel.Request.anonymous",
-   "Usage": "Spread",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "136",
@@ -905,7 +905,7 @@
    "Kind": "model",
    "Name": "Friend",
    "CrossLanguageDefinitionId": "NewProjectTypeSpec.NotFriend",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
     {
@@ -927,7 +927,7 @@
    "Kind": "model",
    "Name": "RoundTripModel",
    "CrossLanguageDefinitionId": "NewProjectTypeSpec.RoundTripModel",
-   "Usage": "Input,Output",
+   "Usage": "Input,Output,Json",
    "Description": "this is a roundtrip model",
    "Properties": [
     {

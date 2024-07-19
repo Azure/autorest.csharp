@@ -31,7 +31,7 @@
    "Kind": "model",
    "Name": "SpreadModelRequest",
    "CrossLanguageDefinitionId": "SpreadTypeSpec.spreadModel.Request.anonymous",
-   "Usage": "Spread",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "6",
@@ -64,7 +64,7 @@
    "Kind": "model",
    "Name": "SpreadAliasRequest",
    "CrossLanguageDefinitionId": "SpreadTypeSpec.spreadAlias.Request.anonymous",
-   "Usage": "Spread",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "11",
@@ -97,7 +97,7 @@
    "Kind": "model",
    "Name": "SpreadMultiTargetAliasRequest",
    "CrossLanguageDefinitionId": "spreadMultiTargetAlias.Request.anonymous",
-   "Usage": "Spread",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "16",
@@ -130,7 +130,7 @@
    "Kind": "model",
    "Name": "SpreadAliasWithModelRequest",
    "CrossLanguageDefinitionId": "spreadAliasWithModel.Request.anonymous",
-   "Usage": "Spread",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "21",
@@ -163,7 +163,7 @@
    "Kind": "model",
    "Name": "SpreadAliasWithSpreadAliasRequest",
    "CrossLanguageDefinitionId": "spreadAliasWithSpreadAlias.Request.anonymous",
-   "Usage": "Spread",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "26",
@@ -196,7 +196,7 @@
    "Kind": "model",
    "Name": "SpreadAliasWithOptionalPropsRequest",
    "CrossLanguageDefinitionId": "spreadAliasWithOptionalProps.Request.anonymous",
-   "Usage": "Spread",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "31",
@@ -277,7 +277,7 @@
    "Kind": "model",
    "Name": "SpreadAliasWithCollectionsRequest",
    "CrossLanguageDefinitionId": "SpreadTypeSpec.spreadAliasWithCollections.Request.anonymous",
-   "Usage": "Spread",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "44",
@@ -316,75 +316,6 @@
      "IsReadOnly": false
     }
    ]
-<<<<<<< HEAD
-=======
-  },
-  {
-   "$id": "45",
-   "Kind": "model",
-   "Name": "SpreadModelRequest",
-   "CrossLanguageDefinitionId": "SpreadTypeSpec.spreadModel.Request.anonymous",
-   "Usage": "Input",
-   "Properties": [
-    {
-     "$id": "46",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "name of the Thing",
-     "Type": {
-      "$id": "47",
-      "Kind": "string"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "48",
-     "Name": "age",
-     "SerializedName": "age",
-     "Description": "age of the Thing",
-     "Type": {
-      "$id": "49",
-      "Kind": "int32"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "50",
-   "Kind": "model",
-   "Name": "SpreadAliasWithModelRequest",
-   "CrossLanguageDefinitionId": "spreadAliasWithModel.Request.anonymous",
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "51",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "name of the Thing",
-     "Type": {
-      "$id": "52",
-      "Kind": "string"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "53",
-     "Name": "age",
-     "SerializedName": "age",
-     "Description": "age of the Thing",
-     "Type": {
-      "$id": "54",
-      "Kind": "int32"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
->>>>>>> origin/feature/v3
   }
  ],
  "Clients": [

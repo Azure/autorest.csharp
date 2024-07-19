@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "InputModel",
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.InputModel",
-   "Usage": "Input,Output",
+   "Usage": "Input,Output,Json",
    "Description": "Usage override to roundtrip.",
    "Properties": [
     {
@@ -31,7 +31,7 @@
    "Kind": "model",
    "Name": "OutputModel",
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.OutputModel",
-   "Usage": "Input,Output",
+   "Usage": "Input,Output,Json",
    "Description": "Usage override to roundtrip.",
    "Properties": [
     {
@@ -53,7 +53,7 @@
    "Kind": "model",
    "Name": "RoundTripModel",
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.RoundTripModel",
-   "Usage": "Input,Output",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "9",
@@ -65,7 +65,7 @@
       "Kind": "model",
       "Name": "ResultModel",
       "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.ResultModel",
-      "Usage": "Output",
+      "Usage": "Output,Json",
       "Properties": [
        {
         "$id": "11",

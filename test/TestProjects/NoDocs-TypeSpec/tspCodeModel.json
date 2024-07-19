@@ -315,7 +315,7 @@
    ],
    "Description": "enum with projected name used in a model",
    "IsExtensible": false,
-   "Usage": "Input"
+   "Usage": "Input,Json"
   },
   {
    "$id": "48",
@@ -345,7 +345,7 @@
    ],
    "Description": "Simple enum",
    "IsExtensible": false,
-   "Usage": "Input,Output"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "53",
@@ -375,7 +375,7 @@
    ],
    "Description": "Extensible enum",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "58",
@@ -405,7 +405,7 @@
    ],
    "Description": "Int based extensible enum",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "63",
@@ -435,7 +435,7 @@
    ],
    "Description": "Float based extensible enum",
    "IsExtensible": true,
-   "Usage": "Input,Output"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "68",
@@ -465,7 +465,7 @@
    ],
    "Description": "float fixed enum",
    "IsExtensible": false,
-   "Usage": "Input,Output"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "73",
@@ -495,7 +495,7 @@
    ],
    "Description": "int fixed enum",
    "IsExtensible": false,
-   "Usage": "Input,Output"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "78",
@@ -572,7 +572,7 @@
    "Kind": "model",
    "Name": "Thing",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.Thing",
-   "Usage": "Input,Output",
+   "Usage": "Input,Output,Json",
    "Description": "A model with a few properties of literal types",
    "Properties": [
     {
@@ -813,7 +813,7 @@
    "Kind": "model",
    "Name": "AnonymousBodyRequest",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.anonymousBody.Request.anonymous",
-   "Usage": "Spread",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "128",
@@ -1053,7 +1053,7 @@
    "Kind": "model",
    "Name": "FriendlyModelRequest",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.friendlyModel.Request.anonymous",
-   "Usage": "Spread",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "165",
@@ -1074,7 +1074,7 @@
    "Kind": "model",
    "Name": "Friend",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.NotFriend",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
     {
@@ -1096,7 +1096,7 @@
    "Kind": "model",
    "Name": "ProjectedNameModelRequest",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.projectedNameModel.Request.anonymous",
-   "Usage": "Spread",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "171",
@@ -1117,7 +1117,7 @@
    "Kind": "model",
    "Name": "ProjectedModel",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithProjectedName",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "this is a model with a projected name",
    "Properties": [
     {
@@ -1139,7 +1139,7 @@
    "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.returnsAnonymousModel.Response.anonymous",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": []
   },
   {
@@ -1147,14 +1147,14 @@
    "Kind": "model",
    "Name": "Extension",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.Extension",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Description": "extension",
    "BaseModel": {
     "$id": "178",
     "Kind": "model",
     "Name": "Element",
     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Element",
-    "Usage": "Input",
+    "Usage": "Input,Json",
     "Description": "element",
     "Properties": [
      {
@@ -1199,7 +1199,7 @@
    "Kind": "model",
    "Name": "Extendible",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.Extendible",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Description": "FHIR extendible element",
    "Properties": [
     {
@@ -1216,14 +1216,14 @@
        "Kind": "model",
        "Name": "ThereLevelExtension",
        "CrossLanguageDefinitionId": "NoDocsTypeSpec.ThereLevelExtension",
-       "Usage": "Input",
+       "Usage": "Input,Json",
        "Description": "extension",
        "BaseModel": {
         "$id": "187",
         "Kind": "model",
         "Name": "ThereLevelElement",
         "CrossLanguageDefinitionId": "NoDocsTypeSpec.ThereLevelElement",
-        "Usage": "Input",
+        "Usage": "Input,Json",
         "Description": "element",
         "Properties": [
          {
@@ -1278,14 +1278,14 @@
    "Kind": "model",
    "Name": "ChildModel",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.ChildModel",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Description": "ChildModel",
    "BaseModel": {
     "$id": "193",
     "Kind": "model",
     "Name": "BaseModel",
     "CrossLanguageDefinitionId": "NoDocsTypeSpec.BaseModel",
-    "Usage": "Input",
+    "Usage": "Input,Json",
     "Description": "parenetModel",
     "Properties": [
      {
@@ -1330,7 +1330,7 @@
    "Kind": "model",
    "Name": "ContainSelf",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.ContainSelf",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Description": "containself",
    "Properties": [
     {
@@ -1351,7 +1351,7 @@
    "Kind": "model",
    "Name": "ModelWithProjectedEnum",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithProjectedEnum",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "201",
@@ -1371,7 +1371,7 @@
    "Kind": "model",
    "Name": "AzureLocationModel",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.AzureLocationModel",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "203",
@@ -1393,7 +1393,7 @@
    "Kind": "model",
    "Name": "RoundTripModel",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel",
-   "Usage": "Input,Output",
+   "Usage": "Input,Output,Json",
    "Description": "this is a roundtrip model",
    "Properties": [
     {
@@ -1704,7 +1704,7 @@
       "Kind": "model",
       "Name": "ModelWithRequiredNullableProperties",
       "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithRequiredNullableProperties",
-      "Usage": "Input,Output",
+      "Usage": "Input,Output,Json",
       "Description": "A model with a few required nullable properties",
       "Properties": [
        {
@@ -1785,7 +1785,7 @@
          "Kind": "model",
          "Name": "ModelForUnion",
          "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelForUnion",
-         "Usage": "Input,Output",
+         "Usage": "Input,Output,Json",
          "Description": "This is a model only used in union types, please do not use it anywhere else.",
          "Properties": [
           {

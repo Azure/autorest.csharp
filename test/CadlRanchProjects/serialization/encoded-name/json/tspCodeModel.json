@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "JsonEncodedNameModel",
    "CrossLanguageDefinitionId": "Serialization.EncodedName.Json.Property.JsonEncodedNameModel",
-   "Usage": "Input,Output",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "3",

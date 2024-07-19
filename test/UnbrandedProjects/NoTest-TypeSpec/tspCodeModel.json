@@ -136,7 +136,7 @@
    "Kind": "model",
    "Name": "Thing",
    "CrossLanguageDefinitionId": "NoTestTypeSpec.Thing",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "A model with a few properties of literal types",
    "Properties": [
     {

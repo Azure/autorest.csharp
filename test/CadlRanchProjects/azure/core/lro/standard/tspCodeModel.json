@@ -78,7 +78,7 @@
    "Kind": "model",
    "Name": "User",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.User",
-   "Usage": "Input,Output",
+   "Usage": "Input,Output,Json",
    "Description": "Details about a user.",
    "Properties": [
     {
@@ -310,7 +310,7 @@
       "Kind": "model",
       "Name": "ExportedUser",
       "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.ExportedUser",
-      "Usage": "Output",
+      "Usage": "Output,Json",
       "Description": "The exported user data.",
       "Properties": [
        {

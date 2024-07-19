@@ -9,14 +9,14 @@
    "Kind": "model",
    "Name": "Extension",
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Extension",
-   "Usage": "Input,Output",
+   "Usage": "Input,Output,Json",
    "Description": "extension",
    "BaseModel": {
     "$id": "3",
     "Kind": "model",
     "Name": "Element",
     "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Element",
-    "Usage": "Input,Output",
+    "Usage": "Input,Output,Json",
     "Description": "element",
     "Properties": [
      {
