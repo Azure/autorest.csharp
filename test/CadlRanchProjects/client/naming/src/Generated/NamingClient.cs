@@ -34,7 +34,7 @@ namespace Client.Naming
         }
 
         /// <summary> Initializes a new instance of NamingClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NamingClient(Uri endpoint, NamingClientOptions options)
@@ -635,13 +635,13 @@ namespace Client.Naming
             }
         }
 
-        private ClientModel _cachedClientModel;
+        private Model _cachedModel;
         private UnionEnum _cachedUnionEnum;
 
-        /// <summary> Initializes a new instance of ClientModel. </summary>
-        public virtual ClientModel GetClientModelClient()
+        /// <summary> Initializes a new instance of Model. </summary>
+        public virtual Model GetModelClient()
         {
-            return Volatile.Read(ref _cachedClientModel) ?? Interlocked.CompareExchange(ref _cachedClientModel, new ClientModel(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedClientModel;
+            return Volatile.Read(ref _cachedModel) ?? Interlocked.CompareExchange(ref _cachedModel, new Model(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedModel;
         }
 
         /// <summary> Initializes a new instance of UnionEnum. </summary>
@@ -659,7 +659,6 @@ namespace Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/operation", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -673,7 +672,6 @@ namespace Client.Naming
             uri.AppendPath("/client/naming/parameter", false);
             uri.AppendQuery("defaultName", clientName, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -686,7 +684,6 @@ namespace Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/property/client", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -701,7 +698,6 @@ namespace Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/property/language", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -716,7 +712,6 @@ namespace Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/property/compatible-with-encoded-name", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -732,7 +727,6 @@ namespace Client.Naming
             uri.AppendPath("/client/naming/header", false);
             request.Uri = uri;
             request.Headers.Add("default-name", clientName);
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -745,7 +739,6 @@ namespace Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/header", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

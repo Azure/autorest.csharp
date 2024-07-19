@@ -36,7 +36,7 @@ namespace _Type.Property.Nullable
         /// <summary> Initializes a new instance of Duration. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Duration(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -395,7 +395,6 @@ namespace _Type.Property.Nullable
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/nullable/duration/non-null", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/merge-patch+json");
             request.Content = content;
             return message;
@@ -410,7 +409,6 @@ namespace _Type.Property.Nullable
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/nullable/duration/null", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/merge-patch+json");
             request.Content = content;
             return message;

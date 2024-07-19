@@ -36,14 +36,14 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> Initializes a new instance of SpreadTypeSpecClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Endpoint Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SpreadTypeSpecClient(Uri endpoint) : this(endpoint, new SpreadTypeSpecClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of SpreadTypeSpecClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Endpoint Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SpreadTypeSpecClient(Uri endpoint, SpreadTypeSpecClientOptions options)
@@ -66,9 +66,9 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            Thing thing = new Thing(name, age, null);
+            SpreadModelRequest spreadModelRequest = new SpreadModelRequest(name, age, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadModelAsync(thing.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadModelAsync(spreadModelRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -82,9 +82,9 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            Thing thing = new Thing(name, age, null);
+            SpreadModelRequest spreadModelRequest = new SpreadModelRequest(name, age, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadModel(thing.ToRequestContent(), context);
+            Response response = SpreadModel(spreadModelRequest.ToRequestContent(), context);
             return response;
         }
 
@@ -416,9 +416,9 @@ namespace SpreadTypeSpec
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(name, nameof(name));
 
-            Thing thing = new Thing(name, age, null);
+            SpreadAliasWithModelRequest spreadAliasWithModelRequest = new SpreadAliasWithModelRequest(name, age, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadAliasWithModelAsync(id, top, thing.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadAliasWithModelAsync(id, top, spreadAliasWithModelRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -436,9 +436,9 @@ namespace SpreadTypeSpec
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(name, nameof(name));
 
-            Thing thing = new Thing(name, age, null);
+            SpreadAliasWithModelRequest spreadAliasWithModelRequest = new SpreadAliasWithModelRequest(name, age, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadAliasWithModel(id, top, thing.ToRequestContent(), context);
+            Response response = SpreadAliasWithModel(id, top, spreadAliasWithModelRequest.ToRequestContent(), context);
             return response;
         }
 
@@ -677,7 +677,7 @@ namespace SpreadTypeSpec
                 color,
                 age,
                 items.ToList(),
-                elements?.ToList() as IList<string> ?? new ChangeTrackingList<string>(),
+                elements?.ToList() as IReadOnlyList<string> ?? new ChangeTrackingList<string>(),
                 null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadAliasWithOptionalPropsAsync(id, top, spreadAliasWithOptionalPropsRequest.ToRequestContent(), context).ConfigureAwait(false);
@@ -707,7 +707,7 @@ namespace SpreadTypeSpec
                 color,
                 age,
                 items.ToList(),
-                elements?.ToList() as IList<string> ?? new ChangeTrackingList<string>(),
+                elements?.ToList() as IReadOnlyList<string> ?? new ChangeTrackingList<string>(),
                 null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadAliasWithOptionalProps(id, top, spreadAliasWithOptionalPropsRequest.ToRequestContent(), context);
@@ -810,7 +810,7 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
 
-            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList(), optionalStringList?.ToList() as IList<string> ?? new ChangeTrackingList<string>(), null);
+            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList(), optionalStringList?.ToList() as IReadOnlyList<string> ?? new ChangeTrackingList<string>(), null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadAliasWithCollectionsAsync(spreadAliasWithCollectionsRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
@@ -826,7 +826,7 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
 
-            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList(), optionalStringList?.ToList() as IList<string> ?? new ChangeTrackingList<string>(), null);
+            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList(), optionalStringList?.ToList() as IReadOnlyList<string> ?? new ChangeTrackingList<string>(), null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadAliasWithCollections(spreadAliasWithCollectionsRequest.ToRequestContent(), context);
             return response;
@@ -919,7 +919,6 @@ namespace SpreadTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/spreadModel", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -934,7 +933,6 @@ namespace SpreadTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/spreadAlias", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -951,7 +949,6 @@ namespace SpreadTypeSpec
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("top", top);
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -968,7 +965,6 @@ namespace SpreadTypeSpec
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("top", top);
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -985,7 +981,6 @@ namespace SpreadTypeSpec
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("top", top);
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -1002,7 +997,6 @@ namespace SpreadTypeSpec
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("top", top);
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -1017,7 +1011,6 @@ namespace SpreadTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/spreadAliasWithCollections", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

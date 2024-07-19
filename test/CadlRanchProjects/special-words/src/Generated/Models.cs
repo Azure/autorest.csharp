@@ -35,7 +35,7 @@ namespace SpecialWords
         /// <summary> Initializes a new instance of Models. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Models(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -3616,7 +3616,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/and", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3631,7 +3630,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/as", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3646,7 +3644,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/assert", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3661,7 +3658,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/async", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3676,7 +3672,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/await", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3691,7 +3686,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/break", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3706,7 +3700,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/class", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3721,7 +3714,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/constructor", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3736,7 +3728,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/continue", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3751,7 +3742,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/def", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3766,7 +3756,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/del", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3781,7 +3770,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/elif", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3796,7 +3784,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/else", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3811,7 +3798,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/except", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3826,7 +3812,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/exec", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3841,7 +3826,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/finally", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3856,7 +3840,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/for", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3871,7 +3854,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/from", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3886,7 +3868,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/global", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3901,7 +3882,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/if", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3916,7 +3896,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/import", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3931,7 +3910,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/in", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3946,7 +3924,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/is", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3961,7 +3938,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/lambda", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3976,7 +3952,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/not", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -3991,7 +3966,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/or", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -4006,7 +3980,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/pass", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -4021,7 +3994,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/raise", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -4036,7 +4008,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/return", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -4051,7 +4022,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/try", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -4066,7 +4036,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/while", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -4081,7 +4050,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/with", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -4096,7 +4064,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/yield", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

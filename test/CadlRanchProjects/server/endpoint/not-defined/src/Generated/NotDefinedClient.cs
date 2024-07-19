@@ -32,14 +32,14 @@ namespace Server.Endpoint.NotDefined
         }
 
         /// <summary> Initializes a new instance of NotDefinedClient. </summary>
-        /// <param name="endpoint"> Service endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NotDefinedClient(Uri endpoint) : this(endpoint, new NotDefinedClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of NotDefinedClient. </summary>
-        /// <param name="endpoint"> Service endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NotDefinedClient(Uri endpoint, NotDefinedClientOptions options)
@@ -123,7 +123,6 @@ namespace Server.Endpoint.NotDefined
             uri.Reset(_endpoint);
             uri.AppendPath("/server/endpoint/not-defined/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

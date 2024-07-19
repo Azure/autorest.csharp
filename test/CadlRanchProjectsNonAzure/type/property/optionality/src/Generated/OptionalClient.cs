@@ -9,7 +9,7 @@ using System.Threading;
 namespace Scm._Type.Property.Optionality
 {
     // Data plane generated client.
-    /// <summary> The Optional service client. </summary>
+    /// <summary> Illustrates models with optional properties. </summary>
     public partial class OptionalClient
     {
         private readonly ClientPipeline _pipeline;
@@ -24,7 +24,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Initializes a new instance of OptionalClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public OptionalClient(Uri endpoint, OptionalClientOptions options)

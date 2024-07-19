@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 namespace Parameters.Spread
 {
     // Data plane generated client.
-    /// <summary> The Spread service client. </summary>
+    /// <summary> Test for the spread operator. </summary>
     public partial class SpreadClient
     {
         private readonly HttpPipeline _pipeline;
@@ -31,7 +31,7 @@ namespace Parameters.Spread
         }
 
         /// <summary> Initializes a new instance of SpreadClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SpreadClient(Uri endpoint, SpreadClientOptions options)

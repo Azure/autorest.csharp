@@ -254,7 +254,6 @@ namespace Client.Structure.Service.Multiple.Client
             uri.AppendRaw(_client.ToSerialString(), true);
             uri.AppendPath("/one", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -269,7 +268,6 @@ namespace Client.Structure.Service.Multiple.Client
             uri.AppendRaw(_client.ToSerialString(), true);
             uri.AppendPath("/three", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -284,7 +282,6 @@ namespace Client.Structure.Service.Multiple.Client
             uri.AppendRaw(_client.ToSerialString(), true);
             uri.AppendPath("/five", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

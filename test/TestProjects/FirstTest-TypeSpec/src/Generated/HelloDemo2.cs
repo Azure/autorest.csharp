@@ -42,7 +42,7 @@ namespace FirstTestTypeSpec
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="tokenCredential"> The token credential to copy. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Endpoint Service. </param>
         internal HelloDemo2(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, TokenCredential tokenCredential, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -558,7 +558,7 @@ namespace FirstTestTypeSpec
             request.Uri = uri;
             request.Headers.Add("p1", p1);
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "text/plain");
+            request.Headers.Add("content-type", "text/plain");
             request.Content = content;
             return message;
         }

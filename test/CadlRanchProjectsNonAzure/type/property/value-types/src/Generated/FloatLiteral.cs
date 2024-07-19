@@ -27,7 +27,7 @@ namespace Scm._Type.Property.ValueTypes
 
         /// <summary> Initializes a new instance of FloatLiteral. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal FloatLiteral(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -201,7 +201,6 @@ namespace Scm._Type.Property.ValueTypes
             uri.Reset(_endpoint);
             uri.AppendPath("/type/property/value-types/float/literal", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

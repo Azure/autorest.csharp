@@ -35,7 +35,7 @@ namespace Parameters.CollectionFormat
         /// <summary> Initializes a new instance of Header. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Header(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -123,7 +123,6 @@ namespace Parameters.CollectionFormat
             uri.AppendPath("/parameters/collection-format/header/csv", false);
             request.Uri = uri;
             request.Headers.AddDelimited("colors", colors, ",");
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

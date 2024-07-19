@@ -34,7 +34,7 @@ namespace _Type.Model.Flatten
         }
 
         /// <summary> Initializes a new instance of FlattenClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public FlattenClient(Uri endpoint, FlattenClientOptions options)

@@ -26,7 +26,7 @@ namespace Scm._Type.Model.Inheritance.Recursive
         }
 
         /// <summary> Initializes a new instance of RecursiveClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public RecursiveClient(Uri endpoint, RecursiveClientOptions options)
@@ -190,7 +190,6 @@ namespace Scm._Type.Model.Inheritance.Recursive
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/recursive", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

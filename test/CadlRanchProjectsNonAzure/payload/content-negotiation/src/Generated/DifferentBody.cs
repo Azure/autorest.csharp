@@ -27,7 +27,7 @@ namespace Scm.Payload.ContentNegotiation
 
         /// <summary> Initializes a new instance of DifferentBody. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal DifferentBody(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -168,7 +168,7 @@ namespace Scm.Payload.ContentNegotiation
             uri.Reset(_endpoint);
             uri.AppendPath("/content-negotiation/different-body", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "image/png");
+            request.Headers.Set("accept", "image/png");
             message.Apply(options);
             return message;
         }
@@ -183,7 +183,7 @@ namespace Scm.Payload.ContentNegotiation
             uri.Reset(_endpoint);
             uri.AppendPath("/content-negotiation/different-body", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("accept", "application/json");
             message.Apply(options);
             return message;
         }

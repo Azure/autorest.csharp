@@ -34,14 +34,14 @@ namespace ModelReaderWriterValidationTypeSpec
         }
 
         /// <summary> Initializes a new instance of ModelReaderWriterValidationTypeSpecClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Endpoint Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ModelReaderWriterValidationTypeSpecClient(Uri endpoint) : this(endpoint, new ModelReaderWriterValidationTypeSpecClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ModelReaderWriterValidationTypeSpecClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Endpoint Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ModelReaderWriterValidationTypeSpecClient(Uri endpoint, ModelReaderWriterValidationTypeSpecClientOptions options)

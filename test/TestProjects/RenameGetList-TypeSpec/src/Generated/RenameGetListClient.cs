@@ -30,14 +30,14 @@ namespace RenameGetList
         }
 
         /// <summary> Initializes a new instance of RenameGetListClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Language Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public RenameGetListClient(Uri endpoint) : this(endpoint, new RenameGetListClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of RenameGetListClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Language Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public RenameGetListClient(Uri endpoint, RenameGetListClientOptions options)

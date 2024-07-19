@@ -42,7 +42,7 @@ namespace Authentication.Http.Custom
         }
 
         /// <summary> Initializes a new instance of CustomClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
@@ -191,7 +191,6 @@ namespace Authentication.Http.Custom
             uri.Reset(_endpoint);
             uri.AppendPath("/authentication/http/custom/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

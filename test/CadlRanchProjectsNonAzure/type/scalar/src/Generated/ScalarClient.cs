@@ -24,7 +24,7 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary> Initializes a new instance of ScalarClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ScalarClient(Uri endpoint, ScalarClientOptions options)
