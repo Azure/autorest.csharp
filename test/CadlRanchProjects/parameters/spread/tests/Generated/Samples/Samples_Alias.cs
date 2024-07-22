@@ -114,7 +114,7 @@ namespace Parameters.Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Alias_SpreadParameterWithInnerModel_ShortVersion()
+        public void Example_Alias_SpreadAsInnerModelParameter_ShortVersion()
         {
             Alias client = new SpreadClient().GetAliasClient();
 
@@ -122,14 +122,14 @@ namespace Parameters.Spread.Samples
             {
                 name = "<name>",
             });
-            Response response = client.SpreadParameterWithInnerModel("<id>", "<x-ms-test-header>", content);
+            Response response = client.SpreadAsInnerModelParameter("<id>", "<x-ms-test-header>", content);
 
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Alias_SpreadParameterWithInnerModel_ShortVersion_Async()
+        public async Task Example_Alias_SpreadAsInnerModelParameter_ShortVersion_Async()
         {
             Alias client = new SpreadClient().GetAliasClient();
 
@@ -137,32 +137,32 @@ namespace Parameters.Spread.Samples
             {
                 name = "<name>",
             });
-            Response response = await client.SpreadParameterWithInnerModelAsync("<id>", "<x-ms-test-header>", content);
+            Response response = await client.SpreadAsInnerModelParameterAsync("<id>", "<x-ms-test-header>", content);
 
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Alias_SpreadParameterWithInnerModel_ShortVersion_Convenience()
+        public void Example_Alias_SpreadAsInnerModelParameter_ShortVersion_Convenience()
         {
             Alias client = new SpreadClient().GetAliasClient();
 
-            Response response = client.SpreadParameterWithInnerModel("<id>", "<x-ms-test-header>", "<name>");
+            Response response = client.SpreadAsInnerModelParameter("<id>", "<x-ms-test-header>", "<name>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Alias_SpreadParameterWithInnerModel_ShortVersion_Convenience_Async()
+        public async Task Example_Alias_SpreadAsInnerModelParameter_ShortVersion_Convenience_Async()
         {
             Alias client = new SpreadClient().GetAliasClient();
 
-            Response response = await client.SpreadParameterWithInnerModelAsync("<id>", "<x-ms-test-header>", "<name>");
+            Response response = await client.SpreadAsInnerModelParameterAsync("<id>", "<x-ms-test-header>", "<name>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Alias_SpreadParameterWithInnerModel_AllParameters()
+        public void Example_Alias_SpreadAsInnerModelParameter_AllParameters()
         {
             Alias client = new SpreadClient().GetAliasClient();
 
@@ -170,14 +170,14 @@ namespace Parameters.Spread.Samples
             {
                 name = "<name>",
             });
-            Response response = client.SpreadParameterWithInnerModel("<id>", "<x-ms-test-header>", content);
+            Response response = client.SpreadAsInnerModelParameter("<id>", "<x-ms-test-header>", content);
 
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Alias_SpreadParameterWithInnerModel_AllParameters_Async()
+        public async Task Example_Alias_SpreadAsInnerModelParameter_AllParameters_Async()
         {
             Alias client = new SpreadClient().GetAliasClient();
 
@@ -185,27 +185,27 @@ namespace Parameters.Spread.Samples
             {
                 name = "<name>",
             });
-            Response response = await client.SpreadParameterWithInnerModelAsync("<id>", "<x-ms-test-header>", content);
+            Response response = await client.SpreadAsInnerModelParameterAsync("<id>", "<x-ms-test-header>", content);
 
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Alias_SpreadParameterWithInnerModel_AllParameters_Convenience()
+        public void Example_Alias_SpreadAsInnerModelParameter_AllParameters_Convenience()
         {
             Alias client = new SpreadClient().GetAliasClient();
 
-            Response response = client.SpreadParameterWithInnerModel("<id>", "<x-ms-test-header>", "<name>");
+            Response response = client.SpreadAsInnerModelParameter("<id>", "<x-ms-test-header>", "<name>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Alias_SpreadParameterWithInnerModel_AllParameters_Convenience_Async()
+        public async Task Example_Alias_SpreadAsInnerModelParameter_AllParameters_Convenience_Async()
         {
             Alias client = new SpreadClient().GetAliasClient();
 
-            Response response = await client.SpreadParameterWithInnerModelAsync("<id>", "<x-ms-test-header>", "<name>");
+            Response response = await client.SpreadAsInnerModelParameterAsync("<id>", "<x-ms-test-header>", "<name>");
         }
 
         [Test]
@@ -428,7 +428,7 @@ namespace Parameters.Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Alias_SpreadParameterWithInnerAlias_ShortVersion()
+        public void Example_Alias_SpreadAsInnerAliasParameter_ShortVersion()
         {
             Alias client = new SpreadClient().GetAliasClient();
 
@@ -437,14 +437,14 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
                 age = 1234,
             });
-            Response response = client.SpreadParameterWithInnerAlias("<id>", "<x-ms-test-header>", content);
+            Response response = client.SpreadAsInnerAliasParameter("<id>", "<x-ms-test-header>", content);
 
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Alias_SpreadParameterWithInnerAlias_ShortVersion_Async()
+        public async Task Example_Alias_SpreadAsInnerAliasParameter_ShortVersion_Async()
         {
             Alias client = new SpreadClient().GetAliasClient();
 
@@ -453,32 +453,32 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
                 age = 1234,
             });
-            Response response = await client.SpreadParameterWithInnerAliasAsync("<id>", "<x-ms-test-header>", content);
+            Response response = await client.SpreadAsInnerAliasParameterAsync("<id>", "<x-ms-test-header>", content);
 
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Alias_SpreadParameterWithInnerAlias_ShortVersion_Convenience()
+        public void Example_Alias_SpreadAsInnerAliasParameter_ShortVersion_Convenience()
         {
             Alias client = new SpreadClient().GetAliasClient();
 
-            Response response = client.SpreadParameterWithInnerAlias("<id>", "<x-ms-test-header>", "<name>", 1234);
+            Response response = client.SpreadAsInnerAliasParameter("<id>", "<x-ms-test-header>", "<name>", 1234);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Alias_SpreadParameterWithInnerAlias_ShortVersion_Convenience_Async()
+        public async Task Example_Alias_SpreadAsInnerAliasParameter_ShortVersion_Convenience_Async()
         {
             Alias client = new SpreadClient().GetAliasClient();
 
-            Response response = await client.SpreadParameterWithInnerAliasAsync("<id>", "<x-ms-test-header>", "<name>", 1234);
+            Response response = await client.SpreadAsInnerAliasParameterAsync("<id>", "<x-ms-test-header>", "<name>", 1234);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Alias_SpreadParameterWithInnerAlias_AllParameters()
+        public void Example_Alias_SpreadAsInnerAliasParameter_AllParameters()
         {
             Alias client = new SpreadClient().GetAliasClient();
 
@@ -487,14 +487,14 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
                 age = 1234,
             });
-            Response response = client.SpreadParameterWithInnerAlias("<id>", "<x-ms-test-header>", content);
+            Response response = client.SpreadAsInnerAliasParameter("<id>", "<x-ms-test-header>", content);
 
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Alias_SpreadParameterWithInnerAlias_AllParameters_Async()
+        public async Task Example_Alias_SpreadAsInnerAliasParameter_AllParameters_Async()
         {
             Alias client = new SpreadClient().GetAliasClient();
 
@@ -503,27 +503,27 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
                 age = 1234,
             });
-            Response response = await client.SpreadParameterWithInnerAliasAsync("<id>", "<x-ms-test-header>", content);
+            Response response = await client.SpreadAsInnerAliasParameterAsync("<id>", "<x-ms-test-header>", content);
 
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Alias_SpreadParameterWithInnerAlias_AllParameters_Convenience()
+        public void Example_Alias_SpreadAsInnerAliasParameter_AllParameters_Convenience()
         {
             Alias client = new SpreadClient().GetAliasClient();
 
-            Response response = client.SpreadParameterWithInnerAlias("<id>", "<x-ms-test-header>", "<name>", 1234);
+            Response response = client.SpreadAsInnerAliasParameter("<id>", "<x-ms-test-header>", "<name>", 1234);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Alias_SpreadParameterWithInnerAlias_AllParameters_Convenience_Async()
+        public async Task Example_Alias_SpreadAsInnerAliasParameter_AllParameters_Convenience_Async()
         {
             Alias client = new SpreadClient().GetAliasClient();
 
-            Response response = await client.SpreadParameterWithInnerAliasAsync("<id>", "<x-ms-test-header>", "<name>", 1234);
+            Response response = await client.SpreadAsInnerAliasParameterAsync("<id>", "<x-ms-test-header>", "<name>", 1234);
         }
     }
 }
