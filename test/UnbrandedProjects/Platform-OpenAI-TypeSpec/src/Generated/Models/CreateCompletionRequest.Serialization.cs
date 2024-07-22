@@ -261,7 +261,7 @@ namespace OpenAI.Models
             {
                 return null;
             }
-            CreateCompletionRequestModel model = default;
+            CreateRequestModel model = default;
             BinaryData prompt = default;
             string suffix = default;
             double? temperature = default;
@@ -283,7 +283,7 @@ namespace OpenAI.Models
             {
                 if (property.NameEquals("model"u8))
                 {
-                    model = new CreateCompletionRequestModel(property.Value.GetString());
+                    model = new CreateRequestModel(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("prompt"u8))

@@ -8,10 +8,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace _Azure.ResourceManager.Models.Resources.Models
+namespace _Type.Property.Optionality.Models
 {
-    /// <summary> The type used for update operations of the TopLevelTrackedResource. </summary>
-    public partial class TopLevelTrackedResourcePatch
+    /// <summary> Model with a plainTime property. </summary>
+    public partial class PlainTimeProperty
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -45,37 +45,21 @@ namespace _Azure.ResourceManager.Models.Resources.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="TopLevelTrackedResourcePatch"/>. </summary>
-        public TopLevelTrackedResourcePatch()
+        /// <summary> Initializes a new instance of <see cref="PlainTimeProperty"/>. </summary>
+        public PlainTimeProperty()
         {
-            Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="TopLevelTrackedResourcePatch"/>. </summary>
-        /// <param name="tags"> Resource tags. </param>
-        /// <param name="properties"></param>
+        /// <summary> Initializes a new instance of <see cref="PlainTimeProperty"/>. </summary>
+        /// <param name="property"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal TopLevelTrackedResourcePatch(IDictionary<string, string> tags, TopLevelTrackedResourceUpdateProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal PlainTimeProperty(TimeSpan? property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Tags = tags;
-            Properties = properties;
+            Property = property;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Resource tags. </summary>
-        public IDictionary<string, string> Tags { get; }
-        /// <summary> Gets or sets the properties. </summary>
-        internal TopLevelTrackedResourceUpdateProperties Properties { get; set; }
-        /// <summary> The description of the resource. </summary>
-        public string TopLevelTrackedResourceUpdateDescription
-        {
-            get => Properties is null ? default : Properties.Description;
-            set
-            {
-                if (Properties is null)
-                    Properties = new TopLevelTrackedResourceUpdateProperties();
-                Properties.Description = value;
-            }
-        }
+        /// <summary> Property. </summary>
+        public TimeSpan? Property { get; set; }
     }
 }

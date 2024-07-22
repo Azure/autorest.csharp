@@ -197,7 +197,7 @@
    "Kind": "model",
    "Name": "SpreadCompositeRequestMixRequest",
    "CrossLanguageDefinitionId": "spreadCompositeRequestMix.Request.anonymous",
-   "Usage": "Input",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "31",

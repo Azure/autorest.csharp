@@ -52,7 +52,7 @@ namespace OpenAI.Models
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="messages"/> is null. </exception>
-        public CreateChatCompletionRequest(CreateChatCompletionRequestModel model, IEnumerable<ChatCompletionRequestMessage> messages)
+        public CreateChatCompletionRequest(CreateRequestModel1 model, IEnumerable<ChatCompletionRequestMessage> messages)
         {
             Argument.AssertNotNull(messages, nameof(messages));
 
@@ -137,7 +137,7 @@ namespace OpenAI.Models
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
         /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CreateChatCompletionRequest(CreateChatCompletionRequestModel model, IList<ChatCompletionRequestMessage> messages, IList<ChatCompletionFunctions> functions, BinaryData functionCall, double? temperature, double? topP, long? n, long? maxTokens, BinaryData stop, double? presencePenalty, double? frequencyPenalty, IDictionary<string, long> logitBias, string user, bool? stream, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal CreateChatCompletionRequest(CreateRequestModel1 model, IList<ChatCompletionRequestMessage> messages, IList<ChatCompletionFunctions> functions, BinaryData functionCall, double? temperature, double? topP, long? n, long? maxTokens, BinaryData stop, double? presencePenalty, double? frequencyPenalty, IDictionary<string, long> logitBias, string user, bool? stream, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Model = model;
             Messages = messages;
@@ -165,7 +165,7 @@ namespace OpenAI.Models
         /// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)
         /// table for details on which models work with the Chat API.
         /// </summary>
-        public CreateChatCompletionRequestModel Model { get; }
+        public CreateRequestModel1 Model { get; }
         /// <summary>
         /// A list of messages comprising the conversation so far.
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).

@@ -102,7 +102,7 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/azure/special-headers/x-ms-client-request-id",
+     "Path": "/azure/special-headers/x-ms-client-request-id/",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
