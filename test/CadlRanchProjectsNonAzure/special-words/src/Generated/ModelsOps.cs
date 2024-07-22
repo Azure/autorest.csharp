@@ -27,7 +27,7 @@ namespace Scm.SpecialWords
 
         /// <summary> Initializes a new instance of ModelsOps. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         internal ModelsOps(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;

@@ -27,7 +27,7 @@ namespace Scm._Type.Property.Nullable
 
         /// <summary> Initializes a new instance of CollectionsModel. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         internal CollectionsModel(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;

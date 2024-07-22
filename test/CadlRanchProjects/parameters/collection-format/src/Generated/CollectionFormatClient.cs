@@ -31,7 +31,7 @@ namespace Parameters.CollectionFormat
         }
 
         /// <summary> Initializes a new instance of CollectionFormatClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public CollectionFormatClient(Uri endpoint, CollectionFormatClientOptions options)

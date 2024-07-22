@@ -93,7 +93,6 @@
        "$id": "13",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Service host",
        "Type": {
         "$id": "14",
         "Kind": "string"

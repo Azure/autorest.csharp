@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="MultiPartClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         public static IAzureClientBuilder<MultiPartClient, MultiPartClientOptions> AddMultiPartClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {

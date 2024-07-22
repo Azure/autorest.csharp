@@ -28,7 +28,7 @@ namespace Scm.Parameters.Spread
 
         /// <summary> Initializes a new instance of Model. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         internal Model(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;

@@ -1176,7 +1176,6 @@
      "$id": "172",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
      "Type": {
       "$id": "173",
       "Kind": "string"
@@ -1216,7 +1215,6 @@
        "$id": "178",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Service host",
        "Type": {
         "$id": "179",
         "Kind": "string"
@@ -1381,7 +1379,6 @@
        "$id": "195",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Service host",
        "Type": {
         "$id": "196",
         "Kind": "string"
@@ -1546,7 +1543,6 @@
        "$id": "212",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Service host",
        "Type": {
         "$id": "213",
         "Kind": "string"
@@ -1711,7 +1707,6 @@
        "$id": "229",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Service host",
        "Type": {
         "$id": "230",
         "Kind": "string"
@@ -1876,7 +1871,6 @@
        "$id": "246",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Service host",
        "Type": {
         "$id": "247",
         "Kind": "string"
@@ -2041,7 +2035,6 @@
        "$id": "263",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Service host",
        "Type": {
         "$id": "264",
         "Kind": "string"
@@ -2206,7 +2199,6 @@
        "$id": "280",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Service host",
        "Type": {
         "$id": "281",
         "Kind": "string"
@@ -2371,7 +2363,6 @@
        "$id": "297",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Service host",
        "Type": {
         "$id": "298",
         "Kind": "string"
@@ -2536,7 +2527,6 @@
        "$id": "314",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Service host",
        "Type": {
         "$id": "315",
         "Kind": "string"
@@ -2701,7 +2691,6 @@
        "$id": "331",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Service host",
        "Type": {
         "$id": "332",
         "Kind": "string"

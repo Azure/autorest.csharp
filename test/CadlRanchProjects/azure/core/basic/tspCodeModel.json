@@ -405,7 +405,6 @@
        "$id": "56",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Service host",
        "Type": {
         "$id": "57",
         "Kind": "string"
@@ -1608,7 +1607,6 @@
        "$id": "191",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Service host",
        "Type": {
         "$id": "192",
         "Kind": "string"

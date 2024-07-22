@@ -31,7 +31,7 @@ namespace OpenAI
         /// <summary> Initializes a new instance of AudioTranscriptions. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         internal AudioTranscriptions(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
         {
             _pipeline = pipeline;

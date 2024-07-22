@@ -26,7 +26,7 @@ namespace Scm._Type.Model.Empty
         }
 
         /// <summary> Initializes a new instance of EmptyClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public EmptyClient(Uri endpoint, EmptyClientOptions options)

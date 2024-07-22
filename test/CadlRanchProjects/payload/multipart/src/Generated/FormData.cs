@@ -38,7 +38,7 @@ namespace Payload.MultiPart
         /// <summary> Initializes a new instance of FormData. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         internal FormData(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;

@@ -235,7 +235,6 @@
        "$id": "32",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Service host",
        "Type": {
         "$id": "33",
         "Kind": "string"

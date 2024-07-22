@@ -24,7 +24,7 @@ namespace Scm._Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of ValueTypesClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ValueTypesClient(Uri endpoint, ValueTypesClientOptions options)

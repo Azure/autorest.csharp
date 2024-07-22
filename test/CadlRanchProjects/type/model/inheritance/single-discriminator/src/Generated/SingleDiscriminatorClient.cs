@@ -34,7 +34,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         }
 
         /// <summary> Initializes a new instance of SingleDiscriminatorClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SingleDiscriminatorClient(Uri endpoint, SingleDiscriminatorClientOptions options)
