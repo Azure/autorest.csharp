@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <PowerShellExe Condition="'$(PowerShellExe)' == ''">pwsh</PowerShellExe>
-    <_TypeSpecProjectSyncAndGenerateCommand>npx --package=@azure-tools/typespec-client-generator-cli@0.9.0 --yes tsp-client update --no-prompt --output-dir $(MSBuildProjectDirectory)/../</_TypeSpecProjectSyncAndGenerateCommand>
-    <_TypeSpecProjectGenerateCommand>npx --package=@azure-tools/typespec-client-generator-cli@0.9.0 --yes tsp-client generate --no-prompt --output-dir $(MSBuildProjectDirectory)/../</_TypeSpecProjectGenerateCommand>
+    <_TypeSpecProjectSyncAndGenerateCommand>npx --no-install --package=@azure-tools/typespec-client-generator-cli --yes tsp-client update --no-prompt --output-dir $(MSBuildProjectDirectory)/../</_TypeSpecProjectSyncAndGenerateCommand>
+    <_TypeSpecProjectGenerateCommand>npx --no-install --package=@azure-tools/typespec-client-generator-cli --yes tsp-client generate --no-prompt --output-dir $(MSBuildProjectDirectory)/../</_TypeSpecProjectGenerateCommand>
     <_DefaultInputName Condition="Exists('$(MSBuildProjectDirectory)/autorest.md')">$(MSBuildProjectDirectory)/autorest.md</_DefaultInputName>
     <TypeSpecInput Condition="Exists('$(MSBuildProjectDirectory)/../tsp-location.yaml') and $(MSBuildProjectDirectory.EndsWith('src'))">$(MSBuildProjectDirectory)/../tsp-location.yaml</TypeSpecInput>
     <AutoRestInput Condition="'$(AutoRestInput)' == ''">$(_DefaultInputName)</AutoRestInput>
@@ -60,7 +60,7 @@
 
   <Target Name="_GenerateCodeForTypeSpec" Condition="'$(_GenerateCode)' == 'true' AND '$(TypeSpecInput)' != ''" >
     <Error Text="You used skipped sync but didn't have the TempTypeSpecFiles in your project directory.  Please run 'dotnet build /t:GenerateCode /p:SaveInputs=true' without SkipSync first at least once" Condition="'$(SkipSync)' == 'true' AND !Exists('$(MSBuildProjectDirectory)/../TempTypeSpecFiles')" />
-    <Exec Command="npm install @azure-tools/typespec-client-generator-cli@0.9.0 --no-save" />
+    <Exec Command="npm install @azure-tools/typespec-client-generator-cli --no-save" />
     <Exec Condition="'$(SkipSync)' == 'true'" Command="$(_TypeSpecProjectGenerateCommand) $(_SaveInputs) $(_Debug)"/>
     <Exec Condition="'$(SkipSync)' != 'true'" Command="$(_TypeSpecProjectSyncAndGenerateCommand) $(_SaveInputs) $(_LocalSpecRepo) $(_Debug)"/>
   </Target>
