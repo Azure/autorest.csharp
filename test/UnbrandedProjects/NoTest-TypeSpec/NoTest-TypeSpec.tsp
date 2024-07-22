@@ -66,6 +66,10 @@ model Thing {
     requiredNullableList: int32[] | null;
 }
 
+model DerivedThing extends Thing {
+    myProperty?: string;
+}
+
 @route("/hello")
 @doc("Return hi")
 @get
@@ -74,3 +78,8 @@ op sayHi(
     @query queryParameter: string,
     @query optionalQuery?: string
 ): Thing;
+
+@route("/helloAgain")
+@doc("Return hello")
+@get
+op sayHello(@body body: DerivedThing): DerivedThing;

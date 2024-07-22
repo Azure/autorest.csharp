@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         : NotEqual(property.Value, Null);
 
                     yield return Serializations.WrapInCheckNotWire(
-                        property,
+                        property.ShouldExcludeInWireSerialization,
                         Serializations.MultipartFormat,
                         InvokeOptional.WrapInIsDefined(
                             property,
@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 else
                 {
                     yield return Serializations.WrapInCheckNotWire(
-                        property,
+                        property.ShouldExcludeInWireSerialization,
                         Serializations.MultipartFormat,
                         InvokeOptional.WrapInIsDefined(property, WritePropertySerialization(multipartContent, property)));
                 }
