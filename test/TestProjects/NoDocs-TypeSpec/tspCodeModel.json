@@ -1856,7 +1856,6 @@
        "$id": "271",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "272",
         "Kind": "uri"
@@ -3393,7 +3392,6 @@
      "$id": "416",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Endpoint Service",
      "Type": {
       "$id": "417",
       "Kind": "uri"
@@ -3426,7 +3424,6 @@
        "$id": "420",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "421",
         "Kind": "uri"
@@ -3562,7 +3559,6 @@
        "$id": "435",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "436",
         "Kind": "uri"
@@ -4124,7 +4120,6 @@
        "$id": "493",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "494",
         "Kind": "uri"
@@ -4225,7 +4220,6 @@
        "$id": "503",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "504",
         "Kind": "uri"
@@ -4383,7 +4377,6 @@
        "$id": "518",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "519",
         "Kind": "uri"
@@ -4487,7 +4480,6 @@
        "$id": "529",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "530",
         "Kind": "uri"

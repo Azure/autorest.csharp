@@ -96,7 +96,6 @@
        "$id": "16",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "17",
         "Kind": "uri"

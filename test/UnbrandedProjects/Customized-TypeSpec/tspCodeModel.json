@@ -973,7 +973,6 @@
        "$id": "144",
        "Name": "unbrandedTypeSpecUrl",
        "NameInRequest": "unbrandedTypeSpecUrl",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "145",
         "Kind": "uri"

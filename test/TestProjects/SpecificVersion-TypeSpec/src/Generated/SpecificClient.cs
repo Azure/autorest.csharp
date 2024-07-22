@@ -31,14 +31,14 @@ namespace TypeSpec.Versioning.Specific
         }
 
         /// <summary> Initializes a new instance of SpecificClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SpecificClient(Uri endpoint) : this(endpoint, new SpecificClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of SpecificClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SpecificClient(Uri endpoint, SpecificClientOptions options)

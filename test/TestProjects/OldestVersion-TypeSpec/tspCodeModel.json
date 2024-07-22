@@ -388,7 +388,6 @@
      "$id": "55",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
      "Type": {
       "$id": "56",
       "Kind": "uri"
@@ -418,7 +417,6 @@
      "$id": "59",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
      "Type": {
       "$id": "60",
       "Kind": "uri"
@@ -450,7 +448,6 @@
        "$id": "63",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Service host",
        "Type": {
         "$id": "64",
         "Kind": "uri"

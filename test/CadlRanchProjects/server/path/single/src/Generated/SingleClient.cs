@@ -32,14 +32,14 @@ namespace Server.Path.Single
         }
 
         /// <summary> Initializes a new instance of SingleClient. </summary>
-        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SingleClient(Uri endpoint) : this(endpoint, new SingleClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of SingleClient. </summary>
-        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SingleClient(Uri endpoint, SingleClientOptions options)

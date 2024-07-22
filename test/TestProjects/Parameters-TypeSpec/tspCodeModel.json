@@ -61,7 +61,6 @@
      "$id": "10",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
      "Type": {
       "$id": "11",
       "Kind": "uri"
@@ -92,7 +91,6 @@
        "$id": "14",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Service host",
        "Type": {
         "$id": "15",
         "Kind": "uri"

@@ -2054,7 +2054,6 @@
      "$id": "305",
      "Name": "Endpoint",
      "NameInRequest": "Endpoint",
-     "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
      "Type": {
       "$id": "306",
       "Kind": "uri"
@@ -2073,7 +2072,6 @@
      "$id": "307",
      "Name": "ApiVersion",
      "NameInRequest": "ApiVersion",
-     "Description": "Api Version",
      "Type": {
       "$ref": "61"
      },
@@ -2113,7 +2111,6 @@
        "$id": "312",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
-       "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
        "Type": {
         "$id": "313",
         "Kind": "uri"
@@ -2132,7 +2129,6 @@
        "$id": "314",
        "Name": "ApiVersion",
        "NameInRequest": "ApiVersion",
-       "Description": "Api Version",
        "Type": {
         "$ref": "61"
        },
@@ -2476,7 +2472,6 @@
        "$id": "346",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
-       "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
        "Type": {
         "$id": "347",
         "Kind": "uri"
@@ -2495,7 +2490,6 @@
        "$id": "348",
        "Name": "ApiVersion",
        "NameInRequest": "ApiVersion",
-       "Description": "Api Version",
        "Type": {
         "$ref": "61"
        },

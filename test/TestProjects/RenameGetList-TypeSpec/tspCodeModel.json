@@ -344,7 +344,6 @@
      "$id": "52",
      "Name": "Endpoint",
      "NameInRequest": "Endpoint",
-     "Description": "Language Service",
      "Type": {
       "$id": "53",
       "Kind": "uri"
@@ -376,7 +375,6 @@
        "$id": "56",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
-       "Description": "Language Service",
        "Type": {
         "$id": "57",
         "Kind": "uri"
@@ -592,7 +590,6 @@
        "$id": "81",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
-       "Description": "Language Service",
        "Type": {
         "$id": "82",
         "Kind": "uri"

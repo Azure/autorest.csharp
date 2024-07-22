@@ -1964,7 +1964,6 @@
        "$id": "288",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "289",
         "Kind": "uri"
@@ -3666,7 +3665,6 @@
      "$id": "449",
      "Name": "firstTestTypeSpecUrl",
      "NameInRequest": "firstTestTypeSpecUrl",
-     "Description": "Endpoint Service",
      "Type": {
       "$id": "450",
       "Kind": "uri"
@@ -3699,7 +3697,6 @@
        "$id": "453",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "454",
         "Kind": "uri"
@@ -3835,7 +3832,6 @@
        "$id": "468",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "469",
         "Kind": "uri"
@@ -4397,7 +4393,6 @@
        "$id": "526",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "527",
         "Kind": "uri"
@@ -4498,7 +4493,6 @@
        "$id": "536",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "537",
         "Kind": "uri"
@@ -4656,7 +4650,6 @@
        "$id": "551",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "552",
         "Kind": "uri"
@@ -4760,7 +4753,6 @@
        "$id": "562",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "563",
         "Kind": "uri"

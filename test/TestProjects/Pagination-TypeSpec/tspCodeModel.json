@@ -577,7 +577,6 @@
        "$id": "82",
        "Name": "pagnationUri",
        "NameInRequest": "pagnationUri",
-       "Description": "Pagination Service",
        "Type": {
         "$id": "83",
         "Kind": "uri"
@@ -736,7 +735,6 @@
        "$id": "100",
        "Name": "pagnationUri",
        "NameInRequest": "pagnationUri",
-       "Description": "Pagination Service",
        "Type": {
         "$id": "101",
         "Kind": "uri"
@@ -955,7 +953,6 @@
        "$id": "125",
        "Name": "pagnationUri",
        "NameInRequest": "pagnationUri",
-       "Description": "Pagination Service",
        "Type": {
         "$id": "126",
         "Kind": "uri"
@@ -1074,7 +1071,6 @@
        "$id": "139",
        "Name": "pagnationUri",
        "NameInRequest": "pagnationUri",
-       "Description": "Pagination Service",
        "Type": {
         "$id": "140",
         "Kind": "uri"
@@ -1348,7 +1344,6 @@
        "$id": "171",
        "Name": "pagnationUri",
        "NameInRequest": "pagnationUri",
-       "Description": "Pagination Service",
        "Type": {
         "$id": "172",
         "Kind": "uri"

@@ -2984,7 +2984,6 @@
        "$id": "445",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "446",
         "Kind": "uri"

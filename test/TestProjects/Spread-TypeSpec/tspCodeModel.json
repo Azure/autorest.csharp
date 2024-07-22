@@ -335,7 +335,6 @@
        "$id": "52",
        "Name": "spreadUrl",
        "NameInRequest": "spreadUrl",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "53",
         "Kind": "uri"

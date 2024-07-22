@@ -1248,7 +1248,6 @@
        "$id": "187",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "188",
         "Kind": "uri"
@@ -1752,7 +1751,6 @@
      "$id": "236",
      "Name": "firstTestTypeSpecUrl",
      "NameInRequest": "firstTestTypeSpecUrl",
-     "Description": "Endpoint Service",
      "Type": {
       "$id": "237",
       "Kind": "uri"
@@ -1785,7 +1783,6 @@
        "$id": "240",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "241",
         "Kind": "uri"
@@ -1921,7 +1918,6 @@
        "$id": "255",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "256",
         "Kind": "uri"
@@ -2426,7 +2422,6 @@
        "$id": "308",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "309",
         "Kind": "uri"
@@ -2527,7 +2522,6 @@
        "$id": "318",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "319",
         "Kind": "uri"

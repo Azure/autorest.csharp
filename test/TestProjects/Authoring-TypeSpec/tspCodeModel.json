@@ -1071,7 +1071,6 @@
      "$id": "156",
      "Name": "Endpoint",
      "NameInRequest": "Endpoint",
-     "Description": "Language Service",
      "Type": {
       "$id": "157",
       "Kind": "uri"
@@ -1103,7 +1102,6 @@
        "$id": "160",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
-       "Description": "Language Service",
        "Type": {
         "$id": "161",
         "Kind": "uri"
@@ -2027,7 +2025,6 @@
        "$id": "273",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
-       "Description": "Language Service",
        "Type": {
         "$id": "274",
         "Kind": "uri"
@@ -2772,7 +2769,6 @@
        "$id": "362",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
-       "Description": "Language Service",
        "Type": {
         "$id": "363",
         "Kind": "uri"
@@ -3062,7 +3058,6 @@
        "$id": "396",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
-       "Description": "Language Service",
        "Type": {
         "$id": "397",
         "Kind": "uri"

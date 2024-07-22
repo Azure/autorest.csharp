@@ -19,7 +19,6 @@
        "$id": "4",
        "Name": "operationGroupServiceUrl",
        "NameInRequest": "operationGroupServiceUrl",
-       "Description": "OperationGroup Service",
        "Type": {
         "$id": "5",
         "Kind": "uri"
@@ -163,7 +162,6 @@
        "$id": "20",
        "Name": "operationGroupServiceUrl",
        "NameInRequest": "operationGroupServiceUrl",
-       "Description": "OperationGroup Service",
        "Type": {
         "$id": "21",
         "Kind": "uri"
@@ -308,7 +306,6 @@
        "$id": "36",
        "Name": "operationGroupServiceUrl",
        "NameInRequest": "operationGroupServiceUrl",
-       "Description": "OperationGroup Service",
        "Type": {
         "$id": "37",
         "Kind": "uri"

@@ -35,16 +35,16 @@ namespace Versioning.RenamedFrom
         }
 
         /// <summary> Initializes a new instance of RenamedFromClient. </summary>
-        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="version"> The <see cref="Versions"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public RenamedFromClient(Uri endpoint, Versions version) : this(endpoint, version, new RenamedFromClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of RenamedFromClient. </summary>
-        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="version"> The <see cref="Versions"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public RenamedFromClient(Uri endpoint, Versions version, RenamedFromClientOptions options)

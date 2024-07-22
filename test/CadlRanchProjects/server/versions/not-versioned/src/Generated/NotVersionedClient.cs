@@ -32,14 +32,14 @@ namespace Server.Versions.NotVersioned
         }
 
         /// <summary> Initializes a new instance of NotVersionedClient. </summary>
-        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NotVersionedClient(Uri endpoint) : this(endpoint, new NotVersionedClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of NotVersionedClient. </summary>
-        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NotVersionedClient(Uri endpoint, NotVersionedClientOptions options)

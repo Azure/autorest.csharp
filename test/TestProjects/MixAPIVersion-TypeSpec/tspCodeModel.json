@@ -205,7 +205,6 @@
      "$id": "31",
      "Name": "petStoreUrl",
      "NameInRequest": "petStoreUrl",
-     "Description": "Endpoint Service",
      "Type": {
       "$id": "32",
       "Kind": "uri"
@@ -239,7 +238,6 @@
        "$id": "35",
        "Name": "petStoreUrl",
        "NameInRequest": "petStoreUrl",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "36",
         "Kind": "uri"
@@ -570,7 +568,6 @@
        "$id": "70",
        "Name": "petStoreUrl",
        "NameInRequest": "petStoreUrl",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "71",
         "Kind": "uri"

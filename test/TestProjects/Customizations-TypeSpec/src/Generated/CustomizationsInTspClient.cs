@@ -35,14 +35,14 @@ namespace CustomizationsInTsp
         }
 
         /// <summary> Initializes a new instance of CustomizationsInTspClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public CustomizationsInTspClient(Uri endpoint) : this(endpoint, new CustomizationsInTspClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of CustomizationsInTspClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public CustomizationsInTspClient(Uri endpoint, CustomizationsInTspClientOptions options)

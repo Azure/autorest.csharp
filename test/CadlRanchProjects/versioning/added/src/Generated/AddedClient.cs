@@ -35,16 +35,16 @@ namespace Versioning.Added
         }
 
         /// <summary> Initializes a new instance of AddedClient. </summary>
-        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="version"> The <see cref="Versions"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public AddedClient(Uri endpoint, Versions version) : this(endpoint, version, new AddedClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of AddedClient. </summary>
-        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="version"> The <see cref="Versions"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public AddedClient(Uri endpoint, Versions version, AddedClientOptions options)

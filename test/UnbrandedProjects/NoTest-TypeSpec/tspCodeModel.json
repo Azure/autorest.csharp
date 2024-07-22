@@ -390,7 +390,6 @@
        "$id": "59",
        "Name": "noTestTypeSpecUrl",
        "NameInRequest": "noTestTypeSpecUrl",
-       "Description": "Endpoint Service",
        "Type": {
         "$id": "60",
         "Kind": "uri"

@@ -40,7 +40,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> Initializes a new instance of FirstTestTypeSpecClient. </summary>
-        /// <param name="endpoint"> Endpoint Service. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public FirstTestTypeSpecClient(Uri endpoint, AzureKeyCredential credential) : this(endpoint, credential, new FirstTestTypeSpecClientOptions())
@@ -48,7 +48,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> Initializes a new instance of FirstTestTypeSpecClient. </summary>
-        /// <param name="endpoint"> Endpoint Service. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public FirstTestTypeSpecClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new FirstTestTypeSpecClientOptions())
@@ -56,7 +56,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> Initializes a new instance of FirstTestTypeSpecClient. </summary>
-        /// <param name="endpoint"> Endpoint Service. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
@@ -73,7 +73,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> Initializes a new instance of FirstTestTypeSpecClient. </summary>
-        /// <param name="endpoint"> Endpoint Service. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>

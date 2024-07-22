@@ -17,10 +17,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="AnomalyDetectorClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint">
-        /// Supported Cognitive Services endpoints (protocol and hostname, for example:
-        /// https://westus2.api.cognitive.microsoft.com).
-        /// </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         public static IAzureClientBuilder<AnomalyDetectorClient, AnomalyDetectorClientOptions> AddAnomalyDetectorClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
