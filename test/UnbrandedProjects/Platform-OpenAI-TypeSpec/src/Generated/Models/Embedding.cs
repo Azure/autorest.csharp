@@ -41,8 +41,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="Embedding"/>. </summary>
         /// <param name="index"> The index of the embedding in the list of embeddings. </param>
         /// <param name="embeddingProperty">
@@ -71,7 +70,7 @@ namespace OpenAI.Models
             Index = index;
             Object = @object;
             EmbeddingProperty = embeddingProperty;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Embedding"/> for deserialization. </summary>

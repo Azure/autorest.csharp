@@ -60,6 +60,8 @@ namespace AutoRest.CSharp.Common.Input
             // TODO - this configuration only exists here because we would like a rolling update for all libraries for this feature since it changes so many files.
             // It is only respected if UseModelReaderWriter is true.
             public const string EnableBicepSerialization = "enable-bicep-serialization";
+            // This configuration is only respected if UseModelReaderWriter is true.
+            public const string EnableInternalRawData = "enable-internal-raw-data";
             public const string HelperNamespace = "helper-namespace";
             public const string DisableXmlDocs = "disable-xml-docs";
         }
@@ -93,6 +95,7 @@ namespace AutoRest.CSharp.Common.Input
             bool useCoreDataFactoryReplacements,
             bool useModelReaderWriter,
             bool enableBicepSerialization,
+            bool enableInternalRawData,
             IReadOnlyList<string> modelFactoryForHlc,
             UnreferencedTypesHandlingOption unreferencedTypesHandling,
             bool keepNonOverloadableProtocolSignature,
@@ -139,6 +142,7 @@ namespace AutoRest.CSharp.Common.Input
             UseCoreDataFactoryReplacements = useCoreDataFactoryReplacements;
             UseModelReaderWriter = useModelReaderWriter;
             EnableBicepSerialization = enableBicepSerialization;
+            EnableInternalRawData = enableInternalRawData;
             projectFolder ??= ProjectFolderDefault;
             (_absoluteProjectFolder, _relativeProjectFolder) = ParseProjectFolders(outputFolder, projectFolder);
 
@@ -258,6 +262,8 @@ namespace AutoRest.CSharp.Common.Input
 
         public static bool EnableBicepSerialization { get; private set; }
 
+        public static bool EnableInternalRawData { get; private set; }
+
         private static string? _outputFolder;
         public static string OutputFolder => _outputFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
         public static string? ExistingProjectFolder { get; private set; }
@@ -363,6 +369,7 @@ namespace AutoRest.CSharp.Common.Input
                 useCoreDataFactoryReplacements: GetOptionBoolValue(autoRest, Options.UseCoreDataFactoryReplacements),
                 useModelReaderWriter: GetOptionBoolValue(autoRest, Options.UseModelReaderWriter),
                 enableBicepSerialization: GetOptionBoolValue(autoRest, Options.EnableBicepSerialization),
+                enableInternalRawData: GetOptionBoolValue(autoRest, Options.EnableInternalRawData),
                 projectFolder: GetProjectFolderOption(autoRest),
                 existingProjectFolder: autoRest.GetValue<string?>(Options.ExistingProjectfolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
@@ -456,6 +463,8 @@ namespace AutoRest.CSharp.Common.Input
                     return false;
                 case Options.DisableXmlDocs:
                     return false;
+                case Options.EnableInternalRawData:
+                    return false;
                 default:
                     return null;
             }
@@ -530,6 +539,7 @@ namespace AutoRest.CSharp.Common.Input
                 useCoreDataFactoryReplacements: ReadOption(root, Options.UseCoreDataFactoryReplacements),
                 useModelReaderWriter: ReadOption(root, Options.UseModelReaderWriter),
                 enableBicepSerialization: ReadOption(root, Options.EnableBicepSerialization),
+                enableInternalRawData: ReadOption(root, Options.EnableInternalRawData),
                 modelFactoryForHlc: oldModelFactoryEntries,
                 unreferencedTypesHandling: ReadEnumOption<UnreferencedTypesHandlingOption>(root, Options.UnreferencedTypesHandling),
                 keepNonOverloadableProtocolSignature: ReadOption(root, Options.KeepNonOverloadableProtocolSignature),

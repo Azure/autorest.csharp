@@ -40,8 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="Image"/>. </summary>
         internal Image()
         {
@@ -55,7 +54,7 @@ namespace OpenAI.Models
         {
             Url = url;
             B64Json = b64Json;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The URL of the generated image, if `response_format` is `url` (default). </summary>
