@@ -21,31 +21,41 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("role"u8);
-            writer.WriteStringValue(Role.ToSerialString());
-            if (Content != null)
+            if (SerializedAdditionalRawData?.ContainsKey("role") != true)
             {
-                writer.WritePropertyName("content"u8);
-                writer.WriteStringValue(Content);
+                writer.WritePropertyName("role"u8);
+                writer.WriteStringValue(Role.ToSerialString());
             }
-            else
+            if (SerializedAdditionalRawData?.ContainsKey("content") != true)
             {
-                writer.WriteNull("content");
+                if (Content != null)
+                {
+                    writer.WritePropertyName("content"u8);
+                    writer.WriteStringValue(Content);
+                }
+                else
+                {
+                    writer.WriteNull("content");
+                }
             }
-            if (Optional.IsDefined(Name))
+            if (SerializedAdditionalRawData?.ContainsKey("name") != true && Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(FunctionCall))
+            if (SerializedAdditionalRawData?.ContainsKey("function_call") != true && Optional.IsDefined(FunctionCall))
             {
                 writer.WritePropertyName("function_call"u8);
                 writer.WriteObjectValue(FunctionCall, options);
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            if (SerializedAdditionalRawData != null)
             {
-                foreach (var item in _serializedAdditionalRawData)
+                foreach (var item in SerializedAdditionalRawData)
                 {
+                    if (ModelSerializationExtensions.IsSentinelValue(item.Value))
+                    {
+                        continue;
+                    }
                     writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
@@ -119,6 +129,7 @@ namespace OpenAI.Models
                 }
                 if (options.Format != "W")
                 {
+                    rawDataDictionary ??= new Dictionary<string, BinaryData>();
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
