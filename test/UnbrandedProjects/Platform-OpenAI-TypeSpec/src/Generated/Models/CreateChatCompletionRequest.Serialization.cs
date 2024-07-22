@@ -216,7 +216,7 @@ namespace OpenAI.Models
             {
                 return null;
             }
-            CreateChatCompletionRequestModel model = default;
+            CreateRequestModel1 model = default;
             IList<ChatCompletionRequestMessage> messages = default;
             IList<ChatCompletionFunctions> functions = default;
             BinaryData functionCall = default;
@@ -236,7 +236,7 @@ namespace OpenAI.Models
             {
                 if (property.NameEquals("model"u8))
                 {
-                    model = new CreateChatCompletionRequestModel(property.Value.GetString());
+                    model = new CreateRequestModel1(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("messages"u8))
