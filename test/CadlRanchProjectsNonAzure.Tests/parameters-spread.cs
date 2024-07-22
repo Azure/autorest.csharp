@@ -40,14 +40,14 @@ namespace CadlRanchProjectsNonAzure.Tests
         [Test]
         public Task Parameters_Spread_Alias_spreadWithModel() => Test(async (host) =>
         {
-            var response = await new SpreadClient(host, null).GetAliasClient().SpreadAsInnerModelParameterAsync("1", "bar", "foo");
+            var response = await new SpreadClient(host, null).GetAliasClient().SpreadParameterWithInnerModelAsync("1", "bar", "foo");
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
         [Test]
         public Task Parameters_Spread_Alias_spreadAliasinAlias() => Test(async (host) =>
         {
-            var response = await new SpreadClient(host, null).GetAliasClient().SpreadAliasWithSpreadAliasAsync("1", "bar", "foo", 1);
+            var response = await new SpreadClient(host, null).GetAliasClient().SpreadParameterWithInnerAliasAsync("1", "bar", "foo", 1);
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });
     }
