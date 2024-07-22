@@ -85,39 +85,39 @@ Response response = client.SpreadAsRequestBody(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="SpreadAsInnerModelParameterAsync(string,string,string,CancellationToken)">
+    <member name="SpreadParameterWithInnerModelAsync(string,string,string,CancellationToken)">
       <example>
-This sample shows how to call SpreadAsInnerModelParameterAsync.
+This sample shows how to call SpreadParameterWithInnerModelAsync.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
-Response response = await client.SpreadAsInnerModelParameterAsync("<id>", "<x-ms-test-header>", "<name>");
+Response response = await client.SpreadParameterWithInnerModelAsync("<id>", "<x-ms-test-header>", "<name>");
 ]]></code>
-This sample shows how to call SpreadAsInnerModelParameterAsync with all parameters.
+This sample shows how to call SpreadParameterWithInnerModelAsync with all parameters.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
-Response response = await client.SpreadAsInnerModelParameterAsync("<id>", "<x-ms-test-header>", "<name>");
+Response response = await client.SpreadParameterWithInnerModelAsync("<id>", "<x-ms-test-header>", "<name>");
 ]]></code></example>
     </member>
-    <member name="SpreadAsInnerModelParameter(string,string,string,CancellationToken)">
+    <member name="SpreadParameterWithInnerModel(string,string,string,CancellationToken)">
       <example>
-This sample shows how to call SpreadAsInnerModelParameter.
+This sample shows how to call SpreadParameterWithInnerModel.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
-Response response = client.SpreadAsInnerModelParameter("<id>", "<x-ms-test-header>", "<name>");
+Response response = client.SpreadParameterWithInnerModel("<id>", "<x-ms-test-header>", "<name>");
 ]]></code>
-This sample shows how to call SpreadAsInnerModelParameter with all parameters.
+This sample shows how to call SpreadParameterWithInnerModel with all parameters.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
-Response response = client.SpreadAsInnerModelParameter("<id>", "<x-ms-test-header>", "<name>");
+Response response = client.SpreadParameterWithInnerModel("<id>", "<x-ms-test-header>", "<name>");
 ]]></code></example>
     </member>
-    <member name="SpreadAsInnerModelParameterAsync(string,string,RequestContent,RequestContext)">
+    <member name="SpreadParameterWithInnerModelAsync(string,string,RequestContent,RequestContext)">
       <example>
-This sample shows how to call SpreadAsInnerModelParameterAsync.
+This sample shows how to call SpreadParameterWithInnerModelAsync.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
@@ -125,11 +125,11 @@ using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
-Response response = await client.SpreadAsInnerModelParameterAsync("<id>", "<x-ms-test-header>", content);
+Response response = await client.SpreadParameterWithInnerModelAsync("<id>", "<x-ms-test-header>", content);
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call SpreadAsInnerModelParameterAsync with all parameters and request content.
+This sample shows how to call SpreadParameterWithInnerModelAsync with all parameters and request content.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
@@ -137,14 +137,14 @@ using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
-Response response = await client.SpreadAsInnerModelParameterAsync("<id>", "<x-ms-test-header>", content);
+Response response = await client.SpreadParameterWithInnerModelAsync("<id>", "<x-ms-test-header>", content);
 
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="SpreadAsInnerModelParameter(string,string,RequestContent,RequestContext)">
+    <member name="SpreadParameterWithInnerModel(string,string,RequestContent,RequestContext)">
       <example>
-This sample shows how to call SpreadAsInnerModelParameter.
+This sample shows how to call SpreadParameterWithInnerModel.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
@@ -152,11 +152,11 @@ using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
-Response response = client.SpreadAsInnerModelParameter("<id>", "<x-ms-test-header>", content);
+Response response = client.SpreadParameterWithInnerModel("<id>", "<x-ms-test-header>", content);
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call SpreadAsInnerModelParameter with all parameters and request content.
+This sample shows how to call SpreadParameterWithInnerModel with all parameters and request content.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
@@ -164,7 +164,7 @@ using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
-Response response = client.SpreadAsInnerModelParameter("<id>", "<x-ms-test-header>", content);
+Response response = client.SpreadParameterWithInnerModel("<id>", "<x-ms-test-header>", content);
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -363,39 +363,39 @@ Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-head
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="SpreadAsInnerAliasParameterAsync(string,string,string,int,CancellationToken)">
+    <member name="SpreadParameterWithInnerAliasAsync(string,string,string,int,CancellationToken)">
       <example>
-This sample shows how to call SpreadAsInnerAliasParameterAsync.
+This sample shows how to call SpreadParameterWithInnerAliasAsync.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
-Response response = await client.SpreadAsInnerAliasParameterAsync("<id>", "<x-ms-test-header>", "<name>", 1234);
+Response response = await client.SpreadParameterWithInnerAliasAsync("<id>", "<x-ms-test-header>", "<name>", 1234);
 ]]></code>
-This sample shows how to call SpreadAsInnerAliasParameterAsync with all parameters.
+This sample shows how to call SpreadParameterWithInnerAliasAsync with all parameters.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
-Response response = await client.SpreadAsInnerAliasParameterAsync("<id>", "<x-ms-test-header>", "<name>", 1234);
+Response response = await client.SpreadParameterWithInnerAliasAsync("<id>", "<x-ms-test-header>", "<name>", 1234);
 ]]></code></example>
     </member>
-    <member name="SpreadAsInnerAliasParameter(string,string,string,int,CancellationToken)">
+    <member name="SpreadParameterWithInnerAlias(string,string,string,int,CancellationToken)">
       <example>
-This sample shows how to call SpreadAsInnerAliasParameter.
+This sample shows how to call SpreadParameterWithInnerAlias.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
-Response response = client.SpreadAsInnerAliasParameter("<id>", "<x-ms-test-header>", "<name>", 1234);
+Response response = client.SpreadParameterWithInnerAlias("<id>", "<x-ms-test-header>", "<name>", 1234);
 ]]></code>
-This sample shows how to call SpreadAsInnerAliasParameter with all parameters.
+This sample shows how to call SpreadParameterWithInnerAlias with all parameters.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
-Response response = client.SpreadAsInnerAliasParameter("<id>", "<x-ms-test-header>", "<name>", 1234);
+Response response = client.SpreadParameterWithInnerAlias("<id>", "<x-ms-test-header>", "<name>", 1234);
 ]]></code></example>
     </member>
-    <member name="SpreadAsInnerAliasParameterAsync(string,string,RequestContent,RequestContext)">
+    <member name="SpreadParameterWithInnerAliasAsync(string,string,RequestContent,RequestContext)">
       <example>
-This sample shows how to call SpreadAsInnerAliasParameterAsync.
+This sample shows how to call SpreadParameterWithInnerAliasAsync.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
@@ -404,11 +404,11 @@ using RequestContent content = RequestContent.Create(new
     name = "<name>",
     age = 1234,
 });
-Response response = await client.SpreadAsInnerAliasParameterAsync("<id>", "<x-ms-test-header>", content);
+Response response = await client.SpreadParameterWithInnerAliasAsync("<id>", "<x-ms-test-header>", content);
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call SpreadAsInnerAliasParameterAsync with all parameters and request content.
+This sample shows how to call SpreadParameterWithInnerAliasAsync with all parameters and request content.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
@@ -417,14 +417,14 @@ using RequestContent content = RequestContent.Create(new
     name = "<name>",
     age = 1234,
 });
-Response response = await client.SpreadAsInnerAliasParameterAsync("<id>", "<x-ms-test-header>", content);
+Response response = await client.SpreadParameterWithInnerAliasAsync("<id>", "<x-ms-test-header>", content);
 
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="SpreadAsInnerAliasParameter(string,string,RequestContent,RequestContext)">
+    <member name="SpreadParameterWithInnerAlias(string,string,RequestContent,RequestContext)">
       <example>
-This sample shows how to call SpreadAsInnerAliasParameter.
+This sample shows how to call SpreadParameterWithInnerAlias.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
@@ -433,11 +433,11 @@ using RequestContent content = RequestContent.Create(new
     name = "<name>",
     age = 1234,
 });
-Response response = client.SpreadAsInnerAliasParameter("<id>", "<x-ms-test-header>", content);
+Response response = client.SpreadParameterWithInnerAlias("<id>", "<x-ms-test-header>", content);
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call SpreadAsInnerAliasParameter with all parameters and request content.
+This sample shows how to call SpreadParameterWithInnerAlias with all parameters and request content.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient();
 
@@ -446,7 +446,7 @@ using RequestContent content = RequestContent.Create(new
     name = "<name>",
     age = 1234,
 });
-Response response = client.SpreadAsInnerAliasParameter("<id>", "<x-ms-test-header>", content);
+Response response = client.SpreadParameterWithInnerAlias("<id>", "<x-ms-test-header>", content);
 
 Console.WriteLine(response.Status);
 ]]></code></example>
