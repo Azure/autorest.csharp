@@ -40,8 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateModerationResponseResultCategoryScores"/>. </summary>
         /// <param name="hate"> The score for the category 'hate'. </param>
         /// <param name="hateThreatening"> The score for the category 'hate/threatening'. </param>
@@ -95,7 +94,7 @@ namespace OpenAI.Models
             SexualMinors = sexualMinors;
             Violence = violence;
             ViolenceGraphic = violenceGraphic;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateModerationResponseResultCategoryScores"/> for deserialization. </summary>

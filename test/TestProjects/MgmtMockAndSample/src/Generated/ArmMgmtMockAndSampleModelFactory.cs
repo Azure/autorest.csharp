@@ -332,6 +332,21 @@ namespace MgmtMockAndSample.Models
                 tags);
         }
 
+        /// <summary> Initializes a new instance of <see cref="Models.KeyForDiskEncryptionSet"/>. </summary>
+        /// <param name="sourceVaultId"> Resource id of the KeyVault containing the key or secret. This property is optional and cannot be used if the KeyVault subscription is not the same as the Disk Encryption Set subscription. </param>
+        /// <param name="keyUri"> Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value. </param>
+        /// <param name="newKeyUri"></param>
+        /// <param name="newListProperty"></param>
+        /// <param name="newReadOnlyListProperty"></param>
+        /// <returns> A new <see cref="Models.KeyForDiskEncryptionSet"/> instance for mocking. </returns>
+        public static KeyForDiskEncryptionSet KeyForDiskEncryptionSet(ResourceIdentifier sourceVaultId = null, Uri keyUri = null, Uri newKeyUri = null, IEnumerable<string> newListProperty = null, IEnumerable<string> newReadOnlyListProperty = null)
+        {
+            newListProperty ??= new List<string>();
+            newReadOnlyListProperty ??= new List<string>();
+
+            return new KeyForDiskEncryptionSet(sourceVaultId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVaultId) : null, keyUri, newKeyUri, newListProperty?.ToList(), newReadOnlyListProperty?.ToList());
+        }
+
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.ManagedHsmData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>

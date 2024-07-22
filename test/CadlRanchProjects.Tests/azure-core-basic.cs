@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using _Specs_.Azure.Core.Basic;
 using _Specs_.Azure.Core.Basic.Models;
@@ -129,5 +132,23 @@ namespace CadlRanchProjects.Tests
                 Assert.AreEqual("Madge", firstItem.Name);
             }
         });
+
+        [Test]
+        public void Azure_Core_basic_RenameGetMethod()
+        {
+            var getUserMethod = typeof(BasicClient).GetMethod("GetUserAsync", new[] { typeof(int), typeof(CancellationToken) });
+            var getMethod  = typeof(BasicClient).GetMethod("Get", new[] { typeof(int), typeof(CancellationToken) });
+            Assert.IsNull(getMethod);
+            Assert.IsNotNull(getUserMethod);
+        }
+
+        [Test]
+        public void Azure_Core_basic_RenameListMethod()
+        {
+            var getUsersMethod = typeof(BasicClient).GetMethod("GetUsersAsync", new[] { typeof(int?), typeof(int?), typeof(int?), typeof(IEnumerable<string>), typeof(string), typeof(IEnumerable<string>), typeof(IEnumerable<string>), typeof(CancellationToken) });
+            var listMethod = typeof(BasicClient).GetMethod("List", new[] { typeof(int?), typeof(int?), typeof(int?), typeof(IEnumerable<string>), typeof(string), typeof(IEnumerable<string>), typeof(IEnumerable<string>), typeof(CancellationToken) });
+            Assert.IsNull(listMethod);
+            Assert.IsNotNull(getUsersMethod);
+        }
     }
 }

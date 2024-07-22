@@ -40,8 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateEmbeddingRequest"/>. </summary>
         /// <param name="model"> ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them. </param>
         /// <param name="input">
@@ -76,7 +75,7 @@ namespace OpenAI.Models
             Model = model;
             Input = input;
             User = user;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateEmbeddingRequest"/> for deserialization. </summary>
