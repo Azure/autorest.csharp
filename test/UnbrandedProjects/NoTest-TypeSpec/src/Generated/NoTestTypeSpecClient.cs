@@ -141,6 +141,86 @@ namespace NoTestTypeSpec
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
+        /// <summary> Return hello. </summary>
+        /// <param name="body"> The <see cref="DerivedThing"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<ClientResult<DerivedThing>> SayHelloAsync(DerivedThing body)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using BinaryContent content = body.ToBinaryContent();
+            ClientResult result = await SayHelloAsync(content, null).ConfigureAwait(false);
+            return ClientResult.FromValue(DerivedThing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+        }
+
+        /// <summary> Return hello. </summary>
+        /// <param name="body"> The <see cref="DerivedThing"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual ClientResult<DerivedThing> SayHello(DerivedThing body)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using BinaryContent content = body.ToBinaryContent();
+            ClientResult result = SayHello(content, null);
+            return ClientResult.FromValue(DerivedThing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+        }
+
+        /// <summary>
+        /// [Protocol Method] Return hello
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SayHelloAsync(DerivedThing)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual async Task<ClientResult> SayHelloAsync(BinaryContent content, RequestOptions options = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using PipelineMessage message = CreateSayHelloRequest(content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+        }
+
+        /// <summary>
+        /// [Protocol Method] Return hello
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SayHello(DerivedThing)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual ClientResult SayHello(BinaryContent content, RequestOptions options = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using PipelineMessage message = CreateSayHelloRequest(content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
+        }
+
         internal PipelineMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
@@ -158,6 +238,23 @@ namespace NoTestTypeSpec
             request.Uri = uri.ToUri();
             request.Headers.Set("head-parameter", headParameter);
             request.Headers.Set("Accept", "application/json");
+            message.Apply(options);
+            return message;
+        }
+
+        internal PipelineMessage CreateSayHelloRequest(BinaryContent content, RequestOptions options)
+        {
+            var message = _pipeline.CreateMessage();
+            message.ResponseClassifier = PipelineMessageClassifier200;
+            var request = message.Request;
+            request.Method = "GET";
+            var uri = new ClientUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/helloAgain", false);
+            request.Uri = uri.ToUri();
+            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Content-Type", "application/json");
+            request.Content = content;
             message.Apply(options);
             return message;
         }

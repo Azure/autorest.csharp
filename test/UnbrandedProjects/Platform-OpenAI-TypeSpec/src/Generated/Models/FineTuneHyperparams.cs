@@ -40,8 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="FineTuneHyperparams"/>. </summary>
         /// <param name="nEpochs">
         /// The number of epochs to train the model for. An epoch refers to one full cycle through the
@@ -85,7 +84,7 @@ namespace OpenAI.Models
             ComputeClassificationMetrics = computeClassificationMetrics;
             ClassificationPositiveClass = classificationPositiveClass;
             ClassificationNClasses = classificationNClasses;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="FineTuneHyperparams"/> for deserialization. </summary>

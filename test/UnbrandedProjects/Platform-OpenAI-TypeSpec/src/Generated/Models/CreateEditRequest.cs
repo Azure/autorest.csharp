@@ -40,8 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateEditRequest"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001`
@@ -87,7 +86,7 @@ namespace OpenAI.Models
             N = n;
             Temperature = temperature;
             TopP = topP;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateEditRequest"/> for deserialization. </summary>

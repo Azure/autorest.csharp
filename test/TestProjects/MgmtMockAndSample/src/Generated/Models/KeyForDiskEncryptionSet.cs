@@ -23,20 +23,23 @@ namespace MgmtMockAndSample.Models
             Argument.AssertNotNull(keyUri, nameof(keyUri));
 
             KeyUri = keyUri;
-            NewReadOnlyArrayProperty = new ChangeTrackingList<string>();
+            NewListProperty = new ChangeTrackingList<string>();
+            NewReadOnlyListProperty = new ChangeTrackingList<string>();
         }
 
         /// <summary> Initializes a new instance of <see cref="KeyForDiskEncryptionSet"/>. </summary>
         /// <param name="sourceVault"> Resource id of the KeyVault containing the key or secret. This property is optional and cannot be used if the KeyVault subscription is not the same as the Disk Encryption Set subscription. </param>
         /// <param name="keyUri"> Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value. </param>
         /// <param name="newKeyUri"></param>
-        /// <param name="newReadOnlyArrayProperty"></param>
-        internal KeyForDiskEncryptionSet(WritableSubResource sourceVault, Uri keyUri, Uri newKeyUri, IList<string> newReadOnlyArrayProperty)
+        /// <param name="newListProperty"></param>
+        /// <param name="newReadOnlyListProperty"></param>
+        internal KeyForDiskEncryptionSet(WritableSubResource sourceVault, Uri keyUri, Uri newKeyUri, IList<string> newListProperty, IReadOnlyList<string> newReadOnlyListProperty)
         {
             SourceVault = sourceVault;
             KeyUri = keyUri;
             NewKeyUri = newKeyUri;
-            NewReadOnlyArrayProperty = newReadOnlyArrayProperty;
+            NewListProperty = newListProperty;
+            NewReadOnlyListProperty = newReadOnlyListProperty;
         }
 
         /// <summary> Resource id of the KeyVault containing the key or secret. This property is optional and cannot be used if the KeyVault subscription is not the same as the Disk Encryption Set subscription. </summary>

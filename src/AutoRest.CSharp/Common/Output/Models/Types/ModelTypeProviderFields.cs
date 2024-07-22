@@ -298,7 +298,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             var fieldModifiers = GetAccessModifiers(existingMember);
-            if (BuilderHelpers.IsReadOnlyFromExisting(existingMember))
+            if (BuilderHelpers.IsReadOnly(existingMember, fieldType))
             {
                 fieldModifiers |= ReadOnly;
             }
