@@ -40,8 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateCompletionRequest"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to
@@ -55,7 +54,7 @@ namespace OpenAI.Models
         /// Note that &lt;|endoftext|&gt; is the document separator that the model sees during training, so if a
         /// prompt is not specified the model will generate as if from the beginning of a new document.
         /// </param>
-        public CreateCompletionRequest(CreateCompletionRequestModel model, BinaryData prompt)
+        public CreateCompletionRequest(CreateRequestModel model, BinaryData prompt)
         {
             Model = model;
             Prompt = prompt;
@@ -153,7 +152,7 @@ namespace OpenAI.Models
         /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
         /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CreateCompletionRequest(CreateCompletionRequestModel model, BinaryData prompt, string suffix, double? temperature, double? topP, long? n, long? maxTokens, BinaryData stop, double? presencePenalty, double? frequencyPenalty, IDictionary<string, long> logitBias, string user, bool? stream, long? logprobs, bool? echo, long? bestOf, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal CreateCompletionRequest(CreateRequestModel model, BinaryData prompt, string suffix, double? temperature, double? topP, long? n, long? maxTokens, BinaryData stop, double? presencePenalty, double? frequencyPenalty, IDictionary<string, long> logitBias, string user, bool? stream, long? logprobs, bool? echo, long? bestOf, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Model = model;
             Prompt = prompt;
@@ -171,7 +170,7 @@ namespace OpenAI.Models
             Logprobs = logprobs;
             Echo = echo;
             BestOf = bestOf;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateCompletionRequest"/> for deserialization. </summary>
@@ -184,7 +183,7 @@ namespace OpenAI.Models
         /// see all of your available models, or see our [Model overview](/docs/models/overview) for
         /// descriptions of them.
         /// </summary>
-        public CreateCompletionRequestModel Model { get; }
+        public CreateRequestModel Model { get; }
         /// <summary>
         /// The prompt(s) to generate completions for, encoded as a string, array of strings, array of
         /// tokens, or array of token arrays.

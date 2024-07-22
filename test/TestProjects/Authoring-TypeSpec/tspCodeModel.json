@@ -914,7 +914,7 @@
   {
    "$id": "134",
    "Kind": "model",
-   "Name": "PagedSupportedLanguage",
+   "Name": "SupportedLanguages",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.SupportedLanguages",
    "Usage": "None",
    "Description": "Paged collection of SupportedLanguage items",
@@ -987,7 +987,7 @@
   {
    "$id": "144",
    "Kind": "model",
-   "Name": "PagedTrainingConfigVersion",
+   "Name": "TrainingConfigVersions",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.TrainingConfigVersions",
    "Usage": "None",
    "Description": "Paged collection of TrainingConfigVersion items",
