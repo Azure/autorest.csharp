@@ -183,7 +183,7 @@
   {
    "$id": "28",
    "Kind": "model",
-   "Name": "SpreadAsInnerAliasParameterRequest",
+   "Name": "SpreadParameterWithInnerAliasRequest",
    "CrossLanguageDefinitionId": ".anonymous",
    "Usage": "Input",
    "Properties": [
@@ -216,9 +216,9 @@
   {
    "$id": "33",
    "Kind": "model",
-   "Name": "SpreadAsInnerModelParameterRequest",
-   "CrossLanguageDefinitionId": "spreadAsInnerModelParameter.Request.anonymous",
-   "Usage": "Input",
+   "Name": "SpreadParameterWithInnerModelRequest",
+   "CrossLanguageDefinitionId": "spreadParameterWithInnerModel.Request.anonymous",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "34",
@@ -998,7 +998,7 @@
     },
     {
      "$id": "113",
-     "Name": "spreadAsInnerModelParameter",
+     "Name": "spreadParameterWithInnerModel",
      "ResourceName": "Alias",
      "Accessibility": "public",
      "Parameters": [
@@ -1403,7 +1403,7 @@
     },
     {
      "$id": "152",
-     "Name": "spreadAsInnerAliasParameter",
+     "Name": "spreadParameterWithInnerAlias",
      "ResourceName": "Alias",
      "Description": "spread an alias with contains another alias property as body.",
      "Accessibility": "public",
@@ -1449,7 +1449,7 @@
       },
       {
        "$id": "157",
-       "Name": "SpreadAsInnerAliasParameterRequest",
+       "Name": "SpreadParameterWithInnerAliasRequest",
        "NameInRequest": "",
        "Type": {
         "$ref": "28"
