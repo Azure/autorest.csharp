@@ -115,8 +115,10 @@ namespace CadlRanchProjects.Tests
         {
             var id = SubscriptionResource.CreateResourceIdentifier(Guid.Empty.ToString());
             var responses = MgmtTestHelper.CreateArmClientWithMockAuth(host).GetSubscriptionResource(id).GetTopLevelTrackedResourcesAsync();
+            var sum = 0;
             await foreach (var response in responses)
             {
+                sum++;
                 Assert.AreEqual(true, response.HasData);
                 Assert.AreEqual("top", response.Data.Name);
                 Assert.AreEqual("Azure.ResourceManager.Models.Resources/topLevelTrackedResources", response.Data.ResourceType.ToString());
@@ -128,6 +130,7 @@ namespace CadlRanchProjects.Tests
                 Assert.AreEqual("AzureSDK", response.Data.SystemData.LastModifiedBy);
                 Assert.AreEqual(CreatedByType.User, response.Data.SystemData.LastModifiedByType);
             }
+            Assert.AreEqual(1, sum);
         });
 
         [Test]
