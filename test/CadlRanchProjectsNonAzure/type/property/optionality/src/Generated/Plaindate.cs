@@ -11,8 +11,8 @@ using Scm._Type.Property.Optionality.Models;
 namespace Scm._Type.Property.Optionality
 {
     // Data plane generated sub-client.
-    /// <summary> The Plaindate sub-client. </summary>
-    public partial class Plaindate
+    /// <summary> The PlainDate sub-client. </summary>
+    public partial class PlainDate
     {
         private readonly ClientPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -20,32 +20,32 @@ namespace Scm._Type.Property.Optionality
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual ClientPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of Plaindate for mocking. </summary>
-        protected Plaindate()
+        /// <summary> Initializes a new instance of PlainDate for mocking. </summary>
+        protected PlainDate()
         {
         }
 
-        /// <summary> Initializes a new instance of Plaindate. </summary>
+        /// <summary> Initializes a new instance of PlainDate. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        internal Plaindate(ClientPipeline pipeline, Uri endpoint)
+        internal PlainDate(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
-        public virtual async Task<ClientResult<PlaindateProperty>> GetAllAsync()
+        public virtual async Task<ClientResult<PlainDateProperty>> GetAllAsync()
         {
             ClientResult result = await GetAllAsync(null).ConfigureAwait(false);
-            return ClientResult.FromValue(PlaindateProperty.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(PlainDateProperty.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
-        public virtual ClientResult<PlaindateProperty> GetAll()
+        public virtual ClientResult<PlainDateProperty> GetAll()
         {
             ClientResult result = GetAll(null);
-            return ClientResult.FromValue(PlaindateProperty.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(PlainDateProperty.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -97,17 +97,17 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Get models that will return the default object. </summary>
-        public virtual async Task<ClientResult<PlaindateProperty>> GetDefaultAsync()
+        public virtual async Task<ClientResult<PlainDateProperty>> GetDefaultAsync()
         {
             ClientResult result = await GetDefaultAsync(null).ConfigureAwait(false);
-            return ClientResult.FromValue(PlaindateProperty.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(PlainDateProperty.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Get models that will return the default object. </summary>
-        public virtual ClientResult<PlaindateProperty> GetDefault()
+        public virtual ClientResult<PlainDateProperty> GetDefault()
         {
             ClientResult result = GetDefault(null);
-            return ClientResult.FromValue(PlaindateProperty.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(PlainDateProperty.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -159,9 +159,9 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Put a body with all properties present. </summary>
-        /// <param name="body"> The <see cref="PlaindateProperty"/> to use. </param>
+        /// <param name="body"> The <see cref="PlainDateProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<ClientResult> PutAllAsync(PlaindateProperty body)
+        public virtual async Task<ClientResult> PutAllAsync(PlainDateProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -171,9 +171,9 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Put a body with all properties present. </summary>
-        /// <param name="body"> The <see cref="PlaindateProperty"/> to use. </param>
+        /// <param name="body"> The <see cref="PlainDateProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual ClientResult PutAll(PlaindateProperty body)
+        public virtual ClientResult PutAll(PlainDateProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -192,7 +192,7 @@ namespace Scm._Type.Property.Optionality
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutAllAsync(PlaindateProperty)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutAllAsync(PlainDateProperty)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -220,7 +220,7 @@ namespace Scm._Type.Property.Optionality
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutAll(PlaindateProperty)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutAll(PlainDateProperty)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -239,9 +239,9 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Put a body with default properties. </summary>
-        /// <param name="body"> The <see cref="PlaindateProperty"/> to use. </param>
+        /// <param name="body"> The <see cref="PlainDateProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<ClientResult> PutDefaultAsync(PlaindateProperty body)
+        public virtual async Task<ClientResult> PutDefaultAsync(PlainDateProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -251,9 +251,9 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Put a body with default properties. </summary>
-        /// <param name="body"> The <see cref="PlaindateProperty"/> to use. </param>
+        /// <param name="body"> The <see cref="PlainDateProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual ClientResult PutDefault(PlaindateProperty body)
+        public virtual ClientResult PutDefault(PlainDateProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -272,7 +272,7 @@ namespace Scm._Type.Property.Optionality
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutDefaultAsync(PlaindateProperty)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutDefaultAsync(PlainDateProperty)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -300,7 +300,7 @@ namespace Scm._Type.Property.Optionality
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutDefault(PlaindateProperty)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutDefault(PlainDateProperty)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -326,7 +326,7 @@ namespace Scm._Type.Property.Optionality
             request.Method = "GET";
             var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/type/property/optional/plaindate/all", false);
+            uri.AppendPath("/type/property/optional/plainDate/all", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
             message.Apply(options);
@@ -341,7 +341,7 @@ namespace Scm._Type.Property.Optionality
             request.Method = "GET";
             var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/type/property/optional/plaindate/default", false);
+            uri.AppendPath("/type/property/optional/plainDate/default", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
             message.Apply(options);
@@ -356,7 +356,7 @@ namespace Scm._Type.Property.Optionality
             request.Method = "PUT";
             var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/type/property/optional/plaindate/all", false);
+            uri.AppendPath("/type/property/optional/plainDate/all", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
@@ -373,7 +373,7 @@ namespace Scm._Type.Property.Optionality
             request.Method = "PUT";
             var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/type/property/optional/plaindate/default", false);
+            uri.AppendPath("/type/property/optional/plainDate/default", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");

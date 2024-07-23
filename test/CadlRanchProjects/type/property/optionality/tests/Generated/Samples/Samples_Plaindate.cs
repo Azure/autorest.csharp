@@ -16,13 +16,13 @@ using _Type.Property.Optionality.Models;
 
 namespace _Type.Property.Optionality.Samples
 {
-    public partial class Samples_Plaindate
+    public partial class Samples_PlainDate
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Plaindate_GetAll_ShortVersion()
+        public void Example_PlainDate_GetAll_ShortVersion()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
             Response response = client.GetAll(null);
 
@@ -32,9 +32,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Plaindate_GetAll_ShortVersion_Async()
+        public async Task Example_PlainDate_GetAll_ShortVersion_Async()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
             Response response = await client.GetAllAsync(null);
 
@@ -44,27 +44,27 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Plaindate_GetAll_ShortVersion_Convenience()
+        public void Example_PlainDate_GetAll_ShortVersion_Convenience()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
-            Response<PlaindateProperty> response = client.GetAll();
+            Response<PlainDateProperty> response = client.GetAll();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Plaindate_GetAll_ShortVersion_Convenience_Async()
+        public async Task Example_PlainDate_GetAll_ShortVersion_Convenience_Async()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
-            Response<PlaindateProperty> response = await client.GetAllAsync();
+            Response<PlainDateProperty> response = await client.GetAllAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Plaindate_GetAll_AllParameters()
+        public void Example_PlainDate_GetAll_AllParameters()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
             Response response = client.GetAll(null);
 
@@ -74,9 +74,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Plaindate_GetAll_AllParameters_Async()
+        public async Task Example_PlainDate_GetAll_AllParameters_Async()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
             Response response = await client.GetAllAsync(null);
 
@@ -86,27 +86,27 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Plaindate_GetAll_AllParameters_Convenience()
+        public void Example_PlainDate_GetAll_AllParameters_Convenience()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
-            Response<PlaindateProperty> response = client.GetAll();
+            Response<PlainDateProperty> response = client.GetAll();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Plaindate_GetAll_AllParameters_Convenience_Async()
+        public async Task Example_PlainDate_GetAll_AllParameters_Convenience_Async()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
-            Response<PlaindateProperty> response = await client.GetAllAsync();
+            Response<PlainDateProperty> response = await client.GetAllAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Plaindate_GetDefault_ShortVersion()
+        public void Example_PlainDate_GetDefault_ShortVersion()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
             Response response = client.GetDefault(null);
 
@@ -116,9 +116,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Plaindate_GetDefault_ShortVersion_Async()
+        public async Task Example_PlainDate_GetDefault_ShortVersion_Async()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
             Response response = await client.GetDefaultAsync(null);
 
@@ -128,27 +128,27 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Plaindate_GetDefault_ShortVersion_Convenience()
+        public void Example_PlainDate_GetDefault_ShortVersion_Convenience()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
-            Response<PlaindateProperty> response = client.GetDefault();
+            Response<PlainDateProperty> response = client.GetDefault();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Plaindate_GetDefault_ShortVersion_Convenience_Async()
+        public async Task Example_PlainDate_GetDefault_ShortVersion_Convenience_Async()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
-            Response<PlaindateProperty> response = await client.GetDefaultAsync();
+            Response<PlainDateProperty> response = await client.GetDefaultAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Plaindate_GetDefault_AllParameters()
+        public void Example_PlainDate_GetDefault_AllParameters()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
             Response response = client.GetDefault(null);
 
@@ -158,9 +158,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Plaindate_GetDefault_AllParameters_Async()
+        public async Task Example_PlainDate_GetDefault_AllParameters_Async()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
             Response response = await client.GetDefaultAsync(null);
 
@@ -170,27 +170,27 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Plaindate_GetDefault_AllParameters_Convenience()
+        public void Example_PlainDate_GetDefault_AllParameters_Convenience()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
-            Response<PlaindateProperty> response = client.GetDefault();
+            Response<PlainDateProperty> response = client.GetDefault();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Plaindate_GetDefault_AllParameters_Convenience_Async()
+        public async Task Example_PlainDate_GetDefault_AllParameters_Convenience_Async()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
-            Response<PlaindateProperty> response = await client.GetDefaultAsync();
+            Response<PlainDateProperty> response = await client.GetDefaultAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Plaindate_PutAll_ShortVersion()
+        public void Example_PlainDate_PutAll_ShortVersion()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutAll(content);
@@ -200,9 +200,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Plaindate_PutAll_ShortVersion_Async()
+        public async Task Example_PlainDate_PutAll_ShortVersion_Async()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAllAsync(content);
@@ -212,29 +212,29 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Plaindate_PutAll_ShortVersion_Convenience()
+        public void Example_PlainDate_PutAll_ShortVersion_Convenience()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
-            PlaindateProperty body = new PlaindateProperty();
+            PlainDateProperty body = new PlainDateProperty();
             Response response = client.PutAll(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Plaindate_PutAll_ShortVersion_Convenience_Async()
+        public async Task Example_PlainDate_PutAll_ShortVersion_Convenience_Async()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
-            PlaindateProperty body = new PlaindateProperty();
+            PlainDateProperty body = new PlainDateProperty();
             Response response = await client.PutAllAsync(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Plaindate_PutAll_AllParameters()
+        public void Example_PlainDate_PutAll_AllParameters()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -247,9 +247,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Plaindate_PutAll_AllParameters_Async()
+        public async Task Example_PlainDate_PutAll_AllParameters_Async()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -262,11 +262,11 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Plaindate_PutAll_AllParameters_Convenience()
+        public void Example_PlainDate_PutAll_AllParameters_Convenience()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
-            PlaindateProperty body = new PlaindateProperty
+            PlainDateProperty body = new PlainDateProperty
             {
                 Property = DateTimeOffset.Parse("2022-05-10"),
             };
@@ -275,11 +275,11 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Plaindate_PutAll_AllParameters_Convenience_Async()
+        public async Task Example_PlainDate_PutAll_AllParameters_Convenience_Async()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
-            PlaindateProperty body = new PlaindateProperty
+            PlainDateProperty body = new PlainDateProperty
             {
                 Property = DateTimeOffset.Parse("2022-05-10"),
             };
@@ -288,9 +288,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Plaindate_PutDefault_ShortVersion()
+        public void Example_PlainDate_PutDefault_ShortVersion()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDefault(content);
@@ -300,9 +300,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Plaindate_PutDefault_ShortVersion_Async()
+        public async Task Example_PlainDate_PutDefault_ShortVersion_Async()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDefaultAsync(content);
@@ -312,29 +312,29 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Plaindate_PutDefault_ShortVersion_Convenience()
+        public void Example_PlainDate_PutDefault_ShortVersion_Convenience()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
-            PlaindateProperty body = new PlaindateProperty();
+            PlainDateProperty body = new PlainDateProperty();
             Response response = client.PutDefault(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Plaindate_PutDefault_ShortVersion_Convenience_Async()
+        public async Task Example_PlainDate_PutDefault_ShortVersion_Convenience_Async()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
-            PlaindateProperty body = new PlaindateProperty();
+            PlainDateProperty body = new PlainDateProperty();
             Response response = await client.PutDefaultAsync(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Plaindate_PutDefault_AllParameters()
+        public void Example_PlainDate_PutDefault_AllParameters()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -347,9 +347,9 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Plaindate_PutDefault_AllParameters_Async()
+        public async Task Example_PlainDate_PutDefault_AllParameters_Async()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -362,11 +362,11 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Plaindate_PutDefault_AllParameters_Convenience()
+        public void Example_PlainDate_PutDefault_AllParameters_Convenience()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
-            PlaindateProperty body = new PlaindateProperty
+            PlainDateProperty body = new PlainDateProperty
             {
                 Property = DateTimeOffset.Parse("2022-05-10"),
             };
@@ -375,11 +375,11 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Plaindate_PutDefault_AllParameters_Convenience_Async()
+        public async Task Example_PlainDate_PutDefault_AllParameters_Convenience_Async()
         {
-            Plaindate client = new OptionalClient().GetPlaindateClient();
+            PlainDate client = new OptionalClient().GetPlainDateClient();
 
-            PlaindateProperty body = new PlaindateProperty
+            PlainDateProperty body = new PlainDateProperty
             {
                 Property = DateTimeOffset.Parse("2022-05-10"),
             };

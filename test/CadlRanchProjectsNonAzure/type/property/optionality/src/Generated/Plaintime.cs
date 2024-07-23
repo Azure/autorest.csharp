@@ -11,8 +11,8 @@ using Scm._Type.Property.Optionality.Models;
 namespace Scm._Type.Property.Optionality
 {
     // Data plane generated sub-client.
-    /// <summary> The Plaintime sub-client. </summary>
-    public partial class Plaintime
+    /// <summary> The PlainTime sub-client. </summary>
+    public partial class PlainTime
     {
         private readonly ClientPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -20,15 +20,15 @@ namespace Scm._Type.Property.Optionality
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual ClientPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of Plaintime for mocking. </summary>
-        protected Plaintime()
+        /// <summary> Initializes a new instance of PlainTime for mocking. </summary>
+        protected PlainTime()
         {
         }
 
-        /// <summary> Initializes a new instance of Plaintime. </summary>
+        /// <summary> Initializes a new instance of PlainTime. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        internal Plaintime(ClientPipeline pipeline, Uri endpoint)
+        internal PlainTime(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;
@@ -326,7 +326,7 @@ namespace Scm._Type.Property.Optionality
             request.Method = "GET";
             var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/type/property/optional/plaintime/all", false);
+            uri.AppendPath("/type/property/optional/plainTime/all", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
             message.Apply(options);
@@ -341,7 +341,7 @@ namespace Scm._Type.Property.Optionality
             request.Method = "GET";
             var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/type/property/optional/plaintime/default", false);
+            uri.AppendPath("/type/property/optional/plainTime/default", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
             message.Apply(options);
@@ -356,7 +356,7 @@ namespace Scm._Type.Property.Optionality
             request.Method = "PUT";
             var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/type/property/optional/plaintime/all", false);
+            uri.AppendPath("/type/property/optional/plainTime/all", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
@@ -373,7 +373,7 @@ namespace Scm._Type.Property.Optionality
             request.Method = "PUT";
             var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/type/property/optional/plaintime/default", false);
+            uri.AppendPath("/type/property/optional/plainTime/default", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");

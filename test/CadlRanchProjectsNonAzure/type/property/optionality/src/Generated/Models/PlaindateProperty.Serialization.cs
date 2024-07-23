@@ -10,14 +10,14 @@ using System.Text.Json;
 
 namespace Scm._Type.Property.Optionality.Models
 {
-    public partial class PlaindateProperty : IJsonModel<PlaindateProperty>
+    public partial class PlainDateProperty : IJsonModel<PlainDateProperty>
     {
-        void IJsonModel<PlaindateProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<PlainDateProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<PlaindateProperty>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<PlainDateProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(PlaindateProperty)} does not support writing '{format}' format.");
+                throw new FormatException($"The model {nameof(PlainDateProperty)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -44,19 +44,19 @@ namespace Scm._Type.Property.Optionality.Models
             writer.WriteEndObject();
         }
 
-        PlaindateProperty IJsonModel<PlaindateProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        PlainDateProperty IJsonModel<PlainDateProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<PlaindateProperty>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<PlainDateProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(PlaindateProperty)} does not support reading '{format}' format.");
+                throw new FormatException($"The model {nameof(PlainDateProperty)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializePlaindateProperty(document.RootElement, options);
+            return DeserializePlainDateProperty(document.RootElement, options);
         }
 
-        internal static PlaindateProperty DeserializePlaindateProperty(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static PlainDateProperty DeserializePlainDateProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -84,46 +84,46 @@ namespace Scm._Type.Property.Optionality.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new PlaindateProperty(property, serializedAdditionalRawData);
+            return new PlainDateProperty(property, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<PlaindateProperty>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<PlainDateProperty>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<PlaindateProperty>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<PlainDateProperty>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(PlaindateProperty)} does not support writing '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(PlainDateProperty)} does not support writing '{options.Format}' format.");
             }
         }
 
-        PlaindateProperty IPersistableModel<PlaindateProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
+        PlainDateProperty IPersistableModel<PlainDateProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<PlaindateProperty>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<PlainDateProperty>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializePlaindateProperty(document.RootElement, options);
+                        return DeserializePlainDateProperty(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(PlaindateProperty)} does not support reading '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(PlainDateProperty)} does not support reading '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<PlaindateProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<PlainDateProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
-        internal static PlaindateProperty FromResponse(PipelineResponse response)
+        internal static PlainDateProperty FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializePlaindateProperty(document.RootElement);
+            return DeserializePlainDateProperty(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>
