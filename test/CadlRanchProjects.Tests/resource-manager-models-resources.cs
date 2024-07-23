@@ -59,7 +59,7 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("Object reference not set to an instance of an object.")]
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/4876")]
         public Task Azure_ResourceManager_Models_Resources_TopLevelTrackedResources_update() => Test(async (host) =>
         {
             var id = TopLevelTrackedResource.CreateResourceIdentifier(Guid.Empty.ToString(), "test-rg", "top");
