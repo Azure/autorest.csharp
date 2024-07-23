@@ -33,7 +33,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Parameters_Spread_Alias_spreadWithMultipleParameters() => Test(async (host) =>
         {
-            Response response = await new SpreadClient(host, null).GetAliasClient().SpreadWithMultipleParametersAsync("1", "bar", "foo1", "foo2", "foo3", "foo4", "foo5", "foo6");
+            Response response = await new SpreadClient(host, null).GetAliasClient().SpreadWithMultipleParametersAsync("1", "bar", "foo", new[] { 1, 2 }, 1, new[] { "foo", "bar" });
             Assert.AreEqual(204, response.Status);
         });
     }
