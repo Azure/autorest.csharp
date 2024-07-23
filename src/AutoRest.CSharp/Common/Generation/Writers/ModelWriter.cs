@@ -102,10 +102,18 @@ namespace AutoRest.CSharp.Generation.Writers
             if ((schema as SerializableObjectType)?.RawDataField is not { } rawDataField)
                 return;
 
-            writer.WriteXmlDocumentationSummary($"{rawDataField.Description}");
-            writer.Append($"{rawDataField.Declaration.Accessibility} ")
-                .AppendRawIf("readonly ", schema.IsStruct)
-                .Line($"{rawDataField.Declaration.Type} {rawDataField.Declaration.Name};");
+            if (Configuration.EnableInternalRawData)
+            {
+                writer.WriteXmlDocumentationSummary($"{rawDataField.Description}");
+                writer.Append($"{rawDataField.Declaration.Accessibility} {rawDataField.Declaration.Type} {rawDataField.Declaration.Name} {{ get; set; }}");
+            }
+            else
+            {
+                writer.WriteXmlDocumentationSummary($"{rawDataField.Description}");
+                writer.Append($"{rawDataField.Declaration.Accessibility} ")
+                    .AppendRawIf("readonly ", schema.IsStruct)
+                    .Line($"{rawDataField.Declaration.Type} {rawDataField.Declaration.Name};");
+            }
 
             writer.Line();
         }

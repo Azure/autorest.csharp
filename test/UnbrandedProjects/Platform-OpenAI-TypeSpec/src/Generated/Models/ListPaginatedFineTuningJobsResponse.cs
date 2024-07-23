@@ -41,8 +41,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="ListPaginatedFineTuningJobsResponse"/>. </summary>
         /// <param name="object"></param>
         /// <param name="data"></param>
@@ -68,7 +67,7 @@ namespace OpenAI.Models
             Object = @object;
             Data = data;
             HasMore = hasMore;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ListPaginatedFineTuningJobsResponse"/> for deserialization. </summary>
