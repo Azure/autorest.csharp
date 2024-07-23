@@ -32,7 +32,6 @@
         "dist/**"
     ],
     "peerDependencies": {
-        "@azure-tools/cadl-ranch-specs": "0.34.8",
-        "@azure-tools/cadl-ranch-api": "0.4.4"
+        "@azure-tools/cadl-ranch-specs": "0.34.9"
     }
 }
