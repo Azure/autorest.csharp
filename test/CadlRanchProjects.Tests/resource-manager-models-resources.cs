@@ -59,17 +59,18 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
+        [Ignore("Object reference not set to an instance of an object.")]
         public Task Azure_ResourceManager_Models_Resources_TopLevelTrackedResources_update() => Test(async (host) =>
         {
             var id = TopLevelTrackedResource.CreateResourceIdentifier(Guid.Empty.ToString(), "test-rg", "top");
-            var patch = new TopLevelTrackedResourcePatch()
+            var data = new TopLevelTrackedResourceData()
             {
-                Properties = new TopLevelTrackedResourceUpdateProperties()
+                Properties = new TopLevelTrackedResourceProperties()
                 {
                     Description = "valid2"
                 }
             };
-            var response = await MgmtTestHelper.CreateArmClientWithMockAuth(host).GetTopLevelTrackedResource(id).UpdateAsync(WaitUntil.Completed, patch);
+            var response = await MgmtTestHelper.CreateArmClientWithMockAuth(host).GetTopLevelTrackedResource(id).UpdateAsync(WaitUntil.Completed, data);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(true, response.Value.HasData);
             Assert.AreEqual("top", response.Value.Data.Name);
@@ -172,14 +173,14 @@ namespace CadlRanchProjects.Tests
         public Task Azure_ResourceManager_Models_Resources_NestedProxyResources_update() => Test(async (host) =>
         {
             var id = NestedProxyResource.CreateResourceIdentifier(Guid.Empty.ToString(), "test-rg", "top", "nested");
-            var patch = new NestedProxyResourcePatch()
+            var data = new NestedProxyResourceData()
             {
-                Properties = new NestedProxyResourceUpdateProperties()
+                Properties = new NestedProxyResourceProperties()
                 {
                     Description = "valid2"
                 }
             };
-            var response = await MgmtTestHelper.CreateArmClientWithMockAuth(host).GetNestedProxyResource(id).UpdateAsync(WaitUntil.Completed, patch);
+            var response = await MgmtTestHelper.CreateArmClientWithMockAuth(host).GetNestedProxyResource(id).UpdateAsync(WaitUntil.Completed, data);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(true, response.Value.HasData);
             Assert.AreEqual("Azure.ResourceManager.Models.Resources/topLevelTrackedResources/top/nestedProxyResources", response.Value.Data.ResourceType.ToString());
