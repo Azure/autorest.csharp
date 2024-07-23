@@ -1,6 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
+using Azure.Core;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Parameters.Spread;
@@ -51,6 +57,89 @@ namespace CadlRanchProjects.Tests
             Response response = await new SpreadClient(host, null).GetAliasClient().SpreadParameterWithInnerAliasAsync("1", "bar", "foo", 1);
             Assert.AreEqual(204, response.Status);
         });
+
+        [Test]
+        public void SpreadModelMethod()
+        {
+            var expected = new[]
+            {
+                (typeof(string), "name", true),
+            };
+            ValidateConvenienceMethod(typeof(Model), "SpreadAsRequestBody", expected);
+        }
+
+        [Test]
+        public void SpreadAliasMethod()
+        {
+            var expected = new[]
+            {
+                (typeof(string), "name", true),
+            };
+            ValidateConvenienceMethod(typeof(Alias), "SpreadAsRequestBody", expected);
+        }
+
+        [Test]
+        public void SpreadAliasWithModelMethod()
+        {
+            var expected = new[]
+            {
+                (typeof(string), "id", true),
+                (typeof(string), "xMsTestHeader", true),
+                (typeof(string), "name", true),
+            };
+            ValidateConvenienceMethod(typeof(Alias), "SpreadParameterWithInnerModel", expected);
+        }
+
+        [Test]
+        public void SpreadAliasWithSpreadAliasMethod()
+        {
+            var expected = new[]
+            {
+                (typeof(string), "id", true),
+                (typeof(string), "xMsTestHeader", true),
+                (typeof(string), "name", true),
+                (typeof(int), "age", true)
+            };
+            ValidateConvenienceMethod(typeof(Alias), "SpreadParameterWithInnerAlias", expected);
+        }
+
+        private static void ValidateConvenienceMethod(Type clientType, string methodName, IEnumerable<(Type ParameterType, string Name, bool IsRequired)> expected)
+        {
+            var methods = FindMethods(clientType, methodName);
+
+            foreach (var method in methods)
+            {
+                ValidateConvenienceMethodParameters(method, expected);
+            }
+        }
+
+        private static IEnumerable<MethodInfo> FindMethods(Type clientType, string methodName)
+        {
+            var asyncMethodName = $"{methodName}Async";
+            var methods = clientType.GetMethods();
+
+            return methods.Where(m => m.Name.Equals(methodName) || m.Name.Equals(asyncMethodName));
+        }
+
+        private static void ValidateConvenienceMethodParameters(MethodInfo method, IEnumerable<(Type ParameterType, string Name, bool IsRequired)> expected)
+        {
+            if (IsProtocolMethod(method))
+                return;
+            var parameters = method.GetParameters().Where(p => !p.ParameterType.Equals(typeof(CancellationToken)));
+            var parameterTypes = parameters.Select(p => p.ParameterType);
+            var parameterNames = parameters.Select(p => p.Name);
+            var parameterRequiredness = parameters.Select(p => !p.IsOptional);
+            var expectedTypes = expected.Select(p => p.ParameterType);
+            var expectedNames = expected.Select(p => p.Name);
+            var expectedRequiredness = expected.Select(p => p.IsRequired);
+
+            CollectionAssert.AreEqual(expectedTypes, parameterTypes);
+            CollectionAssert.AreEqual(expectedNames, parameterNames);
+            CollectionAssert.AreEqual(expectedRequiredness, parameterRequiredness);
+        }
+
+        private static bool IsProtocolMethod(MethodInfo method)
+            => method.GetParameters().Any(parameter => parameter.ParameterType.Equals(typeof(RequestContent)));
 
     }
 }
