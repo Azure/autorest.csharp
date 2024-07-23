@@ -205,6 +205,7 @@
        "$id": "31",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
+       "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "32",
         "Kind": "uri"
@@ -223,6 +224,7 @@
        "$id": "33",
        "Name": "version",
        "NameInRequest": "version",
+       "Description": "Need to be set as 'v1' or 'v2' in client.",
        "Type": {
         "$ref": "9"
        },
@@ -465,6 +467,7 @@
        "$id": "56",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
+       "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "57",
         "Kind": "uri"
@@ -483,6 +486,7 @@
        "$id": "58",
        "Name": "version",
        "NameInRequest": "version",
+       "Description": "Need to be set as 'v1' or 'v2' in client.",
        "Type": {
         "$ref": "9"
        },

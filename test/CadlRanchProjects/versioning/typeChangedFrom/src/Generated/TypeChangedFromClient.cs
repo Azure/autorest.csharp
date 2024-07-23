@@ -35,16 +35,16 @@ namespace Versioning.TypeChangedFrom
         }
 
         /// <summary> Initializes a new instance of TypeChangedFromClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="version"> The <see cref="Versions"/> to use. </param>
+        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public TypeChangedFromClient(Uri endpoint, Versions version) : this(endpoint, version, new TypeChangedFromClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of TypeChangedFromClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="version"> The <see cref="Versions"/> to use. </param>
+        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public TypeChangedFromClient(Uri endpoint, Versions version, TypeChangedFromClientOptions options)

@@ -52,6 +52,7 @@
      "$id": "10",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Need to be set as 'http://localhost:3000' in client.",
      "Type": {
       "$id": "11",
       "Kind": "uri"
@@ -70,6 +71,7 @@
      "$id": "12",
      "Name": "client",
      "NameInRequest": "client",
+     "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
      "Type": {
       "$ref": "2"
      },
@@ -99,6 +101,7 @@
        "$id": "15",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
+       "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "16",
         "Kind": "uri"
@@ -117,6 +120,7 @@
        "$id": "17",
        "Name": "client",
        "NameInRequest": "client",
+       "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
        "Type": {
         "$ref": "2"
        },
@@ -242,6 +246,7 @@
        "$id": "26",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
+       "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "27",
         "Kind": "uri"
@@ -260,6 +265,7 @@
        "$id": "28",
        "Name": "client",
        "NameInRequest": "client",
+       "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
        "Type": {
         "$ref": "2"
        },
