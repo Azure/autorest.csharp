@@ -63,7 +63,7 @@ namespace CadlRanchProjects.Tests
         public Task Azure_ResourceManager_Models_Resources_TopLevelTrackedResources_update() => Test(async (host) =>
         {
             var id = TopLevelTrackedResource.CreateResourceIdentifier(Guid.Empty.ToString(), "test-rg", "top");
-            var data = new TopLevelTrackedResourceData()
+            var data = new TopLevelTrackedResourceData(AzureLocation.EastUS)
             {
                 Properties = new TopLevelTrackedResourceProperties()
                 {
