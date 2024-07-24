@@ -10,7 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SpreadTypeSpec
+namespace Parameters.Spread
 {
     internal class ChangeTrackingList<T> : IList<T>, IReadOnlyList<T>
     {

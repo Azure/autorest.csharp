@@ -8,10 +8,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace SpreadTypeSpec.Models
+namespace Parameters.Spread.Models
 {
-    /// <summary> The SpreadMultiTargetAliasRequest. </summary>
-    internal partial class SpreadMultiTargetAliasRequest
+    /// <summary> The InnerModel. </summary>
+    internal partial class InnerModel
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -45,37 +45,31 @@ namespace SpreadTypeSpec.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="SpreadMultiTargetAliasRequest"/>. </summary>
-        /// <param name="name"> name of the Thing. </param>
-        /// <param name="age"> age of the Thing. </param>
+        /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
+        /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public SpreadMultiTargetAliasRequest(string name, int age)
+        public InnerModel(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
-            Age = age;
         }
 
-        /// <summary> Initializes a new instance of <see cref="SpreadMultiTargetAliasRequest"/>. </summary>
-        /// <param name="name"> name of the Thing. </param>
-        /// <param name="age"> age of the Thing. </param>
+        /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
+        /// <param name="name"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SpreadMultiTargetAliasRequest(string name, int age, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal InnerModel(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
-            Age = age;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="SpreadMultiTargetAliasRequest"/> for deserialization. </summary>
-        internal SpreadMultiTargetAliasRequest()
+        /// <summary> Initializes a new instance of <see cref="InnerModel"/> for deserialization. </summary>
+        internal InnerModel()
         {
         }
 
-        /// <summary> name of the Thing. </summary>
+        /// <summary> Gets the name. </summary>
         public string Name { get; }
-        /// <summary> age of the Thing. </summary>
-        public int Age { get; }
     }
 }
