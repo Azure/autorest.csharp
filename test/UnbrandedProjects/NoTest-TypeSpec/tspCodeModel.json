@@ -136,7 +136,7 @@
    "Kind": "model",
    "Name": "Thing",
    "CrossLanguageDefinitionId": "NoTestTypeSpec.Thing",
-   "Usage": "Output,Json",
+   "Usage": "Input,Output,Json",
    "Description": "A model with a few properties of literal types",
    "Properties": [
     {
@@ -371,27 +371,51 @@
      "IsReadOnly": false
     }
    ]
+  },
+  {
+   "$id": "57",
+   "Kind": "model",
+   "Name": "DerivedThing",
+   "CrossLanguageDefinitionId": "NoTestTypeSpec.DerivedThing",
+   "Usage": "Input,Output,Json",
+   "BaseModel": {
+    "$ref": "20"
+   },
+   "Properties": [
+    {
+     "$id": "58",
+     "Name": "myProperty",
+     "SerializedName": "myProperty",
+     "Description": "",
+     "Type": {
+      "$id": "59",
+      "Kind": "string"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
   }
  ],
  "Clients": [
   {
-   "$id": "57",
+   "$id": "60",
    "Name": "NoTestTypeSpecClient",
    "Description": "This is a sample typespec project.",
    "Operations": [
     {
-     "$id": "58",
+     "$id": "61",
      "Name": "sayHi",
      "ResourceName": "NoTestTypeSpec",
      "Description": "Return hi",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "59",
+       "$id": "62",
        "Name": "noTestTypeSpecUrl",
        "NameInRequest": "noTestTypeSpecUrl",
        "Type": {
-        "$id": "60",
+        "$id": "63",
         "Kind": "url"
        },
        "Location": "Uri",
@@ -405,11 +429,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "61",
+       "$id": "64",
        "Name": "headParameter",
        "NameInRequest": "head-parameter",
        "Type": {
-        "$id": "62",
+        "$id": "65",
         "Kind": "string"
        },
        "Location": "Header",
@@ -423,11 +447,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "63",
+       "$id": "66",
        "Name": "queryParameter",
        "NameInRequest": "queryParameter",
        "Type": {
-        "$id": "64",
+        "$id": "67",
         "Kind": "string"
        },
        "Location": "Query",
@@ -441,11 +465,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "65",
+       "$id": "68",
        "Name": "optionalQuery",
        "NameInRequest": "optionalQuery",
        "Type": {
-        "$id": "66",
+        "$id": "69",
         "Kind": "string"
        },
        "Location": "Query",
@@ -459,11 +483,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "67",
+       "$id": "70",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "68",
+        "$id": "71",
         "Kind": "string"
        },
        "Location": "Header",
@@ -476,9 +500,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "69",
+        "$id": "72",
         "Type": {
-         "$ref": "68"
+         "$ref": "71"
         },
         "Value": "application/json"
        }
@@ -486,7 +510,7 @@
      ],
      "Responses": [
       {
-       "$id": "70",
+       "$id": "73",
        "StatusCodes": [
         200
        ],
@@ -508,22 +532,128 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "74",
+     "Name": "sayHello",
+     "ResourceName": "NoTestTypeSpec",
+     "Description": "Return hello",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "62"
+      },
+      {
+       "$id": "75",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "57"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "76",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "77",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "78",
+        "Type": {
+         "$ref": "77"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "79",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "80",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "81",
+        "Type": {
+         "$ref": "80"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "82",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "57"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{noTestTypeSpecUrl}",
+     "Path": "/helloAgain",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "71"
+    "$id": "83"
    },
    "Parameters": [
     {
-     "$ref": "59"
+     "$ref": "62"
     }
    ]
   }
  ],
  "Auth": {
-  "$id": "72",
+  "$id": "84",
   "ApiKey": {
-   "$id": "73",
+   "$id": "85",
    "Name": "my-api-key"
   }
  }

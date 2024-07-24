@@ -21,20 +21,24 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Url))
+            if (SerializedAdditionalRawData?.ContainsKey("url") != true && Optional.IsDefined(Url))
             {
                 writer.WritePropertyName("url"u8);
                 writer.WriteStringValue(Url.AbsoluteUri);
             }
-            if (Optional.IsDefined(B64Json))
+            if (SerializedAdditionalRawData?.ContainsKey("b64_json") != true && Optional.IsDefined(B64Json))
             {
                 writer.WritePropertyName("b64_json"u8);
                 writer.WriteBase64StringValue(B64Json.ToArray(), "D");
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            if (SerializedAdditionalRawData != null)
             {
-                foreach (var item in _serializedAdditionalRawData)
+                foreach (var item in SerializedAdditionalRawData)
                 {
+                    if (ModelSerializationExtensions.IsSentinelValue(item.Value))
+                    {
+                        continue;
+                    }
                     writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
@@ -95,6 +99,7 @@ namespace OpenAI.Models
                 }
                 if (options.Format != "W")
                 {
+                    rawDataDictionary ??= new Dictionary<string, BinaryData>();
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }

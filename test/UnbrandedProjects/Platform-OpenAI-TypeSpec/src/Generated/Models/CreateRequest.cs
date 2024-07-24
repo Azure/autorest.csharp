@@ -40,8 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateRequest"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to
@@ -171,7 +170,7 @@ namespace OpenAI.Models
             Logprobs = logprobs;
             Echo = echo;
             BestOf = bestOf;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateRequest"/> for deserialization. </summary>

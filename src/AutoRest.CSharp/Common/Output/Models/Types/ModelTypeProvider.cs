@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.InputTypes;
@@ -83,11 +82,15 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                 }
 
+                // when the configuration is enabled, generate this as internal
                 // when this model has derived types, the accessibility should change from private to `protected internal`
-                string accessibility = HasDerivedTypes() ? "private protected" : "private";
+                string accessibility = Configuration.EnableInternalRawData
+                    ? "internal"
+                    : HasDerivedTypes() ? "private protected" : "private";
 
                 _rawDataField = new ObjectTypeProperty(
-                    BuilderHelpers.CreateMemberDeclaration(PrivateAdditionalPropertiesPropertyName,
+                    BuilderHelpers.CreateMemberDeclaration(
+                        Configuration.EnableInternalRawData ? InternalAdditionalPropertiesPropertyName : PrivateAdditionalPropertiesPropertyName,
                         _privateAdditionalPropertiesPropertyType, accessibility, null, _typeFactory),
                     PrivateAdditionalPropertiesPropertyDescription,
                     true,
@@ -481,7 +484,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
                 else if (!_inputModel.IsUnknownDiscriminatorModel && discriminator.Value is { } value)
                 {
-                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, value));
+                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(discriminator.Property, value));
                 }
             }
 
@@ -642,13 +645,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             // build serialization for additional properties property (if any)
-            var additionalPropertiesSerialization = BuildSerializationForAdditionalProperties(additionalPropertiesProperty, additionalPropertiesValueInputType, false);
+            var additionalPropertiesSerialization = BuildSerializationForAdditionalProperties(additionalPropertiesProperty, additionalPropertiesValueInputType, false, false);
             // build serialization for raw data field (if any)
-            var rawDataFieldSerialization = BuildSerializationForAdditionalProperties(rawDataField, null, true);
+            // the raw data is excluded when the configuration is turned off (default), when turned on, we should include it
+            var rawDataFieldSerialization = BuildSerializationForAdditionalProperties(rawDataField, null, Configuration.EnableInternalRawData ? false : true, true);
 
             return (additionalPropertiesSerialization, rawDataFieldSerialization);
 
-            static JsonAdditionalPropertiesSerialization? BuildSerializationForAdditionalProperties(ObjectTypeProperty? additionalPropertiesProperty, InputType? additionalPropertiesValueType, bool shouldExcludeInWireSerialization)
+            static JsonAdditionalPropertiesSerialization? BuildSerializationForAdditionalProperties(ObjectTypeProperty? additionalPropertiesProperty, InputType? additionalPropertiesValueType, bool shouldExcludeInWireSerialization, bool shouldExcludeInWireDeserialization)
             {
                 if (additionalPropertiesProperty is null)
                     return null;
@@ -668,7 +672,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                     additionalPropertiesProperty,
                     valueSerialization,
                     new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
-                    shouldExcludeInWireSerialization);
+                    shouldExcludeInWireSerialization,
+                    shouldExcludeInWireDeserialization);
             }
         }
 

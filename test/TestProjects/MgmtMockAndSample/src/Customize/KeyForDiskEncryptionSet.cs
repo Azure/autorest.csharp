@@ -11,7 +11,8 @@ namespace MgmtMockAndSample.Models
 {
     /// <summary> Key Vault Key Url to be used for server side encryption of Managed Disks and Snapshots. </summary>
     [CodeGenSerialization(nameof(NewKeyUri), "newKeyUrl")]
-    [CodeGenSerialization(nameof(NewReadOnlyArrayProperty), "newReadOnlyArrayProperty")]
+    [CodeGenSerialization(nameof(NewListProperty), "newListProperty")]
+    [CodeGenSerialization(nameof(NewReadOnlyListProperty), "newReadOnlyListProperty")]
     public partial class KeyForDiskEncryptionSet
     {
         /// <summary>
@@ -22,6 +23,11 @@ namespace MgmtMockAndSample.Models
         /// <summary>
         /// add a new property in serialization
         /// </summary>
-        public IList<string> NewReadOnlyArrayProperty { get; }
+        public IList<string> NewListProperty { get; }
+
+        /// <summary>
+        /// add a new property in serialization
+        /// </summary>
+        public IReadOnlyList<string> NewReadOnlyListProperty { get; }
     }
 }

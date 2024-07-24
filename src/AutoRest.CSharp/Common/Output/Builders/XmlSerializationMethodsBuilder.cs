@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             foreach (XmlObjectAttributeSerialization serialization in objectSerialization.Attributes)
             {
                 yield return Serializations.WrapInCheckNotWire(
-                    serialization,
+                    serialization.ShouldExcludeInWireSerialization,
                     options?.Format,
                     InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, new[]
                     {
@@ -120,7 +120,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             foreach (XmlObjectElementSerialization serialization in objectSerialization.Elements)
             {
                 yield return Serializations.WrapInCheckNotWire(
-                    serialization,
+                    serialization.ShouldExcludeInWireSerialization,
                     options?.Format,
                     InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, SerializeExpression(xmlWriter, serialization.ValueSerialization, serialization.Value))));
             }
@@ -128,7 +128,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             foreach (XmlObjectArraySerialization serialization in objectSerialization.EmbeddedArrays)
             {
                 yield return Serializations.WrapInCheckNotWire(
-                    serialization,
+                    serialization.ShouldExcludeInWireSerialization,
                     options?.Format,
                     InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, SerializeExpression(xmlWriter, serialization.ArraySerialization, serialization.Value))));
             }
@@ -136,7 +136,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (objectSerialization.ContentSerialization is { } contentSerialization)
             {
                 yield return Serializations.WrapInCheckNotWire(
-                    contentSerialization,
+                    contentSerialization.ShouldExcludeInWireSerialization,
                     options?.Format,
                     SerializeValueExpression(xmlWriter, contentSerialization.ValueSerialization, contentSerialization.Value));
             }
