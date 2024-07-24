@@ -59,7 +59,7 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        public void SpreadModelMethod()
+        public void SpreadAsRequestBodyInModel()
         {
             var expected = new[]
             {
@@ -69,7 +69,7 @@ namespace CadlRanchProjects.Tests
         }
 
         [Test]
-        public void SpreadAliasMethod()
+        public void SpreadAsRequestBodyInAlias()
         {
             var expected = new[]
             {
@@ -79,7 +79,7 @@ namespace CadlRanchProjects.Tests
         }
 
         [Test]
-        public void SpreadAliasWithModelMethod()
+        public void SpreadParameterWithInnerModel()
         {
             var expected = new[]
             {
@@ -91,7 +91,7 @@ namespace CadlRanchProjects.Tests
         }
 
         [Test]
-        public void SpreadAliasWithSpreadAliasMethod()
+        public void SpreadParameterWithInnerAlias()
         {
             var expected = new[]
             {
