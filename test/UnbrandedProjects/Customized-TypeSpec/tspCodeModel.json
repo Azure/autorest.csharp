@@ -1111,7 +1111,7 @@
       {
        "$id": "159",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "160",
         "Kind": "constant",

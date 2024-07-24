@@ -606,7 +606,7 @@ namespace Encode.Bytes
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/bytes/body/request/octet-stream", false);
             request.Uri = uri;
-            request.Headers.Add("content-type", "application/octet-stream");
+            request.Headers.Add("Content-Type", "application/octet-stream");
             request.Content = content;
             return message;
         }
@@ -620,7 +620,7 @@ namespace Encode.Bytes
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/bytes/body/request/custom-content-type", false);
             request.Uri = uri;
-            request.Headers.Add("content-type", "image/png");
+            request.Headers.Add("Content-Type", "image/png");
             request.Content = content;
             return message;
         }

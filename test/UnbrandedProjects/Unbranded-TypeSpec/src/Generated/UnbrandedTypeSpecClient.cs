@@ -1362,7 +1362,7 @@ namespace UnbrandedTypeSpec
             request.Uri = uri.ToUri();
             request.Headers.Set("p1", p1);
             request.Headers.Set("Accept", "application/json");
-            request.Headers.Set("content-type", "text/plain");
+            request.Headers.Set("Content-Type", "text/plain");
             request.Content = content;
             message.Apply(options);
             return message;

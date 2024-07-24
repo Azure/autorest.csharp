@@ -104,7 +104,7 @@
       {
        "$id": "17",
        "Name": "accept",
-       "NameInRequest": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "18",
         "Kind": "constant",
@@ -177,7 +177,7 @@
       {
        "$id": "26",
        "Name": "accept",
-       "NameInRequest": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "27",
         "Kind": "constant",
@@ -288,7 +288,7 @@
       {
        "$id": "41",
        "Name": "accept",
-       "NameInRequest": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "42",
         "Kind": "constant",
@@ -361,7 +361,7 @@
       {
        "$id": "50",
        "Name": "accept",
-       "NameInRequest": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "51",
         "Kind": "constant",

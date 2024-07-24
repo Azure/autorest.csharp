@@ -5356,7 +5356,7 @@
       {
        "$id": "837",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "838",
         "Kind": "constant",
@@ -5490,7 +5490,7 @@
       {
        "$id": "852",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "853",
         "Kind": "constant",
@@ -6773,7 +6773,7 @@
       {
        "$id": "993",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "994",
         "Kind": "constant",
@@ -7906,7 +7906,7 @@
       {
        "$id": "1107",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "1108",
         "Kind": "constant",
@@ -8002,7 +8002,7 @@
       {
        "$id": "1116",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "1117",
         "Kind": "constant",

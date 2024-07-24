@@ -81,7 +81,7 @@
       {
        "$id": "14",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "15",
         "Kind": "constant",
@@ -222,7 +222,7 @@
       {
        "$id": "30",
        "Name": "contentType",
-       "NameInRequest": "content-type",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "31",
         "Kind": "constant",
