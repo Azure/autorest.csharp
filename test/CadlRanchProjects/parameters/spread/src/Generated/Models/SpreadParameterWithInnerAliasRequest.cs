@@ -7,12 +7,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace SpreadTypeSpec.Models
+namespace Parameters.Spread.Models
 {
-    /// <summary> The SpreadAliasWithOptionalPropsRequest. </summary>
-    internal partial class SpreadAliasWithOptionalPropsRequest
+    /// <summary> The SpreadParameterWithInnerAliasRequest. </summary>
+    internal partial class SpreadParameterWithInnerAliasRequest
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -46,51 +45,41 @@ namespace SpreadTypeSpec.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithOptionalPropsRequest"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="SpreadParameterWithInnerAliasRequest"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
-        /// <param name="items"> required array. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="items"/> is null. </exception>
-        internal SpreadAliasWithOptionalPropsRequest(string name, IEnumerable<int> items)
+        /// <param name="age"> age of the Thing. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+<<<<<<< HEAD:test/TestProjects/Spread-TypeSpec/src/Generated/Models/SpreadAliasWithSpreadAliasRequest.cs
+        internal SpreadAliasWithSpreadAliasRequest(string name, int age)
+=======
+        public SpreadParameterWithInnerAliasRequest(string name, int age)
+>>>>>>> origin/feature/v3:test/CadlRanchProjects/parameters/spread/src/Generated/Models/SpreadParameterWithInnerAliasRequest.cs
         {
             Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(items, nameof(items));
 
             Name = name;
-            Items = items.ToList();
-            Elements = new ChangeTrackingList<string>();
+            Age = age;
         }
 
-        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithOptionalPropsRequest"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="SpreadParameterWithInnerAliasRequest"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
-        /// <param name="color"> optional property of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
-        /// <param name="items"> required array. </param>
-        /// <param name="elements"> optional array. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SpreadAliasWithOptionalPropsRequest(string name, string color, int? age, IReadOnlyList<int> items, IReadOnlyList<string> elements, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal SpreadParameterWithInnerAliasRequest(string name, int age, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
-            Color = color;
             Age = age;
-            Items = items;
-            Elements = elements;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithOptionalPropsRequest"/> for deserialization. </summary>
-        internal SpreadAliasWithOptionalPropsRequest()
+        /// <summary> Initializes a new instance of <see cref="SpreadParameterWithInnerAliasRequest"/> for deserialization. </summary>
+        internal SpreadParameterWithInnerAliasRequest()
         {
         }
 
         /// <summary> name of the Thing. </summary>
         public string Name { get; }
-        /// <summary> optional property of the Thing. </summary>
-        public string Color { get; }
         /// <summary> age of the Thing. </summary>
-        public int? Age { get; }
-        /// <summary> required array. </summary>
-        public IReadOnlyList<int> Items { get; }
-        /// <summary> optional array. </summary>
-        public IReadOnlyList<string> Elements { get; }
+        public int Age { get; }
     }
 }

@@ -12,8 +12,9 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace SpreadTypeSpec.Models
+namespace Parameters.Spread.Models
 {
+<<<<<<<< HEAD:test/CadlRanchProjects/parameters/spread/src/Generated/Models/SpreadModelRequest.Serialization.cs
     internal partial class SpreadModelRequest : IUtf8JsonSerializable, IJsonModel<SpreadModelRequest>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SpreadModelRequest>)this).Write(writer, ModelSerializationExtensions.WireOptions);
@@ -24,13 +25,23 @@ namespace SpreadTypeSpec.Models
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(SpreadModelRequest)} does not support writing '{format}' format.");
+========
+    internal partial class InnerModel : IUtf8JsonSerializable, IJsonModel<InnerModel>
+    {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InnerModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<InnerModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<InnerModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(InnerModel)} does not support writing '{format}' format.");
+>>>>>>>> origin/feature/v3:test/CadlRanchProjects/parameters/spread/src/Generated/Models/InnerModel.Serialization.cs
             }
 
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            writer.WritePropertyName("age"u8);
-            writer.WriteNumberValue(Age);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -49,6 +60,7 @@ namespace SpreadTypeSpec.Models
             writer.WriteEndObject();
         }
 
+<<<<<<<< HEAD:test/CadlRanchProjects/parameters/spread/src/Generated/Models/SpreadModelRequest.Serialization.cs
         SpreadModelRequest IJsonModel<SpreadModelRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<SpreadModelRequest>)this).GetFormatFromOptions(options) : options.Format;
@@ -62,6 +74,21 @@ namespace SpreadTypeSpec.Models
         }
 
         internal static SpreadModelRequest DeserializeSpreadModelRequest(JsonElement element, ModelReaderWriterOptions options = null)
+========
+        InnerModel IJsonModel<InnerModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<InnerModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(InnerModel)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeInnerModel(document.RootElement, options);
+        }
+
+        internal static InnerModel DeserializeInnerModel(JsonElement element, ModelReaderWriterOptions options = null)
+>>>>>>>> origin/feature/v3:test/CadlRanchProjects/parameters/spread/src/Generated/Models/InnerModel.Serialization.cs
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -70,7 +97,6 @@ namespace SpreadTypeSpec.Models
                 return null;
             }
             string name = default;
-            int age = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -80,29 +106,34 @@ namespace SpreadTypeSpec.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("age"u8))
-                {
-                    age = property.Value.GetInt32();
-                    continue;
-                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
+<<<<<<<< HEAD:test/CadlRanchProjects/parameters/spread/src/Generated/Models/SpreadModelRequest.Serialization.cs
             return new SpreadModelRequest(name, age, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<SpreadModelRequest>.Write(ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<SpreadModelRequest>)this).GetFormatFromOptions(options) : options.Format;
+========
+            return new InnerModel(name, serializedAdditionalRawData);
+        }
+
+        BinaryData IPersistableModel<InnerModel>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<InnerModel>)this).GetFormatFromOptions(options) : options.Format;
+>>>>>>>> origin/feature/v3:test/CadlRanchProjects/parameters/spread/src/Generated/Models/InnerModel.Serialization.cs
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
+<<<<<<<< HEAD:test/CadlRanchProjects/parameters/spread/src/Generated/Models/SpreadModelRequest.Serialization.cs
                     throw new FormatException($"The model {nameof(SpreadModelRequest)} does not support writing '{options.Format}' format.");
             }
         }
@@ -110,12 +141,22 @@ namespace SpreadTypeSpec.Models
         SpreadModelRequest IPersistableModel<SpreadModelRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<SpreadModelRequest>)this).GetFormatFromOptions(options) : options.Format;
+========
+                    throw new FormatException($"The model {nameof(InnerModel)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        InnerModel IPersistableModel<InnerModel>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<InnerModel>)this).GetFormatFromOptions(options) : options.Format;
+>>>>>>>> origin/feature/v3:test/CadlRanchProjects/parameters/spread/src/Generated/Models/InnerModel.Serialization.cs
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
+<<<<<<<< HEAD:test/CadlRanchProjects/parameters/spread/src/Generated/Models/SpreadModelRequest.Serialization.cs
                         return DeserializeSpreadModelRequest(document.RootElement, options);
                     }
                 default:
@@ -131,6 +172,23 @@ namespace SpreadTypeSpec.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeSpreadModelRequest(document.RootElement);
+========
+                        return DeserializeInnerModel(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(InnerModel)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<InnerModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static InnerModel FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeInnerModel(document.RootElement);
+>>>>>>>> origin/feature/v3:test/CadlRanchProjects/parameters/spread/src/Generated/Models/InnerModel.Serialization.cs
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>

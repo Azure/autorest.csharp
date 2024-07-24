@@ -8,10 +8,15 @@
 using System;
 using System.Collections.Generic;
 
-namespace SpreadTypeSpec.Models
+namespace Parameters.Spread.Models
 {
+<<<<<<<< HEAD:test/CadlRanchProjects/parameters/spread/src/Generated/Models/SpreadModelRequest.cs
     /// <summary> The SpreadModelRequest. </summary>
     internal partial class SpreadModelRequest
+========
+    /// <summary> The InnerModel. </summary>
+    internal partial class InnerModel
+>>>>>>>> origin/feature/v3:test/CadlRanchProjects/parameters/spread/src/Generated/Models/InnerModel.cs
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -45,37 +50,52 @@ namespace SpreadTypeSpec.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
+<<<<<<<< HEAD:test/CadlRanchProjects/parameters/spread/src/Generated/Models/SpreadModelRequest.cs
         /// <summary> Initializes a new instance of <see cref="SpreadModelRequest"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal SpreadModelRequest(string name, int age)
+========
+        /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
+        /// <param name="name"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public InnerModel(string name)
+>>>>>>>> origin/feature/v3:test/CadlRanchProjects/parameters/spread/src/Generated/Models/InnerModel.cs
         {
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
-            Age = age;
         }
 
+<<<<<<<< HEAD:test/CadlRanchProjects/parameters/spread/src/Generated/Models/SpreadModelRequest.cs
         /// <summary> Initializes a new instance of <see cref="SpreadModelRequest"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal SpreadModelRequest(string name, int age, IDictionary<string, BinaryData> serializedAdditionalRawData)
+========
+        /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
+        /// <param name="name"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal InnerModel(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+>>>>>>>> origin/feature/v3:test/CadlRanchProjects/parameters/spread/src/Generated/Models/InnerModel.cs
         {
             Name = name;
-            Age = age;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
+<<<<<<<< HEAD:test/CadlRanchProjects/parameters/spread/src/Generated/Models/SpreadModelRequest.cs
         /// <summary> Initializes a new instance of <see cref="SpreadModelRequest"/> for deserialization. </summary>
         internal SpreadModelRequest()
+========
+        /// <summary> Initializes a new instance of <see cref="InnerModel"/> for deserialization. </summary>
+        internal InnerModel()
+>>>>>>>> origin/feature/v3:test/CadlRanchProjects/parameters/spread/src/Generated/Models/InnerModel.cs
         {
         }
 
-        /// <summary> name of the Thing. </summary>
+        /// <summary> Gets the name. </summary>
         public string Name { get; }
-        /// <summary> age of the Thing. </summary>
-        public int Age { get; }
     }
 }
