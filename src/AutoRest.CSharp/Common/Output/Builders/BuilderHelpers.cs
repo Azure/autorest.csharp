@@ -229,12 +229,28 @@ namespace AutoRest.CSharp.Output.Builders
             return PromoteNullabilityInformation(newType, defaultType);
         }
 
-        public static bool IsReadOnlyFromExisting(ISymbol existingMember) => existingMember switch
+        private static bool IsExistingSettable(ISymbol existingMember) => existingMember switch
         {
-            IPropertySymbol propertySymbol => propertySymbol.SetMethod == null,
-            IFieldSymbol fieldSymbol => fieldSymbol.IsReadOnly,
+            IPropertySymbol propertySymbol => propertySymbol.SetMethod != null,
+            IFieldSymbol fieldSymbol => !fieldSymbol.IsReadOnly,
             _ => throw new NotSupportedException($"'{existingMember.ContainingType.Name}.{existingMember.Name}' must be either field or property.")
         };
+
+        public static bool IsReadOnly(ISymbol existingMember, CSharpType type)
+        {
+            var hasSetter = IsExistingSettable(existingMember);
+            if (hasSetter)
+            {
+                return false;
+            }
+
+            if (type.IsCollection)
+            {
+                return type.IsReadOnlyDictionary || type.IsReadOnlyList;
+            }
+
+            return !hasSetter;
+        }
 
         public static MemberDeclarationOptions CreateMemberDeclaration(string defaultName, CSharpType defaultType, string defaultAccessibility, ISymbol? existingMember, TypeFactory typeFactory)
         {

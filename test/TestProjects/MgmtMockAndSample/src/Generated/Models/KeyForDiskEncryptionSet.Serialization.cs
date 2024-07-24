@@ -30,6 +30,16 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("newKeyUrl"u8);
                 writer.WriteStringValue(NewKeyUri.AbsoluteUri);
             }
+            if (Optional.IsCollectionDefined(NewListProperty))
+            {
+                writer.WritePropertyName("newListProperty"u8);
+                writer.WriteStartArray();
+                foreach (var item in NewListProperty)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
             writer.WriteEndObject();
         }
 
@@ -42,7 +52,8 @@ namespace MgmtMockAndSample.Models
             WritableSubResource sourceVault = default;
             Uri keyUrl = default;
             Uri newKeyUrl = default;
-            IList<string> newReadOnlyArrayProperty = default;
+            IList<string> newListProperty = default;
+            IReadOnlyList<string> newReadOnlyListProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sourceVault"u8))
@@ -68,7 +79,7 @@ namespace MgmtMockAndSample.Models
                     newKeyUrl = new Uri(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("newReadOnlyArrayProperty"u8))
+                if (property.NameEquals("newListProperty"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -79,11 +90,25 @@ namespace MgmtMockAndSample.Models
                     {
                         array.Add(item.GetString());
                     }
-                    newReadOnlyArrayProperty = array;
+                    newListProperty = array;
+                    continue;
+                }
+                if (property.NameEquals("newReadOnlyListProperty"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    newReadOnlyListProperty = array;
                     continue;
                 }
             }
-            return new KeyForDiskEncryptionSet(sourceVault, keyUrl, newKeyUrl, newReadOnlyArrayProperty ?? new ChangeTrackingList<string>());
+            return new KeyForDiskEncryptionSet(sourceVault, keyUrl, newKeyUrl, newListProperty ?? new ChangeTrackingList<string>(), newReadOnlyListProperty ?? new ChangeTrackingList<string>());
         }
     }
 }

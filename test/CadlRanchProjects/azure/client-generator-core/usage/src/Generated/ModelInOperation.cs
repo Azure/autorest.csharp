@@ -302,7 +302,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// Expected response body:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;
+        ///   "result": {
+        ///     "name": &lt;any string&gt;
+        ///   }
         /// }
         /// ```
         /// </summary>
@@ -332,7 +334,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// Expected response body:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;
+        ///   "result": {
+        ///     "name": &lt;any string&gt;
+        ///   }
         /// }
         /// ```
         /// </summary>
@@ -362,7 +366,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// Expected response body:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;
+        ///   "result": {
+        ///     "name": &lt;any string&gt;
+        ///   }
         /// }
         /// ```
         /// <list type="bullet">
@@ -414,7 +420,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// Expected response body:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;
+        ///   "result": {
+        ///     "name": &lt;any string&gt;
+        ///   }
         /// }
         /// ```
         /// <list type="bullet">

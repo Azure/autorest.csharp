@@ -21,49 +21,65 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("tokens"u8);
-            writer.WriteStartArray();
-            foreach (var item in Tokens)
+            if (SerializedAdditionalRawData?.ContainsKey("tokens") != true)
             {
-                writer.WriteStringValue(item);
-            }
-            writer.WriteEndArray();
-            writer.WritePropertyName("token_logprobs"u8);
-            writer.WriteStartArray();
-            foreach (var item in TokenLogprobs)
-            {
-                writer.WriteNumberValue(item);
-            }
-            writer.WriteEndArray();
-            writer.WritePropertyName("top_logprobs"u8);
-            writer.WriteStartArray();
-            foreach (var item in TopLogprobs)
-            {
-                if (item == null)
+                writer.WritePropertyName("tokens"u8);
+                writer.WriteStartArray();
+                foreach (var item in Tokens)
                 {
-                    writer.WriteNullValue();
-                    continue;
+                    writer.WriteStringValue(item);
                 }
-                writer.WriteStartObject();
-                foreach (var item0 in item)
+                writer.WriteEndArray();
+            }
+            if (SerializedAdditionalRawData?.ContainsKey("token_logprobs") != true)
+            {
+                writer.WritePropertyName("token_logprobs"u8);
+                writer.WriteStartArray();
+                foreach (var item in TokenLogprobs)
                 {
-                    writer.WritePropertyName(item0.Key);
-                    writer.WriteNumberValue(item0.Value);
+                    writer.WriteNumberValue(item);
                 }
-                writer.WriteEndObject();
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
-            writer.WritePropertyName("text_offset"u8);
-            writer.WriteStartArray();
-            foreach (var item in TextOffset)
+            if (SerializedAdditionalRawData?.ContainsKey("top_logprobs") != true)
             {
-                writer.WriteNumberValue(item);
-            }
-            writer.WriteEndArray();
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
+                writer.WritePropertyName("top_logprobs"u8);
+                writer.WriteStartArray();
+                foreach (var item in TopLogprobs)
                 {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+                    writer.WriteStartObject();
+                    foreach (var item0 in item)
+                    {
+                        writer.WritePropertyName(item0.Key);
+                        writer.WriteNumberValue(item0.Value);
+                    }
+                    writer.WriteEndObject();
+                }
+                writer.WriteEndArray();
+            }
+            if (SerializedAdditionalRawData?.ContainsKey("text_offset") != true)
+            {
+                writer.WritePropertyName("text_offset"u8);
+                writer.WriteStartArray();
+                foreach (var item in TextOffset)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (SerializedAdditionalRawData != null)
+            {
+                foreach (var item in SerializedAdditionalRawData)
+                {
+                    if (ModelSerializationExtensions.IsSentinelValue(item.Value))
+                    {
+                        continue;
+                    }
                     writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
@@ -160,6 +176,7 @@ namespace OpenAI.Models
                 }
                 if (options.Format != "W")
                 {
+                    rawDataDictionary ??= new Dictionary<string, BinaryData>();
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }

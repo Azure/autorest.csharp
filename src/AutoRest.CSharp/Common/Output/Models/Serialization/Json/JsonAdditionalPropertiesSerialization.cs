@@ -21,5 +21,11 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
         {
             ImplementationType = type;
         }
+
+        public JsonAdditionalPropertiesSerialization(ObjectTypeProperty property, JsonSerialization valueSerialization, CSharpType type, bool shouldExcludeInWireSerialization, bool shouldExcludeInWireDeserialization)
+            : base(property.Declaration.Name.ToVariableName(), new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type), property.Declaration.Name, property.ValueType, valueSerialization, true, shouldExcludeInWireSerialization, shouldExcludeInWireDeserialization, property)
+        {
+            ImplementationType = type;
+        }
     }
 }

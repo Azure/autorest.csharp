@@ -41,8 +41,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateTranscriptionRequest"/>. </summary>
         /// <param name="file">
         /// The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4,
@@ -92,7 +91,7 @@ namespace OpenAI.Models
             ResponseFormat = responseFormat;
             Temperature = temperature;
             Language = language;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateTranscriptionRequest"/> for deserialization. </summary>
