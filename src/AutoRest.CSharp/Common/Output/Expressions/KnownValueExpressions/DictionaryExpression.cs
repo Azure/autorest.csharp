@@ -15,5 +15,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 
         public MethodBodyStatement Add(KeyValuePairExpression pair)
             => new InvokeInstanceMethodStatement(Untyped, nameof(Dictionary<object, object>.Add), pair);
+
+        public BoolExpression ContainsKey(ValueExpression key) => new(Invoke(nameof(Dictionary<object, object>.ContainsKey), key));
     }
 }

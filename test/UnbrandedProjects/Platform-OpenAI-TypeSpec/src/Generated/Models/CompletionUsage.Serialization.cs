@@ -21,16 +21,29 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("prompt_tokens"u8);
-            writer.WriteNumberValue(PromptTokens);
-            writer.WritePropertyName("completion_tokens"u8);
-            writer.WriteNumberValue(CompletionTokens);
-            writer.WritePropertyName("total_tokens"u8);
-            writer.WriteNumberValue(TotalTokens);
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            if (SerializedAdditionalRawData?.ContainsKey("prompt_tokens") != true)
             {
-                foreach (var item in _serializedAdditionalRawData)
+                writer.WritePropertyName("prompt_tokens"u8);
+                writer.WriteNumberValue(PromptTokens);
+            }
+            if (SerializedAdditionalRawData?.ContainsKey("completion_tokens") != true)
+            {
+                writer.WritePropertyName("completion_tokens"u8);
+                writer.WriteNumberValue(CompletionTokens);
+            }
+            if (SerializedAdditionalRawData?.ContainsKey("total_tokens") != true)
+            {
+                writer.WritePropertyName("total_tokens"u8);
+                writer.WriteNumberValue(TotalTokens);
+            }
+            if (SerializedAdditionalRawData != null)
+            {
+                foreach (var item in SerializedAdditionalRawData)
                 {
+                    if (ModelSerializationExtensions.IsSentinelValue(item.Value))
+                    {
+                        continue;
+                    }
                     writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
@@ -89,6 +102,7 @@ namespace OpenAI.Models
                 }
                 if (options.Format != "W")
                 {
+                    rawDataDictionary ??= new Dictionary<string, BinaryData>();
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
