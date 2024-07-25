@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "User",
    "CrossLanguageDefinitionId": "Payload.Pageable.User",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "User model",
    "Properties": [
     {

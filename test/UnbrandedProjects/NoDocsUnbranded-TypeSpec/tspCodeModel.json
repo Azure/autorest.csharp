@@ -22,7 +22,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Output,Json"
   },
   {
    "$id": "5",
@@ -43,7 +43,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Output,Json"
   },
   {
    "$id": "8",
@@ -64,7 +64,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Output,Json"
   },
   {
    "$id": "11",
@@ -85,7 +85,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Output,Json"
   },
   {
    "$id": "14",
@@ -106,7 +106,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Output,Json"
   },
   {
    "$id": "17",
@@ -127,7 +127,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Output,Json"
   }
  ],
  "Models": [
@@ -136,7 +136,7 @@
    "Kind": "model",
    "Name": "Thing",
    "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "A model with a few properties of literal types",
    "Properties": [
     {

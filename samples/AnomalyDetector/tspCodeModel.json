@@ -38,7 +38,7 @@
    ],
    "Description": "The batch detection status.",
    "IsExtensible": false,
-   "Usage": "Output"
+   "Usage": "Output,Json"
   },
   {
    "$id": "8",
@@ -65,7 +65,7 @@
    ],
    "Description": "Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "12",
@@ -90,7 +90,7 @@
    ],
    "Description": "The alignment mode.",
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "16",
@@ -130,7 +130,7 @@
    ],
    "Description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "23",
@@ -165,7 +165,7 @@
    ],
    "Description": "the model status.",
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "29",
@@ -225,7 +225,7 @@
    ],
    "Description": "the time granularity of the data points.",
    "IsExtensible": false,
-   "Usage": "Input"
+   "Usage": "Input,Json"
   },
   {
    "$id": "40",
@@ -270,7 +270,7 @@
    ],
    "Description": "The impute mode.",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Json"
   },
   {
    "$id": "48",
@@ -339,7 +339,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Output"
+   "Usage": "Output,Json"
   },
   {
    "$id": "61",
@@ -377,7 +377,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -386,7 +386,7 @@
    "Kind": "model",
    "Name": "MultivariateDetectionResult",
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateDetectionResult",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Detection results for the given resultId.",
    "Properties": [
     {
@@ -412,7 +412,7 @@
       "Kind": "model",
       "Name": "MultivariateBatchDetectionResultSummary",
       "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionResultSummary",
-      "Usage": "Output",
+      "Usage": "Output,Json",
       "Description": "Multivariate anomaly detection status.",
       "Properties": [
        {
@@ -440,7 +440,7 @@
           "Kind": "model",
           "Name": "ErrorResponse",
           "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ErrorResponse",
-          "Usage": "Output",
+          "Usage": "Output,Error,Json",
           "Description": "ErrorResponse contains code and message that shows the error information.",
           "Properties": [
            {
@@ -488,7 +488,7 @@
           "Kind": "model",
           "Name": "VariableState",
           "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.VariableState",
-          "Usage": "RoundTrip",
+          "Usage": "Input,Output,Json",
           "Description": "Variable Status.",
           "Properties": [
            {
@@ -578,7 +578,7 @@
          "Kind": "model",
          "Name": "MultivariateBatchDetectionOptions",
          "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionOptions",
-         "Usage": "RoundTrip",
+         "Usage": "Input,Output,Json",
          "Description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
          "Properties": [
           {
@@ -663,7 +663,7 @@
        "Kind": "model",
        "Name": "AnomalyState",
        "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyState",
-       "Usage": "Output",
+       "Usage": "Output,Json",
        "Description": "Anomaly status and information.",
        "Properties": [
         {
@@ -693,7 +693,7 @@
           "Kind": "model",
           "Name": "AnomalyValue",
           "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyValue",
-          "Usage": "Output",
+          "Usage": "Output,Json",
           "Description": "Detailed information of the anomalous timestamp.",
           "Properties": [
            {
@@ -746,7 +746,7 @@
               "Kind": "model",
               "Name": "AnomalyInterpretation",
               "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyInterpretation",
-              "Usage": "Output",
+              "Usage": "Output,Json",
               "Description": "Interpretation of the anomalous timestamp.",
               "Properties": [
                {
@@ -783,7 +783,7 @@
                  "Kind": "model",
                  "Name": "CorrelationChanges",
                  "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.CorrelationChanges",
-                 "Usage": "Output",
+                 "Usage": "Output,Json",
                  "Description": "Correlation changes among the anomalous variables",
                  "Properties": [
                   {
@@ -876,7 +876,7 @@
    "Kind": "model",
    "Name": "ModelInfo",
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelInfo",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Training result of a model including its status, errors and diagnostics\ninformation.",
    "Properties": [
     {
@@ -970,7 +970,7 @@
       "Kind": "model",
       "Name": "AlignPolicy",
       "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AlignPolicy",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output,Json",
       "Description": "An optional field, indicating the manner to align multiple variables.",
       "Properties": [
        {
@@ -1050,7 +1050,7 @@
       "Kind": "model",
       "Name": "DiagnosticsInfo",
       "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.DiagnosticsInfo",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output,Json",
       "Description": "Diagnostics information to help inspect the states of model or variable.",
       "Properties": [
        {
@@ -1063,7 +1063,7 @@
          "Kind": "model",
          "Name": "ModelState",
          "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelState",
-         "Usage": "RoundTrip",
+         "Usage": "Input,Output,Json",
          "Description": "Model status.",
          "Properties": [
           {
@@ -1181,7 +1181,7 @@
    "Kind": "model",
    "Name": "AnomalyDetectionModel",
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyDetectionModel",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Response of getting a model.",
    "Properties": [
     {
@@ -1249,7 +1249,7 @@
    "Kind": "model",
    "Name": "ModelList",
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelList",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Response of listing models.",
    "Properties": [
     {
@@ -1312,7 +1312,7 @@
    "Kind": "model",
    "Name": "MultivariateLastDetectionOptions",
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateLastDetectionOptions",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Description": "Request of last detection.",
    "Properties": [
     {
@@ -1329,7 +1329,7 @@
        "Kind": "model",
        "Name": "VariableValues",
        "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.VariableValues",
-       "Usage": "Input",
+       "Usage": "Input,Json",
        "Description": "Variable values.",
        "Properties": [
         {
@@ -1409,7 +1409,7 @@
    "Kind": "model",
    "Name": "MultivariateLastDetectionResult",
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateLastDetectionResult",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Results of last detection.",
    "Properties": [
     {
@@ -1453,7 +1453,7 @@
    "Kind": "model",
    "Name": "UnivariateDetectionOptions",
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateDetectionOptions",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Description": "The request of entire or last anomaly detection.",
    "Properties": [
     {
@@ -1470,7 +1470,7 @@
        "Kind": "model",
        "Name": "TimeSeriesPoint",
        "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.TimeSeriesPoint",
-       "Usage": "Input",
+       "Usage": "Input,Json",
        "Description": "The definition of input timeseries points.",
        "Properties": [
         {
@@ -1601,7 +1601,7 @@
    "Kind": "model",
    "Name": "UnivariateEntireDetectionResult",
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateEntireDetectionResult",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "The response of entire anomaly detection.",
    "Properties": [
     {
@@ -1749,7 +1749,7 @@
    "Kind": "model",
    "Name": "AnomalyDetectorError",
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.AnomalyDetectorError",
-   "Usage": "Output",
+   "Usage": "Output,Error,Json",
    "Description": "Error information returned by the API.",
    "Properties": [
     {
@@ -1782,7 +1782,7 @@
    "Kind": "model",
    "Name": "UnivariateLastDetectionResult",
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateLastDetectionResult",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "The response of last anomaly detection.",
    "Properties": [
     {
@@ -1900,7 +1900,7 @@
    "Kind": "model",
    "Name": "UnivariateChangePointDetectionOptions",
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateChangePointDetectionOptions",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Description": "The request of change point detection.",
    "Properties": [
     {
@@ -1986,7 +1986,7 @@
    "Kind": "model",
    "Name": "UnivariateChangePointDetectionResult",
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateChangePointDetectionResult",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "The response of change point detection.",
    "Properties": [
     {

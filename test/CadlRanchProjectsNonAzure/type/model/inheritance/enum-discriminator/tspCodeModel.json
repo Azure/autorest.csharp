@@ -22,7 +22,7 @@
    ],
    "Description": "extensible enum type for discriminator",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "5",
@@ -43,7 +43,7 @@
    ],
    "Description": "fixed enum type for discriminator",
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   }
  ],
  "Models": [
@@ -52,7 +52,7 @@
    "Kind": "model",
    "Name": "Dog",
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.Dog",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Test extensible enum type for discriminator",
    "DiscriminatorProperty": {
     "$id": "9",
@@ -90,7 +90,7 @@
      "Kind": "model",
      "Name": "Golden",
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.Golden",
-     "Usage": "RoundTrip",
+     "Usage": "Input,Output,Json",
      "Description": "Golden dog model",
      "DiscriminatorValue": "golden",
      "BaseModel": {
@@ -127,7 +127,7 @@
    "Kind": "model",
    "Name": "Snake",
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.Snake",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Test fixed enum type for discriminator",
    "DiscriminatorProperty": {
     "$id": "18",
@@ -165,7 +165,7 @@
      "Kind": "model",
      "Name": "Cobra",
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.Cobra",
-     "Usage": "RoundTrip",
+     "Usage": "Input,Output,Json",
      "Description": "Cobra model",
      "DiscriminatorValue": "cobra",
      "BaseModel": {

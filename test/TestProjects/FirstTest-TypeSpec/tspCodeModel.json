@@ -24,7 +24,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "5",
@@ -45,7 +45,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "8",
@@ -66,7 +66,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "11",
@@ -87,7 +87,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "14",
@@ -108,7 +108,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "17",
@@ -129,7 +129,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "20",
@@ -150,7 +150,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_requiredLiteralString",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "23",
@@ -171,7 +171,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_requiredLiteralInt",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "26",
@@ -192,7 +192,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_requiredLiteralFloat",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "29",
@@ -213,7 +213,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_optionalLiteralString",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "32",
@@ -234,7 +234,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_optionalLiteralInt",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "35",
@@ -255,7 +255,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_optionalLiteralFloat",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "38",
@@ -315,7 +315,7 @@
    ],
    "Description": "enum with projected name used in a model",
    "IsExtensible": false,
-   "Usage": "Input"
+   "Usage": "Input,Json"
   },
   {
    "$id": "48",
@@ -345,7 +345,7 @@
    ],
    "Description": "Simple enum",
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "53",
@@ -375,7 +375,7 @@
    ],
    "Description": "Extensible enum",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "58",
@@ -405,7 +405,7 @@
    ],
    "Description": "Int based extensible enum",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "63",
@@ -435,7 +435,7 @@
    ],
    "Description": "Float based extensible enum",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "68",
@@ -465,7 +465,7 @@
    ],
    "Description": "float fixed enum",
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "73",
@@ -495,7 +495,7 @@
    ],
    "Description": "int fixed enum",
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "78",
@@ -514,7 +514,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   },
   {
    "$id": "81",
@@ -572,7 +572,7 @@
    "Kind": "model",
    "Name": "Thing",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.Thing",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "A model with a few properties of literal types",
    "Properties": [
     {
@@ -850,7 +850,7 @@
    "Kind": "model",
    "Name": "AnonymousBodyRequest",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody.Request.anonymous",
-   "Usage": "None",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "134",
@@ -1127,7 +1127,7 @@
    "Kind": "model",
    "Name": "FriendlyModelRequest",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.friendlyModel.Request.anonymous",
-   "Usage": "None",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "177",
@@ -1148,7 +1148,7 @@
    "Kind": "model",
    "Name": "Friend",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.NotFriend",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
     {
@@ -1170,7 +1170,7 @@
    "Kind": "model",
    "Name": "ModelWithFormat",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithFormat",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "183",
@@ -1204,7 +1204,7 @@
    "Kind": "model",
    "Name": "ProjectedNameModelRequest",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.projectedNameModel.Request.anonymous",
-   "Usage": "None",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "188",
@@ -1225,7 +1225,7 @@
    "Kind": "model",
    "Name": "ProjectedModel",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithProjectedName",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "this is a model with a projected name",
    "Properties": [
     {
@@ -1247,7 +1247,7 @@
    "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.returnsAnonymousModel.Response.anonymous",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": []
   },
   {
@@ -1255,14 +1255,14 @@
    "Kind": "model",
    "Name": "Extension",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.Extension",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Description": "extension",
    "BaseModel": {
     "$id": "195",
     "Kind": "model",
     "Name": "Element",
     "CrossLanguageDefinitionId": "FirstTestTypeSpec.Element",
-    "Usage": "Input",
+    "Usage": "Input,Json",
     "Description": "element",
     "Properties": [
      {
@@ -1307,7 +1307,7 @@
    "Kind": "model",
    "Name": "Extendible",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.Extendible",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Description": "FHIR extendible element",
    "Properties": [
     {
@@ -1324,14 +1324,14 @@
        "Kind": "model",
        "Name": "ThereLevelExtension",
        "CrossLanguageDefinitionId": "FirstTestTypeSpec.ThereLevelExtension",
-       "Usage": "Input",
+       "Usage": "Input,Json",
        "Description": "extension",
        "BaseModel": {
         "$id": "204",
         "Kind": "model",
         "Name": "ThereLevelElement",
         "CrossLanguageDefinitionId": "FirstTestTypeSpec.ThereLevelElement",
-        "Usage": "Input",
+        "Usage": "Input,Json",
         "Description": "element",
         "Properties": [
          {
@@ -1386,14 +1386,14 @@
    "Kind": "model",
    "Name": "ChildModel",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.ChildModel",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Description": "ChildModel",
    "BaseModel": {
     "$id": "210",
     "Kind": "model",
     "Name": "BaseModel",
     "CrossLanguageDefinitionId": "FirstTestTypeSpec.BaseModel",
-    "Usage": "Input",
+    "Usage": "Input,Json",
     "Description": "parenetModel",
     "Properties": [
      {
@@ -1438,7 +1438,7 @@
    "Kind": "model",
    "Name": "ContainSelf",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.ContainSelf",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Description": "containself",
    "Properties": [
     {
@@ -1459,7 +1459,7 @@
    "Kind": "model",
    "Name": "ModelWithProjectedEnum",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithProjectedEnum",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "218",
@@ -1479,7 +1479,7 @@
    "Kind": "model",
    "Name": "AzureLocationModel",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.AzureLocationModel",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "220",
@@ -1501,7 +1501,7 @@
    "Kind": "model",
    "Name": "RoundTripModel",
    "CrossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "this is a roundtrip model",
    "Properties": [
     {
@@ -1812,7 +1812,7 @@
       "Kind": "model",
       "Name": "ModelWithRequiredNullableProperties",
       "CrossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithRequiredNullableProperties",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output,Json",
       "Description": "A model with a few required nullable properties",
       "Properties": [
        {
@@ -1893,7 +1893,7 @@
          "Kind": "model",
          "Name": "ModelForUnion",
          "CrossLanguageDefinitionId": "FirstTestTypeSpec.ModelForUnion",
-         "Usage": "RoundTrip",
+         "Usage": "Input,Output,Json",
          "Description": "This is a model only used in union types, please do not use it anywhere else.",
          "Properties": [
           {

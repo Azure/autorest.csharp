@@ -24,7 +24,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "5",
@@ -45,7 +45,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "8",
@@ -66,7 +66,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "11",
@@ -87,7 +87,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "14",
@@ -108,7 +108,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "17",
@@ -129,7 +129,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "20",
@@ -150,7 +150,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_requiredLiteralString",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "23",
@@ -171,7 +171,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_requiredLiteralInt",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "26",
@@ -192,7 +192,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_requiredLiteralFloat",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "29",
@@ -213,7 +213,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_optionalLiteralString",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "32",
@@ -234,7 +234,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_optionalLiteralInt",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "35",
@@ -255,7 +255,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_optionalLiteralFloat",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "38",
@@ -274,7 +274,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -283,7 +283,7 @@
    "Kind": "model",
    "Name": "Thing",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.Thing",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "A model with a few properties of literal types",
    "Properties": [
     {
@@ -524,7 +524,7 @@
    "Kind": "model",
    "Name": "RoundTripModel",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.RoundTripModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "this is a roundtrip model",
    "Properties": [
     {
@@ -570,7 +570,7 @@
    "Kind": "model",
    "Name": "AnonymousBodyRequest",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous",
-   "Usage": "None",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "86",
@@ -810,7 +810,7 @@
    "Kind": "model",
    "Name": "ModelWithFormat",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithFormat",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "123",
@@ -844,7 +844,7 @@
    "Kind": "model",
    "Name": "FriendlyModelRequest",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.friendlyModel.Request.anonymous",
-   "Usage": "None",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "128",
@@ -876,7 +876,7 @@
    "Kind": "model",
    "Name": "Friend",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.NotFriend",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
     {
@@ -909,7 +909,7 @@
    "Kind": "model",
    "Name": "ProjectedNameModelRequest",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.projectedNameModel.Request.anonymous",
-   "Usage": "None",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "136",
@@ -930,7 +930,7 @@
    "Kind": "model",
    "Name": "ProjectedModel",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithProjectedName",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "this is a model with a projected name",
    "Properties": [
     {
@@ -952,7 +952,7 @@
    "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.returnsAnonymousModel.Response.anonymous",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": []
   }
  ],

@@ -51,7 +51,7 @@
    ],
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -60,7 +60,7 @@
    "Kind": "model",
    "Name": "User",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.User",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Details about a user.",
    "Properties": [
     {
@@ -101,7 +101,7 @@
        "Kind": "model",
        "Name": "UserOrder",
        "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.UserOrder",
-       "Usage": "RoundTrip",
+       "Usage": "Input,Output,Json",
        "Description": "UserOrder for testing list with expand.",
        "Properties": [
         {
@@ -170,7 +170,7 @@
    "Kind": "model",
    "Name": "ListItemInputBody",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.ListItemInputBody",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Description": "The body of the input.",
    "Properties": [
     {
@@ -192,7 +192,7 @@
    "Kind": "model",
    "Name": "UserListResults",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.CustomPageModel",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "29",
@@ -230,7 +230,7 @@
    "Kind": "model",
    "Name": "FirstItem",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.FirstItem",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "First item.",
    "Properties": [
     {
@@ -252,7 +252,7 @@
    "Kind": "model",
    "Name": "SecondItem",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.SecondItem",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Second item.",
    "Properties": [
     {

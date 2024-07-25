@@ -63,7 +63,7 @@
    "Kind": "model",
    "Name": "Body",
    "CrossLanguageDefinitionId": "MultipleMediaTypes.Body",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "12",

@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "InnerModel",
    "CrossLanguageDefinitionId": "Type.Dictionary.InnerModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Dictionary inner model",
    "Properties": [
     {

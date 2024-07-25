@@ -22,7 +22,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -31,7 +31,7 @@
    "Kind": "model",
    "Name": "Toy",
    "CrossLanguageDefinitionId": "MixApiVersion.Toy",
-   "Usage": "None",
+   "Usage": "Json",
    "Properties": [
     {
      "$id": "6",
@@ -76,7 +76,7 @@
    "Kind": "model",
    "Name": "Pet",
    "CrossLanguageDefinitionId": "MixApiVersion.Pet",
-   "Usage": "None",
+   "Usage": "Json",
    "Description": "Pet",
    "Properties": [
     {
@@ -122,7 +122,7 @@
    "Kind": "model",
    "Name": "Error",
    "CrossLanguageDefinitionId": "MixApiVersion.Error",
-   "Usage": "None",
+   "Usage": "Error,Json",
    "Description": "Error",
    "Properties": [
     {

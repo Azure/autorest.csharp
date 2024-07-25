@@ -22,7 +22,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The WidgetData2_kind",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "5",
@@ -43,7 +43,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The WidgetData1_kind",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "8",
@@ -64,7 +64,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The WidgetData0_kind",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Input,Output,Json"
   }
  ],
  "Models": [
@@ -73,7 +73,7 @@
    "Kind": "model",
    "Name": "SpreadRecordForNonDiscriminatedUnion3",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordForNonDiscriminatedUnion3",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model spread Record<WidgetData2[] | WidgetData1>",
    "AdditionalProperties": {
     "$id": "12",
@@ -89,7 +89,7 @@
        "Kind": "model",
        "Name": "WidgetData2",
        "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.WidgetData2",
-       "Usage": "RoundTrip",
+       "Usage": "Input,Output,Json",
        "Properties": [
         {
          "$id": "15",
@@ -128,7 +128,7 @@
       "Kind": "model",
       "Name": "WidgetData1",
       "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.WidgetData1",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output,Json",
       "Properties": [
        {
         "$id": "20",
@@ -210,7 +210,7 @@
    "Kind": "model",
    "Name": "SpreadRecordForNonDiscriminatedUnion2",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordForNonDiscriminatedUnion2",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model spread Record<WidgetData2 | WidgetData1>",
    "AdditionalProperties": {
     "$id": "31",
@@ -245,7 +245,7 @@
    "Kind": "model",
    "Name": "SpreadRecordForNonDiscriminatedUnion",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordForNonDiscriminatedUnion",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model spread Record<WidgetData0 | WidgetData1>",
    "AdditionalProperties": {
     "$id": "35",
@@ -257,7 +257,7 @@
       "Kind": "model",
       "Name": "WidgetData0",
       "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.WidgetData0",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output,Json",
       "Properties": [
        {
         "$id": "37",
@@ -317,7 +317,7 @@
    "Kind": "model",
    "Name": "SpreadRecordForDiscriminatedUnion",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordForDiscriminatedUnion",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model spread Record<WidgetData>",
    "AdditionalProperties": {
     "$id": "44",
@@ -352,7 +352,7 @@
    "Kind": "model",
    "Name": "SpreadRecordForUnion",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordForUnion",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model spread Record<string | float32>",
    "AdditionalProperties": {
     "$id": "48",
@@ -389,7 +389,7 @@
    "Kind": "model",
    "Name": "MultipleSpreadRecord",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.MultipleSpreadRecord",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model spread Record<string> and Record<float32>",
    "AdditionalProperties": {
     "$id": "54",
@@ -426,14 +426,14 @@
    "Kind": "model",
    "Name": "DifferentSpreadModelArrayDerived",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.DifferentSpreadModelArrayDerived",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model extends from a model that spread Record<ModelForRecord[]> with the different known property type",
    "BaseModel": {
     "$id": "60",
     "Kind": "model",
     "Name": "DifferentSpreadModelArrayRecord",
     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.DifferentSpreadModelArrayRecord",
-    "Usage": "RoundTrip",
+    "Usage": "Input,Output,Json",
     "Description": "The model spread Record<ModelForRecord[]> with the different known property type",
     "AdditionalProperties": {
      "$id": "61",
@@ -444,7 +444,7 @@
       "Kind": "model",
       "Name": "ModelForRecord",
       "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ModelForRecord",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output,Json",
       "Description": "model for record",
       "Properties": [
        {
@@ -509,14 +509,14 @@
    "Kind": "model",
    "Name": "DifferentSpreadModelDerived",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.DifferentSpreadModelDerived",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model extends from a model that spread Record<ModelForRecord> with the different known property type",
    "BaseModel": {
     "$id": "70",
     "Kind": "model",
     "Name": "DifferentSpreadModelRecord",
     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.DifferentSpreadModelRecord",
-    "Usage": "RoundTrip",
+    "Usage": "Input,Output,Json",
     "Description": "The model spread Record<ModelForRecord> with the different known property type",
     "AdditionalProperties": {
      "$ref": "62"
@@ -558,14 +558,14 @@
    "Kind": "model",
    "Name": "DifferentSpreadFloatDerived",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.DifferentSpreadFloatDerived",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model extends from a model that spread Record<float32> with the different known property type",
    "BaseModel": {
     "$id": "75",
     "Kind": "model",
     "Name": "DifferentSpreadFloatRecord",
     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.DifferentSpreadFloatRecord",
-    "Usage": "RoundTrip",
+    "Usage": "Input,Output,Json",
     "Description": "The model spread Record<float32> with the different known property type",
     "AdditionalProperties": {
      "$id": "76",
@@ -609,14 +609,14 @@
    "Kind": "model",
    "Name": "DifferentSpreadStringDerived",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.DifferentSpreadStringDerived",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model extends from a model that spread Record<string> with the different known property type",
    "BaseModel": {
     "$id": "82",
     "Kind": "model",
     "Name": "DifferentSpreadStringRecord",
     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.DifferentSpreadStringRecord",
-    "Usage": "RoundTrip",
+    "Usage": "Input,Output,Json",
     "Description": "The model spread Record<string> with the different known property type",
     "AdditionalProperties": {
      "$id": "83",
@@ -660,7 +660,7 @@
    "Kind": "model",
    "Name": "SpreadModelArrayRecord",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadModelArrayRecord",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "AdditionalProperties": {
     "$id": "89",
     "Kind": "array",
@@ -695,7 +695,7 @@
    "Kind": "model",
    "Name": "IsModelArrayAdditionalProperties",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsModelArrayAdditionalProperties",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model is from Record<ModelForRecord[]> type.",
    "AdditionalProperties": {
     "$id": "93",
@@ -731,7 +731,7 @@
    "Kind": "model",
    "Name": "ExtendsModelArrayAdditionalProperties",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsModelArrayAdditionalProperties",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model extends from Record<ModelForRecord[]> type.",
    "AdditionalProperties": {
     "$id": "97",
@@ -767,7 +767,7 @@
    "Kind": "model",
    "Name": "SpreadModelRecord",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadModelRecord",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model spread Record<ModelForRecord> with the same known property type",
    "AdditionalProperties": {
     "$ref": "62"
@@ -791,7 +791,7 @@
    "Kind": "model",
    "Name": "IsModelAdditionalProperties",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsModelAdditionalProperties",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model is from Record<ModelForRecord> type.",
    "AdditionalProperties": {
     "$ref": "62"
@@ -815,7 +815,7 @@
    "Kind": "model",
    "Name": "ExtendsModelAdditionalProperties",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsModelAdditionalProperties",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model extends from Record<ModelForRecord> type.",
    "AdditionalProperties": {
     "$ref": "62"
@@ -839,7 +839,7 @@
    "Kind": "model",
    "Name": "SpreadFloatRecord",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadFloatRecord",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model spread Record<float32> with the same known property type",
    "AdditionalProperties": {
     "$id": "107",
@@ -865,7 +865,7 @@
    "Kind": "model",
    "Name": "IsFloatAdditionalProperties",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsFloatAdditionalProperties",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model is from Record<float32> type.",
    "AdditionalProperties": {
     "$id": "111",
@@ -891,7 +891,7 @@
    "Kind": "model",
    "Name": "ExtendsFloatAdditionalProperties",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsFloatAdditionalProperties",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model extends from Record<float32> type.",
    "AdditionalProperties": {
     "$id": "115",
@@ -917,7 +917,7 @@
    "Kind": "model",
    "Name": "SpreadStringRecord",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadStringRecord",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model spread Record<string> with the same known property type",
    "AdditionalProperties": {
     "$id": "119",
@@ -943,7 +943,7 @@
    "Kind": "model",
    "Name": "IsStringAdditionalProperties",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsStringAdditionalProperties",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model is from Record<string> type.",
    "AdditionalProperties": {
     "$id": "123",
@@ -969,7 +969,7 @@
    "Kind": "model",
    "Name": "ExtendsStringAdditionalProperties",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsStringAdditionalProperties",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model extends from Record<string> type.",
    "AdditionalProperties": {
     "$id": "127",
@@ -995,7 +995,7 @@
    "Kind": "model",
    "Name": "IsUnknownAdditionalPropertiesDiscriminated",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsUnknownAdditionalPropertiesDiscriminated",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model is Record<unknown> with a discriminator.",
    "AdditionalProperties": {
     "$id": "131",
@@ -1038,7 +1038,7 @@
      "Kind": "model",
      "Name": "IsUnknownAdditionalPropertiesDiscriminatedDerived",
      "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsUnknownAdditionalPropertiesDiscriminatedDerived",
-     "Usage": "RoundTrip",
+     "Usage": "Input,Output,Json",
      "Description": "The derived discriminated type",
      "DiscriminatorValue": "derived",
      "BaseModel": {
@@ -1099,14 +1099,14 @@
    "Kind": "model",
    "Name": "IsUnknownAdditionalPropertiesDerived",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsUnknownAdditionalPropertiesDerived",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model extends from a type that is Record<unknown> type",
    "BaseModel": {
     "$id": "146",
     "Kind": "model",
     "Name": "IsUnknownAdditionalProperties",
     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsUnknownAdditionalProperties",
-    "Usage": "RoundTrip",
+    "Usage": "Input,Output,Json",
     "Description": "The model is from Record<unknown> type.",
     "AdditionalProperties": {
      "$id": "147",
@@ -1162,7 +1162,7 @@
    "Kind": "model",
    "Name": "ExtendsUnknownAdditionalPropertiesDiscriminated",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsUnknownAdditionalPropertiesDiscriminated",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model extends from Record<unknown> with a discriminator.",
    "AdditionalProperties": {
     "$id": "155",
@@ -1205,7 +1205,7 @@
      "Kind": "model",
      "Name": "ExtendsUnknownAdditionalPropertiesDiscriminatedDerived",
      "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsUnknownAdditionalPropertiesDiscriminatedDerived",
-     "Usage": "RoundTrip",
+     "Usage": "Input,Output,Json",
      "Description": "The derived discriminated type",
      "DiscriminatorValue": "derived",
      "BaseModel": {
@@ -1266,14 +1266,14 @@
    "Kind": "model",
    "Name": "ExtendsUnknownAdditionalPropertiesDerived",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsUnknownAdditionalPropertiesDerived",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model extends from a type that extends from Record<unknown>.",
    "BaseModel": {
     "$id": "170",
     "Kind": "model",
     "Name": "ExtendsUnknownAdditionalProperties",
     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsUnknownAdditionalProperties",
-    "Usage": "RoundTrip",
+    "Usage": "Input,Output,Json",
     "Description": "The model extends from Record<unknown> type.",
     "AdditionalProperties": {
      "$id": "171",

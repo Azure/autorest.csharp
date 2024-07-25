@@ -14,17 +14,6 @@ namespace _Type.Property.Nullable.Models
     /// <summary> Model factory for models. </summary>
     public static partial class TypePropertyNullableModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="Models.CollectionsStringProperty"/>. </summary>
-        /// <param name="requiredProperty"> Required property. </param>
-        /// <param name="nullableProperty"> Property. </param>
-        /// <returns> A new <see cref="Models.CollectionsStringProperty"/> instance for mocking. </returns>
-        public static CollectionsStringProperty CollectionsStringProperty(string requiredProperty = null, IEnumerable<string> nullableProperty = null)
-        {
-            nullableProperty ??= new List<string>();
-
-            return new CollectionsStringProperty(requiredProperty, nullableProperty?.ToList(), serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.CollectionsModelProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>

@@ -31,7 +31,7 @@
    ],
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "Usage": "Input"
+   "Usage": "Input,ApiVersionEnum"
   }
  ],
  "Models": [
@@ -40,7 +40,7 @@
    "Kind": "model",
    "Name": "TestModel",
    "CrossLanguageDefinitionId": "Versioning.MadeOptional.TestModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "7",

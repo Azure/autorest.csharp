@@ -23,7 +23,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "5",
@@ -50,7 +50,7 @@
    ],
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "Usage": "Input"
+   "Usage": "Input,ApiVersionEnum"
   }
  ],
  "Models": [
@@ -59,7 +59,7 @@
    "Kind": "model",
    "Name": "NewModel",
    "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "10",

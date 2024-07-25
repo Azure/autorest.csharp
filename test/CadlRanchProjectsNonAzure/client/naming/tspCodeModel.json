@@ -20,7 +20,7 @@
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Json"
   },
   {
    "$id": "5",
@@ -44,7 +44,7 @@
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Json"
   }
  ],
  "Models": [
@@ -53,7 +53,7 @@
    "Kind": "model",
    "Name": "ClientNameModel",
    "CrossLanguageDefinitionId": "Client.Naming.Property.ClientNameModel",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "10",
@@ -74,7 +74,7 @@
    "Kind": "model",
    "Name": "LanguageClientNameModel",
    "CrossLanguageDefinitionId": "Client.Naming.Property.LanguageClientNameModel",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "13",
@@ -95,7 +95,7 @@
    "Kind": "model",
    "Name": "ClientNameAndJsonEncodedNameModel",
    "CrossLanguageDefinitionId": "Client.Naming.Property.ClientNameAndJsonEncodedNameModel",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "16",
@@ -116,7 +116,7 @@
    "Kind": "model",
    "Name": "ClientModel",
    "CrossLanguageDefinitionId": "Client.Naming.Model.ModelWithClientClientName",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "19",
@@ -137,7 +137,7 @@
    "Kind": "model",
    "Name": "CSModel",
    "CrossLanguageDefinitionId": "Client.Naming.Model.ModelWithLanguageClientName",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "22",

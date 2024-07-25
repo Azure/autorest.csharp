@@ -25,7 +25,7 @@
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Json"
   },
   {
    "$id": "6",
@@ -54,7 +54,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input"
+   "Usage": "Input,Json"
   },
   {
    "$id": "11",
@@ -78,7 +78,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input"
+   "Usage": "Input,Json"
   },
   {
    "$id": "15",
@@ -99,7 +99,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Model_object",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Output,Json"
   },
   {
    "$id": "18",
@@ -133,7 +133,7 @@
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Json"
   },
   {
    "$id": "24",
@@ -154,7 +154,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The FineTune_object",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Output,Json"
   },
   {
    "$id": "27",
@@ -193,7 +193,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Output"
+   "Usage": "Output,Json"
   },
   {
    "$id": "34",
@@ -214,7 +214,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The OpenAIFile_object",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Output,Json"
   },
   {
    "$id": "37",
@@ -258,7 +258,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Output"
+   "Usage": "Output,Json"
   },
   {
    "$id": "45",
@@ -277,7 +277,7 @@
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Json"
   },
   {
    "$id": "48",
@@ -298,7 +298,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The CreateEmbeddingResponse_object",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Output,Json"
   },
   {
    "$id": "51",
@@ -319,7 +319,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Embedding_object",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Output,Json"
   },
   {
    "$id": "54",
@@ -343,7 +343,7 @@
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Json"
   },
   {
    "$id": "58",
@@ -364,7 +364,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The CreateEditResponse_object",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Output,Json"
   },
   {
    "$id": "61",
@@ -388,7 +388,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Output"
+   "Usage": "Output,Json"
   },
   {
    "$id": "65",
@@ -447,7 +447,7 @@
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Json"
   },
   {
    "$id": "76",
@@ -476,7 +476,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Output"
+   "Usage": "Output,Json"
   },
   {
    "$id": "81",
@@ -505,7 +505,7 @@
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Json"
   },
   {
    "$id": "86",
@@ -526,7 +526,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The FineTuningJob_object",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Output,Json"
   },
   {
    "$id": "89",
@@ -570,7 +570,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Output"
+   "Usage": "Output,Json"
   },
   {
    "$id": "97",
@@ -599,7 +599,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Output"
+   "Usage": "Output,Json"
   },
   {
    "$id": "102",
@@ -668,7 +668,7 @@
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Json"
   },
   {
    "$id": "115",
@@ -702,7 +702,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input"
+   "Usage": "Input,Json"
   },
   {
    "$id": "121",
@@ -736,7 +736,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Output"
+   "Usage": "Output,Json"
   },
   {
    "$id": "127",
@@ -770,7 +770,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Output"
+   "Usage": "Output,Json"
   },
   {
    "$id": "133",
@@ -895,7 +895,7 @@
    "Kind": "model",
    "Name": "CreateModerationRequest",
    "CrossLanguageDefinitionId": "OpenAI.CreateModerationRequest",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "154",
@@ -944,7 +944,7 @@
    "Kind": "model",
    "Name": "CreateModerationResponse",
    "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "161",
@@ -984,7 +984,7 @@
        "Kind": "model",
        "Name": "CreateModerationResponseResult",
        "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.anonymous",
-       "Usage": "Output",
+       "Usage": "Output,Json",
        "Properties": [
         {
          "$id": "168",
@@ -1008,7 +1008,7 @@
           "Kind": "model",
           "Name": "CreateModerationResponseResultCategories",
           "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous",
-          "Usage": "Output",
+          "Usage": "Output,Json",
           "Properties": [
            {
             "$id": "172",
@@ -1157,7 +1157,7 @@
           "Kind": "model",
           "Name": "CreateModerationResponseResultCategoryScores",
           "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous",
-          "Usage": "Output",
+          "Usage": "Output,Json",
           "Properties": [
            {
             "$id": "196",
@@ -1319,7 +1319,7 @@
    "Kind": "model",
    "Name": "ErrorResponse",
    "CrossLanguageDefinitionId": "OpenAI.ErrorResponse",
-   "Usage": "Output",
+   "Usage": "Output,Error,Json",
    "Properties": [
     {
      "$id": "219",
@@ -1331,7 +1331,7 @@
       "Kind": "model",
       "Name": "Error",
       "CrossLanguageDefinitionId": "OpenAI.Error",
-      "Usage": "Output",
+      "Usage": "Output,Json",
       "Properties": [
        {
         "$id": "221",
@@ -1404,7 +1404,7 @@
    "Kind": "model",
    "Name": "CreateImageRequest",
    "CrossLanguageDefinitionId": "OpenAI.CreateImageRequest",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "232",
@@ -1483,7 +1483,7 @@
    "Kind": "model",
    "Name": "ImagesResponse",
    "CrossLanguageDefinitionId": "OpenAI.ImagesResponse",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "244",
@@ -1516,7 +1516,7 @@
        "Kind": "model",
        "Name": "Image",
        "CrossLanguageDefinitionId": "OpenAI.Image",
-       "Usage": "Output",
+       "Usage": "Output,Json",
        "Description": "Represents the url or the content of an image generated by the OpenAI API.",
        "Properties": [
         {
@@ -1561,7 +1561,7 @@
    "Kind": "model",
    "Name": "CreateImageEditRequest",
    "CrossLanguageDefinitionId": "OpenAI.CreateImageEditRequest",
-   "Usage": "Input,Multipart",
+   "Usage": "Input,MultipartFormData",
    "Properties": [
     {
      "$id": "255",
@@ -1666,7 +1666,7 @@
    "Kind": "model",
    "Name": "CreateImageVariationRequest",
    "CrossLanguageDefinitionId": "OpenAI.CreateImageVariationRequest",
-   "Usage": "Input,Multipart",
+   "Usage": "Input,MultipartFormData",
    "Properties": [
     {
      "$id": "271",
@@ -1746,7 +1746,7 @@
    "Kind": "model",
    "Name": "ListModelsResponse",
    "CrossLanguageDefinitionId": "OpenAI.ListModelsResponse",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "283",
@@ -1774,7 +1774,7 @@
        "Kind": "model",
        "Name": "Model",
        "CrossLanguageDefinitionId": "OpenAI.Model",
-       "Usage": "Output",
+       "Usage": "Output,Json",
        "Description": "Describes an OpenAI model offering that can be used with the API.",
        "Properties": [
         {
@@ -1851,7 +1851,7 @@
    "Kind": "model",
    "Name": "DeleteModelResponse",
    "CrossLanguageDefinitionId": "OpenAI.DeleteModelResponse",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "298",
@@ -1896,7 +1896,7 @@
    "Kind": "model",
    "Name": "CreateFineTuneRequest",
    "CrossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "305",
@@ -2098,7 +2098,7 @@
    "Kind": "model",
    "Name": "FineTune",
    "CrossLanguageDefinitionId": "OpenAI.FineTune",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Deprecation": "deprecated",
    "Description": "The `FineTune` object represents a legacy fine-tune job that has been created through the API.",
    "Properties": [
@@ -2225,7 +2225,7 @@
       "Kind": "model",
       "Name": "FineTuneHyperparams",
       "CrossLanguageDefinitionId": "OpenAI.FineTune.hyperparams.anonymous",
-      "Usage": "Output",
+      "Usage": "Output,Json",
       "Properties": [
        {
         "$id": "361",
@@ -2330,7 +2330,7 @@
        "Kind": "model",
        "Name": "OpenAIFile",
        "CrossLanguageDefinitionId": "OpenAI.OpenAIFile",
-       "Usage": "Output",
+       "Usage": "Output,Json",
        "Description": "The `File` object represents a document that has been uploaded to OpenAI.",
        "Properties": [
         {
@@ -2496,7 +2496,7 @@
        "Kind": "model",
        "Name": "FineTuneEvent",
        "CrossLanguageDefinitionId": "OpenAI.FineTuneEvent",
-       "Usage": "Output",
+       "Usage": "Output,Json",
        "Properties": [
         {
          "$id": "402",
@@ -2574,7 +2574,7 @@
    "Kind": "model",
    "Name": "ListFineTunesResponse",
    "CrossLanguageDefinitionId": "OpenAI.ListFineTunesResponse",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "412",
@@ -2612,7 +2612,7 @@
    "Kind": "model",
    "Name": "ListFineTuneEventsResponse",
    "CrossLanguageDefinitionId": "OpenAI.ListFineTuneEventsResponse",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "417",
@@ -2650,7 +2650,7 @@
    "Kind": "model",
    "Name": "ListFilesResponse",
    "CrossLanguageDefinitionId": "OpenAI.ListFilesResponse",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "422",
@@ -2688,7 +2688,7 @@
    "Kind": "model",
    "Name": "CreateFileRequest",
    "CrossLanguageDefinitionId": "OpenAI.CreateFileRequest",
-   "Usage": "Input,Multipart",
+   "Usage": "Input,MultipartFormData",
    "Properties": [
     {
      "$id": "427",
@@ -2722,7 +2722,7 @@
    "Kind": "model",
    "Name": "DeleteFileResponse",
    "CrossLanguageDefinitionId": "OpenAI.DeleteFileResponse",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "432",
@@ -2767,7 +2767,7 @@
    "Kind": "model",
    "Name": "CreateEmbeddingRequest",
    "CrossLanguageDefinitionId": "OpenAI.CreateEmbeddingRequest",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "439",
@@ -2854,7 +2854,7 @@
    "Kind": "model",
    "Name": "CreateEmbeddingResponse",
    "CrossLanguageDefinitionId": "OpenAI.CreateEmbeddingResponse",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "453",
@@ -2898,7 +2898,7 @@
        "Kind": "model",
        "Name": "Embedding",
        "CrossLanguageDefinitionId": "OpenAI.Embedding",
-       "Usage": "Output",
+       "Usage": "Output,Json",
        "Description": "Represents an embedding vector returned by embedding endpoint.",
        "Properties": [
         {
@@ -2964,7 +2964,7 @@
       "Kind": "model",
       "Name": "CreateEmbeddingResponseUsage",
       "CrossLanguageDefinitionId": "OpenAI.CreateEmbeddingResponse.usage.anonymous",
-      "Usage": "Output",
+      "Usage": "Output,Json",
       "Properties": [
        {
         "$id": "469",
@@ -3008,7 +3008,7 @@
    "Kind": "model",
    "Name": "CreateEditRequest",
    "CrossLanguageDefinitionId": "OpenAI.CreateEditRequest",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "474",
@@ -3104,7 +3104,7 @@
    "Kind": "model",
    "Name": "CreateEditResponse",
    "CrossLanguageDefinitionId": "OpenAI.CreateEditResponse",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Deprecation": "deprecated",
    "Properties": [
     {
@@ -3154,7 +3154,7 @@
        "Kind": "model",
        "Name": "CreateEditResponseChoice",
        "CrossLanguageDefinitionId": "OpenAI.CreateEditResponse.choice.anonymous",
-       "Usage": "Output",
+       "Usage": "Output,Json",
        "Properties": [
         {
          "$id": "498",
@@ -3208,7 +3208,7 @@
       "Kind": "model",
       "Name": "CompletionUsage",
       "CrossLanguageDefinitionId": "OpenAI.CompletionUsage",
-      "Usage": "Output",
+      "Usage": "Output,Json",
       "Description": "Usage statistics for the completion request.",
       "Properties": [
        {
@@ -3265,7 +3265,7 @@
    "Kind": "model",
    "Name": "CreateRequest",
    "CrossLanguageDefinitionId": "OpenAI.create.Request.anonymous",
-   "Usage": "None",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "512",
@@ -3589,7 +3589,7 @@
    "Kind": "model",
    "Name": "CreateCompletionResponse",
    "CrossLanguageDefinitionId": "OpenAI.CreateCompletionResponse",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Represents a completion response from the API. Note: both the streamed and non-streamed response\nobjects share the same shape (unlike the chat endpoint).",
    "Properties": [
     {
@@ -3659,7 +3659,7 @@
        "Kind": "model",
        "Name": "CreateCompletionResponseChoice",
        "CrossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choice.anonymous",
-       "Usage": "Output",
+       "Usage": "Output,Json",
        "Properties": [
         {
          "$id": "583",
@@ -3698,7 +3698,7 @@
            "Kind": "model",
            "Name": "CreateCompletionResponseChoiceLogprobs",
            "CrossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choice.logprobs.anonymous",
-           "Usage": "Output",
+           "Usage": "Output,Json",
            "Properties": [
             {
              "$id": "590",
@@ -3828,7 +3828,7 @@
    "Kind": "model",
    "Name": "CreateFineTuningJobRequest",
    "CrossLanguageDefinitionId": "OpenAI.CreateFineTuningJobRequest",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "607",
@@ -3879,7 +3879,7 @@
       "Kind": "model",
       "Name": "CreateFineTuningJobRequestHyperparameters",
       "CrossLanguageDefinitionId": "OpenAI.CreateFineTuningJobRequest.hyperparameters.anonymous",
-      "Usage": "Input",
+      "Usage": "Input,Json",
       "Properties": [
        {
         "$id": "615",
@@ -3940,7 +3940,7 @@
    "Kind": "model",
    "Name": "FineTuningJob",
    "CrossLanguageDefinitionId": "OpenAI.FineTuningJob",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "624",
@@ -4069,7 +4069,7 @@
       "Kind": "model",
       "Name": "FineTuningJobHyperparameters",
       "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.hyperparameters.anonymous",
-      "Usage": "Output",
+      "Usage": "Output,Json",
       "Properties": [
        {
         "$id": "645",
@@ -4179,7 +4179,7 @@
        "Kind": "model",
        "Name": "FineTuningJobError",
        "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.error.anonymous",
-       "Usage": "Output",
+       "Usage": "Output,Json",
        "Properties": [
         {
          "$id": "664",
@@ -4240,7 +4240,7 @@
    "Kind": "model",
    "Name": "ListPaginatedFineTuningJobsResponse",
    "CrossLanguageDefinitionId": "OpenAI.ListPaginatedFineTuningJobsResponse",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "672",
@@ -4290,7 +4290,7 @@
    "Kind": "model",
    "Name": "ListFineTuningJobEventsResponse",
    "CrossLanguageDefinitionId": "OpenAI.ListFineTuningJobEventsResponse",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "679",
@@ -4318,7 +4318,7 @@
        "Kind": "model",
        "Name": "FineTuningJobEvent",
        "CrossLanguageDefinitionId": "OpenAI.FineTuningJobEvent",
-       "Usage": "Output",
+       "Usage": "Output,Json",
        "Properties": [
         {
          "$id": "684",
@@ -4401,7 +4401,7 @@
    "Kind": "model",
    "Name": "ChatCompletionRequestMessage",
    "CrossLanguageDefinitionId": "OpenAI.ChatCompletionRequestMessage",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "695",
@@ -4452,7 +4452,7 @@
       "Kind": "model",
       "Name": "ChatCompletionRequestMessageFunctionCall",
       "CrossLanguageDefinitionId": "OpenAI.ChatCompletionRequestMessage.function_call.anonymous",
-      "Usage": "Input",
+      "Usage": "Input,Json",
       "Properties": [
        {
         "$id": "703",
@@ -4493,7 +4493,7 @@
    "Kind": "model",
    "Name": "ChatCompletionFunctions",
    "CrossLanguageDefinitionId": "OpenAI.ChatCompletionFunctions",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "708",
@@ -4529,7 +4529,7 @@
       "Kind": "model",
       "Name": "ChatCompletionFunctionParameters",
       "CrossLanguageDefinitionId": "OpenAI.ChatCompletionFunctionParameters",
-      "Usage": "Input",
+      "Usage": "Input,Json",
       "AdditionalProperties": {
        "$id": "714",
        "Kind": "any"
@@ -4549,7 +4549,7 @@
    "Kind": "model",
    "Name": "ChatCompletionFunctionCallOption",
    "CrossLanguageDefinitionId": "OpenAI.ChatCompletionFunctionCallOption",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Properties": [
     {
      "$id": "716",
@@ -4570,7 +4570,7 @@
    "Kind": "model",
    "Name": "CreateRequest1",
    "CrossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous",
-   "Usage": "None",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "719",
@@ -4841,7 +4841,7 @@
    "Kind": "model",
    "Name": "CreateChatCompletionResponse",
    "CrossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Represents a chat completion response returned by model, based on the provided input.",
    "Properties": [
     {
@@ -4911,7 +4911,7 @@
        "Kind": "model",
        "Name": "CreateChatCompletionResponseChoice",
        "CrossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.choice.anonymous",
-       "Usage": "Output",
+       "Usage": "Output,Json",
        "Properties": [
         {
          "$id": "777",
@@ -4935,7 +4935,7 @@
           "Kind": "model",
           "Name": "ChatCompletionResponseMessage",
           "CrossLanguageDefinitionId": "OpenAI.ChatCompletionResponseMessage",
-          "Usage": "Output",
+          "Usage": "Output,Json",
           "Properties": [
            {
             "$id": "781",
@@ -4974,7 +4974,7 @@
              "Kind": "model",
              "Name": "ChatCompletionResponseMessageFunctionCall",
              "CrossLanguageDefinitionId": "OpenAI.ChatCompletionResponseMessage.function_call.anonymous",
-             "Usage": "Output",
+             "Usage": "Output,Json",
              "Properties": [
               {
                "$id": "787",
@@ -5055,7 +5055,7 @@
    "Kind": "model",
    "Name": "CreateTranslationRequest",
    "CrossLanguageDefinitionId": "OpenAI.CreateTranslationRequest",
-   "Usage": "Input,Multipart",
+   "Usage": "Input,MultipartFormData",
    "Properties": [
     {
      "$id": "794",
@@ -5123,7 +5123,7 @@
    "Kind": "model",
    "Name": "CreateTranslationResponse",
    "CrossLanguageDefinitionId": "OpenAI.CreateTranslationResponse",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "803",
@@ -5144,7 +5144,7 @@
    "Kind": "model",
    "Name": "CreateTranscriptionRequest",
    "CrossLanguageDefinitionId": "OpenAI.CreateTranscriptionRequest",
-   "Usage": "Input,Multipart",
+   "Usage": "Input,MultipartFormData",
    "Properties": [
     {
      "$id": "806",
@@ -5224,7 +5224,7 @@
    "Kind": "model",
    "Name": "CreateTranscriptionResponse",
    "CrossLanguageDefinitionId": "OpenAI.CreateTranscriptionResponse",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "817",

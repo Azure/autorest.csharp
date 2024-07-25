@@ -9,14 +9,14 @@
    "Kind": "model",
    "Name": "OuterModel",
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.OuterModel",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Used in internal operations, should be generated but not exported.",
    "BaseModel": {
     "$id": "3",
     "Kind": "model",
     "Name": "BaseModel",
     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.BaseModel",
-    "Usage": "Output",
+    "Usage": "Output,Json",
     "Description": "Used in internal operations, should be generated but not exported.",
     "Properties": [
      {
@@ -44,7 +44,7 @@
       "Kind": "model",
       "Name": "InnerModel",
       "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.InnerModel",
-      "Usage": "Output",
+      "Usage": "Output,Json",
       "Description": "Used in internal operations, should be generated but not exported.",
       "Properties": [
        {
@@ -77,7 +77,7 @@
    "Kind": "model",
    "Name": "AbstractModel",
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.AbstractModel",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Used in internal operations, should be generated but not exported.",
    "DiscriminatorProperty": {
     "$id": "11",
@@ -116,7 +116,7 @@
      "Kind": "model",
      "Name": "RealModel",
      "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.RealModel",
-     "Usage": "Output",
+     "Usage": "Output,Json",
      "Description": "Used in internal operations, should be generated but not exported.",
      "DiscriminatorValue": "real",
      "BaseModel": {
@@ -153,7 +153,7 @@
    "Kind": "model",
    "Name": "SharedModel",
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation.SharedModel",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Used by both public and internal operation. It should be generated and exported.",
    "Properties": [
     {
@@ -175,7 +175,7 @@
    "Kind": "model",
    "Name": "NoDecoratorModelInInternal",
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.NoDecoratorModelInInternal",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Used in an internal operation, should be generated but not exported.",
    "Properties": [
     {
@@ -198,7 +198,7 @@
    "Name": "InternalDecoratorModelInInternal",
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.InternalDecoratorModelInInternal",
    "Access": "internal",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Used in an internal operation, should be generated but not exported.",
    "Properties": [
     {
@@ -221,7 +221,7 @@
    "Name": "PublicDecoratorModelInInternal",
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.PublicDecoratorModelInInternal",
    "Access": "public",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Used in an internal operation but with public decorator, should be generated and exported.",
    "Properties": [
     {
@@ -243,7 +243,7 @@
    "Kind": "model",
    "Name": "NoDecoratorModelInPublic",
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation.NoDecoratorModelInPublic",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Used in a public operation, should be generated and exported.",
    "Properties": [
     {
@@ -266,7 +266,7 @@
    "Name": "PublicDecoratorModelInPublic",
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation.PublicDecoratorModelInPublic",
    "Access": "public",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Used in a public operation, should be generated and exported.",
    "Properties": [
     {

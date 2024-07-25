@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "MultiPartRequest",
    "CrossLanguageDefinitionId": "Payload.MultiPart.MultiPartRequest",
-   "Usage": "Input,Multipart",
+   "Usage": "Input,MultipartFormData",
    "Properties": [
     {
      "$id": "3",
@@ -43,7 +43,7 @@
    "Kind": "model",
    "Name": "ComplexPartsRequest",
    "CrossLanguageDefinitionId": "Payload.MultiPart.ComplexPartsRequest",
-   "Usage": "Input,Multipart",
+   "Usage": "Input,MultipartFormData",
    "Properties": [
     {
      "$id": "8",
@@ -145,7 +145,7 @@
    "Kind": "model",
    "Name": "JsonPartRequest",
    "CrossLanguageDefinitionId": "Payload.MultiPart.JsonPartRequest",
-   "Usage": "Input,Multipart",
+   "Usage": "Input,MultipartFormData",
    "Properties": [
     {
      "$id": "22",
@@ -178,7 +178,7 @@
    "Kind": "model",
    "Name": "BinaryArrayPartsRequest",
    "CrossLanguageDefinitionId": "Payload.MultiPart.BinaryArrayPartsRequest",
-   "Usage": "Input,Multipart",
+   "Usage": "Input,MultipartFormData",
    "Properties": [
     {
      "$id": "26",
@@ -218,7 +218,7 @@
    "Kind": "model",
    "Name": "JsonArrayPartsRequest",
    "CrossLanguageDefinitionId": "Payload.MultiPart.JsonArrayPartsRequest",
-   "Usage": "Input,Multipart",
+   "Usage": "Input,MultipartFormData",
    "Properties": [
     {
      "$id": "32",
@@ -257,7 +257,7 @@
    "Kind": "model",
    "Name": "MultiBinaryPartsRequest",
    "CrossLanguageDefinitionId": "Payload.MultiPart.MultiBinaryPartsRequest",
-   "Usage": "Input,Multipart",
+   "Usage": "Input,MultipartFormData",
    "Properties": [
     {
      "$id": "37",
@@ -292,7 +292,7 @@
    "Kind": "model",
    "Name": "AnonymousModelRequest",
    "CrossLanguageDefinitionId": "anonymousModel.Request.anonymous",
-   "Usage": "Multipart",
+   "Usage": "MultipartFormData,Spread",
    "Properties": [
     {
      "$id": "42",

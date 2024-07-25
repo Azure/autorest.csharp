@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Common.Input
                 {
                     model = model ?? CreateInputModelTypeInstance(id, name, crossLanguageDefinitionId, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, resolver);
                     reader.Read();
-                    CreateProperties(ref reader, properties, options, model.Usage.HasFlag(InputModelTypeUsage.Multipart));
+                    CreateProperties(ref reader, properties, options, model.Usage.HasFlag(InputModelTypeUsage.MultipartFormData));
                     continue;
                 }
                 if (reader.GetString() == nameof(InputModelType.DiscriminatedSubtypes))
@@ -103,10 +103,9 @@ namespace AutoRest.CSharp.Common.Input
         private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? crossLanguageDefinitionId, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, InputModelProperty? discriminatorProperty, InputModelType? baseModel, IReadOnlyList<InputModelProperty> properties, IReadOnlyDictionary<string, InputModelType> discriminatedSubtypes, InputType? additionalProperties, ReferenceResolver resolver)
         {
             name = name ?? throw new JsonException("Model must have name");
-            InputModelTypeUsage usage = InputModelTypeUsage.None;
-            if (usageString != null)
+            if (!Enum.TryParse<InputModelTypeUsage>(usageString, out var usage))
             {
-                Enum.TryParse(usageString, ignoreCase: true, out usage);
+                throw new JsonException($"Cannot parse usage {usageString}");
             }
 
             var derivedModels = new List<InputModelType>();

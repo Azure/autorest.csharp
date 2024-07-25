@@ -22,7 +22,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -31,7 +31,7 @@
    "Kind": "model",
    "Name": "Result",
    "CrossLanguageDefinitionId": "ParametersCadl.ParameterOrders.Result",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "6",

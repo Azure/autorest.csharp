@@ -24,7 +24,7 @@
    ],
    "Description": "Service versions",
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   },
   {
    "$id": "5",
@@ -60,7 +60,7 @@
    "Kind": "model",
    "Name": "User",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Sample Model",
    "Properties": [
     {
@@ -94,7 +94,7 @@
    "Kind": "model",
    "Name": "UserActionParam",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionParam",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Description": "User action param",
    "Properties": [
     {
@@ -116,7 +116,7 @@
    "Kind": "model",
    "Name": "UserActionResponse",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionResponse",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "User action response",
    "Properties": [
     {

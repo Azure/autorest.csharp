@@ -22,7 +22,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   },
   {
    "$id": "5",
@@ -76,7 +76,7 @@
    "Kind": "model",
    "Name": "ExportedResource",
    "CrossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.ExportedResource",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "13",
@@ -133,7 +133,7 @@
    "Kind": "model",
    "Name": "Resource",
    "CrossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.Resource",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "22",

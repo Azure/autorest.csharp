@@ -53,7 +53,7 @@
    ],
    "Description": "Represents the job status values.",
    "IsExtensible": true,
-   "Usage": "Output"
+   "Usage": "Output,Json"
   },
   {
    "$id": "11",
@@ -86,7 +86,7 @@
    ],
    "Description": "Represents the project kind.",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Json"
   },
   {
    "$id": "16",
@@ -105,7 +105,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   },
   {
    "$id": "19",
@@ -159,7 +159,7 @@
    "Kind": "model",
    "Name": "SupportedLanguages",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.SupportedLanguages",
-   "Usage": "None",
+   "Usage": "Json",
    "Description": "Paged collection of SupportedLanguage items",
    "Properties": [
     {
@@ -176,7 +176,7 @@
        "Kind": "model",
        "Name": "SupportedLanguage",
        "CrossLanguageDefinitionId": "AuthoringTypeSpec.SupportedLanguage",
-       "Usage": "None",
+       "Usage": "Json",
        "Description": "Represents a supported language.",
        "Properties": [
         {
@@ -232,7 +232,7 @@
    "Kind": "model",
    "Name": "TrainingConfigVersions",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.TrainingConfigVersions",
-   "Usage": "None",
+   "Usage": "Json",
    "Description": "Paged collection of TrainingConfigVersion items",
    "Properties": [
     {
@@ -249,7 +249,7 @@
        "Kind": "model",
        "Name": "TrainingConfigVersion",
        "CrossLanguageDefinitionId": "AuthoringTypeSpec.TrainingConfigVersion",
-       "Usage": "None",
+       "Usage": "Json",
        "Description": "Represents a training config version.",
        "Properties": [
         {
@@ -305,7 +305,7 @@
    "Kind": "model",
    "Name": "DeploymentJob",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.DeploymentJob",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "47",
@@ -395,7 +395,7 @@
        "Kind": "model",
        "Name": "JobWarning",
        "CrossLanguageDefinitionId": "AuthoringTypeSpec.JobWarning",
-       "Usage": "Output",
+       "Usage": "Output,Json",
        "Description": "Represents a warning that was encountered while executing the request.",
        "Properties": [
         {
@@ -569,7 +569,7 @@
    "Kind": "model",
    "Name": "SwapDeploymentsJob",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.SwapDeploymentsJob",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "84",
@@ -692,7 +692,7 @@
    "Kind": "model",
    "Name": "Deployment",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.Deployment",
-   "Usage": "None",
+   "Usage": "Json",
    "Properties": [
     {
      "$id": "102",
@@ -713,7 +713,7 @@
    "Kind": "model",
    "Name": "Project",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.Project",
-   "Usage": "None",
+   "Usage": "Json",
    "Properties": [
     {
      "$id": "105",
@@ -760,7 +760,7 @@
       "Kind": "model",
       "Name": "ProjectSettings",
       "CrossLanguageDefinitionId": "AuthoringTypeSpec.ProjectSettings",
-      "Usage": "None",
+      "Usage": "Json",
       "Description": "Represents the settings used to define the project behavior.",
       "AdditionalProperties": {
        "$id": "112",
