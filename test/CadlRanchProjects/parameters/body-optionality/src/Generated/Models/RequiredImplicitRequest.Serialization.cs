@@ -12,23 +12,23 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace Parameters.Spread.Models
+namespace Parameters.BodyOptionality.Models
 {
-    internal partial class CompositeRequestMix : IUtf8JsonSerializable, IJsonModel<CompositeRequestMix>
+    internal partial class RequiredImplicitRequest : IUtf8JsonSerializable, IJsonModel<RequiredImplicitRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CompositeRequestMix>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RequiredImplicitRequest>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
-        void IJsonModel<CompositeRequestMix>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<RequiredImplicitRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CompositeRequestMix>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<RequiredImplicitRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(CompositeRequestMix)} does not support writing '{format}' format.");
+                throw new FormatException($"The model {nameof(RequiredImplicitRequest)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("prop"u8);
-            writer.WriteStringValue(Prop);
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -47,19 +47,19 @@ namespace Parameters.Spread.Models
             writer.WriteEndObject();
         }
 
-        CompositeRequestMix IJsonModel<CompositeRequestMix>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        RequiredImplicitRequest IJsonModel<RequiredImplicitRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CompositeRequestMix>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<RequiredImplicitRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(CompositeRequestMix)} does not support reading '{format}' format.");
+                throw new FormatException($"The model {nameof(RequiredImplicitRequest)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeCompositeRequestMix(document.RootElement, options);
+            return DeserializeRequiredImplicitRequest(document.RootElement, options);
         }
 
-        internal static CompositeRequestMix DeserializeCompositeRequestMix(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static RequiredImplicitRequest DeserializeRequiredImplicitRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -67,14 +67,14 @@ namespace Parameters.Spread.Models
             {
                 return null;
             }
-            string prop = default;
+            string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("prop"u8))
+                if (property.NameEquals("name"u8))
                 {
-                    prop = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (options.Format != "W")
@@ -83,46 +83,46 @@ namespace Parameters.Spread.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new CompositeRequestMix(prop, serializedAdditionalRawData);
+            return new RequiredImplicitRequest(name, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<CompositeRequestMix>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<RequiredImplicitRequest>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CompositeRequestMix>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<RequiredImplicitRequest>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(CompositeRequestMix)} does not support writing '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RequiredImplicitRequest)} does not support writing '{options.Format}' format.");
             }
         }
 
-        CompositeRequestMix IPersistableModel<CompositeRequestMix>.Create(BinaryData data, ModelReaderWriterOptions options)
+        RequiredImplicitRequest IPersistableModel<RequiredImplicitRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CompositeRequestMix>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<RequiredImplicitRequest>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeCompositeRequestMix(document.RootElement, options);
+                        return DeserializeRequiredImplicitRequest(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(CompositeRequestMix)} does not support reading '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RequiredImplicitRequest)} does not support reading '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<CompositeRequestMix>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<RequiredImplicitRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static CompositeRequestMix FromResponse(Response response)
+        internal static RequiredImplicitRequest FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCompositeRequestMix(document.RootElement);
+            return DeserializeRequiredImplicitRequest(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
