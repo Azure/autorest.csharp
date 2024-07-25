@@ -21,18 +21,30 @@ namespace Scm.Parameters.Spread.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("prop1"u8);
-            writer.WriteStringValue(Prop1);
-            writer.WritePropertyName("prop2"u8);
-            writer.WriteStringValue(Prop2);
-            writer.WritePropertyName("prop3"u8);
-            writer.WriteStringValue(Prop3);
-            writer.WritePropertyName("prop4"u8);
-            writer.WriteStringValue(Prop4);
-            writer.WritePropertyName("prop5"u8);
-            writer.WriteStringValue(Prop5);
-            writer.WritePropertyName("prop6"u8);
-            writer.WriteStringValue(Prop6);
+            writer.WritePropertyName("requiredString"u8);
+            writer.WriteStringValue(RequiredString);
+            if (Optional.IsDefined(OptionalInt))
+            {
+                writer.WritePropertyName("optionalInt"u8);
+                writer.WriteNumberValue(OptionalInt.Value);
+            }
+            writer.WritePropertyName("requiredIntList"u8);
+            writer.WriteStartArray();
+            foreach (var item in RequiredIntList)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            if (Optional.IsCollectionDefined(OptionalStringList))
+            {
+                writer.WritePropertyName("optionalStringList"u8);
+                writer.WriteStartArray();
+                foreach (var item in OptionalStringList)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -71,44 +83,50 @@ namespace Scm.Parameters.Spread.Models
             {
                 return null;
             }
-            string prop1 = default;
-            string prop2 = default;
-            string prop3 = default;
-            string prop4 = default;
-            string prop5 = default;
-            string prop6 = default;
+            string requiredString = default;
+            int? optionalInt = default;
+            IList<int> requiredIntList = default;
+            IList<string> optionalStringList = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("prop1"u8))
+                if (property.NameEquals("requiredString"u8))
                 {
-                    prop1 = property.Value.GetString();
+                    requiredString = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("prop2"u8))
+                if (property.NameEquals("optionalInt"u8))
                 {
-                    prop2 = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalInt = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("prop3"u8))
+                if (property.NameEquals("requiredIntList"u8))
                 {
-                    prop3 = property.Value.GetString();
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetInt32());
+                    }
+                    requiredIntList = array;
                     continue;
                 }
-                if (property.NameEquals("prop4"u8))
+                if (property.NameEquals("optionalStringList"u8))
                 {
-                    prop4 = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("prop5"u8))
-                {
-                    prop5 = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("prop6"u8))
-                {
-                    prop6 = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    optionalStringList = array;
                     continue;
                 }
                 if (options.Format != "W")
@@ -117,14 +135,7 @@ namespace Scm.Parameters.Spread.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new SpreadWithMultipleParametersRequest(
-                prop1,
-                prop2,
-                prop3,
-                prop4,
-                prop5,
-                prop6,
-                serializedAdditionalRawData);
+            return new SpreadWithMultipleParametersRequest(requiredString, optionalInt, requiredIntList, optionalStringList ?? new ChangeTrackingList<string>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<SpreadWithMultipleParametersRequest>.Write(ModelReaderWriterOptions options)

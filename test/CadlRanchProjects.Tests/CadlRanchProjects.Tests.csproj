@@ -38,6 +38,7 @@
     <Compile Include="../TestProjects/*-TypeSpec/**/*.cs" Exclude="../TestProjects/ConvenienceInitial-TypeSpec/**/*.cs" LinkBase="TestProjects" />
     <Compile Include="../AutoRest.TestServer.Tests/Infrastructure/*.cs" />
     <Compile Include="../AutoRest.TestServer.Tests/TestConstants.cs" />
+    <Compile Include="../../src/assets/Azure.Core.Shared/AzureResourceProviderNamespaceAttribute.cs"/>
   </ItemGroup>
 
 </Project>
