@@ -46,11 +46,7 @@ namespace Scm.Parameters.Spread.Models
         /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-<<<<<<< HEAD:test/TestProjects/Spread-TypeSpec/src/Generated/Models/SpreadAliasRequest.cs
-        internal SpreadAliasRequest(string name, int age)
-=======
-        public SpreadParameterWithInnerAliasRequest(string name, int age)
->>>>>>> origin/feature/v3:test/CadlRanchProjectsNonAzure/parameters/spread/src/Generated/Models/SpreadParameterWithInnerAliasRequest.cs
+        internal SpreadParameterWithInnerAliasRequest(string name, int age)
         {
             Argument.AssertNotNull(name, nameof(name));
 

@@ -7,8 +7,8 @@ using System.Collections.Generic;
 
 namespace Scm.Parameters.Spread.Models
 {
-    /// <summary> The InnerModel. </summary>
-    internal partial class InnerModel
+    /// <summary> The SpreadParameterWithInnerModelRequest. </summary>
+    internal partial class SpreadParameterWithInnerModelRequest
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -42,31 +42,27 @@ namespace Scm.Parameters.Spread.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="SpreadParameterWithInnerModelRequest"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-<<<<<<< HEAD:test/TestProjects/Spread-TypeSpec/src/Generated/Models/SpreadMultiTargetAliasRequest.cs
-        internal SpreadMultiTargetAliasRequest(string name, int age)
-=======
-        public InnerModel(string name)
->>>>>>> origin/feature/v3:test/CadlRanchProjectsNonAzure/parameters/spread/src/Generated/Models/InnerModel.cs
+        internal SpreadParameterWithInnerModelRequest(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
         }
 
-        /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="SpreadParameterWithInnerModelRequest"/>. </summary>
         /// <param name="name"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal InnerModel(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal SpreadParameterWithInnerModelRequest(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="InnerModel"/> for deserialization. </summary>
-        internal InnerModel()
+        /// <summary> Initializes a new instance of <see cref="SpreadParameterWithInnerModelRequest"/> for deserialization. </summary>
+        internal SpreadParameterWithInnerModelRequest()
         {
         }
 

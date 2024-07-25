@@ -338,7 +338,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The FineTuningJob_object",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Output,Json"
   },
   {
    "$id": "61",
@@ -544,7 +544,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The CreateEditResponse_object",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Output,Json"
   },
   {
    "$id": "97",
@@ -608,7 +608,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The CreateEmbeddingResponse_object",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Output,Json"
   },
   {
    "$id": "107",
@@ -629,7 +629,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Embedding_object",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Output,Json"
   },
   {
    "$id": "110",
@@ -650,7 +650,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The OpenAIFile_object",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Output,Json"
   },
   {
    "$id": "113",
@@ -749,7 +749,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The FineTune_object",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Output,Json"
   },
   {
    "$id": "130",
@@ -809,7 +809,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Model_object",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Output,Json"
   },
   {
    "$id": "140",

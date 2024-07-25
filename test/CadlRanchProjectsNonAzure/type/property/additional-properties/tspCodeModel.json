@@ -22,7 +22,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The WidgetData0_kind",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "5",
@@ -43,7 +43,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The WidgetData1_kind",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "8",
@@ -64,7 +64,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The WidgetData2_kind",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Output,Json"
   }
  ],
  "Models": [

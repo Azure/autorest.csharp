@@ -22,7 +22,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The StringLiteralProperty_property",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "5",
@@ -43,7 +43,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The IntLiteralProperty_property",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "8",
@@ -64,7 +64,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The FloatLiteralProperty_property",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "11",

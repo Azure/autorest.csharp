@@ -178,7 +178,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Int32ValuesFacet_kind",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Json"
   },
   {
    "$id": "30",

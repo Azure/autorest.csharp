@@ -8,10 +8,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace SpreadTypeSpec.Models
+namespace Parameters.Spread.Models
 {
-    /// <summary> The SpreadAliasWithModelRequest. </summary>
-    internal partial class SpreadAliasWithModelRequest
+    /// <summary> The SpreadParameterWithInnerModelRequest. </summary>
+    internal partial class SpreadParameterWithInnerModelRequest
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -45,37 +45,31 @@ namespace SpreadTypeSpec.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithModelRequest"/>. </summary>
-        /// <param name="name"> name of the Thing. </param>
-        /// <param name="age"> age of the Thing. </param>
+        /// <summary> Initializes a new instance of <see cref="SpreadParameterWithInnerModelRequest"/>. </summary>
+        /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal SpreadAliasWithModelRequest(string name, int age)
+        internal SpreadParameterWithInnerModelRequest(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
-            Age = age;
         }
 
-        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithModelRequest"/>. </summary>
-        /// <param name="name"> name of the Thing. </param>
-        /// <param name="age"> age of the Thing. </param>
+        /// <summary> Initializes a new instance of <see cref="SpreadParameterWithInnerModelRequest"/>. </summary>
+        /// <param name="name"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SpreadAliasWithModelRequest(string name, int age, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal SpreadParameterWithInnerModelRequest(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
-            Age = age;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithModelRequest"/> for deserialization. </summary>
-        internal SpreadAliasWithModelRequest()
+        /// <summary> Initializes a new instance of <see cref="SpreadParameterWithInnerModelRequest"/> for deserialization. </summary>
+        internal SpreadParameterWithInnerModelRequest()
         {
         }
 
-        /// <summary> name of the Thing. </summary>
+        /// <summary> Gets the name. </summary>
         public string Name { get; }
-        /// <summary> age of the Thing. </summary>
-        public int Age { get; }
     }
 }

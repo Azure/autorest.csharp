@@ -24,7 +24,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "5",
@@ -45,7 +45,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "8",
@@ -66,7 +66,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "11",
@@ -87,7 +87,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "14",
@@ -108,7 +108,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "17",
@@ -129,7 +129,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "20",
@@ -150,7 +150,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_requiredLiteralString",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "23",
@@ -171,7 +171,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_requiredLiteralInt",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "26",
@@ -192,7 +192,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_requiredLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "29",
@@ -213,7 +213,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_optionalLiteralString",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "32",
@@ -234,7 +234,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_optionalLiteralInt",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "35",
@@ -255,7 +255,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_optionalLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "38",
