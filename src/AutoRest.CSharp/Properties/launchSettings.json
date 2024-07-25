@@ -596,10 +596,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SpecificVersion-TypeSpec\\src\\Generated -n"
     },
-    "Spread-TypeSpec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Spread-TypeSpec\\src\\Generated -n"
-    },
     "SubClients-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SubClients-LowLevel\\src\\Generated -n"
